@@ -1,34 +1,7 @@
   import { APP_DOMAIN } from "@/lib/config"
-import type { UserProfile } from "@/lib/user/types"
 import { SupabaseClient } from "@supabase/supabase-js"
 import { fetchClient } from "./fetch"
-import { API_ROUTE_CREATE_GUEST, API_ROUTE_UPDATE_CHAT_MODEL } from "./routes"
-import { createClient } from "./supabase/client"
-
-/**
- * Creates a guest user record on the server
- */
-export async function createGuestUser(guestId: string) {
-  try {
-    const res = await fetchClient(API_ROUTE_CREATE_GUEST, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: guestId }),
-    })
-    const responseData = await res.json()
-    if (!res.ok) {
-      throw new Error(
-        responseData.error ||
-          `Failed to create guest user: ${res.status} ${res.statusText}`
-      )
-    }
-
-    return responseData
-  } catch (err) {
-    // Error creating guest user
-    throw err
-  }
-}
+import { API_ROUTE_UPDATE_CHAT_MODEL } from "./routes"
 
 export class UsageLimitError extends Error {
   code: string
@@ -39,21 +12,13 @@ export class UsageLimitError extends Error {
 }
 
 /**
- * Checks the user's daily usage and increments both overall and daily counters.
- * Resets the daily counter if a new day (UTC) is detected.
- * Uses the `anonymous` flag from the user record to decide which daily limit applies.
- *
- * @param supabase - Your Supabase client.
- * @param userId - The ID of the user.
- * @returns The remaining daily limit.
+ * Checks the authenticated user's daily usage.
+ * userId is derived server-side from the session cookie.
  */
-export async function checkRateLimits(
-  userId: string,
-  isAuthenticated: boolean
-) {
+export async function checkRateLimits() {
   try {
     const res = await fetchClient(
-      `/api/rate-limits?userId=${userId}&isAuthenticated=${isAuthenticated}`,
+      `/api/rate-limits`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -68,7 +33,6 @@ export async function checkRateLimits(
     }
     return responseData
   } catch (err) {
-    // Error checking rate limits
     throw err
   }
 }
@@ -96,30 +60,6 @@ export async function updateChatModel(chatId: string, model: string) {
   } catch (error) {
     // Error updating chat model
     throw error
-  }
-}
-
-/**
- * Signs in user anonymously via Supabase
- */
-export async function signInAnonymously(supabase: SupabaseClient) {
-  try {
-    const { data, error } = await supabase.auth.signInAnonymously()
-
-    if (error) {
-      throw error
-    }
-
-    // Create guest user profile
-    if (data?.user?.id) {
-      await createGuestUser(data.user.id)
-      localStorage.setItem(`guestProfileAttempted_${data.user.id}`, "true")
-    }
-
-    return data
-  } catch (err) {
-    // Error signing in anonymously
-    throw err
   }
 }
 
@@ -263,61 +203,3 @@ export async function signInWithGoogle(supabase: SupabaseClient) {
   }
 }
 
-export const getOrCreateGuestUserId = async (
-  user: UserProfile | null
-): Promise<string | null> => {
-  if (user?.id) return user.id
-
-  const supabase = createClient()
-
-  if (!supabase) {
-    // Supabase is not available
-    return null
-  }
-
-  const existingGuestSessionUser = await supabase.auth.getUser()
-  if (
-    existingGuestSessionUser.data?.user &&
-    existingGuestSessionUser.data.user.is_anonymous
-  ) {
-    const anonUserId = existingGuestSessionUser.data.user.id
-
-    const profileCreationAttempted = localStorage.getItem(
-      `guestProfileAttempted_${anonUserId}`
-    )
-
-    if (!profileCreationAttempted) {
-      try {
-        await createGuestUser(anonUserId)
-        localStorage.setItem(`guestProfileAttempted_${anonUserId}`, "true")
-      } catch (error) {
-        // Failed to ensure guest user profile exists
-        return null
-      }
-    }
-    return anonUserId
-  }
-
-  try {
-    const { data: anonAuthData, error: anonAuthError } =
-      await supabase.auth.signInAnonymously()
-
-    if (anonAuthError) {
-      // Error during anonymous sign-in
-      return null
-    }
-
-    if (!anonAuthData || !anonAuthData.user) {
-      // Anonymous sign-in did not return a user
-      return null
-    }
-
-    const guestIdFromAuth = anonAuthData.user.id
-    await createGuestUser(guestIdFromAuth)
-    localStorage.setItem(`guestProfileAttempted_${guestIdFromAuth}`, "true")
-    return guestIdFromAuth
-  } catch (error) {
-    // Error in getOrCreateGuestUserId
-    return null
-  }
-}

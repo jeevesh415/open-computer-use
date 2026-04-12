@@ -21,6 +21,7 @@ import {
   ArrowSquareOut,
   CaretDown,
 } from "@phosphor-icons/react"
+import { useTranslations } from "next-intl"
 
 /* ─── types ─── */
 
@@ -58,7 +59,7 @@ interface HistoryResponse {
 
 /* ─── constants ─── */
 
-const SERVICE_ICONS: Record<string, React.ElementType> = {
+const SERVICE_ICONS: Record<string, React.ComponentType<any>> = {
   Website: Globe,
   "AI Backend": Cpu,
   Database: Database,
@@ -69,7 +70,7 @@ const SERVICE_ICONS: Record<string, React.ElementType> = {
 
 const STATUS_CONFIG = {
   operational: {
-    label: "Operational",
+    labelKey: "statuses.operational" as const,
     color: "text-emerald-600 dark:text-emerald-400",
     bg: "bg-emerald-500/[0.06] dark:bg-emerald-400/[0.08]",
     border: "border-emerald-500/15 dark:border-emerald-400/15",
@@ -77,7 +78,7 @@ const STATUS_CONFIG = {
     dotPing: "bg-emerald-400",
   },
   degraded: {
-    label: "Degraded",
+    labelKey: "statuses.degraded" as const,
     color: "text-amber-600 dark:text-amber-400",
     bg: "bg-amber-500/[0.06] dark:bg-amber-400/[0.08]",
     border: "border-amber-500/15 dark:border-amber-400/15",
@@ -85,14 +86,14 @@ const STATUS_CONFIG = {
     dotPing: "bg-amber-400",
   },
   outage: {
-    label: "Outage",
+    labelKey: "statuses.outage" as const,
     color: "text-rose-600 dark:text-rose-400",
     bg: "bg-rose-500/[0.06] dark:bg-rose-400/[0.08]",
     border: "border-rose-500/15 dark:border-rose-400/15",
     dot: "bg-rose-500",
     dotPing: "bg-rose-400",
   },
-} as const
+}
 
 /* ─── animation ─── */
 
@@ -152,6 +153,7 @@ const BANNER_GLOW = {
 } as const
 
 function OverallBanner({ status }: { status: "operational" | "degraded" | "outage" }) {
+  const t = useTranslations("statusPage")
   const config = STATUS_CONFIG[status]
 
   return (
@@ -181,17 +183,17 @@ function OverallBanner({ status }: { status: "operational" | "degraded" | "outag
           <div>
             <h2 className={cn("text-xl sm:text-2xl font-bold tracking-tight", config.color)}>
               {status === "operational"
-                ? "All Systems Operational"
+                ? t("overallStatuses.allOperational")
                 : status === "degraded"
-                  ? "Some Systems Degraded"
-                  : "Service Disruption Detected"}
+                  ? t("overallStatuses.someDegraded")
+                  : t("overallStatuses.disruption")}
             </h2>
             <p className="text-sm text-muted-foreground/60 mt-1.5 max-w-md mx-auto leading-relaxed">
               {status === "operational"
-                ? "All services are running smoothly with no issues detected."
+                ? t("overallDescriptions.allOperational")
                 : status === "degraded"
-                  ? "Some services are experiencing slowness. We're investigating."
-                  : "We are aware of the issue and actively working on a fix."}
+                  ? t("overallDescriptions.someDegraded")
+                  : t("overallDescriptions.disruption")}
             </p>
           </div>
         </div>
@@ -209,6 +211,7 @@ function ServiceCard({
   index: number
   history: ServiceHistory | null
 }) {
+  const t = useTranslations("statusPage")
   const [expanded, setExpanded] = useState(false)
   const config = STATUS_CONFIG[service.status]
   const Icon = SERVICE_ICONS[service.name] || Globe
@@ -240,7 +243,7 @@ function ServiceCard({
             <p className="text-sm font-medium text-foreground">{service.name}</p>
             {service.latency !== null && (
               <p className="text-[11px] text-muted-foreground/50 mt-0.5">
-                {service.latency}ms response time
+                {t("responseTime", { ms: service.latency })}
               </p>
             )}
             {service.message && (
@@ -258,7 +261,7 @@ function ServiceCard({
             </span>
           )}
           <span className={cn("text-[12px] font-medium", config.color)}>
-            {config.label}
+            {t(config.labelKey)}
           </span>
           {service.status === "operational" ? (
             <CheckCircle size={16} weight="fill" className="text-emerald-500" />
@@ -286,7 +289,7 @@ function ServiceCard({
           <div className="rounded-xl bg-foreground/[0.02] dark:bg-foreground/[0.03] border border-border/30 p-4">
             <div className="flex items-center justify-between mb-3">
               <p className="text-[11px] font-medium text-muted-foreground/60">
-                90-Day Uptime
+                {t("uptimeLabel")}
               </p>
               <span className={cn(
                 "text-sm font-bold tabular-nums",
@@ -301,8 +304,8 @@ function ServiceCard({
             </div>
             <ServiceUptimeBar days={history.days} />
             <div className="flex items-center justify-between mt-2">
-              <span className="text-[10px] text-muted-foreground/40">90 days ago</span>
-              <span className="text-[10px] text-muted-foreground/40">Today</span>
+              <span className="text-[10px] text-muted-foreground/40">{t("daysAgo")}</span>
+              <span className="text-[10px] text-muted-foreground/40">{t("today")}</span>
             </div>
           </div>
         </div>
@@ -314,6 +317,7 @@ function ServiceCard({
 /* ─── overall uptime summary ─── */
 
 function OverallUptimeSection({ history }: { history: HistoryResponse | null }) {
+  const t = useTranslations("statusPage")
   const overallUptime = useMemo(() => {
     if (!history || !history.has_data || history.services.length === 0) return null
 
@@ -381,9 +385,9 @@ function OverallUptimeSection({ history }: { history: HistoryResponse | null }) 
     >
       <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="text-sm font-medium text-foreground">Overall 90-Day Uptime</p>
+          <p className="text-sm font-medium text-foreground">{t("overallUptime")}</p>
           <p className="text-[11px] text-muted-foreground/50 mt-0.5">
-            Aggregate availability across all services
+            {t("overallUptimeDesc")}
           </p>
         </div>
         <span className={cn(
@@ -399,8 +403,8 @@ function OverallUptimeSection({ history }: { history: HistoryResponse | null }) 
       </div>
       <ServiceUptimeBar days={overallUptime.days} />
       <div className="flex items-center justify-between mt-2">
-        <span className="text-[10px] text-muted-foreground/40">90 days ago</span>
-        <span className="text-[10px] text-muted-foreground/40">Today</span>
+        <span className="text-[10px] text-muted-foreground/40">{t("daysAgo")}</span>
+        <span className="text-[10px] text-muted-foreground/40">{t("today")}</span>
       </div>
     </motion.div>
   )
@@ -409,6 +413,7 @@ function OverallUptimeSection({ history }: { history: HistoryResponse | null }) 
 /* ─── page ─── */
 
 export default function StatusPage() {
+  const t = useTranslations("statusPage")
   const [data, setData] = useState<StatusResponse | null>(null)
   const [history, setHistory] = useState<HistoryResponse | null>(null)
   const [loading, setLoading] = useState(true)
@@ -482,15 +487,15 @@ export default function StatusPage() {
               custom={0}
               className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
             >
-              System Status
+              {t("title")}
             </motion.p>
             <motion.div variants={fade} custom={0} className="flex items-start justify-between gap-4">
               <div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-[1.2] tracking-tight">
-                  Coasty Status
+                  {t("brandTitle")}
                 </h1>
                 <p className="text-sm sm:text-base text-muted-foreground/70 mt-2 max-w-lg leading-relaxed">
-                  Real-time operational status of all Coasty services. This page auto-refreshes every 60 seconds.
+                  {t("subtitle")}
                 </p>
               </div>
               <button
@@ -506,7 +511,7 @@ export default function StatusPage() {
                   weight="bold"
                   className={cn(refreshing && "animate-spin")}
                 />
-                <span className="hidden sm:inline">Refresh</span>
+                <span className="hidden sm:inline">{t("refresh")}</span>
               </button>
             </motion.div>
           </motion.div>
@@ -549,10 +554,10 @@ export default function StatusPage() {
 
               <motion.div variants={fade} custom={1}>
                 <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground/40 mb-3 px-1">
-                  Services
+                  {t("services")}
                   {history?.has_data && (
                     <span className="ml-2 font-normal normal-case tracking-normal text-muted-foreground/30">
-                      — click to view uptime
+                      — {t("clickUptime")}
                     </span>
                   )}
                 </p>
@@ -576,7 +581,7 @@ export default function StatusPage() {
                 >
                   <Clock size={12} weight="duotone" className="text-muted-foreground/40" />
                   <p className="text-[11px] text-muted-foreground/40">
-                    Last checked {lastChecked.toLocaleTimeString()} · Auto-refreshes every 60s
+                    {t("lastChecked", { time: lastChecked.toLocaleTimeString() })}
                   </p>
                 </motion.div>
               )}
@@ -589,10 +594,10 @@ export default function StatusPage() {
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
                     <p className="text-sm font-medium text-foreground">
-                      Experiencing issues?
+                      {t("experiencingIssues")}
                     </p>
                     <p className="text-[13px] text-muted-foreground/60 mt-0.5">
-                      If something doesn&apos;t seem right, reach out to us directly.
+                      {t("issuesDescription")}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
@@ -602,7 +607,7 @@ export default function StatusPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground/70 hover:text-foreground transition-colors"
                     >
-                      Talk to Cofounders
+                      {t("talkToCofounders")}
                       <ArrowSquareOut size={13} weight="bold" className="shrink-0" />
                     </a>
                     <span className="text-border">|</span>
@@ -610,7 +615,7 @@ export default function StatusPage() {
                       href="mailto:founders@coasty.ai"
                       className="inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground/70 hover:text-foreground transition-colors"
                     >
-                      Email Us
+                      {t("emailUs")}
                       <ArrowSquareOut size={13} weight="bold" className="shrink-0" />
                     </a>
                   </div>

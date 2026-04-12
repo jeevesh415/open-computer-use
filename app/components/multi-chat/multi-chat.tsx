@@ -2,7 +2,6 @@
 
 import { MultiModelConversation } from "@/app/components/multi-chat/multi-conversation"
 import { toast } from "@/components/ui/toast"
-import { getOrCreateGuestUserId } from "@/lib/api"
 import { useChats } from "@/lib/chat-store/chats/provider"
 import { useMessages } from "@/lib/chat-store/messages/provider"
 import { useChatSession } from "@/lib/chat-store/session/provider"
@@ -241,7 +240,7 @@ export function MultiChat() {
     setIsSubmitting(true)
 
     try {
-      const uid = await getOrCreateGuestUserId(user)
+      const uid = (user?.id ?? null)
       if (!uid) return
 
       const message_group_id = crypto.randomUUID()

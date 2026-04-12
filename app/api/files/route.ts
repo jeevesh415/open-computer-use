@@ -4,11 +4,21 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
-import { getOrCreateGuestUserId } from '@/lib/api';
 
 // Python backend URL
 const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || 'http://127.0.0.1:8001';
 const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY || '';
+
+// Allowed file operations — prevents path traversal to arbitrary backend endpoints
+const ALLOWED_FILE_OPS = new Set([
+  'list',
+  'upload',
+  'upload-multipart',
+  'download',
+  'download-stream',
+  'delete',
+  'create-folder',
+]);
 
 export const maxDuration = 60;
 
@@ -17,22 +27,16 @@ export async function POST(req: NextRequest) {
     const { pathname } = new URL(req.url);
     const operation = pathname.split('/').pop(); // Get the operation from the URL
     
-    // Get current user
+    // Require authenticated user
     const supabase = await createClient();
-    let user = null;
-    if (supabase) {
-      const { data } = await supabase.auth.getUser();
-      user = data?.user;
+    if (!supabase) {
+      return NextResponse.json({ error: 'Server error' }, { status: 500 });
     }
-    
-    // Get or create user ID
-    const userId = await getOrCreateGuestUserId(user as any);
-    if (!userId) {
-      return NextResponse.json(
-        { error: 'User authentication required' },
-        { status: 401 }
-      );
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    if (authError || !authData?.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const userId = authData.user.id;
     
     // Get request body
     const body = await req.json();
@@ -40,13 +44,19 @@ export async function POST(req: NextRequest) {
     // Determine the backend endpoint based on the operation
     let endpoint = '/api/files';
     const searchParams = new URL(req.url).searchParams;
-    const fileOp = searchParams.get('op');
-    
-    if (fileOp) {
-      endpoint += `/${fileOp}`;
-    } else if (body.operation) {
-      endpoint += `/${body.operation}`;
+    const fileOp = searchParams.get('op') || body.operation || null;
+    if (body.operation) {
       delete body.operation; // Remove from body before forwarding
+    }
+
+    if (fileOp) {
+      if (!ALLOWED_FILE_OPS.has(fileOp)) {
+        return NextResponse.json(
+          { error: `Invalid file operation: ${fileOp}` },
+          { status: 400 }
+        );
+      }
+      endpoint += `/${fileOp}`;
     }
     
     // Forward the request to Python backend
@@ -55,7 +65,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': 'application/json',
         'X-User-ID': userId,
-        'X-Authenticated': user ? 'true' : 'false',
+        'X-Authenticated': 'true',
         ...(INTERNAL_API_KEY && { 'X-Internal-Key': INTERNAL_API_KEY }),
       },
       body: JSON.stringify(body),

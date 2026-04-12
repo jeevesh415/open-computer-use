@@ -9,6 +9,7 @@ import { AuroraText } from "@/components/ui/aurora-text"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { useState, useEffect, useCallback, useRef, useId, useMemo } from "react"
+import { useTranslations } from "next-intl"
 import { motion, AnimatePresence, useInView } from "framer-motion"
 import {
   ArrowRight,
@@ -33,477 +34,110 @@ import {
   Globe,
   Eye,
   Sparkles,
-  MessageCircle,
-  Radio,
-  Database,
-  HelpCircle,
 } from "lucide-react"
 
 // ==========================================================================
-// Mock Swarm Tree — mirrors the real SwarmTree aesthetic
+// Hero Video Player — Apple-style inline video showcase
 // ==========================================================================
 
-interface MockStep {
-  text: string
-  tool: string
-  status: "success" | "pending" | "running"
-  screenshot?: boolean
-  swarmTool?: "message" | "broadcast" | "memory" | "help" | "expertise"
-  targetMachine?: number
-}
+const HERO_VIDEO_ID = "IBydvwkJcCQ"
 
-interface MockMachine {
-  label: string
-  status: "success" | "running" | "pending"
-  steps: MockStep[]
-}
-
-const MOCK_PROMPT = "Research top 5 CRM platforms — compare pricing, features, and user reviews"
-
-const MOCK_MACHINES: MockMachine[] = [
-  {
-    label: "Salesforce",
-    status: "success",
-    steps: [
-      { text: "Navigating to Salesforce pricing page", tool: "browser_navigate", status: "success" },
-      { text: "Extracting Enterprise, Professional, and Starter plan tiers with pricing", tool: "browser_extract", status: "success" },
-      { text: "Shared pricing format template with team", tool: "write_shared_memory", status: "success", swarmTool: "memory" },
-      { text: "Checking integration marketplace — found 4,000+ apps", tool: "browser_navigate", status: "success" },
-      { text: "Scraping G2 reviews — 4.3/5 from 19,842 reviews", tool: "browser_extract", status: "success", screenshot: true },
-      { text: "Sent comparison data to HubSpot agent", tool: "send_swarm_message", status: "success", swarmTool: "message", targetMachine: 1 },
-      { text: "Compiling Salesforce findings into structured report", tool: "terminal_exec", status: "success" },
-    ],
-  },
-  {
-    label: "HubSpot",
-    status: "success",
-    steps: [
-      { text: "Opening HubSpot CRM pricing page", tool: "browser_navigate", status: "success" },
-      { text: "Read pricing format from shared memory", tool: "read_shared_memory", status: "success", swarmTool: "memory" },
-      { text: "Comparing Free, Starter, Professional, Enterprise plans", tool: "browser_extract", status: "success" },
-      { text: "Reviewing 1,500+ integration listings", tool: "browser_navigate", status: "success", screenshot: true },
-      { text: "Broadcast: Found free tier comparison data", tool: "broadcast_swarm_message", status: "success", swarmTool: "broadcast" },
-      { text: "Compiling HubSpot findings into structured report", tool: "terminal_exec", status: "success" },
-    ],
-  },
-  {
-    label: "Pipedrive",
-    status: "running",
-    steps: [
-      { text: "Loading Pipedrive pricing and features page", tool: "browser_navigate", status: "success" },
-      { text: "Cataloging Essential through Enterprise features", tool: "browser_extract", status: "success" },
-      { text: "Claimed expertise: mid-market CRM analysis", tool: "claim_expertise", status: "success", swarmTool: "expertise" },
-      { text: "Reviewing Zapier integrations — 400+ connections", tool: "browser_navigate", status: "success" },
-      { text: "Pulling TrustRadius scores and sentiment analysis", tool: "browser_extract", status: "running" },
-      { text: "Compile Pipedrive findings", tool: "terminal_exec", status: "pending" },
-    ],
-  },
-  {
-    label: "Zoho CRM",
-    status: "running",
-    steps: [
-      { text: "Visiting Zoho CRM editions page", tool: "browser_navigate", status: "success" },
-      { text: "Extracting Standard, Professional, Enterprise, Ultimate pricing", tool: "browser_extract", status: "success" },
-      { text: "Sent question to Salesforce agent about API limits", tool: "send_swarm_message", status: "success", swarmTool: "message", targetMachine: 0 },
-      { text: "Mapping Zoho ecosystem — 45+ native integrations", tool: "browser_navigate", status: "running" },
-      { text: "Check G2 sentiment analysis", tool: "browser_extract", status: "pending" },
-      { text: "Compile Zoho CRM findings", tool: "terminal_exec", status: "pending" },
-    ],
-  },
-  {
-    label: "Close",
-    status: "pending",
-    steps: [
-      { text: "Opening Close.com pricing page", tool: "browser_navigate", status: "success" },
-      { text: "Documenting Startup, Professional, Enterprise features", tool: "browser_extract", status: "running" },
-      { text: "Requested help: Can't find Close API rate limits", tool: "request_help", status: "pending", swarmTool: "help" },
-      { text: "Check API docs and integration capabilities", tool: "browser_navigate", status: "pending" },
-      { text: "Read customer testimonials and review scores", tool: "browser_extract", status: "pending" },
-      { text: "Compile Close findings", tool: "terminal_exec", status: "pending" },
-    ],
-  },
-]
-
-const MOCK_INTERACTIONS_SWARMS = [
-  { from: 0, to: 1, type: "message" as const },
-  { from: 1, to: null, type: "broadcast" as const },
-  { from: 0, to: null, type: "memory" as const },
-  { from: 1, to: null, type: "memory" as const },
-  { from: 3, to: 0, type: "message" as const },
-  { from: 4, to: null, type: "help" as const },
-]
-
-function MockSwarmTree() {
-  const [mounted, setMounted] = useState(false)
-  const treeRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(treeRef, { once: true, amount: 0.2 })
-
-  useEffect(() => {
-    if (inView) {
-      const t = setTimeout(() => setMounted(true), 200)
-      return () => clearTimeout(t)
-    }
-  }, [inView])
-
-  const cols = MOCK_MACHINES.length
+function HeroVideoPlayer() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(containerRef, { once: true, amount: 0.3 })
+  const [isPlaying, setIsPlaying] = useState(false)
 
   return (
-    <div ref={treeRef} className="relative w-full">
-      {/* Dotted canvas background */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl">
-        <div
-          className="absolute inset-0 opacity-[0.25] dark:opacity-[0.12]"
-          style={{
-            backgroundImage: "radial-gradient(circle, currentColor 0.5px, transparent 0.5px)",
-            backgroundSize: "18px 18px",
-          }}
-        />
-        <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-amber-500/[0.04] dark:bg-amber-400/[0.06] blur-[80px]" />
-        <div className="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-blue-500/[0.03] dark:bg-blue-400/[0.05] blur-[60px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-56 w-56 rounded-full bg-emerald-500/[0.02] dark:bg-emerald-400/[0.03] blur-[80px]" />
-      </div>
+    <div
+      ref={containerRef}
+      className="relative group cursor-pointer"
+      onClick={() => setIsPlaying(true)}
+    >
+      {/* Ambient glow */}
+      <div className="absolute -inset-px rounded-[20px] bg-gradient-to-b from-white/[0.08] to-transparent dark:from-white/[0.04] pointer-events-none" />
+      <div className="absolute -inset-4 rounded-[28px] bg-gradient-to-b from-amber-500/[0.03] via-transparent to-blue-500/[0.02] blur-xl pointer-events-none" />
 
-      <div className="relative z-[1] px-4 sm:px-6 py-6 overflow-x-auto">
-        {/* Root prompt node */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={mounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="flex justify-center mb-1"
-        >
-          <div className="relative max-w-md px-5 py-3.5 rounded-xl border border-border/50 bg-background/90 dark:bg-background/70 backdrop-blur-sm text-center shadow-sm">
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
-            <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground/50 mb-1.5 font-medium font-mono">
-              Prompt
-            </p>
-            <p className="text-sm leading-snug text-foreground/90">{MOCK_PROMPT}</p>
-          </div>
-        </motion.div>
-
-        {/* Fork connector SVG */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={mounted ? { opacity: 1 } : {}}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex justify-center"
-        >
-          <svg
-            width={Math.max(cols * 200, 400)}
-            height={52}
-            viewBox={`0 0 ${Math.max(cols * 200, 400)} 52`}
-            className="shrink-0"
-          >
-            {MOCK_MACHINES.map((_, i) => {
-              const totalW = Math.max(cols * 200, 400)
-              const colW = totalW / cols
-              const startX = totalW / 2
-              const endX = colW * i + colW / 2
-              const midY = 26
-              return (
-                <motion.path
-                  key={i}
-                  d={`M ${startX} 0 C ${startX} ${midY}, ${endX} ${midY}, ${endX} 52`}
-                  fill="none"
-                  className="stroke-border/50 dark:stroke-border/40"
-                  strokeWidth={1.5}
-                  strokeDasharray="4 3"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={mounted ? { pathLength: 1, opacity: 1 } : {}}
-                  transition={{ duration: 0.7, delay: 0.3 + i * 0.08, ease: "easeOut" }}
-                />
-              )
-            })}
-          </svg>
-        </motion.div>
-
-        {/* Machine branches with swarm connections overlay */}
-        <div className="relative">
-        {/* Swarm connections overlay — absolutely positioned over machine headers */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={mounted ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="absolute inset-x-0 top-0 z-[2] pointer-events-none"
-        >
-          <div className="relative w-full" style={{ height: 0, overflow: "visible" }}>
-          <svg
-            width={Math.max(cols * 200, 400)}
-            height={48}
-            viewBox={`0 0 ${Math.max(cols * 200, 400)} 48`}
-            className="pointer-events-none"
-            style={{ position: "relative", top: -2 }}
-          >
-            <defs>
-              <style>{`
-                @keyframes swarm-flow-2 { to { stroke-dashoffset: -20; } }
-                .swarm-arc-2 { animation: swarm-flow-2 1.5s linear infinite; }
-              `}</style>
-              <marker id="sarrow-blue-2" markerWidth="5" markerHeight="4" refX="4" refY="2" orient="auto">
-                <path d="M 0 0 L 5 2 L 0 4 z" fill="#3b82f6" opacity="0.6" />
-              </marker>
-            </defs>
-            {(() => {
-              const totalW = Math.max(cols * 200, 400)
-              const colW = totalW / cols
-              const mX = (idx: number) => colW * idx + colW / 2
-              const centerX = totalW / 2
-              const COLORS: Record<string, string> = { message: "#3b82f6", broadcast: "#06b6d4", memory: "#8b5cf6", help: "#f59e0b" }
-
-              return MOCK_INTERACTIONS_SWARMS.map((conn, ci) => {
-                const fromX = mX(conn.from)
-                const stroke = COLORS[conn.type] || "#888"
-
-                if (conn.type === "message" && conn.to !== null) {
-                  const toX = mX(conn.to)
-                  const dist = Math.abs(toX - fromX)
-                  const arcH = Math.max(14, Math.min(36, dist * 0.16)) + (ci % 3) * 3
-                  const midX = (fromX + toX) / 2
-                  return (
-                    <g key={ci}>
-                      <path d={`M ${fromX} 48 Q ${midX} ${48 - arcH}, ${toX} 48`} fill="none" stroke={stroke} strokeWidth={3} opacity={0.08} />
-                      <path d={`M ${fromX} 48 Q ${midX} ${48 - arcH}, ${toX} 48`} fill="none" stroke={stroke} strokeWidth={1.5} strokeDasharray="6 4" className="swarm-arc-2" opacity={0.6} markerEnd="url(#sarrow-blue-2)" />
-                    </g>
-                  )
-                }
-                if (conn.type === "broadcast") {
-                  return (
-                    <g key={ci}>
-                      {[0,1,2,3,4].filter(i => i !== conn.from).map(t => {
-                        const toX = mX(t); const dist = Math.abs(toX - fromX)
-                        const arcH = Math.max(12, Math.min(32, dist * 0.14))
-                        return <path key={t} d={`M ${fromX} 48 Q ${(fromX+toX)/2} ${48-arcH}, ${toX} 48`} fill="none" stroke={stroke} strokeWidth={1} strokeDasharray="4 4" className="swarm-arc-2" opacity={0.35} />
-                      })}
-                      <circle cx={fromX} cy={46} r={3.5} fill={stroke} opacity={0.15} />
-                      <circle cx={fromX} cy={46} r={1.5} fill={stroke} opacity={0.5} />
-                    </g>
-                  )
-                }
-                if (conn.type === "memory") {
-                  return <path key={ci} d={`M ${fromX} 48 Q ${(fromX+centerX)/2} 20, ${centerX} 12`} fill="none" stroke={stroke} strokeWidth={1} strokeDasharray="4 3" className="swarm-arc-2" opacity={0.4} />
-                }
-                if (conn.type === "help") {
-                  return (
-                    <g key={ci}>
-                      <line x1={fromX} y1={48} x2={fromX} y2={14} stroke={stroke} strokeWidth={1} strokeDasharray="3 3" opacity={0.4} className="swarm-arc-2" />
-                      <circle cx={fromX} cy={10} r={4} fill={stroke} opacity={0.12} />
-                      <text x={fromX} y={13} textAnchor="middle" fontSize={6} fill={stroke} opacity={0.6}>?</text>
-                    </g>
-                  )
-                }
-                return null
-              })
-            })()}
-            {/* Central memory node */}
-            {(() => {
-              const totalW = Math.max(cols * 200, 400)
-              const cx = totalW / 2
-              return (
-                <g>
-                  <rect x={cx-14} y={4} width={28} height={14} rx={3} fill="#8b5cf6" opacity={0.1} stroke="#8b5cf6" strokeWidth={0.5} strokeOpacity={0.25} />
-                  <text x={cx} y={14} textAnchor="middle" fontSize={6} fontWeight={600} fill="#8b5cf6" opacity={0.5}>MEM</text>
-                </g>
-              )
-            })()}
-          </svg>
-          </div>
-        </motion.div>
-
-        {/* Interaction legend — floating bottom-left */}
-        <motion.div
-          initial={{ opacity: 0, y: 4 }}
-          animate={mounted ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.3, delay: 0.55 }}
-          className="absolute z-[10] bottom-2 left-2 flex gap-1.5 flex-wrap pointer-events-none"
-        >
-          {[
-            { icon: MessageCircle, label: "Messages", color: "text-blue-500 bg-blue-500/10 border-blue-500/20" },
-            { icon: Radio, label: "Broadcast", color: "text-cyan-500 bg-cyan-500/10 border-cyan-500/20" },
-            { icon: Database, label: "Shared Memory", color: "text-violet-500 bg-violet-500/10 border-violet-500/20" },
-            { icon: HelpCircle, label: "Help", color: "text-amber-500 bg-amber-500/10 border-amber-500/20" },
-          ].map(({ icon: Icon, label, color }) => (
-            <span key={label} className={cn("inline-flex items-center gap-1 text-[8px] font-medium px-1.5 py-0.5 rounded-full border", color)}>
-              <Icon className="size-2" />
-              {label}
-            </span>
-          ))}
-        </motion.div>
-
-        {/* Machine branches */}
-        <div
-          className="grid gap-3"
-          style={{
-            gridTemplateColumns: `repeat(${cols}, minmax(170px, 1fr))`,
-            minWidth: cols * 180,
-          }}
-        >
-          {MOCK_MACHINES.map((machine, i) => (
-            <motion.div
-              key={machine.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={mounted ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.45, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <MockMachineBranch machine={machine} index={i} animated={mounted} />
-            </motion.div>
-          ))}
-        </div>
-        </div>{/* close relative wrapper for overlay + branches */}
-      </div>
-
-      {/* Zoom controls hint */}
-      <div className="absolute bottom-3 left-4 z-[10] flex items-center gap-1.5 text-[10px] text-muted-foreground/30 select-none pointer-events-none">
-        <Eye className="size-3" />
-        <span>Live swarm execution with agent communication</span>
-      </div>
-    </div>
-  )
-}
-
-function MockMachineBranch({ machine, index, animated }: { machine: MockMachine; index: number; animated: boolean }) {
-  const statusIcon = machine.status === "success"
-    ? <Check className="size-3 text-emerald-500" />
-    : machine.status === "running"
-      ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}><RotateCcw className="size-3 text-amber-500" /></motion.div>
-      : <Clock className="size-3 text-muted-foreground/40" />
-
-  return (
-    <div className="flex flex-col items-center">
-      {/* Machine header */}
-      <div
+      {/* Video container */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97, y: 20 }}
+        animate={inView ? { opacity: 1, scale: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          "w-full rounded-xl border px-3 py-2.5 text-center transition-colors shadow-sm backdrop-blur-sm",
-          machine.status === "success"
-            ? "border-emerald-500/25 bg-emerald-50/60 dark:bg-emerald-950/25"
-            : machine.status === "running"
-              ? "border-amber-500/20 bg-amber-50/40 dark:bg-amber-950/15"
-              : "border-border/40 bg-background/70 dark:bg-background/50"
+          "relative rounded-2xl overflow-hidden",
+          "bg-neutral-950",
+          "ring-1 ring-white/[0.08] dark:ring-white/[0.05]",
+          "shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15),0_20px_60px_-20px_rgba(0,0,0,0.2)]",
+          "dark:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.5),0_20px_60px_-20px_rgba(0,0,0,0.6)]",
         )}
       >
-        <div className="flex items-center justify-center gap-1.5">
-          <Monitor className="size-3.5 text-muted-foreground/60" />
-          <span className="text-xs font-medium">{machine.label}</span>
-          {statusIcon}
-        </div>
-      </div>
-
-      {/* Timeline steps */}
-      <div className="relative w-full mt-0 pt-2">
-        {/* Dashed vertical connector */}
-        <div
-          className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(to bottom, hsl(var(--border) / 0.3) 0px, hsl(var(--border) / 0.3) 4px, transparent 4px, transparent 8px)",
-          }}
-        />
-        <div className="relative flex flex-col gap-2 items-center">
-          {machine.steps.map((step, j) => (
-            <motion.div
-              key={j}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={animated ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.25, delay: 0.6 + index * 0.08 + j * 0.06 }}
-              className="relative w-full z-[1]"
-            >
-              {/* Status dot */}
-              <div className="absolute left-1/2 -top-1 -translate-x-1/2 z-[2]">
-                {step.swarmTool ? (
-                  <div className={cn(
-                    "size-4 rounded-full border-2 border-background shadow-sm flex items-center justify-center",
-                    step.swarmTool === "message" ? "bg-gradient-to-br from-blue-400 to-blue-600 shadow-blue-500/20"
-                    : step.swarmTool === "broadcast" ? "bg-gradient-to-br from-cyan-400 to-cyan-600 shadow-cyan-500/20"
-                    : step.swarmTool === "memory" ? "bg-gradient-to-br from-violet-400 to-violet-600 shadow-violet-500/20"
-                    : step.swarmTool === "help" ? "bg-gradient-to-br from-amber-400 to-amber-600 shadow-amber-500/20"
-                    : "bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-emerald-500/20"
-                  )}>
-                    {step.swarmTool === "message" && <MessageCircle className="size-2 text-white" />}
-                    {step.swarmTool === "broadcast" && <Radio className="size-2 text-white" />}
-                    {step.swarmTool === "memory" && <Database className="size-2 text-white" />}
-                    {step.swarmTool === "help" && <HelpCircle className="size-2 text-white" />}
-                    {step.swarmTool === "expertise" && <Shield className="size-2 text-white" />}
-                  </div>
-                ) : step.screenshot ? (
-                  <div className="size-4 rounded-full border-2 border-background bg-gradient-to-br from-amber-400 to-amber-600 shadow-sm shadow-amber-500/20 flex items-center justify-center">
-                    <Eye className="size-2 text-white" />
-                  </div>
-                ) : (
-                  <span
-                    className={cn(
-                      "block size-2.5 rounded-full ring-2 ring-background",
-                      step.status === "success"
-                        ? "bg-emerald-500/70"
-                        : step.status === "running"
-                          ? "bg-amber-500/70"
-                          : "bg-muted-foreground/20"
-                    )}
-                  />
-                )}
+        {/* 16:9 aspect ratio */}
+        <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+          {!isPlaying ? (
+            <>
+              {/* Thumbnail with gradient overlay */}
+              <div className="absolute inset-0">
+                <img
+                  src={`https://img.youtube.com/vi/${HERO_VIDEO_ID}/maxresdefault.jpg`}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-black/20" />
               </div>
 
-              {/* Step card */}
-              <div
-                className={cn(
-                  "mx-1 mt-2 rounded-lg border px-3 py-2 text-left transition-all shadow-sm",
-                  step.swarmTool === "message"
-                    ? "border-blue-500/20 bg-blue-50/30 dark:bg-blue-950/10"
-                    : step.swarmTool === "broadcast"
-                      ? "border-cyan-500/20 bg-cyan-50/30 dark:bg-cyan-950/10"
-                      : step.swarmTool === "memory"
-                        ? "border-violet-500/20 bg-violet-50/30 dark:bg-violet-950/10"
-                        : step.swarmTool === "help"
-                          ? "border-amber-500/20 bg-amber-50/30 dark:bg-amber-950/10"
-                          : step.swarmTool === "expertise"
-                            ? "border-emerald-500/20 bg-emerald-50/30 dark:bg-emerald-950/10"
-                            : step.status === "running"
-                              ? "border-amber-500/20 bg-amber-50/30 dark:bg-amber-950/10"
-                              : "border-border/25 bg-background/80 dark:bg-background/60 backdrop-blur-sm"
-                )}
+              {/* Center play button — large, frosted glass */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 flex items-center justify-center"
               >
-                <p className="text-[11px] leading-relaxed text-foreground/80 line-clamp-2">{step.text}</p>
-
-                {/* Tool badge */}
-                <div className="flex items-center gap-1 mt-1.5">
-                  {step.swarmTool ? (
-                    <span
-                      className={cn(
-                        "inline-flex items-center gap-1 text-[9px] leading-none px-1.5 py-0.5 rounded-full font-medium",
-                        step.swarmTool === "message" ? "text-blue-600/80 dark:text-blue-400/70 bg-blue-500/10"
-                        : step.swarmTool === "broadcast" ? "text-cyan-600/80 dark:text-cyan-400/70 bg-cyan-500/10"
-                        : step.swarmTool === "memory" ? "text-violet-600/80 dark:text-violet-400/70 bg-violet-500/10"
-                        : step.swarmTool === "help" ? "text-amber-600/80 dark:text-amber-400/70 bg-amber-500/10"
-                        : "text-emerald-600/80 dark:text-emerald-400/70 bg-emerald-500/10"
-                      )}
-                    >
-                      {step.swarmTool === "message" && <><MessageCircle className="size-2.5" />Message{step.targetMachine !== undefined ? ` \u2192 #${step.targetMachine + 1}` : ""}</>}
-                      {step.swarmTool === "broadcast" && <><Radio className="size-2.5" />Broadcast</>}
-                      {step.swarmTool === "memory" && <><Database className="size-2.5" />Shared Memory</>}
-                      {step.swarmTool === "help" && <><HelpCircle className="size-2.5" />Help Request</>}
-                      {step.swarmTool === "expertise" && <><Shield className="size-2.5" />Expertise</>}
-                    </span>
-                  ) : (
-                    <span
-                      className={cn(
-                        "inline-flex items-center gap-1 text-[9px] leading-none px-1.5 py-0.5 rounded-full font-mono",
-                        step.status === "success"
-                          ? "text-emerald-600/70 dark:text-emerald-400/60 bg-emerald-500/8"
-                          : step.status === "running"
-                            ? "text-amber-600/70 dark:text-amber-400/60 bg-amber-500/8"
-                            : "text-muted-foreground/40 bg-muted/30"
-                      )}
-                    >
-                      <span className={cn(
-                        "size-1 rounded-full",
-                        step.status === "success" ? "bg-emerald-500" : step.status === "running" ? "bg-amber-500 animate-pulse" : "bg-muted-foreground/30"
-                      )} />
-                      {step.tool}
-                    </span>
+                <motion.button
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.96 }}
+                  className={cn(
+                    "relative size-[72px] sm:size-20 rounded-full",
+                    "bg-white/90 dark:bg-white/85 backdrop-blur-xl",
+                    "shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.08)]",
+                    "flex items-center justify-center",
+                    "transition-shadow duration-300",
+                    "hover:shadow-[0_12px_48px_rgba(0,0,0,0.18),0_4px_12px_rgba(0,0,0,0.1)]",
                   )}
+                >
+                  <Play className="size-7 sm:size-8 text-neutral-900 ml-1" fill="currentColor" />
+                </motion.button>
+              </motion.div>
+
+              {/* Bottom label — "Watch the demo" */}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="absolute bottom-0 inset-x-0 p-5 sm:p-6"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
+                    <span className="relative size-2">
+                      <span className="absolute inset-0 rounded-full bg-red-500 animate-pulse" />
+                      <span className="absolute inset-0 rounded-full bg-red-500" />
+                    </span>
+                    <span className="text-[11px] font-medium text-white/90 tracking-wide">DEMO</span>
+                  </div>
+                  <span className="text-sm text-white/60 font-medium">Watch agent swarms in action</span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            </>
+          ) : (
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src={`https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}?rel=0&modestbranding=1&showinfo=0&autoplay=1`}
+              title="Agent Swarms Demo"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              style={{ border: "none" }}
+            />
+          )}
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
@@ -638,6 +272,7 @@ function useSwarmDemo() {
 }
 
 function DemoMachineCard({ machine, index }: { machine: DemoMachine; index: number }) {
+  const t = useTranslations("agentSwarms")
   const config = screenConfigs[index]
   const waypoints = cursorPaths[index]
   const isActive = machine.status === "running"
@@ -830,7 +465,7 @@ function DemoMachineCard({ machine, index }: { machine: DemoMachine; index: numb
                 {k === 1 && (
                   <div className="rounded-[1px] px-[2px] py-[0.5px] mb-[2px] -mx-[1px] -mt-[1px] text-center"
                     style={{ backgroundColor: config.color + "25" }}>
-                    <span className="text-[2.5px] font-bold text-white/50 uppercase tracking-wider">Popular</span>
+                    <span className="text-[2.5px] font-bold text-white/50 uppercase tracking-wider">{t("popular")}</span>
                   </div>
                 )}
                 <div className="text-[3px] text-white/25 mb-[1px] truncate">{tier.name}</div>
@@ -900,7 +535,7 @@ function DemoMachineCard({ machine, index }: { machine: DemoMachine; index: numb
               ))}
               <div className="size-[3px] rounded-[0.5px] bg-white/[0.08]" />
             </div>
-            <span className="text-[3px] text-white/20">4.2 avg</span>
+            <span className="text-[3px] text-white/20">{t("avgRating", { rating: "4.2" })}</span>
             <div className="h-[2px] flex-1 rounded-full bg-white/[0.04] overflow-hidden ml-[2px]">
               <div className="h-full rounded-full" style={{ width: "84%", backgroundColor: config.color + "35" }} />
             </div>
@@ -1112,19 +747,19 @@ function DemoMachineCard({ machine, index }: { machine: DemoMachine; index: numb
 // ==========================================================================
 
 const comparisons = [
-  { label: "5 CRM tools research", sequential: "~50 min", swarm: "~10 min", speedup: "5x" },
-  { label: "QA across 8 pages", sequential: "~40 min", swarm: "~8 min", speedup: "5x" },
-  { label: "Lead enrichment (100)", sequential: "~3 hours", swarm: "~30 min", speedup: "6x" },
-  { label: "Price monitoring", sequential: "~25 min", swarm: "~5 min", speedup: "5x" },
+  { labelKey: "speedExamples.crmResearch" as const, sequential: "~50 min", swarm: "~10 min", speedup: "5x" },
+  { labelKey: "speedExamples.qaPages" as const, sequential: "~40 min", swarm: "~8 min", speedup: "5x" },
+  { labelKey: "speedExamples.leadEnrichment" as const, sequential: "~3 hours", swarm: "~30 min", speedup: "6x" },
+  { labelKey: "speedExamples.priceMonitoring" as const, sequential: "~25 min", swarm: "~5 min", speedup: "5x" },
 ]
 
-const useCases = [
-  { icon: BarChart3, title: "Market Research at Scale", description: "Research multiple competitors, markets, or products simultaneously across isolated machines." },
-  { icon: Target, title: "Lead Generation", description: "Enrich profiles, find emails, and verify social presence — hours of work in minutes." },
-  { icon: Shield, title: "QA & Regression Testing", description: "Run test scenarios across different pages or flows in parallel." },
-  { icon: Layers, title: "Content & Social", description: "Post to multiple platforms simultaneously with per-machine isolation." },
-  { icon: TrendingUp, title: "Data Extraction", description: "Scrape and structure data from dozens of sources at once." },
-  { icon: Clock, title: "Scheduled Runs", description: "Combine swarm mode with scheduling for recurring parallel tasks." },
+const useCaseItems = [
+  { icon: BarChart3, key: "useCases.marketResearch" as const },
+  { icon: Target, key: "useCases.leadGeneration" as const },
+  { icon: Shield, key: "useCases.qaTesting" as const },
+  { icon: Layers, key: "useCases.contentSocial" as const },
+  { icon: TrendingUp, key: "useCases.dataExtraction" as const },
+  { icon: Clock, key: "useCases.scheduledRuns" as const },
 ]
 
 // ==========================================================================
@@ -1132,6 +767,7 @@ const useCases = [
 // ==========================================================================
 
 export default function AgentSwarmsPage() {
+  const t = useTranslations("agentSwarms")
   const { machines, phase, elapsed, start, reset } = useSwarmDemo()
   const [isMobile, setIsMobile] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -1181,7 +817,7 @@ export default function AgentSwarmsPage() {
             <motion.div variants={itemVariants} className="mb-4">
               <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/15 bg-amber-500/[0.04] px-3.5 py-1 text-[11px] font-medium text-amber-600 dark:text-amber-400/80 tracking-wide">
                 <GitFork className="size-3" />
-                Agent Swarm Mode
+                {t("badge")}
               </span>
             </motion.div>
 
@@ -1192,7 +828,7 @@ export default function AgentSwarmsPage() {
                 isMobile ? "text-3xl" : "text-5xl sm:text-[3.5rem]"
               )}
             >
-              One prompt.{" "}
+              {t("heroTitle1")}{" "}
               <AuroraText
                 colors={["#f59e0b", "#f97316", "#ef4444", "#f59e0b"]}
                 speed={1.5}
@@ -1201,10 +837,10 @@ export default function AgentSwarmsPage() {
                   isMobile ? "text-3xl" : "text-5xl sm:text-[3.5rem]"
                 )}
               >
-                Infinite machines.
+                {t("heroTitle2")}
               </AuroraText>
               <br />
-              Parallel results.
+              {t("heroTitle3")}
             </motion.h1>
 
             <motion.p
@@ -1214,7 +850,7 @@ export default function AgentSwarmsPage() {
                 isMobile ? "text-sm" : "text-[17px]"
               )}
             >
-              Split any task across multiple isolated environments running simultaneously. Work that takes an hour finishes in minutes.
+              {t("heroDescription")}
             </motion.p>
 
             <motion.div
@@ -1223,13 +859,13 @@ export default function AgentSwarmsPage() {
             >
               <RainbowButton className="gap-2" asChild>
                 <Link href="/auth">
-                  Try Swarm Mode
+                  {t("trySwarmMode")}
                   <ArrowRight className="size-4" />
                 </Link>
               </RainbowButton>
               <Button variant="outline" className="rounded-full" asChild>
                 <a href="#demo">
-                  See it in action
+                  {t("seeInAction")}
                   <ChevronDown className="size-3.5 ml-1" />
                 </a>
               </Button>
@@ -1237,37 +873,11 @@ export default function AgentSwarmsPage() {
           </motion.div>
         </section>
 
-        {/* ── Hero Mock Swarm Tree ── */}
-        <section className={cn("relative", isMobile ? "px-3 pb-12" : "px-6 pb-16 pt-4")}>
-          <motion.div
-            initial={isMobile ? {} : { opacity: 0, y: 32 }}
-            animate={heroInView && mounted ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="relative rounded-2xl border border-border/30 bg-card/10 dark:bg-card/5 backdrop-blur-sm overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-              {/* Top bar */}
-              <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/20 bg-muted/20 dark:bg-muted/10">
-                <div className="flex items-center gap-2">
-                  <div className="flex gap-1.5">
-                    <div className="size-2.5 rounded-full bg-red-400/50" />
-                    <div className="size-2.5 rounded-full bg-amber-400/50" />
-                    <div className="size-2.5 rounded-full bg-emerald-400/50" />
-                  </div>
-                  <span className="text-[10px] font-mono text-muted-foreground/40 ml-2">swarm-tree — live execution</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-mono text-amber-500/60">5 machines</span>
-                  <span className="flex items-center gap-1 text-[10px] font-mono text-emerald-500/60">
-                    <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    running
-                  </span>
-                </div>
-              </div>
-
-              <MockSwarmTree />
-            </div>
-          </motion.div>
+        {/* ── Hero Video Demo ── */}
+        <section className={cn("relative", isMobile ? "px-4 pb-12" : "px-6 pb-16 pt-4")}>
+          <div className="max-w-5xl mx-auto">
+            <HeroVideoPlayer />
+          </div>
         </section>
 
         {/* ── How It Works ── */}
@@ -1281,15 +891,15 @@ export default function AgentSwarmsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-14">
               <h2 className={cn("font-bold tracking-tight", isMobile ? "text-2xl" : "text-3xl sm:text-4xl")}>
-                Three steps to parallel execution
+                {t("threeSteps")}
               </h2>
             </motion.div>
 
             <div className={cn("grid gap-px bg-border/30 rounded-2xl overflow-hidden border border-border/30", isMobile ? "grid-cols-1" : "grid-cols-3")}>
               {[
-                { step: "01", title: "Type your prompt", desc: "Describe the task. Toggle swarm mode and choose how many machines.", icon: Send, color: "text-blue-500", bg: "bg-blue-500/6" },
-                { step: "02", title: "Machines spin up", desc: "Each gets a full isolated environment — browser, terminal, desktop.", icon: Cpu, color: "text-amber-500", bg: "bg-amber-500/6" },
-                { step: "03", title: "Results stream live", desc: "Watch every machine in real-time via the swarm tree view.", icon: Merge, color: "text-emerald-500", bg: "bg-emerald-500/6" },
+                { step: "01", title: t("steps.typePrompt.title"), desc: t("steps.typePrompt.desc"), icon: Send, color: "text-blue-500", bg: "bg-blue-500/6" },
+                { step: "02", title: t("steps.machinesSpinUp.title"), desc: t("steps.machinesSpinUp.desc"), icon: Cpu, color: "text-amber-500", bg: "bg-amber-500/6" },
+                { step: "03", title: t("steps.resultsStream.title"), desc: t("steps.resultsStream.desc"), icon: Merge, color: "text-emerald-500", bg: "bg-emerald-500/6" },
               ].map((s) => (
                 <motion.div
                   key={s.step}
@@ -1320,32 +930,11 @@ export default function AgentSwarmsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-10">
               <h2 className={cn("font-bold tracking-tight", isMobile ? "text-2xl" : "text-3xl sm:text-4xl")}>
-                See it in action
+                {t("seeInAction")}
               </h2>
               <p className={cn("text-muted-foreground mt-2", isMobile ? "text-sm" : "text-base")}>
-                Watch 5 machines tackle a CRM research task simultaneously
+                {t("demoDescription", { count: 5 })}
               </p>
-            </motion.div>
-
-            {/* YouTube demo video */}
-            <motion.div variants={itemVariants} className="mb-12">
-              <div className={cn(
-                "relative rounded-xl sm:rounded-2xl overflow-hidden",
-                "border border-border/40 dark:border-border/30",
-                "shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_12px_48px_-8px_rgba(0,0,0,0.1)]",
-                "dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3),0_12px_48px_-8px_rgba(0,0,0,0.4)]",
-              )}>
-                <div className="relative w-full bg-neutral-950" style={{ paddingTop: "56.25%" }}>
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/IBydvwkJcCQ?rel=0&modestbranding=1&showinfo=0"
-                    title="Agent Swarms Demo"
-                    allowFullScreen
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    style={{ border: "none" }}
-                  />
-                </div>
-              </div>
             </motion.div>
 
             <motion.div variants={itemVariants}>
@@ -1357,8 +946,8 @@ export default function AgentSwarmsPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-[10px] font-mono text-amber-500/60 tracking-wide">SWARM</span>
-                      <span className="text-[10px] text-muted-foreground/30">5 machines</span>
+                      <span className="text-[10px] font-mono text-amber-500/60 tracking-wide">{t("swarm")}</span>
+                      <span className="text-[10px] text-muted-foreground/30">{t("machineCount", { count: 5 })}</span>
                     </div>
                     <p className="text-sm font-medium leading-relaxed truncate">{demoPrompt}</p>
                   </div>
@@ -1370,7 +959,7 @@ export default function AgentSwarmsPage() {
                         onClick={start}
                       >
                         <Play className="size-3" />
-                        Run
+                        {t("run")}
                       </Button>
                     )}
                     {phase === "running" && (
@@ -1387,7 +976,7 @@ export default function AgentSwarmsPage() {
                     {phase === "done" && (
                       <Button size="sm" variant="outline" className="gap-1.5 rounded-lg" onClick={reset}>
                         <RotateCcw className="size-3" />
-                        Reset
+                        {t("reset")}
                       </Button>
                     )}
                   </div>
@@ -1413,11 +1002,11 @@ export default function AgentSwarmsPage() {
                     <div className="flex items-center justify-center gap-2 mb-1">
                       <Check className="size-4 text-emerald-500" />
                       <span className="font-semibold text-sm text-emerald-600 dark:text-emerald-400">
-                        All 5 machines completed
+                        {t("allCompleted", { count: 5 })}
                       </span>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      ~10 min instead of ~50 min — <span className="font-semibold text-foreground">5x faster</span>
+                      {t("speedComparison", { swarmTime: "10", seqTime: "50", multiplier: "5" })}
                     </p>
                   </motion.div>
                 )}
@@ -1437,7 +1026,7 @@ export default function AgentSwarmsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-10">
               <h2 className={cn("font-bold tracking-tight", isMobile ? "text-2xl" : "text-3xl sm:text-4xl")}>
-                Sequential vs Swarm
+                {t("seqVsSwarm")}
               </h2>
             </motion.div>
 
@@ -1446,15 +1035,15 @@ export default function AgentSwarmsPage() {
                 {/* Table header */}
                 {!isMobile && (
                   <div className="grid grid-cols-[1fr_100px_100px_72px] text-[11px] font-mono uppercase tracking-wider text-muted-foreground/40 bg-muted/20 dark:bg-muted/10 px-5 py-2.5 border-b border-border/20">
-                    <span>Task</span>
-                    <span className="text-center">Before</span>
-                    <span className="text-center">Swarm</span>
-                    <span className="text-center">Speed</span>
+                    <span>{t("tableHeaders.task")}</span>
+                    <span className="text-center">{t("tableHeaders.before")}</span>
+                    <span className="text-center">{t("tableHeaders.swarm")}</span>
+                    <span className="text-center">{t("tableHeaders.speed")}</span>
                   </div>
                 )}
                 {comparisons.map((row, i) => (
                   <motion.div
-                    key={row.label}
+                    key={row.labelKey}
                     initial={isMobile ? {} : { opacity: 0, x: -12 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -1470,7 +1059,7 @@ export default function AgentSwarmsPage() {
                         ? "grid-cols-1 gap-1.5 p-4"
                         : "grid-cols-[1fr_100px_100px_72px] px-5 py-3.5"
                     )}>
-                      <div className="text-sm font-medium">{row.label}</div>
+                      <div className="text-sm font-medium">{t(row.labelKey)}</div>
                       <div className={cn(
                         "text-muted-foreground/40 line-through decoration-muted-foreground/15",
                         isMobile ? "text-xs" : "text-sm text-center"
@@ -1508,22 +1097,22 @@ export default function AgentSwarmsPage() {
           >
             <motion.div variants={itemVariants} className="text-center mb-10">
               <h2 className={cn("font-bold tracking-tight", isMobile ? "text-2xl" : "text-3xl sm:text-4xl")}>
-                Built for parallel work
+                {t("builtForParallel")}
               </h2>
             </motion.div>
 
             <div className={cn("grid gap-3", isMobile ? "grid-cols-1" : "grid-cols-2 lg:grid-cols-3")}>
-              {useCases.map((uc) => (
+              {useCaseItems.map((uc) => (
                 <motion.div
-                  key={uc.title}
+                  key={uc.key}
                   variants={itemVariants}
                   className="group rounded-xl border border-border/25 bg-card/15 p-5 transition-all duration-300 hover:border-border/40 hover:bg-card/30"
                 >
                   <div className="flex items-center justify-center size-9 rounded-lg bg-amber-500/8 border border-amber-500/10 mb-3 group-hover:bg-amber-500/12 transition-colors">
                     <uc.icon className="size-4 text-amber-500" />
                   </div>
-                  <h3 className="font-semibold text-sm mb-1">{uc.title}</h3>
-                  <p className="text-[13px] text-muted-foreground leading-relaxed">{uc.description}</p>
+                  <h3 className="font-semibold text-sm mb-1">{t(`${uc.key}.title`)}</h3>
+                  <p className="text-[13px] text-muted-foreground leading-relaxed">{t(`${uc.key}.desc`)}</p>
                 </motion.div>
               ))}
             </div>
@@ -1544,19 +1133,19 @@ export default function AgentSwarmsPage() {
               isMobile ? "grid-cols-1" : "grid-cols-2 lg:grid-cols-3"
             )}>
               {[
-                { title: "True Isolation", desc: "Each machine has its own browser, terminal, and desktop.", icon: Shield },
-                { title: "3x Machine Limit", desc: "Swarm mode triples your plan's machine capacity.", icon: Zap },
-                { title: "Live Tree View", desc: "Screenshots and tool calls stream in real-time.", icon: Eye },
-                { title: "Auto Aggregation", desc: "Results combine into a single consolidated report.", icon: Merge },
-                { title: "Shareable Runs", desc: "Replay full execution timelines via a link.", icon: GitFork },
-                { title: "Fully Sandboxed", desc: "All environments destroyed after completion.", icon: Shield },
+                { key: "featureStrip.trueIsolation" as const, icon: Shield },
+                { key: "featureStrip.tripleMachineLimit" as const, icon: Zap },
+                { key: "featureStrip.liveTreeView" as const, icon: Eye },
+                { key: "featureStrip.autoAggregation" as const, icon: Merge },
+                { key: "featureStrip.shareableRuns" as const, icon: GitFork },
+                { key: "featureStrip.fullySandboxed" as const, icon: Shield },
               ].map((f) => (
-                <motion.div key={f.title} variants={itemVariants} className="bg-background p-5">
+                <motion.div key={f.key} variants={itemVariants} className="bg-background p-5">
                   <div className="flex items-start gap-3">
                     <f.icon className="size-4 text-amber-500/70 mt-0.5 flex-shrink-0" />
                     <div>
-                      <h3 className="text-sm font-medium mb-0.5">{f.title}</h3>
-                      <p className="text-[12px] text-muted-foreground leading-relaxed">{f.desc}</p>
+                      <h3 className="text-sm font-medium mb-0.5">{t(`${f.key}.title`)}</h3>
+                      <p className="text-[12px] text-muted-foreground leading-relaxed">{t(`${f.key}.desc`)}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -1576,23 +1165,23 @@ export default function AgentSwarmsPage() {
             className="max-w-2xl mx-auto text-center relative z-10"
           >
             <motion.h2 variants={itemVariants} className={cn("font-bold tracking-tight", isMobile ? "text-2xl" : "text-3xl sm:text-4xl")}>
-              Ready to run tasks in parallel?
+              {t("readyCta")}
             </motion.h2>
 
             <motion.p variants={itemVariants} className={cn("text-muted-foreground mt-3 max-w-md mx-auto", isMobile ? "text-sm" : "text-base")}>
-              Swarm mode is included with every paid plan.
+              {t("includedWithPaid")}
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex items-center justify-center gap-3 mt-7">
               <RainbowButton className="gap-2" asChild>
                 <Link href="/auth">
-                  Get Started
+                  {t("getStarted")}
                   <ArrowRight className="size-4" />
                 </Link>
               </RainbowButton>
               <Button variant="outline" className="rounded-full gap-1.5" asChild>
                 <Link href="/#pricing">
-                  View Pricing
+                  {t("viewPricing")}
                   <ChevronRight className="size-3.5" />
                 </Link>
               </Button>

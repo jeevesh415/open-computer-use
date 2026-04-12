@@ -18,6 +18,7 @@ import { useChats } from "@/lib/chat-store/chats/provider"
 import { Plus, Users, ArrowRight, Sparkle } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { DialogCollaborativeAuth } from "./dialog-collaborative-auth"
@@ -30,6 +31,7 @@ interface CreateRoomDialogProps {
 }
 
 export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open, onOpenChange }: CreateRoomDialogProps) {
+  const t = useTranslations("collaborative")
   const [internalOpen, setInternalOpen] = useState(false)
   const isOpen = open !== undefined ? open : internalOpen
   const setIsOpen = onOpenChange || setInternalOpen
@@ -50,7 +52,7 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
 
     if (!title.trim()) {
       toast({
-        title: "Room title is required",
+        title: t("createProject.titleRequired"),
         status: "error",
       })
       return
@@ -86,7 +88,7 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
       await refresh()
       
       toast({
-        title: "Project created successfully!",
+        title: t("createProject.created"),
         status: "success",
       })
 
@@ -97,7 +99,7 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
     } catch (error) {
       console.error("Error creating room:", error)
       toast({
-        title: error instanceof Error ? error.message : "Failed to create room",
+        title: error instanceof Error ? error.message : t("createProject.failed"),
         status: "error",
       })
     } finally {
@@ -122,24 +124,24 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
           onClick={handleButtonClick}
         >
           <Plus size={18} className="shrink-0" />
-          <span className="truncate">Create New Project</span>
+          <span className="truncate">{t("createProject.title")}</span>
         </button>
 
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create New Project</DialogTitle>
+              <DialogTitle>{t("createProject.title")}</DialogTitle>
               <DialogDescription>
-                Start a new project to build your product with AI.
+                {t("createProject.description")}
               </DialogDescription>
             </DialogHeader>
-            
+
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="room-title">Project Name</Label>
+                <Label htmlFor="room-title">{t("createProject.projectName")}</Label>
                 <Input
                   id="room-title"
-                  placeholder="Enter project name"
+                  placeholder={t("createProject.projectNamePlaceholder")}
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   disabled={isLoading}
@@ -147,7 +149,7 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="max-participants">Team Size</Label>
+                <Label htmlFor="max-participants">{t("createProject.teamSize")}</Label>
                 <Input
                   id="max-participants"
                   type="number"
@@ -162,10 +164,10 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
 
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsOpen(false)} disabled={isLoading}>
-                Cancel
+                {t("createProject.cancel")}
               </Button>
               <Button onClick={handleCreateRoom} disabled={isLoading || !title.trim()}>
-                {isLoading ? "Creating..." : "Create Project"}
+                {isLoading ? t("createProject.creating") : t("createProject.createButton")}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -182,31 +184,31 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button 
+        <Button
           variant="outline"
           size="sm"
           className="font-medium"
           onClick={() => !isLoggedIn ? setIsCollaborativeAuthOpen(true) : setIsOpen(true)}
         >
           <Plus size={16} className="mr-2" />
-          Create Project
+          {t("createProject.createButton")}
         </Button>
       </DialogTrigger>
-      
+
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create New Project</DialogTitle>
+          <DialogTitle>{t("createProject.title")}</DialogTitle>
           <DialogDescription>
-            Start a new project to build your product with AI.
+            {t("createProject.description")}
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="room-title">Project Name</Label>
+            <Label htmlFor="room-title">{t("createProject.projectName")}</Label>
             <Input
               id="room-title"
-              placeholder="Enter project name"
+              placeholder={t("createProject.projectNamePlaceholder")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               disabled={isLoading}
@@ -214,7 +216,7 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="max-participants">Team Size</Label>
+            <Label htmlFor="max-participants">{t("createProject.teamSize")}</Label>
             <Input
               id="max-participants"
               type="number"
@@ -229,10 +231,10 @@ export function CreateRoomDialog({ onRoomCreated, asSidebarButton = false, open,
 
         <DialogFooter>
           <Button variant="outline" onClick={() => setIsOpen(false)} disabled={isLoading}>
-            Cancel
+            {t("createProject.cancel")}
           </Button>
           <Button onClick={handleCreateRoom} disabled={isLoading || !title.trim()}>
-            {isLoading ? "Creating..." : "Create Project"}
+            {isLoading ? t("createProject.creating") : t("createProject.createButton")}
           </Button>
         </DialogFooter>
       </DialogContent>

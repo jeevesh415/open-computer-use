@@ -5,37 +5,44 @@ import Image from "next/image"
 import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
 import { ArrowUpRight } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/components/language-switcher"
 
-const footerColumns: { title: string; links: { href: string; label: string; external?: boolean }[] }[] = [
+type FooterColumn = { titleKey: string; links: { href: string; labelKey: string; external?: boolean }[] }
+
+const footerColumnsDef: FooterColumn[] = [
   {
-    title: "Product",
+    titleKey: "columns.product",
     links: [
-      { href: "/guide", label: "Guide" },
-      { href: "/download", label: "Download" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/agent-swarms", label: "Agent Swarms" },
-      { href: "/status", label: "Status" },
+      { href: "/computer-use", labelKey: "links.computerUse" },
+      { href: "/guide", labelKey: "links.guide" },
+      { href: "/download", labelKey: "links.download" },
+      { href: "/pricing", labelKey: "links.pricing" },
+      { href: "/agent-swarms", labelKey: "links.agentSwarms" },
+      { href: "/status", labelKey: "links.status" },
     ],
   },
   {
-    title: "Resources",
+    titleKey: "columns.resources",
     links: [
-      { href: "/blog", label: "Blog" },
-      { href: "/results", label: "Case Studies" },
+      { href: "/blog", labelKey: "links.blog" },
+      { href: "/use-cases", labelKey: "links.useCases" },
+      { href: "/results", labelKey: "links.demos" },
+      { href: "/compare", labelKey: "links.compare" },
     ],
   },
   {
-    title: "Company",
+    titleKey: "columns.company",
     links: [
-      { href: "https://cal.com/coasty/15min", label: "Talk to Cofounders", external: true },
-      { href: "mailto:founders@coasty.ai", label: "Contact", external: true },
+      { href: "https://cal.com/coasty/15min", labelKey: "links.talkToCofounders", external: true },
+      { href: "mailto:founders@coasty.ai", labelKey: "links.contact", external: true },
     ],
   },
   {
-    title: "Legal",
+    titleKey: "columns.legal",
     links: [
-      { href: "/privacy", label: "Privacy" },
-      { href: "/terms", label: "Terms" },
+      { href: "/privacy", labelKey: "links.privacy" },
+      { href: "/terms", labelKey: "links.terms" },
     ],
   },
 ]
@@ -43,6 +50,8 @@ const footerColumns: { title: string; links: { href: string; label: string; exte
 export function LandingFooter() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+  const t = useTranslations("footer")
+  const tc = useTranslations("common")
 
   useEffect(() => {
     setMounted(true)
@@ -73,27 +82,27 @@ export function LandingFooter() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground/60 leading-relaxed max-w-[260px]">
-              AI-powered computer use.
+              {t("tagline")}
               <br />
-              Automate any workflow with intelligent agents.
+              {t("tagline2")}
             </p>
           </div>
 
           {/* Link columns */}
-          {footerColumns.map((column) => (
-            <div key={column.title} className="flex flex-col gap-3">
+          {footerColumnsDef.map((column) => (
+            <div key={column.titleKey} className="flex flex-col gap-3">
               <h3 className="text-[13px] font-medium text-foreground tracking-[-0.006em]">
-                {column.title}
+                {t(column.titleKey)}
               </h3>
               <ul className="flex flex-col gap-2.5">
                 {column.links.map((link) => (
-                  <li key={link.label}>
+                  <li key={link.labelKey}>
                     <Link
                       href={link.href}
                       {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       className="group/link inline-flex items-center gap-1 text-[13px] text-muted-foreground/60 hover:text-foreground transition-colors duration-200"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                       {link.external && (
                         <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-px translate-x-[-2px] group-hover/link:opacity-100 group-hover/link:translate-x-0 group-hover/link:translate-y-0 transition-all duration-200" />
                       )}
@@ -105,24 +114,29 @@ export function LandingFooter() {
           ))}
         </div>
 
+        {/* Language switcher strip */}
+        <div className="border-t border-border/20 pt-6 pb-2">
+          <LanguageSwitcher />
+        </div>
+
         {/* Bottom bar */}
-        <div className="border-t border-border/30 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="border-t border-border/20 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[12px] text-muted-foreground/50 tracking-[-0.006em]">
-            &copy; {new Date().getFullYear()} Coasty. All rights reserved.
+            &copy; {new Date().getFullYear()} Coasty. {tc("allRightsReserved")}
           </p>
           <div className="flex items-center gap-4">
             <Link
               href="/privacy"
               className="text-[12px] text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-200"
             >
-              Privacy
+              {tc("privacy")}
             </Link>
             <span className="text-muted-foreground/20 text-[10px]">|</span>
             <Link
               href="/terms"
               className="text-[12px] text-muted-foreground/50 hover:text-muted-foreground transition-colors duration-200"
             >
-              Terms
+              {tc("terms")}
             </Link>
           </div>
         </div>

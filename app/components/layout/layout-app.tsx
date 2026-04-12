@@ -13,6 +13,8 @@ import { useChats } from "@/lib/chat-store/chats/provider"
 import { cn } from "@/lib/utils"
 import { ChatStreamingProvider } from "@/lib/chat-streaming-store/provider"
 import dynamic from "next/dynamic"
+import { AccountDialog } from "@/app/components/layout/account-dialog"
+import { ChatBackgroundLayer } from "@/app/components/chat/chat-background"
 
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -61,6 +63,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           "@container relative h-full w-full bg-background",
           mounted && hasSidebar && "md:rounded-2xl md:overflow-hidden md:shadow-sm"
         )}>
+          {mounted && <ChatBackgroundLayer background={preferences.chatBackground} />}
           <Header
             hasSidebar={hasSidebar}
           />
@@ -80,6 +83,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           )}
         </main>
       </div>
+      <AccountDialog />
     </div>
   )
 }

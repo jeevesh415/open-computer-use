@@ -34,11 +34,36 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ agentReady: false, error: "Machine not found" }, { status: 404 });
     }
 
+    const settings = machine.settings as any;
+
+    // Electron machines: check connection status via backend instead of WebSocket ping
+    if (settings?.provider === "electron") {
+      try {
+        const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8001";
+        const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY || "";
+        const res = await fetch(
+          `${PYTHON_BACKEND_URL}/api/electron/machines/${machineId}/health`,
+          {
+            headers: {
+              "X-User-ID": authData.user.id,
+              ...(INTERNAL_API_KEY && { "X-Internal-Key": INTERNAL_API_KEY }),
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          return NextResponse.json({ agentReady: data.agentReady, isElectron: true });
+        }
+      } catch {
+        // Fall through to not ready
+      }
+      return NextResponse.json({ agentReady: false, isElectron: true });
+    }
+
     if (machine.status !== "running" || !machine.public_ip_address) {
       return NextResponse.json({ agentReady: false, reason: "not_running" });
     }
 
-    const settings = machine.settings as any;
     const agentPort = settings?.agent_port || 8080;
 
     // Quick WebSocket ping — 3 second timeout

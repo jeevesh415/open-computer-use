@@ -1,8 +1,11 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { GlobeIcon } from "@phosphor-icons/react"
 import React from "react"
+import { useTranslations } from "next-intl"
 import { PopoverContentAuth } from "./popover-content-auth"
 
 type ButtonSearchProps = {
@@ -16,6 +19,7 @@ export function ButtonSearch({
   onToggle,
   isAuthenticated,
 }: ButtonSearchProps) {
+  const t = useTranslations("chatInput")
   const handleClick = () => {
     const newState = !isSelected
     onToggle?.(newState)
@@ -30,7 +34,7 @@ export function ButtonSearch({
             className="border-border dark:bg-secondary rounded-full border bg-transparent"
           >
             <GlobeIcon className="size-5" />
-            Search
+            {t("search")}
           </Button>
         </PopoverTrigger>
         <PopoverContentAuth />

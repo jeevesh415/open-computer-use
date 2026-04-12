@@ -1,8 +1,12 @@
 import * as fs from 'fs/promises'
 import * as path from 'path'
+import { validateFilePath } from './security'
 
 export async function readFile(params: { path: string; encoding?: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'read')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     const content = await fs.readFile(params.path, { encoding: (params.encoding || 'utf-8') as BufferEncoding })
     return {
       success: true,
@@ -16,6 +20,9 @@ export async function readFile(params: { path: string; encoding?: string }): Pro
 
 export async function writeFile(params: { path: string; content: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'write')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     // Ensure parent directory exists
     await fs.mkdir(path.dirname(params.path), { recursive: true })
     await fs.writeFile(params.path, params.content, 'utf-8')
@@ -31,6 +38,9 @@ export async function editFile(params: {
   new_text: string
 }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'write')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     const content = await fs.readFile(params.path, 'utf-8')
     if (!content.includes(params.old_text)) {
       return { success: false, error: 'Old text not found in file' }
@@ -45,6 +55,9 @@ export async function editFile(params: {
 
 export async function appendFile(params: { path: string; content: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'write')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     await fs.appendFile(params.path, params.content, 'utf-8')
     return { success: true, path: params.path, message: 'Content appended' }
   } catch (error: any) {
@@ -54,6 +67,9 @@ export async function appendFile(params: { path: string; content: string }): Pro
 
 export async function deleteFile(params: { path: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'delete')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     await fs.unlink(params.path)
     return { success: true, path: params.path, message: 'File deleted' }
   } catch (error: any) {
@@ -79,6 +95,9 @@ export async function fileExists(params: { path: string }): Promise<any> {
 
 export async function listDirectory(params: { path: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'read')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     const entries = await fs.readdir(params.path, { withFileTypes: true })
     const items = entries.map((entry) => ({
       name: entry.name,
@@ -93,6 +112,9 @@ export async function listDirectory(params: { path: string }): Promise<any> {
 
 export async function deleteDirectory(params: { path: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'delete')
+    if (!check.allowed) return { success: false, error: check.reason }
+
     await fs.rm(params.path, { recursive: true, force: true })
     return { success: true, path: params.path, message: 'Directory deleted' }
   } catch (error: any) {

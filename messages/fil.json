@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Magsimula nang Libre",
+    "bookDemo": "Mag-book ng demo",
+    "tryCoastyFree": "Subukan ang Coasty nang libre",
+    "learnMore": "Matuto pa",
+    "watchSession": "Panoorin ang session",
+    "compareAllPlans": "Ihambing ang lahat ng plano at features",
+    "allRightsReserved": "Lahat ng karapatan ay nakalaan.",
+    "privacy": "Privacy",
+    "terms": "Mga Tuntunin",
+    "recommended": "Inirerekomenda",
+    "month": "buwan",
+    "creditsPerMonth": "{count} credits/buwan",
+    "agentsInParallel": "{count} agents nang sabay-sabay"
+  },
+  "header": {
+    "useCases": "Mga Gamit",
+    "blog": "Blog",
+    "agentSwarms": "Agent Swarms",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Ihambing",
+    "demos": "Mga Demo",
+    "pricing": "Presyo",
+    "download": "I-download",
+    "signIn": "Mag-sign in",
+    "getStarted": "Magsimula",
+    "useCaseItems": {
+      "competitorIntel": "Pagsusuri ng Kakompetensya",
+      "qaBugReports": "QA Ulat ng Mga Bug",
+      "seoGapAnalysis": "SEO Gap Analysis",
+      "dataExtraction": "Pagkuha ng Data",
+      "leadGeneration": "Pagbuo ng Leads",
+      "siteAudit": "Pag-audit ng Site",
+      "adIntelligence": "Impormasyon sa Ads",
+      "emailOutreach": "Email Outreach",
+      "designReview": "Pagsusuri ng Disenyo",
+      "priceMonitoring": "Pagsubaybay ng Presyo",
+      "marketResearch": "Pananaliksik sa Merkado",
+      "emailCampaigns": "Mga Kampanya sa Email"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} profile ng kakompetensya na naihatid",
+      "qaBugReports": "{stat} user flows na nasubukan bawat run",
+      "seoGapAnalysis": "{stat} keyword gaps na natukoy",
+      "dataExtraction": "{stat} rows na nakuha bawat run",
+      "leadGeneration": "{stat} qualified leads bawat run",
+      "siteAudit": "{stat} pages na na-audit bawat run",
+      "adIntelligence": "{stat} ad creatives na nakuha",
+      "emailOutreach": "{stat} personalized emails na ginawa",
+      "designReview": "{stat} breakpoints na nasubukan bawat page",
+      "priceMonitoring": "{stat} SKUs na inihambing bawat run",
+      "marketResearch": "{stat} data points na nakuha",
+      "emailCampaigns": "{stat} personalized emails bawat kampanya"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Lahat ng Posts",
+      "computerUse": "Paggamit ng Computer",
+      "compare": "Ihambing",
+      "dataEntry": "Pagpasok ng Data",
+      "webScraping": "Web Scraping",
+      "jobApplications": "Mga Aplikasyon sa Trabaho",
+      "demosResults": "Mga Demo at Resulta",
+      "guide": "Gabay"
+    },
+    "blogStats": {
+      "allPosts": "{stat} artikulo na ini-publish lingguhan",
+      "computerUse": "{stat} OSWorld benchmark score",
+      "compare": "{stat} kakompetensya na sinuri",
+      "dataEntry": "{stat} mas mabilis kaysa mano-mano",
+      "webScraping": "{stat} pages bawat session",
+      "jobApplications": "{stat} aplikasyon bawat session",
+      "demosResults": "{stat} totoong case studies",
+      "guide": "{stat} use case walkthroughs"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "Mga autonomous na computer operator",
+    "useCases": {
+      "computerAgent": {
+        "label": "Computer agent",
+        "headline": "i-automate ang anumang gawain sa browser",
+        "outcome": "Isang AI agent na kumokontrol sa totoong computer — nagba-browse, nag-click, nagta-type, at naghahatid ng tapos na trabaho. Walang kailangan i-setup."
+      },
+      "competitorIntel": {
+        "label": "Pagsusuri ng kakompetensya",
+        "headline": "subaybayan ang bawat kakompetensya",
+        "outcome": "Kumpletong profile ng kakompetensya kasama ang presyo, features, at positioning gaps — na-export bilang ready-to-share na ulat."
+      },
+      "qaTesting": {
+        "label": "QA testing",
+        "headline": "hanapin ang mga bug bago ang users",
+        "outcome": "Kritikal na user flows na nasubukan end-to-end, bawat bug may screenshot na may repro steps at severity ranking."
+      },
+      "seoAnalysis": {
+        "label": "SEO analysis",
+        "headline": "tuklasin ang keyword gaps",
+        "outcome": "Keyword gaps na natukoy, content briefs na ginawa, backlink sources ng kakompetensya na na-map — actionable SEO strategy."
+      },
+      "dataExtraction": {
+        "label": "Pagkuha ng data",
+        "headline": "i-scrape at i-structure ang anumang site",
+        "outcome": "Structured data na na-scrape, nalinis, na-deduplicate, at na-export bilang CSV — mula sa anumang website, anumang format."
+      },
+      "leadGeneration": {
+        "label": "Pagbuo ng leads",
+        "headline": "punan ang iyong sales pipeline",
+        "outcome": "Qualified na decision-makers na tumutugma sa iyong ICP na may verified na titulo, kumpanya, at personalized na outreach openers."
+      },
+      "siteAudit": {
+        "label": "Pag-audit ng site",
+        "headline": "i-audit ang bawat page sa malaking scale",
+        "outcome": "Mga page na na-scan, Core Web Vitals na na-score, sirang links na nahanap, accessibility issues na naka-rank ayon sa priority ng pag-aayos."
+      },
+      "emailOutreach": {
+        "label": "Email outreach",
+        "headline": "magpadala ng personalized na outreach",
+        "outcome": "Personalized na emails na tumutukoy sa kumpanya, tungkulin, at pain points ng bawat prospect — handa nang ipadala."
+      },
+      "marketResearch": {
+        "label": "Pananaliksik sa merkado",
+        "headline": "i-validate ang iyong merkado nang mabilis",
+        "outcome": "TAM na nakalkula, pangunahing manlalaro na na-profile, growth trends na na-chart — mula sa dose-dosenang data points."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Marketing",
+        "task": "I-market ang iyong produkto sa Reddit nang autonomous"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Humanap ng prospects at magpadala ng personalized na emails"
+      },
+      "qaTesting": {
+        "label": "QA Testing",
+        "task": "Subukan ang bawat checkout flow at iulat ang mga bug"
+      },
+      "jobApplication": {
+        "label": "Aplikasyon sa Trabaho",
+        "task": "Humanap ng mga posisyon, i-tailor ang resume, at mag-apply"
+      },
+      "formFilling": {
+        "label": "Pagpupuno ng Form",
+        "task": "Punan ang YC S26 application para sa iyo"
+      },
+      "socialMedia": {
+        "label": "Social Media",
+        "task": "Mag-post sa Hacker News at makipag-ugnayan sa mga komento"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld benchmark",
+      "sublabel": "#1 computer-use agent sa buong mundo"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Mga tool na magagamit ng agent",
+      "sublabel": "Browser, terminal, desktop, files"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Tumatakbo ayon sa schedule",
+      "sublabel": "I-automate ang anumang paulit-ulit na gawain"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Kailangan i-setup",
+      "sublabel": "Walang APIs, walang integrations, walang code"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Bakit Coasty",
+    "title": "Hindi chatbot. Hindi RPA script.",
+    "worksLikeHuman": {
+      "title": "Gumagana tulad ng tao",
+      "description": "Nakakakita, nag-click, nagta-type, nagna-navigate — eksaktong tulad mo"
+    },
+    "noScripts": {
+      "title": "Walang scripts o setup",
+      "description": "Simpleng Filipino ang ipasok, resulta ang lalabas"
+    },
+    "handlesUnexpected": {
+      "title": "Hinahandle ang di-inaasahan",
+      "description": "Umaangkop sa CAPTCHAs, popups, pagbabago ng layout"
+    },
+    "runsInIsolation": {
+      "title": "Tumatakbo nang nakahiwalay",
+      "description": "Sandboxed VM bawat session — walang nakakalabas"
+    }
+  },
+  "howItWorks": {
+    "title": "Paano ito gumagana",
+    "step1": {
+      "title": "Ilarawan ang iyong gawain",
+      "description": "Simpleng Filipino. Iyon lang.",
+      "placeholder": "Magsaliksik ng 100 leads sa LinkedIn..."
+    },
+    "step2": {
+      "title": "Panoorin ang agent na gumagawa",
+      "description": "Nagbubukas ng browser, nag-click, nagta-type, nagna-navigate"
+    },
+    "step3": {
+      "title": "Tapos na ang gawain",
+      "description": "Bawat aksyon na naka-log kasama ang mga screenshot",
+      "results": {
+        "taskCompleted": "Tapos na ang gawain",
+        "leadsFound": "12 leads na nahanap",
+        "addedToCrm": "Idinagdag sa CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Na-benchmark bilang #1 sa buong mundo",
+    "subtitle": "82% sa OSWorld — ang pinakamahirap na benchmark para sa AI agents na gumagamit ng totoong mga computer",
+    "agenticFramework": "Agentic Framework",
+    "foundationModel": "Foundation Model"
+  },
+  "comparison": {
+    "title": "Bakit mag-automate gamit ang Coasty?",
+    "subtitle": "Ang parehong gawain na tumatagal ng oras sa team — tinatapos ng Coasty sa ilang minuto, buong araw buong gabi.",
+    "manual": {
+      "title": "Mano-manong Paggawa",
+      "subtitle": "Ikaw o ang iyong team, sa kamay"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 computer-use agent"
+    },
+    "rows": {
+      "timePerTask": "Oras bawat gawain",
+      "availability": "Availability",
+      "setupTime": "Oras ng setup",
+      "errorRate": "Error rate",
+      "scaling": "Pag-scale",
+      "auditTrail": "Audit trail"
+    },
+    "manualValues": {
+      "timePerTask": "Oras hanggang araw",
+      "availability": "Business hours lang",
+      "setupTime": "Matuto ng tools, magsulat ng SOPs",
+      "errorRate": "Mga pagkakamali ng tao",
+      "scaling": "Mas maraming gawain = mas maraming oras",
+      "auditTrail": "Wala"
+    },
+    "coastyValues": {
+      "timePerTask": "Minuto",
+      "availability": "24/7, araw-araw",
+      "setupTime": "60 segundo",
+      "errorRate": "Nag-aauto-correct",
+      "scaling": "Magpatakbo ng walang limitasyon na gawain nang sabay-sabay",
+      "auditTrail": "Bawat click na naka-log + mga screenshot"
+    },
+    "bottomBar": {
+      "automateTasksThat": "I-automate ang mga gawain na tumatagal ng",
+      "hoursManually": "oras nang mano-mano",
+      "startingAt": "Nagsisimula sa"
+    }
+  },
+  "demo": {
+    "title": "Panoorin ang agent sa aksyon",
+    "subtitle": "Totoong gawain. Totoong browsers. Bawat click na naka-record.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty sa Reddit",
+        "description": "Panoorin ang Coasty na autonomous na nagpapatakbo ng marketing campaign — nagsasaliksik ng kakompetensya, nag-aanalisa ng trends, at gumagawa ng strategy deck.",
+        "tag": "Marketing"
+      },
+      "prospects": {
+        "title": "Paghahanap ng Mga Prospective Customer",
+        "description": "Hinahanap at sinusuri ng Coasty ang mga prospective customer, kinukuha ang mahahalagang detalye para gumawa ng personalized na outreach.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA Testing sa Sarili",
+        "description": "Nagpapatakbo ang Coasty ng quality assurance sa sarili nitong produkto — nagna-navigate ng flows, nakakapansin ng bugs, at nag-uulat ng issues nang autonomous.",
+        "tag": "QA Testing"
+      },
+      "email": {
+        "title": "Pagpapadala ng Email sa Ngalan Mo",
+        "description": "Mula sa pag-compose hanggang sa pagpadala — isang AI agent ang gumagawa at nagpapadala ng email nang ganap na mag-isa.",
+        "tag": "Komunikasyon"
+      },
+      "job": {
+        "title": "Pag-apply sa Trabaho",
+        "description": "Hinahanap ng Coasty ang tamang posisyon, ini-tailor ang iyong resume, at sinusubmit ang application — lahat nang mag-isa.",
+        "tag": "Aplikasyon sa Trabaho"
+      },
+      "hackernews": {
+        "title": "Pag-post sa Hacker News",
+        "description": "Gumagawa at nagpa-publish ang Coasty ng blog post sa Hacker News — sinusulat ang content at sinusubmit ito nang autonomous.",
+        "tag": "Social Media"
+      }
+    }
+  },
+  "features": {
+    "title": "Ginawa para sa totoong gawain sa computer",
+    "selfCorrecting": {
+      "title": "Nag-aauto-correct",
+      "description": "Nakaka-detect ng errors, sumusubok ng ibang paraan"
+    },
+    "auditTrail": {
+      "title": "Kumpletong Audit Trail",
+      "description": "Bawat click na naka-log kasama ang mga screenshot"
+    },
+    "schedule": {
+      "title": "Naka-schedule 24/7",
+      "description": "Tumatakbo sa cron — oras-oras, araw-araw, lingguhan"
+    },
+    "sandboxed": {
+      "title": "Sandboxed at Secure",
+      "description": "Isolated na VM bawat session, sinisira pagkatapos"
+    },
+    "benchmark": {
+      "title": "#1 sa OSWorld",
+      "description": "82% — pinakamataas na score na naitala"
+    },
+    "swarms": {
+      "title": "Agent Swarms",
+      "description": "Hatiin ang mga gawain sa mga machine nang sabay-sabay"
+    }
+  },
+  "pricing": {
+    "title": "Magsimula nang libre, mag-scale kapag handa na",
+    "subtitle": "Walang credit card. Ang iyong AI agent ay handa sa loob ng 60 segundo.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Subukan ang #1 computer-use agent",
+        "cta": "Magsimula nang Libre"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Magaan na pang-araw-araw na automation",
+        "cta": "Kunin ang Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Mag-automate ng gawain araw-araw",
+        "cta": "Kunin ang Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "I-scale ang mga kumplikadong workflow",
+        "cta": "Pumili ng Plus",
+        "badge": "Pinakasikat"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Walang limitasyong mabigat na automation",
+        "cta": "Kunin ang Pro"
+      }
+    },
+    "vmTemporary": "1 pansamantalang VM (2 oras)",
+    "vmDeletedAfterInactivity": "1 VM (dine-delete pagkatapos ng inactivity)",
+    "vmAlwaysOn": "{count} always-on na VM",
+    "vmAlwaysOnPlural": "{count} always-on na VMs",
+    "bargain": {
+      "title": "Ang parehong trabaho ay nagkakahalaga ng {oldPrice} sa mano-manong paggawa",
+      "description": "Ang virtual assistant ay nagkakahalaga ng $2,000–$4,000/buwan. Ang part-time hire ay mas mahal pa. Ginagawa ng Coasty ang parehong trabaho 24/7 simula sa $0 — na may perpektong consistency, kumpletong audit trails, at zero training time."
+    }
+  },
+  "faq": {
+    "title": "Mga madalas itanong",
+    "subtitle": "Lahat ng kailangan mong malaman bago magsimula",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Ano ang Coasty?",
+        "answer": "Ang Coasty ang pinakamahusay na computer-use AI agent sa mundo. Mag-describe ka ng gawain — magsaliksik ng leads, mag-test ng website, punan ang mga form, mag-post sa social media — at magbubukas ang Coasty ng totoong browser, mag-navigate sa mga app, mag-click ng mga button, mag-type ng text, at tapusin ang gawain mula simula hanggang dulo. Walang APIs, walang integrations, walang code na kailangan."
+      },
+      "howDifferent": {
+        "question": "Paano ito naiiba sa ChatGPT o ibang AI tools?",
+        "answer": "Ang ChatGPT ay gumagawa ng text. Ang Coasty ay gumagamit ng computer. Hindi ka nito sinasabihan kung ano ang gagawin — nagbubukas ito ng browser, nagna-navigate sa website, nag-click ng mga button, pinupunan ang mga form, at naghahatid ng tapos na trabaho. Ito ang pagkakaiba ng pagkuha ng mga instruksyon at pagkatapos na ng gawain para sa iyo."
+      },
+      "whatTasks": {
+        "question": "Anong mga gawain ang maaaring i-automate ng Coasty?",
+        "answer": "Anumang gawain na magagawa mo sa computer. Web research, pagbuo ng leads, pagpasok ng data, pagpupuno ng form, QA testing, pag-post sa social media, email outreach, pagproseso ng invoice, pagsusuri ng kakompetensya, pag-recruit — kung kasama ang browser o desktop app, kaya itong gawin ng Coasty."
+      },
+      "whatAreCredits": {
+        "question": "Ano ang credits at paano ginagamit?",
+        "answer": "Ang credits ay nagagamit habang gumagawa ang agent ng mga gawain. Ang mas matagal at mas kumplikadong gawain ay gumagamit ng mas maraming credits. Kasama sa mga bayad na plano ang buwanang credits, at maaari ka ring bumili ng karagdagang credit packs anumang oras."
+      },
+      "localComputer": {
+        "question": "Maaari bang tumakbo ang Coasty sa sarili kong computer?",
+        "answer": "Oo. Ang aming desktop app ay tumatakbo bilang lightweight overlay sa iyong machine, kinokontrol ang iyong lokal na browser at mga application nang direkta. Bilang alternatibo, tumatakbo ang mga gawain sa mga isolated na cloud machine — ikaw ang pipili."
+      },
+      "dataSafe": {
+        "question": "Ligtas ba ang aking data?",
+        "answer": "Bawat gawain ay tumatakbo sa isang isolated na sandbox environment. Walang nakakalabas sa pagitan ng mga session. Ang iyong mga credentials ay nananatiling pribado, at bawat aksyon ay naka-log na may mga screenshot sa kumpletong audit trail na maaari mong suriin anumang oras."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI-powered na paggamit ng computer.",
+    "tagline2": "I-automate ang anumang workflow gamit ang mga intelligent agents.",
+    "columns": {
+      "product": "Produkto",
+      "resources": "Mga Mapagkukunan",
+      "company": "Kumpanya",
+      "legal": "Legal"
+    },
+    "links": {
+      "computerUse": "Paggamit ng Computer",
+      "guide": "Gabay",
+      "download": "I-download",
+      "pricing": "Presyo",
+      "agentSwarms": "Agent Swarms",
+      "status": "Status",
+      "blog": "Blog",
+      "useCases": "Mga Gamit",
+      "demos": "Mga Demo",
+      "compare": "Ihambing",
+      "talkToCofounders": "Kausapin ang mga Cofounder at Demo",
+      "contact": "Makipag-ugnayan",
+      "privacy": "Privacy",
+      "terms": "Mga Tuntunin"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Wika"
+  },
+  "auth": {
+    "brandHeading": "Ikaw ang nagtatakda ng layunin.",
+    "brandSubheading": "Kami ang bahala sa natitira.",
+    "mobileHeading": "Ikaw ang nagtatakda ng layunin. Kami ang bahala sa natitira.",
+    "mobileSubheading": "Mga AI agent na nagba-browse, nag-click, at gumagana tulad ng totoong kasama sa team.",
+    "flowSteps": {
+      "step1": {
+        "label": "Inilarawan mo ang gawain",
+        "sub": "\"Mag-research ng top 5 kakompetensya namin\""
+      },
+      "step2": {
+        "label": "Kinuha na ng agent ang kontrol",
+        "sub": "Nagba-browse, nag-click, nagta-type nang autonomous"
+      },
+      "step3": {
+        "label": "Naihatid na ang trabaho",
+        "sub": "Spreadsheet na may 5 kumpletong profile ng kakompetensya"
+      }
+    },
+    "complete": "Tapos na",
+    "doneIn": "Natapos sa 8 minuto",
+    "demoCaption": "Magpatakbo ng AI agent sa iyong computer o kontrolin ito mula sa iyong telepono, saan ka man.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Naghihintay ang iyong operator",
+      "signUp": "Ilagay ang iyong mga workflow sa autopilot",
+      "magicLink": "Laktawan ang password",
+      "forgotPassword": "Ibalik ka namin"
+    },
+    "viewDescriptions": {
+      "signIn": "Magpatuloy kung saan ka tumigil — naaalala ng iyong mga agent",
+      "signUp": "I-deploy ang iyong unang AI agent sa loob ng isang minuto",
+      "magicLink": "Isang click mula sa iyong inbox at pasok ka na",
+      "forgotPassword": "Magpapadala kami ng reset link sa iyong email"
+    },
+    "google": {
+      "connecting": "Kumokonekta...",
+      "continueWithGoogle": "Magpatuloy gamit ang Google"
+    },
+    "or": "o",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Ang iyong password",
+    "confirmPassword": "Kumpirmahin ang password",
+    "confirmPasswordPlaceholder": "Kumpirmahin ang iyong password",
+    "minChars": "Min. 6 na karakter",
+    "signingIn": "Nagsa-sign in...",
+    "signIn": "Mag-sign in",
+    "creatingAccount": "Gumagawa ng account...",
+    "createAccount": "Gumawa ng account",
+    "sending": "Nagpapadala...",
+    "sendMagicLink": "Ipadala ang magic link",
+    "sendResetLink": "Ipadala ang reset link",
+    "forgotPassword": "Nakalimutan ang password?",
+    "useMagicLink": "Gamitin ang magic link",
+    "dontHaveAccount": "Wala pang account?",
+    "signUp": "Mag-sign up",
+    "alreadyHaveAccount": "May account ka na?",
+    "backToSignIn": "Bumalik sa sign in",
+    "termsAgreement": "Sa pagpapatuloy, sumasang-ayon ka sa aming",
+    "terms": "Mga Tuntunin",
+    "and": "at",
+    "privacyPolicy": "Patakaran sa Privacy",
+    "errors": {
+      "fillAllFields": "Pakipunan ang lahat ng field",
+      "passwordMinLength": "Ang password ay dapat may hindi bababa sa 6 na karakter",
+      "passwordsDoNotMatch": "Hindi magkatugma ang mga password",
+      "supabaseNotConfigured": "Hindi naka-configure ang Supabase",
+      "unexpectedError": "May nangyaring hindi inaasahang error. Pakisubukang muli.",
+      "confirmEmail": "Pakikumpirma ang iyong email bago mag-sign in. Tingnan ang iyong inbox.",
+      "invalidCredentials": "Hindi valid na email o password.",
+      "signInFailed": "Nabigo ang pag-sign in. Pakisubukang muli.",
+      "invalidEmail": "Hindi valid na email address.",
+      "emailAlreadyExists": "May account na sa email na ito. Subukang mag-sign in na lang.",
+      "signUpFailed": "Nabigo ang pag-sign up. Pakisubukang muli.",
+      "enterEmail": "Pakilagay ang iyong email",
+      "noAccountFound": "Walang nahanap na account sa email na ito. Mag-sign up muna.",
+      "magicLinkFailed": "Nabigo ang pagpapadala ng magic link. Pakisubukang muli.",
+      "resetFailed": "Nabigo ang pagpapadala ng reset email. Pakisubukang muli.",
+      "updateFailed": "Nabigo ang pag-update ng password. Pakisubukang muli."
+    },
+    "success": {
+      "checkEmailConfirm": "Tingnan ang iyong email para kumpirmahin ang iyong account bago mag-sign in.",
+      "checkEmailMagicLink": "Tingnan ang iyong email para sa magic link sa pag-sign in.",
+      "checkEmailReset": "Tingnan ang iyong email para sa password reset link.",
+      "passwordUpdated": "Matagumpay na na-update ang password. Nire-redirect sa sign in..."
+    },
+    "resetPassword": {
+      "title": "I-reset ang iyong password",
+      "subtitle": "Ilagay ang iyong bagong password sa ibaba.",
+      "newPassword": "Bagong password",
+      "confirmNewPassword": "Kumpirmahin ang bagong password",
+      "confirmPlaceholder": "Kumpirmahin ang iyong bagong password",
+      "updating": "Ina-update...",
+      "updatePassword": "I-update ang password"
+    },
+    "errorPage": {
+      "title": "Error sa Authentication",
+      "defaultMessage": "May nangyaring error sa authentication.",
+      "tryAgain": "Subukang Muli",
+      "backToChat": "Bumalik sa Chat",
+      "needHelp": "Kailangan ng tulong?",
+      "contactSupport": "Makipag-ugnayan sa Support"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Laktawan muna",
+    "back": "Bumalik",
+    "continue": "Magpatuloy",
+    "getStarted": "Magsimula",
+    "settingUp": "Sine-setup...",
+    "welcome": {
+      "titleReturning": "Welcome back{name}!",
+      "titleNew": "Welcome sa Coasty",
+      "descriptionReturning": "Gusto naming malaman pa ang kaunti tungkol sa iyo para mapabuti ang iyong karanasan",
+      "descriptionNew": "I-setup natin ang iyong account para ma-personalize ang iyong karanasan"
+    },
+    "nameLabel": "Ano ang itatawag namin sa iyo?",
+    "namePlaceholder": "Ang pangalan mo",
+    "companyLabel": "Kumpanya",
+    "optional": "(opsyonal)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Website",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Ano ang pinaka-naglalarawan sa iyo?",
+      "subtitle": "Piliin ang lahat ng naaangkop — tumutulong ito sa amin na i-tailor ang iyong karanasan"
+    },
+    "roles": {
+      "founder": "Founder / CEO",
+      "developer": "Developer",
+      "marketer": "Marketer",
+      "designer": "Designer",
+      "product_manager": "Product Manager",
+      "data_analyst": "Data / Analytics",
+      "operations": "Operations",
+      "other": "Iba pa"
+    },
+    "teamSizeLabel": "Laki ng team",
+    "teamSizes": {
+      "solo": "Ako lang",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Paano mo kami nahanap?",
+      "subtitle": "Gusto naming malaman kung saan mo narinig ang tungkol sa Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Kaibigan / Kasamahan",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Iba pa"
+    },
+    "useCaseStep": {
+      "title": "Ano ang ia-automate mo muna?",
+      "subtitle": "Piliin ang lahat ng naaangkop — maaari mong i-explore ang lahat mamaya"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping at Pananaliksik",
+      "browser_automation": "Browser Automation",
+      "data_entry": "Pagpasok ng Data at Mga Form",
+      "email_outreach": "Email at Outreach",
+      "testing": "QA at Testing",
+      "ecommerce": "Mga Gawain sa E-commerce",
+      "social_media": "Pamamahala ng Social Media",
+      "general_automation": "Pangkalahatang Automation"
+    },
+    "showcase": {
+      "title": "Lahat ng kailangan mo,",
+      "titleHighlight": "built-in na.",
+      "subtitle": "Ito ang magagawa ng Coasty para sa iyo",
+      "noCode": {
+        "title": "Walang Code",
+        "description": "Ilarawan lang kung ano ang gusto mo sa simpleng Filipino"
+      },
+      "agentSwarms": {
+        "title": "Agent Swarms",
+        "description": "Mga parallel na agent fleet"
+      },
+      "desktopControl": {
+        "title": "Kontrol sa Desktop",
+        "description": "Nag-click, nagta-type, nagna-navigate"
+      },
+      "browserAutomation": {
+        "title": "Browser Automation",
+        "description": "Mga form, tabs, scraping — fully automated"
+      },
+      "computerVision": {
+        "title": "Computer Vision",
+        "description": "Nakikita at naiintindihan ang iyong screen sa real time"
+      },
+      "workflows": {
+        "title": "Mga Workflow",
+        "description": "Multi-step na mga daloy"
+      },
+      "onDevice": {
+        "title": "Sa Device",
+        "description": "Tumatakbo nang lokal"
+      },
+      "autonomous": {
+        "title": "24/7 Autonomous",
+        "description": "I-set at kalimutan — tumatakbo habang natutulog ka"
+      }
+    },
+    "guideCallout": {
+      "title": "Bago ka dito? May gabay kami para sa iyo",
+      "subtitle": "I-deploy ang iyong unang AI agent sa loob ng isang minuto"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Ano ang dapat gawin ng iyong AI worker?",
+    "placeholderAlt": "Sabihin sa iyong AI kung ano ang gagawin sa computer...",
+    "vmError": {
+      "title": "Error sa Virtual Machine",
+      "description": "Ang virtual machine ay nasa error state o dine-delete.",
+      "hint": "Pakitingnan ang Machines tab para maayos ang isyu, o piliin ang \"Walang Computer na Napili\" para gumamit ng web search lang.",
+      "gotIt": "Sige"
+    },
+    "status": {
+      "creating": "Gumagawa ng {name}...",
+      "initiating": "Sinimulan ang agent sa {name}...",
+      "stopping": "Pinapatigil ang {name}...",
+      "preparing": "Inihahanda ang {name}..."
+    },
+    "swarm": {
+      "title": "Swarm Mode",
+      "pro": "PRO",
+      "upgradeLabel": "Swarm mode — mag-upgrade para i-unlock",
+      "feature1": "Parallel na execution sa mga pansamantalang machine",
+      "feature2": "Bawat machine ay tumatakbo nang autonomous",
+      "feature3": "3x ang machine limit ng iyong plano bawat swarm",
+      "description": "Patakbuhin ang isang prompt sa 3x ng iyong machine limit nang sabay-sabay — bawat isa ay humaharap sa gawain nang mag-isa.",
+      "enableLabel": "I-enable ang swarm mode",
+      "disableLabel": "I-disable ang swarm mode",
+      "onTooltip": "Swarm mode ON — ang iyong prompt ay tatakbo sa maraming machine nang sabay-sabay",
+      "offTooltip": "I-enable ang swarm mode para patakbuhin ang iyong prompt sa maraming machine nang sabay-sabay",
+      "decreaseMachines": "Bawasan ang bilang ng machine",
+      "increaseMachines": "Dagdagan ang bilang ng machine",
+      "machineLimit": "Hanggang {max} swarm machines sa iyong plano. Kailangan pa? Makipag-ugnayan sa founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Swarm Mode"
+    },
+    "desktop": {
+      "connectLabel": "Kumonekta sa desktop",
+      "screenLabel": "Screen ni {name}",
+      "screenDefault": "Desktop",
+      "watchTooltip": "Panoorin ang iyong agent na gumagawa sa hiwalay na screen. Huwag lang hawakan ang kahit ano o magka-stage fright siya!",
+      "watchLabel": "Desktop"
+    },
+    "buttons": {
+      "stop": "Itigil",
+      "sendToSwarm": "Ipadala sa swarm",
+      "taskRunning": "May ibang gawain na tumatakbo — i-click para itigil at patakbuhin ang iyo",
+      "selectComputer": "Pumili ng computer para magpadala ng mensahe",
+      "waitCreating": "Pakihintay ang paglikha ng VM",
+      "waitStarting": "Pakihintay ang pagsisimula ng VM",
+      "waitAgent": "Pakihintay ang pag-initialize ng agent",
+      "vmStopping": "Tumitigil ang VM",
+      "send": "Ipadala",
+      "switching": "Nagpapalit...",
+      "overrideRun": "I-override at Patakbuhin",
+      "stopLabel": "Itigil ang tumatakbong gawain at simulan ito",
+      "sendLabel": "Ipadala ang mensahe"
+    },
+    "search": "Maghanap",
+    "upload": {
+      "label": "Mag-upload ng files sa VM",
+      "heading": "Mag-upload ng files sa VM",
+      "description": "Ise-save ang mga file sa Desktop",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "I-drop ang mga file dito",
+      "dropDescription": "Ia-upload ang mga file sa Desktop folder ng VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Mag-login para subukan ang mas maraming feature nang libre",
+      "description": "Gumawa ng mga Project, mag-invite ng team members, at marami pa.",
+      "connecting": "Kumokonekta...",
+      "continueWithGoogle": "Magpatuloy gamit ang Google"
+    },
+    "removeFile": "Alisin ang file"
+  },
+  "chat": {
+    "greeting": "Kumusta",
+    "greetingAuth": "Ako ang bahala sa trabaho sa computer. Ano ang gawain?",
+    "greetingUnauth": "AI na gumagamit ng computer para hindi mo na kailangan. Sabihin mo lang kung ano ang kailangan mong magawa.",
+    "guide": "Gabay",
+    "saveLogins": "I-save ang mga login para sa auto-fill",
+    "encryptedNote": "naka-encrypt, hindi nakikita ng AI",
+    "roleLabels": [
+      "Katrabaho",
+      "Empleyado",
+      "Kaibigan",
+      "Katulong",
+      "Kasosyo",
+      "Kasama sa Team",
+      "Collaborator",
+      "Tagapag-tulong"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} ulat ng kakompetensya",
+        "warmLeads": "Humanap ng 20 leads para sa {company}",
+        "pitchDeck": "{company} draft ng pitch deck"
+      },
+      "developer": {
+        "findBugs": "Humanap ng mga bug sa {company}",
+        "performance": "{company} performance audit",
+        "apiDocs": "I-extract ang {company} API docs"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO gap analysis",
+        "competitorAds": "Mag-spy sa ads ng mga karibal ng {company}",
+        "trendingContent": "Trending ideas para sa {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} review summary",
+        "featureComparison": "{company} feature comparison",
+        "competitorLaunches": "I-track ang mga launches ng karibal ng {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "I-export ang data ng {company} sa CSV",
+        "marketSizing": "{company} market sizing",
+        "benchmark": "Benchmark ng {company} vs industry"
+      },
+      "operations": {
+        "enterRecords": "Magpasok ng mga record sa {company}",
+        "cheapestVendor": "Humanap ng mga vendor para sa {company}",
+        "invoiceSummary": "{company} invoice summary"
+      },
+      "designer": {
+        "designComparison": "{company} vs kakompetensya sa design",
+        "responsiveAudit": "{company} responsive audit",
+        "inspiration": "Design inspiration para sa {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "I-extract ang data ng site ng {company}",
+      "browser_automation": "I-export ang mga report ng {company}",
+      "data_entry": "Magpasok ng data sa {company}",
+      "email_outreach": "Outreach para sa {company}",
+      "testing": "QA test ng {company}",
+      "ecommerce": "{company} pricing comparison",
+      "social_media": "Mag-post tungkol sa {company}",
+      "general_automation": "I-automate ang gawain sa {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Kopyahin ang text",
+    "copied": "Nakopya na!",
+    "regenerate": "I-regenerate",
+    "feedback": {
+      "title": "Feedback",
+      "prompts": [
+        "I-rate ito",
+        "Feedback",
+        "Kamusta namin?",
+        "Mga saloobin?",
+        "Ibahagi ang feedback"
+      ],
+      "tooltip": "Ibahagi ang iyong feedback"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Smart Search",
+      "description": "AI-powered na paghahanap sa buong web"
+    },
+    "collaborate": {
+      "title": "Mag-collaborate",
+      "description": "Magtulungan sa real-time"
+    },
+    "globalAccess": {
+      "title": "Global Access",
+      "description": "Maghanap sa 50+ na wika"
+    },
+    "aiModels": {
+      "title": "Mga AI Model",
+      "description": "Maraming AI provider"
+    },
+    "freeForever": {
+      "title": "Libre Magpakailanman",
+      "description": "Walang nakatagong gastos"
+    },
+    "privateSecure": {
+      "title": "Pribado at Secure",
+      "description": "Nananatiling sa iyo ang iyong data"
+    }
+  },
+  "sidebar": {
+    "newTask": "Bagong Gawain",
+    "newTaskDescription": "Magsimula ng bagong AI automation",
+    "activity": "Aktibidad",
+    "taskHistory": "Kasaysayan ng Gawain",
+    "taskHistoryDescription": "Suriin ang mga nakaraang gawain at magpatuloy kung saan ka tumigil",
+    "taskHistoryPopup": {
+      "title": "Ang iyong mga kamakailang gawain",
+      "description": "Mag-browse at magpatuloy ng mga nakaraang usapan. Bawat gawain ay naka-save para makabalik ka sa eksaktong pagtigil mo."
+    },
+    "swarmRuns": "Mga Swarm Run",
+    "swarmRunsDescription": "I-monitor ang multi-agent na parallel workflows",
+    "swarmRunsPopup": {
+      "title": "Multi-agent na mga workflow",
+      "description": "Magpatakbo ng mga gawain sa maraming machine nang sabay-sabay. Bawat agent ay gumagana nang mag-isa at ang mga resulta ay awtomatikong nagsasama."
+    },
+    "guide": "Gabay",
+    "guideDescription": "Alamin kung paano mapakinabangan ang Coasty",
+    "guidePopup": {
+      "title": "Pagsisimula",
+      "description": "Step-by-step na mga walkthrough at best practices para sa epektibong automation."
+    },
+    "infrastructure": "Imprastruktura",
+    "computer": "Computer",
+    "computers": "Mga Computer",
+    "active": "aktibo",
+    "view": "Tingnan",
+    "workforce": "Mga Iskedyul",
+    "workforceDescription": "Mag-iskedyul ng mga awtomatikong gawain at trigger",
+    "workforcePopup": {
+      "title": "Naka-schedule na automation",
+      "description": "Mag-set up ng paulit-ulit na gawain gamit ang cron na iskedyul at agent-to-agent na trigger. Tumatakbo ang iyong mga iskedyul habang natutulog ka."
+    },
+    "credentials": "Mga Credential",
+    "credentialsDescription": "Ligtas na mag-store ng mga login para sa access ng agent",
+    "credentialsPopup": {
+      "title": "Secure na credential vault",
+      "description": "Mag-store ng mga login at API key na may encryption. Awtomatikong pine-fill ng mga agent ang credentials nang hindi ine-expose ang mga raw value."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Kunin ang Desktop App",
+      "download": "I-download",
+      "downloadDesktopApp": "I-download ang Desktop App",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Kontrolin ang iyong computer nang malayo",
+      "controlDescription": "I-install ang desktop app at magpatakbo ng mga gawain sa iyong PC mula sa dashboard na ito — kahit saan, kahit kailan."
+    },
+    "credits": {
+      "runningLow": "Mga Credit — Nauubusan na",
+      "remaining": "Natitirang mga credit",
+      "buy": "Bumili",
+      "creditsLeft": "credits na natitira",
+      "usedLabel": "Nagamit: {count}",
+      "consumed": "{percent}% nagamit",
+      "usageThisWeek": "Paggamit ngayong linggo"
+    },
+    "talkToUs": "Kausapin kami",
+    "talkToUsDesc": "Mag-book ng 15-min na tawag",
+    "inviteEarn": "Mag-invite at Kumita",
+    "inviteEarnDesc": "Makakuha ng libreng credits",
+    "user": "User",
+    "account": "Account",
+    "tasks": "{count} Mga Gawain",
+    "recentActivity": "Kamakailang aktibidad",
+    "viewAllHistory": "Tingnan ang buong kasaysayan →",
+    "swarmRunsCount": "{count} Mga Swarm Run",
+    "running": "tumatakbo",
+    "completed": "tapos na",
+    "viewAllSwarms": "Tingnan ang lahat ng swarm →",
+    "schedulesCount": "{count} Mga Schedule",
+    "totalRuns": "{count} kabuuang run",
+    "paused": "naka-pause",
+    "viewAllSchedules": "Tingnan ang lahat ng schedule →",
+    "credentialsCount": "{count} Mga Credential",
+    "encryptedVault": "Naka-encrypt na vault",
+    "manageCredentials": "Pamahalaan ang mga credential →",
+    "days": [
+      "Lun",
+      "Mar",
+      "Miy",
+      "Huw",
+      "Biy",
+      "Sab",
+      "Lin"
+    ],
+    "resume": "ITULOY",
+    "result": "RESULTA",
+    "notScheduled": "Hindi naka-schedule",
+    "overdue": "Lampas na",
+    "lessThanMin": "< 1 min",
+    "inMinutes": "sa {count}m",
+    "inHours": "sa {count}h",
+    "today": "ngayon",
+    "yesterday": "kahapon"
+  },
+  "appHeader": {
+    "login": "Mag-login",
+    "assign": "Mag-iskedyul",
+    "assignDescription": "Mag-iskedyul ng gawaing ito na tumakbo nang awtomatiko",
+    "computer": "Computer",
+    "showComputer": "Ipakita ang Computer",
+    "hideComputer": "Itago ang Computer",
+    "employeeHired": "Na-hire ang empleyado!",
+    "employeeRemoved": "Naalis ang empleyado"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Magaan na pang-araw-araw na automation"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Mag-automate ng gawain araw-araw"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "I-scale ang mga kumplikadong workflow",
+        "badge": "Pinakasikat"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Walang limitasyong mabigat na automation"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (dine-delete pagkatapos ng inactivity)",
+      "vmAlwaysOn": "{count} always-on na VM",
+      "vmAlwaysOnPlural": "{count} always-on na VMs",
+      "agentsParallel": "{count} agents nang sabay-sabay",
+      "basicSearch": "Basic na paghahanap",
+      "advancedSearch": "Advanced na paghahanap at extraction",
+      "standardSupport": "Standard na suporta (totoong tao)",
+      "prioritySupport": "Priority na suporta, 24hr na tugon",
+      "premiumSupport": "Premium na suporta, 12hr na tugon"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Maliit na Boost",
+        "description": "Mabilis na top-up"
+      },
+      "medium": {
+        "name": "Katamtamang Boost",
+        "description": "Standard na refill",
+        "savings": "8% tipid"
+      },
+      "large": {
+        "name": "Malaking Boost",
+        "description": "Bulk na pagbili",
+        "savings": "17% tipid"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Ngayon lang",
+      "minutesAgo": "{count}m ang nakalipas",
+      "hoursAgo": "{count}h ang nakalipas",
+      "daysAgo": "{count}d ang nakalipas"
+    },
+    "noActivity": "Walang aktibidad sa panahong ito",
+    "stats": {
+      "balance": "Balanse",
+      "earned": "Kinita",
+      "used": "Nagamit",
+      "credits": "credits",
+      "allTime": "lahat ng panahon",
+      "lastRange": "huling {range}",
+      "sessions": "{count} sessions",
+      "avgDaily": "~{count}/araw avg",
+      "plan": "Plano",
+      "free": "Libre",
+      "noPlan": "Walang plano",
+      "canceling": "Kina-cancel"
+    },
+    "monthlyUsage": "Buwanang Paggamit ng Credit",
+    "remaining": "{used} / {total} natitira",
+    "usedPercent": "{percent}% nagamit ngayong panahon",
+    "renews": "Magre-renew sa {date}",
+    "choosePlan": "Piliin ang Iyong Plano",
+    "choosePlanDescription": "Mag-subscribe para i-unlock ang mga AI feature at makakuha ng buwanang credits",
+    "savingsVsHuman": "Makatipid ng {amount}/buwan vs tao",
+    "timeSaved": "{time} na natipid buwan-buwan",
+    "cheaper": "{multiplier} mas mura",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/buwan",
+    "creditsPerMonth": "{count} credits /buwan",
+    "processing": "Pinoproseso...",
+    "subscribeTo": "Mag-subscribe sa {name}",
+    "transactionTypes": {
+      "credit_purchase": "Pagbili ng Credit",
+      "agent_usage": "Paggamit ng Agent",
+      "refund": "Refund",
+      "bonus": "Bonus na Reward",
+      "subscription": "Subscription",
+      "subscription_grant": "Subscription Grant",
+      "renewal": "Renewal Credits",
+      "reactivation": "Reactivation"
+    },
+    "toasts": {
+      "paymentSuccess": "Matagumpay ang bayad! Naidagdag na ang iyong mga credit.",
+      "subscriptionActivated": "Matagumpay na na-activate ang subscription!",
+      "paymentCanceled": "Na-cancel ang bayad. Walang sinisingil.",
+      "signInToSubscribe": "Pakisubukang mag-sign in para mag-subscribe",
+      "subscriptionCheckoutFailed": "Nabigo ang pagsisimula ng subscription checkout. Pakisubukang muli.",
+      "signInToPurchase": "Pakisubukang mag-sign in para bumili ng credits",
+      "needSubscription": "Kailangan mo ng aktibong subscription para bumili ng karagdagang credits",
+      "checkoutFailed": "Nabigo ang pagsisimula ng checkout. Pakisubukang muli.",
+      "manageFailed": "Nabigo ang pagbukas ng subscription management. Pakisubukang muli.",
+      "transactionsExported": "Na-export na ang mga transaksyon"
+    }
+  },
+  "apiKeys": {
+    "title": "Mga Model Provider",
+    "new": "bago",
+    "description": "Idagdag ang iyong sariling API keys para ma-unlock ang access sa mga model.",
+    "securityNote": "Ligtas na nakaimbak ang iyong mga key na may end-to-end encryption.",
+    "apiKeyLabel": "{provider} API Key",
+    "getApiKey": "Kumuha ng API key",
+    "delete": "I-delete",
+    "save": "I-save",
+    "deleteDialog": {
+      "title": "I-delete ang API Key",
+      "description": "Sigurado ka bang gusto mong i-delete ang iyong {provider} API key? Hindi na ito maibabalik at mawawala ang access mo sa mga {provider} model.",
+      "cancel": "I-cancel",
+      "confirm": "I-delete"
+    },
+    "toasts": {
+      "saved": "Na-save ang API key",
+      "savedDescription": "Na-save ang iyong {provider} API key at naidagdag ang mga model sa iyong mga paborito.",
+      "updatedDescription": "Na-update ang iyong {provider} API key.",
+      "saveFailed": "Nabigo ang pag-save ng API key",
+      "saveFailedDescription": "Nabigo ang pag-save ng {provider} API key. Pakisubukang muli.",
+      "deleted": "Na-delete ang API key",
+      "deletedDescription": "Na-delete ang iyong {provider} API key.",
+      "deleteFailed": "Nabigo ang pag-delete ng API key",
+      "deleteFailedDescription": "Nabigo ang pag-delete ng {provider} API key. Pakisubukang muli."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Mga Detalye ng Profile",
+    "displayName": "Display Name",
+    "namePlaceholder": "Ang pangalan mo",
+    "company": "Kumpanya",
+    "companyPlaceholder": "Ang iyong kumpanya",
+    "website": "Website",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Nag-save...",
+    "saveChanges": "I-save ang mga pagbabago",
+    "account": "Account",
+    "email": "Email",
+    "verified": "Na-verify",
+    "signOut": "Mag-sign out",
+    "signOutDescription": "Mag-log out sa device na ito",
+    "toasts": {
+      "profileUpdated": "Na-update ang profile",
+      "profileUpdateFailed": "Nabigo ang pag-update ng profile",
+      "signOutFailed": "Nabigo ang pag-sign out"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Protektado ang iyong data",
+    "dataProtectedDescription": "Enterprise-grade na seguridad na may encryption sa rest at transit",
+    "features": {
+      "encryption": {
+        "title": "End-to-End Encryption",
+        "description": "Naka-encrypt ang mga API key gamit ang AES-256-GCM. Hindi kailanman naka-store sa plain text ang iyong mga credential."
+      },
+      "rls": {
+        "title": "Row Level Security",
+        "description": "Ang database-level na isolation ay tinitiyak na ikaw lang ang may access sa iyong data. Walang cross-tenant access na posible."
+      },
+      "privacy": {
+        "title": "Privacy by Design",
+        "description": "Kinokolekta lang namin ang minimum na data na kailangan para ibigay ang serbisyo. Ang iyong mga usapan at file ay nananatiling sa iyo."
+      },
+      "session": {
+        "title": "Session Security",
+        "description": "CSRF protection, secure na HTTP-only cookies, at Content Security Policy headers sa bawat request."
+      }
+    },
+    "legal": "Legal",
+    "privacyPolicy": {
+      "title": "Patakaran sa Privacy",
+      "description": "Paano namin kinokolekta, ginagamit, at pinoprotektahan ang iyong data"
+    },
+    "termsOfService": {
+      "title": "Mga Tuntunin ng Serbisyo",
+      "description": "Ang aming mga tuntunin at kundisyon ng paggamit"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Layout"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Buod",
+      "highlight": "I-summarize"
+    },
+    "code": {
+      "label": "Code",
+      "highlight": "Bumuo"
+    },
+    "research": {
+      "label": "Research",
+      "highlight": "Suriin"
+    },
+    "create": {
+      "label": "Gumawa",
+      "highlight": "I-generate"
+    },
+    "solve": {
+      "label": "Lutasin",
+      "highlight": "I-debug"
+    },
+    "learn": {
+      "label": "Matuto",
+      "highlight": "Ipaliwanag"
+    }
+  },
+  "loadingMessages": [
+    "Binubukas ang silicon brain",
+    "Ginigising ang digital na kamalayan",
+    "Ininitialize ang mga neural pathway",
+    "Pinapaandar ang mga quantum core",
+    "Tina-charge ang flux capacitor",
+    "Ina-activate ang mainframe",
+    "Pinapagana ang computational matrix",
+    "Ini-engage ang warp drive",
+    "Tinatawag ang mga silicon spirit",
+    "Sinisindihan ang electron engine",
+    "Pinapainit ang mga transistor",
+    "Binubuo ang mga bits at bytes",
+    "Kina-calibrate ang mga digital synapse",
+    "Ine-energize ang mga CPU crystal",
+    "Nilo-load ang mga consciousness protocol",
+    "Ininitialize ang mga system resource",
+    "Inihahanda ang computational environment",
+    "Ginagawa ang secure na koneksyon",
+    "Nagpo-provision ng virtual resources",
+    "Kino-configure ang mga system parameter",
+    "Nila-launch ang virtual instance",
+    "Ina-activate ang remote desktop",
+    "Dine-deploy ang cloud resources",
+    "Sinisimulan ang startup sequence",
+    "Inihahanda ang execution environment",
+    "Ginigising ang antok na computer",
+    "Tinutulak ang digital na oso",
+    "Naggagawa ng computational na kape",
+    "Nag-iistretching ng mga digital na kalamnan",
+    "Binubuksan ang mga digital na mata",
+    "Nagsisimula na",
+    "Bumubukas na",
+    "Nag-o-online na",
+    "Binu-boot ang system",
+    "Naghahanda",
+    "Malapit na",
+    "Inihahanda ang workspace",
+    "Nilo-load ang mga resource",
+    "Bumabangon ang system"
+  ],
+  "quickStart": {
+    "greetingName": "Kumusta {name}!",
+    "greetingDefault": "Kumusta!",
+    "subtitle": "Ang iyong mga gawain ay tumatakbo sa isang ligtas, nakahiwalay na virtual computer",
+    "tabs": {
+      "start": "Simula",
+      "desktop": "Desktop",
+      "swarms": "Mga Swarm",
+      "schedules": "Mga Iskedyul"
+    },
+    "items": {
+      "computerReady": "Computer handa na",
+      "pickComputer": "Pumili ng computer",
+      "createComputer": "Gumawa ng computer",
+      "loginsSaved": "Mga login naka-save na",
+      "addLogins": "Magdagdag ng mga login",
+      "askAnything": "Magtanong ng kahit ano",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Mobile remote",
+      "freeDownload": "Libreng download",
+      "onePrompt": "Isang prompt",
+      "manyAgents": "Maraming agents",
+      "combinedResult": "Pinagsamang resulta",
+      "setCadence": "Magtakda ng cadence",
+      "autoRuns": "Auto-runs",
+      "recurringResults": "Paulit-ulit na resulta",
+      "computerReadyDesc": "Nakakonekta at handang magsagawa ng mga gawain",
+      "pickComputerDesc": "Pumili mula sa iyong mga available na makina",
+      "createComputerDesc": "Gumawa ng cloud computer sa ilang segundo",
+      "loginsSavedDesc": "Naka-encrypt na kredensyal na handa para sa auto-fill",
+      "addLoginsDesc": "I-save ang mga password para sa awtomatikong access",
+      "askAnythingDesc": "Ilarawan ang isang gawain at panoorin ang AI",
+      "macWindowsDesc": "Native na app para sa iyong desktop",
+      "mobileRemoteDesc": "Kontrolin ang iyong agent mula sa anumang device",
+      "freeDownloadDesc": "Magaang install, tumatakbo sa ilang segundo",
+      "onePromptDesc": "Ilarawan ang iyong layunin sa simpleng wika",
+      "manyAgentsDesc": "Mga agent na nagtatrabaho nang sabay-sabay",
+      "combinedResultDesc": "Lahat ng resulta sa isang ulat",
+      "setCadenceDesc": "Oras-oras, araw-araw, lingguhan o custom na cron",
+      "autoRunsDesc": "Ang mga agent ay tumatakbo nang walang interbensyon",
+      "recurringResultsDesc": "Mga ulat na inihahatid ayon sa iyong iskedyul"
+    },
+    "cta": {
+      "downloadApp": "I-download ang app",
+      "trySwarms": "Subukan ang swarms",
+      "setUp": "I-set up"
+    }
+  },
+  "machines": {
+    "title": "Mga Computer Ko",
+    "subtitle": "Pamahalaan ang iyong mga AI-controlled desktop environment",
+    "guide": "Gabay",
+    "newMachine": "Bagong Machine",
+    "filters": {
+      "all": "Lahat",
+      "running": "Tumatakbo",
+      "creating": "Ginagawa",
+      "stopped": "Huminto"
+    },
+    "desktopPromo": {
+      "text": "Laktawan ang VM — patakbuhin ang mga AI agent sa sarili mong computer gamit ang native app. Kontrolin ang iyong desktop mula sa iyong telepono.",
+      "cta": "Kunin ang app"
+    },
+    "emptyState": {
+      "title": "Tunay na AI Employee na may buong access sa computer",
+      "description": "Mag-spin up ng isang nakahiwalay na computer at hayaan ang mga AI agent mag-browse sa web, magpatakbo ng mga terminal, at kontrolin ang desktop — hands-free.",
+      "feature1": {
+        "title": "Buong kontrol sa desktop",
+        "description": "Ang AI ay gumagalaw ng mouse, nagta-type, nag-click, at nagna-navigate tulad ng isang tunay na user."
+      },
+      "feature2": {
+        "title": "Anumang gawain ay automated",
+        "description": "Browser, terminal, at UI — lahat ng agents ay nagtutulungan sa isang computer."
+      },
+      "feature3": {
+        "title": "Nakahiwalay at ligtas",
+        "description": "Ang bawat computer ay tumatakbo sa sarili nitong container — ang iyong lokal na system ay hindi naaapektuhan."
+      },
+      "cta": "Gumawa ng iyong unang computer"
+    },
+    "noMachines": "Walang nahanap na mga computer.",
+    "noFilteredMachines": "Walang {filter} na mga computer",
+    "noFilteredDescription": "Walang mga computer na kasalukuyang {filter}.",
+    "loadingMachines": "Nilo-load ang mga computer...",
+    "toasts": {
+      "deleted": "Matagumpay na na-delete ang computer",
+      "readyOpen": "Maaari ka nang kumonekta sa iyong computer.",
+      "open": "Buksan",
+      "createFailed": "Pakisubukang gumawa muli ng computer.",
+      "fetchFailed": "Hindi na-load ang mga computer"
+    }
+  },
+  "createMachine": {
+    "title": "Bagong Computer",
+    "subtitle": "Mag-launch ng cloud desktop — handa sa ~30 segundo",
+    "freeExpiry": "Ang mga libreng computer ay mag-e-expire pagkatapos ng ",
+    "freeExpiry2": "2 oras",
+    "upgrade": "Mag-upgrade",
+    "limitReached": "Naabot mo na ang iyong computer limit. Ihinto o i-delete ang isang kasalukuyang computer para gumawa ng bago.",
+    "upgradeMore": "Mag-upgrade para sa higit pa →",
+    "nameLabel": "Pangalan ng Computer",
+    "namePlaceholder": "Aking Cloud Server",
+    "nameError": "Hindi maaaring magsimula sa \"local\" ang pangalan ng computer",
+    "nameRequired": "Pakienter ang pangalan ng computer",
+    "osLabel": "Operating System",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 desktop"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows desktop — asahan ang mga bug"
+    },
+    "osHintWindows": "Windows desktop na may Chrome (beta). Handa sa ~2 minuto.",
+    "osHintLinux": "Ubuntu desktop, accessible sa pamamagitan ng browser. Handa sa ~30 segundo.",
+    "stateLabel": "Estado ng Computer",
+    "restorePrevious": "Ibalik ang Nakaraan",
+    "restoreDescription": "Magpatuloy mula sa huling snapshot",
+    "startFresh": "Magsimulang Muli",
+    "startFreshDescription": "Malinis na desktop environment",
+    "cancel": "Kanselahin",
+    "creating": "Ginagawa...",
+    "create": "Gumawa ng Computer",
+    "toasts": {
+      "restoringSnapshot": "Inire-restore ang computer mula sa snapshot!",
+      "restoringDescription": "Ang iyong nakaraang desktop state ay nire-restore. Handa sa ~30 segundo.",
+      "windowsCreated": "Nagsimula na ang paggawa ng Windows computer!",
+      "windowsDescription": "Ang iyong Windows desktop ay nagla-launch. Handa sa ~2 minuto.",
+      "linuxCreated": "Ang iyong desktop ay nagla-launch. Handa sa ~30 segundo.",
+      "sshCreated": "Ang iyong cloud computer ay nagla-launch. Magiging available ang SSH key kapag handa na."
+    }
+  },
+  "secrets": {
+    "title": "Mga Naka-save na Credential",
+    "subtitle": "Naka-store nang ligtas at awtomatikong ginagamit ng AI agent kapag nagla-log in",
+    "guide": "Gabay",
+    "import": "Mag-import",
+    "addCredential": "Magdagdag ng Credential",
+    "securityNote": "Ang mga credential ay hindi kailanman ipinapadala sa AI model at hindi kailanman ipinapakita sa chat — direktang pinupunan ng agent nang hindi nakikita ang mga halaga",
+    "username": "Username",
+    "password": "Password",
+    "hide": "Itago",
+    "revealFor10s": "Ipakita ng 10s",
+    "encrypted": "Naka-encrypt",
+    "emptyState": {
+      "title": "Auto-login, hands-free",
+      "description": "I-save ang mga credential nang isang beses — ang AI agent ay awtomatikong nagla-log in at nagpapatuloy nang hindi ka naaabala",
+      "feature1": {
+        "title": "Zero na abala",
+        "description": "Ang agent ay nakakatagpo ng login form, pinupunan ito, at nagpapatuloy sa gawain — walang mga prompt, walang mga pause"
+      },
+      "feature2": {
+        "title": "Hindi kailanman nakikita ng AI",
+        "description": "Ang iyong mga credential ay direktang ini-inject. Ang AI model ay hindi kailanman nakakakita ng tunay na mga halaga"
+      },
+      "feature3": {
+        "title": "Anumang website",
+        "description": "Gumagana sa mga login form sa anumang site — email, SaaS tools, dashboards, kahit ano"
+      },
+      "cta": "Idagdag ang iyong unang credential"
+    },
+    "deleteDialog": {
+      "title": "I-delete ang credential?",
+      "description": "Ang {name} ({service}) ay permanenteng made-delete. Hindi na ito magagamit ng AI agent.",
+      "cancel": "Kanselahin",
+      "delete": "I-delete"
+    },
+    "toasts": {
+      "loadFailed": "Hindi na-load ang mga credential",
+      "revealFailed": "Hindi naipakita ang password",
+      "deleted": "Na-delete ang credential",
+      "deleteFailed": "Hindi na-delete ang credential"
+    },
+    "loading": "Nilo-load ang mga credential..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Simpleng presyo,",
+      "title2": "totoong autopilot",
+      "subtitle": "Magsimula nang libre. Mag-upgrade kapag kailangan mo ng mas maraming kapangyarihan."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Subukan ang #1 computer-use agent",
+        "cta": "Magsimula nang Libre"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Magaan na pang-araw-araw na automation",
+        "cta": "Kumuha ng Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "I-automate ang mga gawain araw-araw",
+        "cta": "Kumuha ng Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "I-scale ang mga kumplikadong workflow",
+        "cta": "Pumunta sa Plus",
+        "badge": "Pinakasikat"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Walang limitasyong mabigat na automation",
+        "cta": "Kumuha ng Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Buong browser, desktop at terminal",
+        "badge": "Core"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "Sunud-sunod lamang",
+        "parallel": "{count} agent nang sabay-sabay",
+        "badge": "Makapangyarihan"
+      },
+      "security": {
+        "name": "Seguridad",
+        "description": "Sandboxed, E2E encrypted",
+        "badge": "Bawat plano"
+      },
+      "monthlyCredits": {
+        "name": "Buwanang Credits",
+        "payAsYouGo": "Magbayad ayon sa paggamit",
+        "creditsPerMonth": "{count} credits/buwan"
+      },
+      "persistentMachines": {
+        "name": "Permanenteng Makina",
+        "temporary": "1 pansamantalang VM (2 oras)",
+        "deletedAfterInactivity": "1 VM (tinatanggal pagkatapos ng kawalan ng aktibidad)",
+        "alwaysOn": "{count} palaging naka-on na VM",
+        "alwaysOnPlural": "{count} palaging naka-on na VMs"
+      },
+      "webSearch": {
+        "name": "Web Search",
+        "advanced": "Advanced na paghahanap at pag-extract",
+        "basic": "Basic na paghahanap"
+      }
+    },
+    "animations": {
+      "agentDescription": "Kinokontrol ng iyong agent ang totoong computer — browser, mga file, at terminal",
+      "fillForm": "Punan ang form",
+      "searchExtract": "Maghanap at mag-extract",
+      "uploadReport": "I-upload ang ulat",
+      "navigateSite": "Mag-navigate sa site",
+      "creditsPerMonth": "credits bawat buwan",
+      "cr": "cr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2 oras na limitasyon",
+      "alwaysOn": "Palaging naka-on",
+      "tempVmDescription": "Pansamantalang VM — nire-reset pagkatapos ng 2 oras",
+      "persistentVmDescription": "Ang iyong mga file, app at session ay nananatili sa pagitan ng mga gawain",
+      "sequentialOnly": "Sunud-sunod na pagpapatupad lamang sa planong ito",
+      "yourTask": "Ang iyong gawain",
+      "agentsWorking": "{count} agent na gumagawa nang sabay-sabay",
+      "upgradeForExtraction": "Mag-upgrade para sa buong extraction",
+      "searchDescription": "Maghanap, mag-scrape at mag-extract ng structured data",
+      "basicSearchIncluded": "Kasama ang basic na paghahanap",
+      "e2eEncryption": "E2E Encryption",
+      "sandboxedVm": "Sandboxed VM",
+      "destroyedAfterUse": "Sinisira pagkatapos gamitin",
+      "everyPlan": "Bawat plano. Walang eksepsiyon."
+    },
+    "perMonth": "/buwan",
+    "faqs": {
+      "credits": {
+        "q": "Ano ang binibilang na credit?",
+        "a": "Ang isang credit ay katumbas ng isang aksyon ng agent — isang click, pag-fill ng form, search query, o operasyon sa file. Ang karaniwang multi-step na gawain ay gumagamit ng 5–15 credits."
+      },
+      "persistent": {
+        "q": "Ano ang ibig sabihin ng 'permanenteng makina'?",
+        "a": "Sa mga bayad na plano, ang iyong VM ay patuloy na tumatakbo sa pagitan ng mga gawain — ang iyong desktop, mga file, browser session, at naka-install na software ay nananatili. Parang sarili mong palaging naka-on na cloud computer."
+      },
+      "swarm": {
+        "q": "Ano ang swarm mode?",
+        "a": "Hinahati ng swarm mode ang isang gawain sa maraming makina na tumatakbo nang sabay-sabay. Sa halip na isang agent ang gumawa ng 10 paghahanap nang sunud-sunod, maraming agent ang gagawa nito nang sabay."
+      },
+      "cancel": {
+        "q": "Maaari ba akong mag-cancel anumang oras?",
+        "a": "Oo. Walang kontrata, walang cancellation fees. Mag-cancel mula sa iyong account page at panatilihin ang access hanggang sa katapusan ng iyong billing period."
+      },
+      "security": {
+        "q": "Ligtas ba ang aking data?",
+        "a": "Bawat gawain ay tumatakbo sa ganap na isolated na VM na sinisira pagkatapos gamitin. Lahat ng koneksyon ay encrypted end-to-end at hindi namin kailanman iniimbak ang iyong mga credentials."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Custom credits, dedicated VMs, SLA, SSO, at priority support.",
+      "cta": "Makipag-ugnayan sa Amin"
+    },
+    "footer": {
+      "title": "60 segundo na lang ang iyong AI agent",
+      "subtitle": "Mag-sign up at hayaan si Coasty ang humawak ng trabaho.",
+      "noCreditCard": "Walang credit card",
+      "cancelAnytime": "Mag-cancel anumang oras",
+      "noCreditCardRequired": "Hindi kailangan ng credit card",
+      "cancelAnytimeNoContracts": "Mag-cancel anumang oras — walang kontrata"
+    },
+    "questions": "Mga Tanong"
+  },
+  "guide": {
+    "pageTitle": "Gabay",
+    "pageSubtitle": "Mula sa unang setup hanggang sa advanced na features — alamin kung paano mapakinabangan nang husto ang Coasty",
+    "completeGuide": "Ang Kumpletong Gabay",
+    "completeGuideSubtitle": "Lahat ng kailangan mong malaman tungkol sa Coasty",
+    "completeGuideDescription": "Mula sa unang setup hanggang sa advanced na features — alamin kung paano mapakinabangan nang husto ang iyong AI agent.",
+    "talkToCofounders": "Makipag-usap sa mga Cofounder",
+    "tabs": {
+      "overview": "Pangkalahatang-tanaw",
+      "gettingStarted": "Pagsisimula",
+      "chatTasks": "Chat at Mga Gawain",
+      "machines": "Mga Makina",
+      "credentials": "Mga Credential",
+      "swarmMode": "Swarm Mode",
+      "workforce": "Mga Iskedyul",
+      "desktopApp": "Desktop App",
+      "billing": "Billing at Credits"
+    },
+    "overview": {
+      "howItWorks": "Paano ito gumagana",
+      "step1": "Ilarawan ang gawain",
+      "step2": "Plano ni Coasty ang mga hakbang",
+      "step3": "Isinasagawa nang mag-isa",
+      "step": "Hakbang",
+      "whatCanDo": "Ano ang kayang gawin ni Coasty",
+      "taskCount": "40+ gawain sa 10 kategorya",
+      "categories": {
+        "sales": {
+          "name": "Sales",
+          "desc": "Humanap ng 50 leads, magpadala ng personalized emails"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "desc": "Mag-publish ng blog posts, mag-schedule ng social media"
+        },
+        "jobApps": {
+          "name": "Mga Aplikasyon sa Trabaho",
+          "desc": "Mag-apply sa 20 trabaho, i-tailor ang bawat resume"
+        },
+        "email": {
+          "name": "Email",
+          "desc": "Mag-draft ng mga sagot, bulk outreach, mag-unsubscribe"
+        },
+        "dataEntry": {
+          "name": "Data Entry",
+          "desc": "Maglipat ng data sa pagitan ng mga app, gumawa ng spreadsheet"
+        },
+        "research": {
+          "name": "Research",
+          "desc": "Malalimang ulat, pagmamanman sa kakumpitensya"
+        },
+        "qaTesting": {
+          "name": "QA Testing",
+          "desc": "Subukan ang mga signup, mga form, health check ng site"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Humanap ng mga kandidato, personalized outreach"
+        },
+        "support": {
+          "name": "Support",
+          "desc": "Mag-draft ng mga sagot, i-update ang help docs"
+        },
+        "productivity": {
+          "name": "Produktibidad",
+          "desc": "Mag-book ng byahe, magbayad ng mga bill, pamahalaan ang mga kalendaryo"
+        }
+      },
+      "whyCoasty": "Bakit Coasty",
+      "notChatbot": "Hindi chatbot. Hindi RPA script.",
+      "worksLikeHuman": {
+        "title": "Gumagana tulad ng tao",
+        "desc": "Nakakakita, nag-click, nagta-type, nag-navigate — eksaktong tulad mo"
+      },
+      "noScripts": {
+        "title": "Walang scripts o setup",
+        "desc": "Simpleng wika ang input, resulta ang output"
+      },
+      "handlesUnexpected": {
+        "title": "Hinaharap ang hindi inaasahan",
+        "desc": "Umaangkop sa mga CAPTCHA, popup, pagbabago ng layout"
+      },
+      "runsInIsolation": {
+        "title": "Tumatakbo sa isolation",
+        "desc": "Sandboxed VM bawat session — walang nalulusot"
+      },
+      "ctaTitle": "Pumili ng kahit anong gawain at subukan",
+      "ctaSubtitle": "Handa nang pagtrabahuin si Coasty?",
+      "ctaDescription": "Ilarawan ang kahit anong gawain mula sa gabay na ito at panoorin si Coasty na hawakan ito.",
+      "ctaNote": "Magsimula nang libre. Hindi kailangan ng credit card.",
+      "startTask": "Magsimula ng gawain",
+      "startFree": "Magsimula nang libre",
+      "desktopApp": "Desktop app"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Mag-sign Up",
+          "desc": "Isang click para magsimula"
+        },
+        "createMachine": {
+          "title": "Gumawa ng Makina",
+          "desc": "Ang iyong agent ay magkakaroon ng sariling computer"
+        },
+        "saveCredentials": {
+          "title": "I-save ang Credentials",
+          "desc": "Encrypted na login para sa anumang site"
+        },
+        "giveTask": {
+          "title": "Magbigay ng Gawain",
+          "desc": "Ilarawan ito. Panoorin itong mangyari."
+        }
+      },
+      "examplePrompts": [
+        "Mag-apply sa 10 matching na trabaho sa LinkedIn gamit ang aking resume",
+        "Mag-research ng competitor pricing at gumawa ng comparison spreadsheet",
+        "Sumulat at mag-publish ng blog post tungkol sa [paksa] sa WordPress",
+        "I-unsubscribe ako sa lahat ng marketing emails sa Gmail",
+        "I-test ang signup flow sa aking website at i-report ang mga bug",
+        "Humanap ng 50 leads na tumutugma sa [ICP] sa LinkedIn at idagdag sa aking CRM"
+      ],
+      "quickPrompts": "Mga mabilisang prompt na subukan",
+      "startFirstTask": "Simulan ang iyong unang gawain"
+    },
+    "chatTasks": {
+      "commandCenter": "Ang iyong command center",
+      "describeTask": "Ilarawan ang anumang gawain. Panoorin itong mangyari.",
+      "examplePrompt": "Hanapin ang top 5 wireless keyboard na wala pang $50 sa Amazon at ikumpara sila sa spreadsheet.",
+      "exampleResponse": "Maghahanap ako sa Amazon at gagawa ng comparison. Binubuksan ang browser ngayon.",
+      "exampleDone": "Tapos na. Naka-save ang spreadsheet na may presyo, rating, at features para sa lahat ng 5 keyboard.",
+      "describePlaceholder": "Ilarawan ang iyong gawain...",
+      "threeAgents": "Tatlong specialized agent",
+      "autoAssigned": "Awtomatikong itinalaga bawat hakbang.",
+      "browser": "Browser",
+      "browserDesc": "Mag-navigate, mag-click, mag-fill ng forms, mag-scrape",
+      "terminal": "Terminal",
+      "terminalDesc": "Magpatakbo ng commands, mag-install, mag-process ng files",
+      "desktop": "Desktop",
+      "desktopDesc": "Mag-click, mag-type, mag-scroll, magbukas ng apps",
+      "betterPrompts": "Sumulat ng mas magagandang prompt",
+      "specificBeatsVague": "Ang espesipiko ay nananalo sa malabo. Palagi.",
+      "do": "Gawin",
+      "dont": "Huwag",
+      "doExample1": "Mag-apply sa 10 software engineering jobs sa LinkedIn. I-tailor ang bawat cover letter na banggitin ang kanilang tech stack.",
+      "dontExample1": "Mag-apply sa mga trabaho",
+      "doExample2": "Maghanap sa Google Flights ng SFO papuntang JFK, Mar 20-25, round trip. I-screenshot ang top 3 pinakamura.",
+      "dontExample2": "Humanap ng flights",
+      "readyToTry": "Handa nang subukan?",
+      "openChat": "Magbukas ng chat at ilarawan kung ano ang kailangan mong gawin.",
+      "startChat": "Magsimula ng chat"
+    },
+    "machinesTab": {
+      "title": "Ang iyong mga makina",
+      "subtitle": "Buong Ubuntu desktop na maaari mong simulan sa ilang segundo.",
+      "lifecycle": "Lifecycle",
+      "lifecycleDesc": "Limang estado, ganap na awtomatiko.",
+      "planLimits": "Mga limitasyon ng plano",
+      "planCol": "Plano",
+      "machinesCol": "Mga Makina",
+      "swarmAgentsCol": "Swarm agents",
+      "temp": "1 pansamantala",
+      "states": {
+        "creating": "Ginagawa",
+        "starting": "Nagsisimula",
+        "running": "Tumatakbo",
+        "stopping": "Humihinto",
+        "stopped": "Huminto"
+      },
+      "newMachine": "+ Bago",
+      "researchVm": "Research VM",
+      "emailVm": "Email VM",
+      "testingVm": "Testing VM",
+      "cores": "{count} cores",
+      "gb": "{count} GB",
+      "stop": "Ihinto",
+      "start": "Simulan",
+      "provisioning": "Ini-setup...",
+      "spinUp": "Magsimula ng makina",
+      "goToMachines": "Pumunta sa Mga Makina"
+    },
+    "credentialsTab": {
+      "loginDetected": "Na-detect ang login",
+      "matched": "Na-match",
+      "credentialFound": "Nahanap ang credential",
+      "autoFilled": "Auto-filled",
+      "autoFillTitle": "Auto-fill sa aksyon",
+      "autoFillDesc": "Na-detect ang login, na-match ang credential, napunan ang form. Awtomatiko.",
+      "security": "Seguridad",
+      "encrypted": "Encrypted",
+      "aes256": "AES-256 sa pahinga",
+      "vmIsolated": "VM-isolated",
+      "sandboxed": "Sandboxed bawat session",
+      "neverLogged": "Hindi kailanman na-log",
+      "zeroTrace": "Zero trace sa logs",
+      "savedCredentials": "Mga naka-save na credential",
+      "addOnce": "Idagdag nang isang beses, auto-fill kahit saan.",
+      "saveFirst": "I-save ang iyong unang credential",
+      "goToCredentials": "Pumunta sa Mga Naka-save na Credential"
+    },
+    "swarmTab": {
+      "title": "Swarm Mode",
+      "runParallel": "Magpatakbo ng {count} makina nang sabay-sabay",
+      "sameTask": "Parehong gawain, {multiplier}x ang output, parehong oras.",
+      "done": "Tapos",
+      "running": "Tumatakbo",
+      "pending": "Naghihintay",
+      "result": "RESULTA",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Parallel research",
+          "desc": "{count} kakumpitensya, {count} makina, sabay-sabay"
+        },
+        "bulkApplications": {
+          "title": "Maramihang aplikasyon",
+          "desc": "Mag-apply sa iba't ibang platform nang sabay"
+        },
+        "multiCitySearch": {
+          "title": "Paghahanap sa maraming lungsod",
+          "desc": "Maghanap ng mga listahan sa {count} lungsod nang sabay"
+        },
+        "parallelOutreach": {
+          "title": "Parallel outreach",
+          "desc": "Personalized emails sa iba't ibang segment"
+        },
+        "crossPlatform": {
+          "title": "Cross-platform",
+          "desc": "Mag-post sa {count} platform nang sabay-sabay"
+        },
+        "distributedTesting": {
+          "title": "Distributed testing",
+          "desc": "Subukan ang maraming senaryo nang sabay"
+        }
+      },
+      "whatToSwarm": "Ano ang i-swarm",
+      "availability": "Availability",
+      "freeNotAvailable": "Hindi available",
+      "litePlus": "Lite+",
+      "agentRange": "2–9 agents",
+      "startSwarm": "Magsimula ng swarm"
+    },
+    "workforceTab": {
+      "title": "Workforce",
+      "subtitle": "Ang iyong AI company, sa autopilot",
+      "description": "Mga empleyado, team, trigger — tumatakbo 24/7.",
+      "myCompany": "Ang Aking Kompanya",
+      "contentOps": "Content Ops",
+      "support": "Support",
+      "writer": "Manunulat",
+      "seo": "SEO",
+      "social": "Social",
+      "inbox": "Inbox",
+      "docs": "Docs",
+      "concepts": "Mga pangunahing konsepto",
+      "conceptItems": {
+        "employees": {
+          "title": "Mga Empleyado",
+          "desc": "AI agents na nagpapatakbo ng mga gawain sa iskedyul, 24/7"
+        },
+        "teams": {
+          "title": "Mga Team",
+          "desc": "Mga grupo ng empleyado na may shared na instruksyon"
+        },
+        "sharedMemory": {
+          "title": "Shared Memory",
+          "desc": "Key-value store na binabasa at sinusulatan ng mga empleyado"
+        },
+        "triggers": {
+          "title": "Mga Trigger",
+          "desc": "I-chain ang mga empleyado: isa ang natapos, susunod ang magsisimula"
+        },
+        "delegates": {
+          "title": "Mga Delegate",
+          "desc": "Mga empleyado na nagbibigay ng sub-task sa mga espesyalista"
+        },
+        "orgChart": {
+          "title": "Org Chart",
+          "desc": "Visual na mapa ng hierarchy ng iyong kompanya"
+        }
+      },
+      "chainTitle": "I-chain ang mga empleyado",
+      "chainDesc": "Ang output ay awtomatikong dumadaloy mula sa isa patungo sa susunod.",
+      "scout": "Scout",
+      "scoutDesc": "nag-reresearch ng kakumpitensya",
+      "atlas": "Atlas",
+      "atlasDesc": "nagsusulat ng blog post",
+      "nova": "Nova",
+      "novaDesc": "nagpa-publish sa social",
+      "done": "Tapos",
+      "onComplete": "on_complete",
+      "waiting": "Naghihintay",
+      "templates": "Magsimula mula sa template",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Customer Support",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} empleyado",
+      "openWorkforce": "Buksan ang Workforce"
+    },
+    "billingTab": {
+      "credits": "Credits",
+      "timeMetric": "Oras ang tanging sukatan.",
+      "rate": "Rate",
+      "rateValue": "10",
+      "creditsPerMin": "credits/min",
+      "metered": "sinusukat tuwing 30s",
+      "example": "Halimbawa",
+      "minTask": "min na gawain",
+      "startCredits": "Simula: {count} credits",
+      "endCredits": "Wakas: {count} credits",
+      "creditsUsed": "{count} credits ang ginamit",
+      "calculation": "{mins} min x 10 credits/min",
+      "plans": "Mga Plano",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 pansamantala",
+          "feature": "Basic na paghahanap"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 palaging naka-on",
+          "feature": "2 parallel agent"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 palaging naka-on",
+          "feature": "Advanced na paghahanap"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 palaging naka-on",
+          "feature": "Priority support"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 palaging naka-on",
+          "feature": "SLA guarantee"
+        }
+      },
+      "perMonth": "{price}/buwan",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Paano sinisingil ang credits?",
+          "a": "10 credits bawat minuto ng agent execution, i-round up. Tini-check tuwing 30 segundo sa isang session."
+        },
+        "runOut": {
+          "q": "Ano ang mangyayari kapag naubos?",
+          "a": "Kailangan mo ng hindi bababa sa 20 credits para magsimula ng gawain. Pag umabot sa 0 humihinto ang gawain — bumili ng add-on para magpatuloy."
+        },
+        "rollOver": {
+          "q": "Nadadala ba ang hindi nagamit na credits?",
+          "a": "Nire-reset ang credits bawat billing cycle. Gamitin o mawala."
+        }
+      },
+      "goToBilling": "Pumunta sa Billing"
+    },
+    "desktopAppTab": {
+      "overlay": "Ang Overlay",
+      "overlayDesc": "Palaging naroon. I-click para palawakin.",
+      "compact": "Compact",
+      "expanded": "Pinalawak",
+      "ready": "Handa",
+      "exampleTask": "I-update ang aking resume",
+      "exampleResponse": "Binubuksan ang resume.docx...",
+      "describePlaceholder": "Ilarawan ang iyong gawain...",
+      "whatItControls": "Ano ang kinokontrol nito",
+      "controls": {
+        "browser": {
+          "name": "Browser",
+          "desc": "Mag-navigate, mag-click, mag-fill ng forms"
+        },
+        "files": {
+          "name": "Mga File",
+          "desc": "Magbasa, magsulat, mag-edit kahit saan"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Magpatakbo ng anumang shell command"
+        },
+        "desktop": {
+          "name": "Desktop",
+          "desc": "Mag-click, mag-type, mag-scroll"
+        },
+        "screenshots": {
+          "name": "Screenshots",
+          "desc": "Nakikita ang nakikita mo"
+        },
+        "apps": {
+          "name": "Mga App",
+          "desc": "Kontrolin ang anumang naka-install na app"
+        }
+      },
+      "twoWays": "Dalawang paraan ng pagpapatakbo",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "Ganap na isolated na sandbox",
+        "freshBrowser": "Bagong browser, walang history",
+        "maxSecurity": "Pinakamataas na seguridad"
+      },
+      "desktopMode": "Desktop",
+      "desktopFeatures": {
+        "yourFiles": "Ang iyong mga file, direktang access",
+        "yourApps": "Ang iyong mga naka-install na app",
+        "yourSessions": "Ang iyong mga naka-login na session"
+      },
+      "downloadCta": "I-download ang Desktop App"
+    }
+  },
+  "comparePage": {
+    "title": "Mga Paghahambing",
+    "heroTitle": "Coasty vs. ang Kompetisyon",
+    "heroDescription": "Tingnan kung paano ang #1 na ranggo na AI agent na gumagamit ng computer (82% OSWorld) ay naghahambing sa mga alternatibo. Detalyadong paghahambing ng mga feature gamit ang totoong data.",
+    "categories": {
+      "aiAgent": "AI Agent",
+      "infrastructure": "Imprastraktura",
+      "rpa": "RPA",
+      "human": "Tao"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "Handa ka na bang subukan ang #1 na AI agent na gumagamit ng computer?",
+    "ctaButton": "Subukan ang Coasty nang Libre",
+    "noCreditCard": "Hindi kailangan ng credit card",
+    "allComparisons": "Lahat ng paghahambing",
+    "featureComparison": "Paghahambing ng mga Feature",
+    "whyChooseCoasty": "Bakit Piliin ang Coasty",
+    "strengthsOf": "Mga Lakas ng {name}",
+    "ctaDescription": "82% OSWorld benchmark. VM isolation. CAPTCHA solving. Nagsisimula sa $20/buwan.",
+    "watchCaseStudies": "Panoorin ang mga Case Study"
+  },
+  "agentSwarms": {
+    "badge": "Agent Swarm Mode",
+    "heroTitle1": "Isang prompt.",
+    "heroTitle2": "Walang hanggang mga makina.",
+    "heroTitle3": "Mga parallel na resulta.",
+    "heroDescription": "Hatiin ang anumang gawain sa maraming isolated na environment na sabay-sabay na tumatakbo. Trabahong tumatagal ng isang oras, matatapos sa ilang minuto.",
+    "trySwarmMode": "Subukan ang Swarm Mode",
+    "seeInAction": "Tingnan ito sa aksyon",
+    "liveExecution": "swarm-tree — live na execution",
+    "machineCount": "{count} na makina",
+    "running": "tumatakbo",
+    "threeSteps": "Tatlong hakbang para sa parallel execution",
+    "steps": {
+      "typePrompt": {
+        "title": "I-type ang iyong prompt",
+        "desc": "Ilarawan ang gawain. I-toggle ang swarm mode at piliin kung ilang makina."
+      },
+      "machinesSpinUp": {
+        "title": "Nagsisimula ang mga makina",
+        "desc": "Bawat isa ay may kumpletong isolated na environment — browser, terminal, desktop."
+      },
+      "resultsStream": {
+        "title": "Mga resulta na live stream",
+        "desc": "Panoorin ang bawat makina sa real-time sa pamamagitan ng swarm tree view."
+      }
+    },
+    "demoTitle": "Demo ng Agent Swarms",
+    "demoDescription": "Panoorin ang {count} na makina na sabay-sabay na ginagawa ang CRM research task",
+    "prompt": "Prompt",
+    "swarm": "SWARM",
+    "run": "Patakbuhin",
+    "reset": "I-reset",
+    "allCompleted": "Lahat ng {count} na makina ay nakumpleto",
+    "speedComparison": "~{swarmTime} min sa halip na ~{seqTime} min — {multiplier}x na mas mabilis",
+    "seqVsSwarm": "Sequential vs Swarm",
+    "tableHeaders": {
+      "task": "Gawain",
+      "before": "Dati",
+      "swarm": "Swarm",
+      "speed": "Bilis"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM tools research",
+      "qaPages": "QA sa 8 pahina",
+      "leadEnrichment": "Lead enrichment (100)",
+      "priceMonitoring": "Pagmonitor ng presyo"
+    },
+    "builtForParallel": "Ginawa para sa parallel na trabaho",
+    "useCases": {
+      "marketResearch": {
+        "title": "Market Research sa Malaking Sukat",
+        "desc": "Magsaliksik ng maraming kakumpitensya, merkado, o produkto nang sabay-sabay sa mga isolated na makina."
+      },
+      "leadGeneration": {
+        "title": "Lead Generation",
+        "desc": "Pagyamanin ang mga profile, maghanap ng mga email, at i-verify ang social presence — oras na trabaho sa loob ng ilang minuto."
+      },
+      "qaTesting": {
+        "title": "QA at Regression Testing",
+        "desc": "Magpatakbo ng mga test scenario sa iba't ibang pahina o daloy nang sabay-sabay."
+      },
+      "contentSocial": {
+        "title": "Content at Social",
+        "desc": "Mag-post sa maraming platform nang sabay-sabay na may isolation sa bawat makina."
+      },
+      "dataExtraction": {
+        "title": "Data Extraction",
+        "desc": "Mag-scrape at mag-structure ng data mula sa dose-dosenang pinagmulan nang sabay-sabay."
+      },
+      "scheduledRuns": {
+        "title": "Mga Naka-schedule na Run",
+        "desc": "Pagsamahin ang swarm mode sa scheduling para sa mga paulit-ulit na parallel task."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Tunay na Isolation",
+        "desc": "Bawat makina ay may sariling browser, terminal, at desktop."
+      },
+      "tripleMachineLimit": {
+        "title": "3x Machine Limit",
+        "desc": "Trinotriple ng swarm mode ang kapasidad ng makina ng iyong plano."
+      },
+      "liveTreeView": {
+        "title": "Live Tree View",
+        "desc": "Mga screenshot at tool call na nag-stream sa real-time."
+      },
+      "autoAggregation": {
+        "title": "Auto Aggregation",
+        "desc": "Pinagsasama ang mga resulta sa isang consolidated na report."
+      },
+      "shareableRuns": {
+        "title": "Mga Naiibahaging Run",
+        "desc": "I-replay ang buong execution timeline sa pamamagitan ng isang link."
+      },
+      "fullySandboxed": {
+        "title": "Ganap na Sandboxed",
+        "desc": "Lahat ng environment ay sinisira pagkatapos makumpleto."
+      }
+    },
+    "readyCta": "Handa ka na bang magpatakbo ng mga gawain nang sabay-sabay?",
+    "includedWithPaid": "Kasama ang swarm mode sa bawat bayad na plano.",
+    "getStarted": "Magsimula",
+    "viewPricing": "Tingnan ang Presyo",
+    "legend": {
+      "messages": "Mga Mensahe",
+      "broadcast": "Broadcast",
+      "sharedMemory": "Shared Memory",
+      "help": "Tulong"
+    },
+    "liveSwarmExecution": "Live swarm execution na may komunikasyon ng agent",
+    "popular": "Sikat",
+    "avgRating": "{rating} average"
+  },
+  "downloadPage": {
+    "title": "Desktop App",
+    "heroTitle": "Hayaan ang Coasty na Patakbuhin ang Iyong Computer",
+    "heroDescription": "Ang iyong AI assistant na namamahala. I-automate ang iyong browser, desktop, at terminal — o kontrolin ang iyong computer mula sa kahit saan sa pamamagitan ng aming web interface.",
+    "seeInAction": "Tingnan ito sa aksyon",
+    "overlayDescription": "Isang magaan na overlay na lumalutang sa iyong desktop. Kontrolin ito nang lokal o sa malayo mula sa anumang browser — ang iyong computer, sa iyong paraan.",
+    "recommended": "Inirerekomenda para sa iyong sistema",
+    "coastyFor": "Coasty para sa {platform}",
+    "installerLabel": "{extension} installer",
+    "beforeInstall": "Bago ka mag-install",
+    "beforeInstallDescription": "Bago pa lang ang Coasty Desktop, kaya hindi pa ito makikilala ng iyong operating system. Ganap itong normal para sa mga bagong inilabas na app — narito kung paano magpatuloy:",
+    "windowsSteps": {
+      "step1": "Pinoprotektahan ng Windows ang iyong PC",
+      "step2": "Karagdagang impormasyon",
+      "step3": "Patakbuhin pa rin"
+    },
+    "macSteps": {
+      "step1": "Hindi mabuksan ang Coasty Desktop",
+      "step2": "System Settings > Privacy & Security",
+      "step3": "Buksan Pa Rin"
+    },
+    "allPlatforms": "Lahat ng platform",
+    "systemRequirements": {
+      "title": "Mga Kinakailangan ng Sistema",
+      "win1": "Windows 10 o mas bago",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minimum na 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) o mas bago",
+      "mac2": "Apple Silicon o Intel",
+      "mac3": "Minimum na 4 GB RAM"
+    },
+    "whatsIncluded": "Ano ang Kasama",
+    "features": {
+      "browser": "Browser automation",
+      "desktop": "Desktop automation",
+      "terminal": "Terminal access",
+      "files": "Mga operasyon sa file",
+      "updates": "Auto-updates",
+      "remote": "Kontrolin mula sa kahit saan"
+    },
+    "browserCta": "Buksan ang Coasty sa Browser",
+    "browserCtaDescription": "Gusto mo bang kontrolin ang iyong makina mula sa kahit saan?",
+    "loading": "Naglo-load...",
+    "downloadFor": "I-download para sa {platform}",
+    "download": "I-download",
+    "unavailable": "Hindi magagamit"
+  },
+  "referralPage": {
+    "shareTitle": "Ibahagi ang Coasty.",
+    "earnTitle": "Kumita nang magkasama.",
+    "shareDescription": "Bigyan ang mga kaibigan ng 50 libreng credits para i-deploy ang kanilang unang AI agent. Makakakuha ka rin ng 50 credits — sa tuwing may sasali.",
+    "features": [
+      "AI na talagang gumagana — totoong browser, totoong mga pag-click, totoong mga resulta",
+      "Isolated at secure — bawat agent ay tumatakbo sa sarili nitong sandboxed VM",
+      "Tumatakbo habang natutulog ka — mag-schedule ng mga gawain at hayaan ang mga agent na gawin ang natitira"
+    ],
+    "recentActivity": "Ang iyong kamakailang aktibidad",
+    "friendsCould": "Maaari ding gawin ito ng iyong mga kaibigan",
+    "giveGet": "Bigyan ang mga kaibigan ng 50 credits. Kumuha ng 50 para sa iyong sarili. Sa tuwina.",
+    "stats": {
+      "invited": "Inimbitahan",
+      "earned": "Kinita",
+      "perInvite": "Bawat imbitasyon"
+    },
+    "tabs": {
+      "invite": "Mag-imbita ng mga kaibigan",
+      "feedback": "Magpadala ng feedback"
+    },
+    "referralLink": "Ang iyong referral link",
+    "howItWorks": "Paano ito gumagana",
+    "howSteps": [
+      "Ibahagi ang iyong link sa isang kaibigan",
+      "Mag-sign up sila at makakuha ng 50 libreng credits",
+      "Agad kang makakakuha ng 50 credits din"
+    ],
+    "shareDirectly": "Ibahagi nang direkta",
+    "yourReferrals": "Ang iyong mga referral",
+    "invitedYou": "Nag-imbita sa iyo",
+    "joinedViaLink": "Sumali sa pamamagitan ng iyong link",
+    "noReferrals": "Wala pang mga referral",
+    "noReferralsHint": "Ibahagi ang iyong link sa itaas at pareho kayong makakakuha ng 50 credits",
+    "feedbackThanks": "Salamat sa iyong feedback!",
+    "feedbackWeRead": "Binabasa namin ang bawat mensahe.",
+    "sendAnother": "Magpadala ng isa pa",
+    "feedbackTitle": "Sabihin sa amin ang iyong iniisip",
+    "feedbackSubtitle": "Mga ulat ng bug, ideya para sa feature, o kumusta lang",
+    "feedbackPlaceholder": "Ano ang nasa isip mo?",
+    "weReadEvery": "Binabasa namin ang bawat mensahe",
+    "send": "Ipadala",
+    "shareMessage": "Hoy, ginagamit ko ang Coasty at ang galing nito. Isa itong AI na talagang kayang gumamit ng computer para sa iyo. Tulad ng pag-browse, pag-click, pag-type, lahat ng ito. Subukan mo gamit ang aking link at pareho tayong makakakuha ng libreng credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Tingnan mo itong AI tool",
+    "emailBody": "Ang AI na ito ay talagang kayang gumamit ng computer para sa iyo. Pag-browse, pag-click, pag-type, lahat ng ito."
+  },
+  "statusPage": {
+    "title": "Katayuan ng Sistema",
+    "brandTitle": "Coasty Status",
+    "subtitle": "Real-time na operational status ng lahat ng serbisyo ng Coasty. Awtomatikong nagre-refresh ang pahinang ito tuwing 60 segundo.",
+    "refresh": "I-refresh",
+    "statuses": {
+      "operational": "Gumagana",
+      "degraded": "Bumaba ang Performance",
+      "outage": "Hindi Gumagana"
+    },
+    "overallStatuses": {
+      "allOperational": "Lahat ng Sistema ay Gumagana",
+      "someDegraded": "Ilang Sistema ay Bumaba ang Performance",
+      "disruption": "May Nakitang Pagkaantala sa Serbisyo"
+    },
+    "overallDescriptions": {
+      "allOperational": "Lahat ng serbisyo ay maayos na tumatakbo nang walang nakitang problema.",
+      "someDegraded": "Ang ilang serbisyo ay nakakaranas ng pagbagal. Iniimbestigahan namin ito.",
+      "disruption": "Alam namin ang problema at aktibong gumagawa ng solusyon."
+    },
+    "responseTime": "{ms}ms response time",
+    "uptimeLabel": "90-Araw na Uptime",
+    "daysAgo": "90 araw na ang nakakaraan",
+    "today": "Ngayon",
+    "overallUptime": "Kabuuang 90-Araw na Uptime",
+    "overallUptimeDesc": "Pinagsama-samang availability sa lahat ng serbisyo",
+    "services": "Mga Serbisyo",
+    "clickUptime": "i-click upang tingnan ang uptime",
+    "lastChecked": "Huling sinuri {time} · Awtomatikong nagre-refresh tuwing 60s",
+    "experiencingIssues": "Nakakaranas ng mga problema?",
+    "issuesDescription": "Kung may hindi tama, makipag-ugnayan sa amin nang direkta.",
+    "talkToCofounders": "Makipag-usap sa mga Cofounder",
+    "emailUs": "I-email Kami",
+    "serviceNames": {
+      "website": "Website",
+      "aiBackend": "AI Backend",
+      "database": "Database",
+      "authentication": "Authentication",
+      "aiModels": "AI Models",
+      "fileStorage": "File Storage"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - #1 AI Agent na Gumagamit ng Computer | AI Employee para sa Desktop at Browser Automation",
+      "titleTemplate": "{title} | Coasty - AI Computer-Use Agent",
+      "description": "Ang Coasty ang #1 na naka-rank na AI agent na gumagamit ng computer — 82% sa OSWorld benchmark. Kinokontrol nito ang buong desktop tulad ng tao: nagbubukas ng browser, nagki-click, nagta-type, nagpupuno ng form, nagpapadala ng email, namamahala ng spreadsheet. Tunay na VM-level isolation bawat session. Simula sa $20/buwan.",
+      "ogTitle": "Coasty - #1 AI Agent na Gumagamit ng Computer | 82% OSWorld Benchmark",
+      "ogDescription": "AI employee na kumokontrol ng desktop tulad ng tao. #1 sa OSWorld benchmark (82%). Browser automation, desktop control, CAPTCHA solving, VM isolation. Simula sa $20/buwan.",
+      "twitterDescription": "AI employee na kumokontrol ng desktop tulad ng tao. Nagbubukas ng browser, nagki-click, nagta-type, nagpupuno ng form, nagpapadala ng email. Tunay na VM isolation. $20/buwan vs $3,000/buwan na human VA."
+    },
+    "compare": {
+      "title": "Ihambing ang Coasty - Mga AI Agent Alternative at Paghahambing ng Kakumpitensya",
+      "description": "Tingnan kung paano inihahambing ang #1 na naka-rank na AI agent ng Coasty sa Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath, at iba pa. Feature-by-feature na paghahambing kasama ang pricing.",
+      "ogTitle": "Ihambing ang Coasty sa mga AI Agent Alternative",
+      "ogDescription": "Feature-by-feature na paghahambing ng #1 computer-using AI agent vs mga kakumpitensya. Benchmark score, pricing, kakayahan."
+    },
+    "download": {
+      "title": "I-download ang Coasty Desktop App — AI Agent para sa Mac at Windows",
+      "description": "I-download ang Coasty Desktop, ang #1 computer-using AI agent na kumokontrol sa iyong lokal na makina. Browser automation, desktop control, terminal access, at file operations. Available para sa Windows at macOS.",
+      "ogTitle": "I-download ang Coasty Desktop — AI Agent para sa Mac at Windows",
+      "ogDescription": "AI na kumokontrol ng iyong computer tulad ng tao. Browser, desktop, at terminal automation sa isang native app. #1 sa OSWorld benchmark."
+    },
+    "guide": {
+      "title": "Ano ang Kaya ng Coasty? — Ang Kumpletong Gabay sa AI Computer Automation",
+      "description": "Tuklasin ang lahat ng kayang i-automate ng Coasty: sales prospecting, email outreach, job application, QA testing, data entry, social media, recruiting, research, at 100+ pang mga gawain.",
+      "ogTitle": "Ano ang Kaya ng Coasty? — Kumpletong AI Automation Guide",
+      "ogDescription": "Tuklasin ang 100+ gawain na kayang i-automate ng Coasty. Mula sa sales outreach hanggang QA testing, tingnan kung paano hinahawakan ng AI computer agent ang totoong trabaho."
+    },
+    "blog": {
+      "title": "Blog - AI Agent Insights, Computer Use Research at Case Studies",
+      "description": "Malalimang pagsusuri sa autonomous AI agents, computer use technology, totoong automation case studies, at kinabukasan ng AI employees. Mula sa team sa likod ng #1 computer-using agent.",
+      "ogTitle": "Coasty Blog - AI Agent Insights at Case Studies",
+      "ogDescription": "Malalimang pagsusuri sa autonomous AI agents, computer use technology, at totoong automation case studies mula sa #1 na naka-rank na computer-using agent."
+    },
+    "results": {
+      "title": "Mga Demo at Resulta — Panoorin ang Coasty AI Agent na Gumagana nang Mag-isa",
+      "description": "Panoorin ang Coasty na nag-aautonomously na nagpapatakbo ng marketing campaigns, nag-a-apply sa trabaho, nagpupuno ng application, nag-QA test ng produkto, nagpapadala ng personalized na email, at marami pa. Totoong case studies na may video demo.",
+      "ogTitle": "Mga Demo — Panoorin ang Coasty AI Agent na Gumagana nang Mag-isa",
+      "ogDescription": "Totoong demo ng AI na kumokontrol ng computer: marketing, job application, QA testing, email outreach, at iba pa. #1 sa OSWorld benchmark."
+    },
+    "terms": {
+      "title": "Mga Tuntunin ng Serbisyo",
+      "description": "Mga Tuntunin ng Serbisyo ng Coasty. Basahin ang mga tuntuning namamahala sa paggamit ng Coasty AI employee platform, computer-using agent, at desktop application.",
+      "ogTitle": "Coasty — Mga Tuntunin ng Serbisyo",
+      "ogDescription": "Mga Tuntunin ng Serbisyo ng Coasty. Basahin ang mga tuntuning namamahala sa paggamit ng Coasty AI employee platform, computer-using agent, at desktop application."
+    },
+    "privacy": {
+      "title": "Patakaran sa Privacy",
+      "description": "Patakaran sa Privacy ng Coasty. Alamin kung paano namin pinoprotektahan ang iyong data gamit ang VM-level isolation, encrypted sessions, sandboxed execution environments, at enterprise-grade security.",
+      "ogTitle": "Coasty — Patakaran sa Privacy",
+      "ogDescription": "Patakaran sa Privacy ng Coasty. Alamin kung paano namin pinoprotektahan ang iyong data gamit ang VM-level isolation, encrypted sessions, sandboxed execution environments, at enterprise-grade security."
+    },
+    "useCases": {
+      "title": "Mga Use Case - Coasty AI Agent para sa Business Operations",
+      "description": "Tuklasin ang 12 paraan kung paano ina-automate ng AI agent ng Coasty ang iyong mga operasyon — competitor research, QA testing, lead generation, email outreach, at iba pa. Totoong resulta.",
+      "ogTitle": "Mga Use Case - Coasty AI Agent",
+      "ogDescription": "12 paraan para i-10x ang iyong output sa autopilot. Totoong resulta, totoong numero."
+    },
+    "computerUse": {
+      "title": "Computer Use AI Agent — #1 Ranked Desktop, Browser at Terminal Automation",
+      "description": "Ang Coasty ang pinakamahusay na computer use AI agent, naka-rank #1 sa OSWorld (82%). I-automate ang anumang desktop, browser, o terminal task gamit ang autonomous AI na kumokontrol ng computer tulad ng tao.",
+      "ogTitle": "Coasty — Ang #1 Computer Use AI Agent",
+      "ogDescription": "Ang pinakamahusay na computer use agent na naka-rank #1 sa OSWorld. I-automate ang anumang desktop, browser, o terminal task gamit ang AI."
+    },
+    "pricing": {
+      "title": "Presyo — Mga Plano at Presyo ng Coasty AI Agent",
+      "description": "Mga pricing plan ng Coasty simula sa $20/buwan. Palitan ang $3,000/buwan na virtual assistant ng AI employee. May libreng tier. Credits-based na paggamit nang walang nakatagong bayarin.",
+      "ogTitle": "Presyo ng Coasty — Mga AI Agent Plan",
+      "ogDescription": "AI employee simula sa $20/buwan. Palitan ang mahal na VA ng autonomous AI. May libreng tier."
+    },
+    "faq": {
+      "q1": "Ano ang Coasty?",
+      "a1": "Ang Coasty ay isang AI employee platform — isang computer-using agent na kumokontrol ng desktop tulad ng tao. Nagbubukas ito ng browser, nagki-click, nagta-type, nagna-navigate ng apps, nagpupuno ng form, nagpapadala ng email, at namamahala ng spreadsheet nang autonomous. Naka-rank #1 sa OSWorld benchmark na may 82% completion rate sa 369 na totoong gawain.",
+      "q2": "Paano inihahambing ang Coasty sa Anthropic Computer Use?",
+      "a2": "Habang ang Anthropic Computer Use ay nagbibigay ng raw API para sa computer control, ang Coasty ay isang production-ready platform na may managed VM infrastructure, built-in CAPTCHA solving, desktop app para sa Mac at Windows, multi-model support, at pinakamataas na OSWorld benchmark score (82%). Nagbibigay ang Coasty ng kumpletong solusyon — hindi lang ang API.",
+      "q3": "Magkano ang Coasty?",
+      "a3": "Ang Coasty ay nagsisimula sa $20/buwan para sa Starter plan na may libreng tier na available. Ito ay kumpara sa higit sa $3,000/buwan para sa isang human virtual assistant. Gumagana ang Coasty 24/7 nang walang break, walang training, at instant scalability.",
+      "q4": "Ligtas bang gamitin ang Coasty?",
+      "a4": "Oo. Bawat Coasty session ay tumatakbo sa sarili nitong isolated, sandboxed virtual machine. Nananatiling ligtas ang iyong data, nananatiling hindi nagagalaw ang iyong makina, at walang tumatagas sa pagitan ng sessions. Ito ay tunay na VM-level isolation, hindi lang containers sa isang shared pool.",
+      "q5": "Ano ang OSWorld benchmark?",
+      "a5": "Ang OSWorld ay isang benchmark para sa pag-evaluate ng AI agents sa totoong computer tasks. Sinusubok nito ang 369 na gawain sa mga browser, office apps, at system operations. Nakakuha ang Coasty ng 82%, ang pinakamataas na score ng anumang computer-using agent — na nakakamit ng state-of-the-art na performance.",
+      "q6": "Paano naiiba ang Coasty sa mga RPA tool tulad ng UiPath?",
+      "a6": "Ang tradisyonal na RPA tools tulad ng UiPath ay nangangailangan ng marupok na scripting at nasisira kapag nagbabago ang mga interface. Gumagamit ang Coasty ng AI vision para maintindihan at makipag-interact sa anumang interface, nag-a-adapt sa real-time nang walang predefined scripts. Gumagana ito tulad ng tao, hindi tulad ng macro. Ilang minuto lang ang setup sa halip na ilang linggo.",
+      "q7": "May desktop app ba ang Coasty?",
+      "a7": "Oo. Available ang Coasty Desktop para sa Mac at Windows. Tumatakbo ito bilang floating overlay sa iyong desktop at direktang makokontrol ang iyong lokal na browser, files, terminal, at applications — walang kailangan na VM para sa lokal na gawain.",
+      "q8": "Ano ang kayang i-automate ng Coasty?",
+      "a8": "Kayang i-automate ng Coasty ang halos anumang computer task: web browsing, form filling, email sending, spreadsheet management, data entry, social media posting, job application, sales prospecting, QA testing, customer support, LinkedIn recruiting, at marami pa. Kung kaya itong gawin ng tao sa computer, kaya rin ng Coasty.",
+      "q9": "Paano inihahambing ang Coasty sa OpenAI Operator?",
+      "a9": "Nalalagpasan ng Coasty ang OpenAI Operator sa OSWorld benchmark (82% vs ~40%), nag-aalok ng tunay na VM-level isolation para sa bawat session, sumusuporta sa maraming AI model, kasama ang buong desktop control bukod sa browser lang, at nagbibigay ng open-source framework.",
+      "q10": "Kayang solusyunan ba ng Coasty ang mga CAPTCHA?",
+      "a10": "Oo. Ang Coasty ay may built-in CAPTCHA-solving pipeline, kaya hindi ito naba-block tulad ng mga kakumpitensyang AI agent. Ito ay kritikal para sa totoong automation kung saan karaniwan ang mga CAPTCHA sa mga website."
+    },
+    "structuredData": {
+      "appDescription": "Ang #1 na naka-rank na computer-using AI agent. Kinokontrol ng Coasty ang buong desktop tulad ng tao — nagbubukas ng browser, nagki-click, nagta-type, nagpupuno ng form, nagpapadala ng email, at namamahala ng spreadsheet nang autonomous. 82% sa OSWorld benchmark. Tunay na VM-level isolation. Built-in CAPTCHA solving. Simula sa $20/buwan.",
+      "orgDescription": "Binubuo ng Coasty ang #1 computer-using AI agent. Nagbibigay ang aming platform ng autonomous desktop control, browser automation, at multi-agent orchestration na may tunay na VM-level isolation.",
+      "productDescription": "Computer-using AI agent na kumokontrol ng desktop tulad ng tao. #1 sa OSWorld benchmark (82%). Autonomous browser automation, desktop control, email sending, form filling, at spreadsheet management na may tunay na VM-level isolation.",
+      "websiteDescription": "#1 computer-using AI agent platform. 82% OSWorld benchmark. Autonomous browser, desktop, at terminal automation na may VM isolation. Simula sa $20/buwan.",
+      "softwareDescription": "Computer-using AI agent na kumokontrol ng buong desktop tulad ng tao. #1 sa OSWorld benchmark na may 82% completion rate sa 369 na totoong gawain. Autonomous browser automation, desktop control, terminal operations, email sending, form filling, at spreadsheet management.",
+      "breadcrumbs": {
+        "home": "Home",
+        "caseStudies": "Mga AI Agent Case Study",
+        "blog": "Blog",
+        "download": "I-download ang Desktop App",
+        "compare": "Ihambing ang mga AI Agent"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Hindi nahanap ang pahina",
+      "description": "Paumanhin, hindi umiiral ang pahinang ito."
+    },
+    "error": {
+      "title": "May nangyaring mali",
+      "description": "May hindi inaasahang error na nangyari. Pakisubukan muli.",
+      "tryAgain": "Subukan muli"
+    }
+  },
+  "schedulesPage": {
+    "title": "Workforce",
+    "subtitle": "Ang iyong AI workforce — mag-assign ng mga gawain at hayaan silang gawin ang natitira",
+    "guide": "Gabay",
+    "teamsTab": "Mga Koponan",
+    "hireEmployee": "Mag-hire ng Empleyado",
+    "loading": "Nilo-load ang iyong mga empleyado...",
+    "onDuty": "{count} naka-duty",
+    "standby": "{count} standby",
+    "company": "Kumpanya",
+    "teams": "{count} na koponan",
+    "employees": "{count} na empleyado",
+    "members": "{count} na miyembro",
+    "unassigned": "Hindi Naka-assign",
+    "add": "Idagdag",
+    "save": "I-save",
+    "cancel": "Kanselahin",
+    "run": "Patakbuhin",
+    "delegate": "i-delegate",
+    "untitledEmployee": "Walang Pangalang Empleyado",
+    "untitled": "Walang Pangalan",
+    "guidelinesPlaceholder": "Mga Alituntunin...",
+    "today": "Ngayon",
+    "timesDaily": "{count} × araw-araw",
+    "noEmployeesDay": "Walang empleyado sa araw na ito",
+    "noEmployeesScheduled": "Walang naka-iskedyul na empleyado",
+    "recentActivity": "Kamakailang Aktibidad",
+    "schedule": "Iskedyul",
+    "emptyState": {
+      "openChat": "Buksan ang anumang chat at i-click ang",
+      "assignEmployee": "Mag-assign ng Empleyado",
+      "onThe": "sa",
+      "topRight": "kanang itaas",
+      "toPutOnAutopilot": "para i-autopilot ito",
+      "newChat": "Bagong Chat"
+    },
+    "emptyWorkforce": {
+      "title": "Mag-hire ng iyong unang empleyado",
+      "description": "Ang mga AI empleyado ay nagtatrabaho para sa iyo — mag-assign ng gawain, magtakda ng iskedyul, at awtomatiko nilang isasagawa ito",
+      "flexibleShifts": {
+        "title": "Mga flexible na shift",
+        "desc": "Mag-iskedyul ng mga empleyado bawat oras, araw-araw, lingguhan, buwanan — o gumamit ng custom na cron expression"
+      },
+      "fullAutonomy": {
+        "title": "Buong autonomiya",
+        "desc": "Bawat empleyado ay may buong access sa browsing, terminal, at iyong mga konektadong workstation"
+      },
+      "activityLogs": {
+        "title": "Mga log ng aktibidad",
+        "desc": "Bawat pagpapatupad ay naka-log para ma-review mo kung ano ang nagawa ng iyong mga empleyado"
+      },
+      "startFromChat": "Magsimula mula sa chat"
+    },
+    "filters": {
+      "all": "Lahat",
+      "onDuty": "Naka-Duty",
+      "standby": "Standby"
+    },
+    "noMatch": "Walang empleyado ang tumutugma sa filter na ito",
+    "createTeam": {
+      "title": "Bagong Koponan",
+      "subtitle": "Magsimula sa template o bumuo mula sa simula",
+      "backToTemplates": "Bumalik sa mga template",
+      "customTeam": "Custom na Koponan",
+      "customDescription": "Lumikha ng koponan gamit ang sarili mong configuration.",
+      "teamNameLabel": "Pangalan ng Koponan",
+      "teamNamePlaceholder": "hal. Research, Marketing, Engineering",
+      "guidelinesLabel": "Mga Alituntunin",
+      "optional": "(opsyonal)",
+      "guidelinesPlaceholder": "Mga nakabahaging instruksyon na susundin ng lahat ng miyembro ng koponan...",
+      "suggestedEmployees": "Mga Iminumungkahing Empleyado",
+      "suggestedCredentials": "Mga Iminumungkahing Credential",
+      "added": "Naidagdag",
+      "addButton": "+ Idagdag",
+      "credentials": "Mga Credential",
+      "addCredential": "+ Magdagdag ng credential",
+      "credentialHint": "Ang mga credential ay naka-encrypt. Isasama ang mga ito sa mga alituntunin ng koponan para malaman ng mga empleyado kung ano ang available.",
+      "settingUp": "Sine-set up...",
+      "createEmployees": "Lumikha ng {count} na Empleyado",
+      "createTeamButton": "Lumikha ng Koponan"
+    },
+    "noTeams": {
+      "title": "Wala pang mga koponan",
+      "description": "Ang mga koponan ay nagpapahintulot sa mga empleyado na magbahagi ng konteksto at memorya. Lumikha ng isa para buuin ang iyong org chart.",
+      "newTeam": "Bagong Koponan"
+    },
+    "howItWorks": {
+      "title": "Paano ito gumagana",
+      "dragEmployees": "I-drag ang mga empleyado sa isang koponan",
+      "clickToEdit": "I-click para i-edit ang iskedyul at mga setting",
+      "teamsShare": "Ang mga koponan ay nagbabahagi ng memorya at mga alituntunin",
+      "dashedLines": "Mga putol-putol na linya — delegasyon sa pagitan ng mga empleyado"
+    },
+    "inactive": {
+      "title": "{count} na empleyado ang hindi aktibo",
+      "missingMachine": "{count} ang walang machine — hindi tatakbo hanggang ma-activate",
+      "wontRun": "Hindi tatakbo hanggang ma-activate",
+      "fixInEmployees": "Ayusin sa Mga Empleyado"
+    },
+    "dragHint": "I-drag ang mga hindi naka-assign na empleyado sa mga koponan para idagdag sila",
+    "limits": {
+      "upgradePlan": "I-upgrade ang Plano",
+      "manageMachines": "Pamahalaan ang mga Machine",
+      "manageEmployees": "Pamahalaan ang mga Empleyado",
+      "machineLimit": "Kailangan mo ng cloud machine pero naabot mo na ang limitasyon na {max} na machine. I-upgrade ang iyong plano o mag-delete ng hindi ginagamit na machine.",
+      "employeeLimit": "Naabot mo na ang limitasyon ng empleyado ({max} para sa {tier} tier). I-upgrade ang iyong plano o mag-alis ng mga hindi ginagamit na empleyado.",
+      "templateLimit": "Ang template na ito ay nangangailangan ng {needed} na empleyado pero {available} na lang ang natitira mong slot ({max} max para sa {tier} tier). I-upgrade ang iyong plano o mag-alis ng mga hindi ginagamit na empleyado.",
+      "createFailed": "Nabigong lumikha ng anumang empleyado. Suriin ang mga limitasyon ng iyong account at subukan ulit.",
+      "teamFailed": "Nabigong lumikha ng koponan"
+    },
+    "provisioning": {
+      "checking": "Sinusuri ang mga limitasyon ng account...",
+      "usingMachine": "Ginagamit ang machine na \"{name}\"...",
+      "assigningMachine": "Ina-assign sa machine na \"{name}\" (tatakbo kapag handa na ang machine)...",
+      "creatingMachine": "Gumagawa ng bagong machine...",
+      "machineStarted": "Nagsimula na ang provisioning ng machine...",
+      "hiring": "Hina-hire si {name} ({current}/{total})...",
+      "creatingTeam": "Gumagawa ng koponan..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Koponan na nilikha na may {count} na empleyado ({failedCount} ang nabigo: {names})",
+      "teamCreated": "Koponan na {name} na nilikha na may {count} na empleyado"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "Mga Operasyon sa Nilalaman",
+        "tagline": "Mag-publish nang tuloy-tuloy nang walang hirap",
+        "description": "Isang payat na content engine — nagsusulat, nag-o-optimize, at nagdiistribute ng nilalaman nang awtomatiko.",
+        "roles": {
+          "atlas": "Manunulat ng Nilalaman — nagdo-draft ng mga blog post, newsletter, at social copy",
+          "echo": "SEO Analyst — nag-a-audit ng mga pahina, nagti-track ng rankings, nagmumungkahi ng keyword opportunities",
+          "nova": "Social Distributor — nagpo-post ng nilalaman sa mga platform at nagmo-monitor ng engagement"
+        },
+        "credentials": {
+          "wordpress": "Mag-publish at mag-manage ng mga blog post",
+          "twitter": "Mag-post ng mga tweet at mag-monitor ng engagement",
+          "linkedin": "Mag-publish ng propesyonal na nilalaman at mga artikulo",
+          "searchConsole": "Mag-track ng search performance at indexing"
+        }
+      },
+      "customerSupport": {
+        "name": "Customer Support",
+        "tagline": "24/7 na saklaw ng suporta mula sa 3 empleyado",
+        "description": "Nagmo-monitor ng mga inbox, nagresolba ng mga karaniwang isyu, at pinapanatiling updated ang knowledge base.",
+        "roles": {
+          "sage": "Inbox Monitor — sinusuri ang mga support email, kinakategorya at sinasagot ang mga karaniwang tanong",
+          "iris": "Knowledge Base Manager — ina-update ang mga help doc at FAQ base sa mga paulit-ulit na isyu",
+          "milo": "Feedback Analyst — nag-a-aggregate ng mga review at support trend sa lingguhang mga ulat"
+        },
+        "credentials": {
+          "gmail": "Mag-monitor at tumugon sa mga support email",
+          "zendesk": "Mag-manage ng mga support ticket (o ang iyong helpdesk)",
+          "notion": "Mag-update ng knowledge base at dokumentasyon"
+        }
+      },
+      "researchIntel": {
+        "name": "Research at Intel",
+        "tagline": "Manatiling informed nang walang manu-manong trabaho",
+        "description": "Nagmo-monitor ng mga kakumpitensya, nagti-track ng mga trend sa industriya, at nag-compile ng mga actionable research brief.",
+        "roles": {
+          "scout": "Competitor Monitor — nagti-track ng mga website, presyo, at pagbabago ng feature ng kakumpitensya",
+          "wren": "Trend Researcher — nag-i-scan ng mga balita sa industriya, publikasyon, at social media para sa mga trend",
+          "quinn": "Brief Compiler — nag-synthesize ng mga natuklasan sa mga structured na lingguhang intelligence report"
+        },
+        "credentials": {
+          "google": "Web research at paghahanap",
+          "linkedin": "Mag-track ng hiring at mga anunsyo ng kakumpitensya",
+          "notion": "Mag-publish ng mga research brief at ulat"
+        }
+      },
+      "marketing": {
+        "name": "Departamento ng Marketing",
+        "tagline": "Isang buong marketing team sa dalawang machine",
+        "description": "Paggawa ng nilalaman, social media, SEO, competitor tracking, at campaign analytics — dalawang koordinadong grupo.",
+        "roles": {
+          "atlas": "Content Strategist — nagpaplano ng content calendar, nagsusulat ng long-form na nilalaman",
+          "nova": "Social Media Manager — nagpo-post, nag-e-engage, at nagpapalaki ng mga social channel",
+          "echo": "SEO Specialist — nag-o-optimize ng mga pahina, nagtatayo ng internal link, nagti-track ng mga keyword",
+          "pixel": "Email Campaign Manager — nagsusulat at nagpapadala ng mga newsletter, nagti-track ng mga bukas/click",
+          "scout": "Competitor Analyst — nagmo-monitor ng mga marketing move ng kakumpitensya at nag-uulat ng mga insight",
+          "dash": "Ad Campaign Monitor — nagti-track ng ad spend, ROAS, at mga pagkakataon sa optimization",
+          "iris": "Analytics Reporter — nag-compile ng cross-channel na performance dashboard"
+        },
+        "credentials": {
+          "wordpress": "Mag-publish ng blog content",
+          "twitter": "Pamamahala ng social media",
+          "linkedin": "Propesyonal na pamamahagi ng nilalaman",
+          "mailchimp": "Mga email campaign at newsletter",
+          "analytics": "Traffic at conversion analytics",
+          "googleAds": "Pamamahala ng Google Ads campaign",
+          "metaAds": "Meta Ads at social management"
+        }
+      },
+      "ecommerce": {
+        "name": "Mga Operasyon sa E-Commerce",
+        "tagline": "Patakbuhin ang iyong tindahan habang natutulog ka",
+        "description": "Pamamahala ng produkto, price intelligence, inventory tracking, review management, at growth marketing para sa mga online store.",
+        "roles": {
+          "cleo": "Product Lister — gumagawa at nag-a-update ng mga product description, larawan, at metadata",
+          "onyx": "Price Monitor — nagti-track ng mga presyo ng kakumpitensya at nagbi-flag ng mga pagkakataon sa pagsasaayos",
+          "luna": "Inventory Tracker — nagmo-monitor ng mga stock level at nag-a-alert sa mababang inventory",
+          "sage": "Review Manager — tumutugon sa mga customer review at nag-a-aggregate ng sentimyento",
+          "dash": "Ad Campaign Optimizer — nagma-manage ng mga product ad at shopping campaign",
+          "flux": "Email Marketer — nagpapadala ng abandoned cart, promo, at post-purchase sequence",
+          "wren": "Analytics Reporter — nagti-track ng revenue, conversion rate, at growth metric"
+        },
+        "credentials": {
+          "shopify": "Pamamahala ng store at product listing",
+          "amazon": "Pamamahala ng Amazon marketplace",
+          "googleAds": "Mga shopping ad at campaign",
+          "mailchimp": "Mga customer email sequence",
+          "analytics": "Conversion at traffic analytics"
+        }
+      },
+      "engineering": {
+        "name": "Engineering Team",
+        "tagline": "I-automate ang mga nakakatamad na bahagi ng engineering",
+        "description": "Automated na code review, dependency monitoring, dokumentasyon, testing, deploy monitoring, at incident response.",
+        "roles": {
+          "rune": "Code Reviewer — nire-review ang mga bukas na PR, nagmumungkahi ng mga pagpapabuti, sinusuri ang mga isyu sa seguridad",
+          "koda": "Dependency Monitor — nagti-track ng mga lumang package, security advisory, at mga breaking change",
+          "aria": "Doc Writer — pinapanatiling updated ang mga API doc, README, at changelog sa pinakabagong code",
+          "blaze": "Test Monitor — nagpapatakbo ng mga test suite, nagti-track ng mga flaky test, nag-uulat ng coverage trend",
+          "frost": "Deploy Monitor — nagmamasid sa mga CI/CD pipeline, nag-a-alert sa mga pagkabigo, nagti-track ng deploy frequency",
+          "neon": "Uptime at Log Watcher — nagmo-monitor ng mga serbisyo, nag-i-scan ng mga log para sa mga error, gumagawa ng mga incident report"
+        },
+        "credentials": {
+          "github": "Access sa repository, PR review, mga isyu",
+          "vercel": "Monitoring ng deployment (o ang iyong CI/CD)",
+          "sentry": "Error tracking at incident alert",
+          "npm": "Package registry para sa dependency check"
+        }
+      },
+      "fullBusiness": {
+        "name": "Buong Operasyon ng Negosyo",
+        "tagline": "Isang buong kumpanya, ganap na automated",
+        "description": "Sales, marketing, support, at admin — apat na departamento na nagtutulungan sa tatlong machine na may shared intelligence.",
+        "roles": {
+          "atlas": "Lead Generator — naghahanap at nagku-qualify ng mga potensyal na customer mula sa online na pinagmulan",
+          "dash": "CRM Manager — nag-a-update ng mga deal, nagti-track ng pipeline, at nagpapadala ng follow-up sequence",
+          "scout": "Proposal Writer — nagdo-draft ng mga sales proposal at pitch deck mula sa mga template",
+          "nova": "Content Marketer — nagsusulat ng mga blog post, case study, at marketing copy",
+          "echo": "Social Media Manager — nagpo-post ng nilalaman at nag-e-engage sa audience",
+          "pixel": "Email Campaign Manager — nagpapatakbo ng mga drip campaign at newsletter sequence",
+          "sage": "Support Lead — humahawak ng mga customer inquiry at nagresolba ng mga isyu",
+          "iris": "Knowledge Manager — nag-maintain ng mga help doc, FAQ, at internal wiki",
+          "milo": "Data Analyst — nag-compile ng cross-department report at KPI dashboard",
+          "wren": "Market Researcher — nagti-track ng mga industry trend at competitive intelligence",
+          "quinn": "Operations Coordinator — nagpapatakbo ng lingguhang mga buod at cross-team sync"
+        },
+        "credentials": {
+          "gmail": "Email communication at suporta",
+          "hubspot": "CRM at sales pipeline (o ang iyong CRM)",
+          "linkedin": "Lead generation at propesyonal na networking",
+          "mailchimp": "Mga email marketing campaign",
+          "notion": "Internal wiki at dokumentasyon",
+          "analytics": "Web analytics at pag-uulat",
+          "twitter": "Presensya sa social media",
+          "zendesk": "Mga customer support ticket"
+        }
+      },
+      "growth": {
+        "name": "Growth at Acquisition",
+        "tagline": "Agresibong growth sa buong autopilot",
+        "description": "Outbound prospecting, inbound marketing, conversion optimization, at analytics — isang dedikadong growth engine sa tatlong machine.",
+        "roles": {
+          "blaze": "Outbound Prospector — naghahanap ng mga decision-maker, nagsasaliksik ng mga kumpanya, nagtatayo ng mga lead list",
+          "flux": "Email Outreach — nagpapadala ng personalized na cold email, nagma-manage ng follow-up sequence",
+          "orion": "LinkedIn Outreach — nakikipag-connect sa mga prospect at nagpapadala ng personalized na mensahe",
+          "coral": "Content Creator — gumagawa ng SEO content, landing page copy, at lead magnet",
+          "taro": "Landing Page Optimizer — nagmo-monitor ng conversion rate, nagmumungkahi at nagtetest ng mga pagpapabuti",
+          "vale": "Ad Campaign Manager — nagma-manage ng Google at Meta ad campaign nang end-to-end",
+          "ember": "Lead Scorer — nagku-qualify ng mga inbound lead at nag-ro-route sa naaangkop na follow-up",
+          "haze": "Funnel Analyst — nagti-track ng mga conversion metric sa bawat yugto, tumutukoy ng mga bottleneck",
+          "dune": "Competitor Intel — nagmo-monitor ng mga campaign, presyo, at pagbabago ng positioning ng kakumpitensya",
+          "kit": "Growth Reporter — nag-compile ng araw-araw/lingguhang growth metric at mga resulta ng eksperimento"
+        },
+        "credentials": {
+          "linkedin": "Prospecting at outreach",
+          "gmail": "Cold email at follow-up sequence",
+          "hubspot": "Pamamahala ng lead at CRM",
+          "googleAds": "Mga paid search campaign",
+          "metaAds": "Meta advertising",
+          "analytics": "Funnel at conversion analytics",
+          "ahrefs": "SEO research at competitor analysis"
+        }
+      },
+      "saas": {
+        "name": "Mga Operasyon sa SaaS",
+        "tagline": "Patakbuhin ang iyong SaaS na parang maayos na makina",
+        "description": "Customer success, product analytics, churn prevention, feature tracking, at automated reporting para sa mga SaaS business.",
+        "roles": {
+          "luna": "Customer Success Monitor — nagti-track ng user engagement, tumutukoy ng mga at-risk account",
+          "sage": "Onboarding Assistant — ginagabayan ang mga bagong user sa setup, nagmo-monitor ng activation rate",
+          "ivy": "Churn Preventer — nakikipag-ugnay sa mga nadi-disengage na user gamit ang mga re-activation campaign",
+          "rune": "Feature Request Tracker — nag-a-aggregate ng user feedback at feature request mula sa lahat ng channel",
+          "koda": "Product Analytics — nagti-track ng feature adoption, user journey, at engagement metric",
+          "neon": "Bug at Issue Monitor — nagmamasid sa error log, user report, at status page incident",
+          "aria": "Changelog Writer — nagdo-dokumento ng mga release, nag-a-update ng knowledge base at help center",
+          "frost": "Revenue Analyst — nagti-track ng MRR, churn rate, LTV, at expansion revenue",
+          "zara": "Competitor Tracker — nagmo-monitor ng feature, presyo, at market positioning ng kakumpitensya"
+        },
+        "credentials": {
+          "stripe": "Data ng subscription at revenue",
+          "intercom": "Customer messaging at support (o ang iyong tool)",
+          "mixpanel": "Product analytics at user tracking",
+          "gmail": "Komunikasyon sa customer",
+          "notion": "Knowledge base at changelog",
+          "sentry": "Error monitoring at bug tracking",
+          "github": "Issue tracking at feature request"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "hanggang 3",
+        "price": "$19/buwan"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "hanggang 10",
+        "price": "$50/buwan"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "hanggang 50",
+        "price": "$100/buwan"
+      }
+    },
+    "frequencies": {
+      "daily": "araw-araw",
+      "weekly": "lingguhan",
+      "every_30_minutes": "bawat 30 minuto",
+      "every_6_hours": "bawat 6 na oras",
+      "every_12_hours": "bawat 12 oras"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Configure basic computer settings",
+    "displayName": "Display Name",
+    "defaultName": "Aking Computer",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "This password is required to connect to the computer"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Komunidad",
+    "title": "Tingnan kung paano ito ginagamit ng mga tao",
+    "subtitle": "Mula sa pananaliksik ng leads hanggang sa QA testing — tingnan kung ano ang ina-automate ng komunidad at magpasiglahi para sa iyong susunod na workflow.",
+    "sessionCount": "{count} na session na ibinahagi ng komunidad",
+    "searchPlaceholder": "Maghanap ayon sa gawain, tool, o resulta...",
+    "emptyTitle": "Wala pang nagbahagi — maging una ka",
+    "emptySubtitle": "Kapag ginawang pampubliko ng mga user ang kanilang mga session, lalabas ang mga ito dito",
+    "noResultsTitle": "Walang tumutugma sa paghahanap na iyon",
+    "noResultsSubtitle": "Subukan ang ibang mga keyword",
+    "watchSession": "Panoorin ang session",
+    "steps": "{count} hakbang",
+    "tryCoasty": "Subukan ang Coasty"
+  }
+}

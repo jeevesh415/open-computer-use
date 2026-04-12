@@ -21,11 +21,12 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTranslations } from "next-intl"
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -50,38 +51,36 @@ interface Feature {
   highlight?: { label: string; color: string; bg: string; border: string }
 }
 
-// ─── Data ───────────────────────────────────────────────────────────────────
+// ─── Static data (non-translatable) ────────────────────────────────────────
 
-const plans: Plan[] = [
-  { id: "free", name: "Free", price: 0, tagline: "Try the #1 computer-use agent", credits: 0, machines: 0, swarm: 0, highlighted: false, cta: "Start Free", search: false },
-  { id: "lite", name: "Lite", price: 9, tagline: "Light daily automation", credits: 100, machines: 1, swarm: 2, highlighted: false, cta: "Get Lite", search: false },
-  { id: "starter", name: "Starter", price: 19, tagline: "Automate tasks every day", credits: 200, machines: 1, swarm: 3, highlighted: false, cta: "Get Starter", search: true },
-  { id: "plus", name: "Plus", price: 50, tagline: "Scale complex workflows", credits: 600, machines: 2, swarm: 6, highlighted: true, badge: "Most Popular", cta: "Go Plus", search: true },
-  { id: "pro", name: "Pro", price: 100, tagline: "Unlimited heavy automation", credits: 1500, machines: 3, swarm: 9, highlighted: false, cta: "Get Pro", search: true },
+const planData = [
+  { id: "free", price: 0, credits: 0, machines: 0, swarm: 0, highlighted: false, search: false },
+  { id: "lite", price: 9, credits: 100, machines: 1, swarm: 2, highlighted: false, search: false },
+  { id: "starter", price: 19, credits: 200, machines: 1, swarm: 3, highlighted: false, search: true },
+  { id: "plus", price: 50, credits: 600, machines: 2, swarm: 6, highlighted: true, search: true },
+  { id: "pro", price: 100, credits: 1500, machines: 3, swarm: 9, highlighted: false, search: true },
+] as const
+
+const featureIcons: LucideIcon[] = [Monitor, Workflow, Shield, Zap, HardDrive, Globe]
+
+const featureHighlights = [
+  { color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+  { color: "text-green-600 dark:text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
+  undefined,
+  undefined,
+  undefined,
 ]
 
-const featureList: Feature[] = [
-  { icon: Monitor, title: "Coasty Computer Agent", subtitle: () => "Full browser, desktop & terminal", highlight: { label: "Core", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" } },
-  { icon: Workflow, title: "Swarm Mode", subtitle: (p) => p.swarm === 0 ? "Sequential only" : `${p.swarm} agents in parallel`, highlight: { label: "Powerful", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" } },
-  { icon: Shield, title: "Security", subtitle: () => "Sandboxed, E2E encrypted", highlight: { label: "Every plan", color: "text-green-600 dark:text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" } },
-  { icon: Zap, title: "Monthly Credits", subtitle: (p) => p.credits === 0 ? "Pay as you go" : `${p.credits.toLocaleString()} credits/mo` },
-  { icon: HardDrive, title: "Persistent Machines", subtitle: (p) => p.machines === 0 ? "1 temporary VM (2hr)" : p.id === "lite" ? "1 VM (deleted after inactivity)" : `${p.machines} always-on VM${p.machines > 1 ? "s" : ""}` },
-  { icon: Globe, title: "Web Search", subtitle: (p) => p.search ? "Advanced search & extraction" : "Basic search" },
-]
+const faqKeys = ["credits", "persistent", "swarm", "cancel", "security"] as const
 
-const faqs = [
-  { q: "What counts as a credit?", a: "One credit equals roughly one agent action — a click, a form fill, a search query, or a file operation. A typical multi-step task uses 5–15 credits." },
-  { q: "What does 'persistent machine' mean?", a: "On paid plans, your VM stays running between tasks — your desktop, files, browser sessions, and installed software all persist. Like your own always-on cloud computer." },
-  { q: "What is swarm mode?", a: "Swarm mode splits a task across multiple machines running simultaneously. Instead of one agent doing 10 searches sequentially, multiple agents do them in parallel." },
-  { q: "Can I cancel anytime?", a: "Yes. No contracts, no cancellation fees. Cancel from your account page and keep access through the end of your billing period." },
-  { q: "Is my data secure?", a: "Every task runs in a fully isolated VM destroyed after use. All connections are encrypted end-to-end and we never store your credentials." },
-]
-
-// ─── Animated Visuals ───────────────────────────────────────────────────────
+const taskCosts = [8, 12, 5, 6] as const
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-function AgentVisual() {
+// ─── Animated Visuals ───────────────────────────────────────────────────────
+
+function AgentVisual({ t }: { t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   return (
     <div className="h-full flex flex-col items-center justify-center gap-5 p-6">
       {/* Mini desktop window */}
@@ -133,19 +132,21 @@ function AgentVisual() {
         transition={{ delay: 0.2, duration: 0.3 }}
         className="text-xs text-muted-foreground text-center max-w-[200px]"
       >
-        Your agent controls a real computer — browser, files, and terminal
+        {t("animations.agentDescription")}
       </motion.p>
     </div>
   )
 }
 
-function CreditsVisual({ plan }: { plan: Plan }) {
-  const tasks = [
-    { label: "Fill out form", cost: 8 },
-    { label: "Search & extract", cost: 12 },
-    { label: "Upload report", cost: 5 },
-    { label: "Navigate site", cost: 6 },
+function CreditsVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTranslations<"pricingPage">> }) {
+  const taskLabels = [
+    t("animations.fillForm"),
+    t("animations.searchExtract"),
+    t("animations.uploadReport"),
+    t("animations.navigateSite"),
   ]
+
+  const tasks = taskLabels.map((label, i) => ({ label, cost: taskCosts[i] }))
 
   return (
     <div className="h-full flex flex-col items-center justify-center gap-5 p-6">
@@ -162,9 +163,9 @@ function CreditsVisual({ plan }: { plan: Plan }) {
           animate={{ opacity: 1, y: 0 }}
           className="text-5xl font-bold tracking-tight text-foreground"
         >
-          {plan.credits === 0 ? "Free" : plan.credits.toLocaleString()}
+          {plan.credits === 0 ? t("plans.free.name") : plan.credits.toLocaleString()}
         </motion.span>
-        <p className="text-sm text-muted-foreground mt-1">{plan.credits === 0 ? "Pay as you go" : "credits per month"}</p>
+        <p className="text-sm text-muted-foreground mt-1">{plan.credits === 0 ? t("features.monthlyCredits.payAsYouGo") : t("animations.creditsPerMonth")}</p>
       </motion.div>
 
       {/* Animated task list showing credit usage */}
@@ -186,7 +187,7 @@ function CreditsVisual({ plan }: { plan: Plan }) {
               />
               <span className="text-xs text-foreground">{task.label}</span>
             </div>
-            <span className="text-[11px] text-muted-foreground tabular-nums">{task.cost} cr</span>
+            <span className="text-[11px] text-muted-foreground tabular-nums">{task.cost} {t("animations.cr")}</span>
           </motion.div>
         ))}
       </div>
@@ -194,7 +195,7 @@ function CreditsVisual({ plan }: { plan: Plan }) {
   )
 }
 
-function MachinesVisual({ plan }: { plan: Plan }) {
+function MachinesVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   const count = plan.machines === 0 ? 1 : plan.machines
   const isTemp = plan.machines === 0
 
@@ -221,7 +222,7 @@ function MachinesVisual({ plan }: { plan: Plan }) {
               isTemp ? "border-border/30 bg-muted/20" : "border-orange-500/15 bg-orange-500/[0.06]"
             )}>
               <div className={cn("h-1.5 w-1.5 rounded-full", isTemp ? "bg-muted-foreground/30" : "bg-orange-500/60")} />
-              <span className="text-[8px] text-muted-foreground">VM {i + 1}</span>
+              <span className="text-[8px] text-muted-foreground">{t("animations.vm", { num: i + 1 })}</span>
             </div>
             {/* Files / bars */}
             <div className="p-2 space-y-1.5">
@@ -248,7 +249,7 @@ function MachinesVisual({ plan }: { plan: Plan }) {
                 animate={isTemp ? {} : { opacity: [1, 0.4, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <span className="text-[8px] text-muted-foreground">{isTemp ? "2hr limit" : "Always on"}</span>
+              <span className="text-[8px] text-muted-foreground">{isTemp ? t("animations.twoHrLimit") : t("animations.alwaysOn")}</span>
             </div>
           </motion.div>
         ))}
@@ -273,13 +274,13 @@ function MachinesVisual({ plan }: { plan: Plan }) {
         transition={{ delay: 0.4, duration: 0.3 }}
         className="text-xs text-muted-foreground text-center"
       >
-        {isTemp ? "Temporary VM — resets after 2 hours" : "Your files, apps & sessions persist between tasks"}
+        {isTemp ? t("animations.tempVmDescription") : t("animations.persistentVmDescription")}
       </motion.p>
     </div>
   )
 }
 
-function SwarmVisual({ plan }: { plan: Plan }) {
+function SwarmVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   const count = plan.swarm
 
   if (count === 0) {
@@ -295,7 +296,7 @@ function SwarmVisual({ plan }: { plan: Plan }) {
             <Workflow className="h-6 w-6 text-muted-foreground/40" />
           </div>
         </motion.div>
-        <p className="text-xs text-muted-foreground text-center">Sequential execution only on this plan</p>
+        <p className="text-xs text-muted-foreground text-center">{t("animations.sequentialOnly")}</p>
       </div>
     )
   }
@@ -314,7 +315,7 @@ function SwarmVisual({ plan }: { plan: Plan }) {
         className="flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/[0.06] px-3 py-1.5"
       >
         <Zap className="h-3 w-3 text-amber-500" />
-        <span className="text-xs font-medium text-foreground">Your task</span>
+        <span className="text-xs font-medium text-foreground">{t("animations.yourTask")}</span>
       </motion.div>
 
       {/* Connection lines */}
@@ -365,13 +366,13 @@ function SwarmVisual({ plan }: { plan: Plan }) {
         transition={{ delay: 0.5, duration: 0.3 }}
         className="text-xs text-muted-foreground text-center"
       >
-        {count} agents working simultaneously
+        {t("animations.agentsWorking", { count })}
       </motion.p>
     </div>
   )
 }
 
-function SearchVisual({ plan }: { plan: Plan }) {
+function SearchVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   const results = ["quarterly earnings report.pdf", "market analysis 2026", "competitor pricing data"]
 
   return (
@@ -414,7 +415,7 @@ function SearchVisual({ plan }: { plan: Plan }) {
               transition={{ delay: 0.7, duration: 0.3 }}
               className="text-center py-1"
             >
-              <span className="text-[9px] text-muted-foreground/50">Upgrade for full extraction</span>
+              <span className="text-[9px] text-muted-foreground/50">{t("animations.upgradeForExtraction")}</span>
             </motion.div>
           )}
         </div>
@@ -426,17 +427,17 @@ function SearchVisual({ plan }: { plan: Plan }) {
         transition={{ delay: 0.5, duration: 0.3 }}
         className="text-xs text-muted-foreground text-center"
       >
-        {plan.search ? "Search, scrape & extract structured data" : "Basic search included"}
+        {plan.search ? t("animations.searchDescription") : t("animations.basicSearchIncluded")}
       </motion.p>
     </div>
   )
 }
 
-function SecurityVisual() {
+function SecurityVisual({ t }: { t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   const layers = [
-    { icon: Lock, label: "E2E Encryption", color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
-    { icon: Shield, label: "Sandboxed VM", color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
-    { icon: Monitor, label: "Destroyed after use", color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" },
+    { icon: Lock, label: t("animations.e2eEncryption"), color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+    { icon: Shield, label: t("animations.sandboxedVm"), color: "text-green-500", bg: "bg-green-500/10", border: "border-green-500/20" },
+    { icon: Monitor, label: t("animations.destroyedAfterUse"), color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" },
   ]
 
   return (
@@ -476,7 +477,7 @@ function SecurityVisual() {
         transition={{ delay: 0.5, duration: 0.3 }}
         className="text-xs text-muted-foreground text-center"
       >
-        Every plan. No exceptions.
+        {t("animations.everyPlan")}
       </motion.p>
     </div>
   )
@@ -484,7 +485,7 @@ function SecurityVisual() {
 
 // ─── Visual selector ────────────────────────────────────────────────────────
 
-function FeatureVisual({ featureIndex, plan }: { featureIndex: number; plan: Plan }) {
+function FeatureVisual({ featureIndex, plan, t }: { featureIndex: number; plan: Plan; t: ReturnType<typeof useTranslations<"pricingPage">> }) {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -495,12 +496,12 @@ function FeatureVisual({ featureIndex, plan }: { featureIndex: number; plan: Pla
         transition={{ duration: 0.2 }}
         className="h-full"
       >
-        {featureIndex === 0 && <AgentVisual />}
-        {featureIndex === 1 && <SwarmVisual plan={plan} />}
-        {featureIndex === 2 && <SecurityVisual />}
-        {featureIndex === 3 && <CreditsVisual plan={plan} />}
-        {featureIndex === 4 && <MachinesVisual plan={plan} />}
-        {featureIndex === 5 && <SearchVisual plan={plan} />}
+        {featureIndex === 0 && <AgentVisual t={t} />}
+        {featureIndex === 1 && <SwarmVisual plan={plan} t={t} />}
+        {featureIndex === 2 && <SecurityVisual t={t} />}
+        {featureIndex === 3 && <CreditsVisual plan={plan} t={t} />}
+        {featureIndex === 4 && <MachinesVisual plan={plan} t={t} />}
+        {featureIndex === 5 && <SearchVisual plan={plan} t={t} />}
       </motion.div>
     </AnimatePresence>
   )
@@ -509,9 +510,59 @@ function FeatureVisual({ featureIndex, plan }: { featureIndex: number; plan: Pla
 // ─── Main Page ──────────────────────────────────────────────────────────────
 
 export default function PricingPage() {
+  const t = useTranslations("pricingPage")
   const [selectedPlan, setSelectedPlan] = useState(3)
   const [activeFeature, setActiveFeature] = useState(0)
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
+
+  const plans: Plan[] = useMemo(() => planData.map((p) => ({
+    ...p,
+    name: t(`plans.${p.id}.name` as any),
+    tagline: t(`plans.${p.id}.tagline` as any),
+    cta: t(`plans.${p.id}.cta` as any),
+    badge: p.id === "plus" ? t("plans.plus.badge") : undefined,
+  })), [t])
+
+  const featureList: Feature[] = useMemo(() => [
+    {
+      icon: featureIcons[0],
+      title: t("features.computerAgent.name"),
+      subtitle: () => t("features.computerAgent.description"),
+      highlight: { label: t("features.computerAgent.badge"), ...featureHighlights[0]! },
+    },
+    {
+      icon: featureIcons[1],
+      title: t("features.swarmMode.name"),
+      subtitle: (p: Plan) => p.swarm === 0 ? t("features.swarmMode.sequential") : t("features.swarmMode.parallel", { count: p.swarm }),
+      highlight: { label: t("features.swarmMode.badge"), ...featureHighlights[1]! },
+    },
+    {
+      icon: featureIcons[2],
+      title: t("features.security.name"),
+      subtitle: () => t("features.security.description"),
+      highlight: { label: t("features.security.badge"), ...featureHighlights[2]! },
+    },
+    {
+      icon: featureIcons[3],
+      title: t("features.monthlyCredits.name"),
+      subtitle: (p: Plan) => p.credits === 0 ? t("features.monthlyCredits.payAsYouGo") : t("features.monthlyCredits.creditsPerMonth", { count: p.credits.toLocaleString() }),
+    },
+    {
+      icon: featureIcons[4],
+      title: t("features.persistentMachines.name"),
+      subtitle: (p: Plan) => p.machines === 0 ? t("features.persistentMachines.temporary") : p.id === "lite" ? t("features.persistentMachines.deletedAfterInactivity") : p.machines > 1 ? t("features.persistentMachines.alwaysOnPlural", { count: p.machines }) : t("features.persistentMachines.alwaysOn", { count: p.machines }),
+    },
+    {
+      icon: featureIcons[5],
+      title: t("features.webSearch.name"),
+      subtitle: (p: Plan) => p.search ? t("features.webSearch.advanced") : t("features.webSearch.basic"),
+    },
+  ], [t])
+
+  const faqs = useMemo(() => faqKeys.map((key) => ({
+    q: t(`faqs.${key}.q` as any),
+    a: t(`faqs.${key}.a` as any),
+  })), [t])
 
   const plan = plans[selectedPlan]
   const price = plan.price
@@ -534,11 +585,11 @@ export default function PricingPage() {
           className="relative max-w-3xl mx-auto px-7 sm:px-10 text-center"
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08]">
-            Simple pricing,{" "}
-            <span className="text-muted-foreground">real autopilot</span>
+            {t("hero.title1")}{" "}
+            <span className="text-muted-foreground">{t("hero.title2")}</span>
           </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Start free. Upgrade when you need more power.
+            {t("hero.subtitle")}
           </p>
         </motion.div>
       </section>
@@ -569,7 +620,7 @@ export default function PricingPage() {
                   </span>
                 )}
                 <span className="text-sm sm:text-base font-semibold">{p.name}</span>
-                <span className="text-xs text-muted-foreground tabular-nums">${p.price}/mo</span>
+                <span className="text-xs text-muted-foreground tabular-nums">${p.price}{t("perMonth")}</span>
                 {selectedPlan === i && (
                   <motion.div
                     layoutId="plan-tab-bg"
@@ -610,7 +661,7 @@ export default function PricingPage() {
                         >
                           ${price}
                         </motion.span>
-                        <span className="text-lg text-muted-foreground">/mo</span>
+                        <span className="text-lg text-muted-foreground">{t("perMonth")}</span>
                       </div>
                     </div>
                     {plan.highlighted ? (
@@ -685,13 +736,13 @@ export default function PricingPage() {
 
                   {/* Animated visual — right */}
                   <div className="flex-1 min-h-[320px] lg:min-h-[380px] border-t lg:border-t-0 border-border/30 flex items-center justify-center bg-muted/[0.02]">
-                    <FeatureVisual featureIndex={activeFeature} plan={plan} />
+                    <FeatureVisual featureIndex={activeFeature} plan={plan} t={t} />
                   </div>
                 </div>
 
                 <div className="px-6 sm:px-8 py-3 border-t border-border/30 text-center">
                   <p className="text-xs text-muted-foreground">
-                    {plan.price === 0 ? "No credit card required" : "Cancel anytime — no contracts"}
+                    {plan.price === 0 ? t("footer.noCreditCardRequired") : t("footer.cancelAnytimeNoContracts")}
                   </p>
                 </div>
               </div>
@@ -707,11 +758,11 @@ export default function PricingPage() {
           >
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-center sm:text-left">
-                <h3 className="font-semibold">Enterprise</h3>
-                <p className="text-sm text-muted-foreground mt-1">Custom credits, dedicated VMs, SLA, SSO, and priority support.</p>
+                <h3 className="font-semibold">{t("enterprise.title")}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{t("enterprise.description")}</p>
               </div>
               <Button variant="outline" size="sm" className="gap-2 flex-shrink-0" asChild>
-                <Link href="mailto:founders@coasty.ai">Contact Us<ArrowRight className="h-3.5 w-3.5" /></Link>
+                <Link href="mailto:founders@coasty.ai">{t("enterprise.cta")}<ArrowRight className="h-3.5 w-3.5" /></Link>
               </Button>
             </div>
           </motion.div>
@@ -727,7 +778,7 @@ export default function PricingPage() {
           transition={{ duration: 0.5, ease }}
           className="max-w-2xl mx-auto"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-center mb-8">Questions</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-center mb-8">{t("questions")}</h2>
           <div className="space-y-2">
             {faqs.map((faq, i) => (
               <div key={i} className="rounded-xl border border-border/50 overflow-hidden transition-colors duration-200 hover:border-border/80">
@@ -768,15 +819,15 @@ export default function PricingPage() {
           transition={{ duration: 0.5, ease }}
           className="max-w-2xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Your AI agent is 60 seconds away</h2>
-          <p className="text-muted-foreground mt-4 text-lg">Sign up and let Coasty handle the work.</p>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">{t("footer.title")}</h2>
+          <p className="text-muted-foreground mt-4 text-lg">{t("footer.subtitle")}</p>
           <div className="mt-8 flex flex-col items-center gap-4">
             <RainbowButton size="lg" className="text-base px-10 h-13 sm:h-14 sm:text-lg sm:px-12" asChild>
-              <Link href="/auth">Start Free<ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" /></Link>
+              <Link href="/auth">{t("plans.free.cta")}<ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" /></Link>
             </RainbowButton>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-primary" /> No credit card</span>
-              <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-primary" /> Cancel anytime</span>
+              <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-primary" /> {t("footer.noCreditCard")}</span>
+              <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-primary" /> {t("footer.cancelAnytime")}</span>
             </div>
           </div>
         </motion.div>

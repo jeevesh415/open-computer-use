@@ -8,6 +8,7 @@ import { useUserPreferences } from "@/lib/user-preference-store/provider"
 import { cn } from "@/lib/utils"
 import type { Message as MessageAISDK } from "@ai-sdk/react"
 import { useMemo } from "react"
+import { useTranslations } from "next-intl"
 import { ArrowClockwise, Check, Copy } from "@phosphor-icons/react"
 import { getSources } from "./get-sources"
 import { Reasoning } from "./reasoning"
@@ -21,7 +22,6 @@ import { TaskPlanFormatter } from "./task-plan-formatter"
 import { MessageStatusIndicator } from "./message-status-indicator"
 import { CuaSectionRenderer, hasCuaSections, extractScreenshots } from "./cua-section-renderer"
 import { MessageStopBanner, detectStopReason, stripStopTags } from "./message-stop-banner"
-import { RunFeedbackBar } from "./run-feedback-bar"
 
 type MessageAssistantProps = {
   children: string
@@ -57,6 +57,7 @@ export function MessageAssistant({
   contentSize,
 }: MessageAssistantProps) {
   const { preferences } = useUserPreferences()
+  const t = useTranslations("chatMessages")
   const sources = getSources(parts)
   const { isOpen: isNavigatorOpen, width: navigatorWidth } = useProjectNavigator()
   const { chatId } = useChatSession()
@@ -142,6 +143,7 @@ export function MessageAssistant({
             <CuaSectionRenderer
               content={displayContent}
               screenshots={cuaScreenshots}
+              isStreaming={status === "streaming"}
             />
           </div>
         ) : (
@@ -170,16 +172,16 @@ export function MessageAssistant({
         {Boolean(isLastStreaming || contentNullOrEmpty) ? null : (
           <MessageActions
             className={cn(
-              "-ml-2 flex gap-0 opacity-0 transition-opacity group-hover:opacity-100"
+              "-ml-2 flex gap-0 sm:opacity-0 transition-opacity sm:group-hover:opacity-100"
             )}
           >
             <MessageAction
-              tooltip={copied ? "Copied!" : "Copy text"}
+              tooltip={copied ? t("copied") : t("copyText")}
               side="bottom"
             >
               <button
                 className="hover:bg-accent/60 text-muted-foreground hover:text-foreground flex size-7.5 items-center justify-center rounded-full bg-transparent transition"
-                aria-label="Copy text"
+                aria-label={t("copyText")}
                 onClick={copyToClipboard}
                 type="button"
               >
@@ -192,13 +194,13 @@ export function MessageAssistant({
             </MessageAction>
             {isLast ? (
               <MessageAction
-                tooltip="Regenerate"
+                tooltip={t("regenerate")}
                 side="bottom"
                 delayDuration={0}
               >
                 <button
                   className="hover:bg-accent/60 text-muted-foreground hover:text-foreground flex size-7.5 items-center justify-center rounded-full bg-transparent transition"
-                  aria-label="Regenerate"
+                  aria-label={t("regenerate")}
                   onClick={onReload}
                   type="button"
                 >
@@ -210,15 +212,6 @@ export function MessageAssistant({
           </MessageActions>
         )}
 
-        {/* Run feedback bar — shown after the last completed message */}
-        {isLast && status === "ready" && !contentNullOrEmpty && (
-          <RunFeedbackBar
-            chatId={chatId}
-            messageId={messageId}
-            feedbackType="run"
-            className="mt-1 -ml-1"
-          />
-        )}
       </div>
     </Message>
   )

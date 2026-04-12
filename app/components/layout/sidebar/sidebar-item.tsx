@@ -31,7 +31,7 @@ import {
 } from "@phosphor-icons/react"
 import { AgentIconFilled } from "@/components/icons/agent"
 import Link from "next/link"
-import { useCallback, useMemo, useRef, useState } from "react"
+import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { SidebarItemMenu } from "./sidebar-item-menu"
 import { useSidebar } from "@/components/ui/sidebar"
 
@@ -154,7 +154,7 @@ export function getChatIcon(title: string) {
   return <Desktop size={16} weight="fill" />
 }
 
-export function SidebarItem({ chat, currentChatId, isCollaborative }: SidebarItemProps) {
+export const SidebarItem = memo(function SidebarItem({ chat, currentChatId, isCollaborative }: SidebarItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editTitle, setEditTitle] = useState(chat.title || "")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -420,4 +420,4 @@ export function SidebarItem({ chat, currentChatId, isCollaborative }: SidebarIte
       )}
     </div>
   )
-}
+})

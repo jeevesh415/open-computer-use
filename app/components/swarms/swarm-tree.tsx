@@ -31,10 +31,12 @@ import {
   HourglassMedium,
   Lightning,
   ArrowBendUpRight,
+  HandPalm,
 } from "@phosphor-icons/react"
 import { AnimatePresence, motion } from "motion/react"
 import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
+import { AwaitingHumanBanner } from "@/app/components/chat/awaiting-human-banner"
 
 // ---------------------------------------------------------------------------
 // Web search result parsing
@@ -111,7 +113,9 @@ export interface TimelineStep {
   toolCalls: Array<{ name: string; content: string }>
   toolResults: Array<{ name: string; content: string; screenshot: string | null }>
   screenshot: string | null
-  status: "success" | "error" | "pending"
+  status: "success" | "error" | "pending" | "awaiting_human"
+  machineId?: string
+  awaitingHumanReason?: string
   timestamp: string
 }
 
@@ -389,6 +393,24 @@ export function buildTimelineSteps(events: SwarmEvent[]): TimelineStep[] {
           timestamp: event.created_at,
         })
       }
+    } else if (event.event_type === "awaiting_human") {
+      flush()
+      let reason = "Human intervention needed"
+      try {
+        const parsed = JSON.parse(event.content)
+        reason = parsed.reason || reason
+      } catch { /* use default */ }
+      steps.push({
+        machineIndex: mIdx,
+        text: reason,
+        toolCalls: [],
+        toolResults: [],
+        screenshot: null,
+        status: "awaiting_human",
+        machineId: (event as any).machine_id || "",
+        awaitingHumanReason: reason,
+        timestamp: event.created_at,
+      })
     } else if (event.event_type === "machine_status") {
       flush()
       steps.push({
@@ -1683,6 +1705,8 @@ function BranchStepCard({
       <div className="absolute left-1/2 -top-1 -translate-x-1/2 z-[2]">
         {hasScreenshot ? (
           <ScreenshotDotSmall src={step.screenshot!} />
+        ) : step.status === "awaiting_human" ? (
+          <HandPalm className="size-3.5 text-amber-500 animate-pulse" weight="fill" />
         ) : (
           <span
             className={cn(
@@ -1700,12 +1724,20 @@ function BranchStepCard({
       <div
         className={cn(
           "mx-1 mt-2 rounded-lg border px-3 py-2 text-left transition-all shadow-sm",
-          "border-border/30 bg-background/85 backdrop-blur-sm hover:border-border/50 hover:bg-background/95"
+          step.status === "awaiting_human"
+            ? "border-amber-300/50 bg-amber-50/50 dark:border-amber-600/30 dark:bg-amber-950/20 p-0 overflow-hidden"
+            : "border-border/30 bg-background/85 backdrop-blur-sm hover:border-border/50 hover:bg-background/95"
         )}
       >
-        {remainingText && (
+        {step.status === "awaiting_human" ? (
+          <AwaitingHumanBanner
+            reason={step.awaitingHumanReason || step.text}
+            machineId={step.machineId || ""}
+            isActive={true}
+          />
+        ) : remainingText ? (
           <p className="text-[12px] leading-relaxed text-foreground/85 line-clamp-3">{remainingText}</p>
-        )}
+        ) : null}
 
         {searches.length > 0 && (
           <div className="space-y-1.5 mt-1">

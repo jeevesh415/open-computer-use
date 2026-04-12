@@ -54,6 +54,11 @@ export interface MachineSettings {
   customSoftware?: string[];
   isLocal?: boolean;
   provider?: 'azure' | 'aws' | 'docker' | 'local' | 'electron';
+  osType?: 'linux' | 'windows';
+  // Electron machine metadata
+  platform?: string;   // win32, darwin, linux
+  hostname?: string;
+  username?: string;
   ports?: {
     vnc?: number;
     websocket?: number;
@@ -184,6 +189,7 @@ export type AIActionType =
 export interface CreateMachineRequest {
   displayName: string;
   provider?: 'azure' | 'aws';
+  osType?: 'linux' | 'windows';
   cpuCores?: number;
   memoryGb?: number;
   storageGb?: number;

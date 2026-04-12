@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Plus, Monitor, Globe, Terminal, MousePointer2, ScanLine, Cpu, MoreHorizontal, Zap, ShieldCheck, Download, RefreshCw, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,6 +33,7 @@ interface MachinesData {
 
 export function MachinesContent() {
   const router = useRouter();
+  const t = useTranslations("machines");
   const [loading, setLoading] = useState(true);
   const [machines, setMachines] = useState<UserMachine[]>([]);
   const [limits, setLimits] = useState<MachinesData["limits"]>({
@@ -56,17 +58,32 @@ export function MachinesContent() {
     fetchMachines();
   }, []);
 
+  // Single shared poll for ALL transitioning machines instead of one interval per machine.
+  // Cleans up on unmount; restarts only when the set of transitioning IDs changes.
   useEffect(() => {
-    const transitioningMachines = machines.filter(m =>
-      ["creating", "starting", "stopping", "deleting"].includes(m.status)
-    );
+    const transitioningIds = machines
+      .filter(m => ["creating", "starting", "stopping", "deleting"].includes(m.status))
+      .map(m => m.id);
 
-    transitioningMachines.forEach(machine => {
-      if (!statusPollingIntervals.has(machine.id)) {
-        pollMachineStatus(machine.id);
+    if (transitioningIds.length === 0) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const response = await fetch("/api/machines");
+        if (!response.ok) return;
+        const data: MachinesData = await response.json();
+        setMachines(data.machines);
+        setLimits(data.limits);
+        setUsage(data.usage);
+      } catch (error) {
+        console.error("Error polling machine status:", error);
       }
-    });
-  }, [machines.length]);
+    }, 5000);
+
+    return () => clearInterval(interval);
+    // Only restart when the set of transitioning machine IDs actually changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [machines.filter(m => ["creating", "starting", "stopping", "deleting"].includes(m.status)).map(m => m.id).join(",")]);
 
   useEffect(() => {
     return () => {
@@ -102,7 +119,7 @@ export function MachinesContent() {
       });
     } catch (error) {
       console.error("Error fetching machines:", error);
-      toast.error("Failed to load machines");
+      toast.error(t("toasts.fetchFailed"));
     } finally {
       setLoading(false);
     }
@@ -131,9 +148,9 @@ export function MachinesContent() {
             clearInterval(interval);
             statusPollingIntervals.delete(machineId);
             toast.success(`${machine.displayName} is now running!`, {
-              description: "You can now connect to your machine.",
+              description: t("toasts.readyOpen"),
               action: {
-                label: "Open",
+                label: t("toasts.open"),
                 onClick: () => window.location.href = `/machines/${machineId}`,
               },
             });
@@ -141,7 +158,7 @@ export function MachinesContent() {
             clearInterval(interval);
             statusPollingIntervals.delete(machineId);
             toast.error(`${machine.displayName} encountered an error`, {
-              description: "Please try creating the machine again.",
+              description: t("toasts.createFailed"),
             });
           }
         }
@@ -166,20 +183,22 @@ export function MachinesContent() {
       clearTimeout(fastPollingTimeout);
     }
 
+    // Brief fast-poll to pick up the new machine, then the shared
+    // transitioning-machine interval (5s) takes over.
     let pollCount = 0;
     const fastPoll = async () => {
       pollCount++;
       await fetchMachines();
 
-      if (pollCount < 15) {
-        const timeout = setTimeout(fastPoll, 2000);
+      if (pollCount < 4) {
+        const timeout = setTimeout(fastPoll, 3000);
         setFastPollingTimeout(timeout);
       } else {
         setFastPollingTimeout(null);
       }
     };
 
-    const timeout = setTimeout(fastPoll, 1000);
+    const timeout = setTimeout(fastPoll, 2000);
     setFastPollingTimeout(timeout);
   };
 
@@ -191,7 +210,7 @@ export function MachinesContent() {
 
   const handleMachineDeleted = (machineId: string) => {
     setMachines(machines.filter(m => m.id !== machineId));
-    toast.success("Machine deleted successfully");
+    toast.success(t("toasts.deleted"));
   };
 
   if (loading) {
@@ -202,7 +221,7 @@ export function MachinesContent() {
             <div className="absolute inset-0 rounded-full border-2 border-muted" />
             <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
           </div>
-          <span className="text-sm text-muted-foreground">Loading machines...</span>
+          <span className="text-sm text-muted-foreground">{t("loadingMachines")}</span>
         </div>
       </div>
     );
@@ -218,10 +237,10 @@ export function MachinesContent() {
     : machines.filter(m => m.status === statusFilter);
 
   const statusFilters = [
-    { id: "all", label: "All", count: totalMachines },
-    { id: "running", label: "Running", count: runningMachines },
-    { id: "creating", label: "Creating", count: creatingMachines },
-    { id: "stopped", label: "Stopped", count: stoppedMachines },
+    { id: "all", label: t("filters.all"), count: totalMachines },
+    { id: "running", label: t("filters.running"), count: runningMachines },
+    { id: "creating", label: t("filters.creating"), count: creatingMachines },
+    { id: "stopped", label: t("filters.stopped"), count: stoppedMachines },
   ];
 
   return (
@@ -255,7 +274,7 @@ export function MachinesContent() {
         >
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">Virtual Machines</h1>
+              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">{t("title")}</h1>
               {limits.max_machines > 0 && (
                 <span className="inline-flex items-center rounded-full border border-border/60 bg-background px-2.5 py-0.5 text-xs font-medium tabular-nums text-muted-foreground">
                   {usage.machines_count} / {limits.max_machines}
@@ -264,14 +283,14 @@ export function MachinesContent() {
             </div>
             <div className="flex items-center gap-3 mt-1.5">
               <p className="text-muted-foreground text-sm">
-                Manage your AI-controlled desktop environments
+                {t("subtitle")}
               </p>
               <Link
                 href="/guide?tab=machines"
                 className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-foreground/[0.05] px-2.5 py-1 text-xs font-medium text-foreground/70 hover:text-foreground hover:border-border hover:bg-foreground/[0.08] transition-all"
               >
                 <BookOpen className="h-3.5 w-3.5" />
-                Guide
+                {t("guide")}
               </Link>
             </div>
           </div>
@@ -291,7 +310,7 @@ export function MachinesContent() {
               className="h-9 rounded-xl gap-2 px-4 font-medium"
             >
               <Plus className="h-4 w-4" />
-              New Machine
+              {t("newMachine")}
             </Button>
           </div>
         </motion.div>
@@ -309,7 +328,7 @@ export function MachinesContent() {
               <AppleIcon className="h-3.5 w-3.5" />
             </div>
             <p className="text-sm text-muted-foreground truncate">
-              Skip the VM — run AI agents on <span className="font-medium text-foreground">your own computer</span> with the native app
+              {t("desktopPromo.text")}
             </p>
           </div>
           <Link
@@ -317,7 +336,7 @@ export function MachinesContent() {
             className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-foreground/[0.04] hover:bg-foreground/[0.08] px-3 py-1.5 text-xs font-medium text-foreground transition-colors"
           >
             <Download className="h-3 w-3" />
-            Get the app
+            {t("desktopPromo.cta")}
           </Link>
         </motion.div>
 
@@ -403,10 +422,10 @@ export function MachinesContent() {
                 transition={{ duration: 0.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
                 <h2 className="text-2xl font-medium tracking-tight mb-2.5">
-                  True AI Employee with full computer access
+                  {t("emptyState.title")}
                 </h2>
                 <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed mb-12">
-                  Spin up an isolated virtual machine and let AI agents browse the web, run terminals, and control the desktop — hands-free.
+                  {t("emptyState.description")}
                 </p>
               </motion.div>
 
@@ -415,18 +434,18 @@ export function MachinesContent() {
                 {[
                   {
                     icon: MousePointer2,
-                    title: "Full desktop control",
-                    desc: "AI moves the mouse, types, clicks, and navigates like a real user.",
+                    title: t("emptyState.feature1.title"),
+                    desc: t("emptyState.feature1.description"),
                   },
                   {
                     icon: Zap,
-                    title: "Any task automated",
-                    desc: "Browser, terminal, and UI — all agents work together in one VM.",
+                    title: t("emptyState.feature2.title"),
+                    desc: t("emptyState.feature2.description"),
                   },
                   {
                     icon: ShieldCheck,
-                    title: "Isolated & safe",
-                    desc: "Each machine runs in its own container — your local system stays untouched.",
+                    title: t("emptyState.feature3.title"),
+                    desc: t("emptyState.feature3.description"),
                   },
                 ].map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
@@ -453,7 +472,7 @@ export function MachinesContent() {
               >
                 <Button onClick={() => setShowCreateDialog(true)} size="lg" className="gap-2 rounded-xl h-11 px-6">
                   <Plus className="h-4 w-4" />
-                  Create your first machine
+                  {t("emptyState.cta")}
                 </Button>
               </motion.div>
             </div>
@@ -467,11 +486,11 @@ export function MachinesContent() {
             <Card className="border-border/30 bg-card/30 backdrop-blur-sm">
               <CardContent className="flex flex-col items-center justify-center py-14">
                 <Monitor className="h-10 w-10 text-muted-foreground/40 mb-4" />
-                <h3 className="text-base font-medium mb-1.5">No {statusFilter !== 'all' ? statusFilter : ''} machines</h3>
+                <h3 className="text-base font-medium mb-1.5">{statusFilter !== 'all' ? t("noFilteredMachines", { filter: statusFilter }) : t("noMachines")}</h3>
                 <p className="text-sm text-muted-foreground">
                   {statusFilter === 'all'
-                    ? 'No machines found.'
-                    : `No machines are currently ${statusFilter}.`}
+                    ? t("noMachines")
+                    : t("noFilteredDescription", { filter: statusFilter })}
                 </p>
               </CardContent>
             </Card>

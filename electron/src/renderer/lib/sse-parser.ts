@@ -8,6 +8,7 @@
  *   a = tool result
  *   g = reasoning
  *   d = finish
+ *   h = awaiting human input
  */
 
 export interface SSECallbacks {
@@ -17,6 +18,7 @@ export interface SSECallbacks {
   onReasoning: (text: string) => void
   onFinish: (data: { finishReason: string; content: string; toolInvocations?: any[] }) => void
   onError: (error: string) => void
+  onAwaitingHuman?: (data: { reason: string; machineId: string }) => void
 }
 
 export async function parseSSEStream(
@@ -103,6 +105,15 @@ export async function parseSSEStream(
                 finishReason: finishData.finishReason || 'stop',
                 content: finishData.content || '',
                 toolInvocations: finishData.toolInvocations,
+              })
+              break
+            }
+            case 'h': {
+              // Awaiting human input
+              const awaitData = JSON.parse(rawData)
+              callbacks.onAwaitingHuman?.({
+                reason: awaitData.reason || 'Human intervention needed',
+                machineId: awaitData.machineId || '',
               })
               break
             }

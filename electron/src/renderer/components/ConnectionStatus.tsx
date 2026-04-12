@@ -18,12 +18,14 @@ export function ConnectionStatus() {
       <span className="text-xs text-neutral-400">{config.label}</span>
 
       {state === 'disconnected' || state === 'error' ? (
-        <button
-          onClick={connect}
-          className="text-xs text-brand-400 hover:text-brand-300 ml-2"
-        >
-          Reconnect
-        </button>
+        <>
+          <button
+            onClick={connect}
+            className="text-xs text-brand-400 hover:text-brand-300 ml-2"
+          >
+            Reconnect
+          </button>
+        </>
       ) : state === 'connected' ? (
         <button
           onClick={disconnect}

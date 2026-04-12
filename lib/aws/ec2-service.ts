@@ -30,6 +30,8 @@ export interface EC2InstanceConfig {
   vncPassword?: string;
   /** AMI ID from a previous machine snapshot — restores full machine state */
   snapshotAmiId?: string;
+  /** Operating system type — 'linux' (default, ARM64 Ubuntu) or 'windows' (x86_64 Windows Server) */
+  osType?: 'linux' | 'windows';
 }
 
 export interface EC2InstanceStatus {
@@ -50,6 +52,7 @@ export class AwsEc2Service {
   private region: string;
   private cachedSecurityGroupIds: Map<string, string> = new Map();
   private cachedAmiId: string | null = null;
+  private cachedWindowsAmiId: string | null = null;
 
   constructor() {
     const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
@@ -111,15 +114,26 @@ export class AwsEc2Service {
     userId: string,
     config: EC2InstanceConfig
   ): Promise<EC2CreateResult> {
-    // Desktop mode forces t4g.small (2GB RAM minimum for XFCE desktop)
-    let instanceType = config.instanceType || process.env.AWS_EC2_INSTANCE_TYPE || "t4g.nano";
-    if (config.desktopEnabled) {
-      instanceType = "t4g.small";
-    }
-    const storageGb = config.storageGb || (config.desktopEnabled ? 16 : 8);
+    const isWindows = config.osType === 'windows';
 
-    // Ensure security group exists (desktop needs port 6080 for noVNC)
-    const securityGroupId = await this.ensureSecurityGroup(config.desktopEnabled);
+    // Instance type selection:
+    // - Windows: x86_64 t3 instances (ARM64 not available for Windows)
+    // - Linux: ARM64 t4g instances (cheaper Graviton2)
+    let instanceType: string;
+    if (isWindows) {
+      instanceType = config.instanceType || process.env.AWS_EC2_WINDOWS_INSTANCE_TYPE || "t3.small";
+    } else {
+      instanceType = config.instanceType || process.env.AWS_EC2_INSTANCE_TYPE || "t4g.nano";
+      if (config.desktopEnabled) {
+        instanceType = "t4g.small";
+      }
+    }
+
+    // Windows needs more storage (OS alone uses ~15GB)
+    const storageGb = config.storageGb || (isWindows ? 30 : (config.desktopEnabled ? 16 : 8));
+
+    // Ensure security group exists
+    const securityGroupId = await this.ensureSecurityGroup(config.desktopEnabled, isWindows);
 
     // Generate key pair
     const keyPrefix = process.env.AWS_EC2_KEY_PREFIX || "llmhub";
@@ -129,7 +143,8 @@ export class AwsEc2Service {
     const createKeyResult = await this.client.send(
       new CreateKeyPairCommand({
         KeyName: keyPairName,
-        KeyType: "ed25519",
+        // Windows uses RSA key pairs (ed25519 not supported for Windows password decryption)
+        KeyType: isWindows ? "rsa" : "ed25519",
       })
     );
 
@@ -138,10 +153,18 @@ export class AwsEc2Service {
       throw new Error("Failed to generate SSH key pair: no key material returned");
     }
 
-    // Resolve AMI — snapshot AMI (user's saved state) > golden AMI > stock Ubuntu
-    const goldenAmiId = process.env.AWS_EC2_GOLDEN_AMI_ID;
+    // Resolve AMI — snapshot AMI (user's saved state) > golden AMI > stock OS
     const snapshotAmiId = config.snapshotAmiId;
-    const amiId = snapshotAmiId || goldenAmiId || config.amiId || process.env.AWS_EC2_AMI_ID || (await this.resolveUbuntuAmi());
+    let amiId: string;
+    let goldenAmiId: string | undefined;
+
+    if (isWindows) {
+      goldenAmiId = process.env.AWS_EC2_WINDOWS_GOLDEN_AMI_ID || undefined;
+      amiId = snapshotAmiId || goldenAmiId || config.amiId || process.env.AWS_EC2_WINDOWS_AMI_ID || (await this.resolveWindowsAmi());
+    } else {
+      goldenAmiId = process.env.AWS_EC2_GOLDEN_AMI_ID || undefined;
+      amiId = snapshotAmiId || goldenAmiId || config.amiId || process.env.AWS_EC2_AMI_ID || (await this.resolveUbuntuAmi());
+    }
 
     // Build instance name tag
     const instanceName = config.name || `llmhub-${userId.substring(0, 8)}-${shortId}`;
@@ -156,7 +179,7 @@ export class AwsEc2Service {
       SecurityGroupIds: [securityGroupId],
       BlockDeviceMappings: [
         {
-          DeviceName: "/dev/sda1",
+          DeviceName: isWindows ? "/dev/sda1" : "/dev/sda1",
           Ebs: {
             VolumeSize: storageGb,
             VolumeType: "gp3",
@@ -172,15 +195,21 @@ export class AwsEc2Service {
             { Key: "UserId", Value: userId },
             { Key: "ManagedBy", Value: "llmhub" },
             { Key: "DesktopEnabled", Value: config.desktopEnabled ? "true" : "false" },
+            { Key: "OsType", Value: isWindows ? "windows" : "linux" },
           ],
         },
       ],
     };
 
-    // Add cloud-init UserData for desktop mode
-    // Snapshot/golden AMI already has packages installed — use slim UserData that only
-    // injects VNC password, deploys agent code, and starts services (~15-30s vs 4-6min)
-    if (config.desktopEnabled && config.vncPassword) {
+    // Add UserData
+    if (isWindows && config.vncPassword) {
+      // Windows: PowerShell UserData wrapped in <powershell> tags
+      const useSlimUserData = snapshotAmiId || goldenAmiId;
+      runInput.UserData = useSlimUserData
+        ? this.generateWindowsGoldenUserData(config.vncPassword)
+        : this.generateWindowsDesktopUserData(config.vncPassword);
+    } else if (config.desktopEnabled && config.vncPassword) {
+      // Linux: bash cloud-init UserData
       const useSlimUserData = snapshotAmiId || goldenAmiId;
       runInput.UserData = useSlimUserData
         ? this.generateGoldenAmiUserData(config.vncPassword)
@@ -405,10 +434,15 @@ export class AwsEc2Service {
     }
   }
 
-  private async ensureSecurityGroup(desktopEnabled?: boolean): Promise<string> {
-    const sgName = desktopEnabled
-      ? (process.env.AWS_EC2_DESKTOP_SG_NAME || "llmhub-ec2-desktop")
-      : (process.env.AWS_EC2_SECURITY_GROUP_NAME || "llmhub-ec2-ssh");
+  private async ensureSecurityGroup(desktopEnabled?: boolean, isWindows?: boolean): Promise<string> {
+    let sgName: string;
+    if (isWindows) {
+      sgName = process.env.AWS_EC2_WINDOWS_SG_NAME || "llmhub-ec2-windows-desktop";
+    } else if (desktopEnabled) {
+      sgName = process.env.AWS_EC2_DESKTOP_SG_NAME || "llmhub-ec2-desktop";
+    } else {
+      sgName = process.env.AWS_EC2_SECURITY_GROUP_NAME || "llmhub-ec2-ssh";
+    }
 
     const cached = this.cachedSecurityGroupIds.get(sgName);
     if (cached) {
@@ -416,10 +450,19 @@ export class AwsEc2Service {
     }
 
     // Required ports for this SG type
-    const requiredPorts: number[] = desktopEnabled ? [22, 6080, 8080] : [22];
+    // Windows: 3389 (RDP admin fallback) + 6080 (noVNC) + 8080 (agent)
+    let requiredPorts: number[];
+    if (isWindows) {
+      requiredPorts = [3389, 6080, 8080];
+    } else if (desktopEnabled) {
+      requiredPorts = [22, 6080, 8080];
+    } else {
+      requiredPorts = [22];
+    }
 
     const portDescriptions: Record<number, string> = {
       22: "SSH access",
+      3389: "RDP access",
       6080: "noVNC web access",
       8080: "AI agent WebSocket",
     };
@@ -1246,6 +1289,499 @@ echo "Desktop setup complete at $(date)"
   }
 
   /**
+   * Returns the Windows-compatible Python AI agent source code.
+   * Uses pyautogui natively (no xdotool), PowerShell for terminal, Chrome for browser.
+   * Same WebSocket protocol as the Linux agent.
+   */
+  private getWindowsAgentSource(): string {
+    return `#!/usr/bin/env python3
+import asyncio,base64,io,json,os,subprocess,tempfile,time,sys
+from typing import Any,Dict
+try:
+ import mss;_HAS_MSS=True
+except:_HAS_MSS=False
+try:
+ import pyautogui;pyautogui.FAILSAFE=False;pyautogui.PAUSE=0.05;_HAS_PAG=True
+except:_HAS_PAG=False
+try:
+ import pytesseract;_HAS_OCR=True
+except:_HAS_OCR=False
+try:
+ from selenium import webdriver
+ from selenium.webdriver.chrome.options import Options as ChromeOptions
+ from selenium.webdriver.chrome.service import Service as ChromeService
+ from selenium.webdriver.common.by import By
+ _HAS_SEL=True
+except:_HAS_SEL=False
+from PIL import Image
+import websockets
+VNC_PASSWORD=os.environ.get("VNC_PASSWORD","")
+PORT=int(os.environ.get("AGENT_PORT","8080"))
+HOST=os.environ.get("AGENT_HOST","0.0.0.0")
+HOME_DIR=os.path.expanduser("~")
+DESKTOP_DIR=os.path.join(HOME_DIR,"Desktop")
+_browser_instance=None
+def _shot():
+ img=None
+ if _HAS_MSS:
+  try:
+   with mss.mss() as s:
+    m=s.monitors[1];sh=s.grab(m);img=Image.frombytes("RGB",sh.size,sh.bgra,"raw","BGRX")
+  except:img=None
+ if img is None and _HAS_PAG:
+  try:img=pyautogui.screenshot()
+  except:img=None
+ if img is None:return None
+ img.thumbnail((1280,720),Image.LANCZOS);buf=io.BytesIO()
+ img.convert("RGB").save(buf,format="JPEG",quality=80)
+ return "data:image/jpeg;base64,"+base64.b64encode(buf.getvalue()).decode()
+def _find_chrome():
+ paths=[
+  os.path.join(os.environ.get("PROGRAMFILES","C:\\\\Program Files"),"Google","Chrome","Application","chrome.exe"),
+  os.path.join(os.environ.get("PROGRAMFILES(X86)","C:\\\\Program Files (x86)"),"Google","Chrome","Application","chrome.exe"),
+  os.path.join(os.environ.get("LOCALAPPDATA",""),"Google","Chrome","Application","chrome.exe"),
+  os.path.join(os.environ.get("PROGRAMFILES","C:\\\\Program Files (x86)"),"Microsoft","Edge","Application","msedge.exe"),
+ ]
+ for p in paths:
+  if os.path.exists(p):return p
+ return None
+def _get_browser():
+ global _browser_instance
+ if _browser_instance is not None:
+  try:_=_browser_instance.title;return _browser_instance
+  except:_browser_instance=None
+ if not _HAS_SEL:raise RuntimeError("selenium unavailable")
+ import shutil
+ opts=ChromeOptions()
+ opts.add_argument("--window-size=1280,720")
+ opts.add_argument("--no-sandbox")
+ opts.add_argument("--disable-dev-shm-usage")
+ opts.add_argument("--disable-gpu")
+ chrome_path=_find_chrome()
+ if chrome_path:opts.binary_location=chrome_path
+ drv=None
+ for p in ["C:\\\\coasty\\\\chromedriver.exe","C:\\\\tools\\\\chromedriver.exe"]:
+  if os.path.exists(p):drv=p;break
+ if not drv and shutil.which("chromedriver"):drv=shutil.which("chromedriver")
+ if not drv and shutil.which("msedgedriver"):drv=shutil.which("msedgedriver")
+ if drv:
+  svc=ChromeService(executable_path=drv)
+  _browser_instance=webdriver.Chrome(service=svc,options=opts)
+ else:_browser_instance=webdriver.Chrome(options=opts)
+ _browser_instance.set_window_size(1280,720)
+ return _browser_instance
+class Agent:
+ def __init__(self):self._t=time.time();self._n=0
+ async def serve(self,ws):
+  ok=not bool(VNC_PASSWORD)
+  try:
+   async for raw in ws:
+    self._n+=1
+    try:msg=json.loads(raw)
+    except:continue
+    t=msg.get("type")
+    if t=="ping":
+     await ws.send(json.dumps({"type":"pong","timestamp":time.time(),"uptime":time.time()-self._t,"messages_processed":self._n}));continue
+    if t=="auth":
+     pw=msg.get("password","")
+     if not VNC_PASSWORD or pw==VNC_PASSWORD:
+      ok=True;await ws.send(json.dumps({"type":"auth_success","data":{"message":"Authentication successful","sessionId":msg.get("sessionId",""),"userId":msg.get("userId",""),"persistent":True}}))
+     else:await ws.send(json.dumps({"type":"error","data":{"error":"Invalid password","code":"AUTH_FAILED"}}))
+     continue
+    if not ok:await ws.send(json.dumps({"type":"error","data":{"error":"Not authenticated"}}));continue
+    if t=="command":
+     d=msg.get("data",{});cmd=d.get("command","");params=d.get("parameters",{})
+     to=75.0 if cmd in{"browser_get_dom","browser_navigate","browser_open","ocr"} else 45.0
+     try:
+      res=await asyncio.wait_for(asyncio.get_event_loop().run_in_executor(None,self._run,cmd,params),timeout=to)
+     except asyncio.TimeoutError:res={"success":False,"error":f"timeout: {cmd}"}
+     except Exception as e:res={"success":False,"error":str(e)}
+     await ws.send(json.dumps({"type":"result","data":res}))
+  except websockets.exceptions.ConnectionClosed:pass
+ def _run(self,command,p):
+  fn={"screenshot":self._ss,"click":self._cl,"double_click":self._dc,"right_click":self._rc,
+   "type":self._ty,"key_press":self._kp,"key_combo":self._kc,
+   "execute_command":self._ex,"terminal_execute":self._ex,
+   "terminal_connect":lambda _:{"success":True,"session_id":"default"},
+   "terminal_read":lambda _:{"success":True,"output":""},
+   "terminal_type":self._tt,
+   "file_read":self._fr,"file_write":self._fw,"file_append":self._fa,
+   "file_upload":self._fu,"file_download":self._fdn,"file_list_downloads":self._fld,
+   "file_delete":self._fd,"file_exists":self._fe,"directory_list":self._dl,
+   "ocr":self._ocr,"scroll":self._scr,"drag":self._drg,
+   "browser_open":self._bo,"browser_navigate":self._bn,"browser_click":self._bc,
+   "browser_type":self._bt,"browser_execute":self._bx,"browser_get_dom":self._bd,
+   "browser_state":self._bs,"browser_get_context":self._bd,
+  }.get(command)
+  if fn is None:return{"success":False,"error":f"Unknown: {command}"}
+  return fn(p)
+ def _ss(self,p):
+  i=_shot()
+  return{"success":True,"screenshot":i,"timestamp":time.time()} if i else{"success":False,"error":"screenshot failed"}
+ def _cl(self,p):
+  x,y=int(p.get("x",0)),int(p.get("y",0));b=p.get("button","left");c=int(p.get("clicks",1))
+  pyautogui.click(x,y,clicks=c,button=b);return{"success":True,"action":"click","x":x,"y":y}
+ def _dc(self,p):
+  x,y=int(p.get("x",0)),int(p.get("y",0));pyautogui.doubleClick(x,y);return{"success":True}
+ def _rc(self,p):
+  x,y=int(p.get("x",0)),int(p.get("y",0));pyautogui.rightClick(x,y);return{"success":True}
+ def _ty(self,p):
+  text=p.get("text","");interval=float(p.get("interval",50))/1000.0
+  pyautogui.write(text,interval=interval);return{"success":True,"action":"type"}
+ def _kp(self,p):
+  for k in(p.get("keys") or[p.get("key","")]):pyautogui.press(k)
+  return{"success":True}
+ def _kc(self,p):pyautogui.hotkey(*p.get("keys",[]));return{"success":True}
+ def _scr(self,p):
+  amt=int(p.get("amount",3));d=p.get("direction","down")
+  if d in("down","right"):amt=-amt
+  pyautogui.scroll(amt);return{"success":True}
+ def _drg(self,p):
+  sx,sy=int(p.get("start_x",0)),int(p.get("start_y",0))
+  ex,ey=int(p.get("end_x",0)),int(p.get("end_y",0))
+  pyautogui.moveTo(sx,sy);pyautogui.drag(ex-sx,ey-sy,duration=0.5);return{"success":True}
+ def _tt(self,p):pyautogui.write(p.get("text",""));return{"success":True}
+ def _ex(self,p):
+  cmd=p.get("command","");cwd=p.get("cwd",HOME_DIR)
+  use_sudo=p.get("sudo",False)
+  try:
+   r=subprocess.run(["powershell.exe","-Command",cmd],capture_output=True,text=True,timeout=120,cwd=cwd)
+   out=(r.stdout+r.stderr)[:5000]
+   if len(r.stdout+r.stderr)>5000:out+="\\n...[truncated]"
+   return{"success":True,"output":out,"exit_code":r.returncode}
+  except subprocess.TimeoutExpired:return{"success":False,"error":"timed out"}
+ def _fr(self,p):
+  try:
+   path=os.path.expanduser(p.get("path",""))
+   with open(path,"r",errors="replace") as f:c=f.read()
+   if len(c)>50000:c=c[:50000]+"\\n...[truncated]"
+   return{"success":True,"content":c}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fw(self,p):
+  try:
+   path=os.path.expanduser(p.get("path",""));os.makedirs(os.path.dirname(path) or".",exist_ok=True)
+   with open(path,"w") as f:f.write(p.get("content",""))
+   return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fu(self,p):
+  try:
+   path=os.path.expanduser(p.get("filepath",p.get("path","")))
+   if not os.path.isabs(path):path=os.path.join(DESKTOP_DIR,path)
+   os.makedirs(os.path.dirname(path) or".",exist_ok=True)
+   enc=p.get("encoding","utf-8");content=p.get("content","")
+   if enc=="base64":
+    with open(path,"wb") as f:f.write(base64.b64decode(content))
+   else:
+    with open(path,"w") as f:f.write(content)
+   sz=os.path.getsize(path)
+   return{"success":True,"filepath":path,"size":sz,"message":f"Uploaded {sz} bytes"}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fdn(self,p):
+  try:
+   path=os.path.expanduser(p.get("filepath",""))
+   if not os.path.isfile(path):return{"success":False,"error":f"Not found: {path}"}
+   sz=os.path.getsize(path);name=os.path.basename(path);enc=p.get("encoding","auto")
+   if enc=="auto":
+    try:
+     with open(path,"r") as f:content=f.read();enc="utf-8"
+    except UnicodeDecodeError:
+     with open(path,"rb") as f:content=base64.b64encode(f.read()).decode("ascii");enc="base64"
+   elif enc=="base64":
+    with open(path,"rb") as f:content=base64.b64encode(f.read()).decode("ascii")
+   else:
+    with open(path,"r",errors="replace") as f:content=f.read()
+   return{"success":True,"filename":name,"filepath":path,"size":sz,"encoding":enc,"content":content}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fld(self,p):
+  try:
+   path=os.path.expanduser(p.get("dirpath",p.get("path",HOME_DIR)))
+   if not os.path.isdir(path):return{"success":False,"error":f"Not a directory: {path}"}
+   files=[]
+   for e in sorted(os.listdir(path)):
+    full=os.path.join(path,e);is_dir=os.path.isdir(full)
+    files.append({"filename":e,"path":full,"is_directory":is_dir,"size":0 if is_dir else os.path.getsize(full)})
+   return{"success":True,"files":files,"count":len(files)}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fa(self,p):
+  try:
+   with open(os.path.expanduser(p.get("path","")),"a") as f:f.write(p.get("content",""))
+   return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fd(self,p):
+  try:os.remove(os.path.expanduser(p.get("path","")));return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _fe(self,p):return{"success":True,"exists":os.path.exists(os.path.expanduser(p.get("path","")))}
+ def _dl(self,p):
+  try:
+   path=os.path.expanduser(p.get("path",HOME_DIR));entries=[]
+   for e in sorted(os.listdir(path)):
+    full=os.path.join(path,e);entries.append({"name":e,"type":"directory" if os.path.isdir(full) else"file","size":os.path.getsize(full) if os.path.isfile(full) else 0})
+   return{"success":True,"entries":entries}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _ocr(self,p):
+  if not _HAS_OCR:return{"success":False,"error":"tesseract unavailable"}
+  img_data=_shot()
+  if not img_data:return{"success":False,"error":"screenshot failed"}
+  b64=img_data.split(",",1)[1];img=Image.open(io.BytesIO(base64.b64decode(b64)))
+  return{"success":True,"text":pytesseract.image_to_string(img),"screenshot":img_data}
+ def _bo(self,p):
+  try:b=_get_browser();u=p.get("url","about:blank");b.get(u) if u!="about:blank" else None;return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bn(self,p):
+  try:b=_get_browser();b.get(p.get("url",""));return{"success":True,"url":b.current_url,"title":b.title}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bc(self,p):
+  try:_get_browser().find_element(By.CSS_SELECTOR,p.get("selector","")).click();return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bt(self,p):
+  try:
+   el=_get_browser().find_element(By.CSS_SELECTOR,p.get("selector",""));el.clear();el.send_keys(p.get("text",""));return{"success":True}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bx(self,p):
+  try:r=_get_browser().execute_script(p.get("script",""));return{"success":True,"result":str(r) if r is not None else None}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bd(self,p):
+  try:
+   b=_get_browser();dom=b.execute_script("return document.documentElement.outerHTML")
+   if len(dom)>10000:dom=dom[:10000]+"...[truncated]"
+   return{"success":True,"dom":dom,"url":b.current_url,"title":b.title}
+  except Exception as e:return{"success":False,"error":str(e)}
+ def _bs(self,p):
+  try:b=_get_browser();return{"success":True,"url":b.current_url,"title":b.title}
+  except Exception as e:return{"success":False,"error":str(e)}
+async def main():
+ agent=Agent()
+ print(f"AI Agent listening on {HOST}:{PORT}",flush=True)
+ async with websockets.serve(agent.serve,HOST,PORT,max_size=100*1024*1024,ping_interval=None,ping_timeout=None,close_timeout=60,compression=None):
+  await asyncio.Future()
+if __name__=="__main__":asyncio.run(main())
+`;
+  }
+
+  /**
+   * Full Windows Desktop UserData (PowerShell) for stock Windows Server 2022.
+   * Since this script + agent exceeds the 16KB UserData limit, the full install
+   * path is only for documentation. In practice, always use a golden AMI.
+   * This method generates a slim bootstrap that downloads the agent from a
+   * temporary local file written during golden AMI build.
+   */
+  private generateWindowsDesktopUserData(vncPassword: string): string {
+    // For full install without golden AMI, we can't fit everything in 16KB.
+    // Reuse the golden path — the golden AMI has all packages pre-installed.
+    // If no golden AMI exists, this will still deploy the agent and start services,
+    // assuming packages were installed manually or via the build script.
+    return this.generateWindowsGoldenUserData(vncPassword);
+  }
+
+  /**
+   * Slim Windows UserData for golden AMI (pre-baked) instances.
+   * Only sets VNC password, deploys the gzipped agent, and restarts services.
+   * Gzips the Python agent to stay well under the 16KB UserData limit.
+   */
+  private generateWindowsGoldenUserData(vncPassword: string): string {
+    const agentPy = this.getWindowsAgentSource();
+
+    // Gzip + base64 to reduce size (same approach as Linux agent)
+    const agentGz = zlib.gzipSync(Buffer.from(agentPy), { level: 9 });
+    const agentB64 = agentGz.toString("base64");
+
+    // ── WINDOWS USERDATA ARCHITECTURE ──
+    //
+    // Two problems to solve:
+    // 1. Password with special chars ($%&!) breaks PowerShell interpolation
+    //    → Solution: base64-encode the password, decode in PowerShell
+    // 2. Session 0 isolation: Windows services (NSSM/SYSTEM) can't see desktop
+    //    → Solution: Agent runs via Startup folder in interactive session
+    //
+    // Boot sequence:
+    //   1st boot: UserData deploys agent, sets auto-logon, reboots
+    //   2nd boot: Auto-logon creates desktop → Startup folder runs agent + noVNC
+    //             TightVNC service mirrors desktop → noVNC proxies it → screenshots work
+    //
+    // No <persist> tag — UserData must NOT re-run on 2nd boot (it would run
+    // as SYSTEM before the logon screen, preventing auto-logon).
+
+    const pwB64 = Buffer.from(vncPassword).toString("base64");
+
+    const script = `<powershell>
+$ErrorActionPreference = "Continue"
+New-Item -ItemType Directory -Force -Path C:\\coasty\\agent | Out-Null
+
+# ── Decode password from base64 (avoids PowerShell special char issues) ──
+$pw = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${pwB64}"))
+
+# ── Disable password complexity policy ──
+secedit /export /cfg C:\\coasty\\secpol.cfg 2>$null
+(Get-Content C:\\coasty\\secpol.cfg) -replace 'PasswordComplexity = 1','PasswordComplexity = 0' -replace 'MinimumPasswordLength = \\d+','MinimumPasswordLength = 0' | Set-Content C:\\coasty\\secpol.cfg
+secedit /configure /db C:\\windows\\security\\local.sdb /cfg C:\\coasty\\secpol.cfg /areas SECURITYPOLICY 2>$null
+
+# ── Set Administrator password ──
+net user Administrator $pw
+if ($LASTEXITCODE -ne 0) { Write-Output "WARNING: net user failed with exit code $LASTEXITCODE" }
+
+# ── Configure auto-logon ──
+$winlogon = "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+Set-ItemProperty -Path $winlogon -Name AutoAdminLogon -Value "1"
+Set-ItemProperty -Path $winlogon -Name DefaultUserName -Value "Administrator"
+Set-ItemProperty -Path $winlogon -Name DefaultPassword -Value $pw
+Set-ItemProperty -Path $winlogon -Name ForceAutoLogon -Value "1"
+reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System" /v DisableCAD /t REG_DWORD /d 1 /f 2>$null
+reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization" /v NoLockScreen /t REG_DWORD /d 1 /f 2>$null
+
+# ── Prevent EC2Launch from regenerating password on future boots ──
+$ec2lCfg = "C:\\ProgramData\\Amazon\\EC2Launch\\config\\agent-config.yml"
+if (Test-Path $ec2lCfg) {
+    (Get-Content $ec2lCfg -Raw) -replace 'setAdminAccount: true','setAdminAccount: false' | Set-Content $ec2lCfg
+}
+
+# ── Set TightVNC password (DES-encrypted in registry) ──
+# VNC protocol truncates passwords to 8 chars. TightVNC stores them as
+# DES-encrypted REG_BINARY using a well-known fixed key.
+# Uses .NET System.Security.Cryptography.DES (works on all Windows versions).
+Stop-Service tvnserver -Force -ErrorAction SilentlyContinue
+Start-Sleep 1
+$vncPw8 = $pw.Substring(0, [Math]::Min(8, $pw.Length))
+$magicKey = [byte[]]@(0xE8, 0x4A, 0xD6, 0x60, 0xC4, 0x72, 0x1A, 0xE0)
+$toEncrypt = [byte[]]::new(8)
+$null = [System.Text.Encoding]::ASCII.GetBytes($vncPw8, 0, $vncPw8.Length, $toEncrypt, 0)
+$des = [System.Security.Cryptography.DES]::Create()
+$des.Padding = [System.Security.Cryptography.PaddingMode]::None
+$enc = $des.CreateEncryptor($magicKey, [byte[]]::new(8))
+$encrypted = [byte[]]::new(8)
+$null = $enc.TransformBlock($toEncrypt, 0, 8, $encrypted, 0)
+$enc.Dispose(); $des.Dispose()
+$vncRegPath = "HKLM:\\SOFTWARE\\TightVNC\\Server"
+if (-not (Test-Path $vncRegPath)) { New-Item -Path $vncRegPath -Force | Out-Null }
+Set-ItemProperty -Path $vncRegPath -Name "Password" -Value $encrypted -Type Binary
+Set-ItemProperty -Path $vncRegPath -Name "PasswordViewOnly" -Value $encrypted -Type Binary
+Set-ItemProperty -Path $vncRegPath -Name "UseVncAuthentication" -Value 1 -Type DWord
+Set-ItemProperty -Path $vncRegPath -Name "RfbPort" -Value 5901 -Type DWord
+Set-ItemProperty -Path $vncRegPath -Name "AcceptHttpConnections" -Value 0 -Type DWord
+Start-Service tvnserver -ErrorAction SilentlyContinue
+
+# ── Deploy agent: base64 decode -> gunzip -> server.py ──
+$gz = [System.Convert]::FromBase64String("${agentB64}")
+$ms = New-Object System.IO.MemoryStream(,$gz)
+$ds = New-Object System.IO.Compression.GZipStream($ms,[System.IO.Compression.CompressionMode]::Decompress)
+$sr = New-Object System.IO.StreamReader($ds)
+$pyCode = $sr.ReadToEnd()
+$sr.Close(); $ds.Close(); $ms.Close()
+[System.IO.File]::WriteAllText("C:\\coasty\\agent\\server.py", $pyCode)
+
+# ── Find Python path ──
+$pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
+if (-not $pythonPath) { $pythonPath = "python" }
+
+# ── Create startup .bat files ──
+# Use double backslashes because this is inside a JS template literal
+# where \\n would be interpreted as a newline.
+# Agent .bat (with restart loop so it recovers from crashes)
+@"
+@echo off
+set VNC_PASSWORD=$pw
+set AGENT_PORT=8080
+set AGENT_HOST=0.0.0.0
+:loop
+cd /d C:\\coasty\\agent
+$pythonPath server.py
+echo Agent exited, restarting in 5s...
+timeout /t 5 /nobreak >nul
+goto loop
+"@ | Set-Content -Path "C:\\coasty\\start-agent.bat" -Encoding ASCII
+
+# noVNC websockify .bat
+@"
+@echo off
+:loop
+cd /d C:\\coasty
+$pythonPath -m websockify --web C:\\coasty\\novnc 6080 localhost:5901
+echo noVNC exited, restarting in 5s...
+timeout /t 5 /nobreak >nul
+goto loop
+"@ | Set-Content -Path "C:\\coasty\\start-novnc.bat" -Encoding ASCII
+
+# ── Create resolution-setting script (runs in interactive session at logon) ──
+@"
+Add-Type @'
+using System;
+using System.Runtime.InteropServices;
+public class Display {
+    [DllImport("user32.dll")] public static extern int ChangeDisplaySettings(ref DEVMODE dm, int flags);
+    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi)]
+    public struct DEVMODE {
+        [MarshalAs(UnmanagedType.ByValTStr,SizeConst=32)] public string dmDeviceName;
+        public short dmSpecVersion, dmDriverVersion, dmSize, dmDriverExtra;
+        public int dmFields, dmPositionX, dmPositionY, dmDisplayOrientation, dmDisplayFixedOutput;
+        public short dmColor, dmDuplex, dmYResolution, dmTTOption, dmCollate;
+        [MarshalAs(UnmanagedType.ByValTStr,SizeConst=32)] public string dmFormName;
+        public short dmLogPixels, dmBitsPerPel;
+        public int dmPelsWidth, dmPelsHeight, dmDisplayFlags, dmDisplayFrequency;
+        public int dmICMMethod, dmICMIntent, dmMediaType, dmDitherType, dmReserved1, dmReserved2, dmPanningWidth, dmPanningHeight;
+    }
+    public static void Set(int w, int h) {
+        var dm = new DEVMODE(); dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
+        dm.dmPelsWidth = w; dm.dmPelsHeight = h; dm.dmFields = 0x80000 | 0x100000;
+        ChangeDisplaySettings(ref dm, 0);
+    }
+}
+'@
+[Display]::Set(1280, 720)
+"@ | Set-Content -Path "C:\\coasty\\set-resolution.ps1" -Encoding ASCII
+
+# ── Place shortcuts in Administrator's Startup folder ──
+# This is the ONLY reliable way to run processes in the interactive desktop
+# session (Session 1). Windows services always run in Session 0.
+$startupDir = "C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+New-Item -ItemType Directory -Force -Path $startupDir | Out-Null
+
+# Resolution setter shortcut (runs first at logon to set 1280x720)
+$ws = New-Object -ComObject WScript.Shell
+$scRes = $ws.CreateShortcut("$startupDir\\0-CoastyResolution.lnk")
+$scRes.TargetPath = "powershell.exe"
+$scRes.Arguments = "-ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\coasty\\set-resolution.ps1"
+$scRes.WindowStyle = 7
+$scRes.Save()
+
+# Agent shortcut (minimized window)
+$sc = $ws.CreateShortcut("$startupDir\\CoastyAgent.lnk")
+$sc.TargetPath = "C:\\coasty\\start-agent.bat"
+$sc.WorkingDirectory = "C:\\coasty\\agent"
+$sc.WindowStyle = 7
+$sc.Save()
+
+# noVNC shortcut (minimized window)
+$sc2 = $ws.CreateShortcut("$startupDir\\CoastyNoVNC.lnk")
+$sc2.TargetPath = "C:\\coasty\\start-novnc.bat"
+$sc2.WorkingDirectory = "C:\\coasty"
+$sc2.WindowStyle = 7
+$sc2.Save()
+
+# ── Remove NSSM services for agent/noVNC (they run in Session 0, useless) ──
+nssm stop CoastyAgent 2>$null
+nssm stop CoastyNoVNC 2>$null
+nssm remove CoastyAgent confirm 2>$null
+nssm remove CoastyNoVNC confirm 2>$null
+
+# ── System settings ──
+powercfg -change -monitor-timeout-ac 0
+powercfg -change -standby-timeout-ac 0
+powercfg -change -hibernate-timeout-ac 0
+reg add "HKCU\\Control Panel\\Desktop" /v ScreenSaveActive /t REG_SZ /d 0 /f 2>$null
+reg add "HKLM\\SOFTWARE\\Microsoft\\ServerManager" /v DoNotOpenServerManagerAtLogon /t REG_DWORD /d 1 /f 2>$null
+
+Set-Content -Path "C:\\coasty\\status.txt" -Value "ready"
+
+# ── Reboot to activate auto-logon ──
+# After reboot: Windows logon screen -> auto-logon -> desktop created ->
+# Startup folder runs agent + noVNC in interactive session ->
+# TightVNC mirrors desktop -> screenshots work
+shutdown /r /t 10 /c "Coasty setup complete - activating desktop" /f
+</powershell>`;
+
+    return Buffer.from(script).toString("base64");
+  }
+
+  /**
    * Slim UserData for golden AMI instances.
    * The golden AMI already has all packages, services, and config baked in.
    * This only injects the VNC password, deploys the Python agent, and starts services.
@@ -1343,6 +1879,43 @@ echo "Golden AMI boot complete at $(date)"
     return this.cachedAmiId;
   }
 
+  private async resolveWindowsAmi(): Promise<string> {
+    if (this.cachedWindowsAmiId) {
+      return this.cachedWindowsAmiId;
+    }
+
+    const result = await this.client.send(
+      new DescribeImagesCommand({
+        Filters: [
+          {
+            Name: "name",
+            Values: ["Windows_Server-2022-English-Full-Base-*"],
+          },
+          { Name: "state", Values: ["available"] },
+          { Name: "architecture", Values: ["x86_64"] },
+        ],
+        Owners: ["amazon"],
+      })
+    );
+
+    const images = result.Images || [];
+    if (images.length === 0) {
+      throw new Error(
+        `No Windows Server 2022 x86_64 AMI found in region ${this.region}. Set AWS_EC2_WINDOWS_AMI_ID manually.`
+      );
+    }
+
+    images.sort((a, b) => {
+      const dateA = a.CreationDate || "";
+      const dateB = b.CreationDate || "";
+      return dateB.localeCompare(dateA);
+    });
+
+    this.cachedWindowsAmiId = images[0].ImageId!;
+    console.log(`Resolved Windows Server 2022 x86_64 AMI: ${this.cachedWindowsAmiId}`);
+    return this.cachedWindowsAmiId;
+  }
+
   private mapInstanceState(instance: Instance): EC2InstanceStatus {
     const stateName = instance.State?.Name;
     const ipAddress = instance.PublicIpAddress;
@@ -1408,11 +1981,18 @@ echo "Golden AMI boot complete at $(date)"
   }
 
   estimateCost(instanceType: string, hours: number): number {
+    // Prices per hour (us-east-1). Windows instances include license surcharge.
     const prices: Record<string, number> = {
+      // Linux ARM64 (Graviton2)
       "t4g.nano": 0.0042,
       "t4g.micro": 0.0084,
       "t4g.small": 0.0168,
       "t4g.medium": 0.0336,
+      // Windows x86_64 (includes Windows license)
+      "t3.nano": 0.0052 + 0.012,   // base + Windows license
+      "t3.micro": 0.0104 + 0.012,
+      "t3.small": 0.0208 + 0.012,
+      "t3.medium": 0.0416 + 0.012,
     };
     return parseFloat(((prices[instanceType] || 0.0042) * hours).toFixed(4));
   }

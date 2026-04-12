@@ -6,20 +6,21 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
 import { GridBackground } from "@/components/ui/grid-background"
+import { useTranslations } from "next-intl"
 
 export const dynamic = "force-dynamic"
 
-// Create a separate component that uses useSearchParams
 function AuthErrorContent() {
   const searchParams = useSearchParams()
-  const message =
-    searchParams.get("message") || "An error occurred during authentication."
+  const t = useTranslations("auth.errorPage")
+  const tc = useTranslations("common")
+  const message = searchParams.get("message") || t("defaultMessage")
 
   return (
     <div className="w-full max-w-md space-y-8">
       <div className="text-center">
         <h1 className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-          Authentication Error
+          {t("title")}
         </h1>
         <div className="mt-6 rounded-md bg-red-500/10 p-4">
           <p className="text-red-400">{message}</p>
@@ -31,7 +32,7 @@ function AuthErrorContent() {
             size="lg"
             asChild
           >
-            <Link href="/auth">Try Again</Link>
+            <Link href="/auth">{t("tryAgain")}</Link>
           </Button>
         </div>
       </div>
@@ -40,11 +41,12 @@ function AuthErrorContent() {
 }
 
 export default function AuthErrorPage() {
+  const t = useTranslations("auth.errorPage")
+  const tc = useTranslations("common")
+
   return (
     <div className="flex h-screen flex-col bg-background relative">
-      {/* Grid pattern background */}
       <GridBackground />
-      {/* Header */}
       <header className="p-4 relative z-10">
         <Link
           href="/"
@@ -52,7 +54,7 @@ export default function AuthErrorPage() {
         >
           <ArrowLeft className="size-5" />
           <span className="font-base ml-2 hidden text-sm sm:inline-block">
-            Back to Chat
+            {t("backToChat")}
           </span>
         </Link>
       </header>
@@ -65,17 +67,17 @@ export default function AuthErrorPage() {
 
       <footer className="py-6 text-center text-sm text-muted-foreground relative z-10">
         <p className="mb-3">
-          Need help?{" "}
+          {t("needHelp")}{" "}
           <Link href="/" className="text-muted-foreground hover:underline">
-            Contact Support
+            {t("contactSupport")}
           </Link>
         </p>
         <div className="flex gap-4 justify-center text-xs">
           <Link href="/privacy" className="hover:text-foreground transition-colors">
-            Privacy
+            {tc("privacy")}
           </Link>
           <Link href="/terms" className="hover:text-foreground transition-colors">
-            Terms
+            {tc("terms")}
           </Link>
         </div>
       </footer>

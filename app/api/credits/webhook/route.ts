@@ -854,7 +854,16 @@ export async function POST(req: NextRequest) {
       case "payment_intent.payment_failed": {
         const paymentIntent = event.data.object as Stripe.PaymentIntent
         console.error("Payment failed:", paymentIntent.id)
-        // You could notify the user or log this for follow-up
+
+        // If this was an auto-refill charge, disable auto-refill to prevent repeated failures
+        if (paymentIntent.metadata?.type === "auto_refill" && paymentIntent.metadata?.user_id) {
+          await supabase
+            .from("auto_refill_settings")
+            .update({ enabled: false, updated_at: new Date().toISOString() })
+            .eq("user_id", paymentIntent.metadata.user_id)
+
+          console.log(`Auto-refill disabled for user ${paymentIntent.metadata.user_id} due to payment failure`)
+        }
         break
       }
 

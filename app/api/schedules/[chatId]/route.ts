@@ -15,12 +15,31 @@ const PYTHON_BACKEND_URL =
   process.env.PYTHON_BACKEND_URL || 'http://127.0.0.1:8001'
 const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY || ''
 
+// UUID v4 format — reject anything else to prevent path traversal
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
 async function getAuthUserId(): Promise<string | null> {
   const supabase = await createClient()
   if (!supabase) return null
   const { data, error } = await supabase.auth.getUser()
   if (error || !data?.user) return null
   return data.user.id
+}
+
+/** Verify the authenticated user owns the chat. */
+async function verifyChatOwnership(
+  chatId: string,
+  userId: string
+): Promise<boolean> {
+  const supabase = await createClient()
+  if (!supabase) return false
+  const { data, error } = await supabase
+    .from('chats')
+    .select('id')
+    .eq('id', chatId)
+    .eq('user_id', userId)
+    .single()
+  return !error && !!data
 }
 
 function buildHeaders(userId: string): Record<string, string> {
@@ -45,6 +64,13 @@ export async function GET(
     }
 
     const { chatId } = await params
+    if (!UUID_RE.test(chatId)) {
+      return NextResponse.json({ error: 'Invalid chat ID' }, { status: 400 })
+    }
+    if (!(await verifyChatOwnership(chatId, userId))) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const response = await fetch(
       `${PYTHON_BACKEND_URL}/api/schedules/${chatId}`,
       { method: 'GET', headers: buildHeaders(userId) }
@@ -69,6 +95,13 @@ export async function POST(
     }
 
     const { chatId } = await params
+    if (!UUID_RE.test(chatId)) {
+      return NextResponse.json({ error: 'Invalid chat ID' }, { status: 400 })
+    }
+    if (!(await verifyChatOwnership(chatId, userId))) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const { searchParams } = new URL(req.url)
     const action = searchParams.get('action')
 
@@ -107,6 +140,13 @@ export async function DELETE(
     }
 
     const { chatId } = await params
+    if (!UUID_RE.test(chatId)) {
+      return NextResponse.json({ error: 'Invalid chat ID' }, { status: 400 })
+    }
+    if (!(await verifyChatOwnership(chatId, userId))) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const response = await fetch(
       `${PYTHON_BACKEND_URL}/api/schedules/${chatId}`,
       { method: 'DELETE', headers: buildHeaders(userId) }
@@ -131,6 +171,13 @@ export async function PATCH(
     }
 
     const { chatId } = await params
+    if (!UUID_RE.test(chatId)) {
+      return NextResponse.json({ error: 'Invalid chat ID' }, { status: 400 })
+    }
+    if (!(await verifyChatOwnership(chatId, userId))) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const response = await fetch(
       `${PYTHON_BACKEND_URL}/api/schedules/${chatId}/pause`,
       { method: 'PATCH', headers: buildHeaders(userId) }
@@ -155,6 +202,13 @@ export async function PUT(
     }
 
     const { chatId } = await params
+    if (!UUID_RE.test(chatId)) {
+      return NextResponse.json({ error: 'Invalid chat ID' }, { status: 400 })
+    }
+    if (!(await verifyChatOwnership(chatId, userId))) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
     const body = JSON.stringify(await req.json())
 
     const response = await fetch(

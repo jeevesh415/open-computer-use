@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# backend
+/backend
+
 # dependencies
 /node_modules
 /.pnp
@@ -140,13 +143,10 @@ backend/prod.env
 # claude
 
 .claude\settings.local.json
-
 .claude/skills/frontend-design/SKILL.md
-backend/app/services/cua_action_bridge.py
-backend/app/services/cua_executor.py
-backend/app/services/cua_remote_env.py
-backend/app/services/cua_screenshot.py
-backend/app/cua.py
-backend/app/computer_use_agent/
+
+# campaigns and config
+campaigns/config.py
 scripts/setup-posthog-dashboards.mjs
 scripts/build-golden-ami.mjs
+scripts/build-windows-golden-ami.mjs

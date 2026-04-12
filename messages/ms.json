@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Mula Percuma",
+    "bookDemo": "Tempah demo",
+    "tryCoastyFree": "Cuba Coasty percuma",
+    "learnMore": "Ketahui lebih lanjut",
+    "watchSession": "Tonton sesi",
+    "compareAllPlans": "Bandingkan semua pelan & ciri",
+    "allRightsReserved": "Hak cipta terpelihara.",
+    "privacy": "Privasi",
+    "terms": "Terma",
+    "recommended": "Disyorkan",
+    "month": "bulan",
+    "creditsPerMonth": "{count} kredit/bln",
+    "agentsInParallel": "{count} agen secara selari"
+  },
+  "header": {
+    "useCases": "Kes Penggunaan",
+    "blog": "Blog",
+    "agentSwarms": "Kawanan Agen",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Bandingkan",
+    "demos": "Demo",
+    "pricing": "Harga",
+    "download": "Muat Turun",
+    "signIn": "Log masuk",
+    "getStarted": "Mulakan",
+    "useCaseItems": {
+      "competitorIntel": "Perisikan Pesaing",
+      "qaBugReports": "Laporan Pepijat QA",
+      "seoGapAnalysis": "Analisis Jurang SEO",
+      "dataExtraction": "Pengekstrakan Data",
+      "leadGeneration": "Penjanaan Prospek",
+      "siteAudit": "Audit Laman",
+      "adIntelligence": "Perisikan Iklan",
+      "emailOutreach": "Jangkauan E-mel",
+      "designReview": "Semakan Reka Bentuk",
+      "priceMonitoring": "Pemantauan Harga",
+      "marketResearch": "Penyelidikan Pasaran",
+      "emailCampaigns": "Kempen E-mel"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} profil pesaing dihantar",
+      "qaBugReports": "{stat} aliran pengguna diuji setiap larian",
+      "seoGapAnalysis": "{stat} jurang kata kunci dikenal pasti",
+      "dataExtraction": "{stat} baris diekstrak setiap larian",
+      "leadGeneration": "{stat} prospek berkualiti setiap larian",
+      "siteAudit": "{stat} halaman diaudit setiap larian",
+      "adIntelligence": "{stat} kreatif iklan ditangkap",
+      "emailOutreach": "{stat} e-mel peribadi dirangka",
+      "designReview": "{stat} titik putus diuji setiap halaman",
+      "priceMonitoring": "{stat} SKU dibandingkan setiap larian",
+      "marketResearch": "{stat} titik data dikumpul",
+      "emailCampaigns": "{stat} e-mel peribadi setiap kempen"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Semua Catatan",
+      "computerUse": "Penggunaan Komputer",
+      "compare": "Bandingkan",
+      "dataEntry": "Kemasukan Data",
+      "webScraping": "Web Scraping",
+      "jobApplications": "Permohonan Kerja",
+      "demosResults": "Demo & Keputusan",
+      "guide": "Panduan"
+    },
+    "blogStats": {
+      "allPosts": "{stat} artikel diterbitkan setiap minggu",
+      "computerUse": "{stat} skor penanda aras OSWorld",
+      "compare": "{stat} pesaing dianalisis",
+      "dataEntry": "{stat} lebih pantas daripada manual",
+      "webScraping": "{stat} halaman setiap sesi",
+      "jobApplications": "{stat} permohonan setiap sesi",
+      "demosResults": "{stat} kajian kes sebenar",
+      "guide": "{stat} panduan kes penggunaan"
+    }
+  },
+  "hero": {
+    "badge": "Agen Computer-Use #1 · {score} OSWorld",
+    "headline": "Operator komputer autonomi",
+    "useCases": {
+      "computerAgent": {
+        "label": "Agen komputer",
+        "headline": "automatikkan sebarang tugas pelayar",
+        "outcome": "Agen AI yang mengawal komputer sebenar — melayari, mengklik, menaip, dan menyiapkan kerja. Tiada persediaan diperlukan."
+      },
+      "competitorIntel": {
+        "label": "Perisikan pesaing",
+        "headline": "pantau setiap pesaing",
+        "outcome": "Profil pesaing lengkap dengan harga, ciri, dan jurang kedudukan — dieksport sebagai laporan sedia dikongsi."
+      },
+      "qaTesting": {
+        "label": "Pengujian QA",
+        "headline": "cari pepijat sebelum pengguna",
+        "outcome": "Aliran pengguna kritikal diuji hujung ke hujung, setiap pepijat ditangkap skrin dengan langkah reproduksi dan penarafan keterukan."
+      },
+      "seoAnalysis": {
+        "label": "Analisis SEO",
+        "headline": "temui jurang kata kunci",
+        "outcome": "Jurang kata kunci dikenal pasti, ringkasan kandungan dirangka, sumber pautan balik pesaing dipetakan — strategi SEO yang boleh dilaksanakan."
+      },
+      "dataExtraction": {
+        "label": "Pengekstrakan data",
+        "headline": "scrape dan strukturkan mana-mana laman",
+        "outcome": "Data berstruktur discrap, dibersihkan, dinyahduplikasi, dan dieksport sebagai CSV — dari mana-mana laman web, sebarang format."
+      },
+      "leadGeneration": {
+        "label": "Penjanaan prospek",
+        "headline": "isikan saluran jualan anda",
+        "outcome": "Pembuat keputusan berkualiti sepadan ICP anda dengan jawatan disahkan, syarikat, dan pembukaan jangkauan peribadi."
+      },
+      "siteAudit": {
+        "label": "Audit laman",
+        "headline": "audit setiap halaman secara berskala",
+        "outcome": "Halaman diimbas, Core Web Vitals dinilai, pautan rosak ditemui, isu kebolehcapaian disusun mengikut keutamaan pembaikan."
+      },
+      "emailOutreach": {
+        "label": "Jangkauan e-mel",
+        "headline": "hantar jangkauan peribadi",
+        "outcome": "E-mel peribadi merujuk syarikat, peranan, dan masalah setiap prospek — sedia dihantar."
+      },
+      "marketResearch": {
+        "label": "Penyelidikan pasaran",
+        "headline": "sahkan pasaran anda dengan pantas",
+        "outcome": "TAM dikira, pemain utama diprofil, trend pertumbuhan dicarta — dikumpul dari berpuluh titik data."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Pemasaran",
+        "task": "Pasarkan produk anda di Reddit secara autonomi"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Cari prospek dan hantar e-mel peribadi"
+      },
+      "qaTesting": {
+        "label": "Pengujian QA",
+        "task": "Uji setiap aliran pembayaran dan laporkan pepijat"
+      },
+      "jobApplication": {
+        "label": "Permohonan Kerja",
+        "task": "Cari jawatan, sesuaikan resume, dan mohon"
+      },
+      "formFilling": {
+        "label": "Pengisian Borang",
+        "task": "Isi permohonan YC S26 untuk anda"
+      },
+      "socialMedia": {
+        "label": "Media Sosial",
+        "task": "Siarkan di Hacker News dan berinteraksi dengan komen"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "Penanda aras OSWorld",
+      "sublabel": "Agen computer-use #1 di dunia"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Alat yang boleh digunakan agen",
+      "sublabel": "Pelayar, terminal, desktop, fail"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Berjalan mengikut jadual",
+      "sublabel": "Automatikkan sebarang tugas berulang"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Persediaan diperlukan",
+      "sublabel": "Tiada API, tiada integrasi, tiada kod"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Mengapa Coasty",
+    "title": "Bukan chatbot. Bukan skrip RPA.",
+    "worksLikeHuman": {
+      "title": "Berfungsi seperti manusia",
+      "description": "Melihat, mengklik, menaip, menavigasi — sama seperti anda"
+    },
+    "noScripts": {
+      "title": "Tiada skrip atau persediaan",
+      "description": "Bahasa biasa masuk, keputusan keluar"
+    },
+    "handlesUnexpected": {
+      "title": "Mengendalikan yang tidak dijangka",
+      "description": "Menyesuaikan diri dengan CAPTCHA, popup, perubahan reka letak"
+    },
+    "runsInIsolation": {
+      "title": "Berjalan dalam pengasingan",
+      "description": "VM kotak pasir setiap sesi — tiada yang bocor"
+    }
+  },
+  "howItWorks": {
+    "title": "Cara ia berfungsi",
+    "step1": {
+      "title": "Jelaskan tugas anda",
+      "description": "Bahasa biasa. Itu sahaja.",
+      "placeholder": "Kaji 100 prospek di LinkedIn..."
+    },
+    "step2": {
+      "title": "Saksikan agen bekerja",
+      "description": "Membuka pelayar, mengklik, menaip, menavigasi"
+    },
+    "step3": {
+      "title": "Tugas selesai",
+      "description": "Setiap tindakan dilog dengan tangkapan skrin",
+      "results": {
+        "taskCompleted": "Tugas selesai",
+        "leadsFound": "12 prospek ditemui",
+        "addedToCrm": "Ditambah ke CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Penanda aras #1 di dunia",
+    "subtitle": "82% di OSWorld — penanda aras paling sukar untuk agen AI yang menggunakan komputer sebenar",
+    "agenticFramework": "Rangka Kerja Agentik",
+    "foundationModel": "Model Asas"
+  },
+  "comparison": {
+    "title": "Mengapa automatikkan dengan Coasty?",
+    "subtitle": "Tugas yang sama yang mengambil berjam-jam bagi pasukan — Coasty siapkan dalam beberapa minit, sepanjang masa.",
+    "manual": {
+      "title": "Melakukannya Secara Manual",
+      "subtitle": "Anda atau pasukan anda, dengan tangan"
+    },
+    "coasty": {
+      "title": "Agen AI Coasty",
+      "subtitle": "Agen computer-use #1"
+    },
+    "rows": {
+      "timePerTask": "Masa setiap tugas",
+      "availability": "Ketersediaan",
+      "setupTime": "Masa persediaan",
+      "errorRate": "Kadar ralat",
+      "scaling": "Penskalaan",
+      "auditTrail": "Jejak audit"
+    },
+    "manualValues": {
+      "timePerTask": "Berjam-jam hingga berhari-hari",
+      "availability": "Waktu perniagaan sahaja",
+      "setupTime": "Belajar alat, tulis SOP",
+      "errorRate": "Kesilapan manusia",
+      "scaling": "Buat lebih banyak = habiskan lebih masa",
+      "auditTrail": "Tiada"
+    },
+    "coastyValues": {
+      "timePerTask": "Minit",
+      "availability": "24/7, setiap hari",
+      "setupTime": "60 saat",
+      "errorRate": "Pembetulan sendiri",
+      "scaling": "Jalankan tugas tanpa had secara selari",
+      "auditTrail": "Setiap klik dilog + tangkapan skrin"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Automatikkan tugas yang mengambil",
+      "hoursManually": "berjam-jam secara manual",
+      "startingAt": "Bermula pada"
+    }
+  },
+  "demo": {
+    "title": "Saksikan agen dalam tindakan",
+    "subtitle": "Tugas sebenar. Pelayar sebenar. Setiap klik dirakam.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty di Reddit",
+        "description": "Saksikan Coasty secara autonomi menjalankan kempen pemasaran — menyelidik pesaing, menganalisis trend, dan membina dek strategi.",
+        "tag": "Pemasaran"
+      },
+      "prospects": {
+        "title": "Mencari Bakal Pelanggan",
+        "description": "Coasty mencari dan menyelidik bakal pelanggan, mengumpulkan butiran penting untuk merangka jangkauan peribadi.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "Menguji QA Sendiri",
+        "description": "Coasty menjalankan jaminan kualiti pada produknya sendiri — menavigasi aliran, menangkap pepijat, dan melaporkan isu secara autonomi.",
+        "tag": "Pengujian QA"
+      },
+      "email": {
+        "title": "Menghantar E-mel Bagi Pihak Anda",
+        "description": "Dari merangka hingga menghantar — agen AI merangka dan menyampaikan e-mel sepenuhnya sendiri.",
+        "tag": "Komunikasi"
+      },
+      "job": {
+        "title": "Memohon Pekerjaan",
+        "description": "Coasty mencari jawatan sepadan, menyesuaikan resume anda, dan menghantar permohonan — semuanya sendiri.",
+        "tag": "Permohonan Kerja"
+      },
+      "hackernews": {
+        "title": "Menyiarkan di Hacker News",
+        "description": "Coasty mencipta dan menerbitkan catatan blog di Hacker News — menulis kandungan dan menghantarnya secara autonomi.",
+        "tag": "Media Sosial"
+      }
+    }
+  },
+  "features": {
+    "title": "Dibina untuk tugas komputer sebenar",
+    "selfCorrecting": {
+      "title": "Pembetulan Sendiri",
+      "description": "Mengesan ralat, mencuba laluan alternatif"
+    },
+    "auditTrail": {
+      "title": "Jejak Audit Penuh",
+      "description": "Setiap klik dilog dengan tangkapan skrin"
+    },
+    "schedule": {
+      "title": "Jadualkan 24/7",
+      "description": "Berjalan dengan cron — setiap jam, harian, mingguan"
+    },
+    "sandboxed": {
+      "title": "Kotak Pasir & Selamat",
+      "description": "VM terpencil setiap sesi, dimusnahkan selepas itu"
+    },
+    "benchmark": {
+      "title": "#1 di OSWorld",
+      "description": "82% — skor tertinggi pernah direkodkan"
+    },
+    "swarms": {
+      "title": "Kawanan Agen",
+      "description": "Bahagikan tugas merentasi mesin secara selari"
+    }
+  },
+  "pricing": {
+    "title": "Mula percuma, skala bila sedia",
+    "subtitle": "Tiada kad kredit. Agen AI anda sedia dalam 60 saat.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Cuba agen computer-use #1",
+        "cta": "Mula Percuma"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Automasi harian ringan",
+        "cta": "Dapatkan Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatikkan tugas setiap hari",
+        "cta": "Dapatkan Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skalakan aliran kerja kompleks",
+        "cta": "Pilih Plus",
+        "badge": "Paling Popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Automasi berat tanpa had",
+        "cta": "Dapatkan Pro"
+      }
+    },
+    "vmTemporary": "1 VM sementara (2 jam)",
+    "vmDeletedAfterInactivity": "1 VM (dipadam selepas tidak aktif)",
+    "vmAlwaysOn": "{count} VM sentiasa aktif",
+    "vmAlwaysOnPlural": "{count} VM sentiasa aktif",
+    "bargain": {
+      "title": "Kerja yang sama berharga {oldPrice} dengan tenaga kerja manual",
+      "description": "Pembantu maya berharga $2,000–$4,000/bulan. Pekerja separuh masa lebih mahal. Coasty melakukan kerja yang sama 24/7 bermula pada $0 — dengan konsistensi sempurna, jejak audit penuh, dan sifar masa latihan."
+    }
+  },
+  "faq": {
+    "title": "Soalan lazim",
+    "subtitle": "Semua yang perlu anda tahu sebelum bermula",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Apa itu Coasty?",
+        "answer": "Coasty ialah agen AI computer-use terbaik di dunia. Anda jelaskan tugas — kaji prospek, uji laman web, isi borang, siarkan di media sosial — dan Coasty membuka pelayar sebenar, menavigasi aplikasi, mengklik butang, menaip teks, dan menyiapkan tugas dari hujung ke hujung. Tiada API, tiada integrasi, tiada kod diperlukan."
+      },
+      "howDifferent": {
+        "question": "Bagaimana ini berbeza daripada ChatGPT atau alat AI lain?",
+        "answer": "ChatGPT menjana teks. Coasty menggunakan komputer. Ia tidak memberitahu anda apa yang perlu dilakukan — ia membuka pelayar, menavigasi ke laman web, mengklik butang, mengisi borang, dan menyerahkan kerja yang telah siap. Ini perbezaan antara mendapat arahan dan tugas disiapkan untuk anda."
+      },
+      "whatTasks": {
+        "question": "Apakah tugas yang boleh diautomatikkan Coasty?",
+        "answer": "Sebarang tugas yang boleh anda lakukan pada komputer. Penyelidikan web, penjanaan prospek, kemasukan data, pengisian borang, pengujian QA, siaran media sosial, jangkauan e-mel, pemprosesan invois, analisis persaingan, pengambilan pekerja — jika ia melibatkan pelayar atau aplikasi desktop, Coasty boleh melakukannya."
+      },
+      "whatAreCredits": {
+        "question": "Apa itu kredit dan bagaimana ia digunakan?",
+        "answer": "Kredit digunakan semasa agen bekerja pada tugas. Tugas yang lebih panjang dan kompleks menggunakan lebih banyak kredit. Pelan berbayar termasuk kredit bulanan, dan anda juga boleh membeli pek kredit tambahan pada bila-bila masa."
+      },
+      "localComputer": {
+        "question": "Bolehkah Coasty berjalan pada komputer saya sendiri?",
+        "answer": "Ya. Aplikasi desktop kami berjalan sebagai overlay ringan pada mesin anda, mengawal pelayar dan aplikasi tempatan anda secara langsung. Sebagai alternatif, tugas berjalan pada mesin awan terpencil — pilihan anda."
+      },
+      "dataSafe": {
+        "question": "Adakah data saya selamat?",
+        "answer": "Setiap tugas berjalan dalam persekitaran kotak pasir terpencil. Tiada yang bocor antara sesi. Kelayakan anda kekal peribadi, dan setiap tindakan dilog dengan tangkapan skrin dalam jejak audit penuh yang boleh anda semak pada bila-bila masa."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Penggunaan komputer berkuasa AI.",
+    "tagline2": "Automatikkan sebarang aliran kerja dengan agen pintar.",
+    "columns": {
+      "product": "Produk",
+      "resources": "Sumber",
+      "company": "Syarikat",
+      "legal": "Undang-undang"
+    },
+    "links": {
+      "computerUse": "Penggunaan Komputer",
+      "guide": "Panduan",
+      "download": "Muat Turun",
+      "pricing": "Harga",
+      "agentSwarms": "Kawanan Agen",
+      "status": "Status",
+      "blog": "Blog",
+      "useCases": "Kes Penggunaan",
+      "demos": "Demo",
+      "compare": "Bandingkan",
+      "talkToCofounders": "Bercakap dengan Pengasas Bersama & Demo",
+      "contact": "Hubungi",
+      "privacy": "Privasi",
+      "terms": "Terma"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Bahasa"
+  },
+  "auth": {
+    "brandHeading": "Anda tetapkan matlamat.",
+    "brandSubheading": "Kami uruskan selebihnya.",
+    "mobileHeading": "Anda tetapkan matlamat. Kami uruskan selebihnya.",
+    "mobileSubheading": "Agen AI yang melayari, mengklik, dan bekerja seperti rakan sepasukan sebenar.",
+    "flowSteps": {
+      "step1": {
+        "label": "Anda jelaskan tugasan",
+        "sub": "\"Kaji 5 pesaing utama kami\""
+      },
+      "step2": {
+        "label": "Agen mengambil alih",
+        "sub": "Melayari, mengklik, menaip secara autonomi"
+      },
+      "step3": {
+        "label": "Kerja dihantar",
+        "sub": "Hamparan dengan 5 profil pesaing lengkap"
+      }
+    },
+    "complete": "Selesai",
+    "doneIn": "Siap dalam 8 minit",
+    "demoCaption": "Jalankan ejen AI pada komputer anda atau kawal dari telefon, di mana sahaja.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Operator anda sedia menunggu",
+      "signUp": "Letakkan aliran kerja anda secara autopilot",
+      "magicLink": "Langkau kata laluan",
+      "forgotPassword": "Mari kami bantu anda masuk semula"
+    },
+    "viewDescriptions": {
+      "signIn": "Sambung dari tempat anda berhenti — agen anda ingat",
+      "signUp": "Deploy agen AI pertama anda dalam masa kurang dari seminit",
+      "magicLink": "Satu klik dari peti masuk anda dan anda sudah masuk",
+      "forgotPassword": "Kami akan hantar pautan set semula ke e-mel anda"
+    },
+    "google": {
+      "connecting": "Menyambung...",
+      "continueWithGoogle": "Teruskan dengan Google"
+    },
+    "or": "atau",
+    "email": "E-mel",
+    "emailPlaceholder": "anda@contoh.com",
+    "password": "Kata laluan",
+    "passwordPlaceholder": "Kata laluan anda",
+    "confirmPassword": "Sahkan kata laluan",
+    "confirmPasswordPlaceholder": "Sahkan kata laluan anda",
+    "minChars": "Min. 6 aksara",
+    "signingIn": "Sedang log masuk...",
+    "signIn": "Log masuk",
+    "creatingAccount": "Mencipta akaun...",
+    "createAccount": "Cipta akaun",
+    "sending": "Menghantar...",
+    "sendMagicLink": "Hantar magic link",
+    "sendResetLink": "Hantar pautan set semula",
+    "forgotPassword": "Lupa kata laluan?",
+    "useMagicLink": "Guna magic link",
+    "dontHaveAccount": "Tiada akaun?",
+    "signUp": "Daftar",
+    "alreadyHaveAccount": "Sudah ada akaun?",
+    "backToSignIn": "Kembali ke log masuk",
+    "termsAgreement": "Dengan meneruskan, anda bersetuju dengan",
+    "terms": "Terma",
+    "and": "dan",
+    "privacyPolicy": "Dasar Privasi",
+    "errors": {
+      "fillAllFields": "Sila isi semua medan",
+      "passwordMinLength": "Kata laluan mesti sekurang-kurangnya 6 aksara",
+      "passwordsDoNotMatch": "Kata laluan tidak sepadan",
+      "supabaseNotConfigured": "Supabase belum dikonfigurasi",
+      "unexpectedError": "Ralat yang tidak dijangka berlaku. Sila cuba lagi.",
+      "confirmEmail": "Sila sahkan e-mel anda sebelum log masuk. Semak peti masuk anda.",
+      "invalidCredentials": "E-mel atau kata laluan tidak sah.",
+      "signInFailed": "Log masuk gagal. Sila cuba lagi.",
+      "invalidEmail": "Alamat e-mel tidak sah.",
+      "emailAlreadyExists": "Akaun dengan e-mel ini sudah wujud. Cuba log masuk sebaliknya.",
+      "signUpFailed": "Pendaftaran gagal. Sila cuba lagi.",
+      "enterEmail": "Sila masukkan e-mel anda",
+      "noAccountFound": "Tiada akaun ditemui dengan e-mel ini. Sila daftar terlebih dahulu.",
+      "magicLinkFailed": "Gagal menghantar magic link. Sila cuba lagi.",
+      "resetFailed": "Gagal menghantar e-mel set semula. Sila cuba lagi.",
+      "updateFailed": "Gagal mengemaskini kata laluan. Sila cuba lagi."
+    },
+    "success": {
+      "checkEmailConfirm": "Semak e-mel anda untuk mengesahkan akaun sebelum log masuk.",
+      "checkEmailMagicLink": "Semak e-mel anda untuk magic link untuk log masuk.",
+      "checkEmailReset": "Semak e-mel anda untuk pautan set semula kata laluan.",
+      "passwordUpdated": "Kata laluan berjaya dikemaskini. Mengalihkan ke log masuk..."
+    },
+    "resetPassword": {
+      "title": "Set semula kata laluan anda",
+      "subtitle": "Masukkan kata laluan baru anda di bawah.",
+      "newPassword": "Kata laluan baru",
+      "confirmNewPassword": "Sahkan kata laluan baru",
+      "confirmPlaceholder": "Sahkan kata laluan baru anda",
+      "updating": "Mengemaskini...",
+      "updatePassword": "Kemaskini kata laluan"
+    },
+    "errorPage": {
+      "title": "Ralat Pengesahan",
+      "defaultMessage": "Ralat berlaku semasa pengesahan.",
+      "tryAgain": "Cuba Lagi",
+      "backToChat": "Kembali ke Chat",
+      "needHelp": "Perlukan bantuan?",
+      "contactSupport": "Hubungi Sokongan"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Langkau buat masa ini",
+    "back": "Kembali",
+    "continue": "Teruskan",
+    "getStarted": "Mulakan",
+    "settingUp": "Menyediakan...",
+    "welcome": {
+      "titleReturning": "Selamat kembali{name}!",
+      "titleNew": "Selamat datang ke Coasty",
+      "descriptionReturning": "Kami ingin mengetahui sedikit lebih tentang anda untuk meningkatkan pengalaman anda",
+      "descriptionNew": "Mari sediakan akaun anda supaya kami boleh memperibadikan pengalaman anda"
+    },
+    "nameLabel": "Apa yang patut kami panggil anda?",
+    "namePlaceholder": "Nama anda",
+    "companyLabel": "Syarikat",
+    "optional": "(pilihan)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Laman Web",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Apa yang paling menggambarkan anda?",
+      "subtitle": "Pilih semua yang berkenaan — ini membantu kami menyesuaikan pengalaman anda"
+    },
+    "roles": {
+      "founder": "Founder / CEO",
+      "developer": "Developer",
+      "marketer": "Marketer",
+      "designer": "Designer",
+      "product_manager": "Product Manager",
+      "data_analyst": "Data / Analytics",
+      "operations": "Operations",
+      "other": "Lain-lain"
+    },
+    "teamSizeLabel": "Saiz pasukan",
+    "teamSizes": {
+      "solo": "Hanya saya",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Bagaimana anda menemui kami?",
+      "subtitle": "Kami ingin tahu di mana anda mendengar tentang Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Rakan / Rakan Sekerja",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Lain-lain"
+    },
+    "useCaseStep": {
+      "title": "Apa yang akan anda automatikkan dahulu?",
+      "subtitle": "Pilih semua yang berkenaan — anda boleh meneroka semuanya kemudian"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping & Penyelidikan",
+      "browser_automation": "Automasi Pelayar",
+      "data_entry": "Kemasukan Data & Borang",
+      "email_outreach": "E-mel & Jangkauan",
+      "testing": "QA & Pengujian",
+      "ecommerce": "Tugas E-dagang",
+      "social_media": "Pengurusan Media Sosial",
+      "general_automation": "Automasi Am"
+    },
+    "showcase": {
+      "title": "Semua yang anda perlukan,",
+      "titleHighlight": "sudah terbina.",
+      "subtitle": "Inilah yang Coasty boleh lakukan untuk anda",
+      "noCode": {
+        "title": "Tanpa Kod",
+        "description": "Hanya jelaskan apa yang anda mahu dalam bahasa biasa"
+      },
+      "agentSwarms": {
+        "title": "Kawanan Agen",
+        "description": "Armada agen selari"
+      },
+      "desktopControl": {
+        "title": "Kawalan Desktop",
+        "description": "Mengklik, menaip, menavigasi"
+      },
+      "browserAutomation": {
+        "title": "Automasi Pelayar",
+        "description": "Borang, tab, scraping — sepenuhnya automatik"
+      },
+      "computerVision": {
+        "title": "Computer Vision",
+        "description": "Melihat & memahami skrin anda secara masa nyata"
+      },
+      "workflows": {
+        "title": "Aliran Kerja",
+        "description": "Aliran berbilang langkah"
+      },
+      "onDevice": {
+        "title": "Pada Peranti",
+        "description": "Berjalan secara tempatan"
+      },
+      "autonomous": {
+        "title": "24/7 Autonomi",
+        "description": "Tetapkan dan lupakan — berjalan semasa anda tidur"
+      }
+    },
+    "guideCallout": {
+      "title": "Baru di sini? Kami ada panduan untuk anda",
+      "subtitle": "Deploy agen AI pertama anda dalam masa kurang dari seminit"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Apa yang perlu dilakukan pekerja AI anda?",
+    "placeholderAlt": "Beritahu AI anda apa yang perlu dilakukan pada komputer...",
+    "vmError": {
+      "title": "Ralat Mesin Maya",
+      "description": "Mesin maya dalam keadaan ralat atau sedang dipadam.",
+      "hint": "Sila semak tab Mesin untuk menyelesaikan isu, atau pilih \"Tiada Komputer Dipilih\" untuk menggunakan carian web sahaja.",
+      "gotIt": "Faham"
+    },
+    "status": {
+      "creating": "Mencipta {name}...",
+      "initiating": "Memulakan agen pada {name}...",
+      "stopping": "Menghentikan {name}...",
+      "preparing": "Menyediakan {name}..."
+    },
+    "swarm": {
+      "title": "Mod Swarm",
+      "pro": "PRO",
+      "upgradeLabel": "Mod swarm — naik taraf untuk membuka",
+      "feature1": "Pelaksanaan selari merentasi mesin sementara",
+      "feature2": "Setiap mesin berjalan secara autonomi",
+      "feature3": "3x had mesin pelan anda setiap swarm",
+      "description": "Jalankan satu prompt merentasi 3x had mesin anda secara selari — setiap satu menangani tugas secara bebas.",
+      "enableLabel": "Aktifkan mod swarm",
+      "disableLabel": "Nyahaktifkan mod swarm",
+      "onTooltip": "Mod swarm AKTIF — prompt anda akan berjalan pada berbilang mesin secara selari",
+      "offTooltip": "Aktifkan mod swarm untuk menjalankan prompt anda merentasi berbilang mesin secara serentak",
+      "decreaseMachines": "Kurangkan bilangan mesin",
+      "increaseMachines": "Tambah bilangan mesin",
+      "machineLimit": "Sehingga {max} mesin swarm pada pelan anda. Perlukan lebih? Hubungi founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Mod Swarm"
+    },
+    "desktop": {
+      "connectLabel": "Sambung ke desktop",
+      "screenLabel": "Skrin {name}",
+      "screenDefault": "Desktop",
+      "watchTooltip": "Saksikan agen anda bekerja pada skrin berasingan. Jangan sentuh apa-apa atau ia jadi demam pentas!",
+      "watchLabel": "Desktop"
+    },
+    "buttons": {
+      "stop": "Berhenti",
+      "sendToSwarm": "Hantar ke swarm",
+      "taskRunning": "Tugasan lain sedang berjalan — klik untuk menghentikan dan jalankan milik anda",
+      "selectComputer": "Pilih komputer untuk menghantar mesej",
+      "waitCreating": "Sila tunggu VM sedang dicipta",
+      "waitStarting": "Sila tunggu VM sedang dimulakan",
+      "waitAgent": "Sila tunggu agen sedang dimulakan",
+      "vmStopping": "VM sedang berhenti",
+      "send": "Hantar",
+      "switching": "Bertukar...",
+      "overrideRun": "Ganti & Jalankan",
+      "stopLabel": "Hentikan tugasan berjalan dan mulakan yang ini",
+      "sendLabel": "Hantar mesej"
+    },
+    "search": "Cari",
+    "upload": {
+      "label": "Muat naik fail ke VM",
+      "heading": "Muat naik fail ke VM",
+      "description": "Fail akan disimpan ke Desktop",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Lepaskan fail di sini",
+      "dropDescription": "Fail akan dimuat naik ke folder Desktop VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Log masuk untuk mencuba lebih banyak ciri secara percuma",
+      "description": "Cipta Projek, jemput ahli pasukan, dan banyak lagi.",
+      "connecting": "Menyambung...",
+      "continueWithGoogle": "Teruskan dengan Google"
+    },
+    "removeFile": "Buang fail"
+  },
+  "chat": {
+    "greeting": "Hai",
+    "greetingAuth": "Saya akan uruskan kerja komputer. Apa tugasannya?",
+    "greetingUnauth": "AI yang mengendalikan komputer supaya anda tidak perlu. Hanya beritahu apa yang perlu dilakukan.",
+    "guide": "Panduan",
+    "saveLogins": "Simpan log masuk untuk isi automatik",
+    "encryptedNote": "disulitkan, tidak pernah dilihat AI",
+    "roleLabels": [
+      "Rakan Sekerja",
+      "Pekerja",
+      "Rakan",
+      "Pembantu",
+      "Rakan Kongsi",
+      "Rakan Sepasukan",
+      "Kolaborator",
+      "Penolong"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "Laporan pesaing {company}",
+        "warmLeads": "Cari 20 prospek untuk {company}",
+        "pitchDeck": "Draf pitch deck {company}"
+      },
+      "developer": {
+        "findBugs": "Cari pepijat di {company}",
+        "performance": "Audit prestasi {company}",
+        "apiDocs": "Ekstrak dokumentasi API {company}"
+      },
+      "marketer": {
+        "seoGap": "Analisis jurang SEO {company}",
+        "competitorAds": "Intip iklan pesaing {company}",
+        "trendingContent": "Idea trending untuk {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "Ringkasan ulasan {company}",
+        "featureComparison": "Perbandingan ciri {company}",
+        "competitorLaunches": "Jejak pelancaran pesaing {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "Eksport data {company} ke CSV",
+        "marketSizing": "Saiz pasaran {company}",
+        "benchmark": "Penanda aras {company} vs industri"
+      },
+      "operations": {
+        "enterRecords": "Masukkan rekod ke {company}",
+        "cheapestVendor": "Cari vendor untuk {company}",
+        "invoiceSummary": "Ringkasan invois {company}"
+      },
+      "designer": {
+        "designComparison": "{company} vs pesaing dalam reka bentuk",
+        "responsiveAudit": "Audit responsif {company}",
+        "inspiration": "Inspirasi reka bentuk untuk {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Ekstrak data laman {company}",
+      "browser_automation": "Eksport laporan {company}",
+      "data_entry": "Masukkan data ke {company}",
+      "email_outreach": "Jangkauan untuk {company}",
+      "testing": "Ujian QA {company}",
+      "ecommerce": "Perbandingan harga {company}",
+      "social_media": "Siarkan tentang {company}",
+      "general_automation": "Automasi tugasan di {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Salin teks",
+    "copied": "Disalin!",
+    "regenerate": "Jana semula",
+    "feedback": {
+      "title": "Maklum Balas",
+      "prompts": [
+        "Nilaikan ini",
+        "Maklum balas",
+        "Bagaimana kami?",
+        "Pandangan?",
+        "Kongsi maklum balas"
+      ],
+      "tooltip": "Kongsi maklum balas anda"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Carian Pintar",
+      "description": "Carian berkuasa AI merentasi web"
+    },
+    "collaborate": {
+      "title": "Kolaborasi",
+      "description": "Bekerjasama secara masa nyata"
+    },
+    "globalAccess": {
+      "title": "Akses Global",
+      "description": "Cari dalam 50+ bahasa"
+    },
+    "aiModels": {
+      "title": "Model AI",
+      "description": "Berbilang penyedia AI"
+    },
+    "freeForever": {
+      "title": "Percuma Selamanya",
+      "description": "Tiada kos tersembunyi"
+    },
+    "privateSecure": {
+      "title": "Peribadi & Selamat",
+      "description": "Data anda kekal milik anda"
+    }
+  },
+  "sidebar": {
+    "newTask": "Tugasan Baru",
+    "newTaskDescription": "Mulakan automasi AI baru",
+    "activity": "Aktiviti",
+    "taskHistory": "Sejarah Tugasan",
+    "taskHistoryDescription": "Semak tugasan lepas dan sambung dari tempat anda berhenti",
+    "taskHistoryPopup": {
+      "title": "Tugasan terbaru anda",
+      "description": "Layari dan sambung perbualan lepas. Setiap tugasan disimpan supaya anda boleh sambung dari tempat anda berhenti."
+    },
+    "swarmRuns": "Larian Swarm",
+    "swarmRunsDescription": "Pantau aliran kerja selari berbilang agen",
+    "swarmRunsPopup": {
+      "title": "Aliran kerja berbilang agen",
+      "description": "Jalankan tugasan merentasi berbilang mesin secara selari. Setiap agen bekerja secara bebas dan keputusan bergabung secara automatik."
+    },
+    "guide": "Panduan",
+    "guideDescription": "Pelajari cara memaksimumkan Coasty",
+    "guidePopup": {
+      "title": "Bermula",
+      "description": "Panduan langkah demi langkah dan amalan terbaik untuk membantu anda mengautomatikkan dengan berkesan."
+    },
+    "infrastructure": "Infrastruktur",
+    "computer": "Komputer",
+    "computers": "Komputer",
+    "active": "aktif",
+    "view": "Lihat",
+    "workforce": "Jadual",
+    "workforceDescription": "Jadualkan tugas dan pencetus automatik",
+    "workforcePopup": {
+      "title": "Automasi berjadual",
+      "description": "Sediakan tugas berulang dengan jadual cron dan pencetus antara ejen. Jadual anda berjalan semasa anda tidur."
+    },
+    "credentials": "Kelayakan",
+    "credentialsDescription": "Simpan log masuk dengan selamat untuk akses agen",
+    "credentialsPopup": {
+      "title": "Peti besi kelayakan selamat",
+      "description": "Simpan log masuk dan API key dengan penyulitan. Agen mengisi kelayakan secara automatik tanpa mendedahkan nilai mentah."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Dapatkan Aplikasi Desktop",
+      "download": "Muat Turun",
+      "downloadDesktopApp": "Muat Turun Aplikasi Desktop",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Kawal komputer anda dari jauh",
+      "controlDescription": "Pasang aplikasi desktop dan jalankan tugasan pada PC anda dari papan pemuka ini — di mana sahaja, bila-bila masa."
+    },
+    "credits": {
+      "runningLow": "Kredit — Hampir habis",
+      "remaining": "Kredit tinggal",
+      "buy": "Beli",
+      "creditsLeft": "kredit tinggal",
+      "usedLabel": "Digunakan: {count}",
+      "consumed": "{percent}% digunakan",
+      "usageThisWeek": "Penggunaan minggu ini"
+    },
+    "talkToUs": "Hubungi kami",
+    "talkToUsDesc": "Tempah panggilan 15 minit",
+    "inviteEarn": "Jemput & Dapatkan",
+    "inviteEarnDesc": "Dapatkan kredit percuma",
+    "user": "Pengguna",
+    "account": "Akaun",
+    "tasks": "{count} Tugasan",
+    "recentActivity": "Aktiviti terbaru",
+    "viewAllHistory": "Lihat semua sejarah →",
+    "swarmRunsCount": "{count} Larian Swarm",
+    "running": "berjalan",
+    "completed": "selesai",
+    "viewAllSwarms": "Lihat semua swarm →",
+    "schedulesCount": "{count} Jadual",
+    "totalRuns": "{count} jumlah larian",
+    "paused": "dijeda",
+    "viewAllSchedules": "Lihat semua jadual →",
+    "credentialsCount": "{count} Kelayakan",
+    "encryptedVault": "Peti besi disulitkan",
+    "manageCredentials": "Urus kelayakan →",
+    "days": [
+      "Isn",
+      "Sel",
+      "Rab",
+      "Kha",
+      "Jum",
+      "Sab",
+      "Ahd"
+    ],
+    "resume": "SAMBUNG",
+    "result": "KEPUTUSAN",
+    "notScheduled": "Tidak dijadualkan",
+    "overdue": "Tertunggak",
+    "lessThanMin": "< 1 min",
+    "inMinutes": "dalam {count}m",
+    "inHours": "dalam {count}j",
+    "today": "hari ini",
+    "yesterday": "semalam"
+  },
+  "appHeader": {
+    "login": "Log Masuk",
+    "assign": "Jadualkan",
+    "assignDescription": "Jadualkan tugas ini untuk berjalan secara automatik",
+    "computer": "Komputer",
+    "showComputer": "Tunjuk Komputer",
+    "hideComputer": "Sembunyi Komputer",
+    "employeeHired": "Pekerja diambil!",
+    "employeeRemoved": "Pekerja dibuang"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Automasi harian ringan"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatikkan tugasan setiap hari"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skalakan aliran kerja kompleks",
+        "badge": "Paling Popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Automasi berat tanpa had"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (dipadam selepas tidak aktif)",
+      "vmAlwaysOn": "{count} VM sentiasa aktif",
+      "vmAlwaysOnPlural": "{count} VM sentiasa aktif",
+      "agentsParallel": "{count} agen secara selari",
+      "basicSearch": "Carian asas",
+      "advancedSearch": "Carian lanjutan & pengekstrakan",
+      "standardSupport": "Sokongan standard (manusia sebenar)",
+      "prioritySupport": "Sokongan keutamaan, respons 24 jam",
+      "premiumSupport": "Sokongan premium, respons 12 jam"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Boost Kecil",
+        "description": "Tambah nilai pantas"
+      },
+      "medium": {
+        "name": "Boost Sederhana",
+        "description": "Isi semula standard",
+        "savings": "Jimat 8%"
+      },
+      "large": {
+        "name": "Boost Besar",
+        "description": "Pembelian pukal",
+        "savings": "Jimat 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Baru sahaja",
+      "minutesAgo": "{count}m lalu",
+      "hoursAgo": "{count}j lalu",
+      "daysAgo": "{count}h lalu"
+    },
+    "noActivity": "Tiada aktiviti dalam tempoh ini",
+    "stats": {
+      "balance": "Baki",
+      "earned": "Diperoleh",
+      "used": "Digunakan",
+      "credits": "kredit",
+      "allTime": "sepanjang masa",
+      "lastRange": "{range} terakhir",
+      "sessions": "{count} sesi",
+      "avgDaily": "~{count}/hari purata",
+      "plan": "Pelan",
+      "free": "Percuma",
+      "noPlan": "Tiada pelan",
+      "canceling": "Membatalkan"
+    },
+    "monthlyUsage": "Penggunaan Kredit Bulanan",
+    "remaining": "{used} / {total} tinggal",
+    "usedPercent": "{percent}% digunakan tempoh ini",
+    "renews": "Diperbaharui {date}",
+    "choosePlan": "Pilih Pelan Anda",
+    "choosePlanDescription": "Langgan untuk membuka ciri AI dan mendapatkan kredit bulanan",
+    "savingsVsHuman": "Jimat {amount}/bln vs manusia",
+    "timeSaved": "{time} dijimatkan sebulan",
+    "cheaper": "{multiplier} lebih murah",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/bulan",
+    "creditsPerMonth": "{count} kredit /bulan",
+    "processing": "Memproses...",
+    "subscribeTo": "Langgan {name}",
+    "transactionTypes": {
+      "credit_purchase": "Pembelian Kredit",
+      "agent_usage": "Penggunaan Agen",
+      "refund": "Bayaran Balik",
+      "bonus": "Ganjaran Bonus",
+      "subscription": "Langganan",
+      "subscription_grant": "Pemberian Langganan",
+      "renewal": "Kredit Pembaharuan",
+      "reactivation": "Pengaktifan Semula"
+    },
+    "toasts": {
+      "paymentSuccess": "Pembayaran berjaya! Kredit anda telah ditambah.",
+      "subscriptionActivated": "Langganan berjaya diaktifkan!",
+      "paymentCanceled": "Pembayaran dibatalkan. Tiada caj dikenakan.",
+      "signInToSubscribe": "Sila log masuk untuk melanggan",
+      "subscriptionCheckoutFailed": "Gagal memulakan pembayaran langganan. Sila cuba lagi.",
+      "signInToPurchase": "Sila log masuk untuk membeli kredit",
+      "needSubscription": "Anda memerlukan langganan aktif untuk membeli kredit tambahan",
+      "checkoutFailed": "Gagal memulakan pembayaran. Sila cuba lagi.",
+      "manageFailed": "Gagal membuka pengurusan langganan. Sila cuba lagi.",
+      "transactionsExported": "Transaksi dieksport"
+    }
+  },
+  "apiKeys": {
+    "title": "Penyedia Model",
+    "new": "baru",
+    "description": "Tambah API key anda sendiri untuk membuka akses ke model.",
+    "securityNote": "Key anda disimpan dengan selamat menggunakan penyulitan hujung-ke-hujung.",
+    "apiKeyLabel": "API Key {provider}",
+    "getApiKey": "Dapatkan API key",
+    "delete": "Padam",
+    "save": "Simpan",
+    "deleteDialog": {
+      "title": "Padam API Key",
+      "description": "Adakah anda pasti ingin memadamkan API key {provider} anda? Tindakan ini tidak boleh dibuat semula dan anda akan kehilangan akses ke model {provider}.",
+      "cancel": "Batal",
+      "confirm": "Padam"
+    },
+    "toasts": {
+      "saved": "API key disimpan",
+      "savedDescription": "API key {provider} anda telah disimpan dan model telah ditambah ke kegemaran anda.",
+      "updatedDescription": "API key {provider} anda telah dikemaskini.",
+      "saveFailed": "Gagal menyimpan API key",
+      "saveFailedDescription": "Gagal menyimpan API key {provider}. Sila cuba lagi.",
+      "deleted": "API key dipadam",
+      "deletedDescription": "API key {provider} anda telah dipadam.",
+      "deleteFailed": "Gagal memadamkan API key",
+      "deleteFailedDescription": "Gagal memadamkan API key {provider}. Sila cuba lagi."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Butiran Profil",
+    "displayName": "Nama Paparan",
+    "namePlaceholder": "Nama anda",
+    "company": "Syarikat",
+    "companyPlaceholder": "Syarikat anda",
+    "website": "Laman Web",
+    "websitePlaceholder": "lamananda.com",
+    "saving": "Menyimpan...",
+    "saveChanges": "Simpan perubahan",
+    "account": "Akaun",
+    "email": "E-mel",
+    "verified": "Disahkan",
+    "signOut": "Log keluar",
+    "signOutDescription": "Log keluar dari peranti ini",
+    "toasts": {
+      "profileUpdated": "Profil dikemaskini",
+      "profileUpdateFailed": "Gagal mengemaskini profil",
+      "signOutFailed": "Gagal log keluar"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Data anda dilindungi",
+    "dataProtectedDescription": "Keselamatan gred enterprise dengan penyulitan semasa rehat dan semasa transit",
+    "features": {
+      "encryption": {
+        "title": "Penyulitan Hujung-ke-Hujung",
+        "description": "API key disulitkan dengan AES-256-GCM. Kelayakan anda tidak pernah disimpan dalam teks biasa."
+      },
+      "rls": {
+        "title": "Row Level Security",
+        "description": "Pengasingan peringkat pangkalan data memastikan data anda hanya boleh diakses oleh anda. Tiada akses silang penyewa."
+      },
+      "privacy": {
+        "title": "Privasi secara Reka Bentuk",
+        "description": "Kami mengumpul data minimum yang diperlukan untuk menyediakan perkhidmatan. Perbualan dan fail anda kekal milik anda."
+      },
+      "session": {
+        "title": "Keselamatan Sesi",
+        "description": "Perlindungan CSRF, kuki HTTP-only yang selamat, dan pengepala Content Security Policy pada setiap permintaan."
+      }
+    },
+    "legal": "Undang-undang",
+    "privacyPolicy": {
+      "title": "Dasar Privasi",
+      "description": "Bagaimana kami mengumpul, menggunakan, dan melindungi data anda"
+    },
+    "termsOfService": {
+      "title": "Terma Perkhidmatan",
+      "description": "Terma dan syarat penggunaan kami"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Susun Atur"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Ringkasan",
+      "highlight": "Ringkaskan"
+    },
+    "code": {
+      "label": "Kod",
+      "highlight": "Bina"
+    },
+    "research": {
+      "label": "Penyelidikan",
+      "highlight": "Analisis"
+    },
+    "create": {
+      "label": "Cipta",
+      "highlight": "Jana"
+    },
+    "solve": {
+      "label": "Selesai",
+      "highlight": "Debug"
+    },
+    "learn": {
+      "label": "Pelajari",
+      "highlight": "Terangkan"
+    }
+  },
+  "loadingMessages": [
+    "Menghidupkan otak silikon",
+    "Membangunkan kesedaran digital",
+    "Memulakan laluan neural",
+    "Memutar teras kuantum",
+    "Mengecas kapasitor fluks",
+    "Mengaktifkan kerangka utama",
+    "Menghidupkan matriks pengiraan",
+    "Melibatkan pemacu warp",
+    "Memanggil semangat silikon",
+    "Menyalakan enjin elektron",
+    "Memanaskan transistor",
+    "Memasang bit dan bait",
+    "Menentukur sinaps digital",
+    "Mengecas kristal CPU",
+    "Memuatkan protokol kesedaran",
+    "Memulakan sumber sistem",
+    "Menyediakan persekitaran pengiraan",
+    "Mewujudkan sambungan selamat",
+    "Memperuntukkan sumber maya",
+    "Mengkonfigurasi parameter sistem",
+    "Melancarkan instance maya",
+    "Mengaktifkan desktop jauh",
+    "Mengerahkan sumber awan",
+    "Memulakan urutan permulaan sistem",
+    "Menyediakan persekitaran pelaksanaan",
+    "Membangunkan komputer yang mengantuk",
+    "Mencucuk beruang digital",
+    "Menyeduh kopi pengiraan",
+    "Meregangkan otot digital",
+    "Membuka mata digital",
+    "Bermula",
+    "Menghidupkan",
+    "Dalam talian",
+    "Memboot sistem",
+    "Bersiap sedia",
+    "Hampir siap",
+    "Menyediakan ruang kerja",
+    "Memuatkan sumber",
+    "Sistem bangkit"
+  ],
+  "quickStart": {
+    "greetingName": "Hai {name}!",
+    "greetingDefault": "Hai!",
+    "subtitle": "Tugas anda berjalan dalam komputer maya yang selamat dan terpencil",
+    "tabs": {
+      "start": "Mula",
+      "desktop": "Desktop",
+      "swarms": "Swarm",
+      "schedules": "Jadual"
+    },
+    "items": {
+      "computerReady": "Komputer sedia",
+      "pickComputer": "Pilih komputer",
+      "createComputer": "Cipta komputer",
+      "loginsSaved": "Log masuk disimpan",
+      "addLogins": "Tambah log masuk",
+      "askAnything": "Tanya apa sahaja",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Kawalan jauh mudah alih",
+      "freeDownload": "Muat turun percuma",
+      "onePrompt": "Satu arahan",
+      "manyAgents": "Banyak ejen",
+      "combinedResult": "Hasil gabungan",
+      "setCadence": "Tetapkan jadual",
+      "autoRuns": "Larian auto",
+      "recurringResults": "Hasil berulang",
+      "computerReadyDesc": "Disambung dan bersedia untuk melaksanakan tugas",
+      "pickComputerDesc": "Pilih daripada mesin anda yang tersedia",
+      "createComputerDesc": "Cipta komputer awan dalam beberapa saat",
+      "loginsSavedDesc": "Kelayakan yang disulitkan sedia untuk isi automatik",
+      "addLoginsDesc": "Simpan kata laluan untuk akses laman automatik",
+      "askAnythingDesc": "Huraikan tugas dan lihat AI bekerja",
+      "macWindowsDesc": "Aplikasi natif untuk desktop anda",
+      "mobileRemoteDesc": "Kawal ejen anda dari mana-mana peranti",
+      "freeDownloadDesc": "Pemasangan ringan, berjalan dalam saat",
+      "onePromptDesc": "Huraikan matlamat anda dalam bahasa mudah",
+      "manyAgentsDesc": "Ejen bekerja selari merentasi mesin",
+      "combinedResultDesc": "Semua keputusan digabung dalam satu laporan",
+      "setCadenceDesc": "Setiap jam, harian, mingguan atau cron tersuai",
+      "autoRunsDesc": "Ejen melaksana tanpa campur tangan",
+      "recurringResultsDesc": "Laporan dihantar mengikut jadual anda"
+    },
+    "cta": {
+      "downloadApp": "Muat turun aplikasi",
+      "trySwarms": "Cuba swarm",
+      "setUp": "Sediakan"
+    }
+  },
+  "machines": {
+    "title": "Komputer saya",
+    "subtitle": "Urus persekitaran desktop yang dikawal AI anda",
+    "guide": "Panduan",
+    "newMachine": "Mesin Baharu",
+    "filters": {
+      "all": "All",
+      "running": "Running",
+      "creating": "Creating",
+      "stopped": "Stopped"
+    },
+    "desktopPromo": {
+      "text": "Skip the VM — run AI agents on your own computer with the native app. Control your desktop from your phone.",
+      "cta": "Get the app"
+    },
+    "emptyState": {
+      "title": "True AI Employee with full computer access",
+      "description": "Spin up an isolated virtual machine and let AI agents browse the web, run terminals, and control the desktop — hands-free.",
+      "feature1": {
+        "title": "Full desktop control",
+        "description": "AI moves the mouse, types, clicks, and navigates like a real user."
+      },
+      "feature2": {
+        "title": "Any task automated",
+        "description": "Browser, terminal, and UI — all agents work together in one VM."
+      },
+      "feature3": {
+        "title": "Isolated & safe",
+        "description": "Each machine runs in its own container — your local system stays untouched."
+      },
+      "cta": "Create your first machine"
+    },
+    "noMachines": "No machines found.",
+    "noFilteredMachines": "No {filter} machines",
+    "noFilteredDescription": "No machines are currently {filter}.",
+    "loadingMachines": "Loading machines...",
+    "toasts": {
+      "deleted": "Machine deleted successfully",
+      "readyOpen": "You can now connect to your machine.",
+      "open": "Open",
+      "createFailed": "Please try creating the machine again.",
+      "fetchFailed": "Failed to load machines"
+    }
+  },
+  "createMachine": {
+    "title": "Komputer Baharu",
+    "subtitle": "Lancarkan desktop awan — sedia dalam ~30 saat",
+    "freeExpiry": "Komputer percuma tamat tempoh selepas ",
+    "freeExpiry2": "2 jam",
+    "upgrade": "Naik taraf",
+    "limitReached": "Anda telah mencapai had komputer. Hentikan atau padam komputer sedia ada untuk mencipta yang baharu.",
+    "upgradeMore": "Naik taraf untuk lebih banyak →",
+    "nameLabel": "Nama Komputer",
+    "namePlaceholder": "Pelayan Awan Saya",
+    "nameError": "Nama komputer tidak boleh bermula dengan \"local\"",
+    "nameRequired": "Sila masukkan nama komputer",
+    "osLabel": "Operating System",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 desktop"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows desktop — expect bugs"
+    },
+    "osHintWindows": "Windows desktop with Chrome (beta). Ready in ~2 minutes.",
+    "osHintLinux": "Ubuntu desktop, accessible via browser. Ready in ~30 seconds.",
+    "stateLabel": "Status Komputer",
+    "restorePrevious": "Restore Previous",
+    "restoreDescription": "Resume from last snapshot",
+    "startFresh": "Start Fresh",
+    "startFreshDescription": "Clean desktop environment",
+    "cancel": "Cancel",
+    "creating": "Creating...",
+    "create": "Cipta Komputer",
+    "toasts": {
+      "restoringSnapshot": "Memulihkan komputer dari snapshot!",
+      "restoringDescription": "Status desktop sebelumnya sedang dipulihkan. Sedia dalam ~30 saat.",
+      "windowsCreated": "Penciptaan komputer Windows dimulakan!",
+      "windowsDescription": "Desktop Windows anda sedang dilancarkan. Sedia dalam ~2 minit.",
+      "linuxCreated": "Desktop anda sedang dilancarkan. Sedia dalam ~30 saat.",
+      "sshCreated": "Komputer awan anda sedang dilancarkan. Kunci SSH akan tersedia apabila sedia."
+    }
+  },
+  "secrets": {
+    "title": "Kelayakan Tersimpan",
+    "subtitle": "Stored securely and used automatically by the AI agent when logging in",
+    "guide": "Guide",
+    "import": "Import",
+    "addCredential": "Add Credential",
+    "securityNote": "Credentials are never sent to the AI model and are never exposed in chat — the agent fills them in directly without seeing the values",
+    "username": "Username",
+    "password": "Password",
+    "hide": "Hide",
+    "revealFor10s": "Reveal for 10s",
+    "encrypted": "Encrypted",
+    "emptyState": {
+      "title": "Auto-login, hands-free",
+      "description": "Save credentials once — the AI agent logs in automatically and keeps going without ever interrupting you",
+      "feature1": {
+        "title": "Zero interruptions",
+        "description": "The agent encounters a login form, fills it in, and continues the task — no prompts, no pauses"
+      },
+      "feature2": {
+        "title": "Never seen by AI",
+        "description": "Your credentials are injected directly. The AI model never sees the actual values"
+      },
+      "feature3": {
+        "title": "Any website",
+        "description": "Works with login forms across any site — email, SaaS tools, dashboards, anything"
+      },
+      "cta": "Add your first credential"
+    },
+    "deleteDialog": {
+      "title": "Delete credential?",
+      "description": "{name} ({service}) will be permanently deleted. The AI agent will no longer be able to use it.",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "toasts": {
+      "loadFailed": "Failed to load credentials",
+      "revealFailed": "Failed to reveal password",
+      "deleted": "Credential deleted",
+      "deleteFailed": "Failed to delete credential"
+    },
+    "loading": "Loading credentials..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Harga mudah,",
+      "title2": "autopilot sebenar",
+      "subtitle": "Mula percuma. Naik taraf apabila perlukan lebih kuasa."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Cuba ejen penggunaan komputer #1",
+        "cta": "Mula Percuma"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Automasi harian ringan",
+        "cta": "Dapatkan Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Automasi tugas setiap hari",
+        "cta": "Dapatkan Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Skalakan aliran kerja kompleks",
+        "cta": "Pilih Plus",
+        "badge": "Paling Popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Automasi berat tanpa had",
+        "cta": "Dapatkan Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Browser, desktop & terminal penuh",
+        "badge": "Teras"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "Berurutan sahaja",
+        "parallel": "{count} ejen secara selari",
+        "badge": "Berkuasa"
+      },
+      "security": {
+        "name": "Keselamatan",
+        "description": "Sandbox, disulitkan E2E",
+        "badge": "Setiap pelan"
+      },
+      "monthlyCredits": {
+        "name": "Kredit Bulanan",
+        "payAsYouGo": "Bayar mengikut penggunaan",
+        "creditsPerMonth": "{count} kredit/bln"
+      },
+      "persistentMachines": {
+        "name": "Mesin Kekal",
+        "temporary": "1 VM sementara (2 jam)",
+        "deletedAfterInactivity": "1 VM (dipadam selepas tidak aktif)",
+        "alwaysOn": "{count} VM sentiasa aktif",
+        "alwaysOnPlural": "{count} VM sentiasa aktif"
+      },
+      "webSearch": {
+        "name": "Carian Web",
+        "advanced": "Carian & pengekstrakan lanjutan",
+        "basic": "Carian asas"
+      }
+    },
+    "animations": {
+      "agentDescription": "Ejen anda mengawal komputer sebenar — browser, fail, dan terminal",
+      "fillForm": "Isi borang",
+      "searchExtract": "Cari & ekstrak",
+      "uploadReport": "Muat naik laporan",
+      "navigateSite": "Navigasi laman",
+      "creditsPerMonth": "kredit sebulan",
+      "cr": "kr",
+      "vm": "VM {num}",
+      "twoHrLimit": "Had 2 jam",
+      "alwaysOn": "Sentiasa aktif",
+      "tempVmDescription": "VM sementara — direset selepas 2 jam",
+      "persistentVmDescription": "Fail, aplikasi & sesi anda kekal antara tugas",
+      "sequentialOnly": "Pelaksanaan berurutan sahaja pada pelan ini",
+      "yourTask": "Tugas anda",
+      "agentsWorking": "{count} ejen bekerja serentak",
+      "upgradeForExtraction": "Naik taraf untuk pengekstrakan penuh",
+      "searchDescription": "Cari, scrape & ekstrak data berstruktur",
+      "basicSearchIncluded": "Carian asas termasuk",
+      "e2eEncryption": "Penyulitan E2E",
+      "sandboxedVm": "VM Sandbox",
+      "destroyedAfterUse": "Dimusnahkan selepas digunakan",
+      "everyPlan": "Setiap pelan. Tanpa pengecualian."
+    },
+    "perMonth": "/bln",
+    "faqs": {
+      "credits": {
+        "q": "Apa yang dikira sebagai kredit?",
+        "a": "Satu kredit bersamaan kira-kira satu tindakan ejen — satu klik, satu pengisian borang, satu pertanyaan carian, atau satu operasi fail. Tugas berbilang langkah biasa menggunakan 5–15 kredit."
+      },
+      "persistent": {
+        "q": "Apa maksud 'mesin kekal'?",
+        "a": "Pada pelan berbayar, VM anda terus berjalan antara tugas — desktop, fail, sesi browser, dan perisian yang dipasang semuanya kekal. Seperti komputer awan sentiasa aktif milik anda."
+      },
+      "swarm": {
+        "q": "Apa itu swarm mode?",
+        "a": "Swarm mode membahagikan tugas merentasi beberapa mesin yang berjalan serentak. Daripada satu ejen melakukan 10 carian secara berurutan, beberapa ejen melakukannya secara selari."
+      },
+      "cancel": {
+        "q": "Bolehkah saya membatalkan bila-bila masa?",
+        "a": "Ya. Tiada kontrak, tiada yuran pembatalan. Batalkan dari halaman akaun anda dan kekalkan akses sehingga akhir tempoh pengebilan."
+      },
+      "security": {
+        "q": "Adakah data saya selamat?",
+        "a": "Setiap tugas berjalan dalam VM yang sepenuhnya terpencil dan dimusnahkan selepas digunakan. Semua sambungan disulitkan hujung-ke-hujung dan kami tidak pernah menyimpan kelayakan anda."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Kredit tersuai, VM khusus, SLA, SSO, dan sokongan keutamaan.",
+      "cta": "Hubungi Kami"
+    },
+    "footer": {
+      "title": "Ejen AI anda tinggal 60 saat lagi",
+      "subtitle": "Daftar dan biarkan Coasty mengendalikan kerja.",
+      "noCreditCard": "Tiada kad kredit",
+      "cancelAnytime": "Batal bila-bila masa",
+      "noCreditCardRequired": "Tidak perlu kad kredit",
+      "cancelAnytimeNoContracts": "Batal bila-bila masa — tiada kontrak"
+    },
+    "questions": "Soalan"
+  },
+  "guide": {
+    "pageTitle": "Panduan",
+    "pageSubtitle": "Dari persediaan pertama hingga ciri lanjutan — pelajari cara memanfaatkan Coasty sepenuhnya",
+    "completeGuide": "Panduan Lengkap",
+    "completeGuideSubtitle": "Semua yang perlu anda tahu tentang Coasty",
+    "completeGuideDescription": "Dari persediaan pertama hingga ciri lanjutan — pelajari cara memanfaatkan ejen AI anda sepenuhnya.",
+    "talkToCofounders": "Berbincang dengan Pengasas Bersama",
+    "tabs": {
+      "overview": "Gambaran Keseluruhan",
+      "gettingStarted": "Bermula",
+      "chatTasks": "Chat & Tugas",
+      "machines": "Mesin",
+      "credentials": "Kelayakan",
+      "swarmMode": "Swarm Mode",
+      "workforce": "Jadual",
+      "desktopApp": "Aplikasi Desktop",
+      "billing": "Pengebilan & Kredit"
+    },
+    "overview": {
+      "howItWorks": "Cara ia berfungsi",
+      "step1": "Huraikan tugas",
+      "step2": "Coasty merancang langkah-langkah",
+      "step3": "Melaksana secara autonomi",
+      "step": "Langkah",
+      "whatCanDo": "Apa yang Coasty boleh lakukan",
+      "taskCount": "40+ tugas merentasi 10 kategori",
+      "categories": {
+        "sales": {
+          "name": "Jualan",
+          "desc": "Cari 50 prospek, hantar e-mel peribadi"
+        },
+        "marketing": {
+          "name": "Pemasaran",
+          "desc": "Terbitkan catatan blog, jadualkan media sosial"
+        },
+        "jobApps": {
+          "name": "Permohonan Kerja",
+          "desc": "Mohon 20 pekerjaan, sesuaikan setiap resume"
+        },
+        "email": {
+          "name": "E-mel",
+          "desc": "Draf balasan, jangkauan pukal, nyahlanggan"
+        },
+        "dataEntry": {
+          "name": "Kemasukan Data",
+          "desc": "Pindahkan data antara aplikasi, bina lembaran kerja"
+        },
+        "research": {
+          "name": "Penyelidikan",
+          "desc": "Laporan mendalam, pemantauan pesaing"
+        },
+        "qaTesting": {
+          "name": "Ujian QA",
+          "desc": "Uji pendaftaran, fuzz borang, semak kesihatan laman"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Cari calon, jangkauan peribadi"
+        },
+        "support": {
+          "name": "Sokongan",
+          "desc": "Draf respons, kemaskini dokumen bantuan"
+        },
+        "productivity": {
+          "name": "Produktiviti",
+          "desc": "Tempah perjalanan, bayar bil, urus kalendar"
+        }
+      },
+      "whyCoasty": "Mengapa Coasty",
+      "notChatbot": "Bukan chatbot. Bukan skrip RPA.",
+      "worksLikeHuman": {
+        "title": "Berfungsi seperti manusia",
+        "desc": "Melihat, mengklik, menaip, menavigasi — tepat seperti anda"
+      },
+      "noScripts": {
+        "title": "Tiada skrip atau persediaan",
+        "desc": "Masukkan bahasa mudah, dapatkan hasil"
+      },
+      "handlesUnexpected": {
+        "title": "Menangani perkara tak dijangka",
+        "desc": "Menyesuaikan diri dengan CAPTCHA, popup, perubahan susun atur"
+      },
+      "runsInIsolation": {
+        "title": "Berjalan secara terpencil",
+        "desc": "VM sandbox setiap sesi — tiada kebocoran"
+      },
+      "ctaTitle": "Pilih mana-mana tugas dan cuba",
+      "ctaSubtitle": "Bersedia untuk meletakkan Coasty bekerja?",
+      "ctaDescription": "Huraikan mana-mana tugas dari panduan ini dan saksikan Coasty mengendalikannya.",
+      "ctaNote": "Mula percuma. Tidak perlu kad kredit.",
+      "startTask": "Mulakan tugas",
+      "startFree": "Mula percuma",
+      "desktopApp": "Aplikasi desktop"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Daftar",
+          "desc": "Satu klik untuk bermula"
+        },
+        "createMachine": {
+          "title": "Cipta Mesin",
+          "desc": "Ejen anda mendapat komputernya sendiri"
+        },
+        "saveCredentials": {
+          "title": "Simpan Kelayakan",
+          "desc": "Log masuk yang disulitkan untuk mana-mana laman"
+        },
+        "giveTask": {
+          "title": "Berikan Tugas",
+          "desc": "Huraikan. Saksikan ia berlaku."
+        }
+      },
+      "examplePrompts": [
+        "Mohon 10 pekerjaan sepadan di LinkedIn dengan resume saya",
+        "Selidik harga pesaing dan bina lembaran perbandingan",
+        "Tulis dan terbitkan catatan blog tentang [topik] di WordPress",
+        "Nyahlanggan saya daripada semua e-mel pemasaran di Gmail",
+        "Uji aliran pendaftaran di laman web saya dan laporkan sebarang pepijat",
+        "Cari 50 prospek sepadan [ICP] di LinkedIn dan tambahkan ke CRM saya"
+      ],
+      "quickPrompts": "Prompt pantas untuk dicuba",
+      "startFirstTask": "Mulakan tugas pertama anda"
+    },
+    "chatTasks": {
+      "commandCenter": "Pusat arahan anda",
+      "describeTask": "Huraikan mana-mana tugas. Saksikan ia berlaku.",
+      "examplePrompt": "Cari 5 papan kekunci wayarles terbaik di bawah $50 di Amazon dan bandingkan dalam lembaran kerja.",
+      "exampleResponse": "Saya akan mencari di Amazon dan membina perbandingan. Membuka browser sekarang.",
+      "exampleDone": "Siap. Lembaran kerja disimpan dengan harga, penilaian, dan ciri untuk semua 5 papan kekunci.",
+      "describePlaceholder": "Huraikan tugas anda...",
+      "threeAgents": "Tiga ejen khusus",
+      "autoAssigned": "Ditetapkan secara automatik setiap langkah.",
+      "browser": "Browser",
+      "browserDesc": "Navigasi, klik, isi borang, scrape",
+      "terminal": "Terminal",
+      "terminalDesc": "Jalankan arahan, pasang, proses fail",
+      "desktop": "Desktop",
+      "desktopDesc": "Klik, taip, tatal, buka aplikasi",
+      "betterPrompts": "Tulis prompt yang lebih baik",
+      "specificBeatsVague": "Spesifik sentiasa menang. Setiap kali.",
+      "do": "Lakukan",
+      "dont": "Jangan",
+      "doExample1": "Mohon 10 pekerjaan kejuruteraan perisian di LinkedIn. Sesuaikan setiap surat permohonan dengan menyebut tech stack mereka.",
+      "dontExample1": "Mohon pekerjaan",
+      "doExample2": "Cari Google Flights untuk SFO ke JFK, 20-25 Mac, pergi balik. Tangkap skrin 3 paling murah.",
+      "dontExample2": "Cari penerbangan",
+      "readyToTry": "Bersedia mencubanya?",
+      "openChat": "Buka chat dan huraikan apa yang perlu dilakukan.",
+      "startChat": "Mulakan chat"
+    },
+    "machinesTab": {
+      "title": "Mesin anda",
+      "subtitle": "Desktop Ubuntu penuh yang boleh anda lancarkan dalam beberapa saat.",
+      "lifecycle": "Kitaran hayat",
+      "lifecycleDesc": "Lima keadaan, sepenuhnya automatik.",
+      "planLimits": "Had pelan",
+      "planCol": "Pelan",
+      "machinesCol": "Mesin",
+      "swarmAgentsCol": "Ejen swarm",
+      "temp": "1 sementara",
+      "states": {
+        "creating": "Mencipta",
+        "starting": "Memulakan",
+        "running": "Berjalan",
+        "stopping": "Menghentikan",
+        "stopped": "Berhenti"
+      },
+      "newMachine": "+ Baharu",
+      "researchVm": "VM Penyelidikan",
+      "emailVm": "VM E-mel",
+      "testingVm": "VM Ujian",
+      "cores": "{count} teras",
+      "gb": "{count} GB",
+      "stop": "Hentikan",
+      "start": "Mulakan",
+      "provisioning": "Menyediakan...",
+      "spinUp": "Lancarkan mesin",
+      "goToMachines": "Ke halaman Mesin"
+    },
+    "credentialsTab": {
+      "loginDetected": "Log masuk dikesan",
+      "matched": "Sepadan",
+      "credentialFound": "Kelayakan ditemui",
+      "autoFilled": "Diisi automatik",
+      "autoFillTitle": "Pengisian automatik beraksi",
+      "autoFillDesc": "Log masuk dikesan, kelayakan sepadan, borang diisi. Automatik.",
+      "security": "Keselamatan",
+      "encrypted": "Disulitkan",
+      "aes256": "AES-256 semasa rehat",
+      "vmIsolated": "VM terpencil",
+      "sandboxed": "Sandbox setiap sesi",
+      "neverLogged": "Tidak pernah direkod",
+      "zeroTrace": "Tiada jejak dalam log",
+      "savedCredentials": "Kelayakan tersimpan",
+      "addOnce": "Tambah sekali, isi automatik di mana-mana.",
+      "saveFirst": "Simpan kelayakan pertama anda",
+      "goToCredentials": "Ke Kelayakan Tersimpan"
+    },
+    "swarmTab": {
+      "title": "Swarm Mode",
+      "runParallel": "Jalankan {count} mesin secara selari",
+      "sameTask": "Tugas sama, {multiplier}x output, masa sama.",
+      "done": "Siap",
+      "running": "Berjalan",
+      "pending": "Menunggu",
+      "result": "KEPUTUSAN",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Penyelidikan selari",
+          "desc": "{count} pesaing, {count} mesin, serentak"
+        },
+        "bulkApplications": {
+          "title": "Permohonan pukal",
+          "desc": "Mohon merentasi platform pada masa yang sama"
+        },
+        "multiCitySearch": {
+          "title": "Carian pelbagai bandar",
+          "desc": "Cari senarai di {count} bandar sekaligus"
+        },
+        "parallelOutreach": {
+          "title": "Jangkauan selari",
+          "desc": "E-mel peribadi ke segmen berbeza"
+        },
+        "crossPlatform": {
+          "title": "Merentas platform",
+          "desc": "Siarkan ke {count} platform serentak"
+        },
+        "distributedTesting": {
+          "title": "Ujian teragih",
+          "desc": "Uji pelbagai senario secara selari"
+        }
+      },
+      "whatToSwarm": "Apa yang boleh di-swarm",
+      "availability": "Ketersediaan",
+      "freeNotAvailable": "Tidak tersedia",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 ejen",
+      "startSwarm": "Mulakan swarm"
+    },
+    "workforceTab": {
+      "title": "Tenaga Kerja",
+      "subtitle": "Syarikat AI anda, atas autopilot",
+      "description": "Pekerja, pasukan, pencetus — berjalan 24/7.",
+      "myCompany": "Syarikat Saya",
+      "contentOps": "Operasi Kandungan",
+      "support": "Sokongan",
+      "writer": "Penulis",
+      "seo": "SEO",
+      "social": "Sosial",
+      "inbox": "Peti Masuk",
+      "docs": "Dokumen",
+      "concepts": "Konsep teras",
+      "conceptItems": {
+        "employees": {
+          "title": "Pekerja",
+          "desc": "Ejen AI yang menjalankan tugas mengikut jadual, 24/7"
+        },
+        "teams": {
+          "title": "Pasukan",
+          "desc": "Kumpulan pekerja dengan arahan bersama"
+        },
+        "sharedMemory": {
+          "title": "Memori Dikongsi",
+          "desc": "Stor kunci-nilai yang dibaca dan ditulis pekerja"
+        },
+        "triggers": {
+          "title": "Pencetus",
+          "desc": "Rantaikan pekerja: satu selesai, seterusnya bermula"
+        },
+        "delegates": {
+          "title": "Perwakilan",
+          "desc": "Pekerja memberi sub-tugas kepada pakar"
+        },
+        "orgChart": {
+          "title": "Carta Organisasi",
+          "desc": "Peta visual hierarki syarikat anda"
+        }
+      },
+      "chainTitle": "Rantaikan pekerja bersama",
+      "chainDesc": "Output mengalir dari satu ke seterusnya secara automatik.",
+      "scout": "Scout",
+      "scoutDesc": "menyelidik pesaing",
+      "atlas": "Atlas",
+      "atlasDesc": "menulis catatan blog",
+      "nova": "Nova",
+      "novaDesc": "menerbitkan ke sosial",
+      "done": "Siap",
+      "onComplete": "on_complete",
+      "waiting": "Menunggu",
+      "templates": "Mula dari templat",
+      "templateItems": {
+        "contentOps": {
+          "name": "Operasi Kandungan",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Sokongan Pelanggan",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Pemasaran",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} pekerja",
+      "openWorkforce": "Buka Tenaga Kerja"
+    },
+    "billingTab": {
+      "credits": "Kredit",
+      "timeMetric": "Masa adalah satu-satunya metrik.",
+      "rate": "Kadar",
+      "rateValue": "10",
+      "creditsPerMin": "kredit/min",
+      "metered": "diukur setiap 30s",
+      "example": "Contoh",
+      "minTask": "tugas minit",
+      "startCredits": "Mula: {count} kredit",
+      "endCredits": "Tamat: {count} kredit",
+      "creditsUsed": "{count} kredit digunakan",
+      "calculation": "{mins} min x 10 kredit/min",
+      "plans": "Pelan",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 sementara",
+          "feature": "Carian asas"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 sentiasa aktif",
+          "feature": "2 ejen selari"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 sentiasa aktif",
+          "feature": "Carian lanjutan"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 sentiasa aktif",
+          "feature": "Sokongan keutamaan"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 sentiasa aktif",
+          "feature": "Jaminan SLA"
+        }
+      },
+      "perMonth": "{price}/bln",
+      "faqTitle": "Soalan Lazim",
+      "faqs": {
+        "howCharged": {
+          "q": "Bagaimana kredit dicaj?",
+          "a": "10 kredit seminit pelaksanaan ejen, dibundarkan ke atas. Disemak setiap 30 saat semasa sesi."
+        },
+        "runOut": {
+          "q": "Apa yang berlaku jika habis?",
+          "a": "Anda memerlukan sekurang-kurangnya 20 kredit untuk memulakan tugas. Jika mencapai 0, tugas dijeda — beli tambahan untuk meneruskan."
+        },
+        "rollOver": {
+          "q": "Adakah kredit tidak digunakan dipindahkan?",
+          "a": "Kredit direset setiap kitaran pengebilan. Gunakan atau hilang."
+        }
+      },
+      "goToBilling": "Ke halaman Pengebilan"
+    },
+    "desktopAppTab": {
+      "overlay": "Overlay",
+      "overlayDesc": "Sentiasa ada. Klik untuk kembangkan.",
+      "compact": "Padat",
+      "expanded": "Dikembangkan",
+      "ready": "Sedia",
+      "exampleTask": "Kemaskini resume saya",
+      "exampleResponse": "Membuka resume.docx...",
+      "describePlaceholder": "Huraikan tugas anda...",
+      "whatItControls": "Apa yang dikawal",
+      "controls": {
+        "browser": {
+          "name": "Browser",
+          "desc": "Navigasi, klik, isi borang"
+        },
+        "files": {
+          "name": "Fail",
+          "desc": "Baca, tulis, edit di mana-mana"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Jalankan sebarang arahan shell"
+        },
+        "desktop": {
+          "name": "Desktop",
+          "desc": "Klik, taip, tatal"
+        },
+        "screenshots": {
+          "name": "Tangkap Skrin",
+          "desc": "Lihat apa yang anda lihat"
+        },
+        "apps": {
+          "name": "Aplikasi",
+          "desc": "Kawal mana-mana aplikasi yang dipasang"
+        }
+      },
+      "twoWays": "Dua cara untuk menjalankan",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "Sandbox sepenuhnya terpencil",
+        "freshBrowser": "Browser bersih, tiada sejarah",
+        "maxSecurity": "Keselamatan maksimum"
+      },
+      "desktopMode": "Desktop",
+      "desktopFeatures": {
+        "yourFiles": "Fail anda, akses terus",
+        "yourApps": "Aplikasi anda yang dipasang",
+        "yourSessions": "Sesi log masuk anda"
+      },
+      "downloadCta": "Muat Turun Aplikasi Desktop"
+    }
+  },
+  "comparePage": {
+    "title": "Perbandingan",
+    "heroTitle": "Coasty vs. Pesaing",
+    "heroDescription": "Lihat bagaimana ejen AI pengguna komputer #1 (82% OSWorld) dibandingkan dengan alternatif. Perbandingan ciri-per-ciri dengan data sebenar.",
+    "categories": {
+      "aiAgent": "Ejen AI",
+      "infrastructure": "Infrastruktur",
+      "rpa": "RPA",
+      "human": "Manusia"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "Bersedia untuk mencuba ejen AI pengguna komputer #1?",
+    "ctaButton": "Cuba Coasty Percuma",
+    "noCreditCard": "Kad kredit tidak diperlukan",
+    "allComparisons": "Semua perbandingan",
+    "featureComparison": "Perbandingan Ciri",
+    "whyChooseCoasty": "Mengapa Pilih Coasty",
+    "strengthsOf": "Kekuatan {name}",
+    "ctaDescription": "82% OSWorld benchmark. Pengasingan VM. Penyelesaian CAPTCHA. Bermula dari $20/bulan.",
+    "watchCaseStudies": "Tonton Kajian Kes"
+  },
+  "agentSwarms": {
+    "badge": "Mod Agent Swarm",
+    "heroTitle1": "Satu prompt.",
+    "heroTitle2": "Mesin tanpa had.",
+    "heroTitle3": "Hasil selari.",
+    "heroDescription": "Bahagikan sebarang tugas merentasi beberapa persekitaran terpencil yang berjalan serentak. Kerja yang mengambil satu jam selesai dalam beberapa minit.",
+    "trySwarmMode": "Cuba Mod Swarm",
+    "seeInAction": "Lihat dalam tindakan",
+    "liveExecution": "swarm-tree — pelaksanaan langsung",
+    "machineCount": "{count} mesin",
+    "running": "berjalan",
+    "threeSteps": "Tiga langkah ke pelaksanaan selari",
+    "steps": {
+      "typePrompt": {
+        "title": "Taip prompt anda",
+        "desc": "Huraikan tugas tersebut. Togol mod swarm dan pilih berapa banyak mesin."
+      },
+      "machinesSpinUp": {
+        "title": "Mesin mula beroperasi",
+        "desc": "Setiap satu mendapat persekitaran terpencil penuh — pelayar, terminal, desktop."
+      },
+      "resultsStream": {
+        "title": "Hasil distrim secara langsung",
+        "desc": "Pantau setiap mesin secara masa nyata melalui paparan pokok swarm."
+      }
+    },
+    "demoTitle": "Demo Agent Swarms",
+    "demoDescription": "Tonton {count} mesin menangani tugas penyelidikan CRM secara serentak",
+    "prompt": "Prompt",
+    "swarm": "SWARM",
+    "run": "Jalankan",
+    "reset": "Set Semula",
+    "allCompleted": "Semua {count} mesin telah selesai",
+    "speedComparison": "~{swarmTime} min berbanding ~{seqTime} min — {multiplier}x lebih pantas",
+    "seqVsSwarm": "Berjujukan vs Swarm",
+    "tableHeaders": {
+      "task": "Tugas",
+      "before": "Sebelum",
+      "swarm": "Swarm",
+      "speed": "Kelajuan"
+    },
+    "speedExamples": {
+      "crmResearch": "Penyelidikan 5 alat CRM",
+      "qaPages": "QA merentasi 8 halaman",
+      "leadEnrichment": "Pengayaan lead (100)",
+      "priceMonitoring": "Pemantauan harga"
+    },
+    "builtForParallel": "Dibina untuk kerja selari",
+    "useCases": {
+      "marketResearch": {
+        "title": "Penyelidikan Pasaran Berskala Besar",
+        "desc": "Selidik beberapa pesaing, pasaran, atau produk secara serentak merentasi mesin terpencil."
+      },
+      "leadGeneration": {
+        "title": "Penjanaan Lead",
+        "desc": "Kayakan profil, cari e-mel, dan sahkan kehadiran sosial — kerja berjam-jam dalam beberapa minit."
+      },
+      "qaTesting": {
+        "title": "QA & Ujian Regresi",
+        "desc": "Jalankan senario ujian merentasi halaman atau aliran berbeza secara selari."
+      },
+      "contentSocial": {
+        "title": "Kandungan & Sosial",
+        "desc": "Siar ke beberapa platform secara serentak dengan pengasingan per-mesin."
+      },
+      "dataExtraction": {
+        "title": "Pengekstrakan Data",
+        "desc": "Kikis dan strukturkan data daripada berpuluh-puluh sumber sekaligus."
+      },
+      "scheduledRuns": {
+        "title": "Pelaksanaan Berjadual",
+        "desc": "Gabungkan mod swarm dengan penjadualan untuk tugas selari berulang."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Pengasingan Sebenar",
+        "desc": "Setiap mesin mempunyai pelayar, terminal, dan desktop sendiri."
+      },
+      "tripleMachineLimit": {
+        "title": "Had Mesin 3x",
+        "desc": "Mod swarm menggandakan tiga kali kapasiti mesin pelan anda."
+      },
+      "liveTreeView": {
+        "title": "Paparan Pokok Langsung",
+        "desc": "Tangkapan skrin dan panggilan alat distrim secara masa nyata."
+      },
+      "autoAggregation": {
+        "title": "Pengagregatan Automatik",
+        "desc": "Hasil digabungkan menjadi satu laporan yang disatukan."
+      },
+      "shareableRuns": {
+        "title": "Pelaksanaan Boleh Dikongsi",
+        "desc": "Main semula garis masa pelaksanaan penuh melalui pautan."
+      },
+      "fullySandboxed": {
+        "title": "Sandbox Sepenuhnya",
+        "desc": "Semua persekitaran dimusnahkan selepas selesai."
+      }
+    },
+    "readyCta": "Bersedia untuk menjalankan tugas secara selari?",
+    "includedWithPaid": "Mod swarm disertakan dengan setiap pelan berbayar.",
+    "getStarted": "Mula Sekarang",
+    "viewPricing": "Lihat Harga",
+    "legend": {
+      "messages": "Mesej",
+      "broadcast": "Siaran",
+      "sharedMemory": "Memori Dikongsi",
+      "help": "Bantuan"
+    },
+    "liveSwarmExecution": "Pelaksanaan swarm langsung dengan komunikasi ejen",
+    "popular": "Popular",
+    "avgRating": "{rating} purata"
+  },
+  "downloadPage": {
+    "title": "Aplikasi Desktop",
+    "heroTitle": "Biarkan Coasty Menjalankan Komputer Anda",
+    "heroDescription": "Pembantu AI anda yang mengambil alih kawalan. Automatikkan pelayar, desktop, dan terminal anda — atau kawal komputer anda dari mana-mana sahaja melalui antara muka web kami.",
+    "seeInAction": "Lihat dalam tindakan",
+    "overlayDescription": "Lapisan tindih ringan yang terapung pada desktop anda. Kawal secara tempatan atau jarak jauh dari mana-mana pelayar — komputer anda, cara anda.",
+    "recommended": "Disyorkan untuk sistem anda",
+    "coastyFor": "Coasty untuk {platform}",
+    "installerLabel": "Pemasang {extension}",
+    "beforeInstall": "Sebelum anda memasang",
+    "beforeInstallDescription": "Coasty Desktop masih baharu, jadi sistem pengendalian anda belum mengenalinya. Ini sepenuhnya normal untuk aplikasi yang baru dikeluarkan — begini cara untuk meneruskan:",
+    "windowsSteps": {
+      "step1": "Windows melindungi PC anda",
+      "step2": "Maklumat lanjut",
+      "step3": "Jalankan juga"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop tidak boleh dibuka",
+      "step2": "Tetapan Sistem > Privasi & Keselamatan",
+      "step3": "Buka Juga"
+    },
+    "allPlatforms": "Semua platform",
+    "systemRequirements": {
+      "title": "Keperluan Sistem",
+      "win1": "Windows 10 atau lebih baharu",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minimum 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) atau lebih baharu",
+      "mac2": "Apple Silicon atau Intel",
+      "mac3": "Minimum 4 GB RAM"
+    },
+    "whatsIncluded": "Apa yang Disertakan",
+    "features": {
+      "browser": "Automatik pelayar",
+      "desktop": "Automatik desktop",
+      "terminal": "Akses terminal",
+      "files": "Operasi fail",
+      "updates": "Kemas kini automatik",
+      "remote": "Kawal dari mana-mana sahaja"
+    },
+    "browserCta": "Buka Coasty dalam Pelayar",
+    "browserCtaDescription": "Mahu mengawal mesin anda dari mana-mana sahaja?",
+    "loading": "Memuatkan...",
+    "downloadFor": "Muat turun untuk {platform}",
+    "download": "Muat Turun",
+    "unavailable": "Tidak tersedia"
+  },
+  "referralPage": {
+    "shareTitle": "Kongsi Coasty.",
+    "earnTitle": "Jana bersama.",
+    "shareDescription": "Beri rakan 50 kredit percuma untuk menjalankan ejen AI pertama mereka. Anda juga mendapat 50 kredit — setiap kali seseorang menyertai.",
+    "features": [
+      "AI yang benar-benar berfungsi — pelayar sebenar, klik sebenar, hasil sebenar",
+      "Terpencil & selamat — setiap ejen berjalan dalam VM sandbox sendiri",
+      "Berjalan semasa anda tidur — jadualkan tugas dan biarkan ejen menguruskan selebihnya"
+    ],
+    "recentActivity": "Aktiviti terbaru anda",
+    "friendsCould": "Rakan anda juga boleh melakukan ini",
+    "giveGet": "Beri rakan 50 kredit. Dapatkan 50 untuk diri sendiri. Setiap masa.",
+    "stats": {
+      "invited": "Dijemput",
+      "earned": "Diperolehi",
+      "perInvite": "Setiap jemputan"
+    },
+    "tabs": {
+      "invite": "Jemput rakan",
+      "feedback": "Hantar maklum balas"
+    },
+    "referralLink": "Pautan rujukan anda",
+    "howItWorks": "Cara ia berfungsi",
+    "howSteps": [
+      "Kongsi pautan anda dengan rakan",
+      "Mereka mendaftar dan mendapat 50 kredit percuma",
+      "Anda serta-merta mendapat 50 kredit juga"
+    ],
+    "shareDirectly": "Kongsi secara langsung",
+    "yourReferrals": "Rujukan anda",
+    "invitedYou": "Menjemput anda",
+    "joinedViaLink": "Menyertai melalui pautan anda",
+    "noReferrals": "Belum ada rujukan",
+    "noReferralsHint": "Kongsi pautan anda di atas dan anda berdua mendapat 50 kredit",
+    "feedbackThanks": "Terima kasih atas maklum balas anda!",
+    "feedbackWeRead": "Kami membaca setiap mesej.",
+    "sendAnother": "Hantar lagi",
+    "feedbackTitle": "Beritahu kami pendapat anda",
+    "feedbackSubtitle": "Laporan pepijat, idea ciri, atau sekadar bertanya khabar",
+    "feedbackPlaceholder": "Apa yang ada dalam fikiran anda?",
+    "weReadEvery": "Kami membaca setiap mesej",
+    "send": "Hantar",
+    "shareMessage": "Hei, saya telah menggunakan Coasty dan ia cukup hebat. Ia adalah AI yang benar-benar boleh menggunakan komputer untuk anda. Seperti melayari, mengklik, menaip, semuanya. Cuba dengan pautan saya dan kita berdua dapat kredit percuma!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-mel"
+    },
+    "emailSubject": "Lihat alat AI ini",
+    "emailBody": "AI ini benar-benar boleh menggunakan komputer untuk anda. Melayari, mengklik, menaip, semuanya."
+  },
+  "statusPage": {
+    "title": "Status Sistem",
+    "brandTitle": "Status Coasty",
+    "subtitle": "Status operasi masa nyata bagi semua perkhidmatan Coasty. Halaman ini dikemas kini secara automatik setiap 60 saat.",
+    "refresh": "Muat Semula",
+    "statuses": {
+      "operational": "Beroperasi",
+      "degraded": "Prestasi Menurun",
+      "outage": "Gangguan"
+    },
+    "overallStatuses": {
+      "allOperational": "Semua Sistem Beroperasi",
+      "someDegraded": "Sesetengah Sistem Mengalami Penurunan Prestasi",
+      "disruption": "Gangguan Perkhidmatan Dikesan"
+    },
+    "overallDescriptions": {
+      "allOperational": "Semua perkhidmatan berjalan lancar tanpa masalah yang dikesan.",
+      "someDegraded": "Sesetengah perkhidmatan mengalami kelambatan. Kami sedang menyiasat.",
+      "disruption": "Kami sedar tentang masalah ini dan sedang berusaha secara aktif untuk memperbaikinya."
+    },
+    "responseTime": "{ms}ms masa tindak balas",
+    "uptimeLabel": "Masa Aktif 90 Hari",
+    "daysAgo": "90 hari lalu",
+    "today": "Hari ini",
+    "overallUptime": "Masa Aktif Keseluruhan 90 Hari",
+    "overallUptimeDesc": "Ketersediaan agregat merentasi semua perkhidmatan",
+    "services": "Perkhidmatan",
+    "clickUptime": "klik untuk melihat masa aktif",
+    "lastChecked": "Terakhir disemak {time} · Dikemas kini secara automatik setiap 60s",
+    "experiencingIssues": "Mengalami masalah?",
+    "issuesDescription": "Jika ada yang tidak kena, hubungi kami secara langsung.",
+    "talkToCofounders": "Bercakap dengan Pengasas Bersama",
+    "emailUs": "E-mel Kami",
+    "serviceNames": {
+      "website": "Laman Web",
+      "aiBackend": "AI Backend",
+      "database": "Pangkalan Data",
+      "authentication": "Pengesahan",
+      "aiModels": "Model AI",
+      "fileStorage": "Storan Fail"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - Ejen AI #1 Penggunaan Komputer | Pekerja AI untuk Automasi Desktop & Pelayar",
+      "titleTemplate": "{title} | Coasty - Ejen AI Penggunaan Komputer",
+      "description": "Coasty ialah ejen AI #1 yang menggunakan komputer — 82% pada penanda aras OSWorld. Ia mengawal desktop penuh seperti manusia: membuka pelayar, mengklik, menaip, mengisi borang, menghantar e-mel, menguruskan hamparan. Pengasingan tahap VM sebenar bagi setiap sesi. Bermula dari $20/bulan.",
+      "ogTitle": "Coasty - Ejen AI #1 Penggunaan Komputer | 82% Penanda Aras OSWorld",
+      "ogDescription": "Pekerja AI yang mengawal desktop seperti manusia. #1 pada penanda aras OSWorld (82%). Automasi pelayar, kawalan desktop, penyelesaian CAPTCHA, pengasingan VM. Bermula dari $20/bulan.",
+      "twitterDescription": "Pekerja AI yang mengawal desktop seperti manusia. Membuka pelayar, mengklik, menaip, mengisi borang, menghantar e-mel. Pengasingan VM sebenar. $20/bulan vs $3,000/bulan pembantu manusia."
+    },
+    "compare": {
+      "title": "Bandingkan Coasty - Alternatif Ejen AI & Perbandingan Pesaing",
+      "description": "Lihat bagaimana ejen AI #1 Coasty yang menggunakan komputer dibandingkan dengan Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath dan lain-lain. Perbandingan ciri-demi-ciri dengan harga.",
+      "ogTitle": "Bandingkan Coasty dengan alternatif ejen AI",
+      "ogDescription": "Perbandingan ciri-demi-ciri ejen AI #1 penggunaan komputer vs pesaing. Skor penanda aras, harga, keupayaan."
+    },
+    "download": {
+      "title": "Muat Turun Aplikasi Desktop Coasty — Ejen AI untuk Mac & Windows",
+      "description": "Muat turun Coasty Desktop, ejen AI #1 yang menggunakan komputer dan mengawal mesin tempatan anda. Automasi pelayar, kawalan desktop, akses terminal dan operasi fail. Tersedia untuk Windows dan macOS.",
+      "ogTitle": "Muat Turun Coasty Desktop — Ejen AI untuk Mac & Windows",
+      "ogDescription": "AI yang mengawal komputer anda seperti manusia. Automasi pelayar, desktop dan terminal dalam satu aplikasi natif. #1 pada penanda aras OSWorld."
+    },
+    "guide": {
+      "title": "Apa yang Coasty Boleh Lakukan? — Panduan Lengkap Automasi Komputer AI",
+      "description": "Temui semua yang Coasty boleh automasikan: pencarian prospek jualan, kempen e-mel, permohonan kerja, ujian QA, kemasukan data, media sosial, pengambilan pekerja, penyelidikan dan 100+ tugas lagi.",
+      "ogTitle": "Apa yang Coasty Boleh Lakukan? — Panduan Lengkap Automasi AI",
+      "ogDescription": "Terokai 100+ tugas yang Coasty boleh automasikan. Dari kempen jualan hingga ujian QA, lihat dengan tepat bagaimana ejen AI komputer mengendalikan kerja sebenar."
+    },
+    "blog": {
+      "title": "Blog - Pandangan Ejen AI, Penyelidikan Penggunaan Komputer & Kajian Kes",
+      "description": "Penerokaan mendalam tentang ejen AI autonomi, teknologi penggunaan komputer, kajian kes automasi dunia sebenar dan masa depan pekerja AI. Dari pasukan di sebalik ejen #1 yang menggunakan komputer.",
+      "ogTitle": "Blog Coasty - Pandangan Ejen AI & Kajian Kes",
+      "ogDescription": "Penerokaan mendalam tentang ejen AI autonomi, teknologi penggunaan komputer dan kajian kes automasi dunia sebenar dari ejen #1 yang menggunakan komputer."
+    },
+    "results": {
+      "title": "Demo & Keputusan — Tonton Ejen AI Coasty Bekerja Secara Autonomi",
+      "description": "Tonton Coasty menjalankan kempen pemasaran secara autonomi, memohon kerja, mengisi permohonan, menguji QA produk, menghantar e-mel peribadi dan banyak lagi. Kajian kes sebenar dengan demo video.",
+      "ogTitle": "Demo — Tonton Ejen AI Coasty Bekerja Secara Autonomi",
+      "ogDescription": "Demo sebenar AI mengawal komputer: pemasaran, permohonan kerja, ujian QA, kempen e-mel dan lain-lain. #1 pada penanda aras OSWorld."
+    },
+    "terms": {
+      "title": "Terma Perkhidmatan",
+      "description": "Terma Perkhidmatan Coasty. Baca terma yang mengawal penggunaan platform pekerja AI Coasty, ejen penggunaan komputer dan aplikasi desktop.",
+      "ogTitle": "Coasty — Terma Perkhidmatan",
+      "ogDescription": "Terma Perkhidmatan Coasty. Baca terma yang mengawal penggunaan platform pekerja AI Coasty, ejen penggunaan komputer dan aplikasi desktop."
+    },
+    "privacy": {
+      "title": "Dasar Privasi",
+      "description": "Dasar Privasi Coasty. Ketahui bagaimana kami melindungi data anda dengan pengasingan tahap VM, sesi yang disulitkan, persekitaran pelaksanaan kotak pasir dan keselamatan tahap perusahaan.",
+      "ogTitle": "Coasty — Dasar Privasi",
+      "ogDescription": "Dasar Privasi Coasty. Ketahui bagaimana kami melindungi data anda dengan pengasingan tahap VM, sesi yang disulitkan, persekitaran pelaksanaan kotak pasir dan keselamatan tahap perusahaan."
+    },
+    "useCases": {
+      "title": "Kes Penggunaan - Ejen AI Coasty untuk Operasi Perniagaan",
+      "description": "Temui 12 cara ejen AI Coasty mengautomasikan operasi anda — penyelidikan pesaing, ujian QA, penjanaan prospek, kempen e-mel dan lain-lain. Keputusan sebenar.",
+      "ogTitle": "Kes Penggunaan - Ejen AI Coasty",
+      "ogDescription": "12 cara untuk meningkatkan output anda 10 kali ganda secara autopilot. Keputusan sebenar, nombor sebenar."
+    },
+    "computerUse": {
+      "title": "Ejen AI Penggunaan Komputer — Automasi Desktop, Pelayar & Terminal #1",
+      "description": "Coasty ialah ejen AI penggunaan komputer terbaik, #1 pada OSWorld (82%). Automasikan sebarang tugas desktop, pelayar atau terminal dengan AI autonomi yang mengawal komputer seperti manusia.",
+      "ogTitle": "Coasty — Ejen AI #1 Penggunaan Komputer",
+      "ogDescription": "Ejen penggunaan komputer terbaik, #1 pada OSWorld. Automasikan sebarang tugas desktop, pelayar atau terminal dengan AI."
+    },
+    "pricing": {
+      "title": "Harga — Pelan & Harga Ejen AI Coasty",
+      "description": "Pelan harga Coasty bermula dari $20/bulan. Gantikan pembantu maya $3,000/bulan dengan pekerja AI. Peringkat percuma tersedia. Penggunaan berasaskan kredit tanpa caj tersembunyi.",
+      "ogTitle": "Harga Coasty — Pelan Ejen AI",
+      "ogDescription": "Pekerja AI bermula dari $20/bulan. Gantikan pembantu maya mahal dengan AI autonomi. Peringkat percuma tersedia."
+    },
+    "faq": {
+      "q1": "Apa itu Coasty?",
+      "a1": "Coasty ialah platform pekerja AI — ejen penggunaan komputer yang mengawal desktop seperti manusia. Ia membuka pelayar, mengklik, menaip, menavigasi aplikasi, mengisi borang, menghantar e-mel dan menguruskan hamparan secara autonomi. #1 pada penanda aras OSWorld dengan kadar penyelesaian 82% merentasi 369 tugas dunia sebenar.",
+      "q2": "Bagaimana Coasty berbanding dengan Anthropic Computer Use?",
+      "a2": "Manakala Anthropic Computer Use menyediakan API mentah untuk kawalan komputer, Coasty ialah platform sedia pengeluaran dengan infrastruktur VM terurus, penyelesaian CAPTCHA terbina dalam, aplikasi desktop untuk Mac dan Windows, sokongan pelbagai model dan skor penanda aras OSWorld tertinggi (82%). Coasty menyediakan penyelesaian lengkap — bukan sekadar API.",
+      "q3": "Berapa harga Coasty?",
+      "a3": "Coasty bermula pada $20/bulan dengan pelan Starter dan peringkat percuma tersedia. Ini berbanding lebih $3,000/bulan untuk pembantu maya manusia. Coasty bekerja 24/7 tanpa rehat, tanpa latihan dan penskalaan segera.",
+      "q4": "Adakah Coasty selamat digunakan?",
+      "a4": "Ya. Setiap sesi Coasty berjalan dalam mesin maya terpencil dan berkotak pasirnya sendiri. Data anda kekal selamat, mesin anda kekal tidak disentuh dan tiada kebocoran antara sesi. Ini pengasingan tahap VM sebenar, bukan sekadar kontena dalam kumpulan dikongsi.",
+      "q5": "Apa itu penanda aras OSWorld?",
+      "a5": "OSWorld ialah penanda aras untuk menilai ejen AI pada tugas komputer dunia sebenar. Ia menguji 369 tugas merentasi pelayar, aplikasi pejabat dan operasi sistem. Coasty mencapai 82%, skor tertinggi daripada mana-mana ejen penggunaan komputer — mencapai prestasi terkini.",
+      "q6": "Bagaimana Coasty berbeza daripada alat RPA seperti UiPath?",
+      "a6": "Alat RPA tradisional seperti UiPath memerlukan skrip rapuh dan rosak apabila antara muka berubah. Coasty menggunakan penglihatan AI untuk memahami dan berinteraksi dengan sebarang antara muka, menyesuaikan diri secara masa nyata tanpa skrip yang telah ditetapkan. Ia berfungsi seperti manusia, bukan makro. Persediaan mengambil minit berbanding minggu.",
+      "q7": "Adakah Coasty mempunyai aplikasi desktop?",
+      "a7": "Ya. Coasty Desktop tersedia untuk Mac dan Windows. Ia berjalan sebagai tindanan terapung pada desktop anda dan boleh mengawal pelayar tempatan, fail, terminal dan aplikasi anda secara langsung — tiada VM diperlukan untuk tugas tempatan.",
+      "q8": "Apa yang Coasty boleh automasikan?",
+      "a8": "Coasty boleh mengautomasikan hampir sebarang tugas komputer: pelayaran web, pengisian borang, penghantaran e-mel, pengurusan hamparan, kemasukan data, penerbitan media sosial, permohonan kerja, pencarian prospek jualan, ujian QA, sokongan pelanggan, pengambilan pekerja LinkedIn dan banyak lagi. Jika manusia boleh melakukannya di komputer, Coasty juga boleh.",
+      "q9": "Bagaimana Coasty berbanding dengan OpenAI Operator?",
+      "a9": "Coasty mengatasi OpenAI Operator pada penanda aras OSWorld (82% vs ~40%), menawarkan pengasingan tahap VM sebenar untuk setiap sesi, menyokong pelbagai model AI, termasuk kawalan desktop penuh selain pelayar sahaja dan menyediakan rangka kerja sumber terbuka.",
+      "q10": "Bolehkah Coasty menyelesaikan CAPTCHA?",
+      "a10": "Ya. Coasty mempunyai saluran penyelesaian CAPTCHA terbina dalam, jadi ia tidak disekat seperti ejen AI pesaing. Ini kritikal untuk automasi dunia sebenar di mana CAPTCHA adalah biasa di laman web."
+    },
+    "structuredData": {
+      "appDescription": "Ejen AI #1 yang menggunakan komputer. Coasty mengawal desktop penuh seperti manusia — membuka pelayar, mengklik, menaip, mengisi borang, menghantar e-mel dan menguruskan hamparan secara autonomi. 82% pada penanda aras OSWorld. Pengasingan tahap VM sebenar. Penyelesaian CAPTCHA terbina dalam. Bermula dari $20/bulan.",
+      "orgDescription": "Coasty membina ejen AI #1 yang menggunakan komputer. Platform kami menyediakan kawalan desktop autonomi, automasi pelayar dan orkestrasi pelbagai ejen dengan pengasingan tahap VM sebenar.",
+      "productDescription": "Ejen AI penggunaan komputer yang mengawal desktop seperti manusia. #1 pada penanda aras OSWorld (82%). Automasi pelayar autonomi, kawalan desktop, penghantaran e-mel, pengisian borang dan pengurusan hamparan dengan pengasingan tahap VM sebenar.",
+      "websiteDescription": "Platform ejen AI #1 penggunaan komputer. 82% penanda aras OSWorld. Automasi pelayar, desktop dan terminal autonomi dengan pengasingan VM. Bermula dari $20/bulan.",
+      "softwareDescription": "Ejen AI penggunaan komputer yang mengawal desktop penuh seperti manusia. #1 pada penanda aras OSWorld dengan kadar penyelesaian 82% merentasi 369 tugas dunia sebenar. Automasi pelayar autonomi, kawalan desktop, operasi terminal, penghantaran e-mel, pengisian borang dan pengurusan hamparan.",
+      "breadcrumbs": {
+        "home": "Laman Utama",
+        "caseStudies": "Kajian Kes Ejen AI",
+        "blog": "Blog",
+        "download": "Muat Turun Aplikasi Desktop",
+        "compare": "Bandingkan Ejen AI"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Halaman tidak dijumpai",
+      "description": "Maaf, halaman ini tidak wujud."
+    },
+    "error": {
+      "title": "Sesuatu telah berlaku",
+      "description": "Ralat yang tidak dijangka telah berlaku. Sila cuba lagi.",
+      "tryAgain": "Cuba lagi"
+    }
+  },
+  "schedulesPage": {
+    "title": "Tenaga Kerja",
+    "subtitle": "Tenaga kerja AI anda — tetapkan tugas dan biarkan mereka menguruskan yang selebihnya",
+    "guide": "Panduan",
+    "teamsTab": "Pasukan",
+    "hireEmployee": "Ambil Pekerja",
+    "loading": "Memuatkan pekerja anda...",
+    "onDuty": "{count} bertugas",
+    "standby": "{count} sedia",
+    "company": "Syarikat",
+    "teams": "{count} pasukan",
+    "employees": "{count} pekerja",
+    "members": "{count} ahli",
+    "unassigned": "Belum Ditugaskan",
+    "add": "Tambah",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "run": "Jalankan",
+    "delegate": "wakilkan",
+    "untitledEmployee": "Pekerja Tanpa Nama",
+    "untitled": "Tanpa Nama",
+    "guidelinesPlaceholder": "Garis panduan...",
+    "today": "Hari Ini",
+    "timesDaily": "{count} × sehari",
+    "noEmployeesDay": "Tiada pekerja pada hari ini",
+    "noEmployeesScheduled": "Tiada pekerja yang dijadualkan",
+    "recentActivity": "Aktiviti Terkini",
+    "schedule": "Jadual",
+    "emptyState": {
+      "openChat": "Buka mana-mana chat dan klik",
+      "assignEmployee": "Tetapkan Pekerja",
+      "onThe": "di",
+      "topRight": "kanan atas",
+      "toPutOnAutopilot": "untuk mengaktifkan autopilot",
+      "newChat": "Chat Baru"
+    },
+    "emptyWorkforce": {
+      "title": "Ambil pekerja pertama anda",
+      "description": "Pekerja AI bekerja bagi pihak anda — tetapkan tugas, tetapkan jadual, dan mereka akan melaksanakannya secara automatik",
+      "flexibleShifts": {
+        "title": "Syif fleksibel",
+        "desc": "Jadualkan pekerja setiap jam, harian, mingguan, bulanan — atau gunakan ungkapan cron tersuai"
+      },
+      "fullAutonomy": {
+        "title": "Autonomi penuh",
+        "desc": "Setiap pekerja mendapat akses penuh kepada pelayaran, terminal, dan stesen kerja yang disambungkan"
+      },
+      "activityLogs": {
+        "title": "Log aktiviti",
+        "desc": "Setiap pelaksanaan direkodkan supaya anda boleh menyemak apa yang pekerja anda capai"
+      },
+      "startFromChat": "Mula dari chat"
+    },
+    "filters": {
+      "all": "Semua",
+      "onDuty": "Bertugas",
+      "standby": "Sedia"
+    },
+    "noMatch": "Tiada pekerja yang sepadan dengan penapis ini",
+    "createTeam": {
+      "title": "Pasukan Baru",
+      "subtitle": "Mulakan dengan templat atau bina dari awal",
+      "backToTemplates": "Kembali ke templat",
+      "customTeam": "Pasukan Tersuai",
+      "customDescription": "Cipta pasukan dengan konfigurasi anda sendiri.",
+      "teamNameLabel": "Nama Pasukan",
+      "teamNamePlaceholder": "cth. Research, Marketing, Engineering",
+      "guidelinesLabel": "Garis Panduan",
+      "optional": "(pilihan)",
+      "guidelinesPlaceholder": "Arahan bersama yang akan diikuti oleh semua ahli pasukan...",
+      "suggestedEmployees": "Pekerja yang Dicadangkan",
+      "suggestedCredentials": "Kelayakan yang Dicadangkan",
+      "added": "Ditambah",
+      "addButton": "+ Tambah",
+      "credentials": "Kelayakan",
+      "addCredential": "+ Tambah kelayakan",
+      "credentialHint": "Kelayakan disulitkan. Ia akan disertakan dalam garis panduan pasukan supaya pekerja tahu apa yang tersedia.",
+      "settingUp": "Menyediakan...",
+      "createEmployees": "Cipta {count} Pekerja",
+      "createTeamButton": "Cipta Pasukan"
+    },
+    "noTeams": {
+      "title": "Belum ada pasukan",
+      "description": "Pasukan membolehkan pekerja berkongsi konteks dan memori. Cipta satu untuk membina carta organisasi anda.",
+      "newTeam": "Pasukan Baru"
+    },
+    "howItWorks": {
+      "title": "Cara ia berfungsi",
+      "dragEmployees": "Seret pekerja ke pasukan",
+      "clickToEdit": "Klik untuk mengedit jadual & tetapan",
+      "teamsShare": "Pasukan berkongsi memori & garis panduan",
+      "dashedLines": "Garisan putus-putus — pewakilan antara pekerja"
+    },
+    "inactive": {
+      "title": "{count} pekerja tidak aktif",
+      "missingMachine": "{count} tiada mesin — tidak akan berjalan sehingga diaktifkan",
+      "wontRun": "Tidak akan berjalan sehingga diaktifkan",
+      "fixInEmployees": "Baiki di Pekerja"
+    },
+    "dragHint": "Seret pekerja yang belum ditugaskan ke pasukan untuk menambah mereka",
+    "limits": {
+      "upgradePlan": "Naik Taraf Pelan",
+      "manageMachines": "Urus Mesin",
+      "manageEmployees": "Urus Pekerja",
+      "machineLimit": "Anda memerlukan mesin awan tetapi telah mencapai had {max} mesin. Naik taraf pelan anda atau padamkan mesin yang tidak digunakan.",
+      "employeeLimit": "Anda telah mencapai had pekerja ({max} untuk peringkat {tier}). Naik taraf pelan anda atau keluarkan pekerja yang tidak digunakan.",
+      "templateLimit": "Templat ini memerlukan {needed} pekerja tetapi anda hanya mempunyai {available} slot lagi ({max} maks untuk peringkat {tier}). Naik taraf pelan anda atau keluarkan pekerja yang tidak digunakan.",
+      "createFailed": "Gagal mencipta sebarang pekerja. Semak had akaun anda dan cuba lagi.",
+      "teamFailed": "Gagal mencipta pasukan"
+    },
+    "provisioning": {
+      "checking": "Menyemak had akaun...",
+      "usingMachine": "Menggunakan mesin \"{name}\"...",
+      "assigningMachine": "Menetapkan ke mesin \"{name}\" (akan berjalan apabila mesin siap)...",
+      "creatingMachine": "Mencipta mesin baru...",
+      "machineStarted": "Penyediaan mesin dimulakan...",
+      "hiring": "Mengambil {name} ({current}/{total})...",
+      "creatingTeam": "Mencipta pasukan..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Pasukan dicipta dengan {count} pekerja ({failedCount} gagal: {names})",
+      "teamCreated": "Pasukan {name} dicipta dengan {count} pekerja"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "Operasi Kandungan",
+        "tagline": "Terbitkan secara konsisten tanpa perlu bersusah payah",
+        "description": "Enjin kandungan yang ringan — menulis, mengoptimumkan dan mengedarkan kandungan secara autopilot.",
+        "roles": {
+          "atlas": "Penulis Kandungan — merangka catatan blog, surat berita dan salinan sosial",
+          "echo": "Penganalisis SEO — mengaudit halaman, menjejak kedudukan, mencadangkan peluang kata kunci",
+          "nova": "Pengedar Sosial — menyiarkan kandungan ke platform dan memantau penglibatan"
+        },
+        "credentials": {
+          "wordpress": "Terbit dan urus catatan blog",
+          "twitter": "Siar tweet dan pantau penglibatan",
+          "linkedin": "Terbit kandungan profesional dan artikel",
+          "searchConsole": "Jejak prestasi carian dan pengindeksan"
+        }
+      },
+      "customerSupport": {
+        "name": "Sokongan Pelanggan",
+        "tagline": "Liputan sokongan 24/7 daripada 3 pekerja",
+        "description": "Memantau peti masuk, menyelesaikan isu biasa dan mengekalkan pangkalan pengetahuan yang terkini.",
+        "roles": {
+          "sage": "Pemantau Peti Masuk — menyemak emel sokongan, mengkategorikan dan menjawab pertanyaan biasa",
+          "iris": "Pengurus Pangkalan Pengetahuan — mengemaskini dokumen bantuan dan Soalan Lazim berdasarkan isu berulang",
+          "milo": "Penganalisis Maklum Balas — mengagregatkan ulasan dan trend sokongan ke dalam laporan mingguan"
+        },
+        "credentials": {
+          "gmail": "Pantau dan balas emel sokongan",
+          "zendesk": "Urus tiket sokongan (atau helpdesk anda)",
+          "notion": "Kemaskini pangkalan pengetahuan dan dokumentasi"
+        }
+      },
+      "researchIntel": {
+        "name": "Penyelidikan & Perisikan",
+        "tagline": "Kekal dimaklumkan tanpa kerja manual",
+        "description": "Memantau pesaing, menjejak trend industri dan menyusun ringkasan penyelidikan yang boleh ditindaklanjuti.",
+        "roles": {
+          "scout": "Pemantau Pesaing — menjejak laman web, harga dan perubahan ciri pesaing",
+          "wren": "Penyelidik Trend — mengimbas berita industri, penerbitan dan media sosial untuk trend",
+          "quinn": "Penyusun Ringkasan — mensintesis penemuan menjadi laporan perisikan mingguan berstruktur"
+        },
+        "credentials": {
+          "google": "Penyelidikan web dan carian",
+          "linkedin": "Jejak pengambilan dan pengumuman pesaing",
+          "notion": "Terbitkan ringkasan penyelidikan dan laporan"
+        }
+      },
+      "marketing": {
+        "name": "Jabatan Pemasaran",
+        "tagline": "Pasukan pemasaran penuh dalam dua mesin",
+        "description": "Penciptaan kandungan, media sosial, SEO, penjejakan pesaing dan analitik kempen — dua kumpulan yang diselaraskan.",
+        "roles": {
+          "atlas": "Strategis Kandungan — merancang kalendar kandungan, menulis kandungan panjang",
+          "nova": "Pengurus Media Sosial — menyiar, melibatkan dan mengembangkan saluran sosial",
+          "echo": "Pakar SEO — mengoptimumkan halaman, membina pautan dalaman, menjejak kata kunci",
+          "pixel": "Pengurus Kempen Emel — menulis dan menghantar surat berita, menjejak buka/klik",
+          "scout": "Penganalisis Pesaing — memantau langkah pemasaran pesaing dan melaporkan pandangan",
+          "dash": "Pemantau Kempen Iklan — menjejak perbelanjaan iklan, ROAS dan peluang pengoptimuman",
+          "iris": "Pelapor Analitik — menyusun papan pemuka prestasi merentasi saluran"
+        },
+        "credentials": {
+          "wordpress": "Terbitkan kandungan blog",
+          "twitter": "Pengurusan media sosial",
+          "linkedin": "Pengedaran kandungan profesional",
+          "mailchimp": "Kempen emel dan surat berita",
+          "analytics": "Analitik trafik dan penukaran",
+          "googleAds": "Pengurusan kempen Google Ads",
+          "metaAds": "Meta Ads dan pengurusan sosial"
+        }
+      },
+      "ecommerce": {
+        "name": "Operasi E-Dagang",
+        "tagline": "Jalankan kedai anda semasa anda tidur",
+        "description": "Pengurusan produk, perisikan harga, penjejakan inventori, pengurusan ulasan dan pemasaran pertumbuhan untuk kedai dalam talian.",
+        "roles": {
+          "cleo": "Penyenarai Produk — mencipta dan mengemaskini penerangan produk, imej dan metadata",
+          "onyx": "Pemantau Harga — menjejak harga pesaing dan menandakan peluang pelarasan",
+          "luna": "Penjejak Inventori — memantau paras stok dan memberi amaran tentang inventori rendah",
+          "sage": "Pengurus Ulasan — membalas ulasan pelanggan dan mengagregatkan sentimen",
+          "dash": "Pengoptimum Kempen Iklan — mengurus iklan produk dan kempen beli-belah",
+          "flux": "Pemasar Emel — menghantar siri troli terbiar, promosi dan selepas pembelian",
+          "wren": "Pelapor Analitik — menjejak hasil, kadar penukaran dan metrik pertumbuhan"
+        },
+        "credentials": {
+          "shopify": "Pengurusan kedai dan penyenaraian produk",
+          "amazon": "Pengurusan pasaran Amazon",
+          "googleAds": "Iklan beli-belah dan kempen",
+          "mailchimp": "Siri emel pelanggan",
+          "analytics": "Analitik penukaran dan trafik"
+        }
+      },
+      "engineering": {
+        "name": "Pasukan Kejuruteraan",
+        "tagline": "Automatikkan bahagian membosankan kejuruteraan",
+        "description": "Semakan kod automatik, pemantauan kebergantungan, dokumentasi, pengujian, pemantauan deploy dan tindak balas insiden.",
+        "roles": {
+          "rune": "Penyemak Kod — menyemak PR terbuka, mencadangkan penambahbaikan, memeriksa isu keselamatan",
+          "koda": "Pemantau Kebergantungan — menjejak pakej lapuk, nasihat keselamatan dan perubahan yang memecahkan",
+          "aria": "Penulis Dokumen — mengekalkan API docs, README dan changelog yang terkini",
+          "blaze": "Pemantau Ujian — menjalankan suite ujian, menjejak ujian yang tidak stabil, melaporkan trend liputan",
+          "frost": "Pemantau Deploy — memerhati pipeline CI/CD, memberi amaran tentang kegagalan, menjejak kekerapan deploy",
+          "neon": "Pemerhati Uptime & Log — memantau perkhidmatan, mengimbas log untuk ralat, mencipta laporan insiden"
+        },
+        "credentials": {
+          "github": "Akses repositori, semakan PR, isu",
+          "vercel": "Pemantauan deployment (atau CI/CD anda)",
+          "sentry": "Penjejakan ralat dan amaran insiden",
+          "npm": "Pendaftaran pakej untuk semakan kebergantungan"
+        }
+      },
+      "fullBusiness": {
+        "name": "Operasi Perniagaan Penuh",
+        "tagline": "Seluruh syarikat, automatik sepenuhnya",
+        "description": "Jualan, pemasaran, sokongan dan pentadbiran — empat jabatan bekerja selaras merentasi tiga mesin dengan perisikan berkongsi.",
+        "roles": {
+          "atlas": "Penjana Prospek — mencari dan mengesahkan pelanggan berpotensi dari sumber dalam talian",
+          "dash": "Pengurus CRM — mengemaskini urus niaga, menjejak saluran paip dan menghantar siri susulan",
+          "scout": "Penulis Cadangan — merangka cadangan jualan dan dek pembentangan dari templat",
+          "nova": "Pemasar Kandungan — menulis catatan blog, kajian kes dan salinan pemasaran",
+          "echo": "Pengurus Media Sosial — menyiarkan kandungan dan melibatkan khalayak",
+          "pixel": "Pengurus Kempen Emel — menjalankan kempen titisan dan siri surat berita",
+          "sage": "Ketua Sokongan — mengendalikan pertanyaan pelanggan dan menyelesaikan isu",
+          "iris": "Pengurus Pengetahuan — mengekalkan dokumen bantuan, Soalan Lazim dan wiki dalaman",
+          "milo": "Penganalisis Data — menyusun laporan merentasi jabatan dan papan pemuka KPI",
+          "wren": "Penyelidik Pasaran — menjejak trend industri dan perisikan persaingan",
+          "quinn": "Penyelaras Operasi — menjalankan ringkasan mingguan dan penyegerakan antara pasukan"
+        },
+        "credentials": {
+          "gmail": "Komunikasi emel dan sokongan",
+          "hubspot": "CRM dan saluran paip jualan (atau CRM anda)",
+          "linkedin": "Penjanaan prospek dan rangkaian profesional",
+          "mailchimp": "Kempen pemasaran emel",
+          "notion": "Wiki dalaman dan dokumentasi",
+          "analytics": "Analitik web dan pelaporan",
+          "twitter": "Kehadiran media sosial",
+          "zendesk": "Tiket sokongan pelanggan"
+        }
+      },
+      "growth": {
+        "name": "Pertumbuhan & Pemerolehan",
+        "tagline": "Pertumbuhan agresif secara autopilot sepenuhnya",
+        "description": "Prospeksi keluar, pemasaran masuk, pengoptimuman penukaran dan analitik — enjin pertumbuhan khusus merentasi tiga mesin.",
+        "roles": {
+          "blaze": "Prospector Keluar — mencari pembuat keputusan, menyelidik syarikat, membina senarai prospek",
+          "flux": "Jangkauan Emel — menghantar emel sejuk yang diperibadikan, mengurus siri susulan",
+          "orion": "Jangkauan LinkedIn — berhubung dengan prospek dan menghantar mesej yang diperibadikan",
+          "coral": "Pencipta Kandungan — menghasilkan kandungan SEO, salinan halaman pendaratan dan magnet prospek",
+          "taro": "Pengoptimum Halaman Pendaratan — memantau kadar penukaran, mencadangkan dan menguji penambahbaikan",
+          "vale": "Pengurus Kempen Iklan — mengurus kempen iklan Google dan Meta secara hujung ke hujung",
+          "ember": "Penilai Prospek — mengesahkan prospek masuk dan menghala ke susulan yang sesuai",
+          "haze": "Penganalisis Corong — menjejak metrik penukaran di setiap peringkat, mengenal pasti kesesakan",
+          "dune": "Perisikan Pesaing — memantau kempen, harga dan perubahan kedudukan pesaing",
+          "kit": "Pelapor Pertumbuhan — menyusun metrik pertumbuhan harian/mingguan dan hasil eksperimen"
+        },
+        "credentials": {
+          "linkedin": "Prospeksi dan jangkauan",
+          "gmail": "Emel sejuk dan siri susulan",
+          "hubspot": "Pengurusan prospek dan CRM",
+          "googleAds": "Kempen carian berbayar",
+          "metaAds": "Pengiklanan Meta",
+          "analytics": "Analitik corong dan penukaran",
+          "ahrefs": "Penyelidikan SEO dan analisis pesaing"
+        }
+      },
+      "saas": {
+        "name": "Operasi SaaS",
+        "tagline": "Jalankan SaaS anda seperti mesin yang diminyaki dengan baik",
+        "description": "Kejayaan pelanggan, analitik produk, pencegahan churn, penjejakan ciri dan pelaporan automatik untuk perniagaan SaaS.",
+        "roles": {
+          "luna": "Pemantau Kejayaan Pelanggan — menjejak penglibatan pengguna, mengenal pasti akaun berisiko",
+          "sage": "Pembantu Onboarding — membimbing pengguna baru melalui persediaan, memantau kadar pengaktifan",
+          "ivy": "Pencegah Churn — menghubungi pengguna yang mula tidak aktif dengan kempen pengaktifan semula",
+          "rune": "Penjejak Permintaan Ciri — mengagregatkan maklum balas pengguna dan permintaan ciri dari semua saluran",
+          "koda": "Analitik Produk — menjejak penggunaan ciri, perjalanan pengguna dan metrik penglibatan",
+          "neon": "Pemantau Pepijat & Isu — memerhati log ralat, laporan pengguna dan insiden halaman status",
+          "aria": "Penulis Changelog — mendokumentasikan keluaran, mengemaskini pangkalan pengetahuan dan pusat bantuan",
+          "frost": "Penganalisis Hasil — menjejak MRR, kadar churn, LTV dan hasil pengembangan",
+          "zara": "Penjejak Pesaing — memantau ciri, harga dan kedudukan pasaran pesaing"
+        },
+        "credentials": {
+          "stripe": "Data langganan dan hasil",
+          "intercom": "Pemesejan dan sokongan pelanggan (atau alat anda)",
+          "mixpanel": "Analitik produk dan penjejakan pengguna",
+          "gmail": "Komunikasi pelanggan",
+          "notion": "Pangkalan pengetahuan dan changelog",
+          "sentry": "Pemantauan ralat dan penjejakan pepijat",
+          "github": "Penjejakan isu dan permintaan ciri"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "sehingga 3",
+        "price": "$19/bulan"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "sehingga 10",
+        "price": "$50/bulan"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "sehingga 50",
+        "price": "$100/bulan"
+      }
+    },
+    "frequencies": {
+      "daily": "harian",
+      "weekly": "mingguan",
+      "every_30_minutes": "setiap 30 minit",
+      "every_6_hours": "setiap 6 jam",
+      "every_12_hours": "setiap 12 jam"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Konfigurasikan tetapan asas komputer",
+    "displayName": "Nama Paparan",
+    "defaultName": "Komputer saya",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Kata laluan ini diperlukan untuk menyambung ke komputer"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Komuniti",
+    "title": "Lihat bagaimana orang menggunakannya",
+    "subtitle": "Dari penyelidikan lead hingga ujian QA — lihat apa yang diautomasikan oleh komuniti dan dapatkan inspirasi untuk aliran kerja anda yang seterusnya.",
+    "sessionCount": "{count} sesi dikongsi oleh komuniti",
+    "searchPlaceholder": "Cari mengikut tugas, alat, atau hasil...",
+    "emptyTitle": "Belum ada yang berkongsi — jadilah yang pertama",
+    "emptySubtitle": "Apabila pengguna menjadikan sesi mereka awam, ia akan muncul di sini",
+    "noResultsTitle": "Tiada padanan untuk carian itu",
+    "noResultsSubtitle": "Cuba kata kunci yang berbeza",
+    "watchSession": "Tonton sesi",
+    "steps": "{count} langkah",
+    "tryCoasty": "Cuba Coasty"
+  }
+}

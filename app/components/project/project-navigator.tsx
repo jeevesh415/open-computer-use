@@ -165,7 +165,23 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
   const { messages: persistedMessages } = useMessages()
   const { streamingMessages, lastUpdate: streamingLastUpdate } = useChatStreaming()
   const [activeTab, setActiveTab] = useState<'activity' | 'files'>('activity')
-  
+  const [isElectronMachine, setIsElectronMachine] = useState(false)
+
+  // Detect if the selected machine is an Electron (local) machine
+  useEffect(() => {
+    if (!selectedVMId) {
+      setIsElectronMachine(false)
+      return
+    }
+    fetch("/api/machines")
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        const machine = (data?.machines || []).find((m: any) => m.id === selectedVMId)
+        setIsElectronMachine(machine?.settings?.provider === 'electron')
+      })
+      .catch(() => setIsElectronMachine(false))
+  }, [selectedVMId])
+
   // Use streaming messages if available, fallback to persisted
   const messages = streamingMessages.length > 0 ? streamingMessages : persistedMessages
   
@@ -678,8 +694,9 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
       const protocol = 'http:'
       const websocketPort = machine.websocketPort || 6080
 
-      // Properly encode the password for URL
-      const encodedPassword = encodeURIComponent(machine.vncPassword)
+      // VNC protocol truncates passwords to 8 characters
+      const vncPw = machine.vncPassword?.substring(0, 8) || ''
+      const encodedPassword = encodeURIComponent(vncPw)
 
       const url = `${protocol}//${machine.publicIpAddress}:${websocketPort}/vnc.html?autoconnect=1&resize=scale&password=${encodedPassword}`
 
@@ -2246,38 +2263,40 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
             onMouseLeave={() => setResizeHandleHover(false)}
           >
             <div className={cn(
-              "w-[3px] rounded-full transition-all duration-200",
+              "w-[3px] rounded-full transition-all duration-300",
               isResizing
-                ? "h-16 bg-neutral-400 dark:bg-neutral-500"
+                ? "h-16 bg-blue-500/80 dark:bg-blue-400/80"
                 : resizeHandleHover
-                  ? "h-12 bg-neutral-400/60 dark:bg-neutral-500/60"
-                  : "h-8 bg-neutral-300/40 dark:bg-neutral-600/40"
+                  ? "h-12 bg-neutral-400/50 dark:bg-neutral-500/50"
+                  : "h-8 bg-neutral-300/25 dark:bg-neutral-600/25"
             )} />
           </div>
           {/* Panel body */}
-          <div className="absolute inset-0 bg-white dark:bg-neutral-900 shadow-2xl shadow-black/8 dark:shadow-black/25 rounded-t-2xl sm:rounded-2xl overflow-hidden flex flex-col border border-neutral-200/60 dark:border-neutral-700/40">
+          <div className="absolute inset-0 bg-neutral-100 dark:bg-neutral-800 shadow-2xl shadow-black/10 dark:shadow-black/50 rounded-t-2xl sm:rounded-2xl overflow-hidden flex flex-col border border-neutral-200/40 dark:border-neutral-700/30">
           <div className="relative flex-1 flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between h-11 px-3.5 border-b border-neutral-100 dark:border-neutral-800/50 flex-shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="relative">
-                  <div className="w-6 h-6 rounded-lg bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center flex-shrink-0">
-                    <CoastyIcon className="h-3.5 w-3.5" />
-                  </div>
-                  {activeTools > 0 && (
-                    <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-[1.5px] ring-white dark:ring-neutral-900" />
+            <div className="flex items-center justify-between h-10 px-3 flex-shrink-0">
+              <div className="flex items-center gap-2">
+                <div className="relative flex items-center gap-2">
+                  {activeTools > 0 ? (
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
+                  ) : (
+                    <span className="h-2 w-2 rounded-full bg-neutral-300 dark:bg-neutral-600" />
                   )}
+                  <span className="text-[13px] font-semibold tracking-[-0.01em] text-neutral-800 dark:text-neutral-200">Machine</span>
                 </div>
-                <span className="text-[13px] font-semibold tracking-[-0.01em] text-neutral-800 dark:text-neutral-200">Machine</span>
-                {activeTab === 'activity' && !taskPlan && toolInvocations.length > 0 && (
-                  <span className="text-[11px] tabular-nums text-neutral-400 dark:text-neutral-500 font-medium">
-                    {toolInvocations.length} {toolInvocations.length === 1 ? 'step' : 'steps'}
+                {activeTab === 'activity' && toolInvocations.length > 0 && (
+                  <span className="text-[10px] tabular-nums text-neutral-400 dark:text-neutral-500 font-medium">
+                    {toolInvocations.length}
                   </span>
                 )}
               </div>
               <button
                 onClick={onToggle}
-                className="w-7 h-7 rounded-lg flex items-center justify-center text-neutral-400 hover:text-neutral-600 dark:text-neutral-500 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                className="w-6 h-6 rounded-md flex items-center justify-center text-neutral-400 hover:text-neutral-500 dark:text-neutral-500 dark:hover:text-neutral-400 transition-colors"
                 title="Minimize panel"
               >
                 <ArrowsIn className="h-3.5 w-3.5" weight="bold" />
@@ -2286,7 +2305,7 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
 
             {/* Task Checklist */}
             {taskPlan && !isMobile && (
-              <div className="px-3.5 py-2 border-b border-neutral-100 dark:border-neutral-800/50">
+              <div className="px-3 py-1.5">
                 <TaskChecklist
                   taskPlan={taskPlan}
                   currentTaskId={currentExecutingTaskId || undefined}
@@ -2296,23 +2315,14 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
 
             {/* Tab Switcher */}
             {isOwner ? (
-              <div className="px-3.5 pt-2 pb-1 flex-shrink-0">
-                <div className="relative flex bg-neutral-100 dark:bg-neutral-800/50 rounded-lg p-[2px]">
-                  <motion.div
-                    className="absolute top-[2px] bottom-[2px] rounded-md bg-white dark:bg-neutral-700 shadow-sm"
-                    layout
-                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
-                    style={{
-                      left: activeTab === 'activity' ? '2px' : 'calc(50%)',
-                      width: 'calc(50% - 2px)',
-                    }}
-                  />
+              <div className="px-3 pb-1 flex-shrink-0">
+                <div className="relative flex gap-1">
                   <button
                     onClick={() => setActiveTab('activity')}
                     className={cn(
-                      "relative z-10 flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium rounded-md transition-colors duration-150",
+                      "relative flex items-center gap-1.5 px-2 py-1 text-[11px] font-medium rounded-md transition-colors duration-150",
                       activeTab === 'activity'
-                        ? "text-neutral-900 dark:text-neutral-100"
+                        ? "text-neutral-900 dark:text-neutral-100 bg-white dark:bg-neutral-700/60"
                         : "text-neutral-400 dark:text-neutral-500 hover:text-neutral-500 dark:hover:text-neutral-400"
                     )}
                   >
@@ -2322,9 +2332,9 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                   <button
                     onClick={() => setActiveTab('files')}
                     className={cn(
-                      "relative z-10 flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[12px] font-medium rounded-md transition-colors duration-150",
+                      "relative flex items-center gap-1.5 px-2 py-1 text-[11px] font-medium rounded-md transition-colors duration-150",
                       activeTab === 'files'
-                        ? "text-neutral-900 dark:text-neutral-100"
+                        ? "text-neutral-900 dark:text-neutral-100 bg-white dark:bg-neutral-700/60"
                         : "text-neutral-400 dark:text-neutral-500 hover:text-neutral-500 dark:hover:text-neutral-400"
                     )}
                   >
@@ -2344,105 +2354,520 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className={cn(
-                      "flex-1 overflow-y-auto scrollbar-invisible absolute top-0 left-0 right-0",
-                      toolInvocations.length > 0 ? "bottom-[140px]" : "bottom-0"
-                    )}
+                    transition={{ duration: 0.15 }}
+                    className="absolute inset-0 flex flex-col"
                   >
                     {toolInvocations.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-full text-center px-6">
-                    <div className="w-11 h-11 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 flex items-center justify-center mb-3">
-                      <CoastyIcon className="h-5 w-5 text-neutral-400 dark:text-neutral-500" />
-                    </div>
-                    <p className="text-[13px] font-semibold text-neutral-600 dark:text-neutral-300 tracking-[-0.01em]">Ready</p>
-                    <p className="text-[11px] text-neutral-400 dark:text-neutral-500 mt-1 leading-relaxed max-w-[200px]">
-                      Actions will appear here as they execute
-                    </p>
-                  </div>
-                  ) : (
-                    <div className="relative w-full h-full p-2">
-                    <AnimatePresence mode="wait">
-                      {(() => {
-                        const currentInv = currentTaskTools[0]
-                        let screenshot = currentInv?.frontendScreenshot
-                        if (!screenshot && currentInv?.result && typeof currentInv.result === 'object' && 'frontendScreenshot' in currentInv.result) {
-                          screenshot = (currentInv.result as any).frontendScreenshot
-                        }
-                        if (!screenshot) {
-                          for (let i = Math.min(currentTask, toolInvocations.length - 1); i >= 0; i--) {
-                            const inv = toolInvocations[i]
-                            const s = inv?.frontendScreenshot || (inv?.result && typeof inv.result === 'object' && 'frontendScreenshot' in inv.result ? (inv.result as any).frontendScreenshot : null)
-                            if (s) { screenshot = s; break }
-                          }
-                        }
-                        if (screenshot && screenshot !== lastBrowserScreenshot) {
-                          setTimeout(() => setLastBrowserScreenshot(screenshot!), 50)
-                        }
-                        const displayScreenshot = screenshot || lastBrowserScreenshot
+                      <div className="flex-1 relative flex flex-col items-center justify-center text-center px-6 rounded-lg m-2 overflow-hidden">
+                        {/* Light backdrop */}
+                        <div className="absolute inset-0 dark:hidden" style={{
+                          background: 'radial-gradient(ellipse at 40% 20%, rgba(210,205,230,0.35) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(195,205,225,0.25) 0%, transparent 55%), linear-gradient(to bottom, #f5f4f7, #eeedf0)',
+                        }} />
+                        {/* Dark backdrop */}
+                        <div className="absolute inset-0 hidden dark:block" style={{
+                          background: 'radial-gradient(ellipse at 40% 20%, rgba(25,22,40,0.4) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(18,28,45,0.3) 0%, transparent 55%), linear-gradient(to bottom, #0a0a0e, #060608)',
+                        }} />
+                        {/* Dot grid — light */}
+                        <div className="absolute inset-0 pointer-events-none dark:hidden" style={{
+                          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px)',
+                          backgroundSize: '24px 24px',
+                        }} />
+                        {/* Dot grid — dark */}
+                        <div className="absolute inset-0 pointer-events-none hidden dark:block" style={{
+                          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                          backgroundSize: '24px 24px',
+                        }} />
+                        <div className="relative z-10">
+                          <div className="w-14 h-14 rounded-2xl bg-black/[0.04] dark:bg-white/[0.04] flex items-center justify-center mb-4 mx-auto">
+                            <Desktop className="h-6 w-6 text-neutral-400 dark:text-neutral-500" />
+                          </div>
+                          <p className="text-[13px] font-semibold text-neutral-500 dark:text-neutral-400 tracking-[-0.01em]">Ready</p>
+                          <p className="text-[11px] text-neutral-400 dark:text-neutral-600 mt-1.5 leading-relaxed max-w-[220px]">
+                            Screenshots will stream here as the agent works
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        {/* Screenshot Showcase */}
+                        <div className="flex-1 relative min-h-0 m-2" style={{ perspective: '1200px' }}>
+                          {/* Clipped background layer */}
+                          <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+                            {/* Light backdrop */}
+                            <div className="absolute inset-0 dark:hidden" style={{
+                              background: 'radial-gradient(ellipse at 40% 20%, rgba(210,205,230,0.35) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(195,205,225,0.25) 0%, transparent 55%), linear-gradient(to bottom, #f5f4f7, #eeedf0)',
+                            }} />
+                            {/* Dark backdrop */}
+                            <div className="absolute inset-0 hidden dark:block" style={{
+                              background: 'radial-gradient(ellipse at 40% 20%, rgba(25,22,40,0.4) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(18,28,45,0.3) 0%, transparent 55%), linear-gradient(to bottom, #0a0a0e, #060608)',
+                            }} />
+                            {/* Dot grid — light */}
+                            <div className="absolute inset-0 dark:hidden" style={{
+                              backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px)',
+                              backgroundSize: '24px 24px',
+                            }} />
+                            {/* Dot grid — dark */}
+                            <div className="absolute inset-0 hidden dark:block" style={{
+                              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                              backgroundSize: '24px 24px',
+                            }} />
+                          </div>
 
-                        if (displayScreenshot) {
-                          return (
-                            <motion.div
-                              key={`screenshot-${currentTask}`}
-                              className="w-full h-full"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.2, ease: "easeOut" }}
-                            >
-                              <div className="w-full h-full overflow-auto scrollbar-invisible rounded-lg border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-                                <img
-                                  src={displayScreenshot}
-                                  alt="VM Screenshot"
-                                  className="w-full h-auto block"
-                                />
-                              </div>
-                              {!screenshot && lastBrowserScreenshot && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[1px]">
-                                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 border border-white/10">
-                                    <Loader2 className="h-3 w-3 text-white/60 animate-spin" />
-                                    <span className="text-[11px] text-white/60 font-medium">Processing</span>
+                          {(() => {
+                            const currentInv = currentTaskTools[0]
+                            let screenshot = currentInv?.frontendScreenshot
+                            if (!screenshot && currentInv?.result && typeof currentInv.result === 'object' && 'frontendScreenshot' in currentInv.result) {
+                              screenshot = (currentInv.result as any).frontendScreenshot
+                            }
+                            if (!screenshot) {
+                              for (let i = Math.min(currentTask, toolInvocations.length - 1); i >= 0; i--) {
+                                const inv = toolInvocations[i]
+                                const s = inv?.frontendScreenshot || (inv?.result && typeof inv.result === 'object' && 'frontendScreenshot' in inv.result ? (inv.result as any).frontendScreenshot : null)
+                                if (s) { screenshot = s; break }
+                              }
+                            }
+                            if (screenshot && screenshot !== lastBrowserScreenshot) {
+                              setTimeout(() => setLastBrowserScreenshot(screenshot!), 50)
+                            }
+                            const displayScreenshot = screenshot || lastBrowserScreenshot
+                            const action = getActionIndicator(currentInv)
+                            const isActive = currentInv?.state === 'call' || currentInv?.state === 'partial-call'
+                            const dir = navigationDirection
+
+                            // Find prev/next screenshots for teaser cards
+                            const screenshotAt = (idx: number) => {
+                              if (idx < 0 || idx >= toolInvocations.length) return null
+                              const inv = toolInvocations[idx]
+                              return inv?.frontendScreenshot ||
+                                (inv?.result && typeof inv.result === 'object' && 'frontendScreenshot' in inv.result
+                                  ? (inv.result as any).frontendScreenshot : null)
+                            }
+                            let prevShot: string | null = null
+                            for (let i = currentTask - 1; i >= 0; i--) {
+                              const s = screenshotAt(i)
+                              if (s && s !== displayScreenshot) { prevShot = s; break }
+                            }
+                            let nextShot: string | null = null
+                            for (let i = currentTask + 1; i < toolInvocations.length; i++) {
+                              const s = screenshotAt(i)
+                              if (s && s !== displayScreenshot) { nextShot = s; break }
+                            }
+
+                            return (
+                              <>
+                                {/* Ambient color glow — clipped to container shape */}
+                                {displayScreenshot && (
+                                  <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
+                                    <img
+                                      src={displayScreenshot}
+                                      alt=""
+                                      className="absolute inset-[-40px] w-[calc(100%+80px)] h-[calc(100%+80px)] object-cover opacity-[0.10] dark:opacity-[0.18]"
+                                      style={{ filter: 'blur(60px) saturate(1.4)' }}
+                                      draggable={false}
+                                    />
+                                  </div>
+                                )}
+
+                                {/* Prev teaser card — same size as main, positioned off-left */}
+                                {displayScreenshot && (
+                                  <motion.div
+                                    className={cn(
+                                      "absolute z-[1] overflow-hidden rounded-xl",
+                                      prevShot ? "cursor-pointer group/prev" : "pointer-events-none"
+                                    )}
+                                    style={{
+                                      left: '-72%',
+                                      top: '4%',
+                                      bottom: '4%',
+                                      width: '80%',
+                                      transformOrigin: 'right center',
+                                    }}
+                                    animate={{ rotateY: 4 }}
+                                    whileHover={prevShot ? { x: 14, rotateY: 1 } : undefined}
+                                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                    onClick={prevShot ? () => {
+                                      setHasUserNavigated(true)
+                                      setNavigationDirection('backward')
+                                      const newTask = Math.max(0, currentTask - 1)
+                                      setCurrentTask(newTask)
+                                      setCurrentStep(newTask)
+                                      setIsPlaying(false)
+                                    } : undefined}
+                                  >
+                                    {/* Crossfade image content — blurred fill + sharp contain */}
+                                    <AnimatePresence mode="popLayout">
+                                      <motion.div
+                                        key={prevShot?.slice(-20) || 'prev-ph'}
+                                        className="absolute inset-0"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                                      >
+                                        {/* Blurred fill — covers letterbox areas */}
+                                        <img
+                                          src={prevShot || displayScreenshot}
+                                          alt=""
+                                          className="absolute inset-[-6px] w-[calc(100%+12px)] h-[calc(100%+12px)] object-cover pointer-events-none select-none"
+                                          style={{ filter: 'blur(20px) saturate(1.1)', opacity: 0.5 }}
+                                          draggable={false}
+                                        />
+                                        {/* Sharp screenshot — preserves aspect ratio */}
+                                        <img
+                                          src={prevShot || displayScreenshot}
+                                          alt=""
+                                          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+                                          style={!prevShot ? { filter: 'blur(8px) saturate(0.5)' } : undefined}
+                                          draggable={false}
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
+                                    <div className={cn(
+                                      "absolute inset-0 transition-colors duration-300",
+                                      prevShot
+                                        ? "bg-white/50 dark:bg-black/50 group-hover/prev:bg-white/30 dark:group-hover/prev:bg-black/35"
+                                        : "bg-white/65 dark:bg-black/65"
+                                    )} />
+                                    {prevShot && (
+                                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/prev:opacity-100 transition-opacity duration-200">
+                                        <CaretLeft className="h-5 w-5 text-neutral-700 dark:text-white/70" weight="bold" />
+                                      </div>
+                                    )}
+                                  </motion.div>
+                                )}
+
+                                {/* Next teaser card — same size as main, positioned off-right */}
+                                {displayScreenshot && (
+                                  <motion.div
+                                    className={cn(
+                                      "absolute z-[1] overflow-hidden rounded-xl",
+                                      nextShot ? "cursor-pointer group/next" : "pointer-events-none"
+                                    )}
+                                    style={{
+                                      left: '92%',
+                                      top: '4%',
+                                      bottom: '4%',
+                                      width: '80%',
+                                      transformOrigin: 'left center',
+                                    }}
+                                    animate={{ rotateY: -4 }}
+                                    whileHover={nextShot ? { x: -14, rotateY: -1 } : undefined}
+                                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                                    onClick={nextShot ? () => {
+                                      setHasUserNavigated(true)
+                                      setNavigationDirection('forward')
+                                      const newTask = Math.min(totalTasks - 1, currentTask + 1)
+                                      setCurrentTask(newTask)
+                                      setCurrentStep(newTask)
+                                      setIsPlaying(false)
+                                    } : undefined}
+                                  >
+                                    {/* Crossfade image content — blurred fill + sharp contain */}
+                                    <AnimatePresence mode="popLayout">
+                                      <motion.div
+                                        key={nextShot?.slice(-20) || 'next-ph'}
+                                        className="absolute inset-0"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                                      >
+                                        {/* Blurred fill — covers letterbox areas */}
+                                        <img
+                                          src={nextShot || displayScreenshot}
+                                          alt=""
+                                          className="absolute inset-[-6px] w-[calc(100%+12px)] h-[calc(100%+12px)] object-cover pointer-events-none select-none"
+                                          style={{ filter: 'blur(20px) saturate(1.1)', opacity: 0.5 }}
+                                          draggable={false}
+                                        />
+                                        {/* Sharp screenshot — preserves aspect ratio */}
+                                        <img
+                                          src={nextShot || displayScreenshot}
+                                          alt=""
+                                          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+                                          style={!nextShot ? { filter: 'blur(8px) saturate(0.5)' } : undefined}
+                                          draggable={false}
+                                        />
+                                      </motion.div>
+                                    </AnimatePresence>
+                                    <div className={cn(
+                                      "absolute inset-0 transition-colors duration-300",
+                                      nextShot
+                                        ? "bg-white/50 dark:bg-black/50 group-hover/next:bg-white/30 dark:group-hover/next:bg-black/35"
+                                        : "bg-white/65 dark:bg-black/65"
+                                    )} />
+                                    {nextShot && (
+                                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/next:opacity-100 transition-opacity duration-200">
+                                        <CaretRight className="h-5 w-5 text-neutral-700 dark:text-white/70" weight="bold" />
+                                      </div>
+                                    )}
+                                  </motion.div>
+                                )}
+
+                                {/* Main screenshot card — elevated focal point */}
+                                <div
+                                  className={cn(
+                                    "absolute z-[2] rounded-xl overflow-hidden",
+                                    displayScreenshot
+                                      ? "shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2),0_8px_20px_-6px_rgba(0,0,0,0.1)] dark:shadow-[0_25px_60px_-12px_rgba(0,0,0,0.7),0_12px_28px_-8px_rgba(0,0,0,0.5)]"
+                                      : "",
+                                  )}
+                                  style={{
+                                    left: '10%',
+                                    right: '10%',
+                                    top: '4%',
+                                    bottom: '4%',
+                                  }}
+                                >
+                                  {/* Blurred fill behind — kills letterboxing */}
+                                  {displayScreenshot && (
+                                    <img
+                                      src={displayScreenshot}
+                                      alt=""
+                                      className="absolute inset-[-10px] w-[calc(100%+20px)] h-[calc(100%+20px)] object-cover pointer-events-none select-none opacity-[0.35] dark:opacity-50"
+                                      style={{ filter: 'blur(30px) saturate(1.1)' }}
+                                      draggable={false}
+                                    />
+                                  )}
+
+                                  {/* Background anchor */}
+                                  {lastBrowserScreenshot && (
+                                    <img
+                                      src={lastBrowserScreenshot}
+                                      alt=""
+                                      className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+                                      draggable={false}
+                                    />
+                                  )}
+
+                                  {/* Active screenshot with directional motion */}
+                                  {displayScreenshot ? (
+                                    <motion.img
+                                      key={displayScreenshot.slice(-24)}
+                                      src={displayScreenshot}
+                                      alt="Screenshot"
+                                      className="absolute inset-0 w-full h-full object-contain cursor-zoom-in select-none"
+                                      initial={{
+                                        opacity: 0,
+                                        x: dir === 'forward' ? 80 : -80,
+                                        scale: 1.06,
+                                      }}
+                                      animate={{
+                                        opacity: 1,
+                                        x: 0,
+                                        scale: 1,
+                                      }}
+                                      transition={{
+                                        duration: 0.5,
+                                        ease: [0.22, 1, 0.36, 1],
+                                        opacity: { duration: 0.3 },
+                                      }}
+                                      draggable={false}
+                                      onClick={() => {
+                                        const win = window.open()
+                                        if (win) {
+                                          win.document.write('<html><head><title>Screenshot</title><style>body{margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh}img{max-width:100%;max-height:100vh;object-fit:contain}</style></head><body><img src="' + displayScreenshot + '" /></body></html>')
+                                        }
+                                      }}
+                                    />
+                                  ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                      <div className="text-center">
+                                        <div className="flex items-center gap-1 justify-center">
+                                          <span className="text-[11px] text-neutral-500 dark:text-neutral-500 font-medium">Working</span>
+                                          <div className="flex gap-0.5">
+                                            {[0, 1, 2].map((i) => (
+                                              <motion.span
+                                                key={i}
+                                                className="text-[11px] text-neutral-400 dark:text-neutral-600"
+                                                animate={{ opacity: [0.2, 1, 0.2] }}
+                                                transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.4 }}
+                                              >
+                                                .
+                                              </motion.span>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* Processing overlay — on main card */}
+                                {!screenshot && lastBrowserScreenshot && isActive && (
+                                  <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 1, duration: 0.3 }}
+                                    className="absolute z-[6] flex items-center justify-center rounded-xl backdrop-blur-[2px] bg-white/20 dark:bg-black/20"
+                                    style={{
+                                      left: '10%',
+                                      right: '10%',
+                                      top: '4%',
+                                      bottom: '4%',
+                                    }}
+                                  >
+                                    <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/70 dark:bg-black/50 border border-neutral-200/50 dark:border-white/[0.06] shadow-lg shadow-black/5 dark:shadow-black/20">
+                                      <Loader2 className="h-3.5 w-3.5 text-neutral-500 dark:text-white/60 animate-spin" />
+                                      <span className="text-[11px] text-neutral-600 dark:text-white/60 font-medium">Processing</span>
+                                    </div>
+                                  </motion.div>
+                                )}
+
+                                {/* Action badge — bottom-left of main card */}
+                                <AnimatePresence mode="wait">
+                                  {action && (
+                                    <motion.div
+                                      key={`action-${currentTask}-${action.label}`}
+                                      initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                                      exit={{ opacity: 0, y: -4, scale: 0.95 }}
+                                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                                      className="absolute z-10"
+                                      style={{ left: 'calc(10% + 10px)', bottom: 'calc(4% + 10px)' }}
+                                    >
+                                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/75 dark:bg-black/50 backdrop-blur-xl border border-neutral-200/50 dark:border-white/[0.05] shadow-lg shadow-black/10 dark:shadow-black/30 text-neutral-800 dark:text-white/90">
+                                        <span className="text-neutral-500 dark:text-white/50">{action.icon}</span>
+                                        <span className="text-[11px] font-semibold tracking-wide">{action.label}</span>
+                                        {action.detail && (
+                                          <>
+                                            <div className="w-px h-3 bg-neutral-300 dark:bg-white/[0.06]" />
+                                            <span className="text-[10px] text-neutral-400 dark:text-white/35 font-mono max-w-[140px] truncate">{action.detail}</span>
+                                          </>
+                                        )}
+                                        {isActive && (
+                                          <span className="relative flex h-1.5 w-1.5 ml-0.5">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                                          </span>
+                                        )}
+                                      </div>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+
+                                {/* Step counter — top-right of main card */}
+                                <div className="absolute z-10" style={{ right: 'calc(10% + 10px)', top: 'calc(4% + 10px)' }}>
+                                  <div className="px-2 py-1 rounded-md bg-white/60 dark:bg-black/30 backdrop-blur-sm text-[10px] tabular-nums text-neutral-400 dark:text-white/25 font-medium">
+                                    {currentTask + 1}/{totalTasks}
                                   </div>
                                 </div>
-                              )}
-                            </motion.div>
-                          )
-                        }
+                              </>
+                            )
+                          })()}
+                        </div>
 
-                        return (
-                          <motion.div
-                            key="placeholder"
-                            className="w-full h-full flex items-center justify-center"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.15 }}
-                          >
-                            <div className="text-center">
-                              <Desktop className="w-7 h-7 text-neutral-300 dark:text-neutral-600 mx-auto mb-2" />
-                              <div className="flex items-center gap-1">
-                                <span className="text-[11px] text-neutral-400 dark:text-neutral-500 font-medium">Working</span>
-                                <div className="flex gap-0.5">
-                                  {[0, 1, 2].map((i) => (
-                                    <motion.span
-                                      key={i}
-                                      className="text-[11px] text-neutral-300 dark:text-neutral-600"
-                                      animate={{ opacity: [0, 1, 0] }}
-                                      transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.4 }}
-                                    >
-                                      .
-                                    </motion.span>
-                                  ))}
-                                </div>
+                        {/* Player Controls */}
+                        <div className="flex-shrink-0 px-3 py-2">
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              className="h-7 w-7 rounded-md flex items-center justify-center text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-white dark:hover:bg-neutral-700 disabled:opacity-25 disabled:pointer-events-none transition-colors"
+                              onClick={() => {
+                                setHasUserNavigated(true)
+                                setNavigationDirection('backward')
+                                const newTask = Math.max(0, currentTask - 1)
+                                setCurrentTask(newTask)
+                                setCurrentStep(newTask)
+                                setIsPlaying(false)
+                              }}
+                              disabled={currentTask === 0}
+                            >
+                              <SkipBack className="h-3 w-3" weight="fill" />
+                            </button>
+
+                            <button
+                              className="h-8 w-8 rounded-lg flex items-center justify-center bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all shadow-sm"
+                              onClick={() => setIsPlaying(!isPlaying)}
+                            >
+                              {isPlaying ? (
+                                <Pause className="h-3 w-3" weight="fill" />
+                              ) : (
+                                <Play className="h-3 w-3 ml-0.5" weight="fill" />
+                              )}
+                            </button>
+
+                            <button
+                              className="h-7 w-7 rounded-md flex items-center justify-center text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-white dark:hover:bg-neutral-700 disabled:opacity-25 disabled:pointer-events-none transition-colors"
+                              onClick={() => {
+                                setHasUserNavigated(true)
+                                setNavigationDirection('forward')
+                                const newTask = Math.min(totalTasks - 1, currentTask + 1)
+                                setCurrentTask(newTask)
+                                setCurrentStep(newTask)
+                                setIsPlaying(false)
+                              }}
+                              disabled={currentTask >= totalTasks - 1}
+                            >
+                              <SkipForward className="h-3 w-3" weight="fill" />
+                            </button>
+
+                            <div
+                              className="flex-1 relative h-7 flex items-center min-w-0 group cursor-pointer"
+                              onClick={(e) => {
+                                const rect = e.currentTarget.getBoundingClientRect()
+                                const x = e.clientX - rect.left
+                                const percentage = Math.max(0, Math.min(1, x / rect.width))
+                                const newStep = Math.round(percentage * Math.max(toolInvocations.length - 1, 1))
+                                setNavigationDirection(newStep > currentTask ? 'forward' : 'backward')
+                                setCurrentStep(newStep)
+                                setCurrentTask(newStep)
+                                setHasUserNavigated(true)
+                                setIsPlaying(false)
+                              }}
+                            >
+                              <div className="relative w-full h-[3px] bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden group-hover:h-[5px] transition-all">
+                                <motion.div
+                                  className="absolute left-0 top-0 h-full bg-neutral-800 dark:bg-neutral-200 rounded-full"
+                                  initial={false}
+                                  animate={{ width: `${(currentStep / Math.max(toolInvocations.length - 1, 1)) * 100}%` }}
+                                  transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+                                />
                               </div>
                             </div>
-                          </motion.div>
-                        )
-                      })()}
-                    </AnimatePresence>
-                    </div>
-                  )}
+
+                            <button
+                              className={cn(
+                                "h-7 px-2.5 text-[11px] font-bold rounded-md whitespace-nowrap transition-all flex items-center gap-1.5",
+                                currentTask === totalTasks - 1
+                                  ? "bg-red-500 text-white shadow-lg shadow-red-500/25"
+                                  : "text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-white dark:hover:bg-neutral-700"
+                              )}
+                              onClick={() => {
+                                setHasUserNavigated(false)
+                                setNavigationDirection('forward')
+                                const lastTask = totalTasks - 1
+                                setCurrentTask(lastTask)
+                                setCurrentStep(toolInvocations.length - 1)
+                                setIsPlaying(false)
+                              }}
+                              disabled={currentTask === totalTasks - 1}
+                            >
+                              {currentTask === totalTasks - 1 && (
+                                <span className="relative flex h-1.5 w-1.5">
+                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                                </span>
+                              )}
+                              LIVE
+                            </button>
+
+                            {selectedVMId && (
+                              <button
+                                className="h-7 px-2 text-[11px] font-medium rounded-md whitespace-nowrap border border-neutral-200 dark:border-neutral-700/50 text-neutral-500 dark:text-neutral-400 hover:bg-white dark:hover:bg-neutral-700 transition-colors flex items-center gap-1.5 disabled:opacity-50"
+                                onClick={openVNCConnection}
+                                disabled={connectingToVM}
+                              >
+                                {connectingToVM ? (
+                                  <Loader2 className="h-3 w-3 animate-spin" />
+                                ) : (
+                                  <Monitor className="h-3 w-3" />
+                                )}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 ) : isOwner && activeTab === 'files' ? (
                   <motion.div
@@ -2456,291 +2881,13 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                     <FileExplorer
                       machineId={selectedVMId || undefined}
                       userId={currentUserId || undefined}
+                      isElectron={isElectronMachine}
                       className="flex-1 min-h-0"
                     />
                   </motion.div>
                 ) : null}
               </AnimatePresence>
             </div>
-            
-            {/* Keyboard/Mouse Visualization + Player Controls */}
-            {activeTab === 'activity' && toolInvocations.length > 0 && (
-              <div className="absolute bottom-0 left-0 right-0 bg-white/90 dark:bg-neutral-900/95 backdrop-blur-md rounded-b-2xl border-t border-neutral-100 dark:border-neutral-800/50">
-                {/* Keyboard + Mouse Action Visualizer */}
-                {(() => {
-                  const currentInv = currentTaskTools[0] || toolInvocations[currentTask]
-                  const action = getActionIndicator(currentInv)
-                  const parsedArgs = currentInv ? (typeof currentInv.args === 'string' ? (() => { try { return JSON.parse(currentInv.args) } catch { return {} } })() : (currentInv.args || {})) : {}
-                  const toolName = currentInv?.toolName || ''
-                  const isCUA = toolName.startsWith('cua_')
-
-                  // Compute active keys — only keys used in this step
-                  const activeKeys = new Set<string>()
-                  if (toolName === 'cua_type_text') {
-                    const text = (parsedArgs.text || '') as string
-                    const unique = new Set(text.toLowerCase().split(''))
-                    unique.forEach((c) => {
-                      if (c === ' ') activeKeys.add('space')
-                      else if (c === '\n' || c === '\r' || c === '\t') { /* skip non-printable */ }
-                      else activeKeys.add(c)
-                    })
-                    if (/[A-Z]/.test(text)) activeKeys.add('shift')
-                  } else if (toolName === 'cua_key_press') {
-                    (parsedArgs.keys || []).forEach((k: string) => activeKeys.add(normalizeKeyId(k)))
-                  } else if (toolName === 'cua_key_combo') {
-                    (parsedArgs.keys || []).forEach((k: string) => activeKeys.add(normalizeKeyId(k)))
-                  }
-
-                  // Compute mouse state
-                  const mouseLeft = (toolName === 'cua_click' || toolName === 'cua_drag') && (parsedArgs.button || 'left') === 'left'
-                  const mouseRight = (toolName === 'cua_click') && parsedArgs.button === 'right'
-                  const scrollDir = toolName === 'cua_scroll' ? (parsedArgs.clicks > 0 ? 'up' : 'down') : null
-
-                  return (
-                    <div className="px-3 pt-2.5 pb-1.5">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={`action-vis-${currentTask}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15 }}
-                        >
-                          {isCUA ? (
-                            /* Keyboard + Mouse for CUA actions */
-                            <div className="flex items-stretch gap-2.5">
-                              {/* Keyboard */}
-                              <div className="flex-1 flex flex-col gap-[1.5px] min-w-0">
-                                {KEYBOARD_LAYOUT.map((row, rowIdx) => (
-                                  <div key={rowIdx} className="flex gap-[1.5px]">
-                                    {row.map((key) => {
-                                      const active = isKeyActive(key.id, activeKeys)
-                                      return (
-                                        <div
-                                          key={key.id}
-                                          className={cn(
-                                            "h-[14px] rounded-[2.5px] flex items-center justify-center select-none",
-                                            "text-[6.5px] leading-none font-medium tracking-wide transition-colors duration-100",
-                                            active
-                                              ? "bg-neutral-800 dark:bg-neutral-200 text-white dark:text-neutral-900"
-                                              : "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500"
-                                          )}
-                                          style={{ flex: key.w }}
-                                        >
-                                          {key.label}
-                                        </div>
-                                      )
-                                    })}
-                                  </div>
-                                ))}
-                              </div>
-                              {/* Mouse */}
-                              <div className="flex flex-col items-center justify-center w-[38px] flex-shrink-0">
-                                <div className="relative w-[30px] h-[50px] rounded-[12px] border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 overflow-hidden flex flex-col">
-                                  <div className="flex h-[18px] border-b border-neutral-200/80 dark:border-neutral-700/80">
-                                    <motion.div
-                                      key={`ml-${currentTask}`}
-                                      className={cn(
-                                        "flex-1 rounded-tl-[11px] border-r border-neutral-200/80 dark:border-neutral-700/80",
-                                        mouseLeft ? "bg-neutral-800 dark:bg-neutral-200" : "bg-transparent"
-                                      )}
-                                      animate={mouseLeft ? { opacity: [0.4, 1, 0.8, 1] } : { opacity: 1 }}
-                                      transition={mouseLeft ? { duration: 0.4, ease: "easeOut" } : {}}
-                                    />
-                                    <motion.div
-                                      key={`mr-${currentTask}`}
-                                      className={cn(
-                                        "flex-1 rounded-tr-[11px]",
-                                        mouseRight ? "bg-neutral-800 dark:bg-neutral-200" : "bg-transparent"
-                                      )}
-                                      animate={mouseRight ? { opacity: [0.4, 1, 0.8, 1] } : { opacity: 1 }}
-                                      transition={mouseRight ? { duration: 0.4, ease: "easeOut" } : {}}
-                                    />
-                                  </div>
-                                  <div className="flex items-start justify-center pt-1.5">
-                                    <motion.div
-                                      key={`sw-${currentTask}`}
-                                      className={cn(
-                                        "w-[5px] h-[8px] rounded-full",
-                                        scrollDir ? "bg-neutral-700 dark:bg-neutral-300" : "bg-neutral-300 dark:bg-neutral-600"
-                                      )}
-                                      animate={scrollDir === 'up' ? { y: [0, -2, 0] } : scrollDir === 'down' ? { y: [0, 2, 0] } : { y: 0 }}
-                                      transition={{ duration: 0.35, repeat: scrollDir ? 3 : 0, ease: "easeInOut" }}
-                                    />
-                                  </div>
-                                  <div className="flex-1" />
-                                </div>
-                                {action && (
-                                  <span className="text-[7px] text-neutral-400 dark:text-neutral-500 mt-1 truncate max-w-[38px] text-center font-medium">{action.label}</span>
-                                )}
-                              </div>
-                            </div>
-                          ) : (
-                            /* Non-CUA: idle keyboard + mouse */
-                            <div className="flex items-stretch gap-2 opacity-25">
-                              <div className="flex-1 flex flex-col gap-[1.5px] min-w-0">
-                                {KEYBOARD_LAYOUT.map((row, rowIdx) => (
-                                  <div key={rowIdx} className="flex gap-[1.5px]">
-                                    {row.map((key) => (
-                                      <div
-                                        key={key.id}
-                                        className="h-[14px] rounded-[2.5px] flex items-center justify-center select-none text-[6.5px] leading-none font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500"
-                                        style={{ flex: key.w }}
-                                      >
-                                        {key.label}
-                                      </div>
-                                    ))}
-                                  </div>
-                                ))}
-                              </div>
-                              <div className="flex flex-col items-center justify-center w-[38px] flex-shrink-0">
-                                <div className="relative w-[30px] h-[50px] rounded-[12px] border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 overflow-hidden flex flex-col">
-                                  <div className="flex h-[18px] border-b border-neutral-200/80 dark:border-neutral-700/80">
-                                    <div className="flex-1 rounded-tl-[11px] border-r border-neutral-200/80 dark:border-neutral-700/80 bg-transparent" />
-                                    <div className="flex-1 rounded-tr-[11px] bg-transparent" />
-                                  </div>
-                                  <div className="flex items-start justify-center pt-1.5">
-                                    <div className="w-[5px] h-[8px] rounded-full bg-neutral-300 dark:bg-neutral-600" />
-                                  </div>
-                                  <div className="flex-1" />
-                                </div>
-                                {action && (
-                                  <span className="text-[7px] text-neutral-400 dark:text-neutral-500 mt-1 truncate max-w-[38px] text-center font-medium">{action.label}</span>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  )
-                })()}
-                {/* Player controls */}
-                <div className="px-3 pb-2 pt-1">
-                  <div className="flex items-center gap-1.5">
-                    {/* Skip back */}
-                    <button
-                      className="h-7 w-7 rounded-md flex items-center justify-center text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
-                      onClick={() => {
-                        setHasUserNavigated(true)
-                        setNavigationDirection('backward')
-                        const newTask = Math.max(0, currentTask - 1)
-                        setCurrentTask(newTask)
-                        setCurrentStep(newTask)
-                        setIsPlaying(false)
-                      }}
-                      disabled={currentTask === 0}
-                    >
-                      <SkipBack className="h-3.5 w-3.5" />
-                    </button>
-
-                    {/* Play/Pause */}
-                    <button
-                      className="h-8 w-8 rounded-lg flex items-center justify-center bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-                      onClick={() => setIsPlaying(!isPlaying)}
-                    >
-                      {isPlaying ? (
-                        <Pause className="h-3.5 w-3.5" />
-                      ) : (
-                        <Play className="h-3.5 w-3.5 ml-0.5" />
-                      )}
-                    </button>
-
-                    {/* Skip forward */}
-                    <button
-                      className="h-7 w-7 rounded-md flex items-center justify-center text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 disabled:opacity-30 disabled:pointer-events-none transition-colors"
-                      onClick={() => {
-                        setHasUserNavigated(true)
-                        setNavigationDirection('forward')
-                        const newTask = Math.min(totalTasks - 1, currentTask + 1)
-                        setCurrentTask(newTask)
-                        setCurrentStep(newTask)
-                        setIsPlaying(false)
-                      }}
-                      disabled={currentTask >= totalTasks - 1}
-                    >
-                      <SkipForward className="h-3.5 w-3.5" />
-                    </button>
-
-                    {/* Timeline */}
-                    <div className="flex-1 relative h-7 flex items-center min-w-0 group">
-                      <div
-                        className="w-full cursor-pointer"
-                        onClick={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect()
-                          const x = e.clientX - rect.left
-                          const percentage = Math.max(0, Math.min(1, x / rect.width))
-                          const newStep = Math.round(percentage * Math.max(toolInvocations.length - 1, 1))
-                          setNavigationDirection(newStep > currentTask ? 'forward' : 'backward')
-                          setCurrentStep(newStep)
-                          setCurrentTask(newStep)
-                          setHasUserNavigated(true)
-                          setIsPlaying(false)
-                        }}
-                      >
-                        <div className="relative w-full h-1 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden group-hover:h-1.5 transition-all">
-                          <div
-                            className="absolute left-0 top-0 h-full bg-neutral-800 dark:bg-neutral-300 rounded-full transition-all duration-200 ease-out"
-                            style={{
-                              width: `${(currentStep / Math.max(toolInvocations.length - 1, 1)) * 100}%`
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Step counter */}
-                    <span className="text-[10px] tabular-nums text-neutral-400 dark:text-neutral-500 font-medium min-w-[32px] text-center">
-                      {currentTask + 1}/{totalTasks}
-                    </span>
-
-                    {/* LIVE button */}
-                    <button
-                      className={cn(
-                        "h-7 px-2.5 text-[11px] font-semibold rounded-md whitespace-nowrap transition-colors",
-                        currentTask === totalTasks - 1
-                          ? "bg-red-500 text-white"
-                          : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                      )}
-                      onClick={() => {
-                        setHasUserNavigated(false)
-                        setNavigationDirection('forward')
-                        const lastTask = totalTasks - 1
-                        setCurrentTask(lastTask)
-                        setCurrentStep(toolInvocations.length - 1)
-                        setIsPlaying(false)
-                      }}
-                      disabled={currentTask === totalTasks - 1}
-                    >
-                      {currentTask === totalTasks - 1 ? (
-                        <span className="flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                          LIVE
-                        </span>
-                      ) : (
-                        "LIVE"
-                      )}
-                    </button>
-
-                    {/* Connect to Desktop */}
-                    {selectedVMId && (
-                      <button
-                        className="h-7 px-2 text-[11px] font-medium rounded-md whitespace-nowrap border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors flex items-center gap-1.5 disabled:opacity-50"
-                        onClick={openVNCConnection}
-                        disabled={connectingToVM}
-                      >
-                        {connectingToVM ? (
-                          <Loader2 className="h-3 w-3 animate-spin" />
-                        ) : (
-                          <MousePointer className="h-3 w-3" />
-                        )}
-                        <span className="hidden sm:inline">Desktop</span>
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
           </div>{/* panel body */}
         </motion.div>

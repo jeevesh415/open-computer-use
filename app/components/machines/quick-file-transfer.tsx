@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Upload, Download, Loader2 } from "lucide-react";
-import { getOrCreateGuestUserId } from "@/lib/api";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,21 +29,15 @@ export function QuickFileTransfer({
   const [uploading, setUploading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Get user ID on mount
+  // Get authenticated user ID on mount
   useEffect(() => {
     const fetchUserId = async () => {
       const supabase = createClient();
-      let user = null;
-      
       if (supabase) {
         const { data } = await supabase.auth.getUser();
-        user = data?.user;
+        setUserId(data?.user?.id ?? null);
       }
-      
-      const uid = await getOrCreateGuestUserId(user as any);
-      setUserId(uid);
     };
-    
     fetchUserId();
   }, []);
 

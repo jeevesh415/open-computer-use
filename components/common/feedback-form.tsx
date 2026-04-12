@@ -15,6 +15,7 @@ import {
 } from "@phosphor-icons/react"
 import { AnimatePresence, motion } from "motion/react"
 import { useRef, useState } from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 const TRANSITION_CONTENT = {
@@ -25,7 +26,7 @@ const TRANSITION_CONTENT = {
 const REACTIONS = [
   {
     icon: ThumbsDown,
-    label: "Bad",
+    labelKey: "ratings.bad" as const,
     value: 1,
     color: "text-red-500",
     bg: "bg-red-500/10 hover:bg-red-500/20 dark:bg-red-500/15",
@@ -34,7 +35,7 @@ const REACTIONS = [
   },
   {
     icon: Minus,
-    label: "Okay",
+    labelKey: "ratings.okay" as const,
     value: 2,
     color: "text-amber-500",
     bg: "bg-amber-500/10 hover:bg-amber-500/20 dark:bg-amber-500/15",
@@ -43,7 +44,7 @@ const REACTIONS = [
   },
   {
     icon: ThumbsUp,
-    label: "Good",
+    labelKey: "ratings.good" as const,
     value: 3,
     color: "text-emerald-500",
     bg: "bg-emerald-500/10 hover:bg-emerald-500/20 dark:bg-emerald-500/15",
@@ -52,7 +53,7 @@ const REACTIONS = [
   },
   {
     icon: Lightning,
-    label: "Amazing",
+    labelKey: "ratings.amazing" as const,
     value: 4,
     color: "text-blue-500",
     bg: "bg-blue-500/10 hover:bg-blue-500/20 dark:bg-blue-500/15",
@@ -67,6 +68,7 @@ type FeedbackFormProps = {
 }
 
 export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
+  const t = useTranslations("feedbackForm")
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle")
@@ -101,7 +103,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!authUserId) {
-      toast({ title: "Please login to submit feedback", status: "error" })
+      toast({ title: t("loginRequired"), status: "error" })
       return
     }
     if (!selectedRating && !feedback.trim()) return
@@ -123,7 +125,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
 
       if (!res.ok) {
         if (data.alreadySubmitted) {
-          toast({ title: "You already submitted feedback for this", status: "info" })
+          toast({ title: t("alreadySubmitted"), status: "info" })
         } else {
           toast({ title: `Error submitting feedback: ${data.error}`, status: "error" })
           setStatus("error")
@@ -156,7 +158,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
               <SealCheck className="size-6 text-emerald-500" weight="fill" />
             </div>
             <p className="text-foreground text-center text-sm font-semibold">
-              Thank you for your feedback!
+              {t("thankYou")}
             </p>
             {creditsEarned > 0 && (
               <motion.div
@@ -170,12 +172,12 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
               >
                 <Coins className="size-4 text-emerald-500" weight="fill" />
                 <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                  +{creditsEarned} credit{creditsEarned !== 1 ? "s" : ""} earned
+                  {t("creditsEarned", { credits: creditsEarned })}
                 </span>
               </motion.div>
             )}
             <p className="text-muted-foreground/60 text-xs mt-0.5">
-              Your input helps us improve Coasty.
+              {t("helpImprove")}
             </p>
           </motion.div>
         ) : (
@@ -192,7 +194,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
             <div className="px-4 pt-4 pb-3">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wider select-none">
-                  How&apos;s your experience?
+                  {t("howsExperience")}
                 </span>
                 {selectedRating && (
                   <motion.span
@@ -205,7 +207,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                     )}
                   >
                     <Coins className="size-3" weight="fill" />
-                    +1
+                    {t("plusOne")}
                   </motion.span>
                 )}
               </div>
@@ -226,7 +228,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                           : cn(r.bg, "border-transparent"),
                         "hover:scale-[1.03] active:scale-[0.97]"
                       )}
-                      title={r.label}
+                      title={t(r.labelKey)}
                     >
                       <Icon
                         className={cn("size-5", r.color)}
@@ -236,7 +238,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                         "text-[10px] font-medium",
                         isSelected ? r.color : "text-muted-foreground/60"
                       )}>
-                        {r.label}
+                        {t(r.labelKey)}
                       </span>
                     </button>
                   )
@@ -253,7 +255,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
             <div className="flex-1 px-4 pt-3 pb-1 flex flex-col min-h-0">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wider select-none">
-                  Tell us more
+                  {t("tellMore")}
                 </span>
                 {feedback.trim() && (
                   <motion.span
@@ -266,7 +268,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                     )}
                   >
                     <Coins className="size-3" weight="fill" />
-                    +5
+                    {t("plusFive")}
                   </motion.span>
                 )}
               </div>
@@ -279,7 +281,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                   "focus:border-primary/25 focus:ring-1 focus:ring-primary/10",
                   "transition-all"
                 )}
-                placeholder="What's working well? What could improve?"
+                placeholder={t("placeholder")}
                 onChange={(e) => setFeedback(e.target.value)}
                 value={feedback}
                 disabled={status === "submitting"}
@@ -294,7 +296,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                 className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
                 disabled={status === "submitting"}
               >
-                Cancel
+                {t("cancel")}
               </button>
               <Button
                 type="submit"
@@ -314,7 +316,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                       className="inline-flex items-center gap-2"
                     >
                       <Spinner className="size-3.5 animate-spin" />
-                      Sending...
+                      {t("sending")}
                     </motion.span>
                   ) : (
                     <motion.span
@@ -326,7 +328,7 @@ export function FeedbackForm({ authUserId, onClose }: FeedbackFormProps) {
                       className="inline-flex items-center gap-1.5"
                     >
                       <PaperPlaneTilt className="size-3.5" weight="fill" />
-                      Send
+                      {t("send")}
                       {predictedCredits > 0 && (
                         <span className="inline-flex items-center gap-0.5 ml-0.5 text-emerald-300 dark:text-emerald-400 text-[10px] font-semibold">
                           +{predictedCredits}

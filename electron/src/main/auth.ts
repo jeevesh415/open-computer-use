@@ -8,66 +8,25 @@ import * as fs from 'fs'
 
 // ── Shared HTML templates for the local callback server ──────────────────
 
-const SPINNER_HTML = `
-<html>
-  <head><meta charset="utf-8"><style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{display:flex;justify-content:center;align-items:center;height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#fff}
-    .card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
-    .logo{width:40px;height:40px;opacity:0;animation:fadeIn .6s ease forwards}
-    .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.6);border-radius:50%;animation:spin .8s linear infinite}
-    p{font-size:13px;color:#737373;letter-spacing:.01em}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes fadeIn{to{opacity:1}}
-  </style></head>
-  <body>
-    <div class="card">
-      <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="g" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
-          <stop offset="30%" stop-color="rgba(255,255,255,.1)"/>
-          <stop offset="50%" stop-color="rgba(255,255,255,.3)"/>
-          <stop offset="70%" stop-color="rgba(255,255,255,.6)"/>
-          <stop offset="100%" stop-color="#fff"/>
-        </linearGradient></defs>
-        <circle cx="100" cy="100" r="100" fill="url(#g)"/>
-      </svg>
-      <div class="spinner"></div>
-      <p>Signing you in...</p>
-    </div>
-    <script>
-      const hash = window.location.hash.substring(1);
-      if (hash) {
-        window.location.href = '/auth/complete?' + hash;
-      } else {
-        const params = window.location.search;
-        if (params) {
-          window.location.href = '/auth/complete' + params;
-        } else {
-          document.querySelector('.spinner').style.display='none';
-          document.querySelector('p').textContent='Authentication failed. Please try again.';
-          document.querySelector('p').style.color='#f87171';
-        }
-      }
-    </script>
-  </body>
-</html>`
-
 const SUCCESS_HTML = `
 <html>
   <head><meta charset="utf-8"><style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{display:flex;justify-content:center;align-items:center;height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#fff}
-    .card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px;max-width:320px;opacity:0;animation:slideUp .6s cubic-bezier(.22,1,.36,1) forwards}
-    .logo{width:48px;height:48px}
+    body{display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#fff;padding:40px 20px}
+    .card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;max-width:480px;opacity:0;animation:slideUp .6s cubic-bezier(.22,1,.36,1) forwards}
+    .logo{width:40px;height:40px}
     .check{width:36px;height:36px;border-radius:50%;background:rgba(16,185,129,.12);display:flex;align-items:center;justify-content:center}
     .check svg{width:20px;height:20px;color:#10b981}
-    h2{font-size:18px;font-weight:600;letter-spacing:-.02em}
-    p{font-size:13px;color:#737373;line-height:1.6}
-    .hint{display:flex;align-items:center;gap:8px;margin-top:4px;padding:10px 16px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-    .hint svg{flex-shrink:0;color:#a3a3a3}
+    h2{font-size:20px;font-weight:600;letter-spacing:-.02em;margin:0}
+    p{font-size:13px;color:#737373;line-height:1.6;margin:0}
+    .demo{width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);margin:4px 0;opacity:0;animation:fadeIn .8s ease .3s forwards}
+    .demo img{width:100%;display:block}
+    .hints{display:flex;flex-direction:column;gap:8px;width:100%}
+    .hint{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+    .hint svg{flex-shrink:0;color:#a3a3a3;width:16px;height:16px}
     .hint span{font-size:12px;color:#a3a3a3;text-align:left}
     @keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   </style></head>
   <body>
     <div class="card">
@@ -88,11 +47,30 @@ const SUCCESS_HTML = `
         <h2>You're all set</h2>
         <p>You can close this tab. Coasty is ready on your desktop.</p>
       </div>
-      <div class="hint">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
-        <span>Type a task in the floating pill and you're done.</span>
+      <div class="demo">
+        <img src="https://coasty.ai/demo-screenshot-mobile.png" alt="Coasty Desktop" loading="eager" onerror="this.onerror=null;this.src='https://coasty.ai/demo-screenshot.png'" />
+      </div>
+      <div class="hints">
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span>Type a task in the floating pill on your desktop and you're done.</span>
+        </div>
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span>You can also remote-control your computer from your phone at <strong style="color:#e5e5e5">coasty.ai</strong></span>
+        </div>
       </div>
     </div>
+    <script>
+      // After a short delay so the user can read the success message:
+      // 1. Try to close the tab (works if browser allows it)
+      // 2. If blocked, redirect to the branded site so the address bar
+      //    shows coasty.ai instead of 127.0.0.1
+      setTimeout(function(){
+        window.close();
+        setTimeout(function(){ window.location.href='https://coasty.ai'; }, 400);
+      }, 2500);
+    </script>
   </body>
 </html>`
 
@@ -106,8 +84,14 @@ export class ElectronAuth {
   private supabase: SupabaseClient
   private session: Session | null = null
   private refreshTimer: ReturnType<typeof setTimeout> | null = null
+  private refreshPromise: Promise<void> | null = null
   private pendingCallbackServer: http.Server | null = null
   private pendingSessionPromise: Promise<{ user: User; session: Session }> | null = null
+  private tokenRefreshListeners: Array<(token: string) => void> = []
+  // Protocol-based OAuth state (used in packaged builds instead of local HTTP server)
+  private protocolAuthResolve: ((result: { user: User; session: Session }) => void) | null = null
+  private protocolAuthReject: ((error: Error) => void) | null = null
+  private protocolAuthTimeout: ReturnType<typeof setTimeout> | null = null
 
   constructor() {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
@@ -121,6 +105,7 @@ export class ElectronAuth {
       auth: {
         autoRefreshToken: false,
         persistSession: false,
+        flowType: 'pkce',
       },
     })
     this.loadStoredSession()
@@ -137,6 +122,12 @@ export class ElectronAuth {
     // Cancel any previous pending auth flow
     this.cancelPendingAuth()
 
+    // Generate a cryptographic nonce for CSRF / replay protection.
+    // Only requests whose URL path contains this nonce are accepted,
+    // which prevents other local processes from injecting tokens into
+    // our ephemeral callback server.
+    const nonce = crypto.randomBytes(32).toString('hex')
+
     return new Promise((resolveSetup, rejectSetup) => {
       const server = http.createServer()
       this.pendingCallbackServer = server
@@ -148,44 +139,46 @@ export class ElectronAuth {
 
       server.listen(0, '127.0.0.1', () => {
         const addr = server.address() as { port: number }
-        const redirectUrl = `http://127.0.0.1:${addr.port}/auth/callback`
+        // Nonce embedded in the callback path — Supabase redirects the browser
+        // here with tokens in the URL fragment (never sent to the server).
+        const redirectUrl = `http://127.0.0.1:${addr.port}/auth/callback/${nonce}`
 
         const sessionPromise = new Promise<{ user: User; session: Session }>((resolve, reject) => {
+          // Guard against double-resolution (e.g. browser retry or timeout vs. success race)
+          let settled = false
+          const finish = (fn: typeof resolve | typeof reject, value: any): void => {
+            if (settled) return
+            settled = true
+            this.pendingCallbackServer = null
+            server.close()
+            fn(value)
+          }
+
           server.on('request', async (req, res) => {
             const parsed = url.parse(req.url || '', true)
 
-            if (parsed.pathname === '/auth/callback') {
-              // Serve HTML that extracts the URL fragment and forwards as query params
-              res.writeHead(200, { 'Content-Type': 'text/html' })
-              res.end(SPINNER_HTML)
-              return
-            }
+            // PKCE flow: the auth code arrives as a ?code= query parameter
+            // on the GET request — no JavaScript fragment extraction needed.
+            if (req.method === 'GET' && parsed.pathname === `/auth/callback/${nonce}`) {
+              const code = parsed.query.code as string | undefined
 
-            if (parsed.pathname === '/auth/complete') {
-              const accessToken = parsed.query.access_token as string
-              const refreshToken = parsed.query.refresh_token as string
-
-              if (!accessToken) {
-                res.writeHead(400, { 'Content-Type': 'text/html' })
-                res.end(errorHtml('Missing access token. Please close this tab and try again.'))
-                this.pendingCallbackServer = null
-                server.close()
-                reject(new Error('Missing access token'))
+              if (!code) {
+                res.writeHead(400, {
+                  'Content-Type': 'text/html',
+                  'Cache-Control': 'no-store',
+                })
+                res.end(errorHtml('No authorization code received. Please try again.'))
+                finish(reject, new Error('No authorization code in callback'))
                 return
               }
 
               try {
-                const { data, error } = await this.supabase.auth.setSession({
-                  access_token: accessToken,
-                  refresh_token: refreshToken,
-                })
+                const { data, error } = await this.supabase.auth.exchangeCodeForSession(code)
 
                 if (error || !data.session || !data.user) {
                   res.writeHead(500, { 'Content-Type': 'text/html' })
                   res.end(errorHtml('Authentication failed. Please close this tab and try again.'))
-                  this.pendingCallbackServer = null
-                  server.close()
-                  reject(error || new Error('No session returned'))
+                  finish(reject, error || new Error('No session returned'))
                   return
                 }
 
@@ -195,26 +188,23 @@ export class ElectronAuth {
 
                 res.writeHead(200, { 'Content-Type': 'text/html' })
                 res.end(SUCCESS_HTML)
-                this.pendingCallbackServer = null
-                server.close()
-                resolve({ user: data.user, session: data.session })
+                finish(resolve, { user: data.user, session: data.session })
               } catch (err) {
                 res.writeHead(500, { 'Content-Type': 'text/html' })
                 res.end(errorHtml('Something went wrong. Please close this tab and try again.'))
-                this.pendingCallbackServer = null
-                server.close()
-                reject(err)
+                finish(reject, err)
               }
+              return
             }
+
+            // Reject all other requests (wrong nonce, path, or method)
+            res.writeHead(404, { 'Content-Type': 'text/plain' })
+            res.end('Not Found')
           })
 
-          // Timeout
+          // Timeout — clean up if the user never completes auth
           setTimeout(() => {
-            if (this.pendingCallbackServer === server) {
-              this.pendingCallbackServer = null
-            }
-            server.close()
-            reject(new Error('Authentication timed out'))
+            finish(reject, new Error('Authentication timed out'))
           }, timeoutMs)
         })
 
@@ -230,11 +220,17 @@ export class ElectronAuth {
       this.pendingCallbackServer = null
       console.log('[Auth] Pending auth flow cancelled')
     }
+    this.cleanupProtocolAuth()
   }
 
   // ── Auth methods ───────────────────────────────────────────────────────
 
   async signInWithGoogle(): Promise<{ user: User; session: Session }> {
+    // Packaged builds: use coasty:// deep link so the browser never shows 127.0.0.1
+    if (app.isPackaged) {
+      return this.signInWithProtocol('google')
+    }
+    // Dev builds: custom protocol isn't registered reliably, use local HTTP server
     const { redirectUrl, sessionPromise } = await this.startCallbackServer(5 * 60 * 1000)
 
     const { data, error } = await this.supabase.auth.signInWithOAuth({
@@ -252,6 +248,93 @@ export class ElectronAuth {
 
     shell.openExternal(data.url)
     return sessionPromise
+  }
+
+  // ── Deep-link (custom protocol) OAuth ─────────────────────────────────
+  // In packaged builds the redirect URL is coasty://auth/callback which
+  // triggers the OS to open the app instead of navigating to localhost.
+  // With PKCE the auth code arrives as a ?code= query parameter (not a
+  // URL fragment), so it's reliably passed through on all platforms.
+
+  private async signInWithProtocol(provider: 'google'): Promise<{ user: User; session: Session }> {
+    this.cancelPendingAuth()
+
+    // Redirect to the web app's intermediate callback page instead of directly
+    // to coasty://. The web page triggers the custom protocol and shows a
+    // "You can close this tab" message — preventing the browser from being
+    // stuck on a blank/loading page after the protocol handoff.
+    const webCallbackUrl = (process.env.COASTY_WEB_URL || 'https://coasty.ai') + '/auth/desktop-callback'
+
+    const { data, error } = await this.supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: webCallbackUrl,
+        skipBrowserRedirect: true,
+      },
+    })
+
+    if (error || !data.url) {
+      throw error || new Error('Failed to get OAuth URL')
+    }
+
+    return new Promise<{ user: User; session: Session }>((resolve, reject) => {
+      this.protocolAuthResolve = resolve
+      this.protocolAuthReject = reject
+
+      // Timeout after 5 minutes
+      this.protocolAuthTimeout = setTimeout(() => {
+        this.cleanupProtocolAuth()
+        reject(new Error('Authentication timed out'))
+      }, 5 * 60 * 1000)
+
+      shell.openExternal(data.url)
+    })
+  }
+
+  /** Handle a coasty:// protocol callback URL (called from main process). */
+  async handleProtocolCallback(callbackUrl: string): Promise<void> {
+    try {
+      const parsed = new URL(callbackUrl)
+      const code = parsed.searchParams.get('code')
+
+      if (!code) {
+        console.error('[Auth] Protocol callback missing auth code:', callbackUrl)
+        this.protocolAuthReject?.(new Error('No authorization code in callback'))
+        this.cleanupProtocolAuth()
+        return
+      }
+
+      console.log('[Auth] Exchanging protocol auth code for session...')
+      const { data, error } = await this.supabase.auth.exchangeCodeForSession(code)
+
+      if (error || !data.session || !data.user) {
+        console.error('[Auth] Code exchange failed:', error?.message)
+        this.protocolAuthReject?.(error || new Error('Failed to exchange code for session'))
+        this.cleanupProtocolAuth()
+        return
+      }
+
+      this.session = data.session
+      this.storeSession(data.session)
+      this.scheduleRefresh(data.session)
+
+      console.log('[Auth] Protocol auth succeeded')
+      this.protocolAuthResolve?.({ user: data.user, session: data.session })
+      this.cleanupProtocolAuth()
+    } catch (err: any) {
+      console.error('[Auth] Protocol callback error:', err.message)
+      this.protocolAuthReject?.(err)
+      this.cleanupProtocolAuth()
+    }
+  }
+
+  private cleanupProtocolAuth(): void {
+    if (this.protocolAuthTimeout) {
+      clearTimeout(this.protocolAuthTimeout)
+      this.protocolAuthTimeout = null
+    }
+    this.protocolAuthResolve = null
+    this.protocolAuthReject = null
   }
 
   async signUpWithEmail(email: string, password: string): Promise<{ user: User; session: Session }> {
@@ -350,8 +433,25 @@ export class ElectronAuth {
     return this.session
   }
 
-  getAccessToken(): string | null {
+  async getAccessToken(): Promise<string | null> {
+    // Refresh expired tokens before returning — mirrors getSession() logic
+    if (this.session && !this.isAuthenticated() && this.session.refresh_token) {
+      await this.refreshSessionNow()
+    }
     return this.session?.access_token || null
+  }
+
+  /** Expose the authenticated Supabase client for direct DB queries.
+   *  Ensures the client has a valid session set before returning. */
+  async getSupabaseClient(): Promise<SupabaseClient> {
+    // Make sure the client has the current session's JWT
+    if (this.session?.access_token) {
+      await this.supabase.auth.setSession({
+        access_token: this.session.access_token,
+        refresh_token: this.session.refresh_token,
+      })
+    }
+    return this.supabase
   }
 
   getUserId(): string | null {
@@ -392,6 +492,17 @@ export class ElectronAuth {
       return false
     }
     return true
+  }
+
+  /** Register a callback that fires whenever the access token is refreshed. */
+  onTokenRefresh(listener: (token: string) => void): void {
+    this.tokenRefreshListeners.push(listener)
+  }
+
+  private notifyTokenRefresh(token: string): void {
+    for (const listener of this.tokenRefreshListeners) {
+      try { listener(token) } catch { /* ignore listener errors */ }
+    }
   }
 
   getMachineId(): string {
@@ -442,9 +553,23 @@ export class ElectronAuth {
 
       if (this.isAuthenticated()) {
         console.log('[Auth] Restored valid session from disk')
+        // Set the session on the Supabase client so RLS-protected queries work.
+        // Without this, the client has no JWT and all DB queries fail with RLS errors.
+        this.supabase.auth.setSession({
+          access_token: this.session!.access_token,
+          refresh_token: this.session!.refresh_token,
+        }).catch((err) => {
+          console.error('[Auth] Failed to set restored session on Supabase client:', err)
+        })
         this.scheduleRefresh(this.session!)
       } else if (this.session?.refresh_token) {
-        console.log('[Auth] Access token expired, will refresh on first getSession() call')
+        console.log('[Auth] Access token expired, refreshing eagerly...')
+        // Refresh immediately instead of deferring — getAccessToken() callers
+        // need a valid token and the old "lazy refresh on getSession()" approach
+        // left the token stale since nothing called getSession().
+        this.refreshSessionNow().catch((err) => {
+          console.error('[Auth] Eager refresh failed:', err)
+        })
       } else {
         console.log('[Auth] Stored session fully expired, clearing')
         this.session = null
@@ -467,7 +592,26 @@ export class ElectronAuth {
     }
   }
 
+  /**
+   * Mutex-guarded token refresh. If a refresh is already in-flight, all
+   * concurrent callers share the same promise instead of racing against
+   * each other (which could revoke a just-issued refresh token).
+   */
   private async refreshSessionNow(): Promise<void> {
+    if (this.refreshPromise) {
+      return this.refreshPromise
+    }
+
+    this.refreshPromise = this.performRefresh()
+    try {
+      await this.refreshPromise
+    } finally {
+      this.refreshPromise = null
+    }
+  }
+
+  /** The actual refresh logic — only called via refreshSessionNow(). */
+  private async performRefresh(): Promise<void> {
     if (!this.session?.refresh_token) {
       this.session = null
       return
@@ -489,6 +633,7 @@ export class ElectronAuth {
       this.session = data.session
       this.storeSession(data.session)
       this.scheduleRefresh(data.session)
+      this.notifyTokenRefresh(data.session.access_token)
       console.log('[Auth] Token refreshed successfully')
     } catch (err: any) {
       console.error('[Auth] Refresh error:', err.message)
@@ -500,6 +645,7 @@ export class ElectronAuth {
   private scheduleRefresh(session: Session): void {
     if (this.refreshTimer) {
       clearTimeout(this.refreshTimer)
+      this.refreshTimer = null
     }
 
     const expiresAt = session.expires_at
@@ -507,19 +653,13 @@ export class ElectronAuth {
 
     const refreshIn = Math.max((expiresAt - Date.now() / 1000 - 300) * 1000, 10000)
 
-    this.refreshTimer = setTimeout(async () => {
-      try {
-        const { data } = await this.supabase.auth.refreshSession({
-          refresh_token: session.refresh_token,
-        })
-        if (data.session) {
-          this.session = data.session
-          this.storeSession(data.session)
-          this.scheduleRefresh(data.session)
-        }
-      } catch {
-        this.session = null
-      }
+    this.refreshTimer = setTimeout(() => {
+      // Use the mutex-guarded refreshSessionNow() so a scheduled refresh
+      // and an on-demand refresh from getSession()/getAccessToken() never
+      // race each other.
+      this.refreshSessionNow().catch((err) => {
+        console.error('[Auth] Scheduled refresh error:', err)
+      })
     }, refreshIn)
   }
 }

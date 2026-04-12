@@ -36,6 +36,7 @@ import {
   Cpu,
   Eye,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface ExistingData {
   role: string
@@ -56,45 +57,45 @@ interface OnboardingFlowProps {
 }
 
 const ROLES = [
-  { value: "founder", label: "Founder / CEO", icon: Sparkles },
-  { value: "developer", label: "Developer", icon: Code },
-  { value: "marketer", label: "Marketer", icon: Megaphone },
-  { value: "designer", label: "Designer", icon: PenTool },
-  { value: "product_manager", label: "Product Manager", icon: Briefcase },
-  { value: "data_analyst", label: "Data / Analytics", icon: BarChart3 },
-  { value: "operations", label: "Operations", icon: Zap },
-  { value: "other", label: "Other", icon: User },
+  { value: "founder", labelKey: "founder", icon: Sparkles },
+  { value: "developer", labelKey: "developer", icon: Code },
+  { value: "marketer", labelKey: "marketer", icon: Megaphone },
+  { value: "designer", labelKey: "designer", icon: PenTool },
+  { value: "product_manager", labelKey: "product_manager", icon: Briefcase },
+  { value: "data_analyst", labelKey: "data_analyst", icon: BarChart3 },
+  { value: "operations", labelKey: "operations", icon: Zap },
+  { value: "other", labelKey: "other", icon: User },
 ]
 
 const TEAM_SIZES = [
-  { value: "solo", label: "Just me" },
-  { value: "2-5", label: "2-5" },
-  { value: "6-20", label: "6-20" },
-  { value: "21-50", label: "21-50" },
-  { value: "51-200", label: "51-200" },
-  { value: "200+", label: "200+" },
+  { value: "solo", labelKey: "solo" },
+  { value: "2-5", labelKey: "2-5" },
+  { value: "6-20", labelKey: "6-20" },
+  { value: "21-50", labelKey: "21-50" },
+  { value: "51-200", labelKey: "51-200" },
+  { value: "200+", labelKey: "200+" },
 ]
 
 const REFERRAL_SOURCES = [
-  { value: "twitter", label: "Twitter / X" },
-  { value: "linkedin", label: "LinkedIn" },
-  { value: "google", label: "Google Search" },
-  { value: "youtube", label: "YouTube" },
-  { value: "friend", label: "Friend / Colleague" },
-  { value: "producthunt", label: "Product Hunt" },
-  { value: "reddit", label: "Reddit" },
-  { value: "other", label: "Other" },
+  { value: "twitter", labelKey: "twitter" },
+  { value: "linkedin", labelKey: "linkedin" },
+  { value: "google", labelKey: "google" },
+  { value: "youtube", labelKey: "youtube" },
+  { value: "friend", labelKey: "friend" },
+  { value: "producthunt", labelKey: "producthunt" },
+  { value: "reddit", labelKey: "reddit" },
+  { value: "other", labelKey: "other" },
 ]
 
 const USE_CASES = [
-  { value: "web_scraping", label: "Web Scraping & Research", icon: Search },
-  { value: "browser_automation", label: "Browser Automation", icon: Globe },
-  { value: "data_entry", label: "Data Entry & Forms", icon: FileText },
-  { value: "email_outreach", label: "Email & Outreach", icon: Mail },
-  { value: "testing", label: "QA & Testing", icon: TestTubes },
-  { value: "ecommerce", label: "E-commerce Tasks", icon: ShoppingCart },
-  { value: "social_media", label: "Social Media Management", icon: Megaphone },
-  { value: "general_automation", label: "General Automation", icon: Bot },
+  { value: "web_scraping", labelKey: "web_scraping", icon: Search },
+  { value: "browser_automation", labelKey: "browser_automation", icon: Globe },
+  { value: "data_entry", labelKey: "data_entry", icon: FileText },
+  { value: "email_outreach", labelKey: "email_outreach", icon: Mail },
+  { value: "testing", labelKey: "testing", icon: TestTubes },
+  { value: "ecommerce", labelKey: "ecommerce", icon: ShoppingCart },
+  { value: "social_media", labelKey: "social_media", icon: Megaphone },
+  { value: "general_automation", labelKey: "general_automation", icon: Bot },
 ]
 
 const TOTAL_STEPS = 5
@@ -107,6 +108,7 @@ export function OnboardingFlow({
   isExistingUser = false,
   existingData,
 }: OnboardingFlowProps) {
+  const t = useTranslations("onboarding")
   const router = useRouter()
   const [step, setStep] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -127,7 +129,7 @@ export function OnboardingFlow({
   const canProceed = () => {
     switch (step) {
       case 0:
-        return displayName.trim().length > 0
+        return displayName.trim().length > 0 && website.trim().length > 0
       case 1:
         return roles.length > 0 && teamSize.length > 0
       case 2:
@@ -463,7 +465,7 @@ export function OnboardingFlow({
           onClick={handleSkip}
           className="text-sm text-muted-foreground/60 hover:text-muted-foreground transition-colors"
         >
-          Skip for now
+          {t("skipForNow")}
         </button>
       </div>
 
@@ -525,13 +527,13 @@ export function OnboardingFlow({
                   )}
                   <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
                     {isExistingUser
-                      ? `Welcome back${initialName ? `, ${initialName.split(" ")[0]}` : ""}!`
-                      : "Welcome to Coasty"}
+                      ? t("welcome.titleReturning", { name: initialName ? `, ${initialName.split(" ")[0]}` : "" })
+                      : t("welcome.titleNew")}
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-base max-w-sm mx-auto">
                     {isExistingUser
-                      ? "We\u2019d love to learn a bit more about you to improve your experience"
-                      : "Let\u2019s set up your account so we can personalize your experience"}
+                      ? t("welcome.descriptionReturning")
+                      : t("welcome.descriptionNew")}
                   </p>
                 </div>
 
@@ -541,12 +543,12 @@ export function OnboardingFlow({
                       htmlFor="name"
                       className="text-xs font-medium text-muted-foreground"
                     >
-                      What should we call you?
+                      {t("nameLabel")}
                     </Label>
                     <Input
                       id="name"
                       type="text"
-                      placeholder="Your name"
+                      placeholder={t("namePlaceholder")}
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
                       className="h-12 rounded-xl bg-background/50 text-base"
@@ -560,16 +562,16 @@ export function OnboardingFlow({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div className="space-y-2">
                       <Label className="text-xs font-medium text-muted-foreground">
-                        Company
+                        {t("companyLabel")}
                         <span className="text-muted-foreground/50 ml-1">
-                          (optional)
+                          {t("optional")}
                         </span>
                       </Label>
                       <div className="relative">
                         <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/40" />
                         <Input
                           type="text"
-                          placeholder="MacroHard"
+                          placeholder={t("companyPlaceholder")}
                           value={company}
                           onChange={(e) => setCompany(e.target.value)}
                           className="h-11 rounded-xl bg-background/50 pl-10"
@@ -578,16 +580,13 @@ export function OnboardingFlow({
                     </div>
                     <div className="space-y-2">
                       <Label className="text-xs font-medium text-muted-foreground">
-                        Website
-                        <span className="text-muted-foreground/50 ml-1">
-                          (optional)
-                        </span>
+                        {t("websiteLabel")}
                       </Label>
                       <div className="relative">
                         <Globe className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground/40" />
                         <Input
                           type="text"
-                          placeholder="xai.com"
+                          placeholder={t("websitePlaceholder")}
                           value={website}
                           onChange={(e) => setWebsite(e.target.value)}
                           className="h-11 rounded-xl bg-background/50 pl-10"
@@ -614,15 +613,15 @@ export function OnboardingFlow({
               >
                 <div className="text-center space-y-2">
                   <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-                    What best describes you?
+                    {t("roleStep.title")}
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-base">
-                    Select all that apply — this helps us tailor your experience
+                    {t("roleStep.subtitle")}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5">
-                  {ROLES.map(({ value, label, icon: Icon }) => {
+                  {ROLES.map(({ value, labelKey, icon: Icon }) => {
                     const isSelected = roles.includes(value)
                     return (
                       <button
@@ -657,7 +656,7 @@ export function OnboardingFlow({
                               : "text-muted-foreground"
                           )}
                         >
-                          {label}
+                          {t(`roles.${labelKey}`)}
                         </span>
                         {isSelected && (
                           <Check className="size-3.5 ml-auto text-foreground/70" />
@@ -670,10 +669,10 @@ export function OnboardingFlow({
                 {/* Team size */}
                 <div className="space-y-3">
                   <p className="text-xs font-medium text-muted-foreground text-center">
-                    Team size
+                    {t("teamSizeLabel")}
                   </p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {TEAM_SIZES.map(({ value, label }) => (
+                    {TEAM_SIZES.map(({ value, labelKey }) => (
                       <button
                         key={value}
                         onClick={() =>
@@ -686,7 +685,7 @@ export function OnboardingFlow({
                             : "border-border/50 bg-card/30 text-muted-foreground hover:border-border hover:bg-card/60"
                         )}
                       >
-                        {label}
+                        {t(`teamSizes.${labelKey}`)}
                       </button>
                     ))}
                   </div>
@@ -706,15 +705,15 @@ export function OnboardingFlow({
               >
                 <div className="text-center space-y-2">
                   <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-                    How did you find us?
+                    {t("referralStep.title")}
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-base">
-                    We&apos;d love to know where you heard about Coasty
+                    {t("referralStep.subtitle")}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5">
-                  {REFERRAL_SOURCES.map(({ value, label }) => (
+                  {REFERRAL_SOURCES.map(({ value, labelKey }) => (
                     <button
                       key={value}
                       onClick={() => setReferralSource(value)}
@@ -726,7 +725,7 @@ export function OnboardingFlow({
                       )}
                     >
                       <span className="flex items-center justify-between">
-                        {label}
+                        {t(`referralSources.${labelKey}`)}
                         {referralSource === value && (
                           <Check className="size-3.5 text-foreground/70" />
                         )}
@@ -749,15 +748,15 @@ export function OnboardingFlow({
               >
                 <div className="text-center space-y-2">
                   <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-                    What will you automate first?
+                    {t("useCaseStep.title")}
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-base">
-                    Select all that apply — you can explore everything later
+                    {t("useCaseStep.subtitle")}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5">
-                  {USE_CASES.map(({ value, label, icon: Icon }) => {
+                  {USE_CASES.map(({ value, labelKey, icon: Icon }) => {
                     const isSelected = useCases.includes(value)
                     return (
                       <button
@@ -792,7 +791,7 @@ export function OnboardingFlow({
                               : "text-muted-foreground"
                           )}
                         >
-                          {label}
+                          {t(`useCases.${labelKey}`)}
                         </span>
                         {isSelected && (
                           <Check className="size-3.5 ml-auto mt-0.5 text-foreground/70" />
@@ -816,11 +815,11 @@ export function OnboardingFlow({
               >
                 <div className="text-center space-y-2">
                   <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
-                    Everything you need,{" "}
-                    <span className="text-muted-foreground">built in.</span>
+                    {t("showcase.title")}{" "}
+                    <span className="text-muted-foreground">{t("showcase.titleHighlight")}</span>
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-base max-w-sm mx-auto">
-                    Here&apos;s what Coasty can do for you
+                    {t("showcase.subtitle")}
                   </p>
                 </div>
 
@@ -838,8 +837,8 @@ export function OnboardingFlow({
                     </div>
                     <MousePointer2 className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">No Code</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Just describe what you want in plain English</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.noCode.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.noCode.description")}</p>
                     </div>
                   </motion.div>
 
@@ -855,8 +854,8 @@ export function OnboardingFlow({
                     </div>
                     <Network className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">Agent Swarms</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Parallel agent fleets</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.agentSwarms.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.agentSwarms.description")}</p>
                     </div>
                   </motion.div>
 
@@ -872,8 +871,8 @@ export function OnboardingFlow({
                     </div>
                     <Monitor className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">Desktop Control</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Clicks, types, navigates</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.desktopControl.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.desktopControl.description")}</p>
                     </div>
                   </motion.div>
 
@@ -889,8 +888,8 @@ export function OnboardingFlow({
                     </div>
                     <Globe className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">Browser Automation</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Forms, tabs, scraping — fully automated</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.browserAutomation.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.browserAutomation.description")}</p>
                     </div>
                   </motion.div>
 
@@ -906,8 +905,8 @@ export function OnboardingFlow({
                     </div>
                     <Eye className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">Computer Vision</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Sees & understands your screen in real time</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.computerVision.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.computerVision.description")}</p>
                     </div>
                   </motion.div>
 
@@ -923,8 +922,8 @@ export function OnboardingFlow({
                     </div>
                     <Workflow className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">Workflows</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Multi-step flows</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.workflows.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.workflows.description")}</p>
                     </div>
                   </motion.div>
 
@@ -940,8 +939,8 @@ export function OnboardingFlow({
                     </div>
                     <Cpu className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">On-Device</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Runs locally</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.onDevice.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.onDevice.description")}</p>
                     </div>
                   </motion.div>
 
@@ -957,8 +956,8 @@ export function OnboardingFlow({
                     </div>
                     <Clock className="size-4.5 text-foreground/60" />
                     <div>
-                      <p className="text-[13px] font-semibold text-foreground">24/7 Autonomous</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">Set it and forget it — runs while you sleep</p>
+                      <p className="text-[13px] font-semibold text-foreground">{t("showcase.autonomous.title")}</p>
+                      <p className="text-[10px] text-muted-foreground/70 mt-0.5">{t("showcase.autonomous.description")}</p>
                     </div>
                   </motion.div>
                 </div>
@@ -1002,10 +1001,10 @@ export function OnboardingFlow({
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-medium text-foreground">
-                      New here? We&apos;ve got a guide for you
+                      {t("guideCallout.title")}
                     </p>
                     <p className="text-[11px] text-muted-foreground/70 leading-relaxed mt-0.5">
-                      Deploy your first AI agent in under a minute
+                      {t("guideCallout.subtitle")}
                     </p>
                   </div>
                   <ArrowRight className="size-4 text-muted-foreground/40 group-hover:text-muted-foreground/70 transition-colors shrink-0" />
@@ -1028,7 +1027,7 @@ export function OnboardingFlow({
                 step === 0 && "invisible"
               )}
             >
-              Back
+              {t("back")}
             </button>
 
             <Button
@@ -1037,15 +1036,15 @@ export function OnboardingFlow({
               className="h-11 px-8 rounded-xl font-medium gap-2"
             >
               {isSubmitting ? (
-                "Setting up..."
+                t("settingUp")
               ) : step === TOTAL_STEPS - 1 ? (
                 <>
-                  Get started
+                  {t("getStarted")}
                   <Sparkles className="size-4" />
                 </>
               ) : (
                 <>
-                  Continue
+                  {t("continue")}
                   <ArrowRight className="size-4" />
                 </>
               )}

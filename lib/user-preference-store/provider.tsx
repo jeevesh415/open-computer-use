@@ -6,11 +6,13 @@ import {
   convertFromApiFormat,
   convertToApiFormat,
   defaultPreferences,
+  type ChatBackground,
   type LayoutType,
   type UserPreferences,
 } from "./utils"
 
 export {
+  type ChatBackground,
   type LayoutType,
   type UserPreferences,
   convertFromApiFormat,
@@ -23,6 +25,7 @@ const LAYOUT_STORAGE_KEY = "preferred-layout"
 interface UserPreferencesContextType {
   preferences: UserPreferences
   setLayout: (layout: LayoutType) => void
+  setChatBackground: (background: ChatBackground) => void
   setPromptSuggestions: (enabled: boolean) => void
   setShowToolInvocations: (enabled: boolean) => void
   setShowConversationPreviews: (enabled: boolean) => void
@@ -198,6 +201,10 @@ export function UserPreferencesProvider({
     }
   }
 
+  const setChatBackground = (chatBackground: ChatBackground) => {
+    updatePreferences({ chatBackground })
+  }
+
   const setPromptSuggestions = (enabled: boolean) => {
     updatePreferences({ promptSuggestions: enabled })
   }
@@ -233,6 +240,7 @@ export function UserPreferencesProvider({
       value={{
         preferences,
         setLayout,
+        setChatBackground,
         setPromptSuggestions,
         setShowToolInvocations,
         setShowConversationPreviews,

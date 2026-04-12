@@ -9,6 +9,7 @@ import { useUser } from "@/lib/user-store/provider"
 import { useChats } from "@/lib/chat-store/chats/provider"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Users, UserPlus, ArrowRight, Loader2 } from "lucide-react"
 
@@ -19,6 +20,7 @@ interface JoinRoomDialogContentProps {
 }
 
 export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: JoinRoomDialogContentProps) {
+  const t = useTranslations("collaborative")
   const [inviteCode, setInviteCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const { user } = useUser()
@@ -31,7 +33,7 @@ export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: Join
 
     if (!inviteCode.trim()) {
       toast({
-        title: "Please enter an invite code",
+        title: t("joinRoom.enterCode"),
         status: "error",
       })
       return
@@ -75,13 +77,13 @@ export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: Join
       }
       
       toast({
-        title: "Successfully joined the project!",
+        title: t("joinRoom.joinSuccess"),
         status: "success",
       })
     } catch (error) {
       toast({
-        title: "Failed to join project",
-        description: error instanceof Error ? error.message : "Invalid invite code or project not found",
+        title: t("joinRoom.joinFailed"),
+        description: error instanceof Error ? error.message : t("joinRoom.invalidCode"),
         status: "error",
       })
     } finally {
@@ -101,20 +103,20 @@ export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: Join
           >
             <Users className="h-6 w-6 text-primary" />
           </motion.div>
-          <DialogTitle className="text-xl">Join Project</DialogTitle>
+          <DialogTitle className="text-xl">{t("joinRoom.title")}</DialogTitle>
           <DialogDescription>
-            Enter an invite code to join an existing project.
+            {t("joinRoom.description")}
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="invite-code" className="text-sm font-medium">
-              Invite Code
+              {t("joinRoom.inviteCode")}
             </Label>
             <Input
               id="invite-code"
-              placeholder="e.g. ABC123"
+              placeholder={t("joinRoom.placeholder")}
               value={inviteCode}
               onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
               onKeyDown={(e) => {
@@ -126,7 +128,7 @@ export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: Join
               maxLength={10}
             />
             <p className="text-xs text-muted-foreground text-center">
-              Ask your team leader for the project invite code
+              {t("joinRoom.hint")}
             </p>
           </div>
         </div>
@@ -137,22 +139,22 @@ export function JoinRoomDialogContent({ open, onOpenChange, onRoomJoined }: Join
             onClick={() => onOpenChange(false)}
             disabled={isLoading}
           >
-            Cancel
+            {t("joinRoom.cancel")}
           </Button>
-          <Button 
-            onClick={handleJoinRoom} 
+          <Button
+            onClick={handleJoinRoom}
             disabled={isLoading || !inviteCode.trim()}
             className="min-w-[120px]"
           >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Joining...
+                {t("joinRoom.joining")}
               </>
             ) : (
               <>
                 <UserPlus className="mr-2 h-4 w-4" />
-                Join Project
+                {t("joinRoom.joinButton")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </>
             )}

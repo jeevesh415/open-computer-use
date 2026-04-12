@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { NextRequest } from "next/server";
 import { WebSocket, WebSocketServer } from "ws";
 import net from "net";
+import { verifySecureToken } from "@/lib/utils/encryption";
 
 // This is a WebSocket endpoint for VNC proxy
 export async function GET(
@@ -25,11 +26,17 @@ export async function GET(
       return new Response("Missing authentication token", { status: 401 });
     }
 
-    // Decode and verify token
-    const tokenData = JSON.parse(Buffer.from(token, "base64").toString());
-    
-    if (tokenData.exp < Date.now()) {
-      return new Response("Token expired", { status: 401 });
+    // Verify token cryptographically (HMAC-SHA256 signed JWT)
+    let tokenData: { userId: string; sessionId: string; machineId: string };
+    try {
+      tokenData = verifySecureToken(token);
+    } catch {
+      return new Response("Invalid or expired token", { status: 401 });
+    }
+
+    // Ensure the token was issued for this specific machine
+    if (tokenData.machineId !== machineId) {
+      return new Response("Token not valid for this machine", { status: 403 });
     }
 
     // Get machine details

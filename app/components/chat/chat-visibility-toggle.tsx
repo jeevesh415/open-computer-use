@@ -26,14 +26,21 @@ interface ChatVisibilityToggleProps {
   chatId: string
   initialPublic?: boolean
   onVisibilityChange?: (isPublic: boolean, shareUrl?: string) => void
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
-export function ChatVisibilityToggle({ 
-  chatId, 
+export function ChatVisibilityToggle({
+  chatId,
   initialPublic = false,
-  onVisibilityChange 
+  onVisibilityChange,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
 }: ChatVisibilityToggleProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isOpen = controlledOpen ?? internalOpen
+  const setIsOpen = controlledOnOpenChange ?? setInternalOpen
+  const showTrigger = controlledOpen === undefined
   const [isPublic, setIsPublic] = useState(initialPublic)
   const [shareUrl, setShareUrl] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -150,51 +157,55 @@ export function ChatVisibilityToggle({
     }
   }
 
-  // Fetch current status when dialog opens
-  const handleOpenChange = async (open: boolean) => {
-    setIsOpen(open)
-    
-    if (open) {
-      try {
-        const response = await fetch(`/api/chats/${chatId}`)
-        if (response.ok) {
-          const data = await response.json()
-          setIsPublic(data.chat.public)
-          setShareUrl(data.chat.shareUrl)
-          setChatTitle(data.chat.title || "")
+  // Refresh status when dialog opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      const fetchStatus = async () => {
+        try {
+          const response = await fetch(`/api/chats/${chatId}`)
+          if (response.ok) {
+            const data = await response.json()
+            setIsPublic(data.chat.public)
+            setShareUrl(data.chat.shareUrl)
+            setChatTitle(data.chat.title || "")
+          }
+        } catch (error) {
+          console.error("Failed to fetch visibility status:", error)
         }
-      } catch (error) {
-        console.error("Failed to fetch visibility status:", error)
       }
+      fetchStatus()
     } else {
-      // Reset copied state when dialog closes
       setIsCopied(false)
     }
+  }, [isOpen, chatId])
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open)
   }
 
   return (
     <>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="sm"
-            className={cn(
-              "rounded-full px-3 py-1.5 h-8 font-medium transition-all duration-200 border",
-              isPublic
-                ? "text-blue-600 dark:text-blue-400 bg-blue-500/10 hover:bg-blue-500/16 border-blue-500/20 dark:border-blue-400/20 shadow-[0_0_8px_-2px_rgba(59,130,246,0.15)] dark:shadow-[0_0_8px_-2px_rgba(96,165,250,0.12)]"
-                : "text-foreground bg-foreground/[0.04] hover:bg-foreground/[0.08] border-foreground/10 hover:border-foreground/15 dark:bg-white/[0.06] dark:hover:bg-white/[0.1] dark:border-white/10"
-            )}
-            onClick={() => handleOpenChange(true)}
-          >
-            <ShareNetwork className="size-3.5" weight={isPublic ? "fill" : "regular"} />
-            <span className="ml-1.5 text-sm">Share</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          {isPublic ? "Manage sharing" : "Share this chat"}
-        </TooltipContent>
-      </Tooltip>
+      {showTrigger && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className={cn(
+                "text-muted-foreground hover:text-foreground hover:bg-foreground/[0.06] dark:hover:bg-white/[0.08] rounded-full h-7 !px-2.5 !gap-1.5 transition-all duration-150 font-medium",
+                isPublic && "text-foreground bg-foreground/[0.06]"
+              )}
+              onClick={() => handleOpenChange(true)}
+            >
+              <ShareNetwork className="size-3.5" weight={isPublic ? "fill" : "regular"} />
+              <span className="text-[13px] leading-none">Share</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            {isPublic ? "Manage sharing" : "Share this chat"}
+          </TooltipContent>
+        </Tooltip>
+      )}
 
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
         <DialogContent className="sm:max-w-lg">

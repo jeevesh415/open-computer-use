@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
   signInWithGoogle,
-  signInAnonymously,
+
   signUpWithEmail,
   signInWithEmail,
   signInWithMagicLink,
@@ -20,26 +20,107 @@ import { HeaderGoBack } from "../components/header-go-back"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { CoastyIcon } from "@/components/icons/coasty"
+import Image from "next/image"
+import { useTranslations } from "next-intl"
+
+/* ── Left Brand Panel ── */
+function LeftBrandPanel() {
+  const t = useTranslations("auth")
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className="hidden lg:flex relative flex-[1.4] xl:flex-[1.6] flex-col justify-center items-center min-h-dvh overflow-hidden bg-zinc-950"
+    >
+      {/* Ambient glow layers */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/40 via-zinc-950 to-violet-950/30" />
+      <div className="absolute top-0 right-0 w-[60%] h-[50%] bg-indigo-500/[0.07] rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 left-0 w-[50%] h-[40%] bg-violet-500/[0.05] rounded-full blur-[100px]" />
+
+      {/* Subtle noise texture */}
+      <div
+        className="absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Demo image — large, floating with perspective */}
+      <motion.div
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 w-[92%] xl:w-[88%] mx-auto"
+      >
+        {/* Smoke gradient layers behind the image */}
+        <div className="absolute -inset-16 rounded-[40px] blur-[80px] opacity-60 bg-gradient-to-br from-indigo-600/20 via-purple-500/10 to-transparent animate-pulse [animation-duration:8s]" />
+        <div className="absolute -inset-12 rounded-[40px] blur-[60px] opacity-40 bg-gradient-to-tl from-violet-500/15 via-blue-500/10 to-transparent animate-pulse [animation-duration:12s] [animation-delay:2s]" />
+        <div className="absolute -inset-20 rounded-[50px] blur-[100px] opacity-30 bg-gradient-to-r from-fuchsia-500/10 via-indigo-400/15 to-cyan-500/5 animate-pulse [animation-duration:10s] [animation-delay:4s]" />
+        <div className="absolute -inset-10 rounded-3xl blur-[40px] opacity-50 bg-gradient-to-b from-indigo-500/10 via-purple-600/8 to-violet-500/10" />
+
+        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] shadow-[0_32px_80px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.05]">
+          <Image
+            src="/demo-3-2.png"
+            alt="Coasty desktop app"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
+      </motion.div>
+
+      {/* Bottom content overlay */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 p-10 xl:p-14">
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent" />
+        <div className="relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <CoastyIcon className="size-7 text-white/90" />
+              <span className="text-white/50 text-[11px] font-semibold tracking-[0.25em] uppercase">Coasty</span>
+            </div>
+            <h2 className="text-white text-2xl xl:text-[28px] font-medium leading-[1.3] tracking-[-0.02em] max-w-lg">
+              Autopilot computers that work for you. No humans needed.
+            </h2>
+            <p className="text-white/40 text-[15px] xl:text-base font-normal leading-relaxed max-w-md mt-3">
+              Delegate hours of repetitive work to AI agents that research, browse, and execute tasks on your computer — while you focus on what actually matters.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 type AuthView = "sign-in" | "sign-up" | "magic-link" | "forgot-password"
 
-const viewTitles: Record<AuthView, string> = {
-  "sign-in": "Your operator is standing by",
-  "sign-up": "Put your workflows on autopilot",
-  "magic-link": "Skip the password",
-  "forgot-password": "Let's get you back in",
-}
-
-const viewDescriptions: Record<AuthView, string> = {
-  "sign-in": "Pick up right where you left off — your agents remember",
-  "sign-up": "Deploy your first AI agent in under a minute",
-  "magic-link": "One click from your inbox and you're in",
-  "forgot-password": "We'll send a reset link to your email",
-}
-
 export default function LoginPage() {
+  const t = useTranslations("auth")
+  const te = useTranslations("auth.errors")
+  const ts = useTranslations("auth.success")
+
+  const viewTitleMap: Record<AuthView, string> = {
+    "sign-in": t("viewTitles.signIn"),
+    "sign-up": t("viewTitles.signUp"),
+    "magic-link": t("viewTitles.magicLink"),
+    "forgot-password": t("viewTitles.forgotPassword"),
+  }
+
+  const viewDescriptionMap: Record<AuthView, string> = {
+    "sign-in": t("viewDescriptions.signIn"),
+    "sign-up": t("viewDescriptions.signUp"),
+    "magic-link": t("viewDescriptions.magicLink"),
+    "forgot-password": t("viewDescriptions.forgotPassword"),
+  }
+
   const [isLoading, setIsLoading] = useState(false)
-  const [isAnonymousLoading, setIsAnonymousLoading] = useState(false)
+  const isAnonymousLoading = false // guest system removed
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
   const [authView, setAuthView] = useState<AuthView>("sign-in")
@@ -66,7 +147,7 @@ export default function LoginPage() {
   async function handleSignInWithGoogle() {
     const supabase = createClient()
     if (!supabase) {
-      throw new Error("Supabase is not configured")
+      throw new Error(te("supabaseNotConfigured"))
     }
 
     try {
@@ -84,38 +165,10 @@ export default function LoginPage() {
       console.error("Error signing in with Google:", err)
       setError(
         (err as Error).message ||
-          "An unexpected error occurred. Please try again."
+          te("unexpectedError")
       )
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  async function handleSignInAnonymously() {
-    const supabase = createClient()
-    if (!supabase) {
-      throw new Error("Supabase is not configured")
-    }
-
-    try {
-      setIsAnonymousLoading(true)
-      setError(null)
-      setSuccess(null)
-
-      const data = await signInAnonymously(supabase)
-
-      if (data?.user) {
-        trackSignUp("anonymous")
-        router.push("/")
-      }
-    } catch (err: unknown) {
-      console.error("Error signing in anonymously:", err)
-      setError(
-        (err as Error).message ||
-          "An unexpected error occurred. Please try again."
-      )
-    } finally {
-      setIsAnonymousLoading(false)
     }
   }
 
@@ -123,12 +176,12 @@ export default function LoginPage() {
     e.preventDefault()
     const supabase = createClient()
     if (!supabase) {
-      setError("Supabase is not configured")
+      setError(te("supabaseNotConfigured"))
       return
     }
 
     if (!email || !password) {
-      setError("Please fill in all fields")
+      setError(te("fillAllFields"))
       return
     }
 
@@ -146,11 +199,11 @@ export default function LoginPage() {
     } catch (err: unknown) {
       const message = (err as Error).message
       if (message?.includes("Email not confirmed")) {
-        setError("Please confirm your email before signing in. Check your inbox.")
+        setError(te("confirmEmail"))
       } else if (message?.includes("Invalid login credentials")) {
-        setError("Invalid email or password.")
+        setError(te("invalidCredentials"))
       } else {
-        setError(message || "Sign in failed. Please try again.")
+        setError(message || te("signInFailed"))
       }
     } finally {
       setIsLoading(false)
@@ -161,22 +214,22 @@ export default function LoginPage() {
     e.preventDefault()
     const supabase = createClient()
     if (!supabase) {
-      setError("Supabase is not configured")
+      setError(te("supabaseNotConfigured"))
       return
     }
 
     if (!email || !password || !confirmPassword) {
-      setError("Please fill in all fields")
+      setError(te("fillAllFields"))
       return
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters")
+      setError(te("passwordMinLength"))
       return
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match")
+      setError(te("passwordsDoNotMatch"))
       return
     }
 
@@ -188,24 +241,24 @@ export default function LoginPage() {
       // Validate email against 121k+ disposable domains (server-side check)
       const validation = await validateEmailForSignup(email)
       if (!validation.valid) {
-        setError(validation.error || "Invalid email address.")
+        setError(validation.error || te("invalidEmail"))
         return
       }
 
       const data = await signUpWithEmail(supabase, validation.normalized || email, password)
 
       if (data?.user?.identities?.length === 0) {
-        setError("An account with this email already exists. Try signing in instead.")
+        setError(te("emailAlreadyExists"))
         return
       }
 
       trackSignUp("email")
-      setSuccess("Check your email to confirm your account before signing in.")
+      setSuccess(ts("checkEmailConfirm"))
       setEmail("")
       setPassword("")
       setConfirmPassword("")
     } catch (err: unknown) {
-      setError((err as Error).message || "Sign up failed. Please try again.")
+      setError((err as Error).message || te("signUpFailed"))
     } finally {
       setIsLoading(false)
     }
@@ -215,12 +268,12 @@ export default function LoginPage() {
     e.preventDefault()
     const supabase = createClient()
     if (!supabase) {
-      setError("Supabase is not configured")
+      setError(te("supabaseNotConfigured"))
       return
     }
 
     if (!email) {
-      setError("Please enter your email")
+      setError(te("enterEmail"))
       return
     }
 
@@ -231,14 +284,14 @@ export default function LoginPage() {
 
       await signInWithMagicLink(supabase, email)
       trackSignIn("magic_link")
-      setSuccess("Check your email for the magic link to sign in.")
+      setSuccess(ts("checkEmailMagicLink"))
     } catch (err: unknown) {
       const message = (err as Error).message
       if (message?.includes("Signups not allowed for otp")) {
         setAuthView("sign-up")
-        setError("No account found with this email. Please sign up first.")
+        setError(te("noAccountFound"))
       } else {
-        setError(message || "Failed to send magic link. Please try again.")
+        setError(message || te("magicLinkFailed"))
       }
     } finally {
       setIsLoading(false)
@@ -249,12 +302,12 @@ export default function LoginPage() {
     e.preventDefault()
     const supabase = createClient()
     if (!supabase) {
-      setError("Supabase is not configured")
+      setError(te("supabaseNotConfigured"))
       return
     }
 
     if (!email) {
-      setError("Please enter your email")
+      setError(te("enterEmail"))
       return
     }
 
@@ -264,81 +317,44 @@ export default function LoginPage() {
       setSuccess(null)
 
       await resetPassword(supabase, email)
-      setSuccess("Check your email for the password reset link.")
+      setSuccess(ts("checkEmailReset"))
     } catch (err: unknown) {
-      setError((err as Error).message || "Failed to send reset email. Please try again.")
+      setError((err as Error).message || te("resetFailed"))
     } finally {
       setIsLoading(false)
     }
   }
 
   return (
-    <div className="relative flex min-h-dvh w-full flex-col bg-background">
-      {/* Ambient gradient mesh background */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div
-          className="absolute -top-[40%] -left-[20%] h-[80%] w-[60%] rounded-full opacity-[0.03] dark:opacity-[0.06] blur-[100px]"
-          style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        <div
-          className="absolute -bottom-[30%] -right-[10%] h-[70%] w-[50%] rounded-full opacity-[0.025] dark:opacity-[0.05] blur-[100px]"
-          style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
-          }}
-        />
-      </div>
+    <div className="relative flex min-h-dvh w-full flex-row bg-background">
+      {/* Left brand panel — visible on lg+ */}
+      <LeftBrandPanel />
 
-      <HeaderGoBack href="/" />
+      {/* Right form panel */}
+      <div className="relative flex flex-1 flex-col min-h-dvh">
+        {/* Ambient gradient mesh background — right side only */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div
+            className="absolute -top-[40%] -left-[20%] h-[80%] w-[60%] rounded-full opacity-[0.03] dark:opacity-[0.06] blur-[100px]"
+            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
+          />
+          <div
+            className="absolute -bottom-[30%] -right-[10%] h-[70%] w-[50%] rounded-full opacity-[0.025] dark:opacity-[0.05] blur-[100px]"
+            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)`,
+              backgroundSize: "80px 80px",
+            }}
+          />
+        </div>
 
-      <main className="relative flex flex-1 flex-col lg:flex-row items-center lg:justify-center z-10 py-4 sm:py-10">
-        {/* Left brand panel — visible on lg+ */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden lg:flex flex-1 flex-col justify-center items-start px-16 xl:px-24 max-w-2xl"
-        >
-          <div className="mb-8">
-            <CoastyIcon className="size-10" />
-          </div>
-          <h1 className="text-foreground text-5xl xl:text-6xl font-medium tracking-tight leading-[1.2]">
-            You set the goal.
-            <br />
-            <span className="text-muted-foreground">We handle the rest.</span>
-          </h1>
-          <p className="text-muted-foreground mt-6 text-lg leading-relaxed max-w-md">
-            Coasty deploys AI agents that browse, click, type, and navigate
-            like a teammate sitting at a real computer — so you can focus
-            on the work that actually needs you.
-          </p>
-          <div className="mt-12 flex flex-col gap-4 text-sm text-muted-foreground/70">
-            {[
-              "Agents run in isolated VMs — your data never leaks",
-              "Every action recorded with screenshots you can review",
-              "Set it once, schedule it forever — runs while you sleep",
-            ].map((feature, i) => (
-              <motion.div
-                key={feature}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-center gap-3"
-              >
-                <div className="h-px w-5 bg-border" />
-                <span>{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <HeaderGoBack href="/" />
 
-        {/* Right form panel */}
-        <div className="flex flex-none lg:flex-1 items-center justify-center w-full lg:max-w-xl px-4 sm:px-6 lg:px-16">
+        <main className="relative flex flex-1 flex-col items-center justify-center z-10 py-4 sm:py-10 px-4 sm:px-6 lg:px-16">
+          <div className="flex items-center justify-center w-full max-w-[420px]">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -351,10 +367,10 @@ export default function LoginPage() {
                 <CoastyIcon className="size-7 sm:size-8" />
               </div>
               <h1 className="text-foreground text-2xl sm:text-4xl font-medium tracking-tight">
-                You set the goal. We handle the rest.
+                {t("mobileHeading")}
               </h1>
               <p className="text-muted-foreground mt-2 text-sm sm:text-base">
-                AI agents that browse, click, and work like a real teammate.
+                {t("mobileSubheading")}
               </p>
             </div>
 
@@ -371,10 +387,10 @@ export default function LoginPage() {
                   className="mb-4 sm:mb-6"
                 >
                   <h2 className="text-foreground text-xl font-medium tracking-tight">
-                    {viewTitles[authView]}
+                    {viewTitleMap[authView]}
                   </h2>
                   <p className="text-muted-foreground text-sm mt-1">
-                    {viewDescriptions[authView]}
+                    {viewDescriptionMap[authView]}
                   </p>
                 </motion.div>
               </AnimatePresence>
@@ -438,8 +454,8 @@ export default function LoginPage() {
                   </svg>
                   <span>
                     {isLoading && authView === "sign-in" && !email
-                      ? "Connecting..."
-                      : "Continue with Google"}
+                      ? t("google.connecting")
+                      : t("google.continueWithGoogle")}
                   </span>
                 </Button>
 
@@ -447,7 +463,7 @@ export default function LoginPage() {
                 <div className="relative flex items-center gap-3 py-1">
                   <div className="h-px flex-1 bg-border/60" />
                   <span className="text-[11px] uppercase tracking-widest text-muted-foreground/50 font-medium select-none">
-                    or
+                    {t("or")}
                   </span>
                   <div className="h-px flex-1 bg-border/60" />
                 </div>
@@ -465,12 +481,12 @@ export default function LoginPage() {
                       <form onSubmit={handleEmailSignIn} className="space-y-3">
                         <div className="space-y-1.5">
                           <Label htmlFor="email" className="text-xs font-medium text-muted-foreground">
-                            Email
+                            {t("email")}
                           </Label>
                           <Input
                             id="email"
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t("emailPlaceholder")}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             disabled={isLoading}
@@ -480,12 +496,12 @@ export default function LoginPage() {
                         </div>
                         <div className="space-y-1.5">
                           <Label htmlFor="password" className="text-xs font-medium text-muted-foreground">
-                            Password
+                            {t("password")}
                           </Label>
                           <Input
                             id="password"
                             type="password"
-                            placeholder="Your password"
+                            placeholder={t("passwordPlaceholder")}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isLoading}
@@ -498,7 +514,7 @@ export default function LoginPage() {
                           className="w-full h-11 rounded-xl font-medium"
                           disabled={isLoading}
                         >
-                          {isLoading ? "Signing in..." : "Sign in"}
+                          {isLoading ? t("signingIn") : t("signIn")}
                         </Button>
                         <div className="flex items-center justify-between text-[13px] pt-1">
                           <button
@@ -506,24 +522,24 @@ export default function LoginPage() {
                             onClick={() => switchView("forgot-password")}
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
-                            Forgot password?
+                            {t("forgotPassword")}
                           </button>
                           <button
                             type="button"
                             onClick={() => switchView("magic-link")}
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
-                            Use magic link
+                            {t("useMagicLink")}
                           </button>
                         </div>
                         <p className="text-center text-[13px] text-muted-foreground pt-2">
-                          Don&apos;t have an account?{" "}
+                          {t("dontHaveAccount")}{" "}
                           <button
                             type="button"
                             onClick={() => switchView("sign-up")}
                             className="text-foreground hover:underline font-medium"
                           >
-                            Sign up
+                            {t("signUp")}
                           </button>
                         </p>
                       </form>
@@ -533,12 +549,12 @@ export default function LoginPage() {
                       <form onSubmit={handleEmailSignUp} className="space-y-3">
                         <div className="space-y-1.5">
                           <Label htmlFor="signup-email" className="text-xs font-medium text-muted-foreground">
-                            Email
+                            {t("email")}
                           </Label>
                           <Input
                             id="signup-email"
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t("emailPlaceholder")}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             disabled={isLoading}
@@ -548,12 +564,12 @@ export default function LoginPage() {
                         </div>
                         <div className="space-y-1.5">
                           <Label htmlFor="signup-password" className="text-xs font-medium text-muted-foreground">
-                            Password
+                            {t("password")}
                           </Label>
                           <Input
                             id="signup-password"
                             type="password"
-                            placeholder="Min. 6 characters"
+                            placeholder={t("minChars")}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isLoading}
@@ -563,12 +579,12 @@ export default function LoginPage() {
                         </div>
                         <div className="space-y-1.5">
                           <Label htmlFor="signup-confirm" className="text-xs font-medium text-muted-foreground">
-                            Confirm password
+                            {t("confirmPassword")}
                           </Label>
                           <Input
                             id="signup-confirm"
                             type="password"
-                            placeholder="Confirm your password"
+                            placeholder={t("confirmPasswordPlaceholder")}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             disabled={isLoading}
@@ -581,16 +597,16 @@ export default function LoginPage() {
                           className="w-full h-11 rounded-xl font-medium"
                           disabled={isLoading}
                         >
-                          {isLoading ? "Creating account..." : "Create account"}
+                          {isLoading ? t("creatingAccount") : t("createAccount")}
                         </Button>
                         <p className="text-center text-[13px] text-muted-foreground pt-2">
-                          Already have an account?{" "}
+                          {t("alreadyHaveAccount")}{" "}
                           <button
                             type="button"
                             onClick={() => switchView("sign-in")}
                             className="text-foreground hover:underline font-medium"
                           >
-                            Sign in
+                            {t("signIn")}
                           </button>
                         </p>
                       </form>
@@ -600,12 +616,12 @@ export default function LoginPage() {
                       <form onSubmit={handleMagicLink} className="space-y-3">
                         <div className="space-y-1.5">
                           <Label htmlFor="magic-email" className="text-xs font-medium text-muted-foreground">
-                            Email
+                            {t("email")}
                           </Label>
                           <Input
                             id="magic-email"
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t("emailPlaceholder")}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             disabled={isLoading}
@@ -618,7 +634,7 @@ export default function LoginPage() {
                           className="w-full h-11 rounded-xl font-medium"
                           disabled={isLoading}
                         >
-                          {isLoading ? "Sending..." : "Send magic link"}
+                          {isLoading ? t("sending") : t("sendMagicLink")}
                         </Button>
                         <p className="text-center text-[13px] text-muted-foreground pt-2">
                           <button
@@ -626,7 +642,7 @@ export default function LoginPage() {
                             onClick={() => switchView("sign-in")}
                             className="text-foreground hover:underline font-medium"
                           >
-                            Back to sign in
+                            {t("backToSignIn")}
                           </button>
                         </p>
                       </form>
@@ -636,12 +652,12 @@ export default function LoginPage() {
                       <form onSubmit={handleForgotPassword} className="space-y-3">
                         <div className="space-y-1.5">
                           <Label htmlFor="reset-email" className="text-xs font-medium text-muted-foreground">
-                            Email
+                            {t("email")}
                           </Label>
                           <Input
                             id="reset-email"
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder={t("emailPlaceholder")}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             disabled={isLoading}
@@ -654,7 +670,7 @@ export default function LoginPage() {
                           className="w-full h-11 rounded-xl font-medium"
                           disabled={isLoading}
                         >
-                          {isLoading ? "Sending..." : "Send reset link"}
+                          {isLoading ? t("sending") : t("sendResetLink")}
                         </Button>
                         <p className="text-center text-[13px] text-muted-foreground pt-2">
                           <button
@@ -662,7 +678,7 @@ export default function LoginPage() {
                             onClick={() => switchView("sign-in")}
                             className="text-foreground hover:underline font-medium"
                           >
-                            Back to sign in
+                            {t("backToSignIn")}
                           </button>
                         </p>
                       </form>
@@ -675,19 +691,20 @@ export default function LoginPage() {
             {/* Footer */}
             <div className="mt-4 sm:mt-6 text-center">
               <p className="text-[12px] text-muted-foreground/60 leading-relaxed">
-                By continuing, you agree to our{" "}
+                {t("termsAgreement")}{" "}
                 <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2">
-                  Terms
+                  {t("terms")}
                 </Link>{" "}
-                and{" "}
+                {t("and")}{" "}
                 <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2">
-                  Privacy Policy
+                  {t("privacyPolicy")}
                 </Link>
               </p>
             </div>
           </motion.div>
-        </div>
-      </main>
+          </div>
+        </main>
+      </div>
     </div>
   )
 }

@@ -1,14 +1,12 @@
 import {
-  BookOpenText,
-  Brain,
-  Code,
-  Lightbulb,
-  Notepad,
-  PaintBrush,
-  Sparkle,
-} from "@phosphor-icons/react/dist/ssr"
+  FileText,
+  Code2,
+  Search,
+  PenTool,
+  Wrench,
+  GraduationCap,
+} from "lucide-react"
 
-export const NON_AUTH_DAILY_MESSAGE_LIMIT = 5
 export const AUTH_DAILY_MESSAGE_LIMIT = 100
 export const REMAINING_QUERY_ALERT_THRESHOLD = 3
 export const DAILY_FILE_UPLOAD_LIMIT = 5
@@ -27,10 +25,13 @@ export const MODEL_DEFAULT = "bedrock-default"
 export const APP_NAME = "Coasty"
 export const APP_DOMAIN = "https://coasty.ai"
 
-export const SUGGESTIONS = [
+// Suggestion category keys — labels/highlights come from i18n ("suggestions" namespace)
+// Items (prompts) are kept in English since they're sent to the AI model
+export const SUGGESTION_KEYS = ["summary", "code", "research", "create", "solve", "learn"] as const
+
+export const SUGGESTIONS_DATA = [
   {
-    label: "Summary",
-    highlight: "Summarize",
+    key: "summary" as const,
     prompt: `Summarize`,
     items: [
       "Find and summarize today's top AI breakthroughs with sources",
@@ -38,11 +39,10 @@ export const SUGGESTIONS = [
       "Get the latest EV market data and summarize key trends",
       "Research and summarize current climate policy changes globally",
     ],
-    icon: Notepad,
+    icon: FileText,
   },
   {
-    label: "Code",
-    highlight: "Build",
+    key: "code" as const,
     prompt: `Build`,
     items: [
       "Build a React component for infinite scroll with TypeScript",
@@ -50,11 +50,10 @@ export const SUGGESTIONS = [
       "Write a SQL query to analyze user engagement metrics",
       "Implement a debounce function in JavaScript with examples",
     ],
-    icon: Code,
+    icon: Code2,
   },
   {
-    label: "Research",
-    highlight: "Analyze",
+    key: "research" as const,
     prompt: `Analyze`,
     items: [
       "Search and analyze 2025 travel trends with data and statistics",
@@ -62,11 +61,10 @@ export const SUGGESTIONS = [
       "Research latest AI regulations and analyze their impact",
       "Investigate renewable energy costs vs fossil fuels with current data",
     ],
-    icon: BookOpenText,
+    icon: Search,
   },
   {
-    label: "Create",
-    highlight: "Generate",
+    key: "create" as const,
     prompt: `Generate`,
     items: [
       "Generate a marketing strategy for a SaaS startup in 2025",
@@ -74,11 +72,10 @@ export const SUGGESTIONS = [
       "Design a color scheme and typography for modern web app",
       "Build a content calendar for tech blog with trending topics",
     ],
-    icon: Sparkle,
+    icon: PenTool,
   },
   {
-    label: "Solve",
-    highlight: "Debug",
+    key: "solve" as const,
     prompt: `Debug`,
     items: [
       "Debug this React useEffect infinite loop issue",
@@ -86,11 +83,10 @@ export const SUGGESTIONS = [
       "Resolve CORS error in Next.js API route",
       "Troubleshoot Docker container networking problem",
     ],
-    icon: Brain,
+    icon: Wrench,
   },
   {
-    label: "Learn",
-    highlight: "Explain",
+    key: "learn" as const,
     prompt: `Explain`,
     items: [
       "Explain transformers in AI with visual examples",
@@ -98,9 +94,18 @@ export const SUGGESTIONS = [
       "Clarify WebSockets vs Server-Sent Events with use cases",
       "Compare SQL vs NoSQL databases with decision matrix",
     ],
-    icon: Lightbulb,
+    icon: GraduationCap,
   },
 ]
+
+// Legacy export for backward compatibility — consumers should migrate to SUGGESTIONS_DATA + useTranslations("suggestions")
+export const SUGGESTIONS = SUGGESTIONS_DATA.map(s => ({
+  label: s.key.charAt(0).toUpperCase() + s.key.slice(1),
+  highlight: s.prompt,
+  prompt: s.prompt,
+  items: s.items,
+  icon: s.icon,
+}))
 
 // Import centralized system prompts
 import { getSystemPromptDefault } from "./prompts/system-prompts";

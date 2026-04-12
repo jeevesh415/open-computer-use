@@ -10,6 +10,7 @@ import { useState } from "react"
 
 import { useRouter } from "next/navigation"
 import { HeaderGoBack } from "../../components/header-go-back"
+import { useTranslations } from "next-intl"
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("")
@@ -18,28 +19,32 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
+  const t = useTranslations("auth.resetPassword")
+  const te = useTranslations("auth.errors")
+  const ts = useTranslations("auth.success")
+  const ta = useTranslations("auth")
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
     if (!password || !confirmPassword) {
-      setError("Please fill in all fields")
+      setError(te("fillAllFields"))
       return
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters")
+      setError(te("passwordMinLength"))
       return
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match")
+      setError(te("passwordsDoNotMatch"))
       return
     }
 
     const supabase = createClient()
     if (!supabase) {
-      setError("Supabase is not configured")
+      setError(te("supabaseNotConfigured"))
       return
     }
 
@@ -56,7 +61,7 @@ export default function ResetPasswordPage() {
       setSuccess(true)
       setTimeout(() => router.push("/auth"), 2000)
     } catch (err: unknown) {
-      setError((err as Error).message || "Failed to update password. Please try again.")
+      setError((err as Error).message || te("updateFailed"))
     } finally {
       setIsLoading(false)
     }
@@ -71,10 +76,10 @@ export default function ResetPasswordPage() {
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
             <h1 className="text-foreground text-3xl font-medium tracking-tight sm:text-4xl">
-              Reset your password
+              {t("title")}
             </h1>
             <p className="text-muted-foreground mt-3">
-              Enter your new password below.
+              {t("subtitle")}
             </p>
           </div>
 
@@ -86,16 +91,16 @@ export default function ResetPasswordPage() {
 
           {success ? (
             <div className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-md p-3 text-sm text-center">
-              Password updated successfully. Redirecting to sign in...
+              {ts("passwordUpdated")}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-1.5">
-                <Label htmlFor="new-password">New password</Label>
+                <Label htmlFor="new-password">{t("newPassword")}</Label>
                 <Input
                   id="new-password"
                   type="password"
-                  placeholder="Min. 6 characters"
+                  placeholder={ta("minChars")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
@@ -103,11 +108,11 @@ export default function ResetPasswordPage() {
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="confirm-new-password">Confirm new password</Label>
+                <Label htmlFor="confirm-new-password">{t("confirmNewPassword")}</Label>
                 <Input
                   id="confirm-new-password"
                   type="password"
-                  placeholder="Confirm your new password"
+                  placeholder={t("confirmPlaceholder")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   disabled={isLoading}
@@ -120,7 +125,7 @@ export default function ResetPasswordPage() {
                 size="lg"
                 disabled={isLoading}
               >
-                {isLoading ? "Updating..." : "Update password"}
+                {isLoading ? t("updating") : t("updatePassword")}
               </Button>
             </form>
           )}
@@ -130,7 +135,7 @@ export default function ResetPasswordPage() {
       <footer className="relative text-muted-foreground py-6 text-center text-sm z-10">
         <p className="mb-3">
           <Link href="/auth" className="text-foreground hover:underline">
-            Back to sign in
+            {ta("backToSignIn")}
           </Link>
         </p>
       </footer>

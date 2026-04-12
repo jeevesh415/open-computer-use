@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Bat dau mien phi",
+    "bookDemo": "Dat lich demo",
+    "tryCoastyFree": "Dung thu Coasty mien phi",
+    "learnMore": "Tim hieu them",
+    "watchSession": "Xem phien lam viec",
+    "compareAllPlans": "So sanh tat ca goi & tinh nang",
+    "allRightsReserved": "Moi quyen duoc bao luu.",
+    "privacy": "Quyen rieng tu",
+    "terms": "Dieu khoan",
+    "recommended": "Duoc de xuat",
+    "month": "thang",
+    "creditsPerMonth": "{count} tin chi/thang",
+    "agentsInParallel": "{count} tac tu song song"
+  },
+  "header": {
+    "useCases": "Truong hop su dung",
+    "blog": "Blog",
+    "agentSwarms": "Bay tac tu",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "So sanh",
+    "demos": "Demo",
+    "pricing": "Gia",
+    "download": "Tai xuong",
+    "signIn": "Dang nhap",
+    "getStarted": "Bat dau",
+    "useCaseItems": {
+      "competitorIntel": "Tinh bao doi thu",
+      "qaBugReports": "Bao cao loi QA",
+      "seoGapAnalysis": "Phan tich khoang trong SEO",
+      "dataExtraction": "Trich xuat du lieu",
+      "leadGeneration": "Tao khach hang tiem nang",
+      "siteAudit": "Kiem toan trang web",
+      "adIntelligence": "Tinh bao quang cao",
+      "emailOutreach": "Tiep can qua email",
+      "designReview": "Danh gia thiet ke",
+      "priceMonitoring": "Theo doi gia",
+      "marketResearch": "Nghien cuu thi truong",
+      "emailCampaigns": "Chien dich email"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} ho so doi thu duoc cung cap",
+      "qaBugReports": "{stat} luong nguoi dung duoc kiem thu moi lan chay",
+      "seoGapAnalysis": "{stat} khoang trong tu khoa duoc xac dinh",
+      "dataExtraction": "{stat} dong duoc trich xuat moi lan chay",
+      "leadGeneration": "{stat} khach hang tiem nang chat luong moi lan chay",
+      "siteAudit": "{stat} trang duoc kiem toan moi lan chay",
+      "adIntelligence": "{stat} mau quang cao duoc thu thap",
+      "emailOutreach": "{stat} email ca nhan hoa duoc soan",
+      "designReview": "{stat} diem ngat duoc kiem thu moi trang",
+      "priceMonitoring": "{stat} SKU duoc so sanh moi lan chay",
+      "marketResearch": "{stat} diem du lieu duoc thu thap",
+      "emailCampaigns": "{stat} email ca nhan hoa moi chien dich"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Tat ca bai viet",
+      "computerUse": "Su dung may tinh",
+      "compare": "So sanh",
+      "dataEntry": "Nhap du lieu",
+      "webScraping": "Web Scraping",
+      "jobApplications": "Ung tuyen viec lam",
+      "demosResults": "Demo & Ket qua",
+      "guide": "Huong dan"
+    },
+    "blogStats": {
+      "allPosts": "{stat} bai viet duoc xuat ban hang tuan",
+      "computerUse": "{stat} diem benchmark OSWorld",
+      "compare": "{stat} doi thu duoc phan tich",
+      "dataEntry": "{stat} nhanh hon so voi thu cong",
+      "webScraping": "{stat} trang moi phien",
+      "jobApplications": "{stat} don ung tuyen moi phien",
+      "demosResults": "{stat} nghien cuu tinh huong thuc te",
+      "guide": "{stat} huong dan truong hop su dung"
+    }
+  },
+  "hero": {
+    "badge": "Tac tu Computer-Use #1 · {score} OSWorld",
+    "headline": "Nha dieu hanh may tinh tu dong",
+    "useCases": {
+      "computerAgent": {
+        "label": "Tac tu may tinh",
+        "headline": "tu dong hoa bat ky tac vu trinh duyet nao",
+        "outcome": "Mot tac tu AI dieu khien may tinh that — duyet web, nhan chuot, go phim va hoan thanh cong viec. Khong can thiet lap."
+      },
+      "competitorIntel": {
+        "label": "Tinh bao doi thu",
+        "headline": "theo doi moi doi thu canh tranh",
+        "outcome": "Ho so doi thu day du voi gia ca, tinh nang va khoang trong vi the — xuat duoi dang bao cao san sang chia se."
+      },
+      "qaTesting": {
+        "label": "Kiem thu QA",
+        "headline": "tim loi truoc nguoi dung",
+        "outcome": "Cac luong nguoi dung quan trong duoc kiem thu toan dien, moi loi duoc chup man hinh voi buoc tai tao va xep hang muc do nghiem trong."
+      },
+      "seoAnalysis": {
+        "label": "Phan tich SEO",
+        "headline": "kham pha khoang trong tu khoa",
+        "outcome": "Khoang trong tu khoa duoc xac dinh, tom tat noi dung duoc soan, nguon backlink doi thu duoc lap ban do — chien luoc SEO co the hanh dong."
+      },
+      "dataExtraction": {
+        "label": "Trich xuat du lieu",
+        "headline": "scrape va cau truc bat ky trang web nao",
+        "outcome": "Du lieu co cau truc duoc scrape, lam sach, loai bo trung lap va xuat duoi dang CSV — tu bat ky trang web nao, bat ky dinh dang nao."
+      },
+      "leadGeneration": {
+        "label": "Tao khach hang tiem nang",
+        "headline": "lap day kenh ban hang cua ban",
+        "outcome": "Nguoi ra quyet dinh chat luong phu hop voi ICP cua ban voi chuc danh da xac minh, cong ty va cau mo dau tiep can ca nhan hoa."
+      },
+      "siteAudit": {
+        "label": "Kiem toan trang web",
+        "headline": "kiem toan moi trang o quy mo lon",
+        "outcome": "Trang duoc quet, Core Web Vitals duoc cham diem, lien ket hong duoc tim, van de tiep can duoc xep hang theo uu tien sua chua."
+      },
+      "emailOutreach": {
+        "label": "Tiep can qua email",
+        "headline": "gui tiep can ca nhan hoa",
+        "outcome": "Email ca nhan hoa tham chieu cong ty, vai tro va diem dau cua moi khach hang tiem nang — san sang gui."
+      },
+      "marketResearch": {
+        "label": "Nghien cuu thi truong",
+        "headline": "xac thuc thi truong cua ban nhanh chong",
+        "outcome": "TAM duoc tinh toan, cac doanh nghiep chu chot duoc lap ho so, xu huong tang truong duoc bieu do — thu thap tu hang chuc diem du lieu."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Tiep thi",
+        "task": "Tiep thi san pham cua ban tren Reddit tu dong"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Tim khach hang tiem nang va gui email ca nhan hoa"
+      },
+      "qaTesting": {
+        "label": "Kiem thu QA",
+        "task": "Kiem thu moi luong thanh toan va bao cao loi"
+      },
+      "jobApplication": {
+        "label": "Ung tuyen viec lam",
+        "task": "Tim vi tri, tuy chinh so yeu ly lich va nop don"
+      },
+      "formFilling": {
+        "label": "Dien bieu mau",
+        "task": "Dien don ung tuyen YC S26 cho ban"
+      },
+      "socialMedia": {
+        "label": "Mang xa hoi",
+        "task": "Dang bai tren Hacker News va tuong tac voi binh luan"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "Benchmark OSWorld",
+      "sublabel": "Tac tu computer-use #1 toan cau"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Cong cu tac tu co the su dung",
+      "sublabel": "Trinh duyet, terminal, desktop, tep"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Chay theo lich trinh",
+      "sublabel": "Tu dong hoa bat ky tac vu dinh ky nao"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Thiet lap can thiet",
+      "sublabel": "Khong API, khong tich hop, khong ma"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Tai sao Coasty",
+    "title": "Khong phai chatbot. Khong phai script RPA.",
+    "worksLikeHuman": {
+      "title": "Hoat dong nhu con nguoi",
+      "description": "Nhin, nhan chuot, go phim, dieu huong — chinh xac nhu ban"
+    },
+    "noScripts": {
+      "title": "Khong can script hay thiet lap",
+      "description": "Nhap ngon ngu tu nhien, nhan ket qua"
+    },
+    "handlesUnexpected": {
+      "title": "Xu ly tinh huong bat ngo",
+      "description": "Thich ung voi CAPTCHA, popup, thay doi bo cuc"
+    },
+    "runsInIsolation": {
+      "title": "Chay trong moi truong cach ly",
+      "description": "VM sandbox moi phien — khong co gi bi ro ri"
+    }
+  },
+  "howItWorks": {
+    "title": "Cach hoat dong",
+    "step1": {
+      "title": "Mo ta tac vu cua ban",
+      "description": "Ngon ngu tu nhien. Chi vay thoi.",
+      "placeholder": "Nghien cuu 100 khach hang tiem nang tren LinkedIn..."
+    },
+    "step2": {
+      "title": "Xem tac tu lam viec",
+      "description": "Mo trinh duyet, nhan chuot, go phim, dieu huong"
+    },
+    "step3": {
+      "title": "Tac vu hoan thanh",
+      "description": "Moi hanh dong duoc ghi lai voi anh chup man hinh",
+      "results": {
+        "taskCompleted": "Tac vu hoan thanh",
+        "leadsFound": "Tim thay 12 khach hang tiem nang",
+        "addedToCrm": "Da them vao CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Benchmark #1 toan cau",
+    "subtitle": "82% tren OSWorld — benchmark kho nhat danh cho tac tu AI su dung may tinh that",
+    "agenticFramework": "Khung Tac tu",
+    "foundationModel": "Mo hinh nen tang"
+  },
+  "comparison": {
+    "title": "Tai sao tu dong hoa voi Coasty?",
+    "subtitle": "Cung nhung tac vu mat hang gio cho doi ngu — Coasty hoan thanh trong vai phut, suot ngay dem.",
+    "manual": {
+      "title": "Lam thu cong",
+      "subtitle": "Ban hoac doi ngu cua ban, bang tay"
+    },
+    "coasty": {
+      "title": "Tac tu AI Coasty",
+      "subtitle": "Tac tu computer-use #1"
+    },
+    "rows": {
+      "timePerTask": "Thoi gian moi tac vu",
+      "availability": "Kha dung",
+      "setupTime": "Thoi gian thiet lap",
+      "errorRate": "Ti le loi",
+      "scaling": "Mo rong",
+      "auditTrail": "Nhat ky kiem toan"
+    },
+    "manualValues": {
+      "timePerTask": "Hang gio den hang ngay",
+      "availability": "Chi gio lam viec",
+      "setupTime": "Hoc cong cu, viet SOP",
+      "errorRate": "Loi cua con nguoi",
+      "scaling": "Lam nhieu hon = ton nhieu thoi gian hon",
+      "auditTrail": "Khong co"
+    },
+    "coastyValues": {
+      "timePerTask": "Phut",
+      "availability": "24/7, moi ngay",
+      "setupTime": "60 giay",
+      "errorRate": "Tu sua loi",
+      "scaling": "Chay khong gioi han tac vu song song",
+      "auditTrail": "Moi cu nhan chuot duoc ghi lai + anh chup man hinh"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Tu dong hoa cac tac vu mat",
+      "hoursManually": "hang gio lam thu cong",
+      "startingAt": "Bat dau tu"
+    }
+  },
+  "demo": {
+    "title": "Xem tac tu hanh dong",
+    "subtitle": "Tac vu thuc. Trinh duyet thuc. Moi cu nhan chuot duoc ghi lai.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty tren Reddit",
+        "description": "Xem Coasty tu dong chay chien dich tiep thi — nghien cuu doi thu, phan tich xu huong va xay dung ban trinh bay chien luoc.",
+        "tag": "Tiep thi"
+      },
+      "prospects": {
+        "title": "Tim kiem khach hang tiem nang",
+        "description": "Coasty tim va nghien cuu khach hang tiem nang, thu thap thong tin quan trong de tao tiep can ca nhan hoa.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "Tu kiem thu QA",
+        "description": "Coasty chay dam bao chat luong tren chinh san pham cua minh — dieu huong cac luong, bat loi va bao cao van de tu dong.",
+        "tag": "Kiem thu QA"
+      },
+      "email": {
+        "title": "Gui email thay ban",
+        "description": "Tu soan den gui — mot tac tu AI soan va gui email hoan toan tu dong.",
+        "tag": "Giao tiep"
+      },
+      "job": {
+        "title": "Nop don ung tuyen",
+        "description": "Coasty tim vi tri phu hop, tuy chinh so yeu ly lich cua ban va nop don — tat ca tu dong.",
+        "tag": "Ung tuyen viec lam"
+      },
+      "hackernews": {
+        "title": "Dang bai tren Hacker News",
+        "description": "Coasty tao va xuat ban bai blog tren Hacker News — viet noi dung va gui tu dong.",
+        "tag": "Mang xa hoi"
+      }
+    }
+  },
+  "features": {
+    "title": "Duoc xay dung cho tac vu may tinh thuc te",
+    "selfCorrecting": {
+      "title": "Tu sua loi",
+      "description": "Phat hien loi, thu cac duong di thay the"
+    },
+    "auditTrail": {
+      "title": "Nhat ky kiem toan day du",
+      "description": "Moi cu nhan chuot duoc ghi lai voi anh chup man hinh"
+    },
+    "schedule": {
+      "title": "Lap lich 24/7",
+      "description": "Chay voi cron — hang gio, hang ngay, hang tuan"
+    },
+    "sandboxed": {
+      "title": "Sandbox & Bao mat",
+      "description": "VM cach ly moi phien, bi huy sau do"
+    },
+    "benchmark": {
+      "title": "#1 tren OSWorld",
+      "description": "82% — diem cao nhat tung duoc ghi nhan"
+    },
+    "swarms": {
+      "title": "Bay tac tu",
+      "description": "Chia tac vu tren nhieu may song song"
+    }
+  },
+  "pricing": {
+    "title": "Bat dau mien phi, mo rong khi san sang",
+    "subtitle": "Khong can the tin dung. Tac tu AI cua ban san sang trong 60 giay.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Dung thu tac tu computer-use #1",
+        "cta": "Bat dau mien phi"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Tu dong hoa hang ngay nhe",
+        "cta": "Chon Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Tu dong hoa tac vu moi ngay",
+        "cta": "Chon Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Mo rong quy trinh phuc tap",
+        "cta": "Chon Plus",
+        "badge": "Pho bien nhat"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Tu dong hoa nang khong gioi han",
+        "cta": "Chon Pro"
+      }
+    },
+    "vmTemporary": "1 VM tam thoi (2 gio)",
+    "vmDeletedAfterInactivity": "1 VM (xoa sau khi khong hoat dong)",
+    "vmAlwaysOn": "{count} VM luon bat",
+    "vmAlwaysOnPlural": "{count} VM luon bat",
+    "bargain": {
+      "title": "Cung cong viec ton {oldPrice} voi lao dong thu cong",
+      "description": "Tro ly ao ton $2.000–$4.000/thang. Nhan vien ban thoi gian con dat hon. Coasty lam cung cong viec 24/7 bat dau tu $0 — voi su nhat quan hoan hao, nhat ky kiem toan day du va khong can thoi gian dao tao."
+    }
+  },
+  "faq": {
+    "title": "Cau hoi thuong gap",
+    "subtitle": "Tat ca nhung gi ban can biet truoc khi bat dau",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Coasty la gi?",
+        "answer": "Coasty la tac tu AI computer-use tot nhat the gioi. Ban mo ta tac vu — nghien cuu khach hang tiem nang, kiem thu trang web, dien bieu mau, dang bai tren mang xa hoi — va Coasty mo trinh duyet thuc, dieu huong ung dung, nhan nut, go van ban va hoan thanh tac vu tu dau den cuoi. Khong API, khong tich hop, khong can ma."
+      },
+      "howDifferent": {
+        "question": "Day khac gi so voi ChatGPT hoac cac cong cu AI khac?",
+        "answer": "ChatGPT tao van ban. Coasty su dung may tinh. No khong noi cho ban lam gi — no mo trinh duyet, dieu huong den trang web, nhan cac nut, dien bieu mau va giao cong viec da hoan thanh. Do la su khac biet giua nhan huong dan va co nguoi lam tac vu cho ban."
+      },
+      "whatTasks": {
+        "question": "Coasty co the tu dong hoa nhung tac vu nao?",
+        "answer": "Bat ky tac vu nao ban co the lam tren may tinh. Nghien cuu web, tao khach hang tiem nang, nhap du lieu, dien bieu mau, kiem thu QA, dang mang xa hoi, tiep can email, xu ly hoa don, phan tich canh tranh, tuyen dung — neu lien quan den trinh duyet hoac ung dung desktop, Coasty co the lam duoc."
+      },
+      "whatAreCredits": {
+        "question": "Tin chi la gi va duoc su dung nhu the nao?",
+        "answer": "Tin chi duoc tieu thu khi tac tu lam viec tren cac tac vu. Tac vu dai hon, phuc tap hon su dung nhieu tin chi hon. Cac goi tra phi bao gom tin chi hang thang, va ban cung co the mua them goi tin chi bat cu luc nao."
+      },
+      "localComputer": {
+        "question": "Coasty co the chay tren may tinh cua toi khong?",
+        "answer": "Co. Ung dung desktop cua chung toi chay nhu mot lop phu nhe tren may cua ban, dieu khien trinh duyet va ung dung cuc bo cua ban truc tiep. Ngoai ra, tac vu chay tren may dam may cach ly — tuy ban chon."
+      },
+      "dataSafe": {
+        "question": "Du lieu cua toi co an toan khong?",
+        "answer": "Moi tac vu chay trong moi truong sandbox cach ly. Khong co gi ro ri giua cac phien. Thong tin dang nhap cua ban van rieng tu, va moi hanh dong duoc ghi lai voi anh chup man hinh trong nhat ky kiem toan day du ma ban co the xem lai bat cu luc nao."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Su dung may tinh ho tro boi AI.",
+    "tagline2": "Tu dong hoa bat ky quy trinh lam viec nao voi tac tu thong minh.",
+    "columns": {
+      "product": "San pham",
+      "resources": "Tai nguyen",
+      "company": "Cong ty",
+      "legal": "Phap ly"
+    },
+    "links": {
+      "computerUse": "Su dung may tinh",
+      "guide": "Huong dan",
+      "download": "Tai xuong",
+      "pricing": "Gia",
+      "agentSwarms": "Bay tac tu",
+      "status": "Trang thai",
+      "blog": "Blog",
+      "useCases": "Truong hop su dung",
+      "demos": "Demo",
+      "compare": "So sanh",
+      "talkToCofounders": "Noi chuyen voi dong sang lap & Demo",
+      "contact": "Lien he",
+      "privacy": "Quyen rieng tu",
+      "terms": "Dieu khoan"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Ngon ngu"
+  },
+  "auth": {
+    "brandHeading": "Ban dat muc tieu.",
+    "brandSubheading": "Chung toi lo phan con lai.",
+    "mobileHeading": "Ban dat muc tieu. Chung toi lo phan con lai.",
+    "mobileSubheading": "Tac tu AI duyet web, nhan chuot va lam viec nhu dong doi that su.",
+    "flowSteps": {
+      "step1": {
+        "label": "Ban mo ta tac vu",
+        "sub": "\"Nghien cuu 5 doi thu hang dau cua chung toi\""
+      },
+      "step2": {
+        "label": "Tac tu nam quyen dieu khien",
+        "sub": "Tu dong duyet web, nhan chuot, go phim"
+      },
+      "step3": {
+        "label": "Cong viec duoc giao",
+        "sub": "Bang tinh voi 5 ho so doi thu day du"
+      }
+    },
+    "complete": "Hoan thanh",
+    "doneIn": "Hoan thanh trong 8 phut",
+    "demoCaption": "Chạy tác tử AI trên máy tính hoặc điều khiển từ điện thoại, ở bất cứ đâu.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Nha dieu hanh cua ban dang san sang",
+      "signUp": "Dat quy trinh lam viec tren che do tu dong",
+      "magicLink": "Bo qua mat khau",
+      "forgotPassword": "Hay de chung toi dua ban tro lai"
+    },
+    "viewDescriptions": {
+      "signIn": "Tiep tuc tu noi ban da dung lai — tac tu cua ban nho het",
+      "signUp": "Trien khai tac tu AI dau tien trong chua day mot phut",
+      "magicLink": "Mot cu nhan chuot tu hop thu den va ban da vao",
+      "forgotPassword": "Chung toi se gui lien ket dat lai den email cua ban"
+    },
+    "google": {
+      "connecting": "Dang ket noi...",
+      "continueWithGoogle": "Tiep tuc voi Google"
+    },
+    "or": "hoac",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Mat khau",
+    "passwordPlaceholder": "Mat khau cua ban",
+    "confirmPassword": "Xac nhan mat khau",
+    "confirmPasswordPlaceholder": "Xac nhan mat khau cua ban",
+    "minChars": "Toi thieu 6 ky tu",
+    "signingIn": "Dang dang nhap...",
+    "signIn": "Dang nhap",
+    "creatingAccount": "Dang tao tai khoan...",
+    "createAccount": "Tao tai khoan",
+    "sending": "Dang gui...",
+    "sendMagicLink": "Gui lien ket ma thuat",
+    "sendResetLink": "Gui lien ket dat lai",
+    "forgotPassword": "Quen mat khau?",
+    "useMagicLink": "Dung lien ket ma thuat",
+    "dontHaveAccount": "Chua co tai khoan?",
+    "signUp": "Dang ky",
+    "alreadyHaveAccount": "Da co tai khoan?",
+    "backToSignIn": "Quay lai dang nhap",
+    "termsAgreement": "Khi tiep tuc, ban dong y voi",
+    "terms": "Dieu khoan",
+    "and": "va",
+    "privacyPolicy": "Chinh sach Quyen rieng tu",
+    "errors": {
+      "fillAllFields": "Vui long dien tat ca cac truong",
+      "passwordMinLength": "Mat khau phai co it nhat 6 ky tu",
+      "passwordsDoNotMatch": "Mat khau khong khop",
+      "supabaseNotConfigured": "Supabase chua duoc cau hinh",
+      "unexpectedError": "Da xay ra loi khong mong muon. Vui long thu lai.",
+      "confirmEmail": "Vui long xac nhan email truoc khi dang nhap. Kiem tra hop thu den.",
+      "invalidCredentials": "Email hoac mat khau khong hop le.",
+      "signInFailed": "Dang nhap that bai. Vui long thu lai.",
+      "invalidEmail": "Dia chi email khong hop le.",
+      "emailAlreadyExists": "Tai khoan voi email nay da ton tai. Hay thu dang nhap.",
+      "signUpFailed": "Dang ky that bai. Vui long thu lai.",
+      "enterEmail": "Vui long nhap email cua ban",
+      "noAccountFound": "Khong tim thay tai khoan voi email nay. Vui long dang ky truoc.",
+      "magicLinkFailed": "Khong the gui lien ket ma thuat. Vui long thu lai.",
+      "resetFailed": "Khong the gui email dat lai. Vui long thu lai.",
+      "updateFailed": "Khong the cap nhat mat khau. Vui long thu lai."
+    },
+    "success": {
+      "checkEmailConfirm": "Kiem tra email de xac nhan tai khoan truoc khi dang nhap.",
+      "checkEmailMagicLink": "Kiem tra email de tim lien ket ma thuat dang nhap.",
+      "checkEmailReset": "Kiem tra email de tim lien ket dat lai mat khau.",
+      "passwordUpdated": "Mat khau da cap nhat thanh cong. Dang chuyen huong den dang nhap..."
+    },
+    "resetPassword": {
+      "title": "Dat lai mat khau",
+      "subtitle": "Nhap mat khau moi cua ban ben duoi.",
+      "newPassword": "Mat khau moi",
+      "confirmNewPassword": "Xac nhan mat khau moi",
+      "confirmPlaceholder": "Xac nhan mat khau moi cua ban",
+      "updating": "Dang cap nhat...",
+      "updatePassword": "Cap nhat mat khau"
+    },
+    "errorPage": {
+      "title": "Loi xac thuc",
+      "defaultMessage": "Da xay ra loi trong qua trinh xac thuc.",
+      "tryAgain": "Thu lai",
+      "backToChat": "Quay lai tro chuyen",
+      "needHelp": "Can giup do?",
+      "contactSupport": "Lien he ho tro"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Bo qua",
+    "back": "Quay lai",
+    "continue": "Tiep tuc",
+    "getStarted": "Bat dau",
+    "settingUp": "Dang thiet lap...",
+    "welcome": {
+      "titleReturning": "Chao mung tro lai{name}!",
+      "titleNew": "Chao mung den voi Coasty",
+      "descriptionReturning": "Chung toi muon tim hieu them ve ban de cai thien trai nghiem",
+      "descriptionNew": "Hay thiet lap tai khoan de chung toi ca nhan hoa trai nghiem cua ban"
+    },
+    "nameLabel": "Chung toi nen goi ban la gi?",
+    "namePlaceholder": "Ten cua ban",
+    "companyLabel": "Cong ty",
+    "optional": "(tuy chon)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Trang web",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Dieu gi mo ta ban tot nhat?",
+      "subtitle": "Chon tat ca phu hop — dieu nay giup chung toi tuy chinh trai nghiem cua ban"
+    },
+    "roles": {
+      "founder": "Nha sang lap / CEO",
+      "developer": "Lap trinh vien",
+      "marketer": "Nha tiep thi",
+      "designer": "Nha thiet ke",
+      "product_manager": "Quan ly san pham",
+      "data_analyst": "Du lieu / Phan tich",
+      "operations": "Van hanh",
+      "other": "Khac"
+    },
+    "teamSizeLabel": "Quy mo doi",
+    "teamSizes": {
+      "solo": "Chi minh toi",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Ban tim thay chung toi bang cach nao?",
+      "subtitle": "Chung toi muon biet ban nghe ve Coasty tu dau"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Ban be / Dong nghiep",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Khac"
+    },
+    "useCaseStep": {
+      "title": "Ban se tu dong hoa gi dau tien?",
+      "subtitle": "Chon tat ca phu hop — ban co the kham pha moi thu sau"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping & Nghien cuu",
+      "browser_automation": "Tu dong hoa trinh duyet",
+      "data_entry": "Nhap du lieu & Bieu mau",
+      "email_outreach": "Email & Tiep can",
+      "testing": "QA & Kiem thu",
+      "ecommerce": "Tac vu E-commerce",
+      "social_media": "Quan ly mang xa hoi",
+      "general_automation": "Tu dong hoa chung"
+    },
+    "showcase": {
+      "title": "Moi thu ban can,",
+      "titleHighlight": "da tich hop san.",
+      "subtitle": "Day la nhung gi Coasty co the lam cho ban",
+      "noCode": {
+        "title": "Khong can ma",
+        "description": "Chi can mo ta nhung gi ban muon bang ngon ngu tu nhien"
+      },
+      "agentSwarms": {
+        "title": "Bay tac tu",
+        "description": "Doi tac tu song song"
+      },
+      "desktopControl": {
+        "title": "Dieu khien Desktop",
+        "description": "Nhan chuot, go phim, dieu huong"
+      },
+      "browserAutomation": {
+        "title": "Tu dong hoa trinh duyet",
+        "description": "Bieu mau, tab, scraping — tu dong hoan toan"
+      },
+      "computerVision": {
+        "title": "Thi giac may tinh",
+        "description": "Nhin va hieu man hinh cua ban theo thoi gian thuc"
+      },
+      "workflows": {
+        "title": "Quy trinh lam viec",
+        "description": "Quy trinh nhieu buoc"
+      },
+      "onDevice": {
+        "title": "Tren thiet bi",
+        "description": "Chay cuc bo"
+      },
+      "autonomous": {
+        "title": "Tu dong 24/7",
+        "description": "Thiet lap va quen di — chay khi ban ngu"
+      }
+    },
+    "guideCallout": {
+      "title": "Moi den day? Chung toi co huong dan cho ban",
+      "subtitle": "Trien khai tac tu AI dau tien trong chua day mot phut"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Tac tu AI cua ban nen lam gi?",
+    "placeholderAlt": "Noi cho AI biet phai lam gi tren may tinh...",
+    "vmError": {
+      "title": "Loi may ao",
+      "description": "May ao dang trong trang thai loi hoac dang bi xoa.",
+      "hint": "Vui long kiem tra tab May tinh de giai quyet van de, hoac chon \"Khong chon may tinh\" de chi su dung tim kiem web.",
+      "gotIt": "Da hieu"
+    },
+    "status": {
+      "creating": "Dang tao {name}...",
+      "initiating": "Dang khoi tao tac tu tren {name}...",
+      "stopping": "Dang dung {name}...",
+      "preparing": "Dang chuan bi {name}..."
+    },
+    "swarm": {
+      "title": "Che do bay",
+      "pro": "PRO",
+      "upgradeLabel": "Che do bay — nang cap de mo khoa",
+      "feature1": "Thuc thi song song tren nhieu may tam thoi",
+      "feature2": "Moi may chay tu dong",
+      "feature3": "Gap 3 lan gioi han may cua goi moi bay",
+      "description": "Chay mot lenh tren gap 3 lan gioi han may song song — moi may xu ly tac vu doc lap.",
+      "enableLabel": "Bat che do bay",
+      "disableLabel": "Tat che do bay",
+      "onTooltip": "Che do bay BAT — lenh cua ban se chay tren nhieu may song song",
+      "offTooltip": "Bat che do bay de chay lenh tren nhieu may cung luc",
+      "decreaseMachines": "Giam so luong may",
+      "increaseMachines": "Tang so luong may",
+      "machineLimit": "Toi da {max} may bay trong goi cua ban. Can them? Lien he founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Che do bay"
+    },
+    "desktop": {
+      "connectLabel": "Ket noi den desktop",
+      "screenLabel": "Man hinh cua {name}",
+      "screenDefault": "Desktop",
+      "watchTooltip": "Xem tac tu lam viec tren man hinh rieng. Chi dung cham vao gi nhe, khong thi no se so san khau do!",
+      "watchLabel": "Desktop"
+    },
+    "buttons": {
+      "stop": "Dung",
+      "sendToSwarm": "Gui den bay",
+      "taskRunning": "Mot tac vu khac dang chay — nhan de dung va chay cua ban",
+      "selectComputer": "Chon may tinh de gui tin nhan",
+      "waitCreating": "Vui long doi VM dang duoc tao",
+      "waitStarting": "Vui long doi VM khoi dong",
+      "waitAgent": "Vui long doi tac tu khoi tao",
+      "vmStopping": "VM dang dung",
+      "send": "Gui",
+      "switching": "Dang chuyen...",
+      "overrideRun": "Ghi de & Chay",
+      "stopLabel": "Dung tac vu dang chay va bat dau tac vu nay",
+      "sendLabel": "Gui tin nhan"
+    },
+    "search": "Tim kiem",
+    "upload": {
+      "label": "Tai tep len VM",
+      "heading": "Tai tep len VM",
+      "description": "Tep se duoc luu vao Desktop",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Tha tep vao day",
+      "dropDescription": "Tep se duoc tai len thu muc Desktop cua VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Dang nhap de thu them tinh nang mien phi",
+      "description": "Tao du an, moi thanh vien nhom, va nhieu hon.",
+      "connecting": "Dang ket noi...",
+      "continueWithGoogle": "Tiep tuc voi Google"
+    },
+    "removeFile": "Xoa tep"
+  },
+  "chat": {
+    "greeting": "Xin chao",
+    "greetingAuth": "Toi se lo phan cong viec may tinh. Tac vu la gi?",
+    "greetingUnauth": "AI lam viec tren may tinh thay ban. Chi can noi cho no biet ban can lam gi.",
+    "guide": "Huong dan",
+    "saveLogins": "Luu dang nhap de tu dong dien",
+    "encryptedNote": "duoc ma hoa, AI khong bao gio nhin thay",
+    "roleLabels": [
+      "Dong nghiep",
+      "Nhan vien",
+      "Ban be",
+      "Tro ly",
+      "Doi tac",
+      "Thanh vien nhom",
+      "Cong tac vien",
+      "Nguoi giup do"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "Bao cao doi thu cua {company}",
+        "warmLeads": "Tim 20 khach hang tiem nang cho {company}",
+        "pitchDeck": "Ban nhap pitch deck {company}"
+      },
+      "developer": {
+        "findBugs": "Tim loi tren {company}",
+        "performance": "Kiem toan hieu nang {company}",
+        "apiDocs": "Trich xuat tai lieu API {company}"
+      },
+      "marketer": {
+        "seoGap": "Phan tich khoang trong SEO {company}",
+        "competitorAds": "Theo doi quang cao doi thu {company}",
+        "trendingContent": "Y tuong xu huong cho {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "Tom tat danh gia {company}",
+        "featureComparison": "So sanh tinh nang {company}",
+        "competitorLaunches": "Theo doi ra mat doi thu {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "Xuat du lieu {company} sang CSV",
+        "marketSizing": "Quy mo thi truong {company}",
+        "benchmark": "So sanh {company} voi nganh"
+      },
+      "operations": {
+        "enterRecords": "Nhap ban ghi vao {company}",
+        "cheapestVendor": "Tim nha cung cap cho {company}",
+        "invoiceSummary": "Tom tat hoa don {company}"
+      },
+      "designer": {
+        "designComparison": "{company} vs doi thu ve thiet ke",
+        "responsiveAudit": "Kiem toan responsive {company}",
+        "inspiration": "Cam hung thiet ke cho {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Trich xuat du lieu trang {company}",
+      "browser_automation": "Xuat bao cao {company}",
+      "data_entry": "Nhap du lieu vao {company}",
+      "email_outreach": "Tiep can cho {company}",
+      "testing": "Test QA {company}",
+      "ecommerce": "So sanh gia {company}",
+      "social_media": "Dang bai ve {company}",
+      "general_automation": "Tu dong hoa tac vu tren {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Sao chep van ban",
+    "copied": "Da sao chep!",
+    "regenerate": "Tao lai",
+    "feedback": {
+      "title": "Phan hoi",
+      "prompts": [
+        "Danh gia",
+        "Phan hoi",
+        "Chung toi lam the nao?",
+        "Suy nghi cua ban?",
+        "Chia se phan hoi"
+      ],
+      "tooltip": "Chia se phan hoi cua ban"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Tim kiem thong minh",
+      "description": "Tim kiem tren web ho tro boi AI"
+    },
+    "collaborate": {
+      "title": "Cong tac",
+      "description": "Lam viec cung nhau theo thoi gian thuc"
+    },
+    "globalAccess": {
+      "title": "Truy cap toan cau",
+      "description": "Tim kiem bang 50+ ngon ngu"
+    },
+    "aiModels": {
+      "title": "Mo hinh AI",
+      "description": "Nhieu nha cung cap AI"
+    },
+    "freeForever": {
+      "title": "Mien phi mai mai",
+      "description": "Khong co chi phi an"
+    },
+    "privateSecure": {
+      "title": "Rieng tu & Bao mat",
+      "description": "Du lieu cua ban thuoc ve ban"
+    }
+  },
+  "sidebar": {
+    "newTask": "Tac vu moi",
+    "newTaskDescription": "Bat dau tu dong hoa AI moi",
+    "activity": "Hoat dong",
+    "taskHistory": "Lich su tac vu",
+    "taskHistoryDescription": "Xem lai tac vu truoc va tiep tuc tu noi ban da dung",
+    "taskHistoryPopup": {
+      "title": "Tac vu gan day cua ban",
+      "description": "Duyet va tiep tuc cac cuoc hoi thoai truoc. Moi tac vu duoc luu de ban co the tiep tuc tu noi da dung."
+    },
+    "swarmRuns": "Lan chay bay",
+    "swarmRunsDescription": "Giam sat quy trinh song song da tac tu",
+    "swarmRunsPopup": {
+      "title": "Quy trinh da tac tu",
+      "description": "Chay tac vu tren nhieu may song song. Moi tac tu lam viec doc lap va ket qua tu dong hoi tu."
+    },
+    "guide": "Huong dan",
+    "guideDescription": "Tim hieu cach tan dung toi da Coasty",
+    "guidePopup": {
+      "title": "Bat dau",
+      "description": "Huong dan tung buoc va cac phuong phap tot nhat de giup ban tu dong hoa hieu qua."
+    },
+    "infrastructure": "Co so ha tang",
+    "computer": "May tinh",
+    "computers": "May tinh",
+    "active": "dang hoat dong",
+    "view": "Xem",
+    "workforce": "Lịch trình",
+    "workforceDescription": "Lên lịch tác vụ và kích hoạt tự động",
+    "workforcePopup": {
+      "title": "Tu dong hoa theo lich",
+      "description": "Thiết lập tác vụ định kỳ với lịch trình cron và kích hoạt giữa các tác nhân. Lịch trình của bạn chạy khi bạn ngủ."
+    },
+    "credentials": "Thong tin dang nhap",
+    "credentialsDescription": "Luu tru an toan dang nhap cho tac tu truy cap",
+    "credentialsPopup": {
+      "title": "Kho thong tin dang nhap bao mat",
+      "description": "Luu tru dang nhap va API key voi ma hoa. Tac tu tu dong dien thong tin dang nhap ma khong lo gia tri goc."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Tai ung dung Desktop",
+      "download": "Tai xuong",
+      "downloadDesktopApp": "Tai ung dung Desktop",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Dieu khien may tinh tu xa",
+      "controlDescription": "Cai dat ung dung desktop va chay tac vu tren PC tu bang dieu khien nay — moi noi, moi luc."
+    },
+    "credits": {
+      "runningLow": "Tin chi — Sap het",
+      "remaining": "Tin chi con lai",
+      "buy": "Mua",
+      "creditsLeft": "tin chi con lai",
+      "usedLabel": "Da dung: {count}",
+      "consumed": "{percent}% da dung",
+      "usageThisWeek": "Su dung tuan nay"
+    },
+    "talkToUs": "Lien he chung toi",
+    "talkToUsDesc": "Đặt cuộc gọi 15 phút",
+    "inviteEarn": "Moi & Nhan thuong",
+    "inviteEarnDesc": "Nhận tín dụng miễn phí",
+    "user": "Nguoi dung",
+    "account": "Tai khoan",
+    "tasks": "{count} Tac vu",
+    "recentActivity": "Hoat dong gan day",
+    "viewAllHistory": "Xem tat ca lich su →",
+    "swarmRunsCount": "{count} Lan chay bay",
+    "running": "dang chay",
+    "completed": "hoan thanh",
+    "viewAllSwarms": "Xem tat ca bay →",
+    "schedulesCount": "{count} Lich trinh",
+    "totalRuns": "{count} tong lan chay",
+    "paused": "tam dung",
+    "viewAllSchedules": "Xem tat ca lich trinh →",
+    "credentialsCount": "{count} Thong tin dang nhap",
+    "encryptedVault": "Kho ma hoa",
+    "manageCredentials": "Quan ly thong tin dang nhap →",
+    "days": [
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6",
+      "T7",
+      "CN"
+    ],
+    "resume": "TIEP TUC",
+    "result": "KET QUA",
+    "notScheduled": "Chua len lich",
+    "overdue": "Qua han",
+    "lessThanMin": "< 1 phut",
+    "inMinutes": "trong {count} phut",
+    "inHours": "trong {count} gio",
+    "today": "hom nay",
+    "yesterday": "hom qua"
+  },
+  "appHeader": {
+    "login": "Dang nhap",
+    "assign": "Lên lịch",
+    "assignDescription": "Lên lịch chạy tự động cho tác vụ này",
+    "computer": "May tinh",
+    "showComputer": "Hien thi may tinh",
+    "hideComputer": "An may tinh",
+    "employeeHired": "Da tuyen nhan vien!",
+    "employeeRemoved": "Da go nhan vien"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Tu dong hoa hang ngay nhe"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Tu dong hoa tac vu moi ngay"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Mo rong quy trinh phuc tap",
+        "badge": "Pho bien nhat"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Tu dong hoa nang khong gioi han"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (xoa sau khi khong hoat dong)",
+      "vmAlwaysOn": "{count} VM luon bat",
+      "vmAlwaysOnPlural": "{count} VM luon bat",
+      "agentsParallel": "{count} tac tu song song",
+      "basicSearch": "Tim kiem co ban",
+      "advancedSearch": "Tim kiem nang cao & trich xuat",
+      "standardSupport": "Ho tro tieu chuan (nguoi that)",
+      "prioritySupport": "Ho tro uu tien, phan hoi 24 gio",
+      "premiumSupport": "Ho tro cao cap, phan hoi 12 gio"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Goi nho",
+        "description": "Nap nhanh"
+      },
+      "medium": {
+        "name": "Goi vua",
+        "description": "Nap tieu chuan",
+        "savings": "Tiet kiem 8%"
+      },
+      "large": {
+        "name": "Goi lon",
+        "description": "Mua so luong lon",
+        "savings": "Tiet kiem 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Vua xong",
+      "minutesAgo": "{count} phut truoc",
+      "hoursAgo": "{count} gio truoc",
+      "daysAgo": "{count} ngay truoc"
+    },
+    "noActivity": "Khong co hoat dong trong giai doan nay",
+    "stats": {
+      "balance": "So du",
+      "earned": "Da kiem",
+      "used": "Da dung",
+      "credits": "tin chi",
+      "allTime": "tat ca thoi gian",
+      "lastRange": "{range} gan nhat",
+      "sessions": "{count} phien",
+      "avgDaily": "~{count}/ngay TB",
+      "plan": "Goi",
+      "free": "Mien phi",
+      "noPlan": "Khong co goi",
+      "canceling": "Dang huy"
+    },
+    "monthlyUsage": "Su dung tin chi hang thang",
+    "remaining": "{used} / {total} con lai",
+    "usedPercent": "{percent}% da dung trong ky nay",
+    "renews": "Gia han {date}",
+    "choosePlan": "Chon goi cua ban",
+    "choosePlanDescription": "Dang ky de mo khoa tinh nang AI va nhan tin chi hang thang",
+    "savingsVsHuman": "Tiet kiem {amount}/thang so voi nguoi",
+    "timeSaved": "Tiet kiem {time} moi thang",
+    "cheaper": "Re hon {multiplier}",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/thang",
+    "creditsPerMonth": "{count} tin chi /thang",
+    "processing": "Dang xu ly...",
+    "subscribeTo": "Dang ky {name}",
+    "transactionTypes": {
+      "credit_purchase": "Mua tin chi",
+      "agent_usage": "Su dung tac tu",
+      "refund": "Hoan tien",
+      "bonus": "Thuong bonus",
+      "subscription": "Dang ky",
+      "subscription_grant": "Cap phat dang ky",
+      "renewal": "Tin chi gia han",
+      "reactivation": "Kich hoat lai"
+    },
+    "toasts": {
+      "paymentSuccess": "Thanh toan thanh cong! Tin chi da duoc them.",
+      "subscriptionActivated": "Dang ky da kich hoat thanh cong!",
+      "paymentCanceled": "Thanh toan da bi huy. Khong co khoan phi nao.",
+      "signInToSubscribe": "Vui long dang nhap de dang ky",
+      "subscriptionCheckoutFailed": "Khong the bat dau thanh toan dang ky. Vui long thu lai.",
+      "signInToPurchase": "Vui long dang nhap de mua tin chi",
+      "needSubscription": "Ban can co dang ky hoat dong de mua them tin chi",
+      "checkoutFailed": "Khong the bat dau thanh toan. Vui long thu lai.",
+      "manageFailed": "Khong the mo quan ly dang ky. Vui long thu lai.",
+      "transactionsExported": "Da xuat giao dich"
+    }
+  },
+  "apiKeys": {
+    "title": "Nha cung cap mo hinh",
+    "new": "moi",
+    "description": "Them API key cua ban de mo khoa quyen truy cap mo hinh.",
+    "securityNote": "Key cua ban duoc luu tru an toan voi ma hoa dau cuoi.",
+    "apiKeyLabel": "{provider} API Key",
+    "getApiKey": "Lay API key",
+    "delete": "Xoa",
+    "save": "Luu",
+    "deleteDialog": {
+      "title": "Xoa API Key",
+      "description": "Ban co chac muon xoa {provider} API key? Hanh dong nay khong the hoan tac va ban se mat quyen truy cap cac mo hinh {provider}.",
+      "cancel": "Huy",
+      "confirm": "Xoa"
+    },
+    "toasts": {
+      "saved": "Da luu API key",
+      "savedDescription": "{provider} API key da duoc luu va cac mo hinh da duoc them vao danh sach yeu thich.",
+      "updatedDescription": "{provider} API key da duoc cap nhat.",
+      "saveFailed": "Khong the luu API key",
+      "saveFailedDescription": "Khong the luu {provider} API key. Vui long thu lai.",
+      "deleted": "Da xoa API key",
+      "deletedDescription": "{provider} API key da bi xoa.",
+      "deleteFailed": "Khong the xoa API key",
+      "deleteFailedDescription": "Khong the xoa {provider} API key. Vui long thu lai."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Chi tiet ho so",
+    "displayName": "Ten hien thi",
+    "namePlaceholder": "Ten cua ban",
+    "company": "Cong ty",
+    "companyPlaceholder": "Cong ty cua ban",
+    "website": "Trang web",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Dang luu...",
+    "saveChanges": "Luu thay doi",
+    "account": "Tai khoan",
+    "email": "Email",
+    "verified": "Da xac minh",
+    "signOut": "Dang xuat",
+    "signOutDescription": "Dang xuat khoi thiet bi nay",
+    "toasts": {
+      "profileUpdated": "Da cap nhat ho so",
+      "profileUpdateFailed": "Khong the cap nhat ho so",
+      "signOutFailed": "Khong the dang xuat"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Du lieu cua ban duoc bao ve",
+    "dataProtectedDescription": "Bao mat cap doanh nghiep voi ma hoa khi luu tru va truyen tai",
+    "features": {
+      "encryption": {
+        "title": "Ma hoa dau cuoi",
+        "description": "API key duoc ma hoa bang AES-256-GCM. Thong tin dang nhap cua ban khong bao gio duoc luu duoi dang van ban thuan."
+      },
+      "rls": {
+        "title": "Bao mat cap hang",
+        "description": "Cach ly cap co so du lieu dam bao du lieu chi ban moi truy cap duoc. Khong the truy cap cheo."
+      },
+      "privacy": {
+        "title": "Rieng tu theo thiet ke",
+        "description": "Chung toi thu thap du lieu toi thieu can thiet de cung cap dich vu. Cuoc tro chuyen va tep cua ban thuoc ve ban."
+      },
+      "session": {
+        "title": "Bao mat phien",
+        "description": "Bao ve CSRF, cookie HTTP-only bao mat va tieu de Content Security Policy tren moi yeu cau."
+      }
+    },
+    "legal": "Phap ly",
+    "privacyPolicy": {
+      "title": "Chinh sach quyen rieng tu",
+      "description": "Cach chung toi thu thap, su dung va bao ve du lieu cua ban"
+    },
+    "termsOfService": {
+      "title": "Dieu khoan dich vu",
+      "description": "Dieu khoan va dieu kien su dung cua chung toi"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Bo cuc"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Tom tat",
+      "highlight": "Tom tat"
+    },
+    "code": {
+      "label": "Ma",
+      "highlight": "Xay dung"
+    },
+    "research": {
+      "label": "Nghien cuu",
+      "highlight": "Phan tich"
+    },
+    "create": {
+      "label": "Tao",
+      "highlight": "Tao ra"
+    },
+    "solve": {
+      "label": "Giai",
+      "highlight": "Go loi"
+    },
+    "learn": {
+      "label": "Hoc",
+      "highlight": "Giai thich"
+    }
+  },
+  "loadingMessages": [
+    "Khoi dong bo nao silicon",
+    "Danh thuc y thuc ky thuat so",
+    "Khoi tao cac duong dan than kinh",
+    "Quay cac loi luong tu",
+    "Sac tu dien thong luong",
+    "Kich hoat may chu chinh",
+    "Cap nguon cho ma tran tinh toan",
+    "Bat dong co warp",
+    "Trieu hoi cac linh hon silicon",
+    "Khoi dong dong co electron",
+    "Lam nong cac transistor",
+    "Lap rap cac bit va byte",
+    "Hieu chinh cac synapse ky thuat so",
+    "Nap nang luong cho tinh the CPU",
+    "Tai giao thuc y thuc",
+    "Khoi tao tai nguyen he thong",
+    "Chuan bi moi truong tinh toan",
+    "Thiet lap ket noi bao mat",
+    "Cung cap tai nguyen ao",
+    "Cau hinh tham so he thong",
+    "Khoi chay may ao",
+    "Kich hoat desktop tu xa",
+    "Trien khai tai nguyen dam may",
+    "Bat dau trinh tu khoi dong he thong",
+    "Chuan bi moi truong thuc thi",
+    "Danh thuc may tinh dang ngu",
+    "Choc con gau ky thuat so",
+    "Pha mot tach ca phe tinh toan",
+    "Keo gian cac co ky thuat so",
+    "Mo mat ky thuat so",
+    "Dang khoi dong",
+    "Dang bat nguon",
+    "Dang len mang",
+    "Dang tai he thong",
+    "Dang chuan bi",
+    "Sap xong roi",
+    "Dang chuan bi khong gian lam viec",
+    "Dang tai tai nguyen",
+    "He thong dang troi day"
+  ],
+  "quickStart": {
+    "greetingName": "Xin chào {name}!",
+    "greetingDefault": "Xin chào!",
+    "subtitle": "Các tác vụ của bạn chạy trên một máy tính ảo an toàn, cách ly",
+    "tabs": {
+      "start": "Bắt đầu",
+      "desktop": "Máy tính",
+      "swarms": "Bầy đàn",
+      "schedules": "Lịch trình"
+    },
+    "items": {
+      "computerReady": "Máy tính sẵn sàng",
+      "pickComputer": "Chọn máy tính",
+      "createComputer": "Tạo máy tính",
+      "loginsSaved": "Thông tin đăng nhập đã lưu",
+      "addLogins": "Thêm thông tin đăng nhập",
+      "askAnything": "Hỏi bất cứ điều gì",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Điều khiển từ xa qua điện thoại",
+      "freeDownload": "Tải miễn phí",
+      "onePrompt": "Một lệnh",
+      "manyAgents": "Nhiều tác tử",
+      "combinedResult": "Kết quả tổng hợp",
+      "setCadence": "Đặt lịch định kỳ",
+      "autoRuns": "Chạy tự động",
+      "recurringResults": "Kết quả định kỳ",
+      "computerReadyDesc": "Đã kết nối và sẵn sàng thực thi tác vụ",
+      "pickComputerDesc": "Chọn từ các máy có sẵn của bạn",
+      "createComputerDesc": "Tạo máy tính đám mây trong vài giây",
+      "loginsSavedDesc": "Thông tin đăng nhập đã mã hóa sẵn sàng tự động điền",
+      "addLoginsDesc": "Lưu mật khẩu để tự động truy cập trang web",
+      "askAnythingDesc": "Mô tả tác vụ và xem AI làm việc",
+      "macWindowsDesc": "Ứng dụng gốc cho máy tính của bạn",
+      "mobileRemoteDesc": "Điều khiển agent từ bất kỳ thiết bị nào",
+      "freeDownloadDesc": "Cài đặt nhẹ, chạy trong vài giây",
+      "onePromptDesc": "Mô tả mục tiêu bằng ngôn ngữ đơn giản",
+      "manyAgentsDesc": "Các agent làm việc song song trên nhiều máy",
+      "combinedResultDesc": "Tất cả kết quả gộp thành một báo cáo",
+      "setCadenceDesc": "Hàng giờ, hàng ngày, hàng tuần hoặc cron tùy chỉnh",
+      "autoRunsDesc": "Các agent thực thi mà không cần can thiệp",
+      "recurringResultsDesc": "Báo cáo được gửi theo lịch trình của bạn"
+    },
+    "cta": {
+      "downloadApp": "Tải ứng dụng",
+      "trySwarms": "Thử bầy đàn",
+      "setUp": "Thiết lập"
+    }
+  },
+  "machines": {
+    "title": "Máy tính của tôi",
+    "subtitle": "Quản lý các môi trường máy tính được điều khiển bởi AI",
+    "guide": "Hướng dẫn",
+    "newMachine": "Máy mới",
+    "filters": {
+      "all": "Tất cả",
+      "running": "Đang chạy",
+      "creating": "Đang tạo",
+      "stopped": "Đã dừng"
+    },
+    "desktopPromo": {
+      "text": "Bỏ qua VM — chạy các tác tử AI trên máy tính của bạn với ứng dụng gốc. Điều khiển máy tính từ điện thoại.",
+      "cta": "Tải ứng dụng"
+    },
+    "emptyState": {
+      "title": "Nhân viên AI thực sự với quyền truy cập đầy đủ máy tính",
+      "description": "Khởi động một máy ảo cách ly và để các tác tử AI duyệt web, chạy terminal và điều khiển máy tính — hoàn toàn tự động.",
+      "feature1": {
+        "title": "Toàn quyền điều khiển máy tính",
+        "description": "AI di chuyển chuột, gõ phím, nhấp chuột và điều hướng như người dùng thật."
+      },
+      "feature2": {
+        "title": "Tự động hóa mọi tác vụ",
+        "description": "Trình duyệt, terminal và UI — tất cả tác tử phối hợp trong một VM."
+      },
+      "feature3": {
+        "title": "Cách ly và an toàn",
+        "description": "Mỗi máy chạy trong container riêng — hệ thống cục bộ của bạn không bị ảnh hưởng."
+      },
+      "cta": "Tạo máy đầu tiên"
+    },
+    "noMachines": "Không tìm thấy máy nào.",
+    "noFilteredMachines": "Không có máy {filter}",
+    "noFilteredDescription": "Hiện không có máy nào ở trạng thái {filter}.",
+    "loadingMachines": "Đang tải danh sách máy...",
+    "toasts": {
+      "deleted": "Đã xóa máy thành công",
+      "readyOpen": "Bạn có thể kết nối với máy của mình ngay bây giờ.",
+      "open": "Mở",
+      "createFailed": "Vui lòng thử tạo lại máy.",
+      "fetchFailed": "Không thể tải danh sách máy"
+    }
+  },
+  "createMachine": {
+    "title": "Máy tính mới",
+    "subtitle": "Khởi động máy tính đám mây — sẵn sàng trong ~30 giây",
+    "freeExpiry": "Máy tính miễn phí hết hạn sau ",
+    "freeExpiry2": "2 giờ",
+    "upgrade": "Nâng cấp",
+    "limitReached": "Bạn đã đạt giới hạn số máy tính. Dừng hoặc xóa một máy tính hiện có để tạo máy tính mới.",
+    "upgradeMore": "Nâng cấp để có thêm →",
+    "nameLabel": "Tên máy tính",
+    "namePlaceholder": "Máy chủ đám mây của tôi",
+    "nameError": "Tên máy tính không thể bắt đầu bằng \"local\"",
+    "nameRequired": "Vui lòng nhập tên máy tính",
+    "osLabel": "Hệ điều hành",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Máy tính Ubuntu 22.04"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Máy tính Windows — có thể có lỗi"
+    },
+    "osHintWindows": "Máy tính Windows với Chrome (beta). Sẵn sàng trong ~2 phút.",
+    "osHintLinux": "Máy tính Ubuntu, truy cập qua trình duyệt. Sẵn sàng trong ~30 giây.",
+    "stateLabel": "Trạng thái máy tính",
+    "restorePrevious": "Khôi phục trước đó",
+    "restoreDescription": "Tiếp tục từ ảnh chụp cuối cùng",
+    "startFresh": "Bắt đầu mới",
+    "startFreshDescription": "Môi trường máy tính sạch",
+    "cancel": "Hủy",
+    "creating": "Đang tạo...",
+    "create": "Tạo máy tính",
+    "toasts": {
+      "restoringSnapshot": "Đang khôi phục máy tính từ ảnh chụp!",
+      "restoringDescription": "Trạng thái máy tính trước đó đang được khôi phục. Sẵn sàng trong ~30 giây.",
+      "windowsCreated": "Đã bắt đầu tạo máy tính Windows!",
+      "windowsDescription": "Máy tính Windows của bạn đang khởi động. Sẵn sàng trong ~2 phút.",
+      "linuxCreated": "Máy tính của bạn đang khởi động. Sẵn sàng trong ~30 giây.",
+      "sshCreated": "Máy tính đám mây của bạn đang khởi động. Khóa SSH sẽ khả dụng khi máy tính sẵn sàng."
+    }
+  },
+  "secrets": {
+    "title": "Thông tin đăng nhập đã lưu",
+    "subtitle": "Được lưu trữ an toàn và sử dụng tự động bởi tác tử AI khi đăng nhập",
+    "guide": "Hướng dẫn",
+    "import": "Nhập",
+    "addCredential": "Thêm thông tin đăng nhập",
+    "securityNote": "Thông tin đăng nhập không bao giờ được gửi đến mô hình AI và không bao giờ hiển thị trong cuộc trò chuyện — tác tử điền trực tiếp mà không nhìn thấy giá trị",
+    "username": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "hide": "Ẩn",
+    "revealFor10s": "Hiện trong 10s",
+    "encrypted": "Đã mã hóa",
+    "emptyState": {
+      "title": "Đăng nhập tự động, không cần thao tác",
+      "description": "Lưu thông tin đăng nhập một lần — tác tử AI đăng nhập tự động và tiếp tục mà không làm gián đoạn bạn",
+      "feature1": {
+        "title": "Không gián đoạn",
+        "description": "Tác tử gặp biểu mẫu đăng nhập, điền vào và tiếp tục tác vụ — không có câu hỏi, không có tạm dừng"
+      },
+      "feature2": {
+        "title": "AI không bao giờ nhìn thấy",
+        "description": "Thông tin đăng nhập của bạn được đưa vào trực tiếp. Mô hình AI không bao giờ nhìn thấy giá trị thực"
+      },
+      "feature3": {
+        "title": "Bất kỳ trang web nào",
+        "description": "Hoạt động với biểu mẫu đăng nhập trên mọi trang web — email, công cụ SaaS, bảng điều khiển, mọi thứ"
+      },
+      "cta": "Thêm thông tin đăng nhập đầu tiên"
+    },
+    "deleteDialog": {
+      "title": "Xóa thông tin đăng nhập?",
+      "description": "{name} ({service}) sẽ bị xóa vĩnh viễn. Tác tử AI sẽ không thể sử dụng nó nữa.",
+      "cancel": "Hủy",
+      "delete": "Xóa"
+    },
+    "toasts": {
+      "loadFailed": "Không thể tải thông tin đăng nhập",
+      "revealFailed": "Không thể hiển thị mật khẩu",
+      "deleted": "Đã xóa thông tin đăng nhập",
+      "deleteFailed": "Không thể xóa thông tin đăng nhập"
+    },
+    "loading": "Đang tải thông tin đăng nhập..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Gia don gian,",
+      "title2": "tu dong hoa that su",
+      "subtitle": "Bat dau mien phi. Nang cap khi ban can nhieu suc manh hon."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Thu agent su dung may tinh so 1",
+        "cta": "Bat dau mien phi"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Tu dong hoa nhe hang ngay",
+        "cta": "Chon Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Tu dong hoa cong viec moi ngay",
+        "cta": "Chon Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Mo rong quy trinh phuc tap",
+        "cta": "Chon Plus",
+        "badge": "Pho bien nhat"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Tu dong hoa nang khong gioi han",
+        "cta": "Chon Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Trinh duyet, may tinh ban va terminal day du",
+        "badge": "Cot loi"
+      },
+      "swarmMode": {
+        "name": "Che do bay",
+        "sequential": "Chi tuan tu",
+        "parallel": "{count} agent song song",
+        "badge": "Manh me"
+      },
+      "security": {
+        "name": "Bao mat",
+        "description": "Sandbox, ma hoa E2E",
+        "badge": "Moi goi"
+      },
+      "monthlyCredits": {
+        "name": "Tin dung hang thang",
+        "payAsYouGo": "Tra theo su dung",
+        "creditsPerMonth": "{count} tin dung/thang"
+      },
+      "persistentMachines": {
+        "name": "May luu tru",
+        "temporary": "1 VM tam thoi (2 gio)",
+        "deletedAfterInactivity": "1 VM (xoa sau khi khong hoat dong)",
+        "alwaysOn": "{count} VM luon bat",
+        "alwaysOnPlural": "{count} VM luon bat"
+      },
+      "webSearch": {
+        "name": "Tim kiem web",
+        "advanced": "Tim kiem va trich xuat nang cao",
+        "basic": "Tim kiem co ban"
+      }
+    },
+    "animations": {
+      "agentDescription": "Agent cua ban dieu khien may tinh that — trinh duyet, tap tin va terminal",
+      "fillForm": "Dien bieu mau",
+      "searchExtract": "Tim va trich xuat",
+      "uploadReport": "Tai len bao cao",
+      "navigateSite": "Duyet trang web",
+      "creditsPerMonth": "tin dung moi thang",
+      "cr": "td",
+      "vm": "VM {num}",
+      "twoHrLimit": "Gioi han 2 gio",
+      "alwaysOn": "Luon bat",
+      "tempVmDescription": "VM tam thoi — dat lai sau 2 gio",
+      "persistentVmDescription": "Tap tin, ung dung va phien cua ban duoc giu giua cac tac vu",
+      "sequentialOnly": "Chi thuc thi tuan tu tren goi nay",
+      "yourTask": "Tac vu cua ban",
+      "agentsWorking": "{count} agent lam viec dong thoi",
+      "upgradeForExtraction": "Nang cap de trich xuat day du",
+      "searchDescription": "Tim kiem, thu thap va trich xuat du lieu co cau truc",
+      "basicSearchIncluded": "Bao gom tim kiem co ban",
+      "e2eEncryption": "Ma hoa E2E",
+      "sandboxedVm": "VM Sandbox",
+      "destroyedAfterUse": "Huy sau khi su dung",
+      "everyPlan": "Moi goi. Khong ngoai le."
+    },
+    "perMonth": "/thang",
+    "faqs": {
+      "credits": {
+        "q": "Gi duoc tinh la mot tin dung?",
+        "a": "Mot tin dung tuong duong voi khoang mot hanh dong cua agent — mot cu nhap chuot, dien bieu mau, truy van tim kiem hoac thao tac tap tin. Mot tac vu nhieu buoc thong thuong su dung 5-15 tin dung."
+      },
+      "persistent": {
+        "q": "'May luu tru' nghia la gi?",
+        "a": "Tren cac goi tra phi, VM cua ban tiep tuc chay giua cac tac vu — may tinh ban, tap tin, phien trinh duyet va phan mem da cai dat deu duoc giu lai. Giong nhu may tinh dam may luon bat cua rieng ban."
+      },
+      "swarm": {
+        "q": "Che do bay la gi?",
+        "a": "Che do bay chia mot tac vu cho nhieu may chay dong thoi. Thay vi mot agent thuc hien 10 tim kiem tuan tu, nhieu agent thuc hien chung song song."
+      },
+      "cancel": {
+        "q": "Toi co the huy bat cu luc nao khong?",
+        "a": "Co. Khong hop dong, khong phi huy. Huy tu trang tai khoan va giu quyen truy cap den cuoi ky thanh toan."
+      },
+      "security": {
+        "q": "Du lieu cua toi co an toan khong?",
+        "a": "Moi tac vu chay trong VM cach ly hoan toan va bi huy sau khi su dung. Tat ca ket noi duoc ma hoa dau cuoi va chung toi khong bao gio luu thong tin dang nhap cua ban."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Tin dung tuy chinh, VM rieng, SLA, SSO va ho tro uu tien.",
+      "cta": "Lien he chung toi"
+    },
+    "footer": {
+      "title": "Agent AI cua ban chi cach 60 giay",
+      "subtitle": "Dang ky va de Coasty xu ly cong viec.",
+      "noCreditCard": "Khong can the tin dung",
+      "cancelAnytime": "Huy bat cu luc nao",
+      "noCreditCardRequired": "Khong yeu cau the tin dung",
+      "cancelAnytimeNoContracts": "Huy bat cu luc nao — khong hop dong"
+    },
+    "questions": "Cau hoi"
+  },
+  "guide": {
+    "pageTitle": "Huong dan",
+    "pageSubtitle": "Tu thiet lap ban dau den tinh nang nang cao — tim hieu cach tan dung toi da Coasty",
+    "completeGuide": "Huong dan day du",
+    "completeGuideSubtitle": "Tat ca nhung gi ban can biet ve Coasty",
+    "completeGuideDescription": "Tu thiet lap ban dau den tinh nang nang cao — tim hieu cach tan dung toi da agent AI cua ban.",
+    "talkToCofounders": "Noi chuyen voi nha sang lap",
+    "tabs": {
+      "overview": "Tong quan",
+      "gettingStarted": "Bat dau",
+      "chatTasks": "Chat va tac vu",
+      "machines": "May",
+      "credentials": "Thong tin dang nhap",
+      "swarmMode": "Che do bay",
+      "workforce": "Lịch trình",
+      "desktopApp": "Ung dung may tinh",
+      "billing": "Thanh toan va tin dung"
+    },
+    "overview": {
+      "howItWorks": "Cach hoat dong",
+      "step1": "Mo ta tac vu",
+      "step2": "Coasty len ke hoach cac buoc",
+      "step3": "Thuc thi tu dong",
+      "step": "Buoc",
+      "whatCanDo": "Coasty co the lam gi",
+      "taskCount": "Hon 40 tac vu trong 10 danh muc",
+      "categories": {
+        "sales": {
+          "name": "Ban hang",
+          "desc": "Tim 50 khach hang tiem nang, gui email ca nhan hoa"
+        },
+        "marketing": {
+          "name": "Tiep thi",
+          "desc": "Dang bai blog, len lich mang xa hoi"
+        },
+        "jobApps": {
+          "name": "Ung tuyen",
+          "desc": "Nop 20 don, tuy chinh tung CV"
+        },
+        "email": {
+          "name": "Email",
+          "desc": "Soan tra loi, tiep can hang loat, huy dang ky"
+        },
+        "dataEntry": {
+          "name": "Nhap lieu",
+          "desc": "Chuyen du lieu giua ung dung, tao bang tinh"
+        },
+        "research": {
+          "name": "Nghien cuu",
+          "desc": "Bao cao chuyen sau, theo doi doi thu"
+        },
+        "qaTesting": {
+          "name": "Kiem thu QA",
+          "desc": "Kiem tra dang ky, kiem tra bieu mau, kiem tra suc khoe trang"
+        },
+        "hr": {
+          "name": "Nhan su",
+          "desc": "Tim ung vien, tiep can ca nhan hoa"
+        },
+        "support": {
+          "name": "Ho tro",
+          "desc": "Soan phan hoi, cap nhat tai lieu tro giup"
+        },
+        "productivity": {
+          "name": "Nang suat",
+          "desc": "Dat chuyen di, thanh toan hoa don, quan ly lich"
+        }
+      },
+      "whyCoasty": "Tai sao chon Coasty",
+      "notChatbot": "Khong phai chatbot. Khong phai script RPA.",
+      "worksLikeHuman": {
+        "title": "Lam viec nhu con nguoi",
+        "desc": "Nhin, nhap, go, di chuyen — chinh xac nhu ban"
+      },
+      "noScripts": {
+        "title": "Khong can script hay thiet lap",
+        "desc": "Nhap van ban thuong, nhan ket qua"
+      },
+      "handlesUnexpected": {
+        "title": "Xu ly tinh huong bat ngo",
+        "desc": "Thich ung voi CAPTCHA, popup, thay doi bo cuc"
+      },
+      "runsInIsolation": {
+        "title": "Chay cach ly",
+        "desc": "VM sandbox moi phien — khong ro ri gi"
+      },
+      "ctaTitle": "Chon bat ky tac vu nao va thu",
+      "ctaSubtitle": "San sang dua Coasty vao lam viec?",
+      "ctaDescription": "Mo ta bat ky tac vu nao tu huong dan nay va xem Coasty xu ly.",
+      "ctaNote": "Bat dau mien phi. Khong can the tin dung.",
+      "startTask": "Bat dau tac vu",
+      "startFree": "Bat dau mien phi",
+      "desktopApp": "Ung dung may tinh"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Dang ky",
+          "desc": "Mot cu nhap chuot de bat dau"
+        },
+        "createMachine": {
+          "title": "Tao may",
+          "desc": "Agent cua ban co may tinh rieng"
+        },
+        "saveCredentials": {
+          "title": "Luu thong tin dang nhap",
+          "desc": "Dang nhap ma hoa cho bat ky trang nao"
+        },
+        "giveTask": {
+          "title": "Giao tac vu",
+          "desc": "Mo ta no. Xem no dien ra."
+        }
+      },
+      "examplePrompts": [
+        "Ung tuyen 10 cong viec phu hop tren LinkedIn voi CV cua toi",
+        "Nghien cuu gia doi thu va tao bang so sanh",
+        "Viet va dang bai blog ve [chu de] tren WordPress",
+        "Huy dang ky tat ca email tiep thi trong Gmail",
+        "Kiem tra luong dang ky tren trang web cua toi va bao cao loi",
+        "Tim 50 khach hang tiem nang phu hop [ICP] tren LinkedIn va them vao CRM"
+      ],
+      "quickPrompts": "Lenh nhanh de thu",
+      "startFirstTask": "Bat dau tac vu dau tien"
+    },
+    "chatTasks": {
+      "commandCenter": "Trung tam chi huy cua ban",
+      "describeTask": "Mo ta bat ky tac vu nao. Xem no dien ra.",
+      "examplePrompt": "Tim 5 ban phim khong day tot nhat duoi $50 tren Amazon va so sanh chung trong bang tinh.",
+      "exampleResponse": "Toi se tim tren Amazon va tao bang so sanh. Dang mo trinh duyet.",
+      "exampleDone": "Xong. Bang tinh da luu voi gia, xep hang va tinh nang cua 5 ban phim.",
+      "describePlaceholder": "Mo ta tac vu cua ban...",
+      "threeAgents": "Ba agent chuyen biet",
+      "autoAssigned": "Tu dong gan theo tung buoc.",
+      "browser": "Trinh duyet",
+      "browserDesc": "Duyet, nhap, dien bieu mau, thu thap",
+      "terminal": "Terminal",
+      "terminalDesc": "Chay lenh, cai dat, xu ly tap tin",
+      "desktop": "May tinh ban",
+      "desktopDesc": "Nhap, go, cuon, mo ung dung",
+      "betterPrompts": "Viet lenh tot hon",
+      "specificBeatsVague": "Cu the luon thang mo ho.",
+      "do": "Nen lam",
+      "dont": "Khong nen",
+      "doExample1": "Ung tuyen 10 cong viec ky su phan mem tren LinkedIn. Tuy chinh thu xin viec de nhac den cong nghe cua ho.",
+      "dontExample1": "Ung tuyen viec lam",
+      "doExample2": "Tim tren Google Flights SFO den JFK, 20-25 thang 3, khu hoi. Chup man hinh 3 chuyen re nhat.",
+      "dontExample2": "Tim chuyen bay",
+      "readyToTry": "San sang thu?",
+      "openChat": "Mo chat va mo ta nhung gi ban can lam.",
+      "startChat": "Bat dau chat"
+    },
+    "machinesTab": {
+      "title": "May cua ban",
+      "subtitle": "May tinh ban Ubuntu day du ban co the khoi dong trong vai giay.",
+      "lifecycle": "Vong doi",
+      "lifecycleDesc": "Nam trang thai, hoan toan tu dong.",
+      "planLimits": "Gioi han goi",
+      "planCol": "Goi",
+      "machinesCol": "May",
+      "swarmAgentsCol": "Agent bay",
+      "temp": "1 tam thoi",
+      "states": {
+        "creating": "Dang tao",
+        "starting": "Dang khoi dong",
+        "running": "Dang chay",
+        "stopping": "Dang dung",
+        "stopped": "Da dung"
+      },
+      "newMachine": "+ Moi",
+      "researchVm": "VM nghien cuu",
+      "emailVm": "VM email",
+      "testingVm": "VM kiem thu",
+      "cores": "{count} loi",
+      "gb": "{count} GB",
+      "stop": "Dung",
+      "start": "Khoi dong",
+      "provisioning": "Dang chuan bi...",
+      "spinUp": "Khoi dong may",
+      "goToMachines": "Di den May"
+    },
+    "credentialsTab": {
+      "loginDetected": "Phat hien dang nhap",
+      "matched": "Khop",
+      "credentialFound": "Tim thay thong tin dang nhap",
+      "autoFilled": "Tu dong dien",
+      "autoFillTitle": "Tu dong dien dang hoat dong",
+      "autoFillDesc": "Phat hien dang nhap, khop thong tin, dien bieu mau. Tu dong.",
+      "security": "Bao mat",
+      "encrypted": "Ma hoa",
+      "aes256": "AES-256 khi luu tru",
+      "vmIsolated": "Cach ly VM",
+      "sandboxed": "Sandbox moi phien",
+      "neverLogged": "Khong bao gio ghi nhan",
+      "zeroTrace": "Khong de lai dau vet trong nhat ky",
+      "savedCredentials": "Thong tin dang nhap da luu",
+      "addOnce": "Them mot lan, tu dong dien moi noi.",
+      "saveFirst": "Luu thong tin dang nhap dau tien",
+      "goToCredentials": "Di den thong tin dang nhap da luu"
+    },
+    "swarmTab": {
+      "title": "Che do bay",
+      "runParallel": "Chay {count} may song song",
+      "sameTask": "Cung tac vu, {multiplier}x ket qua, cung thoi gian.",
+      "done": "Xong",
+      "running": "Dang chay",
+      "pending": "Cho xu ly",
+      "result": "KET QUA",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Nghien cuu song song",
+          "desc": "{count} doi thu, {count} may, dong thoi"
+        },
+        "bulkApplications": {
+          "title": "Ung tuyen hang loat",
+          "desc": "Nop don tren nhieu nen tang cung luc"
+        },
+        "multiCitySearch": {
+          "title": "Tim kiem nhieu thanh pho",
+          "desc": "Tim danh sach tai {count} thanh pho cung luc"
+        },
+        "parallelOutreach": {
+          "title": "Tiep can song song",
+          "desc": "Email ca nhan hoa den cac phan khuc khac nhau"
+        },
+        "crossPlatform": {
+          "title": "Da nen tang",
+          "desc": "Dang len {count} nen tang dong thoi"
+        },
+        "distributedTesting": {
+          "title": "Kiem thu phan tan",
+          "desc": "Kiem tra nhieu kich ban song song"
+        }
+      },
+      "whatToSwarm": "Nen chay bay gi",
+      "availability": "Kha dung",
+      "freeNotAvailable": "Khong kha dung",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 agent",
+      "startSwarm": "Bat dau bay"
+    },
+    "workforceTab": {
+      "title": "Luc luong lao dong",
+      "subtitle": "Cong ty AI cua ban, chay tu dong",
+      "description": "Nhan vien, doi nhom, kich hoat — chay 24/7.",
+      "myCompany": "Cong ty cua toi",
+      "contentOps": "Content Ops",
+      "support": "Ho tro",
+      "writer": "Bien tap",
+      "seo": "SEO",
+      "social": "Mang xa hoi",
+      "inbox": "Hop thu",
+      "docs": "Tai lieu",
+      "concepts": "Khai niem cot loi",
+      "conceptItems": {
+        "employees": {
+          "title": "Nhan vien",
+          "desc": "Agent AI chay tac vu theo lich, 24/7"
+        },
+        "teams": {
+          "title": "Doi nhom",
+          "desc": "Nhom nhan vien voi huong dan chung"
+        },
+        "sharedMemory": {
+          "title": "Bo nho chung",
+          "desc": "Kho key-value ma nhan vien doc va ghi"
+        },
+        "triggers": {
+          "title": "Kich hoat",
+          "desc": "Noi chuoi nhan vien: mot nguoi xong, nguoi tiep theo bat dau"
+        },
+        "delegates": {
+          "title": "Uy quyen",
+          "desc": "Nhan vien giao tac vu phu cho chuyen gia"
+        },
+        "orgChart": {
+          "title": "So do to chuc",
+          "desc": "Ban do truc quan cau truc cong ty cua ban"
+        }
+      },
+      "chainTitle": "Noi chuoi nhan vien voi nhau",
+      "chainDesc": "Ket qua tu dong chuyen tu nguoi nay sang nguoi tiep theo.",
+      "scout": "Scout",
+      "scoutDesc": "nghien cuu doi thu",
+      "atlas": "Atlas",
+      "atlasDesc": "viet bai blog",
+      "nova": "Nova",
+      "novaDesc": "dang len mang xa hoi",
+      "done": "Xong",
+      "onComplete": "on_complete",
+      "waiting": "Dang cho",
+      "templates": "Bat dau tu mau",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Ho tro khach hang",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Tiep thi",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "Thuong mai dien tu",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} nhan vien",
+      "openWorkforce": "Mo luc luong lao dong"
+    },
+    "billingTab": {
+      "credits": "Tin dung",
+      "timeMetric": "Thoi gian la chi so duy nhat.",
+      "rate": "Muc",
+      "rateValue": "10",
+      "creditsPerMin": "tin dung/phut",
+      "metered": "do moi 30 giay",
+      "example": "Vi du",
+      "minTask": "phut tac vu",
+      "startCredits": "Bat dau: {count} tin dung",
+      "endCredits": "Ket thuc: {count} tin dung",
+      "creditsUsed": "{count} tin dung da dung",
+      "calculation": "{mins} phut x 10 tin dung/phut",
+      "plans": "Cac goi",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 tam thoi",
+          "feature": "Tim kiem co ban"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 luon bat",
+          "feature": "2 agent song song"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 luon bat",
+          "feature": "Tim kiem nang cao"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 luon bat",
+          "feature": "Ho tro uu tien"
+        },
+        "pro": {
+          "credits": "1.500",
+          "machines": "3 luon bat",
+          "feature": "Bao dam SLA"
+        }
+      },
+      "perMonth": "{price}/thang",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Tin dung duoc tinh nhu the nao?",
+          "a": "10 tin dung moi phut agent hoat dong, lam tron len. Kiem tra moi 30 giay trong phien."
+        },
+        "runOut": {
+          "q": "Dieu gi xay ra khi het tin dung?",
+          "a": "Ban can it nhat 20 tin dung de bat dau tac vu. Khi ve 0, tac vu tam dung — mua goi bo sung de tiep tuc."
+        },
+        "rollOver": {
+          "q": "Tin dung chua dung co chuyen sang ky tiep khong?",
+          "a": "Tin dung dat lai moi ky thanh toan. Dung hoac mat."
+        }
+      },
+      "goToBilling": "Di den Thanh toan"
+    },
+    "desktopAppTab": {
+      "overlay": "Lop phu",
+      "overlayDesc": "Luon o do. Nhap de mo rong.",
+      "compact": "Thu gon",
+      "expanded": "Mo rong",
+      "ready": "San sang",
+      "exampleTask": "Cap nhat CV cua toi",
+      "exampleResponse": "Dang mo resume.docx...",
+      "describePlaceholder": "Mo ta tac vu cua ban...",
+      "whatItControls": "No dieu khien gi",
+      "controls": {
+        "browser": {
+          "name": "Trinh duyet",
+          "desc": "Duyet, nhap, dien bieu mau"
+        },
+        "files": {
+          "name": "Tap tin",
+          "desc": "Doc, ghi, chinh sua o bat ky dau"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Chay bat ky lenh shell nao"
+        },
+        "desktop": {
+          "name": "May tinh ban",
+          "desc": "Nhap, go, cuon"
+        },
+        "screenshots": {
+          "name": "Chup man hinh",
+          "desc": "Thay nhung gi ban thay"
+        },
+        "apps": {
+          "name": "Ung dung",
+          "desc": "Dieu khien bat ky ung dung da cai"
+        }
+      },
+      "twoWays": "Hai cach chay",
+      "cloudVm": "VM dam may",
+      "cloudFeatures": {
+        "isolated": "Sandbox cach ly hoan toan",
+        "freshBrowser": "Trinh duyet moi, khong lich su",
+        "maxSecurity": "Bao mat toi da"
+      },
+      "desktopMode": "May tinh ban",
+      "desktopFeatures": {
+        "yourFiles": "Tap tin cua ban, truy cap truc tiep",
+        "yourApps": "Ung dung da cai cua ban",
+        "yourSessions": "Phien dang nhap cua ban"
+      },
+      "downloadCta": "Download Desktop App"
+    }
+  },
+  "comparePage": {
+    "title": "So sanh",
+    "heroTitle": "Coasty va doi thu canh tranh",
+    "heroDescription": "Xem AI agent su dung may tinh so 1 (82% OSWorld) so sanh voi cac lua chon thay the nhu the nao. Phan tich tinh nang chi tiet voi du lieu thuc.",
+    "categories": {
+      "aiAgent": "AI Agent",
+      "infrastructure": "Ha tang",
+      "rpa": "RPA",
+      "human": "Con nguoi"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "San sang thu AI agent su dung may tinh so 1?",
+    "ctaButton": "Dung thu Coasty mien phi",
+    "noCreditCard": "Khong can the tin dung",
+    "allComparisons": "Tat ca so sanh",
+    "featureComparison": "So sanh tinh nang",
+    "whyChooseCoasty": "Tai sao chon Coasty?",
+    "strengthsOf": "Diem manh cua {name}",
+    "ctaDescription": "82% OSWorld benchmark. Cach ly VM. Giai CAPTCHA. Tu $20/thang.",
+    "watchCaseStudies": "Xem nghien cuu tinh huong"
+  },
+  "agentSwarms": {
+    "badge": "Che do bay tac tu",
+    "heroTitle1": "Mot lenh.",
+    "heroTitle2": "Vo han may.",
+    "heroTitle3": "Ket qua song song.",
+    "heroDescription": "Chia bat ky tac vu nao cho nhieu moi truong cach ly chay dong thoi. Cong viec mat mot gio se hoan thanh trong vai phut.",
+    "trySwarmMode": "Thu che do bay",
+    "seeInAction": "Xem hoat dong",
+    "liveExecution": "swarm-tree — thuc thi truc tiep",
+    "machineCount": "{count} may",
+    "running": "dang chay",
+    "threeSteps": "Ba buoc de thuc thi song song",
+    "steps": {
+      "typePrompt": {
+        "title": "Nhap lenh cua ban",
+        "desc": "Mo ta tac vu. Bat che do bay va chon so luong may."
+      },
+      "machinesSpinUp": {
+        "title": "Cac may khoi dong",
+        "desc": "Moi may nhan mot moi truong cach ly day du — trinh duyet, terminal, man hinh."
+      },
+      "resultsStream": {
+        "title": "Ket qua truyen truc tiep",
+        "desc": "Theo doi moi may theo thoi gian thuc qua che do xem cay bay."
+      }
+    },
+    "demoTitle": "Demo bay tac tu",
+    "demoDescription": "Xem {count} may dong thoi xu ly tac vu nghien cuu CRM",
+    "prompt": "Lenh",
+    "swarm": "BAY",
+    "run": "Chay",
+    "reset": "Dat lai",
+    "allCompleted": "Tat ca {count} may da hoan thanh",
+    "speedComparison": "~{swarmTime} phut thay vi ~{seqTime} phut — nhanh hon {multiplier}x",
+    "seqVsSwarm": "Tuan tu vs Bay",
+    "tableHeaders": {
+      "task": "Tac vu",
+      "before": "Truoc",
+      "swarm": "Bay",
+      "speed": "Toc do"
+    },
+    "speedExamples": {
+      "crmResearch": "Nghien cuu 5 cong cu CRM",
+      "qaPages": "QA tren 8 trang",
+      "leadEnrichment": "Lam giau lead (100)",
+      "priceMonitoring": "Theo doi gia"
+    },
+    "builtForParallel": "Xay dung cho cong viec song song",
+    "useCases": {
+      "marketResearch": {
+        "title": "Nghien cuu thi truong quy mo lon",
+        "desc": "Nghien cuu nhieu doi thu, thi truong hoac san pham dong thoi tren cac may cach ly."
+      },
+      "leadGeneration": {
+        "title": "Tao lead",
+        "desc": "Lam giau ho so, tim email va xac minh su hien dien tren mang xa hoi — hang gio cong viec trong vai phut."
+      },
+      "qaTesting": {
+        "title": "QA & Kiem thu hoi quy",
+        "desc": "Chay cac kich ban kiem thu tren nhieu trang hoac luong song song."
+      },
+      "contentSocial": {
+        "title": "Noi dung & Mang xa hoi",
+        "desc": "Dang bai len nhieu nen tang dong thoi voi cach ly tung may."
+      },
+      "dataExtraction": {
+        "title": "Trich xuat du lieu",
+        "desc": "Thu thap va cau truc du lieu tu hang chuc nguon cung luc."
+      },
+      "scheduledRuns": {
+        "title": "Chay theo lich",
+        "desc": "Ket hop che do bay voi lap lich cho cac tac vu song song dinh ky."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Cach ly hoan toan",
+        "desc": "Moi may co trinh duyet, terminal va man hinh rieng."
+      },
+      "tripleMachineLimit": {
+        "title": "Gap 3 gioi han may",
+        "desc": "Che do bay tang gap ba dung luong may cua goi cua ban."
+      },
+      "liveTreeView": {
+        "title": "Xem cay truc tiep",
+        "desc": "Anh chup man hinh va loi goi cong cu truyen truc tiep."
+      },
+      "autoAggregation": {
+        "title": "Tu dong tong hop",
+        "desc": "Ket qua duoc ket hop thanh mot bao cao tong hop duy nhat."
+      },
+      "shareableRuns": {
+        "title": "Chia se lan chay",
+        "desc": "Phat lai toan bo dong thoi gian thuc thi qua lien ket."
+      },
+      "fullySandboxed": {
+        "title": "Sandbox hoan toan",
+        "desc": "Tat ca moi truong bi huy sau khi hoan thanh."
+      }
+    },
+    "readyCta": "San sang chay tac vu song song?",
+    "includedWithPaid": "Che do bay di kem voi moi goi tra phi.",
+    "getStarted": "Bat dau",
+    "viewPricing": "Xem gia",
+    "legend": {
+      "messages": "Tin nhan",
+      "broadcast": "Phat song",
+      "sharedMemory": "Bo nho dung chung",
+      "help": "Tro giup"
+    },
+    "liveSwarmExecution": "Thuc thi bay truc tiep voi giao tiep giua cac tac tu",
+    "popular": "Pho bien",
+    "avgRating": "{rating} tb"
+  },
+  "downloadPage": {
+    "title": "Ung dung may tinh",
+    "heroTitle": "De Coasty dieu khien may tinh cua ban",
+    "heroDescription": "Tro ly AI cam lai. Tu dong hoa trinh duyet, man hinh va terminal — hoac dieu khien may tinh tu bat cu dau qua giao dien web.",
+    "seeInAction": "Xem hoat dong",
+    "overlayDescription": "Mot lop phu nhe noi tren man hinh cua ban. Dieu khien tai cho hoac tu xa qua bat ky trinh duyet nao — may tinh cua ban, cach cua ban.",
+    "recommended": "Khuyen dung cho he thong cua ban",
+    "coastyFor": "Coasty cho {platform}",
+    "installerLabel": "Trinh cai dat {extension}",
+    "beforeInstall": "Truoc khi cai dat",
+    "beforeInstallDescription": "Coasty Desktop la ung dung moi nen he dieu hanh cua ban se chua nhan ra no. Day la dieu hoan toan binh thuong voi cac ung dung moi phat hanh — cach thuc hien nhu sau:",
+    "windowsSteps": {
+      "step1": "Windows da bao ve PC cua ban",
+      "step2": "Xem them thong tin",
+      "step3": "Van chay"
+    },
+    "macSteps": {
+      "step1": "Khong the mo Coasty Desktop",
+      "step2": "Cai dat he thong > Quyen rieng tu & Bao mat",
+      "step3": "Van mo"
+    },
+    "allPlatforms": "Tat ca nen tang",
+    "systemRequirements": {
+      "title": "Yeu cau he thong",
+      "win1": "Windows 10 tro len",
+      "win2": "64-bit (x86_64)",
+      "win3": "Toi thieu 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) tro len",
+      "mac2": "Apple Silicon hoac Intel",
+      "mac3": "Toi thieu 4 GB RAM"
+    },
+    "whatsIncluded": "Bao gom nhung gi",
+    "features": {
+      "browser": "Tu dong hoa trinh duyet",
+      "desktop": "Tu dong hoa man hinh",
+      "terminal": "Truy cap terminal",
+      "files": "Thao tac tep",
+      "updates": "Tu dong cap nhat",
+      "remote": "Dieu khien tu bat cu dau"
+    },
+    "browserCta": "Mo Coasty trong trinh duyet",
+    "browserCtaDescription": "Muon dieu khien may tinh tu bat cu dau?",
+    "loading": "Dang tai...",
+    "downloadFor": "Tai xuong cho {platform}",
+    "download": "Tai xuong",
+    "unavailable": "Khong kha dung"
+  },
+  "referralPage": {
+    "shareTitle": "Chia se Coasty.",
+    "earnTitle": "Cung kiem.",
+    "shareDescription": "Tang ban be 50 tin chi mien phi de trien khai AI agent dau tien. Ban cung nhan 50 tin chi — moi khi ai do tham gia.",
+    "features": [
+      "AI thuc su hoat dong — trinh duyet that, nhap chuot that, ket qua that",
+      "Cach ly & an toan — moi agent chay trong VM sandbox rieng",
+      "Chay khi ban ngu — len lich tac vu va de agent xu ly phan con lai"
+    ],
+    "recentActivity": "Hoat dong gan day cua ban",
+    "friendsCould": "Ban be cua ban cung co the lam dieu nay",
+    "giveGet": "Tang ban be 50 tin chi. Nhan 50 cho ban. Moi lan.",
+    "stats": {
+      "invited": "Da moi",
+      "earned": "Da kiem",
+      "perInvite": "Moi loi moi"
+    },
+    "tabs": {
+      "invite": "Moi ban be",
+      "feedback": "Gui phan hoi"
+    },
+    "referralLink": "Lien ket gioi thieu cua ban",
+    "howItWorks": "Cach hoat dong",
+    "howSteps": [
+      "Chia se lien ket voi mot nguoi ban",
+      "Ho dang ky va nhan 50 tin chi mien phi",
+      "Ban lap tuc kiem 50 tin chi"
+    ],
+    "shareDirectly": "Chia se truc tiep",
+    "yourReferrals": "Gioi thieu cua ban",
+    "invitedYou": "Da moi ban",
+    "joinedViaLink": "Da tham gia qua lien ket cua ban",
+    "noReferrals": "Chua co gioi thieu nao",
+    "noReferralsHint": "Chia se lien ket o tren va ca hai deu kiem 50 tin chi",
+    "feedbackThanks": "Cam on phan hoi cua ban!",
+    "feedbackWeRead": "Chung toi doc moi tin nhan.",
+    "sendAnother": "Gui tin nhan khac",
+    "feedbackTitle": "Cho chung toi biet suy nghi cua ban",
+    "feedbackSubtitle": "Bao loi, y tuong tinh nang hoac chi la chao hoi",
+    "feedbackPlaceholder": "Ban dang nghi gi?",
+    "weReadEvery": "Chung toi doc moi tin nhan",
+    "send": "Gui",
+    "shareMessage": "Nay, minh dang dung Coasty va no kha hay. Day la AI co the su dung may tinh cho ban. Luot web, click, go phim, moi thu. Thu qua link cua minh va ca hai deu nhan tin chi mien phi!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Xem cong cu AI nay",
+    "emailBody": "AI nay co the su dung may tinh cho ban. Luot web, click, go phim, moi thu."
+  },
+  "statusPage": {
+    "title": "Trang thai he thong",
+    "brandTitle": "Trang thai Coasty",
+    "subtitle": "Trang thai van hanh thoi gian thuc cua tat ca dich vu Coasty. Trang nay tu dong lam moi moi 60 giay.",
+    "refresh": "Lam moi",
+    "statuses": {
+      "operational": "Hoat dong",
+      "degraded": "Suy giam",
+      "outage": "Ngung hoat dong"
+    },
+    "overallStatuses": {
+      "allOperational": "Tat ca he thong hoat dong",
+      "someDegraded": "Mot so he thong suy giam",
+      "disruption": "Phat hien gian doan dich vu"
+    },
+    "overallDescriptions": {
+      "allOperational": "Tat ca dich vu dang chay tron tru, khong phat hien su co nao.",
+      "someDegraded": "Mot so dich vu dang chay cham. Chung toi dang dieu tra.",
+      "disruption": "Chung toi biet ve su co va dang tich cuc khac phuc."
+    },
+    "responseTime": "{ms}ms thoi gian phan hoi",
+    "uptimeLabel": "Thoi gian hoat dong 90 ngay",
+    "daysAgo": "90 ngay truoc",
+    "today": "Hom nay",
+    "overallUptime": "Thoi gian hoat dong tong the 90 ngay",
+    "overallUptimeDesc": "Kha dung tong hop tren tat ca dich vu",
+    "services": "Dich vu",
+    "clickUptime": "nhan de xem thoi gian hoat dong",
+    "lastChecked": "Kiem tra lan cuoi {time} · Tu dong lam moi moi 60 giay",
+    "experiencingIssues": "Gap su co?",
+    "issuesDescription": "Neu co gi khong on, hay lien he truc tiep voi chung toi.",
+    "talkToCofounders": "Noi chuyen voi dong sang lap",
+    "emailUs": "Gui email",
+    "serviceNames": {
+      "website": "Website",
+      "aiBackend": "AI Backend",
+      "database": "Co so du lieu",
+      "authentication": "Xac thuc",
+      "aiModels": "Mo hinh AI",
+      "fileStorage": "Luu tru tep"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - Trợ lý AI sử dụng máy tính số 1 | Nhân viên AI cho tự động hóa máy tính và trình duyệt",
+      "titleTemplate": "{title} | Coasty - Trợ lý AI sử dụng máy tính",
+      "description": "Coasty là trợ lý AI sử dụng máy tính xếp hạng số 1 — 82% trên OSWorld benchmark. Điều khiển toàn bộ máy tính như con người: mở trình duyệt, nhấp chuột, gõ phím, điền biểu mẫu, gửi email, quản lý bảng tính. Cách ly VM cho mỗi phiên. Bắt đầu từ $20/mo.",
+      "ogTitle": "Coasty - Trợ lý AI sử dụng máy tính số 1 | 82% OSWorld Benchmark",
+      "ogDescription": "Nhân viên AI điều khiển máy tính như con người. Số 1 trên OSWorld benchmark (82%). Tự động hóa trình duyệt, điều khiển máy tính, giải CAPTCHA, cách ly VM. Bắt đầu từ $20/mo.",
+      "twitterDescription": "Nhân viên AI điều khiển máy tính như con người. Mở trình duyệt, nhấp chuột, gõ phím, điền biểu mẫu, gửi email. Cách ly VM thực sự. $20/mo so với $3,000/mo trợ lý ảo."
+    },
+    "compare": {
+      "title": "So sánh Coasty - Các giải pháp thay thế trợ lý AI và so sánh đối thủ",
+      "description": "Xem trợ lý AI sử dụng máy tính số 1 của Coasty so sánh thế nào với Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath và các đối thủ khác. So sánh tính năng chi tiết kèm giá.",
+      "ogTitle": "So sánh Coasty với các giải pháp thay thế trợ lý AI",
+      "ogDescription": "So sánh tính năng chi tiết của trợ lý AI sử dụng máy tính số 1 với đối thủ. Điểm benchmark, giá cả, khả năng."
+    },
+    "download": {
+      "title": "Tải Coasty Desktop — Trợ lý AI cho Mac và Windows",
+      "description": "Tải Coasty Desktop, trợ lý AI sử dụng máy tính số 1 điều khiển máy tính của bạn. Tự động hóa trình duyệt, điều khiển máy tính, truy cập terminal và quản lý tệp. Có sẵn cho Windows và macOS.",
+      "ogTitle": "Tải Coasty Desktop — Trợ lý AI cho Mac và Windows",
+      "ogDescription": "AI điều khiển máy tính của bạn như con người. Tự động hóa trình duyệt, máy tính và terminal trong một ứng dụng. Số 1 trên OSWorld benchmark."
+    },
+    "guide": {
+      "title": "Coasty có thể làm gì? — Hướng dẫn đầy đủ về tự động hóa máy tính bằng AI",
+      "description": "Khám phá mọi thứ Coasty có thể tự động hóa: tìm kiếm khách hàng, gửi email, xin việc, kiểm thử QA, nhập dữ liệu, mạng xã hội, tuyển dụng, nghiên cứu và hơn 100 tác vụ khác.",
+      "ogTitle": "Coasty có thể làm gì? — Hướng dẫn tự động hóa AI đầy đủ",
+      "ogDescription": "Khám phá hơn 100 tác vụ Coasty có thể tự động hóa. Từ bán hàng đến kiểm thử QA, xem chính xác cách trợ lý AI máy tính xử lý công việc thực tế."
+    },
+    "blog": {
+      "title": "Blog - Thông tin chuyên sâu về trợ lý AI, nghiên cứu sử dụng máy tính và nghiên cứu tình huống",
+      "description": "Phân tích sâu về trợ lý AI tự động, công nghệ sử dụng máy tính, nghiên cứu tình huống tự động hóa thực tế và tương lai của nhân viên AI. Từ đội ngũ đứng sau trợ lý sử dụng máy tính số 1.",
+      "ogTitle": "Blog Coasty - Thông tin chuyên sâu về trợ lý AI và nghiên cứu tình huống",
+      "ogDescription": "Phân tích sâu về trợ lý AI tự động, công nghệ sử dụng máy tính và nghiên cứu tình huống tự động hóa thực tế từ trợ lý sử dụng máy tính số 1."
+    },
+    "results": {
+      "title": "Demo và kết quả — Xem trợ lý AI Coasty làm việc tự động",
+      "description": "Xem Coasty tự động chạy chiến dịch marketing, nộp đơn xin việc, điền đơn, kiểm thử QA, gửi email cá nhân hóa và nhiều hơn nữa. Nghiên cứu tình huống thực với video demo.",
+      "ogTitle": "Demo — Xem trợ lý AI Coasty làm việc tự động",
+      "ogDescription": "Demo thực tế AI điều khiển máy tính: marketing, xin việc, kiểm thử QA, gửi email và nhiều hơn nữa. Số 1 trên OSWorld benchmark."
+    },
+    "terms": {
+      "title": "Điều khoản dịch vụ",
+      "description": "Điều khoản dịch vụ của Coasty. Đọc các điều khoản chi phối việc sử dụng nền tảng nhân viên AI Coasty, trợ lý sử dụng máy tính và ứng dụng máy tính.",
+      "ogTitle": "Coasty — Điều khoản dịch vụ",
+      "ogDescription": "Điều khoản dịch vụ của Coasty. Đọc các điều khoản chi phối việc sử dụng nền tảng nhân viên AI Coasty, trợ lý sử dụng máy tính và ứng dụng máy tính."
+    },
+    "privacy": {
+      "title": "Chính sách bảo mật",
+      "description": "Chính sách bảo mật của Coasty. Tìm hiểu cách chúng tôi bảo vệ dữ liệu của bạn với cách ly VM, phiên được mã hóa, môi trường thực thi sandbox và bảo mật cấp doanh nghiệp.",
+      "ogTitle": "Coasty — Chính sách bảo mật",
+      "ogDescription": "Chính sách bảo mật của Coasty. Tìm hiểu cách chúng tôi bảo vệ dữ liệu của bạn với cách ly VM, phiên được mã hóa, môi trường thực thi sandbox và bảo mật cấp doanh nghiệp."
+    },
+    "useCases": {
+      "title": "Trường hợp sử dụng - Trợ lý AI Coasty cho vận hành doanh nghiệp",
+      "description": "Khám phá 12 cách trợ lý AI của Coasty tự động hóa hoạt động của bạn — nghiên cứu đối thủ, kiểm thử QA, tạo khách hàng tiềm năng, gửi email và nhiều hơn nữa. Kết quả thực.",
+      "ogTitle": "Trường hợp sử dụng - Trợ lý AI Coasty",
+      "ogDescription": "12 cách tăng sản lượng gấp 10 lần trên chế độ tự động. Kết quả thực, số liệu thực."
+    },
+    "computerUse": {
+      "title": "Trợ lý AI sử dụng máy tính — Tự động hóa máy tính, trình duyệt và terminal số 1",
+      "description": "Coasty là trợ lý AI sử dụng máy tính tốt nhất, xếp hạng số 1 trên OSWorld (82%). Tự động hóa mọi tác vụ máy tính, trình duyệt hoặc terminal với AI tự động điều khiển máy tính như con người.",
+      "ogTitle": "Coasty — Trợ lý AI sử dụng máy tính số 1",
+      "ogDescription": "Trợ lý sử dụng máy tính tốt nhất xếp hạng số 1 trên OSWorld. Tự động hóa mọi tác vụ máy tính, trình duyệt hoặc terminal bằng AI."
+    },
+    "pricing": {
+      "title": "Bảng giá — Gói và giá trợ lý AI Coasty",
+      "description": "Gói giá Coasty bắt đầu từ $20/mo. Thay thế trợ lý ảo $3,000/mo bằng nhân viên AI. Có gói miễn phí. Sử dụng theo tín dụng, không phí ẩn.",
+      "ogTitle": "Bảng giá Coasty — Gói trợ lý AI",
+      "ogDescription": "Nhân viên AI bắt đầu từ $20/mo. Thay thế VA đắt đỏ bằng AI tự động. Có gói miễn phí."
+    },
+    "faq": {
+      "q1": "Coasty là gì?",
+      "a1": "Coasty là nền tảng nhân viên AI — trợ lý sử dụng máy tính điều khiển máy tính như con người. Nó mở trình duyệt, nhấp chuột, gõ phím, điều hướng ứng dụng, điền biểu mẫu, gửi email và quản lý bảng tính tự động. Xếp hạng số 1 trên OSWorld benchmark với tỷ lệ hoàn thành 82% trên 369 tác vụ thực tế.",
+      "q2": "Coasty so với Anthropic Computer Use như thế nào?",
+      "a2": "Trong khi Anthropic Computer Use cung cấp API thô để điều khiển máy tính, Coasty là nền tảng sẵn sàng sản xuất với hạ tầng VM được quản lý, giải CAPTCHA tích hợp, ứng dụng máy tính cho Mac và Windows, hỗ trợ nhiều mô hình và điểm OSWorld benchmark cao nhất (82%). Coasty cung cấp giải pháp hoàn chỉnh — không chỉ API.",
+      "q3": "Coasty giá bao nhiêu?",
+      "a3": "Coasty bắt đầu từ $20/month cho gói Starter với gói miễn phí có sẵn. So với $3,000+ mỗi tháng cho trợ lý ảo. Coasty hoạt động 24/7 không nghỉ, không cần đào tạo và mở rộng ngay lập tức.",
+      "q4": "Coasty có an toàn không?",
+      "a4": "Có. Mọi phiên Coasty chạy trong VM cách ly, sandbox riêng. Dữ liệu của bạn an toàn, máy của bạn không bị ảnh hưởng và không có gì rò rỉ giữa các phiên. Đây là cách ly VM thực sự, không chỉ container trong pool chung.",
+      "q5": "OSWorld benchmark là gì?",
+      "a5": "OSWorld là benchmark đánh giá trợ lý AI trên các tác vụ máy tính thực tế. Nó kiểm tra 369 tác vụ trên trình duyệt, ứng dụng văn phòng và hoạt động hệ thống. Coasty đạt 82%, cao nhất trong mọi trợ lý sử dụng máy tính — hiệu suất tiên tiến nhất.",
+      "q6": "Coasty khác gì so với công cụ RPA như UiPath?",
+      "a6": "Các công cụ RPA truyền thống như UiPath yêu cầu viết script dễ hỏng và bị lỗi khi giao diện thay đổi. Coasty sử dụng AI vision để hiểu và tương tác với mọi giao diện, thích ứng theo thời gian thực mà không cần script định sẵn. Nó hoạt động như con người, không phải macro. Thiết lập chỉ mất vài phút thay vì vài tuần.",
+      "q7": "Coasty có ứng dụng máy tính không?",
+      "a7": "Có. Coasty Desktop có sẵn cho cả Mac và Windows. Nó chạy như lớp phủ nổi trên máy tính và có thể điều khiển trực tiếp trình duyệt, tệp, terminal và ứng dụng — không cần VM cho tác vụ cục bộ.",
+      "q8": "Coasty có thể tự động hóa những gì?",
+      "a8": "Coasty có thể tự động hóa hầu như mọi tác vụ máy tính: duyệt web, điền biểu mẫu, gửi email, quản lý bảng tính, nhập dữ liệu, đăng mạng xã hội, xin việc, tìm kiếm khách hàng, kiểm thử QA, hỗ trợ khách hàng, tuyển dụng LinkedIn và nhiều hơn nữa. Nếu con người có thể làm trên máy tính, Coasty cũng làm được.",
+      "q9": "Coasty so với OpenAI Operator như thế nào?",
+      "a9": "Coasty vượt trội hơn OpenAI Operator trên OSWorld benchmark (82% so với ~40%), cung cấp cách ly VM thực sự cho mỗi phiên, hỗ trợ nhiều mô hình AI, điều khiển máy tính đầy đủ không chỉ trình duyệt và là framework mã nguồn mở.",
+      "q10": "Coasty có giải được CAPTCHA không?",
+      "a10": "Có. Coasty có hệ thống giải CAPTCHA tích hợp, nên không bị chặn như các trợ lý AI cạnh tranh. Điều này rất quan trọng cho tự động hóa thực tế khi CAPTCHA phổ biến trên các trang web."
+    },
+    "structuredData": {
+      "appDescription": "Trợ lý AI sử dụng máy tính xếp hạng số 1. Coasty điều khiển toàn bộ máy tính như con người — mở trình duyệt, nhấp chuột, gõ phím, điền biểu mẫu, gửi email và quản lý bảng tính tự động. 82% trên OSWorld benchmark. Cách ly VM thực sự. Giải CAPTCHA tích hợp. Bắt đầu từ $20/month.",
+      "orgDescription": "Coasty xây dựng trợ lý AI sử dụng máy tính số 1. Nền tảng của chúng tôi cung cấp điều khiển máy tính tự động, tự động hóa trình duyệt và điều phối đa trợ lý với cách ly VM thực sự.",
+      "productDescription": "Trợ lý AI sử dụng máy tính điều khiển máy tính như con người. Số 1 trên OSWorld benchmark (82%). Tự động hóa trình duyệt, điều khiển máy tính, gửi email, điền biểu mẫu và quản lý bảng tính với cách ly VM thực sự.",
+      "websiteDescription": "Nền tảng trợ lý AI sử dụng máy tính số 1. 82% OSWorld benchmark. Tự động hóa trình duyệt, máy tính và terminal với cách ly VM. Bắt đầu từ $20/mo.",
+      "softwareDescription": "Trợ lý AI sử dụng máy tính điều khiển toàn bộ máy tính như con người. Số 1 trên OSWorld benchmark với tỷ lệ hoàn thành 82% trên 369 tác vụ thực tế. Tự động hóa trình duyệt, điều khiển máy tính, thao tác terminal, gửi email, điền biểu mẫu và quản lý bảng tính.",
+      "breadcrumbs": {
+        "home": "Trang chủ",
+        "caseStudies": "Nghiên cứu tình huống trợ lý AI",
+        "blog": "Blog",
+        "download": "Tải ứng dụng máy tính",
+        "compare": "So sánh trợ lý AI"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 — Khong tim thay trang",
+      "description": "Xin loi, trang nay khong ton tai."
+    },
+    "error": {
+      "title": "Da xay ra loi",
+      "description": "Da xay ra loi khong mong muon. Vui long thu lai.",
+      "tryAgain": "Thu lai"
+    }
+  },
+  "schedulesPage": {
+    "title": "Lực lượng lao động",
+    "subtitle": "Lực lượng lao động AI của bạn — giao nhiệm vụ và để họ xử lý phần còn lại",
+    "guide": "Hướng dẫn",
+    "teamsTab": "Nhóm",
+    "hireEmployee": "Tuyển nhân viên",
+    "loading": "Đang tải nhân viên của bạn...",
+    "onDuty": "{count} đang trực",
+    "standby": "{count} chờ sẵn",
+    "company": "Công ty",
+    "teams": "{count} nhóm",
+    "employees": "{count} nhân viên",
+    "members": "{count} thành viên",
+    "unassigned": "Chưa phân công",
+    "add": "Thêm",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "run": "Chạy",
+    "delegate": "ủy quyền",
+    "untitledEmployee": "Nhân viên chưa đặt tên",
+    "untitled": "Chưa đặt tên",
+    "guidelinesPlaceholder": "Hướng dẫn...",
+    "today": "Hôm nay",
+    "timesDaily": "{count} × mỗi ngày",
+    "noEmployeesDay": "Không có nhân viên vào ngày này",
+    "noEmployeesScheduled": "Không có nhân viên được lên lịch",
+    "recentActivity": "Hoạt động gần đây",
+    "schedule": "Lịch trình",
+    "emptyState": {
+      "openChat": "Mở bất kỳ cuộc trò chuyện nào và nhấp",
+      "assignEmployee": "Phân công nhân viên",
+      "onThe": "ở",
+      "topRight": "góc trên bên phải",
+      "toPutOnAutopilot": "để bật chế độ tự động",
+      "newChat": "Cuộc trò chuyện mới"
+    },
+    "emptyWorkforce": {
+      "title": "Tuyển nhân viên đầu tiên của bạn",
+      "description": "Nhân viên AI làm việc thay bạn — giao nhiệm vụ, đặt lịch trình, và họ sẽ thực hiện tự động",
+      "flexibleShifts": {
+        "title": "Ca làm việc linh hoạt",
+        "desc": "Lên lịch nhân viên theo giờ, ngày, tuần, tháng — hoặc sử dụng cron expression tùy chỉnh"
+      },
+      "fullAutonomy": {
+        "title": "Tự chủ hoàn toàn",
+        "desc": "Mỗi nhân viên có quyền truy cập đầy đủ vào trình duyệt, terminal và các máy trạm được kết nối của bạn"
+      },
+      "activityLogs": {
+        "title": "Nhật ký hoạt động",
+        "desc": "Mọi lần thực thi đều được ghi lại để bạn có thể xem xét những gì nhân viên đã hoàn thành"
+      },
+      "startFromChat": "Bắt đầu từ cuộc trò chuyện"
+    },
+    "filters": {
+      "all": "Tất cả",
+      "onDuty": "Đang trực",
+      "standby": "Chờ sẵn"
+    },
+    "noMatch": "Không có nhân viên nào phù hợp với bộ lọc này",
+    "createTeam": {
+      "title": "Nhóm mới",
+      "subtitle": "Bắt đầu với mẫu hoặc xây dựng từ đầu",
+      "backToTemplates": "Quay lại mẫu",
+      "customTeam": "Nhóm tùy chỉnh",
+      "customDescription": "Tạo nhóm với cấu hình của riêng bạn.",
+      "teamNameLabel": "Tên nhóm",
+      "teamNamePlaceholder": "ví dụ Research, Marketing, Engineering",
+      "guidelinesLabel": "Hướng dẫn",
+      "optional": "(tùy chọn)",
+      "guidelinesPlaceholder": "Hướng dẫn chung mà tất cả thành viên nhóm sẽ tuân theo...",
+      "suggestedEmployees": "Nhân viên được đề xuất",
+      "suggestedCredentials": "Thông tin xác thực được đề xuất",
+      "added": "Đã thêm",
+      "addButton": "+ Thêm",
+      "credentials": "Thông tin xác thực",
+      "addCredential": "+ Thêm thông tin xác thực",
+      "credentialHint": "Thông tin xác thực được mã hóa. Chúng sẽ được đưa vào hướng dẫn nhóm để nhân viên biết những gì có sẵn.",
+      "settingUp": "Đang thiết lập...",
+      "createEmployees": "Tạo {count} nhân viên",
+      "createTeamButton": "Tạo nhóm"
+    },
+    "noTeams": {
+      "title": "Chưa có nhóm nào",
+      "description": "Nhóm cho phép nhân viên chia sẻ ngữ cảnh và bộ nhớ. Tạo một nhóm để xây dựng sơ đồ tổ chức của bạn.",
+      "newTeam": "Nhóm mới"
+    },
+    "howItWorks": {
+      "title": "Cách hoạt động",
+      "dragEmployees": "Kéo nhân viên vào nhóm",
+      "clickToEdit": "Nhấp để chỉnh sửa lịch trình và cài đặt",
+      "teamsShare": "Các nhóm chia sẻ bộ nhớ và hướng dẫn",
+      "dashedLines": "Đường nét đứt — ủy quyền giữa các nhân viên"
+    },
+    "inactive": {
+      "title": "{count} nhân viên không hoạt động",
+      "missingMachine": "{count} thiếu máy — sẽ không chạy cho đến khi được kích hoạt",
+      "wontRun": "Sẽ không chạy cho đến khi được kích hoạt",
+      "fixInEmployees": "Sửa trong Nhân viên"
+    },
+    "dragHint": "Kéo nhân viên chưa phân công vào nhóm để thêm họ",
+    "limits": {
+      "upgradePlan": "Nâng cấp gói",
+      "manageMachines": "Quản lý máy",
+      "manageEmployees": "Quản lý nhân viên",
+      "machineLimit": "Bạn cần một máy đám mây nhưng đã đạt giới hạn {max} máy. Nâng cấp gói hoặc xóa một máy không sử dụng.",
+      "employeeLimit": "Bạn đã đạt giới hạn nhân viên ({max} cho gói {tier}). Nâng cấp gói hoặc xóa nhân viên không sử dụng.",
+      "templateLimit": "Mẫu này cần {needed} nhân viên nhưng bạn chỉ còn {available} chỗ trống (tối đa {max} cho gói {tier}). Nâng cấp gói hoặc xóa nhân viên không sử dụng.",
+      "createFailed": "Không thể tạo nhân viên nào. Kiểm tra giới hạn tài khoản và thử lại.",
+      "teamFailed": "Không thể tạo nhóm"
+    },
+    "provisioning": {
+      "checking": "Đang kiểm tra giới hạn tài khoản...",
+      "usingMachine": "Đang sử dụng máy \"{name}\"...",
+      "assigningMachine": "Đang phân công cho máy \"{name}\" (sẽ chạy khi máy sẵn sàng)...",
+      "creatingMachine": "Đang tạo máy mới...",
+      "machineStarted": "Đã bắt đầu chuẩn bị máy...",
+      "hiring": "Đang tuyển {name} ({current}/{total})...",
+      "creatingTeam": "Đang tạo nhóm..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Đã tạo nhóm với {count} nhân viên ({failedCount} thất bại: {names})",
+      "teamCreated": "Đã tạo nhóm {name} với {count} nhân viên"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "Vận hành nội dung",
+        "tagline": "Xuất bản đều đặn mà không cần động tay",
+        "description": "Một cỗ máy nội dung tinh gọn — viết, tối ưu hóa và phân phối nội dung tự động.",
+        "roles": {
+          "atlas": "Người viết nội dung — soạn bài blog, bản tin và nội dung mạng xã hội",
+          "echo": "Nhà phân tích SEO — kiểm tra trang, theo dõi thứ hạng, đề xuất cơ hội từ khóa",
+          "nova": "Người phân phối mạng xã hội — đăng nội dung lên nền tảng và theo dõi tương tác"
+        },
+        "credentials": {
+          "wordpress": "Xuất bản và quản lý bài blog",
+          "twitter": "Đăng tweet và theo dõi tương tác",
+          "linkedin": "Xuất bản nội dung và bài viết chuyên nghiệp",
+          "searchConsole": "Theo dõi hiệu suất tìm kiếm và lập chỉ mục"
+        }
+      },
+      "customerSupport": {
+        "name": "Hỗ trợ khách hàng",
+        "tagline": "Hỗ trợ 24/7 từ 3 nhân viên",
+        "description": "Giám sát hộp thư, giải quyết vấn đề phổ biến và cập nhật cơ sở kiến thức.",
+        "roles": {
+          "sage": "Giám sát hộp thư — kiểm tra email hỗ trợ, phân loại và trả lời các câu hỏi phổ biến",
+          "iris": "Quản lý cơ sở kiến thức — cập nhật tài liệu trợ giúp và FAQ dựa trên vấn đề lặp lại",
+          "milo": "Nhà phân tích phản hồi — tổng hợp đánh giá và xu hướng hỗ trợ thành báo cáo hàng tuần"
+        },
+        "credentials": {
+          "gmail": "Giám sát và trả lời email hỗ trợ",
+          "zendesk": "Quản lý phiếu hỗ trợ (hoặc hệ thống của bạn)",
+          "notion": "Cập nhật cơ sở kiến thức và tài liệu"
+        }
+      },
+      "researchIntel": {
+        "name": "Nghiên cứu & Thông tin",
+        "tagline": "Luôn cập nhật mà không cần làm thủ công",
+        "description": "Giám sát đối thủ, theo dõi xu hướng ngành và biên soạn các bản tóm tắt nghiên cứu có thể hành động.",
+        "roles": {
+          "scout": "Giám sát đối thủ — theo dõi trang web, giá cả và thay đổi tính năng của đối thủ",
+          "wren": "Nhà nghiên cứu xu hướng — quét tin tức ngành, ấn phẩm và mạng xã hội để tìm xu hướng",
+          "quinn": "Người biên soạn tóm tắt — tổng hợp phát hiện thành báo cáo thông tin hàng tuần có cấu trúc"
+        },
+        "credentials": {
+          "google": "Nghiên cứu web và tìm kiếm",
+          "linkedin": "Theo dõi tuyển dụng và thông báo của đối thủ",
+          "notion": "Xuất bản tóm tắt và báo cáo nghiên cứu"
+        }
+      },
+      "marketing": {
+        "name": "Phòng Marketing",
+        "tagline": "Một đội marketing hoàn chỉnh trong hai máy",
+        "description": "Tạo nội dung, mạng xã hội, SEO, theo dõi đối thủ và phân tích chiến dịch — hai đội phối hợp.",
+        "roles": {
+          "atlas": "Chiến lược gia nội dung — lên kế hoạch lịch nội dung, viết bài dài",
+          "nova": "Quản lý mạng xã hội — đăng bài, tương tác và phát triển kênh mạng xã hội",
+          "echo": "Chuyên gia SEO — tối ưu hóa trang, xây dựng liên kết nội bộ, theo dõi từ khóa",
+          "pixel": "Quản lý chiến dịch email — viết và gửi bản tin, theo dõi tỷ lệ mở/nhấp",
+          "scout": "Nhà phân tích đối thủ — giám sát các bước marketing của đối thủ và báo cáo thông tin chi tiết",
+          "dash": "Giám sát chiến dịch quảng cáo — theo dõi chi tiêu quảng cáo, ROAS và cơ hội tối ưu",
+          "iris": "Người báo cáo phân tích — biên soạn bảng điều khiển hiệu suất đa kênh"
+        },
+        "credentials": {
+          "wordpress": "Xuất bản nội dung blog",
+          "twitter": "Quản lý mạng xã hội",
+          "linkedin": "Phân phối nội dung chuyên nghiệp",
+          "mailchimp": "Chiến dịch email và bản tin",
+          "analytics": "Phân tích lưu lượng và chuyển đổi",
+          "googleAds": "Quản lý chiến dịch Google Ads",
+          "metaAds": "Meta Ads và quản lý mạng xã hội"
+        }
+      },
+      "ecommerce": {
+        "name": "Vận hành thương mại điện tử",
+        "tagline": "Vận hành cửa hàng khi bạn ngủ",
+        "description": "Quản lý sản phẩm, thông tin giá cả, theo dõi tồn kho, quản lý đánh giá và marketing tăng trưởng cho cửa hàng trực tuyến.",
+        "roles": {
+          "cleo": "Người đăng sản phẩm — tạo và cập nhật mô tả sản phẩm, hình ảnh và metadata",
+          "onyx": "Giám sát giá — theo dõi giá đối thủ và báo cơ hội điều chỉnh",
+          "luna": "Theo dõi tồn kho — giám sát mức tồn kho và cảnh báo khi hàng sắp hết",
+          "sage": "Quản lý đánh giá — trả lời đánh giá khách hàng và tổng hợp cảm xúc",
+          "dash": "Tối ưu chiến dịch quảng cáo — quản lý quảng cáo sản phẩm và chiến dịch mua sắm",
+          "flux": "Tiếp thị email — gửi email giỏ hàng bỏ quên, khuyến mãi và sau mua hàng",
+          "wren": "Người báo cáo phân tích — theo dõi doanh thu, tỷ lệ chuyển đổi và chỉ số tăng trưởng"
+        },
+        "credentials": {
+          "shopify": "Quản lý cửa hàng và danh sách sản phẩm",
+          "amazon": "Quản lý sàn thương mại Amazon",
+          "googleAds": "Quảng cáo mua sắm và chiến dịch",
+          "mailchimp": "Chuỗi email khách hàng",
+          "analytics": "Phân tích chuyển đổi và lưu lượng"
+        }
+      },
+      "engineering": {
+        "name": "Đội kỹ thuật",
+        "tagline": "Tự động hóa các phần nhàm chán của kỹ thuật",
+        "description": "Đánh giá mã tự động, giám sát dependency, tài liệu, kiểm thử, giám sát triển khai và phản ứng sự cố.",
+        "roles": {
+          "rune": "Người đánh giá mã — đánh giá các PR đang mở, đề xuất cải tiến, kiểm tra vấn đề bảo mật",
+          "koda": "Giám sát dependency — theo dõi gói lỗi thời, cảnh báo bảo mật và thay đổi gây lỗi",
+          "aria": "Người viết tài liệu — cập nhật tài liệu API, README và changelog theo mã mới nhất",
+          "blaze": "Giám sát kiểm thử — chạy bộ kiểm thử, theo dõi test không ổn định, báo cáo xu hướng bao phủ",
+          "frost": "Giám sát triển khai — theo dõi pipeline CI/CD, cảnh báo lỗi, theo dõi tần suất triển khai",
+          "neon": "Giám sát Uptime & Log — giám sát dịch vụ, quét log tìm lỗi, tạo báo cáo sự cố"
+        },
+        "credentials": {
+          "github": "Truy cập repository, đánh giá PR, issues",
+          "vercel": "Giám sát triển khai (hoặc CI/CD của bạn)",
+          "sentry": "Theo dõi lỗi và cảnh báo sự cố",
+          "npm": "Đăng ký gói để kiểm tra dependency"
+        }
+      },
+      "fullBusiness": {
+        "name": "Vận hành doanh nghiệp toàn diện",
+        "tagline": "Toàn bộ công ty, hoàn toàn tự động",
+        "description": "Bán hàng, marketing, hỗ trợ và quản trị — bốn phòng ban phối hợp trên ba máy với thông tin chia sẻ.",
+        "roles": {
+          "atlas": "Tạo khách hàng tiềm năng — tìm và đánh giá khách hàng tiềm năng từ nguồn trực tuyến",
+          "dash": "Quản lý CRM — cập nhật giao dịch, theo dõi pipeline và gửi chuỗi theo dõi",
+          "scout": "Người viết đề xuất — soạn đề xuất bán hàng và bài thuyết trình từ mẫu",
+          "nova": "Tiếp thị nội dung — viết bài blog, nghiên cứu tình huống và nội dung marketing",
+          "echo": "Quản lý mạng xã hội — đăng nội dung và tương tác với khán giả",
+          "pixel": "Quản lý chiến dịch email — chạy chiến dịch drip và chuỗi bản tin",
+          "sage": "Trưởng nhóm hỗ trợ — xử lý thắc mắc khách hàng và giải quyết vấn đề",
+          "iris": "Quản lý kiến thức — duy trì tài liệu trợ giúp, FAQ và wiki nội bộ",
+          "milo": "Nhà phân tích dữ liệu — biên soạn báo cáo liên phòng ban và bảng KPI",
+          "wren": "Nhà nghiên cứu thị trường — theo dõi xu hướng ngành và thông tin đối thủ",
+          "quinn": "Điều phối viên vận hành — tóm tắt hàng tuần và đồng bộ liên nhóm"
+        },
+        "credentials": {
+          "gmail": "Giao tiếp email và hỗ trợ",
+          "hubspot": "CRM và pipeline bán hàng (hoặc CRM của bạn)",
+          "linkedin": "Tạo khách hàng tiềm năng và mạng lưới chuyên nghiệp",
+          "mailchimp": "Chiến dịch tiếp thị email",
+          "notion": "Wiki nội bộ và tài liệu",
+          "analytics": "Phân tích web và báo cáo",
+          "twitter": "Hiện diện trên mạng xã hội",
+          "zendesk": "Phiếu hỗ trợ khách hàng"
+        }
+      },
+      "growth": {
+        "name": "Tăng trưởng & Thu hút",
+        "tagline": "Tăng trưởng mạnh mẽ hoàn toàn tự động",
+        "description": "Tìm kiếm khách hàng, marketing đầu vào, tối ưu chuyển đổi và phân tích — động cơ tăng trưởng chuyên dụng trên ba máy.",
+        "roles": {
+          "blaze": "Tìm kiếm khách hàng — tìm người ra quyết định, nghiên cứu công ty, xây dựng danh sách khách hàng tiềm năng",
+          "flux": "Tiếp cận email — gửi cold email cá nhân hóa, quản lý chuỗi theo dõi",
+          "orion": "Tiếp cận LinkedIn — kết nối với khách hàng tiềm năng và gửi tin nhắn cá nhân hóa",
+          "coral": "Người tạo nội dung — sản xuất nội dung SEO, bản sao landing page và lead magnet",
+          "taro": "Tối ưu Landing Page — giám sát tỷ lệ chuyển đổi, đề xuất và thử nghiệm cải tiến",
+          "vale": "Quản lý chiến dịch quảng cáo — quản lý chiến dịch Google và Meta ads toàn diện",
+          "ember": "Chấm điểm khách hàng tiềm năng — đánh giá lead đầu vào và chuyển đến theo dõi phù hợp",
+          "haze": "Nhà phân tích phễu — theo dõi chỉ số chuyển đổi ở mọi giai đoạn, xác định điểm nghẽn",
+          "dune": "Thông tin đối thủ — giám sát chiến dịch, giá cả và định vị của đối thủ",
+          "kit": "Người báo cáo tăng trưởng — biên soạn chỉ số tăng trưởng và kết quả thử nghiệm hàng ngày/tuần"
+        },
+        "credentials": {
+          "linkedin": "Tìm kiếm khách hàng và tiếp cận",
+          "gmail": "Cold email và chuỗi theo dõi",
+          "hubspot": "Quản lý khách hàng tiềm năng và CRM",
+          "googleAds": "Chiến dịch tìm kiếm trả phí",
+          "metaAds": "Quảng cáo Meta",
+          "analytics": "Phân tích phễu và chuyển đổi",
+          "ahrefs": "Nghiên cứu SEO và phân tích đối thủ"
+        }
+      },
+      "saas": {
+        "name": "Vận hành SaaS",
+        "tagline": "Vận hành SaaS của bạn như cỗ máy được bôi trơn tốt",
+        "description": "Thành công khách hàng, phân tích sản phẩm, ngăn ngừa rời bỏ, theo dõi tính năng và báo cáo tự động cho doanh nghiệp SaaS.",
+        "roles": {
+          "luna": "Giám sát thành công khách hàng — theo dõi sự tương tác của người dùng, xác định tài khoản có rủi ro",
+          "sage": "Trợ lý onboarding — hướng dẫn người dùng mới qua thiết lập, giám sát tỷ lệ kích hoạt",
+          "ivy": "Ngăn ngừa rời bỏ — liên hệ người dùng giảm tương tác với chiến dịch tái kích hoạt",
+          "rune": "Theo dõi yêu cầu tính năng — tổng hợp phản hồi và yêu cầu tính năng từ tất cả kênh",
+          "koda": "Phân tích sản phẩm — theo dõi sự chấp nhận tính năng, hành trình người dùng và chỉ số tương tác",
+          "neon": "Giám sát lỗi & sự cố — theo dõi log lỗi, báo cáo người dùng và sự cố trang trạng thái",
+          "aria": "Người viết Changelog — ghi nhận các bản phát hành, cập nhật cơ sở kiến thức và trung tâm trợ giúp",
+          "frost": "Nhà phân tích doanh thu — theo dõi MRR, tỷ lệ rời bỏ, LTV và doanh thu mở rộng",
+          "zara": "Theo dõi đối thủ — giám sát tính năng, giá cả và vị trí thị trường của đối thủ"
+        },
+        "credentials": {
+          "stripe": "Dữ liệu đăng ký và doanh thu",
+          "intercom": "Nhắn tin và hỗ trợ khách hàng (hoặc công cụ của bạn)",
+          "mixpanel": "Phân tích sản phẩm và theo dõi người dùng",
+          "gmail": "Giao tiếp với khách hàng",
+          "notion": "Cơ sở kiến thức và changelog",
+          "sentry": "Theo dõi lỗi và bug",
+          "github": "Theo dõi sự cố và yêu cầu tính năng"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "tối đa 3",
+        "price": "$19/tháng"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "tối đa 10",
+        "price": "$50/tháng"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "tối đa 50",
+        "price": "$100/tháng"
+      }
+    },
+    "frequencies": {
+      "daily": "hàng ngày",
+      "weekly": "hàng tuần",
+      "every_30_minutes": "mỗi 30 phút",
+      "every_6_hours": "mỗi 6 giờ",
+      "every_12_hours": "mỗi 12 giờ"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Cấu hình cài đặt máy tính cơ bản",
+    "displayName": "Tên hiển thị",
+    "defaultName": "Máy tính của tôi",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Mật khẩu này được yêu cầu để kết nối với máy tính"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Cộng đồng",
+    "title": "Xem mọi người sử dụng như thế nào",
+    "subtitle": "Từ nghiên cứu lead đến kiểm thử QA — xem cộng đồng đang tự động hóa những gì và lấy cảm hứng cho quy trình làm việc tiếp theo của bạn.",
+    "sessionCount": "{count} phiên được cộng đồng chia sẻ",
+    "searchPlaceholder": "Tìm kiếm theo nhiệm vụ, công cụ hoặc kết quả...",
+    "emptyTitle": "Chưa ai chia sẻ — hãy là người đầu tiên",
+    "emptySubtitle": "Khi người dùng công khai phiên của họ, chúng sẽ xuất hiện ở đây",
+    "noResultsTitle": "Không có kết quả phù hợp",
+    "noResultsSubtitle": "Thử các từ khóa khác",
+    "watchSession": "Xem phiên",
+    "steps": "{count} bước",
+    "tryCoasty": "Thử Coasty"
+  }
+}

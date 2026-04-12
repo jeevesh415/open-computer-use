@@ -16,7 +16,11 @@ import Script from "next/script"
 import { LayoutClient } from "./layout-client"
 import { PostHogProvider } from "@/lib/posthog/provider"
 import { PostHogPageView } from "@/lib/posthog/page-view"
-import { SEOSchemas } from "./seo-schemas"
+import { LocalizedSEOSchemas } from "./seo-schemas"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
+import { locales, rtlLocales, type Locale } from "@/i18n/config"
+import { getHreflangAlternates } from "@/lib/seo"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,116 +32,96 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  title: {
-    default: "Coasty - #1 Computer-Use AI Agent | AI Employee for Desktop & Browser Automation",
-    template: "%s | Coasty - AI Computer-Use Agent"
-  },
-  description:
-    "Coasty is the #1 ranked computer-using AI agent — 82% on the OSWorld benchmark. It controls a full desktop like a human: opens browsers, clicks, types, fills forms, sends emails, manages spreadsheets. True VM-level isolation per session. Built-in CAPTCHA solving. Starting at $20/mo — replaces $3,000/mo virtual assistants. The best alternative to Anthropic Computer Use, OpenAI Operator, and traditional RPA tools.",
-  keywords: [
-    "computer use agent",
-    "AI computer control",
-    "AI agent desktop automation",
-    "computer-using AI",
-    "AI employee",
-    "autonomous AI agent",
-    "browser automation AI",
-    "desktop automation agent",
-    "AI virtual assistant",
-    "OSWorld benchmark",
-    "AI that controls computer",
-    "AI desktop agent",
-    "Coasty AI",
-    "Coasty computer use",
-    "Anthropic computer use alternative",
-    "Claude computer use alternative",
-    "OpenAI Operator alternative",
-    "Google Project Mariner alternative",
-    "Adept AI alternative",
-    "Multion alternative",
-    "Browserbase alternative",
-    "Induced AI alternative",
-    "Convergence AI alternative",
-    "Devin AI alternative",
-    "UiPath alternative",
-    "Automation Anywhere alternative",
-    "RPA alternative AI",
-    "virtual assistant replacement AI",
-    "AI form filler",
-    "AI email sender",
-    "AI web scraper agent",
-    "autonomous browser agent",
-    "AI task automation",
-    "sandboxed AI agent",
-    "VM isolated AI agent",
-    "CAPTCHA solving AI",
-    "AI for spreadsheets",
-    "AI job application agent",
-    "AI sales prospecting",
-    "AI QA testing agent",
-    "AI marketing automation agent",
-    "best computer use agent 2026",
-    "AI that browses the web",
-    "AI workflow automation",
-    "multi-model AI platform",
-    "AI productivity tools",
-    "open source computer use agent",
-    "AI agent platform"
-  ],
-  authors: [{ name: "Coasty Team" }],
-  creator: "Coasty",
-  publisher: "Coasty",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://coasty.ai",
-    siteName: "Coasty - #1 Computer-Use AI Agent",
-    title: "Coasty - #1 Computer-Use AI Agent | 82% OSWorld Benchmark",
-    description: "AI employee that controls a desktop like a human. #1 on OSWorld benchmark (82%). Browser automation, desktop control, CAPTCHA solving, VM isolation. Starting at $20/mo.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Coasty - #1 Computer-Use AI Agent | 82% OSWorld Benchmark"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Coasty - #1 Computer-Use AI Agent | 82% OSWorld Benchmark",
-    description: "AI employee that controls a desktop like a human. Opens browsers, clicks, types, fills forms, sends emails. True VM isolation. $20/mo vs $3k/mo human VA.",
-    images: ["/og-image.png"],
-    creator: "@coasty_ai"
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const t = await getTranslations("seo")
+
+  return {
+    title: {
+      default: t("home.title"),
+      template: t("home.titleTemplate", { title: "%s" }),
+    },
+    description: t("home.description"),
+    keywords: [
+      "computer use agent", "AI computer control", "AI agent desktop automation",
+      "computer-using AI", "AI employee", "autonomous AI agent",
+      "browser automation AI", "desktop automation agent", "AI virtual assistant",
+      "OSWorld benchmark", "AI that controls computer", "AI desktop agent",
+      "Coasty AI", "Coasty computer use",
+      "Anthropic computer use alternative", "Claude computer use alternative",
+      "OpenAI Operator alternative", "Google Project Mariner alternative",
+      "Adept AI alternative", "Multion alternative", "Browserbase alternative",
+      "Induced AI alternative", "Convergence AI alternative", "Devin AI alternative",
+      "UiPath alternative", "Automation Anywhere alternative",
+      "RPA alternative AI", "virtual assistant replacement AI",
+      "AI form filler", "AI email sender", "AI web scraper agent",
+      "autonomous browser agent", "AI task automation",
+      "sandboxed AI agent", "VM isolated AI agent", "CAPTCHA solving AI",
+      "AI for spreadsheets", "AI job application agent", "AI sales prospecting",
+      "AI QA testing agent", "AI marketing automation agent",
+      "best computer use agent 2026", "AI that browses the web",
+      "AI workflow automation", "multi-model AI platform",
+      "AI productivity tools", "open source computer use agent", "AI agent platform",
+    ],
+    authors: [{ name: "Coasty Team" }],
+    creator: "Coasty",
+    publisher: "Coasty",
+    openGraph: {
+      type: "website",
+      locale: locale === "en" ? "en_US" : locale,
+      url: "https://coasty.ai",
+      siteName: "Coasty - #1 Computer-Use AI Agent",
+      title: t("home.ogTitle"),
+      description: t("home.ogDescription"),
+      images: [
+        {
+          url: "/demo-screenshot.png",
+          width: 1920,
+          height: 1080,
+          alt: t("home.ogTitle"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("home.ogTitle"),
+      description: t("home.twitterDescription"),
+      images: ["/demo-screenshot.png"],
+      creator: "@coasty_ai",
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
-  alternates: {
-    canonical: "https://coasty.ai"
-  },
-  category: "productivity",
-  applicationName: "Coasty",
-  referrer: "origin-when-cross-origin",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL("https://coasty.ai"),
-  manifest: "/manifest.json",
-  verification: {
-    google: "google-site-verification-code",
-    yandex: "yandex-verification-code",
+    alternates: {
+      canonical: "https://coasty.ai",
+      languages: getHreflangAlternates(),
+    },
+    category: "productivity",
+    applicationName: "Coasty",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    icons: {
+      icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+    },
+    metadataBase: new URL("https://coasty.ai"),
+    manifest: "/manifest.json",
+    verification: {
+      google: "google-site-verification-code",
+      yandex: "yandex-verification-code",
+    },
   }
 }
 
@@ -149,8 +133,24 @@ export default async function RootLayout({
   const isDev = process.env.NODE_ENV === "development"
   const userProfile = await getUserProfile()
 
+  let locale = "en"
+  let messages = {}
+  let seoT: (key: string) => string = (key) => key
+  try {
+    locale = await getLocale()
+    messages = await getMessages()
+    const t = await getTranslations("seo")
+    seoT = (key: string) => t(key as never)
+  } catch {
+    // Fallback to English if i18n fails (e.g. during static generation)
+    const fallback = await import("../messages/en.json")
+    messages = fallback.default
+  }
+  const dir = rtlLocales.includes(locale as Locale) ? "rtl" : "ltr"
+  const availableLanguages = locales.map(l => l === "fil" ? "Filipino" : l)
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
         {!isDev ? (
           <Script
@@ -171,7 +171,7 @@ export default async function RootLayout({
             "alternateName": ["Coasty AI", "Coasty Computer Use Agent", "Coasty AI Employee"],
             "url": "https://coasty.ai",
             "logo": "https://coasty.ai/logo_light.svg",
-            "description": "The #1 ranked computer-using AI agent. Coasty controls a full desktop like a human — opens browsers, clicks, types, fills forms, sends emails, and manages spreadsheets autonomously. 82% on the OSWorld benchmark. True VM-level isolation. Built-in CAPTCHA solving. Starting at $20/month.",
+            "description": seoT("structuredData.appDescription"),
             "applicationCategory": "ProductivityApplication",
             "operatingSystem": "Web Browser, Windows, macOS",
             "offers": [
@@ -250,7 +250,7 @@ export default async function RootLayout({
               "Open Source Framework",
               "24/7 Autonomous Operation"
             ],
-            "screenshot": "https://coasty.ai/og-image.png",
+            "screenshot": "https://coasty.ai/demo-screenshot.png",
             "sameAs": [
               "https://x.com/coasty_ai",
               "https://github.com/anthropics/open-computer-use"
@@ -269,7 +269,7 @@ export default async function RootLayout({
             "alternateName": "Coasty AI",
             "url": "https://coasty.ai",
             "logo": "https://coasty.ai/logo_light.svg",
-            "description": "Coasty builds the #1 computer-using AI agent. Our platform provides autonomous desktop control, browser automation, and multi-agent orchestration with true VM-level isolation.",
+            "description": seoT("structuredData.orgDescription"),
             "foundingDate": "2025",
             "knowsAbout": ["Computer Use Agents", "AI Automation", "Desktop Automation", "Browser Automation", "Autonomous AI Agents", "Virtual Machine Isolation"],
             "sameAs": [
@@ -281,7 +281,7 @@ export default async function RootLayout({
               "@type": "ContactPoint",
               "contactType": "customer support",
               "email": "support@coasty.ai",
-              "availableLanguage": ["English"]
+              "availableLanguage": availableLanguages
             }
           })
         }}
@@ -296,7 +296,7 @@ export default async function RootLayout({
             "name": "Coasty",
             "alternateName": ["Coasty AI", "Coasty Computer Use Agent"],
             "url": "https://coasty.ai",
-            "description": "#1 computer-using AI agent platform. 82% OSWorld benchmark. Autonomous browser, desktop, and terminal automation with VM isolation. Starting at $20/mo.",
+            "description": seoT("structuredData.websiteDescription"),
             "potentialAction": {
               "@type": "SearchAction",
               "target": {
@@ -322,7 +322,7 @@ export default async function RootLayout({
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web Browser, Windows 10+, macOS 10.15+",
             "softwareVersion": "1.5.0",
-            "description": "AI computer-using agent that controls a full desktop like a human. #1 on OSWorld benchmark with 82% completion rate across 369 real-world tasks. Autonomous browser automation, desktop control, terminal operations, email sending, form filling, and spreadsheet management.",
+            "description": seoT("structuredData.softwareDescription"),
             "award": "#1 Ranked Computer-Use Agent — 82% OSWorld Benchmark",
             "isAccessibleForFree": true,
             "offers": {
@@ -349,48 +349,50 @@ export default async function RootLayout({
               "24/7 Operation",
               "Open Source Framework"
             ],
-            "screenshot": "https://coasty.ai/og-image.png"
+            "screenshot": "https://coasty.ai/demo-screenshot.png"
           })
         }}
       />
-        <SEOSchemas />
+        <LocalizedSEOSchemas locale={locale} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <PostHogProvider>
-          <PostHogPageView />
-          <TanstackQueryProvider>
-            <LayoutClient />
-            <UserProvider initialUser={userProfile}>
-              <ModelProvider>
-                <ChatsProvider userId={userProfile?.id}>
-                  <ChatSessionProvider>
-                    <UserPreferencesProvider
-                      userId={userProfile?.id}
-                      initialPreferences={userProfile?.preferences}
-                    >
-                      <TooltipProvider
-                        delayDuration={200}
-                        skipDelayDuration={500}
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <PostHogProvider>
+            <PostHogPageView />
+            <TanstackQueryProvider>
+              <LayoutClient />
+              <UserProvider initialUser={userProfile}>
+                <ModelProvider>
+                  <ChatsProvider userId={userProfile?.id}>
+                    <ChatSessionProvider>
+                      <UserPreferencesProvider
+                        userId={userProfile?.id}
+                        initialPreferences={userProfile?.preferences}
                       >
-                        <ThemeProvider
-                          attribute="class"
-                          defaultTheme="system"
-                          enableSystem={true}
-                          disableTransitionOnChange
+                        <TooltipProvider
+                          delayDuration={200}
+                          skipDelayDuration={500}
                         >
-                          {children}
-                        </ThemeProvider>
-                      </TooltipProvider>
-                    </UserPreferencesProvider>
-                  </ChatSessionProvider>
-                </ChatsProvider>
-              </ModelProvider>
-            </UserProvider>
-          </TanstackQueryProvider>
-        </PostHogProvider>
+                          <ThemeProvider
+                            attribute="class"
+                            defaultTheme="system"
+                            enableSystem={true}
+                            disableTransitionOnChange
+                          >
+                            {children}
+                          </ThemeProvider>
+                        </TooltipProvider>
+                      </UserPreferencesProvider>
+                    </ChatSessionProvider>
+                  </ChatsProvider>
+                </ModelProvider>
+              </UserProvider>
+            </TanstackQueryProvider>
+          </PostHogProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

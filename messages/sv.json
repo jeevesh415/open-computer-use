@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Borja gratis",
+    "bookDemo": "Boka en demo",
+    "tryCoastyFree": "Prova Coasty gratis",
+    "learnMore": "Las mer",
+    "watchSession": "Se session",
+    "compareAllPlans": "Jamfor alla planer och funktioner",
+    "allRightsReserved": "Alla rattigheter forbehallna.",
+    "privacy": "Integritet",
+    "terms": "Villkor",
+    "recommended": "Rekommenderad",
+    "month": "manad",
+    "creditsPerMonth": "{count} krediter/man",
+    "agentsInParallel": "{count} agenter parallellt"
+  },
+  "header": {
+    "useCases": "Anvandningsfall",
+    "blog": "Blogg",
+    "agentSwarms": "Agentsvarm",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Jamfor",
+    "demos": "Demos",
+    "pricing": "Priser",
+    "download": "Ladda ner",
+    "signIn": "Logga in",
+    "getStarted": "Kom igang",
+    "useCaseItems": {
+      "competitorIntel": "Konkurrentinformation",
+      "qaBugReports": "QA-buggrapporter",
+      "seoGapAnalysis": "SEO-gapanalys",
+      "dataExtraction": "Dataextraktion",
+      "leadGeneration": "Leadgenerering",
+      "siteAudit": "Webbplatsrevision",
+      "adIntelligence": "Annonsinformation",
+      "emailOutreach": "E-postutskick",
+      "designReview": "Designgranskning",
+      "priceMonitoring": "Prisovervakning",
+      "marketResearch": "Marknadsunderskning",
+      "emailCampaigns": "E-postkampanjer"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} konkurrentprofiler levererade",
+      "qaBugReports": "{stat} anvandarfloden testade per korning",
+      "seoGapAnalysis": "{stat} nyckelordsluckor identifierade",
+      "dataExtraction": "{stat} rader extraherade per korning",
+      "leadGeneration": "{stat} kvalificerade leads per korning",
+      "siteAudit": "{stat} sidor granskade per korning",
+      "adIntelligence": "{stat} annonskreativ fangade",
+      "emailOutreach": "{stat} personliga e-postmeddelanden utkastade",
+      "designReview": "{stat} brytpunkter testade per sida",
+      "priceMonitoring": "{stat} SKU:er jamforda per korning",
+      "marketResearch": "{stat} datapunkter insamlade",
+      "emailCampaigns": "{stat} personliga e-postmeddelanden per kampanj"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Alla inlagg",
+      "computerUse": "Datoranvandning",
+      "compare": "Jamfor",
+      "dataEntry": "Dataregistrering",
+      "webScraping": "Web Scraping",
+      "jobApplications": "Jobbansokningar",
+      "demosResults": "Demos och resultat",
+      "guide": "Guide"
+    },
+    "blogStats": {
+      "allPosts": "{stat} artiklar publicerade varje vecka",
+      "computerUse": "{stat} OSWorld-benchmarkpoang",
+      "compare": "{stat} konkurrenter analyserade",
+      "dataEntry": "{stat} snabbare an manuellt",
+      "webScraping": "{stat} sidor per session",
+      "jobApplications": "{stat} ansokningar per session",
+      "demosResults": "{stat} riktiga fallstudier",
+      "guide": "{stat} anvandningsfallsgenomgangar"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "Autonoma datoroperatorer",
+    "useCases": {
+      "computerAgent": {
+        "label": "Datoragent",
+        "headline": "automatisera vilken webblasaruppgift som helst",
+        "outcome": "En AI-agent som styr en riktig dator — surfar, klickar, skriver och levererar fardigt arbete. Ingen installation kravs."
+      },
+      "competitorIntel": {
+        "label": "Konkurrentinformation",
+        "headline": "overvaka alla konkurrenter",
+        "outcome": "Kompletta konkurrentprofiler med priser, funktioner och positioneringsluckor — exporterade som en delningsredo rapport."
+      },
+      "qaTesting": {
+        "label": "QA-testning",
+        "headline": "hitta buggar fore anvandarna",
+        "outcome": "Kritiska anvandarfloden testade anda-till-anda, varje bugg skarmdumpad med reproduktionssteg och allvarlighetsgradering."
+      },
+      "seoAnalysis": {
+        "label": "SEO-analys",
+        "headline": "upptack nyckelordsluckor",
+        "outcome": "Nyckelordsluckor identifierade, innehallsbriefingar utkastade, konkurrenters backlankkallor kartlagda — handlingsbar SEO-strategi."
+      },
+      "dataExtraction": {
+        "label": "Dataextraktion",
+        "headline": "skrapa och strukturera vilken webbplats som helst",
+        "outcome": "Strukturerad data skrapad, rensad, deduplicerad och exporterad som CSV — fran vilken webbplats som helst, vilket format som helst."
+      },
+      "leadGeneration": {
+        "label": "Leadgenerering",
+        "headline": "fyll din forsaljningspipeline",
+        "outcome": "Kvalificerade beslutsfattare som matchar din ICP med verifierade titlar, foretag och personliga kontaktoppnare."
+      },
+      "siteAudit": {
+        "label": "Webbplatsrevision",
+        "headline": "granska varje sida i stor skala",
+        "outcome": "Sidor skannade, Core Web Vitals poangbedomda, trasiga lankar hittade, tillganglighetsproblem rangordnade efter fixeringsprioritet."
+      },
+      "emailOutreach": {
+        "label": "E-postutskick",
+        "headline": "skicka personlig kontakt",
+        "outcome": "Personliga e-postmeddelanden som refererar till varje prospekts foretag, roll och smartpunkter — redo att skicka."
+      },
+      "marketResearch": {
+        "label": "Marknadsunderskning",
+        "headline": "validera din marknad snabbt",
+        "outcome": "TAM beraknad, nyckelaktorer profilerade, tillvaxttrender kartlagda — hamtade fran dussintal datapunkter."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Marknadsforing",
+        "task": "Marknadfor din produkt pa Reddit autonomt"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Hitta prospekt och skicka personliga e-postmeddelanden"
+      },
+      "qaTesting": {
+        "label": "QA-testning",
+        "task": "Testa varje kassaflode och rapportera buggar"
+      },
+      "jobApplication": {
+        "label": "Jobbanskan",
+        "task": "Hitta roller, anpassa CV:t och ansok"
+      },
+      "formFilling": {
+        "label": "Formularifyllning",
+        "task": "Fyll i YC S26-ansokan at dig"
+      },
+      "socialMedia": {
+        "label": "Sociala medier",
+        "task": "Publicera pa Hacker News och engagera med kommentarer"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld-benchmark",
+      "sublabel": "#1 computer-use agent globalt"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Verktyg agenten kan anvanda",
+      "sublabel": "Webblasare, terminal, skrivbord, filer"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Kor enligt schema",
+      "sublabel": "Automatisera vilken aterkommande uppgift som helst"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Installation kravs",
+      "sublabel": "Inga API:er, inga integrationer, ingen kod"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Varfor Coasty",
+    "title": "Inte en chatbot. Inte ett RPA-skript.",
+    "worksLikeHuman": {
+      "title": "Fungerar som en manniska",
+      "description": "Ser, klickar, skriver, navigerar — precis som du"
+    },
+    "noScripts": {
+      "title": "Inga skript eller installation",
+      "description": "Vanligt sprak in, resultat ut"
+    },
+    "handlesUnexpected": {
+      "title": "Hanterar det ovanetade",
+      "description": "Anpassar sig till CAPTCHA:er, popup-fonster, layoutandringar"
+    },
+    "runsInIsolation": {
+      "title": "Kor i isolering",
+      "description": "Sandladeformad VM per session — inget lacker"
+    }
+  },
+  "howItWorks": {
+    "title": "Sa har fungerar det",
+    "step1": {
+      "title": "Beskriv din uppgift",
+      "description": "Vanligt sprak. Det ar allt.",
+      "placeholder": "Undersok 100 leads pa LinkedIn..."
+    },
+    "step2": {
+      "title": "Se agenten arbeta",
+      "description": "Oppnar webblasare, klickar, skriver, navigerar"
+    },
+    "step3": {
+      "title": "Uppgift slutford",
+      "description": "Varje handling loggad med skarmdumpar",
+      "results": {
+        "taskCompleted": "Uppgift slutford",
+        "leadsFound": "12 leads hittade",
+        "addedToCrm": "Tillagd i CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Benchmarkad #1 i varlden",
+    "subtitle": "82% pa OSWorld — det svaraste benchmarket for AI-agenter som anvander riktiga datorer",
+    "agenticFramework": "Agentiskt ramverk",
+    "foundationModel": "Grundmodell"
+  },
+  "comparison": {
+    "title": "Varfor automatisera med Coasty?",
+    "subtitle": "Samma uppgifter som tar ett team timmar — Coasty slutfor pa minuter, dygnet runt.",
+    "manual": {
+      "title": "Gora det manuellt",
+      "subtitle": "Du eller ditt team, for hand"
+    },
+    "coasty": {
+      "title": "Coasty AI-agent",
+      "subtitle": "#1 computer-use agent"
+    },
+    "rows": {
+      "timePerTask": "Tid per uppgift",
+      "availability": "Tillganglighet",
+      "setupTime": "Installationstid",
+      "errorRate": "Felfrekvens",
+      "scaling": "Skalning",
+      "auditTrail": "Revisionslogg"
+    },
+    "manualValues": {
+      "timePerTask": "Timmar till dagar",
+      "availability": "Bara kontorstid",
+      "setupTime": "Lar dig verktygen, skriv rutiner",
+      "errorRate": "Manskliga misstag",
+      "scaling": "Gor mer = anvand mer tid",
+      "auditTrail": "Ingen"
+    },
+    "coastyValues": {
+      "timePerTask": "Minuter",
+      "availability": "24/7, varje dag",
+      "setupTime": "60 sekunder",
+      "errorRate": "Sjalvkorrigerande",
+      "scaling": "Kor obegransade uppgifter parallellt",
+      "auditTrail": "Varje klick loggat + skarmdumpar"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Automatisera uppgifter som tar",
+      "hoursManually": "timmar manuellt",
+      "startingAt": "Fran"
+    }
+  },
+  "demo": {
+    "title": "Se agenten i aktion",
+    "subtitle": "Riktiga uppgifter. Riktiga webblasare. Varje klick inspelat.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty pa Reddit",
+        "description": "Se Coasty autonomt kora en marknadsforingskampanj — undersoka konkurrenter, analysera trender och bygga en strategipresentation.",
+        "tag": "Marknadsforing"
+      },
+      "prospects": {
+        "title": "Hitta potentiella kunder",
+        "description": "Coasty hittar och undersoker potentiella kunder, samlar nyckeldetaljer for att skapa personlig kontakt.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA-testar sig sjalv",
+        "description": "Coasty kor kvalitetssakring pa sin egen produkt — navigerar floden, fangar buggar och rapporterar problem autonomt.",
+        "tag": "QA-testning"
+      },
+      "email": {
+        "title": "Skickar ett e-postmeddelande a dina vagnar",
+        "description": "Fran att skriva till att skicka — en AI-agent utkastar och levererar ett e-postmeddelande helt pa egen hand.",
+        "tag": "Kommunikation"
+      },
+      "job": {
+        "title": "Ansoker om ett jobb",
+        "description": "Coasty hittar en matchande roll, anpassar ditt CV och skickar in ansokan — allt pa egen hand.",
+        "tag": "Jobbanskan"
+      },
+      "hackernews": {
+        "title": "Publicerar pa Hacker News",
+        "description": "Coasty skapar och publicerar ett blogginlagg pa Hacker News — skriver innehallet och skickar in det autonomt.",
+        "tag": "Sociala medier"
+      }
+    }
+  },
+  "features": {
+    "title": "Byggt for riktiga datoruppgifter",
+    "selfCorrecting": {
+      "title": "Sjalvkorrigerande",
+      "description": "Upptacker fel, provar alternativa vagar"
+    },
+    "auditTrail": {
+      "title": "Fullstandig revisionslogg",
+      "description": "Varje klick loggat med skarmdumpar"
+    },
+    "schedule": {
+      "title": "Schemalag 24/7",
+      "description": "Kor pa cron — varje timme, dagligen, veckovis"
+    },
+    "sandboxed": {
+      "title": "Sandlada och sakert",
+      "description": "Isolerad VM per session, forstord efterat"
+    },
+    "benchmark": {
+      "title": "#1 pa OSWorld",
+      "description": "82% — hogsta poangen nagonsin registrerad"
+    },
+    "swarms": {
+      "title": "Agentsvarm",
+      "description": "Dela uppgifter over maskiner parallellt"
+    }
+  },
+  "pricing": {
+    "title": "Borja gratis, skala nar du ar redo",
+    "subtitle": "Inget kreditkort. Din AI-agent ar redo pa 60 sekunder.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Prova #1 computer-use agent",
+        "cta": "Borja gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Latt daglig automatisering",
+        "cta": "Valj Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatisera uppgifter varje dag",
+        "cta": "Valj Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skala komplexa arbetsfloden",
+        "cta": "Valj Plus",
+        "badge": "Mest popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Obegransad tung automatisering",
+        "cta": "Valj Pro"
+      }
+    },
+    "vmTemporary": "1 tillfallig VM (2 tim)",
+    "vmDeletedAfterInactivity": "1 VM (raderad efter inaktivitet)",
+    "vmAlwaysOn": "{count} alltid-pa VM",
+    "vmAlwaysOnPlural": "{count} alltid-pa VM:ar",
+    "bargain": {
+      "title": "Samma arbete kostar {oldPrice} med manuell arbetskraft",
+      "description": "En virtuell assistent kostar $2 000–$4 000/man. En deltidsanstallning kostar mer. Coasty gor samma arbete 24/7 fran $0 — med perfekt konsistens, fullstandiga revisionsloggar och noll utbildningstid."
+    }
+  },
+  "faq": {
+    "title": "Vanliga fragor",
+    "subtitle": "Allt du behover veta innan du borjar",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Vad ar Coasty?",
+        "answer": "Coasty ar varldens basta computer-use AI-agent. Du beskriver en uppgift — undersok leads, testa en webbplats, fyll i formular, publicera pa sociala medier — och Coasty oppnar en riktig webblasare, navigerar appar, klickar pa knappar, skriver text och slutfor uppgiften anda-till-anda. Inga API:er, inga integrationer, ingen kod kravs."
+      },
+      "howDifferent": {
+        "question": "Hur ar detta annorlunda fran ChatGPT eller andra AI-verktyg?",
+        "answer": "ChatGPT genererar text. Coasty anvander en dator. Den beratter inte for dig vad du ska gora — den oppnar en webblasare, navigerar till webbplatsen, klickar pa knapparna, fyller i formularen och levererar det fardiga arbetet. Det ar skillnaden mellan att fa instruktioner och att fa uppgiften gjord at dig."
+      },
+      "whatTasks": {
+        "question": "Vilka uppgifter kan Coasty automatisera?",
+        "answer": "Vilken uppgift som helst som du kan gora pa en dator. Webbundersokningar, leadgenerering, dataregistrering, formularifyllning, QA-testning, publicering pa sociala medier, e-postutskick, fakturabearbetning, konkurrensanalys, rekrytering — om det involverar en webblasare eller skrivbordsapp kan Coasty gora det."
+      },
+      "whatAreCredits": {
+        "question": "Vad ar krediter och hur anvands de?",
+        "answer": "Krediter forbrukas nar agenten arbetar med uppgifter. Langre, mer komplexa uppgifter anvander fler krediter. Betalplaner inkluderar manatliga krediter, och du kan aven kopa extra kreditpaket nar som helst."
+      },
+      "localComputer": {
+        "question": "Kan Coasty kora pa min egen dator?",
+        "answer": "Ja. Var skrivbordsapp kor som ett latt overlagg pa din maskin och styr din lokala webblasare och applikationer direkt. Alternativt kor uppgifter pa isolerade molnmaskiner — ditt val."
+      },
+      "dataSafe": {
+        "question": "Ar mina data sakra?",
+        "answer": "Varje uppgift kor i en isolerad sandlademiljo. Inget lacker mellan sessioner. Dina uppgifter forblir privata, och varje handling loggas med skarmdumpar i en fullstandig revisionslogg du kan granska nar som helst."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI-driven datoranvandning.",
+    "tagline2": "Automatisera vilket arbetsflode som helst med intelligenta agenter.",
+    "columns": {
+      "product": "Produkt",
+      "resources": "Resurser",
+      "company": "Foretag",
+      "legal": "Juridiskt"
+    },
+    "links": {
+      "computerUse": "Datoranvandning",
+      "guide": "Guide",
+      "download": "Ladda ner",
+      "pricing": "Priser",
+      "agentSwarms": "Agentsvarm",
+      "status": "Status",
+      "blog": "Blogg",
+      "useCases": "Anvandningsfall",
+      "demos": "Demos",
+      "compare": "Jamfor",
+      "talkToCofounders": "Prata med grundare och demo",
+      "contact": "Kontakt",
+      "privacy": "Integritet",
+      "terms": "Villkor"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Sprak"
+  },
+  "auth": {
+    "brandHeading": "Du satter malet.",
+    "brandSubheading": "Vi skoter resten.",
+    "mobileHeading": "Du satter malet. Vi skoter resten.",
+    "mobileSubheading": "AI-agenter som surfar, klickar och arbetar som en riktig teammedlem.",
+    "flowSteps": {
+      "step1": {
+        "label": "Du beskriver uppgiften",
+        "sub": "\"Undersok vara 5 storsta konkurrenter\""
+      },
+      "step2": {
+        "label": "Agenten tar over",
+        "sub": "Surfar, klickar, skriver autonomt"
+      },
+      "step3": {
+        "label": "Arbetet levererat",
+        "sub": "Kalkylblad med 5 fullstandiga konkurrentprofiler"
+      }
+    },
+    "complete": "Klart",
+    "doneIn": "Klart pa 8 minuter",
+    "demoCaption": "Kör AI-agenter på din dator eller styr den från mobilen, var du än är.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Din operator star redo",
+      "signUp": "Satt dina arbetsfloden pa autopilot",
+      "magicLink": "Skippa losenordet",
+      "forgotPassword": "Vi hjalper dig tillbaka"
+    },
+    "viewDescriptions": {
+      "signIn": "Fortsatt dar du slutade — dina agenter minns",
+      "signUp": "Distribuera din forsta AI-agent pa under en minut",
+      "magicLink": "Ett klick fran din inkorg och du ar inne",
+      "forgotPassword": "Vi skickar en aterstallningslankar till din e-post"
+    },
+    "google": {
+      "connecting": "Ansluter...",
+      "continueWithGoogle": "Fortsatt med Google"
+    },
+    "or": "eller",
+    "email": "E-post",
+    "emailPlaceholder": "you@example.com",
+    "password": "Losenord",
+    "passwordPlaceholder": "Ditt losenord",
+    "confirmPassword": "Bekrafta losenord",
+    "confirmPasswordPlaceholder": "Bekrafta ditt losenord",
+    "minChars": "Minst 6 tecken",
+    "signingIn": "Loggar in...",
+    "signIn": "Logga in",
+    "creatingAccount": "Skapar konto...",
+    "createAccount": "Skapa konto",
+    "sending": "Skickar...",
+    "sendMagicLink": "Skicka magisk lank",
+    "sendResetLink": "Skicka aterstallningslank",
+    "forgotPassword": "Glomt losenord?",
+    "useMagicLink": "Anvand magisk lank",
+    "dontHaveAccount": "Har du inget konto?",
+    "signUp": "Registrera dig",
+    "alreadyHaveAccount": "Har du redan ett konto?",
+    "backToSignIn": "Tillbaka till inloggning",
+    "termsAgreement": "Genom att fortsatta godkanner du vara",
+    "terms": "Villkor",
+    "and": "och",
+    "privacyPolicy": "Integritetspolicy",
+    "errors": {
+      "fillAllFields": "Vanligenyll i alla falt",
+      "passwordMinLength": "Losenordet maste vara minst 6 tecken",
+      "passwordsDoNotMatch": "Losenorden matchar inte",
+      "supabaseNotConfigured": "Supabase ar inte konfigurerat",
+      "unexpectedError": "Ett ovantade fel uppstod. Forsok igen.",
+      "confirmEmail": "Bekrafta din e-post innan du loggar in. Kolla din inkorg.",
+      "invalidCredentials": "Ogiltig e-post eller losenord.",
+      "signInFailed": "Inloggningen misslyckades. Forsok igen.",
+      "invalidEmail": "Ogiltig e-postadress.",
+      "emailAlreadyExists": "Ett konto med denna e-post finns redan. Forsok logga in istallet.",
+      "signUpFailed": "Registreringen misslyckades. Forsok igen.",
+      "enterEmail": "Ange din e-post",
+      "noAccountFound": "Inget konto hittat med denna e-post. Registrera dig forst.",
+      "magicLinkFailed": "Kunde inte skicka magisk lank. Forsok igen.",
+      "resetFailed": "Kunde inte skicka aterstallningsmail. Forsok igen.",
+      "updateFailed": "Kunde inte uppdatera losenordet. Forsok igen."
+    },
+    "success": {
+      "checkEmailConfirm": "Kolla din e-post for att bekrafta ditt konto innan du loggar in.",
+      "checkEmailMagicLink": "Kolla din e-post efter den magiska lanken for att logga in.",
+      "checkEmailReset": "Kolla din e-post efter aterstallningslanken.",
+      "passwordUpdated": "Losenordet uppdaterat. Omdirigerar till inloggning..."
+    },
+    "resetPassword": {
+      "title": "Aterstall ditt losenord",
+      "subtitle": "Ange ditt nya losenord nedan.",
+      "newPassword": "Nytt losenord",
+      "confirmNewPassword": "Bekrafta nytt losenord",
+      "confirmPlaceholder": "Bekrafta ditt nya losenord",
+      "updating": "Uppdaterar...",
+      "updatePassword": "Uppdatera losenord"
+    },
+    "errorPage": {
+      "title": "Autentiseringsfel",
+      "defaultMessage": "Ett fel uppstod under autentiseringen.",
+      "tryAgain": "Forsok igen",
+      "backToChat": "Tillbaka till chatt",
+      "needHelp": "Behover du hjalp?",
+      "contactSupport": "Kontakta support"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Hoppa over for nu",
+    "back": "Tillbaka",
+    "continue": "Fortsatt",
+    "getStarted": "Kom igang",
+    "settingUp": "Konfigurera...",
+    "welcome": {
+      "titleReturning": "Valkommen tillbaka{name}!",
+      "titleNew": "Valkommen till Coasty",
+      "descriptionReturning": "Vi vill garna lara oss lite mer om dig for att forbattra din upplevelse",
+      "descriptionNew": "Lat oss konfigurera ditt konto sa vi kan anpassa din upplevelse"
+    },
+    "nameLabel": "Vad ska vi kalla dig?",
+    "namePlaceholder": "Ditt namn",
+    "companyLabel": "Foretag",
+    "optional": "(valfritt)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Webbplats",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Vad beskriver dig bast?",
+      "subtitle": "Valj alla som stammer — detta hjalper oss anpassa din upplevelse"
+    },
+    "roles": {
+      "founder": "Grundare / VD",
+      "developer": "Utvecklare",
+      "marketer": "Marknadsorare",
+      "designer": "Designer",
+      "product_manager": "Produktchef",
+      "data_analyst": "Data / Analys",
+      "operations": "Drift",
+      "other": "Ovrigt"
+    },
+    "teamSizeLabel": "Teamstorlek",
+    "teamSizes": {
+      "solo": "Bara jag",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Hur hittade du oss?",
+      "subtitle": "Vi vill garna veta var du horde talas om Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google-sok",
+      "youtube": "YouTube",
+      "friend": "Van / Kollega",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Ovrigt"
+    },
+    "useCaseStep": {
+      "title": "Vad vill du automatisera forst?",
+      "subtitle": "Valj alla som stammer — du kan utforska allt senare"
+    },
+    "useCases": {
+      "web_scraping": "Webbskrapning & Research",
+      "browser_automation": "Webbautomatisering",
+      "data_entry": "Datainmatning & Formular",
+      "email_outreach": "E-post & Utskick",
+      "testing": "QA & Testning",
+      "ecommerce": "E-handelsuppgifter",
+      "social_media": "Sociala medier-hantering",
+      "general_automation": "Allman automatisering"
+    },
+    "showcase": {
+      "title": "Allt du behover,",
+      "titleHighlight": "inbyggt.",
+      "subtitle": "Har ar vad Coasty kan gora for dig",
+      "noCode": {
+        "title": "Ingen kod",
+        "description": "Beskriv bara vad du vill pa vanlig svenska"
+      },
+      "agentSwarms": {
+        "title": "Agentsvarm",
+        "description": "Parallella agentflottor"
+      },
+      "desktopControl": {
+        "title": "Skrivbordskontroll",
+        "description": "Klickar, skriver, navigerar"
+      },
+      "browserAutomation": {
+        "title": "Webbautomatisering",
+        "description": "Formular, flikar, skrapning — helt automatiserat"
+      },
+      "computerVision": {
+        "title": "Datorseende",
+        "description": "Ser och forstar din skarm i realtid"
+      },
+      "workflows": {
+        "title": "Arbetsfloden",
+        "description": "Flerstegsfloden"
+      },
+      "onDevice": {
+        "title": "Pa enheten",
+        "description": "Kors lokalt"
+      },
+      "autonomous": {
+        "title": "24/7 Autonom",
+        "description": "Stall in och glom — kors medan du sover"
+      }
+    },
+    "guideCallout": {
+      "title": "Ny har? Vi har en guide at dig",
+      "subtitle": "Distribuera din forsta AI-agent pa under en minut"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Vad ska din AI-arbetare gora?",
+    "placeholderAlt": "Berattta for din AI vad den ska gora pa datorn...",
+    "vmError": {
+      "title": "Fel pa virtuell maskin",
+      "description": "Den virtuella maskinen ar i felstatus eller haller pa att raderas.",
+      "hint": "Kontrollera fliken Maskiner for att losa problemet, eller valj \"Ingen dator vald\" for att bara anvanda webbsokning.",
+      "gotIt": "Uppfattat"
+    },
+    "status": {
+      "creating": "Skapar {name}...",
+      "initiating": "Startar agent pa {name}...",
+      "stopping": "Stoppar {name}...",
+      "preparing": "Forbereder {name}..."
+    },
+    "swarm": {
+      "title": "Svarmlage",
+      "pro": "PRO",
+      "upgradeLabel": "Svarmlage — uppgradera for att lasa upp",
+      "feature1": "Parallell korning over tillfalliga maskiner",
+      "feature2": "Varje maskin kor autonomt",
+      "feature3": "3x din plans maskingrns per svarm",
+      "description": "Kor en prompt over 3x din maskingrans parallellt — var och en tacklar uppgiften sjalvstandigt.",
+      "enableLabel": "Aktivera svarmlage",
+      "disableLabel": "Inaktivera svarmlage",
+      "onTooltip": "Svarmlage PA — din prompt kors pa flera maskiner parallellt",
+      "offTooltip": "Aktivera svarmlage for att kora din prompt pa flera maskiner samtidigt",
+      "decreaseMachines": "Minska antal maskiner",
+      "increaseMachines": "Oka antal maskiner",
+      "machineLimit": "Upp till {max} svarmmaskiner pa din plan. Behover mer? Kontakta founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Svarmlage"
+    },
+    "desktop": {
+      "connectLabel": "Anslut till skrivbord",
+      "screenLabel": "{name}s skarm",
+      "screenDefault": "Skrivbord",
+      "watchTooltip": "Se din agent arbeta pa en separat skarm. Ror bara inget — den far scenradsla!",
+      "watchLabel": "Skrivbord"
+    },
+    "buttons": {
+      "stop": "Stoppa",
+      "sendToSwarm": "Skicka till svarm",
+      "taskRunning": "En annan uppgift kors — klicka for att stoppa den och kora din",
+      "selectComputer": "Valj en dator for att skicka meddelanden",
+      "waitCreating": "Vanligen vanta medan VM skapas",
+      "waitStarting": "Vanligen vanta medan VM startar",
+      "waitAgent": "Vanligen vanta medan agenten initieras",
+      "vmStopping": "VM stoppas",
+      "send": "Skicka",
+      "switching": "Vaxlar...",
+      "overrideRun": "Overstyra & kora",
+      "stopLabel": "Stoppa korande uppgift och starta denna",
+      "sendLabel": "Skicka meddelande"
+    },
+    "search": "Sok",
+    "upload": {
+      "label": "Ladda upp filer till VM",
+      "heading": "Ladda upp filer till VM",
+      "description": "Filer sparas pa skrivbordet",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Slapp filer har",
+      "dropDescription": "Filer laddas upp till VM:ens skrivbordsmapp",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Logga in for att prova fler funktioner gratis",
+      "description": "Skapa projekt, bjud in teammedlemmar och mer.",
+      "connecting": "Ansluter...",
+      "continueWithGoogle": "Fortsatt med Google"
+    },
+    "removeFile": "Ta bort fil"
+  },
+  "chat": {
+    "greeting": "Hej",
+    "greetingAuth": "Jag tar hand om datorarbetet. Vad ar uppgiften?",
+    "greetingUnauth": "AI som skoter datorn sa du slipper. Beratta bara vad du behover.",
+    "guide": "Guide",
+    "saveLogins": "Spara inloggningar for automatisk ifyllnad",
+    "encryptedNote": "krypterat, aldrig sett av AI",
+    "roleLabels": [
+      "Medarbetare",
+      "Anstalld",
+      "Van",
+      "Assistent",
+      "Partner",
+      "Lagkamrat",
+      "Samarbetspartner",
+      "Hjalpare"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} konkurrentrapport",
+        "warmLeads": "Hitta 20 leads for {company}",
+        "pitchDeck": "{company} pitchdeck-utkast"
+      },
+      "developer": {
+        "findBugs": "Hitta buggar pa {company}",
+        "performance": "{company} prestandagranskning",
+        "apiDocs": "Extrahera {company} API-docs"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO-gapanalys",
+        "competitorAds": "Spionera pa {company}-rivalers annonser",
+        "trendingContent": "Trendande ideer for {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} recensionssammanfattning",
+        "featureComparison": "{company} funktionsjamforelse",
+        "competitorLaunches": "Folj {company}-rivalers lanseringar"
+      },
+      "data_analyst": {
+        "exportCsv": "Exportera {company}-data till CSV",
+        "marketSizing": "{company} marknadsstorlek",
+        "benchmark": "Benchmark {company} mot branschen"
+      },
+      "operations": {
+        "enterRecords": "Mata in poster i {company}",
+        "cheapestVendor": "Hitta leverantorer for {company}",
+        "invoiceSummary": "{company} fakturasammanfattning"
+      },
+      "designer": {
+        "designComparison": "{company} vs konkurrenter i design",
+        "responsiveAudit": "{company} responsiv granskning",
+        "inspiration": "Designinspiration for {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Extrahera {company}-sajtdata",
+      "browser_automation": "Exportera {company}-rapporter",
+      "data_entry": "Mata in data i {company}",
+      "email_outreach": "Utskick for {company}",
+      "testing": "QA-test av {company}",
+      "ecommerce": "{company} prisjamforelse",
+      "social_media": "Publicera om {company}",
+      "general_automation": "Automatisera uppgift pa {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Kopiera text",
+    "copied": "Kopierat!",
+    "regenerate": "Regenerera",
+    "feedback": {
+      "title": "Feedback",
+      "prompts": [
+        "Betygsatt detta",
+        "Feedback",
+        "Hur gick det?",
+        "Tankar?",
+        "Dela feedback"
+      ],
+      "tooltip": "Dela din feedback"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Smart sokning",
+      "description": "AI-driven sokning over webben"
+    },
+    "collaborate": {
+      "title": "Samarbeta",
+      "description": "Arbeta tillsammans i realtid"
+    },
+    "globalAccess": {
+      "title": "Global atkomst",
+      "description": "Sok pa 50+ sprak"
+    },
+    "aiModels": {
+      "title": "AI-modeller",
+      "description": "Flera AI-leverantorer"
+    },
+    "freeForever": {
+      "title": "Gratis for alltid",
+      "description": "Inga dolda kostnader"
+    },
+    "privateSecure": {
+      "title": "Privat och sakert",
+      "description": "Din data forblir din"
+    }
+  },
+  "sidebar": {
+    "newTask": "Ny uppgift",
+    "newTaskDescription": "Starta en ny AI-automatisering",
+    "activity": "Aktivitet",
+    "taskHistory": "Uppgiftshistorik",
+    "taskHistoryDescription": "Granska tidigare uppgifter och fortsatt dar du slutade",
+    "taskHistoryPopup": {
+      "title": "Dina senaste uppgifter",
+      "description": "Bladdra och fortsatt tidigare konversationer. Varje uppgift sparas sa du kan aterupptas dar du slutade."
+    },
+    "swarmRuns": "Svarmkorningar",
+    "swarmRunsDescription": "Overvaka multi-agent parallella arbetsfloden",
+    "swarmRunsPopup": {
+      "title": "Multi-agent arbetsfloden",
+      "description": "Kor uppgifter over flera maskiner parallellt. Varje agent arbetar sjalvstandigt och resultaten konvergerar automatiskt."
+    },
+    "guide": "Guide",
+    "guideDescription": "Lar dig hur du far ut mest av Coasty",
+    "guidePopup": {
+      "title": "Komma igang",
+      "description": "Steg-for-steg-genomgangar och basta praxis for att hjalpa dig automatisera effektivt."
+    },
+    "infrastructure": "Infrastruktur",
+    "computer": "Dator",
+    "computers": "Datorer",
+    "active": "aktiv",
+    "view": "Visa",
+    "workforce": "Scheman",
+    "workforceDescription": "Schemalägg automatiserade uppgifter och utlösare",
+    "workforcePopup": {
+      "title": "Schemalad automatisering",
+      "description": "Ställ in återkommande uppgifter med cron-scheman och agent-till-agent-utlösare. Dina scheman körs medan du sover."
+    },
+    "credentials": "Inloggningsuppgifter",
+    "credentialsDescription": "Lagra inloggningar sakert for agentatkomst",
+    "credentialsPopup": {
+      "title": "Sakert valv for inloggningsuppgifter",
+      "description": "Lagra inloggningar och API-nycklar med kryptering. Agenter fyller i automatiskt utan att exponera radata."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Hamta skrivbordsappen",
+      "download": "Ladda ner",
+      "downloadDesktopApp": "Ladda ner skrivbordsappen",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Styr din dator pa distans",
+      "controlDescription": "Installera skrivbordsappen och kor uppgifter pa din PC fran denna instrumentpanel — var som helst, nar som helst."
+    },
+    "credits": {
+      "runningLow": "Krediter — Boja ta slut",
+      "remaining": "Krediter kvar",
+      "buy": "Kop",
+      "creditsLeft": "krediter kvar",
+      "usedLabel": "Anvant: {count}",
+      "consumed": "{percent}% forbrukat",
+      "usageThisWeek": "Anvandning denna vecka"
+    },
+    "talkToUs": "Prata med oss",
+    "talkToUsDesc": "Boka ett 15-min samtal",
+    "inviteEarn": "Bjud in & tjana",
+    "inviteEarnDesc": "Få gratis krediter",
+    "user": "Anvandare",
+    "account": "Konto",
+    "tasks": "{count} uppgifter",
+    "recentActivity": "Senaste aktivitet",
+    "viewAllHistory": "Visa all historik →",
+    "swarmRunsCount": "{count} svarmkorningar",
+    "running": "kor",
+    "completed": "slutford",
+    "viewAllSwarms": "Visa alla svarmar →",
+    "schedulesCount": "{count} scheman",
+    "totalRuns": "{count} totala korningar",
+    "paused": "pausad",
+    "viewAllSchedules": "Visa alla scheman →",
+    "credentialsCount": "{count} inloggningsuppgifter",
+    "encryptedVault": "Krypterat valv",
+    "manageCredentials": "Hantera inloggningsuppgifter →",
+    "days": [
+      "Man",
+      "Tis",
+      "Ons",
+      "Tor",
+      "Fre",
+      "Lor",
+      "Son"
+    ],
+    "resume": "ATERUPPTAS",
+    "result": "RESULTAT",
+    "notScheduled": "Ej schemalat",
+    "overdue": "Forsenat",
+    "lessThanMin": "< 1 min",
+    "inMinutes": "om {count}m",
+    "inHours": "om {count}h",
+    "today": "idag",
+    "yesterday": "igar"
+  },
+  "appHeader": {
+    "login": "Logga in",
+    "assign": "Schemalägg",
+    "assignDescription": "Schemalägg denna uppgift att köras automatiskt",
+    "computer": "Dator",
+    "showComputer": "Visa dator",
+    "hideComputer": "Dolj dator",
+    "employeeHired": "Anstalld anstalldes!",
+    "employeeRemoved": "Anstalld borttagen"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Latt daglig automatisering"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatisera uppgifter varje dag"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skala komplexa arbetsfloden",
+        "badge": "Mest popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Obegransad tung automatisering"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (raderas efter inaktivitet)",
+      "vmAlwaysOn": "{count} alltid-pa VM",
+      "vmAlwaysOnPlural": "{count} alltid-pa VM:ar",
+      "agentsParallel": "{count} agenter parallellt",
+      "basicSearch": "Grundlaggande sokning",
+      "advancedSearch": "Avancerad sokning & extraktion",
+      "standardSupport": "Standardsupport (riktiga manniskor)",
+      "prioritySupport": "Prioriterad support, 24h svar",
+      "premiumSupport": "Premiumsupport, 12h svar"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Liten boost",
+        "description": "Snabb pafyllning"
+      },
+      "medium": {
+        "name": "Medelstor boost",
+        "description": "Standardpafyllning",
+        "savings": "8% besparing"
+      },
+      "large": {
+        "name": "Stor boost",
+        "description": "Bulkkop",
+        "savings": "17% besparing"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Just nu",
+      "minutesAgo": "{count}m sedan",
+      "hoursAgo": "{count}h sedan",
+      "daysAgo": "{count}d sedan"
+    },
+    "noActivity": "Ingen aktivitet under denna period",
+    "stats": {
+      "balance": "Saldo",
+      "earned": "Intjanat",
+      "used": "Anvant",
+      "credits": "krediter",
+      "allTime": "totalt",
+      "lastRange": "senaste {range}",
+      "sessions": "{count} sessioner",
+      "avgDaily": "~{count}/dag snitt",
+      "plan": "Plan",
+      "free": "Gratis",
+      "noPlan": "Ingen plan",
+      "canceling": "Avslutar"
+    },
+    "monthlyUsage": "Manatlig kreditanvandning",
+    "remaining": "{used} / {total} kvar",
+    "usedPercent": "{percent}% anvant denna period",
+    "renews": "Fornya {date}",
+    "choosePlan": "Valj din plan",
+    "choosePlanDescription": "Prenumerera for att lasa upp AI-funktioner och fa manatliga krediter",
+    "savingsVsHuman": "Spara {amount}/man mot manniska",
+    "timeSaved": "{time} sparad manatligen",
+    "cheaper": "{multiplier} billigare",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/manad",
+    "creditsPerMonth": "{count} krediter /manad",
+    "processing": "Bearbetar...",
+    "subscribeTo": "Prenumerera pa {name}",
+    "transactionTypes": {
+      "credit_purchase": "Kreditkop",
+      "agent_usage": "Agentanvandning",
+      "refund": "Aterbetalning",
+      "bonus": "Bonusbeloning",
+      "subscription": "Prenumeration",
+      "subscription_grant": "Prenumerationstilldeln.",
+      "renewal": "Fornyelsekrediter",
+      "reactivation": "Ateraktivering"
+    },
+    "toasts": {
+      "paymentSuccess": "Betalning lyckades! Dina krediter har lagts till.",
+      "subscriptionActivated": "Prenumeration aktiverad!",
+      "paymentCanceled": "Betalningen avbrots. Inga debiteringar gjordes.",
+      "signInToSubscribe": "Logga in for att prenumerera",
+      "subscriptionCheckoutFailed": "Kunde inte starta prenumerationsutcheckningen. Forsok igen.",
+      "signInToPurchase": "Logga in for att kopa krediter",
+      "needSubscription": "Du behover en aktiv prenumeration for att kopa ytterligare krediter",
+      "checkoutFailed": "Kunde inte starta utcheckningen. Forsok igen.",
+      "manageFailed": "Kunde inte oppna prenumerationshantering. Forsok igen.",
+      "transactionsExported": "Transaktioner exporterade"
+    }
+  },
+  "apiKeys": {
+    "title": "Modellleverantorer",
+    "new": "ny",
+    "description": "Lagg till dina egna API-nycklar for att lasa upp atkomst till modeller.",
+    "securityNote": "Dina nycklar lagras sakert med end-to-end-kryptering.",
+    "apiKeyLabel": "{provider} API-nyckel",
+    "getApiKey": "Hamta API-nyckel",
+    "delete": "Radera",
+    "save": "Spara",
+    "deleteDialog": {
+      "title": "Radera API-nyckel",
+      "description": "Ar du saker pa att du vill radera din {provider} API-nyckel? Denna atgard kan inte angras och du forlorar atkomst till {provider}-modeller.",
+      "cancel": "Avbryt",
+      "confirm": "Radera"
+    },
+    "toasts": {
+      "saved": "API-nyckel sparad",
+      "savedDescription": "Din {provider} API-nyckel har sparats och modeller har lagts till i dina favoriter.",
+      "updatedDescription": "Din {provider} API-nyckel har uppdaterats.",
+      "saveFailed": "Kunde inte spara API-nyckel",
+      "saveFailedDescription": "Kunde inte spara {provider} API-nyckel. Forsok igen.",
+      "deleted": "API-nyckel raderad",
+      "deletedDescription": "Din {provider} API-nyckel har raderats.",
+      "deleteFailed": "Kunde inte radera API-nyckel",
+      "deleteFailedDescription": "Kunde inte radera {provider} API-nyckel. Forsok igen."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Profildetaljer",
+    "displayName": "Visningsnamn",
+    "namePlaceholder": "Ditt namn",
+    "company": "Foretag",
+    "companyPlaceholder": "Ditt foretag",
+    "website": "Webbplats",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Sparar...",
+    "saveChanges": "Spara andringar",
+    "account": "Konto",
+    "email": "E-post",
+    "verified": "Verifierad",
+    "signOut": "Logga ut",
+    "signOutDescription": "Logga ut fran denna enhet",
+    "toasts": {
+      "profileUpdated": "Profil uppdaterad",
+      "profileUpdateFailed": "Kunde inte uppdatera profil",
+      "signOutFailed": "Kunde inte logga ut"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Din data ar skyddad",
+    "dataProtectedDescription": "Foretagssakerhet med kryptering i vila och under overforning",
+    "features": {
+      "encryption": {
+        "title": "End-to-end-kryptering",
+        "description": "API-nycklar krypterade med AES-256-GCM. Dina inloggningsuppgifter lagras aldrig i klartext."
+      },
+      "rls": {
+        "title": "Radnivasakerhet",
+        "description": "Isolering pa databasniva sakertstaller att din data bara ar tillganglig for dig. Ingen korsklientsatkomst mojlig."
+      },
+      "privacy": {
+        "title": "Integritet genom design",
+        "description": "Vi samlar in minimal data som kravs for att tillhandahalla tjansten. Dina konversationer och filer forblir dina."
+      },
+      "session": {
+        "title": "Sessionssakerhet",
+        "description": "CSRF-skydd, sakra HTTP-only cookies och Content Security Policy-headers pa varje forfragan."
+      }
+    },
+    "legal": "Juridiskt",
+    "privacyPolicy": {
+      "title": "Integritetspolicy",
+      "description": "Hur vi samlar in, anvander och skyddar din data"
+    },
+    "termsOfService": {
+      "title": "Anvandarvillkor",
+      "description": "Vara villkor for anvandning"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Layout"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Sammanfattning",
+      "highlight": "Sammanfatta"
+    },
+    "code": {
+      "label": "Kod",
+      "highlight": "Bygg"
+    },
+    "research": {
+      "label": "Forskning",
+      "highlight": "Analysera"
+    },
+    "create": {
+      "label": "Skapa",
+      "highlight": "Generera"
+    },
+    "solve": {
+      "label": "Los",
+      "highlight": "Felsok"
+    },
+    "learn": {
+      "label": "Lar dig",
+      "highlight": "Forklara"
+    }
+  },
+  "loadingMessages": [
+    "Startar upp kiselhjarna",
+    "Vackerden digitala medvetandet",
+    "Initierar neurala banor",
+    "Snurrar upp kvantkarorna",
+    "Laddar fluxkondensatorn",
+    "Aktiverar stordatorn",
+    "Driver berakningsmatrisen",
+    "Kopplar in warp-driften",
+    "Frammanar kiselandan",
+    "Tandar elektronmotorn",
+    "Varmer upp transistorerna",
+    "Satter ihop bitar och bytes",
+    "Kalibrerar de digitala synapserna",
+    "Laddar CPU-kristallerna",
+    "Laddar medvetandeprotokollen",
+    "Initierar systemresurser",
+    "Forbereder berakningsmiljo",
+    "Uppratter saker anslutning",
+    "Tillhandahaller virtuella resurser",
+    "Konfigurerar systemparametrar",
+    "Startar virtuell instans",
+    "Aktiverar fjarrskrivbord",
+    "Driftsatter molnresurser",
+    "Paborjar systemstartsekvens",
+    "Forbereder koringsmiljon",
+    "Vackerden somniga datorn",
+    "Petar pa den digitala bjornen",
+    "Brygger lite berakningskaffe",
+    "Strackerpa de digitala musklerna",
+    "Oppnar de digitala ogonen",
+    "Startar upp",
+    "Slar pa",
+    "Kommer online",
+    "Startar systemet",
+    "Gor sig redo",
+    "Nastan dar",
+    "Forbereder arbetsyta",
+    "Laddar resurser",
+    "Systemet reser sig"
+  ],
+  "quickStart": {
+    "greetingName": "Hej {name}!",
+    "greetingDefault": "Hej!",
+    "subtitle": "Dina uppgifter körs på en säker, isolerad virtuell dator",
+    "tabs": {
+      "start": "Start",
+      "desktop": "Skrivbord",
+      "swarms": "Svärmar",
+      "schedules": "Scheman"
+    },
+    "items": {
+      "computerReady": "Dator redo",
+      "pickComputer": "Välj en dator",
+      "createComputer": "Skapa dator",
+      "loginsSaved": "Inloggningar sparade",
+      "addLogins": "Lägg till inloggningar",
+      "askAnything": "Fråga vad som helst",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Fjärrstyrning via mobil",
+      "freeDownload": "Gratis nedladdning",
+      "onePrompt": "En prompt",
+      "manyAgents": "Många agenter",
+      "combinedResult": "Kombinerat resultat",
+      "setCadence": "Ställ in frekvens",
+      "autoRuns": "Automatiska körningar",
+      "recurringResults": "Återkommande resultat",
+      "computerReadyDesc": "Ansluten och redo att utföra uppgifter",
+      "pickComputerDesc": "Välj bland dina tillgängliga maskiner",
+      "createComputerDesc": "Skapa en molndator på sekunder",
+      "loginsSavedDesc": "Krypterade inloggningsuppgifter redo för autofyll",
+      "addLoginsDesc": "Spara lösenord för automatisk åtkomst",
+      "askAnythingDesc": "Beskriv en uppgift och se AI arbeta",
+      "macWindowsDesc": "Inbyggd app för ditt skrivbord",
+      "mobileRemoteDesc": "Styr din agent från vilken enhet som helst",
+      "freeDownloadDesc": "Lätt installation, körs på sekunder",
+      "onePromptDesc": "Beskriv ditt mål med vanligt språk",
+      "manyAgentsDesc": "Agenter arbetar parallellt över maskiner",
+      "combinedResultDesc": "Alla resultat samlade i en rapport",
+      "setCadenceDesc": "Varje timme, dagligen, veckovis eller anpassad cron",
+      "autoRunsDesc": "Agenter körs utan inblandning",
+      "recurringResultsDesc": "Rapporter levererade enligt ditt schema"
+    },
+    "cta": {
+      "downloadApp": "Ladda ner appen",
+      "trySwarms": "Testa svärmar",
+      "setUp": "Konfigurera"
+    }
+  },
+  "machines": {
+    "title": "Mina datorer",
+    "subtitle": "Hantera dina AI-styrda skrivbordsmiljöer",
+    "guide": "Guide",
+    "newMachine": "Ny maskin",
+    "filters": {
+      "all": "Alla",
+      "running": "Aktiva",
+      "creating": "Skapas",
+      "stopped": "Stoppade"
+    },
+    "desktopPromo": {
+      "text": "Hoppa över VM — kör AI-agenter på din egen dator med den inbyggda appen. Styr skrivbordet från din telefon.",
+      "cta": "Hämta appen"
+    },
+    "emptyState": {
+      "title": "En riktig AI-anställd med full datoråtkomst",
+      "description": "Starta en isolerad virtuell maskin och låt AI-agenter surfa på webben, köra terminaler och styra skrivbordet — helt automatiskt.",
+      "feature1": {
+        "title": "Full skrivbordskontroll",
+        "description": "AI flyttar musen, skriver, klickar och navigerar som en riktig användare."
+      },
+      "feature2": {
+        "title": "Alla uppgifter automatiserade",
+        "description": "Webbläsare, terminal och UI — alla agenter arbetar tillsammans i en VM."
+      },
+      "feature3": {
+        "title": "Isolerat och säkert",
+        "description": "Varje maskin körs i sin egen container — ditt lokala system förblir orört."
+      },
+      "cta": "Skapa din första maskin"
+    },
+    "noMachines": "Inga maskiner hittades.",
+    "noFilteredMachines": "Inga {filter} maskiner",
+    "noFilteredDescription": "Inga maskiner har för närvarande status {filter}.",
+    "loadingMachines": "Laddar maskiner...",
+    "toasts": {
+      "deleted": "Maskinen har tagits bort",
+      "readyOpen": "Du kan nu ansluta till din maskin.",
+      "open": "Öppna",
+      "createFailed": "Försök skapa maskinen igen.",
+      "fetchFailed": "Kunde inte ladda maskiner"
+    }
+  },
+  "createMachine": {
+    "title": "Ny dator",
+    "subtitle": "Starta ett molnskrivbord — redo på ~30 sekunder",
+    "freeExpiry": "Gratisdatorer upphör efter ",
+    "freeExpiry2": "2 timmar",
+    "upgrade": "Uppgradera",
+    "limitReached": "Du har nått din datorgräns. Stoppa eller ta bort en befintlig dator för att skapa en ny.",
+    "upgradeMore": "Uppgradera för fler →",
+    "nameLabel": "Datornamn",
+    "namePlaceholder": "Min molnserver",
+    "nameError": "Datornamnet kan inte börja med \"local\"",
+    "nameRequired": "Ange ett datornamn",
+    "osLabel": "Operativsystem",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04-skrivbord"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows-skrivbord — förvänta buggar"
+    },
+    "osHintWindows": "Windows-skrivbord med Chrome (beta). Redo på ~2 minuter.",
+    "osHintLinux": "Ubuntu-skrivbord, tillgängligt via webbläsaren. Redo på ~30 sekunder.",
+    "stateLabel": "Datorstatus",
+    "restorePrevious": "Återställ föregående",
+    "restoreDescription": "Återuppta från senaste ögonblicksbild",
+    "startFresh": "Börja om",
+    "startFreshDescription": "Ren skrivbordsmiljö",
+    "cancel": "Avbryt",
+    "creating": "Skapar...",
+    "create": "Skapa dator",
+    "toasts": {
+      "restoringSnapshot": "Återställer dator från ögonblicksbild!",
+      "restoringDescription": "Ditt tidigare skrivbordsläge återställs. Redo på ~30 sekunder.",
+      "windowsCreated": "Skapande av Windows-dator har startats!",
+      "windowsDescription": "Ditt Windows-skrivbord startar. Redo på ~2 minuter.",
+      "linuxCreated": "Ditt skrivbord startar. Redo på ~30 sekunder.",
+      "sshCreated": "Din molndator startar. SSH-nyckeln blir tillgänglig när den är redo."
+    }
+  },
+  "secrets": {
+    "title": "Sparade inloggningsuppgifter",
+    "subtitle": "Lagras säkert och används automatiskt av AI-agenten vid inloggning",
+    "guide": "Guide",
+    "import": "Importera",
+    "addCredential": "Lägg till inloggningsuppgifter",
+    "securityNote": "Inloggningsuppgifter skickas aldrig till AI-modellen och visas aldrig i chatten — agenten fyller i dem direkt utan att se värdena",
+    "username": "Användarnamn",
+    "password": "Lösenord",
+    "hide": "Dölj",
+    "revealFor10s": "Visa i 10s",
+    "encrypted": "Krypterad",
+    "emptyState": {
+      "title": "Automatisk inloggning, helt automatiskt",
+      "description": "Spara inloggningsuppgifter en gång — AI-agenten loggar in automatiskt och fortsätter utan att störa dig",
+      "feature1": {
+        "title": "Inga avbrott",
+        "description": "Agenten stöter på ett inloggningsformulär, fyller i det och fortsätter uppgiften — inga frågor, inga pauser"
+      },
+      "feature2": {
+        "title": "Aldrig sedd av AI",
+        "description": "Dina inloggningsuppgifter injiceras direkt. AI-modellen ser aldrig de faktiska värdena"
+      },
+      "feature3": {
+        "title": "Vilken webbplats som helst",
+        "description": "Fungerar med inloggningsformulär på alla webbplatser — e-post, SaaS-verktyg, instrumentpaneler, allt"
+      },
+      "cta": "Lägg till dina första inloggningsuppgifter"
+    },
+    "deleteDialog": {
+      "title": "Ta bort inloggningsuppgifter?",
+      "description": "{name} ({service}) kommer att raderas permanent. AI-agenten kommer inte längre kunna använda dem.",
+      "cancel": "Avbryt",
+      "delete": "Ta bort"
+    },
+    "toasts": {
+      "loadFailed": "Kunde inte ladda inloggningsuppgifter",
+      "revealFailed": "Kunde inte visa lösenord",
+      "deleted": "Inloggningsuppgifter borttagna",
+      "deleteFailed": "Kunde inte ta bort inloggningsuppgifter"
+    },
+    "loading": "Laddar inloggningsuppgifter..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Enkel prissattning,",
+      "title2": "riktig autopilot",
+      "subtitle": "Borja gratis. Uppgradera nar du behover mer kraft."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Testa den #1 datoranvandaragenten",
+        "cta": "Borja gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Latt daglig automatisering",
+        "cta": "Skaffa Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Automatisera uppgifter varje dag",
+        "cta": "Skaffa Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Skala komplexa arbetsfloden",
+        "cta": "Valj Plus",
+        "badge": "Mest popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Obegransad tung automatisering",
+        "cta": "Skaffa Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Full webblasare, skrivbord och terminal",
+        "badge": "Karna"
+      },
+      "swarmMode": {
+        "name": "Svarmlagt",
+        "sequential": "Endast sekventiellt",
+        "parallel": "{count} agenter parallellt",
+        "badge": "Kraftfullt"
+      },
+      "security": {
+        "name": "Sakerhet",
+        "description": "Sandladeforpackat, E2E-krypterat",
+        "badge": "Alla planer"
+      },
+      "monthlyCredits": {
+        "name": "Manatliga krediter",
+        "payAsYouGo": "Betala per anvandning",
+        "creditsPerMonth": "{count} krediter/man"
+      },
+      "persistentMachines": {
+        "name": "Permanenta maskiner",
+        "temporary": "1 tillfallig VM (2 tim)",
+        "deletedAfterInactivity": "1 VM (raderas efter inaktivitet)",
+        "alwaysOn": "{count} alltid-pa VM",
+        "alwaysOnPlural": "{count} alltid-pa VM:ar"
+      },
+      "webSearch": {
+        "name": "Webbsokning",
+        "advanced": "Avancerad sokning och extraktion",
+        "basic": "Grundlaggande sokning"
+      }
+    },
+    "animations": {
+      "agentDescription": "Din agent styr en riktig dator — webblasare, filer och terminal",
+      "fillForm": "Fyll i formular",
+      "searchExtract": "Sok och extrahera",
+      "uploadReport": "Ladda upp rapport",
+      "navigateSite": "Navigera webbplats",
+      "creditsPerMonth": "krediter per manad",
+      "cr": "kr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2 tim grans",
+      "alwaysOn": "Alltid pa",
+      "tempVmDescription": "Tillfallig VM — aterstalls efter 2 timmar",
+      "persistentVmDescription": "Dina filer, appar och sessioner bevaras mellan uppgifter",
+      "sequentialOnly": "Endast sekventiell korning pa denna plan",
+      "yourTask": "Din uppgift",
+      "agentsWorking": "{count} agenter arbetar samtidigt",
+      "upgradeForExtraction": "Uppgradera for full extraktion",
+      "searchDescription": "Sok, skrapa och extrahera strukturerad data",
+      "basicSearchIncluded": "Grundlaggande sokning inkluderad",
+      "e2eEncryption": "E2E-kryptering",
+      "sandboxedVm": "Sandladeforpackad VM",
+      "destroyedAfterUse": "Forstors efter anvandning",
+      "everyPlan": "Alla planer. Inga undantag."
+    },
+    "perMonth": "/man",
+    "faqs": {
+      "credits": {
+        "q": "Vad raknas som en kredit?",
+        "a": "En kredit motsvarar ungefar en agenthandling — ett klick, en formularifyllning, en sokfraga eller en filhantering. En typisk flerstegsuppgift anvander 5-15 krediter."
+      },
+      "persistent": {
+        "q": "Vad innebar \"permanent maskin\"?",
+        "a": "Pa betalplaner fortsatter din VM att kora mellan uppgifter — ditt skrivbord, filer, webblasarsessioner och installerad programvara bevaras. Som din egen alltid-pa molndator."
+      },
+      "swarm": {
+        "q": "Vad ar svarmlagt?",
+        "a": "Svarmlagt delar en uppgift over flera maskiner som kor samtidigt. Istallet for att en agent gor 10 sokningar sekventiellt, gor flera agenter dem parallellt."
+      },
+      "cancel": {
+        "q": "Kan jag avbryta nar som helst?",
+        "a": "Ja. Inga kontrakt, inga avbokningsavgifter. Avbryt fran ditt kontosida och behall tillgangen till slutet av din faktureringsperiod."
+      },
+      "security": {
+        "q": "Ar min data saker?",
+        "a": "Varje uppgift kor i en helt isolerad VM som forstors efter anvandning. Alla anslutningar ar krypterade end-to-end och vi lagrar aldrig dina inloggningsuppgifter."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Anpassade krediter, dedikerade VM:ar, SLA, SSO och prioriterad support.",
+      "cta": "Kontakta oss"
+    },
+    "footer": {
+      "title": "Din AI-agent ar 60 sekunder bort",
+      "subtitle": "Registrera dig och lat Coasty skota jobbet.",
+      "noCreditCard": "Inget kreditkort",
+      "cancelAnytime": "Avbryt nar som helst",
+      "noCreditCardRequired": "Inget kreditkort kravs",
+      "cancelAnytimeNoContracts": "Avbryt nar som helst — inga kontrakt"
+    },
+    "questions": "Fragor"
+  },
+  "guide": {
+    "pageTitle": "Guide",
+    "pageSubtitle": "Fran forsta installationen till avancerade funktioner — lar dig hur du far ut det mesta av Coasty",
+    "completeGuide": "Den kompletta guiden",
+    "completeGuideSubtitle": "Allt du behover veta om Coasty",
+    "completeGuideDescription": "Fran forsta installationen till avancerade funktioner — lar dig hur du far ut det mesta av din AI-agent.",
+    "talkToCofounders": "Prata med grundarna",
+    "tabs": {
+      "overview": "Oversikt",
+      "gettingStarted": "Kom igang",
+      "chatTasks": "Chatt och uppgifter",
+      "machines": "Maskiner",
+      "credentials": "Inloggningsuppgifter",
+      "swarmMode": "Svarmlagt",
+      "workforce": "Scheman",
+      "desktopApp": "Skrivbordsapp",
+      "billing": "Fakturering och krediter"
+    },
+    "overview": {
+      "howItWorks": "Hur det fungerar",
+      "step1": "Beskriv uppgiften",
+      "step2": "Coasty planerar stegen",
+      "step3": "Utfor autonomt",
+      "step": "Steg",
+      "whatCanDo": "Vad Coasty kan gora",
+      "taskCount": "40+ uppgifter i 10 kategorier",
+      "categories": {
+        "sales": {
+          "name": "Forsaljning",
+          "desc": "Hitta 50 leads, skicka personliga e-postmeddelanden"
+        },
+        "marketing": {
+          "name": "Marknadsforing",
+          "desc": "Publicera blogginlagg, schemalgg sociala medier"
+        },
+        "jobApps": {
+          "name": "Jobbansokningar",
+          "desc": "Sok 20 jobb, anpassa varje CV"
+        },
+        "email": {
+          "name": "E-post",
+          "desc": "Skriv svar, massutskick, avprenumerera"
+        },
+        "dataEntry": {
+          "name": "Dataregistrering",
+          "desc": "Overfar data mellan appar, bygg kalkylblad"
+        },
+        "research": {
+          "name": "Forskning",
+          "desc": "Djupgaende rapporter, konkurrentbevakning"
+        },
+        "qaTesting": {
+          "name": "QA-testning",
+          "desc": "Testa registreringar, fuzz-formular, halsocheck"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Hitta kandidater, personlig kontakt"
+        },
+        "support": {
+          "name": "Support",
+          "desc": "Skriv svar, uppdatera hjalpdokument"
+        },
+        "productivity": {
+          "name": "Produktivitet",
+          "desc": "Boka resor, betala rakningar, hantera kalendrar"
+        }
+      },
+      "whyCoasty": "Varfor Coasty",
+      "notChatbot": "Inte en chatbot. Inte ett RPA-skript.",
+      "worksLikeHuman": {
+        "title": "Fungerar som en manniska",
+        "desc": "Ser, klickar, skriver, navigerar — precis som du"
+      },
+      "noScripts": {
+        "title": "Inga skript eller installationer",
+        "desc": "Vanlig text in, resultat ut"
+      },
+      "handlesUnexpected": {
+        "title": "Hanterar det ovantade",
+        "desc": "Anpassar sig till CAPTCHAs, popups, layoutandringar"
+      },
+      "runsInIsolation": {
+        "title": "Kor i isolering",
+        "desc": "Sandladeforpackad VM per session — inget lackt"
+      },
+      "ctaTitle": "Valj vilken uppgift som helst och prova",
+      "ctaSubtitle": "Redo att satta Coasty i arbete?",
+      "ctaDescription": "Beskriv vilken uppgift som helst fran denna guide och se Coasty hantera den.",
+      "ctaNote": "Borja gratis. Inget kreditkort kravs.",
+      "startTask": "Starta en uppgift",
+      "startFree": "Borja gratis",
+      "desktopApp": "Skrivbordsapp"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Registrera dig",
+          "desc": "Ett klick for att borja"
+        },
+        "createMachine": {
+          "title": "Skapa en maskin",
+          "desc": "Din agent far sin egen dator"
+        },
+        "saveCredentials": {
+          "title": "Spara inloggningsuppgifter",
+          "desc": "Krypterade inloggningar for alla webbplatser"
+        },
+        "giveTask": {
+          "title": "Ge en uppgift",
+          "desc": "Beskriv det. Se det handa."
+        }
+      },
+      "examplePrompts": [
+        "Sok 10 matchande jobb pa LinkedIn med mitt CV",
+        "Undersok konkurrentpriser och bygg ett jamforelsekalkylblad",
+        "Skriv och publicera ett blogginlagg om [amne] pa WordPress",
+        "Avprenumerera mig fran alla marknadsforingsmail i Gmail",
+        "Testa registreringsfldet pa min webbplats och rapportera eventuella buggar",
+        "Hitta 50 leads som matchar [ICP] pa LinkedIn och lagg till i mitt CRM"
+      ],
+      "quickPrompts": "Snabba prompter att prova",
+      "startFirstTask": "Starta din forsta uppgift"
+    },
+    "chatTasks": {
+      "commandCenter": "Ditt kommandocenter",
+      "describeTask": "Beskriv vilken uppgift som helst. Se det handa.",
+      "examplePrompt": "Hitta de 5 basta tradlosa tangentborden under $50 pa Amazon och jamfor dem i ett kalkylblad.",
+      "exampleResponse": "Jag soker pa Amazon och bygger en jamforelse. Oppnar webblasaren nu.",
+      "exampleDone": "Klart. Kalkylbladet ar sparat med pris, betyg och funktioner for alla 5 tangentbord.",
+      "describePlaceholder": "Beskriv din uppgift...",
+      "threeAgents": "Tre specialiserade agenter",
+      "autoAssigned": "Tilldelas automatiskt per steg.",
+      "browser": "Webblasare",
+      "browserDesc": "Navigera, klicka, fylla i formular, skrapa",
+      "terminal": "Terminal",
+      "terminalDesc": "Kor kommandon, installera, bearbeta filer",
+      "desktop": "Skrivbord",
+      "desktopDesc": "Klicka, skriva, scrolla, oppna appar",
+      "betterPrompts": "Skriv battre prompter",
+      "specificBeatsVague": "Specifikt slar vagt. Varje gang.",
+      "do": "Gor",
+      "dont": "Gor inte",
+      "doExample1": "Sok 10 mjukvaruingenjorsjobb pa LinkedIn. Anpassa varje personligt brev for att namna deras teknikstack.",
+      "dontExample1": "Sok jobb",
+      "doExample2": "Sok pa Google Flights efter SFO till JFK, 20-25 mars, tur och retur. Skarmavbilda de 3 billigaste.",
+      "dontExample2": "Hitta flyg",
+      "readyToTry": "Redo att prova?",
+      "openChat": "Oppna en chatt och beskriv vad du behover gjort.",
+      "startChat": "Starta en chatt"
+    },
+    "machinesTab": {
+      "title": "Dina maskiner",
+      "subtitle": "Fullstandiga Ubuntu-skrivbord du kan starta pa sekunder.",
+      "lifecycle": "Livscykel",
+      "lifecycleDesc": "Fem tillstand, helt automatiskt.",
+      "planLimits": "Plangranser",
+      "planCol": "Plan",
+      "machinesCol": "Maskiner",
+      "swarmAgentsCol": "Svarm-agenter",
+      "temp": "1 tillfallig",
+      "states": {
+        "creating": "Skapar",
+        "starting": "Startar",
+        "running": "Kor",
+        "stopping": "Stoppar",
+        "stopped": "Stoppad"
+      },
+      "newMachine": "+ Ny",
+      "researchVm": "Forsknings-VM",
+      "emailVm": "E-post-VM",
+      "testingVm": "Test-VM",
+      "cores": "{count} karnor",
+      "gb": "{count} GB",
+      "stop": "Stoppa",
+      "start": "Starta",
+      "provisioning": "Etablerar...",
+      "spinUp": "Starta en maskin",
+      "goToMachines": "Ga till Maskiner"
+    },
+    "credentialsTab": {
+      "loginDetected": "Inloggning upptackt",
+      "matched": "Matchad",
+      "credentialFound": "Inloggningsuppgift hittad",
+      "autoFilled": "Automatiskt ifylld",
+      "autoFillTitle": "Autofyll i aktion",
+      "autoFillDesc": "Inloggning upptackt, uppgift matchad, formular ifyllt. Automatiskt.",
+      "security": "Sakerhet",
+      "encrypted": "Krypterad",
+      "aes256": "AES-256 i vila",
+      "vmIsolated": "VM-isolerad",
+      "sandboxed": "Sandladeforpackad per session",
+      "neverLogged": "Aldrig loggad",
+      "zeroTrace": "Noll spar i loggar",
+      "savedCredentials": "Sparade inloggningsuppgifter",
+      "addOnce": "Lagg till en gang, autofyll overallt.",
+      "saveFirst": "Spara din forsta inloggningsuppgift",
+      "goToCredentials": "Ga till Sparade inloggningsuppgifter"
+    },
+    "swarmTab": {
+      "title": "Svarmlagt",
+      "runParallel": "Kor {count} maskiner parallellt",
+      "sameTask": "Samma uppgift, {multiplier}x resultatet, samma tid.",
+      "done": "Klart",
+      "running": "Kor",
+      "pending": "Vantar",
+      "result": "RESULTAT",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Parallell forskning",
+          "desc": "{count} konkurrenter, {count} maskiner, samtidigt"
+        },
+        "bulkApplications": {
+          "title": "Massansokningar",
+          "desc": "Sok over plattformar samtidigt"
+        },
+        "multiCitySearch": {
+          "title": "Flerstadssokning",
+          "desc": "Sok listor i {count} stader samtidigt"
+        },
+        "parallelOutreach": {
+          "title": "Parallell kontakt",
+          "desc": "Personliga e-postmeddelanden till olika segment"
+        },
+        "crossPlatform": {
+          "title": "Plattformsoberoende",
+          "desc": "Publicera pa {count} plattformar samtidigt"
+        },
+        "distributedTesting": {
+          "title": "Distribuerad testning",
+          "desc": "Testa flera scenarier parallellt"
+        }
+      },
+      "whatToSwarm": "Vad du kan svarma",
+      "availability": "Tillganglighet",
+      "freeNotAvailable": "Ej tillgangligt",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 agenter",
+      "startSwarm": "Starta en svarm"
+    },
+    "workforceTab": {
+      "title": "Arbetsstyrka",
+      "subtitle": "Ditt AI-foretag, pa autopilot",
+      "description": "Anstalda, team, utlosare — kor 24/7.",
+      "myCompany": "Mitt foretag",
+      "contentOps": "Innehallsoperationer",
+      "support": "Support",
+      "writer": "Skribent",
+      "seo": "SEO",
+      "social": "Socialt",
+      "inbox": "Inkorg",
+      "docs": "Dokument",
+      "concepts": "Grundlaggande koncept",
+      "conceptItems": {
+        "employees": {
+          "title": "Anstalda",
+          "desc": "AI-agenter som kor uppgifter pa schema, 24/7"
+        },
+        "teams": {
+          "title": "Team",
+          "desc": "Grupper av anstalda med delade instruktioner"
+        },
+        "sharedMemory": {
+          "title": "Delat minne",
+          "desc": "Nyckel-varde-lager som anstalda laser och skriver till"
+        },
+        "triggers": {
+          "title": "Utlosare",
+          "desc": "Kedja anstalda: en avslutar, nasta borjar"
+        },
+        "delegates": {
+          "title": "Delegater",
+          "desc": "Anstalda tilldelar deluppgifter till specialister"
+        },
+        "orgChart": {
+          "title": "Organisationsschema",
+          "desc": "Visuell karta over ditt foretags hierarki"
+        }
+      },
+      "chainTitle": "Kedja anstalda tillsammans",
+      "chainDesc": "Utdata floder fran en till nasta automatiskt.",
+      "scout": "Scout",
+      "scoutDesc": "undersoker konkurrenter",
+      "atlas": "Atlas",
+      "atlasDesc": "skriver blogginlagg",
+      "nova": "Nova",
+      "novaDesc": "publicerar pa sociala medier",
+      "done": "Klart",
+      "onComplete": "on_complete",
+      "waiting": "Vantar",
+      "templates": "Borja fran en mall",
+      "templateItems": {
+        "contentOps": {
+          "name": "Innehallsoperationer",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Kundsupport",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marknadsforing",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-handel",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} anstalda",
+      "openWorkforce": "Oppna Arbetsstyrka"
+    },
+    "billingTab": {
+      "credits": "Krediter",
+      "timeMetric": "Tid ar det enda mattet.",
+      "rate": "Taxa",
+      "rateValue": "10",
+      "creditsPerMin": "krediter/min",
+      "metered": "matts var 30:e sekund",
+      "example": "Exempel",
+      "minTask": "min uppgift",
+      "startCredits": "Start: {count} krediter",
+      "endCredits": "Slut: {count} krediter",
+      "creditsUsed": "{count} krediter anvanda",
+      "calculation": "{mins} min x 10 krediter/min",
+      "plans": "Planer",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 tillfallig",
+          "feature": "Grundlaggande sokning"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 alltid-pa",
+          "feature": "2 parallella agenter"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 alltid-pa",
+          "feature": "Avancerad sokning"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 alltid-pa",
+          "feature": "Prioriterad support"
+        },
+        "pro": {
+          "credits": "1 500",
+          "machines": "3 alltid-pa",
+          "feature": "SLA-garanti"
+        }
+      },
+      "perMonth": "{price}/man",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Hur debiteras krediter?",
+          "a": "10 krediter per minut av agentkorning, avrundat uppat. Kontrolleras var 30:e sekund under en session."
+        },
+        "runOut": {
+          "q": "Vad hander nar jag tar slut?",
+          "a": "Du behover minst 20 krediter for att starta en uppgift. Nar du nar 0 pausas uppgiften — kop ett tillagg for att fortsatta."
+        },
+        "rollOver": {
+          "q": "Rullar oanvanda krediter over?",
+          "a": "Krediter aterstalls varje faktureringsperiod. Anvand dem eller forlora dem."
+        }
+      },
+      "goToBilling": "Ga till Fakturering"
+    },
+    "desktopAppTab": {
+      "overlay": "Overlagret",
+      "overlayDesc": "Alltid dar. Klicka for att expandera.",
+      "compact": "Kompakt",
+      "expanded": "Expanderad",
+      "ready": "Redo",
+      "exampleTask": "Uppdatera mitt CV",
+      "exampleResponse": "Oppnar resume.docx...",
+      "describePlaceholder": "Beskriv din uppgift...",
+      "whatItControls": "Vad den styr",
+      "controls": {
+        "browser": {
+          "name": "Webblasare",
+          "desc": "Navigera, klicka, fylla i formular"
+        },
+        "files": {
+          "name": "Filer",
+          "desc": "Lasa, skriva, redigera overallt"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Kor valfritt kommando"
+        },
+        "desktop": {
+          "name": "Skrivbord",
+          "desc": "Klicka, skriva, scrolla"
+        },
+        "screenshots": {
+          "name": "Skarmdumpar",
+          "desc": "Se vad du ser"
+        },
+        "apps": {
+          "name": "Appar",
+          "desc": "Styr valfri installerad app"
+        }
+      },
+      "twoWays": "Tva satt att kora",
+      "cloudVm": "Moln-VM",
+      "cloudFeatures": {
+        "isolated": "Helt isolerad sandlada",
+        "freshBrowser": "Ny webblasare, ingen historik",
+        "maxSecurity": "Maximal sakerhet"
+      },
+      "desktopMode": "Skrivbord",
+      "desktopFeatures": {
+        "yourFiles": "Dina filer, direkt atkomst",
+        "yourApps": "Dina installerade appar",
+        "yourSessions": "Dina inloggade sessioner"
+      },
+      "downloadCta": "Ladda ner Skrivbordsappen"
+    }
+  },
+  "comparePage": {
+    "title": "Jämförelser",
+    "heroTitle": "Coasty vs. konkurrenterna",
+    "heroDescription": "Se hur den #1-rankade datanvändande AI-agenten (82% OSWorld) står sig mot alternativ. Funktion-för-funktion-jämförelser med riktig data.",
+    "categories": {
+      "aiAgent": "AI-agent",
+      "infrastructure": "Infrastruktur",
+      "rpa": "RPA",
+      "human": "Människa"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "Redo att testa den #1 datanvändande AI-agenten?",
+    "ctaButton": "Testa Coasty gratis",
+    "noCreditCard": "Inget kreditkort krävs",
+    "allComparisons": "Alla jämförelser",
+    "featureComparison": "Funktionsjämförelse",
+    "whyChooseCoasty": "Varför välja Coasty",
+    "strengthsOf": "{name} styrkor",
+    "ctaDescription": "82% OSWorld benchmark. VM-isolering. CAPTCHA-lösning. Från $20/månad.",
+    "watchCaseStudies": "Se fallstudier"
+  },
+  "agentSwarms": {
+    "badge": "Agent Swarm-läge",
+    "heroTitle1": "En prompt.",
+    "heroTitle2": "Oändliga maskiner.",
+    "heroTitle3": "Parallella resultat.",
+    "heroDescription": "Dela upp vilken uppgift som helst över flera isolerade miljöer som körs samtidigt. Arbete som tar en timme blir klart på minuter.",
+    "trySwarmMode": "Testa Swarm-läge",
+    "seeInAction": "Se det i aktion",
+    "liveExecution": "swarm-tree — livekörning",
+    "machineCount": "{count} maskiner",
+    "running": "körs",
+    "threeSteps": "Tre steg till parallell körning",
+    "steps": {
+      "typePrompt": {
+        "title": "Skriv din prompt",
+        "desc": "Beskriv uppgiften. Aktivera swarm-läge och välj antal maskiner."
+      },
+      "machinesSpinUp": {
+        "title": "Maskiner startar upp",
+        "desc": "Varje maskin får en fullständig isolerad miljö — webbläsare, terminal, skrivbord."
+      },
+      "resultsStream": {
+        "title": "Resultat streamar live",
+        "desc": "Följ varje maskin i realtid via swarm-trädvyn."
+      }
+    },
+    "demoTitle": "Agent Swarms-demo",
+    "demoDescription": "Se {count} maskiner hantera en CRM-forskningsuppgift samtidigt",
+    "prompt": "Prompt",
+    "swarm": "SWARM",
+    "run": "Kör",
+    "reset": "Återställ",
+    "allCompleted": "Alla {count} maskiner slutförda",
+    "speedComparison": "~{swarmTime} min istället för ~{seqTime} min — {multiplier}x snabbare",
+    "seqVsSwarm": "Sekventiell vs Swarm",
+    "tableHeaders": {
+      "task": "Uppgift",
+      "before": "Före",
+      "swarm": "Swarm",
+      "speed": "Hastighet"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM-verktyg forskning",
+      "qaPages": "QA över 8 sidor",
+      "leadEnrichment": "Lead-berikning (100)",
+      "priceMonitoring": "Prisövervakning"
+    },
+    "builtForParallel": "Byggd för parallellt arbete",
+    "useCases": {
+      "marketResearch": {
+        "title": "Marknadsundersökning i stor skala",
+        "desc": "Undersök flera konkurrenter, marknader eller produkter samtidigt på isolerade maskiner."
+      },
+      "leadGeneration": {
+        "title": "Leadgenerering",
+        "desc": "Berika profiler, hitta e-postadresser och verifiera social närvaro — timmars arbete på minuter."
+      },
+      "qaTesting": {
+        "title": "QA & regressionstestning",
+        "desc": "Kör testscenarier över olika sidor eller flöden parallellt."
+      },
+      "contentSocial": {
+        "title": "Innehåll & sociala medier",
+        "desc": "Publicera på flera plattformar samtidigt med isolering per maskin."
+      },
+      "dataExtraction": {
+        "title": "Dataextraktion",
+        "desc": "Samla in och strukturera data från dussintals källor samtidigt."
+      },
+      "scheduledRuns": {
+        "title": "Schemalagda körningar",
+        "desc": "Kombinera swarm-läge med schemaläggning för återkommande parallella uppgifter."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Riktig isolering",
+        "desc": "Varje maskin har sin egen webbläsare, terminal och skrivbord."
+      },
+      "tripleMachineLimit": {
+        "title": "3x maskingräns",
+        "desc": "Swarm-läge tredubblar ditt plans maskinkapacitet."
+      },
+      "liveTreeView": {
+        "title": "Liveträdvy",
+        "desc": "Skärmbilder och verktygsanrop streamar i realtid."
+      },
+      "autoAggregation": {
+        "title": "Automatisk aggregering",
+        "desc": "Resultat kombineras till en enda konsoliderad rapport."
+      },
+      "shareableRuns": {
+        "title": "Delbara körningar",
+        "desc": "Återspela fullständiga körtidslinjer via en länk."
+      },
+      "fullySandboxed": {
+        "title": "Helt sandboxad",
+        "desc": "Alla miljöer förstörs efter slutförande."
+      }
+    },
+    "readyCta": "Redo att köra uppgifter parallellt?",
+    "includedWithPaid": "Swarm-läge ingår i alla betalplaner.",
+    "getStarted": "Kom igång",
+    "viewPricing": "Visa priser",
+    "legend": {
+      "messages": "Meddelanden",
+      "broadcast": "Broadcast",
+      "sharedMemory": "Delat minne",
+      "help": "Hjälp"
+    },
+    "liveSwarmExecution": "Livekörning av swarm med agentkommunikation",
+    "popular": "Populär",
+    "avgRating": "{rating} snitt"
+  },
+  "downloadPage": {
+    "title": "Skrivbordsapp",
+    "heroTitle": "Låt Coasty styra din dator",
+    "heroDescription": "Din AI-assistent som tar över. Automatisera din webbläsare, ditt skrivbord och din terminal — eller styr din dator var som helst via vårt webbgränssnitt.",
+    "seeInAction": "Se det i aktion",
+    "overlayDescription": "En lättviktsöverlagring som svävar på ditt skrivbord. Styr den lokalt eller fjärrstyrt från vilken webbläsare som helst — din dator, ditt sätt.",
+    "recommended": "Rekommenderat för ditt system",
+    "coastyFor": "Coasty för {platform}",
+    "installerLabel": "{extension}-installationsprogram",
+    "beforeInstall": "Innan du installerar",
+    "beforeInstallDescription": "Coasty Desktop är helt nytt, så ditt operativsystem känner inte igen det än. Det är helt normalt för nysläppta appar — så här gör du:",
+    "windowsSteps": {
+      "step1": "Windows skyddade din dator",
+      "step2": "Mer information",
+      "step3": "Kör ändå"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop kan inte öppnas",
+      "step2": "Systeminställningar > Integritet och säkerhet",
+      "step3": "Öppna ändå"
+    },
+    "allPlatforms": "Alla plattformar",
+    "systemRequirements": {
+      "title": "Systemkrav",
+      "win1": "Windows 10 eller senare",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minst 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) eller senare",
+      "mac2": "Apple Silicon eller Intel",
+      "mac3": "Minst 4 GB RAM"
+    },
+    "whatsIncluded": "Vad som ingår",
+    "features": {
+      "browser": "Webbläsarautomatisering",
+      "desktop": "Skrivbordsautomatisering",
+      "terminal": "Terminalåtkomst",
+      "files": "Filoperationer",
+      "updates": "Automatiska uppdateringar",
+      "remote": "Styr från var som helst"
+    },
+    "browserCta": "Öppna Coasty i webbläsaren",
+    "browserCtaDescription": "Vill du styra din maskin var som helst ifrån?",
+    "loading": "Laddar...",
+    "downloadFor": "Ladda ner för {platform}",
+    "download": "Ladda ner",
+    "unavailable": "Ej tillgänglig"
+  },
+  "referralPage": {
+    "shareTitle": "Dela Coasty.",
+    "earnTitle": "Tjäna tillsammans.",
+    "shareDescription": "Ge vänner 50 gratis credits för att starta sin första AI-agent. Du får också 50 credits — varje gång någon går med.",
+    "features": [
+      "AI som faktiskt fungerar — riktig webbläsare, riktiga klick, riktiga resultat",
+      "Isolerat och säkert — varje agent körs i sin egen sandboxade VM",
+      "Körs medan du sover — schemalägg uppgifter och låt agenter sköta resten"
+    ],
+    "recentActivity": "Din senaste aktivitet",
+    "friendsCould": "Dina vänner skulle kunna göra detta också",
+    "giveGet": "Ge vänner 50 credits. Få 50 själv. Varje gång.",
+    "stats": {
+      "invited": "Inbjudna",
+      "earned": "Intjänat",
+      "perInvite": "Per inbjudan"
+    },
+    "tabs": {
+      "invite": "Bjud in vänner",
+      "feedback": "Skicka feedback"
+    },
+    "referralLink": "Din referenslänk",
+    "howItWorks": "Så fungerar det",
+    "howSteps": [
+      "Dela din länk med en vän",
+      "De registrerar sig och får 50 gratis credits",
+      "Du tjänar direkt 50 credits"
+    ],
+    "shareDirectly": "Dela direkt",
+    "yourReferrals": "Dina refereringar",
+    "invitedYou": "Bjud in dig",
+    "joinedViaLink": "Gick med via din länk",
+    "noReferrals": "Inga refereringar ännu",
+    "noReferralsHint": "Dela din länk ovan så tjänar ni båda 50 credits",
+    "feedbackThanks": "Tack för din feedback!",
+    "feedbackWeRead": "Vi läser varje enskilt meddelande.",
+    "sendAnother": "Skicka en till",
+    "feedbackTitle": "Berätta vad du tycker",
+    "feedbackSubtitle": "Buggrapporter, funktionsönskemål, eller bara säg hej",
+    "feedbackPlaceholder": "Vad tänker du på?",
+    "weReadEvery": "Vi läser varje meddelande",
+    "send": "Skicka",
+    "shareMessage": "Hej, jag har använt Coasty och det är riktigt coolt. Det är en AI som faktiskt kan använda en dator åt dig. Surfa, klicka, skriva, allt. Testa med min länk så får vi båda gratis credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-post"
+    },
+    "emailSubject": "Kolla in detta AI-verktyg",
+    "emailBody": "Denna AI kan faktiskt använda en dator åt dig. Surfa, klicka, skriva, allt."
+  },
+  "statusPage": {
+    "title": "Systemstatus",
+    "brandTitle": "Coasty Status",
+    "subtitle": "Driftstatus i realtid för alla Coasty-tjänster. Denna sida uppdateras automatiskt var 60:e sekund.",
+    "refresh": "Uppdatera",
+    "statuses": {
+      "operational": "Driftsäker",
+      "degraded": "Försämrad",
+      "outage": "Avbrott"
+    },
+    "overallStatuses": {
+      "allOperational": "Alla system driftsäkra",
+      "someDegraded": "Några system försämrade",
+      "disruption": "Tjänststörning upptäckt"
+    },
+    "overallDescriptions": {
+      "allOperational": "Alla tjänster körs smidigt utan upptäckta problem.",
+      "someDegraded": "Några tjänster upplever tröghet. Vi undersöker saken.",
+      "disruption": "Vi är medvetna om problemet och arbetar aktivt på en lösning."
+    },
+    "responseTime": "{ms}ms svarstid",
+    "uptimeLabel": "Drifttid 90 dagar",
+    "daysAgo": "90 dagar sedan",
+    "today": "Idag",
+    "overallUptime": "Övergripande drifttid 90 dagar",
+    "overallUptimeDesc": "Aggregerad tillgänglighet för alla tjänster",
+    "services": "Tjänster",
+    "clickUptime": "klicka för att se drifttid",
+    "lastChecked": "Senast kontrollerad {time} · Automatisk uppdatering var 60:e sekund",
+    "experiencingIssues": "Upplever du problem?",
+    "issuesDescription": "Om något inte verkar rätt, kontakta oss direkt.",
+    "talkToCofounders": "Prata med grundarna",
+    "emailUs": "Mejla oss",
+    "serviceNames": {
+      "website": "Webbplats",
+      "aiBackend": "AI Backend",
+      "database": "Databas",
+      "authentication": "Autentisering",
+      "aiModels": "AI-modeller",
+      "fileStorage": "Fillagring"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - #1 AI-agent för datoranvändning | AI-anställd för skrivbords- och webbläsarautomation",
+      "titleTemplate": "{title} | Coasty - AI-agent för datoranvändning",
+      "description": "Coasty är den #1-rankade AI-agenten för datoranvändning — 82% på OSWorld benchmark. Styr ett helt skrivbord som en människa: öppnar webbläsare, klickar, skriver, fyller i formulär, skickar e-post, hanterar kalkylblad. Äkta VM-isolering per session. Från $20/mo.",
+      "ogTitle": "Coasty - #1 AI-agent för datoranvändning | 82% OSWorld Benchmark",
+      "ogDescription": "AI-anställd som styr ett skrivbord som en människa. #1 på OSWorld benchmark (82%). Webbläsarautomation, skrivbordskontroll, CAPTCHA-lösning, VM-isolering. Från $20/mo.",
+      "twitterDescription": "AI-anställd som styr ett skrivbord som en människa. Öppnar webbläsare, klickar, skriver, fyller i formulär, skickar e-post. Äkta VM-isolering. $20/mo jämfört med $3,000/mo mänsklig virtuell assistent."
+    },
+    "compare": {
+      "title": "Jämför Coasty - AI-agentalternativ och konkurrentjämförelse",
+      "description": "Se hur Coastys #1-rankade AI-agent för datoranvändning står sig mot Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath och fler. Funktion-för-funktion-jämförelser med priser.",
+      "ogTitle": "Jämför Coasty med AI-agentalternativ",
+      "ogDescription": "Funktion-för-funktion-jämförelse av den #1-rankade AI-agenten för datoranvändning mot konkurrenter. Benchmarkpoäng, priser, funktioner."
+    },
+    "download": {
+      "title": "Ladda ner Coasty Desktop — AI-agent för Mac och Windows",
+      "description": "Ladda ner Coasty Desktop, den #1-rankade AI-agenten för datoranvändning som styr din lokala maskin. Webbläsarautomation, skrivbordskontroll, terminalåtkomst och filhantering. Tillgänglig för Windows och macOS.",
+      "ogTitle": "Ladda ner Coasty Desktop — AI-agent för Mac och Windows",
+      "ogDescription": "AI som styr din dator som en människa. Webbläsar-, skrivbords- och terminalautomation i en inbyggd app. #1 på OSWorld benchmark."
+    },
+    "guide": {
+      "title": "Vad kan Coasty göra? — Den kompletta guiden till AI-datorautomation",
+      "description": "Upptäck allt Coasty kan automatisera: försäljningsprospektering, e-postutskick, jobbansökningar, QA-testning, datainmatning, sociala medier, rekrytering, forskning och 100+ fler uppgifter.",
+      "ogTitle": "Vad kan Coasty göra? — Komplett AI-automationsguide",
+      "ogDescription": "Utforska 100+ uppgifter Coasty kan automatisera. Från försäljning till QA-testning, se exakt hur en AI-datoragent hanterar verkligt arbete."
+    },
+    "blog": {
+      "title": "Blogg - AI-agentinsikter, forskning om datoranvändning och fallstudier",
+      "description": "Djupdykningar i autonoma AI-agenter, teknik för datoranvändning, verkliga automationsfallstudier och framtiden för AI-anställda. Från teamet bakom den #1-rankade datoranvändningsagenten.",
+      "ogTitle": "Coasty-bloggen - AI-agentinsikter och fallstudier",
+      "ogDescription": "Djupdykningar i autonoma AI-agenter, teknik för datoranvändning och verkliga automationsfallstudier från den #1-rankade datoranvändningsagenten."
+    },
+    "results": {
+      "title": "Demos och resultat — Se Coasty AI-agent arbeta autonomt",
+      "description": "Se Coasty autonomt driva marknadsföringskampanjer, söka jobb, fylla i ansökningar, QA-testa produkter, skicka personliga e-postmeddelanden och mer. Verkliga fallstudier med videodemos.",
+      "ogTitle": "Demos — Se Coasty AI-agent arbeta autonomt",
+      "ogDescription": "Verkliga demos av AI som styr en dator: marknadsföring, jobbansökningar, QA-testning, e-postutskick och mer. #1 på OSWorld benchmark."
+    },
+    "terms": {
+      "title": "Användarvillkor",
+      "description": "Coastys användarvillkor. Läs villkoren som reglerar användningen av Coastys AI-anställdplattform, datoranvändningsagent och skrivbordsapplikation.",
+      "ogTitle": "Coasty — Användarvillkor",
+      "ogDescription": "Coastys användarvillkor. Läs villkoren som reglerar användningen av Coastys AI-anställdplattform, datoranvändningsagent och skrivbordsapplikation."
+    },
+    "privacy": {
+      "title": "Integritetspolicy",
+      "description": "Coastys integritetspolicy. Läs om hur vi skyddar dina data med VM-nivåisolering, krypterade sessioner, sandlådemiljöer och säkerhet i företagsklass.",
+      "ogTitle": "Coasty — Integritetspolicy",
+      "ogDescription": "Coastys integritetspolicy. Läs om hur vi skyddar dina data med VM-nivåisolering, krypterade sessioner, sandlådemiljöer och säkerhet i företagsklass."
+    },
+    "useCases": {
+      "title": "Användningsområden - Coasty AI-agent för affärsverksamhet",
+      "description": "Upptäck 12 sätt Coastys AI-agent automatiserar din verksamhet — konkurrentforskning, QA-testning, leadgenerering, e-postutskick och mer. Verkliga resultat.",
+      "ogTitle": "Användningsområden - Coasty AI-agent",
+      "ogDescription": "12 sätt att 10x:a din produktion på autopilot. Verkliga resultat, verkliga siffror."
+    },
+    "computerUse": {
+      "title": "AI-agent för datoranvändning — #1-rankad skrivbords-, webbläsar- och terminalautomation",
+      "description": "Coasty är den bästa AI-agenten för datoranvändning, rankad #1 på OSWorld (82%). Automatisera alla skrivbords-, webbläsar- eller terminaluppgifter med autonom AI som styr datorer som en människa.",
+      "ogTitle": "Coasty — Den #1-rankade AI-agenten för datoranvändning",
+      "ogDescription": "Den bästa datoranvändningsagenten rankad #1 på OSWorld. Automatisera alla skrivbords-, webbläsar- eller terminaluppgifter med AI."
+    },
+    "pricing": {
+      "title": "Priser — Coasty AI-agentplaner och priser",
+      "description": "Coasty-priser från $20/mo. Ersätt virtuella assistenter för $3,000/mo med en AI-anställd. Gratis plan tillgänglig. Kreditbaserad användning utan dolda avgifter.",
+      "ogTitle": "Coasty-priser — AI-agentplaner",
+      "ogDescription": "AI-anställd från $20/mo. Ersätt dyra VA:s med autonom AI. Gratis plan tillgänglig."
+    },
+    "faq": {
+      "q1": "Vad är Coasty?",
+      "a1": "Coasty är en AI-anställdplattform — en datoranvändningsagent som styr ett skrivbord som en människa. Den öppnar webbläsare, klickar, skriver, navigerar appar, fyller i formulär, skickar e-post och hanterar kalkylblad autonomt. Rankad #1 på OSWorld benchmark med 82% slutförandegrad över 369 verkliga uppgifter.",
+      "q2": "Hur jämförs Coasty med Anthropic Computer Use?",
+      "a2": "Medan Anthropic Computer Use tillhandahåller ett rått API för datorkontroll, är Coasty en produktionsklar plattform med hanterad VM-infrastruktur, inbyggd CAPTCHA-lösning, skrivbordsapp för Mac och Windows, stöd för flera modeller och den högsta OSWorld benchmark-poängen (82%). Coasty ger den kompletta lösningen — inte bara API:et.",
+      "q3": "Vad kostar Coasty?",
+      "a3": "Coasty börjar på $20/month för Starter-planen med en gratis plan tillgänglig. Jämför med $3,000+ per månad för en mänsklig virtuell assistent. Coasty arbetar 24/7 utan pauser, ingen utbildning behövs och omedelbar skalbarhet.",
+      "q4": "Är Coasty säkert att använda?",
+      "a4": "Ja. Varje Coasty-session körs i sin egen isolerade, sandlådebaserade virtuella maskin. Dina data är säkra, din maskin förblir orörd och inget läcker mellan sessioner. Detta är äkta VM-nivåisolering, inte bara containrar i en delad pool.",
+      "q5": "Vad är OSWorld benchmark?",
+      "a5": "OSWorld är ett benchmark för att utvärdera AI-agenter på verkliga datoruppgifter. Det testar 369 uppgifter inom webbläsare, kontorsprogram och systemoperationer. Coasty fick 82%, den högsta poängen av någon datoranvändningsagent — toppmodern prestanda.",
+      "q6": "Hur skiljer sig Coasty från RPA-verktyg som UiPath?",
+      "a6": "Traditionella RPA-verktyg som UiPath kräver bräcklig skriptning och går sönder när gränssnitt ändras. Coasty använder AI-vision för att förstå och interagera med alla gränssnitt, anpassar sig i realtid utan fördefinierade skript. Det fungerar som en människa, inte ett makro. Installation tar minuter istället för veckor.",
+      "q7": "Har Coasty en skrivbordsapp?",
+      "a7": "Ja. Coasty Desktop finns för både Mac och Windows. Den körs som ett flytande överlägg på ditt skrivbord och kan styra din lokala webbläsare, filer, terminal och applikationer direkt — ingen VM behövs för lokala uppgifter.",
+      "q8": "Vad kan Coasty automatisera?",
+      "a8": "Coasty kan automatisera praktiskt taget alla datoruppgifter: webbsurfning, formulärifyllning, e-postsändning, kalkylbladshantering, datainmatning, publicering på sociala medier, jobbansökningar, försäljningsprospektering, QA-testning, kundsupport, LinkedIn-rekrytering och mer. Om en människa kan göra det på en dator kan Coasty det också.",
+      "q9": "Hur jämförs Coasty med OpenAI Operator?",
+      "a9": "Coasty överträffar OpenAI Operator på OSWorld benchmark (82% vs ~40%), erbjuder äkta VM-nivåisolering för varje session, stödjer flera AI-modeller, inkluderar full skrivbordskontroll bortom bara webbläsaren och tillhandahåller ett ramverk med öppen källkod.",
+      "q10": "Kan Coasty lösa CAPTCHA:s?",
+      "a10": "Ja. Coasty har en inbyggd CAPTCHA-lösningspipeline, så den blockeras inte som konkurrerande AI-agenter. Detta är avgörande för verklig automation där CAPTCHA:s är vanliga på webbplatser."
+    },
+    "structuredData": {
+      "appDescription": "Den #1-rankade AI-agenten för datoranvändning. Coasty styr ett helt skrivbord som en människa — öppnar webbläsare, klickar, skriver, fyller i formulär, skickar e-post och hanterar kalkylblad autonomt. 82% på OSWorld benchmark. Äkta VM-nivåisolering. Inbyggd CAPTCHA-lösning. Från $20/month.",
+      "orgDescription": "Coasty bygger den #1-rankade AI-agenten för datoranvändning. Vår plattform erbjuder autonom skrivbordskontroll, webbläsarautomation och orkestering av flera agenter med äkta VM-nivåisolering.",
+      "productDescription": "AI-datoranvändningsagent som styr ett skrivbord som en människa. #1 på OSWorld benchmark (82%). Autonom webbläsarautomation, skrivbordskontroll, e-postsändning, formulärifyllning och kalkylbladshantering med äkta VM-nivåisolering.",
+      "websiteDescription": "#1 AI-agentplattform för datoranvändning. 82% OSWorld benchmark. Autonom webbläsar-, skrivbords- och terminalautomation med VM-isolering. Från $20/mo.",
+      "softwareDescription": "AI-datoranvändningsagent som styr ett helt skrivbord som en människa. #1 på OSWorld benchmark med 82% slutförandegrad över 369 verkliga uppgifter. Autonom webbläsarautomation, skrivbordskontroll, terminaloperationer, e-postsändning, formulärifyllning och kalkylbladshantering.",
+      "breadcrumbs": {
+        "home": "Hem",
+        "caseStudies": "AI-agent fallstudier",
+        "blog": "Blogg",
+        "download": "Ladda ner skrivbordsappen",
+        "compare": "Jämför AI-agenter"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Sidan hittades inte",
+      "description": "Tyvärr, denna sida finns inte."
+    },
+    "error": {
+      "title": "Något gick fel",
+      "description": "Ett oväntat fel inträffade. Försök igen.",
+      "tryAgain": "Försök igen"
+    }
+  },
+  "schedulesPage": {
+    "title": "Workforce",
+    "subtitle": "Din AI-arbetsstyrka — tilldela uppgifter och låt dem sköta resten",
+    "guide": "Guide",
+    "teamsTab": "Team",
+    "hireEmployee": "Anställ medarbetare",
+    "loading": "Laddar dina medarbetare...",
+    "onDuty": "{count} i tjänst",
+    "standby": "{count} i beredskap",
+    "company": "Företag",
+    "teams": "{count} team",
+    "employees": "{count} medarbetare",
+    "members": "{count} medlemmar",
+    "unassigned": "Ej tilldelade",
+    "add": "Lägg till",
+    "save": "Spara",
+    "cancel": "Avbryt",
+    "run": "Kör",
+    "delegate": "delegera",
+    "untitledEmployee": "Namnlös medarbetare",
+    "untitled": "Namnlös",
+    "guidelinesPlaceholder": "Riktlinjer...",
+    "today": "Idag",
+    "timesDaily": "{count} × dagligen",
+    "noEmployeesDay": "Inga medarbetare denna dag",
+    "noEmployeesScheduled": "Inga medarbetare schemalagda",
+    "recentActivity": "Senaste aktivitet",
+    "schedule": "Schema",
+    "emptyState": {
+      "openChat": "Öppna valfri chatt och klicka",
+      "assignEmployee": "Tilldela medarbetare",
+      "onThe": "i",
+      "topRight": "övre högra hörnet",
+      "toPutOnAutopilot": "för att sätta på autopilot",
+      "newChat": "Ny chatt"
+    },
+    "emptyWorkforce": {
+      "title": "Anställ din första medarbetare",
+      "description": "AI-medarbetare arbetar för dig — tilldela en uppgift, ställ in ett schema och de utför det automatiskt",
+      "flexibleShifts": {
+        "title": "Flexibla skift",
+        "desc": "Schemalägg medarbetare per timme, dag, vecka, månad — eller använd ett anpassat cron-uttryck"
+      },
+      "fullAutonomy": {
+        "title": "Full autonomi",
+        "desc": "Varje medarbetare får full tillgång till webbläsare, terminal och dina anslutna arbetsstationer"
+      },
+      "activityLogs": {
+        "title": "Aktivitetsloggar",
+        "desc": "Varje körning loggas så att du kan granska vad dina medarbetare åstadkom"
+      },
+      "startFromChat": "Börja från en chatt"
+    },
+    "filters": {
+      "all": "Alla",
+      "onDuty": "I tjänst",
+      "standby": "I beredskap"
+    },
+    "noMatch": "Inga medarbetare matchar detta filter",
+    "createTeam": {
+      "title": "Nytt team",
+      "subtitle": "Börja med en mall eller bygg från grunden",
+      "backToTemplates": "Tillbaka till mallar",
+      "customTeam": "Anpassat team",
+      "customDescription": "Skapa ett team med din egen konfiguration.",
+      "teamNameLabel": "Teamnamn",
+      "teamNamePlaceholder": "t.ex. Forskning, Marknadsföring, Teknik",
+      "guidelinesLabel": "Riktlinjer",
+      "optional": "(valfritt)",
+      "guidelinesPlaceholder": "Delade instruktioner som alla teammedlemmar följer...",
+      "suggestedEmployees": "Föreslagna medarbetare",
+      "suggestedCredentials": "Föreslagna inloggningsuppgifter",
+      "added": "Tillagd",
+      "addButton": "+ Lägg till",
+      "credentials": "Inloggningsuppgifter",
+      "addCredential": "+ Lägg till inloggningsuppgift",
+      "credentialHint": "Inloggningsuppgifter är krypterade. De inkluderas i teamets riktlinjer så att medarbetare vet vad som är tillgängligt.",
+      "settingUp": "Konfigurerar...",
+      "createEmployees": "Skapa {count} medarbetare",
+      "createTeamButton": "Skapa team"
+    },
+    "noTeams": {
+      "title": "Inga team ännu",
+      "description": "Team låter medarbetare dela kontext och minne. Skapa ett för att bygga ditt organisationsschema.",
+      "newTeam": "Nytt team"
+    },
+    "howItWorks": {
+      "title": "Så fungerar det",
+      "dragEmployees": "Dra medarbetare till ett team",
+      "clickToEdit": "Klicka för att redigera schema och inställningar",
+      "teamsShare": "Team delar minne och riktlinjer",
+      "dashedLines": "Streckade linjer — delegering mellan medarbetare"
+    },
+    "inactive": {
+      "title": "{count} medarbetare inaktiva",
+      "missingMachine": "{count} saknar en maskin — körs inte förrän de aktiveras",
+      "wontRun": "Körs inte förrän aktiverad",
+      "fixInEmployees": "Åtgärda i medarbetare"
+    },
+    "dragHint": "Dra otilldelade medarbetare till team för att lägga till dem",
+    "limits": {
+      "upgradePlan": "Uppgradera plan",
+      "manageMachines": "Hantera maskiner",
+      "manageEmployees": "Hantera medarbetare",
+      "machineLimit": "Du behöver en molnmaskin men har nått din gräns på {max} maskiner. Uppgradera din plan eller ta bort en oanvänd maskin.",
+      "employeeLimit": "Du har nått din medarbetargräns ({max} för {tier}-planen). Uppgradera din plan eller ta bort oanvända medarbetare.",
+      "templateLimit": "Denna mall kräver {needed} medarbetare men du har bara {available} platser kvar ({max} max för {tier}-planen). Uppgradera din plan eller ta bort oanvända medarbetare.",
+      "createFailed": "Kunde inte skapa medarbetare. Kontrollera dina kontogränser och försök igen.",
+      "teamFailed": "Kunde inte skapa team"
+    },
+    "provisioning": {
+      "checking": "Kontrollerar kontogränser...",
+      "usingMachine": "Använder maskin \"{name}\"...",
+      "assigningMachine": "Tilldelar till maskin \"{name}\" (körs när maskinen är redo)...",
+      "creatingMachine": "Skapar en ny maskin...",
+      "machineStarted": "Maskinprovisionering startad...",
+      "hiring": "Anställer {name} ({current}/{total})...",
+      "creatingTeam": "Skapar team..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Team skapat med {count} medarbetare ({failedCount} misslyckade: {names})",
+      "teamCreated": "Team {name} skapat med {count} medarbetare"
+    },
+    "credentialInstructions": "[TILLGÄNGLIGA INLOGGNINGSUPPGIFTER]\nFöljande tjänsteinloggningsuppgifter har konfigurerats och är tillgängliga för användning:\n{list}\nAnvänd dessa inloggningsuppgifter när du behöver logga in på dessa tjänster för att slutföra dina uppgifter.",
+    "templates": {
+      "contentOps": {
+        "name": "Innehållsoperationer",
+        "tagline": "Publicera konsekvent utan att lyfta ett finger",
+        "description": "En smidig innehållsmotor — skriver, optimerar och distribuerar innehåll på autopilot.",
+        "roles": {
+          "atlas": "Content Writer — skriver blogginlägg, nyhetsbrev och texter för sociala medier",
+          "echo": "SEO-analytiker — granskar sidor, spårar rankningar, föreslår sökordssmöjligheter",
+          "nova": "Social distributör — publicerar innehåll på plattformar och övervakar engagemang"
+        },
+        "credentials": {
+          "wordpress": "Publicera och hantera blogginlägg",
+          "twitter": "Publicera tweets och övervaka engagemang",
+          "linkedin": "Publicera professionellt innehåll och artiklar",
+          "searchConsole": "Spåra sökprestanda och indexering"
+        }
+      },
+      "customerSupport": {
+        "name": "Kundsupport",
+        "tagline": "24/7 supporttäckning med 3 medarbetare",
+        "description": "Övervakar inkorgar, löser vanliga problem och håller din kunskapsbas uppdaterad.",
+        "roles": {
+          "sage": "Inkorgövervakare — kontrollerar supportmejl, kategoriserar och svarar på vanliga frågor",
+          "iris": "Kunskapsbashanterare — uppdaterar hjälpdokument och FAQ baserat på återkommande problem",
+          "milo": "Feedbackanalytiker — sammanställer recensioner och supporttrender i veckorapporter"
+        },
+        "credentials": {
+          "gmail": "Övervaka och svara på supportmejl",
+          "zendesk": "Hantera supportärenden (eller din helpdesk)",
+          "notion": "Uppdatera kunskapsbas och dokumentation"
+        }
+      },
+      "researchIntel": {
+        "name": "Forskning och underrättelse",
+        "tagline": "Håll dig informerad utan manuellt arbete",
+        "description": "Övervakar konkurrenter, spårar branschtrender och sammanställer handlingsbara forskningsbriefar.",
+        "roles": {
+          "scout": "Konkurrentövervakare — spårar konkurrenters webbplatser, prissättning och funktionsändringar",
+          "wren": "Trendforskare — skannar branschnyheter, publikationer och sociala medier efter trender",
+          "quinn": "Briefsammanställare — syntetiserar resultat till strukturerade veckovisa underrättelserapporter"
+        },
+        "credentials": {
+          "google": "Webbforskning och sökning",
+          "linkedin": "Spåra konkurrenters rekryteringar och tillkännagivanden",
+          "notion": "Publicera forskningsbriefar och rapporter"
+        }
+      },
+      "marketing": {
+        "name": "Marknadsföringsavdelning",
+        "tagline": "Ett komplett marknadsföringsteam på två maskiner",
+        "description": "Innehållsskapande, sociala medier, SEO, konkurrentspårning och kampanjanalys — två koordinerade team.",
+        "roles": {
+          "atlas": "Innehållsstrateg — planerar innehållskalender, skriver längre texter",
+          "nova": "Social Media Manager — publicerar, engagerar och växer sociala kanaler",
+          "echo": "SEO-specialist — optimerar sidor, bygger interna länkar, spårar sökord",
+          "pixel": "E-postkampanjhanterare — skriver och skickar nyhetsbrev, spårar öppningar/klick",
+          "scout": "Konkurrentanalytiker — övervakar konkurrenters marknadsföringsåtgärder och rapporterar insikter",
+          "dash": "Annonskampanjövervakare — spårar annonsutgifter, ROAS och optimeringsmöjligheter",
+          "iris": "Analysrapportör — sammanställer prestandadashboards för alla kanaler"
+        },
+        "credentials": {
+          "wordpress": "Publicera blogginnehåll",
+          "twitter": "Hantering av sociala medier",
+          "linkedin": "Professionell innehållsdistribution",
+          "mailchimp": "E-postkampanjer och nyhetsbrev",
+          "analytics": "Trafik- och konverteringsanalys",
+          "googleAds": "Google Ads-kampanjhantering",
+          "metaAds": "Meta Ads och social hantering"
+        }
+      },
+      "ecommerce": {
+        "name": "E-handelsoperationer",
+        "tagline": "Driv din butik medan du sover",
+        "description": "Produkthantering, prisintelligens, lagerspårning, recensionshantering och tillväxtmarknadsföring för onlinebutiker.",
+        "roles": {
+          "cleo": "Produktlistare — skapar och uppdaterar produktbeskrivningar, bilder och metadata",
+          "onyx": "Prisövervakare — spårar konkurrentpriser och flaggar möjligheter till justeringar",
+          "luna": "Lagerspårare — övervakar lagernivåer och varnar vid lågt lager",
+          "sage": "Recensionshanterare — svarar på kundrecensioner och sammanställer sentiment",
+          "dash": "Annonskampanjoptimerare — hanterar produktannonser och shoppingkampanjer",
+          "flux": "E-postmarknadsförare — skickar övergivna kundvagns-, promo- och efterköpssekvenser",
+          "wren": "Analysrapportör — spårar intäkter, konverteringsgrader och tillväxtmått"
+        },
+        "credentials": {
+          "shopify": "Butikshantering och produktlistningar",
+          "amazon": "Amazon-marknadsplatshantering",
+          "googleAds": "Shoppingannonser och kampanjer",
+          "mailchimp": "Kund-e-postsekvenser",
+          "analytics": "Konverterings- och trafikanalys"
+        }
+      },
+      "engineering": {
+        "name": "Teknikteam",
+        "tagline": "Automatisera de tråkiga delarna av teknik",
+        "description": "Automatiserade kodgranskningar, beroendeövervakning, dokumentation, testning, driftsättningsövervakning och incidenthantering.",
+        "roles": {
+          "rune": "Code Reviewer — granskar öppna PR:er, föreslår förbättringar, kontrollerar säkerhetsproblem",
+          "koda": "Beroendeövervakare — spårar föråldrade paket, säkerhetsrekommendationer och breaking changes",
+          "aria": "Doc Writer — håller API-dokumentation, README:er och changelogs uppdaterade med senaste koden",
+          "blaze": "Testövervakare — kör testsviter, spårar instabila tester, rapporterar täckningstrender",
+          "frost": "Driftsättningsövervakare — bevakar CI/CD-pipelines, varnar vid fel, spårar driftsättningsfrekvens",
+          "neon": "Drifttid- och loggövervakare — övervakar tjänster, skannar loggar efter fel, skapar incidentrapporter"
+        },
+        "credentials": {
+          "github": "Repositoryåtkomst, PR-granskningar, issues",
+          "vercel": "Driftsättningsövervakning (eller din CI/CD)",
+          "sentry": "Felspårning och incidentvarningar",
+          "npm": "Paketregister för beroendekontroller"
+        }
+      },
+      "fullBusiness": {
+        "name": "Fullständig affärsverksamhet",
+        "tagline": "Ett helt företag, fullt automatiserat",
+        "description": "Försäljning, marknadsföring, support och administration — fyra avdelningar som samverkar på tre maskiner med delad intelligens.",
+        "roles": {
+          "atlas": "Leadgenerator — hittar och kvalificerar potentiella kunder från onlinekällor",
+          "dash": "CRM-hanterare — uppdaterar affärer, spårar pipeline och skickar uppföljningssekvenser",
+          "scout": "Förslagsskrivare — utformar säljförslag och presentationer från mallar",
+          "nova": "Content Marketer — skriver blogginlägg, fallstudier och marknadsföringstexter",
+          "echo": "Social Media Manager — publicerar innehåll och engagerar med publik",
+          "pixel": "E-postkampanjhanterare — kör drip-kampanjer och nyhetsbrevssekvenser",
+          "sage": "Supportledare — hanterar kundfrågor och löser problem",
+          "iris": "Knowledge Manager — underhåller hjälpdokument, FAQ och intern wiki",
+          "milo": "Data Analyst — sammanställer avdelningsövergripande rapporter och KPI-dashboards",
+          "wren": "Marknadsforskare — spårar branschtrender och konkurrensunderrättelser",
+          "quinn": "Operationskoordinator — kör veckovisa sammanfattningar och teamsynkroniseringar"
+        },
+        "credentials": {
+          "gmail": "E-postkommunikation och support",
+          "hubspot": "CRM och försäljningspipeline (eller ditt CRM)",
+          "linkedin": "Leadgenerering och professionellt nätverkande",
+          "mailchimp": "E-postmarknadsföringskampanjer",
+          "notion": "Intern wiki och dokumentation",
+          "analytics": "Webbanalys och rapportering",
+          "twitter": "Närvaro i sociala medier",
+          "zendesk": "Kundsupportärenden"
+        }
+      },
+      "growth": {
+        "name": "Tillväxt och förvärv",
+        "tagline": "Aggressiv tillväxt på full autopilot",
+        "description": "Outbound prospektering, inbound marknadsföring, konverteringsoptimering och analys — en dedikerad tillväxtmotor på tre maskiner.",
+        "roles": {
+          "blaze": "Outbound-prospektör — hittar beslutsfattare, undersöker företag, bygger leadlistor",
+          "flux": "E-post outreach — skickar personliga kalla mejl, hanterar uppföljningssekvenser",
+          "orion": "LinkedIn outreach — ansluter med prospekt och skickar personliga meddelanden",
+          "coral": "Innehållsskapare — producerar SEO-innehåll, landningssidetexter och lead magnets",
+          "taro": "Landningssideoptimerare — övervakar konverteringsgrader, föreslår och testar förbättringar",
+          "vale": "Annonskampanjhanterare — hanterar Google- och Meta-annonskampanjer från början till slut",
+          "ember": "Leadkvalificerare — kvalificerar inbound leads och dirigerar till lämplig uppföljning",
+          "haze": "Funnelanalytiker — spårar konverteringsmått i varje steg, identifierar flaskhalsar",
+          "dune": "Konkurrensunderrättelse — övervakar konkurrentkampanjer, prissättning och positioneringsändringar",
+          "kit": "Tillväxtrapportör — sammanställer dagliga/veckovisa tillväxtmått och experimentresultat"
+        },
+        "credentials": {
+          "linkedin": "Prospektering och outreach",
+          "gmail": "Kalla mejl och uppföljningssekvenser",
+          "hubspot": "Leadhantering och CRM",
+          "googleAds": "Betalda sökkampanjer",
+          "metaAds": "Meta-annonsering",
+          "analytics": "Funnel- och konverteringsanalys",
+          "ahrefs": "SEO-forskning och konkurrentanalys"
+        }
+      },
+      "saas": {
+        "name": "SaaS-operationer",
+        "tagline": "Driv ditt SaaS som en väloljad maskin",
+        "description": "Customer success, produktanalys, churn-förebyggande, funktionsspårning och automatiserad rapportering för SaaS-företag.",
+        "roles": {
+          "luna": "Customer Success-övervakare — spårar användarengagemang, identifierar riskkonton",
+          "sage": "Onboarding-assistent — guidar nya användare genom konfiguration, övervakar aktiveringsgrader",
+          "ivy": "Churn-förebyggare — når ut till avhoppande användare med återaktiveringskampanjer",
+          "rune": "Funktionsönskningsspårare — samlar använderfeedback och funktionsönskningar från alla kanaler",
+          "koda": "Produktanalys — spårar funktionsadoption, användarresor och engagemangsmått",
+          "neon": "Bugg- och problemövervakare — bevakar felloggar, användarrapporter och statussideincidenter",
+          "aria": "Changelog-skribent — dokumenterar releaser, uppdaterar kunskapsbas och hjälpcenter",
+          "frost": "Intäktsanalytiker — spårar MRR, churn-grad, LTV och expansionsintäkter",
+          "zara": "Konkurrentspårare — övervakar konkurrentfunktioner, prissättning och marknadspositionering"
+        },
+        "credentials": {
+          "stripe": "Prenumerations- och intäktsdata",
+          "intercom": "Kundmeddelanden och support (eller ditt verktyg)",
+          "mixpanel": "Produktanalys och användarspårning",
+          "gmail": "Kundkommunikation",
+          "notion": "Kunskapsbas och changelog",
+          "sentry": "Felövervakning och buggspårning",
+          "github": "Ärendespårning och funktionsönskningar"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "upp till 3",
+        "price": "$19/mån"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "upp till 10",
+        "price": "$50/mån"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "upp till 50",
+        "price": "$100/mån"
+      }
+    },
+    "frequencies": {
+      "daily": "dagligen",
+      "weekly": "veckovis",
+      "every_30_minutes": "var 30:e minut",
+      "every_6_hours": "var 6:e timme",
+      "every_12_hours": "var 12:e timme"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Konfigurera grundläggande datorinställningar",
+    "displayName": "Visningsnamn",
+    "defaultName": "Min dator",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Detta lösenord krävs för att ansluta till datorn"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Community",
+    "title": "Se hur folk använder det",
+    "subtitle": "Från leadforskning till QA-testning — se vad communityn automatiserar och inspireras till ditt nästa arbetsflöde.",
+    "sessionCount": "{count} sessioner delade av communityn",
+    "searchPlaceholder": "Sök efter uppgift, verktyg eller resultat...",
+    "emptyTitle": "Ingen har delat ännu — var den första",
+    "emptySubtitle": "När användare gör sina sessioner offentliga visas de här",
+    "noResultsTitle": "Inga träffar för den sökningen",
+    "noResultsSubtitle": "Försök med andra sökord",
+    "watchSession": "Titta på session",
+    "steps": "{count} steg",
+    "tryCoasty": "Testa Coasty"
+  }
+}

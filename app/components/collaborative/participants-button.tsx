@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import { Users, Crown, Shield, User, Copy } from "lucide-react"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { toast } from "@/components/ui/toast"
 
 interface Participant {
@@ -42,6 +43,7 @@ export function ParticipantsButton({
   inviteCode,
   className,
 }: ParticipantsButtonProps) {
+  const t = useTranslations("collaborative")
   const [isOpen, setIsOpen] = useState(false)
 
   const isOnline = (lastActiveAt: string) => {
@@ -77,12 +79,12 @@ export function ParticipantsButton({
     try {
       await navigator.clipboard.writeText(inviteCode)
       toast({
-        title: "Invite code copied!",
+        title: t("participants.codeCopied"),
         status: "success",
       })
     } catch (err) {
       toast({
-        title: "Failed to copy invite code",
+        title: t("participants.codeFailed"),
         status: "error",
       })
     }
@@ -93,12 +95,12 @@ export function ParticipantsButton({
       const inviteLink = `${window.location.origin}/join/${inviteCode}`
       await navigator.clipboard.writeText(inviteLink)
       toast({
-        title: "Invite link copied!",
+        title: t("participants.linkCopied"),
         status: "success",
       })
     } catch (err) {
       toast({
-        title: "Failed to copy invite link",
+        title: t("participants.linkFailed"),
         status: "error",
       })
     }
@@ -166,7 +168,7 @@ export function ParticipantsButton({
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4 text-muted-foreground" />
-              <h4 className="font-medium">Room Participants</h4>
+              <h4 className="font-medium">{t("participants.title")}</h4>
             </div>
             <p className="text-sm text-muted-foreground">{roomTitle}</p>
           </div>
@@ -180,7 +182,7 @@ export function ParticipantsButton({
               className="flex-1 h-8"
             >
               <Copy className="h-3 w-3 mr-1" />
-              Copy Code
+              {t("participants.copyCode")}
             </Button>
             <Button
               variant="outline"
@@ -189,7 +191,7 @@ export function ParticipantsButton({
               className="flex-1 h-8"
             >
               <Copy className="h-3 w-3 mr-1" />
-              Copy Link
+              {t("participants.copyLink")}
             </Button>
           </div>
 
@@ -229,7 +231,7 @@ export function ParticipantsButton({
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium truncate">
                         {participant.users.display_name || participant.users.email}
-                        {isCurrentUser && " (you)"}
+                        {isCurrentUser && ` ${t("participants.you")}`}
                       </span>
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
@@ -241,7 +243,7 @@ export function ParticipantsButton({
                         <span className="ml-1 capitalize">{participant.role}</span>
                       </Badge>
                       <span className="text-xs text-muted-foreground">
-                        {online ? "Online" : "Offline"}
+                        {online ? t("participants.online") : t("participants.offline")}
                       </span>
                     </div>
                   </div>

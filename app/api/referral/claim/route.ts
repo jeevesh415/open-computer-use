@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { createGuestServerClient } from "@/lib/supabase/server-guest"
+import { createServiceClient } from "@/lib/supabase/server-guest"
 import { NextRequest, NextResponse } from "next/server"
 
 export const runtime = "nodejs"
@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Use service role client for cross-user operations
-    const supabaseAdmin = await createGuestServerClient()
+    const supabaseAdmin = await createServiceClient()
     if (!supabaseAdmin) {
       return NextResponse.json({ error: "Service error" }, { status: 500 })
     }

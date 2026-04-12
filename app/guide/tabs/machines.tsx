@@ -2,166 +2,253 @@
 
 import { Fragment } from "react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 import {
   ArrowRight,
   Desktop,
-  Globe,
-  Terminal,
-  FolderOpen,
+  Cpu,
+  HardDrives,
   GearSix,
-  Trash,
   Play,
   Stop,
-  Clock,
-  CaretDown,
-  Spinner,
   CircleNotch,
-  VideoCamera,
 } from "@phosphor-icons/react"
 
-/* ─── animation variants ─── */
-
-const fade = {
-  hidden: { opacity: 0, y: 20 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.05, ease: [0.25, 0.1, 0.25, 1] as const },
-  }),
-}
+/* ─── animations ─── */
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.08 } },
 }
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
+}
+
+/* ─── CSS keyframes ─── */
+
+const machineStyles = `
+  @keyframes gv-pulse-green {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4) }
+    50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34,197,94,0) }
+  }
+  @keyframes gv-spin {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+  }
+  @keyframes gv-progress-fill {
+    0% { width: 0% }
+    60% { width: 72% }
+    80% { width: 88% }
+    100% { width: 95% }
+  }
+  @keyframes gv-fade-in {
+    0% { opacity: 0; transform: translateY(4px) }
+    100% { opacity: 1; transform: translateY(0) }
+  }
+  @keyframes gv-arrow-flow {
+    0% { opacity: 0.15; transform: translateX(-2px) }
+    50% { opacity: 0.5; transform: translateX(2px) }
+    100% { opacity: 0.15; transform: translateX(-2px) }
+  }
+  @keyframes gv-dot-appear {
+    0% { transform: scale(0); opacity: 0 }
+    60% { transform: scale(1.3); opacity: 1 }
+    100% { transform: scale(1); opacity: 1 }
+  }
+`
 
 /* ─── data ─── */
 
-interface MachineCard {
-  name: string
-  status: "running" | "stopped" | "creating"
-  cpu: number
-  ram: string
-  storage: string
-  autoShutdown?: string
-}
-
-const machines: MachineCard[] = [
-  {
-    name: "Research Machine",
-    status: "running",
-    cpu: 2,
-    ram: "4GB",
-    storage: "30GB",
-    autoShutdown: "45m remaining",
-  },
-  {
-    name: "Email Machine",
-    status: "stopped",
-    cpu: 2,
-    ram: "4GB",
-    storage: "30GB",
-  },
-  {
-    name: "Testing VM",
-    status: "creating",
-    cpu: 4,
-    ram: "8GB",
-    storage: "50GB",
-  },
-]
-
-const lifecycleSteps = [
-  { label: "Creating", color: "bg-blue-500", textColor: "text-blue-600 dark:text-blue-400", description: "VM is being provisioned (30\u201360 seconds)" },
-  { label: "Starting", color: "bg-amber-500", textColor: "text-amber-600 dark:text-amber-400", description: "Booting up the desktop environment" },
-  { label: "Running", color: "bg-emerald-500", textColor: "text-emerald-600 dark:text-emerald-400", description: "Ready for tasks \u2014 Coasty can connect" },
-  { label: "Stopping", color: "bg-orange-500", textColor: "text-orange-600 dark:text-orange-400", description: "Saving state and shutting down" },
-  { label: "Stopped", color: "bg-neutral-400", textColor: "text-muted-foreground", description: "No charges. Start anytime." },
-]
-
-const preInstalled = [
-  { icon: Globe, label: "Chrome Browser", description: "Full Chrome with extensions support" },
-  { icon: Terminal, label: "Terminal", description: "Bash shell with common CLI tools" },
-  { icon: FolderOpen, label: "File System", description: "Full filesystem \u2014 create, edit, organize files" },
-  { icon: Desktop, label: "Desktop Apps", description: "LibreOffice, text editors, and more" },
-]
-
 const planLimits = [
-  { plan: "Free", machines: "1 temporary VM (2hr)", swarm: "Not available" },
-  { plan: "Lite", machines: "1 always-on VM", swarm: "2 agents in parallel" },
-  { plan: "Starter", machines: "1 always-on VM", swarm: "3 agents in parallel" },
-  { plan: "Plus", machines: "2 always-on VMs", swarm: "6 agents in parallel" },
-  { plan: "Pro", machines: "3 always-on VMs", swarm: "9 agents in parallel" },
+  { plan: "Free", machines: "1 temp", swarm: "--" },
+  { plan: "Lite", machines: "1", swarm: "2" },
+  { plan: "Starter", machines: "1", swarm: "3" },
+  { plan: "Plus", machines: "2", swarm: "6" },
+  { plan: "Pro", machines: "3", swarm: "9" },
 ]
 
-/* ─── status helpers ─── */
+const lifecycleKeys = [
+  { key: "creating", dotClass: "bg-foreground/30" },
+  { key: "starting", dotClass: "bg-foreground/40" },
+  { key: "running", dotClass: "bg-foreground/60" },
+  { key: "stopping", dotClass: "bg-foreground/40" },
+  { key: "stopped", dotClass: "bg-foreground/20" },
+] as const
 
-function statusDot(status: MachineCard["status"]) {
-  if (status === "running") return "bg-emerald-500"
-  if (status === "creating") return "bg-blue-500"
-  return "bg-neutral-400"
-}
+/* ─── hero mock components ─── */
 
-function statusLabel(status: MachineCard["status"]) {
-  if (status === "running") return "Running"
-  if (status === "creating") return "Creating"
-  return "Stopped"
-}
-
-/* ─── mock components ─── */
-
-function MockMachineCard({ machine }: { machine: MachineCard }) {
+function DashboardMock({ t }: { t: any }) {
   return (
-    <div className="rounded-xl border border-border/40 bg-background/50 p-4 space-y-3">
-      <div className="flex items-center justify-between">
-        <h4 className="text-sm font-semibold text-foreground">{machine.name}</h4>
-        <div className="flex items-center gap-1.5">
-          {machine.status === "creating" ? (
-            <CircleNotch size={12} weight="bold" className="text-blue-500 animate-spin" />
-          ) : (
-            <span className={cn("h-2 w-2 rounded-full", statusDot(machine.status))} />
-          )}
-          <span className="text-xs text-muted-foreground/70">{statusLabel(machine.status)}</span>
+    <div className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 sm:p-6">
+      {/* Header bar */}
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <Desktop size={14} weight="duotone" className="text-foreground/40" />
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-foreground/40">
+            {t("title")}
+          </span>
+        </div>
+        <div className="h-6 px-3 rounded-md bg-foreground/[0.06] flex items-center">
+          <span className="text-[10px] text-foreground/30">{t("newMachine")}</span>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 text-[11px] text-muted-foreground/50">
-        <span>CPU: {machine.cpu}</span>
-        <span>\u00b7</span>
-        <span>RAM: {machine.ram}</span>
-        <span>\u00b7</span>
-        <span>Storage: {machine.storage}</span>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {/* Card 1: Running */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-foreground/70">{t("researchVm")}</span>
+            <div className="flex items-center gap-1.5">
+              <span
+                className="h-2 w-2 rounded-full bg-foreground/50"
+                style={{ animation: "gv-pulse-green 2s ease-in-out infinite" }}
+              />
+              <span className="text-[10px] text-foreground/40">{t("states.running")}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-[10px] text-foreground/25">
+            <span className="flex items-center gap-1"><Cpu size={10} /> {t("cores", { count: 2 })}</span>
+            <span className="flex items-center gap-1"><HardDrives size={10} /> {t("gb", { count: 4 })}</span>
+          </div>
+          <div className="flex gap-1.5">
+            <div className="h-6 px-2 rounded-md border border-foreground/[0.06] flex items-center gap-1 text-[10px] text-foreground/30">
+              <Stop size={10} /> {t("stop")}
+            </div>
+            <div className="h-6 px-2 rounded-md border border-foreground/[0.06] flex items-center gap-1 text-[10px] text-foreground/30">
+              <GearSix size={10} />
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2: Stopped */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] p-4 space-y-3 opacity-60">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-foreground/70">{t("emailVm")}</span>
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-foreground/15" />
+              <span className="text-[10px] text-foreground/30">{t("states.stopped")}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-[10px] text-foreground/20">
+            <span className="flex items-center gap-1"><Cpu size={10} /> {t("cores", { count: 2 })}</span>
+            <span className="flex items-center gap-1"><HardDrives size={10} /> {t("gb", { count: 4 })}</span>
+          </div>
+          <div className="flex gap-1.5">
+            <div className="h-6 px-2 rounded-md border border-foreground/[0.06] flex items-center gap-1 text-[10px] text-foreground/30">
+              <Play size={10} /> {t("start")}
+            </div>
+            <div className="h-6 px-2 rounded-md border border-foreground/[0.06] flex items-center gap-1 text-[10px] text-foreground/30">
+              <GearSix size={10} />
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Creating with progress bar */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-foreground/70">{t("testingVm")}</span>
+            <div className="flex items-center gap-1.5">
+              <CircleNotch
+                size={10}
+                weight="bold"
+                className="text-foreground/40"
+                style={{ animation: "gv-spin 1s linear infinite" }}
+              />
+              <span className="text-[10px] text-foreground/40">{t("states.creating")}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-[10px] text-foreground/25">
+            <span className="flex items-center gap-1"><Cpu size={10} /> {t("cores", { count: 4 })}</span>
+            <span className="flex items-center gap-1"><HardDrives size={10} /> {t("gb", { count: 8 })}</span>
+          </div>
+          {/* Progress bar */}
+          <div className="space-y-1.5">
+            <div className="h-1.5 w-full rounded-full bg-foreground/[0.06] overflow-hidden">
+              <div
+                className="h-full rounded-full bg-foreground/25"
+                style={{ animation: "gv-progress-fill 4s ease-in-out infinite" }}
+              />
+            </div>
+            <span className="text-[9px] text-foreground/25">{t("provisioning")}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ─── lifecycle flow ─── */
+
+function LifecycleFlow({ t }: { t: any }) {
+  return (
+    <div className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-5 sm:p-8">
+      {/* Desktop: horizontal */}
+      <div className="hidden sm:flex items-center justify-between">
+        {lifecycleKeys.map((step, i) => (
+          <Fragment key={step.key}>
+            <div className="flex flex-col items-center gap-2">
+              <div
+                className={`h-3 w-3 rounded-full ${step.dotClass}`}
+                style={{
+                  animation: `gv-dot-appear 0.4s ease forwards ${0.3 + i * 0.25}s`,
+                  opacity: 0,
+                }}
+              />
+              <span
+                className="text-[11px] font-medium text-foreground/50"
+                style={{
+                  animation: `gv-fade-in 0.3s ease forwards ${0.5 + i * 0.25}s`,
+                  opacity: 0,
+                }}
+              >
+                {t(`states.${step.key}`)}
+              </span>
+            </div>
+            {i < lifecycleKeys.length - 1 && (
+              <div
+                className="text-foreground/15 text-sm mx-1"
+                style={{ animation: `gv-arrow-flow 2s ease-in-out infinite ${i * 0.3}s` }}
+              >
+                &rarr;
+              </div>
+            )}
+          </Fragment>
+        ))}
       </div>
 
-      {machine.autoShutdown && (
-        <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground/50">
-          <Clock size={12} weight="duotone" />
-          <span>Auto-shutdown: {machine.autoShutdown}</span>
-        </div>
-      )}
-
-      <div className="flex items-center gap-2 pt-1">
-        {machine.status === "running" ? (
-          <button className="flex items-center gap-1 h-7 px-2.5 rounded-lg border border-border/40 text-[11px] text-muted-foreground hover:text-foreground transition-colors">
-            <Stop size={12} weight="duotone" />
-            Stop
-          </button>
-        ) : machine.status === "stopped" ? (
-          <button className="flex items-center gap-1 h-7 px-2.5 rounded-lg border border-border/40 text-[11px] text-muted-foreground hover:text-foreground transition-colors">
-            <Play size={12} weight="duotone" />
-            Start
-          </button>
-        ) : null}
-        <button className="flex items-center gap-1 h-7 px-2.5 rounded-lg border border-border/40 text-[11px] text-muted-foreground hover:text-foreground transition-colors">
-          <GearSix size={12} weight="duotone" />
-          Settings
-        </button>
-        <button className="flex items-center gap-1 h-7 px-2.5 rounded-lg border border-border/40 text-[11px] text-red-400/70 hover:text-red-400 transition-colors">
-          <Trash size={12} weight="duotone" />
-          Delete
-        </button>
+      {/* Mobile: vertical */}
+      <div className="flex flex-col gap-3 sm:hidden">
+        {lifecycleKeys.map((step, i) => (
+          <div key={step.key} className="flex items-center gap-3">
+            <div
+              className={`h-3 w-3 rounded-full shrink-0 ${step.dotClass}`}
+              style={{
+                animation: `gv-dot-appear 0.4s ease forwards ${0.3 + i * 0.25}s`,
+                opacity: 0,
+              }}
+            />
+            <span
+              className="text-[11px] font-medium text-foreground/50"
+              style={{
+                animation: `gv-fade-in 0.3s ease forwards ${0.5 + i * 0.25}s`,
+                opacity: 0,
+              }}
+            >
+              {t(`states.${step.key}`)}
+            </span>
+            {i < lifecycleKeys.length - 1 && (
+              <span
+                className="text-foreground/15 text-xs ml-auto"
+                style={{ animation: `gv-arrow-flow 2s ease-in-out infinite ${i * 0.3}s` }}
+              >
+                &darr;
+              </span>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -170,10 +257,12 @@ function MockMachineCard({ machine }: { machine: MachineCard }) {
 /* ─── main export ─── */
 
 export function MachinesTab({ inApp }: { inApp: boolean }) {
+  const t = useTranslations("guide.machinesTab")
   return (
     <div className="space-y-0">
+      <style dangerouslySetInnerHTML={{ __html: machineStyles }} />
 
-      {/* ── Section 1: Your Virtual Computers ── */}
+      {/* ── Section 1: Machine Dashboard Hero ── */}
       <motion.section
         initial="hidden"
         whileInView="show"
@@ -181,43 +270,25 @@ export function MachinesTab({ inApp }: { inApp: boolean }) {
         variants={stagger}
         className="mb-14 sm:mb-20"
       >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Virtual Machines
-        </motion.p>
         <motion.h2
-          variants={fade}
-          custom={1}
-          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2"
         >
-          Your Virtual Computers
+          {t("title")}
         </motion.h2>
         <motion.p
-          variants={fade}
-          custom={2}
-          className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
+          variants={fadeUp}
+          className="text-sm text-foreground/40 mb-8"
         >
-          Each machine is a full Ubuntu desktop with Chrome, terminal, and desktop apps &mdash; isolated and secure.
-          Coasty connects to these machines to execute your tasks.
+          {t("subtitle")}
         </motion.p>
 
-        <motion.div
-          variants={fade}
-          custom={3}
-          className="rounded-2xl border border-border/40 bg-card/50 p-4 sm:p-6"
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {machines.map((m) => (
-              <MockMachineCard key={m.name} machine={m} />
-            ))}
-          </div>
+        <motion.div variants={fadeUp}>
+          <DashboardMock t={t} />
         </motion.div>
       </motion.section>
 
-      {/* ── Section 2: Machine Lifecycle ── */}
+      {/* ── Section 2: Lifecycle Flow ── */}
       <motion.section
         initial="hidden"
         whileInView="show"
@@ -225,311 +296,62 @@ export function MachinesTab({ inApp }: { inApp: boolean }) {
         variants={stagger}
         className="mb-14 sm:mb-20"
       >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Lifecycle
-        </motion.p>
         <motion.h2
-          variants={fade}
-          custom={1}
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2"
+        >
+          {t("lifecycle")}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="text-sm text-foreground/40 mb-8"
+        >
+          {t("lifecycleDesc")}
+        </motion.p>
+
+        <motion.div variants={fadeUp}>
+          <LifecycleFlow t={t} />
+        </motion.div>
+      </motion.section>
+
+      {/* ── Section 3: Plan Limits ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={stagger}
+        className="mb-14 sm:mb-20"
+      >
+        <motion.h2
+          variants={fadeUp}
           className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
         >
-          Machine Lifecycle
-        </motion.h2>
-
-        {/* Horizontal flow on desktop, vertical on mobile */}
-        <motion.div
-          variants={fade}
-          custom={2}
-          className="rounded-2xl border border-border/40 bg-card/50 p-5 sm:p-8"
-        >
-          {/* Desktop: horizontal */}
-          <div className="hidden sm:flex items-start gap-0">
-            {lifecycleSteps.map((step, i) => (
-              <div key={step.label} className="flex items-start flex-1">
-                <div className="flex flex-col items-center text-center flex-1">
-                  <span className={cn("h-3 w-3 rounded-full mb-2", step.color)} />
-                  <span className={cn("text-sm font-semibold mb-1", step.textColor)}>
-                    {step.label}
-                  </span>
-                  <span className="text-[11px] text-muted-foreground/50 leading-snug px-2">
-                    {step.description}
-                  </span>
-                </div>
-                {i < lifecycleSteps.length - 1 && (
-                  <span className="text-muted-foreground/30 mt-0.5 text-lg shrink-0">&rarr;</span>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile: vertical */}
-          <div className="flex flex-col gap-4 sm:hidden">
-            {lifecycleSteps.map((step, i) => (
-              <div key={step.label}>
-                <div className="flex items-center gap-3">
-                  <span className={cn("h-3 w-3 rounded-full shrink-0", step.color)} />
-                  <span className={cn("text-sm font-semibold", step.textColor)}>
-                    {step.label}
-                  </span>
-                </div>
-                <p className="text-[12px] text-muted-foreground/50 leading-snug ml-6 mt-1">
-                  {step.description}
-                </p>
-                {i < lifecycleSteps.length - 1 && (
-                  <div className="ml-[5px] mt-2 mb-0 h-3 border-l border-border/40" />
-                )}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* ── Section 3: Auto-Shutdown ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-        className="mb-14 sm:mb-20"
-      >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Cost Saving
-        </motion.p>
-        <motion.h2
-          variants={fade}
-          custom={1}
-          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-        >
-          Auto-Shutdown
-        </motion.h2>
-        <motion.p
-          variants={fade}
-          custom={2}
-          className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
-        >
-          Machines auto-shutdown after a period of inactivity to save credits. You won&apos;t be charged while a machine is stopped.
-        </motion.p>
-
-        <motion.div
-          variants={fade}
-          custom={3}
-          className="rounded-2xl border border-border/40 bg-card/50 p-5 sm:p-6"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/[0.06] dark:bg-amber-400/[0.08]">
-              <Clock size={24} weight="duotone" className="text-amber-600 dark:text-amber-400" />
-            </div>
-            <div>
-              <p className="text-lg font-semibold text-foreground tracking-tight font-mono">
-                Auto-shutdown in 45:00
-              </p>
-              <p className="text-[12px] text-muted-foreground/50 mt-0.5">
-                Research Machine
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-border/30 bg-background/50 p-3.5">
-            <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-              Default is 60 minutes. Running a task resets the timer. You can also manually stop a machine at any time from the Machines page.
-            </p>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* ── Section 4: Selecting a Machine for Tasks ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-        className="mb-14 sm:mb-20"
-      >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Task Setup
-        </motion.p>
-        <motion.h2
-          variants={fade}
-          custom={1}
-          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-        >
-          Selecting a Machine for Tasks
-        </motion.h2>
-        <motion.p
-          variants={fade}
-          custom={2}
-          className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
-        >
-          When starting a task, choose which machine Coasty should connect to using the VM selector in the chat input.
-        </motion.p>
-
-        <motion.div
-          variants={fade}
-          custom={3}
-          className="rounded-2xl border border-border/40 bg-card/50 p-5 sm:p-6"
-        >
-          {/* Mock dropdown */}
-          <div className="max-w-xs">
-            <div className="rounded-xl border border-border/40 bg-background/80 overflow-hidden">
-              {/* Dropdown header */}
-              <div className="flex items-center justify-between px-3.5 py-2.5 border-b border-border/30">
-                <span className="text-xs font-medium text-muted-foreground/60 uppercase tracking-wider">
-                  Select Machine
-                </span>
-                <CaretDown size={12} weight="bold" className="text-muted-foreground/40" />
-              </div>
-
-              {/* Option 1 */}
-              <div className="flex items-center gap-3 px-3.5 py-3 hover:bg-foreground/[0.02] transition-colors border-b border-border/20">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <span className="text-sm text-foreground">Research Machine</span>
-                </div>
-                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">Running</span>
-              </div>
-
-              {/* Option 2 */}
-              <div className="flex items-center gap-3 px-3.5 py-3 hover:bg-foreground/[0.02] transition-colors opacity-60">
-                <span className="h-2 w-2 rounded-full bg-neutral-400 shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <span className="text-sm text-foreground">Email Machine</span>
-                </div>
-                <span className="text-[10px] text-muted-foreground/50 font-medium">Stopped</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-border/30 bg-background/50 p-3.5 mt-4">
-            <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-              Only running machines can be selected. Start a stopped machine from the Machines page before assigning it to a task.
-            </p>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* ── Section 5: What's Inside Each Machine ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-        className="mb-14 sm:mb-20"
-      >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Pre-Installed
-        </motion.p>
-        <motion.h2
-          variants={fade}
-          custom={1}
-          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
-        >
-          What&apos;s Inside Each Machine
-        </motion.h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {preInstalled.map((item, i) => {
-            const Icon = item.icon
-            return (
-              <motion.div
-                key={item.label}
-                variants={fade}
-                custom={i + 2}
-                className="rounded-2xl border border-border/40 bg-card/50 p-5"
-              >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground/[0.04] dark:bg-foreground/[0.06] mb-3">
-                  <Icon size={18} weight="duotone" className="text-foreground/70" />
-                </div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">{item.label}</h3>
-                <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            )
-          })}
-        </div>
-      </motion.section>
-
-      {/* ── Section 6: Machine Limits by Plan ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-        className="mb-14 sm:mb-20"
-      >
-        <motion.p
-          variants={fade}
-          custom={0}
-          className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-        >
-          Plans
-        </motion.p>
-        <motion.h2
-          variants={fade}
-          custom={1}
-          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
-        >
-          Machine Limits by Plan
+          {t("planLimits")}
         </motion.h2>
 
         <motion.div
-          variants={fade}
-          custom={2}
-          className="rounded-2xl border border-border/40 bg-card/50 overflow-hidden"
+          variants={fadeUp}
+          className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] overflow-hidden"
         >
-          <div className="grid grid-cols-3 gap-px bg-border/20">
-            <div className="bg-card/80 px-4 py-3 text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">
-              Plan
-            </div>
-            <div className="bg-card/80 px-4 py-3 text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">
-              Persistent Machines
-            </div>
-            <div className="bg-card/80 px-4 py-3 text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider">
-              Swarm Mode
-            </div>
-            {planLimits.map((row) => (
-              <Fragment key={row.plan}>
-                <div className="bg-background/50 px-4 py-3 text-sm font-medium text-foreground">
-                  {row.plan}
-                </div>
-                <div className="bg-background/50 px-4 py-3 text-sm text-muted-foreground/70">
-                  {row.machines}
-                </div>
-                <div className={cn(
-                  "bg-background/50 px-4 py-3 text-sm",
-                  row.swarm === "Not available" ? "text-muted-foreground/40" : "text-muted-foreground/70"
-                )}>
-                  {row.swarm}
-                </div>
-              </Fragment>
-            ))}
+          <div className="grid grid-cols-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-foreground/30 border-b border-foreground/[0.06]">
+            <div className="px-4 py-3">{t("planCol")}</div>
+            <div className="px-4 py-3">{t("machinesCol")}</div>
+            <div className="px-4 py-3">{t("swarmAgentsCol")}</div>
           </div>
-        </motion.div>
-
-        <motion.div
-          variants={fade}
-          custom={3}
-          className="rounded-xl border border-border/30 bg-background/50 p-3.5 mt-4"
-        >
-          <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-            Swarm mode lets you run tasks on multiple machines in parallel. Each plan has a set number of parallel agents (2–9). Swarm machines are temporary and auto-delete after the task completes.
-          </p>
+          {planLimits.map((row, i) => (
+            <div
+              key={row.plan}
+              className="grid grid-cols-3 border-b border-foreground/[0.03] last:border-b-0"
+              style={{
+                animation: `gv-fade-in 0.3s ease forwards ${0.2 + i * 0.1}s`,
+                opacity: 0,
+              }}
+            >
+              <div className="px-4 py-2.5 text-sm font-medium text-foreground/60">{row.plan}</div>
+              <div className="px-4 py-2.5 text-sm text-foreground/40">{row.machines}</div>
+              <div className="px-4 py-2.5 text-sm text-foreground/30">{row.swarm}</div>
+            </div>
+          ))}
         </motion.div>
       </motion.section>
 
@@ -538,38 +360,20 @@ export function MachinesTab({ inApp }: { inApp: boolean }) {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        className="rounded-2xl border border-border/40 bg-card/30 text-center p-6 sm:p-8"
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] text-center p-8"
       >
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-          Try it now
-        </p>
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-3">
-          Ready to spin up a machine?
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-6">
+          {t("spinUp")}
         </h2>
-        <p className="text-sm text-muted-foreground/60 max-w-lg mx-auto mb-6">
-          Go to the Machines page to create, manage, and connect to your virtual computers.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link
-            href="/machines"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Go to Machines
-            <ArrowRight size={14} weight="bold" />
-          </Link>
-          <a
-            href="https://cal.com/coasty/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl border border-border/60 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition-all"
-          >
-            <VideoCamera size={16} weight="duotone" />
-            Talk to Cofounders
-          </a>
-        </div>
+        <Link
+          href="/machines"
+          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          {t("goToMachines")}
+          <ArrowRight size={14} weight="bold" />
+        </Link>
       </motion.section>
-
     </div>
   )
 }

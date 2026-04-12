@@ -2,10 +2,12 @@ import { createClient } from "@/lib/supabase/server"
 import { HomeClient } from "./home-client"
 import { FAQSchema } from "./seo-schemas"
 import { redirect } from "next/navigation"
+import { getLocale } from "next-intl/server"
 
 export const dynamic = "force-dynamic"
 
 export default async function Home() {
+  const locale = await getLocale()
   const supabase = await createClient()
   let isAuthenticated = false
 
@@ -35,7 +37,7 @@ export default async function Home() {
 
   return (
     <>
-      <FAQSchema />
+      <FAQSchema locale={locale} />
       <HomeClient isAuthenticated={isAuthenticated} />
     </>
   )

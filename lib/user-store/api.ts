@@ -20,9 +20,6 @@ export async function fetchUserProfile(
     return null
   }
 
-  // Don't return anonymous users
-  if (data.anonymous) return null
-
   return {
     ...data,
     profile_image: data.profile_image || "",

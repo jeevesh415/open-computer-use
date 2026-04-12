@@ -13,6 +13,7 @@ import {
 import { X } from "@phosphor-icons/react"
 import Image from "next/image"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 type FileItemProps = {
   file: File
@@ -20,6 +21,7 @@ type FileItemProps = {
 }
 
 export function FileItem({ file, onRemove }: FileItemProps) {
+  const t = useTranslations("chatInput")
   const [isRemoving, setIsRemoving] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -76,12 +78,12 @@ export function FileItem({ file, onRemove }: FileItemProps) {
               type="button"
               onClick={handleRemove}
               className="border-background absolute top-1 right-1 z-10 inline-flex size-6 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] bg-black text-white shadow-none transition-colors"
-              aria-label="Remove file"
+              aria-label={t("removeFile")}
             >
               <X className="size-3" />
             </button>
           </TooltipTrigger>
-          <TooltipContent>Remove file</TooltipContent>
+          <TooltipContent>{t("removeFile")}</TooltipContent>
         </Tooltip>
       ) : null}
     </div>

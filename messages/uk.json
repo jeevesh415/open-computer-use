@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Почати безкоштовно",
+    "bookDemo": "Замовити демо",
+    "tryCoastyFree": "Спробуйте Coasty безкоштовно",
+    "learnMore": "Дізнатися більше",
+    "watchSession": "Переглянути сесію",
+    "compareAllPlans": "Порівняти всі плани та функції",
+    "allRightsReserved": "Усі права захищені.",
+    "privacy": "Конфіденційність",
+    "terms": "Умови",
+    "recommended": "Рекомендовано",
+    "month": "місяць",
+    "creditsPerMonth": "{count} кредитів/міс.",
+    "agentsInParallel": "{count} агентів паралельно"
+  },
+  "header": {
+    "useCases": "Застосування",
+    "blog": "Блог",
+    "agentSwarms": "Agent Swarms",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Порівняти",
+    "demos": "Демо",
+    "pricing": "Ціни",
+    "download": "Завантажити",
+    "signIn": "Увійти",
+    "getStarted": "Розпочати",
+    "useCaseItems": {
+      "competitorIntel": "Аналіз конкурентів",
+      "qaBugReports": "QA-звіти про помилки",
+      "seoGapAnalysis": "Аналіз прогалин SEO",
+      "dataExtraction": "Витяг даних",
+      "leadGeneration": "Генерація лідів",
+      "siteAudit": "Аудит сайту",
+      "adIntelligence": "Аналіз реклами",
+      "emailOutreach": "Email-аутріч",
+      "designReview": "Огляд дизайну",
+      "priceMonitoring": "Моніторинг цін",
+      "marketResearch": "Дослідження ринку",
+      "emailCampaigns": "Email-кампанії"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} профілів конкурентів доставлено",
+      "qaBugReports": "{stat} користувацьких потоків протестовано за запуск",
+      "seoGapAnalysis": "{stat} прогалин у ключових словах виявлено",
+      "dataExtraction": "{stat} рядків витягнуто за запуск",
+      "leadGeneration": "{stat} кваліфікованих лідів за запуск",
+      "siteAudit": "{stat} сторінок перевірено за запуск",
+      "adIntelligence": "{stat} рекламних креативів захоплено",
+      "emailOutreach": "{stat} персоналізованих листів складено",
+      "designReview": "{stat} брейкпоінтів протестовано на сторінку",
+      "priceMonitoring": "{stat} SKU порівняно за запуск",
+      "marketResearch": "{stat} точок даних зібрано",
+      "emailCampaigns": "{stat} персоналізованих листів на кампанію"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Усі статті",
+      "computerUse": "Використання комп'ютера",
+      "compare": "Порівняти",
+      "dataEntry": "Введення даних",
+      "webScraping": "Web scraping",
+      "jobApplications": "Подання заявок на роботу",
+      "demosResults": "Демо та результати",
+      "guide": "Посібник"
+    },
+    "blogStats": {
+      "allPosts": "{stat} статей щотижня",
+      "computerUse": "{stat} бал бенчмарку OSWorld",
+      "compare": "{stat} конкурентів проаналізовано",
+      "dataEntry": "{stat} швидше за ручне введення",
+      "webScraping": "{stat} сторінок за сесію",
+      "jobApplications": "{stat} заявок за сесію",
+      "demosResults": "{stat} реальних кейсів",
+      "guide": "{stat} покрокових інструкцій"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "Автономні оператори комп'ютерів",
+    "useCases": {
+      "computerAgent": {
+        "label": "Комп'ютерний агент",
+        "headline": "автоматизуйте будь-яке завдання в браузері",
+        "outcome": "AI-агент, який керує справжнім комп'ютером — переглядає, натискає, друкує та доставляє готову роботу. Без налаштувань."
+      },
+      "competitorIntel": {
+        "label": "Аналіз конкурентів",
+        "headline": "моніторте кожного конкурента",
+        "outcome": "Повні профілі конкурентів з цінами, функціями та прогалинами в позиціонуванні — експортовані як готовий звіт."
+      },
+      "qaTesting": {
+        "label": "QA-тестування",
+        "headline": "знайдіть помилки раніше за користувачів",
+        "outcome": "Критичні користувацькі потоки протестовані наскрізно, кожна помилка зі скріншотом, кроками відтворення та класифікацією серйозності."
+      },
+      "seoAnalysis": {
+        "label": "SEO-аналіз",
+        "headline": "відкрийте прогалини в ключових словах",
+        "outcome": "Прогалини в ключових словах виявлені, контент-брифи підготовлені, джерела зворотних посилань конкурентів змаповані — дієва SEO-стратегія."
+      },
+      "dataExtraction": {
+        "label": "Витяг даних",
+        "headline": "скрейпте та структуруйте будь-який сайт",
+        "outcome": "Структуровані дані витягнуті, очищені, дедупліковані та експортовані як CSV — з будь-якого сайту, будь-якого формату."
+      },
+      "leadGeneration": {
+        "label": "Генерація лідів",
+        "headline": "наповніть свою воронку продажів",
+        "outcome": "Кваліфіковані особи, що приймають рішення, відповідні вашому ICP, з верифікованими посадами, компаніями та персоналізованими аутріч-відкриттями."
+      },
+      "siteAudit": {
+        "label": "Аудит сайту",
+        "headline": "перевірте кожну сторінку масштабно",
+        "outcome": "Сторінки проскановані, Core Web Vitals оцінені, непрацюючі посилання знайдені, проблеми доступності ранжовані за пріоритетом виправлення."
+      },
+      "emailOutreach": {
+        "label": "Email-аутріч",
+        "headline": "надсилайте персоналізований аутріч",
+        "outcome": "Персоналізовані листи з посиланням на компанію, посаду та болючі точки кожного проспекта — готові до відправки."
+      },
+      "marketResearch": {
+        "label": "Дослідження ринку",
+        "headline": "швидко валідуйте свій ринок",
+        "outcome": "TAM розрахований, ключові гравці профільовані, тренди зростання відображені — з десятків точок даних."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Маркетинг",
+        "task": "Просувайте свій продукт на Reddit автономно"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Знайдіть проспектів і надішліть персоналізовані листи"
+      },
+      "qaTesting": {
+        "label": "QA-тестування",
+        "task": "Протестуйте кожен потік оплати та повідомте про помилки"
+      },
+      "jobApplication": {
+        "label": "Заявка на роботу",
+        "task": "Знайдіть вакансії, адаптуйте резюме та подайте заявку"
+      },
+      "formFilling": {
+        "label": "Заповнення форм",
+        "task": "Заповніть заявку YC S26 за вас"
+      },
+      "socialMedia": {
+        "label": "Соціальні мережі",
+        "task": "Опублікуйте на Hacker News та взаємодійте з коментарями"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "Бенчмарк OSWorld",
+      "sublabel": "#1 agent computer-use у світі"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Інструментів доступних агенту",
+      "sublabel": "Браузер, термінал, робочий стіл, файли"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Працює за розкладом",
+      "sublabel": "Автоматизуйте будь-яке повторюване завдання"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Потрібне налаштування",
+      "sublabel": "Без API, без інтеграцій, без коду"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Чому Coasty",
+    "title": "Не чатбот. Не RPA-скрипт.",
+    "worksLikeHuman": {
+      "title": "Працює як людина",
+      "description": "Бачить, натискає, друкує, навігує — точно як ви"
+    },
+    "noScripts": {
+      "title": "Без скриптів і налаштувань",
+      "description": "Простою мовою вводите, результати отримуєте"
+    },
+    "handlesUnexpected": {
+      "title": "Справляється з несподіванками",
+      "description": "Адаптується до CAPTCHA, спливаючих вікон, змін макету"
+    },
+    "runsInIsolation": {
+      "title": "Працює в ізоляції",
+      "description": "Ізольована VM на сесію — нічого не витікає"
+    }
+  },
+  "howItWorks": {
+    "title": "Як це працює",
+    "step1": {
+      "title": "Опишіть своє завдання",
+      "description": "Простою мовою. Це все.",
+      "placeholder": "Знайти 100 лідів на LinkedIn..."
+    },
+    "step2": {
+      "title": "Спостерігайте за роботою агента",
+      "description": "Відкриває браузер, натискає, друкує, навігує"
+    },
+    "step3": {
+      "title": "Завдання виконано",
+      "description": "Кожна дія зафіксована зі скріншотами",
+      "results": {
+        "taskCompleted": "Завдання виконано",
+        "leadsFound": "Знайдено 12 лідів",
+        "addedToCrm": "Додано до CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Бенчмарк #1 у світі",
+    "subtitle": "82% на OSWorld — найскладніший бенчмарк для AI-агентів, що використовують справжні комп'ютери",
+    "agenticFramework": "Агентний фреймворк",
+    "foundationModel": "Базова модель"
+  },
+  "comparison": {
+    "title": "Чому автоматизувати з Coasty?",
+    "subtitle": "Ті самі завдання, що займають у команди години — Coasty виконує за хвилини, цілодобово.",
+    "manual": {
+      "title": "Робити вручну",
+      "subtitle": "Ви або ваша команда, вручну"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 agent computer-use"
+    },
+    "rows": {
+      "timePerTask": "Час на завдання",
+      "availability": "Доступність",
+      "setupTime": "Час налаштування",
+      "errorRate": "Рівень помилок",
+      "scaling": "Масштабування",
+      "auditTrail": "Аудиторський слід"
+    },
+    "manualValues": {
+      "timePerTask": "Години до днів",
+      "availability": "Лише робочі години",
+      "setupTime": "Вивчити інструменти, написати SOP",
+      "errorRate": "Людські помилки",
+      "scaling": "Більше завдань = більше часу",
+      "auditTrail": "Відсутній"
+    },
+    "coastyValues": {
+      "timePerTask": "Хвилини",
+      "availability": "24/7, щодня",
+      "setupTime": "60 секунд",
+      "errorRate": "Самокорекція",
+      "scaling": "Запускайте необмежену кількість завдань паралельно",
+      "auditTrail": "Кожен клік зафіксований + скріншоти"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Автоматизуйте завдання, які займають",
+      "hoursManually": "годин вручну",
+      "startingAt": "Починаючи від"
+    }
+  },
+  "demo": {
+    "title": "Дивіться агента в дії",
+    "subtitle": "Реальні завдання. Реальні браузери. Кожен клік записаний.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty на Reddit",
+        "description": "Спостерігайте, як Coasty автономно проводить маркетингову кампанію — досліджує конкурентів, аналізує тренди та будує стратегію.",
+        "tag": "Маркетинг"
+      },
+      "prospects": {
+        "title": "Пошук потенційних клієнтів",
+        "description": "Coasty знаходить та досліджує потенційних клієнтів, збираючи ключові деталі для створення персоналізованого аутрічу.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA-тестування самого себе",
+        "description": "Coasty проводить контроль якості власного продукту — навігує потоками, знаходить помилки та повідомляє про проблеми автономно.",
+        "tag": "QA-тестування"
+      },
+      "email": {
+        "title": "Відправка листа від вашого імені",
+        "description": "Від написання до відправки — AI-агент складає та доставляє лист повністю самостійно.",
+        "tag": "Комунікація"
+      },
+      "job": {
+        "title": "Подання заявки на роботу",
+        "description": "Coasty знаходить відповідну вакансію, адаптує ваше резюме та подає заявку — все самостійно.",
+        "tag": "Заявка на роботу"
+      },
+      "hackernews": {
+        "title": "Публікація на Hacker News",
+        "description": "Coasty створює та публікує пост на Hacker News — пише контент та надсилає його автономно.",
+        "tag": "Соціальні мережі"
+      }
+    }
+  },
+  "features": {
+    "title": "Створений для реальних комп'ютерних завдань",
+    "selfCorrecting": {
+      "title": "Самокорекція",
+      "description": "Виявляє помилки, пробує альтернативні шляхи"
+    },
+    "auditTrail": {
+      "title": "Повний аудиторський слід",
+      "description": "Кожен клік зафіксований зі скріншотами"
+    },
+    "schedule": {
+      "title": "Розклад 24/7",
+      "description": "Працює за cron — щогодини, щодня, щотижня"
+    },
+    "sandboxed": {
+      "title": "Ізольований та безпечний",
+      "description": "Ізольована VM на сесію, видаляється після"
+    },
+    "benchmark": {
+      "title": "#1 на OSWorld",
+      "description": "82% — найвищий бал в історії"
+    },
+    "swarms": {
+      "title": "Agent Swarms",
+      "description": "Розподіляйте завдання між машинами паралельно"
+    }
+  },
+  "pricing": {
+    "title": "Починайте безкоштовно, масштабуйте коли готові",
+    "subtitle": "Без кредитної картки. Ваш AI-агент готовий за 60 секунд.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Спробуйте #1 agent computer-use",
+        "cta": "Почати безкоштовно"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Легка щоденна автоматизація",
+        "cta": "Обрати Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Автоматизуйте завдання щодня",
+        "cta": "Обрати Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Масштабуйте складні робочі процеси",
+        "cta": "Перейти на Plus",
+        "badge": "Найпопулярніший"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Необмежена інтенсивна автоматизація",
+        "cta": "Обрати Pro"
+      }
+    },
+    "vmTemporary": "1 тимчасова VM (2 год.)",
+    "vmDeletedAfterInactivity": "1 VM (видаляється після неактивності)",
+    "vmAlwaysOn": "{count} постійно увімкнена VM",
+    "vmAlwaysOnPlural": "{count} постійно увімкнених VM",
+    "bargain": {
+      "title": "Та сама робота коштує {oldPrice} при ручній праці",
+      "description": "Віртуальний асистент коштує $2 000–$4 000/міс. Працівник на часткову зайнятість коштує більше. Coasty виконує ту саму роботу 24/7 від $0 — з ідеальною послідовністю, повним аудиторським слідом та нульовим часом навчання."
+    }
+  },
+  "faq": {
+    "title": "Часті запитання",
+    "subtitle": "Все, що потрібно знати перед початком",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Що таке Coasty?",
+        "answer": "Coasty — це найкращий у світі AI-агент для використання комп'ютера. Ви описуєте завдання — знайти лідів, протестувати сайт, заповнити форми, опублікувати в соцмережах — і Coasty відкриває справжній браузер, навігує додатками, натискає кнопки, друкує текст і виконує завдання від початку до кінця. Без API, без інтеграцій, без коду."
+      },
+      "howDifferent": {
+        "question": "Чим це відрізняється від ChatGPT або інших AI-інструментів?",
+        "answer": "ChatGPT генерує текст. Coasty використовує комп'ютер. Він не каже вам, що робити — він відкриває браузер, навігує на сайт, натискає кнопки, заповнює форми та доставляє виконану роботу. Це різниця між отриманням інструкцій та виконанням завдання за вас."
+      },
+      "whatTasks": {
+        "question": "Які завдання може автоматизувати Coasty?",
+        "answer": "Будь-яке завдання, яке ви можете виконати на комп'ютері. Веб-дослідження, генерація лідів, введення даних, заповнення форм, QA-тестування, публікації в соцмережах, email-аутріч, обробка рахунків, аналіз конкурентів, рекрутинг — якщо це стосується браузера або десктопного додатку, Coasty зробить це."
+      },
+      "whatAreCredits": {
+        "question": "Що таке кредити і як вони використовуються?",
+        "answer": "Кредити витрачаються під час роботи агента над завданнями. Довші та складніші завдання використовують більше кредитів. Платні плани включають місячні кредити, і ви також можете придбати додаткові пакети кредитів у будь-який час."
+      },
+      "localComputer": {
+        "question": "Чи може Coasty працювати на моєму комп'ютері?",
+        "answer": "Так. Наш десктопний додаток працює як легка накладка на вашій машині, безпосередньо керуючи вашим локальним браузером та додатками. Альтернативно завдання виконуються на ізольованих хмарних машинах — ваш вибір."
+      },
+      "dataSafe": {
+        "question": "Чи мої дані в безпеці?",
+        "answer": "Кожне завдання виконується в ізольованому середовищі пісочниці. Нічого не витікає між сесіями. Ваші облікові дані залишаються приватними, а кожна дія фіксується зі скріншотами в повному аудиторському сліді, який ви можете переглянути в будь-який час."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Використання комп'ютера на базі AI.",
+    "tagline2": "Автоматизуйте будь-який робочий процес з інтелектуальними агентами.",
+    "columns": {
+      "product": "Продукт",
+      "resources": "Ресурси",
+      "company": "Компанія",
+      "legal": "Юридичне"
+    },
+    "links": {
+      "computerUse": "Використання комп'ютера",
+      "guide": "Посібник",
+      "download": "Завантажити",
+      "pricing": "Ціни",
+      "agentSwarms": "Agent Swarms",
+      "status": "Статус",
+      "blog": "Блог",
+      "useCases": "Застосування",
+      "demos": "Демо",
+      "compare": "Порівняти",
+      "talkToCofounders": "Поговорити зі співзасновниками та демо",
+      "contact": "Контакти",
+      "privacy": "Конфіденційність",
+      "terms": "Умови"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Мова"
+  },
+  "auth": {
+    "brandHeading": "Ви ставите мету.",
+    "brandSubheading": "Ми робимо решту.",
+    "mobileHeading": "Ви ставите мету. Ми робимо решту.",
+    "mobileSubheading": "AI-агенти, що переглядають, натискають і працюють як справжній колега.",
+    "flowSteps": {
+      "step1": {
+        "label": "Ви описуєте завдання",
+        "sub": "\"Досліди наших топ-5 конкурентів\""
+      },
+      "step2": {
+        "label": "Агент бере контроль",
+        "sub": "Переглядає, натискає, друкує автономно"
+      },
+      "step3": {
+        "label": "Робота доставлена",
+        "sub": "Таблиця з 5 повними профілями конкурентів"
+      }
+    },
+    "complete": "Завершено",
+    "doneIn": "Готово за 8 хвилин",
+    "demoCaption": "Запускайте ШІ-агентів на комп'ютері або керуйте ним з телефону, звідки завгодно.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Ваш оператор на зв'язку",
+      "signUp": "Поставте робочі процеси на автопілот",
+      "magicLink": "Без пароля",
+      "forgotPassword": "Повернемо вас назад"
+    },
+    "viewDescriptions": {
+      "signIn": "Продовжуйте з того місця, де зупинилися — ваші агенти пам'ятають",
+      "signUp": "Розгорніть свого першого AI-агента менш ніж за хвилину",
+      "magicLink": "Один клік з вашої пошти — і ви всередині",
+      "forgotPassword": "Ми надішлемо посилання для скидання на вашу пошту"
+    },
+    "google": {
+      "connecting": "Підключення...",
+      "continueWithGoogle": "Продовжити з Google"
+    },
+    "or": "або",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "Ваш пароль",
+    "confirmPassword": "Підтвердити пароль",
+    "confirmPasswordPlaceholder": "Підтвердіть ваш пароль",
+    "minChars": "Мін. 6 символів",
+    "signingIn": "Вхід...",
+    "signIn": "Увійти",
+    "creatingAccount": "Створення акаунту...",
+    "createAccount": "Створити акаунт",
+    "sending": "Надсилання...",
+    "sendMagicLink": "Надіслати магічне посилання",
+    "sendResetLink": "Надіслати посилання для скидання",
+    "forgotPassword": "Забули пароль?",
+    "useMagicLink": "Використати магічне посилання",
+    "dontHaveAccount": "Немає акаунту?",
+    "signUp": "Зареєструватися",
+    "alreadyHaveAccount": "Вже є акаунт?",
+    "backToSignIn": "Повернутися до входу",
+    "termsAgreement": "Продовжуючи, ви погоджуєтеся з нашими",
+    "terms": "Умовами",
+    "and": "та",
+    "privacyPolicy": "Політикою конфіденційності",
+    "errors": {
+      "fillAllFields": "Будь ласка, заповніть усі поля",
+      "passwordMinLength": "Пароль має містити щонайменше 6 символів",
+      "passwordsDoNotMatch": "Паролі не збігаються",
+      "supabaseNotConfigured": "Supabase не налаштовано",
+      "unexpectedError": "Виникла неочікувана помилка. Спробуйте ще раз.",
+      "confirmEmail": "Будь ласка, підтвердіть свою пошту перед входом. Перевірте вхідні.",
+      "invalidCredentials": "Невірна пошта або пароль.",
+      "signInFailed": "Вхід не вдався. Спробуйте ще раз.",
+      "invalidEmail": "Невірна адреса електронної пошти.",
+      "emailAlreadyExists": "Акаунт з такою поштою вже існує. Спробуйте увійти.",
+      "signUpFailed": "Реєстрація не вдалася. Спробуйте ще раз.",
+      "enterEmail": "Будь ласка, введіть вашу пошту",
+      "noAccountFound": "Акаунт з такою поштою не знайдено. Спочатку зареєструйтеся.",
+      "magicLinkFailed": "Не вдалося надіслати магічне посилання. Спробуйте ще раз.",
+      "resetFailed": "Не вдалося надіслати лист для скидання. Спробуйте ще раз.",
+      "updateFailed": "Не вдалося оновити пароль. Спробуйте ще раз."
+    },
+    "success": {
+      "checkEmailConfirm": "Перевірте пошту, щоб підтвердити акаунт перед входом.",
+      "checkEmailMagicLink": "Перевірте пошту на наявність магічного посилання для входу.",
+      "checkEmailReset": "Перевірте пошту на наявність посилання для скидання пароля.",
+      "passwordUpdated": "Пароль успішно оновлено. Перенаправлення на вхід..."
+    },
+    "resetPassword": {
+      "title": "Скидання пароля",
+      "subtitle": "Введіть новий пароль нижче.",
+      "newPassword": "Новий пароль",
+      "confirmNewPassword": "Підтвердити новий пароль",
+      "confirmPlaceholder": "Підтвердіть ваш новий пароль",
+      "updating": "Оновлення...",
+      "updatePassword": "Оновити пароль"
+    },
+    "errorPage": {
+      "title": "Помилка автентифікації",
+      "defaultMessage": "Під час автентифікації виникла помилка.",
+      "tryAgain": "Спробувати ще",
+      "backToChat": "Повернутися до чату",
+      "needHelp": "Потрібна допомога?",
+      "contactSupport": "Зв'язатися з підтримкою"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Пропустити",
+    "back": "Назад",
+    "continue": "Продовжити",
+    "getStarted": "Розпочати",
+    "settingUp": "Налаштування...",
+    "welcome": {
+      "titleReturning": "З поверненням{name}!",
+      "titleNew": "Ласкаво просимо до Coasty",
+      "descriptionReturning": "Ми хотіли б дізнатися трохи більше про вас, щоб покращити ваш досвід",
+      "descriptionNew": "Давайте налаштуємо ваш акаунт, щоб персоналізувати ваш досвід"
+    },
+    "nameLabel": "Як до вас звертатися?",
+    "namePlaceholder": "Ваше ім'я",
+    "companyLabel": "Компанія",
+    "optional": "(необов'язково)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Веб-сайт",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Що вас найкраще описує?",
+      "subtitle": "Виберіть усе, що підходить — це допоможе нам налаштувати ваш досвід"
+    },
+    "roles": {
+      "founder": "Засновник / CEO",
+      "developer": "Розробник",
+      "marketer": "Маркетолог",
+      "designer": "Дизайнер",
+      "product_manager": "Продакт-менеджер",
+      "data_analyst": "Дані / Аналітика",
+      "operations": "Операції",
+      "other": "Інше"
+    },
+    "teamSizeLabel": "Розмір команди",
+    "teamSizes": {
+      "solo": "Тільки я",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Як ви нас знайшли?",
+      "subtitle": "Ми хотіли б знати, де ви дізналися про Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Друг / Колега",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Інше"
+    },
+    "useCaseStep": {
+      "title": "Що ви автоматизуєте першим?",
+      "subtitle": "Виберіть усе, що підходить — ви зможете дослідити все пізніше"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping та дослідження",
+      "browser_automation": "Автоматизація браузера",
+      "data_entry": "Введення даних та форми",
+      "email_outreach": "Email та аутріч",
+      "testing": "QA та тестування",
+      "ecommerce": "Завдання E-commerce",
+      "social_media": "Управління соцмережами",
+      "general_automation": "Загальна автоматизація"
+    },
+    "showcase": {
+      "title": "Все, що вам потрібно,",
+      "titleHighlight": "вже вбудовано.",
+      "subtitle": "Ось що Coasty може зробити для вас",
+      "noCode": {
+        "title": "Без коду",
+        "description": "Просто опишіть, що вам потрібно, простою мовою"
+      },
+      "agentSwarms": {
+        "title": "Agent Swarms",
+        "description": "Паралельні флоти агентів"
+      },
+      "desktopControl": {
+        "title": "Керування робочим столом",
+        "description": "Натискає, друкує, навігує"
+      },
+      "browserAutomation": {
+        "title": "Автоматизація браузера",
+        "description": "Форми, вкладки, скрейпінг — повністю автоматизовано"
+      },
+      "computerVision": {
+        "title": "Комп'ютерний зір",
+        "description": "Бачить і розуміє ваш екран у реальному часі"
+      },
+      "workflows": {
+        "title": "Робочі процеси",
+        "description": "Багатокрокові процеси"
+      },
+      "onDevice": {
+        "title": "На пристрої",
+        "description": "Працює локально"
+      },
+      "autonomous": {
+        "title": "Автономний 24/7",
+        "description": "Налаштуйте і забудьте — працює, поки ви спите"
+      }
+    },
+    "guideCallout": {
+      "title": "Новачок? У нас є посібник для вас",
+      "subtitle": "Розгорніть свого першого AI-агента менш ніж за хвилину"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Що повинен зробити ваш AI-працівник?",
+    "placeholderAlt": "Скажіть AI, що робити на комп'ютері...",
+    "vmError": {
+      "title": "Помилка віртуальної машини",
+      "description": "Віртуальна машина перебуває в стані помилки або видаляється.",
+      "hint": "Перевірте вкладку Машини, щоб вирішити проблему, або виберіть \"Комп'ютер не вибрано\", щоб використовувати лише веб-пошук.",
+      "gotIt": "Зрозуміло"
+    },
+    "status": {
+      "creating": "Створення {name}...",
+      "initiating": "Ініціалізація агента на {name}...",
+      "stopping": "Зупинка {name}...",
+      "preparing": "Підготовка {name}..."
+    },
+    "swarm": {
+      "title": "Режим рою",
+      "pro": "PRO",
+      "upgradeLabel": "Режим рою — оновіть, щоб розблокувати",
+      "feature1": "Паралельне виконання на тимчасових машинах",
+      "feature2": "Кожна машина працює автономно",
+      "feature3": "3x ліміт машин вашого плану на рій",
+      "description": "Запустіть один запит на 3x ліміту машин паралельно — кожна виконує завдання незалежно.",
+      "enableLabel": "Увімкнути режим рою",
+      "disableLabel": "Вимкнути режим рою",
+      "onTooltip": "Режим рою УВІМКНЕНО — ваш запит буде виконуватися на кількох машинах паралельно",
+      "offTooltip": "Увімкніть режим рою, щоб запустити запит на кількох машинах одночасно",
+      "decreaseMachines": "Зменшити кількість машин",
+      "increaseMachines": "Збільшити кількість машин",
+      "machineLimit": "До {max} машин рою у вашому плані. Потрібно більше? Зв'яжіться з founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Режим рою"
+    },
+    "desktop": {
+      "connectLabel": "Підключитися до робочого столу",
+      "screenLabel": "Екран {name}",
+      "screenDefault": "Робочий стіл",
+      "watchTooltip": "Спостерігайте за роботою агента на окремому екрані. Тільки нічого не чіпайте, а то він збентежиться!",
+      "watchLabel": "Робочий стіл"
+    },
+    "buttons": {
+      "stop": "Стоп",
+      "sendToSwarm": "Надіслати в рій",
+      "taskRunning": "Інше завдання виконується — натисніть, щоб зупинити і запустити своє",
+      "selectComputer": "Виберіть комп'ютер для надсилання повідомлень",
+      "waitCreating": "Зачекайте, VM створюється",
+      "waitStarting": "Зачекайте, VM запускається",
+      "waitAgent": "Зачекайте, агент ініціалізується",
+      "vmStopping": "VM зупиняється",
+      "send": "Надіслати",
+      "switching": "Перемикання...",
+      "overrideRun": "Перевизначити і запустити",
+      "stopLabel": "Зупинити поточне завдання і запустити це",
+      "sendLabel": "Надіслати повідомлення"
+    },
+    "search": "Пошук",
+    "upload": {
+      "label": "Завантажити файли на VM",
+      "heading": "Завантажити файли на VM",
+      "description": "Файли будуть збережені на робочому столі",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Перетягніть файли сюди",
+      "dropDescription": "Файли будуть завантажені в папку робочого столу VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Увійдіть, щоб спробувати більше функцій безкоштовно",
+      "description": "Створюйте проекти, запрошуйте членів команди та інше.",
+      "connecting": "Підключення...",
+      "continueWithGoogle": "Продовжити з Google"
+    },
+    "removeFile": "Видалити файл"
+  },
+  "chat": {
+    "greeting": "Привіт",
+    "greetingAuth": "Я візьму на себе комп'ютерну роботу. Яке завдання?",
+    "greetingUnauth": "AI, який працює за комп'ютером замість вас. Просто скажіть, що потрібно зробити.",
+    "guide": "Посібник",
+    "saveLogins": "Зберегти логіни для автозаповнення",
+    "encryptedNote": "зашифровано, AI ніколи не бачить",
+    "roleLabels": [
+      "Колега",
+      "Працівник",
+      "Друг",
+      "Асистент",
+      "Партнер",
+      "Тіммейт",
+      "Співробітник",
+      "Помічник"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "Звіт про конкурентів {company}",
+        "warmLeads": "Знайти 20 лідів для {company}",
+        "pitchDeck": "Чернетка презентації {company}"
+      },
+      "developer": {
+        "findBugs": "Знайти помилки на {company}",
+        "performance": "Аудит продуктивності {company}",
+        "apiDocs": "Витягнути API-документацію {company}"
+      },
+      "marketer": {
+        "seoGap": "Аналіз прогалин SEO {company}",
+        "competitorAds": "Відстежити рекламу конкурентів {company}",
+        "trendingContent": "Трендові ідеї для {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "Зведення відгуків {company}",
+        "featureComparison": "Порівняння функцій {company}",
+        "competitorLaunches": "Відстежити запуски конкурентів {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "Експорт даних {company} в CSV",
+        "marketSizing": "Розмір ринку {company}",
+        "benchmark": "Бенчмарк {company} vs галузь"
+      },
+      "operations": {
+        "enterRecords": "Внести записи в {company}",
+        "cheapestVendor": "Знайти постачальників для {company}",
+        "invoiceSummary": "Зведення рахунків {company}"
+      },
+      "designer": {
+        "designComparison": "{company} vs конкуренти у дизайні",
+        "responsiveAudit": "Адаптивний аудит {company}",
+        "inspiration": "Натхнення для дизайну {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Витягнути дані сайту {company}",
+      "browser_automation": "Експортувати звіти {company}",
+      "data_entry": "Внести дані в {company}",
+      "email_outreach": "Аутріч для {company}",
+      "testing": "QA-тест {company}",
+      "ecommerce": "Порівняння цін {company}",
+      "social_media": "Опублікувати про {company}",
+      "general_automation": "Автоматизувати завдання на {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Копіювати текст",
+    "copied": "Скопійовано!",
+    "regenerate": "Перегенерувати",
+    "feedback": {
+      "title": "Відгук",
+      "prompts": [
+        "Оцініть це",
+        "Відгук",
+        "Як ми впоралися?",
+        "Ваші думки?",
+        "Залишити відгук"
+      ],
+      "tooltip": "Поділіться відгуком"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Розумний пошук",
+      "description": "Пошук по всьому вебу на базі AI"
+    },
+    "collaborate": {
+      "title": "Співпраця",
+      "description": "Працюйте разом у реальному часі"
+    },
+    "globalAccess": {
+      "title": "Глобальний доступ",
+      "description": "Пошук більш ніж 50 мовами"
+    },
+    "aiModels": {
+      "title": "AI-моделі",
+      "description": "Кілька AI-провайдерів"
+    },
+    "freeForever": {
+      "title": "Безкоштовно назавжди",
+      "description": "Жодних прихованих витрат"
+    },
+    "privateSecure": {
+      "title": "Приватно та безпечно",
+      "description": "Ваші дані залишаються вашими"
+    }
+  },
+  "sidebar": {
+    "newTask": "Нове завдання",
+    "newTaskDescription": "Розпочати нову AI-автоматизацію",
+    "activity": "Активність",
+    "taskHistory": "Історія завдань",
+    "taskHistoryDescription": "Перегляньте минулі завдання та продовжте з місця зупинки",
+    "taskHistoryPopup": {
+      "title": "Ваші останні завдання",
+      "description": "Переглядайте та продовжуйте минулі розмови. Кожне завдання збережено, щоб ви могли продовжити з місця зупинки."
+    },
+    "swarmRuns": "Запуски рою",
+    "swarmRunsDescription": "Моніторинг багатоагентних паралельних процесів",
+    "swarmRunsPopup": {
+      "title": "Багатоагентні процеси",
+      "description": "Запускайте завдання на кількох машинах паралельно. Кожен агент працює незалежно, а результати об'єднуються автоматично."
+    },
+    "guide": "Посібник",
+    "guideDescription": "Дізнайтеся, як отримати максимум від Coasty",
+    "guidePopup": {
+      "title": "Початок роботи",
+      "description": "Покрокові інструкції та найкращі практики для ефективної автоматизації."
+    },
+    "infrastructure": "Інфраструктура",
+    "computer": "Комп'ютер",
+    "computers": "Комп'ютери",
+    "active": "активний",
+    "view": "Переглянути",
+    "workforce": "Розклади",
+    "workforceDescription": "Планування автоматизованих завдань і тригерів",
+    "workforcePopup": {
+      "title": "Запланована автоматизація",
+      "description": "Налаштуйте повторювані завдання з розкладами cron і тригерами між агентами. Ваші розклади працюють, поки ви спите."
+    },
+    "credentials": "Облікові дані",
+    "credentialsDescription": "Безпечно зберігайте логіни для доступу агентів",
+    "credentialsPopup": {
+      "title": "Безпечне сховище облікових даних",
+      "description": "Зберігайте логіни та API-ключі з шифруванням. Агенти автоматично заповнюють облікові дані, не розкриваючи вихідні значення."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Отримати десктопний додаток",
+      "download": "Завантажити",
+      "downloadDesktopApp": "Завантажити десктопний додаток",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Керуйте комп'ютером віддалено",
+      "controlDescription": "Встановіть десктопний додаток і запускайте завдання на вашому ПК з цієї панелі — будь-де, будь-коли."
+    },
+    "credits": {
+      "runningLow": "Кредити — Мало залишилось",
+      "remaining": "Кредитів залишилось",
+      "buy": "Купити",
+      "creditsLeft": "кредитів залишилось",
+      "usedLabel": "Використано: {count}",
+      "consumed": "{percent}% використано",
+      "usageThisWeek": "Використання цього тижня"
+    },
+    "talkToUs": "Зв'яжіться з нами",
+    "talkToUsDesc": "Забронювати 15-хв дзвінок",
+    "inviteEarn": "Запроси та заробляй",
+    "inviteEarnDesc": "Отримайте безкоштовні кредити",
+    "user": "Користувач",
+    "account": "Акаунт",
+    "tasks": "{count} Завдань",
+    "recentActivity": "Остання активність",
+    "viewAllHistory": "Переглянути всю історію →",
+    "swarmRunsCount": "{count} Запусків рою",
+    "running": "виконується",
+    "completed": "завершено",
+    "viewAllSwarms": "Переглянути всі рої →",
+    "schedulesCount": "{count} Розкладів",
+    "totalRuns": "{count} загальних запусків",
+    "paused": "призупинено",
+    "viewAllSchedules": "Переглянути всі розклади →",
+    "credentialsCount": "{count} Облікових даних",
+    "encryptedVault": "Зашифроване сховище",
+    "manageCredentials": "Керувати обліковими даними →",
+    "days": [
+      "Пн",
+      "Вт",
+      "Ср",
+      "Чт",
+      "Пт",
+      "Сб",
+      "Нд"
+    ],
+    "resume": "ПРОДОВЖИТИ",
+    "result": "РЕЗУЛЬТАТ",
+    "notScheduled": "Не заплановано",
+    "overdue": "Прострочено",
+    "lessThanMin": "< 1 хв",
+    "inMinutes": "через {count}хв",
+    "inHours": "через {count}год",
+    "today": "сьогодні",
+    "yesterday": "вчора"
+  },
+  "appHeader": {
+    "login": "Увійти",
+    "assign": "Запланувати",
+    "assignDescription": "Запланувати автоматичне виконання цього завдання",
+    "computer": "Комп'ютер",
+    "showComputer": "Показати комп'ютер",
+    "hideComputer": "Приховати комп'ютер",
+    "employeeHired": "Працівника найнято!",
+    "employeeRemoved": "Працівника видалено"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Легка щоденна автоматизація"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Автоматизуйте завдання щодня"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Масштабуйте складні процеси",
+        "badge": "Найпопулярніший"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Необмежена інтенсивна автоматизація"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (видаляється після неактивності)",
+      "vmAlwaysOn": "{count} постійно увімкнена VM",
+      "vmAlwaysOnPlural": "{count} постійно увімкнених VM",
+      "agentsParallel": "{count} агентів паралельно",
+      "basicSearch": "Базовий пошук",
+      "advancedSearch": "Розширений пошук та витяг",
+      "standardSupport": "Стандартна підтримка (справжні люди)",
+      "prioritySupport": "Пріоритетна підтримка, відповідь за 24 год",
+      "premiumSupport": "Преміум підтримка, відповідь за 12 год"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Малий пакет",
+        "description": "Швидке поповнення"
+      },
+      "medium": {
+        "name": "Середній пакет",
+        "description": "Стандартне поповнення",
+        "savings": "8% економії"
+      },
+      "large": {
+        "name": "Великий пакет",
+        "description": "Оптова покупка",
+        "savings": "17% економії"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Щойно",
+      "minutesAgo": "{count}хв тому",
+      "hoursAgo": "{count}год тому",
+      "daysAgo": "{count}д тому"
+    },
+    "noActivity": "Немає активності за цей період",
+    "stats": {
+      "balance": "Баланс",
+      "earned": "Зароблено",
+      "used": "Використано",
+      "credits": "кредитів",
+      "allTime": "за весь час",
+      "lastRange": "за {range}",
+      "sessions": "{count} сесій",
+      "avgDaily": "~{count}/день серед.",
+      "plan": "План",
+      "free": "Безкоштовний",
+      "noPlan": "Без плану",
+      "canceling": "Скасовується"
+    },
+    "monthlyUsage": "Місячне використання кредитів",
+    "remaining": "{used} / {total} залишилось",
+    "usedPercent": "{percent}% використано за цей період",
+    "renews": "Поновлення {date}",
+    "choosePlan": "Оберіть свій план",
+    "choosePlanDescription": "Підпишіться, щоб розблокувати AI-функції та отримати місячні кредити",
+    "savingsVsHuman": "Економія {amount}/міс порівняно з людиною",
+    "timeSaved": "{time} заощаджено щомісяця",
+    "cheaper": "У {multiplier} дешевше",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/місяць",
+    "creditsPerMonth": "{count} кредитів /місяць",
+    "processing": "Обробка...",
+    "subscribeTo": "Підписатися на {name}",
+    "transactionTypes": {
+      "credit_purchase": "Покупка кредитів",
+      "agent_usage": "Використання агента",
+      "refund": "Повернення",
+      "bonus": "Бонусна нагорода",
+      "subscription": "Підписка",
+      "subscription_grant": "Грант підписки",
+      "renewal": "Кредити поновлення",
+      "reactivation": "Реактивація"
+    },
+    "toasts": {
+      "paymentSuccess": "Оплата успішна! Ваші кредити додано.",
+      "subscriptionActivated": "Підписку успішно активовано!",
+      "paymentCanceled": "Оплату скасовано. Жодних стягнень не було.",
+      "signInToSubscribe": "Увійдіть, щоб підписатися",
+      "subscriptionCheckoutFailed": "Не вдалося розпочати оформлення підписки. Спробуйте ще раз.",
+      "signInToPurchase": "Увійдіть, щоб придбати кредити",
+      "needSubscription": "Для покупки додаткових кредитів потрібна активна підписка",
+      "checkoutFailed": "Не вдалося розпочати оформлення. Спробуйте ще раз.",
+      "manageFailed": "Не вдалося відкрити управління підпискою. Спробуйте ще раз.",
+      "transactionsExported": "Транзакції експортовано"
+    }
+  },
+  "apiKeys": {
+    "title": "Постачальники моделей",
+    "new": "нове",
+    "description": "Додайте власні API-ключі для доступу до моделей.",
+    "securityNote": "Ваші ключі зберігаються безпечно з наскрізним шифруванням.",
+    "apiKeyLabel": "{provider} API Key",
+    "getApiKey": "Отримати API key",
+    "delete": "Видалити",
+    "save": "Зберегти",
+    "deleteDialog": {
+      "title": "Видалити API Key",
+      "description": "Ви впевнені, що хочете видалити ваш {provider} API-ключ? Цю дію неможливо скасувати, і ви втратите доступ до моделей {provider}.",
+      "cancel": "Скасувати",
+      "confirm": "Видалити"
+    },
+    "toasts": {
+      "saved": "API key збережено",
+      "savedDescription": "Ваш {provider} API-ключ збережено, а моделі додано до обраного.",
+      "updatedDescription": "Ваш {provider} API-ключ оновлено.",
+      "saveFailed": "Не вдалося зберегти API key",
+      "saveFailedDescription": "Не вдалося зберегти {provider} API-ключ. Спробуйте ще раз.",
+      "deleted": "API key видалено",
+      "deletedDescription": "Ваш {provider} API-ключ видалено.",
+      "deleteFailed": "Не вдалося видалити API key",
+      "deleteFailedDescription": "Не вдалося видалити {provider} API-ключ. Спробуйте ще раз."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Деталі профілю",
+    "displayName": "Ім'я для відображення",
+    "namePlaceholder": "Ваше ім'я",
+    "company": "Компанія",
+    "companyPlaceholder": "Ваша компанія",
+    "website": "Веб-сайт",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Збереження...",
+    "saveChanges": "Зберегти зміни",
+    "account": "Акаунт",
+    "email": "Email",
+    "verified": "Підтверджено",
+    "signOut": "Вийти",
+    "signOutDescription": "Вийти з цього пристрою",
+    "toasts": {
+      "profileUpdated": "Профіль оновлено",
+      "profileUpdateFailed": "Не вдалося оновити профіль",
+      "signOutFailed": "Не вдалося вийти"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Ваші дані захищені",
+    "dataProtectedDescription": "Безпека корпоративного рівня з шифруванням при зберіганні та передачі",
+    "features": {
+      "encryption": {
+        "title": "Наскрізне шифрування",
+        "description": "API-ключі зашифровані за допомогою AES-256-GCM. Ваші облікові дані ніколи не зберігаються у відкритому вигляді."
+      },
+      "rls": {
+        "title": "Безпека на рівні рядків",
+        "description": "Ізоляція на рівні бази даних гарантує, що ваші дані доступні лише вам. Міжорендний доступ неможливий."
+      },
+      "privacy": {
+        "title": "Конфіденційність за дизайном",
+        "description": "Ми збираємо мінімум даних, необхідних для надання послуги. Ваші розмови та файли залишаються вашими."
+      },
+      "session": {
+        "title": "Безпека сесії",
+        "description": "Захист CSRF, безпечні HTTP-only cookies та заголовки Content Security Policy на кожному запиті."
+      }
+    },
+    "legal": "Юридичне",
+    "privacyPolicy": {
+      "title": "Політика конфіденційності",
+      "description": "Як ми збираємо, використовуємо та захищаємо ваші дані"
+    },
+    "termsOfService": {
+      "title": "Умови використання",
+      "description": "Наші умови та положення використання"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Макет"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Зведення",
+      "highlight": "Підсумувати"
+    },
+    "code": {
+      "label": "Код",
+      "highlight": "Створити"
+    },
+    "research": {
+      "label": "Дослідження",
+      "highlight": "Аналізувати"
+    },
+    "create": {
+      "label": "Створити",
+      "highlight": "Згенерувати"
+    },
+    "solve": {
+      "label": "Розв'язати",
+      "highlight": "Відладити"
+    },
+    "learn": {
+      "label": "Вивчити",
+      "highlight": "Пояснити"
+    }
+  },
+  "loadingMessages": [
+    "Запускаємо кремнієвий мозок",
+    "Будимо цифрову свідомість",
+    "Ініціалізуємо нейронні шляхи",
+    "Розкручуємо квантові ядра",
+    "Заряджаємо конденсатор потоку",
+    "Активуємо мейнфрейм",
+    "Подаємо живлення на обчислювальну матрицю",
+    "Вмикаємо варп-двигун",
+    "Закликаємо кремнієвих духів",
+    "Розпалюємо електронний двигун",
+    "Прогріваємо транзистори",
+    "Збираємо біти та байти",
+    "Калібруємо цифрові синапси",
+    "Заряджаємо кристали CPU",
+    "Завантажуємо протоколи свідомості",
+    "Ініціалізуємо системні ресурси",
+    "Готуємо обчислювальне середовище",
+    "Встановлюємо безпечне з'єднання",
+    "Виділяємо віртуальні ресурси",
+    "Налаштовуємо параметри системи",
+    "Запускаємо віртуальний екземпляр",
+    "Активуємо віддалений робочий стіл",
+    "Розгортаємо хмарні ресурси",
+    "Починаємо послідовність запуску",
+    "Готуємо середовище виконання",
+    "Будимо сонний комп'ютер",
+    "Тицяємо цифрового ведмедя",
+    "Варимо обчислювальну каву",
+    "Розтягуємо цифрові м'язи",
+    "Відкриваємо цифрові очі",
+    "Запускаємось",
+    "Подаємо живлення",
+    "Виходимо в онлайн",
+    "Завантажуємо систему",
+    "Готуємось",
+    "Майже готово",
+    "Готуємо робочий простір",
+    "Завантажуємо ресурси",
+    "Система прокидається"
+  ],
+  "quickStart": {
+    "greetingName": "Привіт {name}!",
+    "greetingDefault": "Привіт!",
+    "subtitle": "Ваші завдання виконуються на безпечному ізольованому віртуальному комп'ютері",
+    "tabs": {
+      "start": "Старт",
+      "desktop": "Робочий стіл",
+      "swarms": "Рої",
+      "schedules": "Розклади"
+    },
+    "items": {
+      "computerReady": "Комп'ютер готовий",
+      "pickComputer": "Обрати комп'ютер",
+      "createComputer": "Створити комп'ютер",
+      "loginsSaved": "Логіни збережено",
+      "addLogins": "Додати логіни",
+      "askAnything": "Запитайте будь-що",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Віддалене керування з телефону",
+      "freeDownload": "Безкоштовне завантаження",
+      "onePrompt": "Один промпт",
+      "manyAgents": "Багато агентів",
+      "combinedResult": "Об'єднаний результат",
+      "setCadence": "Встановити періодичність",
+      "autoRuns": "Автозапуски",
+      "recurringResults": "Періодичні результати",
+      "computerReadyDesc": "Підключено та готово виконувати завдання",
+      "pickComputerDesc": "Оберіть з доступних машин",
+      "createComputerDesc": "Створіть хмарний комп'ютер за секунди",
+      "loginsSavedDesc": "Зашифровані облікові дані готові до автозаповнення",
+      "addLoginsDesc": "Збережіть паролі для автоматичного доступу",
+      "askAnythingDesc": "Опишіть завдання та спостерігайте за роботою ШІ",
+      "macWindowsDesc": "Рідний додаток для вашого робочого столу",
+      "mobileRemoteDesc": "Керуйте агентом з будь-якого пристрою",
+      "freeDownloadDesc": "Легке встановлення, запуск за секунди",
+      "onePromptDesc": "Опишіть мету простою мовою",
+      "manyAgentsDesc": "Агенти працюють паралельно на кількох машинах",
+      "combinedResultDesc": "Усі результати об'єднані в один звіт",
+      "setCadenceDesc": "Щогодини, щодня, щотижня або власний cron",
+      "autoRunsDesc": "Агенти виконуються без втручання",
+      "recurringResultsDesc": "Звіти доставляються за вашим розкладом"
+    },
+    "cta": {
+      "downloadApp": "Завантажити додаток",
+      "trySwarms": "Спробувати рої",
+      "setUp": "Налаштувати"
+    }
+  },
+  "machines": {
+    "title": "Мої комп'ютери",
+    "subtitle": "Керуйте середовищами робочого столу під управлінням AI",
+    "guide": "Посібник",
+    "newMachine": "Нова машина",
+    "filters": {
+      "all": "Усі",
+      "running": "Працюють",
+      "creating": "Створюються",
+      "stopped": "Зупинені"
+    },
+    "desktopPromo": {
+      "text": "Пропустіть VM — запускайте агентів AI на власному комп'ютері за допомогою нативного додатку. Керуйте робочим столом з телефону.",
+      "cta": "Отримати додаток"
+    },
+    "emptyState": {
+      "title": "Справжній AI-працівник з повним доступом до комп'ютера",
+      "description": "Запустіть ізольовану віртуальну машину і дозвольте агентам AI переглядати веб, запускати термінали та керувати робочим столом — без участі людини.",
+      "feature1": {
+        "title": "Повний контроль робочого столу",
+        "description": "AI рухає мишкою, друкує, клацає та навігує як справжній користувач."
+      },
+      "feature2": {
+        "title": "Будь-яке завдання автоматизовано",
+        "description": "Браузер, термінал та UI — всі агенти працюють разом в одній VM."
+      },
+      "feature3": {
+        "title": "Ізольовано та безпечно",
+        "description": "Кожна машина працює у власному контейнері — ваша локальна система залишається недоторканою."
+      },
+      "cta": "Створити першу машину"
+    },
+    "noMachines": "Машин не знайдено.",
+    "noFilteredMachines": "Немає машин зі статусом {filter}",
+    "noFilteredDescription": "Наразі немає машин зі статусом {filter}.",
+    "loadingMachines": "Завантаження машин...",
+    "toasts": {
+      "deleted": "Машину успішно видалено",
+      "readyOpen": "Тепер ви можете підключитися до вашої машини.",
+      "open": "Відкрити",
+      "createFailed": "Будь ласка, спробуйте створити машину ще раз.",
+      "fetchFailed": "Не вдалося завантажити машини"
+    }
+  },
+  "createMachine": {
+    "title": "Новий комп'ютер",
+    "subtitle": "Запустіть хмарний робочий стіл — готовий за ~30 секунд",
+    "freeExpiry": "Безкоштовні комп'ютери закінчуються через ",
+    "freeExpiry2": "2 години",
+    "upgrade": "Покращити",
+    "limitReached": "Ви досягли ліміту комп'ютерів. Зупиніть або видаліть існуючий комп'ютер, щоб створити новий.",
+    "upgradeMore": "Покращити для більшого →",
+    "nameLabel": "Назва комп'ютера",
+    "namePlaceholder": "Мій хмарний сервер",
+    "nameError": "Назва комп'ютера не може починатися з \"local\"",
+    "nameRequired": "Будь ласка, введіть назву комп'ютера",
+    "osLabel": "Операційна система",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Робочий стіл Ubuntu 22.04"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Робочий стіл Windows — можливі помилки"
+    },
+    "osHintWindows": "Робочий стіл Windows з Chrome (бета). Готовий за ~2 хвилини.",
+    "osHintLinux": "Робочий стіл Ubuntu, доступний через браузер. Готовий за ~30 секунд.",
+    "stateLabel": "Стан комп'ютера",
+    "restorePrevious": "Відновити попередній",
+    "restoreDescription": "Продовжити з останнього знімка",
+    "startFresh": "Почати заново",
+    "startFreshDescription": "Чисте середовище робочого столу",
+    "cancel": "Скасувати",
+    "creating": "Створення...",
+    "create": "Створити комп'ютер",
+    "toasts": {
+      "restoringSnapshot": "Відновлення комп'ютера зі знімка!",
+      "restoringDescription": "Ваш попередній стан робочого столу відновлюється. Готовий за ~30 секунд.",
+      "windowsCreated": "Створення комп'ютера Windows розпочато!",
+      "windowsDescription": "Ваш робочий стіл Windows запускається. Готовий за ~2 хвилини.",
+      "linuxCreated": "Ваш робочий стіл запускається. Готовий за ~30 секунд.",
+      "sshCreated": "Ваш хмарний комп'ютер запускається. Ключ SSH буде доступний після готовності."
+    }
+  },
+  "secrets": {
+    "title": "Збережені облікові дані",
+    "subtitle": "Зберігаються безпечно та автоматично використовуються агентом AI при вході в систему",
+    "guide": "Посібник",
+    "import": "Імпорт",
+    "addCredential": "Додати облікові дані",
+    "securityNote": "Облікові дані ніколи не надсилаються моделі AI та не відображаються в чаті — агент заповнює їх напряму, не бачачи значень",
+    "username": "Ім'я користувача",
+    "password": "Пароль",
+    "hide": "Сховати",
+    "revealFor10s": "Показати на 10с",
+    "encrypted": "Зашифровано",
+    "emptyState": {
+      "title": "Автоматичний вхід, без втручання",
+      "description": "Збережіть облікові дані один раз — агент AI входить автоматично і продовжує роботу, не перериваючи вас",
+      "feature1": {
+        "title": "Жодних переривань",
+        "description": "Агент знаходить форму входу, заповнює її та продовжує завдання — без запитів, без пауз"
+      },
+      "feature2": {
+        "title": "AI ніколи не бачить",
+        "description": "Ваші облікові дані вводяться напряму. Модель AI ніколи не бачить фактичних значень"
+      },
+      "feature3": {
+        "title": "Будь-який вебсайт",
+        "description": "Працює з формами входу на будь-якому сайті — електронна пошта, інструменти SaaS, панелі керування, будь-що"
+      },
+      "cta": "Додати перші облікові дані"
+    },
+    "deleteDialog": {
+      "title": "Видалити облікові дані?",
+      "description": "{name} ({service}) буде видалено назавжди. Агент AI більше не зможе їх використовувати.",
+      "cancel": "Скасувати",
+      "delete": "Видалити"
+    },
+    "toasts": {
+      "loadFailed": "Не вдалося завантажити облікові дані",
+      "revealFailed": "Не вдалося показати пароль",
+      "deleted": "Облікові дані видалено",
+      "deleteFailed": "Не вдалося видалити облікові дані"
+    },
+    "loading": "Завантаження облікових даних..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Prosti tsiny,",
+      "title2": "spravzhnii avtopilot",
+      "subtitle": "Pochniit bezkoshtovno. Onovliuitesia, koly potrebuiete bilshe potuzhnosti."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Sprobuity ahenta #1 z vykorystannia kompiutera",
+        "cta": "Pochaty bezkoshtovno"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Lehka shchodenna avtomatyzatsiia",
+        "cta": "Otrymaty Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Avtomatyzuity zavdannia shchodnia",
+        "cta": "Otrymaty Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Masshtabuity skladni robochi protsesy",
+        "cta": "Pereiity na Plus",
+        "badge": "Naipopuliarnishyi"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Neobmezhena vazhka avtomatyzatsiia",
+        "cta": "Otrymaty Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Povnyi brauzér, robochyi stil ta terminal",
+        "badge": "Yadro"
+      },
+      "swarmMode": {
+        "name": "Rezhym roiu",
+        "sequential": "Tilky poslidovnyi",
+        "parallel": "{count} ahentiv paralélno",
+        "badge": "Potuzhnyi"
+      },
+      "security": {
+        "name": "Bezpeka",
+        "description": "Sandbox, E2E-shyfruvannia",
+        "badge": "Kozhen plan"
+      },
+      "monthlyCredits": {
+        "name": "Shchomisiachni kredyty",
+        "payAsYouGo": "Oplata za vykorystannia",
+        "creditsPerMonth": "{count} kredytiv/mis."
+      },
+      "persistentMachines": {
+        "name": "Postiini mashyny",
+        "temporary": "1 tymchasova VM (2 hod.)",
+        "deletedAfterInactivity": "1 VM (vydaliaietsia pislia neaktyvnosti)",
+        "alwaysOn": "{count} zavzhdy uvimknena VM",
+        "alwaysOnPlural": "{count} zavzhdy uvimkneni VM"
+      },
+      "webSearch": {
+        "name": "Veb-poshuk",
+        "advanced": "Rozshyrenyi poshuk ta vyluchemnia",
+        "basic": "Bazovyi poshuk"
+      }
+    },
+    "animations": {
+      "agentDescription": "Vash ahent keruie spravzhnim kompiuterom — brauzér, faily ta terminal",
+      "fillForm": "Zapovnyty formu",
+      "searchExtract": "Shukaty ta vylukhaty",
+      "uploadReport": "Zavantazhyty zvit",
+      "navigateSite": "Naviguvaty saitom",
+      "creditsPerMonth": "kredytiv na misiatsh",
+      "cr": "kr",
+      "vm": "VM {num}",
+      "twoHrLimit": "limit 2 hod.",
+      "alwaysOn": "Zavzhdy uvimknena",
+      "tempVmDescription": "Tymchasova VM — skydaietsia cherez 2 hodyny",
+      "persistentVmDescription": "Vashi faily, dodatky ta sesii zberihaiutsia mizh zavdanniamy",
+      "sequentialOnly": "Tilky poslidovne vykonannia na tsomu plani",
+      "yourTask": "Vashe zavdannia",
+      "agentsWorking": "{count} ahentiv pratsiuiut odnochasno",
+      "upgradeForExtraction": "Onovit dlia povnoho vyluchemnia",
+      "searchDescription": "Shukaty, zbyraty ta vylukhaty strukturovani dani",
+      "basicSearchIncluded": "Bazovyi poshuk vkliucheno",
+      "e2eEncryption": "E2E-shyfruvannia",
+      "sandboxedVm": "Sandbox VM",
+      "destroyedAfterUse": "Znyshchuietsia pislia vykorystannia",
+      "everyPlan": "Kozhen plan. Bez vyniatkiv."
+    },
+    "perMonth": "/mis.",
+    "faqs": {
+      "credits": {
+        "q": "Shcho rakhujétsia yak kredyt?",
+        "a": "Odyn kredyt priblyzno dorivniuie odnii dii ahenta — klik, zapovnennia formy, poshukovyi zapyt abo operatsiia z failom. Typove bahatoetapne zavdannia vykorystovuie 5-15 kredytiv."
+      },
+      "persistent": {
+        "q": "Shcho oznachaie 'postiina mashyna'?",
+        "a": "Na platnych planakh vasha VM prodovzhuie pratsiuvaty mizh zavdanniamy — robochyi stil, faily, sesii brauzera ta vstanovlene PZ zberihaiutsia. Yak vash vlasnyi zavzhdy uvimknenyi khmarny kompiuter."
+      },
+      "swarm": {
+        "q": "Shcho take rezhym roiu?",
+        "a": "Rezhym roiu rozdilaie zavdannia na kilka mashyn, shcho pratsiuiut odnochasno. Zamist toho shchob odyn ahent robyt 10 poshukiv poslidovno, kilka ahentiv robliat tse paralélno."
+      },
+      "cancel": {
+        "q": "Chy mozhna skasuvatsi bud-koly?",
+        "a": "Tak. Bez kontraktiv, bez platy za skasuvannia. Skasuite na storintsi oblikov oho zapysu i zberezh it dostup do kintsia rozrakhunkovoho periodu."
+      },
+      "security": {
+        "q": "Chy moi dani v bezpetsi?",
+        "a": "Kozhne zavdannia vykonuietsia v povnistiu izoliovanii VM, shcho znyshchuietsia pislia vykorystannia. Usi ziednannia zashyfrovani uctan uts ta i my nikoly ne zberihaiemo vashi oblikovi dani."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Indyvidualni kredyty, vydiléni VM, SLA, SSO ta priorytétna pidtrymka.",
+      "cta": "Zviazatysia z namy"
+    },
+    "footer": {
+      "title": "Vash AI-ahent za 60 sekund",
+      "subtitle": "Zareiéstruitesia i dozvolte Coasty vykonaty robotu.",
+      "noCreditCard": "Bez kredytnoi kartky",
+      "cancelAnytime": "Skasuvannia bud-koly",
+      "noCreditCardRequired": "Kredytna kartka ne potribna",
+      "cancelAnytimeNoContracts": "Skasuvannia bud-koly — bez kontraktiv"
+    },
+    "questions": "Pytannia"
+  },
+  "guide": {
+    "pageTitle": "Kerivnytstvo",
+    "pageSubtitle": "Vid pershoho nalashtuvannia do rozshyrenykh funktsii — diznaities, yak otrymaty maksymum vid Coasty",
+    "completeGuide": "Povnyi kerivnytstvo",
+    "completeGuideSubtitle": "Vse, shcho vam potribno znaty pro Coasty",
+    "completeGuideDescription": "Vid pershoho nalashtuvannia do rozshyrenykh funktsii — diznaities, yak otrymaty maksymum vid vashoho AI-ahenta.",
+    "talkToCofounders": "Pohovoryty z zasnovnykamy",
+    "tabs": {
+      "overview": "Ohliad",
+      "gettingStarted": "Pochatok roboty",
+      "chatTasks": "Chat ta zavdannia",
+      "machines": "Mashyny",
+      "credentials": "Oblikovi dani",
+      "swarmMode": "Rezhym roiu",
+      "workforce": "Розклади",
+      "desktopApp": "Desktopnyi zastosunok",
+      "billing": "Oplata ta kredyty"
+    },
+    "overview": {
+      "howItWorks": "Yak tse pratsiuie",
+      "step1": "Opishit zavdannia",
+      "step2": "Coasty planuie kroky",
+      "step3": "Vykonuie avtonomno",
+      "step": "Krok",
+      "whatCanDo": "Shcho mozhe Coasty",
+      "taskCount": "40+ zavdan u 10 katehoriiakh",
+      "categories": {
+        "sales": {
+          "name": "Prodazhi",
+          "desc": "Znaiditi 50 lidiv, nadislaty personalizovani lysty"
+        },
+        "marketing": {
+          "name": "Marketynh",
+          "desc": "Publikuity bloh-pósty, planuvaty sotsialni merezhi"
+        },
+        "jobApps": {
+          "name": "Zaiavky na robotu",
+          "desc": "Podaty na 20 vakansii, adaptuvaty kozhne reziume"
+        },
+        "email": {
+          "name": "Elektronna poshta",
+          "desc": "Pysaty vidpovidi, masova rozsylka, vidsyska"
+        },
+        "dataEntry": {
+          "name": "Vvédennia danykh",
+          "desc": "Perénosyty dani mizh dodatkamy, stvoriuvaty tablytsi"
+        },
+        "research": {
+          "name": "Doslidzhennia",
+          "desc": "Hlyboki zvity, monitorynh konkurentiv"
+        },
+        "qaTesting": {
+          "name": "QA-testuvannia",
+          "desc": "Testuvaty reiéstratsii, formy, perevirky zdorovia saitu"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Poshuk kandydativ, personalizovane zvernennia"
+        },
+        "support": {
+          "name": "Pidtrymka",
+          "desc": "Pysaty vidpovidi, onovliuvaty dovidkovu dokumentatsiiu"
+        },
+        "productivity": {
+          "name": "Produktyvnist",
+          "desc": "Broniuvaty podorózhi, oplachiuvaty rakhunky, keruváty kalendaramy"
+        }
+      },
+      "whyCoasty": "Chomu Coasty",
+      "notChatbot": "Ne chatbot. Ne RPA-skrypt.",
+      "worksLikeHuman": {
+        "title": "Pratsiuie yak liudyna",
+        "desc": "Bachyt, klíkaie, drukkuie, navíhuie — tochno yak vy"
+      },
+      "noScripts": {
+        "title": "Bez skryptiv chy nalashtuvannia",
+        "desc": "Prostyi tekst na vkhodi, rezultaty na vykhodi"
+      },
+      "handlesUnexpected": {
+        "title": "Spravliaietsia z nespodivankamy",
+        "desc": "Adaptuietsia do CAPTCHA, splivaiuchykh vikon, zmin maketiv"
+      },
+      "runsInIsolation": {
+        "title": "Pratsiuie izolovano",
+        "desc": "Sandbox VM na sesiu — nicho ne vitíkuie"
+      },
+      "ctaTitle": "Oberit bud-iake zavdannia i sprobuité",
+      "ctaSubtitle": "Hotovi zapustyty Coasty v robotu?",
+      "ctaDescription": "Opishit bud-iake zavdannia z tsoho kerivnytstva i spohliadaité, yak Coasty yoho vykonuie.",
+      "ctaNote": "Pochnit bezkoshtovno. Kredytna kartka ne potribna.",
+      "startTask": "Pochaty zavdannia",
+      "startFree": "Pochaty bezkoshtovno",
+      "desktopApp": "Desktopnyi zastosunok"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Reiéstratsiia",
+          "desc": "Odyn klik, shchob pochaty"
+        },
+        "createMachine": {
+          "title": "Stvoryty mashynu",
+          "desc": "Vash ahent otrymúie vlasnyi kompiuter"
+        },
+        "saveCredentials": {
+          "title": "Zberehty oblikovi dani",
+          "desc": "Zashyfrovani lohiny dlia bud-iakoho saitu"
+        },
+        "giveTask": {
+          "title": "Daty zavdannia",
+          "desc": "Opishit yoho. Spohliadaité, yak tse vidbuvaietsia."
+        }
+      },
+      "examplePrompts": [
+        "Podaty na 10 vidpovidnykh vakansii na LinkedIn z moim reziume",
+        "Doslidyty tsiny konkurentiv ta stvoryty porivnialnu tablytsu",
+        "Napysaty ta opublikuvaty bloh-post pro [temu] na WordPress",
+        "Vidsysky mene vid usikh marketynhovykh lystiv u Gmail",
+        "Protestuvaty potik reiéstratsii na moiemu saiti ta povidomyty pro pomylky",
+        "Znaiditi 50 lidiv, shcho vidpovidaiut [ICP] na LinkedIn, ta dodaty do CRM"
+      ],
+      "quickPrompts": "Shvydki komandy dlia sproby",
+      "startFirstTask": "Pochnit vashe pershe zavdannia"
+    },
+    "chatTasks": {
+      "commandCenter": "Vash komandnyi tsentr",
+      "describeTask": "Opishit bud-iake zavdannia. Spohliadaité, yak tse vidbuvaietsia.",
+      "examplePrompt": "Znaiditi top-5 bezdrotovykh klaviatur do $50 na Amazon ta porivniaty ikh u tablytsi.",
+      "exampleResponse": "Ya poshukau na Amazon ta stvoriú porivniannia. Vidkryvaiú brauzér zarás.",
+      "exampleDone": "Hotovo. Tablytsia zberézhena z tsinamy, reitynhamy ta funktsiiamy dlia vsikh 5 klaviatur.",
+      "describePlaceholder": "Opishit vashe zavdannia...",
+      "threeAgents": "Try spetsializovani ahenty",
+      "autoAssigned": "Avtomatychno pryznacheni na kozhen krok.",
+      "browser": "Brauzér",
+      "browserDesc": "Navíhuvaty, klikaty, zapovniuvaty formy, zbyraty",
+      "terminal": "Terminal",
+      "terminalDesc": "Vykonuvaty komandy, vstanovliuvaty, obrobliaty faily",
+      "desktop": "Robochyi stil",
+      "desktopDesc": "Klikaty, drukkuvaty, hortaty, vidkryvaty dodatky",
+      "betterPrompts": "Pishit krashchi komandy",
+      "specificBeatsVague": "Konkrétne zavzhdy peremahie rozmyte.",
+      "do": "Robiti",
+      "dont": "Ne robyty",
+      "doExample1": "Podaty na 10 vakansii z rozrobky PZ na LinkedIn. Adaptuvaty kozhen suprovid nyi lyst z zhadkoi tekh-steku.",
+      "dontExample1": "Podaty na robotu",
+      "doExample2": "Shukaty na Google Flights SFO do JFK, 20-25 bereznia, tuda-nazad. Zrobyty skrinshot top-3 naidezhevshykh.",
+      "dontExample2": "Znaiditi reisy",
+      "readyToTry": "Hotovi sprobuváty?",
+      "openChat": "Vidkryite chat ta opishit, shcho vam potribno.",
+      "startChat": "Pochaty chat"
+    },
+    "machinesTab": {
+      "title": "Vashi mashyny",
+      "subtitle": "Povni robochi stoly Ubuntu, yaki mozhna zapustyty za sekundy.",
+      "lifecycle": "Zhyttievyi tsykl",
+      "lifecycleDesc": "Piat staniv, povnistiu avtomatychno.",
+      "planLimits": "Obmézhennia planu",
+      "planCol": "Plan",
+      "machinesCol": "Mashyny",
+      "swarmAgentsCol": "Ahenty roiu",
+      "temp": "1 tymchasova",
+      "states": {
+        "creating": "Stvoriuietsia",
+        "starting": "Zapuskaietsia",
+        "running": "Pratsiuie",
+        "stopping": "Zupyniaietsia",
+        "stopped": "Zupynena"
+      },
+      "newMachine": "+ Nova",
+      "researchVm": "Doslidnytska VM",
+      "emailVm": "VM dlia poshty",
+      "testingVm": "Testova VM",
+      "cores": "{count} yader",
+      "gb": "{count} HB",
+      "stop": "Zupynyty",
+      "start": "Zapustyty",
+      "provisioning": "Pidhotovka...",
+      "spinUp": "Zapustyty mashynu",
+      "goToMachines": "Pereiity do mashyn"
+    },
+    "credentialsTab": {
+      "loginDetected": "Vkhid vyiavleno",
+      "matched": "Zbihlósia",
+      "credentialFound": "Oblikovi dani znaideno",
+      "autoFilled": "Avtozapovneno",
+      "autoFillTitle": "Avtozapovnennia v dii",
+      "autoFillDesc": "Vkhid vyiavleno, oblikovi dani zbihlísia, formu zapovnéno. Avtomatychno.",
+      "security": "Bezpeka",
+      "encrypted": "Zashyfrovano",
+      "aes256": "AES-256 u spokoi",
+      "vmIsolated": "VM-izolovano",
+      "sandboxed": "Sandbox na sesiu",
+      "neverLogged": "Nikoly ne reiestruietsia",
+      "zeroTrace": "Nul slidiv u lohakh",
+      "savedCredentials": "Zberézheni oblikovi dani",
+      "addOnce": "Dodaite raz, avtozapovniúite vsúdy.",
+      "saveFirst": "Zberezhit svoi pershi oblikovi dani",
+      "goToCredentials": "Pereiity do zberézhénykh oblikovykh danykh"
+    },
+    "swarmTab": {
+      "title": "Rezhym roiu",
+      "runParallel": "Zapustyty {count} mashyn paralélno",
+      "sameTask": "Te same zavdannia, {multiplier}x rezultat, toi samyi chas.",
+      "done": "Hotovo",
+      "running": "Pratsiuie",
+      "pending": "Ochikuie",
+      "result": "REZULTAT",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Paralélne doslidzhennia",
+          "desc": "{count} konkurentiv, {count} mashyn, odnochasno"
+        },
+        "bulkApplications": {
+          "title": "Masovi zaiavky",
+          "desc": "Podavaite na rizni platformy odnochasno"
+        },
+        "multiCitySearch": {
+          "title": "Poshuk u kilkokh mistakh",
+          "desc": "Shukaty oholoshennia v {count} mistakh odnochasno"
+        },
+        "parallelOutreach": {
+          "title": "Paralélne zvernennia",
+          "desc": "Personalizovani lysty do riznykh sehmentiv"
+        },
+        "crossPlatform": {
+          "title": "Krosplatformna robota",
+          "desc": "Publikuvaty na {count} platformakh odnochasno"
+        },
+        "distributedTesting": {
+          "title": "Rozpodilene testuvannia",
+          "desc": "Testuvaty kilka stsenariiv paralélno"
+        }
+      },
+      "whatToSwarm": "Shcho zapuskaty roiem",
+      "availability": "Dostupnist",
+      "freeNotAvailable": "Nedostupno",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 ahentiv",
+      "startSwarm": "Zapustyty rii"
+    },
+    "workforceTab": {
+      "title": "Robocha syla",
+      "subtitle": "Vasha AI-kompaniia na avtopiloti",
+      "description": "Spivrobitnyki, komandy, tryhery — pratsiuiut 24/7.",
+      "myCompany": "Moia kompaniia",
+      "contentOps": "Content Ops",
+      "support": "Pidtrymka",
+      "writer": "Pysmennyk",
+      "seo": "SEO",
+      "social": "Sotsialni merezhi",
+      "inbox": "Vkhidni",
+      "docs": "Dokumenty",
+      "concepts": "Bazovi kontseptsii",
+      "conceptItems": {
+        "employees": {
+          "title": "Spivrobitniky",
+          "desc": "AI-ahenty, shcho vykonuiut zavdannia za rozkladom, 24/7"
+        },
+        "teams": {
+          "title": "Komandy",
+          "desc": "Hrupy spivrobitnykiv zi spilnymy instruktsiiamy"
+        },
+        "sharedMemory": {
+          "title": "Spilna pamiat",
+          "desc": "Skhovyshche kliuch-znachennia, yake spivrobitniky chytaiut i zapysúiut"
+        },
+        "triggers": {
+          "title": "Tryhery",
+          "desc": "Zviazuité spivrobitnykiv: odyn zakinchyv, nastupnyi pochnáv"
+        },
+        "delegates": {
+          "title": "Delehaty",
+          "desc": "Spivrobitniky pryznachaiut pidzavdannia spetsialistam"
+        },
+        "orgChart": {
+          "title": "Orhstruktura",
+          "desc": "Vizualna mapa iierarkhii vashoi kompanii"
+        }
+      },
+      "chainTitle": "Zviazati spivrobitnykiv lantsíuzhkom",
+      "chainDesc": "Rezultat avtomatychno perekhodyt vid odnoho do nastupnoho.",
+      "scout": "Scout",
+      "scoutDesc": "doslidzhúie konkurentiv",
+      "atlas": "Atlas",
+      "atlasDesc": "pyshe bloh-post",
+      "nova": "Nova",
+      "novaDesc": "publikuie v sotsialnykh merezhakh",
+      "done": "Hotovo",
+      "onComplete": "on_complete",
+      "waiting": "Ochikuie",
+      "templates": "Pochaty z shablonu",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Pidtrymka kliientiv",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marketynh",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} spivrobitnykiv",
+      "openWorkforce": "Vidkryty robóchu sylu"
+    },
+    "billingTab": {
+      "credits": "Kredyty",
+      "timeMetric": "Chas — iedynyi pokaznyk.",
+      "rate": "Tarif",
+      "rateValue": "10",
+      "creditsPerMin": "kredytiv/khv",
+      "metered": "vimiruietsia kozhni 30 sek.",
+      "example": "Pryklad",
+      "minTask": "khv zavdannia",
+      "startCredits": "Pochatok: {count} kredytiv",
+      "endCredits": "Kinets: {count} kredytiv",
+      "creditsUsed": "{count} kredytiv vykorystano",
+      "calculation": "{mins} khv x 10 kredytiv/khv",
+      "plans": "Plany",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 tymchasova",
+          "feature": "Bazovyi poshuk"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 zavzhdy uvimknena",
+          "feature": "2 paralélnykh ahenty"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 zavzhdy uvimknena",
+          "feature": "Rozshyrenyi poshuk"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 zavzhdy uvimkneni",
+          "feature": "Priorytétna pidtrymka"
+        },
+        "pro": {
+          "credits": "1 500",
+          "machines": "3 zavzhdy uvimkneni",
+          "feature": "Harantiia SLA"
+        }
+      },
+      "perMonth": "{price}/mis.",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Yak narákhovúiutsia kredyty?",
+          "a": "10 kredytiv na khvylynu roboty ahenta, z okrúhlenniam uhóru. Pereviríaietsia kozhni 30 sekund pid chas sesii."
+        },
+        "runOut": {
+          "q": "Shcho stanetsia, koly kredyty zakinchátsia?",
+          "a": "Dlia zapusku zavdannia potribno shchonaimenche 20 kredytiv. Pry 0 zavdannia pryzúpyniaietsia — kupíte dodátkovyi paket, shchob prodóvzhyty."
+        },
+        "rollOver": {
+          "q": "Chy perenósiatsia nevykorystani kredyty?",
+          "a": "Kredyty skydáiutsia kozhnoho rozrakhunkovoho periodu. Vykorystáite abo vtrátyte."
+        }
+      },
+      "goToBilling": "Pereiity do oplaty"
+    },
+    "desktopAppTab": {
+      "overlay": "Nakládka",
+      "overlayDesc": "Zavzhdy poruch. Klikníte, shchob rozhornuty.",
+      "compact": "Kompaktnyi",
+      "expanded": "Rozhornútyi",
+      "ready": "Hotovyi",
+      "exampleTask": "Onovyty moie reziume",
+      "exampleResponse": "Vidkryvaiú resume.docx...",
+      "describePlaceholder": "Opishit vashe zavdannia...",
+      "whatItControls": "Chym keruie",
+      "controls": {
+        "browser": {
+          "name": "Brauzér",
+          "desc": "Navíhuvaty, klikaty, zapovniuvaty formy"
+        },
+        "files": {
+          "name": "Faily",
+          "desc": "Chytaty, pysaty, redahuvaty bud-de"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Vykonuvaty bud-iaku komandu"
+        },
+        "desktop": {
+          "name": "Robochyi stil",
+          "desc": "Klikaty, drukkuvaty, hortaty"
+        },
+        "screenshots": {
+          "name": "Skriinshoty",
+          "desc": "Bachyt te, shcho bachyte vy"
+        },
+        "apps": {
+          "name": "Dodatky",
+          "desc": "Keruváty bud-iakym vstanovlenym dodatkom"
+        }
+      },
+      "twoWays": "Dva sposoby zapusku",
+      "cloudVm": "Khmarna VM",
+      "cloudFeatures": {
+        "isolated": "Povnistiu izoliovana sandbox",
+        "freshBrowser": "Chystyi brauzér, bez istorii",
+        "maxSecurity": "Maksymalna bezpeka"
+      },
+      "desktopMode": "Robochyi stil",
+      "desktopFeatures": {
+        "yourFiles": "Vashi faily, priamyi dostup",
+        "yourApps": "Vashi vstanovleni dodatky",
+        "yourSessions": "Vashi aktivni sesii"
+      },
+      "downloadCta": "Download Desktop App"
+    }
+  },
+  "comparePage": {
+    "title": "Порівняння",
+    "heroTitle": "Coasty проти конкурентів",
+    "heroDescription": "Дізнайтеся, як AI-агент №1 для роботи з комп'ютером (82% OSWorld) порівнюється з альтернативами. Порівняння функцій на основі реальних даних.",
+    "categories": {
+      "aiAgent": "AI-агент",
+      "infrastructure": "Інфраструктура",
+      "rpa": "RPA",
+      "human": "Людина"
+    },
+    "vsLabel": "Coasty проти {name}",
+    "ctaTitle": "Готові спробувати AI-агента №1 для роботи з комп'ютером?",
+    "ctaButton": "Спробувати Coasty безкоштовно",
+    "noCreditCard": "Кредитна картка не потрібна",
+    "allComparisons": "Усі порівняння",
+    "featureComparison": "Порівняння функцій",
+    "whyChooseCoasty": "Чому Coasty?",
+    "strengthsOf": "Сильні сторони {name}",
+    "ctaDescription": "82% OSWorld benchmark. Ізоляція VM. Розв'язання CAPTCHA. Від $20/міс.",
+    "watchCaseStudies": "Переглянути кейси"
+  },
+  "agentSwarms": {
+    "badge": "Режим рою агентів",
+    "heroTitle1": "Один запит.",
+    "heroTitle2": "Безліч машин.",
+    "heroTitle3": "Паралельні результати.",
+    "heroDescription": "Розподіліть будь-яке завдання між кількома ізольованими середовищами, що працюють одночасно. Робота, яка займає годину, завершується за хвилини.",
+    "trySwarmMode": "Спробувати режим рою",
+    "seeInAction": "Подивитися в дії",
+    "liveExecution": "swarm-tree — виконання в реальному часі",
+    "machineCount": "{count} машин",
+    "running": "працює",
+    "threeSteps": "Три кроки до паралельного виконання",
+    "steps": {
+      "typePrompt": {
+        "title": "Введіть запит",
+        "desc": "Опишіть завдання. Увімкніть режим рою та оберіть кількість машин."
+      },
+      "machinesSpinUp": {
+        "title": "Машини запускаються",
+        "desc": "Кожна отримує повністю ізольоване середовище — браузер, термінал, робочий стіл."
+      },
+      "resultsStream": {
+        "title": "Результати в реальному часі",
+        "desc": "Спостерігайте за кожною машиною в реальному часі через деревоподібний вигляд рою."
+      }
+    },
+    "demoTitle": "Демо рою агентів",
+    "demoDescription": "Подивіться, як {count} машин одночасно виконують дослідження CRM",
+    "prompt": "Запит",
+    "swarm": "РІЙ",
+    "run": "Запустити",
+    "reset": "Скинути",
+    "allCompleted": "Усі {count} машин завершили роботу",
+    "speedComparison": "~{swarmTime} хв замість ~{seqTime} хв — у {multiplier}x швидше",
+    "seqVsSwarm": "Послідовно vs Рій",
+    "tableHeaders": {
+      "task": "Завдання",
+      "before": "До",
+      "swarm": "Рій",
+      "speed": "Швидкість"
+    },
+    "speedExamples": {
+      "crmResearch": "Дослідження 5 CRM-інструментів",
+      "qaPages": "QA на 8 сторінках",
+      "leadEnrichment": "Збагачення лідів (100)",
+      "priceMonitoring": "Моніторинг цін"
+    },
+    "builtForParallel": "Створено для паралельної роботи",
+    "useCases": {
+      "marketResearch": {
+        "title": "Масштабне дослідження ринку",
+        "desc": "Досліджуйте кількох конкурентів, ринки або продукти одночасно на ізольованих машинах."
+      },
+      "leadGeneration": {
+        "title": "Генерація лідів",
+        "desc": "Збагачуйте профілі, знаходьте email-адреси та перевіряйте соціальну присутність — години роботи за хвилини."
+      },
+      "qaTesting": {
+        "title": "QA та регресійне тестування",
+        "desc": "Запускайте тестові сценарії на різних сторінках або потоках паралельно."
+      },
+      "contentSocial": {
+        "title": "Контент і соцмережі",
+        "desc": "Публікуйте на кількох платформах одночасно з ізоляцією кожної машини."
+      },
+      "dataExtraction": {
+        "title": "Витягування даних",
+        "desc": "Збирайте та структуруйте дані з десятків джерел одночасно."
+      },
+      "scheduledRuns": {
+        "title": "Заплановані запуски",
+        "desc": "Поєднуйте режим рою з розкладом для повторюваних паралельних завдань."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Повна ізоляція",
+        "desc": "Кожна машина має власний браузер, термінал і робочий стіл."
+      },
+      "tripleMachineLimit": {
+        "title": "3x ліміт машин",
+        "desc": "Режим рою потроює ємність машин вашого плану."
+      },
+      "liveTreeView": {
+        "title": "Деревоподібний вигляд",
+        "desc": "Знімки екрана та виклики інструментів транслюються в реальному часі."
+      },
+      "autoAggregation": {
+        "title": "Автоагрегація",
+        "desc": "Результати об'єднуються в єдиний консолідований звіт."
+      },
+      "shareableRuns": {
+        "title": "Спільні запуски",
+        "desc": "Відтворюйте повні хронології виконання за посиланням."
+      },
+      "fullySandboxed": {
+        "title": "Повний sandbox",
+        "desc": "Усі середовища знищуються після завершення."
+      }
+    },
+    "readyCta": "Готові запускати завдання паралельно?",
+    "includedWithPaid": "Режим рою включений у кожний платний план.",
+    "getStarted": "Почати",
+    "viewPricing": "Переглянути ціни",
+    "legend": {
+      "messages": "Повідомлення",
+      "broadcast": "Трансляція",
+      "sharedMemory": "Спільна пам'ять",
+      "help": "Довідка"
+    },
+    "liveSwarmExecution": "Виконання рою в реальному часі з комунікацією агентів",
+    "popular": "Популярне",
+    "avgRating": "{rating} сер."
+  },
+  "downloadPage": {
+    "title": "Настільний додаток",
+    "heroTitle": "Нехай Coasty керує вашим комп'ютером",
+    "heroDescription": "Ваш AI-помічник, який бере кермо. Автоматизуйте браузер, робочий стіл і термінал — або керуйте комп'ютером з будь-якого місця через веб-інтерфейс.",
+    "seeInAction": "Подивитися в дії",
+    "overlayDescription": "Легке накладення, що плаває на вашому робочому столі. Керуйте локально або віддалено з будь-якого браузера — ваш комп'ютер, ваші правила.",
+    "recommended": "Рекомендовано для вашої системи",
+    "coastyFor": "Coasty для {platform}",
+    "installerLabel": "Інсталятор {extension}",
+    "beforeInstall": "Перед встановленням",
+    "beforeInstallDescription": "Coasty Desktop — новий додаток, тому ваша операційна система ще не впізнає його. Це абсолютно нормально для нещодавно випущених програм — ось як продовжити:",
+    "windowsSteps": {
+      "step1": "Windows захистив ваш ПК",
+      "step2": "Детальніше",
+      "step3": "Все одно запустити"
+    },
+    "macSteps": {
+      "step1": "Не вдається відкрити Coasty Desktop",
+      "step2": "Системні налаштування > Конфіденційність та безпека",
+      "step3": "Все одно відкрити"
+    },
+    "allPlatforms": "Усі платформи",
+    "systemRequirements": {
+      "title": "Системні вимоги",
+      "win1": "Windows 10 або новіше",
+      "win2": "64-біт (x86_64)",
+      "win3": "Мінімум 4 ГБ RAM",
+      "mac1": "macOS 10.15 (Catalina) або новіше",
+      "mac2": "Apple Silicon або Intel",
+      "mac3": "Мінімум 4 ГБ RAM"
+    },
+    "whatsIncluded": "Що включено",
+    "features": {
+      "browser": "Автоматизація браузера",
+      "desktop": "Автоматизація робочого столу",
+      "terminal": "Доступ до терміналу",
+      "files": "Операції з файлами",
+      "updates": "Автооновлення",
+      "remote": "Керування з будь-якого місця"
+    },
+    "browserCta": "Відкрити Coasty у браузері",
+    "browserCtaDescription": "Хочете керувати комп'ютером з будь-якого місця?",
+    "loading": "Завантаження...",
+    "downloadFor": "Завантажити для {platform}",
+    "download": "Завантажити",
+    "unavailable": "Недоступно"
+  },
+  "referralPage": {
+    "shareTitle": "Поділіться Coasty.",
+    "earnTitle": "Заробляйте разом.",
+    "shareDescription": "Дайте друзям 50 безкоштовних кредитів для розгортання першого AI-агента. Ви також отримуєте 50 кредитів — кожного разу, коли хтось приєднується.",
+    "features": [
+      "AI, який справді працює — реальний браузер, реальні кліки, реальні результати",
+      "Ізольовано та безпечно — кожен агент працює у власній sandbox VM",
+      "Працює поки ви спите — плануйте завдання, і агенти зроблять решту"
+    ],
+    "recentActivity": "Ваша остання активність",
+    "friendsCould": "Ваші друзі теж можуть це робити",
+    "giveGet": "Дайте друзям 50 кредитів. Отримайте 50 собі. Кожного разу.",
+    "stats": {
+      "invited": "Запрошено",
+      "earned": "Зароблено",
+      "perInvite": "За запрошення"
+    },
+    "tabs": {
+      "invite": "Запросити друзів",
+      "feedback": "Надіслати відгук"
+    },
+    "referralLink": "Ваше реферальне посилання",
+    "howItWorks": "Як це працює",
+    "howSteps": [
+      "Поділіться посиланням з другом",
+      "Вони реєструються і отримують 50 безкоштовних кредитів",
+      "Ви миттєво отримуєте 50 кредитів"
+    ],
+    "shareDirectly": "Поділитися напряму",
+    "yourReferrals": "Ваші реферали",
+    "invitedYou": "Запросив вас",
+    "joinedViaLink": "Приєднався за вашим посиланням",
+    "noReferrals": "Рефералів ще немає",
+    "noReferralsHint": "Поділіться посиланням вище, і ви обидва отримаєте 50 кредитів",
+    "feedbackThanks": "Дякуємо за відгук!",
+    "feedbackWeRead": "Ми читаємо кожне повідомлення.",
+    "sendAnother": "Надіслати ще",
+    "feedbackTitle": "Розкажіть, що думаєте",
+    "feedbackSubtitle": "Звіти про помилки, ідеї функцій або просто привітайтесь",
+    "feedbackPlaceholder": "Що у вас на думці?",
+    "weReadEvery": "Ми читаємо кожне повідомлення",
+    "send": "Надіслати",
+    "shareMessage": "Привіт, я користуюся Coasty і це дуже круто. Це AI, який може використовувати комп'ютер за тебе. Серфінг, кліки, набір тексту — все. Спробуй за моїм посиланням, і ми обидва отримаємо безкоштовні кредити!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Ел. пошта"
+    },
+    "emailSubject": "Подивись на цей AI-інструмент",
+    "emailBody": "Цей AI може використовувати комп'ютер за тебе. Серфінг, кліки, набір тексту — все."
+  },
+  "statusPage": {
+    "title": "Стан системи",
+    "brandTitle": "Стан Coasty",
+    "subtitle": "Операційний стан усіх сервісів Coasty в реальному часі. Ця сторінка автоматично оновлюється кожні 60 секунд.",
+    "refresh": "Оновити",
+    "statuses": {
+      "operational": "Працює",
+      "degraded": "Знижена продуктивність",
+      "outage": "Збій"
+    },
+    "overallStatuses": {
+      "allOperational": "Усі системи працюють",
+      "someDegraded": "Деякі системи сповільнені",
+      "disruption": "Виявлено перебій у роботі"
+    },
+    "overallDescriptions": {
+      "allOperational": "Усі сервіси працюють без проблем.",
+      "someDegraded": "Деякі сервіси працюють повільно. Ми розслідуємо.",
+      "disruption": "Ми знаємо про проблему та активно працюємо над виправленням."
+    },
+    "responseTime": "{ms} мс час відповіді",
+    "uptimeLabel": "Доступність за 90 днів",
+    "daysAgo": "90 днів тому",
+    "today": "Сьогодні",
+    "overallUptime": "Загальна доступність за 90 днів",
+    "overallUptimeDesc": "Сукупна доступність усіх сервісів",
+    "services": "Сервіси",
+    "clickUptime": "натисніть для перегляду доступності",
+    "lastChecked": "Остання перевірка {time} · Автооновлення кожні 60с",
+    "experiencingIssues": "Виникли проблеми?",
+    "issuesDescription": "Якщо щось не так, зверніться до нас напряму.",
+    "talkToCofounders": "Поговорити із засновниками",
+    "emailUs": "Напишіть нам",
+    "serviceNames": {
+      "website": "Веб-сайт",
+      "aiBackend": "AI-бекенд",
+      "database": "База даних",
+      "authentication": "Автентифікація",
+      "aiModels": "AI-моделі",
+      "fileStorage": "Файлове сховище"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty — ШІ-агент №1 для керування комп'ютером | ШІ-працівник для автоматизації робочого столу та браузера",
+      "titleTemplate": "{title} | Coasty — ШІ-агент для керування комп'ютером",
+      "description": "Coasty — ШІ-агент №1 з керування комп'ютером — 82% на бенчмарку OSWorld. Він керує робочим столом як людина: відкриває браузери, натискає, друкує, заповнює форми, надсилає листи, працює з таблицями. Справжня ізоляція на рівні віртуальних машин. Від $20/міс.",
+      "ogTitle": "Coasty — ШІ-агент №1 для керування комп'ютером | 82% OSWorld",
+      "ogDescription": "ШІ-працівник, що керує робочим столом як людина. №1 на бенчмарку OSWorld (82%). Автоматизація браузера, керування робочим столом, розв'язання CAPTCHA, ізоляція ВМ. Від $20/міс.",
+      "twitterDescription": "ШІ-працівник, що керує робочим столом як людина. Відкриває браузери, натискає, друкує, заповнює форми, надсилає листи. Справжня ізоляція ВМ. $20/міс. замість $3,000/міс. за віртуального помічника."
+    },
+    "compare": {
+      "title": "Порівняння Coasty — Альтернативи та порівняння ШІ-агентів",
+      "description": "Дізнайтеся, як ШІ-агент Coasty №1 з керування комп'ютером порівнюється з Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath та іншими. Порівняння функцій та цін.",
+      "ogTitle": "Порівняйте Coasty з альтернативними ШІ-агентами",
+      "ogDescription": "Детальне порівняння ШІ-агента №1 з керування комп'ютером із конкурентами. Результати бенчмарків, ціни, можливості."
+    },
+    "download": {
+      "title": "Завантажити Coasty Desktop — ШІ-агент для Mac та Windows",
+      "description": "Завантажте Coasty Desktop — ШІ-агент №1 для керування комп'ютером, який працює на вашій локальній машині. Автоматизація браузера, керування робочим столом, доступ до терміналу та файлові операції. Доступний для Windows та macOS.",
+      "ogTitle": "Завантажити Coasty Desktop — ШІ-агент для Mac та Windows",
+      "ogDescription": "ШІ, що керує вашим комп'ютером як людина. Автоматизація браузера, робочого столу та терміналу в одному додатку. №1 на бенчмарку OSWorld."
+    },
+    "guide": {
+      "title": "Що може Coasty? — Повний посібник з ШІ-автоматизації комп'ютера",
+      "description": "Дізнайтеся все, що може автоматизувати Coasty: пошук клієнтів, розсилка листів, подання заявок на роботу, QA-тестування, введення даних, соціальні мережі, рекрутинг, дослідження та понад 100 завдань.",
+      "ogTitle": "Що може Coasty? — Повний посібник з ШІ-автоматизації",
+      "ogDescription": "Понад 100 завдань, які Coasty може автоматизувати. Від продажів до QA-тестування — дізнайтеся, як ШІ-агент справляється з реальною роботою."
+    },
+    "blog": {
+      "title": "Блог — Аналітика ШІ-агентів, дослідження та кейси",
+      "description": "Глибокий аналіз автономних ШІ-агентів, технологій керування комп'ютером, реальних кейсів автоматизації та майбутнього ШІ-працівників. Від команди ШІ-агента №1.",
+      "ogTitle": "Блог Coasty — Аналітика ШІ-агентів та кейси",
+      "ogDescription": "Глибокий аналіз автономних ШІ-агентів, технологій керування комп'ютером та реальних кейсів автоматизації від ШІ-агента №1."
+    },
+    "results": {
+      "title": "Демо та результати — Дивіться, як ШІ-агент Coasty працює автономно",
+      "description": "Дивіться, як Coasty автономно проводить маркетингові кампанії, подає заявки на роботу, заповнює анкети, тестує продукти, надсилає персоналізовані листи та багато іншого. Реальні кейси з відеодемонстраціями.",
+      "ogTitle": "Демо — Дивіться, як ШІ-агент Coasty працює автономно",
+      "ogDescription": "Реальні демонстрації ШІ, що керує комп'ютером: маркетинг, заявки на роботу, QA-тестування, розсилка листів та багато іншого. №1 на бенчмарку OSWorld."
+    },
+    "terms": {
+      "title": "Умови використання",
+      "description": "Умови використання Coasty. Ознайомтеся з умовами використання платформи ШІ-працівника Coasty, агента для керування комп'ютером та десктопного додатку.",
+      "ogTitle": "Coasty — Умови використання",
+      "ogDescription": "Умови використання Coasty. Ознайомтеся з умовами використання платформи ШІ-працівника Coasty, агента для керування комп'ютером та десктопного додатку."
+    },
+    "privacy": {
+      "title": "Політика конфіденційності",
+      "description": "Політика конфіденційності Coasty. Дізнайтеся, як ми захищаємо ваші дані за допомогою ізоляції на рівні ВМ, зашифрованих сесій, ізольованих середовищ виконання та корпоративного рівня безпеки.",
+      "ogTitle": "Coasty — Політика конфіденційності",
+      "ogDescription": "Політика конфіденційності Coasty. Дізнайтеся, як ми захищаємо ваші дані за допомогою ізоляції на рівні ВМ, зашифрованих сесій, ізольованих середовищ виконання та корпоративного рівня безпеки."
+    },
+    "useCases": {
+      "title": "Варіанти використання — ШІ-агент Coasty для бізнес-операцій",
+      "description": "Відкрийте 12 способів автоматизації операцій з ШІ-агентом Coasty — конкурентна розвідка, QA-тестування, генерація лідів, розсилка листів та багато іншого. Реальні результати.",
+      "ogTitle": "Варіанти використання — ШІ-агент Coasty",
+      "ogDescription": "12 способів збільшити продуктивність у 10 разів на автопілоті. Реальні результати, реальні цифри."
+    },
+    "computerUse": {
+      "title": "ШІ-агент для керування комп'ютером — №1 в автоматизації робочого столу, браузера та терміналу",
+      "description": "Coasty — найкращий ШІ-агент для керування комп'ютером, №1 на OSWorld (82%). Автоматизуйте будь-які завдання на робочому столі, в браузері або терміналі з автономним ШІ, що керує комп'ютером як людина.",
+      "ogTitle": "Coasty — ШІ-агент №1 для керування комп'ютером",
+      "ogDescription": "Найкращий агент для керування комп'ютером, №1 на OSWorld. Автоматизуйте будь-які завдання на робочому столі, в браузері або терміналі за допомогою ШІ."
+    },
+    "pricing": {
+      "title": "Ціни — Тарифи та вартість ШІ-агента Coasty",
+      "description": "Тарифи Coasty від $20/міс. Замініть віртуальних помічників за $3,000/міс. ШІ-працівником. Безкоштовний тариф доступний. Оплата на основі кредитів без прихованих комісій.",
+      "ogTitle": "Ціни Coasty — Тарифи ШІ-агента",
+      "ogDescription": "ШІ-працівник від $20/міс. Замініть дорогих віртуальних помічників автономним ШІ. Безкоштовний тариф доступний."
+    },
+    "faq": {
+      "q1": "Що таке Coasty?",
+      "a1": "Coasty — це платформа ШІ-працівника — агент, що керує комп'ютером як людина. Він відкриває браузери, натискає, друкує, навігує додатками, заповнює форми, надсилає листи та керує таблицями автономно. №1 на бенчмарку OSWorld з результатом 82% виконання 369 реальних завдань.",
+      "q2": "Чим Coasty відрізняється від Anthropic Computer Use?",
+      "a2": "У той час як Anthropic Computer Use надає лише API для керування комп'ютером, Coasty — це готова до використання платформа з керованою ВМ-інфраструктурою, вбудованим розв'язанням CAPTCHA, десктопним додатком для Mac та Windows, підтримкою кількох моделей та найкращим результатом на бенчмарку OSWorld (82%). Coasty надає комплексне рішення — не просто API.",
+      "q3": "Скільки коштує Coasty?",
+      "a3": "Coasty починається від $20/міс. за тариф Starter з доступним безкоштовним тарифом. Для порівняння: віртуальний помічник-людина коштує від $3,000/міс. Coasty працює 24/7 без перерв, навчання та з миттєвим масштабуванням.",
+      "q4": "Чи безпечно використовувати Coasty?",
+      "a4": "Так. Кожна сесія Coasty працює у власній ізольованій пісочниці віртуальної машини. Ваші дані в безпеці, ваша машина не зачіпається, і нічого не витікає між сесіями. Це справжня ізоляція на рівні ВМ, а не просто контейнери в спільному пулі.",
+      "q5": "Що таке бенчмарк OSWorld?",
+      "a5": "OSWorld — це бенчмарк для оцінки ШІ-агентів на реальних комп'ютерних завданнях. Він тестує 369 завдань у браузерах, офісних додатках та системних операціях. Coasty набрав 82% — найкращий результат серед усіх агентів з керування комп'ютером.",
+      "q6": "Чим Coasty відрізняється від RPA-інструментів на кшталт UiPath?",
+      "a6": "Традиційні RPA-інструменти на кшталт UiPath вимагають крихких скриптів та ламаються при зміні інтерфейсу. Coasty використовує ШІ-зір для розуміння та взаємодії з будь-яким інтерфейсом, адаптуючись у реальному часі без заздалегідь написаних скриптів. Він працює як людина, а не як макрос. Налаштування займає хвилини, а не тижні.",
+      "q7": "Чи є у Coasty десктопний додаток?",
+      "a7": "Так. Coasty Desktop доступний для Mac та Windows. Він працює як плаваюча панель поверх робочого столу та може керувати вашим локальним браузером, файлами, терміналом та додатками напряму — без необхідності у ВМ для локальних завдань.",
+      "q8": "Що може автоматизувати Coasty?",
+      "a8": "Coasty може автоматизувати практично будь-яке комп'ютерне завдання: веб-серфінг, заповнення форм, надсилання листів, роботу з таблицями, введення даних, публікації в соцмережах, подання заявок на роботу, пошук клієнтів, QA-тестування, підтримку клієнтів, рекрутинг у LinkedIn та багато іншого. Якщо людина може зробити це на комп'ютері — Coasty теж може.",
+      "q9": "Як Coasty порівнюється з OpenAI Operator?",
+      "a9": "Coasty перевершує OpenAI Operator на бенчмарку OSWorld (82% проти ~40%), пропонує справжню ізоляцію на рівні ВМ для кожної сесії, підтримує кілька ШІ-моделей, включає повне керування робочим столом окрім браузера та надає фреймворк з відкритим вихідним кодом.",
+      "q10": "Чи може Coasty розв'язувати CAPTCHA?",
+      "a10": "Так. У Coasty є вбудований конвеєр розв'язання CAPTCHA, тому його не блокують так, як конкуруючих ШІ-агентів. Це критично важливо для реальної автоматизації, де CAPTCHA часто зустрічаються на сайтах."
+    },
+    "structuredData": {
+      "appDescription": "ШІ-агент №1 з керування комп'ютером. Coasty керує робочим столом як людина — відкриває браузери, натискає, друкує, заповнює форми, надсилає листи та працює з таблицями автономно. 82% на бенчмарку OSWorld. Справжня ізоляція на рівні ВМ. Вбудоване розв'язання CAPTCHA. Від $20/міс.",
+      "orgDescription": "Coasty створює ШІ-агента №1 для керування комп'ютером. Наша платформа забезпечує автономне керування робочим столом, автоматизацію браузера та оркестрацію кількох агентів зі справжньою ізоляцією на рівні ВМ.",
+      "productDescription": "ШІ-агент для керування комп'ютером як людина. №1 на бенчмарку OSWorld (82%). Автономна автоматизація браузера, керування робочим столом, надсилання листів, заповнення форм та робота з таблицями зі справжньою ізоляцією на рівні ВМ.",
+      "websiteDescription": "Платформа ШІ-агента №1 для керування комп'ютером. 82% на бенчмарку OSWorld. Автономна автоматизація браузера, робочого столу та терміналу з ізоляцією ВМ. Від $20/міс.",
+      "softwareDescription": "ШІ-агент для керування комп'ютером як людина. №1 на бенчмарку OSWorld з результатом 82% виконання 369 реальних завдань. Автономна автоматизація браузера, керування робочим столом, термінальні операції, надсилання листів, заповнення форм та робота з таблицями.",
+      "breadcrumbs": {
+        "home": "Головна",
+        "caseStudies": "Кейси ШІ-агента",
+        "blog": "Блог",
+        "download": "Завантажити десктопний додаток",
+        "compare": "Порівняти ШІ-агентів"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 — Сторінку не знайдено",
+      "description": "Вибачте, ця сторінка не існує."
+    },
+    "error": {
+      "title": "Щось пішло не так",
+      "description": "Виникла непередбачена помилка. Спробуйте ще раз.",
+      "tryAgain": "Спробувати ще"
+    }
+  },
+  "schedulesPage": {
+    "title": "Робоча сила",
+    "subtitle": "Ваша AI робоча сила — призначайте завдання і дозвольте їм зробити решту",
+    "guide": "Довідник",
+    "teamsTab": "Команди",
+    "hireEmployee": "Найняти працівника",
+    "loading": "Завантаження ваших працівників...",
+    "onDuty": "{count} на зміні",
+    "standby": "{count} у режимі очікування",
+    "company": "Компанія",
+    "teams": "{count} команд",
+    "employees": "{count} працівників",
+    "members": "{count} учасників",
+    "unassigned": "Непризначені",
+    "add": "Додати",
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "run": "Запустити",
+    "delegate": "делегувати",
+    "untitledEmployee": "Працівник без назви",
+    "untitled": "Без назви",
+    "guidelinesPlaceholder": "Інструкції...",
+    "today": "Сьогодні",
+    "timesDaily": "{count} × на день",
+    "noEmployeesDay": "Немає працівників на цей день",
+    "noEmployeesScheduled": "Немає запланованих працівників",
+    "recentActivity": "Остання активність",
+    "schedule": "Розклад",
+    "emptyState": {
+      "openChat": "Відкрийте будь-який чат і натисніть",
+      "assignEmployee": "Призначити працівника",
+      "onThe": "у",
+      "topRight": "верхньому правому куті",
+      "toPutOnAutopilot": "щоб увімкнути автопілот",
+      "newChat": "Новий чат"
+    },
+    "emptyWorkforce": {
+      "title": "Найміть свого першого працівника",
+      "description": "AI працівники працюють від вашого імені — призначте завдання, встановіть розклад, і вони виконають його автоматично",
+      "flexibleShifts": {
+        "title": "Гнучкі зміни",
+        "desc": "Плануйте працівників щогодини, щоденно, щотижня, щомісяця — або використовуйте власний cron expression"
+      },
+      "fullAutonomy": {
+        "title": "Повна автономія",
+        "desc": "Кожен працівник має повний доступ до браузера, терміналу та ваших підключених робочих станцій"
+      },
+      "activityLogs": {
+        "title": "Журнали активності",
+        "desc": "Кожне виконання записується, щоб ви могли переглянути, що ваші працівники зробили"
+      },
+      "startFromChat": "Почати з чату"
+    },
+    "filters": {
+      "all": "Усі",
+      "onDuty": "На зміні",
+      "standby": "У режимі очікування"
+    },
+    "noMatch": "Жоден працівник не відповідає цьому фільтру",
+    "createTeam": {
+      "title": "Нова команда",
+      "subtitle": "Почніть з шаблону або створіть з нуля",
+      "backToTemplates": "Назад до шаблонів",
+      "customTeam": "Користувацька команда",
+      "customDescription": "Створіть команду з власною конфігурацією.",
+      "teamNameLabel": "Назва команди",
+      "teamNamePlaceholder": "напр. Research, Marketing, Engineering",
+      "guidelinesLabel": "Інструкції",
+      "optional": "(необов'язково)",
+      "guidelinesPlaceholder": "Спільні інструкції, яких дотримуватимуться всі члени команди...",
+      "suggestedEmployees": "Рекомендовані працівники",
+      "suggestedCredentials": "Рекомендовані облікові дані",
+      "added": "Додано",
+      "addButton": "+ Додати",
+      "credentials": "Облікові дані",
+      "addCredential": "+ Додати облікові дані",
+      "credentialHint": "Облікові дані зашифровані. Вони будуть включені в інструкції команди, щоб працівники знали, що доступно.",
+      "settingUp": "Налаштування...",
+      "createEmployees": "Створити {count} працівників",
+      "createTeamButton": "Створити команду"
+    },
+    "noTeams": {
+      "title": "Команд ще немає",
+      "description": "Команди дозволяють працівникам ділитися контекстом і пам'яттю. Створіть одну, щоб побудувати свою організаційну структуру.",
+      "newTeam": "Нова команда"
+    },
+    "howItWorks": {
+      "title": "Як це працює",
+      "dragEmployees": "Перетягніть працівників до команди",
+      "clickToEdit": "Натисніть, щоб редагувати розклад і налаштування",
+      "teamsShare": "Команди діляться пам'яттю та інструкціями",
+      "dashedLines": "Пунктирні лінії — делегування між працівниками"
+    },
+    "inactive": {
+      "title": "{count} працівників неактивні",
+      "missingMachine": "{count} без машини — не працюватимуть до активації",
+      "wontRun": "Не працюватиме до активації",
+      "fixInEmployees": "Виправити у працівниках"
+    },
+    "dragHint": "Перетягніть непризначених працівників до команд, щоб додати їх",
+    "limits": {
+      "upgradePlan": "Покращити план",
+      "manageMachines": "Керувати машинами",
+      "manageEmployees": "Керувати працівниками",
+      "machineLimit": "Вам потрібна хмарна машина, але ви досягли ліміту в {max} машин. Покращіть план або видаліть невикористовувану машину.",
+      "employeeLimit": "Ви досягли ліміту працівників ({max} для рівня {tier}). Покращіть план або видаліть невикористовуваних працівників.",
+      "templateLimit": "Цей шаблон потребує {needed} працівників, але у вас залишилося лише {available} місць (максимум {max} для рівня {tier}). Покращіть план або видаліть невикористовуваних працівників.",
+      "createFailed": "Не вдалося створити жодного працівника. Перевірте ліміти облікового запису та спробуйте знову.",
+      "teamFailed": "Не вдалося створити команду"
+    },
+    "provisioning": {
+      "checking": "Перевірка лімітів облікового запису...",
+      "usingMachine": "Використовується машина \"{name}\"...",
+      "assigningMachine": "Призначення на машину \"{name}\" (працюватиме, коли машина буде готова)...",
+      "creatingMachine": "Створення нової машини...",
+      "machineStarted": "Підготовка машини розпочата...",
+      "hiring": "Наймаємо {name} ({current}/{total})...",
+      "creatingTeam": "Створення команди..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Команду створено з {count} працівниками ({failedCount} невдалих: {names})",
+      "teamCreated": "Команду {name} створено з {count} працівниками"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "Контент-операції",
+        "tagline": "Публікуйте послідовно без жодних зусиль",
+        "description": "Компактний контент-двигун — пише, оптимізує та розповсюджує контент на автопілоті.",
+        "roles": {
+          "atlas": "Контент-автор — пише статті для блогу, розсилки та тексти для соцмереж",
+          "echo": "SEO-аналітик — перевіряє сторінки, відстежує позиції, пропонує можливості за ключовими словами",
+          "nova": "Соціальний дистриб'ютор — публікує контент на платформах і відстежує залученість"
+        },
+        "credentials": {
+          "wordpress": "Публікація та управління статтями блогу",
+          "twitter": "Публікація твітів і відстеження залученості",
+          "linkedin": "Публікація професійного контенту та статей",
+          "searchConsole": "Відстеження пошукової ефективності та індексації"
+        }
+      },
+      "customerSupport": {
+        "name": "Підтримка клієнтів",
+        "tagline": "Підтримка 24/7 від 3 працівників",
+        "description": "Моніторить поштові скриньки, вирішує типові проблеми та оновлює базу знань.",
+        "roles": {
+          "sage": "Моніторинг пошти — перевіряє листи підтримки, категоризує та відповідає на типові запити",
+          "iris": "Менеджер бази знань — оновлює довідкові документи та FAQ на основі повторюваних проблем",
+          "milo": "Аналітик зворотного зв'язку — збирає відгуки та тренди підтримки у щотижневі звіти"
+        },
+        "credentials": {
+          "gmail": "Моніторинг і відповіді на листи підтримки",
+          "zendesk": "Управління тикетами підтримки (або ваша система)",
+          "notion": "Оновлення бази знань та документації"
+        }
+      },
+      "researchIntel": {
+        "name": "Дослідження та розвідка",
+        "tagline": "Будьте поінформовані без ручної роботи",
+        "description": "Моніторить конкурентів, відстежує галузеві тренди та складає практичні дослідницькі звіти.",
+        "roles": {
+          "scout": "Моніторинг конкурентів — відстежує сайти конкурентів, ціноутворення та зміни функцій",
+          "wren": "Дослідник трендів — сканує галузеві новини, публікації та соцмережі для виявлення трендів",
+          "quinn": "Укладач звітів — синтезує знахідки у структуровані щотижневі розвідувальні звіти"
+        },
+        "credentials": {
+          "google": "Веб-дослідження та пошук",
+          "linkedin": "Відстеження найму та оголошень конкурентів",
+          "notion": "Публікація дослідницьких звітів"
+        }
+      },
+      "marketing": {
+        "name": "Відділ маркетингу",
+        "tagline": "Повноцінна маркетингова команда на двох машинах",
+        "description": "Створення контенту, соцмережі, SEO, моніторинг конкурентів та аналітика кампаній — два координовані підрозділи.",
+        "roles": {
+          "atlas": "Контент-стратег — планує контент-календар, пише лонгріди",
+          "nova": "Менеджер соцмереж — публікує, взаємодіє та розвиває соціальні канали",
+          "echo": "SEO-спеціаліст — оптимізує сторінки, будує внутрішні посилання, відстежує ключові слова",
+          "pixel": "Менеджер email-кампаній — пише та розсилає бюлетені, відстежує відкриття/кліки",
+          "scout": "Аналітик конкурентів — моніторить маркетингові кроки конкурентів і звітує про інсайти",
+          "dash": "Моніторинг рекламних кампаній — відстежує витрати на рекламу, ROAS та можливості оптимізації",
+          "iris": "Аналітичний звітувач — складає кросканальні панелі ефективності"
+        },
+        "credentials": {
+          "wordpress": "Публікація контенту блогу",
+          "twitter": "Управління соцмережами",
+          "linkedin": "Професійне розповсюдження контенту",
+          "mailchimp": "Email-кампанії та бюлетені",
+          "analytics": "Аналітика трафіку та конверсій",
+          "googleAds": "Управління кампаніями Google Ads",
+          "metaAds": "Meta Ads та соціальне управління"
+        }
+      },
+      "ecommerce": {
+        "name": "Операції e-commerce",
+        "tagline": "Керуйте магазином поки спите",
+        "description": "Управління товарами, цінова розвідка, відстеження запасів, управління відгуками та маркетинг зростання для онлайн-магазинів.",
+        "roles": {
+          "cleo": "Менеджер товарів — створює та оновлює описи товарів, зображення та метадані",
+          "onyx": "Моніторинг цін — відстежує ціни конкурентів і сигналізує про можливості коригування",
+          "luna": "Відстеження запасів — моніторить рівні запасів і попереджає про низький запас",
+          "sage": "Менеджер відгуків — відповідає на відгуки клієнтів і узагальнює настрої",
+          "dash": "Оптимізатор рекламних кампаній — управляє товарною рекламою та шопінг-кампаніями",
+          "flux": "Email-маркетолог — розсилає листи про покинуті кошики, промо та після покупки",
+          "wren": "Аналітичний звітувач — відстежує дохід, конверсію та метрики зростання"
+        },
+        "credentials": {
+          "shopify": "Управління магазином і товарними лістингами",
+          "amazon": "Управління маркетплейсом Amazon",
+          "googleAds": "Шопінг-реклама та кампанії",
+          "mailchimp": "Email-ланцюжки для клієнтів",
+          "analytics": "Аналітика конверсій і трафіку"
+        }
+      },
+      "engineering": {
+        "name": "Інженерна команда",
+        "tagline": "Автоматизуйте рутинні частини інженерії",
+        "description": "Автоматичний огляд коду, моніторинг залежностей, документація, тестування, моніторинг деплою та реагування на інциденти.",
+        "roles": {
+          "rune": "Оглядач коду — переглядає відкриті PR, пропонує покращення, перевіряє проблеми безпеки",
+          "koda": "Моніторинг залежностей — відстежує застарілі пакети, рекомендації з безпеки та критичні зміни",
+          "aria": "Технічний письменник — оновлює API-документацію, README та changelog відповідно до останнього коду",
+          "blaze": "Моніторинг тестів — запускає тестові набори, відстежує нестабільні тести, звітує про покриття",
+          "frost": "Моніторинг деплою — спостерігає за CI/CD пайплайнами, сповіщає про збої, відстежує частоту деплою",
+          "neon": "Моніторинг Uptime та логів — моніторить сервіси, сканує логи на помилки, створює звіти про інциденти"
+        },
+        "credentials": {
+          "github": "Доступ до репозиторію, огляд PR, issues",
+          "vercel": "Моніторинг деплою (або ваш CI/CD)",
+          "sentry": "Відстеження помилок та сповіщення про інциденти",
+          "npm": "Реєстр пакетів для перевірки залежностей"
+        }
+      },
+      "fullBusiness": {
+        "name": "Повні бізнес-операції",
+        "tagline": "Ціла компанія, повністю автоматизована",
+        "description": "Продажі, маркетинг, підтримка та адміністрування — чотири відділи працюють злагоджено на трьох машинах зі спільною розвідкою.",
+        "roles": {
+          "atlas": "Генератор лідів — знаходить і кваліфікує потенційних клієнтів з онлайн-джерел",
+          "dash": "Менеджер CRM — оновлює угоди, відстежує воронку і надсилає послідовності подальших дій",
+          "scout": "Автор пропозицій — готує комерційні пропозиції та презентації з шаблонів",
+          "nova": "Контент-маркетолог — пише статті для блогу, кейси та маркетингові тексти",
+          "echo": "Менеджер соцмереж — публікує контент і взаємодіє з аудиторією",
+          "pixel": "Менеджер email-кампаній — проводить drip-кампанії та розсилки бюлетенів",
+          "sage": "Лідер підтримки — обробляє запити клієнтів і вирішує проблеми",
+          "iris": "Менеджер знань — підтримує довідкові документи, FAQ та внутрішню вікі",
+          "milo": "Аналітик даних — складає міжвідділові звіти та панелі KPI",
+          "wren": "Дослідник ринку — відстежує галузеві тренди та конкурентну розвідку",
+          "quinn": "Координатор операцій — проводить щотижневі підсумки та міжкомандні синхронізації"
+        },
+        "credentials": {
+          "gmail": "Email-комунікація та підтримка",
+          "hubspot": "CRM та воронка продажів (або ваша CRM)",
+          "linkedin": "Генерація лідів і професійна мережа",
+          "mailchimp": "Email-маркетингові кампанії",
+          "notion": "Внутрішня вікі та документація",
+          "analytics": "Веб-аналітика та звітність",
+          "twitter": "Присутність у соцмережах",
+          "zendesk": "Тикети підтримки клієнтів"
+        }
+      },
+      "growth": {
+        "name": "Зростання та залучення",
+        "tagline": "Агресивне зростання на повному автопілоті",
+        "description": "Вихідний пошук, вхідний маркетинг, оптимізація конверсій та аналітика — спеціалізований двигун зростання на трьох машинах.",
+        "roles": {
+          "blaze": "Вихідний пошуковець — знаходить осіб, що приймають рішення, досліджує компанії, будує списки лідів",
+          "flux": "Email-розсилка — надсилає персоналізовані холодні листи, управляє послідовностями",
+          "orion": "LinkedIn-розсилка — з'єднується з потенційними клієнтами та надсилає персоналізовані повідомлення",
+          "coral": "Контент-креатор — створює SEO-контент, тексти для лендінгів та lead magnet",
+          "taro": "Оптимізатор лендінгів — моніторить конверсію, пропонує та тестує покращення",
+          "vale": "Менеджер рекламних кампаній — управляє кампаніями Google та Meta ads від початку до кінця",
+          "ember": "Оцінювач лідів — кваліфікує вхідні ліди та направляє на відповідну подальшу обробку",
+          "haze": "Аналітик воронки — відстежує метрики конверсії на кожному етапі, виявляє вузькі місця",
+          "dune": "Конкурентна розвідка — моніторить кампанії, ціноутворення та позиціонування конкурентів",
+          "kit": "Звітувач зростання — складає щоденні/щотижневі метрики зростання та результати експериментів"
+        },
+        "credentials": {
+          "linkedin": "Пошук клієнтів і комунікація",
+          "gmail": "Холодні листи та послідовності",
+          "hubspot": "Управління лідами та CRM",
+          "googleAds": "Платні пошукові кампанії",
+          "metaAds": "Реклама Meta",
+          "analytics": "Аналітика воронки та конверсій",
+          "ahrefs": "SEO-дослідження та аналіз конкурентів"
+        }
+      },
+      "saas": {
+        "name": "Операції SaaS",
+        "tagline": "Керуйте SaaS як добре налагоджений механізм",
+        "description": "Успіх клієнтів, продуктова аналітика, запобігання відтоку, відстеження функцій та автоматизована звітність для SaaS-бізнесу.",
+        "roles": {
+          "luna": "Моніторинг успіху клієнтів — відстежує залученість користувачів, виявляє ризикові акаунти",
+          "sage": "Помічник з адаптації — проводить нових користувачів через налаштування, моніторить активацію",
+          "ivy": "Запобігач відтоку — контактує з користувачами, що втрачають активність, з кампаніями реактивації",
+          "rune": "Відстеження запитів на функції — збирає відгуки та запити з усіх каналів",
+          "koda": "Продуктова аналітика — відстежує впровадження функцій, шляхи користувачів та метрики залученості",
+          "neon": "Моніторинг багів і проблем — спостерігає за логами помилок, звітами користувачів та інцидентами",
+          "aria": "Автор changelog — документує релізи, оновлює базу знань і довідковий центр",
+          "frost": "Аналітик доходу — відстежує MRR, відтік, LTV та дохід від розширення",
+          "zara": "Відстеження конкурентів — моніторить функції, ціноутворення та позиціонування конкурентів"
+        },
+        "credentials": {
+          "stripe": "Дані про підписки та дохід",
+          "intercom": "Комунікація з клієнтами та підтримка (або ваш інструмент)",
+          "mixpanel": "Продуктова аналітика та відстеження користувачів",
+          "gmail": "Комунікація з клієнтами",
+          "notion": "База знань і changelog",
+          "sentry": "Відстеження помилок і багів",
+          "github": "Відстеження проблем і запитів на функції"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "до 3",
+        "price": "$19/міс"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "до 10",
+        "price": "$50/міс"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "до 50",
+        "price": "$100/міс"
+      }
+    },
+    "frequencies": {
+      "daily": "щоденно",
+      "weekly": "щотижня",
+      "every_30_minutes": "кожні 30 хвилин",
+      "every_6_hours": "кожні 6 годин",
+      "every_12_hours": "кожні 12 годин"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Налаштуйте основні параметри комп'ютера",
+    "displayName": "Відображуване ім'я",
+    "defaultName": "Мій комп'ютер",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Цей пароль необхідний для підключення до комп'ютера"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Спільнота",
+    "title": "Подивіться, як люди це використовують",
+    "subtitle": "Від дослідження лідів до QA-тестування — подивіться, що автоматизує спільнота, та надихніться для свого наступного робочого процесу.",
+    "sessionCount": "{count} сесій, якими поділилася спільнота",
+    "searchPlaceholder": "Шукати за завданням, інструментом або результатом...",
+    "emptyTitle": "Ще ніхто не поділився — будьте першим",
+    "emptySubtitle": "Коли користувачі роблять свої сесії публічними, вони з'являються тут",
+    "noResultsTitle": "Нічого не знайдено",
+    "noResultsSubtitle": "Спробуйте інші ключові слова",
+    "watchSession": "Дивитися сесію",
+    "steps": "{count} кроків",
+    "tryCoasty": "Спробувати Coasty"
+  }
+}

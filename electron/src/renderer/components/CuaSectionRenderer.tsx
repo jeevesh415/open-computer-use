@@ -2,6 +2,7 @@ import React, { memo, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { cn } from '../lib/utils'
 import { Markdown } from './Markdown'
+import { AwaitingHumanBanner } from './AwaitingHumanBanner'
 
 // ── Icons (inline SVGs replacing @phosphor-icons/react) ──
 
@@ -98,6 +99,9 @@ type SectionType =
   | 'action-result'
   | 'status'
   | 'search-results'
+  | 'awaiting-human'
+  | 'awaiting-human-timeout'
+  | 'awaiting-human-resumed'
 
 interface ParsedSection {
   type: SectionType
@@ -121,6 +125,9 @@ type TopLevelItem =
   | { kind: 'code-agent-done'; content: string; step: string }
   | { kind: 'code-agent-summary'; content: string }
   | { kind: 'search-results'; query: string; content: string }
+  | { kind: 'awaiting-human'; reason: string; machineId: string }
+  | { kind: 'awaiting-human-timeout'; content: string }
+  | { kind: 'awaiting-human-resumed'; content: string }
   | { kind: 'text'; content: string }
 
 // ── Parser ──
@@ -130,6 +137,20 @@ const ATTR_REGEX = /(\w[\w-]*)="([^"]*)"/g
 
 function stripAgentCode(text: string): string {
   return text.replace(/```(?:python)?\s*agent\.[\s\S]*?```/g, '').trim()
+}
+
+/** Truncate long text with ellipsis, respecting word boundaries */
+function truncateText(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text
+  const cut = text.lastIndexOf(' ', maxLen)
+  return text.slice(0, cut > maxLen * 0.5 ? cut : maxLen) + '…'
+}
+
+/** Clean agent code for display: truncate long string args */
+function formatAgentCode(code: string): string {
+  return code.replace(/"([^"]{200,})"/g, (_match, content: string) => {
+    return `"${content.slice(0, 150)}…"`
+  })
 }
 
 function parseAttributes(attrString: string): Record<string, string> {
@@ -238,6 +259,15 @@ function buildTopLevel(sections: ParsedSection[]): TopLevelItem[] {
     } else if (s.type === 'search-results') {
       flushStep()
       items.push({ kind: 'search-results', query: s.attrs.query || '', content: s.content })
+    } else if (s.type === 'awaiting-human') {
+      flushStep()
+      items.push({ kind: 'awaiting-human', reason: s.attrs.reason || s.content, machineId: s.attrs.machineId || s.attrs.machineid || '' })
+    } else if (s.type === 'awaiting-human-timeout') {
+      flushStep()
+      items.push({ kind: 'awaiting-human-timeout', content: s.content })
+    } else if (s.type === 'awaiting-human-resumed') {
+      flushStep()
+      items.push({ kind: 'awaiting-human-resumed', content: s.content })
     }
 
     i++
@@ -292,10 +322,10 @@ function ScreenshotDot({ src }: { src: string }) {
   return (
     <>
       <div
-        className="absolute -left-[11px] top-[4px] z-[2] cursor-pointer cua-thumb"
+        className="absolute -left-[10px] top-[3px] z-[2] cursor-pointer cua-thumb"
         onClick={() => setLightboxOpen(true)}
       >
-        <div className="w-[28px] h-[28px] rounded-[6px] overflow-hidden ring-1 ring-neutral-700/40">
+        <div className="w-[26px] h-[26px] rounded-[5px] overflow-hidden ring-1 ring-white/[0.08] shadow-sm">
           <img src={src} alt="" className="w-full h-full object-cover" draggable={false} />
         </div>
         <style>{`
@@ -312,20 +342,11 @@ function ScreenshotDot({ src }: { src: string }) {
   )
 }
 
-// ── Plain Timeline Dot (no screenshot) ──
+// ── Plain Timeline Dot (no screenshot) — no-op with dotted line ──
+// Kept as a stub so StepCard doesn't need restructuring.
 
-function PlainDot({ status }: { status: 'success' | 'error' | 'pending' }) {
-  return (
-    <div className="absolute left-0 top-[10px] flex items-center justify-center">
-      {status === 'error' ? (
-        <span className="w-2 h-2 rounded-full bg-red-500/60 ring-2 ring-red-500/10" />
-      ) : status === 'success' ? (
-        <span className="w-2 h-2 rounded-full bg-emerald-500/60 ring-2 ring-emerald-500/10" />
-      ) : (
-        <span className="w-2 h-2 rounded-full bg-neutral-500/25 ring-2 ring-neutral-500/5" />
-      )}
-    </div>
-  )
+function PlainDot({ status: _status }: { status: 'success' | 'error' | 'pending' }) {
+  return null
 }
 
 // ── Primitives ──
@@ -348,15 +369,15 @@ function DetailRow({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="group/detail flex items-center gap-1.5 py-1 text-[13px] text-neutral-500 hover:text-neutral-300 transition-colors"
+        className="group/detail flex items-center gap-1.5 py-1 text-[12.5px] text-neutral-500/50 hover:text-neutral-400/80 transition-colors"
       >
         <IconChevronRight
           className={cn(
-            'w-2.5 h-2.5 shrink-0 transition-transform duration-150',
+            'w-2.5 h-2.5 shrink-0 transition-transform duration-200 ease-out',
             open && 'rotate-90'
           )}
         />
-        <Icon className="w-3 h-3 shrink-0 opacity-60 group-hover/detail:opacity-100 transition-opacity" />
+        <Icon className="w-3 h-3 shrink-0 opacity-50 group-hover/detail:opacity-80 transition-opacity" />
         <span>{label}</span>
       </button>
       <div
@@ -365,7 +386,7 @@ function DetailRow({
           open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
         )}
       >
-        <div className="ml-[22px] pb-2 text-[13px] leading-relaxed text-neutral-400">
+        <div className="ml-[22px] pb-2 text-[13px] leading-relaxed text-neutral-400/80">
           {children}
         </div>
       </div>
@@ -374,12 +395,36 @@ function DetailRow({
 }
 
 function StatusDot({ status }: { status: string }) {
-  if (status === 'success') return <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500/70 shrink-0" />
-  if (status === 'error') return <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500/70 shrink-0" />
-  return <span className="inline-block w-1.5 h-1.5 rounded-full bg-neutral-500/30 shrink-0" />
+  return (
+    <span
+      className={cn(
+        'inline-block w-[5px] h-[5px] rounded-full shrink-0',
+        status === 'success' && 'bg-emerald-500/70',
+        status === 'error' && 'bg-red-500/70',
+        status !== 'success' && status !== 'error' && 'bg-neutral-400/10',
+      )}
+    />
+  )
 }
 
 // ── Step ──
+
+/** Extract a short task description from agent.call_code_agent(...) code */
+function extractCodeAgentTask(code: string): string | null {
+  const match = code.match(/agent\.call_code_agent\s*\(\s*task\s*=\s*"([\s\S]*?)(?:"\s*[,)])/s)
+    || code.match(/agent\.call_code_agent\s*\(\s*task\s*=\s*'([\s\S]*?)(?:'\s*[,)])/s)
+  if (!match) return null
+  return match[1].replace(/\\n/g, ' ').trim()
+}
+
+/** Check if grounded action code is an agent function call (code_agent, wait, etc.) */
+function extractAgentAction(code: string): { type: string; label: string; detail?: string } | null {
+  const codeAgentTask = extractCodeAgentTask(code)
+  if (codeAgentTask || /agent\.call_code_agent/.test(code)) {
+    return { type: 'code-agent', label: 'Code Agent', detail: codeAgentTask || undefined }
+  }
+  return null
+}
 
 function StepCard({
   step,
@@ -401,6 +446,7 @@ function StepCard({
       ? 'success'
       : 'pending'
   const hasScreenshot = !!screenshot
+  const agentAction = step.code ? extractAgentAction(step.code) : null
 
   return (
     <div className={cn('group/step relative pb-1', hasScreenshot ? 'pl-8' : 'pl-6')}>
@@ -410,11 +456,30 @@ function StepCard({
         <PlainDot status={status} />
       )}
 
-      {/* Action — the natural language line */}
+      {/* Action — the natural language line (truncated for readability) */}
       {actionText && (
-        <p className="text-[15px] leading-relaxed text-neutral-200">
-          {actionText}
+        <p className="text-[15px] leading-relaxed text-neutral-100/90">
+          {truncateText(actionText, 200)}
         </p>
+      )}
+
+      {/* Agent function call pill + prompt card (e.g. code_agent) */}
+      {agentAction && (
+        <div className="mt-1.5 rounded-lg border border-emerald-400/12 bg-emerald-400/[0.03] overflow-hidden">
+          <div className="flex items-center gap-2 px-2.5 py-1.5">
+            <span className="inline-flex items-center gap-1.5 text-[11.5px] leading-none font-medium px-2 py-[3px] rounded-full bg-emerald-500/12 text-emerald-400">
+              <IconTerminal className="w-3 h-3 shrink-0" />
+              {agentAction.label}
+            </span>
+          </div>
+          {agentAction.detail && (
+            <div className="px-3 pb-2.5 -mt-0.5">
+              <p className="text-[12.5px] leading-relaxed text-neutral-300/50">
+                {truncateText(agentAction.detail, 300)}
+              </p>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Inline result badges */}
@@ -425,31 +490,24 @@ function StepCard({
               key={j}
               className={cn(
                 'inline-flex items-center gap-1 text-[11px] leading-none px-1.5 py-0.5 rounded-full',
-                r.status === 'success' && 'text-emerald-400/70 bg-emerald-500/10',
-                r.status === 'error' && 'text-red-400/70 bg-red-500/10',
-                r.status !== 'success' && r.status !== 'error' && 'text-neutral-500 bg-neutral-500/5'
+                r.status === 'success' && 'text-emerald-400/70 bg-emerald-500/8',
+                r.status === 'error' && 'text-red-400/70 bg-red-500/8',
+                r.status !== 'success' && r.status !== 'error' && 'text-neutral-500/50 bg-neutral-500/5',
               )}
             >
               <StatusDot status={r.status} />
-              {r.content}
+              {truncateText(r.content, 120)}
             </span>
           ))}
         </div>
       )}
 
       {/* Expandable details */}
-      {(step.observation || step.code) && (
+      {step.observation && (
         <div className="mt-0.5">
-          {step.observation && (
-            <DetailRow icon={IconEye} label="Observation">
-              <Markdown>{step.observation}</Markdown>
-            </DetailRow>
-          )}
-          {step.code && (
-            <DetailRow icon={IconCode} label="Grounded action">
-              <Markdown>{step.code}</Markdown>
-            </DetailRow>
-          )}
+          <DetailRow icon={IconEye} label="What it noticed">
+            <Markdown>{step.observation}</Markdown>
+          </DetailRow>
         </div>
       )}
     </div>
@@ -461,9 +519,13 @@ function StepCard({
 function ItemRenderer({
   item,
   screenshot,
+  isStreaming,
+  onResumeHuman,
 }: {
   item: TopLevelItem
   screenshot?: string | null
+  isStreaming?: boolean
+  onResumeHuman?: () => void
 }) {
   switch (item.kind) {
     case 'step':
@@ -472,20 +534,25 @@ function ItemRenderer({
     case 'status': {
       const done = item.status === 'completed'
       return (
-        <div className="relative pl-6 py-1.5">
-          <div className="absolute left-0 top-[12px]">
-            {done ? (
-              <IconCheckCircle className="w-4 h-4 text-emerald-500" />
-            ) : (
-              <IconXCircle className="w-4 h-4 text-red-500" />
-            )}
-          </div>
-          <p className={cn(
-            'text-[14px] font-medium',
-            done ? 'text-emerald-400' : 'text-red-400'
+        <div className="py-1.5 pl-6">
+          <div className={cn(
+            'inline-flex items-center gap-2 rounded-lg border px-3 py-1.5',
+            done
+              ? 'border-emerald-700/40 bg-emerald-400/[0.04]'
+              : 'border-red-700/40 bg-red-400/[0.04]',
           )}>
-            {item.content}
-          </p>
+            {done ? (
+              <IconCheckCircle className="w-3.5 h-3.5 shrink-0 text-emerald-500" />
+            ) : (
+              <IconXCircle className="w-3.5 h-3.5 shrink-0 text-red-500" />
+            )}
+            <span className={cn(
+              'text-[13px] font-medium',
+              done ? 'text-emerald-300' : 'text-red-400',
+            )}>
+              {item.content}
+            </span>
+          </div>
         </div>
       )
     }
@@ -514,11 +581,11 @@ function ItemRenderer({
 
     case 'code-agent-done':
       return (
-        <div className="relative pl-6 py-0.5">
-          <div className="absolute left-0 top-[8px]">
-            <IconCheckCircle className="w-3.5 h-3.5 text-emerald-500/60" />
-          </div>
-          <span className="text-[12px] text-emerald-400/50">{item.content}</span>
+        <div className="py-0.5 pl-6">
+          <span className="inline-flex items-center gap-1.5 text-[12px] text-emerald-400/40">
+            <IconCheckCircle className="w-3 h-3 shrink-0" />
+            {item.content}
+          </span>
         </div>
       )
 
@@ -542,12 +609,48 @@ function ItemRenderer({
       )
     }
 
+    case 'awaiting-human':
+      return (
+        <div className="relative pl-6 py-2">
+          <AwaitingHumanBanner
+            reason={item.reason}
+            machineId={item.machineId}
+            isActive={isStreaming}
+            onResume={onResumeHuman}
+          />
+        </div>
+      )
+
+    case 'awaiting-human-timeout':
+      return (
+        <div className="py-1.5 pl-6">
+          <div className="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 border-amber-700/40 bg-amber-400/[0.04]">
+            <svg className="w-3.5 h-3.5 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span className="text-[13px] font-medium text-amber-300">{item.content}</span>
+          </div>
+        </div>
+      )
+
+    case 'awaiting-human-resumed':
+      return (
+        <div className="py-1.5 pl-6">
+          <div className="inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 border-emerald-700/40 bg-emerald-400/[0.04]">
+            <IconCheckCircle className="w-3.5 h-3.5 shrink-0 text-emerald-500" />
+            <span className="text-[13px] font-medium text-emerald-300">
+              Human finished — agent resuming with fresh screen state
+            </span>
+          </div>
+        </div>
+      )
+
     case 'text': {
       const cleaned = stripAgentCode(item.content)
       if (!cleaned) return null
       return (
-        <div className="pl-6 py-0.5 text-[15px] leading-relaxed text-neutral-300">
-          <Markdown>{cleaned}</Markdown>
+        <div className="pl-6 py-0.5 text-[15px] leading-relaxed text-neutral-200/80">
+          <Markdown>{truncateText(cleaned, 500)}</Markdown>
         </div>
       )
     }
@@ -567,10 +670,14 @@ export const CuaSectionRenderer = memo(function CuaSectionRenderer({
   content,
   className,
   screenshots,
+  isStreaming,
+  onResumeHuman,
 }: {
   content: string
   className?: string
   screenshots?: string[]
+  isStreaming?: boolean
+  onResumeHuman?: () => void
 }) {
   const items = useMemo(() => {
     const sections = parseSections(content)
@@ -592,16 +699,26 @@ export const CuaSectionRenderer = memo(function CuaSectionRenderer({
   }, [items, screenshots])
 
   return (
-    <div className={cn('flex flex-col gap-0.5', className)}>
-      {/* Thin timeline line behind dots */}
+    <div className={cn('flex flex-col', className)}>
       <div className="relative">
-        <div className="absolute left-[3.5px] top-2 bottom-2 w-px bg-neutral-700/30" />
+        {/* Timeline — dotted line, fades at ends */}
+        <div
+          className="absolute left-[2.5px] top-0 bottom-0 w-px opacity-[0.30]"
+          style={{
+            maskImage: 'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
+            backgroundImage: 'repeating-linear-gradient(to bottom, currentColor 0px, currentColor 2px, transparent 2px, transparent 7px)',
+          }}
+          aria-hidden="true"
+        />
         <div className="relative flex flex-col">
           {items.map((item, i) => (
             <ItemRenderer
               key={i}
               item={item}
               screenshot={stepScreenshotMap.get(i)}
+              isStreaming={isStreaming}
+              onResumeHuman={onResumeHuman}
             />
           ))}
         </div>

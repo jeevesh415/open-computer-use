@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "เริ่มใช้ฟรี",
+    "bookDemo": "จองสาธิต",
+    "tryCoastyFree": "ลองใช้ Coasty ฟรี",
+    "learnMore": "เรียนรู้เพิ่มเติม",
+    "watchSession": "ดูเซสชัน",
+    "compareAllPlans": "เปรียบเทียบแผนและฟีเจอร์ทั้งหมด",
+    "allRightsReserved": "สงวนลิขสิทธิ์",
+    "privacy": "ความเป็นส่วนตัว",
+    "terms": "ข้อกำหนด",
+    "recommended": "แนะนำ",
+    "month": "เดือน",
+    "creditsPerMonth": "{count} เครดิต/เดือน",
+    "agentsInParallel": "{count} เอเจนต์พร้อมกัน"
+  },
+  "header": {
+    "useCases": "กรณีใช้งาน",
+    "blog": "บล็อก",
+    "agentSwarms": "Agent Swarms",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "เปรียบเทียบ",
+    "demos": "สาธิต",
+    "pricing": "ราคา",
+    "download": "ดาวน์โหลด",
+    "signIn": "เข้าสู่ระบบ",
+    "getStarted": "เริ่มต้นใช้งาน",
+    "useCaseItems": {
+      "competitorIntel": "ข่าวกรองคู่แข่ง",
+      "qaBugReports": "รายงานบั๊ก QA",
+      "seoGapAnalysis": "วิเคราะห์ช่องว่าง SEO",
+      "dataExtraction": "ดึงข้อมูล",
+      "leadGeneration": "สร้างลีด",
+      "siteAudit": "ตรวจสอบเว็บไซต์",
+      "adIntelligence": "วิเคราะห์โฆษณา",
+      "emailOutreach": "อีเมลเข้าถึง",
+      "designReview": "ตรวจสอบการออกแบบ",
+      "priceMonitoring": "ติดตามราคา",
+      "marketResearch": "วิจัยตลาด",
+      "emailCampaigns": "แคมเปญอีเมล"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} โปรไฟล์คู่แข่งที่จัดส่ง",
+      "qaBugReports": "{stat} โฟลว์ผู้ใช้ที่ทดสอบต่อรอบ",
+      "seoGapAnalysis": "{stat} ช่องว่างคำสำคัญที่ระบุ",
+      "dataExtraction": "{stat} แถวที่ดึงต่อรอบ",
+      "leadGeneration": "{stat} ลีดคุณภาพต่อรอบ",
+      "siteAudit": "{stat} หน้าที่ตรวจสอบต่อรอบ",
+      "adIntelligence": "{stat} ครีเอทีฟโฆษณาที่จับได้",
+      "emailOutreach": "{stat} อีเมลส่วนบุคคลที่ร่าง",
+      "designReview": "{stat} เบรกพอยต์ที่ทดสอบต่อหน้า",
+      "priceMonitoring": "{stat} SKU ที่เปรียบเทียบต่อรอบ",
+      "marketResearch": "{stat} จุดข้อมูลที่รวบรวม",
+      "emailCampaigns": "{stat} อีเมลส่วนบุคคลต่อแคมเปญ"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "บทความทั้งหมด",
+      "computerUse": "การใช้คอมพิวเตอร์",
+      "compare": "เปรียบเทียบ",
+      "dataEntry": "ป้อนข้อมูล",
+      "webScraping": "Web scraping",
+      "jobApplications": "สมัครงาน",
+      "demosResults": "สาธิตและผลลัพธ์",
+      "guide": "คู่มือ"
+    },
+    "blogStats": {
+      "allPosts": "{stat} บทความที่เผยแพร่รายสัปดาห์",
+      "computerUse": "{stat} คะแนนเบนช์มาร์ก OSWorld",
+      "compare": "{stat} คู่แข่งที่วิเคราะห์",
+      "dataEntry": "{stat} เร็วกว่าทำด้วยตนเอง",
+      "webScraping": "{stat} หน้าต่อเซสชัน",
+      "jobApplications": "{stat} ใบสมัครต่อเซสชัน",
+      "demosResults": "{stat} กรณีศึกษาจริง",
+      "guide": "{stat} บทแนะนำกรณีใช้งาน"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "ผู้ควบคุมคอมพิวเตอร์อัตโนมัติ",
+    "useCases": {
+      "computerAgent": {
+        "label": "เอเจนต์คอมพิวเตอร์",
+        "headline": "ทำงานอัตโนมัติทุกงานในเบราว์เซอร์",
+        "outcome": "เอเจนต์ AI ที่ควบคุมคอมพิวเตอร์จริง — เปิดเว็บ คลิก พิมพ์ และส่งมอบงานสำเร็จ ไม่ต้องตั้งค่าใดๆ"
+      },
+      "competitorIntel": {
+        "label": "ข่าวกรองคู่แข่ง",
+        "headline": "ติดตามคู่แข่งทุกราย",
+        "outcome": "โปรไฟล์คู่แข่งฉบับสมบูรณ์พร้อมราคา ฟีเจอร์ และช่องว่างในการวางตำแหน่ง — ส่งออกเป็นรายงานพร้อมแชร์"
+      },
+      "qaTesting": {
+        "label": "การทดสอบ QA",
+        "headline": "พบบั๊กก่อนผู้ใช้",
+        "outcome": "โฟลว์ผู้ใช้ที่สำคัญทดสอบแบบครบวงจร ทุกบั๊กถ่ายภาพหน้าจอพร้อมขั้นตอนจำลองและการจัดอันดับความรุนแรง"
+      },
+      "seoAnalysis": {
+        "label": "วิเคราะห์ SEO",
+        "headline": "ค้นพบช่องว่างคำสำคัญ",
+        "outcome": "ช่องว่างคำสำคัญที่ระบุ บรีฟเนื้อหาที่ร่าง แหล่งแบ็คลิงก์ของคู่แข่งที่แมป — กลยุทธ์ SEO ที่นำไปปฏิบัติได้"
+      },
+      "dataExtraction": {
+        "label": "ดึงข้อมูล",
+        "headline": "สแกรปและจัดโครงสร้างเว็บไซต์ใดก็ได้",
+        "outcome": "ข้อมูลที่จัดโครงสร้างแล้ว ดึง ทำความสะอาด ลบซ้ำ และส่งออกเป็น CSV — จากเว็บไซต์ใดก็ได้ รูปแบบใดก็ได้"
+      },
+      "leadGeneration": {
+        "label": "สร้างลีด",
+        "headline": "เติมเต็มไปป์ไลน์การขาย",
+        "outcome": "ผู้ตัดสินใจคุณภาพที่ตรงกับ ICP ของคุณ พร้อมตำแหน่งที่ยืนยัน บริษัท และการเปิดอีเมลส่วนบุคคล"
+      },
+      "siteAudit": {
+        "label": "ตรวจสอบเว็บไซต์",
+        "headline": "ตรวจสอบทุกหน้าในวงกว้าง",
+        "outcome": "หน้าถูกสแกน Core Web Vitals ให้คะแนน ลิงก์เสียพบแล้ว ปัญหาการเข้าถึงจัดอันดับตามลำดับความสำคัญ"
+      },
+      "emailOutreach": {
+        "label": "อีเมลเข้าถึง",
+        "headline": "ส่งอีเมลเข้าถึงส่วนบุคคล",
+        "outcome": "อีเมลส่วนบุคคลที่อ้างอิงบริษัท ตำแหน่ง และจุดเจ็บปวดของแต่ละลูกค้า — พร้อมส่ง"
+      },
+      "marketResearch": {
+        "label": "วิจัยตลาด",
+        "headline": "ตรวจสอบตลาดของคุณอย่างรวดเร็ว",
+        "outcome": "TAM คำนวณแล้ว ผู้เล่นหลักถูกสร้างโปรไฟล์ แนวโน้มการเติบโตถูกแสดงกราฟ — จากจุดข้อมูลหลายสิบจุด"
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "การตลาด",
+        "task": "ทำการตลาดสินค้าบน Reddit โดยอัตโนมัติ"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "หาลูกค้าเป้าหมายและส่งอีเมลส่วนบุคคล"
+      },
+      "qaTesting": {
+        "label": "การทดสอบ QA",
+        "task": "ทดสอบทุกโฟลว์การชำระเงินและรายงานบั๊ก"
+      },
+      "jobApplication": {
+        "label": "สมัครงาน",
+        "task": "หาตำแหน่ง ปรับแต่งเรซูเม่ และสมัคร"
+      },
+      "formFilling": {
+        "label": "กรอกแบบฟอร์ม",
+        "task": "กรอกใบสมัคร YC S26 ให้คุณ"
+      },
+      "socialMedia": {
+        "label": "โซเชียลมีเดีย",
+        "task": "โพสต์บน Hacker News และมีส่วนร่วมกับความคิดเห็น"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "เบนช์มาร์ก OSWorld",
+      "sublabel": "#1 เอเจนต์ computer-use ของโลก"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "เครื่องมือที่เอเจนต์ใช้ได้",
+      "sublabel": "เบราว์เซอร์ เทอร์มินัล เดสก์ท็อป ไฟล์"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "ทำงานตามกำหนดเวลา",
+      "sublabel": "ทำงานอัตโนมัติทุกงานที่ทำซ้ำ"
+    },
+    "setup": {
+      "value": "0",
+      "label": "การตั้งค่าที่ต้องทำ",
+      "sublabel": "ไม่ต้อง API ไม่ต้องเชื่อมต่อ ไม่ต้องเขียนโค้ด"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "ทำไมต้อง Coasty",
+    "title": "ไม่ใช่แชทบอท ไม่ใช่สคริปต์ RPA",
+    "worksLikeHuman": {
+      "title": "ทำงานเหมือนมนุษย์",
+      "description": "มองเห็น คลิก พิมพ์ นำทาง — เหมือนคุณทุกประการ"
+    },
+    "noScripts": {
+      "title": "ไม่ต้องมีสคริปต์หรือตั้งค่า",
+      "description": "พิมพ์ภาษาไทย ได้ผลลัพธ์"
+    },
+    "handlesUnexpected": {
+      "title": "จัดการกับสิ่งที่ไม่คาดคิด",
+      "description": "ปรับตัวกับ CAPTCHA ป๊อปอัป การเปลี่ยนแปลงเลย์เอาต์"
+    },
+    "runsInIsolation": {
+      "title": "ทำงานแบบแยกส่วน",
+      "description": "แซนด์บ็อกซ์ VM ต่อเซสชัน — ไม่มีอะไรรั่วไหล"
+    }
+  },
+  "howItWorks": {
+    "title": "วิธีการทำงาน",
+    "step1": {
+      "title": "อธิบายงานของคุณ",
+      "description": "ภาษาไทยธรรมดา แค่นั้น",
+      "placeholder": "ค้นหา 100 ลีดบน LinkedIn..."
+    },
+    "step2": {
+      "title": "ดูเอเจนต์ทำงาน",
+      "description": "เปิดเบราว์เซอร์ คลิก พิมพ์ นำทาง"
+    },
+    "step3": {
+      "title": "งานเสร็จสมบูรณ์",
+      "description": "ทุกการกระทำบันทึกพร้อมภาพหน้าจอ",
+      "results": {
+        "taskCompleted": "งานเสร็จสมบูรณ์",
+        "leadsFound": "พบ 12 ลีด",
+        "addedToCrm": "เพิ่มลงใน CRM แล้ว"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "อันดับ #1 ของโลก",
+    "subtitle": "82% บน OSWorld — เบนช์มาร์กที่ยากที่สุดสำหรับเอเจนต์ AI ที่ใช้คอมพิวเตอร์จริง",
+    "agenticFramework": "เฟรมเวิร์กเอเจนต์",
+    "foundationModel": "โมเดลพื้นฐาน"
+  },
+  "comparison": {
+    "title": "ทำไมต้องทำงานอัตโนมัติกับ Coasty?",
+    "subtitle": "งานเดียวกันที่ทีมใช้เวลาหลายชั่วโมง — Coasty ทำเสร็จในไม่กี่นาที ตลอดทั้งวัน",
+    "manual": {
+      "title": "ทำด้วยตนเอง",
+      "subtitle": "คุณหรือทีมของคุณ ด้วยมือ"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 เอเจนต์ computer-use"
+    },
+    "rows": {
+      "timePerTask": "เวลาต่องาน",
+      "availability": "ความพร้อมใช้งาน",
+      "setupTime": "เวลาตั้งค่า",
+      "errorRate": "อัตราข้อผิดพลาด",
+      "scaling": "การขยายขนาด",
+      "auditTrail": "ร่องรอยการตรวจสอบ"
+    },
+    "manualValues": {
+      "timePerTask": "หลายชั่วโมงถึงหลายวัน",
+      "availability": "เฉพาะเวลาทำการ",
+      "setupTime": "เรียนรู้เครื่องมือ เขียน SOP",
+      "errorRate": "ข้อผิดพลาดของมนุษย์",
+      "scaling": "ทำมากขึ้น = ใช้เวลามากขึ้น",
+      "auditTrail": "ไม่มี"
+    },
+    "coastyValues": {
+      "timePerTask": "ไม่กี่นาที",
+      "availability": "24/7 ทุกวัน",
+      "setupTime": "60 วินาที",
+      "errorRate": "แก้ไขตัวเอง",
+      "scaling": "รันงานไม่จำกัดพร้อมกัน",
+      "auditTrail": "ทุกคลิกถูกบันทึก + ภาพหน้าจอ"
+    },
+    "bottomBar": {
+      "automateTasksThat": "ทำงานอัตโนมัติที่ใช้เวลา",
+      "hoursManually": "ชั่วโมงด้วยตนเอง",
+      "startingAt": "เริ่มต้นที่"
+    }
+  },
+  "demo": {
+    "title": "ดูเอเจนต์ทำงานจริง",
+    "subtitle": "งานจริง เบราว์เซอร์จริง ทุกคลิกถูกบันทึก",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty บน Reddit",
+        "description": "ดู Coasty ดำเนินแคมเปญการตลาดอัตโนมัติ — วิจัยคู่แข่ง วิเคราะห์แนวโน้ม และสร้างกลยุทธ์",
+        "tag": "การตลาด"
+      },
+      "prospects": {
+        "title": "ค้นหาลูกค้าเป้าหมาย",
+        "description": "Coasty ค้นหาและวิจัยลูกค้าเป้าหมาย รวบรวมรายละเอียดสำคัญเพื่อสร้างอีเมลเข้าถึงส่วนบุคคล",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA ทดสอบตัวเอง",
+        "description": "Coasty ทดสอบคุณภาพผลิตภัณฑ์ของตัวเอง — นำทางโฟลว์ จับบั๊ก และรายงานปัญหาโดยอัตโนมัติ",
+        "tag": "การทดสอบ QA"
+      },
+      "email": {
+        "title": "ส่งอีเมลในนามของคุณ",
+        "description": "ตั้งแต่เขียนจนถึงส่ง — เอเจนต์ AI ร่างและส่งอีเมลด้วยตัวเองทั้งหมด",
+        "tag": "การสื่อสาร"
+      },
+      "job": {
+        "title": "สมัครงาน",
+        "description": "Coasty หาตำแหน่งที่ตรง ปรับแต่งเรซูเม่ และส่งใบสมัคร — ทั้งหมดด้วยตัวเอง",
+        "tag": "สมัครงาน"
+      },
+      "hackernews": {
+        "title": "โพสต์บน Hacker News",
+        "description": "Coasty สร้างและเผยแพร่โพสต์บน Hacker News — เขียนเนื้อหาและส่งโดยอัตโนมัติ",
+        "tag": "โซเชียลมีเดีย"
+      }
+    }
+  },
+  "features": {
+    "title": "สร้างมาเพื่องานคอมพิวเตอร์จริง",
+    "selfCorrecting": {
+      "title": "แก้ไขตัวเอง",
+      "description": "ตรวจจับข้อผิดพลาด ลองเส้นทางอื่น"
+    },
+    "auditTrail": {
+      "title": "ร่องรอยการตรวจสอบเต็มรูปแบบ",
+      "description": "ทุกคลิกบันทึกพร้อมภาพหน้าจอ"
+    },
+    "schedule": {
+      "title": "กำหนดเวลา 24/7",
+      "description": "ทำงานตาม cron — รายชั่วโมง รายวัน รายสัปดาห์"
+    },
+    "sandboxed": {
+      "title": "แซนด์บ็อกซ์และปลอดภัย",
+      "description": "VM แยกต่อเซสชัน ลบหลังเสร็จ"
+    },
+    "benchmark": {
+      "title": "#1 บน OSWorld",
+      "description": "82% — คะแนนสูงสุดที่เคยบันทึก"
+    },
+    "swarms": {
+      "title": "Agent Swarms",
+      "description": "แบ่งงานข้ามเครื่องแบบขนาน"
+    }
+  },
+  "pricing": {
+    "title": "เริ่มฟรี ขยายเมื่อพร้อม",
+    "subtitle": "ไม่ต้องบัตรเครดิต เอเจนต์ AI ของคุณพร้อมใน 60 วินาที",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "ลอง #1 เอเจนต์ computer-use",
+        "cta": "เริ่มใช้ฟรี"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "ระบบอัตโนมัติรายวันแบบเบา",
+        "cta": "เลือก Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "ทำงานอัตโนมัติทุกวัน",
+        "cta": "เลือก Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "ขยายเวิร์กโฟลว์ที่ซับซ้อน",
+        "cta": "เลือก Plus",
+        "badge": "ยอดนิยม"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "ระบบอัตโนมัติหนักไม่จำกัด",
+        "cta": "เลือก Pro"
+      }
+    },
+    "vmTemporary": "1 VM ชั่วคราว (2 ชม.)",
+    "vmDeletedAfterInactivity": "1 VM (ลบหลังไม่ใช้งาน)",
+    "vmAlwaysOn": "{count} VM เปิดตลอด",
+    "vmAlwaysOnPlural": "{count} VM เปิดตลอด",
+    "bargain": {
+      "title": "งานเดียวกันต้องจ่าย {oldPrice} ถ้าใช้แรงงานคน",
+      "description": "ผู้ช่วยเสมือนราคา $2,000–$4,000/เดือน พนักงานพาร์ทไทม์แพงกว่า Coasty ทำงานเดียวกัน 24/7 เริ่มต้นที่ $0 — ด้วยความสม่ำเสมอสมบูรณ์แบบ ร่องรอยการตรวจสอบเต็มรูปแบบ และไม่ต้องฝึกอบรม"
+    }
+  },
+  "faq": {
+    "title": "คำถามที่พบบ่อย",
+    "subtitle": "ทุกสิ่งที่คุณต้องรู้ก่อนเริ่มใช้งาน",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Coasty คืออะไร?",
+        "answer": "Coasty เป็นเอเจนต์ AI สำหรับใช้คอมพิวเตอร์ที่ดีที่สุดในโลก คุณอธิบายงาน — ค้นหาลีด ทดสอบเว็บไซต์ กรอกแบบฟอร์ม โพสต์บนโซเชียลมีเดีย — และ Coasty เปิดเบราว์เซอร์จริง นำทางแอป คลิกปุ่ม พิมพ์ข้อความ และทำงานให้เสร็จตั้งแต่ต้นจนจบ ไม่ต้อง API ไม่ต้องเชื่อมต่อ ไม่ต้องเขียนโค้ด"
+      },
+      "howDifferent": {
+        "question": "แตกต่างจาก ChatGPT หรือเครื่องมือ AI อื่นอย่างไร?",
+        "answer": "ChatGPT สร้างข้อความ Coasty ใช้คอมพิวเตอร์ มันไม่ได้บอกคุณว่าต้องทำอะไร — มันเปิดเบราว์เซอร์ นำทางไปยังเว็บไซต์ คลิกปุ่ม กรอกแบบฟอร์ม และส่งมอบงานสำเร็จ มันคือความแตกต่างระหว่างการได้รับคำแนะนำกับการให้ทำงานให้คุณ"
+      },
+      "whatTasks": {
+        "question": "Coasty ทำงานอัตโนมัติอะไรได้บ้าง?",
+        "answer": "ทุกงานที่คุณทำได้บนคอมพิวเตอร์ วิจัยเว็บ สร้างลีด ป้อนข้อมูล กรอกแบบฟอร์ม ทดสอบ QA โพสต์โซเชียลมีเดีย อีเมลเข้าถึง ประมวลผลใบแจ้งหนี้ วิเคราะห์คู่แข่ง สรรหาบุคลากร — ถ้าเกี่ยวข้องกับเบราว์เซอร์หรือแอปเดสก์ท็อป Coasty ทำได้"
+      },
+      "whatAreCredits": {
+        "question": "เครดิตคืออะไรและใช้อย่างไร?",
+        "answer": "เครดิตถูกใช้ขณะเอเจนต์ทำงาน งานที่ยาวและซับซ้อนกว่าใช้เครดิตมากกว่า แผนชำระเงินรวมเครดิตรายเดือน และคุณยังสามารถซื้อแพ็คเครดิตเพิ่มเติมได้ตลอดเวลา"
+      },
+      "localComputer": {
+        "question": "Coasty ทำงานบนคอมพิวเตอร์ของฉันได้ไหม?",
+        "answer": "ได้ แอปเดสก์ท็อปของเราทำงานเป็นโอเวอร์เลย์น้ำหนักเบาบนเครื่องของคุณ ควบคุมเบราว์เซอร์และแอปพลิเคชันในเครื่องโดยตรง หรือจะให้งานทำงานบนเครื่องคลาวด์แบบแยกส่วนก็ได้ — เลือกได้เอง"
+      },
+      "dataSafe": {
+        "question": "ข้อมูลของฉันปลอดภัยไหม?",
+        "answer": "ทุกงานทำงานในสภาพแวดล้อมแซนด์บ็อกซ์แบบแยกส่วน ไม่มีอะไรรั่วไหลระหว่างเซสชัน ข้อมูลรับรองของคุณยังคงเป็นส่วนตัว และทุกการกระทำถูกบันทึกพร้อมภาพหน้าจอในร่องรอยการตรวจสอบเต็มรูปแบบที่คุณตรวจสอบได้ตลอดเวลา"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "การใช้คอมพิวเตอร์ด้วย AI",
+    "tagline2": "ทำงานอัตโนมัติทุกเวิร์กโฟลว์ด้วยเอเจนต์อัจฉริยะ",
+    "columns": {
+      "product": "ผลิตภัณฑ์",
+      "resources": "แหล่งข้อมูล",
+      "company": "บริษัท",
+      "legal": "กฎหมาย"
+    },
+    "links": {
+      "computerUse": "การใช้คอมพิวเตอร์",
+      "guide": "คู่มือ",
+      "download": "ดาวน์โหลด",
+      "pricing": "ราคา",
+      "agentSwarms": "Agent Swarms",
+      "status": "สถานะ",
+      "blog": "บล็อก",
+      "useCases": "กรณีใช้งาน",
+      "demos": "สาธิต",
+      "compare": "เปรียบเทียบ",
+      "talkToCofounders": "พูดคุยกับผู้ร่วมก่อตั้งและสาธิต",
+      "contact": "ติดต่อ",
+      "privacy": "ความเป็นส่วนตัว",
+      "terms": "ข้อกำหนด"
+    }
+  },
+  "languageSwitcher": {
+    "label": "ภาษา"
+  },
+  "auth": {
+    "brandHeading": "คุณตั้งเป้าหมาย",
+    "brandSubheading": "เราจัดการที่เหลือ",
+    "mobileHeading": "คุณตั้งเป้าหมาย เราจัดการที่เหลือ",
+    "mobileSubheading": "เอเจนต์ AI ที่ท่องเว็บ คลิก และทำงานเหมือนเพื่อนร่วมทีมจริงๆ",
+    "flowSteps": {
+      "step1": {
+        "label": "คุณอธิบายงาน",
+        "sub": "\"วิจัยคู่แข่งยอดนิยม 5 รายของเรา\""
+      },
+      "step2": {
+        "label": "เอเจนต์เข้าควบคุม",
+        "sub": "ท่องเว็บ คลิก พิมพ์ อัตโนมัติ"
+      },
+      "step3": {
+        "label": "ส่งมอบงาน",
+        "sub": "สเปรดชีตพร้อมโปรไฟล์คู่แข่งครบ 5 ราย"
+      }
+    },
+    "complete": "เสร็จสิ้น",
+    "doneIn": "เสร็จใน 8 นาที",
+    "demoCaption": "รันเอเจนต์ AI บนคอมพิวเตอร์ของคุณ หรือควบคุมจากโทรศัพท์ได้ทุกที่",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "ผู้ดำเนินงานของคุณพร้อมแล้ว",
+      "signUp": "ให้เวิร์กโฟลว์ทำงานอัตโนมัติ",
+      "magicLink": "ข้ามรหัสผ่าน",
+      "forgotPassword": "มาช่วยให้คุณกลับเข้าสู่ระบบ"
+    },
+    "viewDescriptions": {
+      "signIn": "กลับมาต่อจากจุดที่ค้างไว้ — เอเจนต์ของคุณจำได้",
+      "signUp": "ติดตั้งเอเจนต์ AI ตัวแรกในไม่ถึงนาที",
+      "magicLink": "คลิกเดียวจากกล่องจดหมายก็เข้าได้เลย",
+      "forgotPassword": "เราจะส่งลิงก์รีเซ็ตไปยังอีเมลของคุณ"
+    },
+    "google": {
+      "connecting": "กำลังเชื่อมต่อ...",
+      "continueWithGoogle": "ดำเนินต่อด้วย Google"
+    },
+    "or": "หรือ",
+    "email": "อีเมล",
+    "emailPlaceholder": "you@example.com",
+    "password": "รหัสผ่าน",
+    "passwordPlaceholder": "รหัสผ่านของคุณ",
+    "confirmPassword": "ยืนยันรหัสผ่าน",
+    "confirmPasswordPlaceholder": "ยืนยันรหัสผ่านของคุณ",
+    "minChars": "อย่างน้อย 6 ตัวอักษร",
+    "signingIn": "กำลังเข้าสู่ระบบ...",
+    "signIn": "เข้าสู่ระบบ",
+    "creatingAccount": "กำลังสร้างบัญชี...",
+    "createAccount": "สร้างบัญชี",
+    "sending": "กำลังส่ง...",
+    "sendMagicLink": "ส่ง magic link",
+    "sendResetLink": "ส่งลิงก์รีเซ็ต",
+    "forgotPassword": "ลืมรหัสผ่าน?",
+    "useMagicLink": "ใช้ magic link",
+    "dontHaveAccount": "ยังไม่มีบัญชี?",
+    "signUp": "สมัครสมาชิก",
+    "alreadyHaveAccount": "มีบัญชีอยู่แล้ว?",
+    "backToSignIn": "กลับไปเข้าสู่ระบบ",
+    "termsAgreement": "เมื่อดำเนินต่อ คุณยอมรับ",
+    "terms": "ข้อกำหนด",
+    "and": "และ",
+    "privacyPolicy": "นโยบายความเป็นส่วนตัว",
+    "errors": {
+      "fillAllFields": "กรุณากรอกข้อมูลทุกช่อง",
+      "passwordMinLength": "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      "passwordsDoNotMatch": "รหัสผ่านไม่ตรงกัน",
+      "supabaseNotConfigured": "ยังไม่ได้ตั้งค่า Supabase",
+      "unexpectedError": "เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองใหม่อีกครั้ง",
+      "confirmEmail": "กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ ตรวจสอบกล่องจดหมายของคุณ",
+      "invalidCredentials": "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
+      "signInFailed": "เข้าสู่ระบบล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "invalidEmail": "ที่อยู่อีเมลไม่ถูกต้อง",
+      "emailAlreadyExists": "บัญชีที่ใช้อีเมลนี้มีอยู่แล้ว ลองเข้าสู่ระบบแทน",
+      "signUpFailed": "สมัครสมาชิกล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "enterEmail": "กรุณาป้อนอีเมลของคุณ",
+      "noAccountFound": "ไม่พบบัญชีที่ใช้อีเมลนี้ กรุณาสมัครสมาชิกก่อน",
+      "magicLinkFailed": "ส่ง magic link ล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "resetFailed": "ส่งอีเมลรีเซ็ตล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "updateFailed": "อัปเดตรหัสผ่านล้มเหลว กรุณาลองใหม่อีกครั้ง"
+    },
+    "success": {
+      "checkEmailConfirm": "ตรวจสอบอีเมลเพื่อยืนยันบัญชีก่อนเข้าสู่ระบบ",
+      "checkEmailMagicLink": "ตรวจสอบอีเมลสำหรับ magic link เพื่อเข้าสู่ระบบ",
+      "checkEmailReset": "ตรวจสอบอีเมลสำหรับลิงก์รีเซ็ตรหัสผ่าน",
+      "passwordUpdated": "อัปเดตรหัสผ่านสำเร็จ กำลังนำไปหน้าเข้าสู่ระบบ..."
+    },
+    "resetPassword": {
+      "title": "รีเซ็ตรหัสผ่านของคุณ",
+      "subtitle": "ป้อนรหัสผ่านใหม่ด้านล่าง",
+      "newPassword": "รหัสผ่านใหม่",
+      "confirmNewPassword": "ยืนยันรหัสผ่านใหม่",
+      "confirmPlaceholder": "ยืนยันรหัสผ่านใหม่ของคุณ",
+      "updating": "กำลังอัปเดต...",
+      "updatePassword": "อัปเดตรหัสผ่าน"
+    },
+    "errorPage": {
+      "title": "ข้อผิดพลาดการยืนยันตัวตน",
+      "defaultMessage": "เกิดข้อผิดพลาดระหว่างการยืนยันตัวตน",
+      "tryAgain": "ลองอีกครั้ง",
+      "backToChat": "กลับไปแชท",
+      "needHelp": "ต้องการความช่วยเหลือ?",
+      "contactSupport": "ติดต่อฝ่ายสนับสนุน"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "ข้ามไปก่อน",
+    "back": "ย้อนกลับ",
+    "continue": "ดำเนินต่อ",
+    "getStarted": "เริ่มต้นใช้งาน",
+    "settingUp": "กำลังตั้งค่า...",
+    "welcome": {
+      "titleReturning": "ยินดีต้อนรับกลับ{name}!",
+      "titleNew": "ยินดีต้อนรับสู่ Coasty",
+      "descriptionReturning": "เราอยากเรียนรู้เพิ่มเติมเกี่ยวกับคุณเพื่อปรับปรุงประสบการณ์การใช้งาน",
+      "descriptionNew": "มาตั้งค่าบัญชีเพื่อปรับแต่งประสบการณ์ของคุณกัน"
+    },
+    "nameLabel": "เราควรเรียกคุณว่าอะไร?",
+    "namePlaceholder": "ชื่อของคุณ",
+    "companyLabel": "บริษัท",
+    "optional": "(ไม่บังคับ)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "เว็บไซต์",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "คุณเป็นใครมากที่สุด?",
+      "subtitle": "เลือกทั้งหมดที่ตรง — ช่วยให้เราปรับแต่งประสบการณ์ให้คุณ"
+    },
+    "roles": {
+      "founder": "ผู้ก่อตั้ง / CEO",
+      "developer": "นักพัฒนา",
+      "marketer": "นักการตลาด",
+      "designer": "นักออกแบบ",
+      "product_manager": "ผู้จัดการผลิตภัณฑ์",
+      "data_analyst": "ข้อมูล / การวิเคราะห์",
+      "operations": "ปฏิบัติการ",
+      "other": "อื่นๆ"
+    },
+    "teamSizeLabel": "ขนาดทีม",
+    "teamSizes": {
+      "solo": "แค่ฉัน",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "คุณรู้จักเราได้อย่างไร?",
+      "subtitle": "เราอยากรู้ว่าคุณได้ยินเกี่ยวกับ Coasty จากที่ไหน"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "เพื่อน / เพื่อนร่วมงาน",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "อื่นๆ"
+    },
+    "useCaseStep": {
+      "title": "คุณจะทำอะไรอัตโนมัติเป็นอย่างแรก?",
+      "subtitle": "เลือกทั้งหมดที่ตรง — คุณสามารถสำรวจทุกอย่างได้ภายหลัง"
+    },
+    "useCases": {
+      "web_scraping": "การดึงข้อมูลเว็บและวิจัย",
+      "browser_automation": "ระบบอัตโนมัติของเบราว์เซอร์",
+      "data_entry": "ป้อนข้อมูลและแบบฟอร์ม",
+      "email_outreach": "อีเมลและการเข้าถึง",
+      "testing": "QA และการทดสอบ",
+      "ecommerce": "งาน E-commerce",
+      "social_media": "การจัดการโซเชียลมีเดีย",
+      "general_automation": "ระบบอัตโนมัติทั่วไป"
+    },
+    "showcase": {
+      "title": "ทุกอย่างที่คุณต้องการ",
+      "titleHighlight": "มีในตัว",
+      "subtitle": "นี่คือสิ่งที่ Coasty ทำได้เพื่อคุณ",
+      "noCode": {
+        "title": "ไม่ต้องเขียนโค้ด",
+        "description": "แค่อธิบายสิ่งที่คุณต้องการเป็นภาษาธรรมดา"
+      },
+      "agentSwarms": {
+        "title": "Agent Swarms",
+        "description": "กองเอเจนต์แบบขนาน"
+      },
+      "desktopControl": {
+        "title": "ควบคุมเดสก์ท็อป",
+        "description": "คลิก พิมพ์ นำทาง"
+      },
+      "browserAutomation": {
+        "title": "ระบบอัตโนมัติเบราว์เซอร์",
+        "description": "แบบฟอร์ม แท็บ การดึงข้อมูล — อัตโนมัติเต็มรูปแบบ"
+      },
+      "computerVision": {
+        "title": "Computer Vision",
+        "description": "เห็นและเข้าใจหน้าจอของคุณแบบเรียลไทม์"
+      },
+      "workflows": {
+        "title": "เวิร์กโฟลว์",
+        "description": "โฟลว์หลายขั้นตอน"
+      },
+      "onDevice": {
+        "title": "บนอุปกรณ์",
+        "description": "ทำงานในเครื่อง"
+      },
+      "autonomous": {
+        "title": "อัตโนมัติ 24/7",
+        "description": "ตั้งค่าแล้วปล่อย — ทำงานขณะคุณหลับ"
+      }
+    },
+    "guideCallout": {
+      "title": "มาใหม่? เรามีคู่มือให้คุณ",
+      "subtitle": "ติดตั้งเอเจนต์ AI ตัวแรกในไม่ถึงนาที"
+    }
+  },
+  "chatInput": {
+    "placeholder": "AI ของคุณควรทำอะไร?",
+    "placeholderAlt": "บอก AI ของคุณว่าต้องทำอะไรบนคอมพิวเตอร์...",
+    "vmError": {
+      "title": "ข้อผิดพลาด Virtual Machine",
+      "description": "Virtual Machine อยู่ในสถานะผิดพลาดหรือกำลังถูกลบ",
+      "hint": "กรุณาตรวจสอบแท็บ Machines เพื่อแก้ไขปัญหา หรือเลือก \"ไม่ได้เลือกคอมพิวเตอร์\" เพื่อใช้เฉพาะการค้นหาเว็บ",
+      "gotIt": "เข้าใจแล้ว"
+    },
+    "status": {
+      "creating": "กำลังสร้าง {name}...",
+      "initiating": "กำลังเริ่มเอเจนต์บน {name}...",
+      "stopping": "กำลังหยุด {name}...",
+      "preparing": "กำลังเตรียม {name}..."
+    },
+    "swarm": {
+      "title": "โหมด Swarm",
+      "pro": "PRO",
+      "upgradeLabel": "โหมด Swarm — อัปเกรดเพื่อปลดล็อก",
+      "feature1": "ประมวลผลแบบขนานข้ามเครื่องชั่วคราว",
+      "feature2": "แต่ละเครื่องทำงานอัตโนมัติ",
+      "feature3": "3 เท่าของจำนวนเครื่องตามแผนต่อ swarm",
+      "description": "รันหนึ่งพรอมต์ข้าม 3 เท่าของจำนวนเครื่องแบบขนาน — แต่ละเครื่องทำงานอิสระ",
+      "enableLabel": "เปิดโหมด Swarm",
+      "disableLabel": "ปิดโหมด Swarm",
+      "onTooltip": "โหมด Swarm เปิด — พรอมต์ของคุณจะทำงานบนหลายเครื่องพร้อมกัน",
+      "offTooltip": "เปิดโหมด Swarm เพื่อรันพรอมต์ข้ามหลายเครื่องพร้อมกัน",
+      "decreaseMachines": "ลดจำนวนเครื่อง",
+      "increaseMachines": "เพิ่มจำนวนเครื่อง",
+      "machineLimit": "สูงสุด {max} เครื่อง swarm ในแผนของคุณ ต้องการมากกว่านี้? ติดต่อ founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "โหมด Swarm"
+    },
+    "desktop": {
+      "connectLabel": "เชื่อมต่อเดสก์ท็อป",
+      "screenLabel": "หน้าจอของ {name}",
+      "screenDefault": "เดสก์ท็อป",
+      "watchTooltip": "ดูเอเจนต์ทำงานบนหน้าจอแยก แค่อย่าแตะอะไร ไม่งั้นมันจะตื่นเต้นจนทำงานไม่ได้!",
+      "watchLabel": "เดสก์ท็อป"
+    },
+    "buttons": {
+      "stop": "หยุด",
+      "sendToSwarm": "ส่งไปยัง swarm",
+      "taskRunning": "งานอื่นกำลังทำงาน — คลิกเพื่อหยุดแล้วรันของคุณ",
+      "selectComputer": "เลือกคอมพิวเตอร์เพื่อส่งข้อความ",
+      "waitCreating": "กรุณารอให้ VM ถูกสร้าง",
+      "waitStarting": "กรุณารอให้ VM เริ่มทำงาน",
+      "waitAgent": "กรุณารอให้เอเจนต์เริ่มต้น",
+      "vmStopping": "VM กำลังหยุด",
+      "send": "ส่ง",
+      "switching": "กำลังสลับ...",
+      "overrideRun": "แทนที่และรัน",
+      "stopLabel": "หยุดงานที่กำลังทำแล้วเริ่มงานนี้",
+      "sendLabel": "ส่งข้อความ"
+    },
+    "search": "ค้นหา",
+    "upload": {
+      "label": "อัปโหลดไฟล์ไปยัง VM",
+      "heading": "อัปโหลดไฟล์ไปยัง VM",
+      "description": "ไฟล์จะถูกบันทึกไว้ที่เดสก์ท็อป",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "วางไฟล์ที่นี่",
+      "dropDescription": "ไฟล์จะถูกอัปโหลดไปยังโฟลเดอร์เดสก์ท็อปของ VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "เข้าสู่ระบบเพื่อทดลองฟีเจอร์เพิ่มเติมฟรี",
+      "description": "สร้างโปรเจกต์ เชิญสมาชิกทีม และอีกมากมาย",
+      "connecting": "กำลังเชื่อมต่อ...",
+      "continueWithGoogle": "ดำเนินต่อด้วย Google"
+    },
+    "removeFile": "ลบไฟล์"
+  },
+  "chat": {
+    "greeting": "สวัสดี",
+    "greetingAuth": "ผมจะจัดการงานคอมพิวเตอร์ มีงานอะไร?",
+    "greetingUnauth": "AI ที่ทำงานคอมพิวเตอร์แทนคุณ แค่บอกว่าต้องการอะไร",
+    "guide": "คู่มือ",
+    "saveLogins": "บันทึกข้อมูลเข้าสู่ระบบสำหรับกรอกอัตโนมัติ",
+    "encryptedNote": "เข้ารหัส ไม่เคยเห็นโดย AI",
+    "roleLabels": [
+      "เพื่อนร่วมงาน",
+      "พนักงาน",
+      "เพื่อน",
+      "ผู้ช่วย",
+      "หุ้นส่วน",
+      "เพื่อนร่วมทีม",
+      "ผู้ร่วมงาน",
+      "ผู้ช่วยเหลือ"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "รายงานคู่แข่งของ {company}",
+        "warmLeads": "หาลีด 20 รายให้ {company}",
+        "pitchDeck": "ร่างพิทช์เด็คของ {company}"
+      },
+      "developer": {
+        "findBugs": "หาบั๊กบน {company}",
+        "performance": "ตรวจสอบประสิทธิภาพ {company}",
+        "apiDocs": "ดึงเอกสาร API ของ {company}"
+      },
+      "marketer": {
+        "seoGap": "วิเคราะห์ช่องว่าง SEO ของ {company}",
+        "competitorAds": "สอดส่องโฆษณาคู่แข่งของ {company}",
+        "trendingContent": "ไอเดียกระแสสำหรับ {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "สรุปรีวิวของ {company}",
+        "featureComparison": "เปรียบเทียบฟีเจอร์ของ {company}",
+        "competitorLaunches": "ติดตามการเปิดตัวคู่แข่งของ {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "ส่งออกข้อมูล {company} เป็น CSV",
+        "marketSizing": "วิเคราะห์ขนาดตลาด {company}",
+        "benchmark": "เปรียบเทียบ {company} กับอุตสาหกรรม"
+      },
+      "operations": {
+        "enterRecords": "ป้อนบันทึกเข้า {company}",
+        "cheapestVendor": "หาผู้ขายให้ {company}",
+        "invoiceSummary": "สรุปใบแจ้งหนี้ของ {company}"
+      },
+      "designer": {
+        "designComparison": "{company} vs คู่แข่งด้านการออกแบบ",
+        "responsiveAudit": "ตรวจสอบ responsive ของ {company}",
+        "inspiration": "แรงบันดาลใจการออกแบบสำหรับ {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "ดึงข้อมูลเว็บไซต์ {company}",
+      "browser_automation": "ส่งออกรายงาน {company}",
+      "data_entry": "ป้อนข้อมูลเข้า {company}",
+      "email_outreach": "เข้าถึงลูกค้าให้ {company}",
+      "testing": "ทดสอบ QA {company}",
+      "ecommerce": "เปรียบเทียบราคา {company}",
+      "social_media": "โพสต์เกี่ยวกับ {company}",
+      "general_automation": "ทำงานอัตโนมัติบน {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "คัดลอกข้อความ",
+    "copied": "คัดลอกแล้ว!",
+    "regenerate": "สร้างใหม่",
+    "feedback": {
+      "title": "ความคิดเห็น",
+      "prompts": [
+        "ให้คะแนน",
+        "ความคิดเห็น",
+        "เราเป็นอย่างไร?",
+        "คิดยังไง?",
+        "แบ่งปันความคิดเห็น"
+      ],
+      "tooltip": "แบ่งปันความคิดเห็นของคุณ"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "ค้นหาอัจฉริยะ",
+      "description": "ค้นหาด้วย AI ทั่วทั้งเว็บ"
+    },
+    "collaborate": {
+      "title": "ทำงานร่วมกัน",
+      "description": "ทำงานร่วมกันแบบเรียลไทม์"
+    },
+    "globalAccess": {
+      "title": "เข้าถึงทั่วโลก",
+      "description": "ค้นหาใน 50+ ภาษา"
+    },
+    "aiModels": {
+      "title": "โมเดล AI",
+      "description": "ผู้ให้บริการ AI หลายราย"
+    },
+    "freeForever": {
+      "title": "ฟรีตลอดไป",
+      "description": "ไม่มีค่าใช้จ่ายแอบแฝง"
+    },
+    "privateSecure": {
+      "title": "ส่วนตัวและปลอดภัย",
+      "description": "ข้อมูลของคุณยังคงเป็นของคุณ"
+    }
+  },
+  "sidebar": {
+    "newTask": "งานใหม่",
+    "newTaskDescription": "เริ่มระบบอัตโนมัติ AI ใหม่",
+    "activity": "กิจกรรม",
+    "taskHistory": "ประวัติงาน",
+    "taskHistoryDescription": "ตรวจสอบงานที่ผ่านมาและกลับมาต่อจากจุดที่ค้างไว้",
+    "taskHistoryPopup": {
+      "title": "งานล่าสุดของคุณ",
+      "description": "เรียกดูและกลับมาต่อการสนทนาที่ผ่านมา ทุกงานถูกบันทึกเพื่อให้คุณกลับมาต่อได้ทันที"
+    },
+    "swarmRuns": "การรัน Swarm",
+    "swarmRunsDescription": "ตรวจสอบเวิร์กโฟลว์ขนานหลายเอเจนต์",
+    "swarmRunsPopup": {
+      "title": "เวิร์กโฟลว์หลายเอเจนต์",
+      "description": "รันงานข้ามหลายเครื่องแบบขนาน แต่ละเอเจนต์ทำงานอิสระและผลลัพธ์รวมกันอัตโนมัติ"
+    },
+    "guide": "คู่มือ",
+    "guideDescription": "เรียนรู้วิธีใช้ Coasty ให้เต็มประสิทธิภาพ",
+    "guidePopup": {
+      "title": "เริ่มต้นใช้งาน",
+      "description": "คำแนะนำทีละขั้นตอนและแนวปฏิบัติที่ดีที่สุดเพื่อช่วยให้คุณทำงานอัตโนมัติอย่างมีประสิทธิภาพ"
+    },
+    "infrastructure": "โครงสร้างพื้นฐาน",
+    "computer": "คอมพิวเตอร์",
+    "computers": "คอมพิวเตอร์",
+    "active": "ใช้งานอยู่",
+    "view": "ดู",
+    "workforce": "กำหนดการ",
+    "workforceDescription": "กำหนดเวลางานและทริกเกอร์อัตโนมัติ",
+    "workforcePopup": {
+      "title": "ระบบอัตโนมัติตามกำหนดเวลา",
+      "description": "ตั้งค่างานที่เกิดซ้ำด้วยกำหนดการ cron และทริกเกอร์ระหว่างเอเจนต์ กำหนดการของคุณทำงานขณะที่คุณหลับ"
+    },
+    "credentials": "ข้อมูลรับรอง",
+    "credentialsDescription": "เก็บข้อมูลเข้าสู่ระบบอย่างปลอดภัยสำหรับเอเจนต์",
+    "credentialsPopup": {
+      "title": "ตู้เซฟข้อมูลรับรองที่ปลอดภัย",
+      "description": "เก็บข้อมูลเข้าสู่ระบบและ API key ด้วยการเข้ารหัส เอเจนต์กรอกข้อมูลอัตโนมัติโดยไม่เปิดเผยค่าจริง"
+    },
+    "desktopApp": {
+      "getDesktopApp": "ดาวน์โหลดแอปเดสก์ท็อป",
+      "download": "ดาวน์โหลด",
+      "downloadDesktopApp": "ดาวน์โหลดแอปเดสก์ท็อป",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "ควบคุมคอมพิวเตอร์ของคุณจากระยะไกล",
+      "controlDescription": "ติดตั้งแอปเดสก์ท็อปและรันงานบน PC ของคุณจากแดชบอร์ดนี้ — ที่ไหนก็ได้ เมื่อไรก็ได้"
+    },
+    "credits": {
+      "runningLow": "เครดิต — ใกล้หมด",
+      "remaining": "เครดิตคงเหลือ",
+      "buy": "ซื้อ",
+      "creditsLeft": "เครดิตเหลือ",
+      "usedLabel": "ใช้แล้ว: {count}",
+      "consumed": "ใช้ไป {percent}%",
+      "usageThisWeek": "การใช้งานสัปดาห์นี้"
+    },
+    "talkToUs": "พูดคุยกับเรา",
+    "talkToUsDesc": "จองสาย 15 นาที",
+    "inviteEarn": "เชิญและรับรางวัล",
+    "inviteEarnDesc": "รับเครดิตฟรี",
+    "user": "ผู้ใช้",
+    "account": "บัญชี",
+    "tasks": "{count} งาน",
+    "recentActivity": "กิจกรรมล่าสุด",
+    "viewAllHistory": "ดูประวัติทั้งหมด →",
+    "swarmRunsCount": "{count} การรัน Swarm",
+    "running": "กำลังทำงาน",
+    "completed": "เสร็จสิ้น",
+    "viewAllSwarms": "ดู swarm ทั้งหมด →",
+    "schedulesCount": "{count} ตารางเวลา",
+    "totalRuns": "{count} การรันทั้งหมด",
+    "paused": "หยุดชั่วคราว",
+    "viewAllSchedules": "ดูตารางเวลาทั้งหมด →",
+    "credentialsCount": "{count} ข้อมูลรับรอง",
+    "encryptedVault": "ตู้เซฟเข้ารหัส",
+    "manageCredentials": "จัดการข้อมูลรับรอง →",
+    "days": [
+      "จ.",
+      "อ.",
+      "พ.",
+      "พฤ.",
+      "ศ.",
+      "ส.",
+      "อา."
+    ],
+    "resume": "ดำเนินต่อ",
+    "result": "ผลลัพธ์",
+    "notScheduled": "ไม่ได้ตั้งเวลา",
+    "overdue": "เกินกำหนด",
+    "lessThanMin": "< 1 นาที",
+    "inMinutes": "ใน {count} นาที",
+    "inHours": "ใน {count} ชม.",
+    "today": "วันนี้",
+    "yesterday": "เมื่อวาน"
+  },
+  "appHeader": {
+    "login": "เข้าสู่ระบบ",
+    "assign": "กำหนดเวลา",
+    "assignDescription": "กำหนดเวลาให้งานนี้ทำงานโดยอัตโนมัติ",
+    "computer": "คอมพิวเตอร์",
+    "showComputer": "แสดงคอมพิวเตอร์",
+    "hideComputer": "ซ่อนคอมพิวเตอร์",
+    "employeeHired": "จ้างพนักงานแล้ว!",
+    "employeeRemoved": "ลบพนักงานแล้ว"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "ระบบอัตโนมัติรายวันแบบเบา"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "ทำงานอัตโนมัติทุกวัน"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "ขยายเวิร์กโฟลว์ที่ซับซ้อน",
+        "badge": "ยอดนิยม"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "ระบบอัตโนมัติหนักไม่จำกัด"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (ลบหลังไม่ใช้งาน)",
+      "vmAlwaysOn": "{count} VM เปิดตลอด",
+      "vmAlwaysOnPlural": "{count} VM เปิดตลอด",
+      "agentsParallel": "{count} เอเจนต์พร้อมกัน",
+      "basicSearch": "ค้นหาพื้นฐาน",
+      "advancedSearch": "ค้นหาขั้นสูงและดึงข้อมูล",
+      "standardSupport": "การสนับสนุนมาตรฐาน (คนจริง)",
+      "prioritySupport": "การสนับสนุนลำดับแรก ตอบภายใน 24 ชม.",
+      "premiumSupport": "การสนับสนุนพรีเมียม ตอบภายใน 12 ชม."
+    },
+    "creditPackages": {
+      "small": {
+        "name": "เพิ่มเล็ก",
+        "description": "เติมเร็ว"
+      },
+      "medium": {
+        "name": "เพิ่มกลาง",
+        "description": "เติมมาตรฐาน",
+        "savings": "ประหยัด 8%"
+      },
+      "large": {
+        "name": "เพิ่มใหญ่",
+        "description": "ซื้อเป็นจำนวนมาก",
+        "savings": "ประหยัด 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "เมื่อกี้",
+      "minutesAgo": "{count} นาทีที่แล้ว",
+      "hoursAgo": "{count} ชม. ที่แล้ว",
+      "daysAgo": "{count} วันที่แล้ว"
+    },
+    "noActivity": "ไม่มีกิจกรรมในช่วงนี้",
+    "stats": {
+      "balance": "ยอมคงเหลือ",
+      "earned": "ได้รับ",
+      "used": "ใช้แล้ว",
+      "credits": "เครดิต",
+      "allTime": "ตลอดทั้งหมด",
+      "lastRange": "{range} ล่าสุด",
+      "sessions": "{count} เซสชัน",
+      "avgDaily": "~{count}/วัน โดยเฉลี่ย",
+      "plan": "แผน",
+      "free": "ฟรี",
+      "noPlan": "ไม่มีแผน",
+      "canceling": "กำลังยกเลิก"
+    },
+    "monthlyUsage": "การใช้เครดิตรายเดือน",
+    "remaining": "{used} / {total} คงเหลือ",
+    "usedPercent": "ใช้ไป {percent}% ในช่วงนี้",
+    "renews": "ต่ออายุ {date}",
+    "choosePlan": "เลือกแผนของคุณ",
+    "choosePlanDescription": "สมัครสมาชิกเพื่อปลดล็อกฟีเจอร์ AI และรับเครดิตรายเดือน",
+    "savingsVsHuman": "ประหยัด {amount}/เดือน เทียบกับคน",
+    "timeSaved": "ประหยัดเวลา {time} ต่อเดือน",
+    "cheaper": "ถูกกว่า {multiplier}",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/เดือน",
+    "creditsPerMonth": "{count} เครดิต /เดือน",
+    "processing": "กำลังประมวลผล...",
+    "subscribeTo": "สมัคร {name}",
+    "transactionTypes": {
+      "credit_purchase": "ซื้อเครดิต",
+      "agent_usage": "การใช้งานเอเจนต์",
+      "refund": "คืนเงิน",
+      "bonus": "รางวัลโบนัส",
+      "subscription": "การสมัครสมาชิก",
+      "subscription_grant": "เครดิตจากการสมัคร",
+      "renewal": "เครดิตต่ออายุ",
+      "reactivation": "เปิดใช้งานใหม่"
+    },
+    "toasts": {
+      "paymentSuccess": "ชำระเงินสำเร็จ! เครดิตของคุณถูกเพิ่มแล้ว",
+      "subscriptionActivated": "เปิดใช้งานการสมัครสมาชิกสำเร็จ!",
+      "paymentCanceled": "การชำระเงินถูกยกเลิก ไม่มีการเรียกเก็บเงิน",
+      "signInToSubscribe": "กรุณาเข้าสู่ระบบเพื่อสมัครสมาชิก",
+      "subscriptionCheckoutFailed": "เริ่มการชำระเงินสมาชิกล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "signInToPurchase": "กรุณาเข้าสู่ระบบเพื่อซื้อเครดิต",
+      "needSubscription": "คุณต้องมีการสมัครสมาชิกที่ใช้งานอยู่เพื่อซื้อเครดิตเพิ่มเติม",
+      "checkoutFailed": "เริ่มการชำระเงินล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "manageFailed": "เปิดการจัดการสมาชิกล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "transactionsExported": "ส่งออกธุรกรรมแล้ว"
+    }
+  },
+  "apiKeys": {
+    "title": "ผู้ให้บริการโมเดล",
+    "new": "ใหม่",
+    "description": "เพิ่ม API key ของคุณเพื่อปลดล็อกการเข้าถึงโมเดล",
+    "securityNote": "คีย์ของคุณถูกเก็บอย่างปลอดภัยด้วยการเข้ารหัสแบบ end-to-end",
+    "apiKeyLabel": "{provider} API Key",
+    "getApiKey": "รับ API key",
+    "delete": "ลบ",
+    "save": "บันทึก",
+    "deleteDialog": {
+      "title": "ลบ API Key",
+      "description": "คุณแน่ใจว่าต้องการลบ API key ของ {provider} หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้ และคุณจะสูญเสียการเข้าถึงโมเดลของ {provider}",
+      "cancel": "ยกเลิก",
+      "confirm": "ลบ"
+    },
+    "toasts": {
+      "saved": "บันทึก API key แล้ว",
+      "savedDescription": "API key ของ {provider} ถูกบันทึกแล้วและโมเดลถูกเพิ่มในรายการโปรดของคุณ",
+      "updatedDescription": "API key ของ {provider} ถูกอัปเดตแล้ว",
+      "saveFailed": "บันทึก API key ล้มเหลว",
+      "saveFailedDescription": "บันทึก API key ของ {provider} ล้มเหลว กรุณาลองใหม่อีกครั้ง",
+      "deleted": "ลบ API key แล้ว",
+      "deletedDescription": "API key ของ {provider} ถูกลบแล้ว",
+      "deleteFailed": "ลบ API key ล้มเหลว",
+      "deleteFailedDescription": "ลบ API key ของ {provider} ล้มเหลว กรุณาลองใหม่อีกครั้ง"
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "รายละเอียดโปรไฟล์",
+    "displayName": "ชื่อที่แสดง",
+    "namePlaceholder": "ชื่อของคุณ",
+    "company": "บริษัท",
+    "companyPlaceholder": "บริษัทของคุณ",
+    "website": "เว็บไซต์",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "กำลังบันทึก...",
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "account": "บัญชี",
+    "email": "อีเมล",
+    "verified": "ยืนยันแล้ว",
+    "signOut": "ออกจากระบบ",
+    "signOutDescription": "ออกจากระบบอุปกรณ์นี้",
+    "toasts": {
+      "profileUpdated": "อัปเดตโปรไฟล์แล้ว",
+      "profileUpdateFailed": "อัปเดตโปรไฟล์ล้มเหลว",
+      "signOutFailed": "ออกจากระบบล้มเหลว"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "ข้อมูลของคุณได้รับการปกป้อง",
+    "dataProtectedDescription": "ความปลอดภัยระดับองค์กรด้วยการเข้ารหัสทั้งขณะเก็บและระหว่างส่ง",
+    "features": {
+      "encryption": {
+        "title": "การเข้ารหัสแบบ End-to-End",
+        "description": "API key เข้ารหัสด้วย AES-256-GCM ข้อมูลรับรองของคุณไม่เคยถูกเก็บเป็นข้อความธรรมดา"
+      },
+      "rls": {
+        "title": "Row Level Security",
+        "description": "การแยกระดับฐานข้อมูลรับประกันว่าข้อมูลของคุณเข้าถึงได้โดยคุณเท่านั้น ไม่สามารถเข้าถึงข้ามผู้เช่าได้"
+      },
+      "privacy": {
+        "title": "ความเป็นส่วนตัวโดยการออกแบบ",
+        "description": "เราเก็บข้อมูลน้อยที่สุดที่จำเป็นในการให้บริการ การสนทนาและไฟล์ของคุณยังคงเป็นของคุณ"
+      },
+      "session": {
+        "title": "ความปลอดภัยเซสชัน",
+        "description": "การป้องกัน CSRF คุกกี้ HTTP-only ที่ปลอดภัย และ Content Security Policy headers ในทุกคำขอ"
+      }
+    },
+    "legal": "กฎหมาย",
+    "privacyPolicy": {
+      "title": "นโยบายความเป็นส่วนตัว",
+      "description": "วิธีที่เราเก็บรวบรวม ใช้ และปกป้องข้อมูลของคุณ"
+    },
+    "termsOfService": {
+      "title": "ข้อกำหนดการให้บริการ",
+      "description": "ข้อกำหนดและเงื่อนไขการใช้งานของเรา"
+    }
+  },
+  "layoutSettings": {
+    "layout": "เลย์เอาต์"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "สรุป",
+      "highlight": "สรุป"
+    },
+    "code": {
+      "label": "โค้ด",
+      "highlight": "สร้าง"
+    },
+    "research": {
+      "label": "วิจัย",
+      "highlight": "วิเคราะห์"
+    },
+    "create": {
+      "label": "สร้างสรรค์",
+      "highlight": "สร้าง"
+    },
+    "solve": {
+      "label": "แก้ปัญหา",
+      "highlight": "ดีบั๊ก"
+    },
+    "learn": {
+      "label": "เรียนรู้",
+      "highlight": "อธิบาย"
+    }
+  },
+  "loadingMessages": [
+    "กำลังบูตสมองซิลิคอน",
+    "กำลังปลุกจิตสำนึกดิจิทัล",
+    "กำลังเริ่มต้นเส้นทางประสาท",
+    "กำลังหมุนแกนควอนตัม",
+    "กำลังชาร์จฟลักซ์คาปาซิเตอร์",
+    "กำลังเปิดใช้เมนเฟรม",
+    "กำลังจ่ายพลังงานเมทริกซ์คำนวณ",
+    "กำลังเข้าเกียร์วาร์ป",
+    "กำลังเรียกวิญญาณซิลิคอน",
+    "กำลังจุดเครื่องยนต์อิเล็กตรอน",
+    "กำลังอุ่นทรานซิสเตอร์",
+    "กำลังประกอบบิตและไบต์",
+    "กำลังปรับเทียบซิแนปส์ดิจิทัล",
+    "กำลังเติมพลังคริสตัล CPU",
+    "กำลังโหลดโปรโตคอลจิตสำนึก",
+    "กำลังเริ่มต้นทรัพยากรระบบ",
+    "กำลังเตรียมสภาพแวดล้อมคำนวณ",
+    "กำลังสร้างการเชื่อมต่อที่ปลอดภัย",
+    "กำลังจัดเตรียมทรัพยากรเสมือน",
+    "กำลังกำหนดค่าพารามิเตอร์ระบบ",
+    "กำลังเปิดตัวอินสแตนซ์เสมือน",
+    "กำลังเปิดใช้เดสก์ท็อประยะไกล",
+    "กำลังติดตั้งทรัพยากรคลาวด์",
+    "กำลังเริ่มลำดับการบูตระบบ",
+    "กำลังเตรียมสภาพแวดล้อมการทำงาน",
+    "กำลังปลุกคอมพิวเตอร์ที่ง่วงนอน",
+    "กำลังจิ้มหมีดิจิทัล",
+    "กำลังชงกาแฟคำนวณ",
+    "กำลังยืดกล้ามเนื้อดิจิทัล",
+    "กำลังเปิดตาดิจิทัล",
+    "กำลังเริ่มต้น",
+    "กำลังเปิดเครื่อง",
+    "กำลังออนไลน์",
+    "กำลังบูตระบบ",
+    "กำลังเตรียมพร้อม",
+    "เกือบเสร็จแล้ว",
+    "กำลังเตรียมพื้นที่ทำงาน",
+    "กำลังโหลดทรัพยากร",
+    "ระบบกำลังตื่น"
+  ],
+  "quickStart": {
+    "greetingName": "สวัสดี {name}!",
+    "greetingDefault": "สวัสดี!",
+    "subtitle": "งานของคุณทำงานบนคอมพิวเตอร์เสมือนที่ปลอดภัยและแยกจากระบบ",
+    "tabs": {
+      "start": "เริ่มต้น",
+      "desktop": "เดสก์ท็อป",
+      "swarms": "สวอร์ม",
+      "schedules": "กำหนดการ"
+    },
+    "items": {
+      "computerReady": "คอมพิวเตอร์พร้อม",
+      "pickComputer": "เลือกคอมพิวเตอร์",
+      "createComputer": "สร้างคอมพิวเตอร์",
+      "loginsSaved": "บันทึกข้อมูลเข้าสู่ระบบแล้ว",
+      "addLogins": "เพิ่มข้อมูลเข้าสู่ระบบ",
+      "askAnything": "ถามอะไรก็ได้",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "รีโมทจากมือถือ",
+      "freeDownload": "ดาวน์โหลดฟรี",
+      "onePrompt": "หนึ่งพรอมต์",
+      "manyAgents": "หลายเอเจนต์",
+      "combinedResult": "ผลลัพธ์รวม",
+      "setCadence": "ตั้งความถี่",
+      "autoRuns": "ทำงานอัตโนมัติ",
+      "recurringResults": "ผลลัพธ์ที่เกิดซ้ำ",
+      "computerReadyDesc": "เชื่อมต่อแล้วและพร้อมดำเนินงาน",
+      "pickComputerDesc": "เลือกจากเครื่องที่มีอยู่ของคุณ",
+      "createComputerDesc": "สร้างคอมพิวเตอร์คลาวด์ในไม่กี่วินาที",
+      "loginsSavedDesc": "ข้อมูลรับรองที่เข้ารหัสพร้อมสำหรับการกรอกอัตโนมัติ",
+      "addLoginsDesc": "บันทึกรหัสผ่านสำหรับการเข้าถึงเว็บไซต์อัตโนมัติ",
+      "askAnythingDesc": "อธิบายงานและดู AI ทำงาน",
+      "macWindowsDesc": "แอปเนทีฟสำหรับเดสก์ท็อปของคุณ",
+      "mobileRemoteDesc": "ควบคุมเอเจนต์จากอุปกรณ์ใดก็ได้",
+      "freeDownloadDesc": "ติดตั้งเบา ทำงานในไม่กี่วินาที",
+      "onePromptDesc": "อธิบายเป้าหมายของคุณด้วยภาษาง่ายๆ",
+      "manyAgentsDesc": "เอเจนต์ทำงานแบบขนานข้ามเครื่อง",
+      "combinedResultDesc": "ผลลัพธ์ทั้งหมดรวมเป็นรายงานเดียว",
+      "setCadenceDesc": "รายชั่วโมง รายวัน รายสัปดาห์ หรือ cron กำหนดเอง",
+      "autoRunsDesc": "เอเจนต์ดำเนินการโดยไม่ต้องแทรกแซง",
+      "recurringResultsDesc": "รายงานส่งตามกำหนดเวลาของคุณ"
+    },
+    "cta": {
+      "downloadApp": "ดาวน์โหลดแอป",
+      "trySwarms": "ลองสวอร์ม",
+      "setUp": "ตั้งค่า"
+    }
+  },
+  "machines": {
+    "title": "คอมพิวเตอร์ของฉัน",
+    "subtitle": "จัดการสภาพแวดล้อมเดสก์ท็อปที่ควบคุมโดย AI",
+    "guide": "คู่มือ",
+    "newMachine": "เครื่องใหม่",
+    "filters": {
+      "all": "ทั้งหมด",
+      "running": "กำลังทำงาน",
+      "creating": "กำลังสร้าง",
+      "stopped": "หยุดแล้ว"
+    },
+    "desktopPromo": {
+      "text": "ข้าม VM — รันเอเจนต์ AI บนคอมพิวเตอร์ของคุณเองด้วยแอปเนทีฟ ควบคุมเดสก์ท็อปจากโทรศัพท์ของคุณ",
+      "cta": "รับแอป"
+    },
+    "emptyState": {
+      "title": "พนักงาน AI ตัวจริงที่เข้าถึงคอมพิวเตอร์ได้เต็มที่",
+      "description": "เปิดคอมพิวเตอร์ที่แยกจากระบบ และให้เอเจนต์ AI ท่องเว็บ รันเทอร์มินัล และควบคุมเดสก์ท็อป — โดยไม่ต้องลงมือเอง",
+      "feature1": {
+        "title": "ควบคุมเดสก์ท็อปเต็มรูปแบบ",
+        "description": "AI เลื่อนเมาส์ พิมพ์ คลิก และนำทางเหมือนผู้ใช้จริง"
+      },
+      "feature2": {
+        "title": "อัตโนมัติทุกงาน",
+        "description": "เบราว์เซอร์ เทอร์มินัล และ UI — เอเจนต์ทั้งหมดทำงานร่วมกันบนคอมพิวเตอร์เดียว"
+      },
+      "feature3": {
+        "title": "แยกจากระบบและปลอดภัย",
+        "description": "แต่ละคอมพิวเตอร์ทำงานในคอนเทนเนอร์ของตัวเอง — ระบบในเครื่องของคุณไม่ถูกแตะต้อง"
+      },
+      "cta": "สร้างคอมพิวเตอร์เครื่องแรกของคุณ"
+    },
+    "noMachines": "ไม่พบคอมพิวเตอร์",
+    "noFilteredMachines": "ไม่มีคอมพิวเตอร์ที่ {filter}",
+    "noFilteredDescription": "ไม่มีคอมพิวเตอร์ที่มีสถานะ {filter} ในขณะนี้",
+    "loadingMachines": "กำลังโหลดคอมพิวเตอร์...",
+    "toasts": {
+      "deleted": "ลบคอมพิวเตอร์สำเร็จแล้ว",
+      "readyOpen": "คุณสามารถเชื่อมต่อกับคอมพิวเตอร์ของคุณได้แล้ว",
+      "open": "เปิด",
+      "createFailed": "กรุณาลองสร้างคอมพิวเตอร์อีกครั้ง",
+      "fetchFailed": "ไม่สามารถโหลดคอมพิวเตอร์ได้"
+    }
+  },
+  "createMachine": {
+    "title": "คอมพิวเตอร์ใหม่",
+    "subtitle": "เปิดเดสก์ท็อปบนคลาวด์ — พร้อมใน ~30 วินาที",
+    "freeExpiry": "คอมพิวเตอร์ฟรีจะหมดอายุหลังจาก ",
+    "freeExpiry2": "2 ชั่วโมง",
+    "upgrade": "อัปเกรด",
+    "limitReached": "คุณถึงขีดจำกัดคอมพิวเตอร์แล้ว หยุดหรือลบคอมพิวเตอร์ที่มีอยู่เพื่อสร้างคอมพิวเตอร์ใหม่",
+    "upgradeMore": "อัปเกรดเพื่อเพิ่มเติม →",
+    "nameLabel": "ชื่อคอมพิวเตอร์",
+    "namePlaceholder": "เซิร์ฟเวอร์คลาวด์ของฉัน",
+    "nameError": "ชื่อคอมพิวเตอร์ไม่สามารถขึ้นต้นด้วย \"local\"",
+    "nameRequired": "กรุณาใส่ชื่อคอมพิวเตอร์",
+    "osLabel": "ระบบปฏิบัติการ",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "เดสก์ท็อป Ubuntu 22.04"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "เดสก์ท็อป Windows — อาจมีข้อผิดพลาด"
+    },
+    "osHintWindows": "เดสก์ท็อป Windows พร้อม Chrome (เบต้า) พร้อมใน ~2 นาที",
+    "osHintLinux": "เดสก์ท็อป Ubuntu เข้าถึงได้ผ่านเบราว์เซอร์ พร้อมใน ~30 วินาที",
+    "stateLabel": "สถานะคอมพิวเตอร์",
+    "restorePrevious": "กู้คืนก่อนหน้า",
+    "restoreDescription": "ดำเนินการต่อจากสแนปช็อตล่าสุด",
+    "startFresh": "เริ่มต้นใหม่",
+    "startFreshDescription": "สภาพแวดล้อมเดสก์ท็อปใหม่",
+    "cancel": "ยกเลิก",
+    "creating": "กำลังสร้าง...",
+    "create": "สร้างคอมพิวเตอร์",
+    "toasts": {
+      "restoringSnapshot": "กำลังกู้คืนคอมพิวเตอร์จากสแนปช็อต!",
+      "restoringDescription": "สถานะเดสก์ท็อปก่อนหน้าของคุณกำลังถูกกู้คืน พร้อมใน ~30 วินาที",
+      "windowsCreated": "เริ่มสร้างคอมพิวเตอร์ Windows แล้ว!",
+      "windowsDescription": "เดสก์ท็อป Windows ของคุณกำลังเปิดใช้งาน พร้อมใน ~2 นาที",
+      "linuxCreated": "เดสก์ท็อปของคุณกำลังเปิดใช้งาน พร้อมใน ~30 วินาที",
+      "sshCreated": "คอมพิวเตอร์คลาวด์ของคุณกำลังเปิดใช้งาน คีย์ SSH จะพร้อมใช้งานเมื่อคอมพิวเตอร์พร้อม"
+    }
+  },
+  "secrets": {
+    "title": "ข้อมูลรับรองที่บันทึกไว้",
+    "subtitle": "จัดเก็บอย่างปลอดภัยและใช้โดยอัตโนมัติโดยเอเจนต์ AI เมื่อเข้าสู่ระบบ",
+    "guide": "คู่มือ",
+    "import": "นำเข้า",
+    "addCredential": "เพิ่มข้อมูลรับรอง",
+    "securityNote": "ข้อมูลรับรองจะไม่ถูกส่งไปยังโมเดล AI และไม่แสดงในแชท — เอเจนต์กรอกข้อมูลโดยตรงโดยไม่เห็นค่า",
+    "username": "ชื่อผู้ใช้",
+    "password": "รหัสผ่าน",
+    "hide": "ซ่อน",
+    "revealFor10s": "แสดง 10 วินาที",
+    "encrypted": "เข้ารหัสแล้ว",
+    "emptyState": {
+      "title": "เข้าสู่ระบบอัตโนมัติ ไม่ต้องลงมือเอง",
+      "description": "บันทึกข้อมูลรับรองครั้งเดียว — เอเจนต์ AI เข้าสู่ระบบอัตโนมัติและทำงานต่อโดยไม่รบกวนคุณ",
+      "feature1": {
+        "title": "ไม่มีการขัดจังหวะ",
+        "description": "เอเจนต์พบฟอร์มเข้าสู่ระบบ กรอกข้อมูล และทำงานต่อ — ไม่มีคำถาม ไม่มีการหยุดชะงัก"
+      },
+      "feature2": {
+        "title": "AI ไม่เคยเห็น",
+        "description": "ข้อมูลรับรองของคุณถูกฉีดเข้าโดยตรง โมเดล AI ไม่เคยเห็นค่าจริง"
+      },
+      "feature3": {
+        "title": "เว็บไซต์ใดก็ได้",
+        "description": "ใช้ได้กับฟอร์มเข้าสู่ระบบบนทุกเว็บไซต์ — อีเมล เครื่องมือ SaaS แดชบอร์ด ทุกอย่าง"
+      },
+      "cta": "เพิ่มข้อมูลรับรองแรกของคุณ"
+    },
+    "deleteDialog": {
+      "title": "ลบข้อมูลรับรอง?",
+      "description": "{name} ({service}) จะถูกลบอย่างถาวร เอเจนต์ AI จะไม่สามารถใช้งานได้อีก",
+      "cancel": "ยกเลิก",
+      "delete": "ลบ"
+    },
+    "toasts": {
+      "loadFailed": "ไม่สามารถโหลดข้อมูลรับรองได้",
+      "revealFailed": "ไม่สามารถแสดงรหัสผ่านได้",
+      "deleted": "ลบข้อมูลรับรองแล้ว",
+      "deleteFailed": "ไม่สามารถลบข้อมูลรับรองได้"
+    },
+    "loading": "กำลังโหลดข้อมูลรับรอง..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "ราคาเรียบง่าย,",
+      "title2": "ออโต้ไพลอตจริง",
+      "subtitle": "เริ่มฟรี อัปเกรดเมื่อคุณต้องการพลังมากขึ้น"
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "ลองเอเจนต์ใช้คอมพิวเตอร์อันดับ #1",
+        "cta": "เริ่มฟรี"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "ระบบอัตโนมัติรายวันแบบเบา",
+        "cta": "รับ Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "ทำงานอัตโนมัติทุกวัน",
+        "cta": "รับ Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "ขยายเวิร์กโฟลว์ที่ซับซ้อน",
+        "cta": "เลือก Plus",
+        "badge": "ยอดนิยม"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "ระบบอัตโนมัติหนักไม่จำกัด",
+        "cta": "รับ Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "เบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลเต็มรูปแบบ",
+        "badge": "หลัก"
+      },
+      "swarmMode": {
+        "name": "โหมดสวอร์ม",
+        "sequential": "แบบลำดับเท่านั้น",
+        "parallel": "{count} เอเจนต์แบบขนาน",
+        "badge": "ทรงพลัง"
+      },
+      "security": {
+        "name": "ความปลอดภัย",
+        "description": "แซนด์บ็อกซ์ เข้ารหัส E2E",
+        "badge": "ทุกแผน"
+      },
+      "monthlyCredits": {
+        "name": "เครดิตรายเดือน",
+        "payAsYouGo": "จ่ายตามการใช้งาน",
+        "creditsPerMonth": "{count} เครดิต/เดือน"
+      },
+      "persistentMachines": {
+        "name": "เครื่องถาวร",
+        "temporary": "1 VM ชั่วคราว (2 ชม.)",
+        "deletedAfterInactivity": "1 VM (ลบหลังไม่ใช้งาน)",
+        "alwaysOn": "{count} VM เปิดตลอด",
+        "alwaysOnPlural": "{count} VM เปิดตลอด"
+      },
+      "webSearch": {
+        "name": "ค้นหาเว็บ",
+        "advanced": "ค้นหาและดึงข้อมูลขั้นสูง",
+        "basic": "ค้นหาพื้นฐาน"
+      }
+    },
+    "animations": {
+      "agentDescription": "เอเจนต์ของคุณควบคุมคอมพิวเตอร์จริง — เบราว์เซอร์ ไฟล์ และเทอร์มินัล",
+      "fillForm": "กรอกแบบฟอร์ม",
+      "searchExtract": "ค้นหาและดึงข้อมูล",
+      "uploadReport": "อัปโหลดรายงาน",
+      "navigateSite": "นำทางเว็บไซต์",
+      "creditsPerMonth": "เครดิตต่อเดือน",
+      "cr": "คร.",
+      "vm": "VM {num}",
+      "twoHrLimit": "จำกัด 2 ชม.",
+      "alwaysOn": "เปิดตลอด",
+      "tempVmDescription": "VM ชั่วคราว — รีเซ็ตหลัง 2 ชั่วโมง",
+      "persistentVmDescription": "ไฟล์ แอป และเซสชันของคุณคงอยู่ระหว่างงาน",
+      "sequentialOnly": "ดำเนินการแบบลำดับเท่านั้นในแผนนี้",
+      "yourTask": "งานของคุณ",
+      "agentsWorking": "{count} เอเจนต์ทำงานพร้อมกัน",
+      "upgradeForExtraction": "อัปเกรดเพื่อดึงข้อมูลเต็มรูปแบบ",
+      "searchDescription": "ค้นหา สแครป และดึงข้อมูลเชิงโครงสร้าง",
+      "basicSearchIncluded": "รวมการค้นหาพื้นฐาน",
+      "e2eEncryption": "การเข้ารหัส E2E",
+      "sandboxedVm": "VM แบบแซนด์บ็อกซ์",
+      "destroyedAfterUse": "ทำลายหลังใช้งาน",
+      "everyPlan": "ทุกแผน ไม่มีข้อยกเว้น"
+    },
+    "perMonth": "/เดือน",
+    "faqs": {
+      "credits": {
+        "q": "อะไรนับเป็นเครดิต?",
+        "a": "เครดิตหนึ่งเท่ากับการดำเนินการของเอเจนต์หนึ่งครั้งโดยประมาณ — คลิก กรอกฟอร์ม สืบค้น หรือจัดการไฟล์ งานหลายขั้นตอนทั่วไปใช้ 5-15 เครดิต"
+      },
+      "persistent": {
+        "q": "\"เครื่องถาวร\" หมายความว่าอะไร?",
+        "a": "ในแผนชำระเงิน VM ของคุณยังคงทำงานระหว่างงาน — เดสก์ท็อป ไฟล์ เซสชันเบราว์เซอร์ และซอฟต์แวร์ที่ติดตั้งทั้งหมดคงอยู่ เหมือนคอมพิวเตอร์คลาวด์ที่เปิดตลอดเวลาของคุณเอง"
+      },
+      "swarm": {
+        "q": "โหมดสวอร์มคืออะไร?",
+        "a": "โหมดสวอร์มแบ่งงานข้ามเครื่องหลายเครื่องที่ทำงานพร้อมกัน แทนที่เอเจนต์ตัวเดียวจะค้นหา 10 ครั้งตามลำดับ เอเจนต์หลายตัวทำแบบขนาน"
+      },
+      "cancel": {
+        "q": "ยกเลิกได้ตลอดเวลาไหม?",
+        "a": "ได้ ไม่มีสัญญา ไม่มีค่าธรรมเนียมยกเลิก ยกเลิกจากหน้าบัญชีและคงสิทธิ์การเข้าถึงจนสิ้นสุดรอบการเรียกเก็บเงิน"
+      },
+      "security": {
+        "q": "ข้อมูลของฉันปลอดภัยไหม?",
+        "a": "ทุกงานทำงานใน VM ที่แยกจากระบบอย่างสมบูรณ์และถูกทำลายหลังใช้งาน การเชื่อมต่อทั้งหมดเข้ารหัสแบบ end-to-end และเราไม่เก็บข้อมูลรับรองของคุณ"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "เครดิตกำหนดเอง VM เฉพาะ SLA, SSO และการสนับสนุนลำดับความสำคัญ",
+      "cta": "ติดต่อเรา"
+    },
+    "footer": {
+      "title": "เอเจนต์ AI ของคุณอยู่ห่างแค่ 60 วินาที",
+      "subtitle": "สมัครและให้ Coasty จัดการงาน",
+      "noCreditCard": "ไม่ต้องใช้บัตรเครดิต",
+      "cancelAnytime": "ยกเลิกได้ตลอดเวลา",
+      "noCreditCardRequired": "ไม่ต้องใช้บัตรเครดิต",
+      "cancelAnytimeNoContracts": "ยกเลิกได้ตลอดเวลา — ไม่มีสัญญา"
+    },
+    "questions": "คำถาม"
+  },
+  "guide": {
+    "pageTitle": "คู่มือ",
+    "pageSubtitle": "จากการตั้งค่าครั้งแรกถึงฟีเจอร์ขั้นสูง — เรียนรู้วิธีใช้ Coasty ให้เต็มประสิทธิภาพ",
+    "completeGuide": "คู่มือฉบับสมบูรณ์",
+    "completeGuideSubtitle": "ทุกสิ่งที่คุณต้องรู้เกี่ยวกับ Coasty",
+    "completeGuideDescription": "จากการตั้งค่าครั้งแรกถึงฟีเจอร์ขั้นสูง — เรียนรู้วิธีใช้เอเจนต์ AI ของคุณให้เต็มประสิทธิภาพ",
+    "talkToCofounders": "พูดคุยกับผู้ร่วมก่อตั้ง",
+    "tabs": {
+      "overview": "ภาพรวม",
+      "gettingStarted": "เริ่มต้นใช้งาน",
+      "chatTasks": "แชทและงาน",
+      "machines": "เครื่อง",
+      "credentials": "ข้อมูลรับรอง",
+      "swarmMode": "โหมดสวอร์ม",
+      "workforce": "กำหนดการ",
+      "desktopApp": "แอปเดสก์ท็อป",
+      "billing": "การเรียกเก็บเงินและเครดิต"
+    },
+    "overview": {
+      "howItWorks": "วิธีการทำงาน",
+      "step1": "อธิบายงาน",
+      "step2": "Coasty วางแผนขั้นตอน",
+      "step3": "ดำเนินการอัตโนมัติ",
+      "step": "ขั้นตอน",
+      "whatCanDo": "Coasty ทำอะไรได้บ้าง",
+      "taskCount": "งานมากกว่า 40 รายการใน 10 หมวดหมู่",
+      "categories": {
+        "sales": {
+          "name": "การขาย",
+          "desc": "หาลูกค้าเป้าหมาย 50 ราย ส่งอีเมลแบบปรับแต่ง"
+        },
+        "marketing": {
+          "name": "การตลาด",
+          "desc": "เผยแพร่บทความบล็อก วางแผนสื่อสังคม"
+        },
+        "jobApps": {
+          "name": "สมัครงาน",
+          "desc": "สมัครงาน 20 ตำแหน่ง ปรับแต่งเรซูเม่ทุกฉบับ"
+        },
+        "email": {
+          "name": "อีเมล",
+          "desc": "ร่างคำตอบ ส่งจำนวนมาก ยกเลิกสมาชิก"
+        },
+        "dataEntry": {
+          "name": "ป้อนข้อมูล",
+          "desc": "ถ่ายโอนข้อมูลระหว่างแอป สร้างสเปรดชีต"
+        },
+        "research": {
+          "name": "วิจัย",
+          "desc": "รายงานเชิงลึก ติดตามคู่แข่ง"
+        },
+        "qaTesting": {
+          "name": "ทดสอบ QA",
+          "desc": "ทดสอบการสมัคร ทดสอบฟอร์ม ตรวจสุขภาพเว็บ"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "หาผู้สมัคร ติดต่อแบบปรับแต่ง"
+        },
+        "support": {
+          "name": "สนับสนุน",
+          "desc": "ร่างคำตอบ อัปเดตเอกสารช่วยเหลือ"
+        },
+        "productivity": {
+          "name": "ประสิทธิภาพ",
+          "desc": "จองการเดินทาง ชำระบิล จัดการปฏิทิน"
+        }
+      },
+      "whyCoasty": "ทำไมต้อง Coasty",
+      "notChatbot": "ไม่ใช่แชทบอท ไม่ใช่สคริปต์ RPA",
+      "worksLikeHuman": {
+        "title": "ทำงานเหมือนคน",
+        "desc": "เห็น คลิก พิมพ์ นำทาง — เหมือนคุณทุกประการ"
+      },
+      "noScripts": {
+        "title": "ไม่ต้องมีสคริปต์หรือตั้งค่า",
+        "desc": "ป้อนข้อความธรรมดา รับผลลัพธ์"
+      },
+      "handlesUnexpected": {
+        "title": "จัดการกับสิ่งที่ไม่คาดคิด",
+        "desc": "ปรับตัวกับ CAPTCHA ป็อปอัป การเปลี่ยนเลย์เอาต์"
+      },
+      "runsInIsolation": {
+        "title": "ทำงานแบบแยกส่วน",
+        "desc": "VM แบบแซนด์บ็อกซ์ต่อเซสชัน — ไม่มีอะไรรั่วไหล"
+      },
+      "ctaTitle": "เลือกงานใดก็ได้แล้วลอง",
+      "ctaSubtitle": "พร้อมใช้ Coasty ทำงานหรือยัง?",
+      "ctaDescription": "อธิบายงานใดก็ได้จากคู่มือนี้แล้วดู Coasty จัดการ",
+      "ctaNote": "เริ่มฟรี ไม่ต้องใช้บัตรเครดิต",
+      "startTask": "เริ่มงาน",
+      "startFree": "เริ่มฟรี",
+      "desktopApp": "แอปเดสก์ท็อป"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "สมัครสมาชิก",
+          "desc": "คลิกเดียวเพื่อเริ่มต้น"
+        },
+        "createMachine": {
+          "title": "สร้างเครื่อง",
+          "desc": "เอเจนต์ของคุณจะได้คอมพิวเตอร์ของตัวเอง"
+        },
+        "saveCredentials": {
+          "title": "บันทึกข้อมูลรับรอง",
+          "desc": "ล็อกอินที่เข้ารหัสสำหรับทุกเว็บไซต์"
+        },
+        "giveTask": {
+          "title": "มอบงาน",
+          "desc": "อธิบายมัน ดูมันเกิดขึ้น"
+        }
+      },
+      "examplePrompts": [
+        "สมัครงาน 10 ตำแหน่งที่ตรงกันบน LinkedIn ด้วยเรซูเม่ของฉัน",
+        "ค้นคว้าราคาคู่แข่งและสร้างสเปรดชีตเปรียบเทียบ",
+        "เขียนและเผยแพร่บทความบล็อกเกี่ยวกับ [หัวข้อ] บน WordPress",
+        "ยกเลิกสมาชิกอีเมลการตลาดทั้งหมดใน Gmail",
+        "ทดสอบขั้นตอนการสมัครบนเว็บไซต์ของฉันและรายงานข้อบกพร่อง",
+        "หาลูกค้าเป้าหมาย 50 รายที่ตรงกับ [ICP] บน LinkedIn และเพิ่มไปยัง CRM ของฉัน"
+      ],
+      "quickPrompts": "คำสั่งด่วนที่น่าลอง",
+      "startFirstTask": "เริ่มงานแรกของคุณ"
+    },
+    "chatTasks": {
+      "commandCenter": "ศูนย์บัญชาการของคุณ",
+      "describeTask": "อธิบายงานใดก็ได้ ดูมันเกิดขึ้น",
+      "examplePrompt": "หาคีย์บอร์ดไร้สายที่ดีที่สุด 5 อันราคาต่ำกว่า $50 บน Amazon แล้วเปรียบเทียบในสเปรดชีต",
+      "exampleResponse": "ฉันจะค้นหาใน Amazon และสร้างการเปรียบเทียบ กำลังเปิดเบราว์เซอร์",
+      "exampleDone": "เสร็จแล้ว สเปรดชีตถูกบันทึกพร้อมราคา คะแนน และคุณสมบัติของคีย์บอร์ดทั้ง 5 อัน",
+      "describePlaceholder": "อธิบายงานของคุณ...",
+      "threeAgents": "เอเจนต์เฉพาะทาง 3 ตัว",
+      "autoAssigned": "กำหนดอัตโนมัติต่อขั้นตอน",
+      "browser": "เบราว์เซอร์",
+      "browserDesc": "นำทาง คลิก กรอกฟอร์ม สแครป",
+      "terminal": "เทอร์มินัล",
+      "terminalDesc": "รันคำสั่ง ติดตั้ง ประมวลผลไฟล์",
+      "desktop": "เดสก์ท็อป",
+      "desktopDesc": "คลิก พิมพ์ เลื่อน เปิดแอป",
+      "betterPrompts": "เขียนคำสั่งที่ดีขึ้น",
+      "specificBeatsVague": "เจาะจงชนะคลุมเครือ ทุกครั้ง",
+      "do": "ควรทำ",
+      "dont": "ไม่ควรทำ",
+      "doExample1": "สมัครงานวิศวกรรมซอฟต์แวร์ 10 ตำแหน่งบน LinkedIn ปรับแต่งจดหมายสมัครงานแต่ละฉบับให้กล่าวถึง tech stack ของพวกเขา",
+      "dontExample1": "สมัครงาน",
+      "doExample2": "ค้นหา Google Flights จาก SFO ไป JFK 20-25 มี.ค. ไป-กลับ ถ่ายภาพหน้าจอ 3 เที่ยวบินที่ถูกที่สุด",
+      "dontExample2": "หาเที่ยวบิน",
+      "readyToTry": "พร้อมลองหรือยัง?",
+      "openChat": "เปิดแชทแล้วอธิบายสิ่งที่คุณต้องการ",
+      "startChat": "เริ่มแชท"
+    },
+    "machinesTab": {
+      "title": "เครื่องของคุณ",
+      "subtitle": "เดสก์ท็อป Ubuntu เต็มรูปแบบที่คุณสามารถเริ่มได้ในไม่กี่วินาที",
+      "lifecycle": "วงจรชีวิต",
+      "lifecycleDesc": "ห้าสถานะ อัตโนมัติทั้งหมด",
+      "planLimits": "ขีดจำกัดแผน",
+      "planCol": "แผน",
+      "machinesCol": "เครื่อง",
+      "swarmAgentsCol": "เอเจนต์สวอร์ม",
+      "temp": "1 ชั่วคราว",
+      "states": {
+        "creating": "กำลังสร้าง",
+        "starting": "กำลังเริ่ม",
+        "running": "กำลังทำงาน",
+        "stopping": "กำลังหยุด",
+        "stopped": "หยุดแล้ว"
+      },
+      "newMachine": "+ ใหม่",
+      "researchVm": "VM วิจัย",
+      "emailVm": "VM อีเมล",
+      "testingVm": "VM ทดสอบ",
+      "cores": "{count} คอร์",
+      "gb": "{count} GB",
+      "stop": "หยุด",
+      "start": "เริ่ม",
+      "provisioning": "กำลังจัดเตรียม...",
+      "spinUp": "เริ่มเครื่อง",
+      "goToMachines": "ไปที่เครื่อง"
+    },
+    "credentialsTab": {
+      "loginDetected": "ตรวจพบการเข้าสู่ระบบ",
+      "matched": "ตรงกัน",
+      "credentialFound": "พบข้อมูลรับรอง",
+      "autoFilled": "กรอกอัตโนมัติแล้ว",
+      "autoFillTitle": "การกรอกอัตโนมัติทำงาน",
+      "autoFillDesc": "ตรวจพบการเข้าสู่ระบบ จับคู่ข้อมูลรับรอง กรอกฟอร์ม อัตโนมัติ",
+      "security": "ความปลอดภัย",
+      "encrypted": "เข้ารหัสแล้ว",
+      "aes256": "AES-256 ขณะพัก",
+      "vmIsolated": "แยก VM",
+      "sandboxed": "แซนด์บ็อกซ์ต่อเซสชัน",
+      "neverLogged": "ไม่เคยบันทึก",
+      "zeroTrace": "ไม่มีร่องรอยในล็อก",
+      "savedCredentials": "ข้อมูลรับรองที่บันทึกไว้",
+      "addOnce": "เพิ่มครั้งเดียว กรอกอัตโนมัติทุกที่",
+      "saveFirst": "บันทึกข้อมูลรับรองแรกของคุณ",
+      "goToCredentials": "ไปที่ข้อมูลรับรองที่บันทึกไว้"
+    },
+    "swarmTab": {
+      "title": "โหมดสวอร์ม",
+      "runParallel": "รัน {count} เครื่องแบบขนาน",
+      "sameTask": "งานเดียวกัน {multiplier}x ผลลัพธ์ เวลาเท่ากัน",
+      "done": "เสร็จ",
+      "running": "กำลังทำงาน",
+      "pending": "รอดำเนินการ",
+      "result": "ผลลัพธ์",
+      "useCases": {
+        "parallelResearch": {
+          "title": "วิจัยแบบขนาน",
+          "desc": "{count} คู่แข่ง {count} เครื่อง พร้อมกัน"
+        },
+        "bulkApplications": {
+          "title": "สมัครจำนวนมาก",
+          "desc": "สมัครข้ามแพลตฟอร์มพร้อมกัน"
+        },
+        "multiCitySearch": {
+          "title": "ค้นหาหลายเมือง",
+          "desc": "ค้นหารายการใน {count} เมืองพร้อมกัน"
+        },
+        "parallelOutreach": {
+          "title": "ติดต่อแบบขนาน",
+          "desc": "อีเมลแบบปรับแต่งไปยังกลุ่มต่างๆ"
+        },
+        "crossPlatform": {
+          "title": "ข้ามแพลตฟอร์ม",
+          "desc": "โพสต์บน {count} แพลตฟอร์มพร้อมกัน"
+        },
+        "distributedTesting": {
+          "title": "ทดสอบแบบกระจาย",
+          "desc": "ทดสอบหลายสถานการณ์แบบขนาน"
+        }
+      },
+      "whatToSwarm": "อะไรควรสวอร์ม",
+      "availability": "ความพร้อมใช้งาน",
+      "freeNotAvailable": "ไม่พร้อมใช้งาน",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 เอเจนต์",
+      "startSwarm": "เริ่มสวอร์ม"
+    },
+    "workforceTab": {
+      "title": "บุคลากร",
+      "subtitle": "บริษัท AI ของคุณ บนออโต้ไพลอต",
+      "description": "พนักงาน ทีม ทริกเกอร์ — ทำงาน 24/7",
+      "myCompany": "บริษัทของฉัน",
+      "contentOps": "Content Ops",
+      "support": "สนับสนุน",
+      "writer": "นักเขียน",
+      "seo": "SEO",
+      "social": "โซเชียล",
+      "inbox": "กล่องจดหมาย",
+      "docs": "เอกสาร",
+      "concepts": "แนวคิดหลัก",
+      "conceptItems": {
+        "employees": {
+          "title": "พนักงาน",
+          "desc": "เอเจนต์ AI ที่ทำงานตามตารางเวลา 24/7"
+        },
+        "teams": {
+          "title": "ทีม",
+          "desc": "กลุ่มพนักงานที่มีคำสั่งร่วมกัน"
+        },
+        "sharedMemory": {
+          "title": "หน่วยความจำร่วม",
+          "desc": "ที่เก็บ key-value ที่พนักงานอ่านและเขียน"
+        },
+        "triggers": {
+          "title": "ทริกเกอร์",
+          "desc": "เชื่อมโยงพนักงาน: คนหนึ่งเสร็จ คนต่อไปเริ่ม"
+        },
+        "delegates": {
+          "title": "ผู้รับมอบหมาย",
+          "desc": "พนักงานมอบหมายงานย่อยให้ผู้เชี่ยวชาญ"
+        },
+        "orgChart": {
+          "title": "แผนผังองค์กร",
+          "desc": "แผนภาพลำดับชั้นบริษัทของคุณ"
+        }
+      },
+      "chainTitle": "เชื่อมโยงพนักงานเข้าด้วยกัน",
+      "chainDesc": "ผลลัพธ์ไหลจากคนหนึ่งไปยังคนถัดไปโดยอัตโนมัติ",
+      "scout": "Scout",
+      "scoutDesc": "วิจัยคู่แข่ง",
+      "atlas": "Atlas",
+      "atlasDesc": "เขียนบทความบล็อก",
+      "nova": "Nova",
+      "novaDesc": "เผยแพร่บนโซเชียล",
+      "done": "เสร็จ",
+      "onComplete": "on_complete",
+      "waiting": "รอ",
+      "templates": "เริ่มจากเทมเพลต",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "สนับสนุนลูกค้า",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "การตลาด",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "อีคอมเมิร์ซ",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} พนักงาน",
+      "openWorkforce": "เปิดบุคลากร"
+    },
+    "billingTab": {
+      "credits": "เครดิต",
+      "timeMetric": "เวลาคือตัวชี้วัดเดียว",
+      "rate": "อัตรา",
+      "rateValue": "10",
+      "creditsPerMin": "เครดิต/นาที",
+      "metered": "วัดทุก 30 วินาที",
+      "example": "ตัวอย่าง",
+      "minTask": "นาที งาน",
+      "startCredits": "เริ่ม: {count} เครดิต",
+      "endCredits": "สิ้นสุด: {count} เครดิต",
+      "creditsUsed": "ใช้ {count} เครดิต",
+      "calculation": "{mins} นาที x 10 เครดิต/นาที",
+      "plans": "แผน",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 ชั่วคราว",
+          "feature": "ค้นหาพื้นฐาน"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 เปิดตลอด",
+          "feature": "2 เอเจนต์ขนาน"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 เปิดตลอด",
+          "feature": "ค้นหาขั้นสูง"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 เปิดตลอด",
+          "feature": "สนับสนุนลำดับความสำคัญ"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 เปิดตลอด",
+          "feature": "การรับประกัน SLA"
+        }
+      },
+      "perMonth": "{price}/เดือน",
+      "faqTitle": "คำถามที่พบบ่อย",
+      "faqs": {
+        "howCharged": {
+          "q": "เครดิตถูกเรียกเก็บอย่างไร?",
+          "a": "10 เครดิตต่อนาทีของการทำงานเอเจนต์ ปัดขึ้น ตรวจสอบทุก 30 วินาทีระหว่างเซสชัน"
+        },
+        "runOut": {
+          "q": "เกิดอะไรขึ้นเมื่อเครดิตหมด?",
+          "a": "คุณต้องมีอย่างน้อย 20 เครดิตเพื่อเริ่มงาน เมื่อถึง 0 งานจะหยุดชั่วคราว — ซื้อแพ็กเสริมเพื่อดำเนินการต่อ"
+        },
+        "rollOver": {
+          "q": "เครดิตที่ไม่ได้ใช้ยกยอดไหม?",
+          "a": "เครดิตรีเซ็ตทุกรอบการเรียกเก็บเงิน ใช้หรือเสีย"
+        }
+      },
+      "goToBilling": "ไปที่การเรียกเก็บเงิน"
+    },
+    "desktopAppTab": {
+      "overlay": "โอเวอร์เลย์",
+      "overlayDesc": "อยู่ตลอด คลิกเพื่อขยาย",
+      "compact": "กะทัดรัด",
+      "expanded": "ขยาย",
+      "ready": "พร้อม",
+      "exampleTask": "อัปเดตเรซูเม่ของฉัน",
+      "exampleResponse": "กำลังเปิด resume.docx...",
+      "describePlaceholder": "อธิบายงานของคุณ...",
+      "whatItControls": "สิ่งที่มันควบคุม",
+      "controls": {
+        "browser": {
+          "name": "เบราว์เซอร์",
+          "desc": "นำทาง คลิก กรอกฟอร์ม"
+        },
+        "files": {
+          "name": "ไฟล์",
+          "desc": "อ่าน เขียน แก้ไขได้ทุกที่"
+        },
+        "terminal": {
+          "name": "เทอร์มินัล",
+          "desc": "รันคำสั่ง shell ใดก็ได้"
+        },
+        "desktop": {
+          "name": "เดสก์ท็อป",
+          "desc": "คลิก พิมพ์ เลื่อน"
+        },
+        "screenshots": {
+          "name": "ภาพหน้าจอ",
+          "desc": "เห็นสิ่งที่คุณเห็น"
+        },
+        "apps": {
+          "name": "แอป",
+          "desc": "ควบคุมแอปที่ติดตั้งใดก็ได้"
+        }
+      },
+      "twoWays": "สองวิธีในการรัน",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "แซนด์บ็อกซ์แยกเต็มรูปแบบ",
+        "freshBrowser": "เบราว์เซอร์ใหม่ ไม่มีประวัติ",
+        "maxSecurity": "ความปลอดภัยสูงสุด"
+      },
+      "desktopMode": "เดสก์ท็อป",
+      "desktopFeatures": {
+        "yourFiles": "ไฟล์ของคุณ เข้าถึงโดยตรง",
+        "yourApps": "แอปที่ติดตั้งของคุณ",
+        "yourSessions": "เซสชันที่เข้าสู่ระบบของคุณ"
+      },
+      "downloadCta": "Download Desktop App"
+    }
+  },
+  "comparePage": {
+    "title": "เปรียบเทียบ",
+    "heroTitle": "Coasty เทียบกับคู่แข่ง",
+    "heroDescription": "ดูว่า AI เอเจนต์ใช้คอมพิวเตอร์อันดับ 1 (82% OSWorld) เปรียบเทียบกับตัวเลือกอื่นอย่างไร วิเคราะห์ฟีเจอร์ด้วยข้อมูลจริง",
+    "categories": {
+      "aiAgent": "AI เอเจนต์",
+      "infrastructure": "โครงสร้างพื้นฐาน",
+      "rpa": "RPA",
+      "human": "มนุษย์"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "พร้อมลอง AI เอเจนต์ใช้คอมพิวเตอร์อันดับ 1 หรือยัง?",
+    "ctaButton": "ลองใช้ Coasty ฟรี",
+    "noCreditCard": "ไม่ต้องใช้บัตรเครดิต",
+    "allComparisons": "การเปรียบเทียบทั้งหมด",
+    "featureComparison": "เปรียบเทียบฟีเจอร์",
+    "whyChooseCoasty": "ทำไมต้อง Coasty?",
+    "strengthsOf": "จุดแข็งของ {name}",
+    "ctaDescription": "82% OSWorld benchmark แยก VM แก้ CAPTCHA เริ่มต้น $20/เดือน",
+    "watchCaseStudies": "ดูกรณีศึกษา"
+  },
+  "agentSwarms": {
+    "badge": "โหมดฝูงเอเจนต์",
+    "heroTitle1": "คำสั่งเดียว",
+    "heroTitle2": "เครื่องไม่จำกัด",
+    "heroTitle3": "ผลลัพธ์แบบขนาน",
+    "heroDescription": "แบ่งงานใดก็ได้ไปยังหลายสภาพแวดล้อมแยกที่ทำงานพร้อมกัน งานที่ใช้เวลาหนึ่งชั่วโมงเสร็จในไม่กี่นาที",
+    "trySwarmMode": "ลองโหมดฝูง",
+    "seeInAction": "ดูการทำงาน",
+    "liveExecution": "swarm-tree — ดำเนินการสด",
+    "machineCount": "{count} เครื่อง",
+    "running": "กำลังทำงาน",
+    "threeSteps": "สามขั้นตอนสู่การทำงานแบบขนาน",
+    "steps": {
+      "typePrompt": {
+        "title": "พิมพ์คำสั่งของคุณ",
+        "desc": "อธิบายงาน เปิดโหมดฝูงและเลือกจำนวนเครื่อง"
+      },
+      "machinesSpinUp": {
+        "title": "เครื่องเริ่มทำงาน",
+        "desc": "แต่ละเครื่องได้สภาพแวดล้อมแยกเต็มรูปแบบ — เบราว์เซอร์ เทอร์มินัล เดสก์ท็อป"
+      },
+      "resultsStream": {
+        "title": "ผลลัพธ์สตรีมสด",
+        "desc": "ดูทุกเครื่องแบบเรียลไทม์ผ่านมุมมองต้นไม้ฝูง"
+      }
+    },
+    "demoTitle": "สาธิตฝูงเอเจนต์",
+    "demoDescription": "ดู {count} เครื่องจัดการงานวิจัย CRM พร้อมกัน",
+    "prompt": "คำสั่ง",
+    "swarm": "ฝูง",
+    "run": "เริ่ม",
+    "reset": "รีเซ็ต",
+    "allCompleted": "ทั้ง {count} เครื่องเสร็จสมบูรณ์",
+    "speedComparison": "~{swarmTime} นาที แทน ~{seqTime} นาที — เร็วกว่า {multiplier} เท่า",
+    "seqVsSwarm": "ตามลำดับ vs ฝูง",
+    "tableHeaders": {
+      "task": "งาน",
+      "before": "ก่อน",
+      "swarm": "ฝูง",
+      "speed": "ความเร็ว"
+    },
+    "speedExamples": {
+      "crmResearch": "วิจัย 5 เครื่องมือ CRM",
+      "qaPages": "QA ข้าม 8 หน้า",
+      "leadEnrichment": "เพิ่มคุณค่า Lead (100)",
+      "priceMonitoring": "ติดตามราคา"
+    },
+    "builtForParallel": "สร้างมาเพื่อการทำงานแบบขนาน",
+    "useCases": {
+      "marketResearch": {
+        "title": "วิจัยตลาดขนาดใหญ่",
+        "desc": "วิจัยคู่แข่ง ตลาด หรือผลิตภัณฑ์หลายรายการพร้อมกันบนเครื่องแยก"
+      },
+      "leadGeneration": {
+        "title": "สร้างลูกค้าเป้าหมาย",
+        "desc": "เพิ่มข้อมูลโปรไฟล์ ค้นหาอีเมล และยืนยันตัวตนบนโซเชียล — งานหลายชั่วโมงเสร็จในไม่กี่นาที"
+      },
+      "qaTesting": {
+        "title": "QA & ทดสอบการถดถอย",
+        "desc": "รันสถานการณ์ทดสอบข้ามหน้าหรือโฟลว์ต่างๆ แบบขนาน"
+      },
+      "contentSocial": {
+        "title": "เนื้อหา & โซเชียล",
+        "desc": "โพสต์ไปหลายแพลตฟอร์มพร้อมกันโดยแยกแต่ละเครื่อง"
+      },
+      "dataExtraction": {
+        "title": "ดึงข้อมูล",
+        "desc": "รวบรวมและจัดโครงสร้างข้อมูลจากหลายสิบแหล่งพร้อมกัน"
+      },
+      "scheduledRuns": {
+        "title": "รันตามกำหนดเวลา",
+        "desc": "รวมโหมดฝูงกับการตั้งเวลาสำหรับงานขนานที่ทำซ้ำ"
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "แยกสมบูรณ์",
+        "desc": "แต่ละเครื่องมีเบราว์เซอร์ เทอร์มินัล และเดสก์ท็อปของตัวเอง"
+      },
+      "tripleMachineLimit": {
+        "title": "จำกัดเครื่อง 3 เท่า",
+        "desc": "โหมดฝูงเพิ่มความจุเครื่องของแผนคุณสามเท่า"
+      },
+      "liveTreeView": {
+        "title": "มุมมองต้นไม้สด",
+        "desc": "สกรีนช็อตและการเรียกเครื่องมือสตรีมแบบเรียลไทม์"
+      },
+      "autoAggregation": {
+        "title": "รวมผลอัตโนมัติ",
+        "desc": "ผลลัพธ์รวมเป็นรายงานสรุปเดียว"
+      },
+      "shareableRuns": {
+        "title": "แชร์การรันได้",
+        "desc": "เล่นซ้ำไทม์ไลน์การดำเนินการทั้งหมดผ่านลิงก์"
+      },
+      "fullySandboxed": {
+        "title": "Sandbox เต็มรูปแบบ",
+        "desc": "สภาพแวดล้อมทั้งหมดถูกทำลายหลังเสร็จสิ้น"
+      }
+    },
+    "readyCta": "พร้อมรันงานแบบขนานหรือยัง?",
+    "includedWithPaid": "โหมดฝูงรวมอยู่ในทุกแผนชำระเงิน",
+    "getStarted": "เริ่มต้น",
+    "viewPricing": "ดูราคา",
+    "legend": {
+      "messages": "ข้อความ",
+      "broadcast": "ประกาศ",
+      "sharedMemory": "หน่วยความจำร่วม",
+      "help": "ช่วยเหลือ"
+    },
+    "liveSwarmExecution": "การดำเนินการฝูงสดพร้อมการสื่อสารระหว่างเอเจนต์",
+    "popular": "ยอดนิยม",
+    "avgRating": "{rating} เฉลี่ย"
+  },
+  "downloadPage": {
+    "title": "แอปเดสก์ท็อป",
+    "heroTitle": "ให้ Coasty ควบคุมคอมพิวเตอร์ของคุณ",
+    "heroDescription": "ผู้ช่วย AI ที่เข้าควบคุม ทำให้เบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลเป็นอัตโนมัติ — หรือควบคุมคอมพิวเตอร์จากที่ใดก็ได้ผ่านเว็บอินเทอร์เฟซ",
+    "seeInAction": "ดูการทำงาน",
+    "overlayDescription": "โอเวอร์เลย์น้ำหนักเบาที่ลอยอยู่บนเดสก์ท็อป ควบคุมในเครื่องหรือระยะไกลจากเบราว์เซอร์ใดก็ได้ — คอมพิวเตอร์ของคุณ ตามแบบของคุณ",
+    "recommended": "แนะนำสำหรับระบบของคุณ",
+    "coastyFor": "Coasty สำหรับ {platform}",
+    "installerLabel": "ตัวติดตั้ง {extension}",
+    "beforeInstall": "ก่อนติดตั้ง",
+    "beforeInstallDescription": "Coasty Desktop เป็นแอปใหม่ ดังนั้นระบบปฏิบัติการจะยังไม่รู้จัก นี่เป็นเรื่องปกติสำหรับแอปที่เพิ่งเปิดตัว — วิธีดำเนินการมีดังนี้:",
+    "windowsSteps": {
+      "step1": "Windows ปกป้อง PC ของคุณ",
+      "step2": "ข้อมูลเพิ่มเติม",
+      "step3": "เรียกใช้ต่อไป"
+    },
+    "macSteps": {
+      "step1": "ไม่สามารถเปิด Coasty Desktop ได้",
+      "step2": "การตั้งค่าระบบ > ความเป็นส่วนตัวและความปลอดภัย",
+      "step3": "เปิดต่อไป"
+    },
+    "allPlatforms": "ทุกแพลตฟอร์ม",
+    "systemRequirements": {
+      "title": "ความต้องการของระบบ",
+      "win1": "Windows 10 ขึ้นไป",
+      "win2": "64 บิต (x86_64)",
+      "win3": "RAM ขั้นต่ำ 4 GB",
+      "mac1": "macOS 10.15 (Catalina) ขึ้นไป",
+      "mac2": "Apple Silicon หรือ Intel",
+      "mac3": "RAM ขั้นต่ำ 4 GB"
+    },
+    "whatsIncluded": "รวมอะไรบ้าง",
+    "features": {
+      "browser": "ระบบอัตโนมัติเบราว์เซอร์",
+      "desktop": "ระบบอัตโนมัติเดสก์ท็อป",
+      "terminal": "เข้าถึงเทอร์มินัล",
+      "files": "จัดการไฟล์",
+      "updates": "อัปเดตอัตโนมัติ",
+      "remote": "ควบคุมจากที่ใดก็ได้"
+    },
+    "browserCta": "เปิด Coasty ในเบราว์เซอร์",
+    "browserCtaDescription": "ต้องการควบคุมเครื่องจากที่ใดก็ได้หรือไม่?",
+    "loading": "กำลังโหลด...",
+    "downloadFor": "ดาวน์โหลดสำหรับ {platform}",
+    "download": "ดาวน์โหลด",
+    "unavailable": "ไม่พร้อมใช้งาน"
+  },
+  "referralPage": {
+    "shareTitle": "แชร์ Coasty",
+    "earnTitle": "รับรางวัลด้วยกัน",
+    "shareDescription": "ให้เพื่อนได้รับ 50 เครดิตฟรีเพื่อใช้งาน AI เอเจนต์ตัวแรก คุณก็ได้ 50 เครดิตเช่นกัน — ทุกครั้งที่มีคนเข้าร่วม",
+    "features": [
+      "AI ที่ทำงานได้จริง — เบราว์เซอร์จริง คลิกจริง ผลลัพธ์จริง",
+      "แยกส่วนและปลอดภัย — ทุกเอเจนต์ทำงานใน sandbox VM ของตัวเอง",
+      "ทำงานขณะคุณหลับ — ตั้งเวลางานและให้เอเจนต์จัดการส่วนที่เหลือ"
+    ],
+    "recentActivity": "กิจกรรมล่าสุดของคุณ",
+    "friendsCould": "เพื่อนของคุณก็ทำแบบนี้ได้",
+    "giveGet": "ให้เพื่อน 50 เครดิต รับ 50 สำหรับตัวเอง ทุกครั้ง",
+    "stats": {
+      "invited": "เชิญแล้ว",
+      "earned": "ได้รับ",
+      "perInvite": "ต่อการเชิญ"
+    },
+    "tabs": {
+      "invite": "เชิญเพื่อน",
+      "feedback": "ส่งความคิดเห็น"
+    },
+    "referralLink": "ลิงก์แนะนำของคุณ",
+    "howItWorks": "วิธีการทำงาน",
+    "howSteps": [
+      "แชร์ลิงก์กับเพื่อน",
+      "เพื่อนสมัครและได้รับ 50 เครดิตฟรี",
+      "คุณได้รับ 50 เครดิตทันที"
+    ],
+    "shareDirectly": "แชร์โดยตรง",
+    "yourReferrals": "การแนะนำของคุณ",
+    "invitedYou": "เชิญคุณ",
+    "joinedViaLink": "เข้าร่วมผ่านลิงก์ของคุณ",
+    "noReferrals": "ยังไม่มีการแนะนำ",
+    "noReferralsHint": "แชร์ลิงก์ด้านบนแล้วทั้งคู่จะได้รับ 50 เครดิต",
+    "feedbackThanks": "ขอบคุณสำหรับความคิดเห็น!",
+    "feedbackWeRead": "เราอ่านทุกข้อความ",
+    "sendAnother": "ส่งอีกครั้ง",
+    "feedbackTitle": "บอกเราว่าคุณคิดอย่างไร",
+    "feedbackSubtitle": "รายงานบัก ไอเดียฟีเจอร์ หรือแค่ทักทาย",
+    "feedbackPlaceholder": "คุณกำลังคิดอะไรอยู่?",
+    "weReadEvery": "เราอ่านทุกข้อความ",
+    "send": "ส่ง",
+    "shareMessage": "เฮ้ ฉันใช้ Coasty อยู่แล้วมันเจ๋งมาก เป็น AI ที่ใช้คอมพิวเตอร์แทนคุณได้จริง ท่องเว็บ คลิก พิมพ์ ทำได้หมด ลองใช้ลิงก์ของฉันแล้วเราทั้งคู่จะได้เครดิตฟรี!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "อีเมล"
+    },
+    "emailSubject": "ลองดูเครื่องมือ AI นี้",
+    "emailBody": "AI นี้ใช้คอมพิวเตอร์แทนคุณได้จริง ท่องเว็บ คลิก พิมพ์ ทำได้หมด"
+  },
+  "statusPage": {
+    "title": "สถานะระบบ",
+    "brandTitle": "สถานะ Coasty",
+    "subtitle": "สถานะการทำงานแบบเรียลไทม์ของบริการ Coasty ทั้งหมด หน้านี้รีเฟรชอัตโนมัติทุก 60 วินาที",
+    "refresh": "รีเฟรช",
+    "statuses": {
+      "operational": "ทำงานปกติ",
+      "degraded": "ประสิทธิภาพลดลง",
+      "outage": "หยุดทำงาน"
+    },
+    "overallStatuses": {
+      "allOperational": "ทุกระบบทำงานปกติ",
+      "someDegraded": "บางระบบช้าลง",
+      "disruption": "ตรวจพบการหยุดชะงักของบริการ"
+    },
+    "overallDescriptions": {
+      "allOperational": "บริการทั้งหมดทำงานราบรื่น ไม่พบปัญหาใดๆ",
+      "someDegraded": "บางบริการทำงานช้า เรากำลังตรวจสอบ",
+      "disruption": "เราทราบปัญหาแล้วและกำลังแก้ไขอย่างเร่งด่วน"
+    },
+    "responseTime": "เวลาตอบสนอง {ms} มิลลิวินาที",
+    "uptimeLabel": "ความพร้อมใช้งาน 90 วัน",
+    "daysAgo": "90 วันที่แล้ว",
+    "today": "วันนี้",
+    "overallUptime": "ความพร้อมใช้งานรวม 90 วัน",
+    "overallUptimeDesc": "ความพร้อมใช้งานรวมของทุกบริการ",
+    "services": "บริการ",
+    "clickUptime": "คลิกเพื่อดูความพร้อมใช้งาน",
+    "lastChecked": "ตรวจสอบล่าสุด {time} · รีเฟรชอัตโนมัติทุก 60 วินาที",
+    "experiencingIssues": "พบปัญหาหรือไม่?",
+    "issuesDescription": "หากมีสิ่งผิดปกติ ติดต่อเราโดยตรง",
+    "talkToCofounders": "พูดคุยกับผู้ร่วมก่อตั้ง",
+    "emailUs": "ส่งอีเมลหาเรา",
+    "serviceNames": {
+      "website": "เว็บไซต์",
+      "aiBackend": "AI Backend",
+      "database": "ฐานข้อมูล",
+      "authentication": "การยืนยันตัวตน",
+      "aiModels": "โมเดล AI",
+      "fileStorage": "จัดเก็บไฟล์"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 | พนักงาน AI สำหรับระบบอัตโนมัติเดสก์ท็อปและเบราว์เซอร์",
+      "titleTemplate": "{title} | Coasty - ตัวแทน AI ใช้คอมพิวเตอร์",
+      "description": "Coasty คือตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 — 82% บน OSWorld benchmark ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์: เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล จัดการสเปรดชีต แยก VM ต่อเซสชัน เริ่มต้นที่ $20/mo",
+      "ogTitle": "Coasty - ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 | 82% OSWorld Benchmark",
+      "ogDescription": "พนักงาน AI ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark (82%) ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป แก้ CAPTCHA แยก VM เริ่มต้นที่ $20/mo",
+      "twitterDescription": "พนักงาน AI ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล แยก VM จริง $20/mo เทียบกับ $3,000/mo สำหรับผู้ช่วยเสมือนจริง"
+    },
+    "compare": {
+      "title": "เปรียบเทียบ Coasty - ทางเลือกตัวแทน AI และการเปรียบเทียบคู่แข่ง",
+      "description": "ดูว่าตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 ของ Coasty เปรียบเทียบกับ Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath และอื่นๆ อย่างไร เปรียบเทียบฟีเจอร์ต่อฟีเจอร์พร้อมราคา",
+      "ogTitle": "เปรียบเทียบ Coasty กับทางเลือกตัวแทน AI",
+      "ogDescription": "เปรียบเทียบฟีเจอร์ต่อฟีเจอร์ของตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 กับคู่แข่ง คะแนน benchmark ราคา ความสามารถ"
+    },
+    "download": {
+      "title": "ดาวน์โหลดแอปเดสก์ท็อป Coasty — ตัวแทน AI สำหรับ Mac และ Windows",
+      "description": "ดาวน์โหลด Coasty Desktop ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 ที่ควบคุมเครื่องของคุณ ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป เข้าถึงเทอร์มินัล และจัดการไฟล์ มีให้สำหรับ Windows และ macOS",
+      "ogTitle": "ดาวน์โหลด Coasty Desktop — ตัวแทน AI สำหรับ Mac และ Windows",
+      "ogDescription": "AI ที่ควบคุมคอมพิวเตอร์ของคุณเหมือนมนุษย์ ระบบอัตโนมัติเบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลในแอปเดียว อันดับ 1 บน OSWorld benchmark"
+    },
+    "guide": {
+      "title": "Coasty ทำอะไรได้บ้าง? — คู่มือฉบับสมบูรณ์เกี่ยวกับระบบอัตโนมัติคอมพิวเตอร์ด้วย AI",
+      "description": "ค้นพบทุกสิ่งที่ Coasty สามารถทำให้อัตโนมัติ: การหาลูกค้า การส่งอีเมล การสมัครงาน การทดสอบ QA การกรอกข้อมูล โซเชียลมีเดีย การสรรหาบุคลากร การวิจัย และงานอื่นๆ อีกกว่า 100 รายการ",
+      "ogTitle": "Coasty ทำอะไรได้บ้าง? — คู่มือระบบอัตโนมัติ AI ฉบับสมบูรณ์",
+      "ogDescription": "สำรวจงานกว่า 100 รายการที่ Coasty สามารถทำให้อัตโนมัติ ตั้งแต่การขายไปจนถึงการทดสอบ QA ดูว่าตัวแทน AI คอมพิวเตอร์จัดการงานจริงอย่างไร"
+    },
+    "blog": {
+      "title": "บล็อก - ข้อมูลเชิงลึกเกี่ยวกับตัวแทน AI การวิจัยการใช้คอมพิวเตอร์ และกรณีศึกษา",
+      "description": "เจาะลึกเกี่ยวกับตัวแทน AI อัตโนมัติ เทคโนโลยีการใช้คอมพิวเตอร์ กรณีศึกษาระบบอัตโนมัติในโลกจริง และอนาคตของพนักงาน AI จากทีมผู้สร้างตัวแทนใช้คอมพิวเตอร์อันดับ 1",
+      "ogTitle": "บล็อก Coasty - ข้อมูลเชิงลึกเกี่ยวกับตัวแทน AI และกรณีศึกษา",
+      "ogDescription": "เจาะลึกเกี่ยวกับตัวแทน AI อัตโนมัติ เทคโนโลยีการใช้คอมพิวเตอร์ และกรณีศึกษาระบบอัตโนมัติในโลกจริง จากตัวแทนใช้คอมพิวเตอร์อันดับ 1"
+    },
+    "results": {
+      "title": "สาธิตและผลลัพธ์ — ดู Coasty ตัวแทน AI ทำงานอัตโนมัติ",
+      "description": "ดู Coasty ทำแคมเปญการตลาด สมัครงาน กรอกใบสมัคร ทดสอบ QA ส่งอีเมลส่วนตัว และอื่นๆ โดยอัตโนมัติ กรณีศึกษาจริงพร้อมวิดีโอสาธิต",
+      "ogTitle": "สาธิต — ดู Coasty ตัวแทน AI ทำงานอัตโนมัติ",
+      "ogDescription": "สาธิตจริงของ AI ควบคุมคอมพิวเตอร์: การตลาด การสมัครงาน การทดสอบ QA การส่งอีเมล และอื่นๆ อันดับ 1 บน OSWorld benchmark"
+    },
+    "terms": {
+      "title": "ข้อกำหนดการให้บริการ",
+      "description": "ข้อกำหนดการให้บริการของ Coasty อ่านข้อกำหนดที่ใช้บังคับกับการใช้แพลตฟอร์มพนักงาน AI Coasty ตัวแทนใช้คอมพิวเตอร์ และแอปพลิเคชันเดสก์ท็อป",
+      "ogTitle": "Coasty — ข้อกำหนดการให้บริการ",
+      "ogDescription": "ข้อกำหนดการให้บริการของ Coasty อ่านข้อกำหนดที่ใช้บังคับกับการใช้แพลตฟอร์มพนักงาน AI Coasty ตัวแทนใช้คอมพิวเตอร์ และแอปพลิเคชันเดสก์ท็อป."
+    },
+    "privacy": {
+      "title": "นโยบายความเป็นส่วนตัว",
+      "description": "นโยบายความเป็นส่วนตัวของ Coasty เรียนรู้วิธีที่เราปกป้องข้อมูลของคุณด้วยการแยก VM เซสชันเข้ารหัส สภาพแวดล้อมการทำงานแบบ sandbox และความปลอดภัยระดับองค์กร",
+      "ogTitle": "Coasty — นโยบายความเป็นส่วนตัว",
+      "ogDescription": "นโยบายความเป็นส่วนตัวของ Coasty เรียนรู้วิธีที่เราปกป้องข้อมูลของคุณด้วยการแยก VM เซสชันเข้ารหัส สภาพแวดล้อมการทำงานแบบ sandbox และความปลอดภัยระดับองค์กร."
+    },
+    "useCases": {
+      "title": "กรณีการใช้งาน - ตัวแทน AI Coasty สำหรับการดำเนินธุรกิจ",
+      "description": "ค้นพบ 12 วิธีที่ตัวแทน AI ของ Coasty ทำให้การดำเนินงานเป็นอัตโนมัติ — วิจัยคู่แข่ง ทดสอบ QA สร้างลูกค้าเป้าหมาย ส่งอีเมล และอื่นๆ ผลลัพธ์จริง",
+      "ogTitle": "กรณีการใช้งาน - ตัวแทน AI Coasty",
+      "ogDescription": "12 วิธีเพิ่มผลผลิต 10 เท่าแบบอัตโนมัติ ผลลัพธ์จริง ตัวเลขจริง"
+    },
+    "computerUse": {
+      "title": "ตัวแทน AI ใช้คอมพิวเตอร์ — ระบบอัตโนมัติเดสก์ท็อป เบราว์เซอร์ และเทอร์มินัลอันดับ 1",
+      "description": "Coasty คือตัวแทน AI ใช้คอมพิวเตอร์ที่ดีที่สุด อันดับ 1 บน OSWorld (82%) ทำให้งานเดสก์ท็อป เบราว์เซอร์ หรือเทอร์มินัลใดๆ เป็นอัตโนมัติด้วย AI อัตโนมัติที่ควบคุมคอมพิวเตอร์เหมือนมนุษย์",
+      "ogTitle": "Coasty — ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1",
+      "ogDescription": "ตัวแทนใช้คอมพิวเตอร์ที่ดีที่สุด อันดับ 1 บน OSWorld ทำให้งานเดสก์ท็อป เบราว์เซอร์ หรือเทอร์มินัลใดๆ เป็นอัตโนมัติด้วย AI"
+    },
+    "pricing": {
+      "title": "ราคา — แผนและราคาตัวแทน AI Coasty",
+      "description": "แผนราคา Coasty เริ่มต้นที่ $20/mo แทนที่ผู้ช่วยเสมือนจริง $3,000/mo ด้วยพนักงาน AI มีแผนฟรี ใช้งานแบบเครดิตไม่มีค่าธรรมเนียมแอบแฝง",
+      "ogTitle": "ราคา Coasty — แผนตัวแทน AI",
+      "ogDescription": "พนักงาน AI เริ่มต้นที่ $20/mo แทนที่ VA ราคาแพงด้วย AI อัตโนมัติ มีแผนฟรี"
+    },
+    "faq": {
+      "q1": "Coasty คืออะไร?",
+      "a1": "Coasty คือแพลตฟอร์มพนักงาน AI — ตัวแทนใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ เปิดเบราว์เซอร์ คลิก พิมพ์ นำทางแอป กรอกแบบฟอร์ม ส่งอีเมล และจัดการสเปรดชีตโดยอัตโนมัติ อันดับ 1 บน OSWorld benchmark ด้วยอัตราสำเร็จ 82% จาก 369 งานในโลกจริง",
+      "q2": "Coasty เปรียบเทียบกับ Anthropic Computer Use อย่างไร?",
+      "a2": "ในขณะที่ Anthropic Computer Use ให้ API ดิบสำหรับการควบคุมคอมพิวเตอร์ Coasty เป็นแพลตฟอร์มพร้อมใช้งานจริงพร้อมโครงสร้าง VM ที่จัดการ การแก้ CAPTCHA ในตัว แอปเดสก์ท็อปสำหรับ Mac และ Windows รองรับหลายโมเดล และคะแนน OSWorld benchmark สูงสุด (82%) Coasty ให้โซลูชันครบวงจร — ไม่ใช่แค่ API",
+      "q3": "Coasty ราคาเท่าไร?",
+      "a3": "Coasty เริ่มต้นที่ $20/month สำหรับแผน Starter โดยมีแผนฟรี เปรียบเทียบกับ $3,000+ ต่อเดือนสำหรับผู้ช่วยเสมือนจริง Coasty ทำงาน 24/7 ไม่พัก ไม่ต้องฝึก และขยายได้ทันที",
+      "q4": "Coasty ปลอดภัยไหม?",
+      "a4": "ใช่ ทุกเซสชันของ Coasty ทำงานใน VM แบบแยกและ sandbox ของตัวเอง ข้อมูลของคุณปลอดภัย เครื่องของคุณไม่ถูกแตะต้อง และไม่มีอะไรรั่วไหลระหว่างเซสชัน นี่คือการแยก VM จริง ไม่ใช่แค่คอนเทนเนอร์ในพูลร่วม",
+      "q5": "OSWorld benchmark คืออะไร?",
+      "a5": "OSWorld คือ benchmark สำหรับประเมินตัวแทน AI ในงานคอมพิวเตอร์จริง ทดสอบ 369 งานในเบราว์เซอร์ แอปสำนักงาน และการดำเนินการระบบ Coasty ทำได้ 82% สูงที่สุดในบรรดาตัวแทนใช้คอมพิวเตอร์ — ประสิทธิภาพระดับสูงสุด",
+      "q6": "Coasty แตกต่างจากเครื่องมือ RPA อย่าง UiPath อย่างไร?",
+      "a6": "เครื่องมือ RPA แบบดั้งเดิมอย่าง UiPath ต้องเขียนสคริปต์ที่เปราะบางและพังเมื่ออินเทอร์เฟซเปลี่ยน Coasty ใช้ AI vision เพื่อเข้าใจและโต้ตอบกับอินเทอร์เฟซใดๆ ปรับตัวแบบเรียลไทม์โดยไม่ต้องมีสคริปต์ล่วงหน้า ทำงานเหมือนมนุษย์ ไม่ใช่มาโคร ตั้งค่าใช้เวลาไม่กี่นาทีแทนที่จะเป็นสัปดาห์",
+      "q7": "Coasty มีแอปเดสก์ท็อปไหม?",
+      "a7": "มี Coasty Desktop มีให้ทั้ง Mac และ Windows ทำงานเป็นโอเวอร์เลย์ลอยบนเดสก์ท็อปและสามารถควบคุมเบราว์เซอร์ ไฟล์ เทอร์มินัล และแอปพลิเคชันของคุณได้โดยตรง — ไม่ต้องใช้ VM สำหรับงานในเครื่อง",
+      "q8": "Coasty ทำอะไรให้อัตโนมัติได้บ้าง?",
+      "a8": "Coasty สามารถทำงานคอมพิวเตอร์แทบทุกอย่างให้อัตโนมัติ: ท่องเว็บ กรอกแบบฟอร์ม ส่งอีเมล จัดการสเปรดชีต กรอกข้อมูล โพสต์โซเชียลมีเดีย สมัครงาน หาลูกค้า ทดสอบ QA บริการลูกค้า สรรหาบุคลากรทาง LinkedIn และอื่นๆ ถ้ามนุษย์ทำได้บนคอมพิวเตอร์ Coasty ก็ทำได้เช่นกัน",
+      "q9": "Coasty เปรียบเทียบกับ OpenAI Operator อย่างไร?",
+      "a9": "Coasty ทำได้ดีกว่า OpenAI Operator บน OSWorld benchmark (82% เทียบกับ ~40%) ให้การแยก VM จริงทุกเซสชัน รองรับหลายโมเดล AI ควบคุมเดสก์ท็อปเต็มรูปแบบไม่ใช่แค่เบราว์เซอร์ และเป็นเฟรมเวิร์กโอเพนซอร์ส",
+      "q10": "Coasty แก้ CAPTCHA ได้ไหม?",
+      "a10": "ได้ Coasty มีระบบแก้ CAPTCHA ในตัว จึงไม่ถูกบล็อกเหมือนตัวแทน AI คู่แข่ง นี่สำคัญมากสำหรับระบบอัตโนมัติในโลกจริงที่เว็บไซต์มักมี CAPTCHA"
+    },
+    "structuredData": {
+      "appDescription": "ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 Coasty ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ — เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล และจัดการสเปรดชีตโดยอัตโนมัติ 82% บน OSWorld benchmark แยก VM จริง แก้ CAPTCHA ในตัว เริ่มต้นที่ $20/month",
+      "orgDescription": "Coasty สร้างตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 แพลตฟอร์มของเราให้การควบคุมเดสก์ท็อปอัตโนมัติ ระบบอัตโนมัติเบราว์เซอร์ และการจัดการหลายตัวแทนพร้อมแยก VM จริง",
+      "productDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark (82%) ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีตด้วยแยก VM จริง",
+      "websiteDescription": "แพลตฟอร์มตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 82% OSWorld benchmark ระบบอัตโนมัติเบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลพร้อมแยก VM เริ่มต้นที่ $20/mo",
+      "softwareDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark ด้วยอัตราสำเร็จ 82% จาก 369 งานในโลกจริง ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ดำเนินการเทอร์มินัล ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีต",
+      "breadcrumbs": {
+        "home": "หน้าแรก",
+        "caseStudies": "กรณีศึกษาตัวแทน AI",
+        "blog": "บล็อก",
+        "download": "ดาวน์โหลดแอปเดสก์ท็อป",
+        "compare": "เปรียบเทียบตัวแทน AI"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 — ไม่พบหน้า",
+      "description": "ขออภัย หน้านี้ไม่มีอยู่"
+    },
+    "error": {
+      "title": "เกิดข้อผิดพลาด",
+      "description": "เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองอีกครั้ง",
+      "tryAgain": "ลองอีกครั้ง"
+    }
+  },
+  "schedulesPage": {
+    "title": "บุคลากร",
+    "subtitle": "บุคลากร AI ของคุณ — มอบหมายงานแล้วปล่อยให้พวกเขาจัดการ",
+    "guide": "คู่มือ",
+    "teamsTab": "ทีม",
+    "hireEmployee": "จ้างพนักงาน",
+    "loading": "กำลังโหลดพนักงานของคุณ...",
+    "onDuty": "{count} กำลังปฏิบัติงาน",
+    "standby": "{count} สแตนด์บาย",
+    "company": "บริษัท",
+    "teams": "{count} ทีม",
+    "employees": "{count} พนักงาน",
+    "members": "{count} สมาชิก",
+    "unassigned": "ยังไม่ได้มอบหมาย",
+    "add": "เพิ่ม",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "run": "เรียกใช้",
+    "delegate": "มอบหมาย",
+    "untitledEmployee": "พนักงานไม่มีชื่อ",
+    "untitled": "ไม่มีชื่อ",
+    "guidelinesPlaceholder": "แนวทาง...",
+    "today": "วันนี้",
+    "timesDaily": "{count} × ต่อวัน",
+    "noEmployeesDay": "ไม่มีพนักงานในวันนี้",
+    "noEmployeesScheduled": "ไม่มีพนักงานที่กำหนดเวลา",
+    "recentActivity": "กิจกรรมล่าสุด",
+    "schedule": "กำหนดการ",
+    "emptyState": {
+      "openChat": "เปิดแชทใดก็ได้แล้วคลิก",
+      "assignEmployee": "มอบหมายพนักงาน",
+      "onThe": "ที่",
+      "topRight": "มุมขวาบน",
+      "toPutOnAutopilot": "เพื่อเปิดระบบอัตโนมัติ",
+      "newChat": "แชทใหม่"
+    },
+    "emptyWorkforce": {
+      "title": "จ้างพนักงานคนแรกของคุณ",
+      "description": "พนักงาน AI ทำงานแทนคุณ — มอบหมายงาน กำหนดตารางเวลา แล้วพวกเขาจะดำเนินการโดยอัตโนมัติ",
+      "flexibleShifts": {
+        "title": "กะทำงานยืดหยุ่น",
+        "desc": "กำหนดเวลาพนักงานรายชั่วโมง รายวัน รายสัปดาห์ รายเดือน — หรือใช้ cron expression แบบกำหนดเอง"
+      },
+      "fullAutonomy": {
+        "title": "ทำงานอิสระเต็มที่",
+        "desc": "พนักงานแต่ละคนสามารถเข้าถึงการท่องเว็บ เทอร์มินัล และเวิร์กสเตชันที่เชื่อมต่อของคุณ"
+      },
+      "activityLogs": {
+        "title": "บันทึกกิจกรรม",
+        "desc": "ทุกการดำเนินการถูกบันทึกไว้เพื่อให้คุณสามารถตรวจสอบสิ่งที่พนักงานทำสำเร็จ"
+      },
+      "startFromChat": "เริ่มจากแชท"
+    },
+    "filters": {
+      "all": "ทั้งหมด",
+      "onDuty": "กำลังปฏิบัติงาน",
+      "standby": "สแตนด์บาย"
+    },
+    "noMatch": "ไม่มีพนักงานที่ตรงกับตัวกรองนี้",
+    "createTeam": {
+      "title": "ทีมใหม่",
+      "subtitle": "เริ่มจากเทมเพลตหรือสร้างตั้งแต่ต้น",
+      "backToTemplates": "กลับไปที่เทมเพลต",
+      "customTeam": "ทีมกำหนดเอง",
+      "customDescription": "สร้างทีมด้วยการกำหนดค่าของคุณเอง",
+      "teamNameLabel": "ชื่อทีม",
+      "teamNamePlaceholder": "เช่น Research, Marketing, Engineering",
+      "guidelinesLabel": "แนวทาง",
+      "optional": "(ไม่บังคับ)",
+      "guidelinesPlaceholder": "คำแนะนำที่สมาชิกทุกคนในทีมจะปฏิบัติตาม...",
+      "suggestedEmployees": "พนักงานที่แนะนำ",
+      "suggestedCredentials": "ข้อมูลรับรองที่แนะนำ",
+      "added": "เพิ่มแล้ว",
+      "addButton": "+ เพิ่ม",
+      "credentials": "ข้อมูลรับรอง",
+      "addCredential": "+ เพิ่มข้อมูลรับรอง",
+      "credentialHint": "ข้อมูลรับรองถูกเข้ารหัส จะถูกรวมในแนวทางของทีมเพื่อให้พนักงานรู้ว่ามีอะไรใช้งานได้",
+      "settingUp": "กำลังตั้งค่า...",
+      "createEmployees": "สร้าง {count} พนักงาน",
+      "createTeamButton": "สร้างทีม"
+    },
+    "noTeams": {
+      "title": "ยังไม่มีทีม",
+      "description": "ทีมช่วยให้พนักงานแชร์บริบทและหน่วยความจำ สร้างทีมเพื่อสร้างแผนผังองค์กร",
+      "newTeam": "ทีมใหม่"
+    },
+    "howItWorks": {
+      "title": "วิธีการทำงาน",
+      "dragEmployees": "ลากพนักงานไปยังทีม",
+      "clickToEdit": "คลิกเพื่อแก้ไขกำหนดการและการตั้งค่า",
+      "teamsShare": "ทีมแชร์หน่วยความจำและแนวทาง",
+      "dashedLines": "เส้นประ — การมอบหมายระหว่างพนักงาน"
+    },
+    "inactive": {
+      "title": "{count} พนักงานไม่ได้ใช้งาน",
+      "missingMachine": "{count} ขาดเครื่อง — จะไม่ทำงานจนกว่าจะเปิดใช้งาน",
+      "wontRun": "จะไม่ทำงานจนกว่าจะเปิดใช้งาน",
+      "fixInEmployees": "แก้ไขในพนักงาน"
+    },
+    "dragHint": "ลากพนักงานที่ยังไม่ได้มอบหมายไปยังทีมเพื่อเพิ่ม",
+    "limits": {
+      "upgradePlan": "อัปเกรดแผน",
+      "manageMachines": "จัดการเครื่อง",
+      "manageEmployees": "จัดการพนักงาน",
+      "machineLimit": "คุณต้องการเครื่องคลาวด์แต่คุณถึงขีดจำกัด {max} เครื่องแล้ว อัปเกรดแผนของคุณหรือลบเครื่องที่ไม่ได้ใช้",
+      "employeeLimit": "คุณถึงขีดจำกัดพนักงานแล้ว ({max} สำหรับระดับ {tier}) อัปเกรดแผนของคุณหรือลบพนักงานที่ไม่ได้ใช้",
+      "templateLimit": "เทมเพลตนี้ต้องการ {needed} พนักงาน แต่คุณมีเหลือเพียง {available} ตำแหน่ง (สูงสุด {max} สำหรับระดับ {tier}) อัปเกรดแผนของคุณหรือลบพนักงานที่ไม่ได้ใช้",
+      "createFailed": "ไม่สามารถสร้างพนักงานได้ ตรวจสอบขีดจำกัดบัญชีของคุณแล้วลองอีกครั้ง",
+      "teamFailed": "ไม่สามารถสร้างทีมได้"
+    },
+    "provisioning": {
+      "checking": "กำลังตรวจสอบขีดจำกัดบัญชี...",
+      "usingMachine": "กำลังใช้เครื่อง \"{name}\"...",
+      "assigningMachine": "กำลังมอบหมายให้เครื่อง \"{name}\" (จะทำงานเมื่อเครื่องพร้อม)...",
+      "creatingMachine": "กำลังสร้างเครื่องใหม่...",
+      "machineStarted": "เริ่มจัดเตรียมเครื่องแล้ว...",
+      "hiring": "กำลังจ้าง {name} ({current}/{total})...",
+      "creatingTeam": "กำลังสร้างทีม..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "สร้างทีมแล้วพร้อม {count} พนักงาน ({failedCount} ล้มเหลว: {names})",
+      "teamCreated": "สร้างทีม {name} แล้วพร้อม {count} พนักงาน"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "ปฏิบัติการเนื้อหา",
+        "tagline": "เผยแพร่อย่างสม่ำเสมอโดยไม่ต้องลงมือเอง",
+        "description": "เครื่องยนต์เนื้อหาแบบลีน — เขียน ปรับแต่ง และเผยแพร่เนื้อหาโดยอัตโนมัติ",
+        "roles": {
+          "atlas": "นักเขียนเนื้อหา — ร่างบทความบล็อก จดหมายข่าว และสำเนาโซเชียล",
+          "echo": "นักวิเคราะห์ SEO — ตรวจสอบหน้าเว็บ ติดตามอันดับ แนะนำโอกาสคีย์เวิร์ด",
+          "nova": "ผู้จัดจำหน่ายโซเชียล — โพสต์เนื้อหาบนแพลตฟอร์มและติดตามการมีส่วนร่วม"
+        },
+        "credentials": {
+          "wordpress": "เผยแพร่และจัดการบทความบล็อก",
+          "twitter": "โพสต์ทวีตและติดตามการมีส่วนร่วม",
+          "linkedin": "เผยแพร่เนื้อหาและบทความระดับมืออาชีพ",
+          "searchConsole": "ติดตามประสิทธิภาพการค้นหาและการทำดัชนี"
+        }
+      },
+      "customerSupport": {
+        "name": "ฝ่ายสนับสนุนลูกค้า",
+        "tagline": "ให้บริการสนับสนุนตลอด 24 ชั่วโมงจาก 3 พนักงาน",
+        "description": "ตรวจสอบกล่องจดหมาย แก้ไขปัญหาทั่วไป และอัปเดตฐานความรู้",
+        "roles": {
+          "sage": "ผู้ตรวจสอบกล่องจดหมาย — ตรวจสอบอีเมลสนับสนุน จัดหมวดหมู่และตอบคำถามทั่วไป",
+          "iris": "ผู้จัดการฐานความรู้ — อัปเดตเอกสารช่วยเหลือและคำถามที่พบบ่อยจากปัญหาที่เกิดซ้ำ",
+          "milo": "นักวิเคราะห์ข้อเสนอแนะ — รวบรวมรีวิวและแนวโน้มการสนับสนุนเป็นรายงานรายสัปดาห์"
+        },
+        "credentials": {
+          "gmail": "ตรวจสอบและตอบอีเมลสนับสนุน",
+          "zendesk": "จัดการตั๋วสนับสนุน (หรือ helpdesk ของคุณ)",
+          "notion": "อัปเดตฐานความรู้และเอกสาร"
+        }
+      },
+      "researchIntel": {
+        "name": "วิจัยและข่าวกรอง",
+        "tagline": "ติดตามข้อมูลโดยไม่ต้องทำงานเอง",
+        "description": "ติดตามคู่แข่ง ติดตามแนวโน้มอุตสาหกรรม และรวบรวมสรุปการวิจัยที่นำไปปฏิบัติได้",
+        "roles": {
+          "scout": "ผู้ติดตามคู่แข่ง — ติดตามเว็บไซต์ ราคา และการเปลี่ยนแปลงฟีเจอร์ของคู่แข่ง",
+          "wren": "นักวิจัยแนวโน้ม — สแกนข่าวอุตสาหกรรม สิ่งพิมพ์ และโซเชียลมีเดียเพื่อหาแนวโน้ม",
+          "quinn": "ผู้รวบรวมสรุป — สังเคราะห์ผลการค้นพบเป็นรายงานข่าวกรองรายสัปดาห์"
+        },
+        "credentials": {
+          "google": "ค้นคว้าบนเว็บและการค้นหา",
+          "linkedin": "ติดตามการจ้างงานและประกาศของคู่แข่ง",
+          "notion": "เผยแพร่สรุปและรายงานการวิจัย"
+        }
+      },
+      "marketing": {
+        "name": "แผนกการตลาด",
+        "tagline": "ทีมการตลาดครบวงจรในสองเครื่อง",
+        "description": "สร้างเนื้อหา โซเชียลมีเดีย SEO ติดตามคู่แข่ง และวิเคราะห์แคมเปญ — สองทีมประสานงานกัน",
+        "roles": {
+          "atlas": "นักวางกลยุทธ์เนื้อหา — วางแผนปฏิทินเนื้อหา เขียนบทความยาว",
+          "nova": "ผู้จัดการโซเชียลมีเดีย — โพสต์ มีส่วนร่วม และเพิ่มผู้ติดตามในช่องทางโซเชียล",
+          "echo": "ผู้เชี่ยวชาญ SEO — ปรับแต่งหน้าเว็บ สร้างลิงก์ภายใน ติดตามคีย์เวิร์ด",
+          "pixel": "ผู้จัดการแคมเปญอีเมล — เขียนและส่งจดหมายข่าว ติดตามการเปิดอ่าน/คลิก",
+          "scout": "นักวิเคราะห์คู่แข่ง — ติดตามกลยุทธ์การตลาดของคู่แข่งและรายงานข้อมูลเชิงลึก",
+          "dash": "ผู้ติดตามแคมเปญโฆษณา — ติดตามค่าใช้จ่ายโฆษณา ROAS และโอกาสในการปรับปรุง",
+          "iris": "ผู้รายงานการวิเคราะห์ — รวบรวมแดชบอร์ดประสิทธิภาพข้ามช่องทาง"
+        },
+        "credentials": {
+          "wordpress": "เผยแพร่เนื้อหาบล็อก",
+          "twitter": "จัดการโซเชียลมีเดีย",
+          "linkedin": "เผยแพร่เนื้อหาระดับมืออาชีพ",
+          "mailchimp": "แคมเปญอีเมลและจดหมายข่าว",
+          "analytics": "วิเคราะห์ทราฟฟิกและคอนเวอร์ชัน",
+          "googleAds": "จัดการแคมเปญ Google Ads",
+          "metaAds": "Meta Ads และการจัดการโซเชียล"
+        }
+      },
+      "ecommerce": {
+        "name": "ปฏิบัติการอีคอมเมิร์ซ",
+        "tagline": "จัดการร้านค้าขณะที่คุณนอนหลับ",
+        "description": "จัดการสินค้า ข่าวกรองราคา ติดตามสต็อก จัดการรีวิว และการตลาดเพื่อการเติบโตสำหรับร้านค้าออนไลน์",
+        "roles": {
+          "cleo": "ผู้ลงสินค้า — สร้างและอัปเดตคำอธิบายสินค้า รูปภาพ และเมตาเดต้า",
+          "onyx": "ผู้ติดตามราคา — ติดตามราคาคู่แข่งและแจ้งเตือนโอกาสในการปรับราคา",
+          "luna": "ผู้ติดตามสินค้าคงคลัง — ติดตามระดับสต็อกและแจ้งเตือนเมื่อสินค้าเหลือน้อย",
+          "sage": "ผู้จัดการรีวิว — ตอบรีวิวลูกค้าและรวบรวมความคิดเห็น",
+          "dash": "ผู้ปรับแต่งแคมเปญโฆษณา — จัดการโฆษณาสินค้าและแคมเปญช้อปปิ้ง",
+          "flux": "นักการตลาดอีเมล — ส่งอีเมลตะกร้าที่ถูกทิ้ง โปรโมชัน และหลังการซื้อ",
+          "wren": "ผู้รายงานการวิเคราะห์ — ติดตามรายได้ อัตราคอนเวอร์ชัน และตัวชี้วัดการเติบโต"
+        },
+        "credentials": {
+          "shopify": "จัดการร้านค้าและรายการสินค้า",
+          "amazon": "จัดการตลาด Amazon",
+          "googleAds": "โฆษณาช้อปปิ้งและแคมเปญ",
+          "mailchimp": "ลำดับอีเมลลูกค้า",
+          "analytics": "วิเคราะห์คอนเวอร์ชันและทราฟฟิก"
+        }
+      },
+      "engineering": {
+        "name": "ทีมวิศวกรรม",
+        "tagline": "ทำให้ส่วนที่น่าเบื่อของวิศวกรรมเป็นอัตโนมัติ",
+        "description": "รีวิวโค้ดอัตโนมัติ ติดตามดีเพนเดนซี เอกสาร ทดสอบ ติดตามการ deploy และตอบสนองต่อเหตุการณ์",
+        "roles": {
+          "rune": "ผู้รีวิวโค้ด — รีวิว PR ที่เปิดอยู่ แนะนำการปรับปรุง ตรวจสอบปัญหาด้านความปลอดภัย",
+          "koda": "ผู้ติดตามดีเพนเดนซี — ติดตามแพ็กเกจที่ล้าสมัย คำแนะนำด้านความปลอดภัย และการเปลี่ยนแปลงที่ทำให้เสียหาย",
+          "aria": "ผู้เขียนเอกสาร — อัปเดตเอกสาร API, README และ changelog ให้ทันสมัยกับโค้ดล่าสุด",
+          "blaze": "ผู้ติดตามการทดสอบ — รันชุดทดสอบ ติดตามทดสอบที่ไม่เสถียร รายงานแนวโน้มครอบคลุม",
+          "frost": "ผู้ติดตามการ Deploy — เฝ้าดูไปป์ไลน์ CI/CD แจ้งเตือนเมื่อล้มเหลว ติดตามความถี่ในการ deploy",
+          "neon": "ผู้เฝ้าระวัง Uptime และ Log — ติดตามบริการ สแกนล็อกเพื่อหาข้อผิดพลาด สร้างรายงานเหตุการณ์"
+        },
+        "credentials": {
+          "github": "เข้าถึง repository, รีวิว PR, issues",
+          "vercel": "ติดตามการ deployment (หรือ CI/CD ของคุณ)",
+          "sentry": "ติดตามข้อผิดพลาดและแจ้งเตือนเหตุการณ์",
+          "npm": "รีจิสทรีแพ็กเกจสำหรับตรวจสอบดีเพนเดนซี"
+        }
+      },
+      "fullBusiness": {
+        "name": "ปฏิบัติการธุรกิจครบวงจร",
+        "tagline": "ทั้งบริษัท ทำงานอัตโนมัติเต็มรูปแบบ",
+        "description": "ฝ่ายขาย การตลาด สนับสนุน และธุรการ — สี่แผนกทำงานประสานกันบนสามเครื่องพร้อมข่าวกรองร่วม",
+        "roles": {
+          "atlas": "ผู้สร้างลีด — ค้นหาและคัดกรองลูกค้าที่มีศักยภาพจากแหล่งออนไลน์",
+          "dash": "ผู้จัดการ CRM — อัปเดตดีล ติดตามไปป์ไลน์ และส่งลำดับติดตามผล",
+          "scout": "ผู้เขียนข้อเสนอ — ร่างข้อเสนอการขายและสไลด์นำเสนอจากเทมเพลต",
+          "nova": "นักการตลาดเนื้อหา — เขียนบทความบล็อก กรณีศึกษา และสำเนาการตลาด",
+          "echo": "ผู้จัดการโซเชียลมีเดีย — โพสต์เนื้อหาและมีส่วนร่วมกับผู้ชม",
+          "pixel": "ผู้จัดการแคมเปญอีเมล — จัดแคมเปญ drip และลำดับจดหมายข่าว",
+          "sage": "หัวหน้าฝ่ายสนับสนุน — จัดการคำถามลูกค้าและแก้ไขปัญหา",
+          "iris": "ผู้จัดการความรู้ — ดูแลเอกสารช่วยเหลือ คำถามที่พบบ่อย และวิกิภายใน",
+          "milo": "นักวิเคราะห์ข้อมูล — รวบรวมรายงานข้ามแผนกและแดชบอร์ด KPI",
+          "wren": "นักวิจัยตลาด — ติดตามแนวโน้มอุตสาหกรรมและข่าวกรองคู่แข่ง",
+          "quinn": "ผู้ประสานงานปฏิบัติการ — สรุปรายสัปดาห์และประสานงานข้ามทีม"
+        },
+        "credentials": {
+          "gmail": "สื่อสารทางอีเมลและสนับสนุน",
+          "hubspot": "CRM และไปป์ไลน์การขาย (หรือ CRM ของคุณ)",
+          "linkedin": "สร้างลีดและเครือข่ายมืออาชีพ",
+          "mailchimp": "แคมเปญการตลาดทางอีเมล",
+          "notion": "วิกิภายในและเอกสาร",
+          "analytics": "วิเคราะห์เว็บและรายงาน",
+          "twitter": "การมีตัวตนบนโซเชียลมีเดีย",
+          "zendesk": "ตั๋วสนับสนุนลูกค้า"
+        }
+      },
+      "growth": {
+        "name": "การเติบโตและการได้มา",
+        "tagline": "การเติบโตเชิงรุกแบบอัตโนมัติเต็มรูปแบบ",
+        "description": "การหาลูกค้าใหม่ การตลาดขาเข้า การปรับปรุงคอนเวอร์ชัน และการวิเคราะห์ — เครื่องยนต์เติบโตเฉพาะทางบนสามเครื่อง",
+        "roles": {
+          "blaze": "ผู้หาลูกค้าใหม่ — ค้นหาผู้มีอำนาจตัดสินใจ วิจัยบริษัท สร้างรายชื่อลีด",
+          "flux": "การติดต่อทางอีเมล — ส่ง cold email แบบเฉพาะบุคคล จัดการลำดับติดตามผล",
+          "orion": "การติดต่อผ่าน LinkedIn — เชื่อมต่อกับผู้มีแนวโน้มเป็นลูกค้าและส่งข้อความเฉพาะบุคคล",
+          "coral": "ผู้สร้างเนื้อหา — ผลิตเนื้อหา SEO สำเนาหน้า landing page และ lead magnet",
+          "taro": "ผู้ปรับปรุงหน้า Landing Page — ติดตามอัตราคอนเวอร์ชัน แนะนำและทดสอบการปรับปรุง",
+          "vale": "ผู้จัดการแคมเปญโฆษณา — จัดการแคมเปญ Google และ Meta ads ตั้งแต่ต้นจนจบ",
+          "ember": "ผู้ให้คะแนนลีด — คัดกรองลีดขาเข้าและส่งต่อเพื่อติดตามผลที่เหมาะสม",
+          "haze": "นักวิเคราะห์ Funnel — ติดตามตัวชี้วัดคอนเวอร์ชันทุกขั้นตอน ระบุจุดคอขวด",
+          "dune": "ข่าวกรองคู่แข่ง — ติดตามแคมเปญ ราคา และตำแหน่งของคู่แข่ง",
+          "kit": "ผู้รายงานการเติบโต — รวบรวมตัวชี้วัดการเติบโตและผลการทดลองรายวัน/รายสัปดาห์"
+        },
+        "credentials": {
+          "linkedin": "การหาลูกค้าและการติดต่อ",
+          "gmail": "Cold email และลำดับติดตามผล",
+          "hubspot": "การจัดการลีดและ CRM",
+          "googleAds": "แคมเปญค้นหาแบบจ่ายเงิน",
+          "metaAds": "โฆษณา Meta",
+          "analytics": "วิเคราะห์ Funnel และคอนเวอร์ชัน",
+          "ahrefs": "วิจัย SEO และวิเคราะห์คู่แข่ง"
+        }
+      },
+      "saas": {
+        "name": "ปฏิบัติการ SaaS",
+        "tagline": "จัดการ SaaS ของคุณให้ราบรื่น",
+        "description": "ความสำเร็จของลูกค้า การวิเคราะห์ผลิตภัณฑ์ การป้องกันการยกเลิก การติดตามฟีเจอร์ และการรายงานอัตโนมัติสำหรับธุรกิจ SaaS",
+        "roles": {
+          "luna": "ผู้ติดตามความสำเร็จลูกค้า — ติดตามการมีส่วนร่วมของผู้ใช้ ระบุบัญชีที่มีความเสี่ยง",
+          "sage": "ผู้ช่วยเริ่มต้นใช้งาน — แนะนำผู้ใช้ใหม่ในการตั้งค่า ติดตามอัตราการเปิดใช้งาน",
+          "ivy": "ผู้ป้องกันการยกเลิก — ติดต่อผู้ใช้ที่เลิกใช้งานด้วยแคมเปญกระตุ้นการกลับมา",
+          "rune": "ผู้ติดตามคำขอฟีเจอร์ — รวบรวมข้อเสนอแนะและคำขอฟีเจอร์จากทุกช่องทาง",
+          "koda": "วิเคราะห์ผลิตภัณฑ์ — ติดตามการใช้งานฟีเจอร์ เส้นทางผู้ใช้ และตัวชี้วัดการมีส่วนร่วม",
+          "neon": "ผู้ติดตามบั๊กและปัญหา — เฝ้าดูล็อกข้อผิดพลาด รายงานผู้ใช้ และเหตุการณ์หน้าสถานะ",
+          "aria": "ผู้เขียน Changelog — บันทึกการอัปเดต อัปเดตฐานความรู้และศูนย์ช่วยเหลือ",
+          "frost": "นักวิเคราะห์รายได้ — ติดตาม MRR อัตราการยกเลิก LTV และรายได้จากการขยาย",
+          "zara": "ผู้ติดตามคู่แข่ง — ติดตามฟีเจอร์ ราคา และตำแหน่งตลาดของคู่แข่ง"
+        },
+        "credentials": {
+          "stripe": "ข้อมูลการสมัครสมาชิกและรายได้",
+          "intercom": "การส่งข้อความและสนับสนุนลูกค้า (หรือเครื่องมือของคุณ)",
+          "mixpanel": "การวิเคราะห์ผลิตภัณฑ์และติดตามผู้ใช้",
+          "gmail": "การสื่อสารกับลูกค้า",
+          "notion": "ฐานความรู้และ changelog",
+          "sentry": "ติดตามข้อผิดพลาดและบั๊ก",
+          "github": "ติดตามปัญหาและคำขอฟีเจอร์"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "สูงสุด 3",
+        "price": "$19/เดือน"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "สูงสุด 10",
+        "price": "$50/เดือน"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "สูงสุด 50",
+        "price": "$100/เดือน"
+      }
+    },
+    "frequencies": {
+      "daily": "รายวัน",
+      "weekly": "รายสัปดาห์",
+      "every_30_minutes": "ทุก 30 นาที",
+      "every_6_hours": "ทุก 6 ชั่วโมง",
+      "every_12_hours": "ทุก 12 ชั่วโมง"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "กำหนดค่าพื้นฐานของคอมพิวเตอร์",
+    "displayName": "ชื่อที่แสดง",
+    "defaultName": "คอมพิวเตอร์ของฉัน",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "รหัสผ่านนี้จำเป็นสำหรับการเชื่อมต่อกับคอมพิวเตอร์"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "ชุมชน",
+    "title": "ดูว่าคนอื่นใช้งานอย่างไร",
+    "subtitle": "จากการวิจัย lead ถึงการทดสอบ QA — ดูว่าชุมชนกำลังทำอะไรให้เป็นอัตโนมัติ และรับแรงบันดาลใจสำหรับเวิร์กโฟลว์ถัดไปของคุณ",
+    "sessionCount": "{count} เซสชันที่ชุมชนแชร์",
+    "searchPlaceholder": "ค้นหาตามงาน เครื่องมือ หรือผลลัพธ์...",
+    "emptyTitle": "ยังไม่มีใครแชร์ — เป็นคนแรกเลย",
+    "emptySubtitle": "เมื่อผู้ใช้ทำให้เซสชันเป็นสาธารณะ จะแสดงที่นี่",
+    "noResultsTitle": "ไม่พบผลลัพธ์ที่ตรงกัน",
+    "noResultsSubtitle": "ลองใช้คำค้นหาอื่น",
+    "watchSession": "ดูเซสชัน",
+    "steps": "{count} ขั้นตอน",
+    "tryCoasty": "ลองใช้ Coasty"
+  }
+}

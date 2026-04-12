@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { useAccountDialog } from "@/lib/account-dialog-store"
 import { motion, AnimatePresence } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -58,7 +59,7 @@ const guideSteps = [
     showNext: false,
     showDone: true,
     expandSidebar: true,
-    navigateTo: "/account?section=billing",
+    openAccountSection: "billing" as const,
   },
 ]
 
@@ -587,10 +588,9 @@ export function VMCreationGuide({ isOpen, onClose }: VMCreationGuideProps) {
     const nextStep = currentStep + 1
     const nextGuideStep = guideSteps[nextStep]
     
-    // Handle navigation if the next step has a navigateTo property
-    if (nextGuideStep?.navigateTo) {
-      router.push(nextGuideStep.navigateTo)
-      // Keep guide open and advance step
+    // Handle account dialog if the next step has an openAccountSection property
+    if (nextGuideStep?.openAccountSection) {
+      useAccountDialog.getState().open(nextGuideStep.openAccountSection)
       setCurrentStep(nextStep)
     } else {
       // Normal step advancement
@@ -632,9 +632,9 @@ export function VMCreationGuide({ isOpen, onClose }: VMCreationGuideProps) {
   }
 
   const handleComplete = () => {
-    // Navigate to account page for the last step
-    if (currentGuideStep?.navigateTo) {
-      router.push(currentGuideStep.navigateTo)
+    // Open account dialog for the last step
+    if (currentGuideStep?.openAccountSection) {
+      useAccountDialog.getState().open(currentGuideStep.openAccountSection)
     }
     onClose()
   }

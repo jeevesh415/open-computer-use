@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { createGuestServerClient } from "@/lib/supabase/server-guest"
+import { createServiceClient } from "@/lib/supabase/server-guest"
 import { NextRequest, NextResponse } from "next/server"
 
 // GET: Get all messages in a collaborative room with enhanced user data
@@ -76,7 +76,7 @@ export async function GET(
     }
 
     // Get admin client to fetch user metadata with avatar URLs
-    const adminClient = await createGuestServerClient()
+    const adminClient = await createServiceClient()
     
     if (adminClient && messages) {
       // Enhance messages with avatar URLs from user metadata for user messages only

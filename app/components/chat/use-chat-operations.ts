@@ -42,12 +42,7 @@ export function useChatOperations({
   // Chat utilities
   const checkLimitsAndNotify = async (uid: string): Promise<boolean> => {
     try {
-      const rateData = await checkRateLimits(uid, isAuthenticated)
-
-      if (rateData.remaining === 0 && !isAuthenticated) {
-        setHasDialogAuth(true)
-        return false
-      }
+      const rateData = await checkRateLimits()
 
       if (rateData.remaining === REMAINING_QUERY_ALERT_THRESHOLD) {
         toast({
@@ -75,11 +70,6 @@ export function useChatOperations({
   }
 
   const ensureChatExists = async (userId: string, input: string) => {
-    if (!isAuthenticated) {
-      const storedGuestChatId = localStorage.getItem("guestChatId")
-      if (storedGuestChatId) return storedGuestChatId
-    }
-
     // If we already have a valid chatId, use it
     if (chatId) {
       return chatId
@@ -102,11 +92,7 @@ export function useChatOperations({
         // Set local chat ID immediately to prevent timing issues
         setLocalChatId?.(newChat.id)
         
-        if (isAuthenticated) {
-          window.history.pushState(null, "", `/c/${newChat.id}`)
-        } else {
-          localStorage.setItem("guestChatId", newChat.id)
-        }
+        window.history.pushState(null, "", `/c/${newChat.id}`)
 
         return newChat.id
       } catch (err: unknown) {

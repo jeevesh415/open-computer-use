@@ -79,8 +79,10 @@ export function SimpleVNCViewer({ machine, session }: SimpleVNCViewerProps) {
     const protocol = 'http:';
     const websocketPort = currentMachine.websocketPort || 6080;
     
-    // Properly encode the password for URL
-    const encodedPassword = encodeURIComponent(currentMachine.vncPassword);
+    // VNC protocol truncates passwords to 8 characters.
+    // Windows VMs use TightVNC which enforces this strictly.
+    const vncPassword = currentMachine.vncPassword?.substring(0, 8) || '';
+    const encodedPassword = encodeURIComponent(vncPassword);
     
     const url = `${protocol}//${currentMachine.publicIpAddress}:${websocketPort}/vnc.html?autoconnect=1&resize=scale&password=${encodedPassword}`;
     window.open(url, '_blank');

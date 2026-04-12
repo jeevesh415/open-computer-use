@@ -1,13 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { CircleNotch, GitFork, Robot, Stop, CheckCircle, XCircle, Warning, DownloadSimple, FilePdf, Pause, Play } from "@phosphor-icons/react"
+import { CircleNotch, GitFork, Robot, Stop, CheckCircle, XCircle, Warning, DownloadSimple, FilePdf, Pause, Play, HandPalm } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { Markdown } from "@/components/prompt-kit/markdown"
 import { SwarmTree, stripAgentTags, type SwarmEvent } from "@/app/components/swarms/swarm-tree"
 import { RunFeedbackBar } from "./run-feedback-bar"
+import { AwaitingHumanBanner } from "./awaiting-human-banner"
 
 // ---------------------------------------------------------------------------
 // Types
@@ -16,9 +17,10 @@ import { RunFeedbackBar } from "./run-feedback-bar"
 interface SwarmMachine {
   machine_id: string
   machine_index: number
-  status: "pending" | "running" | "completed" | "failed" | "cancelled"
+  status: "pending" | "running" | "completed" | "failed" | "cancelled" | "awaiting_human"
   lastText?: string
   stepCount: number
+  awaitingHumanReason?: string
 }
 
 interface SwarmChunk {
@@ -219,6 +221,19 @@ export function SwarmPanel({ isActive, swarmId, prompt, machineCount, persistent
         )
       )
       appendSwarmEvent("step_complete", chunk)
+    } else if (type === "awaiting_human") {
+      const mid = chunk.machine_id
+      const reason = chunk.reason || "Human intervention needed"
+      if (mid) {
+        setMachines((prev) =>
+          prev.map((m) =>
+            m.machine_id === mid
+              ? { ...m, status: "awaiting_human", awaitingHumanReason: reason, lastText: reason }
+              : m
+          )
+        )
+      }
+      appendSwarmEvent("awaiting_human", chunk)
     } else if (type === "error") {
       if (chunk.machine_id) {
         setMachines((prev) =>
@@ -802,28 +817,39 @@ function SwarmSummaryBlock({ summary }: { summary: string }) {
 
 function MachineRow({ machine }: { machine: SwarmMachine }) {
   return (
-    <div className="flex items-center gap-3 px-4 py-2.5">
-      <div className="flex-shrink-0">
-        <MachineStatusIcon status={machine.status} />
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium">
-            Machine #{machine.machine_index + 1}
-          </span>
-          {machine.stepCount > 0 && (
-            <span className="text-[10px] text-muted-foreground">
-              {machine.stepCount} steps
+    <div className="flex flex-col">
+      <div className="flex items-center gap-3 px-4 py-2.5">
+        <div className="flex-shrink-0">
+          <MachineStatusIcon status={machine.status} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-medium">
+              Machine #{machine.machine_index + 1}
             </span>
+            {machine.stepCount > 0 && (
+              <span className="text-[10px] text-muted-foreground">
+                {machine.stepCount} steps
+              </span>
+            )}
+          </div>
+          {machine.lastText && machine.status !== "awaiting_human" && (
+            <p className="text-[11px] text-muted-foreground truncate mt-0.5">
+              {machine.lastText}
+            </p>
           )}
         </div>
-        {machine.lastText && (
-          <p className="text-[11px] text-muted-foreground truncate mt-0.5">
-            {machine.lastText}
-          </p>
-        )}
+        <MachineStatusBadge status={machine.status} />
       </div>
-      <MachineStatusBadge status={machine.status} />
+      {machine.status === "awaiting_human" && (
+        <div className="px-4 pb-3">
+          <AwaitingHumanBanner
+            reason={machine.awaitingHumanReason || "Human intervention needed"}
+            machineId={machine.machine_id}
+            isActive={true}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -838,6 +864,8 @@ function MachineStatusIcon({ status }: { status: string }) {
       return <XCircle className="size-4 text-red-500" weight="fill" />
     case "cancelled":
       return <Warning className="size-4 text-amber-500" weight="fill" />
+    case "awaiting_human":
+      return <HandPalm className="size-4 text-amber-500 animate-pulse" weight="fill" />
     default:
       return <Robot className="size-4 text-muted-foreground" />
   }
@@ -850,6 +878,7 @@ function MachineStatusBadge({ status }: { status: string }) {
     completed: { className: "bg-green-500/10 text-green-700 dark:text-green-400", label: "Done" },
     failed: { className: "bg-red-500/10 text-red-600 dark:text-red-400", label: "Failed" },
     cancelled: { className: "bg-amber-500/10 text-amber-600 dark:text-amber-400", label: "Cancelled" },
+    awaiting_human: { className: "bg-amber-500/10 text-amber-600 dark:text-amber-400", label: "Your turn" },
   }
   const v = variants[status] || variants.pending
   return (

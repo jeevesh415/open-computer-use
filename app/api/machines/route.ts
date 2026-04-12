@@ -6,6 +6,7 @@ import { transformMachineFromDB } from "@/lib/utils/db-transforms";
 import type { UserMachine, CreateMachineRequest, MachineStatus } from "@/types/machines.types";
 import { dockerService } from "@/lib/docker/docker-service";
 import { createSwarmMailbox, deleteSwarmMailbox } from "@/lib/services/workmail-service";
+import crypto from "crypto";
 
 // GET /api/machines - List user's machines
 export async function GET(request: NextRequest) {
@@ -106,6 +107,37 @@ export async function GET(request: NextRequest) {
       const s = parseSettings(m);
       return s.provider !== 'electron' && !s.isLocal;
     });
+
+    // Fetch live Electron connection status from backend
+    const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8001";
+    const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY || "";
+    let electronStatusMap: Record<string, boolean> = {};
+    try {
+      const electronRes = await fetch(`${PYTHON_BACKEND_URL}/api/electron/machines`, {
+        headers: {
+          "X-User-ID": userId,
+          ...(INTERNAL_API_KEY && { "X-Internal-Key": INTERNAL_API_KEY }),
+        },
+      });
+      if (electronRes.ok) {
+        const electronData = await electronRes.json();
+        for (const em of electronData.machines || []) {
+          electronStatusMap[em.id] = em.connected;
+        }
+      }
+    } catch {
+      // Non-critical — Electron status will just use DB status
+    }
+
+    // Update Electron machine status based on live connection state
+    for (const m of allDbMachines) {
+      const s = parseSettings(m);
+      if (s.provider === 'electron') {
+        const isConnected = electronStatusMap[m.id] ?? false;
+        (m as any).status = isConnected ? 'running' : 'stopped';
+        (m as any).electronConnected = isConnected;
+      }
+    }
 
     // Get local Docker machines
     const localMachines = await dockerService.getLocalMachines();
@@ -415,10 +447,12 @@ export async function POST(request: NextRequest) {
 
     // Validate resources against limits and minimum requirements
     const isAws = provider === 'aws';
-    const isDesktop = isAws && body.desktopEnabled;
+    const osType = (body as any).osType || 'linux';
+    const isWindows = osType === 'windows';
+    const isDesktop = isWindows || (isAws && body.desktopEnabled);
     const requestedCpu = isAws ? 2 : (body.cpuCores || 1);
     const requestedMemory = isDesktop ? 2 : (isAws ? 0.5 : (body.memoryGb || 3));
-    const requestedStorage = body.storageGb || (isDesktop ? 16 : (isAws ? 8 : 10));
+    const requestedStorage = body.storageGb || (isWindows ? 30 : (isDesktop ? 16 : (isAws ? 8 : 10)));
 
     // Enforce minimum requirements (only for Azure)
     if (!isAws && (requestedCpu < 1 || requestedMemory < 1)) {
@@ -439,14 +473,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate the container/instance name
-    const uniqueId = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 6)}`;
+    // Generate the container/instance name using crypto-safe random bytes
+    const uniqueId = `${Date.now().toString(36)}-${crypto.randomBytes(4).toString('hex')}`;
     const containerName = `vm-${userId.substring(0, 8)}-${uniqueId}`.toLowerCase().replace(/[^a-z0-9-]/g, '');
-    // Generate VNC password for Azure and AWS desktop machines
-    const needsVnc = !isAws || isDesktop;
-    const vncPassword = needsVnc
-      ? (Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 8))
-      : '';
+    // Generate VNC password for Azure, AWS desktop, and Windows machines
+    const needsVnc = !isAws || isDesktop || isWindows;
+    let vncPassword = '';
+    if (needsVnc) {
+      vncPassword = generateSecureVncPassword(isWindows);
+    }
 
     // First, create a placeholder in the database so it appears immediately
     const placeholderData = {
@@ -464,7 +499,7 @@ export async function POST(request: NextRequest) {
       storage_gb: requestedStorage,
       gpu_enabled: false,
       settings: isAws
-        ? { provider: 'aws' as const, sshUsername: 'ubuntu', desktopEnabled: isDesktop }
+        ? { provider: 'aws' as const, sshUsername: isWindows ? 'Administrator' : 'ubuntu', desktopEnabled: isDesktop, osType }
         : {},
     };
 
@@ -494,14 +529,15 @@ export async function POST(request: NextRequest) {
     if (isAws) {
       // AWS EC2 creation flow
       const awsService = getAwsEc2Service();
-      const awsInstanceType = isDesktop ? 't4g.small' : 't4g.nano';
+      const awsInstanceType = isWindows ? 't3.small' : (isDesktop ? 't4g.small' : 't4g.nano');
 
       (async () => {
         try {
           // Check if user has a previous machine snapshot to restore from
           // Only restore if user explicitly opted in (restoreFromSnapshot !== false)
+          // Never restore Linux snapshots onto Windows machines (different arch + OS)
           let snapshotAmiId: string | undefined;
-          if (body.restoreFromSnapshot !== false) {
+          if (body.restoreFromSnapshot !== false && !isWindows) {
             try {
               const latestSnapshot = await awsService.findLatestUserSnapshot(userId);
               if (latestSnapshot) {
@@ -521,8 +557,9 @@ export async function POST(request: NextRequest) {
             name: containerName,
             storageGb: requestedStorage,
             desktopEnabled: isDesktop,
-            vncPassword: isDesktop ? vncPassword : undefined,
+            vncPassword: (isDesktop || isWindows) ? vncPassword : undefined,
             snapshotAmiId,
+            osType: isWindows ? 'windows' : 'linux',
           });
 
           console.log(`AWS EC2 instance created: ${result.instanceId}`);
@@ -549,15 +586,16 @@ export async function POST(request: NextRequest) {
             .update({
               settings: {
                 provider: 'aws',
+                osType,
                 awsInstanceId: result.instanceId,
                 awsRegion: process.env.AWS_REGION || 'us-east-1',
                 awsKeyPairName: result.keyPairName,
                 sshPrivateKey: result.privateKeyPem,
-                sshUsername: 'ubuntu',
+                sshUsername: isWindows ? 'Administrator' : 'ubuntu',
                 awsInstanceType,
                 desktopEnabled: isDesktop,
                 desktopInitStatus: isDesktop ? 'installing' as const : undefined,
-                agent_port: isDesktop ? 8080 : undefined,
+                agent_port: (isDesktop || isWindows) ? 8080 : undefined,
                 ...(snapshotAmiId && {
                   restoredFromSnapshot: snapshotAmiId,
                   restoredAt: new Date().toISOString(),
@@ -566,7 +604,7 @@ export async function POST(request: NextRequest) {
                   email_identity: emailIdentitySettings,
                 }),
               },
-              ssh_port: 22,
+              ssh_port: isWindows ? undefined : 22,
             })
             .eq("id", machineId);
 
@@ -744,6 +782,45 @@ export async function POST(request: NextRequest) {
       { error: "Internal server error" },
       { status: 500 }
     );
+  }
+}
+
+/**
+ * Generate a cryptographically secure VNC password.
+ * Uses crypto.randomBytes instead of Math.random to prevent prediction.
+ */
+function generateSecureVncPassword(isWindows: boolean): string {
+  if (isWindows) {
+    // Windows Server requires password complexity: uppercase + lowercase + digit + special char.
+    // IMPORTANT: Only use special chars safe in PowerShell/batch/URLs/registry.
+    const lower = 'abcdefghijkmnpqrstuvwxyz';
+    const upper = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const digits = '23456789';
+    const special = '-_=+';
+    const all = lower + upper + digits + special;
+
+    // Guarantee one from each category
+    const randomBytes = crypto.randomBytes(16 + 4); // 4 for categories, 12 for fill, 4 for shuffle
+    const chars: string[] = [
+      lower[randomBytes[0] % lower.length],
+      upper[randomBytes[1] % upper.length],
+      digits[randomBytes[2] % digits.length],
+      special[randomBytes[3] % special.length],
+    ];
+    // Fill remaining 12 chars
+    for (let i = 0; i < 12; i++) {
+      chars.push(all[randomBytes[4 + i] % all.length]);
+    }
+    // Fisher-Yates shuffle with crypto randomness
+    const shuffleBytes = crypto.randomBytes(chars.length * 2);
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = shuffleBytes.readUInt16BE(i * 2) % (i + 1);
+      [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+    return chars.join('');
+  } else {
+    // 20 bytes = 40 hex chars of entropy (much stronger than Math.random)
+    return crypto.randomBytes(15).toString('base64url');
   }
 }
 

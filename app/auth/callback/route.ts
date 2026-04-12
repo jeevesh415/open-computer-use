@@ -1,7 +1,7 @@
 import { MODEL_DEFAULT } from "@/lib/config"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { createClient } from "@/lib/supabase/server"
-import { createGuestServerClient } from "@/lib/supabase/server-guest"
+import { createServiceClient } from "@/lib/supabase/server-guest"
 import { NextResponse } from "next/server"
 
 export async function GET(request: Request) {
@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   }
 
   const supabase = await createClient()
-  const supabaseAdmin = await createGuestServerClient()
+  const supabaseAdmin = await createServiceClient()
 
   if (!supabase || !supabaseAdmin) {
     return NextResponse.redirect(

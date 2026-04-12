@@ -1,9 +1,8 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
+import { getLocalizedMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "Coasty Privacy Policy. Learn how we protect your data with VM-level isolation, encrypted sessions, sandboxed execution environments, and enterprise-grade security for every AI agent session.",
-  alternates: { canonical: "https://coasty.ai/privacy" },
+export async function generateMetadata(): Promise<Metadata> {
+  return getLocalizedMetadata("privacy", "/privacy")
 }
 
 export default function PrivacyLayout({ children }: { children: React.ReactNode }) {

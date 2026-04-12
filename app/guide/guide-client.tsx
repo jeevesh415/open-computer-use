@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { GuideLines } from "@/app/components/landing/guide-lines"
@@ -34,21 +35,21 @@ import { BillingTab } from "./tabs/billing"
 
 /* ─── tab config ─── */
 
-const tabs = [
-  { id: "overview", label: "Overview", shortLabel: "Overview", icon: BookOpen },
-  { id: "getting-started", label: "Getting Started", shortLabel: "Start", icon: RocketLaunch },
-  { id: "chat-tasks", label: "Chat & Tasks", shortLabel: "Chat", icon: ChatText },
-  { id: "machines", label: "Machines", shortLabel: "Machines", icon: Desktop },
-  { id: "credentials", label: "Credentials", shortLabel: "Creds", icon: Key },
-  { id: "swarm-mode", label: "Swarm Mode", shortLabel: "Swarm", icon: Lightning },
-  { id: "workforce", label: "Workforce", shortLabel: "Workforce", icon: UsersThree },
-  { id: "desktop-app", label: "Desktop App", shortLabel: "Desktop", icon: Monitor },
-  { id: "billing", label: "Billing & Credits", shortLabel: "Billing", icon: CreditCard },
+const tabConfig = [
+  { id: "overview", labelKey: "tabs.overview", shortLabel: "Overview", icon: BookOpen },
+  { id: "getting-started", labelKey: "tabs.gettingStarted", shortLabel: "Start", icon: RocketLaunch },
+  { id: "chat-tasks", labelKey: "tabs.chatTasks", shortLabel: "Chat", icon: ChatText },
+  { id: "machines", labelKey: "tabs.machines", shortLabel: "Machines", icon: Desktop },
+  { id: "credentials", labelKey: "tabs.credentials", shortLabel: "Creds", icon: Key },
+  { id: "swarm-mode", labelKey: "tabs.swarmMode", shortLabel: "Swarm", icon: Lightning },
+  { id: "workforce", labelKey: "tabs.workforce", shortLabel: "Workforce", icon: UsersThree },
+  { id: "desktop-app", labelKey: "tabs.desktopApp", shortLabel: "Desktop", icon: Monitor },
+  { id: "billing", labelKey: "tabs.billing", shortLabel: "Billing", icon: CreditCard },
 ] as const
 
-type TabId = (typeof tabs)[number]["id"]
+type TabId = (typeof tabConfig)[number]["id"]
 
-const tabIds = new Set<string>(tabs.map((t) => t.id))
+const tabIds = new Set<string>(tabConfig.map((t) => t.id))
 function isValidTabId(value: string | null): value is TabId {
   return value !== null && tabIds.has(value)
 }
@@ -89,17 +90,14 @@ function TabContent({ activeTab, inApp }: { activeTab: TabId; inApp: boolean }) 
 /* ─── tab navigation ─── */
 
 function TabNav({ activeTab, onTabChange }: { activeTab: TabId; onTabChange: (id: TabId) => void }) {
+  const t = useTranslations("guide")
   return (
-    <div className="relative">
-      {/* Scroll fade indicators */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-background to-transparent z-10 sm:hidden" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-background to-transparent z-10 sm:hidden" />
-
+    <div className="rounded-2xl border border-foreground/[0.06] bg-background/60 dark:bg-background/40 backdrop-blur-2xl p-1.5 shadow-sm">
       <nav
-        className="flex gap-1 overflow-x-auto scrollbar-invisible pb-1 -mx-1 px-1"
+        className="flex flex-wrap justify-center gap-0.5"
         role="tablist"
       >
-        {tabs.map((tab) => {
+        {tabConfig.map((tab) => {
           const Icon = tab.icon
           const isActive = activeTab === tab.id
           return (
@@ -109,19 +107,19 @@ function TabNav({ activeTab, onTabChange }: { activeTab: TabId; onTabChange: (id
               aria-selected={isActive}
               onClick={() => onTabChange(tab.id)}
               className={cn(
-                "relative flex items-center gap-2 whitespace-nowrap rounded-xl px-3.5 py-2 text-[13px] font-medium transition-all duration-200 shrink-0",
+                "relative flex items-center justify-center gap-1.5 rounded-xl px-2.5 py-2 sm:px-3.5 sm:py-2 text-[11px] sm:text-[12.5px] font-medium transition-all duration-200",
                 isActive
-                  ? "bg-foreground text-background shadow-sm"
-                  : "text-muted-foreground/60 hover:text-foreground hover:bg-foreground/[0.04]"
+                  ? "bg-foreground/[0.08] dark:bg-foreground/[0.12] text-foreground"
+                  : "text-muted-foreground/50 hover:text-foreground/80 hover:bg-foreground/[0.04]"
               )}
             >
               <Icon
-                size={15}
+                size={14}
                 weight={isActive ? "fill" : "duotone"}
                 className="shrink-0"
               />
-              <span className="hidden sm:inline">{tab.label}</span>
-              <span className="sm:hidden">{tab.shortLabel}</span>
+              <span className="hidden sm:inline truncate">{t(tab.labelKey)}</span>
+              <span className="sm:hidden truncate">{tab.shortLabel}</span>
             </button>
           )
         })}
@@ -133,6 +131,7 @@ function TabNav({ activeTab, onTabChange }: { activeTab: TabId; onTabChange: (id
 /* ─── guide content ─── */
 
 function GuideContent({ inApp }: { inApp: boolean }) {
+  const t = useTranslations("guide")
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
   const [activeTab, setActiveTab] = useState<TabId>(
@@ -177,9 +176,9 @@ function GuideContent({ inApp }: { inApp: boolean }) {
             className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
           >
             <div>
-              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">Guide</h1>
+              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">{t("pageTitle")}</h1>
               <p className="text-muted-foreground text-sm mt-1.5">
-                From first setup to advanced features — learn how to get the most out of Coasty
+                {t("pageSubtitle")}
               </p>
             </div>
           </motion.div>
@@ -189,7 +188,7 @@ function GuideContent({ inApp }: { inApp: boolean }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05, ease: [0.22, 1, 0.36, 1] as const }}
-            className="sticky top-0 z-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pb-4 pt-2 bg-background/80 backdrop-blur-xl border-b border-border/30"
+            className="sticky top-0 z-20 py-3"
           >
             <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
           </motion.div>
@@ -227,13 +226,13 @@ function GuideContent({ inApp }: { inApp: boolean }) {
             className="mb-8"
           >
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-              The Complete Guide
+              {t("completeGuide")}
             </p>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-[1.1] tracking-tight">
-              Everything you need to know about Coasty
+              {t("completeGuideSubtitle")}
             </h1>
             <p className="text-sm sm:text-base text-muted-foreground/70 mt-2 max-w-2xl leading-relaxed">
-              From first setup to advanced features — learn how to get the most out of your AI agent.
+              {t("completeGuideDescription")}
             </p>
             <a
               href="https://cal.com/coasty/15min"
@@ -242,7 +241,7 @@ function GuideContent({ inApp }: { inApp: boolean }) {
               className="inline-flex items-center gap-2 mt-4 h-9 px-4 rounded-xl border border-border/60 text-sm font-medium text-muted-foreground/70 hover:text-foreground hover:border-border transition-all"
             >
               <VideoCamera size={15} weight="duotone" />
-              Talk to Cofounders
+              {t("talkToCofounders")}
             </a>
           </motion.div>
 
@@ -251,7 +250,7 @@ function GuideContent({ inApp }: { inApp: boolean }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
-            className="sticky top-[56px] z-20 -mx-5 sm:-mx-6 px-7 sm:px-10 pb-4 pt-2 bg-background/80 backdrop-blur-xl border-b border-border/30"
+            className="sticky top-[56px] z-20 py-3"
           >
             <TabNav activeTab={activeTab} onTabChange={setActiveTab} />
           </motion.div>

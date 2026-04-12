@@ -12,10 +12,12 @@ import {
   Lightning,
   Terminal,
   MagnifyingGlass,
+  Timer,
 } from "@phosphor-icons/react"
 import { AnimatePresence, motion } from "framer-motion"
 import { memo, useEffect, useMemo, useState } from "react"
 import { createPortal } from "react-dom"
+import { AwaitingHumanBanner } from "./awaiting-human-banner"
 
 // ── Types ──
 
@@ -32,6 +34,9 @@ type SectionType =
   | "action-result"
   | "status"
   | "search-results"
+  | "awaiting-human"
+  | "awaiting-human-timeout"
+  | "awaiting-human-resumed"
 
 interface ParsedSection {
   type: SectionType
@@ -55,6 +60,9 @@ type TopLevelItem =
   | { kind: "code-agent-done"; content: string; step: string }
   | { kind: "code-agent-summary"; content: string }
   | { kind: "search-results"; query: string; content: string }
+  | { kind: "awaiting-human"; reason: string; machineId: string }
+  | { kind: "awaiting-human-timeout"; content: string }
+  | { kind: "awaiting-human-resumed"; content: string }
   | { kind: "text"; content: string }
 
 // ── Parser ──
@@ -64,6 +72,24 @@ const ATTR_REGEX = /(\w[\w-]*)="([^"]*)"/g
 
 function stripAgentCode(text: string): string {
   return text.replace(/```(?:python)?\s*agent\.[\s\S]*?```/g, "").trim()
+}
+
+/** Truncate long text with ellipsis, respecting word boundaries */
+function truncateText(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text
+  const cut = text.lastIndexOf(" ", maxLen)
+  return text.slice(0, cut > maxLen * 0.5 ? cut : maxLen) + "…"
+}
+
+/**
+ * Clean agent code for display: truncate long string args (like code agent prompts),
+ * strip excessive \n sequences, and format for readability.
+ */
+function formatAgentCode(code: string): string {
+  // Truncate very long string arguments inside agent calls (e.g. code_agent prompts)
+  return code.replace(/"([^"]{200,})"/g, (_match, content: string) => {
+    return `"${content.slice(0, 150)}…"`
+  })
 }
 
 function parseAttributes(attrString: string): Record<string, string> {
@@ -172,6 +198,15 @@ function buildTopLevel(sections: ParsedSection[]): TopLevelItem[] {
     } else if (s.type === "search-results") {
       flushStep()
       items.push({ kind: "search-results", query: s.attrs.query || "", content: s.content })
+    } else if (s.type === "awaiting-human") {
+      flushStep()
+      items.push({ kind: "awaiting-human", reason: s.attrs.reason || s.content, machineId: s.attrs.machineId || s.attrs.machineid || "" })
+    } else if (s.type === "awaiting-human-timeout") {
+      flushStep()
+      items.push({ kind: "awaiting-human-timeout", content: s.content })
+    } else if (s.type === "awaiting-human-resumed") {
+      flushStep()
+      items.push({ kind: "awaiting-human-resumed", content: s.content })
     }
 
     i++
@@ -228,13 +263,13 @@ function ScreenshotDot({ src }: { src: string }) {
   return (
     <>
       <motion.div
-        className="absolute -left-[11px] top-[4px] z-[2] cursor-pointer"
-        whileHover={{ scale: 1.18 }}
-        whileTap={{ scale: 0.95 }}
-        transition={{ type: "spring", stiffness: 500, damping: 15 }}
+        className="absolute -left-[10px] top-[3px] z-[2] cursor-pointer"
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.96 }}
+        transition={{ type: "spring", stiffness: 400, damping: 20 }}
         onClick={() => setLightboxOpen(true)}
       >
-        <div className="size-[28px] rounded-[6px] overflow-hidden ring-1 ring-border/40">
+        <div className="size-[26px] rounded-[5px] overflow-hidden ring-1 ring-black/[0.06] dark:ring-white/[0.08] shadow-sm">
           <img src={src} alt="" className="size-full object-cover" draggable={false} />
         </div>
       </motion.div>
@@ -248,20 +283,11 @@ function ScreenshotDot({ src }: { src: string }) {
   )
 }
 
-// ── Plain Timeline Dot (no screenshot) ──
+// ── Plain Timeline Dot (no screenshot) — no-op with dotted line ──
+// Kept as a stub so StepCard doesn't need restructuring.
 
-function PlainDot({ status }: { status: "success" | "error" | "pending" }) {
-  return (
-    <div className="absolute left-0 top-[10px] flex items-center justify-center">
-      {status === "error" ? (
-        <span className="size-2 rounded-full bg-red-500/60 ring-2 ring-red-500/10" />
-      ) : status === "success" ? (
-        <span className="size-2 rounded-full bg-emerald-500/60 ring-2 ring-emerald-500/10" />
-      ) : (
-        <span className="size-2 rounded-full bg-muted-foreground/25 ring-2 ring-muted-foreground/5" />
-      )}
-    </div>
-  )
+function PlainDot({ status: _status }: { status: "success" | "error" | "pending" }) {
+  return null
 }
 
 // ── Primitives ──
@@ -272,7 +298,7 @@ function DetailRow({
   children,
   defaultOpen = false,
 }: {
-  icon: React.ElementType
+  icon: React.ComponentType<any>
   label: string
   children: React.ReactNode
   defaultOpen?: boolean
@@ -284,16 +310,16 @@ function DetailRow({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="group/detail flex items-center gap-1.5 py-1 text-[13px] text-muted-foreground/60 hover:text-muted-foreground transition-colors"
+        className="group/detail flex items-center gap-1.5 py-1 text-[12.5px] text-muted-foreground/50 hover:text-muted-foreground/80 transition-colors"
       >
         <CaretRight
           weight="bold"
           className={cn(
-            "size-2.5 shrink-0 transition-transform duration-150",
+            "size-2.5 shrink-0 transition-transform duration-200 ease-out",
             open && "rotate-90"
           )}
         />
-        <Icon className="size-3 shrink-0 opacity-60 group-hover/detail:opacity-100 transition-opacity" />
+        <Icon className="size-3 shrink-0 opacity-50 group-hover/detail:opacity-80 transition-opacity" />
         <span>{label}</span>
       </button>
       <AnimatePresence initial={false}>
@@ -316,12 +342,37 @@ function DetailRow({
 }
 
 function StatusDot({ status }: { status: string }) {
-  if (status === "success") return <span className="inline-block size-1.5 rounded-full bg-emerald-500/70 shrink-0" />
-  if (status === "error") return <span className="inline-block size-1.5 rounded-full bg-red-500/70 shrink-0" />
-  return <span className="inline-block size-1.5 rounded-full bg-muted-foreground/30 shrink-0" />
+  return (
+    <span
+      className={cn(
+        "inline-block size-[5px] rounded-full shrink-0",
+        status === "success" && "bg-emerald-400 dark:bg-emerald-500/70",
+        status === "error" && "bg-red-400 dark:bg-red-500/70",
+        status !== "success" && status !== "error" && "bg-foreground/[0.14] dark:bg-foreground/[0.10]",
+      )}
+    />
+  )
 }
 
 // ── Step ──
+
+/** Extract a short task description from agent.call_code_agent(...) code */
+function extractCodeAgentTask(code: string): string | null {
+  const match = code.match(/agent\.call_code_agent\s*\(\s*task\s*=\s*"([\s\S]*?)(?:"\s*[,)])/)
+    || code.match(/agent\.call_code_agent\s*\(\s*task\s*=\s*'([\s\S]*?)(?:'\s*[,)])/)
+  if (!match) return null
+  return match[1].replace(/\\n/g, " ").trim()
+}
+
+/** Check if grounded action code is an agent function call (code_agent, wait, etc.) */
+function extractAgentAction(code: string): { type: string; label: string; detail?: string } | null {
+  // Code agent
+  const codeAgentTask = extractCodeAgentTask(code)
+  if (codeAgentTask || /agent\.call_code_agent/.test(code)) {
+    return { type: "code-agent", label: "Code Agent", detail: codeAgentTask || undefined }
+  }
+  return null
+}
 
 function StepCard({
   step,
@@ -343,6 +394,7 @@ function StepCard({
       ? "success"
       : "pending"
   const hasScreenshot = !!screenshot
+  const agentAction = step.code ? extractAgentAction(step.code) : null
 
   return (
     <div className={cn("group/step relative pb-1", hasScreenshot ? "pl-8" : "pl-6")}>
@@ -352,11 +404,30 @@ function StepCard({
         <PlainDot status={status} />
       )}
 
-      {/* Action — the natural language line */}
+      {/* Action — the natural language line (truncated for readability) */}
       {actionText && (
         <p className="text-[15px] leading-relaxed text-foreground/90">
-          {actionText}
+          {truncateText(actionText, 200)}
         </p>
+      )}
+
+      {/* Agent function call pill + prompt card (e.g. code_agent) */}
+      {agentAction && (
+        <div className="mt-1.5 rounded-lg border border-emerald-500/15 dark:border-emerald-400/12 bg-emerald-500/[0.03] dark:bg-emerald-400/[0.03] overflow-hidden">
+          <div className="flex items-center gap-2 px-2.5 py-1.5">
+            <span className="inline-flex items-center gap-1.5 text-[11.5px] leading-none font-medium px-2 py-[3px] rounded-full bg-emerald-500/12 text-emerald-600 dark:text-emerald-400">
+              <Terminal className="size-3 shrink-0" />
+              {agentAction.label}
+            </span>
+          </div>
+          {agentAction.detail && (
+            <div className="px-3 pb-2.5 -mt-0.5">
+              <p className="text-[12.5px] leading-relaxed text-foreground/60 dark:text-foreground/50">
+                {truncateText(agentAction.detail, 300)}
+              </p>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Inline result badges */}
@@ -373,25 +444,18 @@ function StepCard({
               )}
             >
               <StatusDot status={r.status} />
-              {r.content}
+              {truncateText(r.content, 120)}
             </span>
           ))}
         </div>
       )}
 
       {/* Expandable details */}
-      {(step.observation || step.code) && (
+      {step.observation && (
         <div className="mt-0.5">
-          {step.observation && (
-            <DetailRow icon={Eye} label="Observation">
-              <Markdown>{step.observation}</Markdown>
-            </DetailRow>
-          )}
-          {step.code && (
-            <DetailRow icon={Code} label="Grounded action">
-              <Markdown>{step.code}</Markdown>
-            </DetailRow>
-          )}
+          <DetailRow icon={Eye} label="What it noticed">
+            <Markdown>{step.observation}</Markdown>
+          </DetailRow>
         </div>
       )}
     </div>
@@ -403,9 +467,11 @@ function StepCard({
 function ItemRenderer({
   item,
   screenshot,
+  isStreaming,
 }: {
   item: TopLevelItem
   screenshot?: string | null
+  isStreaming?: boolean
 }) {
   switch (item.kind) {
     case "step":
@@ -414,20 +480,25 @@ function ItemRenderer({
     case "status": {
       const done = item.status === "completed"
       return (
-        <div className="relative pl-6 py-1.5">
-          <div className="absolute left-0 top-[12px]">
-            {done ? (
-              <CheckCircle className="size-4 text-emerald-500" weight="fill" />
-            ) : (
-              <XCircle className="size-4 text-red-500" weight="fill" />
-            )}
-          </div>
-          <p className={cn(
-            "text-[14px] font-medium",
-            done ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400",
+        <div className="py-1.5 pl-6">
+          <div className={cn(
+            "inline-flex items-center gap-2 rounded-lg border px-3 py-1.5",
+            done
+              ? "border-emerald-200/60 bg-emerald-500/[0.04] dark:border-emerald-700/40 dark:bg-emerald-400/[0.04]"
+              : "border-red-200/60 bg-red-500/[0.04] dark:border-red-700/40 dark:bg-red-400/[0.04]",
           )}>
-            {item.content}
-          </p>
+            {done ? (
+              <CheckCircle className="size-3.5 shrink-0 text-emerald-500" weight="fill" />
+            ) : (
+              <XCircle className="size-3.5 shrink-0 text-red-500" weight="fill" />
+            )}
+            <span className={cn(
+              "text-[13px] font-medium",
+              done ? "text-emerald-700 dark:text-emerald-300" : "text-red-600 dark:text-red-400",
+            )}>
+              {item.content}
+            </span>
+          </div>
         </div>
       )
     }
@@ -456,11 +527,11 @@ function ItemRenderer({
 
     case "code-agent-done":
       return (
-        <div className="relative pl-6 py-0.5">
-          <div className="absolute left-0 top-[8px]">
-            <CheckCircle className="size-3.5 text-emerald-500/60" weight="fill" />
-          </div>
-          <span className="text-[12px] text-emerald-600/60 dark:text-emerald-400/50">{item.content}</span>
+        <div className="py-0.5 pl-6">
+          <span className="inline-flex items-center gap-1.5 text-[12px] text-emerald-600/50 dark:text-emerald-400/40">
+            <CheckCircle className="size-3 shrink-0" weight="fill" />
+            {item.content}
+          </span>
         </div>
       )
 
@@ -484,12 +555,55 @@ function ItemRenderer({
       )
     }
 
+    case "awaiting-human":
+      return (
+        <div className="relative pl-6 py-2">
+          <AwaitingHumanBanner
+            reason={item.reason}
+            machineId={item.machineId}
+            isActive={isStreaming}
+          />
+        </div>
+      )
+
+    case "awaiting-human-timeout":
+      return (
+        <div className="py-1.5 pl-6">
+          <div className={cn(
+            "inline-flex items-center gap-2 rounded-lg border px-3 py-1.5",
+            "border-amber-200/60 bg-amber-500/[0.04]",
+            "dark:border-amber-700/40 dark:bg-amber-400/[0.04]",
+          )}>
+            <Timer className="size-3.5 shrink-0 text-amber-500" weight="fill" />
+            <span className="text-[13px] font-medium text-amber-700 dark:text-amber-300">
+              {item.content}
+            </span>
+          </div>
+        </div>
+      )
+
+    case "awaiting-human-resumed":
+      return (
+        <div className="py-1.5 pl-6">
+          <div className={cn(
+            "inline-flex items-center gap-2 rounded-lg border px-3 py-1.5",
+            "border-emerald-200/60 bg-emerald-500/[0.04]",
+            "dark:border-emerald-700/40 dark:bg-emerald-400/[0.04]",
+          )}>
+            <CheckCircle className="size-3.5 shrink-0 text-emerald-500" weight="fill" />
+            <span className="text-[13px] font-medium text-emerald-700 dark:text-emerald-300">
+              Human finished — agent resuming with fresh screen state
+            </span>
+          </div>
+        </div>
+      )
+
     case "text": {
       const cleaned = stripAgentCode(item.content)
       if (!cleaned) return null
       return (
         <div className="pl-6 py-0.5 text-[15px] leading-relaxed text-foreground/80">
-          <Markdown>{cleaned}</Markdown>
+          <Markdown>{truncateText(cleaned, 500)}</Markdown>
         </div>
       )
     }
@@ -558,10 +672,12 @@ export const CuaSectionRenderer = memo(function CuaSectionRenderer({
   content,
   className,
   screenshots,
+  isStreaming,
 }: {
   content: string
   className?: string
   screenshots?: string[]
+  isStreaming?: boolean
 }) {
   const items = useMemo(() => {
     const sections = parseSections(content)
@@ -583,15 +699,25 @@ export const CuaSectionRenderer = memo(function CuaSectionRenderer({
   }, [items, screenshots])
 
   return (
-    <div className={cn("flex flex-col gap-0.5", className)}>
+    <div className={cn("flex flex-col", className)}>
       <div className="relative">
-        <div className="absolute left-[3.5px] top-2 bottom-2 w-px bg-border/30" />
+        {/* Timeline — dotted line, fades at ends */}
+        <div
+          className="absolute left-[2.5px] top-0 bottom-0 w-px opacity-[0.22] dark:opacity-[0.30]"
+          style={{
+            maskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)",
+            backgroundImage: "repeating-linear-gradient(to bottom, currentColor 0px, currentColor 2px, transparent 2px, transparent 7px)",
+          }}
+          aria-hidden="true"
+        />
         <div className="relative flex flex-col">
           {items.map((item, i) => (
             <ItemRenderer
               key={i}
               item={item}
               screenshot={stepScreenshotMap.get(i)}
+              isStreaming={isStreaming}
             />
           ))}
         </div>

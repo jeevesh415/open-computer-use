@@ -234,7 +234,7 @@ export default function ResultsPage() {
             transition={{ duration: 0.6 }}
             className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/50 mb-4"
           >
-            Case Studies
+            Demos
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -242,8 +242,8 @@ export default function ResultsPage() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-5"
           >
-            Real work.{" "}
-            <span className="text-muted-foreground/40">Not demos.</span>
+            Watch it work.{" "}
+            <span className="text-muted-foreground/40">Unscripted.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

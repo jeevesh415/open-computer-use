@@ -6,10 +6,11 @@ import { useApprovalStore } from './stores/approval-store'
 import { AuthScreen } from './components/AuthScreen'
 import { Overlay } from './components/Overlay'
 import { PermissionsGuard } from './components/PermissionsGuard'
+import { PermissionToast } from './components/PermissionToast'
 
 export default function App() {
-  const { isAuthenticated, loading, checkSession } = useAuthStore()
-  const { connect, init: initConnection } = useConnectionStore()
+  const { isAuthenticated, loading, checkSession, signOut } = useAuthStore()
+  const { connect, init: initConnection, state: connectionState } = useConnectionStore()
   const { mode, setMode, init: initWindow } = useWindowStore()
 
   // Check session on mount
@@ -42,6 +43,13 @@ export default function App() {
     }
   }, [isAuthenticated])
 
+  // Auto sign-out when backend rejects authentication
+  React.useEffect(() => {
+    if (connectionState === 'error' && isAuthenticated) {
+      signOut()
+    }
+  }, [connectionState])
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen bg-neutral-950 rounded-2xl">
@@ -63,6 +71,7 @@ export default function App() {
   return (
     <PermissionsGuard>
       <Overlay />
+      <PermissionToast />
     </PermissionsGuard>
   )
 }

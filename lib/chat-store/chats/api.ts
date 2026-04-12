@@ -288,23 +288,14 @@ export async function createNewChat(
   // projectId?: string  // COMMENTED OUT - Project feature disabled
 ): Promise<Chats> {
   try {
+    // userId is derived server-side from session — only send title/model
     const payload: {
-      userId: string
       title: string
       model: string
-      isAuthenticated?: boolean
-      // projectId?: string  // COMMENTED OUT - Project feature disabled
     } = {
-      userId,
       title: title || "New Project",
       model: model || MODEL_DEFAULT,
-      isAuthenticated,
     }
-
-    // Project functionality commented out
-    // if (projectId) {
-    //   payload.projectId = projectId
-    // }
 
     const res = await fetchClient("/api/create-chat", {
       method: "POST",

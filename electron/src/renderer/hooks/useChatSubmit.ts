@@ -3,12 +3,20 @@ import { useAuthStore } from '../stores/auth-store'
 import { useConnectionStore } from '../stores/connection-store'
 import { sendChatMessage } from '../lib/api'
 
+export interface FileRef {
+  path: string
+  name: string
+  ext: string
+  isDirectory: boolean
+}
+
 export function useChatSubmit() {
   const {
     messages, isStreaming, chatId, chatTitle,
     addUserMessage, setStreaming, setAbortController, stopStreaming,
     appendAssistantContent, addToolCall, updateToolResult,
     finishAssistantMessage, clearMessages, ensureChat, loadChatList,
+    setAwaitingHuman,
   } = useChatStore()
   const { user, machineId } = useAuthStore()
   const connectionState = useConnectionStore((s) => s.state)
@@ -16,10 +24,22 @@ export function useChatSubmit() {
   const canSend = (input: string) =>
     input.trim().length > 0 && !isStreaming && connectionState === 'connected'
 
-  const handleSubmit = async (input: string) => {
+  const handleSubmit = async (input: string, files?: FileRef[]) => {
     if (!canSend(input) || !user || !machineId) return
 
-    const userMessage = input.trim()
+    // Build the user-visible message content
+    let userMessage = input.trim()
+
+    // Append file reference tags so the agent knows about attached files
+    if (files && files.length > 0) {
+      const tags = files.map((f) =>
+        f.isDirectory
+          ? `<directory path="${f.path}" name="${f.name}">${f.name}</directory>`
+          : `<file path="${f.path}" name="${f.name}">${f.name}</file>`,
+      )
+      userMessage = userMessage + '\n' + tags.join('\n')
+    }
+
     addUserMessage(userMessage)
     setStreaming(true)
 
@@ -56,6 +76,13 @@ export function useChatSubmit() {
           onFinish: (data) => {
             finishAssistantMessage(data.content, data.toolInvocations)
             loadChatList()
+          },
+          onAwaitingHuman: (data) => {
+            setAwaitingHuman({
+              reason: data.reason,
+              machineId: data.machineId,
+              since: Date.now(),
+            })
           },
           onError: (error) => {
             appendAssistantContent(`\n\nError: ${error}`)

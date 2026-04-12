@@ -69,6 +69,12 @@ export async function checkAllPermissions(): Promise<PermissionStatus> {
   return result
 }
 
+/** Quick check whether Accessibility is granted (non-macOS always returns true). */
+export function isAccessibilityGranted(): boolean {
+  if (process.platform !== 'darwin') return true
+  return systemPreferences.isTrustedAccessibilityClient(false)
+}
+
 /** Prompt for Accessibility permission via the system dialog. */
 export function requestAccessibility(): boolean {
   if (process.platform !== 'darwin') return true

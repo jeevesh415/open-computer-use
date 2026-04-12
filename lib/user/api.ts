@@ -39,9 +39,6 @@ export async function getUserProfile(): Promise<UserProfile | null> {
     .eq("id", user.id)
     .single()
 
-  // Don't load anonymous users in the user store
-  if (userProfileData?.anonymous) return null
-
   // Format user preferences if they exist
   const formattedPreferences = userProfileData?.user_preferences
     ? convertFromApiFormat(userProfileData.user_preferences)

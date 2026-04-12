@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "免费开始",
+    "bookDemo": "预约演示",
+    "tryCoastyFree": "免费试用 Coasty",
+    "learnMore": "了解更多",
+    "watchSession": "观看会话",
+    "compareAllPlans": "比较所有方案和功能",
+    "allRightsReserved": "保留所有权利。",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "recommended": "推荐",
+    "month": "月",
+    "creditsPerMonth": "{count} 积分/月",
+    "agentsInParallel": "{count} 个智能体并行"
+  },
+  "header": {
+    "useCases": "使用场景",
+    "blog": "博客",
+    "agentSwarms": "智能体集群",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "对比",
+    "demos": "演示",
+    "pricing": "价格",
+    "download": "下载",
+    "signIn": "登录",
+    "getStarted": "立即开始",
+    "useCaseItems": {
+      "competitorIntel": "竞争对手情报",
+      "qaBugReports": "QA 缺陷报告",
+      "seoGapAnalysis": "SEO 差距分析",
+      "dataExtraction": "数据提取",
+      "leadGeneration": "潜在客户开发",
+      "siteAudit": "网站审计",
+      "adIntelligence": "广告情报",
+      "emailOutreach": "邮件外联",
+      "designReview": "设计评审",
+      "priceMonitoring": "价格监控",
+      "marketResearch": "市场调研",
+      "emailCampaigns": "邮件营销"
+    },
+    "useCaseStats": {
+      "competitorIntel": "已交付 {stat} 份竞争对手档案",
+      "qaBugReports": "每次运行测试 {stat} 个用户流程",
+      "seoGapAnalysis": "已识别 {stat} 个关键词差距",
+      "dataExtraction": "每次运行提取 {stat} 行数据",
+      "leadGeneration": "每次运行获取 {stat} 个合格线索",
+      "siteAudit": "每次运行审计 {stat} 个页面",
+      "adIntelligence": "已抓取 {stat} 个广告创意",
+      "emailOutreach": "已撰写 {stat} 封个性化邮件",
+      "designReview": "每页测试 {stat} 个断点",
+      "priceMonitoring": "每次运行比较 {stat} 个 SKU",
+      "marketResearch": "已采集 {stat} 个数据点",
+      "emailCampaigns": "每次营销发送 {stat} 封个性化邮件"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "所有文章",
+      "computerUse": "计算机使用",
+      "compare": "对比",
+      "dataEntry": "数据录入",
+      "webScraping": "网页抓取",
+      "jobApplications": "求职申请",
+      "demosResults": "演示与结果",
+      "guide": "指南"
+    },
+    "blogStats": {
+      "allPosts": "每周发布 {stat} 篇文章",
+      "computerUse": "OSWorld 基准分数 {stat}",
+      "compare": "已分析 {stat} 个竞争对手",
+      "dataEntry": "比手动快 {stat}",
+      "webScraping": "每次会话处理 {stat} 个页面",
+      "jobApplications": "每次会话投递 {stat} 份申请",
+      "demosResults": "{stat} 个真实案例研究",
+      "guide": "{stat} 个使用场景教程"
+    }
+  },
+  "hero": {
+    "badge": "#1 计算机使用智能体 · {score} OSWorld",
+    "headline": "自主计算机操作员",
+    "useCases": {
+      "computerAgent": {
+        "label": "计算机智能体",
+        "headline": "自动化任何浏览器任务",
+        "outcome": "一个控制真实计算机的 AI 智能体——浏览、点击、输入，交付完成的工作。无需任何设置。"
+      },
+      "competitorIntel": {
+        "label": "竞争对手情报",
+        "headline": "监控每一个竞争对手",
+        "outcome": "完整的竞争对手档案，包括定价、功能和定位差距——导出为可直接分享的报告。"
+      },
+      "qaTesting": {
+        "label": "QA 测试",
+        "headline": "在用户之前发现缺陷",
+        "outcome": "端到端测试关键用户流程，每个缺陷都附带截图、复现步骤和严重性分级。"
+      },
+      "seoAnalysis": {
+        "label": "SEO 分析",
+        "headline": "挖掘关键词差距",
+        "outcome": "识别关键词差距、起草内容简报、映射竞争对手外链来源——可执行的 SEO 策略。"
+      },
+      "dataExtraction": {
+        "label": "数据提取",
+        "headline": "抓取并结构化任何网站",
+        "outcome": "结构化数据抓取、清洗、去重，并导出为 CSV——支持任何网站、任何格式。"
+      },
+      "leadGeneration": {
+        "label": "潜在客户开发",
+        "headline": "填满您的销售管道",
+        "outcome": "匹配您理想客户画像的合格决策者，包含已验证的职位、公司和个性化开场白。"
+      },
+      "siteAudit": {
+        "label": "网站审计",
+        "headline": "大规模审计每个页面",
+        "outcome": "扫描页面、评估核心 Web 指标、发现失效链接、按修复优先级排列无障碍问题。"
+      },
+      "emailOutreach": {
+        "label": "邮件外联",
+        "headline": "发送个性化外联邮件",
+        "outcome": "个性化邮件引用每位潜在客户的公司、职位和痛点——随时可发送。"
+      },
+      "marketResearch": {
+        "label": "市场调研",
+        "headline": "快速验证您的市场",
+        "outcome": "计算总可寻址市场、分析主要参与者、绘制增长趋势——来自数十个数据源。"
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "营销",
+        "task": "在 Reddit 上自主推广您的产品"
+      },
+      "goToMarket": {
+        "label": "市场推广",
+        "task": "寻找潜在客户并发送个性化邮件"
+      },
+      "qaTesting": {
+        "label": "QA 测试",
+        "task": "测试每个结账流程并报告缺陷"
+      },
+      "jobApplication": {
+        "label": "求职申请",
+        "task": "查找职位、定制简历并投递"
+      },
+      "formFilling": {
+        "label": "表单填写",
+        "task": "为您填写 YC S26 申请表"
+      },
+      "socialMedia": {
+        "label": "社交媒体",
+        "task": "在 Hacker News 上发帖并参与评论互动"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld 基准测试",
+      "sublabel": "全球排名第一的计算机使用智能体"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "智能体可使用的工具",
+      "sublabel": "浏览器、终端、桌面、文件"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "定时自动运行",
+      "sublabel": "自动化任何重复性任务"
+    },
+    "setup": {
+      "value": "0",
+      "label": "无需设置",
+      "sublabel": "无需 API、无需集成、无需代码"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "为什么选择 Coasty",
+    "title": "不是聊天机器人，也不是 RPA 脚本。",
+    "worksLikeHuman": {
+      "title": "像人一样工作",
+      "description": "看、点击、输入、导航——和您一模一样"
+    },
+    "noScripts": {
+      "title": "无需脚本或设置",
+      "description": "用自然语言输入，直接获得结果"
+    },
+    "handlesUnexpected": {
+      "title": "应对意外情况",
+      "description": "自适应验证码、弹窗和布局变化"
+    },
+    "runsInIsolation": {
+      "title": "隔离运行",
+      "description": "每个会话使用独立沙盒 VM——数据不会泄露"
+    }
+  },
+  "howItWorks": {
+    "title": "工作原理",
+    "step1": {
+      "title": "描述您的任务",
+      "description": "用自然语言，就这么简单。",
+      "placeholder": "在 LinkedIn 上调研 100 个线索..."
+    },
+    "step2": {
+      "title": "观看智能体工作",
+      "description": "打开浏览器、点击、输入、导航"
+    },
+    "step3": {
+      "title": "任务完成",
+      "description": "每个操作都有截图记录",
+      "results": {
+        "taskCompleted": "任务已完成",
+        "leadsFound": "找到 12 个线索",
+        "addedToCrm": "已添加到 CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "全球基准测试排名第一",
+    "subtitle": "OSWorld 得分 82%——这是针对使用真实计算机的 AI 智能体最难的基准测试",
+    "agenticFramework": "智能体框架",
+    "foundationModel": "基础模型"
+  },
+  "comparison": {
+    "title": "为什么选择 Coasty 自动化？",
+    "subtitle": "同样的任务，团队需要数小时——Coasty 几分钟就能完成，全天候运行。",
+    "manual": {
+      "title": "手动操作",
+      "subtitle": "您或您的团队手工完成"
+    },
+    "coasty": {
+      "title": "Coasty AI 智能体",
+      "subtitle": "排名第一的计算机使用智能体"
+    },
+    "rows": {
+      "timePerTask": "每项任务耗时",
+      "availability": "可用性",
+      "setupTime": "设置时间",
+      "errorRate": "错误率",
+      "scaling": "扩展性",
+      "auditTrail": "审计追踪"
+    },
+    "manualValues": {
+      "timePerTask": "数小时到数天",
+      "availability": "仅工作时间",
+      "setupTime": "学习工具、编写流程文档",
+      "errorRate": "人为失误",
+      "scaling": "做更多 = 花更多时间",
+      "auditTrail": "无"
+    },
+    "coastyValues": {
+      "timePerTask": "几分钟",
+      "availability": "全天候，每天运行",
+      "setupTime": "60 秒",
+      "errorRate": "自动纠错",
+      "scaling": "无限任务并行运行",
+      "auditTrail": "每次点击都有记录和截图"
+    },
+    "bottomBar": {
+      "automateTasksThat": "自动化那些需要",
+      "hoursManually": "数小时手动操作的任务",
+      "startingAt": "起步价"
+    }
+  },
+  "demo": {
+    "title": "观看智能体实际操作",
+    "subtitle": "真实任务。真实浏览器。每次点击都有记录。",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty 在 Reddit 上",
+        "description": "观看 Coasty 自主运行营销活动——调研竞争对手、分析趋势并构建策略方案。",
+        "tag": "营销"
+      },
+      "prospects": {
+        "title": "寻找潜在客户",
+        "description": "Coasty 寻找并调研潜在客户，收集关键信息以撰写个性化外联内容。",
+        "tag": "市场推广"
+      },
+      "qa": {
+        "title": "QA 自我测试",
+        "description": "Coasty 对自己的产品进行质量保证——导航流程、发现缺陷并自主报告问题。",
+        "tag": "QA 测试"
+      },
+      "email": {
+        "title": "代您发送邮件",
+        "description": "从撰写到发送——AI 智能体完全自主地起草并发送邮件。",
+        "tag": "沟通"
+      },
+      "job": {
+        "title": "求职申请",
+        "description": "Coasty 找到匹配的职位、定制您的简历并提交申请——全部自主完成。",
+        "tag": "求职申请"
+      },
+      "hackernews": {
+        "title": "在 Hacker News 上发帖",
+        "description": "Coasty 在 Hacker News 上创建并发布博文——撰写内容并自主提交。",
+        "tag": "社交媒体"
+      }
+    }
+  },
+  "features": {
+    "title": "为真实计算机任务而构建",
+    "selfCorrecting": {
+      "title": "自动纠错",
+      "description": "检测错误，自动尝试替代路径"
+    },
+    "auditTrail": {
+      "title": "完整审计追踪",
+      "description": "每次点击都有截图记录"
+    },
+    "schedule": {
+      "title": "全天候定时运行",
+      "description": "支持定时任务——每小时、每天、每周"
+    },
+    "sandboxed": {
+      "title": "沙盒安全隔离",
+      "description": "每个会话使用独立 VM，用后即销毁"
+    },
+    "benchmark": {
+      "title": "OSWorld 排名第一",
+      "description": "82%——有史以来最高分"
+    },
+    "swarms": {
+      "title": "智能体集群",
+      "description": "跨多台机器并行拆分任务"
+    }
+  },
+  "pricing": {
+    "title": "免费开始，按需扩展",
+    "subtitle": "无需信用卡。您的 AI 智能体 60 秒内即可就绪。",
+    "plans": {
+      "free": {
+        "name": "免费版",
+        "description": "试用排名第一的计算机使用智能体",
+        "cta": "免费开始"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "轻量日常自动化",
+        "cta": "获取 Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "每日任务自动化",
+        "cta": "获取 Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "扩展复杂工作流",
+        "cta": "获取 Plus",
+        "badge": "最受欢迎"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "无限量重度自动化",
+        "cta": "获取 Pro"
+      }
+    },
+    "vmTemporary": "1 个临时 VM（2小时）",
+    "vmDeletedAfterInactivity": "1 个 VM（不活跃后删除）",
+    "vmAlwaysOn": "{count} 个常驻 VM",
+    "vmAlwaysOnPlural": "{count} 个常驻 VM",
+    "bargain": {
+      "title": "同样的工作，人工成本为 {oldPrice}",
+      "description": "一名虚拟助理每月费用为 $2,000–$4,000。兼职员工更贵。Coasty 以 $0 起步完成同样的工作，全天候运行——完美一致、完整审计追踪、零培训时间。"
+    }
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "开始之前您需要了解的一切",
+    "items": {
+      "whatIsCoasty": {
+        "question": "什么是 Coasty？",
+        "answer": "Coasty 是全球最优秀的计算机使用 AI 智能体。您只需描述一个任务——调研线索、测试网站、填写表单、发布社交媒体——Coasty 就会打开真实浏览器，导航应用、点击按钮、输入文字，端到端完成任务。无需 API、无需集成、无需编写代码。"
+      },
+      "howDifferent": {
+        "question": "这和 ChatGPT 或其他 AI 工具有什么不同？",
+        "answer": "ChatGPT 生成文本。Coasty 使用计算机。它不是告诉您该怎么做——而是打开浏览器、导航到网站、点击按钮、填写表单，并交付完成的工作。这就是「获得指导」和「让任务直接完成」之间的区别。"
+      },
+      "whatTasks": {
+        "question": "Coasty 可以自动化哪些任务？",
+        "answer": "任何您能在计算机上完成的任务。网络调研、潜在客户开发、数据录入、表单填写、QA 测试、社交媒体发布、邮件外联、发票处理、竞争分析、招聘——只要涉及浏览器或桌面应用，Coasty 都能胜任。"
+      },
+      "whatAreCredits": {
+        "question": "什么是积分？如何使用？",
+        "answer": "积分在智能体执行任务时消耗。任务越长越复杂，消耗的积分越多。付费方案包含每月积分额度，您也可以随时购买额外的积分包。"
+      },
+      "localComputer": {
+        "question": "Coasty 能在我自己的电脑上运行吗？",
+        "answer": "可以。我们的桌面应用以轻量级浮窗形式运行在您的电脑上，直接控制您本地的浏览器和应用程序。或者，任务也可以在隔离的云端机器上运行——由您选择。"
+      },
+      "dataSafe": {
+        "question": "我的数据安全吗？",
+        "answer": "每个任务都在隔离的沙盒环境中运行。会话之间不会有数据泄露。您的凭据保持私密，每个操作都有截图记录在完整的审计追踪中，您可以随时查看。"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI 驱动的计算机使用。",
+    "tagline2": "用智能代理自动化任何工作流。",
+    "columns": {
+      "product": "产品",
+      "resources": "资源",
+      "company": "公司",
+      "legal": "法律"
+    },
+    "links": {
+      "computerUse": "计算机使用",
+      "guide": "指南",
+      "download": "下载",
+      "pricing": "价格",
+      "agentSwarms": "智能体集群",
+      "status": "状态",
+      "blog": "博客",
+      "useCases": "使用场景",
+      "demos": "演示",
+      "compare": "对比",
+      "talkToCofounders": "与联合创始人交流与演示",
+      "contact": "联系我们",
+      "privacy": "隐私政策",
+      "terms": "服务条款"
+    }
+  },
+  "languageSwitcher": {
+    "label": "语言"
+  },
+  "auth": {
+    "brandHeading": "目标由你设定。",
+    "brandSubheading": "其余的交给我们。",
+    "mobileHeading": "目标由你设定。其余的交给我们。",
+    "mobileSubheading": "像真正的队友一样浏览、点击和工作的AI智能体。",
+    "flowSteps": {
+      "step1": {
+        "label": "你描述任务",
+        "sub": "\"调研我们的前5名竞争对手\""
+      },
+      "step2": {
+        "label": "智能体接管控制",
+        "sub": "自主浏览、点击、输入"
+      },
+      "step3": {
+        "label": "工作完成",
+        "sub": "包含5个完整竞争对手档案的电子表格"
+      }
+    },
+    "complete": "完成",
+    "doneIn": "8分钟完成",
+    "demoCaption": "在电脑上运行 AI 代理，或随时随地用手机远程控制。",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "您的操作员已就绪",
+      "signUp": "让您的工作流程自动化",
+      "magicLink": "跳过密码",
+      "forgotPassword": "让我们帮您恢复访问"
+    },
+    "viewDescriptions": {
+      "signIn": "从您上次离开的地方继续 — 您的智能体会记住一切",
+      "signUp": "一分钟内部署您的第一个AI智能体",
+      "magicLink": "从收件箱点击一下即可登录",
+      "forgotPassword": "我们将向您的邮箱发送重置链接"
+    },
+    "google": {
+      "connecting": "连接中...",
+      "continueWithGoogle": "使用 Google 继续"
+    },
+    "or": "或",
+    "email": "邮箱",
+    "emailPlaceholder": "you@example.com",
+    "password": "密码",
+    "passwordPlaceholder": "您的密码",
+    "confirmPassword": "确认密码",
+    "confirmPasswordPlaceholder": "再次输入密码",
+    "minChars": "最少6个字符",
+    "signingIn": "登录中...",
+    "signIn": "登录",
+    "creatingAccount": "创建账户中...",
+    "createAccount": "创建账户",
+    "sending": "发送中...",
+    "sendMagicLink": "发送魔法链接",
+    "sendResetLink": "发送重置链接",
+    "forgotPassword": "忘记密码？",
+    "useMagicLink": "使用魔法链接",
+    "dontHaveAccount": "没有账户？",
+    "signUp": "注册",
+    "alreadyHaveAccount": "已有账户？",
+    "backToSignIn": "返回登录",
+    "termsAgreement": "继续即表示您同意我们的",
+    "terms": "服务条款",
+    "and": "和",
+    "privacyPolicy": "隐私政策",
+    "errors": {
+      "fillAllFields": "请填写所有字段",
+      "passwordMinLength": "密码至少需要6个字符",
+      "passwordsDoNotMatch": "密码不匹配",
+      "supabaseNotConfigured": "Supabase未配置",
+      "unexpectedError": "发生意外错误。请重试。",
+      "confirmEmail": "登录前请先确认您的邮箱。请检查收件箱。",
+      "invalidCredentials": "邮箱或密码无效。",
+      "signInFailed": "登录失败。请重试。",
+      "invalidEmail": "邮箱地址无效。",
+      "emailAlreadyExists": "此邮箱已注册账户。请尝试登录。",
+      "signUpFailed": "注册失败。请重试。",
+      "enterEmail": "请输入您的邮箱",
+      "noAccountFound": "未找到此邮箱的账户。请先注册。",
+      "magicLinkFailed": "魔法链接发送失败。请重试。",
+      "resetFailed": "重置邮件发送失败。请重试。",
+      "updateFailed": "密码更新失败。请重试。"
+    },
+    "success": {
+      "checkEmailConfirm": "登录前请检查邮箱以确认您的账户。",
+      "checkEmailMagicLink": "请检查邮箱中的魔法链接以登录。",
+      "checkEmailReset": "请检查邮箱中的密码重置链接。",
+      "passwordUpdated": "密码更新成功。正在跳转到登录页面..."
+    },
+    "resetPassword": {
+      "title": "重置密码",
+      "subtitle": "请在下方输入您的新密码。",
+      "newPassword": "新密码",
+      "confirmNewPassword": "确认新密码",
+      "confirmPlaceholder": "再次输入新密码",
+      "updating": "更新中...",
+      "updatePassword": "更新密码"
+    },
+    "errorPage": {
+      "title": "认证错误",
+      "defaultMessage": "认证过程中发生错误。",
+      "tryAgain": "重试",
+      "backToChat": "返回聊天",
+      "needHelp": "需要帮助？",
+      "contactSupport": "联系客服"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "暂时跳过",
+    "back": "返回",
+    "continue": "继续",
+    "getStarted": "开始使用",
+    "settingUp": "设置中...",
+    "welcome": {
+      "titleReturning": "欢迎回来{name}！",
+      "titleNew": "欢迎来到 Coasty",
+      "descriptionReturning": "我们想更多地了解您，以改善您的体验",
+      "descriptionNew": "让我们设置您的账户，以便个性化您的体验"
+    },
+    "nameLabel": "您希望我们怎么称呼您？",
+    "namePlaceholder": "您的姓名",
+    "companyLabel": "公司",
+    "optional": "（选填）",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "网站",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "哪个最能描述您？",
+      "subtitle": "选择所有适用的 — 这有助于我们定制您的体验"
+    },
+    "roles": {
+      "founder": "创始人 / CEO",
+      "developer": "开发者",
+      "marketer": "市场营销",
+      "designer": "设计师",
+      "product_manager": "产品经理",
+      "data_analyst": "数据 / 分析",
+      "operations": "运营",
+      "other": "其他"
+    },
+    "teamSizeLabel": "团队规模",
+    "teamSizes": {
+      "solo": "只有我自己",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "您是如何找到我们的？",
+      "subtitle": "我们想知道您在哪里了解到 Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "朋友 / 同事",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "其他"
+    },
+    "useCaseStep": {
+      "title": "您首先想自动化什么？",
+      "subtitle": "选择所有适用的 — 之后可以探索所有功能"
+    },
+    "useCases": {
+      "web_scraping": "网页抓取与研究",
+      "browser_automation": "浏览器自动化",
+      "data_entry": "数据录入与表单",
+      "email_outreach": "邮件与外联",
+      "testing": "QA与测试",
+      "ecommerce": "电商任务",
+      "social_media": "社交媒体管理",
+      "general_automation": "通用自动化"
+    },
+    "showcase": {
+      "title": "您需要的一切，",
+      "titleHighlight": "内置其中。",
+      "subtitle": "以下是 Coasty 能为您做的",
+      "noCode": {
+        "title": "无需代码",
+        "description": "用简单的中文描述您想要的即可"
+      },
+      "agentSwarms": {
+        "title": "智能体集群",
+        "description": "并行智能体舰队"
+      },
+      "desktopControl": {
+        "title": "桌面控制",
+        "description": "点击、输入、导航"
+      },
+      "browserAutomation": {
+        "title": "浏览器自动化",
+        "description": "表单、标签页、抓取 — 完全自动化"
+      },
+      "computerVision": {
+        "title": "计算机视觉",
+        "description": "实时查看和理解您的屏幕"
+      },
+      "workflows": {
+        "title": "工作流",
+        "description": "多步骤流程"
+      },
+      "onDevice": {
+        "title": "本地运行",
+        "description": "在本地执行"
+      },
+      "autonomous": {
+        "title": "24/7 自主运行",
+        "description": "设置后即可忘记 — 在您睡觉时也在运行"
+      }
+    },
+    "guideCallout": {
+      "title": "初来乍到？我们为您准备了指南",
+      "subtitle": "一分钟内部署您的第一个AI智能体"
+    }
+  },
+  "chatInput": {
+    "placeholder": "AI 助手应该做什么？",
+    "placeholderAlt": "告诉 AI 在电脑上做什么...",
+    "vmError": {
+      "title": "虚拟机错误",
+      "description": "虚拟机处于错误状态或正在删除中。",
+      "hint": "请检查「机器」标签页以解决问题，或选择「未选择计算机」以仅使用网页搜索。",
+      "gotIt": "知道了"
+    },
+    "status": {
+      "creating": "正在创建 {name}...",
+      "initiating": "正在 {name} 上启动智能体...",
+      "stopping": "正在停止 {name}...",
+      "preparing": "正在准备 {name}..."
+    },
+    "swarm": {
+      "title": "集群模式",
+      "pro": "PRO",
+      "upgradeLabel": "集群模式 — 升级以解锁",
+      "feature1": "跨临时机器并行执行",
+      "feature2": "每台机器自主运行",
+      "feature3": "每个集群可使用套餐机器上限的 3 倍",
+      "description": "一条提示在机器上限的 3 倍上并行运行 — 每台独立处理任务。",
+      "enableLabel": "启用集群模式",
+      "disableLabel": "禁用集群模式",
+      "onTooltip": "集群模式已开启 — 您的提示将在多台机器上并行运行",
+      "offTooltip": "启用集群模式，在多台机器上同时运行您的提示",
+      "decreaseMachines": "减少机器数量",
+      "increaseMachines": "增加机器数量",
+      "machineLimit": "您的套餐最多可使用 {max} 台集群机器。需要更多？请联系 founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "集群模式"
+    },
+    "desktop": {
+      "connectLabel": "连接到桌面",
+      "screenLabel": "{name} 的屏幕",
+      "screenDefault": "桌面",
+      "watchTooltip": "在单独的屏幕上观看智能体工作。请不要碰任何东西，它会怯场的！",
+      "watchLabel": "桌面"
+    },
+    "buttons": {
+      "stop": "停止",
+      "sendToSwarm": "发送到集群",
+      "taskRunning": "另一个任务正在运行 — 点击停止它并运行您的任务",
+      "selectComputer": "选择一台计算机以发送消息",
+      "waitCreating": "请等待虚拟机创建完成",
+      "waitStarting": "请等待虚拟机启动",
+      "waitAgent": "请等待智能体初始化",
+      "vmStopping": "虚拟机正在停止",
+      "send": "发送",
+      "switching": "切换中...",
+      "overrideRun": "强制运行",
+      "stopLabel": "停止正在运行的任务并启动此任务",
+      "sendLabel": "发送消息"
+    },
+    "search": "搜索",
+    "upload": {
+      "label": "上传文件到虚拟机",
+      "heading": "上传文件到虚拟机",
+      "description": "文件将保存到桌面",
+      "vmInfo": "虚拟机: {name}",
+      "dropHeading": "将文件拖放到此处",
+      "dropDescription": "文件将上传到虚拟机的桌面文件夹",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "登录即可免费体验更多功能",
+      "description": "创建项目、邀请团队成员等。",
+      "connecting": "连接中...",
+      "continueWithGoogle": "使用 Google 继续"
+    },
+    "removeFile": "移除文件"
+  },
+  "chat": {
+    "greeting": "你好",
+    "greetingAuth": "我来处理电脑操作。有什么任务？",
+    "greetingUnauth": "AI 代替您操作电脑。只需告诉它您需要完成什么。",
+    "guide": "指南",
+    "saveLogins": "保存登录信息以自动填充",
+    "encryptedNote": "已加密，AI 无法查看",
+    "roleLabels": [
+      "同事",
+      "员工",
+      "朋友",
+      "助手",
+      "伙伴",
+      "队友",
+      "协作者",
+      "帮手"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} 竞争对手报告",
+        "warmLeads": "为 {company} 寻找 20 个线索",
+        "pitchDeck": "{company} 路演文稿草案"
+      },
+      "developer": {
+        "findBugs": "查找 {company} 上的缺陷",
+        "performance": "{company} 性能审计",
+        "apiDocs": "提取 {company} API 文档"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO 差距分析",
+        "competitorAds": "分析 {company} 竞品广告",
+        "trendingContent": "{company} 热门创意"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} 评价摘要",
+        "featureComparison": "{company} 功能对比",
+        "competitorLaunches": "追踪 {company} 竞品发布"
+      },
+      "data_analyst": {
+        "exportCsv": "导出 {company} 数据为 CSV",
+        "marketSizing": "{company} 市场规模分析",
+        "benchmark": "{company} 与行业基准对比"
+      },
+      "operations": {
+        "enterRecords": "将记录录入 {company}",
+        "cheapestVendor": "为 {company} 寻找供应商",
+        "invoiceSummary": "{company} 发票摘要"
+      },
+      "designer": {
+        "designComparison": "{company} vs 竞品设计",
+        "responsiveAudit": "{company} 响应式审计",
+        "inspiration": "{company} 设计灵感"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "抓取 {company} 网站数据",
+      "browser_automation": "导出 {company} 报告",
+      "data_entry": "录入数据到 {company}",
+      "email_outreach": "{company} 推广外联",
+      "testing": "{company} QA 测试",
+      "ecommerce": "{company} 价格对比",
+      "social_media": "发布关于 {company} 的内容",
+      "general_automation": "在 {company} 上自动化任务"
+    }
+  },
+  "chatMessages": {
+    "copyText": "复制文本",
+    "copied": "已复制！",
+    "regenerate": "重新生成",
+    "feedback": {
+      "title": "反馈",
+      "prompts": [
+        "评价一下",
+        "反馈",
+        "感觉如何？",
+        "有什么想法？",
+        "分享反馈"
+      ],
+      "tooltip": "分享您的反馈"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "智能搜索",
+      "description": "AI 驱动的全网搜索"
+    },
+    "collaborate": {
+      "title": "协作",
+      "description": "实时协同工作"
+    },
+    "globalAccess": {
+      "title": "全球访问",
+      "description": "支持 50+ 种语言搜索"
+    },
+    "aiModels": {
+      "title": "AI 模型",
+      "description": "多个 AI 提供商"
+    },
+    "freeForever": {
+      "title": "永久免费",
+      "description": "无隐藏费用"
+    },
+    "privateSecure": {
+      "title": "隐私与安全",
+      "description": "您的数据归您所有"
+    }
+  },
+  "sidebar": {
+    "newTask": "新任务",
+    "newTaskDescription": "开始新的 AI 自动化",
+    "activity": "活动",
+    "taskHistory": "任务历史",
+    "taskHistoryDescription": "查看过去的任务并继续未完成的工作",
+    "taskHistoryPopup": {
+      "title": "您的近期任务",
+      "description": "浏览并继续过去的对话。每个任务都会保存，您可以随时从中断处继续。"
+    },
+    "swarmRuns": "集群运行",
+    "swarmRunsDescription": "监控多智能体并行工作流",
+    "swarmRunsPopup": {
+      "title": "多智能体工作流",
+      "description": "在多台机器上并行运行任务。每个智能体独立工作，结果自动汇聚。"
+    },
+    "guide": "指南",
+    "guideDescription": "了解如何充分利用 Coasty",
+    "guidePopup": {
+      "title": "入门指南",
+      "description": "帮助您高效自动化的分步教程和最佳实践。"
+    },
+    "infrastructure": "基础设施",
+    "computer": "计算机",
+    "computers": "计算机",
+    "active": "活跃",
+    "view": "查看",
+    "workforce": "计划表",
+    "workforceDescription": "计划自动化任务和触发器",
+    "workforcePopup": {
+      "title": "定时自动化",
+      "description": "使用 cron 计划和代理间触发器设置循环任务。您的计划在您睡觉时运行。"
+    },
+    "credentials": "凭据",
+    "credentialsDescription": "安全存储智能体访问所需的登录信息",
+    "credentialsPopup": {
+      "title": "安全凭据保管库",
+      "description": "加密存储登录信息和 API 密钥。智能体自动填充凭据，不会暴露原始值。"
+    },
+    "desktopApp": {
+      "getDesktopApp": "获取桌面应用",
+      "download": "下载",
+      "downloadDesktopApp": "下载桌面应用",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "远程控制您的电脑",
+      "controlDescription": "安装桌面应用，从此仪表盘运行 PC 上的任务 — 随时随地。"
+    },
+    "credits": {
+      "runningLow": "积分 — 即将用完",
+      "remaining": "剩余积分",
+      "buy": "购买",
+      "creditsLeft": "剩余积分",
+      "usedLabel": "已用: {count}",
+      "consumed": "已消耗 {percent}%",
+      "usageThisWeek": "本周使用量"
+    },
+    "talkToUs": "联系我们",
+    "talkToUsDesc": "预约15分钟通话",
+    "inviteEarn": "邀请赚积分",
+    "inviteEarnDesc": "获取免费积分",
+    "user": "用户",
+    "account": "账户",
+    "tasks": "{count} 个任务",
+    "recentActivity": "近期活动",
+    "viewAllHistory": "查看全部历史 →",
+    "swarmRunsCount": "{count} 次集群运行",
+    "running": "运行中",
+    "completed": "已完成",
+    "viewAllSwarms": "查看全部集群 →",
+    "schedulesCount": "{count} 个计划",
+    "totalRuns": "共 {count} 次运行",
+    "paused": "已暂停",
+    "viewAllSchedules": "查看全部计划 →",
+    "credentialsCount": "{count} 个凭据",
+    "encryptedVault": "加密保管库",
+    "manageCredentials": "管理凭据 →",
+    "days": [
+      "周一",
+      "周二",
+      "周三",
+      "周四",
+      "周五",
+      "周六",
+      "周日"
+    ],
+    "resume": "继续",
+    "result": "结果",
+    "notScheduled": "未计划",
+    "overdue": "已逾期",
+    "lessThanMin": "< 1 分钟",
+    "inMinutes": "{count} 分钟后",
+    "inHours": "{count} 小时后",
+    "today": "今天",
+    "yesterday": "昨天"
+  },
+  "appHeader": {
+    "login": "登录",
+    "assign": "计划",
+    "assignDescription": "计划自动运行此任务",
+    "computer": "计算机",
+    "showComputer": "显示计算机",
+    "hideComputer": "隐藏计算机",
+    "employeeHired": "员工已分配！",
+    "employeeRemoved": "员工已移除"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "轻度日常自动化"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "每日任务自动化"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "扩展复杂工作流",
+        "badge": "最受欢迎"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "无限大规模自动化"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 台虚拟机（不活跃后删除）",
+      "vmAlwaysOn": "{count} 台常驻虚拟机",
+      "vmAlwaysOnPlural": "{count} 台常驻虚拟机",
+      "agentsParallel": "{count} 个智能体并行",
+      "basicSearch": "基础搜索",
+      "advancedSearch": "高级搜索与提取",
+      "standardSupport": "标准支持（真人服务）",
+      "prioritySupport": "优先支持，24 小时内响应",
+      "premiumSupport": "高级支持，12 小时内响应"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "小额充值",
+        "description": "快速补充"
+      },
+      "medium": {
+        "name": "中额充值",
+        "description": "标准补充",
+        "savings": "省 8%"
+      },
+      "large": {
+        "name": "大额充值",
+        "description": "批量购买",
+        "savings": "省 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count} 分钟前",
+      "hoursAgo": "{count} 小时前",
+      "daysAgo": "{count} 天前"
+    },
+    "noActivity": "此期间无活动",
+    "stats": {
+      "balance": "余额",
+      "earned": "已获得",
+      "used": "已使用",
+      "credits": "积分",
+      "allTime": "全部时间",
+      "lastRange": "最近 {range}",
+      "sessions": "{count} 个会话",
+      "avgDaily": "日均约 {count}",
+      "plan": "套餐",
+      "free": "Free",
+      "noPlan": "无套餐",
+      "canceling": "取消中"
+    },
+    "monthlyUsage": "月度积分使用量",
+    "remaining": "{used} / {total} 剩余",
+    "usedPercent": "本期已用 {percent}%",
+    "renews": "{date} 续费",
+    "choosePlan": "选择您的套餐",
+    "choosePlanDescription": "订阅以解锁 AI 功能并获取每月积分",
+    "savingsVsHuman": "相比人工每月节省 {amount}",
+    "timeSaved": "每月节省 {time}",
+    "cheaper": "便宜 {multiplier}",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/月",
+    "creditsPerMonth": "{count} 积分/月",
+    "processing": "处理中...",
+    "subscribeTo": "订阅 {name}",
+    "transactionTypes": {
+      "credit_purchase": "积分购买",
+      "agent_usage": "智能体使用",
+      "refund": "退款",
+      "bonus": "奖励",
+      "subscription": "订阅",
+      "subscription_grant": "订阅发放",
+      "renewal": "续费积分",
+      "reactivation": "重新激活"
+    },
+    "toasts": {
+      "paymentSuccess": "支付成功！积分已添加。",
+      "subscriptionActivated": "订阅已成功激活！",
+      "paymentCanceled": "支付已取消。未产生任何费用。",
+      "signInToSubscribe": "请登录以订阅",
+      "subscriptionCheckoutFailed": "无法启动订阅结算。请重试。",
+      "signInToPurchase": "请登录以购买积分",
+      "needSubscription": "您需要有效订阅才能购买额外积分",
+      "checkoutFailed": "无法启动结算。请重试。",
+      "manageFailed": "无法打开订阅管理。请重试。",
+      "transactionsExported": "交易记录已导出"
+    }
+  },
+  "apiKeys": {
+    "title": "模型提供商",
+    "new": "new",
+    "description": "添加您自己的 API 密钥以解锁模型访问。",
+    "securityNote": "您的密钥通过端到端加密安全存储。",
+    "apiKeyLabel": "{provider} API 密钥",
+    "getApiKey": "获取 API 密钥",
+    "delete": "删除",
+    "save": "保存",
+    "deleteDialog": {
+      "title": "删除 API 密钥",
+      "description": "确定要删除您的 {provider} API 密钥吗？此操作无法撤销，您将失去对 {provider} 模型的访问权限。",
+      "cancel": "取消",
+      "confirm": "删除"
+    },
+    "toasts": {
+      "saved": "API 密钥已保存",
+      "savedDescription": "您的 {provider} API 密钥已保存，模型已添加到收藏夹。",
+      "updatedDescription": "您的 {provider} API 密钥已更新。",
+      "saveFailed": "API 密钥保存失败",
+      "saveFailedDescription": "保存 {provider} API 密钥失败。请重试。",
+      "deleted": "API 密钥已删除",
+      "deletedDescription": "您的 {provider} API 密钥已删除。",
+      "deleteFailed": "API 密钥删除失败",
+      "deleteFailedDescription": "删除 {provider} API 密钥失败。请重试。"
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "个人资料",
+    "displayName": "显示名称",
+    "namePlaceholder": "您的姓名",
+    "company": "公司",
+    "companyPlaceholder": "您的公司",
+    "website": "网站",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "保存中...",
+    "saveChanges": "保存更改",
+    "account": "账户",
+    "email": "邮箱",
+    "verified": "已验证",
+    "signOut": "退出登录",
+    "signOutDescription": "从此设备退出登录",
+    "toasts": {
+      "profileUpdated": "个人资料已更新",
+      "profileUpdateFailed": "更新个人资料失败",
+      "signOutFailed": "退出登录失败"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "您的数据受到保护",
+    "dataProtectedDescription": "企业级安全，数据在存储和传输时均加密",
+    "features": {
+      "encryption": {
+        "title": "端到端加密",
+        "description": "API 密钥使用 AES-256-GCM 加密。您的凭据永远不会以明文形式存储。"
+      },
+      "rls": {
+        "title": "行级安全",
+        "description": "数据库级别的隔离确保只有您可以访问自己的数据。不可能发生跨租户访问。"
+      },
+      "privacy": {
+        "title": "隐私优先设计",
+        "description": "我们仅收集提供服务所需的最少数据。您的对话和文件归您所有。"
+      },
+      "session": {
+        "title": "会话安全",
+        "description": "每个请求都有 CSRF 保护、安全的 HTTP-only Cookie 和内容安全策略头。"
+      }
+    },
+    "legal": "法律信息",
+    "privacyPolicy": {
+      "title": "隐私政策",
+      "description": "我们如何收集、使用和保护您的数据"
+    },
+    "termsOfService": {
+      "title": "服务条款",
+      "description": "我们的使用条款和条件"
+    }
+  },
+  "layoutSettings": {
+    "layout": "布局"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "摘要",
+      "highlight": "总结"
+    },
+    "code": {
+      "label": "代码",
+      "highlight": "构建"
+    },
+    "research": {
+      "label": "研究",
+      "highlight": "分析"
+    },
+    "create": {
+      "label": "创建",
+      "highlight": "生成"
+    },
+    "solve": {
+      "label": "解决",
+      "highlight": "调试"
+    },
+    "learn": {
+      "label": "学习",
+      "highlight": "解释"
+    }
+  },
+  "loadingMessages": [
+    "正在启动硅脑",
+    "正在唤醒数字意识",
+    "正在初始化神经通路",
+    "正在启动量子核心",
+    "正在充能通量电容器",
+    "正在激活主机",
+    "正在驱动计算矩阵",
+    "正在启动曲速引擎",
+    "正在召唤硅灵",
+    "正在点燃电子引擎",
+    "正在预热晶体管",
+    "正在组装比特和字节",
+    "正在校准数字突触",
+    "正在为 CPU 晶体充能",
+    "正在加载意识协议",
+    "正在初始化系统资源",
+    "正在准备计算环境",
+    "正在建立安全连接",
+    "正在配置虚拟资源",
+    "正在设置系统参数",
+    "正在启动虚拟实例",
+    "正在激活远程桌面",
+    "正在部署云资源",
+    "正在启动系统启动序列",
+    "正在准备执行环境",
+    "正在叫醒打瞌睡的电脑",
+    "正在戳数字熊",
+    "正在冲一杯计算咖啡",
+    "正在伸展数字肌肉",
+    "正在睁开数字之眼",
+    "正在启动",
+    "正在开机",
+    "正在上线",
+    "正在引导系统",
+    "正在准备",
+    "即将就绪",
+    "正在准备工作区",
+    "正在加载资源",
+    "系统启动中"
+  ],
+  "quickStart": {
+    "greetingName": "你好 {name}!",
+    "greetingDefault": "你好!",
+    "subtitle": "你的任务在安全、隔离的虚拟计算机中运行",
+    "tabs": {
+      "start": "开始",
+      "desktop": "桌面",
+      "swarms": "集群",
+      "schedules": "定时任务"
+    },
+    "items": {
+      "computerReady": "计算机已就绪",
+      "pickComputer": "选择计算机",
+      "createComputer": "创建计算机",
+      "loginsSaved": "登录信息已保存",
+      "addLogins": "添加登录信息",
+      "askAnything": "随便问",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "手机远程控制",
+      "freeDownload": "免费下载",
+      "onePrompt": "一个提示",
+      "manyAgents": "多个代理",
+      "combinedResult": "综合结果",
+      "setCadence": "设置频率",
+      "autoRuns": "自动运行",
+      "recurringResults": "周期性结果",
+      "computerReadyDesc": "已连接，准备执行任务",
+      "pickComputerDesc": "从可用机器中选择",
+      "createComputerDesc": "几秒内创建云端电脑",
+      "loginsSavedDesc": "加密凭据已准备好自动填充",
+      "addLoginsDesc": "保存密码以自动访问网站",
+      "askAnythingDesc": "描述任务，观看AI工作",
+      "macWindowsDesc": "桌面原生应用",
+      "mobileRemoteDesc": "从任何设备控制您的代理",
+      "freeDownloadDesc": "轻量安装，秒速运行",
+      "onePromptDesc": "用自然语言描述您的目标",
+      "manyAgentsDesc": "代理跨机器并行工作",
+      "combinedResultDesc": "所有结果合并为一份报告",
+      "setCadenceDesc": "每小时、每天、每周或自定义cron",
+      "autoRunsDesc": "代理无需干预自动执行",
+      "recurringResultsDesc": "按您的时间表交付报告"
+    },
+    "cta": {
+      "downloadApp": "下载应用",
+      "trySwarms": "试用集群",
+      "setUp": "设置"
+    }
+  },
+  "machines": {
+    "title": "我的电脑",
+    "subtitle": "管理你的 AI 控制桌面环境",
+    "guide": "指南",
+    "newMachine": "新建机器",
+    "filters": {
+      "all": "全部",
+      "running": "运行中",
+      "creating": "创建中",
+      "stopped": "已停止"
+    },
+    "desktopPromo": {
+      "text": "跳过 VM，使用原生应用在你自己的电脑上运行 AI 代理。用手机控制你的桌面。",
+      "cta": "获取应用"
+    },
+    "emptyState": {
+      "title": "拥有完整计算机访问权限的真正 AI 员工",
+      "description": "启动隔离的虚拟机，让 AI 代理浏览网页、运行终端并控制桌面——全程无需干预。",
+      "feature1": {
+        "title": "完全桌面控制",
+        "description": "AI 像真实用户一样移动鼠标、打字、点击和导航。"
+      },
+      "feature2": {
+        "title": "任何任务自动化",
+        "description": "浏览器、终端和 UI——所有代理在一个 VM 中协同工作。"
+      },
+      "feature3": {
+        "title": "隔离且安全",
+        "description": "每台机器在自己的容器中运行——你的本地系统不受影响。"
+      },
+      "cta": "创建你的第一台机器"
+    },
+    "noMachines": "未找到机器。",
+    "noFilteredMachines": "没有{filter}的机器",
+    "noFilteredDescription": "当前没有{filter}的机器。",
+    "loadingMachines": "正在加载机器...",
+    "toasts": {
+      "deleted": "机器已成功删除",
+      "readyOpen": "你现在可以连接到你的机器了。",
+      "open": "打开",
+      "createFailed": "请重新尝试创建机器。",
+      "fetchFailed": "加载机器列表失败"
+    }
+  },
+  "createMachine": {
+    "title": "新建电脑",
+    "subtitle": "启动云桌面——约 30 秒即可就绪",
+    "freeExpiry": "免费电脑到期时间：",
+    "freeExpiry2": "2 小时",
+    "upgrade": "升级",
+    "limitReached": "你已达到电脑上限。请停止或删除现有电脑后再创建新的。",
+    "upgradeMore": "升级以获得更多 →",
+    "nameLabel": "电脑名称",
+    "namePlaceholder": "我的云服务器",
+    "nameError": "电脑名称不能以「local」开头",
+    "nameRequired": "请输入电脑名称",
+    "osLabel": "操作系统",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 桌面"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows 桌面——可能存在问题"
+    },
+    "osHintWindows": "带有 Chrome 的 Windows 桌面（测试版）。约 2 分钟后就绪。",
+    "osHintLinux": "可通过浏览器访问的 Ubuntu 桌面。约 30 秒后就绪。",
+    "stateLabel": "电脑状态",
+    "restorePrevious": "恢复上次状态",
+    "restoreDescription": "从上次快照恢复",
+    "startFresh": "全新开始",
+    "startFreshDescription": "干净的桌面环境",
+    "cancel": "取消",
+    "creating": "创建中...",
+    "create": "创建电脑",
+    "toasts": {
+      "restoringSnapshot": "正在从快照恢复电脑！",
+      "restoringDescription": "正在恢复你之前的桌面状态。约 30 秒后就绪。",
+      "windowsCreated": "Windows 电脑创建已开始！",
+      "windowsDescription": "你的 Windows 桌面正在启动。约 2 分钟后就绪。",
+      "linuxCreated": "你的桌面正在启动。约 30 秒后就绪。",
+      "sshCreated": "你的云电脑正在启动。就绪后即可使用 SSH 密钥。"
+    }
+  },
+  "secrets": {
+    "title": "已保存的凭据",
+    "subtitle": "安全存储，AI 代理登录时自动使用",
+    "guide": "指南",
+    "import": "导入",
+    "addCredential": "添加凭据",
+    "securityNote": "凭据不会发送给 AI 模型，也不会在聊天中暴露——代理直接填写，不会看到实际值",
+    "username": "用户名",
+    "password": "密码",
+    "hide": "隐藏",
+    "revealFor10s": "显示 10 秒",
+    "encrypted": "已加密",
+    "emptyState": {
+      "title": "自动登录，无需操作",
+      "description": "保存一次凭据，AI 代理自动登录并继续工作，不会打断你",
+      "feature1": {
+        "title": "零中断",
+        "description": "代理遇到登录表单时自动填写并继续任务——无提示、无暂停"
+      },
+      "feature2": {
+        "title": "AI 看不到",
+        "description": "你的凭据被直接注入。AI 模型永远看不到实际值"
+      },
+      "feature3": {
+        "title": "任何网站",
+        "description": "适用于任何网站的登录表单——电子邮件、SaaS 工具、仪表板等"
+      },
+      "cta": "添加你的第一个凭据"
+    },
+    "deleteDialog": {
+      "title": "删除凭据？",
+      "description": "{name}（{service}）将被永久删除。AI 代理将无法再使用它。",
+      "cancel": "取消",
+      "delete": "删除"
+    },
+    "toasts": {
+      "loadFailed": "加载凭据失败",
+      "revealFailed": "显示密码失败",
+      "deleted": "凭据已删除",
+      "deleteFailed": "删除凭据失败"
+    },
+    "loading": "正在加载凭据..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "简单定价,",
+      "title2": "真正的自动化",
+      "subtitle": "免费开始。需要更多功能时再升级。"
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "体验排名第一的计算机操控代理",
+        "cta": "免费开始"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "轻量日常自动化",
+        "cta": "获取 Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "每天自动化任务",
+        "cta": "获取 Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "扩展复杂工作流",
+        "cta": "获取 Plus",
+        "badge": "最受欢迎"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "无限高级自动化",
+        "cta": "获取 Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "浏览器、桌面和终端全面控制",
+        "badge": "核心"
+      },
+      "swarmMode": {
+        "name": "集群模式",
+        "sequential": "仅顺序执行",
+        "parallel": "{count} 个代理并行执行",
+        "badge": "强大"
+      },
+      "security": {
+        "name": "安全",
+        "description": "沙盒隔离，E2E 加密",
+        "badge": "所有套餐"
+      },
+      "monthlyCredits": {
+        "name": "每月积分",
+        "payAsYouGo": "按量付费",
+        "creditsPerMonth": "每月 {count} 积分"
+      },
+      "persistentMachines": {
+        "name": "持久化机器",
+        "temporary": "1 台临时 VM（2小时）",
+        "deletedAfterInactivity": "1 台 VM（不活动后删除）",
+        "alwaysOn": "{count} 台常驻 VM",
+        "alwaysOnPlural": "{count} 台常驻 VM"
+      },
+      "webSearch": {
+        "name": "网络搜索",
+        "advanced": "高级搜索和数据提取",
+        "basic": "基础搜索"
+      }
+    },
+    "animations": {
+      "agentDescription": "您的代理控制一台真实计算机——浏览器、文件和终端",
+      "fillForm": "填写表单",
+      "searchExtract": "搜索和提取",
+      "uploadReport": "上传报告",
+      "navigateSite": "浏览网站",
+      "creditsPerMonth": "每月积分",
+      "cr": "cr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2小时限制",
+      "alwaysOn": "常驻运行",
+      "tempVmDescription": "临时 VM——2小时后重置",
+      "persistentVmDescription": "您的文件、应用和会话在任务之间保留",
+      "sequentialOnly": "此套餐仅支持顺序执行",
+      "yourTask": "您的任务",
+      "agentsWorking": "{count} 个代理同时工作",
+      "upgradeForExtraction": "升级以获取完整提取功能",
+      "searchDescription": "搜索、抓取和提取结构化数据",
+      "basicSearchIncluded": "包含基础搜索",
+      "e2eEncryption": "E2E 加密",
+      "sandboxedVm": "沙盒 VM",
+      "destroyedAfterUse": "使用后销毁",
+      "everyPlan": "所有套餐。无一例外。"
+    },
+    "perMonth": "/月",
+    "faqs": {
+      "credits": {
+        "q": "什么算作一个积分？",
+        "a": "一个积分大约等于代理的一次操作——一次点击、一次表单填写、一次搜索查询或一次文件操作。典型的多步骤任务使用 5 到 15 个积分。"
+      },
+      "persistent": {
+        "q": "「持久化机器」是什么意思？",
+        "a": "在付费套餐中，您的 VM 在任务之间保持运行——桌面、文件、浏览器会话和已安装的软件全部保留。就像您自己的常驻云电脑。"
+      },
+      "swarm": {
+        "q": "什么是集群模式？",
+        "a": "集群模式将任务分配到同时运行的多台机器上。不再是一个代理按顺序执行 10 次搜索，而是多个代理并行处理。"
+      },
+      "cancel": {
+        "q": "可以随时取消吗？",
+        "a": "可以。没有合同，没有取消费用。从账户页面取消，在计费周期结束前继续使用。"
+      },
+      "security": {
+        "q": "我的数据安全吗？",
+        "a": "每个任务都在使用后销毁的完全隔离 VM 中运行。所有连接端到端加密，我们从不存储您的凭据。"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "定制积分、专用 VM、SLA、SSO 和优先支持。",
+      "cta": "联系我们"
+    },
+    "footer": {
+      "title": "您的 AI 代理只需 60 秒",
+      "subtitle": "注册并让 Coasty 为您工作。",
+      "noCreditCard": "无需信用卡",
+      "cancelAnytime": "随时取消",
+      "noCreditCardRequired": "无需信用卡",
+      "cancelAnytimeNoContracts": "随时取消——无合同约束"
+    },
+    "questions": "常见问题"
+  },
+  "guide": {
+    "pageTitle": "指南",
+    "pageSubtitle": "从初始设置到高级功能——了解如何充分利用 Coasty",
+    "completeGuide": "完整指南",
+    "completeGuideSubtitle": "关于 Coasty 您需要知道的一切",
+    "completeGuideDescription": "从初始设置到高级功能——了解如何充分利用您的 AI 代理。",
+    "talkToCofounders": "联系联合创始人",
+    "tabs": {
+      "overview": "概览",
+      "gettingStarted": "快速入门",
+      "chatTasks": "对话与任务",
+      "machines": "机器",
+      "credentials": "凭据",
+      "swarmMode": "集群模式",
+      "workforce": "计划表",
+      "desktopApp": "桌面应用",
+      "billing": "计费与积分"
+    },
+    "overview": {
+      "howItWorks": "工作原理",
+      "step1": "描述任务",
+      "step2": "Coasty 规划步骤",
+      "step3": "自主执行",
+      "step": "步骤",
+      "whatCanDo": "Coasty 能做什么",
+      "taskCount": "10 个类别中超过 40 项任务",
+      "categories": {
+        "sales": {
+          "name": "销售",
+          "desc": "挖掘 50 个潜在客户，发送个性化邮件"
+        },
+        "marketing": {
+          "name": "营销",
+          "desc": "发布博客文章，安排社交媒体"
+        },
+        "jobApps": {
+          "name": "求职申请",
+          "desc": "申请 20 份工作，定制每份简历"
+        },
+        "email": {
+          "name": "邮件",
+          "desc": "起草回复、批量发送、取消订阅"
+        },
+        "dataEntry": {
+          "name": "数据录入",
+          "desc": "在应用间传输数据，创建电子表格"
+        },
+        "research": {
+          "name": "研究",
+          "desc": "深度报告，竞争对手监控"
+        },
+        "qaTesting": {
+          "name": "QA 测试",
+          "desc": "测试注册流程，模糊测试表单，网站健康检查"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "搜索候选人，个性化联络"
+        },
+        "support": {
+          "name": "客户支持",
+          "desc": "起草回复，更新帮助文档"
+        },
+        "productivity": {
+          "name": "生产力",
+          "desc": "预订旅行，支付账单，管理日历"
+        }
+      },
+      "whyCoasty": "为什么选择 Coasty",
+      "notChatbot": "不是聊天机器人。不是 RPA 脚本。",
+      "worksLikeHuman": {
+        "title": "像人类一样工作",
+        "desc": "看、点击、打字、导航——和您一模一样"
+      },
+      "noScripts": {
+        "title": "无需脚本或设置",
+        "desc": "用自然语言输入，直接获得结果"
+      },
+      "handlesUnexpected": {
+        "title": "应对意外情况",
+        "desc": "适应 CAPTCHA、弹窗、布局变化"
+      },
+      "runsInIsolation": {
+        "title": "隔离环境运行",
+        "desc": "每个会话独立沙盒 VM——不会泄露任何信息"
+      },
+      "ctaTitle": "选择任意任务试试看",
+      "ctaSubtitle": "准备好让 Coasty 为您工作了吗？",
+      "ctaDescription": "描述本指南中的任何任务，看 Coasty 如何完成。",
+      "ctaNote": "免费开始。无需信用卡。",
+      "startTask": "开始任务",
+      "startFree": "免费开始",
+      "desktopApp": "桌面应用"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "注册",
+          "desc": "一键开始"
+        },
+        "createMachine": {
+          "title": "创建机器",
+          "desc": "您的代理获得专属计算机"
+        },
+        "saveCredentials": {
+          "title": "保存凭据",
+          "desc": "为任何网站加密登录信息"
+        },
+        "giveTask": {
+          "title": "下达任务",
+          "desc": "描述任务。观看它执行。"
+        }
+      },
+      "examplePrompts": [
+        "用我的简历在 LinkedIn 上申请 10 个匹配的职位",
+        "研究竞争对手定价并创建比较电子表格",
+        "在 WordPress 上撰写并发布关于 [topic] 的博客文章",
+        "在 Gmail 中取消所有营销邮件的订阅",
+        "测试我网站的注册流程并报告任何 bug",
+        "在 LinkedIn 上找到符合 [ICP] 的 50 个潜在客户并添加到我的 CRM"
+      ],
+      "quickPrompts": "快速尝试的提示",
+      "startFirstTask": "开始您的第一个任务"
+    },
+    "chatTasks": {
+      "commandCenter": "您的指挥中心",
+      "describeTask": "描述任何任务。观看它执行。",
+      "examplePrompt": "在 Amazon 上找到 $50 以下的前 5 款无线键盘，并在电子表格中进行比较。",
+      "exampleResponse": "我将搜索 Amazon 并创建比较表。正在打开浏览器。",
+      "exampleDone": "完成。电子表格已保存，包含 5 款键盘的价格、评分和功能。",
+      "describePlaceholder": "描述您的任务...",
+      "threeAgents": "三个专业代理",
+      "autoAssigned": "按步骤自动分配。",
+      "browser": "浏览器",
+      "browserDesc": "导航、点击、填写表单、抓取数据",
+      "terminal": "终端",
+      "terminalDesc": "运行命令、安装、处理文件",
+      "desktop": "桌面",
+      "desktopDesc": "点击、打字、滚动、打开应用",
+      "betterPrompts": "编写更好的提示",
+      "specificBeatsVague": "具体的永远优于模糊的。每一次。",
+      "do": "应该这样",
+      "dont": "不要这样",
+      "doExample1": "在 LinkedIn 上申请 10 个软件工程职位。每封求职信都要提到对方的技术栈。",
+      "dontExample1": "申请工作",
+      "doExample2": "在 Google Flights 上搜索 SFO 到 JFK，3月20-25日往返。截图最便宜的前 3 个。",
+      "dontExample2": "找航班",
+      "readyToTry": "准备好试试了吗？",
+      "openChat": "打开对话，描述您需要完成的任务。",
+      "startChat": "开始对话"
+    },
+    "machinesTab": {
+      "title": "您的机器",
+      "subtitle": "几秒内即可启动的完整 Ubuntu 桌面。",
+      "lifecycle": "生命周期",
+      "lifecycleDesc": "五种状态，全自动。",
+      "planLimits": "套餐限制",
+      "planCol": "套餐",
+      "machinesCol": "机器",
+      "swarmAgentsCol": "集群代理",
+      "temp": "1 台临时",
+      "states": {
+        "creating": "创建中",
+        "starting": "启动中",
+        "running": "运行中",
+        "stopping": "停止中",
+        "stopped": "已停止"
+      },
+      "newMachine": "+ 新建",
+      "researchVm": "研究 VM",
+      "emailVm": "邮件 VM",
+      "testingVm": "测试 VM",
+      "cores": "{count} 核",
+      "gb": "{count} GB",
+      "stop": "停止",
+      "start": "启动",
+      "provisioning": "配置中...",
+      "spinUp": "启动机器",
+      "goToMachines": "前往机器"
+    },
+    "credentialsTab": {
+      "loginDetected": "检测到登录",
+      "matched": "已匹配",
+      "credentialFound": "找到凭据",
+      "autoFilled": "已自动填充",
+      "autoFillTitle": "自动填充运行中",
+      "autoFillDesc": "检测到登录，凭据匹配，表单填充。全自动。",
+      "security": "安全",
+      "encrypted": "已加密",
+      "aes256": "AES-256 静态加密",
+      "vmIsolated": "VM 隔离",
+      "sandboxed": "每会话沙盒隔离",
+      "neverLogged": "从不记录",
+      "zeroTrace": "日志中零痕迹",
+      "savedCredentials": "已保存的凭据",
+      "addOnce": "添加一次，处处自动填充。",
+      "saveFirst": "保存您的第一个凭据",
+      "goToCredentials": "前往已保存的凭据"
+    },
+    "swarmTab": {
+      "title": "集群模式",
+      "runParallel": "并行运行 {count} 台机器",
+      "sameTask": "相同任务，{multiplier} 倍产出，相同时间。",
+      "done": "完成",
+      "running": "运行中",
+      "pending": "等待中",
+      "result": "结果",
+      "useCases": {
+        "parallelResearch": {
+          "title": "并行研究",
+          "desc": "{count} 个竞争对手，{count} 台机器，同时进行"
+        },
+        "bulkApplications": {
+          "title": "批量申请",
+          "desc": "同时在多个平台上申请"
+        },
+        "multiCitySearch": {
+          "title": "多城市搜索",
+          "desc": "同时搜索 {count} 个城市的列表"
+        },
+        "parallelOutreach": {
+          "title": "并行外联",
+          "desc": "向不同群体发送个性化邮件"
+        },
+        "crossPlatform": {
+          "title": "跨平台",
+          "desc": "同时发布到 {count} 个平台"
+        },
+        "distributedTesting": {
+          "title": "分布式测试",
+          "desc": "并行测试多种场景"
+        }
+      },
+      "whatToSwarm": "集群任务",
+      "availability": "可用性",
+      "freeNotAvailable": "不可用",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 个代理",
+      "startSwarm": "启动集群"
+    },
+    "workforceTab": {
+      "title": "工作力",
+      "subtitle": "您的 AI 公司，自动运行",
+      "description": "员工、团队、触发器——全天候运行。",
+      "myCompany": "我的公司",
+      "contentOps": "内容运营",
+      "support": "客户支持",
+      "writer": "写手",
+      "seo": "SEO",
+      "social": "社交",
+      "inbox": "收件箱",
+      "docs": "文档",
+      "concepts": "核心概念",
+      "conceptItems": {
+        "employees": {
+          "title": "员工",
+          "desc": "按计划全天候执行任务的 AI 代理"
+        },
+        "teams": {
+          "title": "团队",
+          "desc": "共享指令的员工组"
+        },
+        "sharedMemory": {
+          "title": "共享内存",
+          "desc": "员工读写的键值存储"
+        },
+        "triggers": {
+          "title": "触发器",
+          "desc": "连接员工：一个完成，下一个开始"
+        },
+        "delegates": {
+          "title": "委派",
+          "desc": "员工将子任务分配给专家"
+        },
+        "orgChart": {
+          "title": "组织架构图",
+          "desc": "公司层级结构的可视化地图"
+        }
+      },
+      "chainTitle": "将员工串联起来",
+      "chainDesc": "输出自动从一个流向下一个。",
+      "scout": "Scout",
+      "scoutDesc": "研究竞争对手",
+      "atlas": "Atlas",
+      "atlasDesc": "撰写博客文章",
+      "nova": "Nova",
+      "novaDesc": "发布到社交平台",
+      "done": "完成",
+      "onComplete": "on_complete",
+      "waiting": "等待中",
+      "templates": "从模板开始",
+      "templateItems": {
+        "contentOps": {
+          "name": "内容运营",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "客户支持",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "营销",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} 名员工",
+      "openWorkforce": "打开工作力"
+    },
+    "billingTab": {
+      "credits": "积分",
+      "timeMetric": "时间是唯一的衡量标准。",
+      "rate": "费率",
+      "rateValue": "10",
+      "creditsPerMin": "积分/分钟",
+      "metered": "每 30 秒计量",
+      "example": "示例",
+      "minTask": "分钟任务",
+      "startCredits": "开始：{count} 积分",
+      "endCredits": "结束：{count} 积分",
+      "creditsUsed": "已用 {count} 积分",
+      "calculation": "{mins} 分钟 x 10 积分/分钟",
+      "plans": "套餐",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 台临时",
+          "feature": "基础搜索"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 台常驻",
+          "feature": "2 个并行代理"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 台常驻",
+          "feature": "高级搜索"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 台常驻",
+          "feature": "优先支持"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 台常驻",
+          "feature": "SLA 保障"
+        }
+      },
+      "perMonth": "{price}/月",
+      "faqTitle": "常见问题",
+      "faqs": {
+        "howCharged": {
+          "q": "积分如何计费？",
+          "a": "代理执行每分钟 10 积分，向上取整。会话期间每 30 秒检查一次。"
+        },
+        "runOut": {
+          "q": "积分用完会怎样？",
+          "a": "开始任务至少需要 20 积分。积分归零后任务暂停——购买附加积分继续使用。"
+        },
+        "rollOver": {
+          "q": "未使用的积分会结转吗？",
+          "a": "积分在每个计费周期重置。用完即止。"
+        }
+      },
+      "goToBilling": "前往计费"
+    },
+    "desktopAppTab": {
+      "overlay": "悬浮窗",
+      "overlayDesc": "始终在那里。点击展开。",
+      "compact": "紧凑模式",
+      "expanded": "展开模式",
+      "ready": "就绪",
+      "exampleTask": "更新我的简历",
+      "exampleResponse": "正在打开 resume.docx...",
+      "describePlaceholder": "描述您的任务...",
+      "whatItControls": "控制范围",
+      "controls": {
+        "browser": {
+          "name": "浏览器",
+          "desc": "导航、点击、填写表单"
+        },
+        "files": {
+          "name": "文件",
+          "desc": "随处读取、写入、编辑"
+        },
+        "terminal": {
+          "name": "终端",
+          "desc": "运行任何 shell 命令"
+        },
+        "desktop": {
+          "name": "桌面",
+          "desc": "点击、打字、滚动"
+        },
+        "screenshots": {
+          "name": "截图",
+          "desc": "看到您所看到的"
+        },
+        "apps": {
+          "name": "应用",
+          "desc": "控制任何已安装的应用"
+        }
+      },
+      "twoWays": "两种运行方式",
+      "cloudVm": "云端 VM",
+      "cloudFeatures": {
+        "isolated": "完全隔离的沙盒",
+        "freshBrowser": "全新浏览器，无历史记录",
+        "maxSecurity": "最高安全级别"
+      },
+      "desktopMode": "桌面",
+      "desktopFeatures": {
+        "yourFiles": "您的文件，直接访问",
+        "yourApps": "您已安装的应用",
+        "yourSessions": "您已登录的会话"
+      },
+      "downloadCta": "下载桌面应用"
+    }
+  },
+  "comparePage": {
+    "title": "对比",
+    "heroTitle": "Coasty vs. 竞争对手",
+    "heroDescription": "了解排名第一的计算机操作 AI 智能体（OSWorld 82%）与其他方案的对比。基于真实数据的逐项功能比较。",
+    "categories": {
+      "aiAgent": "AI 智能体",
+      "infrastructure": "基础设施",
+      "rpa": "RPA",
+      "human": "人工"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "准备好体验排名第一的计算机操作 AI 智能体了吗？",
+    "ctaButton": "免费试用 Coasty",
+    "noCreditCard": "无需信用卡",
+    "allComparisons": "所有对比",
+    "featureComparison": "功能对比",
+    "whyChooseCoasty": "为什么选择 Coasty",
+    "strengthsOf": "{name} 的优势",
+    "ctaDescription": "OSWorld 基准 82%。VM 隔离。CAPTCHA 破解。起价 $20/月。",
+    "watchCaseStudies": "观看案例研究"
+  },
+  "agentSwarms": {
+    "badge": "智能体集群模式",
+    "heroTitle1": "一个提示词。",
+    "heroTitle2": "无限台机器。",
+    "heroTitle3": "并行结果。",
+    "heroDescription": "将任何任务分配到多个同时运行的隔离环境中。一小时的工作几分钟内完成。",
+    "trySwarmMode": "试用集群模式",
+    "seeInAction": "查看实际效果",
+    "liveExecution": "swarm-tree — 实时执行",
+    "machineCount": "{count} 台机器",
+    "running": "运行中",
+    "threeSteps": "并行执行三步走",
+    "steps": {
+      "typePrompt": {
+        "title": "输入提示词",
+        "desc": "描述任务。开启集群模式并选择机器数量。"
+      },
+      "machinesSpinUp": {
+        "title": "机器启动",
+        "desc": "每台机器拥有完整的隔离环境 — 浏览器、终端、桌面。"
+      },
+      "resultsStream": {
+        "title": "结果实时流式传输",
+        "desc": "通过集群树视图实时观看每台机器的运行情况。"
+      }
+    },
+    "demoTitle": "智能体集群演示",
+    "demoDescription": "观看 {count} 台机器同时处理 CRM 调研任务",
+    "prompt": "提示词",
+    "swarm": "SWARM",
+    "run": "运行",
+    "reset": "重置",
+    "allCompleted": "全部 {count} 台机器已完成",
+    "speedComparison": "~{swarmTime} 分钟代替 ~{seqTime} 分钟 — 快 {multiplier} 倍",
+    "seqVsSwarm": "顺序执行 vs 集群",
+    "tableHeaders": {
+      "task": "任务",
+      "before": "之前",
+      "swarm": "集群",
+      "speed": "速度"
+    },
+    "speedExamples": {
+      "crmResearch": "5 款 CRM 工具调研",
+      "qaPages": "8 个页面 QA 测试",
+      "leadEnrichment": "线索充实（100 条）",
+      "priceMonitoring": "价格监控"
+    },
+    "builtForParallel": "为并行工作而生",
+    "useCases": {
+      "marketResearch": {
+        "title": "大规模市场调研",
+        "desc": "在隔离的机器上同时调研多个竞争对手、市场或产品。"
+      },
+      "leadGeneration": {
+        "title": "线索生成",
+        "desc": "充实资料、查找邮箱、验证社交媒体 — 几小时的工作几分钟完成。"
+      },
+      "qaTesting": {
+        "title": "QA 与回归测试",
+        "desc": "在不同页面或流程上并行运行测试场景。"
+      },
+      "contentSocial": {
+        "title": "内容与社交",
+        "desc": "通过每台机器的隔离同时发布到多个平台。"
+      },
+      "dataExtraction": {
+        "title": "数据提取",
+        "desc": "一次性从数十个来源抓取并结构化数据。"
+      },
+      "scheduledRuns": {
+        "title": "定时执行",
+        "desc": "将集群模式与调度结合，执行周期性并行任务。"
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "真正隔离",
+        "desc": "每台机器拥有独立的浏览器、终端和桌面。"
+      },
+      "tripleMachineLimit": {
+        "title": "3 倍机器上限",
+        "desc": "集群模式将您套餐的机器容量提升至 3 倍。"
+      },
+      "liveTreeView": {
+        "title": "实时树视图",
+        "desc": "截图和工具调用实时流式传输。"
+      },
+      "autoAggregation": {
+        "title": "自动汇总",
+        "desc": "结果合并为一份统一的报告。"
+      },
+      "shareableRuns": {
+        "title": "可分享的运行",
+        "desc": "通过链接回放完整的执行时间线。"
+      },
+      "fullySandboxed": {
+        "title": "完全沙箱化",
+        "desc": "完成后所有环境将被销毁。"
+      }
+    },
+    "readyCta": "准备好并行执行任务了吗？",
+    "includedWithPaid": "集群模式包含在所有付费套餐中。",
+    "getStarted": "开始使用",
+    "viewPricing": "查看定价",
+    "legend": {
+      "messages": "消息",
+      "broadcast": "广播",
+      "sharedMemory": "共享内存",
+      "help": "帮助"
+    },
+    "liveSwarmExecution": "带有智能体通信的实时集群执行",
+    "popular": "热门",
+    "avgRating": "平均 {rating}"
+  },
+  "downloadPage": {
+    "title": "桌面应用",
+    "heroTitle": "让 Coasty 操控您的电脑",
+    "heroDescription": "为您接管操作的 AI 助手。自动化您的浏览器、桌面和终端 — 或通过网页界面从任何地方控制您的电脑。",
+    "seeInAction": "查看实际效果",
+    "overlayDescription": "悬浮在桌面上的轻量级覆盖层。在本地或通过任何浏览器远程控制 — 您的电脑，您做主。",
+    "recommended": "推荐适用于您的系统",
+    "coastyFor": "{platform} 版 Coasty",
+    "installerLabel": "{extension} 安装程序",
+    "beforeInstall": "安装前须知",
+    "beforeInstallDescription": "Coasty Desktop 是全新发布的应用，因此您的操作系统可能暂时无法识别。这对于新发布的应用来说完全正常 — 请按以下步骤操作：",
+    "windowsSteps": {
+      "step1": "Windows 已保护你的电脑",
+      "step2": "更多信息",
+      "step3": "仍要运行"
+    },
+    "macSteps": {
+      "step1": "无法打开 Coasty Desktop",
+      "step2": "系统设置 > 隐私与安全性",
+      "step3": "仍要打开"
+    },
+    "allPlatforms": "所有平台",
+    "systemRequirements": {
+      "title": "系统要求",
+      "win1": "Windows 10 或更高版本",
+      "win2": "64 位（x86_64）",
+      "win3": "最低 4 GB RAM",
+      "mac1": "macOS 10.15（Catalina）或更高版本",
+      "mac2": "Apple Silicon 或 Intel",
+      "mac3": "最低 4 GB RAM"
+    },
+    "whatsIncluded": "包含功能",
+    "features": {
+      "browser": "浏览器自动化",
+      "desktop": "桌面自动化",
+      "terminal": "终端访问",
+      "files": "文件操作",
+      "updates": "自动更新",
+      "remote": "随处控制"
+    },
+    "browserCta": "在浏览器中打开 Coasty",
+    "browserCtaDescription": "想要从任何地方控制您的机器？",
+    "loading": "加载中...",
+    "downloadFor": "下载 {platform} 版",
+    "download": "下载",
+    "unavailable": "不可用"
+  },
+  "referralPage": {
+    "shareTitle": "分享 Coasty。",
+    "earnTitle": "一起赚取。",
+    "shareDescription": "赠送朋友 50 个免费积分来部署他们的首个 AI 智能体。每次有人加入，您也获得 50 积分。",
+    "features": [
+      "真正有用的 AI — 真实浏览器、真实点击、真实结果",
+      "隔离且安全 — 每个智能体在独立的沙箱 VM 中运行",
+      "睡觉时也在运行 — 安排任务，让智能体处理其余工作"
+    ],
+    "recentActivity": "您的近期活动",
+    "friendsCould": "您的朋友也可以这样做",
+    "giveGet": "赠送朋友 50 积分。自己获得 50 积分。每次都有。",
+    "stats": {
+      "invited": "已邀请",
+      "earned": "已赚取",
+      "perInvite": "每次邀请"
+    },
+    "tabs": {
+      "invite": "邀请朋友",
+      "feedback": "发送反馈"
+    },
+    "referralLink": "您的推荐链接",
+    "howItWorks": "如何运作",
+    "howSteps": [
+      "与朋友分享您的链接",
+      "他们注册后获得 50 个免费积分",
+      "您也立即获得 50 积分"
+    ],
+    "shareDirectly": "直接分享",
+    "yourReferrals": "您的推荐",
+    "invitedYou": "邀请了您",
+    "joinedViaLink": "通过您的链接加入",
+    "noReferrals": "暂无推荐",
+    "noReferralsHint": "分享上方的链接，双方各获 50 积分",
+    "feedbackThanks": "感谢您的反馈！",
+    "feedbackWeRead": "我们会阅读每一条消息。",
+    "sendAnother": "再发一条",
+    "feedbackTitle": "告诉我们您的想法",
+    "feedbackSubtitle": "Bug 报告、功能建议，或打个招呼",
+    "feedbackPlaceholder": "您在想什么？",
+    "weReadEvery": "我们会阅读每条消息",
+    "send": "发送",
+    "shareMessage": "嘿，我一直在用 Coasty，挺不错的。它是一个能真正帮你操作电脑的 AI。浏览、点击、打字，全都能做。用我的链接注册，我们都能获得免费积分！",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "邮件"
+    },
+    "emailSubject": "看看这个 AI 工具",
+    "emailBody": "这个 AI 能真正帮你操作电脑。浏览、点击、打字，全都能做。"
+  },
+  "statusPage": {
+    "title": "系统状态",
+    "brandTitle": "Coasty 状态",
+    "subtitle": "所有 Coasty 服务的实时运行状态。此页面每 60 秒自动刷新。",
+    "refresh": "刷新",
+    "statuses": {
+      "operational": "正常运行",
+      "degraded": "性能下降",
+      "outage": "服务中断"
+    },
+    "overallStatuses": {
+      "allOperational": "所有系统正常运行",
+      "someDegraded": "部分系统性能下降",
+      "disruption": "检测到服务中断"
+    },
+    "overallDescriptions": {
+      "allOperational": "所有服务运行顺畅，未检测到任何问题。",
+      "someDegraded": "部分服务响应缓慢。我们正在调查中。",
+      "disruption": "我们已知晓此问题，正在积极修复中。"
+    },
+    "responseTime": "{ms}ms 响应时间",
+    "uptimeLabel": "90 天正常运行时间",
+    "daysAgo": "90 天前",
+    "today": "今天",
+    "overallUptime": "总体 90 天正常运行时间",
+    "overallUptimeDesc": "所有服务的综合可用性",
+    "services": "服务",
+    "clickUptime": "点击查看正常运行时间",
+    "lastChecked": "上次检查 {time} · 每 60 秒自动刷新",
+    "experiencingIssues": "遇到问题？",
+    "issuesDescription": "如有异常，请直接联系我们。",
+    "talkToCofounders": "与联合创始人交流",
+    "emailUs": "发送邮件",
+    "serviceNames": {
+      "website": "网站",
+      "aiBackend": "AI 后端",
+      "database": "数据库",
+      "authentication": "身份验证",
+      "aiModels": "AI 模型",
+      "fileStorage": "文件存储"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty — 排名第一的计算机操控AI代理 | 桌面和浏览器自动化AI员工",
+      "titleTemplate": "{title} | Coasty — AI计算机操控代理",
+      "description": "Coasty是排名第一的计算机操控AI代理 — OSWorld基准测试82%。它像人类一样操控桌面：打开浏览器、点击、输入、填写表单、发送邮件、管理电子表格。每个会话真正的虚拟机级别隔离。$20/月起。",
+      "ogTitle": "Coasty — 排名第一的计算机操控AI代理 | OSWorld 82%",
+      "ogDescription": "像人类一样操控桌面的AI员工。OSWorld基准测试排名第一（82%）。浏览器自动化、桌面控制、CAPTCHA破解、虚拟机隔离。$20/月起。",
+      "twitterDescription": "像人类一样操控桌面的AI员工。打开浏览器、点击、输入、填写表单、发送邮件。真正的虚拟机隔离。$20/月 vs 人工虚拟助手$3,000/月。"
+    },
+    "compare": {
+      "title": "Coasty对比 — AI代理替代方案与竞品比较",
+      "description": "了解Coasty排名第一的计算机操控AI代理与Anthropic Computer Use、OpenAI Operator、Adept AI、UiPath等的对比。功能与价格的详细比较。",
+      "ogTitle": "将Coasty与AI代理替代方案进行比较",
+      "ogDescription": "排名第一的计算机操控AI代理与竞品的功能对比。基准分数、价格、功能。"
+    },
+    "download": {
+      "title": "下载Coasty Desktop — Mac和Windows的AI代理",
+      "description": "下载Coasty Desktop — 操控您本地计算机的排名第一的计算机操控AI代理。浏览器自动化、桌面控制、终端访问和文件操作。支持Windows和macOS。",
+      "ogTitle": "下载Coasty Desktop — Mac和Windows的AI代理",
+      "ogDescription": "像人类一样操控您计算机的AI。浏览器、桌面和终端自动化集于一个原生应用。OSWorld基准测试排名第一。"
+    },
+    "guide": {
+      "title": "Coasty能做什么？ — AI计算机自动化完全指南",
+      "description": "探索Coasty能自动化的一切：销售开发、邮件推广、求职申请、QA测试、数据录入、社交媒体、招聘、研究等100多项任务。",
+      "ogTitle": "Coasty能做什么？ — 完全AI自动化指南",
+      "ogDescription": "探索Coasty能自动化的100多项任务。从销售到QA测试，了解AI计算机代理如何处理真实工作。"
+    },
+    "blog": {
+      "title": "博客 — AI代理洞察、计算机操控研究与案例研究",
+      "description": "深入分析自主AI代理、计算机操控技术、真实自动化案例研究和AI员工的未来。来自排名第一的计算机操控代理团队。",
+      "ogTitle": "Coasty博客 — AI代理洞察与案例研究",
+      "ogDescription": "深入分析自主AI代理、计算机操控技术以及排名第一的计算机操控代理的真实自动化案例研究。"
+    },
+    "results": {
+      "title": "演示与成果 — 观看Coasty AI代理自主工作",
+      "description": "观看Coasty自主运行营销活动、求职申请、填写表单、QA测试产品、发送个性化邮件等。带有视频演示的真实案例研究。",
+      "ogTitle": "演示 — 观看Coasty AI代理自主工作",
+      "ogDescription": "AI操控计算机的真实演示：营销、求职申请、QA测试、邮件推广等。OSWorld基准测试排名第一。"
+    },
+    "terms": {
+      "title": "服务条款",
+      "description": "Coasty服务条款。阅读管理Coasty AI员工平台、计算机操控代理和桌面应用程序使用的条款。",
+      "ogTitle": "Coasty — 服务条款",
+      "ogDescription": "Coasty服务条款。阅读管理Coasty AI员工平台、计算机操控代理和桌面应用程序使用的条款。."
+    },
+    "privacy": {
+      "title": "隐私政策",
+      "description": "Coasty隐私政策。了解我们如何通过虚拟机级别隔离、加密会话、沙箱执行环境和企业级安全保护您的数据。",
+      "ogTitle": "Coasty — 隐私政策",
+      "ogDescription": "Coasty隐私政策。了解我们如何通过虚拟机级别隔离、加密会话、沙箱执行环境和企业级安全保护您的数据。."
+    },
+    "useCases": {
+      "title": "使用场景 — Coasty AI代理助力业务运营",
+      "description": "发现Coasty AI代理自动化运营的12种方式 — 竞品调研、QA测试、潜在客户生成、邮件推广等。真实成果。",
+      "ogTitle": "使用场景 — Coasty AI代理",
+      "ogDescription": "自动驾驶模式下产出提升10倍的12种方式。真实成果，真实数据。"
+    },
+    "computerUse": {
+      "title": "计算机操控AI代理 — 排名第一的桌面、浏览器和终端自动化",
+      "description": "Coasty是最佳计算机操控AI代理，OSWorld排名第一（82%）。通过像人类一样操控计算机的自主AI，自动化任何桌面、浏览器或终端任务。",
+      "ogTitle": "Coasty — 排名第一的计算机操控AI代理",
+      "ogDescription": "OSWorld排名第一的最佳计算机操控代理。通过AI自动化任何桌面、浏览器或终端任务。"
+    },
+    "pricing": {
+      "title": "价格 — Coasty AI代理方案与定价",
+      "description": "Coasty定价方案$20/月起。用AI员工替代$3,000/月的虚拟助手。提供免费方案。基于积分的计费，无隐藏费用。",
+      "ogTitle": "Coasty价格 — AI代理方案",
+      "ogDescription": "$20/月起的AI员工。用自主AI替代昂贵的虚拟助手。提供免费方案。"
+    },
+    "faq": {
+      "q1": "什么是Coasty？",
+      "a1": "Coasty是一个AI员工平台 — 一个像人类一样操控桌面的计算机操控代理。它自主地打开浏览器、点击、输入、导航应用、填写表单、发送邮件和管理电子表格。在OSWorld基准测试的369项真实任务中以82%的完成率排名第一。",
+      "q2": "Coasty与Anthropic Computer Use有何不同？",
+      "a2": "Anthropic Computer Use提供的是计算机控制的原始API，而Coasty是一个生产就绪的平台，提供托管的虚拟机基础设施、内置CAPTCHA破解、Mac和Windows桌面应用、多模型支持以及最高的OSWorld基准分数（82%）。Coasty提供完整的解决方案 — 不仅仅是API。",
+      "q3": "Coasty多少钱？",
+      "a3": "Coasty入门方案$20/月起，提供免费方案。相比之下，人工虚拟助手每月$3,000以上。Coasty全天候工作，无需休息、无需培训、可即时扩展。",
+      "q4": "使用Coasty安全吗？",
+      "a4": "是的。每个Coasty会话都在自己的隔离沙箱虚拟机中运行。您的数据安全，您的计算机不受影响，会话之间不会泄露任何信息。这是真正的虚拟机级别隔离，而不是共享池中的容器。",
+      "q5": "什么是OSWorld基准测试？",
+      "a5": "OSWorld是一个用于评估AI代理在真实计算机任务上表现的基准测试。它测试涵盖浏览器、办公应用和系统操作的369项任务。Coasty得分82%，是所有计算机操控代理中的最高分。",
+      "q6": "Coasty与UiPath等RPA工具有何不同？",
+      "a6": "像UiPath这样的传统RPA工具需要脆弱的脚本，界面变化时就会失效。Coasty使用AI视觉来理解和交互任何界面，无需预定义脚本即可实时适应。它像人类一样工作，而不是宏。设置只需几分钟，而不是几周。",
+      "q7": "Coasty有桌面应用吗？",
+      "a7": "有。Coasty Desktop适用于Mac和Windows。它作为桌面上的浮动叠层运行，可以直接控制您的本地浏览器、文件、终端和应用程序 — 本地任务无需虚拟机。",
+      "q8": "Coasty能自动化什么？",
+      "a8": "Coasty几乎可以自动化任何计算机任务：网页浏览、表单填写、邮件发送、电子表格管理、数据录入、社交媒体发布、求职申请、销售开发、QA测试、客户支持、LinkedIn招聘等。人类能在计算机上做的，Coasty也能做。",
+      "q9": "Coasty与OpenAI Operator相比如何？",
+      "a9": "Coasty在OSWorld基准测试中超越OpenAI Operator（82% vs ~40%），为每个会话提供真正的虚拟机级别隔离，支持多种AI模型，包括浏览器之外的完整桌面控制，并提供开源框架。",
+      "q10": "Coasty能破解CAPTCHA吗？",
+      "a10": "能。Coasty有内置的CAPTCHA破解流水线，不会像竞品AI代理那样被阻止。这对于网站上常见CAPTCHA的真实自动化至关重要。"
+    },
+    "structuredData": {
+      "appDescription": "排名第一的计算机操控AI代理。Coasty像人类一样操控桌面 — 自主地打开浏览器、点击、输入、填写表单、发送邮件和管理电子表格。OSWorld基准测试82%。真正的虚拟机级别隔离。内置CAPTCHA破解。$20/月起。",
+      "orgDescription": "Coasty打造排名第一的计算机操控AI代理。我们的平台提供自主桌面控制、浏览器自动化以及真正虚拟机级别隔离的多代理编排。",
+      "productDescription": "像人类一样操控桌面的AI计算机操控代理。OSWorld基准测试排名第一（82%）。自主浏览器自动化、桌面控制、邮件发送、表单填写和电子表格管理，配备真正的虚拟机级别隔离。",
+      "websiteDescription": "排名第一的计算机操控AI代理平台。OSWorld基准测试82%。虚拟机隔离的自主浏览器、桌面和终端自动化。$20/月起。",
+      "softwareDescription": "像人类一样操控桌面的AI计算机操控代理。在369项真实任务中以82%完成率获得OSWorld基准测试第一名。自主浏览器自动化、桌面控制、终端操作、邮件发送、表单填写和电子表格管理。",
+      "breadcrumbs": {
+        "home": "首页",
+        "caseStudies": "AI代理案例研究",
+        "blog": "博客",
+        "download": "下载桌面应用",
+        "compare": "比较AI代理"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – 页面未找到",
+      "description": "抱歉，此页面不存在。"
+    },
+    "error": {
+      "title": "出了点问题",
+      "description": "发生了意外错误。请重试。",
+      "tryAgain": "重试"
+    }
+  },
+  "schedulesPage": {
+    "title": "团队",
+    "subtitle": "您的AI团队 — 分配任务，让他们处理其余事务",
+    "guide": "指南",
+    "hireEmployee": "雇用员工",
+    "loading": "正在加载您的员工...",
+    "onDuty": "{count}人在岗",
+    "standby": "{count}人待命",
+    "company": "公司",
+    "teams": "{count}个团队",
+    "employees": "{count}名员工",
+    "members": "{count}名成员",
+    "unassigned": "未分配",
+    "add": "添加",
+    "save": "保存",
+    "cancel": "取消",
+    "run": "运行",
+    "delegate": "委派",
+    "untitledEmployee": "未命名员工",
+    "untitled": "未命名",
+    "guidelinesPlaceholder": "指导方针...",
+    "today": "今天",
+    "timesDaily": "{count} × 每天",
+    "noEmployeesDay": "当天没有员工",
+    "noEmployeesScheduled": "没有已安排的员工",
+    "recentActivity": "最近活动",
+    "schedule": "日程",
+    "emptyState": {
+      "openChat": "打开任意聊天并点击",
+      "assignEmployee": "分配员工",
+      "onThe": "",
+      "topRight": "右上角",
+      "toPutOnAutopilot": "以设置为自动运行",
+      "newChat": "新建聊天"
+    },
+    "emptyWorkforce": {
+      "title": "雇用您的第一位员工",
+      "description": "AI员工代替您工作 — 分配任务、设定日程，他们将自动执行",
+      "flexibleShifts": {
+        "title": "灵活排班",
+        "desc": "按小时、每天、每周、每月安排员工 — 或使用自定义cron表达式"
+      },
+      "fullAutonomy": {
+        "title": "完全自主",
+        "desc": "每位员工都可以完全访问浏览器、终端和您连接的工作站"
+      },
+      "activityLogs": {
+        "title": "活动日志",
+        "desc": "每次执行都会被记录，以便您查看员工完成的工作"
+      },
+      "startFromChat": "从聊天开始"
+    },
+    "filters": {
+      "all": "全部",
+      "onDuty": "在岗",
+      "standby": "待命"
+    },
+    "noMatch": "没有员工匹配此筛选条件",
+    "createTeam": {
+      "title": "新建团队",
+      "subtitle": "从模板开始或从头创建",
+      "backToTemplates": "返回模板",
+      "customTeam": "自定义团队",
+      "customDescription": "使用您自己的配置创建团队。",
+      "teamNameLabel": "团队名称",
+      "teamNamePlaceholder": "例如：研究、营销、工程",
+      "guidelinesLabel": "指导方针",
+      "optional": "（可选）",
+      "guidelinesPlaceholder": "所有团队成员将遵循的共享指令...",
+      "suggestedEmployees": "推荐员工",
+      "suggestedCredentials": "推荐凭证",
+      "added": "已添加",
+      "addButton": "+ 添加",
+      "credentials": "凭证",
+      "addCredential": "+ 添加凭证",
+      "credentialHint": "凭证已加密。它们将包含在团队指导方针中，以便员工了解可用资源。",
+      "settingUp": "正在设置...",
+      "createEmployees": "创建{count}名员工",
+      "createTeamButton": "创建团队"
+    },
+    "noTeams": {
+      "title": "暂无团队",
+      "description": "团队让员工共享上下文和记忆。创建一个来构建您的组织架构。",
+      "newTeam": "新建团队"
+    },
+    "howItWorks": {
+      "title": "使用方法",
+      "dragEmployees": "将员工拖入团队",
+      "clickToEdit": "点击编辑日程和设置",
+      "teamsShare": "团队共享记忆和指导方针",
+      "dashedLines": "虚线 — 员工之间的委派"
+    },
+    "inactive": {
+      "title": "{count}名员工未激活",
+      "missingMachine": "{count}名缺少机器 — 激活前不会运行",
+      "wontRun": "激活前不会运行",
+      "fixInEmployees": "在员工中修复"
+    },
+    "dragHint": "将未分配的员工拖到团队中以添加",
+    "limits": {
+      "upgradePlan": "升级计划",
+      "manageMachines": "管理机器",
+      "manageEmployees": "管理员工",
+      "machineLimit": "您需要一台云机器，但已达到{max}台的上限。升级您的计划或删除未使用的机器。",
+      "employeeLimit": "您已达到员工上限（{tier}级别{max}人）。升级您的计划或移除未使用的员工。",
+      "templateLimit": "此模板需要{needed}名员工，但您只剩{available}个名额（{tier}级别最多{max}个）。升级您的计划或移除未使用的员工。",
+      "createFailed": "创建员工失败。请检查您的账户限制并重试。",
+      "teamFailed": "创建团队失败"
+    },
+    "provisioning": {
+      "checking": "正在检查账户限制...",
+      "usingMachine": "正在使用机器「{name}」...",
+      "assigningMachine": "正在分配到机器「{name}」（机器准备好后将运行）...",
+      "creatingMachine": "正在创建新机器...",
+      "machineStarted": "机器配置已开始...",
+      "hiring": "正在雇用{name} ({current}/{total})...",
+      "creatingTeam": "正在创建团队..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "已创建团队，{count}名员工（{failedCount}人失败：{names}）",
+      "teamCreated": "已创建{name}团队，{count}名员工"
+    },
+    "credentialInstructions": "[可用凭证]\n以下服务凭证已配置并可使用：\n{list}\n当您需要登录这些服务来完成任务时，请使用这些凭证。",
+    "templates": {
+      "contentOps": {
+        "name": "内容运营",
+        "tagline": "无需动手即可持续发布",
+        "description": "精简的内容引擎 — 自动撰写、优化和分发内容。",
+        "roles": {
+          "atlas": "内容撰写 — 撰写博客文章、新闻通讯和社交媒体文案",
+          "echo": "SEO分析师 — 审核页面、跟踪排名、建议关键词机会",
+          "nova": "社交分发 — 在平台上发布内容并监控互动"
+        },
+        "credentials": {
+          "wordpress": "发布和管理博客文章",
+          "twitter": "发布推文并监控互动",
+          "linkedin": "发布专业内容和文章",
+          "searchConsole": "跟踪搜索性能和索引"
+        }
+      },
+      "customerSupport": {
+        "name": "客户支持",
+        "tagline": "3名员工提供全天候支持",
+        "description": "监控收件箱、解决常见问题并保持知识库更新。",
+        "roles": {
+          "sage": "收件箱监控 — 检查支持邮件、分类并回复常见查询",
+          "iris": "知识库管理员 — 根据反复出现的问题更新帮助文档和FAQ",
+          "milo": "反馈分析师 — 将评价和支持趋势汇总为每周报告"
+        },
+        "credentials": {
+          "gmail": "监控和回复支持邮件",
+          "zendesk": "管理支持工单（或您的帮助台）",
+          "notion": "更新知识库和文档"
+        }
+      },
+      "researchIntel": {
+        "name": "研究与情报",
+        "tagline": "无需手动工作即可掌握信息",
+        "description": "监控竞争对手、跟踪行业趋势并编制可操作的研究简报。",
+        "roles": {
+          "scout": "竞争对手监控 — 跟踪竞争对手网站、定价和功能变化",
+          "wren": "趋势研究员 — 扫描行业新闻、出版物和社交媒体以发现趋势",
+          "quinn": "简报编辑 — 将发现综合为结构化的每周情报报告"
+        },
+        "credentials": {
+          "google": "网络研究和搜索",
+          "linkedin": "跟踪竞争对手招聘和公告",
+          "notion": "发布研究简报和报告"
+        }
+      },
+      "marketing": {
+        "name": "营销部门",
+        "tagline": "两台机器上的完整营销团队",
+        "description": "内容创建、社交媒体、SEO、竞争对手跟踪和活动分析 — 两个协调的小组。",
+        "roles": {
+          "atlas": "内容策略师 — 规划内容日历、撰写长篇文章",
+          "nova": "社交媒体经理 — 发布、互动并扩大社交渠道",
+          "echo": "SEO专家 — 优化页面、建立内部链接、跟踪关键词",
+          "pixel": "邮件活动经理 — 撰写和发送新闻通讯、跟踪打开/点击率",
+          "scout": "竞争对手分析师 — 监控竞争对手营销动态并报告洞察",
+          "dash": "广告活动监控 — 跟踪广告支出、ROAS和优化机会",
+          "iris": "分析报告员 — 编制跨渠道绩效仪表板"
+        },
+        "credentials": {
+          "wordpress": "发布博客内容",
+          "twitter": "社交媒体管理",
+          "linkedin": "专业内容分发",
+          "mailchimp": "邮件活动和新闻通讯",
+          "analytics": "流量和转化分析",
+          "googleAds": "Google Ads活动管理",
+          "metaAds": "Meta Ads和社交管理"
+        }
+      },
+      "ecommerce": {
+        "name": "电商运营",
+        "tagline": "在您睡觉时运营商店",
+        "description": "产品管理、价格情报、库存跟踪、评价管理和在线商店增长营销。",
+        "roles": {
+          "cleo": "产品上架 — 创建和更新产品描述、图片和元数据",
+          "onyx": "价格监控 — 跟踪竞争对手价格并标记调整机会",
+          "luna": "库存追踪 — 监控库存水平并在低库存时预警",
+          "sage": "评价管理 — 回复客户评价并汇总情感",
+          "dash": "活动优化 — 管理产品广告和购物活动",
+          "flux": "邮件营销 — 发送弃购、促销和购后序列邮件",
+          "wren": "分析报告员 — 跟踪收入、转化率和增长指标"
+        },
+        "credentials": {
+          "shopify": "商店管理和产品列表",
+          "amazon": "Amazon市场管理",
+          "googleAds": "购物广告和活动",
+          "mailchimp": "客户邮件序列",
+          "analytics": "转化和流量分析"
+        }
+      },
+      "engineering": {
+        "name": "工程团队",
+        "tagline": "自动化工程中的乏味工作",
+        "description": "自动代码审查、依赖监控、文档、测试、部署监控和事件响应。",
+        "roles": {
+          "rune": "代码审查员 — 审查开放PR、建议改进、检查安全问题",
+          "koda": "依赖监控 — 跟踪过时的包、安全公告和破坏性变更",
+          "aria": "文档撰写 — 保持API文档、README和变更日志与最新代码同步",
+          "blaze": "测试监控 — 运行测试套件、跟踪不稳定测试、报告覆盖率趋势",
+          "frost": "部署监控 — 监视CI/CD管道、在失败时预警、跟踪部署频率",
+          "neon": "可用性与日志监控 — 监控服务、扫描日志查找错误、创建事件报告"
+        },
+        "credentials": {
+          "github": "仓库访问、PR审查、Issues",
+          "vercel": "部署监控（或您的CI/CD）",
+          "sentry": "错误跟踪和事件预警",
+          "npm": "依赖检查的包注册表"
+        }
+      },
+      "fullBusiness": {
+        "name": "完整业务运营",
+        "tagline": "整个公司完全自动化",
+        "description": "销售、营销、支持和管理 — 四个部门在三台机器上以共享智能协同工作。",
+        "roles": {
+          "atlas": "潜在客户开发 — 从在线来源查找和评估潜在客户",
+          "dash": "CRM经理 — 更新交易、跟踪管道并发送跟进序列",
+          "scout": "提案撰写 — 根据模板起草销售提案和演示文稿",
+          "nova": "内容营销 — 撰写博客文章、案例研究和营销文案",
+          "echo": "社交媒体经理 — 发布内容并与受众互动",
+          "pixel": "邮件活动经理 — 运行滴灌活动和新闻通讯序列",
+          "sage": "支持主管 — 处理客户咨询并解决问题",
+          "iris": "知识管理 — 维护帮助文档、FAQ和内部Wiki",
+          "milo": "数据分析师 — 编制跨部门报告和KPI仪表板",
+          "wren": "市场研究员 — 跟踪行业趋势和竞争情报",
+          "quinn": "运营协调员 — 执行每周总结和跨团队同步"
+        },
+        "credentials": {
+          "gmail": "邮件沟通和支持",
+          "hubspot": "CRM和销售管道（或您的CRM）",
+          "linkedin": "潜在客户开发和专业社交",
+          "mailchimp": "邮件营销活动",
+          "notion": "内部Wiki和文档",
+          "analytics": "网络分析和报告",
+          "twitter": "社交媒体存在",
+          "zendesk": "客户支持工单"
+        }
+      },
+      "growth": {
+        "name": "增长与获客",
+        "tagline": "全自动的积极增长",
+        "description": "外向探客、内向营销、转化优化和分析 — 三台机器上的专用增长引擎。",
+        "roles": {
+          "blaze": "外向探客 — 找到决策者、研究公司、建立潜在客户列表",
+          "flux": "邮件外展 — 发送个性化冷邮件、管理跟进序列",
+          "orion": "LinkedIn外展 — 与潜在客户建立联系并发送个性化消息",
+          "coral": "内容创作者 — 制作SEO内容、着陆页文案和潜在客户磁铁",
+          "taro": "着陆页优化 — 监控转化率、建议和测试改进",
+          "vale": "广告活动经理 — 端到端管理Google和Meta广告活动",
+          "ember": "潜在客户评分 — 评估入站潜在客户并路由到适当的跟进",
+          "haze": "漏斗分析师 — 跟踪每个阶段的转化指标、识别瓶颈",
+          "dune": "竞争情报 — 监控竞争对手活动、定价和定位变化",
+          "kit": "增长报告员 — 编制每日/每周增长指标和实验结果"
+        },
+        "credentials": {
+          "linkedin": "探客和外展",
+          "gmail": "冷邮件和跟进序列",
+          "hubspot": "潜在客户管理和CRM",
+          "googleAds": "付费搜索活动",
+          "metaAds": "Meta广告",
+          "analytics": "漏斗和转化分析",
+          "ahrefs": "SEO研究和竞争对手分析"
+        }
+      },
+      "saas": {
+        "name": "SaaS运营",
+        "tagline": "像精密机器一样运营您的SaaS",
+        "description": "客户成功、产品分析、流失预防、功能跟踪和SaaS业务自动报告。",
+        "roles": {
+          "luna": "客户成功监控 — 跟踪用户参与度、识别风险账户",
+          "sage": "入职助手 — 引导新用户完成设置、监控激活率",
+          "ivy": "流失预防 — 向脱离的用户发起重新激活活动",
+          "rune": "功能请求追踪 — 从所有渠道汇总用户反馈和功能请求",
+          "koda": "产品分析 — 跟踪功能采用、用户旅程和参与指标",
+          "neon": "Bug与问题监控 — 监视错误日志、用户报告和状态页面事件",
+          "aria": "变更日志撰写 — 记录发布、更新知识库和帮助中心",
+          "frost": "收入分析师 — 跟踪MRR、流失率、LTV和扩展收入",
+          "zara": "竞争对手追踪 — 监控竞争对手功能、定价和市场定位"
+        },
+        "credentials": {
+          "stripe": "订阅和收入数据",
+          "intercom": "客户消息和支持（或您的工具）",
+          "mixpanel": "产品分析和用户跟踪",
+          "gmail": "客户沟通",
+          "notion": "知识库和变更日志",
+          "sentry": "错误监控和Bug跟踪",
+          "github": "问题跟踪和功能请求"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "最多3人",
+        "price": "$19/月"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "最多10人",
+        "price": "$50/月"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "最多50人",
+        "price": "$100/月"
+      }
+    },
+    "frequencies": {
+      "daily": "daily",
+      "weekly": "weekly",
+      "every_30_minutes": "每30分钟",
+      "every_6_hours": "每6小时",
+      "every_12_hours": "每12小时"
+    },
+    "teamsTab": "团队"
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "配置基本电脑设置",
+    "displayName": "显示名称",
+    "defaultName": "我的电脑",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "连接到电脑需要此密码"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "社区",
+    "title": "看看大家怎么用",
+    "subtitle": "从线索调研到QA测试 — 看看社区在自动化什么，为你的下一个工作流获取灵感。",
+    "sessionCount": "社区分享了 {count} 个会话",
+    "searchPlaceholder": "按任务、工具或结果搜索...",
+    "emptyTitle": "还没有人分享 — 成为第一个",
+    "emptySubtitle": "当用户公开他们的会话时，会显示在这里",
+    "noResultsTitle": "没有匹配的结果",
+    "noResultsSubtitle": "试试其他关键词",
+    "watchSession": "观看会话",
+    "steps": "{count} 个步骤",
+    "tryCoasty": "试用 Coasty"
+  }
+}

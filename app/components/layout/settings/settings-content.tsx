@@ -9,7 +9,7 @@ import {
   // CubeIcon,
   GearSixIcon,
   // KeyIcon,
-  // PaintBrushIcon,
+  PaintBrushIcon,
   // PlugsConnectedIcon,
   XIcon,
   CreditCard,
@@ -18,7 +18,6 @@ import { useState } from "react"
 // import { ByokSection } from "./apikeys/byok-section"
 // import { InteractionPreferences } from "./appearance/interaction-preferences"
 // import { LayoutSettings } from "./appearance/layout-settings"
-// import { ThemeSelection } from "./appearance/theme-selection"
 // import { ConnectionsPlaceholder } from "./connections/connections-placeholder"
 // import { DeveloperTools } from "./connections/developer-tools"
 // import { OllamaSection } from "./connections/ollama-section" // COMMENTED OUT
@@ -26,6 +25,8 @@ import { AccountManagement } from "./general/account-management"
 import { UserProfile } from "./general/user-profile"
 import { PrivacySection } from "./general/privacy-section"
 import { BillingSection } from "./billing/billing-section"
+import { ThemeSelection } from "./appearance/theme-selection"
+import { BackgroundSelection } from "./appearance/background-selection"
 // import { ModelsSettings } from "./models/models-settings"
 
 type SettingsContentProps = {
@@ -33,7 +34,7 @@ type SettingsContentProps = {
   defaultTab?: TabType
 }
 
-type TabType = "general" | "billing" // | "appearance" | "models" | "connections"
+type TabType = "general" | "billing" | "appearance" // | "models" | "connections"
 
 export function SettingsContent({
   isDrawer = false,
@@ -80,6 +81,13 @@ export function SettingsContent({
                   <span>General</span>
                 </TabsTrigger>
                 <TabsTrigger
+                  value="appearance"
+                  className="flex shrink-0 items-center gap-2"
+                >
+                  <PaintBrushIcon className="size-4" />
+                  <span>Appearance</span>
+                </TabsTrigger>
+                <TabsTrigger
                   value="billing"
                   className="flex shrink-0 items-center gap-2"
                 >
@@ -121,6 +129,11 @@ export function SettingsContent({
               <PrivacySection />
             </TabsContent>
 
+            <TabsContent value="appearance" className="space-y-6 px-6">
+              <ThemeSelection />
+              <BackgroundSelection />
+            </TabsContent>
+
             <TabsContent value="billing" className="px-6">
               <BillingSection />
             </TabsContent>
@@ -153,6 +166,15 @@ export function SettingsContent({
                   <div className="flex items-center gap-2">
                     <GearSixIcon className="size-4" />
                     <span>General</span>
+                  </div>
+                </TabsTrigger>
+                <TabsTrigger
+                  value="appearance"
+                  className="w-full justify-start rounded-md px-3 py-2 text-left"
+                >
+                  <div className="flex items-center gap-2">
+                    <PaintBrushIcon className="size-4" />
+                    <span>Appearance</span>
                   </div>
                 </TabsTrigger>
                 <TabsTrigger
@@ -206,6 +228,11 @@ export function SettingsContent({
                   </>
                 )}
                 <PrivacySection />
+              </TabsContent>
+
+              <TabsContent value="appearance" className="mt-0 space-y-6">
+                <ThemeSelection />
+                <BackgroundSelection />
               </TabsContent>
 
               <TabsContent value="billing" className="mt-0 space-y-6">

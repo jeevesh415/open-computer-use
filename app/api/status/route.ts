@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { createServiceClient } from "@/lib/supabase/service"
+
+export const dynamic = "force-dynamic"
 
 const PYTHON_BACKEND_URL =
   process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8001"
@@ -44,14 +45,15 @@ export async function GET() {
 
     // 3. Database (Supabase)
     checkService("Database", async () => {
-      const supabase = createServiceClient()
-      if (!supabase) throw new Error("Supabase not configured")
-      // Simple query to verify connectivity
-      const { error } = await supabase
-        .from("users")
-        .select("id")
-        .limit(1)
-      if (error) throw new Error(error.message)
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+      if (!url) throw new Error("Supabase URL not configured")
+      const res = await fetch(`${url}/rest/v1/`, {
+        headers: {
+          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+        },
+        signal: AbortSignal.timeout(5000),
+      })
+      if (res.status >= 500) throw new Error(`HTTP ${res.status}`)
     }),
 
     // 4. Authentication
@@ -67,14 +69,15 @@ export async function GET() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
     }),
 
-    // 5. AI Models (shares backend with AI Backend — check /api/health as proxy)
+    // 5. AI Models (readiness check — verifies Bedrock/model provider connectivity)
     checkService("AI Models", async () => {
-      const res = await fetch(`${PYTHON_BACKEND_URL}/api/health`, {
-        signal: AbortSignal.timeout(5000),
+      const res = await fetch(`${PYTHON_BACKEND_URL}/api/ready`, {
+        signal: AbortSignal.timeout(10000),
       })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data = await res.json()
-      if (data.status !== "healthy") throw new Error("Backend unhealthy")
+      if (data.models === "error") throw new Error("Model provider unreachable")
+      if (data.status !== "ready" && data.models !== "available")
+        throw new Error(data.status || "Not ready")
     }),
 
     // 6. File Storage (Supabase Storage)
@@ -93,37 +96,29 @@ export async function GET() {
     }),
   ])
 
-  // Persist checks to database (fire-and-forget, don't block response)
-  const supabase = createServiceClient()
-  if (supabase) {
-    const now = new Date().toISOString()
-    const rows = checks.map((c) => ({
-      service_name: c.name,
-      status: c.status,
-      latency: c.latency,
-      message: c.message || null,
-      checked_at: now,
-    }))
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ;(supabase as any).from("status_checks").insert(rows).then(() => {})
-  }
+  // Persistence is handled by the backend's periodic_status_check (main.py).
+  // This endpoint only returns the current live check results.
 
   const allOperational = checks.every((c) => c.status === "operational")
   const hasOutage = checks.some((c) => c.status === "outage")
 
+  const overall = allOperational
+    ? "operational"
+    : hasOutage
+      ? "outage"
+      : "degraded"
+
   return NextResponse.json(
     {
-      overall: allOperational
-        ? "operational"
-        : hasOutage
-          ? "outage"
-          : "degraded",
+      overall,
       timestamp: new Date().toISOString(),
       services: checks,
     },
     {
       headers: {
-        "Cache-Control": "public, max-age=30, s-maxage=30",
+        "Cache-Control": allOperational
+          ? "public, max-age=15, s-maxage=15, stale-while-revalidate=10"
+          : "no-store, no-cache, must-revalidate",
       },
     }
   )

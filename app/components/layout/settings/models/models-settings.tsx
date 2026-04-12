@@ -174,7 +174,7 @@ export function ModelsSettings() {
                         onClick={() => removeFavorite(model.id)}
                         type="button"
                         disabled={favoriteModels.length <= 1}
-                        className="text-muted-foreground rounded-md border p-1 opacity-0 transition-all group-hover:opacity-100 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="text-muted-foreground rounded-md border p-1 sm:opacity-0 transition-all sm:group-hover:opacity-100 disabled:cursor-not-allowed disabled:opacity-50"
                         title={
                           favoriteModels.length <= 1
                             ? "At least one favorite model is required"

@@ -27,6 +27,7 @@ import { cn } from "@/lib/utils"
 import { PlusIcon } from "@phosphor-icons/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Loader2, Trash2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 type Provider = {
@@ -98,6 +99,7 @@ const PROVIDERS: Provider[] = [
 ]
 
 export function ByokSection() {
+  const t = useTranslations("apiKeys")
   const queryClient = useQueryClient()
   const { userKeyStatus, refreshUserKeyStatus, refreshModels } = useModel()
   const [selectedProvider, setSelectedProvider] = useState<string>("openrouter")
@@ -140,10 +142,10 @@ export function ByokSection() {
       const providerConfig = PROVIDERS.find((p) => p.id === provider)
 
       toast({
-        title: "API key saved",
+        title: t("toasts.saved"),
         description: response.isNewKey
-          ? `Your ${providerConfig?.name} API key has been saved and models have been added to your favorites.`
-          : `Your ${providerConfig?.name} API key has been updated.`,
+          ? t("toasts.savedDescription", { provider: providerConfig?.name || "" })
+          : t("toasts.updatedDescription", { provider: providerConfig?.name || "" }),
       })
 
       // Refresh models and user key status
@@ -162,8 +164,8 @@ export function ByokSection() {
     onError: (_, { provider }) => {
       const providerConfig = PROVIDERS.find((p) => p.id === provider)
       toast({
-        title: "Failed to save API key",
-        description: `Failed to save ${providerConfig?.name} API key. Please try again.`,
+        title: t("toasts.saveFailed"),
+        description: t("toasts.saveFailedDescription", { provider: providerConfig?.name || "" }),
       })
     },
   })
@@ -182,8 +184,8 @@ export function ByokSection() {
     onSuccess: async (_, provider) => {
       const providerConfig = PROVIDERS.find((p) => p.id === provider)
       toast({
-        title: "API key deleted",
-        description: `Your ${providerConfig?.name} API key has been deleted.`,
+        title: t("toasts.deleted"),
+        description: t("toasts.deletedDescription", { provider: providerConfig?.name || "" }),
       })
       await Promise.all([refreshUserKeyStatus(), refreshModels()])
       setApiKeys((prev) => ({ ...prev, [provider]: "" }))
@@ -193,8 +195,8 @@ export function ByokSection() {
     onError: (_, provider) => {
       const providerConfig = PROVIDERS.find((p) => p.id === provider)
       toast({
-        title: "Failed to delete API key",
-        description: `Failed to delete ${providerConfig?.name} API key. Please try again.`,
+        title: t("toasts.deleteFailed"),
+        description: t("toasts.deleteFailedDescription", { provider: providerConfig?.name || "" }),
       })
       setDeleteDialogOpen(false)
       setProviderToDelete("")
@@ -220,16 +222,16 @@ export function ByokSection() {
   return (
     <div>
       <h3 className="relative mb-2 inline-flex text-lg font-medium">
-        Model Providers{" "}
+        {t("title")}{" "}
         <span className="text-muted-foreground absolute top-0 -right-7 text-xs">
-          new
+          {t("new")}
         </span>
       </h3>
       <p className="text-muted-foreground text-sm">
-        Add your own API keys to unlock access to models.
+        {t("description")}
       </p>
       <p className="text-muted-foreground text-sm">
-        Your keys are stored securely with end-to-end encryption.
+        {t("securityNote")}
       </p>
 
       <div className="mt-4 grid grid-cols-4 gap-3">
@@ -266,7 +268,7 @@ export function ByokSection() {
         {selectedProviderConfig && (
           <div className="flex flex-col">
             <Label htmlFor={`${selectedProvider}-key`} className="mb-3">
-              {selectedProviderConfig.name} API Key
+              {t("apiKeyLabel", { provider: selectedProviderConfig.name })}
             </Label>
             <Input
               id={`${selectedProvider}-key`}
@@ -287,7 +289,7 @@ export function ByokSection() {
                 target="_blank"
                 className="text-muted-foreground mt-1 text-xs hover:underline"
               >
-                Get API key
+                {t("getApiKey")}
               </a>
               <div className="flex gap-2">
                 {userKeyStatus[
@@ -304,7 +306,7 @@ export function ByokSection() {
                     }
                   >
                     <Trash2 className="mr-1 size-4" />
-                    Delete
+                    {t("delete")}
                   </Button>
                 )}
                 <Button
@@ -317,7 +319,7 @@ export function ByokSection() {
                   {saveMutation.isPending ? (
                     <Loader2 className="size-4 animate-spin" />
                   ) : (
-                    "Save"
+                    t("save")
                   )}
                 </Button>
               </div>
@@ -329,16 +331,13 @@ export function ByokSection() {
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete API Key</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete your{" "}
-              {PROVIDERS.find((p) => p.id === providerToDelete)?.name} API key?
-              This action cannot be undone and you will lose access to{" "}
-              {PROVIDERS.find((p) => p.id === providerToDelete)?.name} models.
+              {t("deleteDialog.description", { provider: PROVIDERS.find((p) => p.id === providerToDelete)?.name || "" })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("deleteDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleConfirmDelete}
               disabled={deleteMutation.isPending}
@@ -346,7 +345,7 @@ export function ByokSection() {
               {deleteMutation.isPending ? (
                 <Loader2 className="mr-2 size-4 animate-spin" />
               ) : null}
-              Delete
+              {t("deleteDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

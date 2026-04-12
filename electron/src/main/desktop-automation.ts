@@ -1,5 +1,32 @@
 import { execFile, spawn } from 'child_process'
 import * as os from 'os'
+import { isAccessibilityGranted, requestAccessibility } from './permissions'
+
+/**
+ * Check macOS Accessibility permission before any desktop automation action.
+ * Returns null if granted, or an error result object if denied.
+ * On first denial, triggers the macOS system prompt so the user can grant it.
+ */
+let _hasPromptedAccessibility = false
+function requireAccessibility(): { success: false; error: string; permissionDenied: true; permissionType: 'accessibility' } | null {
+  if (process.platform !== 'darwin') return null
+  if (isAccessibilityGranted()) return null
+
+  // Trigger the macOS permission prompt once per session
+  if (!_hasPromptedAccessibility) {
+    _hasPromptedAccessibility = true
+    requestAccessibility()
+  }
+
+  return {
+    success: false,
+    error: 'macOS Accessibility permission is required for desktop automation (clicks, typing, scrolling). '
+      + 'A permission prompt should have appeared — grant access to Coasty, then restart the app. '
+      + 'You can also enable it manually: System Settings > Privacy & Security > Accessibility > enable Coasty.',
+    permissionDenied: true,
+    permissionType: 'accessibility',
+  }
+}
 
 function runPowershell(script: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -41,13 +68,50 @@ function runSwift(code: string): Promise<string> {
   })
 }
 
+/** Validate and coerce a value to a finite integer — prevents shell injection via coordinates/counts. */
+function validateInt(v: any, name: string): number {
+  const n = Number(v)
+  if (!Number.isFinite(n)) throw new Error(`Invalid ${name}: expected a number`)
+  return Math.round(n)
+}
+
+/** Run osascript directly via execFile — bypasses bash, prevents $() and backtick injection. */
+function runOsascript(script: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    execFile('/usr/bin/osascript', ['-e', script], { timeout: 10000 }, (error, stdout) => {
+      if (error) reject(error)
+      else resolve(stdout.trim())
+    })
+  })
+}
+
+/** Escape a string for use inside AppleScript double-quoted string literals. */
+function escapeAppleScript(s: string): string {
+  return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
+/** Map a key name to a safe xdotool key identifier. Rejects unknown keys to prevent shell injection. */
+function safeXdotoolKey(key: string): string {
+  const lower = key.toLowerCase()
+  const mapped = KEY_MAP_XDOTOOL[lower] || MODIFIER_MAP_XDOTOOL[lower]
+  if (mapped) return mapped
+  // Allow single ASCII letter/digit as literal key name
+  if (/^[a-zA-Z0-9]$/.test(key)) return key
+  throw new Error(`Unknown key for automation: "${key}"`)
+}
+
 export async function desktopClick(params: {
   x: number
   y: number
   button?: string
 }): Promise<any> {
   try {
-    const { x, y, button = 'left' } = params
+    const denied = requireAccessibility()
+    if (denied) return denied
+
+    const x = validateInt(params.x, 'x')
+    const y = validateInt(params.y, 'y')
+    const button = params.button === 'right' ? 'right' : 'left'
 
     if (process.platform === 'win32') {
       const clickType = button === 'right' ? 'RightClick' : 'Click'
@@ -91,12 +155,136 @@ CGEvent(mouseEventSource: nil, mouseType: ${upType}, mouseCursorPosition: pt, mo
   }
 }
 
+export async function desktopClickWithModifiers(params: {
+  x: number
+  y: number
+  button?: string
+  hold_keys?: string[]
+  clicks?: number
+}): Promise<any> {
+  try {
+    const denied = requireAccessibility()
+    if (denied) return denied
+
+    const x = validateInt(params.x, 'x')
+    const y = validateInt(params.y, 'y')
+    const button = params.button === 'right' ? 'right' : (params.button === 'middle' ? 'middle' : 'left')
+    const clicks = validateInt(params.clicks ?? 1, 'clicks')
+    const keys = normalizeKeysForPlatform(params.hold_keys ?? [])
+
+    if (process.platform === 'win32') {
+      // Use keybd_event to hold modifiers, mouse_event to click, then release
+      const vkKeys = keys.map(k => ({
+        vk: VK_CODES[k.toLowerCase()] || k.toUpperCase().charCodeAt(0),
+        isModifier: true,
+      }))
+      const downFlags = button === 'right' ? '0x08' : '0x02'
+      const upFlags = button === 'right' ? '0x10' : '0x04'
+      const lines = [
+        'Add-Type -AssemblyName System.Windows.Forms',
+        'Add-Type @"',
+        'using System;',
+        'using System.Runtime.InteropServices;',
+        'public class ModClickOps {',
+        '    [DllImport("user32.dll")]',
+        '    public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);',
+        '    [DllImport("user32.dll")]',
+        '    public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);',
+        '    public const uint KEYEVENTF_KEYUP = 0x02;',
+        '}',
+        '"@',
+      ]
+      // Press modifier keys down
+      for (const k of vkKeys) {
+        lines.push(`[ModClickOps]::keybd_event(${k.vk}, 0, 0, 0)`)
+      }
+      lines.push('Start-Sleep -Milliseconds 50')
+      // Move cursor and click
+      lines.push(`[System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x}, ${y})`)
+      lines.push('Start-Sleep -Milliseconds 30')
+      for (let i = 0; i < clicks; i++) {
+        lines.push(`[ModClickOps]::mouse_event(${downFlags}, 0, 0, 0, 0)`)
+        lines.push(`[ModClickOps]::mouse_event(${upFlags}, 0, 0, 0, 0)`)
+        if (i < clicks - 1) lines.push('Start-Sleep -Milliseconds 50')
+      }
+      // Release modifier keys
+      lines.push('Start-Sleep -Milliseconds 30')
+      for (const k of [...vkKeys].reverse()) {
+        lines.push(`[ModClickOps]::keybd_event(${k.vk}, 0, [ModClickOps]::KEYEVENTF_KEYUP, 0)`)
+      }
+      await runPowershell(lines.join('\n'))
+    } else if (process.platform === 'linux') {
+      const parts: string[] = []
+      for (const key of keys) {
+        parts.push(`xdotool keydown ${safeXdotoolKey(key)}`)
+      }
+      const xdoBtn = button === 'right' ? 3 : button === 'middle' ? 2 : 1
+      parts.push(`xdotool mousemove --sync ${x} ${y}`)
+      if (clicks >= 2) {
+        parts.push(`xdotool click --repeat ${clicks} --delay 80 ${xdoBtn}`)
+      } else {
+        parts.push(`xdotool click ${xdoBtn}`)
+      }
+      for (const key of keys) {
+        parts.push(`xdotool keyup ${safeXdotoolKey(key)}`)
+      }
+      await runBash(parts.join(' && '))
+    } else if (process.platform === 'darwin') {
+      // Build CGEvent flags for modifiers
+      const flagMap: Record<string, string> = {
+        shift: '.maskShift', cmd: '.maskCommand', command: '.maskCommand',
+        option: '.maskAlternate', alt: '.maskAlternate',
+        ctrl: '.maskControl', control: '.maskControl', fn: '.maskSecondaryFn',
+      }
+      const flags = keys
+        .map(k => flagMap[k.toLowerCase()])
+        .filter(Boolean)
+      const flagExpr = flags.length > 0
+        ? `CGEventFlags([${flags.join(', ')}])`
+        : 'CGEventFlags(rawValue: 0)'
+      const downType = button === 'right' ? '.rightMouseDown' : '.leftMouseDown'
+      const upType = button === 'right' ? '.rightMouseUp' : '.leftMouseUp'
+      const btn = button === 'right' ? '.right' : '.left'
+
+      let swiftCode = `
+import Cocoa
+let pt = CGPoint(x: ${x}, y: ${y})
+let flags = ${flagExpr}
+`
+      for (let i = 0; i < clicks; i++) {
+        const clickState = i + 1
+        swiftCode += `
+let down${i} = CGEvent(mouseEventSource: nil, mouseType: ${downType}, mouseCursorPosition: pt, mouseButton: ${btn})
+down${i}?.flags = flags
+down${i}?.setIntegerValueField(.mouseEventClickState, value: ${clickState})
+down${i}?.post(tap: .cghidEventTap)
+usleep(30000)
+let up${i} = CGEvent(mouseEventSource: nil, mouseType: ${upType}, mouseCursorPosition: pt, mouseButton: ${btn})
+up${i}?.flags = flags
+up${i}?.setIntegerValueField(.mouseEventClickState, value: ${clickState})
+up${i}?.post(tap: .cghidEventTap)
+`
+        if (i < clicks - 1) swiftCode += 'usleep(50000)\n'
+      }
+      await runSwift(swiftCode)
+    }
+
+    return { success: true, message: `Clicked at (${x}, ${y}) with modifiers [${keys.join(', ')}]` }
+  } catch (error: any) {
+    return { success: false, error: error.message }
+  }
+}
+
 export async function desktopDoubleClick(params: {
   x: number
   y: number
 }): Promise<any> {
   try {
-    const { x, y } = params
+    const denied = requireAccessibility()
+    if (denied) return denied
+
+    const x = validateInt(params.x, 'x')
+    const y = validateInt(params.y, 'y')
 
     if (process.platform === 'win32') {
       await runPowershell(`
@@ -148,6 +336,9 @@ up2?.post(tap: .cghidEventTap)
 
 export async function desktopType(params: { text: string }): Promise<any> {
   try {
+    const denied = requireAccessibility()
+    if (denied) return denied
+
     const { text } = params
 
     if (process.platform === 'win32') {
@@ -161,7 +352,8 @@ Add-Type -AssemblyName System.Windows.Forms
     } else if (process.platform === 'linux') {
       await runBash(`xdotool type --clearmodifiers -- ${JSON.stringify(text)}`)
     } else if (process.platform === 'darwin') {
-      await runBash(`osascript -e 'tell application "System Events" to keystroke "${text.replace(/"/g, '\\"')}"'`)
+      // Use runOsascript (execFile) instead of runBash to prevent $() and backtick shell injection
+      await runOsascript(`tell application "System Events" to keystroke "${escapeAppleScript(text)}"`)
     }
 
     return { success: true, message: `Typed "${text.slice(0, 50)}"` }
@@ -328,6 +520,9 @@ function normalizeKeysForPlatform(keys: string[]): string[] {
 
 export async function desktopKeyPress(params: { keys: string[] }): Promise<any> {
   try {
+    const denied = requireAccessibility()
+    if (denied) return denied
+
     const { keys: rawKeys } = params
     const keys = normalizeKeysForPlatform(rawKeys)
 
@@ -348,7 +543,7 @@ Add-Type -AssemblyName System.Windows.Forms
       }
     } else if (process.platform === 'linux') {
       for (const key of keys) {
-        const mapped = KEY_MAP_XDOTOOL[key.toLowerCase()] || key
+        const mapped = safeXdotoolKey(key)
         await runBash(`xdotool key ${mapped}`)
       }
     } else if (process.platform === 'darwin') {
@@ -356,10 +551,10 @@ Add-Type -AssemblyName System.Windows.Forms
         const lower = key.toLowerCase()
         const macKeyCode = KEY_MAP_MACOS[lower]
         if (macKeyCode !== undefined) {
-          await runBash(`osascript -e 'tell application "System Events" to key code ${macKeyCode}'`)
+          await runOsascript(`tell application "System Events" to key code ${macKeyCode}`)
         } else {
-          // Single character — use keystroke
-          await runBash(`osascript -e 'tell application "System Events" to keystroke "${key.replace(/"/g, '\\"')}"'`)
+          // Single character — use keystroke (runOsascript bypasses bash shell injection)
+          await runOsascript(`tell application "System Events" to keystroke "${escapeAppleScript(key)}"`)
         }
       }
     }
@@ -395,6 +590,9 @@ const KEY_MAP_MACOS: Record<string, number> = {
 
 export async function desktopKeyCombo(params: { keys: string[] }): Promise<any> {
   try {
+    const denied = requireAccessibility()
+    if (denied) return denied
+
     const { keys: rawKeys } = params
     const keys = normalizeKeysForPlatform(rawKeys)
 
@@ -422,7 +620,7 @@ export async function desktopKeyCombo(params: { keys: string[] }): Promise<any> 
         if (MODIFIER_MAP_XDOTOOL[lower]) {
           modifiers.push(MODIFIER_MAP_XDOTOOL[lower])
         } else {
-          finalKey = KEY_MAP_XDOTOOL[lower] || lower
+          finalKey = safeXdotoolKey(key)
         }
       }
       const combo = [...modifiers, finalKey].join('+')
@@ -447,10 +645,10 @@ export async function desktopKeyCombo(params: { keys: string[] }): Promise<any> 
       const macKeyCode = KEY_MAP_MACOS[finalKey.toLowerCase()]
       if (macKeyCode !== undefined) {
         // Special key (Enter, Backspace, arrows, etc.) — must use key code
-        await runBash(`osascript -e 'tell application "System Events" to key code ${macKeyCode}${using}'`)
+        await runOsascript(`tell application "System Events" to key code ${macKeyCode}${using}`)
       } else {
-        // Regular character — use keystroke
-        await runBash(`osascript -e 'tell application "System Events" to keystroke "${finalKey.replace(/"/g, '\\"')}"${using}'`)
+        // Regular character — use keystroke (runOsascript bypasses bash shell injection)
+        await runOsascript(`tell application "System Events" to keystroke "${escapeAppleScript(finalKey)}"${using}`)
       }
     }
 
@@ -467,9 +665,17 @@ export async function desktopScroll(params: {
   y?: number
 }): Promise<any> {
   try {
-    const { clicks, direction = 'vertical', x, y } = params
-    const amount = Math.abs(clicks)
-    const scrollUp = clicks > 0
+    const denied = requireAccessibility()
+    if (denied) return denied
+
+    const rawClicks = validateInt(params.clicks, 'clicks')
+    const direction = params.direction ?? 'vertical'
+    const x = params.x !== undefined ? validateInt(params.x, 'x') : undefined
+    const y = params.y !== undefined ? validateInt(params.y, 'y') : undefined
+    // Clamp to prevent Int32 overflow when multiplied by platform scroll units.
+    const MAX_SCROLL_CLICKS = 500
+    const amount = Math.min(Math.abs(rawClicks), MAX_SCROLL_CLICKS)
+    const scrollUp = rawClicks > 0
 
     if (process.platform === 'win32') {
       // Move mouse to position first (if specified), then scroll via mouse_event
@@ -528,36 +734,82 @@ export async function desktopDrag(params: {
   hold_keys?: string[]
 }): Promise<any> {
   try {
-    const { x1, y1, x2, y2, hold_keys = [] } = params
+    const denied = requireAccessibility()
+    if (denied) return denied
+
+    const x1 = validateInt(params.x1, 'x1')
+    const y1 = validateInt(params.y1, 'y1')
+    const x2 = validateInt(params.x2, 'x2')
+    const y2 = validateInt(params.y2, 'y2')
+    const hold_keys = params.hold_keys ?? []
 
     if (process.platform === 'win32') {
-      // Windows: move to start, mousedown, move to end, mouseup
-      await runPowershell(`
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type @"
-using System;
-using System.Runtime.InteropServices;
-public class DragOps {
-    [DllImport("user32.dll")]
-    public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
-    public const int MOUSEEVENTF_LEFTDOWN = 0x02;
-    public const int MOUSEEVENTF_LEFTUP = 0x04;
-    public const int MOUSEEVENTF_ABSOLUTE = 0x8000;
-    public const int MOUSEEVENTF_MOVE = 0x0001;
-}
-"@
-[System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x1}, ${y1})
-Start-Sleep -Milliseconds 100
-[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-Start-Sleep -Milliseconds 50
-[System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point(${x2}, ${y2})
-Start-Sleep -Milliseconds 100
-[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
-`)
+      // Windows: hold modifiers, move to start via MOUSEEVENTF_MOVE|ABSOLUTE,
+      // mousedown, move through midpoint to end, mouseup, release modifiers.
+      // MOUSEEVENTF_ABSOLUTE uses normalized 0-65535 coords mapped to screen size.
+      const xm = Math.round((x1 + x2) / 2), ym = Math.round((y1 + y2) / 2)
+      const modVks = hold_keys.map(k => VK_CODES[k.toLowerCase()] || k.toUpperCase().charCodeAt(0))
+
+      const lines = [
+        'Add-Type -AssemblyName System.Windows.Forms',
+        'Add-Type @"',
+        'using System;',
+        'using System.Runtime.InteropServices;',
+        'public class DragOps {',
+        '    [DllImport("user32.dll")]',
+        '    public static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);',
+        '    [DllImport("user32.dll")]',
+        '    public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);',
+        '    [DllImport("user32.dll")]',
+        '    public static extern int GetSystemMetrics(int nIndex);',
+        '    public const int MOUSEEVENTF_MOVE = 0x0001;',
+        '    public const int MOUSEEVENTF_LEFTDOWN = 0x02;',
+        '    public const int MOUSEEVENTF_LEFTUP = 0x04;',
+        '    public const int MOUSEEVENTF_ABSOLUTE = 0x8000;',
+        '    public const uint KEYEVENTF_KEYUP = 0x02;',
+        '}',
+        '"@',
+        // Screen dimensions for absolute coordinate normalization
+        '$sw = [DragOps]::GetSystemMetrics(0)',
+        '$sh = [DragOps]::GetSystemMetrics(1)',
+      ]
+
+      // Helper function to convert pixel coords to normalized absolute coords
+      const absCoord = (px: number, py: number) =>
+        `[int](${px} * 65536 / $sw + 0.5), [int](${py} * 65536 / $sh + 0.5)`
+
+      // Press modifier keys down
+      for (const vk of modVks) {
+        lines.push(`[DragOps]::keybd_event(${vk}, 0, 0, 0)`)
+      }
+      if (modVks.length > 0) lines.push('Start-Sleep -Milliseconds 50')
+
+      // Move to start position (generates WM_MOUSEMOVE)
+      lines.push(`[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_MOVE -bor [DragOps]::MOUSEEVENTF_ABSOLUTE, ${absCoord(x1, y1)}, 0, 0)`)
+      lines.push('Start-Sleep -Milliseconds 100')
+      // Mouse down at start
+      lines.push('[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)')
+      lines.push('Start-Sleep -Milliseconds 50')
+      // Move through midpoint (smooth drag, generates WM_MOUSEMOVE)
+      lines.push(`[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_MOVE -bor [DragOps]::MOUSEEVENTF_ABSOLUTE, ${absCoord(xm, ym)}, 0, 0)`)
+      lines.push('Start-Sleep -Milliseconds 50')
+      // Move to end position
+      lines.push(`[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_MOVE -bor [DragOps]::MOUSEEVENTF_ABSOLUTE, ${absCoord(x2, y2)}, 0, 0)`)
+      lines.push('Start-Sleep -Milliseconds 100')
+      // Mouse up at end
+      lines.push('[DragOps]::mouse_event([DragOps]::MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)')
+
+      // Release modifier keys in reverse
+      if (modVks.length > 0) lines.push('Start-Sleep -Milliseconds 30')
+      for (const vk of [...modVks].reverse()) {
+        lines.push(`[DragOps]::keybd_event(${vk}, 0, [DragOps]::KEYEVENTF_KEYUP, 0)`)
+      }
+
+      await runPowershell(lines.join('\n'))
     } else if (process.platform === 'linux') {
       const parts: string[] = []
       for (const key of hold_keys) {
-        parts.push(`xdotool keydown ${key}`)
+        parts.push(`xdotool keydown ${safeXdotoolKey(key)}`)
       }
       parts.push(`xdotool mousemove --sync ${x1} ${y1}`)
       parts.push('sleep 0.2')
@@ -570,7 +822,7 @@ Start-Sleep -Milliseconds 100
       parts.push('sleep 0.15')
       parts.push('xdotool mouseup 1')
       for (const key of hold_keys) {
-        parts.push(`xdotool keyup ${key}`)
+        parts.push(`xdotool keyup ${safeXdotoolKey(key)}`)
       }
       await runBash(parts.join(' && '))
     } else if (process.platform === 'darwin') {

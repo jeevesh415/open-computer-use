@@ -107,4 +107,12 @@ jest.config.js
 .prettierrc*
 
 # TypeScript
-*.tsbuildinfo 
+*.tsbuildinfo
+
+# Large directories not needed for frontend build
+OSWorld/
+electron/
+docker/
+infra/
+supabase/
+backend/

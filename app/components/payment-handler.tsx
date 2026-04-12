@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect } from "react"
+import { useTranslations } from "next-intl"
 import { useSearchParams } from "next/navigation"
 import { toast } from "sonner"
 import { useCredits } from "@/lib/hooks/use-credits"
 import { trackPaymentCompleted, trackPaymentCanceled } from "@/lib/posthog/analytics"
 
 export function PaymentHandler() {
+  const t = useTranslations("paymentHandler")
   const searchParams = useSearchParams()
   const { refetch: refetchCredits } = useCredits()
 
@@ -17,7 +19,7 @@ export function PaymentHandler() {
     if (success === "true") {
       // Payment successful
       trackPaymentCompleted("unknown", 0, "credits")
-      toast.success("Payment successful! Your credits have been added.", {
+      toast.success(t("success"), {
         duration: 5000,
       })
       
@@ -35,7 +37,7 @@ export function PaymentHandler() {
     } else if (canceled === "true") {
       // Payment canceled
       trackPaymentCanceled()
-      toast.error("Payment was canceled. No charges were made.", {
+      toast.error(t("canceled"), {
         duration: 5000,
       })
       

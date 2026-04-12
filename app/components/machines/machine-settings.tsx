@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Save, Loader2, Shield, Key, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +16,7 @@ interface MachineSettingsProps {
 }
 
 export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
+  const t = useTranslations("machineSettings");
   const [saving, setSaving] = useState(false);
   const [displayName, setDisplayName] = useState(machine.displayName);
   const handleSave = async () => {
@@ -49,19 +51,19 @@ export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
       {/* General Settings */}
       <Card>
         <CardHeader>
-          <CardTitle>General Settings</CardTitle>
+          <CardTitle>{t("generalSettings")}</CardTitle>
           <CardDescription>
-            Configure basic machine settings
+            {t("generalDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="displayName">Display Name</Label>
+            <Label htmlFor="displayName">{t("displayName")}</Label>
             <Input
               id="displayName"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="My Machine"
+              placeholder={t("defaultName")}
             />
           </div>
 
@@ -76,7 +78,7 @@ export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
               ) : (
                 <Save className="h-4 w-4 mr-1.5" />
               )}
-              Save Changes
+              {t("saveChanges")}
             </Button>
           </div>
         </CardContent>
@@ -85,9 +87,9 @@ export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
       {/* Security Settings */}
       <Card>
         <CardHeader>
-          <CardTitle>Security</CardTitle>
+          <CardTitle>{t("security")}</CardTitle>
           <CardDescription>
-            Security and access settings
+            {t("securityDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -96,14 +98,14 @@ export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
               <div className="rounded-lg border p-4 space-y-2">
                 <div className="flex items-center gap-2">
                   <Key className="h-4 w-4 text-blue-500" />
-                  <p className="text-sm font-medium">SSH Authentication</p>
+                  <p className="text-sm font-medium">{t("sshAuth")}</p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-xs text-muted-foreground">
-                    Username: <span className="font-mono">{machine.settings?.sshUsername || 'ubuntu'}</span>
+                    {t("username")} <span className="font-mono">{machine.settings?.sshUsername || 'ubuntu'}</span>
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    Key Pair: <span className="font-mono">{machine.settings?.awsKeyPairName || 'N/A'}</span>
+                    {t("keyPair")} <span className="font-mono">{machine.settings?.awsKeyPairName || 'N/A'}</span>
                   </p>
                 </div>
               </div>
@@ -123,27 +125,27 @@ export function MachineSettings({ machine, onUpdate }: MachineSettingsProps) {
                     a.click();
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
-                    toast.success("SSH key downloaded");
+                    toast.success(t("sshKeyDownloaded"));
                   } catch {
-                    toast.error("Failed to download SSH key");
+                    toast.error(t("sshKeyFailed"));
                   }
                 }}
               >
                 <Download className="h-4 w-4 mr-1.5" />
-                Download SSH Key
+                {t("downloadSshKey")}
               </Button>
             </>
           ) : (
             <div className="rounded-lg border p-4 space-y-2">
               <div className="flex items-center gap-2">
                 <Shield className="h-4 w-4 text-blue-500" />
-                <p className="text-sm font-medium">VNC Password</p>
+                <p className="text-sm font-medium">{t("vncPassword")}</p>
               </div>
               <p className="text-sm text-muted-foreground font-mono">
                 {machine.vncPassword}
               </p>
               <p className="text-xs text-muted-foreground">
-                This password is required to connect to the machine
+                {t("vncPasswordHint")}
               </p>
             </div>
           )}

@@ -44,6 +44,8 @@ export const AnimatedThemeToggler = ({ className }: props) => {
       return;
     }
 
+    if (!buttonRef.current) return;
+
     const { top, left, width, height } =
       buttonRef.current.getBoundingClientRect();
     const y = top + height / 2;
@@ -69,12 +71,12 @@ export const AnimatedThemeToggler = ({ className }: props) => {
   };
   
   if (!mounted) {
-    return <button className={cn(className)}></button>;
+    return <button className={cn("inline-flex items-center justify-center", className)}></button>;
   }
-  
+
   return (
-    <button ref={buttonRef} onClick={changeTheme} className={cn(className)}>
-      {resolvedTheme === "dark" ? <Moon /> : <SunDim />}
+    <button ref={buttonRef} onClick={changeTheme} className={cn("inline-flex items-center justify-center", className)}>
+      {resolvedTheme === "dark" ? <Moon className="h-[1em] w-[1em]" /> : <SunDim className="h-[1em] w-[1em]" />}
     </button>
   );
 };

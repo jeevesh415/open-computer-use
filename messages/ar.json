@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "ابدأ مجاناً",
+    "bookDemo": "احجز عرضاً توضيحياً",
+    "tryCoastyFree": "جرّب Coasty مجاناً",
+    "learnMore": "اعرف المزيد",
+    "watchSession": "شاهد الجلسة",
+    "compareAllPlans": "قارن جميع الخطط والميزات",
+    "allRightsReserved": "جميع الحقوق محفوظة.",
+    "privacy": "الخصوصية",
+    "terms": "الشروط",
+    "recommended": "موصى به",
+    "month": "شهر",
+    "creditsPerMonth": "{count} رصيد/شهر",
+    "agentsInParallel": "{count} وكلاء بالتوازي"
+  },
+  "header": {
+    "useCases": "حالات الاستخدام",
+    "blog": "المدوّنة",
+    "agentSwarms": "أسراب الوكلاء",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "مقارنة",
+    "demos": "عروض توضيحية",
+    "pricing": "الأسعار",
+    "download": "تحميل",
+    "signIn": "تسجيل الدخول",
+    "getStarted": "ابدأ الآن",
+    "useCaseItems": {
+      "competitorIntel": "استخبارات المنافسين",
+      "qaBugReports": "تقارير أخطاء ضمان الجودة",
+      "seoGapAnalysis": "تحليل فجوات SEO",
+      "dataExtraction": "استخراج البيانات",
+      "leadGeneration": "توليد العملاء المحتملين",
+      "siteAudit": "تدقيق الموقع",
+      "adIntelligence": "استخبارات الإعلانات",
+      "emailOutreach": "التواصل عبر البريد الإلكتروني",
+      "designReview": "مراجعة التصميم",
+      "priceMonitoring": "مراقبة الأسعار",
+      "marketResearch": "أبحاث السوق",
+      "emailCampaigns": "حملات البريد الإلكتروني"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} ملف تعريف منافس تم تسليمه",
+      "qaBugReports": "{stat} مسار مستخدم تم اختباره لكل تشغيل",
+      "seoGapAnalysis": "{stat} فجوة كلمات مفتاحية تم تحديدها",
+      "dataExtraction": "{stat} صف تم استخراجه لكل تشغيل",
+      "leadGeneration": "{stat} عميل محتمل مؤهل لكل تشغيل",
+      "siteAudit": "{stat} صفحة تم تدقيقها لكل تشغيل",
+      "adIntelligence": "{stat} إعلان إبداعي تم التقاطه",
+      "emailOutreach": "{stat} بريد إلكتروني مخصص تمت صياغته",
+      "designReview": "{stat} نقطة توقف تم اختبارها لكل صفحة",
+      "priceMonitoring": "{stat} منتج تمت مقارنته لكل تشغيل",
+      "marketResearch": "{stat} نقطة بيانات تم جمعها",
+      "emailCampaigns": "{stat} بريد إلكتروني مخصص لكل حملة"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "جميع المقالات",
+      "computerUse": "استخدام الحاسوب",
+      "compare": "مقارنة",
+      "dataEntry": "إدخال البيانات",
+      "webScraping": "استخراج بيانات الويب",
+      "jobApplications": "طلبات التوظيف",
+      "demosResults": "العروض والنتائج",
+      "guide": "دليل"
+    },
+    "blogStats": {
+      "allPosts": "{stat} مقالة تُنشر أسبوعياً",
+      "computerUse": "{stat} نتيجة معيار OSWorld",
+      "compare": "{stat} منافس تم تحليله",
+      "dataEntry": "{stat} أسرع من الإدخال اليدوي",
+      "webScraping": "{stat} صفحة لكل جلسة",
+      "jobApplications": "{stat} طلب لكل جلسة",
+      "demosResults": "{stat} دراسة حالة حقيقية",
+      "guide": "{stat} شرح لحالات الاستخدام"
+    }
+  },
+  "hero": {
+    "badge": "الوكيل رقم 1 لاستخدام الحاسوب · {score} OSWorld",
+    "headline": "مشغّلو حاسوب مستقلون",
+    "useCases": {
+      "computerAgent": {
+        "label": "وكيل الحاسوب",
+        "headline": "أتمتة أي مهمة متصفح",
+        "outcome": "وكيل ذكاء اصطناعي يتحكم في حاسوب حقيقي — يتصفح وينقر ويكتب ويُنجز العمل. لا حاجة لأي إعداد."
+      },
+      "competitorIntel": {
+        "label": "استخبارات المنافسين",
+        "headline": "راقب كل منافس",
+        "outcome": "ملفات تعريف كاملة للمنافسين تشمل الأسعار والميزات وفجوات التموضع — مُصدَّرة كتقرير جاهز للمشاركة."
+      },
+      "qaTesting": {
+        "label": "اختبار ضمان الجودة",
+        "headline": "اكتشف الأخطاء قبل المستخدمين",
+        "outcome": "اختبار مسارات المستخدم الحرجة من البداية للنهاية، كل خطأ موثّق بلقطة شاشة مع خطوات إعادة الإنتاج وتصنيف الخطورة."
+      },
+      "seoAnalysis": {
+        "label": "تحليل SEO",
+        "headline": "اكتشف فجوات الكلمات المفتاحية",
+        "outcome": "تحديد فجوات الكلمات المفتاحية، صياغة ملخصات المحتوى، رسم خريطة مصادر الروابط الخلفية للمنافسين — استراتيجية SEO قابلة للتنفيذ."
+      },
+      "dataExtraction": {
+        "label": "استخراج البيانات",
+        "headline": "استخرج وهيكل أي موقع",
+        "outcome": "بيانات منظمة مستخرجة ومنظفة ومزالة التكرار ومُصدَّرة كـ CSV — من أي موقع وبأي تنسيق."
+      },
+      "leadGeneration": {
+        "label": "توليد العملاء المحتملين",
+        "headline": "املأ خط مبيعاتك",
+        "outcome": "صنّاع قرار مؤهلون يطابقون ملف عميلك المثالي مع ألقاب وشركات موثقة وعبارات تواصل مخصصة."
+      },
+      "siteAudit": {
+        "label": "تدقيق الموقع",
+        "headline": "دقّق كل صفحة على نطاق واسع",
+        "outcome": "فحص الصفحات، تقييم مؤشرات الويب الأساسية، اكتشاف الروابط المعطلة، تصنيف مشاكل إمكانية الوصول حسب أولوية الإصلاح."
+      },
+      "emailOutreach": {
+        "label": "التواصل عبر البريد الإلكتروني",
+        "headline": "أرسل تواصلاً مخصصاً",
+        "outcome": "رسائل بريد إلكتروني مخصصة تشير إلى شركة كل عميل محتمل ومنصبه ونقاط ألمه — جاهزة للإرسال."
+      },
+      "marketResearch": {
+        "label": "أبحاث السوق",
+        "headline": "تحقق من سوقك بسرعة",
+        "outcome": "حساب حجم السوق الكلي، تحليل اللاعبين الرئيسيين، رسم اتجاهات النمو — من عشرات نقاط البيانات."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "التسويق",
+        "task": "سوّق منتجك على Reddit بشكل مستقل"
+      },
+      "goToMarket": {
+        "label": "الوصول للسوق",
+        "task": "ابحث عن عملاء محتملين وأرسل رسائل مخصصة"
+      },
+      "qaTesting": {
+        "label": "اختبار الجودة",
+        "task": "اختبر كل مسار دفع وأبلغ عن الأخطاء"
+      },
+      "jobApplication": {
+        "label": "طلب توظيف",
+        "task": "ابحث عن وظائف، خصص سيرتك الذاتية، وقدّم"
+      },
+      "formFilling": {
+        "label": "ملء النماذج",
+        "task": "املأ طلب YC S26 نيابة عنك"
+      },
+      "socialMedia": {
+        "label": "وسائل التواصل الاجتماعي",
+        "task": "انشر على Hacker News وتفاعل مع التعليقات"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "معيار OSWorld",
+      "sublabel": "الوكيل رقم 1 لاستخدام الحاسوب عالمياً"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "أداة يمكن للوكيل استخدامها",
+      "sublabel": "متصفح، طرفية، سطح مكتب، ملفات"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "يعمل وفق جدول زمني",
+      "sublabel": "أتمتة أي مهمة متكررة"
+    },
+    "setup": {
+      "value": "0",
+      "label": "إعداد مطلوب",
+      "sublabel": "لا واجهات برمجة، لا تكاملات، لا كود"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "لماذا Coasty",
+    "title": "ليس روبوت محادثة. ليس سكريبت أتمتة.",
+    "worksLikeHuman": {
+      "title": "يعمل كإنسان",
+      "description": "يرى وينقر ويكتب ويتنقل — تماماً مثلك"
+    },
+    "noScripts": {
+      "title": "لا سكريبتات ولا إعداد",
+      "description": "أدخل بلغة بسيطة، واحصل على النتائج"
+    },
+    "handlesUnexpected": {
+      "title": "يتعامل مع غير المتوقع",
+      "description": "يتكيف مع اختبارات CAPTCHA والنوافذ المنبثقة وتغييرات التخطيط"
+    },
+    "runsInIsolation": {
+      "title": "يعمل في بيئة معزولة",
+      "description": "VM مخصص لكل جلسة — لا شيء يتسرب"
+    }
+  },
+  "howItWorks": {
+    "title": "كيف يعمل",
+    "step1": {
+      "title": "صِف مهمتك",
+      "description": "بلغة بسيطة. هذا كل شيء.",
+      "placeholder": "ابحث عن 100 عميل محتمل على LinkedIn..."
+    },
+    "step2": {
+      "title": "شاهد الوكيل يعمل",
+      "description": "يفتح المتصفح وينقر ويكتب ويتنقل"
+    },
+    "step3": {
+      "title": "المهمة مكتملة",
+      "description": "كل إجراء موثّق بلقطات شاشة",
+      "results": {
+        "taskCompleted": "تمت المهمة",
+        "leadsFound": "تم العثور على 12 عميل محتمل",
+        "addedToCrm": "تمت الإضافة إلى CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "المرتبة الأولى عالمياً في المعايير",
+    "subtitle": "82% على OSWorld — أصعب معيار لوكلاء الذكاء الاصطناعي الذين يستخدمون حواسيب حقيقية",
+    "agenticFramework": "إطار عمل الوكيل",
+    "foundationModel": "النموذج الأساسي"
+  },
+  "comparison": {
+    "title": "لماذا الأتمتة مع Coasty؟",
+    "subtitle": "نفس المهام التي تستغرق ساعات من فريقك — Coasty ينجزها في دقائق، على مدار الساعة.",
+    "manual": {
+      "title": "العمل اليدوي",
+      "subtitle": "أنت أو فريقك، يدوياً"
+    },
+    "coasty": {
+      "title": "وكيل Coasty الذكي",
+      "subtitle": "الوكيل رقم 1 لاستخدام الحاسوب"
+    },
+    "rows": {
+      "timePerTask": "الوقت لكل مهمة",
+      "availability": "التوفر",
+      "setupTime": "وقت الإعداد",
+      "errorRate": "معدل الأخطاء",
+      "scaling": "التوسع",
+      "auditTrail": "سجل المراجعة"
+    },
+    "manualValues": {
+      "timePerTask": "ساعات إلى أيام",
+      "availability": "ساعات العمل فقط",
+      "setupTime": "تعلّم الأدوات، اكتب إجراءات العمل",
+      "errorRate": "أخطاء بشرية",
+      "scaling": "المزيد من العمل = المزيد من الوقت",
+      "auditTrail": "لا يوجد"
+    },
+    "coastyValues": {
+      "timePerTask": "دقائق",
+      "availability": "24/7، كل يوم",
+      "setupTime": "60 ثانية",
+      "errorRate": "تصحيح ذاتي",
+      "scaling": "شغّل مهام غير محدودة بالتوازي",
+      "auditTrail": "كل نقرة موثقة + لقطات شاشة"
+    },
+    "bottomBar": {
+      "automateTasksThat": "أتمتة مهام تستغرق",
+      "hoursManually": "ساعات يدوياً",
+      "startingAt": "بدءاً من"
+    }
+  },
+  "demo": {
+    "title": "شاهد الوكيل أثناء العمل",
+    "subtitle": "مهام حقيقية. متصفحات حقيقية. كل نقرة مسجّلة.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty على Reddit",
+        "description": "شاهد Coasty يدير حملة تسويقية بشكل مستقل — يبحث عن المنافسين ويحلل الاتجاهات ويبني عرضاً استراتيجياً.",
+        "tag": "التسويق"
+      },
+      "prospects": {
+        "title": "إيجاد عملاء محتملين",
+        "description": "Coasty يجد ويبحث عن عملاء محتملين، يجمع التفاصيل الرئيسية لصياغة تواصل مخصص.",
+        "tag": "الوصول للسوق"
+      },
+      "qa": {
+        "title": "اختبار الجودة لنفسه",
+        "description": "Coasty يجري اختبار ضمان الجودة على منتجه — يتنقل بين المسارات ويكتشف الأخطاء ويبلغ عن المشاكل بشكل مستقل.",
+        "tag": "اختبار الجودة"
+      },
+      "email": {
+        "title": "إرسال بريد إلكتروني نيابة عنك",
+        "description": "من الصياغة إلى الإرسال — وكيل الذكاء الاصطناعي يكتب ويرسل بريداً إلكترونياً بالكامل بمفرده.",
+        "tag": "التواصل"
+      },
+      "job": {
+        "title": "التقديم لوظيفة",
+        "description": "Coasty يجد وظيفة مناسبة ويخصص سيرتك الذاتية ويقدم الطلب — كل ذلك بمفرده.",
+        "tag": "طلب توظيف"
+      },
+      "hackernews": {
+        "title": "النشر على Hacker News",
+        "description": "Coasty ينشئ وينشر مقالة على Hacker News — يكتب المحتوى ويقدمه بشكل مستقل.",
+        "tag": "وسائل التواصل الاجتماعي"
+      }
+    }
+  },
+  "features": {
+    "title": "مصمم لمهام الحاسوب الحقيقية",
+    "selfCorrecting": {
+      "title": "تصحيح ذاتي",
+      "description": "يكتشف الأخطاء ويعيد المحاولة بمسارات بديلة"
+    },
+    "auditTrail": {
+      "title": "سجل مراجعة كامل",
+      "description": "كل نقرة موثقة بلقطات شاشة"
+    },
+    "schedule": {
+      "title": "جدولة 24/7",
+      "description": "يعمل وفق جدول — كل ساعة، يومياً، أسبوعياً"
+    },
+    "sandboxed": {
+      "title": "معزول وآمن",
+      "description": "VM مخصص لكل جلسة، يُحذف بعدها"
+    },
+    "benchmark": {
+      "title": "رقم 1 على OSWorld",
+      "description": "82% — أعلى نتيجة تم تسجيلها على الإطلاق"
+    },
+    "swarms": {
+      "title": "أسراب الوكلاء",
+      "description": "قسّم المهام عبر أجهزة متعددة بالتوازي"
+    }
+  },
+  "pricing": {
+    "title": "ابدأ مجاناً، وسّع عندما تكون جاهزاً",
+    "subtitle": "لا بطاقة ائتمان. وكيلك الذكي جاهز في 60 ثانية.",
+    "plans": {
+      "free": {
+        "name": "مجاني",
+        "description": "جرّب الوكيل رقم 1 لاستخدام الحاسوب",
+        "cta": "ابدأ مجاناً"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "أتمتة يومية خفيفة",
+        "cta": "احصل على Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "أتمتة المهام يومياً",
+        "cta": "احصل على Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "وسّع سير العمل المعقدة",
+        "cta": "انتقل إلى Plus",
+        "badge": "الأكثر شعبية"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "أتمتة ثقيلة غير محدودة",
+        "cta": "احصل على Pro"
+      }
+    },
+    "vmTemporary": "1 VM مؤقت (ساعتان)",
+    "vmDeletedAfterInactivity": "1 VM (يُحذف بعد عدم النشاط)",
+    "vmAlwaysOn": "{count} VM يعمل دائماً",
+    "vmAlwaysOnPlural": "{count} أجهزة VM تعمل دائماً",
+    "bargain": {
+      "title": "نفس العمل يكلف {oldPrice} بالعمالة اليدوية",
+      "description": "مساعد افتراضي يكلف $2,000–$4,000/شهر. توظيف جزئي يكلف أكثر. Coasty ينجز نفس العمل 24/7 بدءاً من $0 — بدقة تامة، سجلات مراجعة كاملة، وبدون وقت تدريب."
+    }
+  },
+  "faq": {
+    "title": "الأسئلة الشائعة",
+    "subtitle": "كل ما تحتاج معرفته قبل البدء",
+    "items": {
+      "whatIsCoasty": {
+        "question": "ما هو Coasty؟",
+        "answer": "Coasty هو أفضل وكيل ذكاء اصطناعي لاستخدام الحاسوب في العالم. تصف مهمة — البحث عن عملاء محتملين، اختبار موقع، ملء نماذج، النشر على وسائل التواصل الاجتماعي — و Coasty يفتح متصفحاً حقيقياً ويتنقل في التطبيقات وينقر الأزرار ويكتب النصوص وينجز المهمة من البداية للنهاية. لا واجهات برمجة، لا تكاملات، لا كود مطلوب."
+      },
+      "howDifferent": {
+        "question": "كيف يختلف هذا عن ChatGPT أو أدوات الذكاء الاصطناعي الأخرى؟",
+        "answer": "ChatGPT يولّد نصوصاً. Coasty يستخدم حاسوباً. لا يخبرك بما يجب فعله — بل يفتح متصفحاً وينتقل إلى الموقع وينقر الأزرار ويملأ النماذج ويسلّم العمل المكتمل. إنه الفرق بين الحصول على تعليمات وإنجاز المهمة نيابة عنك."
+      },
+      "whatTasks": {
+        "question": "ما المهام التي يمكن لـ Coasty أتمتتها؟",
+        "answer": "أي مهمة يمكنك القيام بها على الحاسوب. البحث على الويب، توليد العملاء المحتملين، إدخال البيانات، ملء النماذج، اختبار ضمان الجودة، النشر على وسائل التواصل الاجتماعي، التواصل عبر البريد الإلكتروني، معالجة الفواتير، التحليل التنافسي، التوظيف — إذا كان يتضمن متصفحاً أو تطبيق سطح مكتب، Coasty يمكنه القيام به."
+      },
+      "whatAreCredits": {
+        "question": "ما هي الأرصدة وكيف تُستخدم؟",
+        "answer": "تُستهلك الأرصدة أثناء عمل الوكيل على المهام. المهام الأطول والأكثر تعقيداً تستخدم أرصدة أكثر. الخطط المدفوعة تتضمن أرصدة شهرية، ويمكنك أيضاً شراء حزم أرصدة إضافية في أي وقت."
+      },
+      "localComputer": {
+        "question": "هل يمكن لـ Coasty العمل على حاسوبي الشخصي؟",
+        "answer": "نعم. تطبيق سطح المكتب لدينا يعمل كطبقة خفيفة على جهازك، يتحكم في متصفحك وتطبيقاتك المحلية مباشرة. بدلاً من ذلك، يمكن تشغيل المهام على أجهزة سحابية معزولة — الخيار لك."
+      },
+      "dataSafe": {
+        "question": "هل بياناتي آمنة؟",
+        "answer": "كل مهمة تعمل في بيئة صندوق رمل معزولة. لا شيء يتسرب بين الجلسات. بيانات اعتمادك تبقى خاصة، وكل إجراء موثق بلقطات شاشة في سجل مراجعة كامل يمكنك مراجعته في أي وقت."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "استخدام الحاسوب بالذكاء الاصطناعي.",
+    "tagline2": "أتمتة أي سير عمل بوكلاء أذكياء.",
+    "columns": {
+      "product": "المنتج",
+      "resources": "الموارد",
+      "company": "الشركة",
+      "legal": "القانوني"
+    },
+    "links": {
+      "computerUse": "استخدام الحاسوب",
+      "guide": "دليل",
+      "download": "تحميل",
+      "pricing": "الأسعار",
+      "agentSwarms": "أسراب الوكلاء",
+      "status": "الحالة",
+      "blog": "المدوّنة",
+      "useCases": "حالات الاستخدام",
+      "demos": "عروض توضيحية",
+      "compare": "مقارنة",
+      "talkToCofounders": "تحدث مع المؤسسين وعرض توضيحي",
+      "contact": "اتصل بنا",
+      "privacy": "الخصوصية",
+      "terms": "الشروط"
+    }
+  },
+  "languageSwitcher": {
+    "label": "اللغة"
+  },
+  "auth": {
+    "brandHeading": "أنت تحدد الهدف.",
+    "brandSubheading": "ونحن نتولى الباقي.",
+    "mobileHeading": "أنت تحدد الهدف. ونحن نتولى الباقي.",
+    "mobileSubheading": "وكلاء ذكاء اصطناعي يتصفحون وينقرون ويعملون مثل زميل حقيقي.",
+    "flowSteps": {
+      "step1": {
+        "label": "تصف المهمة",
+        "sub": "\"ابحث عن أهم 5 منافسين لنا\""
+      },
+      "step2": {
+        "label": "الوكيل يتولى التحكم",
+        "sub": "يتصفح وينقر ويكتب بشكل مستقل"
+      },
+      "step3": {
+        "label": "تم تسليم العمل",
+        "sub": "جدول بيانات يحتوي على 5 ملفات تعريف كاملة للمنافسين"
+      }
+    },
+    "complete": "مكتمل",
+    "doneIn": "تم في 8 دقائق",
+    "demoCaption": "شغّل وكلاء الذكاء الاصطناعي على حاسوبك أو تحكّم به من هاتفك، أينما كنت.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "المشغّل في انتظارك",
+      "signUp": "اجعل سير عملك يعمل تلقائياً",
+      "magicLink": "تخطَّ كلمة المرور",
+      "forgotPassword": "دعنا نعيدك مرة أخرى"
+    },
+    "viewDescriptions": {
+      "signIn": "تابع من حيث توقفت — وكلاؤك يتذكرون",
+      "signUp": "انشر أول وكيل ذكاء اصطناعي في أقل من دقيقة",
+      "magicLink": "نقرة واحدة من بريدك الوارد وستدخل",
+      "forgotPassword": "سنرسل رابط إعادة التعيين إلى بريدك الإلكتروني"
+    },
+    "google": {
+      "connecting": "جارٍ الاتصال...",
+      "continueWithGoogle": "المتابعة مع Google"
+    },
+    "or": "أو",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "you@example.com",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "كلمة المرور الخاصة بك",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أكد كلمة المرور الخاصة بك",
+    "minChars": "6 أحرف على الأقل",
+    "signingIn": "جارٍ تسجيل الدخول...",
+    "signIn": "تسجيل الدخول",
+    "creatingAccount": "جارٍ إنشاء الحساب...",
+    "createAccount": "إنشاء حساب",
+    "sending": "جارٍ الإرسال...",
+    "sendMagicLink": "إرسال الرابط السحري",
+    "sendResetLink": "إرسال رابط إعادة التعيين",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "useMagicLink": "استخدام الرابط السحري",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "signUp": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "backToSignIn": "العودة لتسجيل الدخول",
+    "termsAgreement": "بالمتابعة، فإنك توافق على",
+    "terms": "الشروط",
+    "and": "و",
+    "privacyPolicy": "سياسة الخصوصية",
+    "errors": {
+      "fillAllFields": "يرجى ملء جميع الحقول",
+      "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "passwordsDoNotMatch": "كلمتا المرور غير متطابقتين",
+      "supabaseNotConfigured": "Supabase غير مُهيأ",
+      "unexpectedError": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+      "confirmEmail": "يرجى تأكيد بريدك الإلكتروني قبل تسجيل الدخول. تحقق من بريدك الوارد.",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "signInFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+      "invalidEmail": "عنوان بريد إلكتروني غير صالح.",
+      "emailAlreadyExists": "يوجد حساب بهذا البريد الإلكتروني بالفعل. حاول تسجيل الدخول بدلاً من ذلك.",
+      "signUpFailed": "فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.",
+      "enterEmail": "يرجى إدخال بريدك الإلكتروني",
+      "noAccountFound": "لم يتم العثور على حساب بهذا البريد الإلكتروني. يرجى التسجيل أولاً.",
+      "magicLinkFailed": "فشل إرسال الرابط السحري. يرجى المحاولة مرة أخرى.",
+      "resetFailed": "فشل إرسال بريد إعادة التعيين. يرجى المحاولة مرة أخرى.",
+      "updateFailed": "فشل تحديث كلمة المرور. يرجى المحاولة مرة أخرى."
+    },
+    "success": {
+      "checkEmailConfirm": "تحقق من بريدك الإلكتروني لتأكيد حسابك قبل تسجيل الدخول.",
+      "checkEmailMagicLink": "تحقق من بريدك الإلكتروني للعثور على الرابط السحري لتسجيل الدخول.",
+      "checkEmailReset": "تحقق من بريدك الإلكتروني للعثور على رابط إعادة تعيين كلمة المرور.",
+      "passwordUpdated": "تم تحديث كلمة المرور بنجاح. جارٍ إعادة التوجيه لتسجيل الدخول..."
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل كلمة المرور الجديدة أدناه.",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+      "confirmPlaceholder": "أكد كلمة المرور الجديدة",
+      "updating": "جارٍ التحديث...",
+      "updatePassword": "تحديث كلمة المرور"
+    },
+    "errorPage": {
+      "title": "خطأ في المصادقة",
+      "defaultMessage": "حدث خطأ أثناء المصادقة.",
+      "tryAgain": "حاول مرة أخرى",
+      "backToChat": "العودة إلى المحادثة",
+      "needHelp": "تحتاج مساعدة؟",
+      "contactSupport": "تواصل مع الدعم"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "تخطَّ الآن",
+    "back": "رجوع",
+    "continue": "متابعة",
+    "getStarted": "ابدأ الآن",
+    "settingUp": "جارٍ الإعداد...",
+    "welcome": {
+      "titleReturning": "مرحباً بعودتك{name}!",
+      "titleNew": "مرحباً بك في Coasty",
+      "descriptionReturning": "نودّ معرفة المزيد عنك لتحسين تجربتك",
+      "descriptionNew": "لنقم بإعداد حسابك لنتمكن من تخصيص تجربتك"
+    },
+    "nameLabel": "ماذا نناديك؟",
+    "namePlaceholder": "اسمك",
+    "companyLabel": "الشركة",
+    "optional": "(اختياري)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "الموقع الإلكتروني",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "ما الذي يصفك بشكل أفضل؟",
+      "subtitle": "اختر كل ما ينطبق — هذا يساعدنا في تخصيص تجربتك"
+    },
+    "roles": {
+      "founder": "مؤسس / CEO",
+      "developer": "مطوّر",
+      "marketer": "تسويق",
+      "designer": "مصمم",
+      "product_manager": "مدير منتج",
+      "data_analyst": "بيانات / تحليلات",
+      "operations": "عمليات",
+      "other": "أخرى"
+    },
+    "teamSizeLabel": "حجم الفريق",
+    "teamSizes": {
+      "solo": "أنا فقط",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "كيف عرفت عنا؟",
+      "subtitle": "نودّ معرفة أين سمعت عن Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "صديق / زميل",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "أخرى"
+    },
+    "useCaseStep": {
+      "title": "ما الذي ستؤتمته أولاً؟",
+      "subtitle": "اختر كل ما ينطبق — يمكنك استكشاف كل شيء لاحقاً"
+    },
+    "useCases": {
+      "web_scraping": "استخراج بيانات الويب والبحث",
+      "browser_automation": "أتمتة المتصفح",
+      "data_entry": "إدخال البيانات والنماذج",
+      "email_outreach": "البريد الإلكتروني والتواصل",
+      "testing": "ضمان الجودة والاختبار",
+      "ecommerce": "مهام التجارة الإلكترونية",
+      "social_media": "إدارة وسائل التواصل الاجتماعي",
+      "general_automation": "الأتمتة العامة"
+    },
+    "showcase": {
+      "title": "كل ما تحتاجه،",
+      "titleHighlight": "مدمج.",
+      "subtitle": "إليك ما يمكن أن يقدمه لك Coasty",
+      "noCode": {
+        "title": "بدون كود",
+        "description": "فقط صِف ما تريده بالعربية البسيطة"
+      },
+      "agentSwarms": {
+        "title": "أسراب الوكلاء",
+        "description": "أساطيل وكلاء متوازية"
+      },
+      "desktopControl": {
+        "title": "التحكم في سطح المكتب",
+        "description": "ينقر ويكتب ويتصفح"
+      },
+      "browserAutomation": {
+        "title": "أتمتة المتصفح",
+        "description": "النماذج والتبويبات والاستخراج — مؤتمت بالكامل"
+      },
+      "computerVision": {
+        "title": "الرؤية الحاسوبية",
+        "description": "يرى ويفهم شاشتك في الوقت الفعلي"
+      },
+      "workflows": {
+        "title": "سير العمل",
+        "description": "تدفقات متعددة الخطوات"
+      },
+      "onDevice": {
+        "title": "على الجهاز",
+        "description": "يعمل محلياً"
+      },
+      "autonomous": {
+        "title": "مستقل 24/7",
+        "description": "اضبطه وانسَه — يعمل أثناء نومك"
+      }
+    },
+    "guideCallout": {
+      "title": "جديد هنا؟ لدينا دليل لك",
+      "subtitle": "انشر أول وكيل ذكاء اصطناعي في أقل من دقيقة"
+    }
+  },
+  "chatInput": {
+    "placeholder": "ماذا يجب أن يفعل مساعد AI الخاص بك؟",
+    "placeholderAlt": "أخبر AI بما يجب فعله على الكمبيوتر...",
+    "vmError": {
+      "title": "خطأ في الجهاز الافتراضي",
+      "description": "الجهاز الافتراضي في حالة خطأ أو يتم حذفه.",
+      "hint": "يرجى التحقق من علامة تبويب الأجهزة لحل المشكلة، أو اختر \"لم يتم اختيار كمبيوتر\" لاستخدام البحث على الويب فقط.",
+      "gotIt": "فهمت"
+    },
+    "status": {
+      "creating": "جارٍ إنشاء {name}...",
+      "initiating": "جارٍ بدء الوكيل على {name}...",
+      "stopping": "جارٍ إيقاف {name}...",
+      "preparing": "جارٍ تجهيز {name}..."
+    },
+    "swarm": {
+      "title": "وضع السرب",
+      "pro": "PRO",
+      "upgradeLabel": "وضع السرب — قم بالترقية لفتحه",
+      "feature1": "تنفيذ متوازٍ عبر أجهزة مؤقتة",
+      "feature2": "كل جهاز يعمل بشكل مستقل",
+      "feature3": "3 أضعاف حد أجهزة خطتك لكل سرب",
+      "description": "شغّل أمراً واحداً على 3 أضعاف حد أجهزتك بالتوازي — كل جهاز يعالج المهمة بشكل مستقل.",
+      "enableLabel": "تفعيل وضع السرب",
+      "disableLabel": "تعطيل وضع السرب",
+      "onTooltip": "وضع السرب مُفعّل — سيعمل أمرك على عدة أجهزة بالتوازي",
+      "offTooltip": "فعّل وضع السرب لتشغيل أمرك على عدة أجهزة في آن واحد",
+      "decreaseMachines": "تقليل عدد الأجهزة",
+      "increaseMachines": "زيادة عدد الأجهزة",
+      "machineLimit": "حتى {max} جهاز سرب في خطتك. تحتاج المزيد؟ تواصل مع founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "وضع السرب"
+    },
+    "desktop": {
+      "connectLabel": "الاتصال بسطح المكتب",
+      "screenLabel": "شاشة {name}",
+      "screenDefault": "سطح المكتب",
+      "watchTooltip": "شاهد وكيلك يعمل على شاشة منفصلة. فقط لا تلمس أي شيء وإلا سيصاب برهبة المسرح!",
+      "watchLabel": "سطح المكتب"
+    },
+    "buttons": {
+      "stop": "إيقاف",
+      "sendToSwarm": "إرسال إلى السرب",
+      "taskRunning": "مهمة أخرى قيد التشغيل — انقر لإيقافها وتشغيل مهمتك",
+      "selectComputer": "اختر كمبيوتراً لإرسال الرسائل",
+      "waitCreating": "يرجى الانتظار حتى يتم إنشاء الجهاز الافتراضي",
+      "waitStarting": "يرجى الانتظار حتى يبدأ الجهاز الافتراضي",
+      "waitAgent": "يرجى الانتظار حتى يتم تهيئة الوكيل",
+      "vmStopping": "الجهاز الافتراضي يتوقف",
+      "send": "إرسال",
+      "switching": "جارٍ التبديل...",
+      "overrideRun": "تجاوز وتشغيل",
+      "stopLabel": "إيقاف المهمة الجارية وبدء هذه المهمة",
+      "sendLabel": "إرسال رسالة"
+    },
+    "search": "بحث",
+    "upload": {
+      "label": "رفع ملفات إلى الجهاز الافتراضي",
+      "heading": "رفع ملفات إلى الجهاز الافتراضي",
+      "description": "سيتم حفظ الملفات على سطح المكتب",
+      "vmInfo": "الجهاز الافتراضي: {name}",
+      "dropHeading": "أفلت الملفات هنا",
+      "dropDescription": "سيتم رفع الملفات إلى مجلد سطح المكتب في الجهاز الافتراضي",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "سجّل الدخول لتجربة المزيد من الميزات مجاناً",
+      "description": "أنشئ مشاريع، ادعُ أعضاء الفريق، والمزيد.",
+      "connecting": "جارٍ الاتصال...",
+      "continueWithGoogle": "المتابعة مع Google"
+    },
+    "removeFile": "إزالة الملف"
+  },
+  "chat": {
+    "greeting": "مرحباً",
+    "greetingAuth": "سأتولى العمل على الكمبيوتر. ما هي المهمة؟",
+    "greetingUnauth": "ذكاء اصطناعي يعمل على الكمبيوتر بدلاً منك. فقط أخبره بما تحتاجه.",
+    "guide": "دليل",
+    "saveLogins": "حفظ بيانات الدخول للملء التلقائي",
+    "encryptedNote": "مُشفّر، لا يراه الذكاء الاصطناعي",
+    "roleLabels": [
+      "زميل عمل",
+      "موظف",
+      "صديق",
+      "مساعد",
+      "شريك",
+      "عضو فريق",
+      "متعاون",
+      "مُعين"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "تقرير منافسي {company}",
+        "warmLeads": "ابحث عن 20 عميلاً محتملاً لـ {company}",
+        "pitchDeck": "مسودة عرض تقديمي لـ {company}"
+      },
+      "developer": {
+        "findBugs": "ابحث عن أخطاء في {company}",
+        "performance": "تدقيق أداء {company}",
+        "apiDocs": "استخرج وثائق API لـ {company}"
+      },
+      "marketer": {
+        "seoGap": "تحليل فجوات SEO لـ {company}",
+        "competitorAds": "تجسس على إعلانات منافسي {company}",
+        "trendingContent": "أفكار رائجة لـ {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "ملخص مراجعات {company}",
+        "featureComparison": "مقارنة ميزات {company}",
+        "competitorLaunches": "تتبع إطلاقات منافسي {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "صدّر بيانات {company} إلى CSV",
+        "marketSizing": "تحليل حجم سوق {company}",
+        "benchmark": "قارن {company} بالصناعة"
+      },
+      "operations": {
+        "enterRecords": "أدخل السجلات في {company}",
+        "cheapestVendor": "ابحث عن موردين لـ {company}",
+        "invoiceSummary": "ملخص فواتير {company}"
+      },
+      "designer": {
+        "designComparison": "{company} مقابل المنافسين في التصميم",
+        "responsiveAudit": "تدقيق استجابة {company}",
+        "inspiration": "إلهام تصميم لـ {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "استخرج بيانات موقع {company}",
+      "browser_automation": "صدّر تقارير {company}",
+      "data_entry": "أدخل بيانات في {company}",
+      "email_outreach": "تواصل لصالح {company}",
+      "testing": "اختبار QA لـ {company}",
+      "ecommerce": "مقارنة أسعار {company}",
+      "social_media": "انشر عن {company}",
+      "general_automation": "أتمتة مهمة على {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "نسخ النص",
+    "copied": "تم النسخ!",
+    "regenerate": "إعادة التوليد",
+    "feedback": {
+      "title": "ملاحظات",
+      "prompts": [
+        "قيّم هذا",
+        "ملاحظات",
+        "كيف كان أداؤنا؟",
+        "أفكارك؟",
+        "شارك ملاحظاتك"
+      ],
+      "tooltip": "شارك ملاحظاتك"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "بحث ذكي",
+      "description": "بحث مدعوم بالذكاء الاصطناعي عبر الويب"
+    },
+    "collaborate": {
+      "title": "تعاون",
+      "description": "اعمل مع فريقك في الوقت الفعلي"
+    },
+    "globalAccess": {
+      "title": "وصول عالمي",
+      "description": "بحث بأكثر من 50 لغة"
+    },
+    "aiModels": {
+      "title": "نماذج AI",
+      "description": "مزودو AI متعددون"
+    },
+    "freeForever": {
+      "title": "مجاني للأبد",
+      "description": "لا تكاليف خفية"
+    },
+    "privateSecure": {
+      "title": "خاص وآمن",
+      "description": "بياناتك تبقى ملكك"
+    }
+  },
+  "sidebar": {
+    "newTask": "مهمة جديدة",
+    "newTaskDescription": "ابدأ أتمتة AI جديدة",
+    "activity": "النشاط",
+    "taskHistory": "سجل المهام",
+    "taskHistoryDescription": "راجع المهام السابقة واستأنف من حيث توقفت",
+    "taskHistoryPopup": {
+      "title": "مهامك الأخيرة",
+      "description": "تصفح واستأنف المحادثات السابقة. كل مهمة محفوظة حتى تتمكن من الاستئناف من حيث توقفت."
+    },
+    "swarmRuns": "تشغيلات السرب",
+    "swarmRunsDescription": "مراقبة سير عمل الوكلاء المتوازية",
+    "swarmRunsPopup": {
+      "title": "سير عمل متعدد الوكلاء",
+      "description": "شغّل المهام عبر أجهزة متعددة بالتوازي. كل وكيل يعمل بشكل مستقل والنتائج تتجمع تلقائياً."
+    },
+    "guide": "دليل",
+    "guideDescription": "تعلم كيف تحقق أقصى استفادة من Coasty",
+    "guidePopup": {
+      "title": "البدء",
+      "description": "إرشادات خطوة بخطوة وأفضل الممارسات لمساعدتك على الأتمتة بفعالية."
+    },
+    "infrastructure": "البنية التحتية",
+    "computer": "كمبيوتر",
+    "computers": "أجهزة كمبيوتر",
+    "active": "نشط",
+    "view": "عرض",
+    "workforce": "الجداول",
+    "workforceDescription": "جدولة المهام والمشغلات التلقائية",
+    "workforcePopup": {
+      "title": "الأتمتة المجدولة",
+      "description": "إعداد مهام متكررة بجداول cron ومشغلات بين الوكلاء. تعمل جداولك أثناء نومك."
+    },
+    "credentials": "بيانات الاعتماد",
+    "credentialsDescription": "تخزين آمن لبيانات الدخول لوصول الوكلاء",
+    "credentialsPopup": {
+      "title": "خزنة بيانات اعتماد آمنة",
+      "description": "خزّن بيانات الدخول ومفاتيح API بالتشفير. الوكلاء يملأون بيانات الاعتماد تلقائياً دون كشف القيم الأصلية."
+    },
+    "desktopApp": {
+      "getDesktopApp": "احصل على تطبيق سطح المكتب",
+      "download": "تحميل",
+      "downloadDesktopApp": "تحميل تطبيق سطح المكتب",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "تحكم في كمبيوترك عن بُعد",
+      "controlDescription": "ثبّت تطبيق سطح المكتب وشغّل المهام على حاسوبك من لوحة التحكم هذه — في أي مكان وأي وقت."
+    },
+    "credits": {
+      "runningLow": "الأرصدة — تنفد",
+      "remaining": "الأرصدة المتبقية",
+      "buy": "شراء",
+      "creditsLeft": "أرصدة متبقية",
+      "usedLabel": "مستخدم: {count}",
+      "consumed": "{percent}% مستهلك",
+      "usageThisWeek": "الاستخدام هذا الأسبوع"
+    },
+    "talkToUs": "تحدث إلينا",
+    "talkToUsDesc": "احجز مكالمة 15 دقيقة",
+    "inviteEarn": "ادعُ واكسب",
+    "inviteEarnDesc": "احصل على رصيد مجاني",
+    "user": "مستخدم",
+    "account": "الحساب",
+    "tasks": "{count} مهام",
+    "recentActivity": "النشاط الأخير",
+    "viewAllHistory": "عرض كل السجل →",
+    "swarmRunsCount": "{count} تشغيلات سرب",
+    "running": "قيد التشغيل",
+    "completed": "مكتمل",
+    "viewAllSwarms": "عرض كل الأسراب →",
+    "schedulesCount": "{count} جداول",
+    "totalRuns": "{count} تشغيل إجمالي",
+    "paused": "متوقف مؤقتاً",
+    "viewAllSchedules": "عرض كل الجداول →",
+    "credentialsCount": "{count} بيانات اعتماد",
+    "encryptedVault": "خزنة مشفرة",
+    "manageCredentials": "إدارة بيانات الاعتماد →",
+    "days": [
+      "الإثنين",
+      "الثلاثاء",
+      "الأربعاء",
+      "الخميس",
+      "الجمعة",
+      "السبت",
+      "الأحد"
+    ],
+    "resume": "استئناف",
+    "result": "نتيجة",
+    "notScheduled": "غير مجدول",
+    "overdue": "متأخر",
+    "lessThanMin": "< 1 دقيقة",
+    "inMinutes": "بعد {count} دقيقة",
+    "inHours": "بعد {count} ساعة",
+    "today": "اليوم",
+    "yesterday": "أمس"
+  },
+  "appHeader": {
+    "login": "تسجيل الدخول",
+    "assign": "جدولة",
+    "assignDescription": "جدولة هذه المهمة للتشغيل تلقائيًا",
+    "computer": "كمبيوتر",
+    "showComputer": "إظهار الكمبيوتر",
+    "hideComputer": "إخفاء الكمبيوتر",
+    "employeeHired": "تم تعيين الموظف!",
+    "employeeRemoved": "تم إزالة الموظف"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "أتمتة يومية خفيفة"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "أتمتة المهام يومياً"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "توسيع سير العمل المعقدة",
+        "badge": "الأكثر شعبية"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "أتمتة ثقيلة غير محدودة"
+      }
+    },
+    "features": {
+      "vmDeleted": "جهاز افتراضي واحد (يُحذف بعد عدم النشاط)",
+      "vmAlwaysOn": "{count} جهاز افتراضي دائم التشغيل",
+      "vmAlwaysOnPlural": "{count} أجهزة افتراضية دائمة التشغيل",
+      "agentsParallel": "{count} وكلاء بالتوازي",
+      "basicSearch": "بحث أساسي",
+      "advancedSearch": "بحث متقدم واستخراج",
+      "standardSupport": "دعم عادي (بشر حقيقيون)",
+      "prioritySupport": "دعم ذو أولوية، استجابة خلال 24 ساعة",
+      "premiumSupport": "دعم متميز، استجابة خلال 12 ساعة"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "شحن صغير",
+        "description": "شحن سريع"
+      },
+      "medium": {
+        "name": "شحن متوسط",
+        "description": "إعادة شحن عادية",
+        "savings": "توفير 8%"
+      },
+      "large": {
+        "name": "شحن كبير",
+        "description": "شراء بالجملة",
+        "savings": "توفير 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "الآن",
+      "minutesAgo": "منذ {count} دقيقة",
+      "hoursAgo": "منذ {count} ساعة",
+      "daysAgo": "منذ {count} يوم"
+    },
+    "noActivity": "لا يوجد نشاط في هذه الفترة",
+    "stats": {
+      "balance": "الرصيد",
+      "earned": "مكتسب",
+      "used": "مستخدم",
+      "credits": "أرصدة",
+      "allTime": "كل الوقت",
+      "lastRange": "آخر {range}",
+      "sessions": "{count} جلسات",
+      "avgDaily": "~{count}/يوم متوسط",
+      "plan": "الخطة",
+      "free": "Free",
+      "noPlan": "لا توجد خطة",
+      "canceling": "جارٍ الإلغاء"
+    },
+    "monthlyUsage": "استخدام الأرصدة الشهري",
+    "remaining": "{used} / {total} متبقٍ",
+    "usedPercent": "{percent}% مستخدم هذه الفترة",
+    "renews": "يُجدد في {date}",
+    "choosePlan": "اختر خطتك",
+    "choosePlanDescription": "اشترك لفتح ميزات AI والحصول على أرصدة شهرية",
+    "savingsVsHuman": "وفّر {amount}/شهر مقارنة بالبشر",
+    "timeSaved": "{time} يُوفر شهرياً",
+    "cheaper": "أرخص بـ {multiplier}",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/شهر",
+    "creditsPerMonth": "{count} رصيد/شهر",
+    "processing": "جارٍ المعالجة...",
+    "subscribeTo": "اشترك في {name}",
+    "transactionTypes": {
+      "credit_purchase": "شراء أرصدة",
+      "agent_usage": "استخدام الوكيل",
+      "refund": "استرداد",
+      "bonus": "مكافأة",
+      "subscription": "اشتراك",
+      "subscription_grant": "منح الاشتراك",
+      "renewal": "أرصدة التجديد",
+      "reactivation": "إعادة التفعيل"
+    },
+    "toasts": {
+      "paymentSuccess": "تم الدفع بنجاح! تمت إضافة أرصدتك.",
+      "subscriptionActivated": "تم تفعيل الاشتراك بنجاح!",
+      "paymentCanceled": "تم إلغاء الدفع. لم يتم خصم أي رسوم.",
+      "signInToSubscribe": "يرجى تسجيل الدخول للاشتراك",
+      "subscriptionCheckoutFailed": "فشل بدء عملية الدفع للاشتراك. يرجى المحاولة مرة أخرى.",
+      "signInToPurchase": "يرجى تسجيل الدخول لشراء الأرصدة",
+      "needSubscription": "تحتاج إلى اشتراك نشط لشراء أرصدة إضافية",
+      "checkoutFailed": "فشل بدء عملية الدفع. يرجى المحاولة مرة أخرى.",
+      "manageFailed": "فشل فتح إدارة الاشتراك. يرجى المحاولة مرة أخرى.",
+      "transactionsExported": "تم تصدير المعاملات"
+    }
+  },
+  "apiKeys": {
+    "title": "مزودو النماذج",
+    "new": "new",
+    "description": "أضف مفاتيح API الخاصة بك لفتح الوصول إلى النماذج.",
+    "securityNote": "مفاتيحك مخزنة بأمان مع تشفير من طرف إلى طرف.",
+    "apiKeyLabel": "مفتاح API لـ {provider}",
+    "getApiKey": "احصل على مفتاح API",
+    "delete": "حذف",
+    "save": "حفظ",
+    "deleteDialog": {
+      "title": "حذف مفتاح API",
+      "description": "هل أنت متأكد أنك تريد حذف مفتاح API الخاص بـ {provider}؟ لا يمكن التراجع عن هذا الإجراء وستفقد الوصول إلى نماذج {provider}.",
+      "cancel": "إلغاء",
+      "confirm": "حذف"
+    },
+    "toasts": {
+      "saved": "تم حفظ مفتاح API",
+      "savedDescription": "تم حفظ مفتاح API الخاص بـ {provider} وتمت إضافة النماذج إلى المفضلة.",
+      "updatedDescription": "تم تحديث مفتاح API الخاص بـ {provider}.",
+      "saveFailed": "فشل حفظ مفتاح API",
+      "saveFailedDescription": "فشل حفظ مفتاح API الخاص بـ {provider}. يرجى المحاولة مرة أخرى.",
+      "deleted": "تم حذف مفتاح API",
+      "deletedDescription": "تم حذف مفتاح API الخاص بـ {provider}.",
+      "deleteFailed": "فشل حذف مفتاح API",
+      "deleteFailedDescription": "فشل حذف مفتاح API الخاص بـ {provider}. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "تفاصيل الملف الشخصي",
+    "displayName": "الاسم المعروض",
+    "namePlaceholder": "اسمك",
+    "company": "الشركة",
+    "companyPlaceholder": "شركتك",
+    "website": "الموقع الإلكتروني",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "جارٍ الحفظ...",
+    "saveChanges": "حفظ التغييرات",
+    "account": "الحساب",
+    "email": "البريد الإلكتروني",
+    "verified": "تم التحقق",
+    "signOut": "تسجيل الخروج",
+    "signOutDescription": "تسجيل الخروج من هذا الجهاز",
+    "toasts": {
+      "profileUpdated": "تم تحديث الملف الشخصي",
+      "profileUpdateFailed": "فشل تحديث الملف الشخصي",
+      "signOutFailed": "فشل تسجيل الخروج"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "بياناتك محمية",
+    "dataProtectedDescription": "أمان على مستوى المؤسسات مع تشفير أثناء التخزين والنقل",
+    "features": {
+      "encryption": {
+        "title": "تشفير من طرف إلى طرف",
+        "description": "مفاتيح API مشفرة بـ AES-256-GCM. بيانات اعتمادك لا تُخزن أبداً كنص عادي."
+      },
+      "rls": {
+        "title": "أمان على مستوى الصف",
+        "description": "العزل على مستوى قاعدة البيانات يضمن أن بياناتك متاحة لك فقط. لا يمكن الوصول عبر المستأجرين."
+      },
+      "privacy": {
+        "title": "الخصوصية بالتصميم",
+        "description": "نجمع الحد الأدنى من البيانات اللازمة لتقديم الخدمة. محادثاتك وملفاتك تبقى ملكك."
+      },
+      "session": {
+        "title": "أمان الجلسة",
+        "description": "حماية CSRF، كوكيز HTTP آمنة للقراءة فقط، ورؤوس سياسة أمان المحتوى في كل طلب."
+      }
+    },
+    "legal": "قانوني",
+    "privacyPolicy": {
+      "title": "سياسة الخصوصية",
+      "description": "كيف نجمع بياناتك ونستخدمها ونحميها"
+    },
+    "termsOfService": {
+      "title": "شروط الخدمة",
+      "description": "شروط وأحكام الاستخدام"
+    }
+  },
+  "layoutSettings": {
+    "layout": "التخطيط"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "ملخص",
+      "highlight": "لخّص"
+    },
+    "code": {
+      "label": "كود",
+      "highlight": "ابنِ"
+    },
+    "research": {
+      "label": "بحث",
+      "highlight": "حلّل"
+    },
+    "create": {
+      "label": "إنشاء",
+      "highlight": "ولّد"
+    },
+    "solve": {
+      "label": "حل",
+      "highlight": "صحّح"
+    },
+    "learn": {
+      "label": "تعلّم",
+      "highlight": "اشرح"
+    }
+  },
+  "loadingMessages": [
+    "تشغيل الدماغ السيليكوني",
+    "إيقاظ الوعي الرقمي",
+    "تهيئة المسارات العصبية",
+    "تشغيل النوى الكمية",
+    "شحن مكثف التدفق",
+    "تفعيل الحاسوب المركزي",
+    "تشغيل مصفوفة الحوسبة",
+    "تفعيل محرك الانتقال الفائق",
+    "استدعاء أرواح السيليكون",
+    "إشعال محرك الإلكترون",
+    "تسخين الترانزستورات",
+    "تجميع البتات والبايتات",
+    "معايرة المشابك الرقمية",
+    "شحن بلورات المعالج",
+    "تحميل بروتوكولات الوعي",
+    "تهيئة موارد النظام",
+    "تجهيز بيئة الحوسبة",
+    "إنشاء اتصال آمن",
+    "تخصيص الموارد الافتراضية",
+    "ضبط معاملات النظام",
+    "إطلاق المثيل الافتراضي",
+    "تفعيل سطح المكتب البعيد",
+    "نشر الموارد السحابية",
+    "بدء تسلسل إقلاع النظام",
+    "تجهيز بيئة التنفيذ",
+    "إيقاظ الكمبيوتر النائم",
+    "نخز الدب الرقمي",
+    "تحضير قهوة حوسبية",
+    "تمديد العضلات الرقمية",
+    "فتح العيون الرقمية",
+    "جارٍ البدء",
+    "جارٍ التشغيل",
+    "الاتصال بالشبكة",
+    "إقلاع النظام",
+    "جارٍ التجهيز",
+    "اقتربنا",
+    "تجهيز مساحة العمل",
+    "تحميل الموارد",
+    "النظام يستيقظ"
+  ],
+  "quickStart": {
+    "greetingName": "مرحبًا {name}!",
+    "greetingDefault": "مرحبًا!",
+    "subtitle": "تعمل مهامك في حاسوب افتراضي آمن ومعزول",
+    "tabs": {
+      "start": "البداية",
+      "desktop": "سطح المكتب",
+      "swarms": "الأسراب",
+      "schedules": "الجداول"
+    },
+    "items": {
+      "computerReady": "الحاسوب جاهز",
+      "pickComputer": "اختر حاسوبًا",
+      "createComputer": "إنشاء حاسوب",
+      "loginsSaved": "تم حفظ بيانات الدخول",
+      "addLogins": "إضافة بيانات دخول",
+      "askAnything": "اسأل أي شيء",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "التحكم عن بُعد بالهاتف",
+      "freeDownload": "تنزيل مجاني",
+      "onePrompt": "أمر واحد",
+      "manyAgents": "عدة وكلاء",
+      "combinedResult": "نتيجة مجمّعة",
+      "setCadence": "تعيين التكرار",
+      "autoRuns": "تشغيل تلقائي",
+      "recurringResults": "نتائج متكررة",
+      "computerReadyDesc": "متصل وجاهز لتنفيذ المهام",
+      "pickComputerDesc": "اختر من أجهزتك المتاحة",
+      "createComputerDesc": "أنشئ حاسوبًا سحابيًا في ثوانٍ",
+      "loginsSavedDesc": "بيانات اعتماد مشفرة جاهزة للملء التلقائي",
+      "addLoginsDesc": "احفظ كلمات المرور للوصول التلقائي",
+      "askAnythingDesc": "صف مهمة وراقب الذكاء الاصطناعي يعمل",
+      "macWindowsDesc": "تطبيق أصلي لسطح المكتب",
+      "mobileRemoteDesc": "تحكم بوكيلك من أي جهاز",
+      "freeDownloadDesc": "تثبيت خفيف، يعمل في ثوانٍ",
+      "onePromptDesc": "صف هدفك بلغة بسيطة",
+      "manyAgentsDesc": "الوكلاء يعملون بالتوازي عبر الأجهزة",
+      "combinedResultDesc": "جميع النتائج مدمجة في تقرير واحد",
+      "setCadenceDesc": "كل ساعة، يوميًا، أسبوعيًا أو cron مخصص",
+      "autoRunsDesc": "الوكلاء ينفذون بدون تدخل",
+      "recurringResultsDesc": "التقارير تُسلّم وفق جدولك الزمني"
+    },
+    "cta": {
+      "downloadApp": "تنزيل التطبيق",
+      "trySwarms": "جرّب الأسراب",
+      "setUp": "إعداد"
+    }
+  },
+  "machines": {
+    "title": "أجهزتي",
+    "subtitle": "إدارة بيئات سطح المكتب التي يتحكم بها الذكاء الاصطناعي",
+    "guide": "الدليل",
+    "newMachine": "جهاز جديد",
+    "filters": {
+      "all": "الكل",
+      "running": "قيد التشغيل",
+      "creating": "جارٍ الإنشاء",
+      "stopped": "متوقف"
+    },
+    "desktopPromo": {
+      "text": "تخطَّ الجهاز الافتراضي — شغّل وكلاء الذكاء الاصطناعي على حاسوبك باستخدام التطبيق الأصلي. تحكّم بسطح المكتب من هاتفك.",
+      "cta": "احصل على التطبيق"
+    },
+    "emptyState": {
+      "title": "موظف ذكاء اصطناعي حقيقي مع وصول كامل للحاسوب",
+      "description": "أطلق جهازًا افتراضيًا معزولًا ودع وكلاء الذكاء الاصطناعي يتصفحون الويب ويشغّلون الطرفية ويتحكمون بسطح المكتب — بدون تدخل.",
+      "feature1": {
+        "title": "تحكم كامل بسطح المكتب",
+        "description": "يحرّك الذكاء الاصطناعي الماوس ويكتب وينقر ويتنقل مثل مستخدم حقيقي."
+      },
+      "feature2": {
+        "title": "أتمتة أي مهمة",
+        "description": "المتصفح والطرفية وواجهة المستخدم — جميع الوكلاء يعملون معًا في جهاز افتراضي واحد."
+      },
+      "feature3": {
+        "title": "معزول وآمن",
+        "description": "يعمل كل جهاز في حاوية خاصة به — نظامك المحلي يبقى دون تغيير."
+      },
+      "cta": "أنشئ جهازك الأول"
+    },
+    "noMachines": "لم يتم العثور على أجهزة.",
+    "noFilteredMachines": "لا توجد أجهزة {filter}",
+    "noFilteredDescription": "لا توجد أجهزة {filter} حاليًا.",
+    "loadingMachines": "جارٍ تحميل الأجهزة...",
+    "toasts": {
+      "deleted": "تم حذف الجهاز بنجاح",
+      "readyOpen": "يمكنك الآن الاتصال بجهازك.",
+      "open": "فتح",
+      "createFailed": "يرجى محاولة إنشاء الجهاز مرة أخرى.",
+      "fetchFailed": "فشل تحميل الأجهزة"
+    }
+  },
+  "createMachine": {
+    "title": "كمبيوتر جديد",
+    "subtitle": "أطلق سطح مكتب سحابي — جاهز خلال ~30 ثانية",
+    "freeExpiry": "تنتهي صلاحية أجهزة الكمبيوتر المجانية بعد ",
+    "freeExpiry2": "ساعتين",
+    "upgrade": "ترقية",
+    "limitReached": "لقد وصلت إلى الحد الأقصى لأجهزة الكمبيوتر. أوقف أو احذف كمبيوتر موجودًا لإنشاء كمبيوتر جديد.",
+    "upgradeMore": "قم بالترقية للمزيد →",
+    "nameLabel": "اسم الكمبيوتر",
+    "namePlaceholder": "خادمي السحابي",
+    "nameError": "لا يمكن أن يبدأ اسم الكمبيوتر بـ \"local\"",
+    "nameRequired": "يرجى إدخال اسم الكمبيوتر",
+    "osLabel": "نظام التشغيل",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "سطح مكتب Ubuntu 22.04"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "سطح مكتب Windows — توقع وجود أخطاء"
+    },
+    "osHintWindows": "سطح مكتب Windows مع Chrome (تجريبي). جاهز خلال ~دقيقتين.",
+    "osHintLinux": "سطح مكتب Ubuntu، يمكن الوصول إليه عبر المتصفح. جاهز خلال ~30 ثانية.",
+    "stateLabel": "حالة الكمبيوتر",
+    "restorePrevious": "استعادة السابق",
+    "restoreDescription": "استئناف من آخر لقطة",
+    "startFresh": "بداية جديدة",
+    "startFreshDescription": "بيئة سطح مكتب نظيفة",
+    "cancel": "إلغاء",
+    "creating": "جارٍ الإنشاء...",
+    "create": "إنشاء كمبيوتر",
+    "toasts": {
+      "restoringSnapshot": "جارٍ استعادة الكمبيوتر من اللقطة!",
+      "restoringDescription": "يتم استعادة حالة سطح المكتب السابقة. جاهز خلال ~30 ثانية.",
+      "windowsCreated": "بدأ إنشاء كمبيوتر Windows!",
+      "windowsDescription": "يتم تشغيل سطح مكتب Windows الخاص بك. جاهز خلال ~دقيقتين.",
+      "linuxCreated": "يتم تشغيل سطح المكتب الخاص بك. جاهز خلال ~30 ثانية.",
+      "sshCreated": "يتم تشغيل كمبيوترك السحابي. سيتوفر مفتاح SSH عندما يصبح جاهزًا."
+    }
+  },
+  "secrets": {
+    "title": "بيانات الاعتماد المحفوظة",
+    "subtitle": "مخزّنة بأمان وتُستخدم تلقائيًا بواسطة وكيل الذكاء الاصطناعي عند تسجيل الدخول",
+    "guide": "الدليل",
+    "import": "استيراد",
+    "addCredential": "إضافة بيانات اعتماد",
+    "securityNote": "لا يتم إرسال بيانات الاعتماد إلى نموذج الذكاء الاصطناعي ولا تُعرض في المحادثة — يقوم الوكيل بإدخالها مباشرة دون رؤية القيم",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "hide": "إخفاء",
+    "revealFor10s": "إظهار لمدة 10 ثوانٍ",
+    "encrypted": "مشفّر",
+    "emptyState": {
+      "title": "تسجيل دخول تلقائي بدون تدخل",
+      "description": "احفظ بيانات الاعتماد مرة واحدة — يسجّل وكيل الذكاء الاصطناعي الدخول تلقائيًا ويستمر دون مقاطعتك أبدًا",
+      "feature1": {
+        "title": "بدون مقاطعات",
+        "description": "يواجه الوكيل نموذج تسجيل الدخول ويملأه ويستمر في المهمة — بدون مطالبات، بدون توقف"
+      },
+      "feature2": {
+        "title": "الذكاء الاصطناعي لا يراها أبدًا",
+        "description": "يتم حقن بيانات اعتمادك مباشرة. نموذج الذكاء الاصطناعي لا يرى القيم الفعلية أبدًا"
+      },
+      "feature3": {
+        "title": "أي موقع",
+        "description": "يعمل مع نماذج تسجيل الدخول في أي موقع — البريد الإلكتروني، أدوات SaaS، لوحات المعلومات، أي شيء"
+      },
+      "cta": "أضف أول بيانات اعتماد"
+    },
+    "deleteDialog": {
+      "title": "حذف بيانات الاعتماد؟",
+      "description": "سيتم حذف {name} ({service}) نهائيًا. لن يتمكن وكيل الذكاء الاصطناعي من استخدامها بعد الآن.",
+      "cancel": "إلغاء",
+      "delete": "حذف"
+    },
+    "toasts": {
+      "loadFailed": "فشل تحميل بيانات الاعتماد",
+      "revealFailed": "فشل إظهار كلمة المرور",
+      "deleted": "تم حذف بيانات الاعتماد",
+      "deleteFailed": "فشل حذف بيانات الاعتماد"
+    },
+    "loading": "جارٍ تحميل بيانات الاعتماد..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "أسعار بسيطة،",
+      "title2": "طيار آلي حقيقي",
+      "subtitle": "ابدأ مجانًا. قم بالترقية عندما تحتاج المزيد من القوة."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "جرّب الوكيل الأول لاستخدام الحاسوب",
+        "cta": "ابدأ مجانًا"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "أتمتة يومية خفيفة",
+        "cta": "احصل على Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "أتمتة المهام كل يوم",
+        "cta": "احصل على Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "توسيع سير العمل المعقدة",
+        "cta": "انتقل إلى Plus",
+        "badge": "الأكثر شعبية"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "أتمتة ثقيلة غير محدودة",
+        "cta": "احصل على Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "متصفح وسطح مكتب وطرفية كاملة",
+        "badge": "أساسي"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "تسلسلي فقط",
+        "parallel": "{count} وكلاء بالتوازي",
+        "badge": "قوي"
+      },
+      "security": {
+        "name": "الأمان",
+        "description": "معزول ومشفر من طرف إلى طرف",
+        "badge": "كل خطة"
+      },
+      "monthlyCredits": {
+        "name": "الأرصدة الشهرية",
+        "payAsYouGo": "ادفع حسب الاستخدام",
+        "creditsPerMonth": "{count} رصيد/شهر"
+      },
+      "persistentMachines": {
+        "name": "أجهزة دائمة",
+        "temporary": "1 VM مؤقت (ساعتان)",
+        "deletedAfterInactivity": "1 VM (يُحذف بعد عدم النشاط)",
+        "alwaysOn": "{count} VM دائم",
+        "alwaysOnPlural": "{count} VMs دائمة"
+      },
+      "webSearch": {
+        "name": "البحث على الويب",
+        "advanced": "بحث واستخراج متقدم",
+        "basic": "بحث أساسي"
+      }
+    },
+    "animations": {
+      "agentDescription": "وكيلك يتحكم بحاسوب حقيقي — متصفح وملفات وطرفية",
+      "fillForm": "ملء النموذج",
+      "searchExtract": "بحث واستخراج",
+      "uploadReport": "رفع التقرير",
+      "navigateSite": "تصفح الموقع",
+      "creditsPerMonth": "رصيد شهريًا",
+      "cr": "رصيد",
+      "vm": "VM {num}",
+      "twoHrLimit": "حد ساعتين",
+      "alwaysOn": "دائم التشغيل",
+      "tempVmDescription": "VM مؤقت — يُعاد تعيينه بعد ساعتين",
+      "persistentVmDescription": "ملفاتك وتطبيقاتك وجلساتك تبقى بين المهام",
+      "sequentialOnly": "تنفيذ تسلسلي فقط في هذه الخطة",
+      "yourTask": "مهمتك",
+      "agentsWorking": "{count} وكلاء يعملون في وقت واحد",
+      "upgradeForExtraction": "قم بالترقية للاستخراج الكامل",
+      "searchDescription": "ابحث واستخرج بيانات منظمة",
+      "basicSearchIncluded": "البحث الأساسي مضمّن",
+      "e2eEncryption": "تشفير من طرف إلى طرف",
+      "sandboxedVm": "VM معزول",
+      "destroyedAfterUse": "يُدمر بعد الاستخدام",
+      "everyPlan": "كل خطة. بدون استثناءات."
+    },
+    "perMonth": "/شهر",
+    "faqs": {
+      "credits": {
+        "q": "ما الذي يُحسب كرصيد؟",
+        "a": "رصيد واحد يساوي تقريبًا إجراء واحد للوكيل — نقرة أو ملء نموذج أو استعلام بحث أو عملية ملف. المهمة متعددة الخطوات تستخدم عادةً 5-15 رصيدًا."
+      },
+      "persistent": {
+        "q": "ماذا تعني \"آلة دائمة\"؟",
+        "a": "في الخطط المدفوعة، يبقى VM الخاص بك قيد التشغيل بين المهام — سطح المكتب والملفات وجلسات المتصفح والبرامج المثبتة كلها تبقى. مثل حاسوبك السحابي الدائم."
+      },
+      "swarm": {
+        "q": "ما هو وضع السرب؟",
+        "a": "وضع السرب يقسم المهمة على عدة أجهزة تعمل في وقت واحد. بدلاً من وكيل واحد يقوم بـ 10 عمليات بحث بالتتابع، عدة وكلاء يقومون بها بالتوازي."
+      },
+      "cancel": {
+        "q": "هل يمكنني الإلغاء في أي وقت؟",
+        "a": "نعم. لا عقود ولا رسوم إلغاء. ألغِ من صفحة حسابك واحتفظ بالوصول حتى نهاية فترة الفوترة."
+      },
+      "security": {
+        "q": "هل بياناتي آمنة؟",
+        "a": "كل مهمة تعمل في VM معزول تمامًا ويُدمر بعد الاستخدام. جميع الاتصالات مشفرة من طرف إلى طرف ولا نخزن بيانات اعتمادك أبدًا."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "أرصدة مخصصة، VMs مخصصة، SLA، SSO، ودعم ذو أولوية.",
+      "cta": "تواصل معنا"
+    },
+    "footer": {
+      "title": "وكيل الذكاء الاصطناعي الخاص بك على بعد 60 ثانية",
+      "subtitle": "سجّل واترك Coasty يتولى العمل.",
+      "noCreditCard": "بدون بطاقة ائتمان",
+      "cancelAnytime": "إلغاء في أي وقت",
+      "noCreditCardRequired": "لا حاجة لبطاقة ائتمان",
+      "cancelAnytimeNoContracts": "إلغاء في أي وقت — بدون عقود"
+    },
+    "questions": "أسئلة"
+  },
+  "guide": {
+    "pageTitle": "الدليل",
+    "pageSubtitle": "من الإعداد الأول إلى الميزات المتقدمة — تعلم كيف تحقق أقصى استفادة من Coasty",
+    "completeGuide": "الدليل الشامل",
+    "completeGuideSubtitle": "كل ما تحتاج معرفته عن Coasty",
+    "completeGuideDescription": "من الإعداد الأول إلى الميزات المتقدمة — تعلم كيف تحقق أقصى استفادة من وكيل الذكاء الاصطناعي.",
+    "talkToCofounders": "تحدث مع المؤسسين",
+    "tabs": {
+      "overview": "نظرة عامة",
+      "gettingStarted": "البدء",
+      "chatTasks": "المحادثة والمهام",
+      "machines": "الأجهزة",
+      "credentials": "بيانات الاعتماد",
+      "swarmMode": "وضع السرب",
+      "workforce": "الجداول",
+      "desktopApp": "تطبيق سطح المكتب",
+      "billing": "الفوترة والأرصدة"
+    },
+    "overview": {
+      "howItWorks": "كيف يعمل",
+      "step1": "صف المهمة",
+      "step2": "Coasty يخطط الخطوات",
+      "step3": "ينفذ بشكل مستقل",
+      "step": "خطوة",
+      "whatCanDo": "ماذا يمكن لـ Coasty فعله",
+      "taskCount": "أكثر من 40 مهمة عبر 10 فئات",
+      "categories": {
+        "sales": {
+          "name": "المبيعات",
+          "desc": "ابحث عن 50 عميلاً محتملاً، أرسل رسائل مخصصة"
+        },
+        "marketing": {
+          "name": "التسويق",
+          "desc": "انشر مقالات المدونة، جدول منشورات التواصل الاجتماعي"
+        },
+        "jobApps": {
+          "name": "طلبات العمل",
+          "desc": "تقدم لـ 20 وظيفة، خصص كل سيرة ذاتية"
+        },
+        "email": {
+          "name": "البريد الإلكتروني",
+          "desc": "صياغة الردود، إرسال جماعي، إلغاء الاشتراك"
+        },
+        "dataEntry": {
+          "name": "إدخال البيانات",
+          "desc": "نقل البيانات بين التطبيقات، إنشاء جداول البيانات"
+        },
+        "research": {
+          "name": "البحث",
+          "desc": "تقارير معمقة، مراقبة المنافسين"
+        },
+        "qaTesting": {
+          "name": "اختبار الجودة",
+          "desc": "اختبار التسجيل، فحص النماذج، فحوصات صحة الموقع"
+        },
+        "hr": {
+          "name": "الموارد البشرية",
+          "desc": "استقطاب المرشحين، تواصل مخصص"
+        },
+        "support": {
+          "name": "الدعم",
+          "desc": "صياغة الردود، تحديث مستندات المساعدة"
+        },
+        "productivity": {
+          "name": "الإنتاجية",
+          "desc": "حجز السفر، دفع الفواتير، إدارة التقويمات"
+        }
+      },
+      "whyCoasty": "لماذا Coasty",
+      "notChatbot": "ليس روبوت محادثة. ليس نص RPA.",
+      "worksLikeHuman": {
+        "title": "يعمل مثل الإنسان",
+        "desc": "يرى وينقر ويكتب ويتصفح — تمامًا مثلك"
+      },
+      "noScripts": {
+        "title": "لا نصوص أو إعداد",
+        "desc": "أدخل بلغة بسيطة، واحصل على النتائج"
+      },
+      "handlesUnexpected": {
+        "title": "يتعامل مع غير المتوقع",
+        "desc": "يتكيف مع CAPTCHAs والنوافذ المنبثقة وتغييرات التصميم"
+      },
+      "runsInIsolation": {
+        "title": "يعمل بمعزل",
+        "desc": "VM معزول لكل جلسة — لا تسرب"
+      },
+      "ctaTitle": "اختر أي مهمة وجربها",
+      "ctaSubtitle": "هل أنت مستعد لتشغيل Coasty؟",
+      "ctaDescription": "صف أي مهمة من هذا الدليل وشاهد Coasty يتعامل معها.",
+      "ctaNote": "ابدأ مجانًا. لا حاجة لبطاقة ائتمان.",
+      "startTask": "ابدأ مهمة",
+      "startFree": "ابدأ مجانًا",
+      "desktopApp": "تطبيق سطح المكتب"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "التسجيل",
+          "desc": "نقرة واحدة للبدء"
+        },
+        "createMachine": {
+          "title": "إنشاء جهاز",
+          "desc": "وكيلك يحصل على حاسوبه الخاص"
+        },
+        "saveCredentials": {
+          "title": "حفظ بيانات الاعتماد",
+          "desc": "تسجيلات دخول مشفرة لأي موقع"
+        },
+        "giveTask": {
+          "title": "أعطِ مهمة",
+          "desc": "صفها. وشاهدها تحدث."
+        }
+      },
+      "examplePrompts": [
+        "تقدم لـ 10 وظائف مطابقة على LinkedIn بسيرتي الذاتية",
+        "ابحث عن أسعار المنافسين وأنشئ جدول مقارنة",
+        "اكتب وانشر مقالة مدونة عن [الموضوع] على WordPress",
+        "ألغِ اشتراكي من جميع رسائل التسويق في Gmail",
+        "اختبر تدفق التسجيل على موقعي وأبلغ عن أي أخطاء",
+        "ابحث عن 50 عميلاً محتملاً مطابقين لـ [ICP] على LinkedIn وأضفهم إلى CRM"
+      ],
+      "quickPrompts": "أوامر سريعة للتجربة",
+      "startFirstTask": "ابدأ مهمتك الأولى"
+    },
+    "chatTasks": {
+      "commandCenter": "مركز القيادة الخاص بك",
+      "describeTask": "صف أي مهمة. شاهدها تحدث.",
+      "examplePrompt": "ابحث عن أفضل 5 لوحات مفاتيح لاسلكية بأقل من 50 دولار على Amazon وقارنها في جدول بيانات.",
+      "exampleResponse": "سأبحث في Amazon وأنشئ مقارنة. جارٍ فتح المتصفح الآن.",
+      "exampleDone": "تم. جدول البيانات محفوظ بالسعر والتقييم والميزات لجميع لوحات المفاتيح الخمس.",
+      "describePlaceholder": "صف مهمتك...",
+      "threeAgents": "ثلاثة وكلاء متخصصين",
+      "autoAssigned": "يُعيَّنون تلقائيًا لكل خطوة.",
+      "browser": "المتصفح",
+      "browserDesc": "تصفح، نقر، ملء النماذج، استخراج",
+      "terminal": "الطرفية",
+      "terminalDesc": "تشغيل الأوامر، تثبيت، معالجة الملفات",
+      "desktop": "سطح المكتب",
+      "desktopDesc": "نقر، كتابة، تمرير، فتح التطبيقات",
+      "betterPrompts": "اكتب أوامر أفضل",
+      "specificBeatsVague": "التحديد يتفوق على الغموض. دائمًا.",
+      "do": "افعل",
+      "dont": "لا تفعل",
+      "doExample1": "تقدم لـ 10 وظائف هندسة برمجيات على LinkedIn. خصص كل خطاب تغطية بذكر مجموعة التقنيات الخاصة بهم.",
+      "dontExample1": "تقدم للوظائف",
+      "doExample2": "ابحث في Google Flights عن SFO إلى JFK، 20-25 مارس، ذهاب وعودة. التقط لقطة شاشة لأرخص 3 رحلات.",
+      "dontExample2": "ابحث عن رحلات",
+      "readyToTry": "هل أنت مستعد للتجربة؟",
+      "openChat": "افتح محادثة وصف ما تحتاج إنجازه.",
+      "startChat": "ابدأ محادثة"
+    },
+    "machinesTab": {
+      "title": "أجهزتك",
+      "subtitle": "أسطح مكتب Ubuntu كاملة يمكنك تشغيلها في ثوانٍ.",
+      "lifecycle": "دورة الحياة",
+      "lifecycleDesc": "خمس حالات، تلقائية بالكامل.",
+      "planLimits": "حدود الخطة",
+      "planCol": "الخطة",
+      "machinesCol": "الأجهزة",
+      "swarmAgentsCol": "وكلاء السرب",
+      "temp": "1 مؤقت",
+      "states": {
+        "creating": "جارٍ الإنشاء",
+        "starting": "جارٍ البدء",
+        "running": "قيد التشغيل",
+        "stopping": "جارٍ الإيقاف",
+        "stopped": "متوقف"
+      },
+      "newMachine": "+ جديد",
+      "researchVm": "VM البحث",
+      "emailVm": "VM البريد",
+      "testingVm": "VM الاختبار",
+      "cores": "{count} أنوية",
+      "gb": "{count} GB",
+      "stop": "إيقاف",
+      "start": "تشغيل",
+      "provisioning": "جارٍ التجهيز...",
+      "spinUp": "تشغيل جهاز",
+      "goToMachines": "اذهب إلى الأجهزة"
+    },
+    "credentialsTab": {
+      "loginDetected": "تم اكتشاف تسجيل الدخول",
+      "matched": "مطابق",
+      "credentialFound": "تم العثور على بيانات الاعتماد",
+      "autoFilled": "تم الملء التلقائي",
+      "autoFillTitle": "الملء التلقائي قيد العمل",
+      "autoFillDesc": "تم اكتشاف تسجيل الدخول، مطابقة بيانات الاعتماد، ملء النموذج. تلقائيًا.",
+      "security": "الأمان",
+      "encrypted": "مشفر",
+      "aes256": "AES-256 في حالة السكون",
+      "vmIsolated": "معزول في VM",
+      "sandboxed": "معزول لكل جلسة",
+      "neverLogged": "لا يُسجَّل أبدًا",
+      "zeroTrace": "بدون أثر في السجلات",
+      "savedCredentials": "بيانات الاعتماد المحفوظة",
+      "addOnce": "أضف مرة، ملء تلقائي في كل مكان.",
+      "saveFirst": "احفظ أول بيانات اعتماد",
+      "goToCredentials": "اذهب إلى بيانات الاعتماد المحفوظة"
+    },
+    "swarmTab": {
+      "title": "وضع السرب",
+      "runParallel": "شغّل {count} أجهزة بالتوازي",
+      "sameTask": "نفس المهمة، {multiplier} ضعف الإنتاج، نفس الوقت.",
+      "done": "تم",
+      "running": "قيد التشغيل",
+      "pending": "قيد الانتظار",
+      "result": "النتيجة",
+      "useCases": {
+        "parallelResearch": {
+          "title": "بحث متوازي",
+          "desc": "{count} منافسين، {count} أجهزة، في وقت واحد"
+        },
+        "bulkApplications": {
+          "title": "طلبات جماعية",
+          "desc": "تقدم عبر المنصات في نفس الوقت"
+        },
+        "multiCitySearch": {
+          "title": "بحث متعدد المدن",
+          "desc": "ابحث في القوائم في {count} مدن دفعة واحدة"
+        },
+        "parallelOutreach": {
+          "title": "تواصل متوازي",
+          "desc": "رسائل مخصصة لشرائح مختلفة"
+        },
+        "crossPlatform": {
+          "title": "متعدد المنصات",
+          "desc": "انشر على {count} منصات في وقت واحد"
+        },
+        "distributedTesting": {
+          "title": "اختبار موزع",
+          "desc": "اختبر سيناريوهات متعددة بالتوازي"
+        }
+      },
+      "whatToSwarm": "ماذا تستخدم السرب",
+      "availability": "التوفر",
+      "freeNotAvailable": "غير متاح",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 وكلاء",
+      "startSwarm": "ابدأ سربًا"
+    },
+    "workforceTab": {
+      "title": "القوى العاملة",
+      "subtitle": "شركة الذكاء الاصطناعي الخاصة بك، على الطيار الآلي",
+      "description": "موظفون وفرق ومشغلات — تعمل 24/7.",
+      "myCompany": "شركتي",
+      "contentOps": "عمليات المحتوى",
+      "support": "الدعم",
+      "writer": "الكاتب",
+      "seo": "SEO",
+      "social": "التواصل الاجتماعي",
+      "inbox": "البريد الوارد",
+      "docs": "المستندات",
+      "concepts": "المفاهيم الأساسية",
+      "conceptItems": {
+        "employees": {
+          "title": "الموظفون",
+          "desc": "وكلاء ذكاء اصطناعي ينفذون المهام وفق جدول، 24/7"
+        },
+        "teams": {
+          "title": "الفرق",
+          "desc": "مجموعات من الموظفين بتعليمات مشتركة"
+        },
+        "sharedMemory": {
+          "title": "الذاكرة المشتركة",
+          "desc": "مخزن قيم يقرأه ويكتبه الموظفون"
+        },
+        "triggers": {
+          "title": "المشغلات",
+          "desc": "ربط الموظفين: واحد ينتهي، التالي يبدأ"
+        },
+        "delegates": {
+          "title": "المفوضون",
+          "desc": "الموظفون يعينون مهام فرعية للمتخصصين"
+        },
+        "orgChart": {
+          "title": "الهيكل التنظيمي",
+          "desc": "خريطة مرئية لتسلسل شركتك"
+        }
+      },
+      "chainTitle": "اربط الموظفين معًا",
+      "chainDesc": "المخرجات تتدفق من واحد إلى التالي تلقائيًا.",
+      "scout": "Scout",
+      "scoutDesc": "يبحث عن المنافسين",
+      "atlas": "Atlas",
+      "atlasDesc": "يكتب مقالة مدونة",
+      "nova": "Nova",
+      "novaDesc": "ينشر على التواصل الاجتماعي",
+      "done": "تم",
+      "onComplete": "on_complete",
+      "waiting": "في الانتظار",
+      "templates": "ابدأ من قالب",
+      "templateItems": {
+        "contentOps": {
+          "name": "عمليات المحتوى",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "دعم العملاء",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "التسويق",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "التجارة الإلكترونية",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} موظفين",
+      "openWorkforce": "فتح القوى العاملة"
+    },
+    "billingTab": {
+      "credits": "الأرصدة",
+      "timeMetric": "الوقت هو المقياس الوحيد.",
+      "rate": "المعدل",
+      "rateValue": "10",
+      "creditsPerMin": "أرصدة/دقيقة",
+      "metered": "يُقاس كل 30 ثانية",
+      "example": "مثال",
+      "minTask": "دقيقة مهمة",
+      "startCredits": "البداية: {count} رصيد",
+      "endCredits": "النهاية: {count} رصيد",
+      "creditsUsed": "{count} رصيد مستخدم",
+      "calculation": "{mins} دقيقة × 10 أرصدة/دقيقة",
+      "plans": "الخطط",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 مؤقت",
+          "feature": "بحث أساسي"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 دائم",
+          "feature": "2 وكلاء بالتوازي"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 دائم",
+          "feature": "بحث متقدم"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 دائم",
+          "feature": "دعم ذو أولوية"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 دائم",
+          "feature": "ضمان SLA"
+        }
+      },
+      "perMonth": "{price}/شهر",
+      "faqTitle": "الأسئلة الشائعة",
+      "faqs": {
+        "howCharged": {
+          "q": "كيف تُحسب الأرصدة؟",
+          "a": "10 أرصدة لكل دقيقة من تنفيذ الوكيل، مقربة للأعلى. يُتحقق كل 30 ثانية أثناء الجلسة."
+        },
+        "runOut": {
+          "q": "ماذا يحدث عند نفاد الأرصدة؟",
+          "a": "تحتاج 20 رصيدًا على الأقل لبدء مهمة. عند الوصول إلى 0 تتوقف المهمة — اشترِ إضافة للمتابعة."
+        },
+        "rollOver": {
+          "q": "هل تُرحّل الأرصدة غير المستخدمة؟",
+          "a": "تُعاد تعيين الأرصدة في كل دورة فوترة. استخدمها أو اخسرها."
+        }
+      },
+      "goToBilling": "اذهب إلى الفوترة"
+    },
+    "desktopAppTab": {
+      "overlay": "الشريط العائم",
+      "overlayDesc": "دائمًا هناك. انقر للتوسيع.",
+      "compact": "مصغر",
+      "expanded": "موسع",
+      "ready": "جاهز",
+      "exampleTask": "حدّث سيرتي الذاتية",
+      "exampleResponse": "جارٍ فتح resume.docx...",
+      "describePlaceholder": "صف مهمتك...",
+      "whatItControls": "ما يتحكم به",
+      "controls": {
+        "browser": {
+          "name": "المتصفح",
+          "desc": "تصفح، نقر، ملء النماذج"
+        },
+        "files": {
+          "name": "الملفات",
+          "desc": "قراءة وكتابة وتعديل في أي مكان"
+        },
+        "terminal": {
+          "name": "الطرفية",
+          "desc": "تشغيل أي أمر"
+        },
+        "desktop": {
+          "name": "سطح المكتب",
+          "desc": "نقر، كتابة، تمرير"
+        },
+        "screenshots": {
+          "name": "لقطات الشاشة",
+          "desc": "يرى ما تراه"
+        },
+        "apps": {
+          "name": "التطبيقات",
+          "desc": "تحكم بأي تطبيق مثبت"
+        }
+      },
+      "twoWays": "طريقتان للتشغيل",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "بيئة معزولة تمامًا",
+        "freshBrowser": "متصفح نظيف، بدون سجل",
+        "maxSecurity": "أقصى درجات الأمان"
+      },
+      "desktopMode": "سطح المكتب",
+      "desktopFeatures": {
+        "yourFiles": "ملفاتك، وصول مباشر",
+        "yourApps": "تطبيقاتك المثبتة",
+        "yourSessions": "جلساتك المسجّلة"
+      },
+      "downloadCta": "تنزيل تطبيق سطح المكتب"
+    }
+  },
+  "comparePage": {
+    "title": "المقارنات",
+    "heroTitle": "Coasty مقابل المنافسين",
+    "heroDescription": "اكتشف كيف يقارن وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر (82% OSWorld) بالبدائل. مقارنات مفصلة ميزة بميزة مع بيانات حقيقية.",
+    "categories": {
+      "aiAgent": "وكيل ذكاء اصطناعي",
+      "infrastructure": "البنية التحتية",
+      "rpa": "RPA",
+      "human": "بشري"
+    },
+    "vsLabel": "Coasty مقابل {name}",
+    "ctaTitle": "مستعد لتجربة وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر؟",
+    "ctaButton": "جرّب Coasty مجانًا",
+    "noCreditCard": "لا حاجة لبطاقة ائتمان",
+    "allComparisons": "جميع المقارنات",
+    "featureComparison": "مقارنة الميزات",
+    "whyChooseCoasty": "لماذا تختار Coasty",
+    "strengthsOf": "نقاط قوة {name}",
+    "ctaDescription": "معيار OSWorld بنسبة 82%. عزل VM. حل CAPTCHA. يبدأ من $20/شهر.",
+    "watchCaseStudies": "شاهد دراسات الحالة"
+  },
+  "agentSwarms": {
+    "badge": "وضع سرب الوكلاء",
+    "heroTitle1": "أمر واحد.",
+    "heroTitle2": "أجهزة لا نهائية.",
+    "heroTitle3": "نتائج متوازية.",
+    "heroDescription": "قسّم أي مهمة عبر بيئات معزولة متعددة تعمل في وقت واحد. العمل الذي يستغرق ساعة ينتهي في دقائق.",
+    "trySwarmMode": "جرّب وضع السرب",
+    "seeInAction": "شاهده أثناء العمل",
+    "liveExecution": "swarm-tree — تنفيذ مباشر",
+    "machineCount": "{count} أجهزة",
+    "running": "قيد التشغيل",
+    "threeSteps": "ثلاث خطوات للتنفيذ المتوازي",
+    "steps": {
+      "typePrompt": {
+        "title": "اكتب الأمر",
+        "desc": "صف المهمة. فعّل وضع السرب واختر عدد الأجهزة."
+      },
+      "machinesSpinUp": {
+        "title": "بدء تشغيل الأجهزة",
+        "desc": "كل جهاز يحصل على بيئة معزولة كاملة — متصفح، طرفية، سطح مكتب."
+      },
+      "resultsStream": {
+        "title": "بث النتائج مباشرة",
+        "desc": "راقب كل جهاز في الوقت الفعلي عبر عرض شجرة السرب."
+      }
+    },
+    "demoTitle": "عرض سرب الوكلاء",
+    "demoDescription": "شاهد {count} أجهزة تتعامل مع مهمة بحث CRM في وقت واحد",
+    "prompt": "الأمر",
+    "swarm": "SWARM",
+    "run": "تشغيل",
+    "reset": "إعادة تعيين",
+    "allCompleted": "اكتملت جميع الأجهزة {count}",
+    "speedComparison": "~{swarmTime} دقيقة بدلاً من ~{seqTime} دقيقة — أسرع {multiplier} مرة",
+    "seqVsSwarm": "التسلسلي مقابل السرب",
+    "tableHeaders": {
+      "task": "المهمة",
+      "before": "قبل",
+      "swarm": "السرب",
+      "speed": "السرعة"
+    },
+    "speedExamples": {
+      "crmResearch": "بحث 5 أدوات CRM",
+      "qaPages": "اختبار جودة عبر 8 صفحات",
+      "leadEnrichment": "إثراء العملاء المحتملين (100)",
+      "priceMonitoring": "مراقبة الأسعار"
+    },
+    "builtForParallel": "مصمم للعمل المتوازي",
+    "useCases": {
+      "marketResearch": {
+        "title": "أبحاث السوق على نطاق واسع",
+        "desc": "ابحث عن عدة منافسين وأسواق ومنتجات في وقت واحد عبر أجهزة معزولة."
+      },
+      "leadGeneration": {
+        "title": "توليد العملاء المحتملين",
+        "desc": "أثرِ الملفات الشخصية، واعثر على البريد الإلكتروني، وتحقق من الحضور الاجتماعي — ساعات من العمل في دقائق."
+      },
+      "qaTesting": {
+        "title": "اختبار الجودة والانحدار",
+        "desc": "شغّل سيناريوهات الاختبار عبر صفحات أو مسارات مختلفة بالتوازي."
+      },
+      "contentSocial": {
+        "title": "المحتوى والتواصل الاجتماعي",
+        "desc": "انشر على منصات متعددة في وقت واحد مع عزل كل جهاز."
+      },
+      "dataExtraction": {
+        "title": "استخراج البيانات",
+        "desc": "اجمع وهيكل البيانات من عشرات المصادر دفعة واحدة."
+      },
+      "scheduledRuns": {
+        "title": "عمليات التشغيل المجدولة",
+        "desc": "ادمج وضع السرب مع الجدولة للمهام المتوازية المتكررة."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "عزل حقيقي",
+        "desc": "كل جهاز لديه متصفحه وطرفيته وسطح مكتبه الخاص."
+      },
+      "tripleMachineLimit": {
+        "title": "3 أضعاف حد الأجهزة",
+        "desc": "وضع السرب يضاعف سعة أجهزة خطتك 3 مرات."
+      },
+      "liveTreeView": {
+        "title": "عرض شجرة مباشر",
+        "desc": "لقطات الشاشة واستدعاءات الأدوات تُبث في الوقت الفعلي."
+      },
+      "autoAggregation": {
+        "title": "تجميع تلقائي",
+        "desc": "تُدمج النتائج في تقرير موحد واحد."
+      },
+      "shareableRuns": {
+        "title": "عمليات تشغيل قابلة للمشاركة",
+        "desc": "أعد تشغيل الجداول الزمنية الكاملة للتنفيذ عبر رابط."
+      },
+      "fullySandboxed": {
+        "title": "معزول بالكامل",
+        "desc": "تُدمر جميع البيئات بعد الانتهاء."
+      }
+    },
+    "readyCta": "مستعد لتشغيل المهام بالتوازي؟",
+    "includedWithPaid": "وضع السرب مضمّن في كل خطة مدفوعة.",
+    "getStarted": "ابدأ الآن",
+    "viewPricing": "عرض الأسعار",
+    "legend": {
+      "messages": "الرسائل",
+      "broadcast": "البث",
+      "sharedMemory": "الذاكرة المشتركة",
+      "help": "المساعدة"
+    },
+    "liveSwarmExecution": "تنفيذ سرب مباشر مع تواصل الوكلاء",
+    "popular": "شائع",
+    "avgRating": "متوسط {rating}"
+  },
+  "downloadPage": {
+    "title": "تطبيق سطح المكتب",
+    "heroTitle": "دع Coasty يدير حاسوبك",
+    "heroDescription": "مساعد الذكاء الاصطناعي الذي يتولى القيادة. أتمت المتصفح وسطح المكتب والطرفية — أو تحكم في حاسوبك من أي مكان عبر واجهة الويب.",
+    "seeInAction": "شاهده أثناء العمل",
+    "overlayDescription": "طبقة خفيفة تطفو على سطح مكتبك. تحكم فيها محليًا أو عن بُعد من أي متصفح — حاسوبك، بأسلوبك.",
+    "recommended": "موصى به لنظامك",
+    "coastyFor": "Coasty لـ {platform}",
+    "installerLabel": "مثبّت {extension}",
+    "beforeInstall": "قبل التثبيت",
+    "beforeInstallDescription": "تطبيق Coasty Desktop جديد تمامًا، لذلك قد لا يتعرف عليه نظام التشغيل بعد. هذا طبيعي تمامًا للتطبيقات الجديدة — إليك كيفية المتابعة:",
+    "windowsSteps": {
+      "step1": "قام Windows بحماية جهاز الكمبيوتر الخاص بك",
+      "step2": "مزيد من المعلومات",
+      "step3": "تشغيل على أي حال"
+    },
+    "macSteps": {
+      "step1": "لا يمكن فتح Coasty Desktop",
+      "step2": "إعدادات النظام > الخصوصية والأمان",
+      "step3": "فتح على أي حال"
+    },
+    "allPlatforms": "جميع المنصات",
+    "systemRequirements": {
+      "title": "متطلبات النظام",
+      "win1": "Windows 10 أو أحدث",
+      "win2": "64 بت (x86_64)",
+      "win3": "4 جيجابايت RAM كحد أدنى",
+      "mac1": "macOS 10.15 (Catalina) أو أحدث",
+      "mac2": "Apple Silicon أو Intel",
+      "mac3": "4 جيجابايت RAM كحد أدنى"
+    },
+    "whatsIncluded": "ما الذي يتضمنه",
+    "features": {
+      "browser": "أتمتة المتصفح",
+      "desktop": "أتمتة سطح المكتب",
+      "terminal": "الوصول إلى الطرفية",
+      "files": "عمليات الملفات",
+      "updates": "تحديثات تلقائية",
+      "remote": "التحكم من أي مكان"
+    },
+    "browserCta": "افتح Coasty في المتصفح",
+    "browserCtaDescription": "تريد التحكم في جهازك من أي مكان؟",
+    "loading": "جارٍ التحميل...",
+    "downloadFor": "تحميل لـ {platform}",
+    "download": "تحميل",
+    "unavailable": "غير متوفر"
+  },
+  "referralPage": {
+    "shareTitle": "شارك Coasty.",
+    "earnTitle": "اكسبوا معًا.",
+    "shareDescription": "امنح أصدقاءك 50 رصيدًا مجانيًا لنشر أول وكيل ذكاء اصطناعي. تحصل أنت أيضًا على 50 رصيدًا — في كل مرة ينضم شخص.",
+    "features": [
+      "ذكاء اصطناعي يعمل فعلاً — متصفح حقيقي، نقرات حقيقية، نتائج حقيقية",
+      "معزول وآمن — كل وكيل يعمل في VM خاص به",
+      "يعمل أثناء نومك — جدوِل المهام ودع الوكلاء يتولون الباقي"
+    ],
+    "recentActivity": "نشاطك الأخير",
+    "friendsCould": "أصدقاؤك يمكنهم فعل هذا أيضًا",
+    "giveGet": "امنح أصدقاءك 50 رصيدًا. واحصل على 50 لنفسك. في كل مرة.",
+    "stats": {
+      "invited": "تمت الدعوة",
+      "earned": "تم الكسب",
+      "perInvite": "لكل دعوة"
+    },
+    "tabs": {
+      "invite": "دعوة أصدقاء",
+      "feedback": "إرسال ملاحظات"
+    },
+    "referralLink": "رابط الإحالة الخاص بك",
+    "howItWorks": "كيف يعمل",
+    "howSteps": [
+      "شارك رابطك مع صديق",
+      "يسجّل ويحصل على 50 رصيدًا مجانيًا",
+      "تحصل أنت فورًا على 50 رصيدًا أيضًا"
+    ],
+    "shareDirectly": "شارك مباشرة",
+    "yourReferrals": "إحالاتك",
+    "invitedYou": "دعاك",
+    "joinedViaLink": "انضم عبر رابطك",
+    "noReferrals": "لا توجد إحالات بعد",
+    "noReferralsHint": "شارك رابطك أعلاه وستكسبان معًا 50 رصيدًا",
+    "feedbackThanks": "شكرًا على ملاحظاتك!",
+    "feedbackWeRead": "نقرأ كل رسالة.",
+    "sendAnother": "أرسل أخرى",
+    "feedbackTitle": "أخبرنا برأيك",
+    "feedbackSubtitle": "تقارير أخطاء، أفكار ميزات، أو مجرد تحية",
+    "feedbackPlaceholder": "ما الذي يدور في ذهنك؟",
+    "weReadEvery": "نقرأ كل رسالة",
+    "send": "إرسال",
+    "shareMessage": "مرحبًا، أنا أستخدم Coasty وهو رائع جدًا. إنه ذكاء اصطناعي يمكنه فعلاً استخدام الكمبيوتر بدلاً منك. التصفح والنقر والكتابة، كل شيء. جرّبه من رابطي وسنحصل كلانا على أرصدة مجانية!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "البريد الإلكتروني"
+    },
+    "emailSubject": "تفقد أداة الذكاء الاصطناعي هذه",
+    "emailBody": "هذا الذكاء الاصطناعي يمكنه فعلاً استخدام الكمبيوتر بدلاً منك. التصفح والنقر والكتابة، كل شيء."
+  },
+  "statusPage": {
+    "title": "حالة النظام",
+    "brandTitle": "حالة Coasty",
+    "subtitle": "حالة التشغيل في الوقت الفعلي لجميع خدمات Coasty. تُحدّث هذه الصفحة تلقائيًا كل 60 ثانية.",
+    "refresh": "تحديث",
+    "statuses": {
+      "operational": "تعمل بشكل طبيعي",
+      "degraded": "أداء منخفض",
+      "outage": "انقطاع"
+    },
+    "overallStatuses": {
+      "allOperational": "جميع الأنظمة تعمل بشكل طبيعي",
+      "someDegraded": "بعض الأنظمة تعاني من بطء",
+      "disruption": "تم اكتشاف انقطاع في الخدمة"
+    },
+    "overallDescriptions": {
+      "allOperational": "جميع الخدمات تعمل بسلاسة دون أي مشاكل.",
+      "someDegraded": "بعض الخدمات تعاني من بطء. نحن نحقق في الأمر.",
+      "disruption": "نحن على علم بالمشكلة ونعمل بنشاط على إصلاحها."
+    },
+    "responseTime": "{ms} مللي ثانية وقت الاستجابة",
+    "uptimeLabel": "وقت التشغيل خلال 90 يومًا",
+    "daysAgo": "قبل 90 يومًا",
+    "today": "اليوم",
+    "overallUptime": "وقت التشغيل الإجمالي خلال 90 يومًا",
+    "overallUptimeDesc": "التوفر الإجمالي عبر جميع الخدمات",
+    "services": "الخدمات",
+    "clickUptime": "انقر لعرض وقت التشغيل",
+    "lastChecked": "آخر فحص {time} · تحديث تلقائي كل 60 ثانية",
+    "experiencingIssues": "تواجه مشاكل؟",
+    "issuesDescription": "إذا بدا شيء غير صحيح، تواصل معنا مباشرة.",
+    "talkToCofounders": "تحدث إلى المؤسسين",
+    "emailUs": "أرسل لنا بريدًا إلكترونيًا",
+    "serviceNames": {
+      "website": "الموقع الإلكتروني",
+      "aiBackend": "خادم الذكاء الاصطناعي",
+      "database": "قاعدة البيانات",
+      "authentication": "المصادقة",
+      "aiModels": "نماذج الذكاء الاصطناعي",
+      "fileStorage": "تخزين الملفات"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر | موظف ذكاء اصطناعي لأتمتة سطح المكتب والمتصفح",
+      "titleTemplate": "{title} | Coasty — وكيل ذكاء اصطناعي لاستخدام الكمبيوتر",
+      "description": "Coasty هو وكيل الذكاء الاصطناعي رقم 1 في استخدام الكمبيوتر — 82% على معيار OSWorld. يتحكم بسطح المكتب كالإنسان: يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات. عزل حقيقي على مستوى الآلات الافتراضية لكل جلسة. ابتداءً من $20/شهر.",
+      "ogTitle": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر | OSWorld 82%",
+      "ogDescription": "موظف ذكاء اصطناعي يتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld (82%). أتمتة المتصفح، التحكم بسطح المكتب، حل CAPTCHA، عزل الآلة الافتراضية. ابتداءً من $20/شهر.",
+      "twitterDescription": "موظف ذكاء اصطناعي يتحكم بسطح المكتب كالإنسان. يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل البريد الإلكتروني. عزل حقيقي للآلة الافتراضية. $20/شهر مقابل $3,000/شهر لمساعد افتراضي بشري."
+    },
+    "compare": {
+      "title": "مقارنة Coasty — بدائل ومقارنة وكلاء الذكاء الاصطناعي",
+      "description": "اكتشف كيف يقارن وكيل Coasty رقم 1 لاستخدام الكمبيوتر مع Anthropic Computer Use وOpenAI Operator وAdept AI وUiPath والمزيد. مقارنات تفصيلية للميزات مع الأسعار.",
+      "ogTitle": "قارن Coasty مع بدائل وكلاء الذكاء الاصطناعي",
+      "ogDescription": "مقارنة ميزة بميزة لوكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر مقابل المنافسين. نتائج المعايير، الأسعار، القدرات."
+    },
+    "download": {
+      "title": "تحميل Coasty Desktop — وكيل ذكاء اصطناعي لـ Mac وWindows",
+      "description": "حمّل Coasty Desktop، وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر الذي يتحكم بجهازك المحلي. أتمتة المتصفح، التحكم بسطح المكتب، الوصول إلى الطرفية، وعمليات الملفات. متوفر لـ Windows وmacOS.",
+      "ogTitle": "تحميل Coasty Desktop — وكيل ذكاء اصطناعي لـ Mac وWindows",
+      "ogDescription": "ذكاء اصطناعي يتحكم بكمبيوترك كالإنسان. أتمتة المتصفح وسطح المكتب والطرفية في تطبيق واحد أصلي. رقم 1 على معيار OSWorld."
+    },
+    "guide": {
+      "title": "ماذا يمكن أن يفعل Coasty؟ — الدليل الشامل لأتمتة الكمبيوتر بالذكاء الاصطناعي",
+      "description": "اكتشف كل ما يمكن لـ Coasty أتمتته: البحث عن العملاء المحتملين، التواصل عبر البريد الإلكتروني، التقدم للوظائف، اختبار ضمان الجودة، إدخال البيانات، وسائل التواصل الاجتماعي، التوظيف، البحث، وأكثر من 100 مهمة أخرى.",
+      "ogTitle": "ماذا يمكن أن يفعل Coasty؟ — دليل أتمتة الذكاء الاصطناعي الشامل",
+      "ogDescription": "استكشف أكثر من 100 مهمة يمكن لـ Coasty أتمتتها. من المبيعات إلى اختبار ضمان الجودة، شاهد كيف يتعامل وكيل الكمبيوتر بالذكاء الاصطناعي مع العمل الحقيقي."
+    },
+    "blog": {
+      "title": "المدونة — رؤى وكلاء الذكاء الاصطناعي، أبحاث استخدام الكمبيوتر ودراسات الحالة",
+      "description": "تحليلات معمقة حول وكلاء الذكاء الاصطناعي المستقلين، تقنية استخدام الكمبيوتر، دراسات حالة الأتمتة الواقعية، ومستقبل موظفي الذكاء الاصطناعي. من فريق وكيل استخدام الكمبيوتر رقم 1.",
+      "ogTitle": "مدونة Coasty — رؤى وكلاء الذكاء الاصطناعي ودراسات الحالة",
+      "ogDescription": "تحليلات معمقة حول وكلاء الذكاء الاصطناعي المستقلين، تقنية استخدام الكمبيوتر، ودراسات حالة الأتمتة الواقعية من وكيل استخدام الكمبيوتر رقم 1."
+    },
+    "results": {
+      "title": "العروض التوضيحية والنتائج — شاهد وكيل Coasty يعمل بشكل مستقل",
+      "description": "شاهد Coasty يدير حملات تسويقية، يتقدم للوظائف، يملأ الطلبات، يختبر المنتجات، يرسل رسائل بريد إلكتروني مخصصة، والمزيد بشكل مستقل. دراسات حالة حقيقية مع عروض فيديو توضيحية.",
+      "ogTitle": "عروض توضيحية — شاهد وكيل Coasty يعمل بشكل مستقل",
+      "ogDescription": "عروض حقيقية للذكاء الاصطناعي وهو يتحكم بالكمبيوتر: التسويق، التقدم للوظائف، اختبار ضمان الجودة، التواصل عبر البريد الإلكتروني، والمزيد. رقم 1 على معيار OSWorld."
+    },
+    "terms": {
+      "title": "شروط الخدمة",
+      "description": "شروط خدمة Coasty. اقرأ الشروط المنظمة لاستخدام منصة موظف Coasty بالذكاء الاصطناعي، ووكيل استخدام الكمبيوتر، وتطبيق سطح المكتب.",
+      "ogTitle": "Coasty — شروط الخدمة",
+      "ogDescription": "شروط خدمة Coasty. اقرأ الشروط المنظمة لاستخدام منصة موظف Coasty بالذكاء الاصطناعي، ووكيل استخدام الكمبيوتر، وتطبيق سطح المكتب."
+    },
+    "privacy": {
+      "title": "سياسة الخصوصية",
+      "description": "سياسة خصوصية Coasty. تعرف على كيفية حماية بياناتك من خلال العزل على مستوى الآلة الافتراضية، والجلسات المشفرة، وبيئات التنفيذ المعزولة، والأمان على مستوى المؤسسات.",
+      "ogTitle": "Coasty — سياسة الخصوصية",
+      "ogDescription": "سياسة خصوصية Coasty. تعرف على كيفية حماية بياناتك من خلال العزل على مستوى الآلة الافتراضية، والجلسات المشفرة، وبيئات التنفيذ المعزولة، والأمان على مستوى المؤسسات."
+    },
+    "useCases": {
+      "title": "حالات الاستخدام — وكيل Coasty للذكاء الاصطناعي لعمليات الأعمال",
+      "description": "اكتشف 12 طريقة يقوم بها وكيل Coasty بالذكاء الاصطناعي بأتمتة عملياتك — أبحاث المنافسين، اختبار ضمان الجودة، توليد العملاء المحتملين، التواصل عبر البريد الإلكتروني، والمزيد. نتائج حقيقية.",
+      "ogTitle": "حالات الاستخدام — وكيل Coasty للذكاء الاصطناعي",
+      "ogDescription": "12 طريقة لمضاعفة إنتاجيتك 10 أضعاف على الطيار الآلي. نتائج حقيقية، أرقام حقيقية."
+    },
+    "computerUse": {
+      "title": "وكيل ذكاء اصطناعي لاستخدام الكمبيوتر — رقم 1 في أتمتة سطح المكتب والمتصفح والطرفية",
+      "description": "Coasty هو أفضل وكيل ذكاء اصطناعي لاستخدام الكمبيوتر، رقم 1 على OSWorld (82%). أتمتة أي مهمة على سطح المكتب أو المتصفح أو الطرفية باستخدام ذكاء اصطناعي مستقل يتحكم بالكمبيوتر كالإنسان.",
+      "ogTitle": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر",
+      "ogDescription": "أفضل وكيل استخدام كمبيوتر، رقم 1 على OSWorld. أتمتة أي مهمة على سطح المكتب أو المتصفح أو الطرفية باستخدام الذكاء الاصطناعي."
+    },
+    "pricing": {
+      "title": "الأسعار — خطط وأسعار وكيل Coasty للذكاء الاصطناعي",
+      "description": "خطط أسعار Coasty تبدأ من $20/شهر. استبدل المساعدين الافتراضيين بتكلفة $3,000/شهر بموظف ذكاء اصطناعي. خطة مجانية متاحة. فوترة قائمة على الرصيد بدون رسوم مخفية.",
+      "ogTitle": "أسعار Coasty — خطط وكيل الذكاء الاصطناعي",
+      "ogDescription": "موظف ذكاء اصطناعي ابتداءً من $20/شهر. استبدل المساعدين الافتراضيين المكلفين بذكاء اصطناعي مستقل. خطة مجانية متاحة."
+    },
+    "faq": {
+      "q1": "ما هو Coasty؟",
+      "a1": "Coasty هو منصة موظف ذكاء اصطناعي — وكيل يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. يفتح المتصفحات، ينقر، يكتب، يتنقل بين التطبيقات، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات بشكل مستقل. رقم 1 على معيار OSWorld بنسبة إنجاز 82% عبر 369 مهمة حقيقية.",
+      "q2": "كيف يختلف Coasty عن Anthropic Computer Use؟",
+      "a2": "بينما يوفر Anthropic Computer Use واجهة برمجة تطبيقات خام للتحكم بالكمبيوتر، فإن Coasty منصة جاهزة للإنتاج مع بنية تحتية مُدارة للآلات الافتراضية، وحل CAPTCHA مدمج، وتطبيق سطح مكتب لـ Mac وWindows، ودعم نماذج متعددة، وأعلى نتيجة على معيار OSWorld (82%). Coasty يوفر الحل الكامل — وليس فقط الواجهة البرمجية.",
+      "q3": "كم يكلف Coasty؟",
+      "a3": "يبدأ Coasty من $20/شهر لخطة المبتدئين مع توفر خطة مجانية. مقارنة بذلك، يكلف المساعد الافتراضي البشري أكثر من $3,000/شهر. Coasty يعمل على مدار الساعة بدون استراحات، بدون تدريب، وبقابلية توسع فورية.",
+      "q4": "هل استخدام Coasty آمن؟",
+      "a4": "نعم. كل جلسة في Coasty تعمل في آلة افتراضية معزولة خاصة بها. بياناتك آمنة، جهازك لا يُمس، ولا يتسرب شيء بين الجلسات. هذا عزل حقيقي على مستوى الآلة الافتراضية، وليس مجرد حاويات في مجموعة مشتركة.",
+      "q5": "ما هو معيار OSWorld؟",
+      "a5": "OSWorld هو معيار لتقييم وكلاء الذكاء الاصطناعي على مهام كمبيوتر حقيقية. يختبر 369 مهمة عبر المتصفحات وتطبيقات المكتب وعمليات النظام. حقق Coasty نسبة 82%، وهي الأعلى بين جميع وكلاء استخدام الكمبيوتر.",
+      "q6": "كيف يختلف Coasty عن أدوات RPA مثل UiPath؟",
+      "a6": "أدوات RPA التقليدية مثل UiPath تتطلب نصوصاً برمجية هشة وتتعطل عند تغيير الواجهات. يستخدم Coasty الرؤية بالذكاء الاصطناعي لفهم أي واجهة والتفاعل معها، والتكيف في الوقت الفعلي بدون نصوص محددة مسبقاً. يعمل كالإنسان، وليس كماكرو. الإعداد يستغرق دقائق بدلاً من أسابيع.",
+      "q7": "هل لدى Coasty تطبيق سطح مكتب؟",
+      "a7": "نعم. Coasty Desktop متوفر لكل من Mac وWindows. يعمل كطبقة عائمة على سطح المكتب ويمكنه التحكم بالمتصفح والملفات والطرفية والتطبيقات المحلية مباشرة — لا حاجة لآلة افتراضية للمهام المحلية.",
+      "q8": "ما الذي يمكن لـ Coasty أتمتته؟",
+      "a8": "يمكن لـ Coasty أتمتة أي مهمة كمبيوتر تقريباً: تصفح الويب، ملء النماذج، إرسال البريد الإلكتروني، إدارة جداول البيانات، إدخال البيانات، النشر على وسائل التواصل الاجتماعي، التقدم للوظائف، البحث عن عملاء محتملين، اختبار ضمان الجودة، دعم العملاء، التوظيف عبر LinkedIn، والمزيد. إذا كان الإنسان يستطيع فعله على الكمبيوتر، يستطيع Coasty ذلك أيضاً.",
+      "q9": "كيف يقارن Coasty بـ OpenAI Operator؟",
+      "a9": "يتفوق Coasty على OpenAI Operator في معيار OSWorld (82% مقابل ~40%)، ويوفر عزلاً حقيقياً على مستوى الآلة الافتراضية لكل جلسة، ويدعم نماذج ذكاء اصطناعي متعددة، ويشمل التحكم الكامل بسطح المكتب وليس المتصفح فقط، ويوفر إطار عمل مفتوح المصدر.",
+      "q10": "هل يستطيع Coasty حل CAPTCHA؟",
+      "a10": "نعم. لدى Coasty خط أنابيب مدمج لحل CAPTCHA، لذلك لا يُحظر كما يحدث مع وكلاء الذكاء الاصطناعي المنافسين. هذا أمر بالغ الأهمية للأتمتة الواقعية حيث تكون CAPTCHA شائعة على المواقع."
+    },
+    "structuredData": {
+      "appDescription": "وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. Coasty يتحكم بسطح المكتب كالإنسان — يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات بشكل مستقل. 82% على معيار OSWorld. عزل حقيقي على مستوى الآلة الافتراضية. حل CAPTCHA مدمج. ابتداءً من $20/شهر.",
+      "orgDescription": "Coasty يبني وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. توفر منصتنا التحكم المستقل بسطح المكتب، وأتمتة المتصفح، وتنسيق الوكلاء المتعددين مع عزل حقيقي على مستوى الآلة الافتراضية.",
+      "productDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld (82%). أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات مع عزل حقيقي على مستوى الآلة الافتراضية.",
+      "websiteDescription": "منصة وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. 82% على معيار OSWorld. أتمتة مستقلة للمتصفح وسطح المكتب والطرفية مع عزل الآلة الافتراضية. ابتداءً من $20/شهر.",
+      "softwareDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld بنسبة إنجاز 82% عبر 369 مهمة حقيقية. أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، عمليات الطرفية، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات.",
+      "breadcrumbs": {
+        "home": "الرئيسية",
+        "caseStudies": "دراسات حالة وكيل الذكاء الاصطناعي",
+        "blog": "المدونة",
+        "download": "تحميل تطبيق سطح المكتب",
+        "compare": "مقارنة وكلاء الذكاء الاصطناعي"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – الصفحة غير موجودة",
+      "description": "عذرًا، هذه الصفحة غير موجودة."
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "description": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+      "tryAgain": "حاول مرة أخرى"
+    }
+  },
+  "schedulesPage": {
+    "title": "القوى العاملة",
+    "subtitle": "قوتك العاملة بالذكاء الاصطناعي — عيّن المهام واتركهم يتولون الباقي",
+    "guide": "دليل",
+    "hireEmployee": "توظيف موظف",
+    "loading": "جارٍ تحميل موظفيك...",
+    "onDuty": "{count} في الخدمة",
+    "standby": "{count} في الانتظار",
+    "company": "شركة",
+    "teams": "{count} فرق",
+    "employees": "{count} موظفين",
+    "members": "{count} أعضاء",
+    "unassigned": "غير مُعيّن",
+    "add": "إضافة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "run": "تشغيل",
+    "delegate": "تفويض",
+    "untitledEmployee": "موظف بدون عنوان",
+    "untitled": "بدون عنوان",
+    "guidelinesPlaceholder": "إرشادات...",
+    "today": "اليوم",
+    "timesDaily": "{count} × يومياً",
+    "noEmployeesDay": "لا يوجد موظفون في هذا اليوم",
+    "noEmployeesScheduled": "لا يوجد موظفون مجدولون",
+    "recentActivity": "النشاط الأخير",
+    "schedule": "الجدول",
+    "emptyState": {
+      "openChat": "افتح أي محادثة وانقر على",
+      "assignEmployee": "تعيين موظف",
+      "onThe": "في",
+      "topRight": "أعلى اليمين",
+      "toPutOnAutopilot": "لوضعه على الطيار الآلي",
+      "newChat": "محادثة جديدة"
+    },
+    "emptyWorkforce": {
+      "title": "وظّف أول موظف لك",
+      "description": "موظفو الذكاء الاصطناعي يعملون نيابة عنك — عيّن مهمة، حدد جدولاً وسينفذونها تلقائياً",
+      "flexibleShifts": {
+        "title": "نوبات مرنة",
+        "desc": "جدول الموظفين بالساعة أو يومياً أو أسبوعياً أو شهرياً — أو استخدم تعبير cron مخصص"
+      },
+      "fullAutonomy": {
+        "title": "استقلالية كاملة",
+        "desc": "كل موظف يحصل على وصول كامل للتصفح والطرفية ومحطات العمل المتصلة"
+      },
+      "activityLogs": {
+        "title": "سجلات النشاط",
+        "desc": "كل تنفيذ يتم تسجيله لتتمكن من مراجعة ما أنجزه موظفوك"
+      },
+      "startFromChat": "ابدأ من محادثة"
+    },
+    "filters": {
+      "all": "الكل",
+      "onDuty": "في الخدمة",
+      "standby": "في الانتظار"
+    },
+    "noMatch": "لا يوجد موظفون يطابقون هذا الفلتر",
+    "createTeam": {
+      "title": "فريق جديد",
+      "subtitle": "ابدأ بقالب أو أنشئ من الصفر",
+      "backToTemplates": "العودة إلى القوالب",
+      "customTeam": "فريق مخصص",
+      "customDescription": "أنشئ فريقاً بإعداداتك الخاصة.",
+      "teamNameLabel": "اسم الفريق",
+      "teamNamePlaceholder": "مثال: البحث، التسويق، الهندسة",
+      "guidelinesLabel": "الإرشادات",
+      "optional": "(اختياري)",
+      "guidelinesPlaceholder": "تعليمات مشتركة سيتبعها جميع أعضاء الفريق...",
+      "suggestedEmployees": "موظفون مقترحون",
+      "suggestedCredentials": "بيانات اعتماد مقترحة",
+      "added": "تمت الإضافة",
+      "addButton": "+ إضافة",
+      "credentials": "بيانات الاعتماد",
+      "addCredential": "+ إضافة بيانات اعتماد",
+      "credentialHint": "بيانات الاعتماد مشفرة. سيتم تضمينها في إرشادات الفريق ليعرف الموظفون ما هو متاح.",
+      "settingUp": "جارٍ الإعداد...",
+      "createEmployees": "إنشاء {count} موظفين",
+      "createTeamButton": "إنشاء فريق"
+    },
+    "noTeams": {
+      "title": "لا توجد فرق بعد",
+      "description": "الفرق تتيح للموظفين مشاركة السياق والذاكرة. أنشئ واحداً لبناء هيكلك التنظيمي.",
+      "newTeam": "فريق جديد"
+    },
+    "howItWorks": {
+      "title": "كيف يعمل",
+      "dragEmployees": "اسحب الموظفين إلى فريق",
+      "clickToEdit": "انقر لتعديل الجدول والإعدادات",
+      "teamsShare": "الفرق تتشارك الذاكرة والإرشادات",
+      "dashedLines": "خطوط متقطعة — تفويض بين الموظفين"
+    },
+    "inactive": {
+      "title": "{count} موظفين غير نشطين",
+      "missingMachine": "{count} بدون جهاز — لن يعمل حتى يتم تفعيله",
+      "wontRun": "لن يعمل حتى يتم تفعيله",
+      "fixInEmployees": "إصلاح في الموظفين"
+    },
+    "dragHint": "اسحب الموظفين غير المُعيّنين إلى الفرق لإضافتهم",
+    "limits": {
+      "upgradePlan": "ترقية الخطة",
+      "manageMachines": "إدارة الأجهزة",
+      "manageEmployees": "إدارة الموظفين",
+      "machineLimit": "تحتاج إلى جهاز سحابي لكنك وصلت إلى حدك البالغ {max} أجهزة. قم بترقية خطتك أو احذف جهازاً غير مستخدم.",
+      "employeeLimit": "وصلت إلى حد الموظفين ({max} لمستوى {tier}). قم بترقية خطتك أو أزل موظفين غير مستخدمين.",
+      "templateLimit": "يحتاج هذا القالب إلى {needed} موظفين لكن لديك فقط {available} أماكن متبقية (الحد الأقصى {max} لمستوى {tier}). قم بترقية خطتك أو أزل موظفين غير مستخدمين.",
+      "createFailed": "فشل في إنشاء الموظفين. تحقق من حدود حسابك وحاول مرة أخرى.",
+      "teamFailed": "فشل في إنشاء الفريق"
+    },
+    "provisioning": {
+      "checking": "جارٍ التحقق من حدود الحساب...",
+      "usingMachine": "جارٍ استخدام الجهاز \"{name}\"...",
+      "assigningMachine": "جارٍ التعيين على الجهاز \"{name}\" (سيعمل عندما يكون الجهاز جاهزاً)...",
+      "creatingMachine": "جارٍ إنشاء جهاز جديد...",
+      "machineStarted": "بدأ تجهيز الجهاز...",
+      "hiring": "جارٍ توظيف {name} ({current}/{total})...",
+      "creatingTeam": "جارٍ إنشاء الفريق..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "تم إنشاء الفريق مع {count} موظفين ({failedCount} فشلوا: {names})",
+      "teamCreated": "تم إنشاء فريق {name} مع {count} موظفين"
+    },
+    "credentialInstructions": "[بيانات الاعتماد المتاحة]\nتم تكوين بيانات اعتماد الخدمة التالية وهي متاحة للاستخدام:\n{list}\nاستخدم بيانات الاعتماد هذه عندما تحتاج لتسجيل الدخول إلى هذه الخدمات لإكمال مهامك.",
+    "templates": {
+      "contentOps": {
+        "name": "عمليات المحتوى",
+        "tagline": "انشر باستمرار دون تحريك ساكن",
+        "description": "محرك محتوى فعّال — يكتب ويحسّن ويوزع المحتوى تلقائياً.",
+        "roles": {
+          "atlas": "كاتب محتوى — يكتب مقالات المدونة والنشرات الإخبارية ونصوص وسائل التواصل",
+          "echo": "محلل SEO — يراجع الصفحات ويتتبع التصنيفات ويقترح فرص الكلمات المفتاحية",
+          "nova": "موزع اجتماعي — ينشر المحتوى على المنصات ويراقب التفاعل"
+        },
+        "credentials": {
+          "wordpress": "نشر وإدارة مقالات المدونة",
+          "twitter": "نشر التغريدات ومراقبة التفاعل",
+          "linkedin": "نشر المحتوى المهني والمقالات",
+          "searchConsole": "تتبع أداء البحث والفهرسة"
+        }
+      },
+      "customerSupport": {
+        "name": "دعم العملاء",
+        "tagline": "تغطية دعم على مدار الساعة من 3 موظفين",
+        "description": "يراقب صناديق البريد ويحل المشكلات الشائعة ويحافظ على تحديث قاعدة المعرفة.",
+        "roles": {
+          "sage": "مراقب البريد — يفحص رسائل الدعم ويصنفها ويرد على الاستفسارات الشائعة",
+          "iris": "مدير قاعدة المعرفة — يحدّث مستندات المساعدة والأسئلة الشائعة بناءً على المشكلات المتكررة",
+          "milo": "محلل التعليقات — يجمع المراجعات واتجاهات الدعم في تقارير أسبوعية"
+        },
+        "credentials": {
+          "gmail": "مراقبة والرد على رسائل الدعم",
+          "zendesk": "إدارة تذاكر الدعم (أو مكتب المساعدة الخاص بك)",
+          "notion": "تحديث قاعدة المعرفة والوثائق"
+        }
+      },
+      "researchIntel": {
+        "name": "البحث والاستخبارات",
+        "tagline": "ابقَ على اطلاع دون عمل يدوي",
+        "description": "يراقب المنافسين ويتتبع اتجاهات الصناعة ويجمع ملخصات بحثية قابلة للتنفيذ.",
+        "roles": {
+          "scout": "مراقب المنافسين — يتتبع مواقع المنافسين والأسعار وتغييرات الميزات",
+          "wren": "باحث الاتجاهات — يفحص أخبار الصناعة والمنشورات ووسائل التواصل بحثاً عن الاتجاهات",
+          "quinn": "مُعدّ الملخصات — يلخص النتائج في تقارير استخبارات أسبوعية منظمة"
+        },
+        "credentials": {
+          "google": "البحث على الإنترنت",
+          "linkedin": "تتبع توظيف وإعلانات المنافسين",
+          "notion": "نشر ملخصات البحث والتقارير"
+        }
+      },
+      "marketing": {
+        "name": "قسم التسويق",
+        "tagline": "فريق تسويق كامل على جهازين",
+        "description": "إنشاء المحتوى ووسائل التواصل وSEO وتتبع المنافسين وتحليل الحملات — فريقان منسقان.",
+        "roles": {
+          "atlas": "استراتيجي المحتوى — يخطط تقويم المحتوى ويكتب المقالات الطويلة",
+          "nova": "مدير وسائل التواصل — ينشر ويتفاعل وينمّي القنوات الاجتماعية",
+          "echo": "متخصص SEO — يحسّن الصفحات ويبني الروابط الداخلية ويتتبع الكلمات المفتاحية",
+          "pixel": "مدير حملات البريد — يكتب ويرسل النشرات ويتتبع الفتح/النقر",
+          "scout": "محلل المنافسين — يراقب تحركات تسويق المنافسين ويقدم رؤى",
+          "dash": "مراقب الحملات الإعلانية — يتتبع الإنفاق وROAS وفرص التحسين",
+          "iris": "مُعدّ التقارير — يجمع لوحات أداء متعددة القنوات"
+        },
+        "credentials": {
+          "wordpress": "نشر محتوى المدونة",
+          "twitter": "إدارة وسائل التواصل",
+          "linkedin": "توزيع المحتوى المهني",
+          "mailchimp": "حملات البريد والنشرات",
+          "analytics": "تحليل الزيارات والتحويل",
+          "googleAds": "إدارة حملات Google Ads",
+          "metaAds": "إدارة Meta Ads والتواصل الاجتماعي"
+        }
+      },
+      "ecommerce": {
+        "name": "عمليات التجارة الإلكترونية",
+        "tagline": "أدِر متجرك أثناء نومك",
+        "description": "إدارة المنتجات واستخبارات الأسعار وتتبع المخزون وإدارة المراجعات وتسويق النمو للمتاجر الإلكترونية.",
+        "roles": {
+          "cleo": "مسجّل المنتجات — ينشئ ويحدّث أوصاف وصور وبيانات المنتجات",
+          "onyx": "مراقب الأسعار — يتتبع أسعار المنافسين ويشير لفرص التعديل",
+          "luna": "متتبع المخزون — يراقب مستويات المخزون وينبّه عند انخفاضه",
+          "sage": "مدير المراجعات — يرد على مراجعات العملاء ويجمع المشاعر",
+          "dash": "مُحسّن الحملات — يدير إعلانات المنتجات وحملات التسوق",
+          "flux": "مسوّق بريدي — يرسل تسلسلات السلة المتروكة والعروض وما بعد الشراء",
+          "wren": "مُعدّ التقارير — يتتبع الإيرادات ومعدلات التحويل ومقاييس النمو"
+        },
+        "credentials": {
+          "shopify": "إدارة المتجر وقوائم المنتجات",
+          "amazon": "إدارة سوق Amazon",
+          "googleAds": "إعلانات وحملات التسوق",
+          "mailchimp": "تسلسلات بريد العملاء",
+          "analytics": "تحليل التحويل والزيارات"
+        }
+      },
+      "engineering": {
+        "name": "فريق الهندسة",
+        "tagline": "أتمِت الأجزاء المملة من الهندسة",
+        "description": "مراجعات كود آلية ومراقبة التبعيات والتوثيق والاختبار ومراقبة النشر والاستجابة للحوادث.",
+        "roles": {
+          "rune": "مراجع الكود — يراجع PR المفتوحة ويقترح تحسينات ويفحص مشكلات الأمان",
+          "koda": "مراقب التبعيات — يتتبع الحزم القديمة وتحذيرات الأمان والتغييرات الجذرية",
+          "aria": "كاتب التوثيق — يحافظ على تحديث مستندات API وREADME وسجلات التغييرات",
+          "blaze": "مراقب الاختبارات — يشغّل مجموعات الاختبار ويتتبع الاختبارات غير المستقرة ويقدم تقارير التغطية",
+          "frost": "مراقب النشر — يراقب خطوط CI/CD وينبّه عند الفشل ويتتبع تكرار النشر",
+          "neon": "مراقب التشغيل والسجلات — يراقب الخدمات ويفحص السجلات بحثاً عن الأخطاء وينشئ تقارير الحوادث"
+        },
+        "credentials": {
+          "github": "الوصول للمستودعات ومراجعات PR وIssues",
+          "vercel": "مراقبة النشر (أو CI/CD الخاص بك)",
+          "sentry": "تتبع الأخطاء وتنبيهات الحوادث",
+          "npm": "سجل الحزم لفحص التبعيات"
+        }
+      },
+      "fullBusiness": {
+        "name": "عمليات تجارية كاملة",
+        "tagline": "شركة بأكملها مؤتمتة بالكامل",
+        "description": "المبيعات والتسويق والدعم والإدارة — أربعة أقسام تعمل بتناغم عبر ثلاثة أجهزة بذكاء مشترك.",
+        "roles": {
+          "atlas": "مولّد العملاء المحتملين — يجد ويؤهل العملاء المحتملين من مصادر عبر الإنترنت",
+          "dash": "مدير CRM — يحدّث الصفقات ويتتبع خط الأنابيب ويرسل تسلسلات المتابعة",
+          "scout": "كاتب العروض — يعدّ عروض المبيعات والعروض التقديمية من القوالب",
+          "nova": "مسوّق المحتوى — يكتب مقالات المدونة ودراسات الحالة ونصوص التسويق",
+          "echo": "مدير وسائل التواصل — ينشر المحتوى ويتفاعل مع الجمهور",
+          "pixel": "مدير حملات البريد — يشغّل حملات التنقيط وتسلسلات النشرات",
+          "sage": "قائد الدعم — يعالج استفسارات العملاء ويحل المشكلات",
+          "iris": "مدير المعرفة — يحافظ على مستندات المساعدة والأسئلة الشائعة والويكي الداخلي",
+          "milo": "محلل البيانات — يجمع تقارير متعددة الأقسام ولوحات KPI",
+          "wren": "باحث السوق — يتتبع اتجاهات الصناعة والاستخبارات التنافسية",
+          "quinn": "منسق العمليات — ينفذ الملخصات الأسبوعية والمزامنة بين الفرق"
+        },
+        "credentials": {
+          "gmail": "التواصل عبر البريد والدعم",
+          "hubspot": "CRM وخط أنابيب المبيعات (أو CRM الخاص بك)",
+          "linkedin": "توليد العملاء المحتملين والتواصل المهني",
+          "mailchimp": "حملات التسويق عبر البريد",
+          "notion": "الويكي الداخلي والتوثيق",
+          "analytics": "تحليلات الويب والتقارير",
+          "twitter": "التواجد على وسائل التواصل",
+          "zendesk": "تذاكر دعم العملاء"
+        }
+      },
+      "growth": {
+        "name": "النمو والاستحواذ",
+        "tagline": "نمو عدواني بالطيار الآلي الكامل",
+        "description": "التنقيب الخارجي والتسويق الداخلي وتحسين التحويل والتحليلات — محرك نمو مخصص عبر ثلاثة أجهزة.",
+        "roles": {
+          "blaze": "منقّب خارجي — يجد صناع القرار ويبحث عن الشركات ويبني قوائم العملاء المحتملين",
+          "flux": "تواصل بريدي — يرسل رسائل باردة مخصصة ويدير تسلسلات المتابعة",
+          "orion": "تواصل LinkedIn — يتواصل مع المحتملين ويرسل رسائل مخصصة",
+          "coral": "منشئ المحتوى — ينتج محتوى SEO ونصوص صفحات الهبوط ومغناطيس العملاء",
+          "taro": "مُحسّن صفحات الهبوط — يراقب معدلات التحويل ويقترح ويختبر التحسينات",
+          "vale": "مدير الحملات الإعلانية — يدير حملات Google وMeta من البداية للنهاية",
+          "ember": "مُقيّم العملاء المحتملين — يؤهل العملاء الداخليين ويوجههم للمتابعة المناسبة",
+          "haze": "محلل القمع — يتتبع مقاييس التحويل في كل مرحلة ويحدد الاختناقات",
+          "dune": "استخبارات المنافسين — يراقب حملات وأسعار وتموضع المنافسين",
+          "kit": "مُعدّ تقارير النمو — يجمع مقاييس النمو اليومية/الأسبوعية ونتائج التجارب"
+        },
+        "credentials": {
+          "linkedin": "التنقيب والتواصل",
+          "gmail": "البريد البارد وتسلسلات المتابعة",
+          "hubspot": "إدارة العملاء المحتملين وCRM",
+          "googleAds": "حملات البحث المدفوعة",
+          "metaAds": "إعلانات Meta",
+          "analytics": "تحليل القمع والتحويل",
+          "ahrefs": "بحث SEO وتحليل المنافسين"
+        }
+      },
+      "saas": {
+        "name": "عمليات SaaS",
+        "tagline": "أدِر SaaS الخاص بك كآلة جيدة التزييت",
+        "description": "نجاح العملاء وتحليلات المنتج ومنع الانسحاب وتتبع الميزات والتقارير الآلية لأعمال SaaS.",
+        "roles": {
+          "luna": "مراقب نجاح العملاء — يتتبع تفاعل المستخدمين ويحدد الحسابات المعرضة للخطر",
+          "sage": "مساعد الإعداد — يرشد المستخدمين الجدد خلال الإعداد ويراقب معدلات التفعيل",
+          "ivy": "مانع الانسحاب — يتواصل مع المستخدمين المنسحبين بحملات إعادة التفعيل",
+          "rune": "متتبع طلبات الميزات — يجمع ملاحظات المستخدمين وطلبات الميزات من جميع القنوات",
+          "koda": "تحليلات المنتج — يتتبع اعتماد الميزات ورحلات المستخدم ومقاييس التفاعل",
+          "neon": "مراقب الأخطاء والمشكلات — يراقب سجلات الأخطاء وتقارير المستخدمين وحوادث صفحة الحالة",
+          "aria": "كاتب سجل التغييرات — يوثق الإصدارات ويحدّث قاعدة المعرفة ومركز المساعدة",
+          "frost": "محلل الإيرادات — يتتبع MRR ومعدل الانسحاب وLTV وإيرادات التوسع",
+          "zara": "متتبع المنافسين — يراقب ميزات وأسعار وتموضع المنافسين في السوق"
+        },
+        "credentials": {
+          "stripe": "بيانات الاشتراكات والإيرادات",
+          "intercom": "رسائل ودعم العملاء (أو أداتك)",
+          "mixpanel": "تحليلات المنتج وتتبع المستخدمين",
+          "gmail": "التواصل مع العملاء",
+          "notion": "قاعدة المعرفة وسجل التغييرات",
+          "sentry": "مراقبة الأخطاء وتتبع العيوب",
+          "github": "تتبع المشكلات وطلبات الميزات"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "حتى 3",
+        "price": "$19/شهر"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "حتى 10",
+        "price": "$50/شهر"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "حتى 50",
+        "price": "$100/شهر"
+      }
+    },
+    "frequencies": {
+      "daily": "daily",
+      "weekly": "weekly",
+      "every_30_minutes": "كل 30 دقيقة",
+      "every_6_hours": "كل 6 ساعات",
+      "every_12_hours": "كل 12 ساعة"
+    },
+    "teamsTab": "الفرق"
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "تكوين إعدادات الكمبيوتر الأساسية",
+    "displayName": "اسم العرض",
+    "defaultName": "جهاز كمبيوتري",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "كلمة المرور هذه مطلوبة للاتصال بالكمبيوتر"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "المجتمع",
+    "title": "شاهد كيف يستخدمه الناس",
+    "subtitle": "من البحث عن العملاء إلى اختبار الجودة — شاهد ما يقوم المجتمع بأتمتته واستلهم سير عملك التالي.",
+    "sessionCount": "{count} جلسة شاركها المجتمع",
+    "searchPlaceholder": "ابحث حسب المهمة أو الأداة أو النتيجة...",
+    "emptyTitle": "لم يشارك أحد بعد — كن الأول",
+    "emptySubtitle": "عندما يجعل المستخدمون جلساتهم عامة، تظهر هنا",
+    "noResultsTitle": "لا توجد نتائج مطابقة",
+    "noResultsSubtitle": "جرب كلمات مختلفة",
+    "watchSession": "شاهد الجلسة",
+    "steps": "{count} خطوة",
+    "tryCoasty": "جرب Coasty"
+  }
+}

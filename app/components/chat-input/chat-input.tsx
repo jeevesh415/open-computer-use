@@ -9,11 +9,13 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { VMSelector } from "@/components/common/vm-selector/vm-selector"
-import { ArrowUpIcon, StopIcon, WarningCircle, CircleNotch, Monitor, ArrowsClockwise, GitFork, Lock, Lightning, ArrowRight, HardDrive } from "@phosphor-icons/react"
+import { ArrowUpIcon, StopIcon, WarningCircle, CircleNotch, ArrowsClockwise, GitFork, Lock, Lightning, ArrowRight, Monitor } from "@phosphor-icons/react"
 import { MacMiniIcon } from "@/components/icons/mac-mini"
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
 import { useCallback, useMemo, useState, useEffect } from "react"
+import { useTranslations } from "next-intl"
+import { useAccountDialog } from "@/lib/account-dialog-store"
 import { PromptSystem } from "../suggestions/prompt-system"
 import { AnimatePresence, motion } from "motion/react"
 import type { UserMachine } from "@/types/machines.types"
@@ -46,144 +48,17 @@ type ChatInputProps = {
   onSwarmModeChange?: (enabled: boolean) => void
   swarmCount?: number
   onSwarmCountChange?: (count: number) => void
-  // Persistent swarm (machines survive after completion)
-  swarmPersistent?: boolean
-  onSwarmPersistentChange?: (persistent: boolean) => void
   // Subscription tier — determines whether swarm is locked
   userTier?: string | null
   // Max swarm machines (3x plan max_machines, capped at 10)
   maxSwarmMachines?: number
 }
 
-// Fun startup messages
-const startupMessages = [
-  // Tech & Geeky
-  "Booting up the silicon brain",
-  "Awakening the digital consciousness",
-  "Initializing neural pathways",
-  "Spinning up the quantum cores",
-  "Charging the flux capacitor",
-  "Activating the mainframe",
-  "Powering the computational matrix",
-  "Engaging warp drive",
-  "Summoning the silicon spirits",
-  "Firing up the electron engine",
-  "Warming up the transistors",
-  "Assembling the bits and bytes",
-  "Calibrating the digital synapses",
-  "Energizing the CPU crystals",
-  "Loading the consciousness protocols",
-  
-  // Formal & Professional
-  "Initializing system resources",
-  "Preparing computational environment",
-  "Establishing secure connection",
-  "Provisioning virtual resources",
-  "Configuring system parameters",
-  "Launching virtual instance",
-  "Activating remote desktop",
-  "Deploying cloud resources",
-  "Initiating system startup sequence",
-  "Preparing execution environment",
-  
-  // Playful & Fun
-  "Waking up the sleepy computer",
-  "Poking the digital bear",
-  "Brewing some computational coffee",
-  "Stretching the digital muscles",
-  "Opening the digital eyes",
-  "Turning on the think machine",
-  "Revving up the brain engine",
-  "Unleashing the silicon beast",
-  "Summoning your digital assistant",
-  "Calling your virtual buddy",
-  "Rousing the electronic friend",
-  "Tickling the circuits awake",
-  "Giving life to the machine",
-  "Breathing life into silicon",
-  "Sparking the digital flame",
-  
-  // Space & Sci-Fi
-  "Launching the cyber rocket",
-  "Igniting the plasma cores",
-  "Activating the hyperdrive",
-  "Powering the photon processors",
-  "Engaging the stellar engine",
-  "Charging the antimatter cells",
-  "Initializing the holodeck",
-  "Booting the starship computer",
-  "Activating artificial gravity",
-  "Establishing subspace link",
-  
-  // Magic & Fantasy
-  "Casting the startup spell",
-  "Summoning the digital daemon",
-  "Awakening the silicon oracle",
-  "Channeling the electric mana",
-  "Invoking the binary spirits",
-  "Opening the portal to cyberspace",
-  "Enchanting the circuits",
-  "Conjuring computational power",
-  "Releasing the digital genie",
-  "Unlocking the techno-grimoire",
-  
-  // Nature & Organic
-  "Germinating the digital seed",
-  "Blooming the silicon flower",
-  "Hatching the cyber egg",
-  "Growing the computational tree",
-  "Nurturing the electric garden",
-  "Cultivating processing power",
-  "Sprouting digital neurons",
-  "Photosynthesizing the data streams",
-  
-  // Mechanical & Industrial
-  "Cranking the digital engine",
-  "Oiling the virtual gears",
-  "Stoking the computational furnace",
-  "Priming the data pumps",
-  "Spinning the turbines",
-  "Engaging the pistons",
-  "Lubricating the logic gates",
-  "Tightening the digital bolts",
-  "Revving the silicon motor",
-  "Igniting the cyber forge",
-  
-  // Cooking & Kitchen
-  "Preheating the digital oven",
-  "Marinating the data packets",
-  "Seasoning the algorithms",
-  "Simmering the code soup",
-  "Baking the binary bread",
-  "Grilling the graphics card",
-  "Stirring the pixel pot",
-  "Microwaving the memories",
-  
-  // Music & Audio
-  "Tuning the digital orchestra",
-  "Composing the startup symphony",
-  "Amplifying the silicon signals",
-  "Harmonizing the frequencies",
-  "Conducting the electron choir",
-  "Playing the boot sequence ballad",
-  "Drumming up processing power",
-  "Strumming the fiber optic strings",
-  
-  // Simple & Direct
-  "Starting up",
-  "Powering on",
-  "Coming online",
-  "Booting system",
-  "Getting ready",
-  "Almost there",
-  "Preparing workspace",
-  "Loading resources",
-  "System rising"
-]
+// startupMessages is loaded from translations inside the component
 
 
 // Beautiful VM status bar component
-function VMStatusBar({ isVisible, machineName, status }: { isVisible: boolean; machineName?: string; status?: string }) {
+function VMStatusBar({ isVisible, machineName, status, startupMessages, t }: { isVisible: boolean; machineName?: string; status?: string; startupMessages: string[]; t: (key: string, values?: Record<string, string>) => string }) {
   const [messageIndex, setMessageIndex] = useState(() => 
     Math.floor(Math.random() * startupMessages.length)
   )
@@ -202,18 +77,19 @@ function VMStatusBar({ isVisible, machineName, status }: { isVisible: boolean; m
   if (!isVisible) return null
   
   const getStatusMessage = () => {
+    const name = machineName || "computer"
     switch (status) {
       case "creating":
-        return `Creating ${machineName || "computer"}...`
+        return t("status.creating", { name })
       case "starting":
       case "stopped": // When stopped but starting
         return `${startupMessages[messageIndex]}...`
       case "initiating":
-        return `Initiating agent on ${machineName || "computer"}...`
+        return t("status.initiating", { name })
       case "stopping":
-        return `Stopping ${machineName || "computer"}...`
+        return t("status.stopping", { name })
       default:
-        return `Preparing ${machineName || "computer"}...`
+        return t("status.preparing", { name })
     }
   }
 
@@ -275,7 +151,7 @@ function VMStatusBar({ isVisible, machineName, status }: { isVisible: boolean; m
 }
 
 // Beautiful VM error dialog component (for other error states)
-function VMErrorDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function VMErrorDialog({ isOpen, onClose, t }: { isOpen: boolean; onClose: () => void; t: (key: string) => string }) {
   if (!isOpen) return null
   
   return (
@@ -305,12 +181,12 @@ function VMErrorDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
               </div>
               
               <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Virtual Machine Error</h3>
+                <h3 className="text-lg font-semibold">{t("vmError.title")}</h3>
                 <p className="text-sm text-muted-foreground">
-                  The virtual machine is in an error state or is being deleted.
+                  {t("vmError.description")}
                 </p>
                 <p className="text-xs text-muted-foreground mt-3">
-                  Please check the <span className="font-medium">Machines</span> tab to resolve the issue, or select <span className="font-medium">"No Computer Selected"</span> to use web search only.
+                  {t("vmError.hint")}
                 </p>
               </div>
               
@@ -319,7 +195,7 @@ function VMErrorDialog({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                 className="mt-2 w-full"
                 variant="outline"
               >
-                Got it
+                {t("vmError.gotIt")}
               </Button>
             </div>
           </motion.div>
@@ -351,14 +227,14 @@ export function ChatInput({
   onSwarmModeChange,
   swarmCount,
   onSwarmCountChange,
-  swarmPersistent,
-  onSwarmPersistentChange,
   userTier,
   maxSwarmMachines = 3,
 }: ChatInputProps) {
+  const t = useTranslations("chatInput")
+  const tl = useTranslations()
+  const startupMessages = tl.raw("loadingMessages") as string[]
   const isOnlyWhitespace = (text: string) => !/[^\s]/.test(text)
   const isSwarmLocked = !userTier || userTier === "free"
-  const isPersistentEligible = userTier === "starter" || userTier === "professional" || userTier === "enterprise"
   const [machineStatus, setMachineStatus] = useState<UserMachine['status'] | null>(null)
   const [machineName, setMachineName] = useState<string | null>(null)
   const [showVMError, setShowVMError] = useState(false)
@@ -367,6 +243,9 @@ export function ChatInput({
   const [agentReady, setAgentReady] = useState(false)
   const [isMachineBusy, setIsMachineBusy] = useState(false)
   const [isStoppingMachine, setIsStoppingMachine] = useState(false)
+
+  // Derive isElectronMachine from currentMachine to avoid stale state
+  const isElectronMachine = currentMachine?.settings?.provider === 'electron'
 
   // Reset agentReady and busy state whenever VM selection changes
   useEffect(() => {
@@ -388,6 +267,16 @@ export function ChatInput({
               setMachineStatus(machine.status)
               setMachineName(machine.displayName)
               setCurrentMachine(machine)
+
+              const isElectron = machine.settings?.provider === 'electron'
+
+              if (isElectron) {
+                // Electron machines: check live connection status via backend
+                const isConnected = (machine as any).electronConnected === true
+                setAgentReady(isConnected)
+                setShowVMStatusBar(false)
+                return
+              }
 
               // Show status bar for creating, starting states
               if (machine.status === "creating" || machine.status === "starting") {
@@ -419,7 +308,7 @@ export function ChatInput({
       }
 
       fetchMachineStatus()
-      // Poll for status updates every 3 seconds when showing status bar, 10 seconds otherwise
+      // Poll for status updates — 3s when actively provisioning, 10s otherwise
       const interval = setInterval(fetchMachineStatus, showVMStatusBar ? 3000 : 10000)
       return () => clearInterval(interval)
     } else {
@@ -428,8 +317,14 @@ export function ChatInput({
       setCurrentMachine(null)
       setShowVMStatusBar(false)
       setAgentReady(false)
+
     }
-  }, [selectedVMId, isUserAuthenticated, showVMStatusBar])
+    // NOTE: showVMStatusBar intentionally excluded from deps — it only affects
+    // the polling interval, not whether we should poll. Including it caused a
+    // cascade: fetch → setState → showVMStatusBar changes → effect re-runs →
+    // immediate fetch → repeat, exhausting the hourly rate limit on login.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedVMId, isUserAuthenticated])
   
 
   // Start VM if it's stopped
@@ -458,8 +353,13 @@ export function ChatInput({
       return false
     }
     
-    console.log(`VM Status Check - ID: ${selectedVMId}, Status: ${machineStatus}`)
-    
+    console.log(`VM Status Check - ID: ${selectedVMId}, Status: ${machineStatus}, Electron: ${isElectronMachine}`)
+
+    // Electron machines: no startup needed — just check if connected
+    if (isElectronMachine) {
+      return agentReady // true if Electron app is connected, false if offline
+    }
+
     if (machineStatus === "running") {
       if (!agentReady) {
         setShowVMStatusBar(true)
@@ -632,7 +532,7 @@ export function ChatInput({
     // Send message - VM ID is already being sent through use-chat-core
     onSend()
 
-  }, [isSubmitting, onSend, status, stop, isUserAuthenticated, onAuthRequired, selectedVMId, machineStatus, agentReady, startVMIfNeeded, checkMachineBusy, swarmMode])
+  }, [isSubmitting, onSend, status, stop, isUserAuthenticated, onAuthRequired, selectedVMId, machineStatus, agentReady, startVMIfNeeded, checkMachineBusy, swarmMode, isElectronMachine])
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -678,7 +578,9 @@ export function ChatInput({
           return
         }
 
-        const machineReady = machineStatus === "running" && agentReady
+        // Electron: check agentReady directly (no startup sequence)
+        // Cloud: check running + agentReady
+        const machineReady = isElectronMachine ? agentReady : (machineStatus === "running" && agentReady)
         if (!machineReady) {
           return
         }
@@ -687,7 +589,7 @@ export function ChatInput({
         handleSend()
       }
     },
-    [isSubmitting, status, value, isUserAuthenticated, onAuthRequired, handleSend, stop, selectedVMId, machineStatus, agentReady, isMachineBusy, forceStopAndSend, swarmMode]
+    [isSubmitting, status, value, isUserAuthenticated, onAuthRequired, handleSend, stop, selectedVMId, machineStatus, agentReady, isMachineBusy, forceStopAndSend, swarmMode, isElectronMachine]
   )
 
   const handlePaste = useCallback(
@@ -736,9 +638,9 @@ export function ChatInput({
 
   return (
     <>
-      <VMErrorDialog isOpen={showVMError} onClose={() => setShowVMError(false)} />
+      <VMErrorDialog isOpen={showVMError} onClose={() => setShowVMError(false)} t={t} />
       <div className="relative flex w-full flex-col gap-4">
-        <VMStatusBar isVisible={showVMStatusBar} machineName={machineName || undefined} status={machineStatus === "running" && !agentReady ? "initiating" : (machineStatus || undefined)} />
+        <VMStatusBar isVisible={showVMStatusBar} machineName={machineName || undefined} status={machineStatus === "running" && !agentReady ? "initiating" : (machineStatus || undefined)} startupMessages={startupMessages} t={t} />
       {hasSuggestions && (
         <PromptSystem
           onValueChange={onValueChange}
@@ -749,7 +651,7 @@ export function ChatInput({
       
       {/* Typing indicators for collaborative rooms - will be implemented with real-time data */}
 
-      <div className="relative order-2 pb-3 sm:pb-4 md:order-1">
+      <div className="relative order-2 pb-0 sm:pb-2 md:order-1">
         <PromptInput
             className={cn("relative shadow-xl hover:shadow-2xl focus-within:shadow-2xl focus-within:ring-0 !border-0 [&>*]:border-0 transition-all duration-300 z-10 bg-neutral-100 dark:bg-neutral-800 border border-border/50", hasToolInvocations ? "rounded-b-2xl rounded-t-none" : "rounded-2xl")}
             maxHeight={200}
@@ -763,8 +665,8 @@ export function ChatInput({
           <PromptInputTextarea
             placeholder={
               selectedVMId && selectedVMId !== "none"
-                ? "What should your AI worker do?"
-                : "Tell your AI what to do on the computer..."
+                ? t("placeholder")
+                : t("placeholderAlt")
             }
             onKeyDown={handleKeyDown}
             onPaste={handlePaste}
@@ -780,31 +682,230 @@ export function ChatInput({
                   className="h-9 min-w-0 flex-shrink"
                 />
               )}
-              {/* Connect to Desktop - opens noVNC in new tab */}
-              {selectedVMId && selectedVMId !== "none" && !swarmMode && machineStatus === "running" && agentReady && currentMachine?.publicIpAddress && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="sm"
-                      variant="secondary"
-                      type="button"
-                      onClick={() => {
-                        const websocketPort = currentMachine.websocketPort || 6080
-                        const encodedPassword = encodeURIComponent(currentMachine.vncPassword)
-                        const url = `http://${currentMachine.publicIpAddress}:${websocketPort}/vnc.html?autoconnect=1&resize=scale&password=${encodedPassword}`
-                        window.open(url, '_blank')
-                      }}
-                      className="border-border dark:bg-secondary h-9 rounded-full border bg-transparent px-2.5 sm:px-3"
-                      aria-label="Connect to desktop"
+              {/* Swarm mode toggle — next to machine selector */}
+              {onSwarmModeChange && (
+                <div className="flex items-center gap-1">
+                  <HoverCard openDelay={200} closeDelay={150}>
+                    <HoverCardTrigger asChild>
+                      <Button
+                        size="sm"
+                        variant={!isSwarmLocked && swarmMode ? "default" : "secondary"}
+                        type="button"
+                        onClick={() => !isSwarmLocked && onSwarmModeChange(!swarmMode)}
+                        className={cn(
+                          "border-border h-9 rounded-full border px-2.5 sm:px-3 transition-all duration-200",
+                          isSwarmLocked
+                            ? "bg-transparent dark:bg-secondary opacity-70 hover:opacity-100 cursor-default"
+                            : swarmMode
+                              ? "bg-amber-500 hover:bg-amber-600 text-white border-amber-500"
+                              : "bg-transparent dark:bg-secondary"
+                        )}
+                        aria-label={isSwarmLocked ? t("swarm.upgradeLabel") : swarmMode ? t("swarm.disableLabel") : t("swarm.enableLabel")}
+                      >
+                        <div className="relative">
+                          <GitFork className="size-4 flex-shrink-0" weight={!isSwarmLocked && swarmMode ? "duotone" : "regular"} />
+                          {isSwarmLocked && (
+                            <Lock className="size-2.5 absolute -bottom-0.5 -right-1 text-amber-500" weight="fill" />
+                          )}
+                        </div>
+                        <span className="hidden sm:inline text-xs ml-1.5">Swarm</span>
+                      </Button>
+                    </HoverCardTrigger>
+                    <HoverCardContent
+                      side="top"
+                      align="center"
+                      sideOffset={8}
+                      className="w-[340px] p-0 rounded-xl border border-amber-500/20 dark:border-amber-500/15 !bg-background dark:!bg-neutral-900 shadow-2xl shadow-amber-500/5 overflow-hidden"
                     >
-                      <Monitor className="size-4 flex-shrink-0" weight="duotone" />
-                      <span className="hidden sm:inline text-xs ml-1.5">{machineName ? `${machineName}'s screen` : "Desktop"}</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="top" className="max-w-[200px] text-center">
-                    Watch your agent work on a separate screen. Just don't touch anything or it gets stage fright!
-                  </TooltipContent>
-                </Tooltip>
+                      {/* Animated graph header */}
+                      <div className="relative px-5 pt-5 pb-3 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.06] to-transparent dark:from-amber-500/[0.04]" />
+
+                        {/* Mini swarm visualization — animated node graph */}
+                        <div className="relative mb-3">
+                          <svg viewBox="0 0 300 100" className="w-full h-[80px]" fill="none">
+                            {[0, 25, 50, 75, 100].map((y) => (
+                              <line key={`grid-${y}`} x1="0" y1={y} x2="300" y2={y} stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" />
+                            ))}
+
+                            <circle cx="30" cy="50" r="8" className="fill-amber-500/20 stroke-amber-500" strokeWidth="1.5">
+                              <animate attributeName="r" values="7;8.5;7" dur="3s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="30" cy="50" r="3" className="fill-amber-500" />
+
+                            {[
+                              { x: 120, y: 15 },
+                              { x: 120, y: 50 },
+                              { x: 120, y: 85 },
+                            ].map((target, i) => (
+                              <line
+                                key={`conn-${i}`}
+                                x1="38"
+                                y1="50"
+                                x2={target.x - 12}
+                                y2={target.y}
+                                className="stroke-amber-500/40"
+                                strokeWidth="1"
+                                strokeDasharray="4 3"
+                              >
+                                <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.2 + i * 0.3}s`} repeatCount="indefinite" />
+                              </line>
+                            ))}
+
+                            {[
+                              { x: 120, y: 15, delay: "0s" },
+                              { x: 120, y: 50, delay: "0.15s" },
+                              { x: 120, y: 85, delay: "0.3s" },
+                            ].map((node, i) => (
+                              <g key={`machine-${i}`}>
+                                <rect x={node.x - 10} y={node.y - 8} width="20" height="16" rx="3" className="fill-amber-500/10 stroke-amber-500/60" strokeWidth="1">
+                                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" begin={node.delay} repeatCount="indefinite" />
+                                </rect>
+                                <rect x={node.x - 6} y={node.y - 3} width="0" height="2" rx="1" className="fill-amber-400">
+                                  <animate attributeName="width" values="0;12;12;0" dur={`${2 + i * 0.5}s`} begin={node.delay} repeatCount="indefinite" />
+                                </rect>
+                                <rect x={node.x - 6} y={node.y + 1} width="0" height="2" rx="1" className="fill-amber-400/60">
+                                  <animate attributeName="width" values="0;8;8;0" dur={`${2.3 + i * 0.4}s`} begin={node.delay} repeatCount="indefinite" />
+                                </rect>
+                              </g>
+                            ))}
+
+                            {[
+                              { x1: 130, y1: 15, x2: 200, y2: 15 },
+                              { x1: 130, y1: 50, x2: 200, y2: 50 },
+                              { x1: 130, y1: 85, x2: 200, y2: 85 },
+                            ].map((line, i) => (
+                              <line
+                                key={`out-${i}`}
+                                x1={line.x1}
+                                y1={line.y1}
+                                x2={line.x2}
+                                y2={line.y2}
+                                className="stroke-amber-500/30"
+                                strokeWidth="1"
+                                strokeDasharray="4 3"
+                              >
+                                <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.5 + i * 0.2}s`} repeatCount="indefinite" />
+                              </line>
+                            ))}
+
+                            {[
+                              { x: 200, y: 15, width: 80, speed: "3s" },
+                              { x: 200, y: 50, width: 65, speed: "3.5s" },
+                              { x: 200, y: 85, width: 90, speed: "2.8s" },
+                            ].map((bar, i) => (
+                              <g key={`result-${i}`}>
+                                <rect x={bar.x} y={bar.y - 5} width="90" height="10" rx="3" className="fill-muted/50 stroke-border/50" strokeWidth="0.5" />
+                                <rect x={bar.x + 2} y={bar.y - 3} width="0" height="6" rx="2" className="fill-amber-500/50">
+                                  <animate attributeName="width" values={`0;${bar.width};${bar.width}`} dur={bar.speed} repeatCount="indefinite" />
+                                </rect>
+                                <circle cx={bar.x + 82} cy={bar.y} r="0" className="fill-green-500/70">
+                                  <animate attributeName="r" values="0;0;0;3.5;3.5" dur={bar.speed} repeatCount="indefinite" />
+                                </circle>
+                              </g>
+                            ))}
+
+                            <text x="30" y="72" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Prompt</text>
+                            <text x="120" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Machines</text>
+                            <text x="245" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Parallel tasks</text>
+                          </svg>
+                        </div>
+
+                        <div className="relative flex items-center gap-2 mb-1">
+                          <div className="flex items-center justify-center size-6 rounded-md bg-amber-500/15">
+                            <GitFork className="size-3.5 text-amber-500" weight="duotone" />
+                          </div>
+                          <h4 className="text-sm font-semibold tracking-tight">{t("swarm.title")}</h4>
+                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">{t("swarm.pro")}</span>
+                        </div>
+                      </div>
+
+                      {/* Feature list */}
+                      <div className="px-5 pb-2">
+                        <p className="text-xs text-muted-foreground leading-relaxed mb-3">
+                          {t("swarm.description")}
+                        </p>
+                        <div className="space-y-2">
+                          {[
+                            { icon: Lightning, text: t("swarm.feature1") },
+                            { icon: GitFork, text: t("swarm.feature2") },
+                            { icon: Monitor, text: t("swarm.feature3") },
+                          ].map((feature, i) => (
+                            <div key={i} className="flex items-center gap-2.5">
+                              <div className="flex items-center justify-center size-5 rounded bg-amber-500/10 flex-shrink-0">
+                                <feature.icon className="size-3 text-amber-500" weight="duotone" />
+                              </div>
+                              <span className="text-[11px] text-muted-foreground">{feature.text}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Footer — differs by tier */}
+                      {isSwarmLocked ? (
+                        <div className="px-4 pb-4 pt-3 space-y-2">
+                          <button
+                            onClick={() => useAccountDialog.getState().open("billing")}
+                            className="flex items-center justify-center gap-2 w-full h-9 rounded-lg text-xs font-semibold text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-200 active:scale-[0.98]"
+                          >
+                            Upgrade to unlock Swarm
+                            <ArrowRight className="size-3.5" weight="bold" />
+                          </button>
+                          <p className="text-[10px] text-muted-foreground text-center">
+                            Need custom limits?{" "}
+                            <a href="mailto:founders@coasty.ai" className="text-amber-600 dark:text-amber-400 hover:underline">founders@coasty.ai</a>
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="px-4 pb-4 pt-3">
+                          <button
+                            onClick={() => onSwarmModeChange(!swarmMode)}
+                            className={cn(
+                              "flex items-center justify-center gap-2 w-full h-9 rounded-lg text-xs font-semibold transition-all duration-200 active:scale-[0.98]",
+                              swarmMode
+                                ? "text-amber-700 dark:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20"
+                                : "text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/30"
+                            )}
+                          >
+                            <GitFork className="size-3.5" weight="duotone" />
+                            {swarmMode ? t("swarm.disableLabel") : t("swarm.enableLabel")}
+                          </button>
+                        </div>
+                      )}
+                    </HoverCardContent>
+                  </HoverCard>
+                  {/* Machine count controls — visible when swarm is active */}
+                  {!isSwarmLocked && swarmMode && onSwarmCountChange && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex items-center gap-0.5 h-9 rounded-full border border-amber-500/40 bg-amber-500/10 px-1">
+                          <button
+                            type="button"
+                            onClick={() => onSwarmCountChange(Math.max(2, (swarmCount || 2) - 1))}
+                            className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
+                            aria-label={t("swarm.decreaseMachines")}
+                          >
+                            −
+                          </button>
+                          <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 min-w-[2ch] text-center tabular-nums">
+                            {swarmCount || 2}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => onSwarmCountChange(Math.min(maxSwarmMachines, (swarmCount || 2) + 1))}
+                            className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
+                            aria-label={t("swarm.increaseMachines")}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="max-w-[240px] text-center">
+                        {t("swarm.machineLimit", { max: String(maxSwarmMachines) })}
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </div>
               )}
               {/* File upload feature - only show when VM is selected and not in swarm mode */}
               {selectedVMId && selectedVMId !== "none" && !swarmMode && (
@@ -814,291 +915,18 @@ export function ChatInput({
                   vmName={machineName || undefined}
                 />
               )}
-              {/* Swarm mode toggle */}
-              {onSwarmModeChange && (
-                <div className="flex items-center gap-1">
-                  {isSwarmLocked ? (
-                    /* ── Locked teaser for free users ── */
-                    <HoverCard openDelay={200} closeDelay={150}>
-                      <HoverCardTrigger asChild>
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          type="button"
-                          className="border-border h-9 rounded-full border px-2.5 sm:px-3 bg-transparent dark:bg-secondary opacity-70 hover:opacity-100 transition-all duration-200 cursor-default group"
-                          aria-label="Swarm mode — upgrade to unlock"
-                        >
-                          <div className="relative">
-                            <GitFork className="size-4 flex-shrink-0 text-muted-foreground" weight="regular" />
-                            <Lock className="size-2.5 absolute -bottom-0.5 -right-1 text-amber-500" weight="fill" />
-                          </div>
-                          <span className="hidden sm:inline text-xs ml-1.5 text-muted-foreground">Swarm</span>
-                        </Button>
-                      </HoverCardTrigger>
-                      <HoverCardContent
-                        side="top"
-                        align="center"
-                        sideOffset={8}
-                        className="w-[340px] p-0 rounded-xl border border-amber-500/20 dark:border-amber-500/15 !bg-background dark:!bg-neutral-900 shadow-2xl shadow-amber-500/5 overflow-hidden"
-                      >
-                        {/* Animated graph header */}
-                        <div className="relative px-5 pt-5 pb-3 overflow-hidden">
-                          {/* Subtle gradient bg */}
-                          <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.06] to-transparent dark:from-amber-500/[0.04]" />
-
-                          {/* Mini swarm visualization — animated node graph */}
-                          <div className="relative mb-3">
-                            <svg viewBox="0 0 300 100" className="w-full h-[80px]" fill="none">
-                              {/* Grid lines — subtle background */}
-                              {[0, 25, 50, 75, 100].map((y) => (
-                                <line key={`grid-${y}`} x1="0" y1={y} x2="300" y2={y} stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" />
-                              ))}
-
-                              {/* Central prompt node */}
-                              <circle cx="30" cy="50" r="8" className="fill-amber-500/20 stroke-amber-500" strokeWidth="1.5">
-                                <animate attributeName="r" values="7;8.5;7" dur="3s" repeatCount="indefinite" />
-                              </circle>
-                              <circle cx="30" cy="50" r="3" className="fill-amber-500" />
-
-                              {/* Connection lines with animated dashes */}
-                              {[
-                                { x: 120, y: 15 },
-                                { x: 120, y: 50 },
-                                { x: 120, y: 85 },
-                              ].map((target, i) => (
-                                <line
-                                  key={`conn-${i}`}
-                                  x1="38"
-                                  y1="50"
-                                  x2={target.x - 12}
-                                  y2={target.y}
-                                  className="stroke-amber-500/40"
-                                  strokeWidth="1"
-                                  strokeDasharray="4 3"
-                                >
-                                  <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.2 + i * 0.3}s`} repeatCount="indefinite" />
-                                </line>
-                              ))}
-
-                              {/* Machine nodes */}
-                              {[
-                                { x: 120, y: 15, delay: "0s" },
-                                { x: 120, y: 50, delay: "0.15s" },
-                                { x: 120, y: 85, delay: "0.3s" },
-                              ].map((node, i) => (
-                                <g key={`machine-${i}`}>
-                                  <rect x={node.x - 10} y={node.y - 8} width="20" height="16" rx="3" className="fill-amber-500/10 stroke-amber-500/60" strokeWidth="1">
-                                    <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" begin={node.delay} repeatCount="indefinite" />
-                                  </rect>
-                                  {/* Activity bar inside machine */}
-                                  <rect x={node.x - 6} y={node.y - 3} width="0" height="2" rx="1" className="fill-amber-400">
-                                    <animate attributeName="width" values="0;12;12;0" dur={`${2 + i * 0.5}s`} begin={node.delay} repeatCount="indefinite" />
-                                  </rect>
-                                  <rect x={node.x - 6} y={node.y + 1} width="0" height="2" rx="1" className="fill-amber-400/60">
-                                    <animate attributeName="width" values="0;8;8;0" dur={`${2.3 + i * 0.4}s`} begin={node.delay} repeatCount="indefinite" />
-                                  </rect>
-                                </g>
-                              ))}
-
-                              {/* Output lines from machines to results */}
-                              {[
-                                { x1: 130, y1: 15, x2: 200, y2: 15 },
-                                { x1: 130, y1: 50, x2: 200, y2: 50 },
-                                { x1: 130, y1: 85, x2: 200, y2: 85 },
-                              ].map((line, i) => (
-                                <line
-                                  key={`out-${i}`}
-                                  x1={line.x1}
-                                  y1={line.y1}
-                                  x2={line.x2}
-                                  y2={line.y2}
-                                  className="stroke-amber-500/30"
-                                  strokeWidth="1"
-                                  strokeDasharray="4 3"
-                                >
-                                  <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.5 + i * 0.2}s`} repeatCount="indefinite" />
-                                </line>
-                              ))}
-
-                              {/* Result/progress bars */}
-                              {[
-                                { x: 200, y: 15, width: 80, speed: "3s" },
-                                { x: 200, y: 50, width: 65, speed: "3.5s" },
-                                { x: 200, y: 85, width: 90, speed: "2.8s" },
-                              ].map((bar, i) => (
-                                <g key={`result-${i}`}>
-                                  <rect x={bar.x} y={bar.y - 5} width="90" height="10" rx="3" className="fill-muted/50 stroke-border/50" strokeWidth="0.5" />
-                                  <rect x={bar.x + 2} y={bar.y - 3} width="0" height="6" rx="2" className="fill-amber-500/50">
-                                    <animate attributeName="width" values={`0;${bar.width};${bar.width}`} dur={bar.speed} repeatCount="indefinite" />
-                                  </rect>
-                                  {/* Completion checkmark area */}
-                                  <circle cx={bar.x + 82} cy={bar.y} r="0" className="fill-green-500/70">
-                                    <animate attributeName="r" values="0;0;0;3.5;3.5" dur={bar.speed} repeatCount="indefinite" />
-                                  </circle>
-                                </g>
-                              ))}
-
-                              {/* Labels */}
-                              <text x="30" y="72" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Prompt</text>
-                              <text x="120" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Machines</text>
-                              <text x="245" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Parallel tasks</text>
-                            </svg>
-                          </div>
-
-                          <div className="relative flex items-center gap-2 mb-1">
-                            <div className="flex items-center justify-center size-6 rounded-md bg-amber-500/15">
-                              <GitFork className="size-3.5 text-amber-500" weight="duotone" />
-                            </div>
-                            <h4 className="text-sm font-semibold tracking-tight">Swarm Mode</h4>
-                            <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">PRO</span>
-                          </div>
-                        </div>
-
-                        {/* Feature list */}
-                        <div className="px-5 pb-2">
-                          <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                            Run one prompt across <span className="text-foreground font-medium">3x your machine limit</span> in parallel — each tackling the task independently.
-                          </p>
-                          <div className="space-y-2">
-                            {[
-                              { icon: Lightning, text: "Parallel execution across temporary machines" },
-                              { icon: GitFork, text: "3x your plan's machine limit per swarm" },
-                              { icon: Monitor, text: "Each machine runs autonomously" },
-                            ].map((feature, i) => (
-                              <div key={i} className="flex items-center gap-2.5">
-                                <div className="flex items-center justify-center size-5 rounded bg-amber-500/10 flex-shrink-0">
-                                  <feature.icon className="size-3 text-amber-500" weight="duotone" />
-                                </div>
-                                <span className="text-[11px] text-muted-foreground">{feature.text}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Upgrade CTA */}
-                        <div className="px-4 pb-4 pt-3 space-y-2">
-                          <a
-                            href="/account?section=billing"
-                            className="flex items-center justify-center gap-2 w-full h-9 rounded-lg text-xs font-semibold text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-200 active:scale-[0.98]"
-                          >
-                            Upgrade to unlock Swarm
-                            <ArrowRight className="size-3.5" weight="bold" />
-                          </a>
-                          <p className="text-[10px] text-muted-foreground text-center">
-                            Need custom limits?{" "}
-                            <a href="mailto:founders@coasty.ai" className="text-amber-600 dark:text-amber-400 hover:underline">founders@coasty.ai</a>
-                          </p>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  ) : (
-                    /* ── Unlocked swarm toggle ── */
-                    <>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <Button
-                            size="sm"
-                            variant={swarmMode ? "default" : "secondary"}
-                            type="button"
-                            onClick={() => onSwarmModeChange(!swarmMode)}
-                            className={cn(
-                              "border-border h-9 rounded-full border px-2.5 sm:px-3 transition-all duration-200",
-                              swarmMode
-                                ? "bg-amber-500 hover:bg-amber-600 text-white border-amber-500"
-                                : "bg-transparent dark:bg-secondary"
-                            )}
-                            aria-label={swarmMode ? "Disable swarm mode" : "Enable swarm mode"}
-                          >
-                            <GitFork className="size-4 flex-shrink-0" weight={swarmMode ? "duotone" : "regular"} />
-                            <span className="hidden sm:inline text-xs ml-1.5">Swarm</span>
-                          </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top" className="max-w-[220px] text-center">
-                          {swarmMode
-                            ? "Swarm mode ON — your prompt will run on multiple machines in parallel"
-                            : "Enable swarm mode to run your prompt across multiple machines simultaneously"}
-                        </TooltipContent>
-                      </Tooltip>
-                      {swarmMode && onSwarmCountChange && (
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="flex items-center gap-0.5 h-9 rounded-full border border-amber-500/40 bg-amber-500/10 px-1">
-                              <button
-                                type="button"
-                                onClick={() => onSwarmCountChange(Math.max(2, (swarmCount || 2) - 1))}
-                                className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
-                                aria-label="Decrease machine count"
-                              >
-                                −
-                              </button>
-                              <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 min-w-[2ch] text-center tabular-nums">
-                                {swarmCount || 2}
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => onSwarmCountChange(Math.min(maxSwarmMachines, (swarmCount || 2) + 1))}
-                                className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
-                                aria-label="Increase machine count"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-[240px] text-center">
-                            Up to {maxSwarmMachines} swarm machines on your plan. Need more? Contact founders@coasty.ai
-                          </TooltipContent>
-                        </Tooltip>
-                      )}
-                      {swarmMode && onSwarmPersistentChange && (
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button
-                              size="sm"
-                              variant={swarmPersistent ? "default" : "secondary"}
-                              type="button"
-                              onClick={() => {
-                                if (!isPersistentEligible) return
-                                onSwarmPersistentChange(!swarmPersistent)
-                              }}
-                              className={cn(
-                                "border-border h-9 rounded-full border px-2.5 sm:px-3 transition-all duration-200",
-                                swarmPersistent
-                                  ? "bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-500"
-                                  : isPersistentEligible
-                                    ? "bg-transparent dark:bg-secondary"
-                                    : "bg-transparent dark:bg-secondary opacity-50 cursor-not-allowed"
-                              )}
-                              aria-label={swarmPersistent ? "Disable persistent mode" : "Enable persistent mode — machines stay after completion"}
-                            >
-                              <HardDrive className="size-3.5 flex-shrink-0" />
-                              <span className="hidden sm:inline text-xs ml-1.5">Keep</span>
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-[260px] text-center">
-                            {!isPersistentEligible
-                              ? "Persistent swarms require Starter ($19+) plan — machines are kept after completion"
-                              : swarmPersistent
-                                ? "Persistent ON — machines will be kept as your VMs after completion"
-                                : "Enable to keep swarm machines as persistent VMs after the task completes"}
-                          </TooltipContent>
-                        </Tooltip>
-                      )}
-                    </>
-                  )}
-                </div>
-              )}
             </div>
             <PromptInputAction
               tooltip={
-                status === "streaming" ? "Stop" :
-                swarmMode ? "Send to swarm" :
-                isMachineBusy ? "Another task is running — click to stop it and run yours" :
-                (!selectedVMId || selectedVMId === "none") ? "Select a computer to send messages" :
-                (machineStatus === "creating") ? "Please wait for VM to be created" :
-                (machineStatus === "starting" || machineStatus === "stopped") ? "Please wait for VM to start" :
-                (machineStatus === "running" && !agentReady) ? "Please wait for agent to initialize" :
-                (machineStatus === "stopping") ? "VM is stopping" :
-                "Send"
+                status === "streaming" ? t("buttons.stop") :
+                swarmMode ? t("buttons.sendToSwarm") :
+                isMachineBusy ? t("buttons.taskRunning") :
+                (!selectedVMId || selectedVMId === "none") ? t("buttons.selectComputer") :
+                (machineStatus === "creating") ? t("buttons.waitCreating") :
+                (machineStatus === "starting" || machineStatus === "stopped") ? t("buttons.waitStarting") :
+                (machineStatus === "running" && !agentReady) ? t("buttons.waitAgent") :
+                (machineStatus === "stopping") ? t("buttons.vmStopping") :
+                t("buttons.send")
               }
             >
               {isMachineBusy && value && !isOnlyWhitespace(value) && status !== "streaming" ? (
@@ -1108,7 +936,7 @@ export function ChatInput({
                   disabled={isStoppingMachine}
                   type="button"
                   onClick={forceStopAndSend}
-                  aria-label="Stop running task and start this one"
+                  aria-label={t("buttons.stopLabel")}
                 >
                   {isStoppingMachine ? (
                     <CircleNotch className="size-4 shrink-0 animate-spin" />
@@ -1116,7 +944,7 @@ export function ChatInput({
                     <ArrowsClockwise className="size-4 shrink-0" />
                   )}
                   <span className="text-xs font-medium hidden sm:inline whitespace-nowrap">
-                    {isStoppingMachine ? "Switching..." : "Override & Run"}
+                    {isStoppingMachine ? t("buttons.switching") : t("buttons.overrideRun")}
                   </span>
                 </Button>
               ) : (
@@ -1126,7 +954,7 @@ export function ChatInput({
                   disabled={status === "streaming" ? false : (!!(!value || isSubmitting || isOnlyWhitespace(value) || (!swarmMode && (!selectedVMId || selectedVMId === "none" || machineStatus !== "running" || !agentReady))))}
                   type="button"
                   onClick={handleSend}
-                  aria-label={status === "streaming" ? "Stop" : "Send message"}
+                  aria-label={status === "streaming" ? t("buttons.stop") : t("buttons.sendLabel")}
                 >
                   {status === "streaming" ? (
                     <StopIcon className="size-4" />

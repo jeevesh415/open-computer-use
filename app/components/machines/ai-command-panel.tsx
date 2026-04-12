@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import type { MachineSession, AIAction } from "@/types/machines.types";
 
 interface AICommandPanelProps {
@@ -49,6 +50,7 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
   const [executing, setExecuting] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
   const [actions, setActions] = useState<AIAction[]>([]);
+  const t = useTranslations("aiCommandPanel");
 
   const handleExecute = async () => {
     if (!command.trim()) return;
@@ -103,10 +105,10 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
       <div className="p-4 border-b">
         <h2 className="text-lg font-semibold flex items-center gap-2">
           <Sparkles className="h-5 w-5" />
-          AI Control Panel
+          {t("title")}
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
-          Describe what you want the AI to do
+          {t("subtitle")}
         </p>
       </div>
 
@@ -114,7 +116,7 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
       <div className="p-4 border-b">
         <h3 className="text-sm font-medium mb-2 flex items-center gap-2">
           <History className="h-4 w-4" />
-          Quick Commands
+          {t("quickCommands")}
         </h3>
         <div className="space-y-2">
           {commandExamples.map((example, index) => (
@@ -142,7 +144,7 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
         <div className="space-y-2">
           {actions.length === 0 ? (
             <p className="text-sm text-muted-foreground text-center py-8">
-              No actions performed yet
+              {t("noActions")}
             </p>
           ) : (
             actions.map((action) => (
@@ -160,7 +162,7 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
                     variant={action.success ? "default" : "destructive"}
                     className="text-xs"
                   >
-                    {action.success ? "Success" : "Failed"}
+                    {action.success ? t("success") : t("failed")}
                   </Badge>
                 </div>
                 {action.errorMessage && (
@@ -184,7 +186,7 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
               handleExecute();
             }
           }}
-          placeholder="Tell the AI what to do... (Ctrl+Enter to send)"
+          placeholder={t("placeholder")}
           className="min-h-[80px]"
           disabled={executing}
         />
@@ -196,12 +198,12 @@ export function AICommandPanel({ session, onCommand }: AICommandPanelProps) {
           {executing ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Executing...
+              {t("executing")}
             </>
           ) : (
             <>
               <Send className="mr-2 h-4 w-4" />
-              Execute Command
+              {t("executeCommand")}
             </>
           )}
         </Button>

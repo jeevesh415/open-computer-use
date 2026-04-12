@@ -1,5 +1,9 @@
 appId: com.coasty.desktop
 productName: Coasty Desktop
+protocols:
+  - name: Coasty Desktop
+    schemes:
+      - coasty
 directories:
   buildResources: build
   output: dist

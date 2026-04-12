@@ -161,6 +161,11 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   signOut: async () => {
     await window.coasty.signOut()
+    // Clear permission-related localStorage so the next user gets a clean state
+    try {
+      localStorage.removeItem('coasty_permissions_dismissed')
+      localStorage.removeItem('coasty_permissions_granted')
+    } catch { /* localStorage may be unavailable */ }
     set({ isAuthenticated: false, user: null, machineId: null })
   },
 }))

@@ -5,7 +5,7 @@ import type {
   StoreAssistantMessageParams,
   SupabaseClientType,
 } from "@/app/types/api.types"
-import { FREE_MODELS_IDS, NON_AUTH_ALLOWED_MODELS } from "@/lib/config"
+import { FREE_MODELS_IDS } from "@/lib/config"
 import { getProviderForModel } from "@/lib/openproviders/provider-map"
 import { sanitizeUserInput } from "@/lib/sanitize"
 import { validateUserIdentity } from "@/lib/server/api"
@@ -17,33 +17,21 @@ export async function validateAndTrackUsage({
   model,
   isAuthenticated,
 }: ChatApiParams): Promise<SupabaseClientType | null> {
-  const supabase = await validateUserIdentity(userId, isAuthenticated)
+  const supabase = await validateUserIdentity(userId)
   if (!supabase) return null
 
-  // Check if user is authenticated
-  if (!isAuthenticated) {
-    // For unauthenticated users, only allow specific models
-    if (!NON_AUTH_ALLOWED_MODELS.includes(model)) {
-      throw new Error(
-        "This model requires authentication. Please sign in to access more models."
-      )
-    }
-  } else {
-    // For authenticated users, check API key requirements
-    const provider = getProviderForModel(model)
+  // Check API key requirements for non-free models
+  const provider = getProviderForModel(model)
+  const userApiKey = await getUserKey(userId, provider)
 
-    const userApiKey = await getUserKey(userId, provider)
-
-    // If no API key and model is not in free list, deny access
-    if (!userApiKey && !FREE_MODELS_IDS.includes(model)) {
-      throw new Error(
-        `This model requires an API key for ${provider}. Please add your API key in settings or use a free model.`
-      )
-    }
+  if (!userApiKey && !FREE_MODELS_IDS.includes(model)) {
+    throw new Error(
+      `This model requires an API key for ${provider}. Please add your API key in settings or use a free model.`
+    )
   }
 
   // Check usage limits for the model
-  await checkUsageByModel(supabase, userId, model, isAuthenticated)
+  await checkUsageByModel(supabase, userId, model)
 
   return supabase as any
 }

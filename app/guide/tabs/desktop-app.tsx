@@ -2,26 +2,20 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 import {
   ArrowRight,
-  ArrowsOutSimple,
-  AppWindow,
-  Camera,
-  CaretDown,
-  Check,
-  Desktop,
-  DownloadSimple,
-  FolderOpen,
   Globe,
-  Lightning,
-  Minus,
-  ShieldCheck,
+  FolderOpen,
   Terminal,
+  Desktop,
+  Camera,
+  AppWindow,
+  Cloud,
+  Monitor,
+  ShieldCheck,
+  Browser,
   UserCircle,
-  WifiHigh,
-  X,
-  VideoCamera,
 } from "@phosphor-icons/react"
 
 /* ─── animation variants ─── */
@@ -40,551 +34,313 @@ const stagger = {
   show: { transition: { staggerChildren: 0.06 } },
 }
 
-/* ─── mock UI components ─── */
+/* ─── CSS animations ─── */
 
-function MockCompactPill() {
-  return (
-    <div className="flex items-center justify-center py-4">
-      <div className="inline-flex items-center gap-3 rounded-full border border-dashed border-border/60 bg-card/50 px-5 py-2.5 shadow-sm">
-        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground/[0.08]">
-          <span className="text-[11px] font-bold text-foreground/70">C</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          <span className="text-[12px] font-medium text-foreground/70">Ready</span>
-        </div>
-        <CaretDown size={12} weight="bold" className="text-muted-foreground/40" />
-      </div>
-    </div>
-  )
+const overlayAnimations = `
+@keyframes gv-pill-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.15); }
+  50% { box-shadow: 0 0 12px 4px rgba(34,197,94,0.1); }
 }
-
-function MockExpandedPanel() {
-  return (
-    <div className="flex items-center justify-center py-4">
-      <div className="w-full max-w-[300px] rounded-2xl border border-dashed border-border/60 bg-card/40 overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-border/30 px-4 py-2.5">
-          <div className="flex items-center gap-2">
-            <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/[0.08]">
-              <span className="text-[9px] font-bold text-foreground/70">C</span>
-            </div>
-            <span className="text-[12px] font-semibold text-foreground/80">Coasty</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <div className="flex h-5 w-5 items-center justify-center rounded-md hover:bg-foreground/[0.04]">
-              <Minus size={10} weight="bold" className="text-muted-foreground/40" />
-            </div>
-            <div className="flex h-5 w-5 items-center justify-center rounded-md hover:bg-foreground/[0.04]">
-              <X size={10} weight="bold" className="text-muted-foreground/40" />
-            </div>
-          </div>
-        </div>
-
-        {/* Messages */}
-        <div className="space-y-2.5 p-3">
-          <div className="flex justify-end">
-            <div className="max-w-[85%] rounded-2xl rounded-br-md bg-foreground/[0.06] px-3 py-2">
-              <p className="text-[11px] text-foreground/70">Open my resume and update the work experience section</p>
-            </div>
-          </div>
-          <div className="max-w-[85%] rounded-2xl rounded-bl-md border border-dashed border-border/30 bg-card/30 px-3 py-2">
-            <p className="text-[11px] text-foreground/60">I&apos;ll open your resume file and update the work experience. Let me find it first...</p>
-          </div>
-          <div className="max-w-[85%] rounded-xl border border-dashed border-border/30 bg-card/20 px-2.5 py-1.5 flex items-center gap-1.5">
-            <FolderOpen size={10} weight="duotone" className="text-muted-foreground/40" />
-            <span className="text-[10px] text-muted-foreground/50">Reading ~/Documents/resume.docx</span>
-          </div>
-        </div>
-
-        {/* Input */}
-        <div className="border-t border-border/30 p-2.5">
-          <div className="flex items-center gap-2">
-            <div className="flex-1 rounded-lg border border-border/30 bg-background/50 px-2.5 py-1.5 text-[11px] text-muted-foreground/40">
-              Describe your task...
-            </div>
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground/90">
-              <ArrowRight size={10} weight="bold" className="text-background" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+@keyframes gv-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
 }
+@keyframes gv-expand-line {
+  0% { width: 0; opacity: 0; }
+  40% { width: 60px; opacity: 0.5; }
+  100% { width: 100%; opacity: 0.15; }
+}
+@keyframes gv-msg-appear {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes gv-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes gv-typing-dot {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+.gv-pill-glow { animation: gv-pill-glow 3s ease-in-out infinite; }
+.gv-dot-pulse { animation: gv-dot-pulse 2s ease-in-out infinite; }
+.gv-expand-line { animation: gv-expand-line 2s ease-out forwards; }
+.gv-msg-1 { animation: gv-msg-appear 0.4s ease-out 0.3s both; }
+.gv-msg-2 { animation: gv-msg-appear 0.4s ease-out 0.8s both; }
+.gv-msg-3 { animation: gv-msg-appear 0.4s ease-out 1.3s both; }
+.gv-cursor-blink { animation: gv-cursor-blink 1s step-end infinite; }
+.gv-typing-1 { animation: gv-typing-dot 1.4s ease-in-out infinite; }
+.gv-typing-2 { animation: gv-typing-dot 1.4s ease-in-out 0.2s infinite; }
+.gv-typing-3 { animation: gv-typing-dot 1.4s ease-in-out 0.4s infinite; }
+`
 
-/* ─── capability cards data ─── */
+/* ─── capability data ─── */
 
-const capabilities = [
-  {
-    icon: Globe,
-    title: "Browser",
-    description: "Control Chrome, Edge, or Brave on your machine — navigate, click, fill forms",
-  },
-  {
-    icon: FolderOpen,
-    title: "Files",
-    description: "Read, write, edit files anywhere on your computer",
-  },
-  {
-    icon: Terminal,
-    title: "Terminal",
-    description: "Run shell commands — PowerShell on Windows, bash on macOS/Linux",
-  },
-  {
-    icon: Desktop,
-    title: "Desktop",
-    description: "Click, type, scroll anywhere on your screen",
-  },
-  {
-    icon: Camera,
-    title: "Screenshots",
-    description: "Capture your screen to understand what's visible",
-  },
-  {
-    icon: AppWindow,
-    title: "Apps",
-    description: "Open and interact with any installed application",
-  },
-]
-
-/* ─── comparison data ─── */
-
-const comparisonRows = [
-  { feature: "Isolation", cloud: "Fully sandboxed", desktop: "Your machine", cloudCheck: true, desktopCheck: false },
-  { feature: "Local files", cloud: "Upload needed", desktop: "Direct access", cloudCheck: false, desktopCheck: true },
-  { feature: "Installed apps", cloud: "Pre-installed only", desktop: "All your apps", cloudCheck: false, desktopCheck: true },
-  { feature: "Browser sessions", cloud: "Fresh browser", desktop: "Your logged-in sessions", cloudCheck: false, desktopCheck: true },
-  { feature: "Security", cloud: "Maximum", desktop: "Standard", cloudCheck: true, desktopCheck: false },
-  { feature: "Best for", cloud: "Sensitive tasks, testing", desktop: "Local file work, app automation", cloudCheck: false, desktopCheck: false },
-]
-
-/* ─── connection steps ─── */
-
-const connectionSteps = [
-  {
-    icon: UserCircle,
-    title: "Sign in",
-    description: "Google OAuth, same account as web app",
-  },
-  {
-    icon: WifiHigh,
-    title: "Connect",
-    description: "Secure WebSocket to Coasty backend",
-  },
-  {
-    icon: Lightning,
-    title: "Execute",
-    description: "Commands run directly on your machine",
-  },
-]
+const capabilityKeys = [
+  { icon: Globe, key: "browser" },
+  { icon: FolderOpen, key: "files" },
+  { icon: Terminal, key: "terminal" },
+  { icon: Desktop, key: "desktop" },
+  { icon: Camera, key: "screenshots" },
+  { icon: AppWindow, key: "apps" },
+] as const
 
 /* ─── main component ─── */
 
 export function DesktopAppTab({ inApp }: { inApp: boolean }) {
+  const t = useTranslations("guide.desktopAppTab")
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <div className="space-y-16 sm:space-y-20">
+      <style dangerouslySetInnerHTML={{ __html: overlayAnimations }} />
 
-      {/* ── Section 1: Coasty on Your Desktop ── */}
+      {/* ── Section 1: Hero — The Overlay ── */}
       <motion.section
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-60px" }}
         variants={stagger}
       >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Desktop App
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            Coasty on Your Desktop
-          </h2>
-          <p className="text-sm text-muted-foreground/60 mt-1.5 max-w-lg leading-relaxed">
-            The desktop app lets Coasty control YOUR local computer — your browser, files, and apps — instead of a remote VM.
-          </p>
-        </motion.div>
+        <motion.h2
+          variants={fade}
+          custom={0}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2 text-center"
+        >
+          {t("overlay")}
+        </motion.h2>
+        <motion.p
+          variants={fade}
+          custom={1}
+          className="text-sm text-foreground/50 text-center mb-10"
+        >
+          {t("overlayDesc")}
+        </motion.p>
 
         <motion.div
           variants={fade}
-          custom={1}
-          className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-4 sm:p-5"
+          custom={2}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start"
         >
-          <div className="flex items-start gap-3">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-500/[0.08] dark:bg-amber-400/[0.1] mt-0.5">
-              <ArrowsOutSimple size={16} weight="duotone" className="text-amber-600 dark:text-amber-400" />
+          {/* Compact Pill */}
+          <div className="flex flex-col items-center">
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/30 mb-5">
+              {t("compact")}
+            </p>
+            <div className="relative">
+              {/* Simulated desktop background */}
+              <div className="w-full max-w-[280px] mx-auto rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-8 pb-16 relative overflow-hidden">
+                {/* Fake title bar dots */}
+                <div className="flex gap-1.5 mb-6">
+                  <div className="w-2 h-2 rounded-full bg-foreground/[0.08]" />
+                  <div className="w-2 h-2 rounded-full bg-foreground/[0.08]" />
+                  <div className="w-2 h-2 rounded-full bg-foreground/[0.08]" />
+                </div>
+                {/* Content lines */}
+                <div className="space-y-2.5 mb-6">
+                  <div className="h-2 w-3/4 rounded bg-foreground/[0.04]" />
+                  <div className="h-2 w-1/2 rounded bg-foreground/[0.04]" />
+                  <div className="h-2 w-2/3 rounded bg-foreground/[0.04]" />
+                </div>
+                {/* Floating pill overlay */}
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10">
+                  <div className="gv-pill-glow inline-flex items-center gap-2.5 rounded-full border border-foreground/[0.08] bg-background/90 backdrop-blur-md px-4 py-2 shadow-lg">
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/[0.06]">
+                      <span className="text-[9px] font-bold text-foreground/60">C</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="gv-dot-pulse h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      <span className="text-[11px] font-medium text-foreground/60">{t("ready")}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-[13px] font-semibold text-foreground/80 mb-1">Key difference</p>
-              <p className="text-[12px] sm:text-[13px] text-muted-foreground/70 leading-relaxed">
-                <span className="font-medium text-foreground/70">Cloud VM</span> = isolated remote computer.{" "}
-                <span className="font-medium text-foreground/70">Desktop App</span> = your actual machine.
-                Use the desktop app when you need Coasty to work with your local files, installed apps, or logged-in browser sessions.
-              </p>
+          </div>
+
+          {/* Expanded Panel */}
+          <div className="flex flex-col items-center">
+            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-foreground/30 mb-5">
+              {t("expanded")}
+            </p>
+            <div className="w-full max-w-[280px] mx-auto">
+              <div className="rounded-2xl border border-foreground/[0.08] bg-background/90 backdrop-blur-md shadow-lg overflow-hidden">
+                {/* Header */}
+                <div className="flex items-center justify-between border-b border-foreground/[0.06] px-4 py-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/[0.06]">
+                      <span className="text-[9px] font-bold text-foreground/60">C</span>
+                    </div>
+                    <span className="text-[11px] font-semibold text-foreground/70">Coasty</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 gv-dot-pulse" />
+                  </div>
+                </div>
+
+                {/* Messages */}
+                <div className="space-y-2 p-3 min-h-[140px]">
+                  <div className="gv-msg-1 flex justify-end">
+                    <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-foreground/[0.05] px-3 py-2">
+                      <p className="text-[10px] text-foreground/60">{t("exampleTask")}</p>
+                    </div>
+                  </div>
+                  <div className="gv-msg-2 max-w-[85%]">
+                    <div className="rounded-2xl rounded-bl-sm border border-foreground/[0.06] px-3 py-2">
+                      <p className="text-[10px] text-foreground/50">{t("exampleResponse")}</p>
+                    </div>
+                  </div>
+                  <div className="gv-msg-3 max-w-[70%]">
+                    <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] px-2.5 py-1.5 flex items-center gap-1.5">
+                      <FolderOpen size={9} weight="duotone" className="text-foreground/30" />
+                      <span className="text-[9px] text-foreground/40">~/Documents/resume.docx</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Input */}
+                <div className="border-t border-foreground/[0.06] p-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 rounded-lg border border-foreground/[0.06] bg-foreground/[0.02] px-2.5 py-1.5 flex items-center">
+                      <span className="text-[10px] text-foreground/25">{t("describePlaceholder")}</span>
+                      <span className="gv-cursor-blink ml-0.5 w-px h-3 bg-foreground/30" />
+                    </div>
+                    <div className="flex h-6 w-6 items-center justify-center rounded-md bg-foreground/90">
+                      <ArrowRight size={10} weight="bold" className="text-background" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Connection line between pill and panel */}
+              <div className="flex justify-center mt-3">
+                <div className="gv-expand-line h-px bg-foreground/20" />
+              </div>
             </div>
           </div>
         </motion.div>
       </motion.section>
 
-      {/* ── Section 2: The Floating Overlay ── */}
+      {/* ── Section 2: Capabilities ── */}
       <motion.section
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-60px" }}
         variants={stagger}
       >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Interface
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            The Floating Overlay
-          </h2>
-          <p className="text-sm text-muted-foreground/60 mt-1.5 max-w-lg leading-relaxed">
-            The app runs as a small floating pill at the top of your screen, always accessible on top of other windows.
-          </p>
-        </motion.div>
+        <motion.h2
+          variants={fade}
+          custom={0}
+          className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-8 text-center"
+        >
+          {t("whatItControls")}
+        </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Compact mode */}
-          <motion.div
-            variants={fade}
-            custom={1}
-            className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-4 sm:p-5"
-          >
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50 mb-3">
-              Compact Mode
-            </p>
-            <MockCompactPill />
-            <p className="text-[12px] text-muted-foreground/50 text-center mt-2">
-              Click to expand. Always visible on top of other windows.
-            </p>
-          </motion.div>
-
-          {/* Expanded mode */}
-          <motion.div
-            variants={fade}
-            custom={2}
-            className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-4 sm:p-5"
-          >
-            <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50 mb-3">
-              Expanded Mode
-            </p>
-            <MockExpandedPanel />
-            <p className="text-[12px] text-muted-foreground/50 text-center mt-2">
-              Full chat interface. Give tasks just like in the web app.
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* ── Section 3: What It Can Do Locally ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-      >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Capabilities
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            What It Can Do Locally
-          </h2>
-        </motion.div>
-
-        <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {capabilities.map((cap, i) => {
+        <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {capabilityKeys.map((cap, i) => {
             const Icon = cap.icon
             return (
               <motion.div
-                key={cap.title}
+                key={cap.key}
                 variants={fade}
                 custom={i + 1}
-                className={cn(
-                  "group rounded-2xl border border-border/30 bg-card/30 p-4 transition-all duration-200",
-                  "hover:bg-card/60 hover:border-border/50"
-                )}
+                className="group rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 text-center transition-colors hover:bg-foreground/[0.04]"
               >
-                <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-foreground/[0.05] dark:bg-foreground/[0.08]">
-                    <Icon size={18} weight="duotone" className="text-foreground/60" />
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-foreground/80 mb-0.5">{cap.title}</p>
-                    <p className="text-[12px] text-muted-foreground/60 leading-relaxed">{cap.description}</p>
-                  </div>
+                <div className="flex h-10 w-10 mx-auto items-center justify-center rounded-xl bg-foreground/[0.05] mb-3">
+                  <Icon size={20} weight="duotone" className="text-foreground/50" />
                 </div>
+                <p className="text-[13px] font-semibold text-foreground/70 mb-0.5">{t(`controls.${cap.key}.name`)}</p>
+                <p className="text-[11px] text-foreground/35">{t(`controls.${cap.key}.desc`)}</p>
               </motion.div>
             )
           })}
         </motion.div>
       </motion.section>
 
-      {/* ── Section 4: Installation ── */}
+      {/* ── Section 3: Cloud vs Desktop ── */}
       <motion.section
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-60px" }}
         variants={stagger}
       >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Get Started
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            Installation
-          </h2>
-        </motion.div>
+        <motion.h2
+          variants={fade}
+          custom={0}
+          className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-8 text-center"
+        >
+          {t("twoWays")}
+        </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
-          {/* Windows */}
+        <motion.div variants={stagger} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Cloud VM */}
           <motion.div
             variants={fade}
             custom={1}
-            className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-5"
+            className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-6"
           >
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground/[0.05] dark:bg-foreground/[0.08]">
-                <Desktop size={18} weight="duotone" className="text-foreground/60" />
-              </div>
-              <div>
-                <p className="text-[13px] font-semibold text-foreground/80">Windows</p>
-                <p className="text-[11px] text-muted-foreground/50">Windows 10+, 64-bit</p>
-              </div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/[0.05] mb-4">
+              <Cloud size={22} weight="duotone" className="text-foreground/50" />
             </div>
-
-            <div className="space-y-2.5 mb-4">
-              <div className="flex items-center gap-2">
-                <DownloadSimple size={12} weight="duotone" className="text-muted-foreground/40 shrink-0" />
-                <span className="text-[12px] text-muted-foreground/60">.exe installer (NSIS)</span>
+            <p className="text-[15px] font-semibold text-foreground/70 mb-4">{t("cloudVm")}</p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-2.5">
+                <ShieldCheck size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("cloudFeatures.isolated")}</p>
               </div>
-            </div>
-
-            <div className="flex items-start gap-2 rounded-xl bg-amber-500/[0.04] dark:bg-amber-400/[0.05] border border-amber-500/10 dark:border-amber-400/10 px-3 py-2.5">
-              <ShieldCheck size={13} weight="duotone" className="text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
-              <p className="text-[11px] text-muted-foreground/70 leading-relaxed">
-                Windows SmartScreen may show a warning — click &ldquo;More info&rdquo; then &ldquo;Run anyway&rdquo;
-              </p>
+              <div className="flex items-start gap-2.5">
+                <Browser size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("cloudFeatures.freshBrowser")}</p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <ShieldCheck size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("cloudFeatures.maxSecurity")}</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* macOS */}
+          {/* Desktop */}
           <motion.div
             variants={fade}
             custom={2}
-            className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm p-5"
+            className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-6"
           >
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground/[0.05] dark:bg-foreground/[0.08]">
-                <AppWindow size={18} weight="duotone" className="text-foreground/60" />
-              </div>
-              <div>
-                <p className="text-[13px] font-semibold text-foreground/80">macOS</p>
-                <p className="text-[11px] text-muted-foreground/50">macOS Catalina+</p>
-              </div>
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/[0.05] mb-4">
+              <Monitor size={22} weight="duotone" className="text-foreground/50" />
             </div>
-
-            <div className="space-y-2.5 mb-4">
-              <div className="flex items-center gap-2">
-                <DownloadSimple size={12} weight="duotone" className="text-muted-foreground/40 shrink-0" />
-                <span className="text-[12px] text-muted-foreground/60">.dmg installer</span>
+            <p className="text-[15px] font-semibold text-foreground/70 mb-4">{t("desktopMode")}</p>
+            <div className="space-y-3">
+              <div className="flex items-start gap-2.5">
+                <FolderOpen size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("desktopFeatures.yourFiles")}</p>
               </div>
-            </div>
-
-            <div className="flex items-start gap-2 rounded-xl bg-amber-500/[0.04] dark:bg-amber-400/[0.05] border border-amber-500/10 dark:border-amber-400/10 px-3 py-2.5">
-              <ShieldCheck size={13} weight="duotone" className="text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
-              <p className="text-[11px] text-muted-foreground/70 leading-relaxed">
-                Grant Screen Recording and Accessibility permissions when prompted — required for desktop automation
-              </p>
+              <div className="flex items-start gap-2.5">
+                <AppWindow size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("desktopFeatures.yourApps")}</p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <UserCircle size={14} weight="duotone" className="text-foreground/30 mt-0.5 shrink-0" />
+                <p className="text-[12px] text-foreground/45 leading-relaxed">{t("desktopFeatures.yourSessions")}</p>
+              </div>
             </div>
           </motion.div>
-        </div>
-
-        <motion.div variants={fade} custom={3}>
-          <Link
-            href="/download"
-            className="inline-flex items-center gap-2 rounded-xl bg-foreground/90 px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-foreground"
-          >
-            <DownloadSimple size={16} weight="bold" />
-            Download Coasty Desktop
-            <ArrowRight size={14} weight="bold" />
-          </Link>
-        </motion.div>
-      </motion.section>
-
-      {/* ── Section 5: Cloud vs Desktop ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-      >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Comparison
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            Cloud vs Desktop — When to Use Each
-          </h2>
-        </motion.div>
-
-        <motion.div
-          variants={fade}
-          custom={1}
-          className="rounded-2xl border border-border/40 bg-card/30 backdrop-blur-sm overflow-hidden"
-        >
-          {/* Table header */}
-          <div className="grid grid-cols-3 border-b border-border/30">
-            <div className="px-4 py-3">
-              <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50">
-                Feature
-              </span>
-            </div>
-            <div className="px-4 py-3 border-l border-border/20">
-              <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50">
-                Cloud VM
-              </span>
-            </div>
-            <div className="px-4 py-3 border-l border-border/20">
-              <span className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground/50">
-                Desktop App
-              </span>
-            </div>
-          </div>
-
-          {/* Table rows */}
-          {comparisonRows.map((row, i) => (
-            <div
-              key={row.feature}
-              className={cn(
-                "grid grid-cols-3",
-                i < comparisonRows.length - 1 && "border-b border-border/20",
-                i % 2 === 1 && "bg-foreground/[0.01] dark:bg-foreground/[0.02]"
-              )}
-            >
-              <div className="px-4 py-3">
-                <span className="text-[12px] font-medium text-foreground/70">{row.feature}</span>
-              </div>
-              <div className="px-4 py-3 border-l border-border/20">
-                <div className="flex items-center gap-1.5">
-                  {row.cloudCheck && (
-                    <Check size={12} weight="bold" className="text-emerald-500 shrink-0" />
-                  )}
-                  {!row.cloudCheck && row.desktopCheck && (
-                    <X size={12} weight="bold" className="text-muted-foreground/30 shrink-0" />
-                  )}
-                  <span className="text-[12px] text-muted-foreground/60">{row.cloud}</span>
-                </div>
-              </div>
-              <div className="px-4 py-3 border-l border-border/20">
-                <div className="flex items-center gap-1.5">
-                  {row.desktopCheck && (
-                    <Check size={12} weight="bold" className="text-emerald-500 shrink-0" />
-                  )}
-                  {!row.desktopCheck && row.cloudCheck && (
-                    <X size={12} weight="bold" className="text-muted-foreground/30 shrink-0" />
-                  )}
-                  <span className="text-[12px] text-muted-foreground/60">{row.desktop}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-      </motion.section>
-
-      {/* ── Section 6: How It Connects ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-      >
-        <motion.div variants={fade} custom={0} className="mb-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-            Under the hood
-          </p>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-            How It Connects
-          </h2>
-        </motion.div>
-
-        <motion.div variants={stagger} className="space-y-0">
-          {connectionSteps.map((step, i) => {
-            const Icon = step.icon
-            return (
-              <motion.div key={step.title} variants={fade} custom={i + 1} className="relative">
-                {/* Connector line */}
-                {i < connectionSteps.length - 1 && (
-                  <div className="absolute left-[19px] top-[44px] bottom-[-4px] w-px bg-gradient-to-b from-border/40 to-border/20" />
-                )}
-
-                <div className="flex items-start gap-4 py-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-foreground/[0.06] dark:bg-foreground/[0.08] border border-border/30 z-10">
-                    <Icon size={18} weight="duotone" className="text-foreground/60" />
-                  </div>
-                  <div className="pt-1">
-                    <p className="text-[13px] font-semibold text-foreground/80 mb-0.5">
-                      {i + 1}. {step.title}
-                    </p>
-                    <p className="text-[12px] text-muted-foreground/60 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-
-        <motion.div
-          variants={fade}
-          custom={4}
-          className="mt-5 flex items-start gap-2 rounded-xl bg-foreground/[0.02] dark:bg-foreground/[0.03] border border-border/30 px-3.5 py-2.5"
-        >
-          <ShieldCheck size={14} weight="duotone" className="text-muted-foreground/50 mt-0.5 shrink-0" />
-          <p className="text-[12px] sm:text-[13px] text-muted-foreground/60 leading-relaxed">
-            The overlay auto-hides during desktop automation so it doesn&apos;t interfere with clicks.
-          </p>
         </motion.div>
       </motion.section>
 
       {/* ── CTA ── */}
-      <motion.section
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        className="rounded-2xl border border-border/40 bg-card/30 text-center p-6 sm:p-8"
+        className="flex justify-center"
       >
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-          Try it now
-        </p>
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-3">
-          Ready to try the desktop app?
-        </h2>
-        <p className="text-sm text-muted-foreground/60 max-w-lg mx-auto mb-6">
-          Download the Coasty desktop app and let it control your local computer directly.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link
-            href="/download"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Download Desktop App
-            <ArrowRight size={14} weight="bold" />
-          </Link>
-          <a
-            href="https://cal.com/coasty/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl border border-border/60 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition-all"
-          >
-            <VideoCamera size={16} weight="duotone" />
-            Talk to Cofounders
-          </a>
-        </div>
-      </motion.section>
+        <Link
+          href="/download"
+          className="inline-flex items-center gap-2.5 h-11 px-6 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          {t("downloadCta")}
+          <ArrowRight size={15} weight="bold" />
+        </Link>
+      </motion.div>
     </div>
   )
 }

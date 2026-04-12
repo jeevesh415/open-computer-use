@@ -407,6 +407,14 @@ function SwarmRunCard({
   const [shareLoading, setShareLoading] = useState(false)
   const [copied, setCopied] = useState(false)
   const [stopping, setStopping] = useState(false)
+  const [promptCopied, setPromptCopied] = useState(false)
+
+  const copyPrompt = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation()
+    navigator.clipboard.writeText(swarm.prompt)
+    setPromptCopied(true)
+    setTimeout(() => setPromptCopied(false), 2000)
+  }, [swarm.prompt])
 
   const isActive = swarm.status === "running" || swarm.status === "creating" || swarm.status === "paused"
 
@@ -539,7 +547,7 @@ function SwarmRunCard({
             {/* Prompt + status row */}
             <div className="flex items-start justify-between gap-2 sm:gap-3">
               <button onClick={onToggle} className="flex-1 min-w-0 text-left">
-                <p className="text-sm font-medium leading-snug line-clamp-2 sm:line-clamp-none">{swarm.prompt}</p>
+                <p className={cn("text-sm font-medium leading-snug", isExpanded ? "" : "line-clamp-1")}>{swarm.prompt}</p>
               </button>
 
               {/* Status + Share */}
@@ -637,6 +645,20 @@ function SwarmRunCard({
                     <span className="hidden sm:inline">{stopping ? "Stopping" : "Stop"}</span>
                   </button>
                 )}
+
+                <button
+                  onClick={copyPrompt}
+                  className={cn(
+                    "inline-flex items-center justify-center gap-1.5 h-7 sm:h-8 w-7 sm:w-auto sm:px-2.5 rounded-lg border text-xs font-medium transition-all duration-200",
+                    promptCopied
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-500"
+                      : "border-border/40 bg-background/60 text-muted-foreground hover:text-foreground hover:bg-background/90"
+                  )}
+                  title={promptCopied ? "Copied!" : "Copy prompt"}
+                >
+                  {promptCopied ? <Check className="size-3.5" weight="bold" /> : <Copy className="size-3.5" />}
+                  <span className="hidden sm:inline">{promptCopied ? "Copied" : "Copy"}</span>
+                </button>
 
                 <SharePopover
                   swarm={swarm}

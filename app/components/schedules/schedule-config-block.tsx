@@ -206,7 +206,7 @@ function SectionHeader({
   showStep = true,
 }: {
   step?: number
-  icon: React.ElementType
+  icon: React.ComponentType<any>
   title: string
   subtitle: string
   showStep?: boolean
@@ -220,7 +220,7 @@ function SectionHeader({
       )}>
         <Icon className="h-3.5 w-3.5 text-foreground/60" />
         {showStep && step && (
-          <div className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-foreground text-background text-[10px] font-bold ring-2 ring-background">
+          <div className="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-muted-foreground text-muted text-[10px] font-bold ring-2 ring-background">
             {step}
           </div>
         )}
@@ -288,7 +288,7 @@ export function ScheduleConfigBlock({
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                       isSelected
                         ? [
-                          "text-background bg-foreground",
+                          "text-foreground bg-muted ring-1 ring-border",
                           "shadow-sm",
                           "scale-[1.02]",
                         ]
@@ -354,7 +354,7 @@ export function ScheduleConfigBlock({
                               "flex-1 h-11 rounded-xl text-[11px] font-bold transition-all duration-200",
                               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                               config.dayOfWeek === d.value
-                                ? "text-background bg-foreground shadow-sm"
+                                ? "text-foreground bg-muted ring-1 ring-border shadow-sm"
                                 : [
                                   "bg-muted/40 text-muted-foreground",
                                   "border border-border/30",
@@ -455,7 +455,7 @@ export function ScheduleConfigBlock({
               const isSelected = config.machineId === m.id
               const statusColor =
                 m.status === "running"
-                  ? "bg-foreground"
+                  ? "bg-muted-foreground"
                   : m.status === "stopped"
                   ? "bg-muted-foreground/50"
                   : "bg-muted-foreground/30"
@@ -487,7 +487,7 @@ export function ScheduleConfigBlock({
                     <div className={cn(
                       "h-9 w-9 sm:h-10 sm:w-10 rounded-lg sm:rounded-xl flex items-center justify-center text-[13px] sm:text-sm font-bold transition-all duration-300",
                       isSelected
-                        ? "bg-foreground/15 text-foreground shadow-sm"
+                        ? "bg-muted-foreground/15 text-foreground shadow-sm"
                         : "bg-muted/60 text-muted-foreground group-hover/machine:bg-muted"
                     )}>
                       {m.displayName?.charAt(0)?.toUpperCase() || "M"}
@@ -523,7 +523,7 @@ export function ScheduleConfigBlock({
                     className={cn(
                       "h-5 w-5 rounded-full transition-all duration-300 shrink-0 flex items-center justify-center",
                       isSelected
-                        ? "bg-foreground shadow-sm"
+                        ? "bg-muted-foreground shadow-sm"
                         : "border-2 border-border/40 group-hover/machine:border-border/60"
                     )}
                   >

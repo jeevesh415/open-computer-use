@@ -1,4 +1,6 @@
 import { Metadata } from "next"
+import { getTranslations, getLocale } from "next-intl/server"
+import { getHreflangAlternates } from "@/lib/seo"
 
 const competitorMeta: Record<string, { name: string; title: string; description: string; keywords: string[] }> = {
   "anthropic-computer-use": {
@@ -77,14 +79,17 @@ export async function generateMetadata({ params }: { params: Promise<{ competito
       description: meta.description,
       url: `https://coasty.ai/compare/${competitor}`,
       type: "website",
-      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: meta.title }],
+      images: [{ url: "/demo-screenshot.png", width: 1200, height: 630, alt: meta.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
     },
-    alternates: { canonical: `https://coasty.ai/compare/${competitor}` },
+    alternates: {
+      canonical: `https://coasty.ai/compare/${competitor}`,
+      languages: getHreflangAlternates(`/compare/${competitor}`),
+    },
   }
 }
 

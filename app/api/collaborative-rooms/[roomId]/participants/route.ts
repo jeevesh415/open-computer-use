@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { createGuestServerClient } from "@/lib/supabase/server-guest"
+import { createServiceClient } from "@/lib/supabase/server-guest"
 import { NextRequest, NextResponse } from "next/server"
 
 // GET: Get all participants in a room
@@ -62,7 +62,7 @@ export async function GET(
     }
 
     // Get admin client to fetch user metadata with avatar URLs
-    const adminClient = await createGuestServerClient()
+    const adminClient = await createServiceClient()
     
     if (adminClient && participants) {
       // Enhance participants with avatar URLs from user metadata

@@ -48,6 +48,11 @@ resource "aws_ecs_task_definition" "app" {
           { name = "NODE_ENV", value = "production" },
           { name = "NEXT_TELEMETRY_DISABLED", value = "1" },
           { name = "PYTHON_BACKEND_URL", value = "http://localhost:8001" },
+          # HOSTNAME must be set explicitly — Fargate's container runtime can
+          # override the Dockerfile ENV with the task hostname, causing Next.js
+          # to bind to the wrong interface and reject localhost health checks.
+          { name = "HOSTNAME", value = "0.0.0.0" },
+          { name = "PORT", value = "3000" },
         ],
         [for k, v in var.frontend_env_vars : { name = k, value = v }]
       )
@@ -57,6 +62,14 @@ resource "aws_ecs_task_definition" "app" {
         containerName = "backend"
         condition     = "HEALTHY"
       }]
+
+      healthCheck = {
+        command     = ["CMD-SHELL", "node -e \"const http=require('http');const r=http.get('http://localhost:3000/api/health',res=>{process.exit(res.statusCode===200?0:1)});r.on('error',()=>process.exit(1));r.setTimeout(4000,()=>{r.destroy();process.exit(1)})\""]
+        interval    = 30
+        timeout     = 5
+        retries     = 3
+        startPeriod = 60
+      }
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -93,11 +106,11 @@ resource "aws_ecs_task_definition" "app" {
       )
 
       healthCheck = {
-        command     = ["CMD-SHELL", "curl -f http://localhost:8001/api/health || exit 1"]
+        command     = ["CMD-SHELL", "curl -sf http://localhost:8001/api/health || exit 1"]
         interval    = 30
         timeout     = 5
         retries     = 3
-        startPeriod = 10
+        startPeriod = 45
       }
 
       logConfiguration = {
@@ -141,6 +154,11 @@ resource "aws_ecs_service" "app" {
     container_name   = "backend"
     container_port   = 8001
   }
+
+  # Give containers time to start before ALB health checks count against the task.
+  # Backend needs ~10-30s to init, frontend waits for backend HEALTHY, then needs
+  # 2 consecutive ALB checks (60s) to become healthy.  Total: ~120s worst case.
+  health_check_grace_period_seconds = 180
 
   # Rolling deployment: keep at least 100% healthy, spin up to 200% during deploy
   deployment_minimum_healthy_percent = 100

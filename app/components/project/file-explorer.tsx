@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback } from "react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Folder,
   FolderOpen,
@@ -15,14 +13,11 @@ import {
   FileCode,
   FileArchive,
   ChevronRight,
-  ChevronDown,
   ChevronLeft,
   Upload,
   Download,
   Search,
   Home,
-  ArrowLeft,
-  Plus,
   Grid3x3,
   List,
   MoreHorizontal,
@@ -34,7 +29,8 @@ import {
   Trash2,
   Loader2,
   X,
-  RefreshCw
+  RefreshCw,
+  Monitor
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast } from "sonner"
@@ -45,13 +41,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { Progress } from "@/components/ui/progress"
 
 interface FileNode {
   name: string
@@ -68,9 +57,10 @@ interface FileExplorerProps {
   machineId?: string
   userId?: string
   className?: string
+  isElectron?: boolean
 }
 
-export function FileExplorer({ machineId, userId, className }: FileExplorerProps) {
+export function FileExplorer({ machineId, userId, className, isElectron }: FileExplorerProps) {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [currentPath, setCurrentPath] = useState("/home/desktop")
   const [files, setFiles] = useState<FileNode[]>([])
@@ -86,28 +76,28 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [isRefreshing, setIsRefreshing] = useState(false)
 
-  // Initial load
+  // Initial load — skip for Electron machines (no remote file system)
   useEffect(() => {
-    if (machineId && navigationHistory.length === 0) {
+    if (machineId && !isElectron && navigationHistory.length === 0) {
       // Start at /home/desktop/Desktop which is the default desktop directory
       // Only load once to prevent loops
       loadDirectory("/home/desktop/Desktop")
     }
-  }, [machineId])
+  }, [machineId, isElectron])
 
-  // Get file icon with better colors
+  // Get file icon — muted palette
   const getFileIcon = (node: FileNode, size: 'sm' | 'md' | 'lg' = 'sm') => {
     const sizeClass = {
       sm: "h-4 w-4",
       md: "h-5 w-5",
-      lg: "h-8 w-8"
+      lg: "h-7 w-7"
     }[size]
 
     if (node.type === 'directory') {
       return node.isExpanded ? (
-        <FolderOpen className={cn(sizeClass, "text-blue-500")} />
+        <FolderOpen className={cn(sizeClass, "text-blue-400/70")} />
       ) : (
-        <Folder className={cn(sizeClass, "text-blue-500")} />
+        <Folder className={cn(sizeClass, "text-blue-400/70")} />
       )
     }
 
@@ -117,63 +107,63 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
       case 'md':
       case 'doc':
       case 'docx':
-        return <FileText className={cn(sizeClass, "text-gray-500")} />
+        return <FileText className={cn(sizeClass, "text-neutral-500")} />
       case 'pdf':
-        return <FileText className={cn(sizeClass, "text-red-500")} />
+        return <FileText className={cn(sizeClass, "text-red-400/60")} />
       case 'jpg':
       case 'jpeg':
       case 'png':
       case 'gif':
       case 'svg':
       case 'webp':
-        return <FileImage className={cn(sizeClass, "text-green-500")} />
+        return <FileImage className={cn(sizeClass, "text-violet-400/60")} />
       case 'mp4':
       case 'avi':
       case 'mov':
       case 'mkv':
-        return <FileVideo className={cn(sizeClass, "text-purple-500")} />
+        return <FileVideo className={cn(sizeClass, "text-purple-400/60")} />
       case 'mp3':
       case 'wav':
       case 'flac':
       case 'ogg':
-        return <FileAudio className={cn(sizeClass, "text-pink-500")} />
+        return <FileAudio className={cn(sizeClass, "text-pink-400/60")} />
       case 'js':
       case 'jsx':
       case 'ts':
       case 'tsx':
-        return <FileCode className={cn(sizeClass, "text-yellow-500")} />
+        return <FileCode className={cn(sizeClass, "text-amber-400/60")} />
       case 'py':
-        return <FileCode className={cn(sizeClass, "text-blue-400")} />
+        return <FileCode className={cn(sizeClass, "text-emerald-400/60")} />
       case 'java':
       case 'cpp':
       case 'c':
       case 'h':
-        return <FileCode className={cn(sizeClass, "text-orange-500")} />
+        return <FileCode className={cn(sizeClass, "text-orange-400/60")} />
       case 'css':
       case 'scss':
       case 'sass':
-        return <FileCode className={cn(sizeClass, "text-pink-400")} />
+        return <FileCode className={cn(sizeClass, "text-pink-400/50")} />
       case 'html':
       case 'xml':
-        return <FileCode className={cn(sizeClass, "text-orange-400")} />
+        return <FileCode className={cn(sizeClass, "text-orange-400/50")} />
       case 'json':
-        return <FileJson className={cn(sizeClass, "text-yellow-600")} />
+        return <FileJson className={cn(sizeClass, "text-amber-400/50")} />
       case 'csv':
       case 'xlsx':
       case 'xls':
-        return <FileSpreadsheet className={cn(sizeClass, "text-green-600")} />
+        return <FileSpreadsheet className={cn(sizeClass, "text-emerald-400/50")} />
       case 'sh':
       case 'bash':
       case 'zsh':
-        return <Terminal className={cn(sizeClass, "text-gray-400")} />
+        return <Terminal className={cn(sizeClass, "text-neutral-500")} />
       case 'zip':
       case 'rar':
       case 'tar':
       case 'gz':
       case '7z':
-        return <FileArchive className={cn(sizeClass, "text-amber-500")} />
+        return <FileArchive className={cn(sizeClass, "text-amber-400/50")} />
       default:
-        return <File className={cn(sizeClass, "text-gray-400")} />
+        return <File className={cn(sizeClass, "text-neutral-600")} />
     }
   }
 
@@ -560,112 +550,89 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
 
   if (!machineId) {
     return (
-      <div className={cn("w-full h-full p-2", className)}>
-        <div className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-zinc-900 rounded-lg border border-gray-200 dark:border-zinc-800">
-          <div className="text-center">
-            <Folder className="h-12 w-12 text-gray-400 dark:text-zinc-600 mx-auto mb-3" />
-            <p className="text-sm text-gray-600 dark:text-zinc-400">No machine connected</p>
-            <p className="text-xs text-gray-500 dark:text-zinc-500 mt-1">Connect to a virtual machine to browse files</p>
-          </div>
+      <div className={cn("flex flex-col h-full", className)}>
+        <div
+          className="flex-1 flex flex-col items-center justify-center text-center px-6 rounded-lg overflow-hidden relative"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        >
+          <Folder className="h-7 w-7 text-neutral-700 mb-3" />
+          <p className="text-[13px] font-medium text-neutral-500">No machine connected</p>
+          <p className="text-[11px] text-neutral-600 mt-1 max-w-[200px] leading-relaxed">Connect to a virtual machine to browse files</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (isElectron) {
+    return (
+      <div className={cn("flex flex-col h-full", className)}>
+        <div
+          className="flex-1 flex flex-col items-center justify-center text-center px-6 rounded-lg overflow-hidden relative"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        >
+          <Monitor className="h-7 w-7 text-neutral-700 mb-3" />
+          <p className="text-[13px] font-medium text-neutral-500">Local Computer</p>
+          <p className="text-[11px] text-neutral-600 mt-1 max-w-[200px] leading-relaxed">File browsing is available on cloud machines</p>
         </div>
       </div>
     )
   }
 
   return (
-    <TooltipProvider>
-      <div className={cn("flex flex-col h-full p-2", className)}>
-        <div className="flex-1 flex flex-col bg-white dark:bg-zinc-900 rounded-lg border border-gray-200 dark:border-zinc-800 overflow-hidden min-h-0">
-        {/* Header Toolbar */}
-        <div className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 border-b border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/50 overflow-x-auto">
-          {/* Navigation */}
-          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                  onClick={navigateBack}
-                  disabled={historyIndex <= 0}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Back</TooltipContent>
-            </Tooltip>
-            
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                  onClick={navigateForward}
-                  disabled={historyIndex >= navigationHistory.length - 1}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Forward</TooltipContent>
-            </Tooltip>
+    <div className={cn("flex flex-col h-full", className)}>
+      <div className="flex-1 flex flex-col min-h-0">
 
-            <div className="hidden sm:block">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                    onClick={navigateUp}
-                    disabled={currentPath === '/'}
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Up</TooltipContent>
-              </Tooltip>
-            </div>
+        {/* Navigation bar */}
+        <div className="flex items-center gap-1 px-2.5 h-9 flex-shrink-0">
+          <div className="flex items-center gap-0.5">
+            <button
+              className="h-6 w-6 rounded-md flex items-center justify-center text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] disabled:opacity-25 disabled:pointer-events-none transition-colors"
+              onClick={navigateBack}
+              disabled={historyIndex <= 0}
+            >
+              <ChevronLeft className="h-3.5 w-3.5" />
+            </button>
+            <button
+              className="h-6 w-6 rounded-md flex items-center justify-center text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] disabled:opacity-25 disabled:pointer-events-none transition-colors"
+              onClick={navigateForward}
+              disabled={historyIndex >= navigationHistory.length - 1}
+            >
+              <ChevronRight className="h-3.5 w-3.5" />
+            </button>
           </div>
 
-          <div className="hidden sm:block h-5 w-px bg-gray-300 dark:bg-zinc-700 shrink-0" />
-          {/* Breadcrumb */}
-          <div className="flex-1 flex items-center gap-0.5 sm:gap-1 min-w-0 overflow-x-auto scrollbar-none">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-6 sm:h-7 px-1.5 sm:px-2 text-xs hover:bg-gray-100 dark:hover:bg-zinc-800 shrink-0"
-                  onClick={() => loadDirectory('/home/desktop/Desktop')}
-                >
-                  <Home className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Go to Desktop</TooltipContent>
-            </Tooltip>
+          {/* Breadcrumb path */}
+          <div className="flex-1 flex items-center gap-0.5 min-w-0 overflow-hidden px-1">
+            <button
+              className="flex-shrink-0 h-5 w-5 rounded flex items-center justify-center text-neutral-500 hover:text-neutral-300 transition-colors"
+              onClick={() => loadDirectory('/home/desktop/Desktop')}
+            >
+              <Home className="h-3 w-3" />
+            </button>
             {pathParts.map((part, index) => {
               const path = '/' + pathParts.slice(0, index + 1).join('/')
               return (
-                <div key={path} className="flex items-center gap-0.5 sm:gap-1 shrink-0">
-                  <ChevronRight className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-gray-400 dark:text-zinc-600" />
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 sm:h-7 px-1.5 sm:px-2 text-xs hover:bg-gray-100 dark:hover:bg-zinc-800 shrink-0"
+                <div key={path} className="flex items-center gap-0.5 min-w-0">
+                  <span className="text-neutral-700 text-[10px] flex-shrink-0">/</span>
+                  <button
+                    className="text-[11px] text-neutral-500 hover:text-neutral-200 truncate transition-colors"
                     onClick={() => loadDirectory(path)}
                   >
                     {part}
-                  </Button>
+                  </button>
                 </div>
               )
             })}
           </div>
 
-          <div className="hidden sm:block h-5 w-px bg-gray-300 dark:bg-zinc-700 shrink-0" />
-
           {/* Actions */}
-          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+          <div className="flex items-center gap-0.5 flex-shrink-0">
             <input
               ref={fileInputRef}
               type="file"
@@ -673,136 +640,101 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
               className="hidden"
               onChange={(e) => e.target.files && handleUpload(e.target.files)}
             />
-            
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                  onClick={refreshDirectory}
-                  disabled={isRefreshing || loading}
-                >
-                  <RefreshCw className={cn(
-                    "h-3.5 w-3.5 sm:h-4 sm:w-4",
-                    isRefreshing && "animate-spin"
-                  )} />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Refresh</TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                  onClick={() => fileInputRef.current?.click()}
-                  disabled={isUploading}
-                >
-                  {isUploading ? (
-                    <Loader2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 animate-spin" />
-                  ) : (
-                    <Upload className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                  )}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Upload files</TooltipContent>
-            </Tooltip>
-
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="h-6 w-6 sm:h-7 sm:w-7 hover:bg-gray-100 dark:hover:bg-zinc-800"
-                  onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
-                >
-                  {viewMode === 'list' ? <Grid3x3 className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : <List className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>{viewMode === 'list' ? 'Grid view' : 'List view'}</TooltipContent>
-            </Tooltip>
+            <button
+              className="h-6 w-6 rounded-md flex items-center justify-center text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] disabled:opacity-25 transition-colors"
+              onClick={refreshDirectory}
+              disabled={isRefreshing || loading}
+            >
+              <RefreshCw className={cn("h-3 w-3", isRefreshing && "animate-spin")} />
+            </button>
+            <button
+              className="h-6 w-6 rounded-md flex items-center justify-center text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] transition-colors"
+              onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
+            >
+              {viewMode === 'list' ? <Grid3x3 className="h-3 w-3" /> : <List className="h-3 w-3" />}
+            </button>
+            <button
+              className="h-6 w-6 rounded-md flex items-center justify-center text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] disabled:opacity-25 transition-colors"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+            >
+              {isUploading ? <Loader2 className="h-3 w-3 animate-spin" /> : <Upload className="h-3 w-3" />}
+            </button>
           </div>
         </div>
 
-        {/* Search Bar */}
-        <div className="px-2 sm:px-3 py-1.5 sm:py-2 border-b border-gray-200 dark:border-zinc-800">
+        {/* Search */}
+        <div className="px-2.5 pb-2">
           <div className="relative">
-            <Search className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 sm:h-4 sm:w-4 text-gray-400 dark:text-zinc-500" />
-            <Input
-              placeholder="Search..."
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-neutral-600" />
+            <input
+              placeholder="Search files..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-7 sm:pl-9 h-7 sm:h-8 bg-white dark:bg-zinc-900 border-gray-300 dark:border-zinc-700 text-xs sm:text-sm focus:border-blue-500 dark:focus:border-zinc-600"
+              className="w-full h-7 pl-7 pr-7 rounded-lg bg-white/[0.03] text-[11px] text-neutral-300 placeholder:text-neutral-600 border-none outline-none focus:bg-white/[0.05] focus:ring-1 focus:ring-white/[0.06] transition-all"
             />
             {searchQuery && (
-              <Button
-                size="icon"
-                variant="ghost"
-                className="absolute right-1 top-1/2 -translate-y-1/2 h-5 w-5 sm:h-6 sm:w-6 hover:bg-gray-100 dark:hover:bg-zinc-800"
+              <button
+                className="absolute right-1.5 top-1/2 -translate-y-1/2 h-4 w-4 rounded flex items-center justify-center text-neutral-600 hover:text-neutral-400 transition-colors"
                 onClick={() => setSearchQuery('')}
               >
                 <X className="h-3 w-3" />
-              </Button>
+              </button>
             )}
           </div>
         </div>
 
-        {/* Upload Progress */}
+        {/* Upload progress */}
         <AnimatePresence>
           {isUploading && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="px-3 py-2 border-b border-gray-200 dark:border-zinc-800 bg-blue-50 dark:bg-blue-500/10"
+              className="px-2.5 pb-2"
             >
-              <div className="flex items-center justify-between text-xs mb-1">
-                <span className="text-blue-400">Uploading...</span>
-                <span className="text-gray-600 dark:text-zinc-400">{uploadProgress.toFixed(0)}%</span>
+              <div className="flex items-center gap-2 text-[10px] text-neutral-500 mb-1">
+                <span>Uploading</span>
+                <span className="text-neutral-600">{uploadProgress.toFixed(0)}%</span>
               </div>
-              <Progress value={uploadProgress} className="h-1" />
+              <div className="h-[2px] bg-white/[0.04] rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-500/60 rounded-full transition-all duration-300"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* File List */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-0 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-zinc-700">
+        {/* File content */}
+        <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-0 scrollbar-invisible">
           {loading ? (
             <div className="flex items-center justify-center h-full">
-              <Loader2 className="h-6 w-6 animate-spin text-gray-400 dark:text-zinc-600" />
+              <Loader2 className="h-5 w-5 animate-spin text-neutral-600" />
             </div>
           ) : filteredFiles.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full">
-              <Folder className="h-8 w-8 text-gray-300 dark:text-zinc-700 mb-2" />
-              <p className="text-sm text-gray-500 dark:text-zinc-500">
+              <Folder className="h-6 w-6 text-neutral-700 mb-2" />
+              <p className="text-[12px] text-neutral-600">
                 {searchQuery ? 'No files found' : 'Empty folder'}
               </p>
             </div>
           ) : viewMode === 'list' ? (
-            // List View — Origami unfold
-            <div className="p-2 space-y-1">
+            /* List view */
+            <div className="px-1.5 py-1 space-y-px">
               {filteredFiles.map((node, index) => (
                 <motion.div
                   key={node.path}
-                  initial={{ opacity: 0, x: -12, scaleY: 0.85 }}
-                  animate={{ opacity: 1, x: 0, scaleY: 1 }}
-                  transition={{
-                    delay: index * 0.03,
-                    duration: 0.35,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.02, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
-                    "group flex items-center gap-3 px-3 py-2 rounded-md cursor-pointer",
-                    "transition-all duration-200 hover:bg-gray-100 dark:hover:bg-zinc-800/50 hover:translate-x-0.5",
-                    selectedFiles.has(node.path) && "bg-gray-100 dark:bg-zinc-800",
-                    (copiedFiles.has(node.path) || cutFiles.has(node.path)) && "opacity-50"
+                    "group flex items-center gap-2.5 px-2.5 py-[7px] rounded-lg cursor-pointer transition-colors duration-150",
+                    "hover:bg-white/[0.04]",
+                    selectedFiles.has(node.path) && "bg-white/[0.06]",
+                    (copiedFiles.has(node.path) || cutFiles.has(node.path)) && "opacity-40"
                   )}
-                  style={{ transformOrigin: 'left center' }}
-                  whileHover={{ x: 2 }}
                   onClick={(e) => handleItemClick(node, e)}
                   onDoubleClick={() => handleItemDoubleClick(node)}
                   onContextMenu={(e) => {
@@ -810,81 +742,79 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
                     setSelectedFiles(new Set([node.path]))
                   }}
                 >
-                  {getFileIcon(node)}
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm text-gray-700 dark:text-zinc-200 truncate">{node.name}</div>
-                    <div className="text-xs text-gray-500 dark:text-zinc-500 flex items-center gap-3">
-                      {node.type === 'file' && node.size && (
-                        <span>{formatFileSize(node.size)}</span>
-                      )}
-                      {node.modified && (
-                        <span>{formatDate(node.modified)}</span>
-                      )}
-                    </div>
+                  <div className="flex-shrink-0">
+                    {getFileIcon(node)}
                   </div>
-                  
-                  {/* Quick Actions */}
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="flex-1 text-[12px] text-neutral-300 truncate min-w-0">
+                    {node.name}
+                  </span>
+                  {node.type === 'file' && node.size !== undefined && (
+                    <span className="text-[10px] text-neutral-600 tabular-nums flex-shrink-0">
+                      {formatFileSize(node.size)}
+                    </span>
+                  )}
+                  {node.modified && (
+                    <span className="text-[10px] text-neutral-600 flex-shrink-0">
+                      {formatDate(node.modified)}
+                    </span>
+                  )}
+                  {/* Hover actions */}
+                  <div className="flex-shrink-0 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button
-                          size="icon"
-                          variant="ghost"
-                          className="h-7 w-7 hover:bg-gray-200 dark:hover:bg-zinc-700"
+                        <button
+                          className="h-5 w-5 rounded flex items-center justify-center text-neutral-600 hover:text-neutral-300 hover:bg-white/[0.06] transition-colors"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
+                          <MoreHorizontal className="h-3.5 w-3.5" />
+                        </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="bg-white dark:bg-zinc-900 border-gray-200 dark:border-zinc-800">
+                      <DropdownMenuContent align="end" className="bg-[#141414] border-white/[0.06] min-w-[140px]">
                         {node.type === 'file' && (
-                          <>
-                            <DropdownMenuItem 
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedFiles(new Set([node.path]))
-                                downloadSelected()
-                              }}
-                              className="text-sm"
-                            >
-                              <Download className="h-4 w-4 mr-2" />
-                              Download
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator className="bg-gray-200 dark:bg-zinc-800" />
-                          </>
+                          <DropdownMenuItem
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setSelectedFiles(new Set([node.path]))
+                              downloadSelected()
+                            }}
+                            className="text-[12px] text-neutral-300 focus:bg-white/[0.06] focus:text-neutral-200"
+                          >
+                            <Download className="h-3.5 w-3.5 mr-2 text-neutral-500" />
+                            Download
+                          </DropdownMenuItem>
                         )}
-                        <DropdownMenuItem 
+                        <DropdownMenuItem
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedFiles(new Set([node.path]))
                             copySelected()
                           }}
-                          className="text-sm"
+                          className="text-[12px] text-neutral-300 focus:bg-white/[0.06] focus:text-neutral-200"
                         >
-                          <Copy className="h-4 w-4 mr-2" />
+                          <Copy className="h-3.5 w-3.5 mr-2 text-neutral-500" />
                           Copy
                         </DropdownMenuItem>
-                        <DropdownMenuItem 
+                        <DropdownMenuItem
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedFiles(new Set([node.path]))
                             cutSelected()
                           }}
-                          className="text-sm"
+                          className="text-[12px] text-neutral-300 focus:bg-white/[0.06] focus:text-neutral-200"
                         >
-                          <Scissors className="h-4 w-4 mr-2" />
+                          <Scissors className="h-3.5 w-3.5 mr-2 text-neutral-500" />
                           Cut
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-zinc-800" />
-                        <DropdownMenuItem 
+                        <DropdownMenuSeparator className="bg-white/[0.04]" />
+                        <DropdownMenuItem
                           onClick={(e) => {
                             e.stopPropagation()
                             setSelectedFiles(new Set([node.path]))
                             deleteSelected()
                           }}
-                          className="text-sm text-red-400"
+                          className="text-[12px] text-red-400/80 focus:bg-red-500/10 focus:text-red-400"
                         >
-                          <Trash2 className="h-4 w-4 mr-2" />
+                          <Trash2 className="h-3.5 w-3.5 mr-2" />
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -894,28 +824,20 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
               ))}
             </div>
           ) : (
-            // Grid View — Origami cascade
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 p-3">
+            /* Grid view */
+            <div className="grid grid-cols-3 gap-1 p-2">
               {filteredFiles.map((node, index) => (
                 <motion.div
                   key={node.path}
-                  initial={{ opacity: 0, scale: 0.8, y: 16 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{
-                    delay: index * 0.03,
-                    duration: 0.4,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 24,
-                  }}
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.02, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className={cn(
-                    "group flex flex-col items-center gap-2 p-3 rounded-lg cursor-pointer",
-                    "transition-all duration-200 hover:bg-gray-100 dark:hover:bg-zinc-800/50",
-                    selectedFiles.has(node.path) && "bg-gray-100 dark:bg-zinc-800",
-                    (copiedFiles.has(node.path) || cutFiles.has(node.path)) && "opacity-50"
+                    "group flex flex-col items-center gap-2 p-3 rounded-xl cursor-pointer transition-colors duration-150",
+                    "hover:bg-white/[0.04]",
+                    selectedFiles.has(node.path) && "bg-white/[0.06]",
+                    (copiedFiles.has(node.path) || cutFiles.has(node.path)) && "opacity-40"
                   )}
-                  whileHover={{ scale: 1.04, y: -2 }}
-                  whileTap={{ scale: 0.96 }}
                   onClick={(e) => handleItemClick(node, e)}
                   onDoubleClick={() => handleItemDoubleClick(node)}
                   onContextMenu={(e) => {
@@ -924,7 +846,7 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
                   }}
                 >
                   {getFileIcon(node, 'lg')}
-                  <span className="text-xs text-gray-700 dark:text-zinc-300 text-center break-all line-clamp-2">
+                  <span className="text-[11px] text-neutral-400 text-center break-all line-clamp-2 leading-tight">
                     {node.name}
                   </span>
                 </motion.div>
@@ -933,40 +855,34 @@ export function FileExplorer({ machineId, userId, className }: FileExplorerProps
           )}
         </div>
 
-        {/* Status Bar */}
-        <div className="flex items-center justify-between px-3 py-1.5 border-t border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/50">
-          <div className="text-xs text-gray-500 dark:text-zinc-500">
-            {selectedFiles.size > 0 ? (
-              <span>{selectedFiles.size} selected</span>
-            ) : (
-              <span>{filteredFiles.length} items</span>
-            )}
-          </div>
+        {/* Status line */}
+        <div className="flex items-center justify-between px-3 py-1.5 flex-shrink-0">
+          <span className="text-[10px] text-neutral-600">
+            {selectedFiles.size > 0
+              ? `${selectedFiles.size} selected`
+              : `${filteredFiles.length} items`
+            }
+          </span>
           {selectedFiles.size > 0 && (
-            <div className="flex items-center gap-2">
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-6 px-2 text-xs hover:bg-gray-100 dark:hover:bg-zinc-800"
+            <div className="flex items-center gap-1">
+              <button
+                className="h-5 px-2 rounded text-[10px] text-neutral-500 hover:text-neutral-300 hover:bg-white/[0.05] transition-colors flex items-center gap-1"
                 onClick={downloadSelected}
               >
-                <Download className="h-3 w-3 mr-1" />
+                <Download className="h-2.5 w-2.5" />
                 Download
-              </Button>
-              <Button
-                size="sm"
-                variant="ghost"
-                className="h-6 px-2 text-xs hover:bg-gray-100 dark:hover:bg-zinc-800"
+              </button>
+              <button
+                className="h-5 px-2 rounded text-[10px] text-red-400/60 hover:text-red-400 hover:bg-red-500/10 transition-colors flex items-center gap-1"
                 onClick={deleteSelected}
               >
-                <Trash2 className="h-3 w-3 mr-1" />
+                <Trash2 className="h-2.5 w-2.5" />
                 Delete
-              </Button>
+              </button>
             </div>
           )}
         </div>
-        </div>
       </div>
-    </TooltipProvider>
+    </div>
   )
 }

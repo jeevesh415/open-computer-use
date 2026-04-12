@@ -4,6 +4,7 @@
 
 import { WebSocketServer, WebSocket } from 'ws';
 import net from 'net';
+import crypto from 'crypto';
 import { verifySecureToken } from '@/lib/utils/encryption';
 import { createClient } from '@/lib/supabase/server';
 
@@ -396,7 +397,7 @@ export class SecureVNCProxy {
    * Generate unique connection ID
    */
   private generateConnectionId(): string {
-    return `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `conn_${Date.now()}_${crypto.randomBytes(8).toString('hex')}`;
   }
 
   /**

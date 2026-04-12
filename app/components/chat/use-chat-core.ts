@@ -1,6 +1,5 @@
 import { useChatDraft } from "@/app/hooks/use-chat-draft"
 import { toast } from "@/components/ui/toast"
-import { getOrCreateGuestUserId } from "@/lib/api"
 import { MESSAGE_MAX_LENGTH } from "@/lib/config"
 import { SystemPrompts } from "@/lib/prompts/system-prompts"
 import { API_ROUTE_CHAT } from "@/lib/routes"
@@ -186,7 +185,7 @@ export function useChatCore({
   const submit = useCallback(async () => {
     setIsSubmitting(true)
 
-    const uid = await getOrCreateGuestUserId(user)
+    const uid = (user?.id ?? null)
     if (!uid) {
       setIsSubmitting(false)
       return
@@ -367,7 +366,7 @@ export function useChatCore({
       setMessages((prev) => [...prev, optimisticMessage])
 
       try {
-        const uid = await getOrCreateGuestUserId(user)
+        const uid = (user?.id ?? null)
 
         if (!uid) {
           setMessages((prev) => prev.filter((msg) => msg.id !== optimisticId))
@@ -432,7 +431,7 @@ export function useChatCore({
 
   // Handle reload
   const handleReload = useCallback(async () => {
-    const uid = await getOrCreateGuestUserId(user)
+    const uid = (user?.id ?? null)
     if (!uid) {
       return
     }

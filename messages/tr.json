@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Ucretsiz Basla",
+    "bookDemo": "Demo rezerve et",
+    "tryCoastyFree": "Coasty'yi ucretsiz dene",
+    "learnMore": "Daha fazla bilgi",
+    "watchSession": "Oturumu izle",
+    "compareAllPlans": "Tum planlari ve ozellikleri karsilastir",
+    "allRightsReserved": "Tum haklari saklidir.",
+    "privacy": "Gizlilik",
+    "terms": "Sartlar",
+    "recommended": "Onerilen",
+    "month": "ay",
+    "creditsPerMonth": "{count} kredi/ay",
+    "agentsInParallel": "{count} paralel ajan"
+  },
+  "header": {
+    "useCases": "Kullanim Alanlari",
+    "blog": "Blog",
+    "agentSwarms": "Ajan Suruleri",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Karsilastir",
+    "demos": "Demolar",
+    "pricing": "Fiyatlandirma",
+    "download": "Indir",
+    "signIn": "Giris yap",
+    "getStarted": "Basla",
+    "useCaseItems": {
+      "competitorIntel": "Rakip Istihbarati",
+      "qaBugReports": "QA Hata Raporlari",
+      "seoGapAnalysis": "SEO Bosluk Analizi",
+      "dataExtraction": "Veri Cikarimi",
+      "leadGeneration": "Potansiyel Musteri Olusturma",
+      "siteAudit": "Site Denetimi",
+      "adIntelligence": "Reklam Istihbarati",
+      "emailOutreach": "E-posta Erisimi",
+      "designReview": "Tasarim Incelemesi",
+      "priceMonitoring": "Fiyat Izleme",
+      "marketResearch": "Pazar Arastirmasi",
+      "emailCampaigns": "E-posta Kampanyalari"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} rakip profili teslim edildi",
+      "qaBugReports": "{stat} kullanici akisi calisma basina test edildi",
+      "seoGapAnalysis": "{stat} anahtar kelime boslugu belirlendi",
+      "dataExtraction": "{stat} satir calisma basina cikarildi",
+      "leadGeneration": "{stat} nitelikli potansiyel musteri calisma basina",
+      "siteAudit": "{stat} sayfa calisma basina denetlendi",
+      "adIntelligence": "{stat} reklam kreatifi yakalandi",
+      "emailOutreach": "{stat} kisisellestirilmis e-posta taslagi olusturuldu",
+      "designReview": "{stat} kirilma noktasi sayfa basina test edildi",
+      "priceMonitoring": "{stat} SKU calisma basina karsilastirildi",
+      "marketResearch": "{stat} veri noktasi toplandi",
+      "emailCampaigns": "{stat} kisisellestirilmis e-posta kampanya basina"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Tum Yazilar",
+      "computerUse": "Bilgisayar Kullanimi",
+      "compare": "Karsilastir",
+      "dataEntry": "Veri Girisi",
+      "webScraping": "Web Scraping",
+      "jobApplications": "Is Basvurulari",
+      "demosResults": "Demolar ve Sonuclar",
+      "guide": "Rehber"
+    },
+    "blogStats": {
+      "allPosts": "{stat} makale haftalik yayinlandi",
+      "computerUse": "{stat} OSWorld benchmark puani",
+      "compare": "{stat} rakip analiz edildi",
+      "dataEntry": "{stat} manualden daha hizli",
+      "webScraping": "{stat} sayfa oturum basina",
+      "jobApplications": "{stat} basvuru oturum basina",
+      "demosResults": "{stat} gercek vaka calismasi",
+      "guide": "{stat} kullanim alani kilavuzu"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Ajani · {score} OSWorld",
+    "headline": "Otonom bilgisayar operatorleri",
+    "useCases": {
+      "computerAgent": {
+        "label": "Bilgisayar ajani",
+        "headline": "herhangi bir tarayici gorevini otomatiklestir",
+        "outcome": "Gercek bir bilgisayari kontrol eden bir AI ajani — gozatar, tiklar, yazar ve bitirmis isi teslim eder. Kurulum gerektirmez."
+      },
+      "competitorIntel": {
+        "label": "Rakip istihbarati",
+        "headline": "her rakibi izle",
+        "outcome": "Fiyatlandirma, ozellikler ve konumlandirma bosluklari ile eksiksiz rakip profilleri — paylasilmaya hazir rapor olarak disari aktarilir."
+      },
+      "qaTesting": {
+        "label": "QA testi",
+        "headline": "hatalari kullanicilardan once bul",
+        "outcome": "Kritik kullanici akislari uctan uca test edilir, her hata yeniden uretim adimlari ve ciddiyet derecesi ile ekran goruntusu alinir."
+      },
+      "seoAnalysis": {
+        "label": "SEO analizi",
+        "headline": "anahtar kelime bosluklarini ortaya cikar",
+        "outcome": "Anahtar kelime bosluklari belirlendi, icerik ozetleri hazirlandi, rakip geri baglanti kaynaklari haritalandi — uygulanabilir SEO stratejisi."
+      },
+      "dataExtraction": {
+        "label": "Veri cikarimi",
+        "headline": "herhangi bir siteyi kaziyip yapilandir",
+        "outcome": "Yapilandirilmis veri kazindi, temizlendi, tekillestirildi ve CSV olarak disari aktarildi — herhangi bir web sitesinden, herhangi bir formattan."
+      },
+      "leadGeneration": {
+        "label": "Potansiyel musteri olusturma",
+        "headline": "satis hattinizi doldurun",
+        "outcome": "ICP'nize uyan nitelikli karar vericiler, dogrulanmis unvanlar, sirketler ve kisisellestirilmis erisim aciclari ile."
+      },
+      "siteAudit": {
+        "label": "Site denetimi",
+        "headline": "her sayfayi olcekte denetle",
+        "outcome": "Sayfalar tarandi, Core Web Vitals puanlandi, kirik baglantilar bulundu, erisilebilirlik sorunlari duzeltme onceligne gore siralandi."
+      },
+      "emailOutreach": {
+        "label": "E-posta erisimi",
+        "headline": "kisisellestirilmis erisim gonder",
+        "outcome": "Her potansiyel musterinin sirketine, rolune ve sorunlarina atifta bulunan kisisellestirilmis e-postalar — gondermeye hazir."
+      },
+      "marketResearch": {
+        "label": "Pazar arastirmasi",
+        "headline": "pazarinizi hizla dogrulayin",
+        "outcome": "TAM hesaplandi, kilit oyuncular profillendi, buyume egilimi cizelgelendi — duzinelerce veri noktasindan elde edildi."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Pazarlama",
+        "task": "Urununu Reddit'te otonom olarak pazarla"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Potansiyel musterileri bul ve kisisellestirilmis e-postalar gonder"
+      },
+      "qaTesting": {
+        "label": "QA Testi",
+        "task": "Her odeme akisini test et ve hatalari raporla"
+      },
+      "jobApplication": {
+        "label": "Is Basvurusu",
+        "task": "Rolleri bul, ozgecmisi uyarla ve basvur"
+      },
+      "formFilling": {
+        "label": "Form Doldurma",
+        "task": "YC S26 basvurusunu sizin icin doldurun"
+      },
+      "socialMedia": {
+        "label": "Sosyal Medya",
+        "task": "Hacker News'de yayinla ve yorumlarla etkilesime gir"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld benchmark",
+      "sublabel": "Kuresel #1 computer-use ajani"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Ajanin kullanabilecegi araclar",
+      "sublabel": "Tarayici, terminal, masaustu, dosyalar"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Zamanlamaya gore calisir",
+      "sublabel": "Herhangi bir tekrarlayan gorevi otomatiklestir"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Kurulum gerekli",
+      "sublabel": "API yok, entegrasyon yok, kod yok"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Neden Coasty",
+    "title": "Bir chatbot degil. Bir RPA komut dosyasi degil.",
+    "worksLikeHuman": {
+      "title": "Insan gibi calisir",
+      "description": "Gorur, tiklar, yazar, gezinir — aynen senin gibi"
+    },
+    "noScripts": {
+      "title": "Komut dosyasi veya kurulum yok",
+      "description": "Duz Turkce girer, sonuclar cikar"
+    },
+    "handlesUnexpected": {
+      "title": "Beklenmedik durumlarla basa cikar",
+      "description": "CAPTCHA'lara, popup'lara, duzlem degisikliklerine uyum saglar"
+    },
+    "runsInIsolation": {
+      "title": "Izole ortamda calisir",
+      "description": "Oturum basina sandbox VM — hicbir sey sizamaz"
+    }
+  },
+  "howItWorks": {
+    "title": "Nasil calisir",
+    "step1": {
+      "title": "Gorevini tanimla",
+      "description": "Duz Turkce. Hepsi bu.",
+      "placeholder": "LinkedIn'de 100 potansiyel musteri arastir..."
+    },
+    "step2": {
+      "title": "Ajanin calismasini izle",
+      "description": "Tarayici acar, tiklar, yazar, gezinir"
+    },
+    "step3": {
+      "title": "Gorev tamamlandi",
+      "description": "Her islem ekran goruntuleriyle kaydedildi",
+      "results": {
+        "taskCompleted": "Gorev tamamlandi",
+        "leadsFound": "12 potansiyel musteri bulundu",
+        "addedToCrm": "CRM'e eklendi"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Dunya capinda #1 benchmark",
+    "subtitle": "OSWorld'de %82 — gercek bilgisayar kullanan AI ajanlari icin en zor benchmark",
+    "agenticFramework": "Ajantik Cerceve",
+    "foundationModel": "Temel Model"
+  },
+  "comparison": {
+    "title": "Neden Coasty ile otomatiklestirmelisiniz?",
+    "subtitle": "Bir ekibin saatler harcadigi ayni gorevler — Coasty dakikalar icinde, 7/24 tamamlar.",
+    "manual": {
+      "title": "Manuel Olarak Yapmak",
+      "subtitle": "Siz veya ekibiniz, elle"
+    },
+    "coasty": {
+      "title": "Coasty AI Ajani",
+      "subtitle": "#1 computer-use ajani"
+    },
+    "rows": {
+      "timePerTask": "Gorev basina sure",
+      "availability": "Erisilebilirlik",
+      "setupTime": "Kurulum suresi",
+      "errorRate": "Hata orani",
+      "scaling": "Olcekleme",
+      "auditTrail": "Denetim izi"
+    },
+    "manualValues": {
+      "timePerTask": "Saatlerden gunlere",
+      "availability": "Sadece mesai saatleri",
+      "setupTime": "Araclari ogren, SOP'lar yaz",
+      "errorRate": "Insan hatalari",
+      "scaling": "Daha fazla yap = daha fazla zaman harca",
+      "auditTrail": "Yok"
+    },
+    "coastyValues": {
+      "timePerTask": "Dakikalar",
+      "availability": "7/24, her gun",
+      "setupTime": "60 saniye",
+      "errorRate": "Kendini duzeltir",
+      "scaling": "Sinirsiz gorevi paralel calistir",
+      "auditTrail": "Her tiklama kaydedildi + ekran goruntuleri"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Manuel olarak",
+      "hoursManually": "saatler suren gorevleri otomatiklestir",
+      "startingAt": "Baslayan fiyat"
+    }
+  },
+  "demo": {
+    "title": "Ajani is basinda izle",
+    "subtitle": "Gercek gorevler. Gercek tarayicilar. Her tiklama kaydedildi.",
+    "sessions": {
+      "reddit": {
+        "title": "Reddit'te Coasty",
+        "description": "Coasty'nin otonom olarak bir pazarlama kampanyasi yurutmesini izleyin — rakipleri arastiriyor, trendleri analiz ediyor ve strateji sunumu olusturuyor.",
+        "tag": "Pazarlama"
+      },
+      "prospects": {
+        "title": "Potansiyel Musteriler Bulma",
+        "description": "Coasty potansiyel musterileri buluyor ve arastiriyor, kisisellestirilmis erisim hazirlmak icin onemli detaylari topluyor.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "Kendini QA Test Etme",
+        "description": "Coasty kendi urunu uzerinde kalite guvence calismasi yapiyor — akislarda geziniyor, hatalari yakaliyor ve sorunlari otonom olarak raporluyor.",
+        "tag": "QA Testi"
+      },
+      "email": {
+        "title": "Sizin Adiniza E-posta Gonderme",
+        "description": "Yazmaktan gondermeye — bir AI ajani tamamen kendi basina bir e-posta hazirlayip teslim ediyor.",
+        "tag": "Iletisim"
+      },
+      "job": {
+        "title": "Ise Basvurma",
+        "description": "Coasty uygun bir rol buluyor, ozgecmisinizi uyarliyor ve basvuruyu gonderiyor — hepsi kendi basina.",
+        "tag": "Is Basvurusu"
+      },
+      "hackernews": {
+        "title": "Hacker News'de Yayinlama",
+        "description": "Coasty Hacker News'de bir blog yazisi olusturup yayinliyor — icerigi yaziyor ve otonom olarak gonderiyor.",
+        "tag": "Sosyal Medya"
+      }
+    }
+  },
+  "features": {
+    "title": "Gercek bilgisayar gorevleri icin insa edildi",
+    "selfCorrecting": {
+      "title": "Kendini Duzeltir",
+      "description": "Hatalari tespit eder, alternatif yollar dener"
+    },
+    "auditTrail": {
+      "title": "Tam Denetim Izi",
+      "description": "Her tiklama ekran goruntuleriyle kaydedildi"
+    },
+    "schedule": {
+      "title": "7/24 Zamanla",
+      "description": "Cron ile calisir — saatlik, gunluk, haftalik"
+    },
+    "sandboxed": {
+      "title": "Sandbox ve Guvenli",
+      "description": "Oturum basina izole VM, sonrasinda yok edilir"
+    },
+    "benchmark": {
+      "title": "OSWorld'de #1",
+      "description": "%82 — simdiye kadar kaydedilen en yuksek puan"
+    },
+    "swarms": {
+      "title": "Ajan Suruleri",
+      "description": "Gorevleri makineler arasinda paralel olarak bol"
+    }
+  },
+  "pricing": {
+    "title": "Ucretsiz basla, hazir olunca olcekle",
+    "subtitle": "Kredi karti gereksiz. AI ajaniniz 60 saniyede hazir.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "#1 computer-use ajanini dene",
+        "cta": "Ucretsiz Basla"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Hafif gunluk otomasyon",
+        "cta": "Lite'i Al"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Her gun gorevleri otomatiklestir",
+        "cta": "Starter'i Al"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Karmasik is akislarini olcekle",
+        "cta": "Plus'a Gec",
+        "badge": "En Populer"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Sinirsiz agir otomasyon",
+        "cta": "Pro'yu Al"
+      }
+    },
+    "vmTemporary": "1 gecici VM (2 saat)",
+    "vmDeletedAfterInactivity": "1 VM (etkinsizlik sonrasi silindi)",
+    "vmAlwaysOn": "{count} her zaman acik VM",
+    "vmAlwaysOnPlural": "{count} her zaman acik VM",
+    "bargain": {
+      "title": "Ayni is manuel iscilikle {oldPrice} tutar",
+      "description": "Sanal asistan aylik $2.000–$4.000'dir. Yari zamanli calisan daha pahaliya mal olur. Coasty ayni isi 7/24 $0'dan baslayarak yapar — mukemmel tutarlilik, tam denetim izleri ve sifir egitim suresiyle."
+    }
+  },
+  "faq": {
+    "title": "Sikca sorulan sorular",
+    "subtitle": "Baslamadan once bilmeniz gereken her sey",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Coasty nedir?",
+        "answer": "Coasty dunyanin en iyi computer-use AI ajanidir. Bir gorevi tanimlarsiniz — potansiyel musterileri arastir, bir web sitesini test et, formlari doldur, sosyal medyada yayinla — ve Coasty gercek bir tarayici acar, uygulamalarda gezinir, dumelere tiklar, metin yazar ve gorevi uctan uca tamamlar. API yok, entegrasyon yok, kod gerekmez."
+      },
+      "howDifferent": {
+        "question": "Bu ChatGPT veya diger AI araclarindan nasil farkli?",
+        "answer": "ChatGPT metin uretir. Coasty bilgisayar kullanir. Size ne yapmaniz gerektigini soylemez — tarayici acar, web sitesine gider, dumelere tiklar, formlari doldurur ve bitirmis isi teslim eder. Talimat almakla gorevinin sizin icin yapilmasi arasindaki farktir."
+      },
+      "whatTasks": {
+        "question": "Coasty hangi gorevleri otomatiklestirebilir?",
+        "answer": "Bilgisayarda yapabildiginiz herhangi bir gorevi. Web arastirmasi, potansiyel musteri olusturma, veri girisi, form doldurma, QA testi, sosyal medya yayini, e-posta erisimi, fatura isleme, rekabet analizi, ise alim — bir tarayici veya masaustu uygulamasi iceriyorsa, Coasty yapabilir."
+      },
+      "whatAreCredits": {
+        "question": "Krediler nedir ve nasil kullanilir?",
+        "answer": "Krediler, ajan gorevler uzerinde calisirken tuketilir. Daha uzun, daha karmasik gorevler daha fazla kredi kullanir. Ucretli planlar aylik krediler icerir ve istediginiz zaman ek kredi paketleri satin alabilirsiniz."
+      },
+      "localComputer": {
+        "question": "Coasty kendi bilgisayarimda calisabilir mi?",
+        "answer": "Evet. Masaustu uygulamamiz makinenizde hafif bir katman olarak calisir, yerel tarayicinizi ve uygulamalarinizi dogrudan kontrol eder. Alternatif olarak, gorevler izole bulut makinelerinde calisir — secim sizin."
+      },
+      "dataSafe": {
+        "question": "Verilerim guvende mi?",
+        "answer": "Her gorev izole bir sandbox ortaminda calisir. Oturumlar arasinda hicbir sey sizamaz. Kimlik bilgileriniz gizli kalir ve her islem, istediginiz zaman inceleyebileceginiz tam bir denetim izinde ekran goruntuleriyle kaydedilir."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI destekli bilgisayar kullanimi.",
+    "tagline2": "Akilli ajanlarla herhangi bir is akisini otomatiklestirin.",
+    "columns": {
+      "product": "Urun",
+      "resources": "Kaynaklar",
+      "company": "Sirket",
+      "legal": "Yasal"
+    },
+    "links": {
+      "computerUse": "Bilgisayar Kullanimi",
+      "guide": "Rehber",
+      "download": "Indir",
+      "pricing": "Fiyatlandirma",
+      "agentSwarms": "Ajan Suruleri",
+      "status": "Durum",
+      "blog": "Blog",
+      "useCases": "Kullanim Alanlari",
+      "demos": "Demolar",
+      "compare": "Karsilastir",
+      "talkToCofounders": "Kurucu ortaklarla konusun ve demo",
+      "contact": "Iletisim",
+      "privacy": "Gizlilik",
+      "terms": "Sartlar"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Dil"
+  },
+  "auth": {
+    "brandHeading": "Hedefi sen belirle.",
+    "brandSubheading": "Gerisini biz halledelim.",
+    "mobileHeading": "Hedefi sen belirle. Gerisini biz halledelim.",
+    "mobileSubheading": "Gercek bir takim arkadasi gibi gozatan, tiklayan ve calisan AI ajanlari.",
+    "flowSteps": {
+      "step1": {
+        "label": "Gorevi tanimla",
+        "sub": "\"Ilk 5 rakibimizi arastir\""
+      },
+      "step2": {
+        "label": "Ajan kontrolu alir",
+        "sub": "Otonom olarak gozatar, tiklar, yazar"
+      },
+      "step3": {
+        "label": "Is teslim edildi",
+        "sub": "5 tam rakip profili iceren tablo"
+      }
+    },
+    "complete": "Tamamlandi",
+    "doneIn": "8 dakikada tamamlandi",
+    "demoCaption": "Bilgisayarınızda yapay zeka ajanları çalıştırın ya da telefonunuzdan her yerden kontrol edin.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Operatorunuz hazir bekliyor",
+      "signUp": "Is akislarinizi otopilota alin",
+      "magicLink": "Sifreyi atla",
+      "forgotPassword": "Sizi geri alalim"
+    },
+    "viewDescriptions": {
+      "signIn": "Kaldiginiz yerden devam edin — ajanlariniz hatirlyor",
+      "signUp": "Ilk AI ajaninizi bir dakikadan kisa surede devreye alin",
+      "magicLink": "Gelen kutunuzdan tek tikla iceridesiniz",
+      "forgotPassword": "E-postaniza bir sifirlama baglantisi gonderecegiz"
+    },
+    "google": {
+      "connecting": "Baglaniyor...",
+      "continueWithGoogle": "Google ile devam et"
+    },
+    "or": "veya",
+    "email": "E-posta",
+    "emailPlaceholder": "you@example.com",
+    "password": "Sifre",
+    "passwordPlaceholder": "Sifreniz",
+    "confirmPassword": "Sifre onayi",
+    "confirmPasswordPlaceholder": "Sifrenizi onaylayin",
+    "minChars": "Min. 6 karakter",
+    "signingIn": "Giris yapiliyor...",
+    "signIn": "Giris yap",
+    "creatingAccount": "Hesap olusturuluyor...",
+    "createAccount": "Hesap olustur",
+    "sending": "Gonderiliyor...",
+    "sendMagicLink": "Sihirli baglanti gonder",
+    "sendResetLink": "Sifirlama baglantisi gonder",
+    "forgotPassword": "Sifreni mi unuttun?",
+    "useMagicLink": "Sihirli baglanti kullan",
+    "dontHaveAccount": "Hesabiniz yok mu?",
+    "signUp": "Kaydol",
+    "alreadyHaveAccount": "Zaten hesabiniz var mi?",
+    "backToSignIn": "Girise don",
+    "termsAgreement": "Devam ederek, kabul etmis olursunuz:",
+    "terms": "Sartlar",
+    "and": "ve",
+    "privacyPolicy": "Gizlilik Politikasi",
+    "errors": {
+      "fillAllFields": "Lutfen tum alanlari doldurun",
+      "passwordMinLength": "Sifre en az 6 karakter olmalidir",
+      "passwordsDoNotMatch": "Sifreler eslesmiyor",
+      "supabaseNotConfigured": "Supabase yapilandirilmamis",
+      "unexpectedError": "Beklenmeyen bir hata olustu. Lutfen tekrar deneyin.",
+      "confirmEmail": "Giris yapmadan once lutfen e-postanizi onaylayin. Gelen kutunuzu kontrol edin.",
+      "invalidCredentials": "Gecersiz e-posta veya sifre.",
+      "signInFailed": "Giris basarisiz. Lutfen tekrar deneyin.",
+      "invalidEmail": "Gecersiz e-posta adresi.",
+      "emailAlreadyExists": "Bu e-posta ile bir hesap zaten mevcut. Bunun yerine giris yapmayi deneyin.",
+      "signUpFailed": "Kayit basarisiz. Lutfen tekrar deneyin.",
+      "enterEmail": "Lutfen e-postanizi girin",
+      "noAccountFound": "Bu e-posta ile hesap bulunamadi. Lutfen once kaydolun.",
+      "magicLinkFailed": "Sihirli baglanti gonderilemedi. Lutfen tekrar deneyin.",
+      "resetFailed": "Sifirlama e-postasi gonderilemedi. Lutfen tekrar deneyin.",
+      "updateFailed": "Sifre guncellenemedi. Lutfen tekrar deneyin."
+    },
+    "success": {
+      "checkEmailConfirm": "Giris yapmadan once hesabinizi onaylamak icin e-postanizi kontrol edin.",
+      "checkEmailMagicLink": "Giris yapmak icin sihirli baglanti e-postanizi kontrol edin.",
+      "checkEmailReset": "Sifre sifirlama baglantisi icin e-postanizi kontrol edin.",
+      "passwordUpdated": "Sifre basariyla guncellendi. Girise yonlendiriliyor..."
+    },
+    "resetPassword": {
+      "title": "Sifrenizi sifirlayin",
+      "subtitle": "Yeni sifrenizi asagiya girin.",
+      "newPassword": "Yeni sifre",
+      "confirmNewPassword": "Yeni sifre onayi",
+      "confirmPlaceholder": "Yeni sifrenizi onaylayin",
+      "updating": "Guncelleniyor...",
+      "updatePassword": "Sifreyi guncelle"
+    },
+    "errorPage": {
+      "title": "Kimlik Dogrulama Hatasi",
+      "defaultMessage": "Kimlik dogrulama sirasinda bir hata olustu.",
+      "tryAgain": "Tekrar Dene",
+      "backToChat": "Sohbete Don",
+      "needHelp": "Yardima mi ihtiyaciniz var?",
+      "contactSupport": "Destekle Iletisime Gec"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Simdilik atla",
+    "back": "Geri",
+    "continue": "Devam",
+    "getStarted": "Basla",
+    "settingUp": "Hazirlaniyor...",
+    "welcome": {
+      "titleReturning": "Tekrar hos geldiniz{name}!",
+      "titleNew": "Coasty'ye hos geldiniz",
+      "descriptionReturning": "Deneyiminizi iyilestirmek icin sizin hakkinda biraz daha bilgi edinmek isteriz",
+      "descriptionNew": "Deneyiminizi kisisellestirebilmemiz icin hesabinizi ayarlayalim"
+    },
+    "nameLabel": "Size ne diyelim?",
+    "namePlaceholder": "Adiniz",
+    "companyLabel": "Sirket",
+    "optional": "(istege bagli)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Web sitesi",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Sizi en iyi ne tanimlar?",
+      "subtitle": "Gecerli olan tumu secin — bu deneyiminizi ozellestirmemize yardimci olur"
+    },
+    "roles": {
+      "founder": "Kurucu / CEO",
+      "developer": "Gelistirici",
+      "marketer": "Pazarlamaci",
+      "designer": "Tasarimci",
+      "product_manager": "Urun Yoneticisi",
+      "data_analyst": "Veri / Analitik",
+      "operations": "Operasyon",
+      "other": "Diger"
+    },
+    "teamSizeLabel": "Takim buyuklugu",
+    "teamSizes": {
+      "solo": "Sadece ben",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Bizi nasil buldunuz?",
+      "subtitle": "Coasty'yi nereden duydugunu bilmek isteriz"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Arkadas / Is Arkadasi",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Diger"
+    },
+    "useCaseStep": {
+      "title": "Ilk olarak neyi otomatiklestireceksiniz?",
+      "subtitle": "Gecerli olan tumu secin — daha sonra her seyi kesfedebilirsiniz"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping ve Arastirma",
+      "browser_automation": "Tarayici Otomasyonu",
+      "data_entry": "Veri Girisi ve Formlar",
+      "email_outreach": "E-posta ve Erisim",
+      "testing": "QA ve Test",
+      "ecommerce": "E-ticaret Gorevleri",
+      "social_media": "Sosyal Medya Yonetimi",
+      "general_automation": "Genel Otomasyon"
+    },
+    "showcase": {
+      "title": "Ihtiyaciniz olan her sey,",
+      "titleHighlight": "yerlesik.",
+      "subtitle": "Coasty sizin icin neler yapabilir",
+      "noCode": {
+        "title": "Kod Yok",
+        "description": "Istediginizi duz Turkce olarak tanimlayin"
+      },
+      "agentSwarms": {
+        "title": "Ajan Suruleri",
+        "description": "Paralel ajan filolari"
+      },
+      "desktopControl": {
+        "title": "Masaustu Kontrolu",
+        "description": "Tiklar, yazar, gezinir"
+      },
+      "browserAutomation": {
+        "title": "Tarayici Otomasyonu",
+        "description": "Formlar, sekmeler, scraping — tamamen otomatik"
+      },
+      "computerVision": {
+        "title": "Bilgisayar Gorusu",
+        "description": "Ekraninizi gercek zamanli gorur ve anlar"
+      },
+      "workflows": {
+        "title": "Is Akislari",
+        "description": "Cok adimli akislar"
+      },
+      "onDevice": {
+        "title": "Cihaz Uzerinde",
+        "description": "Yerel olarak calisir"
+      },
+      "autonomous": {
+        "title": "7/24 Otonom",
+        "description": "Ayarla ve unut — siz uyurken calisir"
+      }
+    },
+    "guideCallout": {
+      "title": "Yeni misiniz? Sizin icin bir rehberimiz var",
+      "subtitle": "Ilk AI ajaninizi bir dakikadan kisa surede devreye alin"
+    }
+  },
+  "chatInput": {
+    "placeholder": "AI calisaniniz ne yapmali?",
+    "placeholderAlt": "AI'niza bilgisayarda ne yapacagini soyleyin...",
+    "vmError": {
+      "title": "Sanal Makine Hatasi",
+      "description": "Sanal makine hata durumunda veya siliniyor.",
+      "hint": "Lutfen sorunu cozmek icin Makineler sekmesini kontrol edin veya yalnizca web aramasi kullanmak icin \"Bilgisayar Secilmedi\" secenegini secin.",
+      "gotIt": "Anladim"
+    },
+    "status": {
+      "creating": "{name} olusturuluyor...",
+      "initiating": "{name} uzerinde ajan baslatiliyor...",
+      "stopping": "{name} durduruluyor...",
+      "preparing": "{name} hazirlaniyor..."
+    },
+    "swarm": {
+      "title": "Suru Modu",
+      "pro": "PRO",
+      "upgradeLabel": "Suru modu — acmak icin yukseltin",
+      "feature1": "Gecici makineler arasinda paralel yurutme",
+      "feature2": "Her makine otonom calisir",
+      "feature3": "Suru basina planinizin makine limitinin 3 kati",
+      "description": "Tek bir istemi makine limitinizin 3 kati uzerinde paralel calistirin — her biri gorevi bagimsiz olarak ustlenir.",
+      "enableLabel": "Suru modunu etkinlestir",
+      "disableLabel": "Suru modunu devre disi birak",
+      "onTooltip": "Suru modu ACIK — isteminiz birden fazla makinede paralel calisacak",
+      "offTooltip": "Isteminizi birden fazla makinede ayni anda calistirmak icin suru modunu etkinlestirin",
+      "decreaseMachines": "Makine sayisini azalt",
+      "increaseMachines": "Makine sayisini artir",
+      "machineLimit": "Planinizda en fazla {max} suru makinesi. Daha fazla mi lazim? founders@coasty.ai ile iletisime gecin",
+      "label": "Multi-Run",
+      "upgradeCta": "Suru Modu"
+    },
+    "desktop": {
+      "connectLabel": "Masaustune baglan",
+      "screenLabel": "{name} ekrani",
+      "screenDefault": "Masaustu",
+      "watchTooltip": "Ajaninizin ayri bir ekranda calismasini izleyin. Sadece hicbir seye dokunmayin, yoksa sahne korkusu yasar!",
+      "watchLabel": "Masaustu"
+    },
+    "buttons": {
+      "stop": "Dur",
+      "sendToSwarm": "Suruye gonder",
+      "taskRunning": "Baska bir gorev calisiyor — durdurmak ve kendinizinkini calistirmak icin tiklayin",
+      "selectComputer": "Mesaj gondermek icin bir bilgisayar secin",
+      "waitCreating": "Lutfen VM'nin olusturulmasini bekleyin",
+      "waitStarting": "Lutfen VM'nin baslamasini bekleyin",
+      "waitAgent": "Lutfen ajanin baslatilmasini bekleyin",
+      "vmStopping": "VM durduruluyor",
+      "send": "Gonder",
+      "switching": "Degistiriliyor...",
+      "overrideRun": "Gecer Yaz ve Calistir",
+      "stopLabel": "Calisan gorevi durdur ve bunu baslat",
+      "sendLabel": "Mesaj gonder"
+    },
+    "search": "Ara",
+    "upload": {
+      "label": "VM'ye dosya yukle",
+      "heading": "VM'ye dosya yukle",
+      "description": "Dosyalar Masaustune kaydedilecek",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Dosyalari buraya birakin",
+      "dropDescription": "Dosyalar VM'nin Masaustu klasorune yuklenecek",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Daha fazla ozellik icin ucretsiz giris yapin",
+      "description": "Projeler olusturun, takim uyelerini davet edin ve daha fazlasi.",
+      "connecting": "Baglaniyor...",
+      "continueWithGoogle": "Google ile devam et"
+    },
+    "removeFile": "Dosyayi kaldir"
+  },
+  "chat": {
+    "greeting": "Merhaba",
+    "greetingAuth": "Bilgisayar islerini ben hallederim. Gorev nedir?",
+    "greetingUnauth": "Bilgisayari sizin yerinize kullanan AI. Sadece ne yapilmasini istediginizi soyleyin.",
+    "guide": "Rehber",
+    "saveLogins": "Otomatik doldurma icin girisleri kaydet",
+    "encryptedNote": "sifrelenmis, AI tarafindan asla gorulmez",
+    "roleLabels": [
+      "Is Arkadasi",
+      "Calisan",
+      "Arkadas",
+      "Asistan",
+      "Ortak",
+      "Takim Arkadasi",
+      "Isbirligi Yapan",
+      "Yardimci"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} rakip raporu",
+        "warmLeads": "{company} icin 20 lead bul",
+        "pitchDeck": "{company} sunum taslagi"
+      },
+      "developer": {
+        "findBugs": "{company} uzerinde hata bul",
+        "performance": "{company} performans denetimi",
+        "apiDocs": "{company} API dokumantasyonunu cikar"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO bosluk analizi",
+        "competitorAds": "{company} rakiplerinin reklamlarini izle",
+        "trendingContent": "{company} icin trend fikirler"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} degerlendirme ozeti",
+        "featureComparison": "{company} ozellik karsilastirmasi",
+        "competitorLaunches": "{company} rakip lansmanlarini takip et"
+      },
+      "data_analyst": {
+        "exportCsv": "{company} verilerini CSV'ye aktar",
+        "marketSizing": "{company} pazar boyutlandirmasi",
+        "benchmark": "{company} vs sektor kiyaslamasi"
+      },
+      "operations": {
+        "enterRecords": "{company} sistemine kayit gir",
+        "cheapestVendor": "{company} icin tedarikci bul",
+        "invoiceSummary": "{company} fatura ozeti"
+      },
+      "designer": {
+        "designComparison": "{company} vs rakipler tasarim",
+        "responsiveAudit": "{company} responsive denetimi",
+        "inspiration": "{company} icin tasarim ilhami"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "{company} site verilerini cek",
+      "browser_automation": "{company} raporlarini disari aktar",
+      "data_entry": "{company} sistemine veri gir",
+      "email_outreach": "{company} icin erisim gonder",
+      "testing": "{company} QA testi",
+      "ecommerce": "{company} fiyat karsilastirmasi",
+      "social_media": "{company} hakkinda paylas",
+      "general_automation": "{company} uzerinde gorev otomatiklestir"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Metni kopyala",
+    "copied": "Kopyalandi!",
+    "regenerate": "Yeniden olustur",
+    "feedback": {
+      "title": "Geri Bildirim",
+      "prompts": [
+        "Bunu degerlendir",
+        "Geri bildirim",
+        "Nasil yaptik?",
+        "Dusunceleriniz?",
+        "Geri bildirim paylas"
+      ],
+      "tooltip": "Geri bildiriminizi paylasin"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Akilli Arama",
+      "description": "Web genelinde AI destekli arama"
+    },
+    "collaborate": {
+      "title": "Is Birligi",
+      "description": "Gercek zamanli birlikte calisin"
+    },
+    "globalAccess": {
+      "title": "Kuresel Erisim",
+      "description": "50'den fazla dilde arama yapin"
+    },
+    "aiModels": {
+      "title": "AI Modelleri",
+      "description": "Birden fazla AI saglayici"
+    },
+    "freeForever": {
+      "title": "Sonsuza Kadar Ucretsiz",
+      "description": "Gizli maliyet yok"
+    },
+    "privateSecure": {
+      "title": "Ozel ve Guvenli",
+      "description": "Verileriniz sizin kalir"
+    }
+  },
+  "sidebar": {
+    "newTask": "Yeni Gorev",
+    "newTaskDescription": "Yeni bir AI otomasyonu baslat",
+    "activity": "Aktivite",
+    "taskHistory": "Gorev Gecmisi",
+    "taskHistoryDescription": "Gecmis gorevleri inceleyin ve kaldiginiz yerden devam edin",
+    "taskHistoryPopup": {
+      "title": "Son gorevleriniz",
+      "description": "Gecmis konusmalari gozatin ve devam edin. Her gorev kaydedilir, boylece kaldiginiz yerden devam edebilirsiniz."
+    },
+    "swarmRuns": "Suru Calismalari",
+    "swarmRunsDescription": "Coklu ajan paralel is akislarini izle",
+    "swarmRunsPopup": {
+      "title": "Coklu ajan is akislari",
+      "description": "Gorevleri birden fazla makinede paralel calistirin. Her ajan bagimsiz calisir ve sonuclar otomatik olarak birlesir."
+    },
+    "guide": "Rehber",
+    "guideDescription": "Coasty'den en iyi sekilde nasil yararlanacaginizi ogrenin",
+    "guidePopup": {
+      "title": "Baslarken",
+      "description": "Etkili otomasyon icin adim adim kilavuzlar ve en iyi uygulamalar."
+    },
+    "infrastructure": "Altyapi",
+    "computer": "Bilgisayar",
+    "computers": "Bilgisayarlar",
+    "active": "aktif",
+    "view": "Goruntule",
+    "workforce": "Zamanlamalar",
+    "workforceDescription": "Otomatik görevleri ve tetikleyicileri planla",
+    "workforcePopup": {
+      "title": "Zamanlanmis otomasyon",
+      "description": "Cron zamanlamaları ve ajanlar arası tetikleyicilerle tekrarlanan görevler ayarlayın. Zamanlamalarınız siz uyurken çalışır."
+    },
+    "credentials": "Kimlik Bilgileri",
+    "credentialsDescription": "Ajan erisimi icin girisleri guvenle saklayin",
+    "credentialsPopup": {
+      "title": "Guvenli kimlik bilgisi kasasi",
+      "description": "Sifreleme ile girisleri ve API anahtarlarini saklayin. Ajanlar ham degerleri ifsa etmeden kimlik bilgilerini otomatik doldurur."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Masaustu Uygulamasini Edin",
+      "download": "Indir",
+      "downloadDesktopApp": "Masaustu Uygulamasini Indir",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Bilgisayarinizi uzaktan kontrol edin",
+      "controlDescription": "Masaustu uygulamasini kurun ve bu kontrol panelinden bilgisayarinizda gorevleri calistirin — her yerden, her zaman."
+    },
+    "credits": {
+      "runningLow": "Krediler — Azaliyor",
+      "remaining": "Kalan krediler",
+      "buy": "Satin Al",
+      "creditsLeft": "kredi kaldi",
+      "usedLabel": "Kullanilan: {count}",
+      "consumed": "{percent}% tuketildi",
+      "usageThisWeek": "Bu haftaki kullanim"
+    },
+    "talkToUs": "Bizimle konusun",
+    "talkToUsDesc": "15 dakikalık görüşme ayırtın",
+    "inviteEarn": "Davet Et ve Kazan",
+    "inviteEarnDesc": "Ücretsiz kredi kazanın",
+    "user": "Kullanici",
+    "account": "Hesap",
+    "tasks": "{count} Gorev",
+    "recentActivity": "Son aktivite",
+    "viewAllHistory": "Tum gecmisi goruntule →",
+    "swarmRunsCount": "{count} Suru Calismasi",
+    "running": "calisiyor",
+    "completed": "tamamlandi",
+    "viewAllSwarms": "Tum suruleri goruntule →",
+    "schedulesCount": "{count} Zamanlama",
+    "totalRuns": "{count} toplam calistirma",
+    "paused": "duraklatildi",
+    "viewAllSchedules": "Tum zamanlamalari goruntule →",
+    "credentialsCount": "{count} Kimlik Bilgisi",
+    "encryptedVault": "Sifrelenmis kasa",
+    "manageCredentials": "Kimlik bilgilerini yonet →",
+    "days": [
+      "Pzt",
+      "Sal",
+      "Car",
+      "Per",
+      "Cum",
+      "Cmt",
+      "Paz"
+    ],
+    "resume": "DEVAM",
+    "result": "SONUC",
+    "notScheduled": "Zamanlanmamis",
+    "overdue": "Gecikti",
+    "lessThanMin": "< 1 dk",
+    "inMinutes": "{count}dk icinde",
+    "inHours": "{count}sa icinde",
+    "today": "bugun",
+    "yesterday": "dun"
+  },
+  "appHeader": {
+    "login": "Giris",
+    "assign": "Planla",
+    "assignDescription": "Bu görevi otomatik çalışacak şekilde planla",
+    "computer": "Bilgisayar",
+    "showComputer": "Bilgisayari Goster",
+    "hideComputer": "Bilgisayari Gizle",
+    "employeeHired": "Calisan ise alindi!",
+    "employeeRemoved": "Calisan cikarildi"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Hafif gunluk otomasyon"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Her gun gorevleri otomatiklestir"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Karmasik is akislarini olcekle",
+        "badge": "En Populer"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Sinirsiz agir otomasyon"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (etkinsizlik sonrasi silindi)",
+      "vmAlwaysOn": "{count} her zaman acik VM",
+      "vmAlwaysOnPlural": "{count} her zaman acik VM",
+      "agentsParallel": "{count} paralel ajan",
+      "basicSearch": "Temel arama",
+      "advancedSearch": "Gelismis arama ve cikarim",
+      "standardSupport": "Standart destek (gercek insanlar)",
+      "prioritySupport": "Oncelikli destek, 24 saat yanitlama",
+      "premiumSupport": "Premium destek, 12 saat yanitlama"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Kucuk Paket",
+        "description": "Hizli yukleme"
+      },
+      "medium": {
+        "name": "Orta Paket",
+        "description": "Standart yenileme",
+        "savings": "%8 tasarruf"
+      },
+      "large": {
+        "name": "Buyuk Paket",
+        "description": "Toplu satin alma",
+        "savings": "%17 tasarruf"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Az once",
+      "minutesAgo": "{count}dk once",
+      "hoursAgo": "{count}sa once",
+      "daysAgo": "{count}g once"
+    },
+    "noActivity": "Bu donemde aktivite yok",
+    "stats": {
+      "balance": "Bakiye",
+      "earned": "Kazanilan",
+      "used": "Kullanilan",
+      "credits": "kredi",
+      "allTime": "tum zamanlar",
+      "lastRange": "son {range}",
+      "sessions": "{count} oturum",
+      "avgDaily": "~{count}/gun ort.",
+      "plan": "Plan",
+      "free": "Ucretsiz",
+      "noPlan": "Plan yok",
+      "canceling": "Iptal ediliyor"
+    },
+    "monthlyUsage": "Aylik Kredi Kullanimi",
+    "remaining": "{used} / {total} kalan",
+    "usedPercent": "Bu donemde {percent}% kullanildi",
+    "renews": "{date} tarihinde yenilenir",
+    "choosePlan": "Planinizi Secin",
+    "choosePlanDescription": "AI ozelliklerini acmak ve aylik kredi almak icin abone olun",
+    "savingsVsHuman": "Insana karsi {amount}/ay tasarruf edin",
+    "timeSaved": "Aylik {time} tasarruf",
+    "cheaper": "{multiplier} daha ucuz",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/ay",
+    "creditsPerMonth": "{count} kredi /ay",
+    "processing": "Isleniyor...",
+    "subscribeTo": "{name} planina abone ol",
+    "transactionTypes": {
+      "credit_purchase": "Kredi Satin Alma",
+      "agent_usage": "Ajan Kullanimi",
+      "refund": "Iade",
+      "bonus": "Bonus Odul",
+      "subscription": "Abonelik",
+      "subscription_grant": "Abonelik Hibesi",
+      "renewal": "Yenileme Kredileri",
+      "reactivation": "Yeniden Aktivasyon"
+    },
+    "toasts": {
+      "paymentSuccess": "Odeme basarili! Kredileriniz eklendi.",
+      "subscriptionActivated": "Abonelik basariyla etkinlestirildi!",
+      "paymentCanceled": "Odeme iptal edildi. Hicbir ucret alinmadi.",
+      "signInToSubscribe": "Abone olmak icin lutfen giris yapin",
+      "subscriptionCheckoutFailed": "Abonelik odemesi baslatiliamadi. Lutfen tekrar deneyin.",
+      "signInToPurchase": "Kredi satin almak icin lutfen giris yapin",
+      "needSubscription": "Ek kredi satin almak icin aktif bir aboneliginiz olmasi gerekir",
+      "checkoutFailed": "Odeme baslatiliamadi. Lutfen tekrar deneyin.",
+      "manageFailed": "Abonelik yonetimi acilamadi. Lutfen tekrar deneyin.",
+      "transactionsExported": "Islemler disari aktarildi"
+    }
+  },
+  "apiKeys": {
+    "title": "Model Saglayicilari",
+    "new": "yeni",
+    "description": "Modellere erismek icin kendi API anahtarlarinizi ekleyin.",
+    "securityNote": "Anahtarlariniz uctan uca sifreleme ile guvenli sekilde saklanir.",
+    "apiKeyLabel": "{provider} API Key",
+    "getApiKey": "API key al",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "deleteDialog": {
+      "title": "API Key Sil",
+      "description": "{provider} API anahtarinizi silmek istediginizden emin misiniz? Bu islem geri alinamaz ve {provider} modellerine erisinizi kaybedersiniz.",
+      "cancel": "Iptal",
+      "confirm": "Sil"
+    },
+    "toasts": {
+      "saved": "API key kaydedildi",
+      "savedDescription": "{provider} API anahtariniz kaydedildi ve modeller favorilerinize eklendi.",
+      "updatedDescription": "{provider} API anahtariniz guncellendi.",
+      "saveFailed": "API key kaydedilemedi",
+      "saveFailedDescription": "{provider} API anahtari kaydedilemedi. Lutfen tekrar deneyin.",
+      "deleted": "API key silindi",
+      "deletedDescription": "{provider} API anahtariniz silindi.",
+      "deleteFailed": "API key silinemedi",
+      "deleteFailedDescription": "{provider} API anahtari silinemedi. Lutfen tekrar deneyin."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Profil Detaylari",
+    "displayName": "Gorunen Ad",
+    "namePlaceholder": "Adiniz",
+    "company": "Sirket",
+    "companyPlaceholder": "Sirketiniz",
+    "website": "Web Sitesi",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Kaydediliyor...",
+    "saveChanges": "Degisiklikleri kaydet",
+    "account": "Hesap",
+    "email": "E-posta",
+    "verified": "Dogrulandi",
+    "signOut": "Cikis yap",
+    "signOutDescription": "Bu cihazdan cikis yap",
+    "toasts": {
+      "profileUpdated": "Profil guncellendi",
+      "profileUpdateFailed": "Profil guncellenemedi",
+      "signOutFailed": "Cikis yapilamadi"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Verileriniz koruma altinda",
+    "dataProtectedDescription": "Aktarim ve depolama sirasinda sifreleme ile kurumsal duzeyde guvenlik",
+    "features": {
+      "encryption": {
+        "title": "Uctan Uca Sifreleme",
+        "description": "API anahtarlari AES-256-GCM ile sifrelenmistir. Kimlik bilgileriniz asla duz metin olarak saklanmaz."
+      },
+      "rls": {
+        "title": "Satir Duzeyi Guvenlik",
+        "description": "Veritabani duzeyi izolasyon, verilerinizin yalnizca sizin tarafinizdan erisilebilmesini saglar. Calisanlar arasi erisim mumkun degildir."
+      },
+      "privacy": {
+        "title": "Tasarimla Gizlilik",
+        "description": "Hizmeti sunmak icin gerekli minimum veriyi topluriz. Konusmalariniz ve dosyalariniz sizin kalir."
+      },
+      "session": {
+        "title": "Oturum Guvenligi",
+        "description": "CSRF korumasi, guvenli HTTP-only cerezler ve her istekte Content Security Policy basiklari."
+      }
+    },
+    "legal": "Yasal",
+    "privacyPolicy": {
+      "title": "Gizlilik Politikasi",
+      "description": "Verilerinizi nasil topladigimiz, kullandigimiz ve korudigumuz"
+    },
+    "termsOfService": {
+      "title": "Hizmet Sartlari",
+      "description": "Kullanim sartlarimiz ve kosullarimiz"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Duzlem"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Ozet",
+      "highlight": "Ozetle"
+    },
+    "code": {
+      "label": "Kod",
+      "highlight": "Olustur"
+    },
+    "research": {
+      "label": "Arastirma",
+      "highlight": "Analiz Et"
+    },
+    "create": {
+      "label": "Olustur",
+      "highlight": "Uret"
+    },
+    "solve": {
+      "label": "Coz",
+      "highlight": "Hata Ayikla"
+    },
+    "learn": {
+      "label": "Ogren",
+      "highlight": "Acikla"
+    }
+  },
+  "loadingMessages": [
+    "Silikon beyin baslatiliyor",
+    "Dijital bilinc uyandiiriliyor",
+    "Noron yollari hazirlaniyor",
+    "Kuantum cekirdekleri dondruluyor",
+    "Flux kapasitor sarj ediliyor",
+    "Ana bilgisayar aktive ediliyor",
+    "Hesaplama matrisi guc veriliyor",
+    "Warp motoru devreye aliniyor",
+    "Silikon ruhlar cagriliyor",
+    "Elektron motoru atescleniyor",
+    "Transistorler isitiliyor",
+    "Bit ve baytlar birlestiriliyor",
+    "Dijital sinapslar kalibre ediliyor",
+    "CPU kristalleri enerji yukleniyor",
+    "Bilinc protokolleri yukleniyor",
+    "Sistem kaynaklari baslatiliyor",
+    "Hesaplama ortami hazirlaniyor",
+    "Guvenli baglanti kuruluyor",
+    "Sanal kaynaklar saglaaniyor",
+    "Sistem parametreleri yapilandiriliyor",
+    "Sanal ornek baslatiliyor",
+    "Uzak masaustu aktive ediliyor",
+    "Bulut kaynaklari dagitiliyor",
+    "Sistem baslama dizisi baslatiliyor",
+    "Yurutme ortami hazirlaniyor",
+    "Uykucu bilgisayar uyandiiriliyor",
+    "Dijital ayiya durtuklenliyor",
+    "Biraz hesaplama kahvesi demleniyor",
+    "Dijital kaslar gerriliyor",
+    "Dijital gozler aciliyor",
+    "Baslatiliyor",
+    "Guc veriliyor",
+    "Cevrimici olunuyor",
+    "Sistem yukleniyor",
+    "Hazirlaniyor",
+    "Neredeyse tamam",
+    "Calisma alani hazirlaniyor",
+    "Kaynaklar yukleniyor",
+    "Sistem yukseliyor"
+  ],
+  "quickStart": {
+    "greetingName": "Merhaba {name}!",
+    "greetingDefault": "Merhaba!",
+    "subtitle": "Görevleriniz güvenli, izole bir sanal bilgisayarda çalışır",
+    "tabs": {
+      "start": "Başla",
+      "desktop": "Masaüstü",
+      "swarms": "Sürüler",
+      "schedules": "Zamanlamalar"
+    },
+    "items": {
+      "computerReady": "Bilgisayar hazır",
+      "pickComputer": "Bir bilgisayar seç",
+      "createComputer": "Bilgisayar oluştur",
+      "loginsSaved": "Girişler kaydedildi",
+      "addLogins": "Giriş bilgisi ekle",
+      "askAnything": "Her şeyi sor",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Mobil uzaktan kontrol",
+      "freeDownload": "Ücretsiz indirme",
+      "onePrompt": "Tek istem",
+      "manyAgents": "Birçok ajan",
+      "combinedResult": "Birleşik sonuç",
+      "setCadence": "Sıklık belirle",
+      "autoRuns": "Otomatik çalıştırmalar",
+      "recurringResults": "Tekrarlayan sonuçlar",
+      "computerReadyDesc": "Bağlı ve görevleri yürütmeye hazır",
+      "pickComputerDesc": "Mevcut makineleriniz arasından seçin",
+      "createComputerDesc": "Saniyeler içinde bir bulut bilgisayar oluşturun",
+      "loginsSavedDesc": "Şifreli kimlik bilgileri otomatik doldurma için hazır",
+      "addLoginsDesc": "Otomatik site erişimi için şifreleri kaydedin",
+      "askAnythingDesc": "Bir görev tanımlayın ve yapay zekanın çalışmasını izleyin",
+      "macWindowsDesc": "Masaüstünüz için yerel uygulama",
+      "mobileRemoteDesc": "Ajanınızı herhangi bir cihazdan kontrol edin",
+      "freeDownloadDesc": "Hafif kurulum, saniyeler içinde çalışır",
+      "onePromptDesc": "Hedefinizi doğal dilde açıklayın",
+      "manyAgentsDesc": "Ajanlar birden fazla makinede paralel çalışır",
+      "combinedResultDesc": "Tüm sonuçlar tek bir raporda birleştirildi",
+      "setCadenceDesc": "Saatlik, günlük, haftalık veya özel cron",
+      "autoRunsDesc": "Ajanlar müdahale olmadan çalışır",
+      "recurringResultsDesc": "Raporlar zaman çizelgenize göre teslim edilir"
+    },
+    "cta": {
+      "downloadApp": "Uygulamayı indir",
+      "trySwarms": "Sürüleri dene",
+      "setUp": "Kur"
+    }
+  },
+  "machines": {
+    "title": "Bilgisayarlarım",
+    "subtitle": "AI kontrollü masaüstü ortamlarınızı yönetin",
+    "guide": "Rehber",
+    "newMachine": "Yeni Makine",
+    "filters": {
+      "all": "Tümü",
+      "running": "Çalışıyor",
+      "creating": "Oluşturuluyor",
+      "stopped": "Durduruldu"
+    },
+    "desktopPromo": {
+      "text": "VM'yi atlayın — yerel uygulama ile AI ajanlarını kendi bilgisayarınızda çalıştırın. Masaüstünüzü telefonunuzdan kontrol edin.",
+      "cta": "Uygulamayı al"
+    },
+    "emptyState": {
+      "title": "Tam bilgisayar erişimli gerçek bir AI çalışanı",
+      "description": "İzole bir sanal makine başlatın ve AI ajanlarının web'de gezinmesine, terminal çalıştırmasına ve masaüstünü kontrol etmesine izin verin — elleri serbest.",
+      "feature1": {
+        "title": "Tam masaüstü kontrolü",
+        "description": "AI fareyi hareket ettirir, yazar, tıklar ve gerçek bir kullanıcı gibi gezinir."
+      },
+      "feature2": {
+        "title": "Her görev otomatik",
+        "description": "Tarayıcı, terminal ve UI — tüm ajanlar tek bir VM'de birlikte çalışır."
+      },
+      "feature3": {
+        "title": "İzole ve güvenli",
+        "description": "Her makine kendi konteynerinde çalışır — yerel sisteminiz dokunulmaz kalır."
+      },
+      "cta": "İlk makinenizi oluşturun"
+    },
+    "noMachines": "Makine bulunamadı.",
+    "noFilteredMachines": "{filter} makine yok",
+    "noFilteredDescription": "Şu anda {filter} durumunda makine yok.",
+    "loadingMachines": "Makineler yükleniyor...",
+    "toasts": {
+      "deleted": "Makine başarıyla silindi",
+      "readyOpen": "Artık makinenize bağlanabilirsiniz.",
+      "open": "Aç",
+      "createFailed": "Lütfen makineyi tekrar oluşturmayı deneyin.",
+      "fetchFailed": "Makineler yüklenemedi"
+    }
+  },
+  "createMachine": {
+    "title": "Yeni Bilgisayar",
+    "subtitle": "Bulut masaüstü başlatın — ~30 saniyede hazır",
+    "freeExpiry": "Ücretsiz bilgisayarlar şu süre sonra sona erer: ",
+    "freeExpiry2": "2 saat",
+    "upgrade": "Yükselt",
+    "limitReached": "Bilgisayar limitinize ulaştınız. Yeni bir tane oluşturmak için mevcut bir bilgisayarı durdurun veya silin.",
+    "upgradeMore": "Daha fazlası için yükseltin →",
+    "nameLabel": "Bilgisayar Adı",
+    "namePlaceholder": "Bulut Sunucum",
+    "nameError": "Bilgisayar adı \"local\" ile başlayamaz",
+    "nameRequired": "Lütfen bir bilgisayar adı girin",
+    "osLabel": "İşletim Sistemi",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 masaüstü"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows masaüstü — hatalar olabilir"
+    },
+    "osHintWindows": "Chrome ile Windows masaüstü (beta). ~2 dakikada hazır.",
+    "osHintLinux": "Tarayıcı üzerinden erişilebilir Ubuntu masaüstü. ~30 saniyede hazır.",
+    "stateLabel": "Bilgisayar Durumu",
+    "restorePrevious": "Öncekini Geri Yükle",
+    "restoreDescription": "Son anlık görüntüden devam et",
+    "startFresh": "Sıfırdan Başla",
+    "startFreshDescription": "Temiz masaüstü ortamı",
+    "cancel": "İptal",
+    "creating": "Oluşturuluyor...",
+    "create": "Bilgisayar Oluştur",
+    "toasts": {
+      "restoringSnapshot": "Bilgisayar anlık görüntüden geri yükleniyor!",
+      "restoringDescription": "Önceki masaüstü durumunuz geri yükleniyor. ~30 saniyede hazır.",
+      "windowsCreated": "Windows bilgisayar oluşturma başladı!",
+      "windowsDescription": "Windows masaüstünüz başlatılıyor. ~2 dakikada hazır.",
+      "linuxCreated": "Masaüstünüz başlatılıyor. ~30 saniyede hazır.",
+      "sshCreated": "Bulut bilgisayarınız başlatılıyor. SSH anahtarı hazır olduğunda kullanılabilir olacak."
+    }
+  },
+  "secrets": {
+    "title": "Kayıtlı Kimlik Bilgileri",
+    "subtitle": "Güvenli şekilde saklanır ve giriş yaparken AI ajanı tarafından otomatik olarak kullanılır",
+    "guide": "Rehber",
+    "import": "İçe Aktar",
+    "addCredential": "Kimlik Bilgisi Ekle",
+    "securityNote": "Kimlik bilgileri asla AI modeline gönderilmez ve sohbette gösterilmez — ajan değerleri görmeden doğrudan doldurur",
+    "username": "Kullanıcı Adı",
+    "password": "Şifre",
+    "hide": "Gizle",
+    "revealFor10s": "10sn göster",
+    "encrypted": "Şifreli",
+    "emptyState": {
+      "title": "Otomatik giriş, eller serbest",
+      "description": "Kimlik bilgilerini bir kez kaydedin — AI ajanı otomatik olarak giriş yapar ve sizi hiç rahatsız etmeden devam eder",
+      "feature1": {
+        "title": "Sıfır kesinti",
+        "description": "Ajan bir giriş formuyla karşılaşır, doldurur ve göreve devam eder — soru yok, duraklama yok"
+      },
+      "feature2": {
+        "title": "AI tarafından asla görülmez",
+        "description": "Kimlik bilgileriniz doğrudan enjekte edilir. AI modeli gerçek değerleri asla görmez"
+      },
+      "feature3": {
+        "title": "Herhangi bir web sitesi",
+        "description": "Her sitedeki giriş formlarıyla çalışır — e-posta, SaaS araçları, panolar, her şey"
+      },
+      "cta": "İlk kimlik bilginizi ekleyin"
+    },
+    "deleteDialog": {
+      "title": "Kimlik bilgisi silinsin mi?",
+      "description": "{name} ({service}) kalıcı olarak silinecek. AI ajanı artık bunu kullanamayacak.",
+      "cancel": "İptal",
+      "delete": "Sil"
+    },
+    "toasts": {
+      "loadFailed": "Kimlik bilgileri yüklenemedi",
+      "revealFailed": "Şifre gösterilemedi",
+      "deleted": "Kimlik bilgisi silindi",
+      "deleteFailed": "Kimlik bilgisi silinemedi"
+    },
+    "loading": "Kimlik bilgileri yükleniyor..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Basit fiyatlandirma,",
+      "title2": "gercek otopilot",
+      "subtitle": "Ucretsiz baslayin. Daha fazla guce ihtiyaciniz olunca yukseltme yapin."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "1 numarali bilgisayar kullanim ajanini deneyin",
+        "cta": "Ucretsiz basla"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Hafif gunluk otomasyon",
+        "cta": "Lite al"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Her gun gorevleri otomatiklestirin",
+        "cta": "Starter al"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Karmasik is akislarini olceklendirin",
+        "cta": "Plus'a gec",
+        "badge": "En Populer"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Sinirsiz yogun otomasyon",
+        "cta": "Pro al"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Tam tarayici, masaustu ve terminal",
+        "badge": "Cekirdek"
+      },
+      "swarmMode": {
+        "name": "Suru Modu",
+        "sequential": "Yalnizca sirasal",
+        "parallel": "{count} ajan paralel",
+        "badge": "Guclu"
+      },
+      "security": {
+        "name": "Guvenlik",
+        "description": "Sandbox, E2E sifrelenmis",
+        "badge": "Her plan"
+      },
+      "monthlyCredits": {
+        "name": "Aylik krediler",
+        "payAsYouGo": "Kullandikca ode",
+        "creditsPerMonth": "{count} kredi/ay"
+      },
+      "persistentMachines": {
+        "name": "Kalici makineler",
+        "temporary": "1 gecici VM (2 saat)",
+        "deletedAfterInactivity": "1 VM (etkisizlikten sonra silinir)",
+        "alwaysOn": "{count} her zaman acik VM",
+        "alwaysOnPlural": "{count} her zaman acik VM"
+      },
+      "webSearch": {
+        "name": "Web arama",
+        "advanced": "Gelismis arama ve cikarma",
+        "basic": "Temel arama"
+      }
+    },
+    "animations": {
+      "agentDescription": "Ajaniniz gercek bir bilgisayari kontrol eder — tarayici, dosyalar ve terminal",
+      "fillForm": "Formu doldur",
+      "searchExtract": "Ara ve cikar",
+      "uploadReport": "Raporu yukle",
+      "navigateSite": "Sitede gezin",
+      "creditsPerMonth": "aylik kredi",
+      "cr": "kr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2 saat siniri",
+      "alwaysOn": "Her zaman acik",
+      "tempVmDescription": "Gecici VM — 2 saat sonra sifirlanir",
+      "persistentVmDescription": "Dosyalariniz, uygulamalariniz ve oturumlariniz gorevler arasinda korunur",
+      "sequentialOnly": "Bu planda yalnizca sirasal calistirma",
+      "yourTask": "Goreviniz",
+      "agentsWorking": "{count} ajan ayni anda calisiyor",
+      "upgradeForExtraction": "Tam cikarma icin yukseltme yapin",
+      "searchDescription": "Yapilandirilmis veriyi arayin, kaziin ve cikarin",
+      "basicSearchIncluded": "Temel arama dahil",
+      "e2eEncryption": "E2E sifreleme",
+      "sandboxedVm": "Sandbox VM",
+      "destroyedAfterUse": "Kullanim sonrasi yok edilir",
+      "everyPlan": "Her plan. Istisnasiz."
+    },
+    "perMonth": "/ay",
+    "faqs": {
+      "credits": {
+        "q": "Bir kredi olarak ne sayilir?",
+        "a": "Bir kredi yaklasik bir ajan eylemine esittir — bir tiklama, form doldurma, arama sorgusu veya dosya islemi. Tipik bir cok adimli gorev 5-15 kredi kullanir."
+      },
+      "persistent": {
+        "q": "'Kalici makine' ne demek?",
+        "a": "Ucretli planlarda VM'niz gorevler arasinda calismaya devam eder — masaustunuz, dosyalariniz, tarayici oturumlariniz ve yuklu yazilimlariniz korunur. Kendi her zaman acik bulut bilgisayariniz gibi."
+      },
+      "swarm": {
+        "q": "Suru modu nedir?",
+        "a": "Suru modu, bir gorevi ayni anda calisan birden fazla makineye boler. Bir ajanin sirasiyla 10 arama yapmasi yerine, birden fazla ajan bunlari paralel olarak yapar."
+      },
+      "cancel": {
+        "q": "Istedigim zaman iptal edebilir miyim?",
+        "a": "Evet. Sozlesme yok, iptal ucreti yok. Hesap sayfanizdan iptal edin ve fatura doneminizin sonuna kadar erisimi koruyun."
+      },
+      "security": {
+        "q": "Verilerim guvenli mi?",
+        "a": "Her gorev, kullanim sonrasi yok edilen tamamen izole bir VM'de calisir. Tum baglanti uctan uca sifrelenmistir ve kimlik bilgilerinizi asla saklamayiz."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Ozel krediler, ozel VM'ler, SLA, SSO ve oncelikli destek.",
+      "cta": "Bize Ulasin"
+    },
+    "footer": {
+      "title": "AI ajaniniz 60 saniye uzakta",
+      "subtitle": "Kaydolun ve Coasty'nin isi halletmesine izin verin.",
+      "noCreditCard": "Kredi karti yok",
+      "cancelAnytime": "Istediginiz zaman iptal",
+      "noCreditCardRequired": "Kredi karti gerekmiyor",
+      "cancelAnytimeNoContracts": "Istediginiz zaman iptal — sozlesme yok"
+    },
+    "questions": "Sorular"
+  },
+  "guide": {
+    "pageTitle": "Kilavuz",
+    "pageSubtitle": "Ilk kurulumdan gelismis ozelliklere — Coasty'den en iyi sekilde yararlanmayi ogrenin",
+    "completeGuide": "Tam Kilavuz",
+    "completeGuideSubtitle": "Coasty hakkinda bilmeniz gereken her sey",
+    "completeGuideDescription": "Ilk kurulumdan gelismis ozelliklere — AI ajaninizdan en iyi sekilde yararlanmayi ogrenin.",
+    "talkToCofounders": "Kurucularla konusun",
+    "tabs": {
+      "overview": "Genel bakis",
+      "gettingStarted": "Baslarken",
+      "chatTasks": "Sohbet ve gorevler",
+      "machines": "Makineler",
+      "credentials": "Kimlik bilgileri",
+      "swarmMode": "Suru Modu",
+      "workforce": "Zamanlamalar",
+      "desktopApp": "Masaustu uygulamasi",
+      "billing": "Faturalandirma ve krediler"
+    },
+    "overview": {
+      "howItWorks": "Nasil calisir",
+      "step1": "Gorevi tanimlayin",
+      "step2": "Coasty adimlari planlar",
+      "step3": "Otonom olarak yurutur",
+      "step": "Adim",
+      "whatCanDo": "Coasty neler yapabilir",
+      "taskCount": "10 kategoride 40'tan fazla gorev",
+      "categories": {
+        "sales": {
+          "name": "Satis",
+          "desc": "50 potansiyel musteri bulun, kisisellestirilmis e-postalar gonderin"
+        },
+        "marketing": {
+          "name": "Pazarlama",
+          "desc": "Blog yazilari yayinlayin, sosyal medya planlayin"
+        },
+        "jobApps": {
+          "name": "Is basvurulari",
+          "desc": "20 ise basvurun, her ozgecmisi uyarlayin"
+        },
+        "email": {
+          "name": "E-posta",
+          "desc": "Yanitlar yazin, toplu erisim, abonelik iptali"
+        },
+        "dataEntry": {
+          "name": "Veri girisi",
+          "desc": "Uygulamalar arasi veri aktarin, elektronik tablolar olusturun"
+        },
+        "research": {
+          "name": "Arastirma",
+          "desc": "Derinlemesine raporlar, rakip izleme"
+        },
+        "qaTesting": {
+          "name": "QA testi",
+          "desc": "Kayitlari test edin, formlari test edin, site saglik kontrolleri"
+        },
+        "hr": {
+          "name": "IK",
+          "desc": "Aday bulun, kisisellestirilmis erisim"
+        },
+        "support": {
+          "name": "Destek",
+          "desc": "Yanitlar yazin, yardim belgelerini guncelleyin"
+        },
+        "productivity": {
+          "name": "Uretkenlik",
+          "desc": "Seyahat rezervasyonu, fatura odeme, takvim yonetimi"
+        }
+      },
+      "whyCoasty": "Neden Coasty",
+      "notChatbot": "Bir chatbot degil. Bir RPA betigi degil.",
+      "worksLikeHuman": {
+        "title": "Bir insan gibi calisir",
+        "desc": "Gorur, tiklar, yazar, gezinir — tam sizin gibi"
+      },
+      "noScripts": {
+        "title": "Betik veya kurulum yok",
+        "desc": "Duz metin girin, sonuc alin"
+      },
+      "handlesUnexpected": {
+        "title": "Beklenmedik durumlari yonetir",
+        "desc": "CAPTCHA'lara, popup'lara, duzen degisikliklerine uyum saglar"
+      },
+      "runsInIsolation": {
+        "title": "Izole olarak calisir",
+        "desc": "Oturum basina sandbox VM — hicbir sey sizdirmaz"
+      },
+      "ctaTitle": "Herhangi bir gorev secin ve deneyin",
+      "ctaSubtitle": "Coasty'yi ise koymaya hazir misiniz?",
+      "ctaDescription": "Bu kilavuzdaki herhangi bir gorevi tanimlayin ve Coasty'nin hallettmesini izleyin.",
+      "ctaNote": "Ucretsiz baslayin. Kredi karti gerekmez.",
+      "startTask": "Bir gorev baslat",
+      "startFree": "Ucretsiz basla",
+      "desktopApp": "Masaustu uygulamasi"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Kaydolun",
+          "desc": "Baslamak icin tek tiklama"
+        },
+        "createMachine": {
+          "title": "Bir makine olusturun",
+          "desc": "Ajaniniz kendi bilgisayarini alir"
+        },
+        "saveCredentials": {
+          "title": "Kimlik bilgilerini kaydedin",
+          "desc": "Herhangi bir site icin sifrelenmis girisler"
+        },
+        "giveTask": {
+          "title": "Bir gorev verin",
+          "desc": "Tanimlayin. Gerceklesmesini izleyin."
+        }
+      },
+      "examplePrompts": [
+        "LinkedIn'de ozgecmisimle eslesen 10 ise basvur",
+        "Rakip fiyatlandirmasini arastir ve karsilastirma tablosu olustur",
+        "WordPress'te [konu] hakkinda bir blog yazisi yaz ve yayinla",
+        "Gmail'deki tum pazarlama e-postalarindan aboneligimi iptal et",
+        "Web sitemdeki kayit akisini test et ve hatalari raporla",
+        "LinkedIn'de [ICP] ile eslesen 50 potansiyel musteri bul ve CRM'ime ekle"
+      ],
+      "quickPrompts": "Deneyecek hizli komutlar",
+      "startFirstTask": "Ilk gorevinizi baslatin"
+    },
+    "chatTasks": {
+      "commandCenter": "Komuta merkeziniz",
+      "describeTask": "Herhangi bir gorevi tanimlayin. Gerceklesmesini izleyin.",
+      "examplePrompt": "Amazon'da 50$'in altindaki en iyi 5 kablosuz klavyeyi bulun ve bir elektronik tabloda karsilastirin.",
+      "exampleResponse": "Amazon'da arayacagim ve bir karsilastirma olusturacagim. Tarayiciyi simdi aciyorum.",
+      "exampleDone": "Tamamlandi. Elektronik tablo 5 klavyenin fiyati, puani ve ozellikleriyle kaydedildi.",
+      "describePlaceholder": "Gorevinizi tanimlayin...",
+      "threeAgents": "Uc uzman ajan",
+      "autoAssigned": "Adim basina otomatik atanir.",
+      "browser": "Tarayici",
+      "browserDesc": "Gezin, tiklayin, form doldurun, kaziyni",
+      "terminal": "Terminal",
+      "terminalDesc": "Komut calistirin, yukleyin, dosya isleyin",
+      "desktop": "Masaustu",
+      "desktopDesc": "Tiklayin, yazin, kaydin, uygulama acin",
+      "betterPrompts": "Daha iyi komutlar yazin",
+      "specificBeatsVague": "Spesifik her zaman belirsizi yener.",
+      "do": "Yapin",
+      "dont": "Yapmayin",
+      "doExample1": "LinkedIn'de 10 yazilim muhendisligi isine basvurun. Her on yaziyi teknoloji yiginlarindan bahsedecek sekilde uyarlayin.",
+      "dontExample1": "Islere basvur",
+      "doExample2": "Google Flights'ta SFO'dan JFK'ya, 20-25 Mart, gidis-donus arayin. En ucuz 3'unun ekran goruntusunu alin.",
+      "dontExample2": "Ucus bul",
+      "readyToTry": "Denemeye hazir misiniz?",
+      "openChat": "Bir sohbet acin ve yapilmasini istediginizi tanimlayin.",
+      "startChat": "Sohbet baslat"
+    },
+    "machinesTab": {
+      "title": "Makineleriniz",
+      "subtitle": "Saniyeler icinde baslatabildiginiz tam Ubuntu masaustleri.",
+      "lifecycle": "Yasam dongsu",
+      "lifecycleDesc": "Bes durum, tamamen otomatik.",
+      "planLimits": "Plan sinirlari",
+      "planCol": "Plan",
+      "machinesCol": "Makineler",
+      "swarmAgentsCol": "Suru ajanlari",
+      "temp": "1 gecici",
+      "states": {
+        "creating": "Olusturuluyor",
+        "starting": "Baslatiliyor",
+        "running": "Calisiyor",
+        "stopping": "Durduruluyor",
+        "stopped": "Durduruldu"
+      },
+      "newMachine": "+ Yeni",
+      "researchVm": "Arastirma VM",
+      "emailVm": "E-posta VM",
+      "testingVm": "Test VM",
+      "cores": "{count} cekirdek",
+      "gb": "{count} GB",
+      "stop": "Durdur",
+      "start": "Baslat",
+      "provisioning": "Hazirlaniyor...",
+      "spinUp": "Bir makine baslat",
+      "goToMachines": "Makinelere git"
+    },
+    "credentialsTab": {
+      "loginDetected": "Giris algilandi",
+      "matched": "Eslesti",
+      "credentialFound": "Kimlik bilgisi bulundu",
+      "autoFilled": "Otomatik dolduruldu",
+      "autoFillTitle": "Otomatik doldurma aksiyonda",
+      "autoFillDesc": "Giris algilandi, kimlik bilgisi eslesti, form dolduruldu. Otomatik.",
+      "security": "Guvenlik",
+      "encrypted": "Sifrelenmis",
+      "aes256": "AES-256 beklemede",
+      "vmIsolated": "VM-izole",
+      "sandboxed": "Oturum basina sandbox",
+      "neverLogged": "Asla kaydedilmez",
+      "zeroTrace": "Kayitlarda sifir iz",
+      "savedCredentials": "Kaydedilmis kimlik bilgileri",
+      "addOnce": "Bir kez ekleyin, her yerde otomatik doldurun.",
+      "saveFirst": "Ilk kimlik bilginizi kaydedin",
+      "goToCredentials": "Kaydedilmis kimlik bilgilerine git"
+    },
+    "swarmTab": {
+      "title": "Suru Modu",
+      "runParallel": "{count} makineyi paralel calistirin",
+      "sameTask": "Ayni gorev, {multiplier}x cikti, ayni sure.",
+      "done": "Tamamlandi",
+      "running": "Calisiyor",
+      "pending": "Bekliyor",
+      "result": "SONUC",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Paralel arastirma",
+          "desc": "{count} rakip, {count} makine, esanli"
+        },
+        "bulkApplications": {
+          "title": "Toplu basvurular",
+          "desc": "Ayni anda platformlar arasi basvurun"
+        },
+        "multiCitySearch": {
+          "title": "Coklu sehir aramasi",
+          "desc": "Ayni anda {count} sehirde ilan arayin"
+        },
+        "parallelOutreach": {
+          "title": "Paralel erisim",
+          "desc": "Farkli segmentlere kisisellestirilmis e-postalar"
+        },
+        "crossPlatform": {
+          "title": "Platformlar arasi",
+          "desc": "Ayni anda {count} platforma yayinlayin"
+        },
+        "distributedTesting": {
+          "title": "Dagitilmis test",
+          "desc": "Paralel olarak birden fazla senaryo test edin"
+        }
+      },
+      "whatToSwarm": "Ne surulenmeli",
+      "availability": "Kullanilabilirlik",
+      "freeNotAvailable": "Kulanilamaz",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 ajan",
+      "startSwarm": "Bir suru baslat"
+    },
+    "workforceTab": {
+      "title": "Is gucu",
+      "subtitle": "AI sirketiniz, otopilotta",
+      "description": "Calisanlar, ekipler, tetikleyiciler — 7/24 calisiyor.",
+      "myCompany": "Sirketim",
+      "contentOps": "Content Ops",
+      "support": "Destek",
+      "writer": "Yazar",
+      "seo": "SEO",
+      "social": "Sosyal",
+      "inbox": "Gelen kutusu",
+      "docs": "Belgeler",
+      "concepts": "Temel kavramlar",
+      "conceptItems": {
+        "employees": {
+          "title": "Calisanlar",
+          "desc": "Programa gore gorev calistiran AI ajanlari, 7/24"
+        },
+        "teams": {
+          "title": "Ekipler",
+          "desc": "Paylasilan talimatlara sahip calisan gruplari"
+        },
+        "sharedMemory": {
+          "title": "Paylasilan bellek",
+          "desc": "Calisanlarin okudugu ve yazdigi anahtar-deger deposu"
+        },
+        "triggers": {
+          "title": "Tetikleyiciler",
+          "desc": "Calisanlari zincirleyin: biri biter, sonraki baslar"
+        },
+        "delegates": {
+          "title": "Delegeler",
+          "desc": "Calisanlar uzmanlara alt gorevler atar"
+        },
+        "orgChart": {
+          "title": "Organizasyon semasi",
+          "desc": "Sirket hiyerarsinizin gorsel haritasi"
+        }
+      },
+      "chainTitle": "Calisanlari birbirine zincirleyin",
+      "chainDesc": "Cikti otomatik olarak birinden digerine akar.",
+      "scout": "Scout",
+      "scoutDesc": "rakipleri arastirir",
+      "atlas": "Atlas",
+      "atlasDesc": "blog yazisi yazar",
+      "nova": "Nova",
+      "novaDesc": "sosyal medyada yayinlar",
+      "done": "Tamamlandi",
+      "onComplete": "on_complete",
+      "waiting": "Bekliyor",
+      "templates": "Bir sablondan baslayin",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Musteri Destegi",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Pazarlama",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Ticaret",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} calisan",
+      "openWorkforce": "Is gucunu ac"
+    },
+    "billingTab": {
+      "credits": "Krediler",
+      "timeMetric": "Zaman tek olcuttur.",
+      "rate": "Oran",
+      "rateValue": "10",
+      "creditsPerMin": "kredi/dk",
+      "metered": "her 30 saniyede olculur",
+      "example": "Ornek",
+      "minTask": "dk gorev",
+      "startCredits": "Baslangic: {count} kredi",
+      "endCredits": "Bitis: {count} kredi",
+      "creditsUsed": "{count} kredi kullanildi",
+      "calculation": "{mins} dk x 10 kredi/dk",
+      "plans": "Planlar",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 gecici",
+          "feature": "Temel arama"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 her zaman acik",
+          "feature": "2 paralel ajan"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 her zaman acik",
+          "feature": "Gelismis arama"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 her zaman acik",
+          "feature": "Oncelikli destek"
+        },
+        "pro": {
+          "credits": "1.500",
+          "machines": "3 her zaman acik",
+          "feature": "SLA garantisi"
+        }
+      },
+      "perMonth": "{price}/ay",
+      "faqTitle": "SSS",
+      "faqs": {
+        "howCharged": {
+          "q": "Krediler nasil ucretlendirilir?",
+          "a": "Ajan calisma dakikasi basina 10 kredi, yukari yuvarlanir. Oturum sirasinda her 30 saniyede kontrol edilir."
+        },
+        "runOut": {
+          "q": "Kredilerim bittiginde ne olur?",
+          "a": "Bir gorevi baslatmak icin en az 20 krediye ihtiyaciniz var. 0'a ulastiginizda gorev duraklar — devam etmek icin ek paket satin alin."
+        },
+        "rollOver": {
+          "q": "Kullanilmayan krediler devredilir mi?",
+          "a": "Krediler her fatura doneminde sifirlanir. Kullaniñ ya da kaybedin."
+        }
+      },
+      "goToBilling": "Faturalandirmaya git"
+    },
+    "desktopAppTab": {
+      "overlay": "Kaplama",
+      "overlayDesc": "Her zaman orada. Genisletmek icin tiklayin.",
+      "compact": "Kompakt",
+      "expanded": "Genisletilmis",
+      "ready": "Hazir",
+      "exampleTask": "Ozgecmisimi guncelle",
+      "exampleResponse": "resume.docx aciliyor...",
+      "describePlaceholder": "Gorevinizi tanimlayin...",
+      "whatItControls": "Neyi kontrol eder",
+      "controls": {
+        "browser": {
+          "name": "Tarayici",
+          "desc": "Gezin, tiklayin, form doldurun"
+        },
+        "files": {
+          "name": "Dosyalar",
+          "desc": "Her yerde okuyun, yazin, duzenleyin"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Herhangi bir kabuk komutu calistirin"
+        },
+        "desktop": {
+          "name": "Masaustu",
+          "desc": "Tiklayin, yazin, kaydin"
+        },
+        "screenshots": {
+          "name": "Ekran goruntuleri",
+          "desc": "Gordugonuzu gorur"
+        },
+        "apps": {
+          "name": "Uygulamalar",
+          "desc": "Herhangi bir yuklu uygulamayi kontrol edin"
+        }
+      },
+      "twoWays": "Iki calistirma yolu",
+      "cloudVm": "Bulut VM",
+      "cloudFeatures": {
+        "isolated": "Tamamen izole sandbox",
+        "freshBrowser": "Temiz tarayici, gecmis yok",
+        "maxSecurity": "Maksimum guvenlik"
+      },
+      "desktopMode": "Masaustu",
+      "desktopFeatures": {
+        "yourFiles": "Dosyalariniz, dogrudan erisim",
+        "yourApps": "Yuklu uygulamalariniz",
+        "yourSessions": "Giris yapmis oturumlariniz"
+      },
+      "downloadCta": "Download Desktop App"
+    }
+  },
+  "comparePage": {
+    "title": "Karsilastirmalar",
+    "heroTitle": "Coasty ve Rakipler",
+    "heroDescription": "1 numarali bilgisayar kullanan yapay zeka ajaninin (82% OSWorld) alternatiflere kiyasla nasil oldugunu gorun. Gercek verilerle ozellik bazinda karsilastirmalar.",
+    "categories": {
+      "aiAgent": "AI Ajan",
+      "infrastructure": "Altyapi",
+      "rpa": "RPA",
+      "human": "Insan"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "1 numarali bilgisayar kullanan AI ajani denemeye hazir misiniz?",
+    "ctaButton": "Coasty'yi Ucretsiz Dene",
+    "noCreditCard": "Kredi karti gerekmez",
+    "allComparisons": "Tum karsilastirmalar",
+    "featureComparison": "Ozellik Karsilastirmasi",
+    "whyChooseCoasty": "Neden Coasty?",
+    "strengthsOf": "{name} Guclu Yanlari",
+    "ctaDescription": "82% OSWorld benchmark. VM izolasyonu. CAPTCHA cozme. Aylik $20'dan basliyor.",
+    "watchCaseStudies": "Vaka Calismalarini Izle"
+  },
+  "agentSwarms": {
+    "badge": "Ajan Surusu Modu",
+    "heroTitle1": "Tek komut.",
+    "heroTitle2": "Sinirsiz makine.",
+    "heroTitle3": "Paralel sonuclar.",
+    "heroDescription": "Herhangi bir gorevi ayni anda calisan birden fazla izole ortama bolerek dagitir. Bir saat suren isler dakikalar icinde tamamlanir.",
+    "trySwarmMode": "Suru Modunu Dene",
+    "seeInAction": "Calismaya bak",
+    "liveExecution": "swarm-tree — canli calistirma",
+    "machineCount": "{count} makine",
+    "running": "calisiyor",
+    "threeSteps": "Paralel calistirma icin uc adim",
+    "steps": {
+      "typePrompt": {
+        "title": "Komutunuzu yazin",
+        "desc": "Gorevi tanimlayin. Suru modunu acin ve kac makine kullanacaginizi secin."
+      },
+      "machinesSpinUp": {
+        "title": "Makineler baslatiliyor",
+        "desc": "Her biri tam izole bir ortam alir — tarayici, terminal, masaustu."
+      },
+      "resultsStream": {
+        "title": "Sonuclar canli akar",
+        "desc": "Her makineyi suru agaci gorunumunde gercek zamanli izleyin."
+      }
+    },
+    "demoTitle": "Ajan Suruleri Demosu",
+    "demoDescription": "{count} makinenin ayni anda bir CRM arastirma gorevini nasil yaptiklarina bakin",
+    "prompt": "Komut",
+    "swarm": "SURU",
+    "run": "Calistir",
+    "reset": "Sifirla",
+    "allCompleted": "Tum {count} makine tamamlandi",
+    "speedComparison": "~{seqTime} dk yerine ~{swarmTime} dk — {multiplier}x daha hizli",
+    "seqVsSwarm": "Sirasal vs Suru",
+    "tableHeaders": {
+      "task": "Gorev",
+      "before": "Oncesi",
+      "swarm": "Suru",
+      "speed": "Hiz"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM araci arastirmasi",
+      "qaPages": "8 sayfada QA",
+      "leadEnrichment": "Potansiyel musteri zenginlestirme (100)",
+      "priceMonitoring": "Fiyat izleme"
+    },
+    "builtForParallel": "Paralel calisma icin tasarlandi",
+    "useCases": {
+      "marketResearch": {
+        "title": "Olcekli Pazar Arastirmasi",
+        "desc": "Birden fazla rakibi, pazari veya urunu izole makinelerde ayni anda arastirin."
+      },
+      "leadGeneration": {
+        "title": "Potansiyel Musteri Olusturma",
+        "desc": "Profilleri zenginlestirin, e-postalari bulun ve sosyal medya varligini dogrulayin — saatlik isler dakikalar icinde."
+      },
+      "qaTesting": {
+        "title": "QA & Regresyon Testi",
+        "desc": "Test senaryolarini farkli sayfalar veya akislar uzerinde paralel olarak calistirin."
+      },
+      "contentSocial": {
+        "title": "Icerik & Sosyal Medya",
+        "desc": "Makine basina izolasyonla birden fazla platforma ayni anda yayin yapin."
+      },
+      "dataExtraction": {
+        "title": "Veri Cikarma",
+        "desc": "Onlarca kaynaktan ayni anda veri toplayin ve yapilandirin."
+      },
+      "scheduledRuns": {
+        "title": "Zamanlanmis Calistirmalar",
+        "desc": "Tekrarlayan paralel gorevler icin suru modunu zamanlama ile birlestirin."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Tam Izolasyon",
+        "desc": "Her makinenin kendi tarayicisi, terminali ve masaustu vardir."
+      },
+      "tripleMachineLimit": {
+        "title": "3x Makine Limiti",
+        "desc": "Suru modu, planinizin makine kapasitesini uc katina cikarir."
+      },
+      "liveTreeView": {
+        "title": "Canli Agac Gorunumu",
+        "desc": "Ekran goruntuleri ve arac cagrilari gercek zamanli olarak akar."
+      },
+      "autoAggregation": {
+        "title": "Otomatik Birlestirme",
+        "desc": "Sonuclar tek bir konsolide raporda birlestirilir."
+      },
+      "shareableRuns": {
+        "title": "Paylasilabilir Calistirmalar",
+        "desc": "Tam calistirma zaman cizelgelerini bir bagnlatle tekrar izleyin."
+      },
+      "fullySandboxed": {
+        "title": "Tamamen Sandbox",
+        "desc": "Tum ortamlar tamamlandiktan sonra yok edilir."
+      }
+    },
+    "readyCta": "Gorevleri paralel calistirmaya hazir misiniz?",
+    "includedWithPaid": "Suru modu her ucretli plana dahildir.",
+    "getStarted": "Baslayin",
+    "viewPricing": "Fiyatlandirmayi Goruntule",
+    "legend": {
+      "messages": "Mesajlar",
+      "broadcast": "Yayin",
+      "sharedMemory": "Paylasilan Bellek",
+      "help": "Yardim"
+    },
+    "liveSwarmExecution": "Ajan iletisimi ile canli suru calistirmasi",
+    "popular": "Populer",
+    "avgRating": "{rating} ort."
+  },
+  "downloadPage": {
+    "title": "Masaustu Uygulamasi",
+    "heroTitle": "Coasty Bilgisayarinizi Yonetsin",
+    "heroDescription": "Direksiyona gecen yapay zeka asistani. Tarayicinizi, masaustunuzu ve terminalinizi otomatiklestirin — veya web arayuzumuz uzerinden bilgisayarinizi her yerden kontrol edin.",
+    "seeInAction": "Calismaya bak",
+    "overlayDescription": "Masaustunuzde yozen hafif bir kaplama. Yerel olarak veya herhangi bir tarayicidan uzaktan kontrol edin — bilgisayariniz, sizin kurallariniz.",
+    "recommended": "Sisteminiz icin onerilen",
+    "coastyFor": "{platform} icin Coasty",
+    "installerLabel": "{extension} yukleyici",
+    "beforeInstall": "Yuklemeden once",
+    "beforeInstallDescription": "Coasty Desktop yepyeni oldugundan isletim sisteminiz onu henuz tanimayacaktir. Bu yeni yayinlanan uygulamalar icin tamamen normaldir — nasil devam edileceginiz asagidadir:",
+    "windowsSteps": {
+      "step1": "Windows bilgisayarinizi koruma altina aldi",
+      "step2": "Daha fazla bilgi",
+      "step3": "Yine de calistir"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop acilamiyor",
+      "step2": "Sistem Ayarlari > Gizlilik ve Guvenlik",
+      "step3": "Yine de Ac"
+    },
+    "allPlatforms": "Tum platformlar",
+    "systemRequirements": {
+      "title": "Sistem Gereksinimleri",
+      "win1": "Windows 10 veya ustO",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minimum 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) veya ustO",
+      "mac2": "Apple Silicon veya Intel",
+      "mac3": "Minimum 4 GB RAM"
+    },
+    "whatsIncluded": "Neler Dahil",
+    "features": {
+      "browser": "Tarayici otomasyonu",
+      "desktop": "Masaustu otomasyonu",
+      "terminal": "Terminal erisimi",
+      "files": "Dosya islemleri",
+      "updates": "Otomatik guncellemeler",
+      "remote": "Her yerden kontrol"
+    },
+    "browserCta": "Coasty'yi Tarayicida Ac",
+    "browserCtaDescription": "Makinenizi her yerden kontrol etmek ister misiniz?",
+    "loading": "Yukleniyor...",
+    "downloadFor": "{platform} icin indir",
+    "download": "Indir",
+    "unavailable": "Kulanilamiyor"
+  },
+  "referralPage": {
+    "shareTitle": "Coasty'yi Paylas.",
+    "earnTitle": "Birlikte kazan.",
+    "shareDescription": "Arkadaslariniza ilk AI ajanlarini kullanmalari icin 50 ucretsiz kredi verin. Biri her katildiginda siz de 50 kredi kazanin.",
+    "features": [
+      "Gercekten calisan yapay zeka — gercek tarayici, gercek tiklamalar, gercek sonuclar",
+      "Izole ve guvenli — her ajan kendi sandbox VM'inde calisir",
+      "Siz uyurken calisir — gorevleri planlayin ve ajanlar geri kalanini halletsin"
+    ],
+    "recentActivity": "Son aktiviteniz",
+    "friendsCould": "Arkadaslariniz da bunu yapabilir",
+    "giveGet": "Arkadaslara 50 kredi verin. Kendinize 50 kredi kazanin. Her seferinde.",
+    "stats": {
+      "invited": "Davet Edilen",
+      "earned": "Kazanilan",
+      "perInvite": "Davet basina"
+    },
+    "tabs": {
+      "invite": "Arkadaslari davet et",
+      "feedback": "Geri bildirim gonder"
+    },
+    "referralLink": "Referans baglantiniz",
+    "howItWorks": "Nasil calisir",
+    "howSteps": [
+      "Baglantinizi bir arkadasinizla paylasin",
+      "Kaydolsunlar ve 50 ucretsiz kredi kazansinlar",
+      "Siz de aninda 50 kredi kazanin"
+    ],
+    "shareDirectly": "Dogrudan paylas",
+    "yourReferrals": "Referanslariniz",
+    "invitedYou": "Sizi davet etti",
+    "joinedViaLink": "Baglantinizla katildi",
+    "noReferrals": "Henuz referans yok",
+    "noReferralsHint": "Yukaridaki baglantiyi paylasin, ikiniz de 50 kredi kazanin",
+    "feedbackThanks": "Geri bildiriminiz icin tesekkurler!",
+    "feedbackWeRead": "Her mesaji okuyoruz.",
+    "sendAnother": "Baska bir tane gonder",
+    "feedbackTitle": "Ne dusunuyorsunuz?",
+    "feedbackSubtitle": "Hata raporlari, ozellik fikirleri veya sadece merhaba deyin",
+    "feedbackPlaceholder": "Aklinizdaki nedir?",
+    "weReadEvery": "Her mesaji okuyoruz",
+    "send": "Gonder",
+    "shareMessage": "Selam, Coasty kullaniyorum ve gercekten harika. Senin icin bilgisayar kullanabilen bir yapay zeka. Gezinme, tiklama, yazma, her seyi yapiyor. Baglantiyla dene, ikimiz de ucretsiz kredi kazanalim!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-posta"
+    },
+    "emailSubject": "Bu yapay zeka aracina bak",
+    "emailBody": "Bu yapay zeka senin icin bilgisayar kullanabiliyor. Gezinme, tiklama, yazma, her seyi."
+  },
+  "statusPage": {
+    "title": "Sistem Durumu",
+    "brandTitle": "Coasty Durumu",
+    "subtitle": "Tum Coasty hizmetlerinin gercek zamanli operasyonel durumu. Bu sayfa her 60 saniyede otomatik yenilenir.",
+    "refresh": "Yenile",
+    "statuses": {
+      "operational": "Calisiyor",
+      "degraded": "Dusuk Performans",
+      "outage": "Kesinti"
+    },
+    "overallStatuses": {
+      "allOperational": "Tum Sistemler Calisiyor",
+      "someDegraded": "Bazi Sistemlerde Yavaslik",
+      "disruption": "Hizmet Kesintisi Tespit Edildi"
+    },
+    "overallDescriptions": {
+      "allOperational": "Tum hizmetler sorunsuz calisiyor, herhangi bir sorun tespit edilmedi.",
+      "someDegraded": "Bazi hizmetlerde yavaslik yasaniyor. Arastiriyoruz.",
+      "disruption": "Sorunun farkindayiz ve aktif olarak cozum uzerinde calisiyoruz."
+    },
+    "responseTime": "{ms}ms yanit suresi",
+    "uptimeLabel": "90 Gunluk Calisma Suresi",
+    "daysAgo": "90 gun once",
+    "today": "Bugun",
+    "overallUptime": "Genel 90 Gunluk Calisma Suresi",
+    "overallUptimeDesc": "Tum hizmetlerdeki toplam kullanilabilirlik",
+    "services": "Hizmetler",
+    "clickUptime": "calisma suresini goruntule",
+    "lastChecked": "Son kontrol {time} · Her 60 saniyede otomatik yenilenir",
+    "experiencingIssues": "Sorun mu yasiyorsunuz?",
+    "issuesDescription": "Bir seyler dogru gorunmuyorsa dogrudan bize ulasin.",
+    "talkToCofounders": "Kurucularla Konusun",
+    "emailUs": "E-posta Gonderin",
+    "serviceNames": {
+      "website": "Web Sitesi",
+      "aiBackend": "AI Arka Ucu",
+      "database": "Veritabani",
+      "authentication": "Kimlik Dogrulama",
+      "aiModels": "AI Modelleri",
+      "fileStorage": "Dosya Depolama"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - 1 Numaralı Bilgisayar Kullanan AI Ajanı | Masaüstü ve Tarayıcı Otomasyonu için AI Çalışan",
+      "titleTemplate": "{title} | Coasty - AI Bilgisayar Kullanım Ajanı",
+      "description": "Coasty, 1 numaralı bilgisayar kullanan AI ajanıdır — OSWorld benchmark'ta 82%. Tam bir masaüstünü insan gibi kontrol eder: tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir, elektronik tablolar yönetir. Oturum başına gerçek VM izolasyonu. $20/mo'dan başlayan fiyatlar.",
+      "ogTitle": "Coasty - 1 Numaralı Bilgisayar Kullanan AI Ajanı | 82% OSWorld Benchmark",
+      "ogDescription": "Masaüstünü insan gibi kontrol eden AI çalışan. OSWorld benchmark'ta 1 numara (82%). Tarayıcı otomasyonu, masaüstü kontrolü, CAPTCHA çözme, VM izolasyonu. $20/mo'dan başlayan fiyatlar.",
+      "twitterDescription": "Masaüstünü insan gibi kontrol eden AI çalışan. Tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir. Gerçek VM izolasyonu. İnsan sanal asistana kıyasla $20/mo vs $3,000/mo."
+    },
+    "compare": {
+      "title": "Coasty Karşılaştırma - AI Ajanı Alternatifleri ve Rakip Karşılaştırması",
+      "description": "Coasty'nin 1 numaralı bilgisayar kullanan AI ajanının Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath ve diğerleriyle nasıl karşılaştırıldığını görün. Fiyatlandırma ile özellik karşılaştırmaları.",
+      "ogTitle": "Coasty'yi AI Ajanı Alternatifleriyle Karşılaştırın",
+      "ogDescription": "1 numaralı bilgisayar kullanan AI ajanının rakiplerle özellik bazında karşılaştırması. Benchmark puanları, fiyatlandırma, yetenekler."
+    },
+    "download": {
+      "title": "Coasty Masaüstü Uygulamasını İndirin — Mac ve Windows için AI Ajanı",
+      "description": "Yerel makinenizi kontrol eden 1 numaralı bilgisayar kullanan AI ajanı Coasty Desktop'ı indirin. Tarayıcı otomasyonu, masaüstü kontrolü, terminal erişimi ve dosya işlemleri. Windows ve macOS için mevcuttur.",
+      "ogTitle": "Coasty Desktop'ı İndirin — Mac ve Windows için AI Ajanı",
+      "ogDescription": "Bilgisayarınızı insan gibi kontrol eden AI. Tek bir yerel uygulamada tarayıcı, masaüstü ve terminal otomasyonu. OSWorld benchmark'ta 1 numara."
+    },
+    "guide": {
+      "title": "Coasty Ne Yapabilir? — AI Bilgisayar Otomasyonunun Eksiksiz Rehberi",
+      "description": "Coasty'nin otomatikleştirebileceği her şeyi keşfedin: satış araştırması, e-posta gönderimi, iş başvuruları, QA testi, veri girişi, sosyal medya, işe alım, araştırma ve 100'den fazla görev.",
+      "ogTitle": "Coasty Ne Yapabilir? — Eksiksiz AI Otomasyon Rehberi",
+      "ogDescription": "Coasty'nin otomatikleştirebileceği 100'den fazla görevi keşfedin. Satıştan QA testine, AI bilgisayar ajanının gerçek dünya işlerini nasıl yönettiğini görün."
+    },
+    "blog": {
+      "title": "Blog - AI Ajanı İçgörüleri, Bilgisayar Kullanımı Araştırması ve Vaka Çalışmaları",
+      "description": "Otonom AI ajanları, bilgisayar kullanım teknolojisi, gerçek dünya otomasyon vaka çalışmaları ve AI çalışanların geleceği hakkında derinlemesine analizler. 1 numaralı bilgisayar kullanan ajanın arkasındaki ekipten.",
+      "ogTitle": "Coasty Blog - AI Ajanı İçgörüleri ve Vaka Çalışmaları",
+      "ogDescription": "Otonom AI ajanları, bilgisayar kullanım teknolojisi ve 1 numaralı bilgisayar kullanan ajandan gerçek dünya otomasyon vaka çalışmaları hakkında derinlemesine analizler."
+    },
+    "results": {
+      "title": "Demolar ve Sonuçlar — Coasty AI Ajanını Otonom Çalışırken İzleyin",
+      "description": "Coasty'nin pazarlama kampanyaları yürüttüğünü, iş başvurusu yaptığını, formları doldurduğunu, QA testi yaptığını, kişiselleştirilmiş e-postalar gönderdiğini ve daha fazlasını otonom olarak izleyin. Video demolu gerçek vaka çalışmaları.",
+      "ogTitle": "Demolar — Coasty AI Ajanını Otonom Çalışırken İzleyin",
+      "ogDescription": "AI'nın bilgisayar kontrol ettiği gerçek demolar: pazarlama, iş başvuruları, QA testi, e-posta gönderimi ve daha fazlası. OSWorld benchmark'ta 1 numara."
+    },
+    "terms": {
+      "title": "Hizmet Şartları",
+      "description": "Coasty Hizmet Şartları. Coasty AI çalışan platformu, bilgisayar kullanan ajanı ve masaüstü uygulamasının kullanımını düzenleyen şartları okuyun.",
+      "ogTitle": "Coasty — Hizmet Şartları",
+      "ogDescription": "Coasty Hizmet Şartları. Coasty AI çalışan platformu, bilgisayar kullanan ajanı ve masaüstü uygulamasının kullanımını düzenleyen şartları okuyun."
+    },
+    "privacy": {
+      "title": "Gizlilik Politikası",
+      "description": "Coasty Gizlilik Politikası. VM düzeyinde izolasyon, şifreli oturumlar, sandbox yürütme ortamları ve kurumsal düzey güvenlikle verilerinizi nasıl koruduğumuzu öğrenin.",
+      "ogTitle": "Coasty — Gizlilik Politikası",
+      "ogDescription": "Coasty Gizlilik Politikası. VM düzeyinde izolasyon, şifreli oturumlar, sandbox yürütme ortamları ve kurumsal düzey güvenlikle verilerinizi nasıl koruduğumuzu öğrenin."
+    },
+    "useCases": {
+      "title": "Kullanım Alanları - İş Operasyonları için Coasty AI Ajanı",
+      "description": "Coasty'nin AI ajanının operasyonlarınızı nasıl otomatikleştirdiğini 12 yolla keşfedin — rakip araştırması, QA testi, potansiyel müşteri oluşturma, e-posta gönderimi ve daha fazlası. Gerçek sonuçlar.",
+      "ogTitle": "Kullanım Alanları - Coasty AI Ajanı",
+      "ogDescription": "Otopilotta çıktınızı 10 katına çıkarmanın 12 yolu. Gerçek sonuçlar, gerçek rakamlar."
+    },
+    "computerUse": {
+      "title": "Bilgisayar Kullanan AI Ajanı — 1 Numaralı Masaüstü, Tarayıcı ve Terminal Otomasyonu",
+      "description": "Coasty, en iyi bilgisayar kullanan AI ajanıdır, OSWorld'de 1 numara (82%). Bilgisayarları insan gibi kontrol eden otonom AI ile herhangi bir masaüstü, tarayıcı veya terminal görevini otomatikleştirin.",
+      "ogTitle": "Coasty — 1 Numaralı Bilgisayar Kullanan AI Ajanı",
+      "ogDescription": "OSWorld'de 1 numara olan en iyi bilgisayar kullanım ajanı. AI ile herhangi bir masaüstü, tarayıcı veya terminal görevini otomatikleştirin."
+    },
+    "pricing": {
+      "title": "Fiyatlandırma — Coasty AI Ajanı Planları ve Fiyatları",
+      "description": "Coasty fiyatlandırma planları $20/mo'dan başlar. $3,000/mo sanal asistanları AI çalışanla değiştirin. Ücretsiz plan mevcuttur. Gizli ücret olmadan kredi tabanlı kullanım.",
+      "ogTitle": "Coasty Fiyatlandırma — AI Ajanı Planları",
+      "ogDescription": "$20/mo'dan başlayan AI çalışan. Pahalı sanal asistanları otonom AI ile değiştirin. Ücretsiz plan mevcuttur."
+    },
+    "faq": {
+      "q1": "Coasty nedir?",
+      "a1": "Coasty bir AI çalışan platformudur — masaüstünü insan gibi kontrol eden bilgisayar kullanan bir ajan. Tarayıcı açar, tıklar, yazar, uygulamalarda gezinir, form doldurur, e-posta gönderir ve elektronik tabloları otonom olarak yönetir. 369 gerçek dünya görevinde 82% tamamlama oranıyla OSWorld benchmark'ta 1 numara.",
+      "q2": "Coasty, Anthropic Computer Use ile nasıl karşılaştırılır?",
+      "a2": "Anthropic Computer Use bilgisayar kontrolü için ham bir API sağlarken, Coasty yönetilen VM altyapısı, yerleşik CAPTCHA çözümü, Mac ve Windows için masaüstü uygulaması, çoklu model desteği ve en yüksek OSWorld benchmark puanı (82%) ile üretime hazır bir platformdur. Coasty eksiksiz çözümü sunar — sadece API değil.",
+      "q3": "Coasty'nin maliyeti nedir?",
+      "a3": "Coasty, ücretsiz plan mevcut olmak üzere Starter planı için $20/month'dan başlar. Bu, bir insan sanal asistan için aylık $3,000+ ile karşılaştırılır. Coasty molasız, eğitimsiz ve anında ölçeklenebilir olarak 7/24 çalışır.",
+      "q4": "Coasty kullanmak güvenli mi?",
+      "a4": "Evet. Her Coasty oturumu kendi izole, sandbox sanal makinesinde çalışır. Verileriniz güvende, makinenize dokunulmaz ve oturumlar arasında hiçbir şey sızmaz. Bu gerçek VM düzeyinde izolasyondur, paylaşılan havuzda konteynerler değil.",
+      "q5": "OSWorld benchmark nedir?",
+      "a5": "OSWorld, AI ajanlarını gerçek dünya bilgisayar görevlerinde değerlendirmek için bir benchmark'tır. Tarayıcılar, ofis uygulamaları ve sistem işlemlerinde 369 görevi test eder. Coasty, herhangi bir bilgisayar kullanan ajanın en yüksek puanı olan 82% aldı — en gelişmiş performans.",
+      "q6": "Coasty, UiPath gibi RPA araçlarından nasıl farklıdır?",
+      "a6": "UiPath gibi geleneksel RPA araçları kırılgan betik yazma gerektirir ve arayüzler değiştiğinde bozulur. Coasty, herhangi bir arayüzü anlamak ve etkileşime geçmek için AI vizyonu kullanır, önceden tanımlanmış betikler olmadan gerçek zamanlı uyum sağlar. İnsan gibi çalışır, makro gibi değil. Kurulum haftalar yerine dakikalar sürer.",
+      "q7": "Coasty'nin masaüstü uygulaması var mı?",
+      "a7": "Evet. Coasty Desktop hem Mac hem de Windows için mevcuttur. Masaüstünüzde yüzen bir kaplama olarak çalışır ve yerel tarayıcınızı, dosyalarınızı, terminalinizi ve uygulamalarınızı doğrudan kontrol edebilir — yerel görevler için VM gerekmez.",
+      "q8": "Coasty neleri otomatikleştirebilir?",
+      "a8": "Coasty neredeyse her bilgisayar görevini otomatikleştirebilir: web tarama, form doldurma, e-posta gönderme, elektronik tablo yönetimi, veri girişi, sosyal medya paylaşımı, iş başvuruları, satış araştırması, QA testi, müşteri desteği, LinkedIn işe alımı ve daha fazlası. Bir insan bilgisayarda yapabiliyorsa, Coasty de yapabilir.",
+      "q9": "Coasty, OpenAI Operator ile nasıl karşılaştırılır?",
+      "a9": "Coasty, OSWorld benchmark'ta OpenAI Operator'ı geçer (82% vs ~40%), her oturum için gerçek VM düzeyinde izolasyon sunar, birden fazla AI modelini destekler, sadece tarayıcının ötesinde tam masaüstü kontrolü sağlar ve açık kaynaklı bir çerçeve sunar.",
+      "q10": "Coasty CAPTCHA çözebilir mi?",
+      "a10": "Evet. Coasty'nin yerleşik CAPTCHA çözme sistemi vardır, bu nedenle rakip AI ajanların engellenmesi gibi engellenmez. Bu, web sitelerinde CAPTCHA'nın yaygın olduğu gerçek dünya otomasyonu için kritik öneme sahiptir."
+    },
+    "structuredData": {
+      "appDescription": "1 numaralı bilgisayar kullanan AI ajanı. Coasty tam bir masaüstünü insan gibi kontrol eder — tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir ve elektronik tabloları otonom olarak yönetir. OSWorld benchmark'ta 82%. Gerçek VM düzeyinde izolasyon. Yerleşik CAPTCHA çözümü. $20/month'dan başlayan fiyatlar.",
+      "orgDescription": "Coasty, 1 numaralı bilgisayar kullanan AI ajanını geliştirir. Platformumuz gerçek VM düzeyinde izolasyonla otonom masaüstü kontrolü, tarayıcı otomasyonu ve çoklu ajan orkestrasyonu sağlar.",
+      "productDescription": "Masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. OSWorld benchmark'ta 1 numara (82%). Gerçek VM izolasyonuyla otonom tarayıcı otomasyonu, masaüstü kontrolü, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
+      "websiteDescription": "1 numaralı bilgisayar kullanan AI ajanı platformu. 82% OSWorld benchmark. VM izolasyonuyla otonom tarayıcı, masaüstü ve terminal otomasyonu. $20/mo'dan başlayan fiyatlar.",
+      "softwareDescription": "Tam bir masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. 369 gerçek dünya görevinde 82% tamamlama oranıyla OSWorld benchmark'ta 1 numara. Otonom tarayıcı otomasyonu, masaüstü kontrolü, terminal işlemleri, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
+      "breadcrumbs": {
+        "home": "Ana Sayfa",
+        "caseStudies": "AI Ajanı Vaka Çalışmaları",
+        "blog": "Blog",
+        "download": "Masaüstü Uygulamasını İndir",
+        "compare": "AI Ajanlarını Karşılaştır"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Sayfa bulunamadi",
+      "description": "Uzgunuz, bu sayfa mevcut degil."
+    },
+    "error": {
+      "title": "Bir seyler yanlis gitti",
+      "description": "Beklenmeyen bir hata olustu. Lutfen tekrar deneyin.",
+      "tryAgain": "Tekrar dene"
+    }
+  },
+  "schedulesPage": {
+    "title": "İş Gücü",
+    "subtitle": "AI iş gücünüz — görevleri atayın ve gerisini onlara bırakın",
+    "guide": "Rehber",
+    "teamsTab": "Takımlar",
+    "hireEmployee": "Çalışan İşe Al",
+    "loading": "Çalışanlarınız yükleniyor...",
+    "onDuty": "{count} görevde",
+    "standby": "{count} beklemede",
+    "company": "Şirket",
+    "teams": "{count} takım",
+    "employees": "{count} çalışan",
+    "members": "{count} üye",
+    "unassigned": "Atanmamış",
+    "add": "Ekle",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "run": "Çalıştır",
+    "delegate": "devret",
+    "untitledEmployee": "İsimsiz Çalışan",
+    "untitled": "İsimsiz",
+    "guidelinesPlaceholder": "Kurallar...",
+    "today": "Bugün",
+    "timesDaily": "{count} × günlük",
+    "noEmployeesDay": "Bu gün için çalışan yok",
+    "noEmployeesScheduled": "Planlanmış çalışan yok",
+    "recentActivity": "Son Aktivite",
+    "schedule": "Program",
+    "emptyState": {
+      "openChat": "Herhangi bir sohbet açın ve tıklayın",
+      "assignEmployee": "Çalışan Ata",
+      "onThe": "üzerindeki",
+      "topRight": "sağ üst",
+      "toPutOnAutopilot": "otomatik pilota almak için",
+      "newChat": "Yeni Sohbet"
+    },
+    "emptyWorkforce": {
+      "title": "İlk çalışanınızı işe alın",
+      "description": "AI çalışanlar sizin adınıza çalışır — bir görev atayın, program belirleyin, otomatik olarak yürütecekler",
+      "flexibleShifts": {
+        "title": "Esnek vardiyalar",
+        "desc": "Çalışanları saatlik, günlük, haftalık, aylık olarak planlayın — veya özel bir cron expression kullanın"
+      },
+      "fullAutonomy": {
+        "title": "Tam özerklik",
+        "desc": "Her çalışan tarayıcıya, terminale ve bağlı iş istasyonlarınıza tam erişime sahiptir"
+      },
+      "activityLogs": {
+        "title": "Aktivite günlükleri",
+        "desc": "Her yürütme kaydedilir, böylece çalışanlarınızın başardıklarını inceleyebilirsiniz"
+      },
+      "startFromChat": "Sohbetten başla"
+    },
+    "filters": {
+      "all": "Tümü",
+      "onDuty": "Görevde",
+      "standby": "Beklemede"
+    },
+    "noMatch": "Bu filtreyle eşleşen çalışan yok",
+    "createTeam": {
+      "title": "Yeni Takım",
+      "subtitle": "Bir şablonla başlayın veya sıfırdan oluşturun",
+      "backToTemplates": "Şablonlara dön",
+      "customTeam": "Özel Takım",
+      "customDescription": "Kendi yapılandırmanızla bir takım oluşturun.",
+      "teamNameLabel": "Takım Adı",
+      "teamNamePlaceholder": "ör. Research, Marketing, Engineering",
+      "guidelinesLabel": "Kurallar",
+      "optional": "(isteğe bağlı)",
+      "guidelinesPlaceholder": "Tüm takım üyelerinin uyacağı ortak talimatlar...",
+      "suggestedEmployees": "Önerilen Çalışanlar",
+      "suggestedCredentials": "Önerilen Kimlik Bilgileri",
+      "added": "Eklendi",
+      "addButton": "+ Ekle",
+      "credentials": "Kimlik Bilgileri",
+      "addCredential": "+ Kimlik bilgisi ekle",
+      "credentialHint": "Kimlik bilgileri şifrelenmiştir. Çalışanların nelerin kullanılabilir olduğunu bilmesi için takım kurallarına dahil edilecektir.",
+      "settingUp": "Kuruluyor...",
+      "createEmployees": "{count} Çalışan Oluştur",
+      "createTeamButton": "Takım Oluştur"
+    },
+    "noTeams": {
+      "title": "Henüz takım yok",
+      "description": "Takımlar çalışanların bağlam ve bellek paylaşmasını sağlar. Organizasyon şemanızı oluşturmak için bir tane yaratın.",
+      "newTeam": "Yeni Takım"
+    },
+    "howItWorks": {
+      "title": "Nasıl çalışır",
+      "dragEmployees": "Çalışanları bir takıma sürükleyin",
+      "clickToEdit": "Program ve ayarları düzenlemek için tıklayın",
+      "teamsShare": "Takımlar bellek ve kuralları paylaşır",
+      "dashedLines": "Kesikli çizgiler — çalışanlar arası yetkilendirme"
+    },
+    "inactive": {
+      "title": "{count} çalışan aktif değil",
+      "missingMachine": "{count} makine eksik — etkinleştirilene kadar çalışmayacak",
+      "wontRun": "Etkinleştirilene kadar çalışmayacak",
+      "fixInEmployees": "Çalışanlarda düzelt"
+    },
+    "dragHint": "Atanmamış çalışanları eklemek için takımlara sürükleyin",
+    "limits": {
+      "upgradePlan": "Planı Yükselt",
+      "manageMachines": "Makineleri Yönet",
+      "manageEmployees": "Çalışanları Yönet",
+      "machineLimit": "Bir bulut makinesine ihtiyacınız var ama {max} makine sınırınıza ulaştınız. Planınızı yükseltin veya kullanılmayan bir makineyi silin.",
+      "employeeLimit": "Çalışan sınırınıza ulaştınız ({tier} seviyesi için {max}). Planınızı yükseltin veya kullanılmayan çalışanları kaldırın.",
+      "templateLimit": "Bu şablon {needed} çalışan gerektiriyor ama yalnızca {available} yeriniz kaldı ({tier} seviyesi için maksimum {max}). Planınızı yükseltin veya kullanılmayan çalışanları kaldırın.",
+      "createFailed": "Hiçbir çalışan oluşturulamadı. Hesap sınırlarınızı kontrol edip tekrar deneyin.",
+      "teamFailed": "Takım oluşturulamadı"
+    },
+    "provisioning": {
+      "checking": "Hesap sınırları kontrol ediliyor...",
+      "usingMachine": "\"{name}\" makinesi kullanılıyor...",
+      "assigningMachine": "\"{name}\" makinesine atanıyor (makine hazır olunca çalışacak)...",
+      "creatingMachine": "Yeni bir makine oluşturuluyor...",
+      "machineStarted": "Makine hazırlığı başlatıldı...",
+      "hiring": "{name} işe alınıyor ({current}/{total})...",
+      "creatingTeam": "Takım oluşturuluyor..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Takım {count} çalışanla oluşturuldu ({failedCount} başarısız: {names})",
+      "teamCreated": "{name} takımı {count} çalışanla oluşturuldu"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "İçerik Operasyonları",
+        "tagline": "Parmağınızı kıpırdatmadan sürekli yayın yapın",
+        "description": "Yalın bir içerik motoru — içerik yazar, optimize eder ve otomatik olarak dağıtır.",
+        "roles": {
+          "atlas": "İçerik Yazarı — blog yazıları, bültenler ve sosyal medya metinleri yazar",
+          "echo": "SEO Analisti — sayfaları denetler, sıralamaları takip eder, anahtar kelime fırsatları önerir",
+          "nova": "Sosyal Dağıtımcı — platformlara içerik paylaşır ve etkileşimi izler"
+        },
+        "credentials": {
+          "wordpress": "Blog yazılarını yayınla ve yönet",
+          "twitter": "Tweet paylaş ve etkileşimi izle",
+          "linkedin": "Profesyonel içerik ve makaleler yayınla",
+          "searchConsole": "Arama performansını ve dizinlemeyi takip et"
+        }
+      },
+      "customerSupport": {
+        "name": "Müşteri Desteği",
+        "tagline": "3 çalışandan 7/24 destek kapsamı",
+        "description": "Gelen kutularını izler, yaygın sorunları çözer ve bilgi tabanınızı güncel tutar.",
+        "roles": {
+          "sage": "Gelen Kutusu İzleyici — destek e-postalarını kontrol eder, sınıflandırır ve yaygın sorulara yanıt verir",
+          "iris": "Bilgi Tabanı Yöneticisi — tekrarlayan sorunlara göre yardım belgelerini ve SSS'leri günceller",
+          "milo": "Geri Bildirim Analisti — yorumları ve destek trendlerini haftalık raporlarda birleştirir"
+        },
+        "credentials": {
+          "gmail": "Destek e-postalarını izle ve yanıtla",
+          "zendesk": "Destek biletlerini yönet (veya yardım masanız)",
+          "notion": "Bilgi tabanını ve belgeleri güncelle"
+        }
+      },
+      "researchIntel": {
+        "name": "Araştırma ve İstihbarat",
+        "tagline": "Manuel çalışma olmadan bilgi sahibi olun",
+        "description": "Rakipleri izler, sektör trendlerini takip eder ve uygulanabilir araştırma özetleri derler.",
+        "roles": {
+          "scout": "Rakip İzleyici — rakip web sitelerini, fiyatlandırmayı ve özellik değişikliklerini takip eder",
+          "wren": "Trend Araştırmacısı — sektör haberlerini, yayınları ve sosyal medyayı trendler için tarar",
+          "quinn": "Özet Derleyici — bulguları yapılandırılmış haftalık istihbarat raporlarında sentezler"
+        },
+        "credentials": {
+          "google": "Web araştırması ve arama",
+          "linkedin": "Rakip işe alımlarını ve duyurularını takip et",
+          "notion": "Araştırma özetlerini ve raporları yayınla"
+        }
+      },
+      "marketing": {
+        "name": "Pazarlama Departmanı",
+        "tagline": "İki makinede tam bir pazarlama ekibi",
+        "description": "İçerik oluşturma, sosyal medya, SEO, rakip takibi ve kampanya analitiği — iki koordineli ekip.",
+        "roles": {
+          "atlas": "İçerik Stratejisti — içerik takvimi planlar, uzun formatlı içerikler yazar",
+          "nova": "Sosyal Medya Yöneticisi — paylaşır, etkileşim kurar ve sosyal kanalları büyütür",
+          "echo": "SEO Uzmanı — sayfaları optimize eder, dahili bağlantılar oluşturur, anahtar kelimeleri takip eder",
+          "pixel": "E-posta Kampanya Yöneticisi — bültenler yazar ve gönderir, açılma/tıklanma oranlarını takip eder",
+          "scout": "Rakip Analisti — rakiplerin pazarlama hamlelerini izler ve içgörü raporlar",
+          "dash": "Reklam Kampanya İzleyici — reklam harcamalarını, ROAS'ı ve optimizasyon fırsatlarını takip eder",
+          "iris": "Analitik Raportörü — çapraz kanal performans panolarını derler"
+        },
+        "credentials": {
+          "wordpress": "Blog içeriği yayınla",
+          "twitter": "Sosyal medya yönetimi",
+          "linkedin": "Profesyonel içerik dağıtımı",
+          "mailchimp": "E-posta kampanyaları ve bültenler",
+          "analytics": "Trafik ve dönüşüm analitiği",
+          "googleAds": "Google Ads kampanya yönetimi",
+          "metaAds": "Meta Ads ve sosyal yönetim"
+        }
+      },
+      "ecommerce": {
+        "name": "E-Ticaret Operasyonları",
+        "tagline": "Siz uyurken mağazanızı yönetin",
+        "description": "Ürün yönetimi, fiyat istihbaratı, envanter takibi, yorum yönetimi ve online mağazalar için büyüme pazarlaması.",
+        "roles": {
+          "cleo": "Ürün Listeleyici — ürün açıklamalarını, görsellerini ve meta verilerini oluşturur ve günceller",
+          "onyx": "Fiyat İzleyici — rakip fiyatlarını takip eder ve ayarlama fırsatlarını bildirir",
+          "luna": "Envanter Takipçisi — stok seviyelerini izler ve düşük envanterde uyarır",
+          "sage": "Yorum Yöneticisi — müşteri yorumlarına yanıt verir ve duygu analizi yapar",
+          "dash": "Reklam Kampanya Optimizörü — ürün reklamlarını ve alışveriş kampanyalarını yönetir",
+          "flux": "E-posta Pazarlamacı — terk edilmiş sepet, promosyon ve satış sonrası e-postaları gönderir",
+          "wren": "Analitik Raportörü — geliri, dönüşüm oranlarını ve büyüme metriklerini takip eder"
+        },
+        "credentials": {
+          "shopify": "Mağaza yönetimi ve ürün listeleme",
+          "amazon": "Amazon pazar yeri yönetimi",
+          "googleAds": "Alışveriş reklamları ve kampanyalar",
+          "mailchimp": "Müşteri e-posta dizileri",
+          "analytics": "Dönüşüm ve trafik analitiği"
+        }
+      },
+      "engineering": {
+        "name": "Mühendislik Ekibi",
+        "tagline": "Mühendisliğin sıkıcı kısımlarını otomatikleştirin",
+        "description": "Otomatik kod incelemeleri, bağımlılık izleme, dokümantasyon, test, dağıtım izleme ve olay müdahalesi.",
+        "roles": {
+          "rune": "Kod İnceleyici — açık PR'ları inceler, iyileştirmeler önerir, güvenlik sorunlarını kontrol eder",
+          "koda": "Bağımlılık İzleyici — eski paketleri, güvenlik uyarılarını ve bozucu değişiklikleri takip eder",
+          "aria": "Belge Yazarı — API belgelerini, README'leri ve changelog'ları en son kodla güncel tutar",
+          "blaze": "Test İzleyici — test takımlarını çalıştırır, kararsız testleri takip eder, kapsam trendlerini raporlar",
+          "frost": "Dağıtım İzleyici — CI/CD boru hatlarını izler, hatalarda uyarır, dağıtım sıklığını takip eder",
+          "neon": "Uptime ve Log İzleyici — servisleri izler, hata için logları tarar, olay raporları oluşturur"
+        },
+        "credentials": {
+          "github": "Repository erişimi, PR incelemeleri, issues",
+          "vercel": "Dağıtım izleme (veya CI/CD'niz)",
+          "sentry": "Hata takibi ve olay uyarıları",
+          "npm": "Bağımlılık kontrolleri için paket kayıt defteri"
+        }
+      },
+      "fullBusiness": {
+        "name": "Tam İş Operasyonları",
+        "tagline": "Tamamen otomatikleştirilmiş bir şirket",
+        "description": "Satış, pazarlama, destek ve yönetim — paylaşılan istihbaratla üç makinede uyum içinde çalışan dört departman.",
+        "roles": {
+          "atlas": "Potansiyel Müşteri Bulucu — çevrimiçi kaynaklardan potansiyel müşterileri bulur ve nitelendirir",
+          "dash": "CRM Yöneticisi — anlaşmaları günceller, boru hattını takip eder ve takip dizileri gönderir",
+          "scout": "Teklif Yazarı — şablonlardan satış teklifleri ve sunum dosyaları hazırlar",
+          "nova": "İçerik Pazarlamacı — blog yazıları, vaka çalışmaları ve pazarlama metinleri yazar",
+          "echo": "Sosyal Medya Yöneticisi — içerik paylaşır ve hedef kitleyle etkileşim kurar",
+          "pixel": "E-posta Kampanya Yöneticisi — drip kampanyaları ve bülten dizileri yürütür",
+          "sage": "Destek Lideri — müşteri sorularını yanıtlar ve sorunları çözer",
+          "iris": "Bilgi Yöneticisi — yardım belgelerini, SSS'leri ve dahili vikiyi yönetir",
+          "milo": "Veri Analisti — departmanlar arası raporları ve KPI panolarını derler",
+          "wren": "Pazar Araştırmacısı — sektör trendlerini ve rekabet istihbaratını takip eder",
+          "quinn": "Operasyon Koordinatörü — haftalık özetleri ve takımlar arası senkronizasyonları yürütür"
+        },
+        "credentials": {
+          "gmail": "E-posta iletişimi ve destek",
+          "hubspot": "CRM ve satış boru hattı (veya CRM'iniz)",
+          "linkedin": "Potansiyel müşteri bulma ve profesyonel ağ",
+          "mailchimp": "E-posta pazarlama kampanyaları",
+          "notion": "Dahili viki ve dokümantasyon",
+          "analytics": "Web analitiği ve raporlama",
+          "twitter": "Sosyal medya varlığı",
+          "zendesk": "Müşteri destek biletleri"
+        }
+      },
+      "growth": {
+        "name": "Büyüme ve Kazanım",
+        "tagline": "Tam otomatik agresif büyüme",
+        "description": "Giden müşteri arama, gelen pazarlama, dönüşüm optimizasyonu ve analitik — üç makinede özel bir büyüme motoru.",
+        "roles": {
+          "blaze": "Giden Müşteri Arayıcı — karar vericileri bulur, şirketleri araştırır, potansiyel müşteri listeleri oluşturur",
+          "flux": "E-posta İletişim — kişiselleştirilmiş soğuk e-postalar gönderir, takip dizilerini yönetir",
+          "orion": "LinkedIn İletişim — potansiyel müşterilerle bağlantı kurar ve kişiselleştirilmiş mesajlar gönderir",
+          "coral": "İçerik Oluşturucu — SEO içeriği, açılış sayfası metni ve lead magnet üretir",
+          "taro": "Açılış Sayfası Optimizörü — dönüşüm oranlarını izler, iyileştirmeler önerir ve test eder",
+          "vale": "Reklam Kampanya Yöneticisi — Google ve Meta reklam kampanyalarını uçtan uca yönetir",
+          "ember": "Potansiyel Müşteri Puanlayıcı — gelen potansiyel müşterileri nitelendirir ve uygun takibe yönlendirir",
+          "haze": "Funnel Analisti — her aşamada dönüşüm metriklerini takip eder, darboğazları belirler",
+          "dune": "Rakip İstihbaratı — rakip kampanyalarını, fiyatlandırmasını ve konumlandırma değişikliklerini izler",
+          "kit": "Büyüme Raportörü — günlük/haftalık büyüme metriklerini ve deney sonuçlarını derler"
+        },
+        "credentials": {
+          "linkedin": "Müşteri arama ve iletişim",
+          "gmail": "Soğuk e-posta ve takip dizileri",
+          "hubspot": "Potansiyel müşteri yönetimi ve CRM",
+          "googleAds": "Ücretli arama kampanyaları",
+          "metaAds": "Meta reklamcılığı",
+          "analytics": "Funnel ve dönüşüm analitiği",
+          "ahrefs": "SEO araştırması ve rakip analizi"
+        }
+      },
+      "saas": {
+        "name": "SaaS Operasyonları",
+        "tagline": "SaaS'ınızı kusursuz yönetin",
+        "description": "Müşteri başarısı, ürün analitiği, kayıp önleme, özellik takibi ve SaaS işletmeleri için otomatik raporlama.",
+        "roles": {
+          "luna": "Müşteri Başarısı İzleyici — kullanıcı etkileşimini takip eder, riskli hesapları belirler",
+          "sage": "Başlangıç Asistanı — yeni kullanıcıları kurulum sürecinde yönlendirir, aktivasyon oranlarını izler",
+          "ivy": "Kayıp Önleyici — etkileşimi azalan kullanıcılara yeniden aktivasyon kampanyalarıyla ulaşır",
+          "rune": "Özellik İsteği Takipçisi — tüm kanallardan kullanıcı geri bildirimlerini ve özellik isteklerini toplar",
+          "koda": "Ürün Analitiği — özellik benimsenmesini, kullanıcı yolculuklarını ve etkileşim metriklerini takip eder",
+          "neon": "Hata ve Sorun İzleyici — hata loglarını, kullanıcı raporlarını ve durum sayfası olaylarını izler",
+          "aria": "Changelog Yazarı — sürümleri belgeler, bilgi tabanını ve yardım merkezini günceller",
+          "frost": "Gelir Analisti — MRR, kayıp oranı, LTV ve genişleme gelirini takip eder",
+          "zara": "Rakip Takipçisi — rakip özelliklerini, fiyatlandırmasını ve pazar konumlandırmasını izler"
+        },
+        "credentials": {
+          "stripe": "Abonelik ve gelir verileri",
+          "intercom": "Müşteri mesajlaşması ve desteği (veya aracınız)",
+          "mixpanel": "Ürün analitiği ve kullanıcı takibi",
+          "gmail": "Müşteri iletişimi",
+          "notion": "Bilgi tabanı ve changelog",
+          "sentry": "Hata izleme ve hata takibi",
+          "github": "Sorun takibi ve özellik istekleri"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "3'e kadar",
+        "price": "$19/ay"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "10'a kadar",
+        "price": "$50/ay"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "50'ye kadar",
+        "price": "$100/ay"
+      }
+    },
+    "frequencies": {
+      "daily": "günlük",
+      "weekly": "haftalık",
+      "every_30_minutes": "her 30 dakikada",
+      "every_6_hours": "her 6 saatte",
+      "every_12_hours": "her 12 saatte"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Temel bilgisayar ayarlarını yapılandırın",
+    "displayName": "Görünen Ad",
+    "defaultName": "Bilgisayarım",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Bu şifre bilgisayara bağlanmak için gereklidir"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Topluluk",
+    "title": "İnsanların nasıl kullandığını görün",
+    "subtitle": "Lead araştırmasından QA testine — topluluğun neyi otomatikleştirdiğini görün ve bir sonraki iş akışınız için ilham alın.",
+    "sessionCount": "Topluluk tarafından paylaşılan {count} oturum",
+    "searchPlaceholder": "Görev, araç veya sonuca göre ara...",
+    "emptyTitle": "Henüz kimse paylaşmadı — ilk siz olun",
+    "emptySubtitle": "Kullanıcılar oturumlarını herkese açık yaptığında burada görünürler",
+    "noResultsTitle": "Bu aramayla eşleşen sonuç yok",
+    "noResultsSubtitle": "Farklı anahtar kelimeler deneyin",
+    "watchSession": "Oturumu izle",
+    "steps": "{count} adım",
+    "tryCoasty": "Coasty'yi dene"
+  }
+}

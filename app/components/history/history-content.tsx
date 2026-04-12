@@ -533,6 +533,14 @@ function ChatCard({
   const [isPublic, setIsPublic] = useState(chat.public ?? false)
   const [shareLoading, setShareLoading] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [titleCopied, setTitleCopied] = useState(false)
+
+  const copyTitle = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation()
+    navigator.clipboard.writeText(chat.title || "Untitled Project")
+    setTitleCopied(true)
+    setTimeout(() => setTitleCopied(false), 2000)
+  }, [chat.title])
   const shareUrl = `${APP_DOMAIN}/share/${chat.id}`
 
   const hasMessages = chat.last_message_preview != null
@@ -665,7 +673,7 @@ function ChatCard({
           </div>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium leading-snug mb-2">
+            <p className={cn("text-sm font-medium leading-snug mb-2", !isExpanded && "line-clamp-1")}>
               {chat.title || "Untitled Project"}
               {isDesktopChat && (
                 <span className="inline-flex shrink-0 items-center gap-0.5 rounded bg-blue-500/15 px-1.5 py-0.5 text-[10px] font-medium text-blue-500 dark:text-blue-400 ml-2 align-middle">
@@ -716,6 +724,20 @@ function ChatCard({
               </>
             )}
           </span>
+
+          <button
+            onClick={copyTitle}
+            className={cn(
+              "inline-flex items-center gap-1.5 h-8 px-2.5 rounded-lg border text-xs font-medium transition-all duration-200",
+              titleCopied
+                ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-500"
+                : "border-border/40 bg-background/60 text-muted-foreground hover:text-foreground hover:bg-background/90"
+            )}
+            title="Copy title"
+          >
+            {titleCopied ? <Check className="size-3.5" weight="bold" /> : <Copy className="size-3.5" />}
+            <span className="hidden sm:inline">{titleCopied ? "Copied" : "Copy"}</span>
+          </button>
 
           <button
             onClick={(e) => {

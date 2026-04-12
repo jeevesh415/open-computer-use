@@ -7,8 +7,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { useUser } from "@/lib/user-store/provider"
-import { useRouter } from "next/navigation"
 import { CoastyIcon } from "@/components/icons/coasty"
+import { useAccountDialog } from "@/lib/account-dialog-store"
 
 interface UserMenuProps {
   children?: React.ReactNode
@@ -17,10 +17,10 @@ interface UserMenuProps {
 
 export function UserMenu({ children, showTooltip = true }: UserMenuProps) {
   const { user } = useUser()
-  const router = useRouter()
+  const openAccountDialog = useAccountDialog((s) => s.open)
 
   const handleClick = () => {
-    router.push("/account")
+    openAccountDialog()
   }
 
   if (!user) return null

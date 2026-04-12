@@ -563,13 +563,13 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.625rem;
-  --sidebar: oklch(0.975 0.002 260);
+  --sidebar: oklch(0.965 0 0);
   --sidebar-foreground: oklch(0.4 0.005 260);
   --sidebar-primary: oklch(0.21 0.006 285.885);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.94 0.003 260);
+  --sidebar-accent: oklch(0.94 0 0);
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.85 0.005 260);
+  --sidebar-border: oklch(0.85 0 0);
   --sidebar-ring: oklch(0.705 0.015 286.067);
   --color-1: oklch(0.95 0 0); /* White */
   --color-2: oklch(0.1 0 0);  /* Black */
@@ -604,13 +604,13 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(20% 0.005 260);
-  --sidebar-foreground: oklch(0.9 0.005 260);
+  --sidebar: oklch(18% 0 0);
+  --sidebar-foreground: oklch(0.92 0.005 260);
   --sidebar-primary: oklch(0.985 0 0);
   --sidebar-primary-foreground: oklch(20% 0 0);
-  --sidebar-accent: oklch(25% 0.005 260);
+  --sidebar-accent: oklch(23% 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(100% 0 0 / 10%);
+  --sidebar-border: oklch(100% 0 0 / 14%);
   --sidebar-ring: oklch(0.705 0.015 286.067);
   --color-1: oklch(0.95 0 0); /* White */
   --color-2: oklch(0.1 0 0);  /* Black */
@@ -627,39 +627,60 @@
     @apply bg-background text-foreground;
   }
 
-  /* Smooth sidebar animations */
-  [data-sidebar] * {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  /* ── Smooth sidebar transitions ── */
 
+  /* All sidebar children get smooth transitions */
   [data-sidebar="sidebar"] {
-    will-change: width, transform;
+    will-change: width;
   }
 
-  [data-collapsible="icon"] [data-sidebar="sidebar"] {
-    animation: sidebar-collapse 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Nav item labels, badges, text — fade + slide on expand/collapse */
+  [data-sidebar="sidebar"] span,
+  [data-sidebar="sidebar"] p,
+  [data-sidebar="sidebar"] [data-slot="sidebar-header"] span,
+  [data-sidebar="sidebar"] [data-slot="sidebar-footer"] span,
+  [data-sidebar="sidebar"] [data-slot="sidebar-footer"] div {
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  [data-collapsible=""] [data-sidebar="sidebar"] {
-    animation: sidebar-expand 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* When collapsed, fade out text content */
+  [data-collapsible="icon"] [data-sidebar="sidebar"] .truncate,
+  [data-collapsible="icon"] [data-sidebar="sidebar"] [data-slot="sidebar-header"] span:not(:first-child) {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 120ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 120ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  @keyframes sidebar-collapse {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 1;
-    }
+  /* Icons stay visible and centered smoothly */
+  [data-sidebar="sidebar"] svg,
+  [data-sidebar="sidebar"] img {
+    transition: transform 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-shrink: 0;
   }
 
-  @keyframes sidebar-expand {
-    from {
-      opacity: 0.95;
-    }
-    to {
-      opacity: 1;
-    }
+  /* Buttons/links in sidebar — smooth padding & gap transitions */
+  [data-sidebar="sidebar"] a,
+  [data-sidebar="sidebar"] button {
+    transition: background-color 150ms ease,
+                color 150ms ease,
+                padding 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                gap 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 200ms ease,
+                box-shadow 200ms ease,
+                border-color 200ms ease;
+  }
+
+  /* Section dividers — smooth width */
+  [data-sidebar="sidebar"] [data-slot="sidebar-content"] > div > div:first-child {
+    transition: width 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 200ms ease;
+  }
+
+  /* Footer cards (credits, download) — smooth border & bg */
+  [data-sidebar="sidebar"] [data-slot="sidebar-footer"] {
+    transition: padding 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* App container with rounded edges */
@@ -907,3 +928,5 @@ code {
 ::view-transition-new(root) {
   z-index: 99999;
 }
+
+/* ── Chat Background Patterns ── */

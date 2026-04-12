@@ -80,9 +80,8 @@ export function UserProvider({
       display_name: user.display_name,
       profile_image: user.profile_image,
       created_at: user.created_at ?? undefined,
-      is_anonymous: user.anonymous ?? undefined,
     })
-  }, [user?.id, user?.email, user?.display_name, user?.profile_image, user?.created_at, user?.anonymous])
+  }, [user?.id, user?.email, user?.display_name, user?.profile_image, user?.created_at])
 
   // Set up realtime subscription for user data changes
   useEffect(() => {

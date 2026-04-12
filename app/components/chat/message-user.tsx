@@ -248,7 +248,7 @@ export function MessageUser({
           )}
         </div>
       )}
-      <MessageActions className="flex gap-0 opacity-0 transition-opacity duration-0 group-hover:opacity-100">
+      <MessageActions className="flex gap-0 sm:opacity-0 transition-opacity duration-0 sm:group-hover:opacity-100">
         <MessageAction tooltip={copied ? "Copied!" : "Copy text"} side="bottom">
           <button
             className="hover:bg-accent/60 text-muted-foreground hover:text-foreground flex size-7.5 items-center justify-center rounded-full bg-transparent transition"

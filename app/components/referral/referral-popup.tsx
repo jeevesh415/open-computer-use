@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -43,56 +44,53 @@ interface ReferralStats {
   referredBy: { email: string; credits: number; date: string } | null
 }
 
-const shareMessage =
-  "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!"
-
-const socials = [
+const socialConfig = [
   {
     id: "twitter",
-    label: "X",
+    labelKey: "socialLabels.x" as const,
     icon: TwitterLogo,
     hover: "hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2]",
-    urlFn: (link: string) =>
+    urlFn: (link: string, shareMessage: string) =>
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         `${shareMessage} 🤖`
       )}&url=${encodeURIComponent(link)}`,
   },
   {
     id: "linkedin",
-    label: "LinkedIn",
+    labelKey: "socialLabels.linkedin" as const,
     icon: LinkedinLogo,
     hover: "hover:bg-[#0A66C2] hover:text-white hover:border-[#0A66C2]",
-    urlFn: (link: string) =>
+    urlFn: (link: string, _shareMessage: string) =>
       `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
         link
       )}`,
   },
   {
     id: "whatsapp",
-    label: "WhatsApp",
+    labelKey: "socialLabels.whatsapp" as const,
     icon: WhatsappLogo,
     hover: "hover:bg-[#25D366] hover:text-white hover:border-[#25D366]",
-    urlFn: (link: string) =>
+    urlFn: (link: string, shareMessage: string) =>
       `https://wa.me/?text=${encodeURIComponent(
         `${shareMessage}\n\n${link}`
       )}`,
   },
   {
     id: "telegram",
-    label: "Telegram",
+    labelKey: "socialLabels.telegram" as const,
     icon: TelegramLogo,
     hover: "hover:bg-[#26A5E4] hover:text-white hover:border-[#26A5E4]",
-    urlFn: (link: string) =>
+    urlFn: (link: string, shareMessage: string) =>
       `https://t.me/share/url?url=${encodeURIComponent(
         link
       )}&text=${encodeURIComponent(shareMessage)}`,
   },
   {
     id: "reddit",
-    label: "Reddit",
+    labelKey: "socialLabels.reddit" as const,
     icon: RedditLogo,
     hover: "hover:bg-[#FF4500] hover:text-white hover:border-[#FF4500]",
-    urlFn: (link: string) =>
+    urlFn: (link: string, _shareMessage: string) =>
       `https://reddit.com/submit?url=${encodeURIComponent(
         link
       )}&title=${encodeURIComponent(
@@ -101,12 +99,12 @@ const socials = [
   },
   {
     id: "email",
-    label: "Email",
+    labelKey: "socialLabels.email" as const,
     icon: EnvelopeSimple,
     hover: "hover:bg-foreground hover:text-background hover:border-foreground",
-    urlFn: (link: string) =>
+    urlFn: (link: string, shareMessage: string, emailSubject: string) =>
       `mailto:?subject=${encodeURIComponent(
-        "Check out this AI tool"
+        emailSubject
       )}&body=${encodeURIComponent(
         `${shareMessage}\n\nHere's my link: ${link}`
       )}`,
@@ -120,21 +118,22 @@ function maskEmail(email: string) {
   return `${local[0]}${local[1]}${"*".repeat(Math.min(local.length - 2, 4))}@${domain}`
 }
 
-function timeAgo(dateStr: string) {
+function timeAgo(dateStr: string, t: (key: string, values?: Record<string, number>) => string) {
   const now = Date.now()
   const then = new Date(dateStr).getTime()
   const diff = now - then
   const minutes = Math.floor(diff / 60000)
-  if (minutes < 1) return "just now"
-  if (minutes < 60) return `${minutes}m ago`
+  if (minutes < 1) return t("timeAgo.justNow")
+  if (minutes < 60) return t("timeAgo.minutesAgo", { minutes })
   const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}h ago`
+  if (hours < 24) return t("timeAgo.hoursAgo", { hours })
   const days = Math.floor(hours / 24)
-  if (days < 30) return `${days}d ago`
-  return `${Math.floor(days / 30)}mo ago`
+  if (days < 30) return t("timeAgo.daysAgo", { days })
+  return t("timeAgo.monthsAgo", { months: Math.floor(days / 30) })
 }
 
 export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
+  const t = useTranslations("referralPopup")
   const { user } = useUser()
   const [isCopied, setIsCopied] = useState(false)
   const [stats, setStats] = useState<ReferralStats | null>(null)
@@ -185,12 +184,15 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
       document.body.removeChild(textArea)
     }
     setIsCopied(true)
-    toast.success("Referral link copied!")
+    toast.success(t("linkCopied"))
     setTimeout(() => setIsCopied(false), 2500)
   }
 
-  const handleShare = (urlFn: (link: string) => string) => {
-    window.open(urlFn(referralLink), "_blank", "width=600,height=500")
+  const shareMessage = t("shareMessage")
+  const emailSubject = t("emailSubject")
+
+  const handleShare = (urlFn: (link: string, shareMessage: string, emailSubject: string) => string) => {
+    window.open(urlFn(referralLink, shareMessage, emailSubject), "_blank", "width=600,height=500")
   }
 
   return (
@@ -255,14 +257,10 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                   <CoastyIcon className="h-6 w-6" />
                 </div>
                 <DialogTitle className="text-lg font-semibold">
-                  Good friends share memes. Great friends share AI agents.
+                  {t("headline")}
                 </DialogTitle>
                 <p className="text-[13px] text-muted-foreground mt-1.5 leading-relaxed">
-                  You both get{" "}
-                  <span className="font-medium text-foreground">
-                    50 free credits
-                  </span>{" "}
-                  when your friend joins.
+                  {t("subheadline", { credits: "50" })}
                 </p>
               </DialogHeader>
             </div>
@@ -271,7 +269,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
               {/* Copy link */}
               <div>
                 <p className="text-[10px] font-medium text-muted-foreground/70 uppercase tracking-widest mb-1.5">
-                  Your referral link
+                  {t("yourLink")}
                 </p>
                 <button
                   onClick={handleCopy}
@@ -309,10 +307,10 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
               {/* Social share grid */}
               <div>
                 <p className="text-[10px] font-medium text-muted-foreground/70 uppercase tracking-widest mb-2">
-                  Share directly
+                  {t("shareDirectly")}
                 </p>
                 <div className="grid grid-cols-3 gap-1.5">
-                  {socials.map((s) => {
+                  {socialConfig.map((s) => {
                     const Icon = s.icon
                     return (
                       <Button
@@ -327,7 +325,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                         )}
                       >
                         <Icon size={15} weight="bold" className="mr-1.5" />
-                        {s.label}
+                        {t(s.labelKey)}
                       </Button>
                     )
                   })}
@@ -337,24 +335,16 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
               {/* Stats + Referral list */}
               <div>
                 <p className="text-[10px] font-medium text-muted-foreground/70 uppercase tracking-widest mb-2">
-                  Your referrals
+                  {t("yourReferrals")}
                 </p>
 
                 {/* Summary bar */}
                 <div className="flex items-center justify-between rounded-lg bg-muted/40 px-3 py-2.5 mb-2">
                   <div className="text-[11px] text-muted-foreground">
-                    <span className="font-semibold text-foreground text-sm">
-                      {stats?.totalReferrals ?? 0}
-                    </span>{" "}
-                    {(stats?.totalReferrals ?? 0) === 1
-                      ? "referral"
-                      : "referrals"}
+                    {t("referralCount", { count: String(stats?.totalReferrals ?? 0) })}
                   </div>
                   <div className="text-[11px] text-muted-foreground">
-                    <span className="font-semibold text-foreground text-sm">
-                      {(stats?.totalEarned ?? 0).toLocaleString()}
-                    </span>{" "}
-                    credits earned
+                    {t("creditsEarned", { credits: (stats?.totalEarned ?? 0).toLocaleString() })}
                   </div>
                 </div>
 
@@ -375,7 +365,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                             {maskEmail(stats.referredBy.email)}
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            Invited you
+                            {t("invitedYou")}
                           </p>
                         </div>
                         <div className="text-right shrink-0 ml-3">
@@ -383,7 +373,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                             +{stats.referredBy.credits.toLocaleString()} credits
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            {timeAgo(stats.referredBy.date)}
+                            {timeAgo(stats.referredBy.date, t)}
                           </p>
                         </div>
                       </div>
@@ -398,7 +388,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                             {maskEmail(r.email)}
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            Joined via your link
+                            {t("joinedViaLink")}
                           </p>
                         </div>
                         <div className="text-right shrink-0 ml-3">
@@ -406,7 +396,7 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                             +{r.credits.toLocaleString()} credits
                           </p>
                           <p className="text-[10px] text-muted-foreground">
-                            {timeAgo(r.date)}
+                            {timeAgo(r.date, t)}
                           </p>
                         </div>
                       </div>
@@ -415,10 +405,10 @@ export function ReferralPopup({ open, onOpenChange }: ReferralPopupProps) {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-4 text-center">
                     <p className="text-xs text-muted-foreground">
-                      No users invited yet
+                      {t("noInvites")}
                     </p>
                     <p className="text-[10px] text-muted-foreground/60 mt-0.5">
-                      Share your link and you both earn 50 credits
+                      {t("noInvitesHint")}
                     </p>
                   </div>
                 )}

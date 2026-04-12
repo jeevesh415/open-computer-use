@@ -1,5 +1,6 @@
 import { execFile, exec, ChildProcess } from 'child_process'
 import * as os from 'os'
+import { sanitizeChildEnv, checkDangerousCommand } from './security'
 
 interface TerminalSession {
   id: string
@@ -30,6 +31,12 @@ export async function executeTerminal(params: {
 }): Promise<any> {
   const { command, timeout = 30 } = params
 
+  // Block catastrophic commands even if auto-approved
+  const risk = checkDangerousCommand(command)
+  if (risk.blocked) {
+    return { success: false, output: '', exit_code: -1, error: risk.reason }
+  }
+
   // Determine working directory from session
   let cwd = os.homedir()
   if (params.session_id && sessions.has(params.session_id)) {
@@ -46,7 +53,7 @@ export async function executeTerminal(params: {
       cwd,
       timeout: timeout * 1000,
       maxBuffer: 1024 * 1024, // 1MB
-      env: { ...process.env },
+      env: sanitizeChildEnv(),
     }, (error, stdout, stderr) => {
       const output = stdout + (stderr ? `\n${stderr}` : '')
       resolve({

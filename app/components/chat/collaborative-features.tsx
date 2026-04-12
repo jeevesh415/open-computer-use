@@ -2,49 +2,34 @@
 
 import { cn } from "@/lib/utils"
 import { motion } from "motion/react"
+import { useTranslations } from "next-intl"
 
-const features = [
-  {
-    label: "Smart Search",
-    description: "AI-powered search across the web",
-    bgColor: "bg-blue-500/10",
-  },
-  {
-    label: "Collaborate",
-    description: "Work together in real-time",
-    bgColor: "bg-purple-500/10",
-  },
-  {
-    label: "Global Access",
-    description: "Search in 50+ languages",
-    bgColor: "bg-green-500/10",
-  },
-  {
-    label: "AI Models",
-    description: "Multiple AI providers",
-    bgColor: "bg-orange-500/10",
-  },
-  {
-    label: "Free Forever",
-    description: "No hidden costs",
-    bgColor: "bg-pink-500/10",
-  },
-  {
-    label: "Private & Secure",
-    description: "Your data stays yours",
-    bgColor: "bg-cyan-500/10",
-  },
-]
+const featureKeys = [
+  { key: "smartSearch", bgColor: "bg-blue-500/10" },
+  { key: "collaborate", bgColor: "bg-purple-500/10" },
+  { key: "globalAccess", bgColor: "bg-green-500/10" },
+  { key: "aiModels", bgColor: "bg-orange-500/10" },
+  { key: "freeForever", bgColor: "bg-pink-500/10" },
+  { key: "privateSecure", bgColor: "bg-cyan-500/10" },
+] as const
 
 interface CollaborativeFeaturesProps {
   className?: string
   variant?: "default" | "compact"
 }
 
-export function CollaborativeFeatures({ 
-  className, 
-  variant = "default" 
+export function CollaborativeFeatures({
+  className,
+  variant = "default"
 }: CollaborativeFeaturesProps) {
+  const t = useTranslations("collaborativeFeatures")
+
+  const features = featureKeys.map((f) => ({
+    label: t(`${f.key}.title`),
+    description: t(`${f.key}.description`),
+    bgColor: f.bgColor,
+  }))
+
   return (
     <div className={cn("w-full", className)}>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">

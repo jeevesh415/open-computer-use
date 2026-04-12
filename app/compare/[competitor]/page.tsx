@@ -3,9 +3,11 @@
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { LandingHeader } from "@/app/components/landing/landing-header"
+import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { ArrowRight, ArrowLeft, Check, X, Minus } from "lucide-react"
 import { motion } from "framer-motion"
 import { notFound } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 type FeatureValue = true | false | "partial" | string
 
@@ -337,6 +339,7 @@ function FeatureIcon({ value }: { value: FeatureValue }) {
 }
 
 export default function CompetitorPage() {
+  const t = useTranslations("comparePage")
   const params = useParams()
   const slug = params.competitor as string
   const data = competitors[slug]
@@ -357,7 +360,7 @@ export default function CompetitorPage() {
           >
             <Link href="/compare" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground/60 hover:text-foreground transition-colors">
               <ArrowLeft className="h-3.5 w-3.5" />
-              All comparisons
+              {t("allComparisons")}
             </Link>
           </motion.div>
 
@@ -369,7 +372,7 @@ export default function CompetitorPage() {
             className="mb-12"
           >
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.2] mb-4">
-              Coasty vs {data.name}
+              {t("vsLabel", { name: data.name })}
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
               {data.description}
@@ -400,7 +403,7 @@ export default function CompetitorPage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="mb-16"
           >
-            <h2 className="text-xl font-semibold mb-6">Feature Comparison</h2>
+            <h2 className="text-xl font-semibold mb-6">{t("featureComparison")}</h2>
             <div className="rounded-xl border border-border/40 overflow-hidden">
               <div className="grid grid-cols-[1fr,100px,100px] sm:grid-cols-[1fr,140px,140px] bg-muted/30 border-b border-border/40 px-4 py-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground/50">Feature</p>
@@ -432,7 +435,7 @@ export default function CompetitorPage() {
             className="grid sm:grid-cols-2 gap-6 mb-16"
           >
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
-              <h3 className="font-semibold mb-4">Why Choose Coasty</h3>
+              <h3 className="font-semibold mb-4">{t("whyChooseCoasty")}</h3>
               <ul className="space-y-3">
                 {data.whyCoasty.map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
@@ -443,7 +446,7 @@ export default function CompetitorPage() {
               </ul>
             </div>
             <div className="rounded-xl border border-border/40 bg-card p-6">
-              <h3 className="font-semibold mb-4">{data.name} Strengths</h3>
+              <h3 className="font-semibold mb-4">{t("strengthsOf", { name: data.name })}</h3>
               <ul className="space-y-3">
                 {data.competitorStrengths.map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-muted-foreground leading-relaxed">
@@ -463,10 +466,10 @@ export default function CompetitorPage() {
             className="text-center border-t border-border/30 pt-16"
           >
             <h2 className="text-2xl font-bold mb-3">
-              Ready to try the #1 computer-using AI agent?
+              {t("ctaTitle")}
             </h2>
             <p className="text-muted-foreground mb-6">
-              82% OSWorld benchmark. VM isolation. CAPTCHA solving. Starting at $20/mo.
+              {t("ctaDescription")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/auth">
@@ -475,7 +478,7 @@ export default function CompetitorPage() {
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Try Coasty Free
+                  {t("ctaButton")}
                   <ArrowRight className="h-4 w-4" />
                 </motion.button>
               </Link>
@@ -485,16 +488,18 @@ export default function CompetitorPage() {
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Watch Case Studies
+                  {t("watchCaseStudies")}
                 </motion.button>
               </Link>
             </div>
             <p className="text-[11px] text-muted-foreground/30 mt-4">
-              No credit card required
+              {t("noCreditCard")}
             </p>
           </motion.div>
         </div>
       </main>
+
+      <LandingFooter />
     </div>
   )
 }

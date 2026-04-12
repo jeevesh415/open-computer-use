@@ -5,6 +5,7 @@
 
 import { NextRequest } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { verifyBearerToken } from '@/lib/supabase/bearer-auth';
 
 // Python backend URL - can be configured via environment variable
 // Use 127.0.0.1 instead of localhost to force IPv4
@@ -15,20 +16,26 @@ export const maxDuration = 300; // 5 minutes for large messages
 
 export async function POST(req: NextRequest) {
   try {
-    // Authenticate user before proxying to backend
+    // Authenticate user — try cookies first (web), then Bearer token (Electron)
+    let authUser: { id: string; email?: string } | null = null;
+
     const supabase = await createClient();
-    if (!supabase) {
-      return new Response(
-        JSON.stringify({ error: 'Database connection failed' }),
-        {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' }
-        }
-      );
+    if (supabase) {
+      const { data: authData, error: authError } = await supabase.auth.getUser();
+      if (!authError && authData?.user) {
+        authUser = { id: authData.user.id, email: authData.user.email ?? undefined };
+      }
     }
 
-    const { data: authData, error: authError } = await supabase.auth.getUser();
-    if (authError || !authData?.user) {
+    // Fallback: Bearer token auth (Electron desktop app)
+    if (!authUser) {
+      const bearer = await verifyBearerToken(req);
+      if (bearer.user) {
+        authUser = bearer.user;
+      }
+    }
+
+    if (!authUser) {
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
         {
@@ -37,6 +44,8 @@ export async function POST(req: NextRequest) {
         }
       );
     }
+
+    const authData = { user: authUser };
 
     // Get the request body
     const body = await req.json();

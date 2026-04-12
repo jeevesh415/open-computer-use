@@ -1,9 +1,10 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
+import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
-import { Plus, KeyRound, Eye, EyeOff, MoreHorizontal, Pencil, Trash2, ShieldCheck, LockKeyhole, Globe, MousePointerClick, BookOpen } from "lucide-react"
+import { Plus, KeyRound, Eye, EyeOff, MoreHorizontal, Pencil, Trash2, ShieldCheck, LockKeyhole, Globe, MousePointerClick, BookOpen, Download } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -25,6 +26,7 @@ import {
 import { toast } from "sonner"
 import type { UserSecret } from "@/types/secrets.types"
 import { SecretDialog } from "./secret-dialog"
+import { ImportDialog } from "./import-dialog"
 import { cn } from "@/lib/utils"
 
 /* ─── SecretCard ─── */
@@ -73,6 +75,7 @@ function getDomain(service: string): string | null {
 }
 
 function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, onDelete }: SecretCardProps) {
+  const t = useTranslations("secrets")
   const { resolvedTheme } = useTheme()
   const [faviconError, setFaviconError] = useState(false)
   const domain = getDomain(secret.service)
@@ -136,13 +139,13 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
         {/* Credential fields */}
         <div className="px-6 pb-5 space-y-3 flex-1">
           <div className="space-y-1.5">
-            <span className="text-[11px] font-medium text-muted-foreground">Username</span>
+            <span className="text-[11px] font-medium text-muted-foreground">{t("username")}</span>
             <div className="flex items-center gap-2 rounded-lg bg-muted/40 px-3 py-2">
               <span className="text-sm font-mono text-foreground truncate flex-1">{secret.username}</span>
             </div>
           </div>
           <div className="space-y-1.5">
-            <span className="text-[11px] font-medium text-muted-foreground">Password</span>
+            <span className="text-[11px] font-medium text-muted-foreground">{t("password")}</span>
             <div className="flex items-center gap-2 rounded-lg bg-muted/40 px-3 py-2">
               <span className="text-sm font-mono text-foreground truncate flex-1">
                 {revealedPassword ?? "••••••••••••"}
@@ -151,7 +154,7 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
                 onClick={onReveal}
                 disabled={isRevealing}
                 className="h-6 w-6 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors duration-150 shrink-0 disabled:opacity-40"
-                title={revealedPassword ? "Hide" : "Reveal for 10s"}
+                title={revealedPassword ? t("hide") : t("revealFor10s")}
               >
                 {revealedPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
               </button>
@@ -166,7 +169,7 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
         {/* Footer */}
         <div className="border-t border-border/30 px-6 py-3 flex items-center gap-1.5">
           <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground/50 shrink-0" />
-          <span className="text-xs text-muted-foreground">Encrypted</span>
+          <span className="text-xs text-muted-foreground">{t("encrypted")}</span>
         </div>
       </div>
     </div>
@@ -176,6 +179,7 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
 /* ─── Main content ─── */
 
 export function SecretsContent() {
+  const t = useTranslations("secrets")
   const [secrets, setSecrets] = useState<UserSecret[]>([])
   const [loading, setLoading] = useState(true)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -183,6 +187,7 @@ export function SecretsContent() {
   const [deleteTarget, setDeleteTarget] = useState<UserSecret | null>(null)
   const [revealedPasswords, setRevealedPasswords] = useState<Record<string, string>>({})
   const [revealingId, setRevealingId] = useState<string | null>(null)
+  const [importOpen, setImportOpen] = useState(false)
   const hideTimers = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
 
   const fetchSecrets = useCallback(async () => {
@@ -191,7 +196,7 @@ export function SecretsContent() {
       const data = await res.json()
       setSecrets(data.secrets ?? [])
     } catch {
-      toast.error("Failed to load credentials")
+      toast.error(t("toasts.loadFailed"))
     } finally {
       setLoading(false)
     }
@@ -234,7 +239,7 @@ export function SecretsContent() {
         })
       }, 10000)
     } catch {
-      toast.error("Failed to reveal password")
+      toast.error(t("toasts.revealFailed"))
     } finally {
       setRevealingId(null)
     }
@@ -245,7 +250,7 @@ export function SecretsContent() {
     try {
       const res = await fetch(`/api/secrets/${deleteTarget.id}`, { method: "DELETE" })
       if (!res.ok) throw new Error("Failed")
-      toast.success("Credential deleted")
+      toast.success(t("toasts.deleted"))
       setSecrets((prev) => prev.filter((s) => s.id !== deleteTarget.id))
       setRevealedPasswords((prev) => {
         const next = { ...prev }
@@ -253,7 +258,7 @@ export function SecretsContent() {
         return next
       })
     } catch {
-      toast.error("Failed to delete credential")
+      toast.error(t("toasts.deleteFailed"))
     } finally {
       setDeleteTarget(null)
     }
@@ -277,7 +282,7 @@ export function SecretsContent() {
             <div className="absolute inset-0 rounded-full border-2 border-foreground/[0.08]" />
             <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/60 animate-spin" />
           </div>
-          <span className="text-sm text-muted-foreground">Loading credentials...</span>
+          <span className="text-sm text-muted-foreground">{t("loading")}</span>
         </div>
       </div>
     )
@@ -307,27 +312,36 @@ export function SecretsContent() {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
           <div>
-            <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">Saved Credentials</h1>
+            <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">{t("title")}</h1>
             <div className="flex items-center gap-3 mt-1.5">
               <p className="text-muted-foreground text-sm">
-                Stored securely and used automatically by the AI agent when logging in
+                {t("subtitle")}
               </p>
               <Link
                 href="/guide?tab=credentials"
                 className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-foreground/[0.05] px-2.5 py-1 text-xs font-medium text-foreground/70 hover:text-foreground hover:border-border hover:bg-foreground/[0.08] transition-all"
               >
                 <BookOpen className="h-3.5 w-3.5" />
-                Guide
+                {t("guide")}
               </Link>
             </div>
           </div>
-          <button
-            onClick={handleAdd}
-            className="inline-flex h-9 items-center justify-center rounded-xl px-5 text-sm font-medium gap-2 transition-all bg-foreground text-background hover:bg-foreground/90"
-          >
-            <Plus className="h-4 w-4" />
-            Add Credential
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setImportOpen(true)}
+              className="inline-flex h-9 items-center justify-center rounded-xl px-4 text-sm font-medium gap-2 transition-all border border-border/60 bg-foreground/[0.05] text-foreground/80 hover:text-foreground hover:border-border hover:bg-foreground/[0.08]"
+            >
+              <Download className="h-4 w-4" />
+              {t("import")}
+            </button>
+            <button
+              onClick={handleAdd}
+              className="inline-flex h-9 items-center justify-center rounded-xl px-5 text-sm font-medium gap-2 transition-all bg-foreground text-background hover:bg-foreground/90"
+            >
+              <Plus className="h-4 w-4" />
+              {t("addCredential")}
+            </button>
+          </div>
         </motion.div>
 
         {/* Security Banner */}
@@ -341,9 +355,7 @@ export function SecretsContent() {
           <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
             <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-muted-foreground mt-0.5 sm:mt-0" />
             <p className="text-xs sm:text-sm text-muted-foreground">
-              Credentials are{" "}
-              <span className="font-semibold text-foreground">never sent to the AI model</span>{" "}
-              and are never exposed in chat — the agent fills them in directly without seeing the values
+              {t("securityNote")}
             </p>
           </div>
         </motion.div>
@@ -388,9 +400,9 @@ export function SecretsContent() {
                 </motion.div>
               </div>
 
-              <h3 className="text-xl font-bold mb-2">Auto-login, hands-free</h3>
+              <h3 className="text-xl font-bold mb-2">{t("emptyState.title")}</h3>
               <p className="text-sm text-muted-foreground max-w-sm mb-10">
-                Save credentials once — the AI agent logs in automatically and keeps going without ever interrupting you
+                {t("emptyState.description")}
               </p>
 
               {/* Feature cards */}
@@ -398,18 +410,18 @@ export function SecretsContent() {
                 {[
                   {
                     icon: MousePointerClick,
-                    title: "Zero interruptions",
-                    desc: "The agent encounters a login form, fills it in, and continues the task — no prompts, no pauses",
+                    title: t("emptyState.feature1.title"),
+                    desc: t("emptyState.feature1.description"),
                   },
                   {
                     icon: ShieldCheck,
-                    title: "Never seen by AI",
-                    desc: "Your credentials are injected directly. The AI model never sees the actual values",
+                    title: t("emptyState.feature2.title"),
+                    desc: t("emptyState.feature2.description"),
                   },
                   {
                     icon: Globe,
-                    title: "Any website",
-                    desc: "Works with login forms across any site — email, SaaS tools, dashboards, anything",
+                    title: t("emptyState.feature3.title"),
+                    desc: t("emptyState.feature3.description"),
                   },
                 ].map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
@@ -434,7 +446,7 @@ export function SecretsContent() {
                 className="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all text-background bg-foreground hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Plus className="h-4 w-4" />
-                Add your first credential
+                {t("emptyState.cta")}
               </button>
             </div>
           </motion.div>
@@ -468,22 +480,27 @@ export function SecretsContent() {
         onSaved={fetchSecrets}
       />
 
+      <ImportDialog
+        open={importOpen}
+        onOpenChange={setImportOpen}
+        onImported={fetchSecrets}
+      />
+
       <AlertDialog open={!!deleteTarget} onOpenChange={(o) => !o && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete credential?</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              <strong>{deleteTarget?.name}</strong> ({deleteTarget?.service}) will be permanently
-              deleted. The AI agent will no longer be able to use it.
+              {t("deleteDialog.description", { name: deleteTarget?.name ?? "", service: deleteTarget?.service ?? "" })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("deleteDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
-              Delete
+              {t("deleteDialog.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

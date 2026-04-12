@@ -1,9 +1,8 @@
-import { Metadata } from "next"
+import type { Metadata } from "next"
+import { getLocalizedMetadata } from "@/lib/seo"
 
-export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "Coasty Terms of Service. Read the terms governing use of the Coasty AI employee platform, computer-using agent, and desktop application.",
-  alternates: { canonical: "https://coasty.ai/terms" },
+export async function generateMetadata(): Promise<Metadata> {
+  return getLocalizedMetadata("terms", "/terms")
 }
 
 export default function TermsLayout({ children }: { children: React.ReactNode }) {

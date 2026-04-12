@@ -1,3 +1,5 @@
+"use client"
+
 import {
   FileUpload,
   FileUploadContent,
@@ -12,6 +14,7 @@ import {
 import { cn } from "@/lib/utils"
 import { FileArrowUp, Paperclip } from "@phosphor-icons/react"
 import React from "react"
+import { useTranslations } from "next-intl"
 
 type ButtonVMFileUploadProps = {
   onFileUpload: (files: File[]) => void
@@ -24,6 +27,7 @@ export function ButtonVMFileUpload({
   isUserAuthenticated,
   vmName,
 }: ButtonVMFileUploadProps) {
+  const t = useTranslations("chatInput")
   return (
     <FileUpload
       onFilesAdded={onFileUpload}
@@ -43,7 +47,7 @@ export function ButtonVMFileUpload({
               )}
               type="button"
               disabled={!isUserAuthenticated}
-              aria-label="Upload files to VM"
+              aria-label={t("upload.label")}
             >
               <Paperclip className="size-4" />
             </Button>
@@ -51,21 +55,21 @@ export function ButtonVMFileUpload({
         </TooltipTrigger>
         <TooltipContent>
           <div className="text-xs">
-            <div className="font-medium">Upload files to VM</div>
-            <div className="text-muted-foreground">Files will be saved to Desktop</div>
-            {vmName && <div className="text-muted-foreground">VM: {vmName}</div>}
+            <div className="font-medium">{t("upload.heading")}</div>
+            <div className="text-muted-foreground">{t("upload.description")}</div>
+            {vmName && <div className="text-muted-foreground">{t("upload.vmInfo", { name: vmName })}</div>}
           </div>
         </TooltipContent>
       </Tooltip>
       <FileUploadContent>
         <div className="border-input bg-background flex flex-col items-center rounded-lg border border-dashed p-8">
           <FileArrowUp className="text-muted-foreground size-8" />
-          <span className="mt-4 mb-1 text-lg font-medium">Drop files here</span>
+          <span className="mt-4 mb-1 text-lg font-medium">{t("upload.dropHeading")}</span>
           <span className="text-muted-foreground text-sm">
-            Files will be uploaded to the VM's Desktop folder
+            {t("upload.dropDescription")}
           </span>
           <span className="text-muted-foreground text-xs mt-2">
-            Path: /home/desktop/Desktop/
+            {t("upload.dropPath")}
           </span>
         </div>
       </FileUploadContent>

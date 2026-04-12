@@ -10,9 +10,9 @@ const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
 
 // Server-side credit packages — single source of truth for pricing
 const CREDIT_PACKAGES: Record<string, { credits: number; price: number; name: string }> = {
-  "boost-small": { credits: 500, price: 5, name: "Small Boost" },
-  "boost-medium": { credits: 2000, price: 18, name: "Medium Boost" },
-  "boost-large": { credits: 5000, price: 40, name: "Large Boost" },
+  "boost-small": { credits: 150, price: 19, name: "Boost" },
+  "boost-medium": { credits: 500, price: 49, name: "Power Boost" },
+  "boost-large": { credits: 1200, price: 99, name: "Ultra Boost" },
 }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
@@ -116,6 +116,9 @@ export async function POST(req: NextRequest) {
         },
       ],
       mode: "payment",
+      payment_intent_data: {
+        setup_future_usage: "off_session",
+      },
       success_url: `${BASE_URL}/?payment_success=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/?payment_canceled=true`,
       metadata: {

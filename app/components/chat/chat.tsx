@@ -17,7 +17,8 @@ import { AnimatePresence, motion } from "motion/react"
 import { Caveat } from "next/font/google"
 import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
-import { useEffect, useMemo, useState, useRef, useCallback } from "react"
+import React, { useEffect, useMemo, useState, useRef, useCallback } from "react"
+import { useTranslations } from "next-intl"
 import { useChatCore } from "./use-chat-core"
 import { InsufficientCreditsModal } from "@/app/components/credits/insufficient-credits-modal"
 import { useChatOperations } from "./use-chat-operations"
@@ -27,90 +28,345 @@ import { useProjectNavigator } from "@/lib/project-navigator-store/provider"
 import { useChatStreaming } from "@/lib/chat-streaming-store/provider"
 // import { ResearchSuggestions } from "./research-suggestions" // Removed trending searches
 import { themeConfig } from "@/lib/theme-config"
-import { Switch } from "@/components/ui/switch"
+import { useGuideStore } from "@/lib/guide-store"
 import { QuickStartGuide } from "./quick-start-guide"
-import Link from "next/link"
-import { ShieldCheck } from "lucide-react"
+import { Search, Bug, Globe, FileText, BarChart3, Mail, Zap, Sparkles, PenTool, MonitorSmartphone, Clipboard, Users, TrendingUp, Eye, FileCode, LayoutGrid, Send, ShoppingCart, MessageCircle, Bot } from "lucide-react"
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
 import { SwarmPanel } from "./swarm-panel"
 import { ActiveSwarmBanner, type ActiveSwarm } from "./active-swarm-banner"
+import { RemoteApproval } from "./remote-approval"
 
 // ── Task templates by role & use-case (activation metric: first task < 5 min) ──
-const ROLE_TEMPLATES: Record<string, { label: string; prompt: string }[]> = {
+// Templates use {url} and {company} tokens — replaced at runtime with onboarding data.
+// Every template references both so suggestions always feel personal.
+// Labels are added at runtime via useTranslations (hooks cannot be called at module level).
+type TaskTemplate = { label: string; prompt: string; icon: React.ComponentType<any>; color: string }
+type TaskTemplateData = { labelKey: string; prompt: string; icon: React.ComponentType<any>; color: string }
+
+const ROLE_TEMPLATE_DATA: Record<string, TaskTemplateData[]> = {
   founder: [
-    { label: "Research competitors", prompt: "Research the top 5 competitors in my space, compare their pricing, features, and positioning. Compile everything into a spreadsheet." },
-    { label: "Draft investor update", prompt: "Go to my email and draft a monthly investor update summarizing key metrics, milestones hit, and next month's priorities." },
-    { label: "Find leads on LinkedIn", prompt: "Search LinkedIn for 20 potential customers matching [your ICP] and export their names, titles, companies, and profile URLs." },
+    { labelKey: "competitorReport", prompt: "Find the top 5 competitors of {company}. Go to each of their websites and {url}. Compare pricing, features, positioning, and traffic estimates. Deliver a side-by-side spreadsheet I can share with my team.", icon: Search, color: "blue" },
+    { labelKey: "warmLeads", prompt: "Search LinkedIn for 20 decision-makers who match {company}'s ideal customer profile. For each, grab their name, title, company, profile URL, and a personalized one-liner referencing {url}. Export as a CSV ready for outreach.", icon: Users, color: "emerald" },
+    { labelKey: "pitchDeck", prompt: "Research {company}'s market, competitors, and traction visible on {url}. Draft a 10-slide investor pitch deck outline with key stats, market size, competitive advantages, and a growth narrative.", icon: FileText, color: "violet" },
   ],
   developer: [
-    { label: "Test a web app", prompt: "Go to [URL] and test the full signup → onboarding → dashboard flow. Screenshot each step and report any bugs or broken UI." },
-    { label: "Scrape API docs", prompt: "Go to [documentation URL] and extract all API endpoints, methods, parameters, and response examples into a structured JSON file." },
-    { label: "Fill out forms", prompt: "Go to [URL] and fill out the registration form with the following details: [name, email, etc.]" },
+    { labelKey: "findBugs", prompt: "Go to {url} and run through every user flow for {company} — signup, login, onboarding, core features, settings, and logout. Screenshot each step, flag any bugs, broken links, or UI glitches, and deliver a prioritized bug report.", icon: Bug, color: "rose" },
+    { labelKey: "performance", prompt: "Audit {url} for {company} — check page load speed, Core Web Vitals, broken links, SEO meta tags, and accessibility issues. Deliver a scored report with specific fixes ranked by impact.", icon: TrendingUp, color: "emerald" },
+    { labelKey: "apiDocs", prompt: "Go to {url}/docs and extract every API endpoint, method, parameter, and response example for {company}. Organize into a structured JSON file I can import into Postman.", icon: FileCode, color: "blue" },
   ],
   marketer: [
-    { label: "Post on social media", prompt: "Log in to Twitter/X and post: \"[your message]\". Then check for early engagement and reply to any comments." },
-    { label: "Research trending topics", prompt: "Search Google, Reddit, and Hacker News for trending topics in [your niche] this week. Summarize the top 10 with links." },
-    { label: "Competitor ad analysis", prompt: "Visit [competitor URLs] and screenshot their landing pages, pricing pages, and any ads. Summarize their messaging strategy." },
+    { labelKey: "seoGap", prompt: "Search Google for the top 20 keywords {company} should rank for. Check where {url} appears for each. Identify the top 10 content gaps and suggest article titles that would close them.", icon: TrendingUp, color: "emerald" },
+    { labelKey: "competitorAds", prompt: "Find {company}'s top 3 competitors. Visit their websites, screenshot their landing pages, pricing pages, and any visible ads. Deliver a messaging teardown comparing their strategy to {url}.", icon: Eye, color: "blue" },
+    { labelKey: "trendingContent", prompt: "Search Google, Reddit, Twitter, and Hacker News for what's trending in {company}'s niche right now. Deliver 10 content ideas with hooks, angles, and how each ties back to {url}.", icon: Sparkles, color: "violet" },
   ],
   product_manager: [
-    { label: "Collect user feedback", prompt: "Go to G2, Capterra, and Product Hunt for [product name]. Extract all reviews from the last 3 months, noting common complaints and feature requests." },
-    { label: "Competitive feature matrix", prompt: "Research [competitor 1], [competitor 2], and [competitor 3]. Build a feature comparison matrix covering pricing, integrations, and key capabilities." },
-    { label: "Monitor release notes", prompt: "Check the changelogs and release notes of [competitor URLs]. Summarize any new features or changes from the past month." },
+    { labelKey: "reviewSummary", prompt: "Search G2, Capterra, Product Hunt, and Reddit for every review of {company} from the last 3 months. Categorize into praise, complaints, and feature requests. Deliver a summary with quotes and links, cross-referenced with {url}.", icon: MessageCircle, color: "emerald" },
+    { labelKey: "featureComparison", prompt: "Find {company}'s top 3 competitors. Research their features, pricing, and integrations. Deliver a feature comparison matrix showing where {url} wins, loses, and has gaps.", icon: LayoutGrid, color: "blue" },
+    { labelKey: "competitorLaunches", prompt: "Find the changelogs, blogs, and release notes of {company}'s top 3 competitors. Summarize everything they shipped in the past month and flag anything that threatens or validates what's on {url}.", icon: FileText, color: "violet" },
   ],
   data_analyst: [
-    { label: "Scrape public data", prompt: "Go to [website] and extract all the data from the table on the page. Export it as a CSV file." },
-    { label: "Research market stats", prompt: "Search for the latest market size, growth rate, and key statistics for [your industry]. Compile sources and numbers." },
-    { label: "Pull financial data", prompt: "Go to Yahoo Finance and pull the last 12 months of stock price data for [ticker symbols]. Save as a spreadsheet." },
+    { labelKey: "exportCsv", prompt: "Go to {url} and extract all structured data from {company}'s pages — products, pricing, categories, metadata. Clean it up and deliver as a well-formatted CSV file.", icon: FileText, color: "blue" },
+    { labelKey: "marketSizing", prompt: "Research the total addressable market for {company}'s industry. Find market size, growth rate, key players, and trends. Deliver a report with sources that I can reference alongside {url}.", icon: BarChart3, color: "emerald" },
+    { labelKey: "benchmark", prompt: "Research industry benchmarks for companies like {company} — traffic, conversion rates, engagement, churn. Compare against what's visible on {url} and flag where we're above or below average.", icon: TrendingUp, color: "amber" },
   ],
   operations: [
-    { label: "Automate data entry", prompt: "Go to [web app URL] and enter the following records into the system: [paste your data or describe the source]." },
-    { label: "Vendor price check", prompt: "Visit [vendor website 1] and [vendor website 2]. Compare pricing for [product/service] and summarize the best deal." },
-    { label: "Process invoices", prompt: "Go to [email/portal] and download all invoices from the last month. Extract vendor names, amounts, and dates into a spreadsheet." },
+    { labelKey: "enterRecords", prompt: "Go to {url} and enter the following records into {company}'s system. Confirm each entry was saved successfully and flag any errors: [paste your data or describe the source].", icon: Clipboard, color: "blue" },
+    { labelKey: "cheapestVendor", prompt: "Search for the top 5 vendors that {company} could use for [service/product]. Compare pricing, reviews, and terms. Deliver a recommendation with the best deal, cross-referenced with any vendor links on {url}.", icon: ShoppingCart, color: "emerald" },
+    { labelKey: "invoiceSummary", prompt: "Go to {company}'s email or billing portal and download all invoices from the past month. Extract vendor names, amounts, due dates, and payment status into a spreadsheet. Cross-reference with {url}.", icon: FileText, color: "violet" },
   ],
   designer: [
-    { label: "Screenshot competitor UIs", prompt: "Visit [competitor URLs] and take full-page screenshots of their homepage, pricing page, and dashboard. Save all images." },
-    { label: "Check responsive design", prompt: "Go to [your URL] and test it at mobile (375px), tablet (768px), and desktop (1440px) widths. Screenshot each and note any layout issues." },
-    { label: "Find design inspiration", prompt: "Search Dribbble and Behance for the best [dashboard/landing page/mobile app] designs in [your industry]. Save the top 10 screenshots." },
+    { labelKey: "designComparison", prompt: "Find {company}'s top 3 competitors. Take full-page screenshots of their homepage, pricing, and dashboard. Put them side-by-side with {url} and write up what they do better and worse.", icon: Eye, color: "violet" },
+    { labelKey: "responsiveAudit", prompt: "Go to {url} and test {company}'s site at mobile (375px), tablet (768px), and desktop (1440px). Screenshot each breakpoint, flag every layout issue, and deliver a fix-priority list.", icon: MonitorSmartphone, color: "blue" },
+    { labelKey: "inspiration", prompt: "Search Dribbble, Behance, and Awwwards for the best designs in {company}'s industry. Save the top 10 screenshots with notes on what ideas could improve {url}.", icon: PenTool, color: "rose" },
   ],
 }
 
-const USE_CASE_TEMPLATES: Record<string, { label: string; prompt: string }[]> = {
+const USE_CASE_TEMPLATE_DATA: Record<string, TaskTemplateData[]> = {
   web_scraping: [
-    { label: "Scrape a website", prompt: "Go to [URL] and extract all [product names / prices / emails / data] from the page. Export as a CSV." },
+    { labelKey: "web_scraping", prompt: "Go to {url} and extract all products, prices, descriptions, and metadata from {company}'s pages. Clean it up and deliver as a formatted CSV file.", icon: Globe, color: "blue" },
   ],
   browser_automation: [
-    { label: "Automate a workflow", prompt: "Go to [website], log in with my saved credentials, navigate to [section], and [perform action]. Repeat for all items." },
+    { labelKey: "browser_automation", prompt: "Go to {url}, log in to {company}'s platform with my saved credentials, navigate to the reports section, and export all available reports. Save them organized by date.", icon: Zap, color: "amber" },
   ],
   data_entry: [
-    { label: "Bulk data entry", prompt: "Go to [web app] and enter these records one by one: [paste data]. Confirm each entry was saved." },
+    { labelKey: "data_entry", prompt: "Go to {url} and enter these records into {company}'s system one by one. Confirm each entry saved successfully and flag any that failed: [paste data].", icon: Clipboard, color: "emerald" },
   ],
   email_outreach: [
-    { label: "Send personalized emails", prompt: "Go to my email and send personalized messages to these contacts: [list]. Use this template: [your template]." },
+    { labelKey: "email_outreach", prompt: "Go to my email and send personalized outreach messages on behalf of {company} to the contacts below. Each email should mention {url} and use this template: [your template]. Confirm each was sent.", icon: Send, color: "violet" },
   ],
   testing: [
-    { label: "QA test a website", prompt: "Go to [URL] and test the core user flows: signup, login, main feature, and logout. Screenshot each step and report any bugs." },
+    { labelKey: "testing", prompt: "Go to {url} and test every core flow for {company} — signup, login, main features, settings, and logout. Screenshot each step, flag every bug, and deliver a prioritized QA report.", icon: Bug, color: "rose" },
   ],
   ecommerce: [
-    { label: "Monitor product prices", prompt: "Check [competitor store URLs] for [product name] pricing. Record current prices, availability, and any active promotions." },
+    { labelKey: "ecommerce", prompt: "Find the top 5 competitors of {company}. Check their product pricing, promotions, and availability. Deliver a comparison spreadsheet showing how {url}'s prices stack up.", icon: ShoppingCart, color: "amber" },
   ],
   social_media: [
-    { label: "Post & engage", prompt: "Log in to [Twitter/LinkedIn/Reddit] and post: \"[your content]\". Then engage with any replies for the next few minutes." },
+    { labelKey: "social_media", prompt: "Log in to Twitter/X and craft a compelling post about {company} with a link to {url}. Post it, monitor replies for 5 minutes, and engage with every response to boost visibility.", icon: MessageCircle, color: "blue" },
   ],
   general_automation: [
-    { label: "Automate a task", prompt: "Go to [website] and [describe what you need done step by step]." },
+    { labelKey: "general_automation", prompt: "Go to {url} and complete the following task for {company}: [describe what you need done and what the end result should look like].", icon: Bot, color: "violet" },
   ],
 }
 
-function getTaskTemplates(role: string | null | undefined, useCase: string | null | undefined): { label: string; prompt: string }[] {
-  const templates: { label: string; prompt: string }[] = []
+const TASK_COLORS: Record<string, { icon: string; bg: string; border: string; hover: string }> = {
+  blue:    { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+  violet:  { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+  emerald: { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+  rose:    { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+  amber:   { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+}
+
+// ── Task hover visual components ─────────────────────────────────────
+// Animated mini-previews shown on hover, matching the sidebar pattern
+
+function TaskVisualSearch() {
+  const results = [
+    { title: "Competitor A", w: "w-14", delay: "0s" },
+    { title: "Competitor B", w: "w-18", delay: "0.08s" },
+    { title: "Competitor C", w: "w-12", delay: "0.16s" },
+    { title: "Pricing data", w: "w-16", delay: "0.24s" },
+  ]
+  return (
+    <div className="w-full h-full flex flex-col px-3 py-2 gap-1">
+      {/* Search bar */}
+      <div className="thv-row flex items-center gap-1.5 px-2 py-[4px] rounded border border-foreground/10 bg-foreground/[0.03]" style={{ animationDelay: "0s" }}>
+        <svg width="7" height="7" viewBox="0 0 16 16" className="text-foreground/25 shrink-0">
+          <circle cx="6.5" cy="6.5" r="5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+          <path d="M10 10l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+        <div className="flex items-center gap-[1px]">
+          {Array.from("competitors").map((c, i) => (
+            <span key={i} className="text-[5px] text-foreground/35 font-mono thv-type-char" style={{ animationDelay: `${0.2 + i * 0.03}s` }}>{c}</span>
+          ))}
+        </div>
+      </div>
+      {/* Results */}
+      {results.map((r, i) => (
+        <div key={i} className="thv-row flex items-center gap-2 px-2 py-[4px] rounded border border-foreground/8" style={{ animationDelay: `${0.5 + i * 0.1}s` }}>
+          <div className="w-[14px] h-[14px] rounded bg-foreground/[0.06] border border-foreground/10 shrink-0" />
+          <div className="flex-1 flex flex-col gap-[2px]">
+            <div className={cn("h-[4px] rounded-full bg-foreground/15", r.w)} />
+            <div className="h-[2px] w-20 rounded-full bg-foreground/8" />
+          </div>
+        </div>
+      ))}
+      {/* Export row */}
+      <div className="flex items-center gap-1.5 self-center mt-0.5 thv-fade-up" style={{ animationDelay: "1s" }}>
+        <div className="px-2 py-[2px] rounded-full border border-foreground/15 bg-foreground/[0.04] text-[5px] font-bold text-foreground/30 tracking-widest">EXPORT CSV</div>
+      </div>
+    </div>
+  )
+}
+
+function TaskVisualBrowse() {
+  return (
+    <div className="w-full h-full flex flex-col px-3 py-2 gap-1.5">
+      {/* Browser chrome */}
+      <div className="thv-row flex flex-col rounded border border-foreground/10 overflow-hidden flex-1" style={{ animationDelay: "0s" }}>
+        {/* Tab bar */}
+        <div className="flex items-center gap-1 px-1.5 py-[3px] border-b border-foreground/8 bg-foreground/[0.03]">
+          <div className="w-1 h-1 rounded-full bg-foreground/20" />
+          <div className="w-1 h-1 rounded-full bg-foreground/20" />
+          <div className="w-1 h-1 rounded-full bg-foreground/20" />
+          <div className="ml-1 h-[3px] w-16 rounded-full bg-foreground/10" />
+        </div>
+        {/* Page content loading */}
+        <div className="flex-1 p-2 flex flex-col gap-1.5">
+          <div className="h-[5px] w-3/4 rounded-full bg-foreground/12 thv-row" style={{ animationDelay: "0.2s" }} />
+          <div className="h-[3px] w-full rounded-full bg-foreground/8 thv-row" style={{ animationDelay: "0.3s" }} />
+          <div className="h-[3px] w-5/6 rounded-full bg-foreground/8 thv-row" style={{ animationDelay: "0.4s" }} />
+          <div className="h-8 w-full rounded bg-foreground/[0.04] border border-foreground/8 mt-1 thv-row" style={{ animationDelay: "0.5s" }} />
+        </div>
+      </div>
+      {/* Click indicator */}
+      <div className="flex items-center gap-2 thv-fade-up" style={{ animationDelay: "0.7s" }}>
+        <svg width="8" height="8" viewBox="0 0 16 16" className="text-foreground/25">
+          <path d="M4 1v10l3-3h6" stroke="currentColor" strokeWidth="1.2" fill="none" strokeLinejoin="round" />
+        </svg>
+        <div className="flex-1 h-px bg-foreground/10" />
+        <span className="text-[5px] font-bold text-foreground/25 tracking-widest">SCREENSHOT</span>
+      </div>
+    </div>
+  )
+}
+
+function TaskVisualData() {
+  const rows = [
+    { cells: ["w-8", "w-6", "w-10"], delay: "0.2s" },
+    { cells: ["w-10", "w-8", "w-6"], delay: "0.3s" },
+    { cells: ["w-6", "w-10", "w-8"], delay: "0.4s" },
+    { cells: ["w-8", "w-8", "w-10"], delay: "0.5s" },
+  ]
+  return (
+    <div className="w-full h-full flex flex-col px-3 py-2 gap-1">
+      {/* Table header */}
+      <div className="thv-row flex items-center gap-3 px-1.5 py-[3px] border-b border-foreground/12" style={{ animationDelay: "0.1s" }}>
+        <div className="h-[3px] w-8 rounded-full bg-foreground/20" />
+        <div className="h-[3px] w-6 rounded-full bg-foreground/20" />
+        <div className="h-[3px] w-10 rounded-full bg-foreground/20" />
+      </div>
+      {/* Rows filling in */}
+      {rows.map((r, i) => (
+        <div key={i} className="thv-row flex items-center gap-3 px-1.5 py-[3px]" style={{ animationDelay: r.delay }}>
+          {r.cells.map((w, j) => (
+            <div key={j} className={cn("h-[3px] rounded-full bg-foreground/10", w)} />
+          ))}
+        </div>
+      ))}
+      {/* Progress bar */}
+      <div className="mt-auto flex items-center gap-1.5 thv-fade-up" style={{ animationDelay: "0.8s" }}>
+        <div className="flex-1 h-[3px] bg-foreground/[0.06] rounded-full overflow-hidden">
+          <div className="h-full bg-foreground/20 rounded-full thv-progress" style={{ ["--progress" as string]: "75%", animationDelay: "0.9s" }} />
+        </div>
+        <span className="text-[5px] font-bold text-foreground/25 tracking-wider">75%</span>
+      </div>
+    </div>
+  )
+}
+
+function TaskVisualAutomate() {
+  const steps = [
+    { label: "Navigate", done: true, delay: "0.1s" },
+    { label: "Fill form", active: true, delay: "0.3s" },
+    { label: "Submit", upcoming: true, delay: "0.5s" },
+  ]
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center px-3 py-2 gap-2">
+      {/* Steps */}
+      <div className="flex items-center gap-1 w-full">
+        {steps.map((s, i) => (
+          <React.Fragment key={i}>
+            <div
+              className={cn(
+                "thv-row flex-1 flex flex-col items-center gap-1 px-1 py-1.5 rounded border",
+                s.done && "border-foreground/15 bg-foreground/[0.05]",
+                s.active && "border-foreground/20 bg-foreground/[0.07]",
+                s.upcoming && "border-dashed border-foreground/10",
+              )}
+              style={{ animationDelay: s.delay }}
+            >
+              <div className={cn(
+                "w-3 h-3 rounded-full border flex items-center justify-center",
+                s.done && "border-foreground/25 bg-foreground/10",
+                s.active && "border-foreground/30 bg-foreground/[0.08] thv-pulse-dot",
+                s.upcoming && "border-foreground/10",
+              )}>
+                {s.done && <svg width="5" height="5" viewBox="0 0 10 10"><path d="M2 5.5L4 7.5L8 3" stroke="currentColor" strokeWidth="1.5" fill="none" className="text-foreground/50" /></svg>}
+                {s.active && <div className="w-1 h-1 rounded-full bg-foreground/40" />}
+              </div>
+              <span className={cn("text-[5px] font-bold tracking-wide", s.upcoming ? "text-foreground/20" : "text-foreground/35")}>{s.label}</span>
+            </div>
+            {i < steps.length - 1 && (
+              <div className="w-3 h-px bg-foreground/10 shrink-0" />
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+      {/* Active indicator */}
+      <div className="flex items-center gap-1.5 thv-fade-up" style={{ animationDelay: "0.7s" }}>
+        <div className="w-1.5 h-1.5 rounded-full bg-foreground/30 thv-pulse-dot" />
+        <span className="text-[5px] font-semibold text-foreground/25 tracking-widest">RUNNING</span>
+      </div>
+    </div>
+  )
+}
+
+// Map task labels to their visual component
+function getTaskVisual(label: string): React.FC {
+  const l = label.toLowerCase()
+  if (l.includes("competitor") || l.includes("lead") || l.includes("seo") || l.includes("review") || l.includes("comparison") || l.includes("benchmark") || l.includes("vendor") || l.includes("pricing")) return TaskVisualSearch
+  if (l.includes("bug") || l.includes("performance") || l.includes("audit") || l.includes("responsive") || l.includes("qa")) return TaskVisualBrowse
+  if (l.includes("export") || l.includes("data") || l.includes("scrape") || l.includes("extract") || l.includes("market") || l.includes("invoice")) return TaskVisualData
+  return TaskVisualAutomate
+}
+
+// Hover preview descriptions per task type
+function getTaskDescription(label: string): string {
+  const l = label.toLowerCase()
+  if (l.includes("competitor")) return "Opens competitor websites, compares pricing & features, builds a structured report"
+  if (l.includes("lead")) return "Searches LinkedIn for prospects, grabs contact info, exports a ready-to-use CSV"
+  if (l.includes("pitch")) return "Researches your market & competition, outlines a 10-slide investor deck"
+  if (l.includes("bug")) return "Walks through every user flow, screenshots each step, flags issues by priority"
+  if (l.includes("performance")) return "Checks page speed, SEO, accessibility & broken links, delivers a scored report"
+  if (l.includes("api") || l.includes("documentation")) return "Extracts every endpoint, method & response, exports a Postman-ready JSON"
+  if (l.includes("seo")) return "Searches target keywords, maps your ranking gaps, suggests content to close them"
+  if (l.includes("spy") || l.includes("competitor ads")) return "Screenshots competitor pages & ads, delivers a messaging teardown"
+  if (l.includes("trending") || l.includes("content idea")) return "Scans Google, Reddit & HN for trending topics, delivers 10 hooks"
+  if (l.includes("export") || l.includes("data")) return "Navigates your pages, extracts structured data, cleans & formats as CSV"
+  if (l.includes("market")) return "Researches TAM, growth rates & key players with sourced data"
+  if (l.includes("review")) return "Gathers reviews from G2, Capterra & Reddit, categorizes praise vs complaints"
+  if (l.includes("responsive") || l.includes("design")) return "Tests at mobile, tablet & desktop breakpoints, flags every layout issue"
+  if (l.includes("enter") || l.includes("record")) return "Opens your app, enters each record one by one, confirms saves"
+  return "Opens your site, executes the task step by step, delivers results"
+}
+
+/** Try to derive a short brand name from a domain, e.g. "acme.com" → "Acme" */
+function brandFromDomain(url: string | null): string | null {
+  if (!url) return null
+  try {
+    const host = url.includes("://") ? new URL(url).hostname : url.split("/")[0]
+    // Strip www. and take the part before the TLD
+    const parts = host.replace(/^www\./, "").split(".")
+    if (parts.length === 0) return null
+    const name = parts[0]
+    if (!name || name.length < 2) return null
+    // Capitalize first letter
+    return name.charAt(0).toUpperCase() + name.slice(1)
+  } catch {
+    return null
+  }
+}
+
+function getTaskTemplates(
+  role: string | null | undefined,
+  useCase: string | null | undefined,
+  website: string | null | undefined,
+  company: string | null | undefined,
+  translateRole: (role: string, key: string) => string,
+  translateUseCase: (key: string) => string,
+): TaskTemplate[] {
+  const siteUrl = website ? (website.startsWith("http") ? website : `https://${website}`) : null
+  const companyName = company?.trim() || null
+  // Fallback: derive a brand name from the domain if no company was provided
+  const displayName = companyName || brandFromDomain(website ?? null)
+
+  const personalize = (text: string, isLabel = false) => {
+    let p = text
+    if (siteUrl) {
+      p = p.replace(/\{url\}/g, siteUrl)
+    } else {
+      p = p.replace(/\{url\}/g, isLabel ? "your site" : "[your website URL]")
+    }
+    if (displayName) {
+      p = p.replace(/\{company\}/g, displayName)
+    } else if (isLabel) {
+      // No company info at all — strip "{company} " or " {company}" or " for {company}" cleanly
+      p = p.replace(/\{company\}\s*/g, "")
+      p = p.replace(/\s*for \{company\}/g, "")
+      p = p.replace(/\s*on \{company\}/g, "")
+      p = p.replace(/\s*into \{company\}/g, "")
+      p = p.replace(/\s*about \{company\}/g, "")
+      p = p.replace(/\s*\{company\}/g, "")
+      // Capitalize first letter if it got lowered
+      p = p.trim()
+      if (p.length > 0) p = p.charAt(0).toUpperCase() + p.slice(1)
+    } else {
+      p = p.replace(/\{company\}/g, "[your company]")
+    }
+    return p
+  }
+
+  const templates: TaskTemplate[] = []
   const seen = new Set<string>()
 
   // Add role-based templates first (primary persona)
   const roles = (role || "").split(",").map(r => r.trim()).filter(Boolean)
   for (const r of roles) {
-    for (const t of ROLE_TEMPLATES[r] || []) {
-      if (!seen.has(t.label)) {
-        seen.add(t.label)
-        templates.push(t)
+    for (const td of ROLE_TEMPLATE_DATA[r] || []) {
+      const label = personalize(translateRole(r, td.labelKey), true)
+      if (!seen.has(label)) {
+        seen.add(label)
+        templates.push({ label, prompt: personalize(td.prompt), icon: td.icon, color: td.color })
       }
     }
   }
@@ -118,10 +374,11 @@ function getTaskTemplates(role: string | null | undefined, useCase: string | nul
   // Fill with use-case templates
   const useCases = (useCase || "").split(",").map(u => u.trim()).filter(Boolean)
   for (const uc of useCases) {
-    for (const t of USE_CASE_TEMPLATES[uc] || []) {
-      if (!seen.has(t.label)) {
-        seen.add(t.label)
-        templates.push(t)
+    for (const td of USE_CASE_TEMPLATE_DATA[uc] || []) {
+      const label = personalize(translateUseCase(td.labelKey), true)
+      if (!seen.has(label)) {
+        seen.add(label)
+        templates.push({ label, prompt: personalize(td.prompt), icon: td.icon, color: td.color })
       }
     }
   }
@@ -129,10 +386,10 @@ function getTaskTemplates(role: string | null | undefined, useCase: string | nul
   // Fallback if nothing matched
   if (templates.length === 0) {
     return [
-      { label: "Scrape a website", prompt: "Go to [URL] and extract all the data from the page. Export as a CSV." },
-      { label: "Test a web app", prompt: "Go to [URL] and test the full signup → dashboard flow. Screenshot each step and report any bugs." },
-      { label: "Research a topic", prompt: "Search Google for [your topic] and summarize the top 10 results with key takeaways and links." },
-      { label: "Fill out a form", prompt: "Go to [URL] and fill out the form with the following details: [your data]." },
+      { label: personalize(translateRole("founder", "competitorReport"), true), prompt: personalize("Find the top 5 competitors of {company}. Compare their pricing, features, and traffic to {url}. Deliver a side-by-side spreadsheet."), icon: Search, color: "blue" },
+      { label: personalize(translateRole("developer", "findBugs"), true), prompt: personalize("Go to {url} and test every user flow for {company}. Screenshot each step, flag any bugs or broken UI, and deliver a prioritized bug report."), icon: Bug, color: "rose" },
+      { label: personalize(translateUseCase("web_scraping"), true), prompt: personalize("Go to {url} and extract all structured data from {company}'s pages — products, pricing, metadata. Deliver as a clean CSV file."), icon: Globe, color: "violet" },
+      { label: personalize(translateRole("developer", "performance"), true), prompt: personalize("Audit {url} for {company} — page speed, SEO, broken links, accessibility. Deliver a scored report with fixes ranked by impact."), icon: TrendingUp, color: "emerald" },
     ]
   }
 
@@ -152,6 +409,7 @@ const DialogAuth = dynamic(
 
 export function Chat() {
   const { chatId } = useChatSession()
+  const t = useTranslations("chat")
   const {
     createNewChat,
     getChatById,
@@ -161,7 +419,7 @@ export function Chat() {
   } = useChats()
 
   // Text rotation state
-  const words = ["Co-worker", "Employee", "Friend", "Assistant", "Partner", "Teammate", "Collaborator", "Helper"]
+  const words = t.raw("roleLabels") as string[]
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [wordWidth, setWordWidth] = useState(150)
   const wordRef = useRef<HTMLSpanElement>(null)
@@ -279,6 +537,7 @@ export function Chat() {
   // Fetch subscription tier + machine limits for swarm gating
   const [userTier, setUserTier] = useState<string | null>(null)
   const [maxSwarmMachines, setMaxSwarmMachines] = useState(2)
+  const [machinesList, setMachinesList] = useState<any[]>([])
   useEffect(() => {
     if (!user?.id) return
     fetch("/api/machines")
@@ -286,9 +545,9 @@ export function Chat() {
       .then((data) => {
         if (data?.subscriptionTier) setUserTier(data.subscriptionTier)
         else setUserTier("free")
-        // Swarm limit = 3x persistent machine limit, capped at 10
         const planMax = data?.limits?.max_machines || 1
         setMaxSwarmMachines(Math.min(planMax * 3, 10))
+        setMachinesList(data?.machines || [])
       })
       .catch(() => { setUserTier("free"); setMaxSwarmMachines(3) })
   }, [user?.id])
@@ -577,7 +836,6 @@ export function Chat() {
   // Swarm mode state — only available on homepage (no active chat)
   const [swarmMode, setSwarmMode] = useState(false)
   const [swarmCount, setSwarmCount] = useState(3)
-  const [swarmPersistent, setSwarmPersistent] = useState(false)
   const [swarmActive, setSwarmActive] = useState(false)
   const [swarmId, setSwarmId] = useState<string | null>(null)
   const [swarmPrompt, setSwarmPrompt] = useState("")
@@ -659,8 +917,6 @@ export function Chat() {
       onSwarmModeChange: !effectiveChatId ? setSwarmMode : undefined,
       swarmCount: !effectiveChatId ? swarmCount : undefined,
       onSwarmCountChange: !effectiveChatId ? setSwarmCount : undefined,
-      swarmPersistent: !effectiveChatId ? swarmPersistent : undefined,
-      onSwarmPersistentChange: !effectiveChatId ? setSwarmPersistent : undefined,
       userTier,
       maxSwarmMachines,
       }
@@ -689,7 +945,6 @@ export function Chat() {
       hasToolInvocations,
       swarmMode,
       swarmCount,
-      swarmPersistent,
       userTier,
       maxSwarmMachines,
     ]
@@ -718,15 +973,10 @@ export function Chat() {
 
   const showOnboarding = !effectiveChatId && redirectCheckMessages.length === 0
 
-  // Quick start guide for first-time users
-  // Start as false on both server and client to avoid hydration mismatch,
-  // then sync from localStorage after mount.
-  const [quickStartDismissed, setQuickStartDismissed] = useState(false)
-  useEffect(() => {
-    if (localStorage.getItem("coasty-quickstart-dismissed") === "true") {
-      setQuickStartDismissed(true)
-    }
-  }, [])
+  // Quick start guide — synced via store so the header toggle works too
+  const guideDismissed = useGuideStore((s) => s.dismissed)
+  const hydrateGuide = useGuideStore((s) => s.hydrate)
+  useEffect(() => { hydrateGuide() }, [hydrateGuide])
 
   // Check if user has saved credentials (for nudge in greeting)
   const [hasCredentials, setHasCredentials] = useState<boolean | null>(null)
@@ -741,12 +991,14 @@ export function Chat() {
   const showQuickStart =
     showOnboarding &&
     !!user &&
-    !quickStartDismissed
+    !guideDismissed
 
   // Task templates based on onboarding role + use-case (activation metric)
+  const translateRole = useCallback((role: string, key: string) => t(`taskTemplates.${role}.${key}`, { company: "{company}" }), [t])
+  const translateUseCase = useCallback((key: string) => t(`useCaseTemplates.${key}`, { company: "{company}" }), [t])
   const taskTemplates = useMemo(
-    () => getTaskTemplates(user?.role, user?.use_case),
-    [user?.role, user?.use_case]
+    () => getTaskTemplates(user?.role, user?.use_case, user?.website, user?.company, translateRole, translateUseCase),
+    [user?.role, user?.use_case, user?.website, user?.company, translateRole, translateUseCase]
   )
 
   // Any swarm is taking over the screen (new or returning)
@@ -795,13 +1047,13 @@ export function Chat() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  className="mb-6 sm:mb-8"
                 >
                   <QuickStartGuide
                     userName={user?.display_name || undefined}
                     selectedVMId={selectedVMId}
-                    setSelectedVMId={setSelectedVMId}
-                    onFillInput={handleInputChange}
                     isUserAuthenticated={isAuthenticated}
+                    hasCredentials={hasCredentials}
                   />
                 </motion.div>
               ) : (
@@ -827,7 +1079,7 @@ export function Chat() {
                     >
                       {user ? (
                         <>
-                          <span className="inline-block -rotate-1 text-primary/90">Hello</span>
+                          <span className="inline-block -rotate-1 text-primary/90">{t("greeting")}</span>
                           {user.display_name && (
                             <>
                               <span className="inline-block -rotate-1 text-primary/90">, {user.display_name}</span>
@@ -910,8 +1162,8 @@ export function Chat() {
                   >
                     <p className="text-center text-muted-foreground text-sm sm:text-base md:text-lg">
                       {user
-                        ? "I'll handle the computer work. What's the task?"
-                        : "AI that works the computer so you don't have to. Just tell it what you need done."
+                        ? t("greetingAuth")
+                        : t("greetingUnauth")
                       }
                     </p>
                   </motion.div>
@@ -920,45 +1172,6 @@ export function Chat() {
               )}
             </AnimatePresence>
 
-            {/* Guide toggle + credential nudge */}
-            {user && (
-              <motion.div
-                className="flex items-center justify-center gap-3 mt-4 sm:mt-6 mb-2"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
-              >
-                <label className="inline-flex items-center gap-2.5 cursor-pointer select-none">
-                  <span className="text-xs text-muted-foreground">Guide</span>
-                  <Switch
-                    checked={!quickStartDismissed}
-                    onCheckedChange={(checked) => {
-                      if (checked) {
-                        localStorage.removeItem("coasty-quickstart-dismissed")
-                        setQuickStartDismissed(false)
-                      } else {
-                        localStorage.setItem("coasty-quickstart-dismissed", "true")
-                        setQuickStartDismissed(true)
-                      }
-                    }}
-                  />
-                </label>
-                {hasCredentials === false && (
-                  <>
-                    <span className="text-muted-foreground/20 text-xs select-none">&middot;</span>
-                    <Link
-                      href="/secrets"
-                      className="group inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 dark:bg-blue-500/15 px-3 py-1 text-[11px] text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 transition-colors"
-                    >
-                      <ShieldCheck className="h-3 w-3 shrink-0" />
-                      <span className="underline underline-offset-2 decoration-blue-400/30 group-hover:decoration-blue-400/60">Save logins for auto-fill</span>
-                      <span className="hidden sm:inline text-blue-500/50">&middot; encrypted, never seen by AI</span>
-                      <span className="text-[10px] group-hover:translate-x-0.5 transition-transform">&rarr;</span>
-                    </Link>
-                  </>
-                )}
-              </motion.div>
-            )}
           </motion.div>
         )}
         {!showOnboarding && !swarmFullscreen && (
@@ -982,7 +1195,6 @@ export function Chat() {
               swarmId={swarmId}
               prompt={swarmPrompt}
               machineCount={swarmCount}
-              persistent={swarmPersistent}
               onStop={handleSwarmStop}
               onDismiss={handleSwarmDismiss}
             />
@@ -1049,41 +1261,146 @@ export function Chat() {
         )} */}
         {/* Show inline active swarm banner only when not in fullscreen swarm mode */}
         {showOnboarding && !swarmFullscreen && <ActiveSwarmBanner onSwarmDetected={handleActiveSwarmDetected} />}
-        <ChatInput {...chatInputProps} />
+        <RemoteApproval machineId={selectedVMId} isElectronMachine={machinesList.some((m: any) => m.id === selectedVMId && m.settings?.provider === 'electron')} />
 
-        {/* Task templates — reduces friction to first task completion */}
+        {/* Task templates — above input on mobile, below on desktop */}
         <AnimatePresence>
           {showOnboarding && !swarmMode && !swarmFullscreen && user && (
             <motion.div
-              key="task-templates"
+              key="task-templates-mobile"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 6, transition: { duration: 0.15 } }}
               transition={{ delay: 0.3, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mt-3 mb-1"
+              className="mb-2 -mx-4 sm:hidden"
             >
-              <div className="flex items-center justify-center gap-1.5 mb-2">
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-muted-foreground/50">
-                  <path d="M8 1l1.796 4.898L15 7.5l-3.804 2.952L12.392 16 8 12.6 3.608 16l1.196-5.548L1 7.5l5.204-1.602L8 1z" fill="currentColor" opacity="0.5" />
-                  <path d="M8 1l1.796 4.898L15 7.5l-3.804 2.952L12.392 16 8 12.6 3.608 16l1.196-5.548L1 7.5l5.204-1.602L8 1z" stroke="currentColor" strokeWidth="0.5" opacity="0.3" />
-                </svg>
-                <span className="text-[11px] text-muted-foreground/50 font-medium tracking-wide">Try a task</span>
-              </div>
-              <div className="flex flex-wrap justify-center gap-1.5">
-                {taskTemplates.map((t) => (
-                  <button
-                    key={t.label}
-                    type="button"
-                    onClick={() => handleCollaborativeInputChange(t.prompt)}
-                    className="inline-flex items-center gap-1 rounded-lg border border-border/40 bg-card/60 hover:bg-accent/60 hover:border-border/60 px-2.5 py-1.5 text-xs text-muted-foreground hover:text-foreground transition-all duration-150 cursor-pointer"
-                  >
-                    {t.label}
-                  </button>
-                ))}
+              <div
+                className="flex gap-2 overflow-x-auto px-4"
+                style={{ scrollbarWidth: "none" }}
+              >
+                {taskTemplates.map((t, i) => {
+                  const Icon = t.icon
+                  const colors = TASK_COLORS[t.color] || TASK_COLORS.blue
+                  return (
+                    <motion.button
+                      key={t.label}
+                      type="button"
+                      onClick={() => handleCollaborativeInputChange(t.prompt)}
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.35 + i * 0.04, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className={cn(
+                        "group inline-flex shrink-0 items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs whitespace-nowrap transition-all duration-200 cursor-pointer",
+                        colors.border, colors.hover, "bg-card/40",
+                      )}
+                    >
+                      <Icon className={cn("size-3", colors.icon)} />
+                      <span className="font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                        {t.label}
+                      </span>
+                    </motion.button>
+                  )
+                })}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
+
+        <ChatInput {...chatInputProps} />
+
+        {/* Task templates — desktop only (below input) */}
+        <AnimatePresence>
+          {showOnboarding && !swarmMode && !swarmFullscreen && user && (
+            <motion.div
+              key="task-templates-desktop"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6, transition: { duration: 0.15 } }}
+              transition={{ delay: 0.3, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mt-3 mb-1 hidden sm:block"
+            >
+              <div className="flex flex-wrap justify-center gap-2">
+                {taskTemplates.map((t, i) => {
+                  const Icon = t.icon
+                  const colors = TASK_COLORS[t.color] || TASK_COLORS.blue
+                  const Visual = getTaskVisual(t.label)
+                  const description = getTaskDescription(t.label)
+                  return (
+                    <HoverCard key={t.label} openDelay={300} closeDelay={150}>
+                      <HoverCardTrigger asChild>
+                        <motion.button
+                          type="button"
+                          onClick={() => handleCollaborativeInputChange(t.prompt)}
+                          initial={{ opacity: 0, scale: 0.92 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.35 + i * 0.04, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                          className={cn(
+                            "group inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs transition-all duration-200 cursor-pointer",
+                            colors.border, colors.hover, "bg-card/40",
+                          )}
+                        >
+                          <Icon className={cn("size-3", colors.icon)} />
+                          <span className="font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
+                            {t.label}
+                          </span>
+                        </motion.button>
+                      </HoverCardTrigger>
+                      <HoverCardContent
+                        side="top"
+                        align="center"
+                        sideOffset={10}
+                        className="w-64 p-0 border border-border/50 shadow-xl rounded-xl overflow-hidden"
+                      >
+                        <div className="flex flex-col">
+                          <div className="relative h-[120px] w-full bg-muted/50 border-b border-border/40 overflow-hidden">
+                            <Visual />
+                          </div>
+                          <div className="p-3.5 pt-3">
+                            <h4 className="text-[13px] font-semibold text-foreground leading-tight">{t.label}</h4>
+                            <p className="text-[11.5px] text-foreground/50 mt-1.5 leading-relaxed">{description}</p>
+                          </div>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                  )
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Task hover visual animations */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes thv-slide-in {
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
+          }
+          .thv-row { animation: thv-slide-in 0.35s cubic-bezier(0.25, 1, 0.5, 1) both; }
+
+          @keyframes thv-fade-up {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .thv-fade-up { animation: thv-fade-up 0.4s ease-out both; }
+
+          @keyframes thv-fill {
+            from { width: 0%; }
+            to { width: var(--progress, 50%); }
+          }
+          .thv-progress { animation: thv-fill 0.8s cubic-bezier(0.25, 1, 0.5, 1) both; }
+
+          @keyframes thv-char-reveal {
+            from { opacity: 0; transform: translateY(2px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .thv-type-char { animation: thv-char-reveal 0.15s ease-out both; }
+
+          @keyframes thv-pulse-dot {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+          }
+          .thv-pulse-dot { animation: thv-pulse-dot 2s ease-in-out infinite; }
+        ` }} />
       </motion.div>
     </div>
   )

@@ -66,9 +66,11 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Create a non-root user
+# Create a non-root user and install curl for reliable health checks
+# (BusyBox wget on Alpine has inconsistent exit-code behavior)
 RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+    adduser --system --uid 1001 nextjs && \
+    apk add --no-cache curl
 
 # Copy public assets (only if it exists)
 COPY --from=builder /app/public ./public
@@ -84,6 +86,10 @@ RUN chown -R nextjs:nodejs /app
 
 # Switch to non-root user
 USER nextjs
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+  CMD curl -sf http://localhost:3000/api/health || exit 1
 
 # Expose application port
 EXPOSE 3000

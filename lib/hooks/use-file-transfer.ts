@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
 import { toast } from "sonner";
-import { getOrCreateGuestUserId } from "@/lib/api";
 import { createClient } from "@/lib/supabase/client";
 
 interface FileTransferOptions {
@@ -21,21 +20,15 @@ export function useFileTransfer({
   const [progress, setProgress] = useState(0);
   const [userId, setUserId] = useState<string | null>(null);
 
-  // Get user ID on mount
+  // Get authenticated user ID on mount
   useEffect(() => {
     const fetchUserId = async () => {
       const supabase = createClient();
-      let user = null;
-      
       if (supabase) {
         const { data } = await supabase.auth.getUser();
-        user = data?.user;
+        setUserId(data?.user?.id ?? null);
       }
-      
-      const uid = await getOrCreateGuestUserId(user as any);
-      setUserId(uid);
     };
-    
     fetchUserId();
   }, []);
 

@@ -35,11 +35,8 @@ export async function GET(request: Request) {
   }
 
   const supabase = createServiceClient()
-  if (!supabase) {
-    return NextResponse.json({ error: "Supabase not configured" }, { status: 500 })
-  }
 
-  // Run all health checks
+  // Run all health checks (even if Supabase is unavailable for persistence)
   const checks = await Promise.all([
     checkService("Website", async () => {
       // Self-check: if this endpoint responds, frontend is up
@@ -55,11 +52,23 @@ export async function GET(request: Request) {
     }),
 
     checkService("Database", async () => {
-      const { error } = await supabase
-        .from("users")
-        .select("id")
-        .limit(1)
-      if (error) throw new Error(error.message)
+      if (supabase) {
+        const { error } = await supabase
+          .from("users")
+          .select("id")
+          .limit(1)
+        if (error) throw new Error(error.message)
+      } else {
+        const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+        if (!url) throw new Error("Supabase URL not configured")
+        const res = await fetch(`${url}/rest/v1/`, {
+          headers: {
+            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+          },
+          signal: AbortSignal.timeout(5000),
+        })
+        if (res.status >= 500) throw new Error(`HTTP ${res.status}`)
+      }
     }),
 
     checkService("Authentication", async () => {
@@ -75,12 +84,13 @@ export async function GET(request: Request) {
     }),
 
     checkService("AI Models", async () => {
-      const res = await fetch(`${PYTHON_BACKEND_URL}/api/health`, {
-        signal: AbortSignal.timeout(5000),
+      const res = await fetch(`${PYTHON_BACKEND_URL}/api/ready`, {
+        signal: AbortSignal.timeout(10000),
       })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
       const data = await res.json()
-      if (data.status !== "healthy") throw new Error("Backend unhealthy")
+      if (data.models === "error") throw new Error("Model provider unreachable")
+      if (data.status !== "ready" && data.models !== "available")
+        throw new Error(data.status || "Not ready")
     }),
 
     checkService("File Storage", async () => {
@@ -97,18 +107,16 @@ export async function GET(request: Request) {
     }),
   ])
 
-  // Persist to database
+  // Persist to database (best-effort)
   const now = new Date().toISOString()
   const rows = checks.map((c) => ({ ...c, checked_at: now }))
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { error } = await (supabase as any).from("status_checks").insert(rows)
-
-  if (error) {
-    return NextResponse.json(
-      { error: "Failed to persist checks", detail: error.message },
-      { status: 500 }
-    )
+  if (supabase) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any).from("status_checks").insert(rows)
+    if (error) {
+      console.error("[Status Cron] Failed to persist checks:", error.message)
+    }
   }
 
   return NextResponse.json({

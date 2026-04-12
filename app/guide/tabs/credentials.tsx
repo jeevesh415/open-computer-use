@@ -2,174 +2,255 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
+import { useTranslations } from "next-intl"
 import {
-  Key,
-  Eye,
-  EyeSlash,
+  ArrowRight,
   Lock,
   ShieldCheck,
-  PencilSimple,
-  TrashSimple,
-  ArrowRight,
+  EyeSlash,
+  Eye,
   CheckCircle,
-  Plus,
-  ArrowsLeftRight,
-  VideoCamera,
 } from "@phosphor-icons/react"
 
-/* ─── animation variants ─── */
-
-const fade = {
-  hidden: { opacity: 0, y: 20 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.05, ease: [0.25, 0.1, 0.25, 1] as const },
-  }),
-}
+/* ─── animations ─── */
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.08 } },
 }
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
+}
+
+/* ─── CSS keyframes ─── */
+
+const credentialStyles = `
+  @keyframes gv-scan-match {
+    0% { top: 0%; opacity: 0 }
+    10% { opacity: 1 }
+    50% { top: 50% }
+    90% { opacity: 1 }
+    100% { top: 100%; opacity: 0 }
+  }
+  @keyframes gv-connect-line {
+    0% { width: 0; opacity: 0 }
+    30% { opacity: 1 }
+    100% { width: 100%; opacity: 1 }
+  }
+  @keyframes gv-fill-field {
+    0% { width: 0 }
+    100% { width: 100% }
+  }
+  @keyframes gv-check-pop {
+    0% { transform: scale(0); opacity: 0 }
+    60% { transform: scale(1.3); opacity: 1 }
+    100% { transform: scale(1); opacity: 1 }
+  }
+  @keyframes gv-fade-in {
+    0% { opacity: 0; transform: translateY(4px) }
+    100% { opacity: 1; transform: translateY(0) }
+  }
+  @keyframes gv-shimmer {
+    0% { background-position: -200% 0 }
+    100% { background-position: 200% 0 }
+  }
+  @keyframes gv-pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(var(--foreground-rgb, 0,0,0), 0.08) }
+    50% { box-shadow: 0 0 0 6px rgba(var(--foreground-rgb, 0,0,0), 0) }
+    100% { box-shadow: 0 0 0 0 rgba(var(--foreground-rgb, 0,0,0), 0) }
+  }
+`
 
 /* ─── data ─── */
 
-const savedCredentials = [
-  { domain: "gmail.com", username: "john@example.com", letter: "G", color: "bg-red-500" },
-  { domain: "linkedin.com", username: "john.doe", letter: "L", color: "bg-blue-600" },
-  { domain: "notion.so", username: "john@example.com", letter: "N", color: "bg-neutral-800 dark:bg-neutral-200" },
-  { domain: "hubspot.com", username: "john@company.com", letter: "H", color: "bg-orange-500" },
+const savedCreds = [
+  { domain: "gmail.com", initial: "G", username: "john@example.com" },
+  { domain: "linkedin.com", initial: "L", username: "john.doe" },
+  { domain: "notion.so", initial: "N", username: "john@example.com" },
+  { domain: "hubspot.com", initial: "H", username: "john@company.com" },
 ]
 
-const securityFeatures = [
-  {
-    icon: Lock,
-    title: "End-to-end encryption",
-    description: "Passwords encrypted with AES-256 before storage",
-  },
-  {
-    icon: ShieldCheck,
-    title: "VM isolation",
-    description: "Credentials only exist inside your session's sandboxed VM",
-  },
-  {
-    icon: EyeSlash,
-    title: "Never logged",
-    description: "Credentials are never included in chat logs or AI training",
-  },
-]
+const securityKeys = [
+  { icon: Lock, labelKey: "encrypted", descKey: "aes256" },
+  { icon: ShieldCheck, labelKey: "vmIsolated", descKey: "sandboxed" },
+  { icon: EyeSlash, labelKey: "neverLogged", descKey: "zeroTrace" },
+] as const
 
-const commonServices = [
-  "Gmail / Google Workspace",
-  "LinkedIn",
-  "Twitter / X",
-  "HubSpot / Salesforce",
-  "Notion / Confluence",
-  "WordPress",
-  "GitHub",
-  "Slack",
-  "Bank / Financial sites",
-  "Company CRM",
-]
+/* ─── hero: auto-fill flow ─── */
 
-/* ─── mock components ─── */
-
-function MockInput({
-  label,
-  value,
-  helperText,
-  isPassword,
-}: {
-  label: string
-  value: string
-  helperText?: string
-  isPassword?: boolean
-}) {
-  const [showPassword, setShowPassword] = useState(false)
-
+function AutoFillFlowMock({ t }: { t: any }) {
   return (
-    <div className="space-y-1.5">
-      <label className="text-xs font-medium text-muted-foreground/70">{label}</label>
-      <div className="relative">
-        <div className="flex h-10 w-full items-center rounded-xl border border-border/40 bg-background/60 px-3.5 text-sm text-foreground">
-          <span className="flex-1 truncate">
-            {isPassword && !showPassword ? "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022" : value}
+    <div className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 sm:p-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        {/* Panel 1: Login page skeleton */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] p-4 relative overflow-hidden">
+          <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-foreground/25 mb-3 block">
+            {t("loginDetected")}
           </span>
-          {isPassword && (
-            <button
-              onClick={() => setShowPassword(!showPassword)}
-              className="ml-2 shrink-0 text-muted-foreground/50 hover:text-muted-foreground transition-colors"
-            >
-              {showPassword ? (
-                <EyeSlash size={16} weight="duotone" />
-              ) : (
-                <Eye size={16} weight="duotone" />
-              )}
-            </button>
-          )}
+          <div className="space-y-2.5">
+            {/* URL bar */}
+            <div className="h-5 rounded-md bg-foreground/[0.04] flex items-center px-2">
+              <div className="h-1.5 w-1.5 rounded-full bg-foreground/10 mr-1.5" />
+              <div className="h-1.5 w-16 rounded bg-foreground/[0.06]" />
+            </div>
+            {/* Email label */}
+            <div className="h-2 w-10 rounded bg-foreground/[0.06]" />
+            {/* Email field skeleton */}
+            <div className="h-7 rounded-md border border-foreground/[0.06] bg-foreground/[0.02] relative overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, rgba(var(--foreground-rgb,0,0,0),0.03) 50%, transparent 100%)",
+                  backgroundSize: "200% 100%",
+                  animation: "gv-shimmer 2s linear infinite",
+                }}
+              />
+            </div>
+            {/* Password label */}
+            <div className="h-2 w-12 rounded bg-foreground/[0.06]" />
+            {/* Password field skeleton */}
+            <div className="h-7 rounded-md border border-foreground/[0.06] bg-foreground/[0.02] relative overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, rgba(var(--foreground-rgb,0,0,0),0.03) 50%, transparent 100%)",
+                  backgroundSize: "200% 100%",
+                  animation: "gv-shimmer 2s linear infinite 0.3s",
+                }}
+              />
+            </div>
+            {/* Submit button skeleton */}
+            <div className="h-6 w-14 rounded-md bg-foreground/[0.06]" />
+          </div>
+          {/* Scanning line */}
+          <div
+            className="absolute left-0 right-0 h-px bg-foreground/15"
+            style={{ animation: "gv-scan-match 3s ease-in-out infinite" }}
+          />
+        </div>
+
+        {/* Panel 2: Credential matched */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] p-4 flex flex-col items-center justify-center">
+          <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-foreground/25 mb-4 block">
+            {t("matched")}
+          </span>
+          <div className="w-full space-y-3">
+            {/* Domain bubble */}
+            <div className="flex items-center justify-center">
+              <div className="h-7 px-3 rounded-lg border border-foreground/[0.08] bg-foreground/[0.03] flex items-center gap-1.5">
+                <div className="h-2 w-2 rounded-full bg-foreground/15" />
+                <span className="text-[10px] text-foreground/40">gmail.com</span>
+              </div>
+            </div>
+            {/* Connecting line */}
+            <div className="flex items-center justify-center h-4">
+              <div className="relative h-px w-20 bg-foreground/[0.06] overflow-hidden">
+                <div
+                  className="absolute inset-y-0 left-0 bg-foreground/25 origin-left"
+                  style={{ animation: "gv-connect-line 2s ease forwards infinite" }}
+                />
+              </div>
+            </div>
+            {/* Credential bubble */}
+            <div className="flex items-center justify-center">
+              <div
+                className="h-7 px-3 rounded-lg border border-foreground/[0.08] bg-foreground/[0.03] flex items-center gap-1.5"
+                style={{ animation: "gv-fade-in 0.5s ease forwards 1s", opacity: 0 }}
+              >
+                <Lock size={10} className="text-foreground/30" />
+                <span className="text-[10px] text-foreground/40">{t("credentialFound")}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Panel 3: Auto-filled */}
+        <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] p-4 relative">
+          <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-foreground/25 mb-3 block">
+            {t("autoFilled")}
+          </span>
+          <div className="space-y-2.5">
+            {/* URL bar */}
+            <div className="h-5 rounded-md bg-foreground/[0.04] flex items-center px-2">
+              <div className="h-1.5 w-1.5 rounded-full bg-foreground/10 mr-1.5" />
+              <div className="h-1.5 w-16 rounded bg-foreground/[0.06]" />
+            </div>
+            {/* Email label */}
+            <div className="h-2 w-10 rounded bg-foreground/[0.06]" />
+            {/* Email field filled */}
+            <div className="h-7 rounded-md border border-foreground/[0.08] bg-foreground/[0.02] flex items-center px-2 gap-1.5 overflow-hidden">
+              <div className="flex-1 overflow-hidden">
+                <div
+                  className="text-[10px] text-foreground/50 whitespace-nowrap overflow-hidden"
+                  style={{ animation: "gv-fill-field 1.5s ease forwards 1.5s", width: 0 }}
+                >
+                  john@example.com
+                </div>
+              </div>
+              <CheckCircle
+                size={11}
+                weight="fill"
+                className="text-foreground/30 shrink-0"
+                style={{ animation: "gv-check-pop 0.3s ease forwards 2.5s", opacity: 0 }}
+              />
+            </div>
+            {/* Password label */}
+            <div className="h-2 w-12 rounded bg-foreground/[0.06]" />
+            {/* Password field filled */}
+            <div className="h-7 rounded-md border border-foreground/[0.08] bg-foreground/[0.02] flex items-center px-2 gap-1.5 overflow-hidden">
+              <div className="flex-1 overflow-hidden">
+                <div
+                  className="text-[10px] text-foreground/50 whitespace-nowrap overflow-hidden"
+                  style={{ animation: "gv-fill-field 1.5s ease forwards 2s", width: 0 }}
+                >
+                  {"\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
+                </div>
+              </div>
+              <CheckCircle
+                size={11}
+                weight="fill"
+                className="text-foreground/30 shrink-0"
+                style={{ animation: "gv-check-pop 0.3s ease forwards 3s", opacity: 0 }}
+              />
+            </div>
+            {/* Submit */}
+            <div className="h-6 w-14 rounded-md bg-foreground/[0.08]" />
+          </div>
         </div>
       </div>
-      {helperText && (
-        <p className="text-[11px] text-muted-foreground/50">{helperText}</p>
-      )}
     </div>
   )
 }
 
-function CredentialCard({
-  domain,
-  username,
-  letter,
-  color,
-}: {
-  domain: string
-  username: string
-  letter: string
-  color: string
-}) {
+/* ─── credential card with reveal ─── */
+
+function CredCard({ domain, initial, username }: { domain: string; initial: string; username: string }) {
   const [revealed, setRevealed] = useState(false)
 
   return (
-    <div className="rounded-xl border border-border/40 bg-card/50 p-4 transition-all duration-200 hover:border-border/60">
-      <div className="flex items-start gap-3">
-        <div
-          className={cn(
-            "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white",
-            color
-          )}
-        >
-          {letter}
+    <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] p-3.5 transition-all hover:border-foreground/[0.1]">
+      <div className="flex items-center gap-3">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-foreground/[0.06] text-[11px] font-bold text-foreground/40">
+          {initial}
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-foreground truncate">{domain}</p>
-          <p className="text-[12px] text-muted-foreground/60 truncate mt-0.5">{username}</p>
-          <div className="flex items-center gap-1.5 mt-1.5">
-            <span className="text-[12px] text-muted-foreground/40 font-mono">
-              {revealed ? "s3cur3P@ss!" : "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
-            </span>
-            <button
-              onClick={() => setRevealed(!revealed)}
-              className="text-muted-foreground/40 hover:text-muted-foreground transition-colors"
-            >
-              {revealed ? (
-                <EyeSlash size={13} weight="duotone" />
-              ) : (
-                <Eye size={13} weight="duotone" />
-              )}
-            </button>
-          </div>
+          <p className="text-xs font-medium text-foreground/60 truncate">{domain}</p>
+          <p className="text-[10px] text-foreground/30 truncate">{username}</p>
         </div>
-        <div className="flex items-center gap-1 shrink-0">
-          <button className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground/40 hover:text-muted-foreground hover:bg-foreground/[0.04] transition-all">
-            <PencilSimple size={14} weight="duotone" />
-          </button>
-          <button className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground/40 hover:text-red-500 hover:bg-red-500/[0.04] transition-all">
-            <TrashSimple size={14} weight="duotone" />
-          </button>
-        </div>
+      </div>
+      <div className="flex items-center gap-1.5 mt-2 pl-11">
+        <span className="text-[11px] text-foreground/25 font-mono">
+          {revealed ? "s3cur3P@ss!" : "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}
+        </span>
+        <button
+          onClick={() => setRevealed(!revealed)}
+          className="text-foreground/20 hover:text-foreground/40 transition-colors"
+        >
+          {revealed ? <EyeSlash size={12} /> : <Eye size={12} />}
+        </button>
       </div>
     </div>
   )
@@ -178,423 +259,127 @@ function CredentialCard({
 /* ─── main export ─── */
 
 export function CredentialsTab({ inApp }: { inApp: boolean }) {
+  const t = useTranslations("guide.credentialsTab")
   return (
     <div className="space-y-0">
+      <style dangerouslySetInnerHTML={{ __html: credentialStyles }} />
 
-        {/* ── Section 1: Why Save Credentials? ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-          className="mb-12 sm:mb-16"
+      {/* ── Section 1: Auto-Fill Flow Hero ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={stagger}
+        className="mb-14 sm:mb-20"
+      >
+        <motion.h2
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2"
         >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            Credentials
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-          >
-            Why Save Credentials?
-          </motion.h2>
-          <motion.p
-            variants={fade}
-            custom={2}
-            className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-6"
-          >
-            Many tasks need Coasty to log into websites like Gmail, LinkedIn, your CRM, and more.
-            Saved credentials let Coasty auto-fill login forms so it can complete tasks without
-            interrupting you for passwords.
-          </motion.p>
-
-          {/* amber callout */}
-          <motion.div
-            variants={fade}
-            custom={3}
-            className="rounded-2xl border border-amber-500/15 dark:border-amber-400/15 bg-amber-500/[0.03] dark:bg-amber-400/[0.04] p-5 sm:p-6"
-          >
-            <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/10 dark:bg-amber-400/10">
-                <ShieldCheck size={20} weight="duotone" className="text-amber-600 dark:text-amber-400" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1">
-                  Your credentials are safe
-                </h3>
-                <p className="text-[13px] sm:text-sm text-muted-foreground/70 leading-relaxed">
-                  Credentials are encrypted and only used inside your session&apos;s isolated VM.
-                  They&apos;re never logged or shared.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </motion.section>
-
-        {/* ── Section 2: Adding a Credential ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-          className="mb-12 sm:mb-16"
+          {t("autoFillTitle")}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="text-sm text-foreground/40 mb-8"
         >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            Step by step
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-          >
-            Adding a Credential
-          </motion.h2>
-          <motion.p
-            variants={fade}
-            custom={2}
-            className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
-          >
-            Follow these steps to save a new credential that Coasty can use during tasks.
-          </motion.p>
+          {t("autoFillDesc")}
+        </motion.p>
 
-          {/* steps */}
-          <motion.div variants={fade} custom={3} className="space-y-4 mb-8">
-            {[
-              { step: 1, text: "Navigate to Saved Credentials from the sidebar or go to /secrets" },
-              { step: 2, text: 'Click "Add Credential" to open the form' },
-              { step: 3, text: "Fill in the service domain, username, and password" },
-            ].map((s) => (
-              <div key={s.step} className="flex items-start gap-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-foreground/[0.04] dark:bg-foreground/[0.06] text-xs font-bold text-muted-foreground/60">
-                  {s.step}
-                </div>
-                <p className="text-sm text-foreground/80 leading-relaxed pt-0.5">{s.text}</p>
-              </div>
-            ))}
-          </motion.div>
+        <motion.div variants={fadeUp}>
+          <AutoFillFlowMock t={t} />
+        </motion.div>
+      </motion.section>
 
-          {/* mock form */}
-          <motion.div
-            variants={fade}
-            custom={4}
-            className="rounded-2xl border border-border/40 bg-card/50 p-5 sm:p-6"
-          >
-            <div className="flex items-center gap-3 mb-5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground/[0.04] dark:bg-foreground/[0.06]">
-                <Plus size={16} weight="bold" className="text-foreground/70" />
-              </div>
-              <h3 className="text-sm font-semibold text-foreground">Add Credential</h3>
-            </div>
-
-            <div className="space-y-4 max-w-sm">
-              <MockInput
-                label="Service"
-                value="gmail.com"
-                helperText="The website domain where you log in"
-              />
-              <MockInput label="Username" value="john@example.com" />
-              <MockInput label="Password" value="myS3cur3P@ss" isPassword />
-
-              <div className="pt-2">
-                <div className="inline-flex items-center gap-2 h-9 px-4 rounded-xl bg-foreground text-background text-sm font-medium cursor-default">
-                  <Key size={14} weight="duotone" />
-                  Save Credential
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </motion.section>
-
-        {/* ── Section 3: Managing Your Credentials ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-          className="mb-12 sm:mb-16"
+      {/* ── Section 2: Security ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={stagger}
+        className="mb-14 sm:mb-20"
+      >
+        <motion.h2
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
         >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            Manage
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-          >
-            Managing Your Credentials
-          </motion.h2>
-          <motion.p
-            variants={fade}
-            custom={2}
-            className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
-          >
-            View, edit, and delete your saved credentials from the credentials page. Each card shows
-            the service, username, and a masked password you can reveal.
-          </motion.p>
+          {t("security")}
+        </motion.h2>
 
-          <motion.div
-            variants={fade}
-            custom={3}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-          >
-            {savedCredentials.map((cred) => (
-              <CredentialCard key={cred.domain} {...cred} />
-            ))}
-          </motion.div>
-        </motion.section>
-
-        {/* ── Section 4: How Auto-Fill Works ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-          className="mb-12 sm:mb-16"
-        >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            How it works
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
-          >
-            How Auto-Fill Works
-          </motion.h2>
-
-          {/* visual flow */}
-          <motion.div
-            variants={fade}
-            custom={2}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
-          >
-            {/* step 1: login page encountered */}
-            <div className="rounded-2xl border border-border/40 bg-card/30 p-5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/40 mb-3 block">
-                Step 1
-              </span>
-              <h3 className="text-sm font-semibold text-foreground mb-3">
-                Encounters a login page
-              </h3>
-              {/* mini login mock */}
-              <div className="rounded-xl border border-border/30 bg-background/50 p-3 space-y-2">
-                <div className="h-3 w-16 rounded bg-foreground/[0.06]" />
-                <div className="h-8 w-full rounded-lg border border-border/30 bg-background/60" />
-                <div className="h-3 w-14 rounded bg-foreground/[0.06]" />
-                <div className="h-8 w-full rounded-lg border border-border/30 bg-background/60" />
-                <div className="h-7 w-20 rounded-lg bg-foreground/10" />
-              </div>
-            </div>
-
-            {/* step 2: domain match */}
-            <div className="rounded-2xl border border-border/40 bg-card/30 p-5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/40 mb-3 block">
-                Step 2
-              </span>
-              <h3 className="text-sm font-semibold text-foreground mb-3">
-                Matches your credentials
-              </h3>
-              <div className="flex flex-col items-center gap-3 py-4">
-                <div className="flex items-center gap-2 rounded-xl border border-border/30 bg-background/50 px-3 py-2">
-                  <span className="text-xs text-muted-foreground/60">gmail.com</span>
-                </div>
-                <ArrowsLeftRight size={20} weight="duotone" className="text-muted-foreground/30 rotate-90" />
-                <div className="flex items-center gap-2 rounded-xl border border-amber-500/20 bg-amber-500/[0.03] px-3 py-2">
-                  <Lock size={14} weight="duotone" className="text-amber-600 dark:text-amber-400" />
-                  <span className="text-xs text-foreground/80">Saved credential found</span>
-                </div>
-              </div>
-            </div>
-
-            {/* step 3: auto-filled */}
-            <div className="rounded-2xl border border-border/40 bg-card/30 p-5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/40 mb-3 block">
-                Step 3
-              </span>
-              <h3 className="text-sm font-semibold text-foreground mb-3">
-                Auto-fills the form
-              </h3>
-              {/* mini filled login mock */}
-              <div className="rounded-xl border border-border/30 bg-background/50 p-3 space-y-2">
-                <div className="h-3 w-16 rounded bg-foreground/[0.06]" />
-                <div className="flex h-8 items-center rounded-lg border border-emerald-500/30 bg-emerald-500/[0.03] px-2.5 gap-1.5">
-                  <span className="text-[11px] text-foreground/70 truncate">john@example.com</span>
-                  <CheckCircle size={13} weight="fill" className="text-emerald-500 shrink-0 ml-auto" />
-                </div>
-                <div className="h-3 w-14 rounded bg-foreground/[0.06]" />
-                <div className="flex h-8 items-center rounded-lg border border-emerald-500/30 bg-emerald-500/[0.03] px-2.5 gap-1.5">
-                  <span className="text-[11px] text-foreground/70">{"\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"}</span>
-                  <CheckCircle size={13} weight="fill" className="text-emerald-500 shrink-0 ml-auto" />
-                </div>
-                <div className="h-7 w-20 rounded-lg bg-foreground/10" />
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={fade}
-            custom={3}
-            className="rounded-xl border border-border/30 bg-background/50 p-4"
-          >
-            <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-              <span className="font-medium text-muted-foreground/80">Note:</span>{" "}
-              If no credential matches the domain, Coasty will ask you to log in manually or prompt you
-              to save the credential for next time.
-            </p>
-          </motion.div>
-        </motion.section>
-
-        {/* ── Section 5: Security Details ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-          className="mb-12 sm:mb-16"
-        >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            Security
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-8"
-          >
-            Security Details
-          </motion.h2>
-
-          <motion.div
-            variants={fade}
-            custom={2}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-          >
-            {securityFeatures.map((feat, i) => {
-              const FeatIcon = feat.icon
-              return (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-border/40 bg-card/30 p-5 sm:p-6"
-                >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-foreground/[0.04] dark:bg-foreground/[0.06] mb-3">
-                    <FeatIcon size={18} weight="duotone" className="text-foreground/70" />
-                  </div>
-                  <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1">
-                    {feat.title}
-                  </h3>
-                  <p className="text-[13px] text-muted-foreground/60 leading-relaxed">
-                    {feat.description}
-                  </p>
-                </div>
-              )
-            })}
-          </motion.div>
-        </motion.section>
-
-        {/* ── Section 6: Common Services ── */}
-        <motion.section
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={stagger}
-        >
-          <motion.p
-            variants={fade}
-            custom={0}
-            className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3"
-          >
-            Recommendations
-          </motion.p>
-          <motion.h2
-            variants={fade}
-            custom={1}
-            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-3"
-          >
-            Common Services to Save
-          </motion.h2>
-          <motion.p
-            variants={fade}
-            custom={2}
-            className="text-sm sm:text-base text-muted-foreground/70 leading-relaxed max-w-2xl mb-8"
-          >
-            We recommend saving credentials for the services you use most often. Here are the most
-            popular ones:
-          </motion.p>
-
-          <motion.div
-            variants={fade}
-            custom={3}
-            className="flex flex-wrap gap-2 mb-8"
-          >
-            {commonServices.map((service) => (
-              <span
-                key={service}
-                className="inline-flex items-center h-8 px-3.5 rounded-full border border-border/40 bg-card/50 text-[13px] text-foreground/80"
+        <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {securityKeys.map((item, i) => {
+            const Icon = item.icon
+            return (
+              <div
+                key={i}
+                className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] p-4 flex items-center gap-3"
+                style={{
+                  animation: `gv-fade-in 0.4s ease forwards ${0.2 + i * 0.15}s`,
+                  opacity: 0,
+                }}
               >
-                {service}
-              </span>
-            ))}
-          </motion.div>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-foreground/[0.04]">
+                  <Icon size={15} weight="duotone" className="text-foreground/40" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-foreground/60">{t(item.labelKey)}</p>
+                  <p className="text-[10px] text-foreground/30">{t(item.descKey)}</p>
+                </div>
+              </div>
+            )
+          })}
+        </motion.div>
+      </motion.section>
 
-        </motion.section>
+      {/* ── Section 3: Saved Credentials Mock ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        variants={stagger}
+        className="mb-14 sm:mb-20"
+      >
+        <motion.h2
+          variants={fadeUp}
+          className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-2"
+        >
+          {t("savedCredentials")}
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="text-sm text-foreground/40 mb-8"
+        >
+          {t("addOnce")}
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+        >
+          {savedCreds.map((cred) => (
+            <CredCard key={cred.domain} {...cred} />
+          ))}
+        </motion.div>
+      </motion.section>
 
       {/* ── CTA ── */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-        className="rounded-2xl border border-border/40 bg-card/30 text-center p-6 sm:p-8"
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="rounded-2xl border border-foreground/[0.06] bg-foreground/[0.02] text-center p-8"
       >
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60 mb-3">
-          Try it now
-        </p>
-        <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-3">
-          Ready to save your first credential?
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight mb-6">
+          {t("saveFirst")}
         </h2>
-        <p className="text-sm text-muted-foreground/60 max-w-lg mx-auto mb-6">
-          Head to Saved Credentials to add your logins so Coasty can auto-fill them during tasks.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link
-            href="/secrets"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Go to Saved Credentials
-            <ArrowRight size={14} weight="bold" />
-          </Link>
-          <a
-            href="https://cal.com/coasty/15min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 h-10 px-5 rounded-xl border border-border/60 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-border transition-all"
-          >
-            <VideoCamera size={16} weight="duotone" />
-            Talk to Cofounders
-          </a>
-        </div>
+        <Link
+          href="/secrets"
+          className="inline-flex items-center gap-2 h-10 px-6 rounded-xl bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+        >
+          {t("goToCredentials")}
+          <ArrowRight size={14} weight="bold" />
+        </Link>
       </motion.section>
-
     </div>
   )
 }

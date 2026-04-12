@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Start gratis",
+    "bookDemo": "Book en demo",
+    "tryCoastyFree": "Prøv Coasty gratis",
+    "learnMore": "Læs mere",
+    "watchSession": "Se session",
+    "compareAllPlans": "Sammenlign alle planer og funktioner",
+    "allRightsReserved": "Alle rettigheder forbeholdes.",
+    "privacy": "Privatliv",
+    "terms": "Vilkår",
+    "recommended": "Anbefalet",
+    "month": "måned",
+    "creditsPerMonth": "{count} kreditter/md.",
+    "agentsInParallel": "{count} agenter parallelt"
+  },
+  "header": {
+    "useCases": "Anvendelser",
+    "blog": "Blog",
+    "agentSwarms": "Agent-sværme",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Sammenlign",
+    "demos": "Demoer",
+    "pricing": "Priser",
+    "download": "Download",
+    "signIn": "Log ind",
+    "getStarted": "Kom i gang",
+    "useCaseItems": {
+      "competitorIntel": "Konkurrentanalyse",
+      "qaBugReports": "QA-fejlrapporter",
+      "seoGapAnalysis": "SEO-gab-analyse",
+      "dataExtraction": "Dataudtræk",
+      "leadGeneration": "Leadgenerering",
+      "siteAudit": "Webstedsrevision",
+      "adIntelligence": "Annonceindsigt",
+      "emailOutreach": "E-mail-outreach",
+      "designReview": "Designgennemgang",
+      "priceMonitoring": "Prisovervågning",
+      "marketResearch": "Markedsundersøgelse",
+      "emailCampaigns": "E-mail-kampagner"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} konkurrentprofiler leveret",
+      "qaBugReports": "{stat} brugerflows testet pr. kørsel",
+      "seoGapAnalysis": "{stat} søgeordsgab identificeret",
+      "dataExtraction": "{stat} rækker udtrukket pr. kørsel",
+      "leadGeneration": "{stat} kvalificerede leads pr. kørsel",
+      "siteAudit": "{stat} sider revideret pr. kørsel",
+      "adIntelligence": "{stat} annoncekreativer indfanget",
+      "emailOutreach": "{stat} personaliserede e-mails udarbejdet",
+      "designReview": "{stat} breakpoints testet pr. side",
+      "priceMonitoring": "{stat} SKU'er sammenlignet pr. kørsel",
+      "marketResearch": "{stat} datapunkter indsamlet",
+      "emailCampaigns": "{stat} personaliserede e-mails pr. kampagne"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Alle indlæg",
+      "computerUse": "Computerbrug",
+      "compare": "Sammenlign",
+      "dataEntry": "Dataindtastning",
+      "webScraping": "Web scraping",
+      "jobApplications": "Jobansøgninger",
+      "demosResults": "Demoer og resultater",
+      "guide": "Guide"
+    },
+    "blogStats": {
+      "allPosts": "{stat} artikler publiceret ugentligt",
+      "computerUse": "{stat} OSWorld benchmark-score",
+      "compare": "{stat} konkurrenter analyseret",
+      "dataEntry": "{stat} hurtigere end manuelt",
+      "webScraping": "{stat} sider pr. session",
+      "jobApplications": "{stat} ansøgninger pr. session",
+      "demosResults": "{stat} virkelige casestudier",
+      "guide": "{stat} use case-gennemgange"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "Autonome computeroperatører",
+    "useCases": {
+      "computerAgent": {
+        "label": "Computeragent",
+        "headline": "automatisér enhver browseropgave",
+        "outcome": "En AI-agent der styrer en rigtig computer — browser, klikker, skriver og leverer færdigt arbejde. Ingen opsætning påkrævet."
+      },
+      "competitorIntel": {
+        "label": "Konkurrentanalyse",
+        "headline": "overvåg enhver konkurrent",
+        "outcome": "Komplette konkurrentprofiler med priser, funktioner og positioneringsgab — eksporteret som en delbar rapport."
+      },
+      "qaTesting": {
+        "label": "QA-test",
+        "headline": "find fejl før brugerne gør",
+        "outcome": "Kritiske brugerflows testet end-to-end, hver fejl screenshottet med reproduktionstrin og sværhedsgrad."
+      },
+      "seoAnalysis": {
+        "label": "SEO-analyse",
+        "headline": "afdæk søgeordsgab",
+        "outcome": "Søgeordsgab identificeret, indholdsbriefs udarbejdet, konkurrenters backlink-kilder kortlagt — handlingsorienteret SEO-strategi."
+      },
+      "dataExtraction": {
+        "label": "Dataudtræk",
+        "headline": "scrap og strukturér ethvert websted",
+        "outcome": "Struktureret data scrapet, renset, deduplikeret og eksporteret som CSV — fra ethvert websted, ethvert format."
+      },
+      "leadGeneration": {
+        "label": "Leadgenerering",
+        "headline": "fyld din salgspipeline",
+        "outcome": "Kvalificerede beslutningstagere der matcher din ICP med verificerede titler, virksomheder og personaliserede kontaktåbnere."
+      },
+      "siteAudit": {
+        "label": "Webstedsrevision",
+        "headline": "revider hver side i stor skala",
+        "outcome": "Sider scannet, Core Web Vitals scoret, brudte links fundet, tilgængelighedsproblemer rangeret efter rettePrioritet."
+      },
+      "emailOutreach": {
+        "label": "E-mail-outreach",
+        "headline": "send personaliseret outreach",
+        "outcome": "Personaliserede e-mails der refererer til hver prospects virksomhed, rolle og smertepunkter — klar til afsendelse."
+      },
+      "marketResearch": {
+        "label": "Markedsundersøgelse",
+        "headline": "validér dit marked hurtigt",
+        "outcome": "TAM beregnet, nøglespillere profileret, væksttendenser kortlagt — indsamlet fra snesevis af datapunkter."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Marketing",
+        "task": "Markedsfør dit produkt på Reddit autonomt"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Find prospects og send personaliserede e-mails"
+      },
+      "qaTesting": {
+        "label": "QA-test",
+        "task": "Test hvert checkout-flow og rapporter fejl"
+      },
+      "jobApplication": {
+        "label": "Jobansøgning",
+        "task": "Find stillinger, tilpas CV og ansøg"
+      },
+      "formFilling": {
+        "label": "Formularudfyldning",
+        "task": "Udfyld YC S26-ansøgningen for dig"
+      },
+      "socialMedia": {
+        "label": "Sociale medier",
+        "task": "Post på Hacker News og engagér med kommentarer"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld-benchmark",
+      "sublabel": "#1 computer-use agent globalt"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Værktøjer agenten kan bruge",
+      "sublabel": "Browser, terminal, skrivebord, filer"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Kører efter tidsplan",
+      "sublabel": "Automatisér enhver tilbagevendende opgave"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Opsætning påkrævet",
+      "sublabel": "Ingen API'er, ingen integrationer, ingen kode"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Hvorfor Coasty",
+    "title": "Ikke en chatbot. Ikke et RPA-script.",
+    "worksLikeHuman": {
+      "title": "Arbejder som et menneske",
+      "description": "Ser, klikker, skriver, navigerer — præcis som dig"
+    },
+    "noScripts": {
+      "title": "Ingen scripts eller opsætning",
+      "description": "Almindeligt dansk ind, resultater ud"
+    },
+    "handlesUnexpected": {
+      "title": "Håndterer det uventede",
+      "description": "Tilpasser sig CAPTCHAs, popups, layoutændringer"
+    },
+    "runsInIsolation": {
+      "title": "Kører i isolation",
+      "description": "Sandboxet VM pr. session — intet lækker"
+    }
+  },
+  "howItWorks": {
+    "title": "Sådan fungerer det",
+    "step1": {
+      "title": "Beskriv din opgave",
+      "description": "Almindeligt dansk. Det er det hele.",
+      "placeholder": "Undersøg 100 leads på LinkedIn..."
+    },
+    "step2": {
+      "title": "Se agenten arbejde",
+      "description": "Åbner browser, klikker, skriver, navigerer"
+    },
+    "step3": {
+      "title": "Opgave fuldført",
+      "description": "Hver handling logget med screenshots",
+      "results": {
+        "taskCompleted": "Opgave fuldført",
+        "leadsFound": "12 leads fundet",
+        "addedToCrm": "Tilføjet til CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Benchmarket som #1 på verdensplan",
+    "subtitle": "82% på OSWorld — det sværeste benchmark for AI-agenter der bruger rigtige computere",
+    "agenticFramework": "Agentisk framework",
+    "foundationModel": "Grundmodel"
+  },
+  "comparison": {
+    "title": "Hvorfor automatisere med Coasty?",
+    "subtitle": "De samme opgaver der tager et team timer — Coasty fuldender på minutter, døgnet rundt.",
+    "manual": {
+      "title": "Manuel udførelse",
+      "subtitle": "Dig eller dit team, i hånden"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 computer-use agent"
+    },
+    "rows": {
+      "timePerTask": "Tid pr. opgave",
+      "availability": "Tilgængelighed",
+      "setupTime": "Opsætningstid",
+      "errorRate": "Fejlrate",
+      "scaling": "Skalering",
+      "auditTrail": "Revisionsspor"
+    },
+    "manualValues": {
+      "timePerTask": "Timer til dage",
+      "availability": "Kun arbejdstid",
+      "setupTime": "Lær værktøjer, skriv SOP'er",
+      "errorRate": "Menneskelige fejl",
+      "scaling": "Mere arbejde = mere tid",
+      "auditTrail": "Ingen"
+    },
+    "coastyValues": {
+      "timePerTask": "Minutter",
+      "availability": "24/7, hver dag",
+      "setupTime": "60 sekunder",
+      "errorRate": "Selvkorrigerende",
+      "scaling": "Kør ubegrænsede opgaver parallelt",
+      "auditTrail": "Hvert klik logget + screenshots"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Automatisér opgaver der tager",
+      "hoursManually": "timer manuelt",
+      "startingAt": "Fra kun"
+    }
+  },
+  "demo": {
+    "title": "Se agenten i aktion",
+    "subtitle": "Rigtige opgaver. Rigtige browsere. Hvert klik optaget.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty på Reddit",
+        "description": "Se Coasty autonomt køre en marketingkampagne — researche konkurrenter, analysere tendenser og bygge et strategidæk.",
+        "tag": "Marketing"
+      },
+      "prospects": {
+        "title": "Find potentielle kunder",
+        "description": "Coasty finder og researcher potentielle kunder, indsamler nøgledetaljer til at udforme personaliseret outreach.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA-tester sig selv",
+        "description": "Coasty kører kvalitetssikring på sit eget produkt — navigerer flows, fanger fejl og rapporterer problemer autonomt.",
+        "tag": "QA-test"
+      },
+      "email": {
+        "title": "Sender en e-mail på dine vegne",
+        "description": "Fra udarbejdelse til afsendelse — en AI-agent udformer og leverer en e-mail helt på egen hånd.",
+        "tag": "Kommunikation"
+      },
+      "job": {
+        "title": "Ansøger om et job",
+        "description": "Coasty finder en matchende stilling, tilpasser dit CV og indsender ansøgningen — alt på egen hånd.",
+        "tag": "Jobansøgning"
+      },
+      "hackernews": {
+        "title": "Poster på Hacker News",
+        "description": "Coasty opretter og publicerer et blogindlæg på Hacker News — skriver indholdet og indsender det autonomt.",
+        "tag": "Sociale medier"
+      }
+    }
+  },
+  "features": {
+    "title": "Bygget til rigtige computeropgaver",
+    "selfCorrecting": {
+      "title": "Selvkorrigerende",
+      "description": "Registrerer fejl, prøver alternative veje"
+    },
+    "auditTrail": {
+      "title": "Komplet revisionsspor",
+      "description": "Hvert klik logget med screenshots"
+    },
+    "schedule": {
+      "title": "Planlægning 24/7",
+      "description": "Kører på cron — hver time, dagligt, ugentligt"
+    },
+    "sandboxed": {
+      "title": "Sandboxet og sikkert",
+      "description": "Isoleret VM pr. session, destrueret bagefter"
+    },
+    "benchmark": {
+      "title": "#1 på OSWorld",
+      "description": "82% — højeste score nogensinde registreret"
+    },
+    "swarms": {
+      "title": "Agent-sværme",
+      "description": "Fordel opgaver på tværs af maskiner parallelt"
+    }
+  },
+  "pricing": {
+    "title": "Start gratis, skalér når du er klar",
+    "subtitle": "Intet kreditkort. Din AI-agent er klar på 60 sekunder.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Prøv #1 computer-use agenten",
+        "cta": "Start gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Let daglig automatisering",
+        "cta": "Få Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatisér opgaver hver dag",
+        "cta": "Få Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skalér komplekse workflows",
+        "cta": "Vælg Plus",
+        "badge": "Mest populær"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ubegrænset tung automatisering",
+        "cta": "Få Pro"
+      }
+    },
+    "vmTemporary": "1 midlertidig VM (2 timer)",
+    "vmDeletedAfterInactivity": "1 VM (slettet efter inaktivitet)",
+    "vmAlwaysOn": "{count} altid-tændt VM",
+    "vmAlwaysOnPlural": "{count} altid-tændte VM'er",
+    "bargain": {
+      "title": "Det samme arbejde koster {oldPrice} med manuelt arbejde",
+      "description": "En virtuel assistent koster $2.000–$4.000/md. En deltidsansat koster mere. Coasty udfører det samme arbejde 24/7 fra $0 — med perfekt konsistens, komplet revisionsspor og nul oplæringstid."
+    }
+  },
+  "faq": {
+    "title": "Ofte stillede spørgsmål",
+    "subtitle": "Alt du skal vide, før du kommer i gang",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Hvad er Coasty?",
+        "answer": "Coasty er verdens bedste computer-use AI-agent. Du beskriver en opgave — research leads, test et websted, udfyld formularer, post på sociale medier — og Coasty åbner en rigtig browser, navigerer i apps, klikker på knapper, skriver tekst og fuldender opgaven end-to-end. Ingen API'er, ingen integrationer, ingen kode påkrævet."
+      },
+      "howDifferent": {
+        "question": "Hvordan adskiller dette sig fra ChatGPT eller andre AI-værktøjer?",
+        "answer": "ChatGPT genererer tekst. Coasty bruger en computer. Den fortæller dig ikke, hvad du skal gøre — den åbner en browser, navigerer til webstedet, klikker på knapperne, udfylder formularerne og leverer det færdige arbejde. Det er forskellen mellem at få instruktioner og have opgaven udført for dig."
+      },
+      "whatTasks": {
+        "question": "Hvilke opgaver kan Coasty automatisere?",
+        "answer": "Enhver opgave du kan udføre på en computer. Webresearch, leadgenerering, dataindtastning, formularudfyldning, QA-test, opslag på sociale medier, e-mail-outreach, fakturabehandling, konkurrentanalyse, rekruttering — hvis det involverer en browser eller desktop-app, kan Coasty gøre det."
+      },
+      "whatAreCredits": {
+        "question": "Hvad er kreditter, og hvordan bruges de?",
+        "answer": "Kreditter forbruges, når agenten arbejder på opgaver. Længere, mere komplekse opgaver bruger flere kreditter. Betalte planer inkluderer månedlige kreditter, og du kan også købe ekstra kreditpakker når som helst."
+      },
+      "localComputer": {
+        "question": "Kan Coasty køre på min egen computer?",
+        "answer": "Ja. Vores desktop-app kører som et let overlay på din maskine og styrer din lokale browser og applikationer direkte. Alternativt kører opgaver på isolerede cloud-maskiner — dit valg."
+      },
+      "dataSafe": {
+        "question": "Er mine data sikre?",
+        "answer": "Hver opgave kører i et isoleret sandbox-miljø. Intet lækker mellem sessioner. Dine legitimationsoplysninger forbliver private, og hver handling er logget med screenshots i et komplet revisionsspor, du kan gennemse når som helst."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI-drevet computerbrug.",
+    "tagline2": "Automatisér enhver arbejdsgang med intelligente agenter.",
+    "columns": {
+      "product": "Produkt",
+      "resources": "Ressourcer",
+      "company": "Virksomhed",
+      "legal": "Juridisk"
+    },
+    "links": {
+      "computerUse": "Computerbrug",
+      "guide": "Guide",
+      "download": "Download",
+      "pricing": "Priser",
+      "agentSwarms": "Agent-sværme",
+      "status": "Status",
+      "blog": "Blog",
+      "useCases": "Anvendelser",
+      "demos": "Demoer",
+      "compare": "Sammenlign",
+      "talkToCofounders": "Tal med medstiftere og demo",
+      "contact": "Kontakt",
+      "privacy": "Privatliv",
+      "terms": "Vilkår"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Sprog"
+  },
+  "auth": {
+    "brandHeading": "Du saetter malet.",
+    "brandSubheading": "Vi klarer resten.",
+    "mobileHeading": "Du saetter malet. Vi klarer resten.",
+    "mobileSubheading": "AI-agenter der browser, klikker og arbejder som en rigtig kollega.",
+    "flowSteps": {
+      "step1": {
+        "label": "Du beskriver opgaven",
+        "sub": "\"Undersog vores top 5 konkurrenter\""
+      },
+      "step2": {
+        "label": "Agenten tager over",
+        "sub": "Browser, klikker, skriver selvstaendigt"
+      },
+      "step3": {
+        "label": "Arbejdet leveret",
+        "sub": "Regneark med 5 fulde konkurrentprofiler"
+      }
+    },
+    "complete": "Faerdigt",
+    "doneIn": "Klart pa 8 minutter",
+    "demoCaption": "Kør AI-agenter på din computer eller styr den fra din telefon, uanset hvor du er.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Din operator star klar",
+      "signUp": "Saet dine workflows pa autopilot",
+      "magicLink": "Spring adgangskoden over",
+      "forgotPassword": "Vi hjaelper dig tilbage"
+    },
+    "viewDescriptions": {
+      "signIn": "Fortsaet lige der du slap — dine agenter husker",
+      "signUp": "Udrul din forste AI-agent pa under et minut",
+      "magicLink": "Et klik fra din indbakke og du er inde",
+      "forgotPassword": "Vi sender et nulstillingslink til din email"
+    },
+    "google": {
+      "connecting": "Forbinder...",
+      "continueWithGoogle": "Fortsaet med Google"
+    },
+    "or": "eller",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Adgangskode",
+    "passwordPlaceholder": "Din adgangskode",
+    "confirmPassword": "Bekraeft adgangskode",
+    "confirmPasswordPlaceholder": "Bekraeft din adgangskode",
+    "minChars": "Min. 6 tegn",
+    "signingIn": "Logger ind...",
+    "signIn": "Log ind",
+    "creatingAccount": "Opretter konto...",
+    "createAccount": "Opret konto",
+    "sending": "Sender...",
+    "sendMagicLink": "Send magisk link",
+    "sendResetLink": "Send nulstillingslink",
+    "forgotPassword": "Glemt adgangskode?",
+    "useMagicLink": "Brug magisk link",
+    "dontHaveAccount": "Har du ikke en konto?",
+    "signUp": "Opret konto",
+    "alreadyHaveAccount": "Har du allerede en konto?",
+    "backToSignIn": "Tilbage til login",
+    "termsAgreement": "Ved at fortsaette accepterer du vores",
+    "terms": "Vilkar",
+    "and": "og",
+    "privacyPolicy": "Privatlivspolitik",
+    "errors": {
+      "fillAllFields": "Udfyld venligst alle felter",
+      "passwordMinLength": "Adgangskoden skal vaere mindst 6 tegn",
+      "passwordsDoNotMatch": "Adgangskoderne matcher ikke",
+      "supabaseNotConfigured": "Supabase er ikke konfigureret",
+      "unexpectedError": "En uventet fejl opstod. Prov venligst igen.",
+      "confirmEmail": "Bekraeft venligst din email for du logger ind. Tjek din indbakke.",
+      "invalidCredentials": "Ugyldig email eller adgangskode.",
+      "signInFailed": "Login mislykkedes. Prov venligst igen.",
+      "invalidEmail": "Ugyldig emailadresse.",
+      "emailAlreadyExists": "En konto med denne email findes allerede. Prov at logge ind i stedet.",
+      "signUpFailed": "Oprettelse mislykkedes. Prov venligst igen.",
+      "enterEmail": "Indtast venligst din email",
+      "noAccountFound": "Ingen konto fundet med denne email. Opret dig forst.",
+      "magicLinkFailed": "Kunne ikke sende magisk link. Prov venligst igen.",
+      "resetFailed": "Kunne ikke sende nulstillingsemail. Prov venligst igen.",
+      "updateFailed": "Kunne ikke opdatere adgangskoden. Prov venligst igen."
+    },
+    "success": {
+      "checkEmailConfirm": "Tjek din email for at bekraefte din konto for du logger ind.",
+      "checkEmailMagicLink": "Tjek din email for det magiske link til at logge ind.",
+      "checkEmailReset": "Tjek din email for nulstillingslinket.",
+      "passwordUpdated": "Adgangskode opdateret. Omdirigerer til login..."
+    },
+    "resetPassword": {
+      "title": "Nulstil din adgangskode",
+      "subtitle": "Indtast din nye adgangskode herunder.",
+      "newPassword": "Ny adgangskode",
+      "confirmNewPassword": "Bekraeft ny adgangskode",
+      "confirmPlaceholder": "Bekraeft din nye adgangskode",
+      "updating": "Opdaterer...",
+      "updatePassword": "Opdater adgangskode"
+    },
+    "errorPage": {
+      "title": "Godkendelsesfejl",
+      "defaultMessage": "Der opstod en fejl under godkendelsen.",
+      "tryAgain": "Prov igen",
+      "backToChat": "Tilbage til chat",
+      "needHelp": "Brug for hjaelp?",
+      "contactSupport": "Kontakt support"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Spring over for nu",
+    "back": "Tilbage",
+    "continue": "Fortsaet",
+    "getStarted": "Kom i gang",
+    "settingUp": "Opsaetter...",
+    "welcome": {
+      "titleReturning": "Velkommen tilbage{name}!",
+      "titleNew": "Velkommen til Coasty",
+      "descriptionReturning": "Vi vil gerne laere lidt mere om dig for at forbedre din oplevelse",
+      "descriptionNew": "Lad os opsaette din konto sa vi kan tilpasse din oplevelse"
+    },
+    "nameLabel": "Hvad skal vi kalde dig?",
+    "namePlaceholder": "Dit navn",
+    "companyLabel": "Virksomhed",
+    "optional": "(valgfrit)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Hjemmeside",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Hvad beskriver dig bedst?",
+      "subtitle": "Vaelg alle der passer — dette hjaelper os med at tilpasse din oplevelse"
+    },
+    "roles": {
+      "founder": "Stifter / CEO",
+      "developer": "Udvikler",
+      "marketer": "Marketingmedarbejder",
+      "designer": "Designer",
+      "product_manager": "Produktchef",
+      "data_analyst": "Data / Analyse",
+      "operations": "Drift",
+      "other": "Andet"
+    },
+    "teamSizeLabel": "Teamstorrelse",
+    "teamSizes": {
+      "solo": "Kun mig",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Hvordan fandt du os?",
+      "subtitle": "Vi vil gerne vide hvor du horte om Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google-sogning",
+      "youtube": "YouTube",
+      "friend": "Ven / Kollega",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Andet"
+    },
+    "useCaseStep": {
+      "title": "Hvad vil du automatisere forst?",
+      "subtitle": "Vaelg alle der passer — du kan udforske alt senere"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping & Research",
+      "browser_automation": "Browserautomatisering",
+      "data_entry": "Dataindtastning & Formularer",
+      "email_outreach": "Email & Outreach",
+      "testing": "QA & Test",
+      "ecommerce": "E-handelsopgaver",
+      "social_media": "Sociale medier-styring",
+      "general_automation": "Generel automatisering"
+    },
+    "showcase": {
+      "title": "Alt hvad du har brug for,",
+      "titleHighlight": "indbygget.",
+      "subtitle": "Her er hvad Coasty kan gore for dig",
+      "noCode": {
+        "title": "Ingen kode",
+        "description": "Beskriv bare hvad du onsker pa almindeligt dansk"
+      },
+      "agentSwarms": {
+        "title": "Agentsvarm",
+        "description": "Parallelle agentflader"
+      },
+      "desktopControl": {
+        "title": "Skrivebordskontrol",
+        "description": "Klikker, skriver, navigerer"
+      },
+      "browserAutomation": {
+        "title": "Browserautomatisering",
+        "description": "Formularer, faner, scraping — fuldt automatiseret"
+      },
+      "computerVision": {
+        "title": "Computersyn",
+        "description": "Ser og forstar din skaerm i realtid"
+      },
+      "workflows": {
+        "title": "Workflows",
+        "description": "Flertrins-flows"
+      },
+      "onDevice": {
+        "title": "Pa enheden",
+        "description": "Korer lokalt"
+      },
+      "autonomous": {
+        "title": "24/7 Autonom",
+        "description": "Saet det op og glem det — korer mens du sover"
+      }
+    },
+    "guideCallout": {
+      "title": "Ny her? Vi har en guide til dig",
+      "subtitle": "Udrul din forste AI-agent pa under et minut"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Hvad skal din AI-medarbejder gore?",
+    "placeholderAlt": "Fortael din AI hvad den skal gore pa computeren...",
+    "vmError": {
+      "title": "Virtuel maskine fejl",
+      "description": "Den virtuelle maskine er i fejltilstand eller bliver slettet.",
+      "hint": "Tjek venligst fanen Maskiner for at lose problemet, eller vaelg \"Ingen computer valgt\" for kun at bruge websogning.",
+      "gotIt": "Forstaaet"
+    },
+    "status": {
+      "creating": "Opretter {name}...",
+      "initiating": "Starter agent pa {name}...",
+      "stopping": "Stopper {name}...",
+      "preparing": "Forbereder {name}..."
+    },
+    "swarm": {
+      "title": "Svaermtilstand",
+      "pro": "PRO",
+      "upgradeLabel": "Svaermtilstand — opgrader for at lase op",
+      "feature1": "Parallel korsel pa tvaers af midlertidige maskiner",
+      "feature2": "Hver maskine korer selvstaendigt",
+      "feature3": "3x din plans maskingraense per svaerm",
+      "description": "Kor en prompt pa tvaers af 3x din maskingraense parallelt — hver tackler opgaven selvstaendigt.",
+      "enableLabel": "Aktiver svaermtilstand",
+      "disableLabel": "Deaktiver svaermtilstand",
+      "onTooltip": "Svaermtilstand TIL — din prompt korer pa flere maskiner parallelt",
+      "offTooltip": "Aktiver svaermtilstand for at kore din prompt pa flere maskiner samtidig",
+      "decreaseMachines": "Formindsk antal maskiner",
+      "increaseMachines": "Forog antal maskiner",
+      "machineLimit": "Op til {max} svaermmaskiner pa din plan. Brug for flere? Kontakt founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Svaermtilstand"
+    },
+    "desktop": {
+      "connectLabel": "Forbind til skrivebord",
+      "screenLabel": "{name}s skaerm",
+      "screenDefault": "Skrivebord",
+      "watchTooltip": "Se din agent arbejde pa en separat skaerm. Ror bare ikke ved noget — den far sceneskraek!",
+      "watchLabel": "Skrivebord"
+    },
+    "buttons": {
+      "stop": "Stop",
+      "sendToSwarm": "Send til svaerm",
+      "taskRunning": "En anden opgave korer — klik for at stoppe den og kore din",
+      "selectComputer": "Vaelg en computer for at sende beskeder",
+      "waitCreating": "Vent venligst mens VM oprettes",
+      "waitStarting": "Vent venligst mens VM starter",
+      "waitAgent": "Vent venligst mens agenten initialiseres",
+      "vmStopping": "VM stopper",
+      "send": "Send",
+      "switching": "Skifter...",
+      "overrideRun": "Tilsidesaet & Kor",
+      "stopLabel": "Stop korende opgave og start denne",
+      "sendLabel": "Send besked"
+    },
+    "search": "Sog",
+    "upload": {
+      "label": "Upload filer til VM",
+      "heading": "Upload filer til VM",
+      "description": "Filer gemmes pa skrivebordet",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Slip filer her",
+      "dropDescription": "Filer uploades til VM'ens skrivebordsmappe",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Log ind for at prove flere funktioner gratis",
+      "description": "Opret projekter, inviter teammedlemmer og mere.",
+      "connecting": "Forbinder...",
+      "continueWithGoogle": "Fortsaet med Google"
+    },
+    "removeFile": "Fjern fil"
+  },
+  "chat": {
+    "greeting": "Hej",
+    "greetingAuth": "Jeg klarer computerarbejdet. Hvad er opgaven?",
+    "greetingUnauth": "AI der betjener computeren sa du slipper. Fortael bare hvad du har brug for.",
+    "guide": "Guide",
+    "saveLogins": "Gem logins til automatisk udfyldning",
+    "encryptedNote": "krypteret, aldrig set af AI",
+    "roleLabels": [
+      "Kollega",
+      "Medarbejder",
+      "Ven",
+      "Assistent",
+      "Partner",
+      "Holdkammerat",
+      "Samarbejdspartner",
+      "Hjaelper"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} konkurrentrapport",
+        "warmLeads": "Find 20 leads til {company}",
+        "pitchDeck": "{company} pitch deck-udkast"
+      },
+      "developer": {
+        "findBugs": "Find fejl pa {company}",
+        "performance": "{company} ydelsesaudit",
+        "apiDocs": "Udtrak {company} API-docs"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO-gap-analyse",
+        "competitorAds": "Spioner pa {company}-rivalers annoncer",
+        "trendingContent": "Trending ideer til {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} anmeldelsesopsummering",
+        "featureComparison": "{company} funktionssammenligning",
+        "competitorLaunches": "Spor {company}-rivalers lanceringer"
+      },
+      "data_analyst": {
+        "exportCsv": "Eksporter {company}-data til CSV",
+        "marketSizing": "{company} markedsstorrelse",
+        "benchmark": "Benchmark {company} mod branchen"
+      },
+      "operations": {
+        "enterRecords": "Indtast poster i {company}",
+        "cheapestVendor": "Find leverandorer til {company}",
+        "invoiceSummary": "{company} fakturaopsummering"
+      },
+      "designer": {
+        "designComparison": "{company} vs konkurrenter i design",
+        "responsiveAudit": "{company} responsiv audit",
+        "inspiration": "Designinspiration til {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Udtrak {company}-sidedata",
+      "browser_automation": "Eksporter {company}-rapporter",
+      "data_entry": "Indtast data i {company}",
+      "email_outreach": "Outreach for {company}",
+      "testing": "QA-test af {company}",
+      "ecommerce": "{company} prissammenligning",
+      "social_media": "Publicer om {company}",
+      "general_automation": "Automatiser opgave pa {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Kopier tekst",
+    "copied": "Kopieret!",
+    "regenerate": "Regenerer",
+    "feedback": {
+      "title": "Feedback",
+      "prompts": [
+        "Bedomen dette",
+        "Feedback",
+        "Hvordan gik det?",
+        "Tanker?",
+        "Del feedback"
+      ],
+      "tooltip": "Del din feedback"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Smart sogning",
+      "description": "AI-drevet sogning pa tvaers af nettet"
+    },
+    "collaborate": {
+      "title": "Samarbejd",
+      "description": "Arbejd sammen i realtid"
+    },
+    "globalAccess": {
+      "title": "Global adgang",
+      "description": "Sog pa 50+ sprog"
+    },
+    "aiModels": {
+      "title": "AI-modeller",
+      "description": "Flere AI-udbydere"
+    },
+    "freeForever": {
+      "title": "Gratis for altid",
+      "description": "Ingen skjulte omkostninger"
+    },
+    "privateSecure": {
+      "title": "Privat & Sikkert",
+      "description": "Dine data forbliver dine"
+    }
+  },
+  "sidebar": {
+    "newTask": "Ny opgave",
+    "newTaskDescription": "Start en ny AI-automatisering",
+    "activity": "Aktivitet",
+    "taskHistory": "Opgavehistorik",
+    "taskHistoryDescription": "Gennemga tidligere opgaver og fortsaet hvor du slap",
+    "taskHistoryPopup": {
+      "title": "Dine seneste opgaver",
+      "description": "Gennemse og fortsaet tidligere samtaler. Hver opgave gemmes sa du kan genoptage lige der du slap."
+    },
+    "swarmRuns": "Svaermkoersler",
+    "swarmRunsDescription": "Overvar multi-agent parallelle workflows",
+    "swarmRunsPopup": {
+      "title": "Multi-agent workflows",
+      "description": "Kor opgaver pa tvaers af flere maskiner parallelt. Hver agent arbejder selvstaendigt og resultater konvergerer automatisk."
+    },
+    "guide": "Guide",
+    "guideDescription": "Laer hvordan du far mest ud af Coasty",
+    "guidePopup": {
+      "title": "Kom i gang",
+      "description": "Trin-for-trin-gennemgange og bedste praksis for at hjaelpe dig med at automatisere effektivt."
+    },
+    "infrastructure": "Infrastruktur",
+    "computer": "Computer",
+    "computers": "Computere",
+    "active": "aktiv",
+    "view": "Vis",
+    "workforce": "Tidsplaner",
+    "workforceDescription": "Planlæg automatiserede opgaver og udløsere",
+    "workforcePopup": {
+      "title": "Planlagt automatisering",
+      "description": "Opsæt tilbagevendende opgaver med cron-tidsplaner og agent-til-agent-udløsere. Dine tidsplaner kører, mens du sover."
+    },
+    "credentials": "Loginoplysninger",
+    "credentialsDescription": "Gem logins sikkert til agentadgang",
+    "credentialsPopup": {
+      "title": "Sikkert loginboks",
+      "description": "Gem logins og API-nogler med kryptering. Agenter udfylder automatisk uden at afsloere radata."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Hent desktop-app",
+      "download": "Download",
+      "downloadDesktopApp": "Download desktop-app",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Styr din computer eksternt",
+      "controlDescription": "Installer desktop-appen og kor opgaver pa din PC fra dette dashboard — hvor som helst, nar som helst."
+    },
+    "credits": {
+      "runningLow": "Kreditter — Lober trt",
+      "remaining": "Kreditter tilbage",
+      "buy": "Kob",
+      "creditsLeft": "kreditter tilbage",
+      "usedLabel": "Brugt: {count}",
+      "consumed": "{percent}% forbrugt",
+      "usageThisWeek": "Forbrug denne uge"
+    },
+    "talkToUs": "Tal med os",
+    "talkToUsDesc": "Book et 15-min opkald",
+    "inviteEarn": "Inviter & Tjen",
+    "inviteEarnDesc": "Få gratis credits",
+    "user": "Bruger",
+    "account": "Konto",
+    "tasks": "{count} opgaver",
+    "recentActivity": "Seneste aktivitet",
+    "viewAllHistory": "Vis al historik →",
+    "swarmRunsCount": "{count} svaermkoersler",
+    "running": "korer",
+    "completed": "afsluttet",
+    "viewAllSwarms": "Vis alle svaerme →",
+    "schedulesCount": "{count} planer",
+    "totalRuns": "{count} samlede koersler",
+    "paused": "sat pa pause",
+    "viewAllSchedules": "Vis alle planer →",
+    "credentialsCount": "{count} loginoplysninger",
+    "encryptedVault": "Krypteret boks",
+    "manageCredentials": "Administrer loginoplysninger →",
+    "days": [
+      "Man",
+      "Tir",
+      "Ons",
+      "Tor",
+      "Fre",
+      "Lor",
+      "Son"
+    ],
+    "resume": "GENOPTAG",
+    "result": "RESULTAT",
+    "notScheduled": "Ikke planlagt",
+    "overdue": "Forsinket",
+    "lessThanMin": "< 1 min",
+    "inMinutes": "om {count}m",
+    "inHours": "om {count}t",
+    "today": "i dag",
+    "yesterday": "i gar"
+  },
+  "appHeader": {
+    "login": "Log ind",
+    "assign": "Planlæg",
+    "assignDescription": "Planlæg denne opgave til at køre automatisk",
+    "computer": "Computer",
+    "showComputer": "Vis computer",
+    "hideComputer": "Skjul computer",
+    "employeeHired": "Medarbejder ansat!",
+    "employeeRemoved": "Medarbejder fjernet"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Let daglig automatisering"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatiser opgaver hver dag"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Skaler komplekse workflows",
+        "badge": "Mest populaer"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Ubegraaenset tung automatisering"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (slettet efter inaktivitet)",
+      "vmAlwaysOn": "{count} altid-taendt VM",
+      "vmAlwaysOnPlural": "{count} altid-taendte VM'er",
+      "agentsParallel": "{count} agenter parallelt",
+      "basicSearch": "Grundlaeggende sogning",
+      "advancedSearch": "Avanceret sogning & ekstraktion",
+      "standardSupport": "Standardsupport (rigtige mennesker)",
+      "prioritySupport": "Prioriteret support, 24t svar",
+      "premiumSupport": "Premiumsupport, 12t svar"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Lille boost",
+        "description": "Hurtig optankning"
+      },
+      "medium": {
+        "name": "Medium boost",
+        "description": "Standard pafyldning",
+        "savings": "8% besparelse"
+      },
+      "large": {
+        "name": "Stor boost",
+        "description": "Storindkob",
+        "savings": "17% besparelse"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Lige nu",
+      "minutesAgo": "{count}m siden",
+      "hoursAgo": "{count}t siden",
+      "daysAgo": "{count}d siden"
+    },
+    "noActivity": "Ingen aktivitet i denne periode",
+    "stats": {
+      "balance": "Saldo",
+      "earned": "Optjent",
+      "used": "Brugt",
+      "credits": "kreditter",
+      "allTime": "alt tid",
+      "lastRange": "sidste {range}",
+      "sessions": "{count} sessioner",
+      "avgDaily": "~{count}/dag gns",
+      "plan": "Plan",
+      "free": "Gratis",
+      "noPlan": "Ingen plan",
+      "canceling": "Opsiger"
+    },
+    "monthlyUsage": "Manedligt kreditforbrug",
+    "remaining": "{used} / {total} tilbage",
+    "usedPercent": "{percent}% brugt i denne periode",
+    "renews": "Fornyes {date}",
+    "choosePlan": "Vaelg din plan",
+    "choosePlanDescription": "Abonner for at lase AI-funktioner op og fa manedlige kreditter",
+    "savingsVsHuman": "Spar {amount}/md mod menneske",
+    "timeSaved": "{time} sparet manedligt",
+    "cheaper": "{multiplier} billigere",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/maned",
+    "creditsPerMonth": "{count} kreditter /maned",
+    "processing": "Behandler...",
+    "subscribeTo": "Abonner pa {name}",
+    "transactionTypes": {
+      "credit_purchase": "Kreditkob",
+      "agent_usage": "Agentforbrug",
+      "refund": "Refusion",
+      "bonus": "Bonusbelonning",
+      "subscription": "Abonnement",
+      "subscription_grant": "Abonnementstildeling",
+      "renewal": "Fornyelseskreditter",
+      "reactivation": "Genaktivering"
+    },
+    "toasts": {
+      "paymentSuccess": "Betaling gennemfort! Dine kreditter er tilfojet.",
+      "subscriptionActivated": "Abonnement aktiveret!",
+      "paymentCanceled": "Betaling annulleret. Ingen opkraevning foretaget.",
+      "signInToSubscribe": "Log venligst ind for at abonnere",
+      "subscriptionCheckoutFailed": "Kunne ikke starte abonnementskassen. Prov venligst igen.",
+      "signInToPurchase": "Log venligst ind for at kobe kreditter",
+      "needSubscription": "Du har brug for et aktivt abonnement for at kobe yderligere kreditter",
+      "checkoutFailed": "Kunne ikke starte kassen. Prov venligst igen.",
+      "manageFailed": "Kunne ikke abne abonnementsstyring. Prov venligst igen.",
+      "transactionsExported": "Transaktioner eksporteret"
+    }
+  },
+  "apiKeys": {
+    "title": "Modeludbydere",
+    "new": "ny",
+    "description": "Tilfoej dine egne API-nogler for at lase adgang til modeller op.",
+    "securityNote": "Dine nogler gemmes sikkert med end-to-end-kryptering.",
+    "apiKeyLabel": "{provider} API-nogle",
+    "getApiKey": "Hent API-nogle",
+    "delete": "Slet",
+    "save": "Gem",
+    "deleteDialog": {
+      "title": "Slet API-nogle",
+      "description": "Er du sikker pa at du vil slette din {provider} API-nogle? Denne handling kan ikke fortrydes og du mister adgang til {provider}-modeller.",
+      "cancel": "Annuller",
+      "confirm": "Slet"
+    },
+    "toasts": {
+      "saved": "API-nogle gemt",
+      "savedDescription": "Din {provider} API-nogle er gemt og modeller er tilfojet til dine favoritter.",
+      "updatedDescription": "Din {provider} API-nogle er opdateret.",
+      "saveFailed": "Kunne ikke gemme API-nogle",
+      "saveFailedDescription": "Kunne ikke gemme {provider} API-nogle. Prov venligst igen.",
+      "deleted": "API-nogle slettet",
+      "deletedDescription": "Din {provider} API-nogle er slettet.",
+      "deleteFailed": "Kunne ikke slette API-nogle",
+      "deleteFailedDescription": "Kunne ikke slette {provider} API-nogle. Prov venligst igen."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Profildetaljer",
+    "displayName": "Visningsnavn",
+    "namePlaceholder": "Dit navn",
+    "company": "Virksomhed",
+    "companyPlaceholder": "Din virksomhed",
+    "website": "Hjemmeside",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Gemmer...",
+    "saveChanges": "Gem aendringer",
+    "account": "Konto",
+    "email": "Email",
+    "verified": "Verificeret",
+    "signOut": "Log ud",
+    "signOutDescription": "Log ud fra denne enhed",
+    "toasts": {
+      "profileUpdated": "Profil opdateret",
+      "profileUpdateFailed": "Kunne ikke opdatere profil",
+      "signOutFailed": "Kunne ikke logge ud"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Dine data er beskyttet",
+    "dataProtectedDescription": "Virksomhedsklasse sikkerhed med kryptering i hvile og under transport",
+    "features": {
+      "encryption": {
+        "title": "End-to-end-kryptering",
+        "description": "API-nogler krypteret med AES-256-GCM. Dine loginoplysninger gemmes aldrig i klartekst."
+      },
+      "rls": {
+        "title": "Raekkeniveausikkerhed",
+        "description": "Isolation pa databaseniveau sikrer at dine data kun er tilgaengelige for dig. Ingen krydslejer-adgang mulig."
+      },
+      "privacy": {
+        "title": "Privatliv ved design",
+        "description": "Vi indsamler minimale data naodvendige for at levere tjenesten. Dine samtaler og filer forbliver dine."
+      },
+      "session": {
+        "title": "Sessionssikkerhed",
+        "description": "CSRF-beskyttelse, sikre HTTP-only cookies og Content Security Policy headers pa hver foresp0rgsel."
+      }
+    },
+    "legal": "Juridisk",
+    "privacyPolicy": {
+      "title": "Privatlivspolitik",
+      "description": "Hvordan vi indsamler, bruger og beskytter dine data"
+    },
+    "termsOfService": {
+      "title": "Servicevilkar",
+      "description": "Vores vilkar og betingelser for brug"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Layout"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Resumé",
+      "highlight": "Opsummer"
+    },
+    "code": {
+      "label": "Kode",
+      "highlight": "Byg"
+    },
+    "research": {
+      "label": "Forskning",
+      "highlight": "Analyser"
+    },
+    "create": {
+      "label": "Opret",
+      "highlight": "Generer"
+    },
+    "solve": {
+      "label": "Los",
+      "highlight": "Fejlfind"
+    },
+    "learn": {
+      "label": "Laer",
+      "highlight": "Forklar"
+    }
+  },
+  "loadingMessages": [
+    "Starter siliciumhjernen op",
+    "Vaekker den digitale bevidsthed",
+    "Initialiserer neurale stier",
+    "Spinner kvantekernerne op",
+    "Oplader flux-kondensatoren",
+    "Aktiverer stormaskinen",
+    "Driver beregningsmatrixen",
+    "Aktiverer warp-drevet",
+    "Panakalder siliciumanderne",
+    "Taender elektronmotoren",
+    "Varmer transistorerne op",
+    "Samler bits og bytes",
+    "Kalibrerer de digitale synapser",
+    "Oplader CPU-krystallerne",
+    "Indlaeser bevidsthedsprotokollerne",
+    "Initialiserer systemressourcer",
+    "Forbereder beregningsmiljo",
+    "Etablerer sikker forbindelse",
+    "Klargror virtuelle ressourcer",
+    "Konfigurerer systemparametre",
+    "Starter virtuel instans",
+    "Aktiverer fjernskrivebordet",
+    "Udsender cloud-ressourcer",
+    "Igangsaetter systemstartsekvens",
+    "Forbereder korselsmiljo",
+    "Vaekker den sovende computer",
+    "Prikker til den digitale bjorn",
+    "Brygger lidt beregningskaffe",
+    "Straekker de digitale muskler",
+    "Abner de digitale ojne",
+    "Starter op",
+    "Taender",
+    "Kommer online",
+    "Booter systemet",
+    "Gor klar",
+    "Naesten der",
+    "Forbereder arbejdsomradet",
+    "Indlaeser ressourcer",
+    "Systemet rejser sig"
+  ],
+  "quickStart": {
+    "greetingName": "Hej {name}!",
+    "greetingDefault": "Hej!",
+    "subtitle": "Dine opgaver kører i en sikker, isoleret virtuel computer",
+    "tabs": {
+      "start": "Start",
+      "desktop": "Skrivebord",
+      "swarms": "Sværme",
+      "schedules": "Tidsplaner"
+    },
+    "items": {
+      "computerReady": "Computer klar",
+      "pickComputer": "Vælg en computer",
+      "createComputer": "Opret computer",
+      "loginsSaved": "Logins gemt",
+      "addLogins": "Tilføj logins",
+      "askAnything": "Spørg om hvad som helst",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Mobilfjernbetjening",
+      "freeDownload": "Gratis download",
+      "onePrompt": "Én prompt",
+      "manyAgents": "Mange agenter",
+      "combinedResult": "Kombineret resultat",
+      "setCadence": "Sæt en kadence",
+      "autoRuns": "Auto-kørsler",
+      "recurringResults": "Tilbagevendende resultater",
+      "computerReadyDesc": "Forbundet og klar til at udføre opgaver",
+      "pickComputerDesc": "Vælg blandt dine tilgængelige maskiner",
+      "createComputerDesc": "Opret en cloud-computer på sekunder",
+      "loginsSavedDesc": "Krypterede legitimationsoplysninger klar til autoudfyldning",
+      "addLoginsDesc": "Gem adgangskoder til automatisk adgang",
+      "askAnythingDesc": "Beskriv en opgave og se AI arbejde",
+      "macWindowsDesc": "Nativ app til dit skrivebord",
+      "mobileRemoteDesc": "Styr din agent fra enhver enhed",
+      "freeDownloadDesc": "Let installation, kører på sekunder",
+      "onePromptDesc": "Beskriv dit mål med almindeligt sprog",
+      "manyAgentsDesc": "Agenter arbejder parallelt på tværs af maskiner",
+      "combinedResultDesc": "Alle resultater samlet i én rapport",
+      "setCadenceDesc": "Timevis, dagligt, ugentligt eller brugerdefineret cron",
+      "autoRunsDesc": "Agenter kører uden indgriben",
+      "recurringResultsDesc": "Rapporter leveret efter din tidsplan"
+    },
+    "cta": {
+      "downloadApp": "Download app",
+      "trySwarms": "Prøv sværme",
+      "setUp": "Opsæt"
+    }
+  },
+  "machines": {
+    "title": "Mine computere",
+    "subtitle": "Administrer dine AI-styrede skrivebordsmiljøer",
+    "guide": "Guide",
+    "newMachine": "Ny maskine",
+    "filters": {
+      "all": "Alle",
+      "running": "Kørende",
+      "creating": "Opretter",
+      "stopped": "Stoppet"
+    },
+    "desktopPromo": {
+      "text": "Spring VM'en over — kør AI-agenter på din egen computer med den native app. Styr dit skrivebord fra din telefon.",
+      "cta": "Hent appen"
+    },
+    "emptyState": {
+      "title": "Ægte AI-medarbejder med fuld computeradgang",
+      "description": "Start en isoleret virtuel maskine og lad AI-agenter browse nettet, køre terminaler og styre skrivebordet — håndfrit.",
+      "feature1": {
+        "title": "Fuld skrivebordskontrol",
+        "description": "AI bevæger musen, skriver, klikker og navigerer som en rigtig bruger."
+      },
+      "feature2": {
+        "title": "Enhver opgave automatiseret",
+        "description": "Browser, terminal og UI — alle agenter arbejder sammen i én VM."
+      },
+      "feature3": {
+        "title": "Isoleret og sikkert",
+        "description": "Hver maskine kører i sin egen container — dit lokale system forbliver urørt."
+      },
+      "cta": "Opret din første maskine"
+    },
+    "noMachines": "Ingen maskiner fundet.",
+    "noFilteredMachines": "Ingen {filter} maskiner",
+    "noFilteredDescription": "Ingen maskiner er i øjeblikket {filter}.",
+    "loadingMachines": "Indlæser maskiner...",
+    "toasts": {
+      "deleted": "Maskine slettet",
+      "readyOpen": "Du kan nu oprette forbindelse til din maskine.",
+      "open": "Åbn",
+      "createFailed": "Prøv venligst at oprette maskinen igen.",
+      "fetchFailed": "Kunne ikke indlæse maskiner"
+    }
+  },
+  "createMachine": {
+    "title": "Ny computer",
+    "subtitle": "Start et cloud-skrivebord — klar på ~30 sekunder",
+    "freeExpiry": "Gratis computere udløber efter ",
+    "freeExpiry2": "2 timer",
+    "upgrade": "Opgrader",
+    "limitReached": "Du har nået din computergrænse. Stop eller slet en eksisterende computer for at oprette en ny.",
+    "upgradeMore": "Opgrader for mere →",
+    "nameLabel": "Computernavn",
+    "namePlaceholder": "Min cloud-server",
+    "nameError": "Computernavn kan ikke starte med \"local\"",
+    "nameRequired": "Indtast venligst et computernavn",
+    "osLabel": "Operativsystem",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 skrivebord"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows skrivebord — forvent fejl"
+    },
+    "osHintWindows": "Windows skrivebord med Chrome (beta). Klar på ~2 minutter.",
+    "osHintLinux": "Ubuntu skrivebord, tilgængeligt via browser. Klar på ~30 sekunder.",
+    "stateLabel": "Computertilstand",
+    "restorePrevious": "Gendan forrige",
+    "restoreDescription": "Genoptag fra sidste snapshot",
+    "startFresh": "Start forfra",
+    "startFreshDescription": "Rent skrivebordsmiljø",
+    "cancel": "Annuller",
+    "creating": "Opretter...",
+    "create": "Opret computer",
+    "toasts": {
+      "restoringSnapshot": "Gendanner computer fra snapshot!",
+      "restoringDescription": "Din tidligere skrivebordstilstand gendannes. Klar på ~30 sekunder.",
+      "windowsCreated": "Oprettelse af Windows-computer startet!",
+      "windowsDescription": "Dit Windows-skrivebord starter. Klar på ~2 minutter.",
+      "linuxCreated": "Dit skrivebord starter. Klar på ~30 sekunder.",
+      "sshCreated": "Din cloud-computer starter. SSH-nøgle vil være tilgængelig når den er klar."
+    }
+  },
+  "secrets": {
+    "title": "Gemte loginoplysninger",
+    "subtitle": "Opbevaret sikkert og brugt automatisk af AI-agenten ved login",
+    "guide": "Guide",
+    "import": "Importer",
+    "addCredential": "Tilføj loginoplysning",
+    "securityNote": "Loginoplysninger sendes aldrig til AI-modellen og vises aldrig i chatten — agenten udfylder dem direkte uden at se værdierne",
+    "username": "Brugernavn",
+    "password": "Adgangskode",
+    "hide": "Skjul",
+    "revealFor10s": "Vis i 10 sek.",
+    "encrypted": "Krypteret",
+    "emptyState": {
+      "title": "Auto-login, håndfrit",
+      "description": "Gem loginoplysninger én gang — AI-agenten logger ind automatisk og fortsætter uden at afbryde dig",
+      "feature1": {
+        "title": "Ingen afbrydelser",
+        "description": "Agenten støder på en loginformular, udfylder den og fortsætter opgaven — ingen prompter, ingen pauser"
+      },
+      "feature2": {
+        "title": "Aldrig set af AI",
+        "description": "Dine loginoplysninger indsættes direkte. AI-modellen ser aldrig de faktiske værdier"
+      },
+      "feature3": {
+        "title": "Enhver hjemmeside",
+        "description": "Fungerer med loginformularer på enhver side — e-mail, SaaS-værktøjer, dashboards, hvad som helst"
+      },
+      "cta": "Tilføj din første loginoplysning"
+    },
+    "deleteDialog": {
+      "title": "Slet loginoplysning?",
+      "description": "{name} ({service}) vil blive permanent slettet. AI-agenten vil ikke længere kunne bruge den.",
+      "cancel": "Annuller",
+      "delete": "Slet"
+    },
+    "toasts": {
+      "loadFailed": "Kunne ikke indlæse loginoplysninger",
+      "revealFailed": "Kunne ikke vise adgangskode",
+      "deleted": "Loginoplysning slettet",
+      "deleteFailed": "Kunne ikke slette loginoplysning"
+    },
+    "loading": "Indlæser loginoplysninger..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Simpel prissaetning,",
+      "title2": "aekte autopilot",
+      "subtitle": "Start gratis. Opgrader naar du har brug for mere kraft."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Proev den #1 computer-use agent",
+        "cta": "Start gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Let daglig automatisering",
+        "cta": "Faa Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Automatiser opgaver hver dag",
+        "cta": "Faa Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Skaler komplekse arbejdsgange",
+        "cta": "Gaa til Plus",
+        "badge": "Mest populaer"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Ubegrainset tung automatisering",
+        "cta": "Faa Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Fuld browser, skrivebord og terminal",
+        "badge": "Kerne"
+      },
+      "swarmMode": {
+        "name": "Svaerm-tilstand",
+        "sequential": "Kun sekventiel",
+        "parallel": "{count} agenter parallelt",
+        "badge": "Kraftfuld"
+      },
+      "security": {
+        "name": "Sikkerhed",
+        "description": "Sandboxet, E2E-krypteret",
+        "badge": "Alle planer"
+      },
+      "monthlyCredits": {
+        "name": "Maanedlige credits",
+        "payAsYouGo": "Betal loebende",
+        "creditsPerMonth": "{count} credits/md."
+      },
+      "persistentMachines": {
+        "name": "Persistente maskiner",
+        "temporary": "1 midlertidig VM (2 timer)",
+        "deletedAfterInactivity": "1 VM (slettet efter inaktivitet)",
+        "alwaysOn": "{count} altid-taindt VM",
+        "alwaysOnPlural": "{count} altid-taendte VM'er"
+      },
+      "webSearch": {
+        "name": "Websoegning",
+        "advanced": "Avanceret soegning og udtrak",
+        "basic": "Grundlaeggende soegning"
+      }
+    },
+    "animations": {
+      "agentDescription": "Din agent styrer en rigtig computer — browser, filer og terminal",
+      "fillForm": "Udfyld formular",
+      "searchExtract": "Soeg og udtrak",
+      "uploadReport": "Upload rapport",
+      "navigateSite": "Naviger paa site",
+      "creditsPerMonth": "credits per maaned",
+      "cr": "cr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2-timers graense",
+      "alwaysOn": "Altid taendt",
+      "tempVmDescription": "Midlertidig VM — nulstilles efter 2 timer",
+      "persistentVmDescription": "Dine filer, apps og sessioner bevares mellem opgaver",
+      "sequentialOnly": "Kun sekventiel udfoerelse paa denne plan",
+      "yourTask": "Din opgave",
+      "agentsWorking": "{count} agenter arbejder samtidigt",
+      "upgradeForExtraction": "Opgrader for fuld udtrak",
+      "searchDescription": "Soeg, scrap og udtrak strukturerede data",
+      "basicSearchIncluded": "Grundlaeggende soegning inkluderet",
+      "e2eEncryption": "E2E-kryptering",
+      "sandboxedVm": "Sandboxet VM",
+      "destroyedAfterUse": "Oedelagt efter brug",
+      "everyPlan": "Alle planer. Ingen undtagelser."
+    },
+    "perMonth": "/md.",
+    "faqs": {
+      "credits": {
+        "q": "Hvad taeller som en credit?",
+        "a": "En credit svarer nogenlunde til en agenthandling — et klik, en formularudfyldning, en soegeforesprgsoel eller en filoperation. En typisk flertrinsopgave bruger 5–15 credits."
+      },
+      "persistent": {
+        "q": "Hvad betyder 'persistent maskine'?",
+        "a": "Paa betalte planer forbliver din VM koerende mellem opgaver — dit skrivebord, filer, browsersessioner og installeret software bevares. Som din egen altid-taendte cloud-computer."
+      },
+      "swarm": {
+        "q": "Hvad er svaerm-tilstand?",
+        "a": "Svaerm-tilstand opdeler en opgave paa tvaers af flere maskiner, der koerer samtidigt. I stedet for at en agent laver 10 soegninger sekventielt, goer flere agenter det parallelt."
+      },
+      "cancel": {
+        "q": "Kan jeg opsige naar som helst?",
+        "a": "Ja. Ingen kontrakter, ingen opsigelsesgebyrer. Opsig fra din kontoside og behold adgang til slutningen af din faktureringsperiode."
+      },
+      "security": {
+        "q": "Er mine data sikre?",
+        "a": "Hver opgave koerer i en fuldt isoleret VM, der oedelaegges efter brug. Alle forbindelser er krypteret end-to-end, og vi gemmer aldrig dine loginoplysninger."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Brugerdefinerede credits, dedikerede VM'er, SLA, SSO og prioriteret support.",
+      "cta": "Kontakt os"
+    },
+    "footer": {
+      "title": "Din AI-agent er 60 sekunder vaek",
+      "subtitle": "Tilmeld dig og lad Coasty klare arbejdet.",
+      "noCreditCard": "Intet kreditkort",
+      "cancelAnytime": "Opsig naar som helst",
+      "noCreditCardRequired": "Intet kreditkort paakraevet",
+      "cancelAnytimeNoContracts": "Opsig naar som helst — ingen kontrakter"
+    },
+    "questions": "Spoergsmaal"
+  },
+  "guide": {
+    "pageTitle": "Guide",
+    "pageSubtitle": "Fra foerste opsaetning til avancerede funktioner — laer at faa mest ud af Coasty",
+    "completeGuide": "Den komplette guide",
+    "completeGuideSubtitle": "Alt du behoever at vide om Coasty",
+    "completeGuideDescription": "Fra foerste opsaetning til avancerede funktioner — laer at faa mest ud af din AI-agent.",
+    "talkToCofounders": "Tal med grundlaeggerne",
+    "tabs": {
+      "overview": "Oversigt",
+      "gettingStarted": "Kom i gang",
+      "chatTasks": "Chat og opgaver",
+      "machines": "Maskiner",
+      "credentials": "Loginoplysninger",
+      "swarmMode": "Svaerm-tilstand",
+      "workforce": "Tidsplaner",
+      "desktopApp": "Desktop-app",
+      "billing": "Fakturering og credits"
+    },
+    "overview": {
+      "howItWorks": "Saadan virker det",
+      "step1": "Beskriv opgaven",
+      "step2": "Coasty planlaegger trinnene",
+      "step3": "Udforer autonomt",
+      "step": "Trin",
+      "whatCanDo": "Hvad Coasty kan",
+      "taskCount": "40+ opgaver paa tvaers af 10 kategorier",
+      "categories": {
+        "sales": {
+          "name": "Salg",
+          "desc": "Find 50 leads, send personlige e-mails"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "desc": "Publicer blogindlaeg, planlaqeg sociale medier"
+        },
+        "jobApps": {
+          "name": "Jobansogninger",
+          "desc": "Ansoeg til 20 jobs, tilpas hvert CV"
+        },
+        "email": {
+          "name": "E-mail",
+          "desc": "Skriv svar, masseudsendelse, afmeld"
+        },
+        "dataEntry": {
+          "name": "Dataindtastning",
+          "desc": "Overfloer data mellem apps, byg regneark"
+        },
+        "research": {
+          "name": "Research",
+          "desc": "Dybdegaaende rapporter, konkurrentovervaagning"
+        },
+        "qaTesting": {
+          "name": "QA-test",
+          "desc": "Test tilmeldinger, fuzz formularer, site-sundhedstjek"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Find kandidater, personlig kontakt"
+        },
+        "support": {
+          "name": "Support",
+          "desc": "Skriv svar, opdater hjaelpedokumenter"
+        },
+        "productivity": {
+          "name": "Produktivitet",
+          "desc": "Book rejser, betal regninger, administrer kalendere"
+        }
+      },
+      "whyCoasty": "Hvorfor Coasty",
+      "notChatbot": "Ikke en chatbot. Ikke et RPA-script.",
+      "worksLikeHuman": {
+        "title": "Arbejder som et menneske",
+        "desc": "Ser, klikker, skriver, navigerer — praecis som dig"
+      },
+      "noScripts": {
+        "title": "Ingen scripts eller opsaetning",
+        "desc": "Almindeligt sprog ind, resultater ud"
+      },
+      "handlesUnexpected": {
+        "title": "Haandterer det uventede",
+        "desc": "Tilpasser sig CAPTCHAs, popups, layoutaendringer"
+      },
+      "runsInIsolation": {
+        "title": "Koerer i isolation",
+        "desc": "Sandboxet VM per session — intet lqekker"
+      },
+      "ctaTitle": "Vaelg en opgave og proev den",
+      "ctaSubtitle": "Klar til at saette Coasty i arbejde?",
+      "ctaDescription": "Beskriv enhver opgave fra denne guide og se Coasty klare den.",
+      "ctaNote": "Start gratis. Intet kreditkort paakraevet.",
+      "startTask": "Start en opgave",
+      "startFree": "Start gratis",
+      "desktopApp": "Desktop-app"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Tilmeld dig",
+          "desc": "Et klik for at starte"
+        },
+        "createMachine": {
+          "title": "Opret en maskine",
+          "desc": "Din agent faar sin egen computer"
+        },
+        "saveCredentials": {
+          "title": "Gem loginoplysninger",
+          "desc": "Krypterede logins til enhver side"
+        },
+        "giveTask": {
+          "title": "Giv en opgave",
+          "desc": "Beskriv den. Se det ske."
+        }
+      },
+      "examplePrompts": [
+        "Ansoeg til 10 matchende jobs paa LinkedIn med mit CV",
+        "Undersoeg konkurrentpriser og byg et sammenligningsregneark",
+        "Skriv og publicer et blogindlaeg om [emne] paa WordPress",
+        "Afmeld mig fra alle marketing-e-mails i Gmail",
+        "Test tilmeldingsflowet paa min hjemmeside og rapporter eventuelle fejl",
+        "Find 50 leads der matcher [ICP] paa LinkedIn og tilfoj til mit CRM"
+      ],
+      "quickPrompts": "Hurtige prompts at proeve",
+      "startFirstTask": "Start din foerste opgave"
+    },
+    "chatTasks": {
+      "commandCenter": "Dit kommandocenter",
+      "describeTask": "Beskriv enhver opgave. Se det ske.",
+      "examplePrompt": "Find de 5 bedste traadloese tastaturer under $50 paa Amazon og sammenlign dem i et regneark.",
+      "exampleResponse": "Jeg soeger paa Amazon og bygger en sammenligning. Aabner browseren nu.",
+      "exampleDone": "Faerdig. Regnearket er gemt med pris, vurdering og funktioner for alle 5 tastaturer.",
+      "describePlaceholder": "Beskriv din opgave...",
+      "threeAgents": "Tre specialiserede agenter",
+      "autoAssigned": "Automatisk tildelt per trin.",
+      "browser": "Browser",
+      "browserDesc": "Naviger, klik, udfyld formularer, scrap",
+      "terminal": "Terminal",
+      "terminalDesc": "Koer kommandoer, installer, behandl filer",
+      "desktop": "Skrivebord",
+      "desktopDesc": "Klik, skriv, scroll, aabn apps",
+      "betterPrompts": "Skriv bedre prompts",
+      "specificBeatsVague": "Specifikt slaar vagt. Hver gang.",
+      "do": "Goer",
+      "dont": "Goer ikke",
+      "doExample1": "Ansoeg til 10 softwareingenijoer-jobs paa LinkedIn. Tilpas hvert folgbrev til at naevne deres tech stack.",
+      "dontExample1": "Ansoeg til jobs",
+      "doExample2": "Soeg paa Google Flights efter SFO til JFK, 20.-25. marts, tur-retur. Screenshot de 3 billigste.",
+      "dontExample2": "Find flyrejser",
+      "readyToTry": "Klar til at proeve?",
+      "openChat": "Aabn en chat og beskriv hvad du har brug for.",
+      "startChat": "Start en chat"
+    },
+    "machinesTab": {
+      "title": "Dine maskiner",
+      "subtitle": "Fulde Ubuntu-skriveborde du kan starte paa sekunder.",
+      "lifecycle": "Livscyklus",
+      "lifecycleDesc": "Fem tilstande, fuldt automatisk.",
+      "planLimits": "Plangraenser",
+      "planCol": "Plan",
+      "machinesCol": "Maskiner",
+      "swarmAgentsCol": "Svaerm-agenter",
+      "temp": "1 midlertidig",
+      "states": {
+        "creating": "Opretter",
+        "starting": "Starter",
+        "running": "Koerer",
+        "stopping": "Stopper",
+        "stopped": "Stoppet"
+      },
+      "newMachine": "+ Ny",
+      "researchVm": "Research VM",
+      "emailVm": "E-mail VM",
+      "testingVm": "Test VM",
+      "cores": "{count} kerner",
+      "gb": "{count} GB",
+      "stop": "Stop",
+      "start": "Start",
+      "provisioning": "Klargjoer...",
+      "spinUp": "Start en maskine",
+      "goToMachines": "Gaa til maskiner"
+    },
+    "credentialsTab": {
+      "loginDetected": "Login registreret",
+      "matched": "Matchet",
+      "credentialFound": "Loginoplysning fundet",
+      "autoFilled": "Auto-udfyldt",
+      "autoFillTitle": "Auto-udfyldning i aktion",
+      "autoFillDesc": "Login registreret, loginoplysning matchet, formular udfyldt. Automatisk.",
+      "security": "Sikkerhed",
+      "encrypted": "Krypteret",
+      "aes256": "AES-256 i hvile",
+      "vmIsolated": "VM-isoleret",
+      "sandboxed": "Sandboxet per session",
+      "neverLogged": "Aldrig logget",
+      "zeroTrace": "Nul spor i logs",
+      "savedCredentials": "Gemte loginoplysninger",
+      "addOnce": "Tilfoej en gang, auto-udfyld overalt.",
+      "saveFirst": "Gem din foerste loginoplysning",
+      "goToCredentials": "Gaa til gemte loginoplysninger"
+    },
+    "swarmTab": {
+      "title": "Svaerm-tilstand",
+      "runParallel": "Koer {count} maskiner parallelt",
+      "sameTask": "Samme opgave, {multiplier}x output, samme tid.",
+      "done": "Faerdig",
+      "running": "Koerer",
+      "pending": "Afventer",
+      "result": "RESULTAT",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Parallel research",
+          "desc": "{count} konkurrenter, {count} maskiner, samtidigt"
+        },
+        "bulkApplications": {
+          "title": "Masseansogninger",
+          "desc": "Ansoeg paa tvaers af platforme paa samme tid"
+        },
+        "multiCitySearch": {
+          "title": "Soegning i flere byer",
+          "desc": "Soeg opslag i {count} byer paa en gang"
+        },
+        "parallelOutreach": {
+          "title": "Parallel kontakt",
+          "desc": "Personlige e-mails til forskellige segmenter"
+        },
+        "crossPlatform": {
+          "title": "Paa tvaers af platforme",
+          "desc": "Post til {count} platforme samtidigt"
+        },
+        "distributedTesting": {
+          "title": "Distribueret test",
+          "desc": "Test flere scenarier parallelt"
+        }
+      },
+      "whatToSwarm": "Hvad skal svaermes",
+      "availability": "Tilgaengelighed",
+      "freeNotAvailable": "Ikke tilgaengelig",
+      "litePlus": "Lite+",
+      "agentRange": "2–9 agenter",
+      "startSwarm": "Start en svaerm"
+    },
+    "workforceTab": {
+      "title": "Arbejdsstyrke",
+      "subtitle": "Din AI-virksomhed paa autopilot",
+      "description": "Medarbejdere, teams, triggers — koerer 24/7.",
+      "myCompany": "Min virksomhed",
+      "contentOps": "Content Ops",
+      "support": "Support",
+      "writer": "Skribent",
+      "seo": "SEO",
+      "social": "Social",
+      "inbox": "Indbakke",
+      "docs": "Dokumenter",
+      "concepts": "Kernekoncepter",
+      "conceptItems": {
+        "employees": {
+          "title": "Medarbejdere",
+          "desc": "AI-agenter der koerer opgaver paa en tidsplan, 24/7"
+        },
+        "teams": {
+          "title": "Teams",
+          "desc": "Grupper af medarbejdere med delte instruktioner"
+        },
+        "sharedMemory": {
+          "title": "Delt hukommelse",
+          "desc": "Key-value lager som medarbejdere laeser og skriver til"
+        },
+        "triggers": {
+          "title": "Triggers",
+          "desc": "Kqed medarbejdere: en afslutter, naeste starter"
+        },
+        "delegates": {
+          "title": "Delegerede",
+          "desc": "Medarbejdere tildeler delopgaver til specialister"
+        },
+        "orgChart": {
+          "title": "Organisationsdiagram",
+          "desc": "Visuelt kort over din virksomheds hierarki"
+        }
+      },
+      "chainTitle": "Kqed medarbejdere sammen",
+      "chainDesc": "Output flyder automatisk fra en til den naeste.",
+      "scout": "Scout",
+      "scoutDesc": "undersoeger konkurrenter",
+      "atlas": "Atlas",
+      "atlasDesc": "skriver blogindlaeg",
+      "nova": "Nova",
+      "novaDesc": "publicerer paa sociale medier",
+      "done": "Faerdig",
+      "onComplete": "on_complete",
+      "waiting": "Venter",
+      "templates": "Start fra en skabelon",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Kundesupport",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} medarbejdere",
+      "openWorkforce": "Aabn arbejdsstyrke"
+    },
+    "billingTab": {
+      "credits": "Credits",
+      "timeMetric": "Tid er den eneste metrik.",
+      "rate": "Sats",
+      "rateValue": "10",
+      "creditsPerMin": "credits/min",
+      "metered": "maalt hvert 30. sekund",
+      "example": "Eksempel",
+      "minTask": "min opgave",
+      "startCredits": "Start: {count} credits",
+      "endCredits": "Slut: {count} credits",
+      "creditsUsed": "{count} credits brugt",
+      "calculation": "{mins} min x 10 credits/min",
+      "plans": "Planer",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 midlertidig",
+          "feature": "Grundlaeggende soegning"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 altid-taendt",
+          "feature": "2 parallelle agenter"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 altid-taendt",
+          "feature": "Avanceret soegning"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 altid-taendte",
+          "feature": "Prioriteret support"
+        },
+        "pro": {
+          "credits": "1.500",
+          "machines": "3 altid-taendte",
+          "feature": "SLA-garanti"
+        }
+      },
+      "perMonth": "{price}/md.",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Hvordan opkraeves credits?",
+          "a": "10 credits per minut af agentudforelse, rundet op. Tjekket hvert 30. sekund under en session."
+        },
+        "runOut": {
+          "q": "Hvad sker der, naar jeg loeber toer?",
+          "a": "Du skal bruge mindst 20 credits for at starte en opgave. Naar du naar 0, pauses opgaven — koeb en tilfoejelse for at fortsaette."
+        },
+        "rollOver": {
+          "q": "Overfoeres ubrugte credits?",
+          "a": "Credits nulstilles hver faktureringscyklus. Brug dem eller mist dem."
+        }
+      },
+      "goToBilling": "Gaa til fakturering"
+    },
+    "desktopAppTab": {
+      "overlay": "Overlayet",
+      "overlayDesc": "Altid der. Klik for at udvide.",
+      "compact": "Kompakt",
+      "expanded": "Udvidet",
+      "ready": "Klar",
+      "exampleTask": "Opdater mit CV",
+      "exampleResponse": "Aabner resume.docx...",
+      "describePlaceholder": "Beskriv din opgave...",
+      "whatItControls": "Hvad det styrer",
+      "controls": {
+        "browser": {
+          "name": "Browser",
+          "desc": "Naviger, klik, udfyld formularer"
+        },
+        "files": {
+          "name": "Filer",
+          "desc": "Laes, skriv, rediger overalt"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Koer enhver shell-kommando"
+        },
+        "desktop": {
+          "name": "Skrivebord",
+          "desc": "Klik, skriv, scroll"
+        },
+        "screenshots": {
+          "name": "Skaermbilleder",
+          "desc": "Ser hvad du ser"
+        },
+        "apps": {
+          "name": "Apps",
+          "desc": "Styr enhver installeret app"
+        }
+      },
+      "twoWays": "To maader at koere paa",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "Fuldt isoleret sandbox",
+        "freshBrowser": "Ren browser, ingen historik",
+        "maxSecurity": "Maksimal sikkerhed"
+      },
+      "desktopMode": "Skrivebord",
+      "desktopFeatures": {
+        "yourFiles": "Dine filer, direkte adgang",
+        "yourApps": "Dine installerede apps",
+        "yourSessions": "Dine loggede sessioner"
+      },
+      "downloadCta": "Download desktop-app"
+    }
+  },
+  "comparePage": {
+    "title": "Sammenligninger",
+    "heroTitle": "Coasty vs. konkurrenterne",
+    "heroDescription": "Se hvordan den #1-rangerede computerbrugende AI-agent (82% OSWorld) klarer sig mod alternativer. Funktion-for-funktion sammenligning med reelle data.",
+    "categories": {
+      "aiAgent": "AI-agent",
+      "infrastructure": "Infrastruktur",
+      "rpa": "RPA",
+      "human": "Menneske"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "Klar til at prøve den #1 computerbrugende AI-agent?",
+    "ctaButton": "Prøv Coasty gratis",
+    "noCreditCard": "Intet kreditkort påkrævet",
+    "allComparisons": "Alle sammenligninger",
+    "featureComparison": "Funktionssammenligning",
+    "whyChooseCoasty": "Hvorfor vælge Coasty",
+    "strengthsOf": "{name} styrker",
+    "ctaDescription": "82% OSWorld benchmark. VM-isolation. CAPTCHA-løsning. Fra $20/md.",
+    "watchCaseStudies": "Se casestudier"
+  },
+  "agentSwarms": {
+    "badge": "Agent Swarm-tilstand",
+    "heroTitle1": "Én prompt.",
+    "heroTitle2": "Uendelige maskiner.",
+    "heroTitle3": "Parallelle resultater.",
+    "heroDescription": "Opdel enhver opgave på tværs af flere isolerede miljøer, der kører samtidigt. Arbejde der tager en time, er færdigt på minutter.",
+    "trySwarmMode": "Prøv Swarm-tilstand",
+    "seeInAction": "Se det i aktion",
+    "liveExecution": "swarm-tree — live udførelse",
+    "machineCount": "{count} maskiner",
+    "running": "kører",
+    "threeSteps": "Tre trin til parallel udførelse",
+    "steps": {
+      "typePrompt": {
+        "title": "Skriv din prompt",
+        "desc": "Beskriv opgaven. Slå swarm-tilstand til og vælg antal maskiner."
+      },
+      "machinesSpinUp": {
+        "title": "Maskiner starter op",
+        "desc": "Hver får et fuldt isoleret miljø — browser, terminal, skrivebord."
+      },
+      "resultsStream": {
+        "title": "Resultater streames live",
+        "desc": "Se hver maskine i realtid via swarm-trævisningen."
+      }
+    },
+    "demoTitle": "Agent Swarms demo",
+    "demoDescription": "Se {count} maskiner tackle en CRM-forskningsopgave samtidigt",
+    "prompt": "Prompt",
+    "swarm": "SWARM",
+    "run": "Kør",
+    "reset": "Nulstil",
+    "allCompleted": "Alle {count} maskiner færdige",
+    "speedComparison": "~{swarmTime} min i stedet for ~{seqTime} min — {multiplier}x hurtigere",
+    "seqVsSwarm": "Sekventiel vs Swarm",
+    "tableHeaders": {
+      "task": "Opgave",
+      "before": "Før",
+      "swarm": "Swarm",
+      "speed": "Hastighed"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM-værktøjer research",
+      "qaPages": "QA på tværs af 8 sider",
+      "leadEnrichment": "Lead-berigelse (100)",
+      "priceMonitoring": "Prisovervågning"
+    },
+    "builtForParallel": "Bygget til parallelt arbejde",
+    "useCases": {
+      "marketResearch": {
+        "title": "Markedsundersøgelse i stor skala",
+        "desc": "Undersøg flere konkurrenter, markeder eller produkter samtidigt på isolerede maskiner."
+      },
+      "leadGeneration": {
+        "title": "Leadgenerering",
+        "desc": "Berig profiler, find e-mails og verificer social tilstedeværelse — timers arbejde på minutter."
+      },
+      "qaTesting": {
+        "title": "QA og regressionstest",
+        "desc": "Kør testscenarier på tværs af forskellige sider eller flows parallelt."
+      },
+      "contentSocial": {
+        "title": "Indhold og sociale medier",
+        "desc": "Publicer på flere platforme samtidigt med isolation per maskine."
+      },
+      "dataExtraction": {
+        "title": "Dataudtrækning",
+        "desc": "Skrab og strukturer data fra snesevis af kilder på én gang."
+      },
+      "scheduledRuns": {
+        "title": "Planlagte kørsler",
+        "desc": "Kombiner swarm-tilstand med planlægning til tilbagevendende parallelle opgaver."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Ægte isolation",
+        "desc": "Hver maskine har sin egen browser, terminal og skrivebord."
+      },
+      "tripleMachineLimit": {
+        "title": "3x maskingrænse",
+        "desc": "Swarm-tilstand tredobler dit plans maskinkapacitet."
+      },
+      "liveTreeView": {
+        "title": "Live trævisning",
+        "desc": "Skærmbilleder og værktøjskald streames i realtid."
+      },
+      "autoAggregation": {
+        "title": "Auto-aggregering",
+        "desc": "Resultater kombineres til én samlet rapport."
+      },
+      "shareableRuns": {
+        "title": "Delbare kørsler",
+        "desc": "Afspil fulde udførelsestidslinjer via et link."
+      },
+      "fullySandboxed": {
+        "title": "Fuldt sandboxet",
+        "desc": "Alle miljøer destrueres efter afslutning."
+      }
+    },
+    "readyCta": "Klar til at køre opgaver parallelt?",
+    "includedWithPaid": "Swarm-tilstand er inkluderet i alle betalte planer.",
+    "getStarted": "Kom i gang",
+    "viewPricing": "Se priser",
+    "legend": {
+      "messages": "Beskeder",
+      "broadcast": "Broadcast",
+      "sharedMemory": "Delt hukommelse",
+      "help": "Hjælp"
+    },
+    "liveSwarmExecution": "Live swarm-udførelse med agentkommunikation",
+    "popular": "Populær",
+    "avgRating": "{rating} gennemsnit"
+  },
+  "downloadPage": {
+    "title": "Desktop-app",
+    "heroTitle": "Lad Coasty styre din computer",
+    "heroDescription": "Din AI-assistent der tager rattet. Automatiser din browser, skrivebord og terminal — eller styr din computer fra hvor som helst via vores webgrænseflade.",
+    "seeInAction": "Se det i aktion",
+    "overlayDescription": "Et letvægts-overlay der svæver på dit skrivebord. Styr det lokalt eller eksternt fra enhver browser — din computer, din måde.",
+    "recommended": "Anbefalet til dit system",
+    "coastyFor": "Coasty til {platform}",
+    "installerLabel": "{extension}-installationsprogram",
+    "beforeInstall": "Før du installerer",
+    "beforeInstallDescription": "Coasty Desktop er helt ny, så dit operativsystem genkender den ikke endnu. Det er helt normalt for nyligt udgivne apps — her er hvordan du fortsætter:",
+    "windowsSteps": {
+      "step1": "Windows beskyttede din PC",
+      "step2": "Mere info",
+      "step3": "Kør alligevel"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop kan ikke åbnes",
+      "step2": "Systemindstillinger > Privatliv og sikkerhed",
+      "step3": "Åbn alligevel"
+    },
+    "allPlatforms": "Alle platforme",
+    "systemRequirements": {
+      "title": "Systemkrav",
+      "win1": "Windows 10 eller nyere",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minimum 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) eller nyere",
+      "mac2": "Apple Silicon eller Intel",
+      "mac3": "Minimum 4 GB RAM"
+    },
+    "whatsIncluded": "Hvad der er inkluderet",
+    "features": {
+      "browser": "Browserautomatisering",
+      "desktop": "Skrivebordsautomatisering",
+      "terminal": "Terminaladgang",
+      "files": "Filoperationer",
+      "updates": "Automatiske opdateringer",
+      "remote": "Styr fra hvor som helst"
+    },
+    "browserCta": "Åbn Coasty i browser",
+    "browserCtaDescription": "Vil du styre din maskine fra hvor som helst?",
+    "loading": "Indlæser...",
+    "downloadFor": "Download til {platform}",
+    "download": "Download",
+    "unavailable": "Ikke tilgængelig"
+  },
+  "referralPage": {
+    "shareTitle": "Del Coasty.",
+    "earnTitle": "Tjen sammen.",
+    "shareDescription": "Giv venner 50 gratis credits til at deploye deres første AI-agent. Du får også 50 credits — hver gang nogen tilmelder sig.",
+    "features": [
+      "AI der faktisk virker — rigtig browser, rigtige klik, rigtige resultater",
+      "Isoleret og sikkert — hver agent kører i sin egen sandboxede VM",
+      "Kører mens du sover — planlæg opgaver og lad agenterne klare resten"
+    ],
+    "recentActivity": "Din seneste aktivitet",
+    "friendsCould": "Dine venner kunne også gøre dette",
+    "giveGet": "Giv venner 50 credits. Få 50 til dig selv. Hver gang.",
+    "stats": {
+      "invited": "Inviteret",
+      "earned": "Optjent",
+      "perInvite": "Per invitation"
+    },
+    "tabs": {
+      "invite": "Inviter venner",
+      "feedback": "Send feedback"
+    },
+    "referralLink": "Dit henvisningslink",
+    "howItWorks": "Sådan virker det",
+    "howSteps": [
+      "Del dit link med en ven",
+      "De tilmelder sig og får 50 gratis credits",
+      "Du tjener øjeblikkeligt 50 credits også"
+    ],
+    "shareDirectly": "Del direkte",
+    "yourReferrals": "Dine henvisninger",
+    "invitedYou": "Inviterede dig",
+    "joinedViaLink": "Tilmeldte sig via dit link",
+    "noReferrals": "Ingen henvisninger endnu",
+    "noReferralsHint": "Del dit link ovenfor og I tjener begge 50 credits",
+    "feedbackThanks": "Tak for din feedback!",
+    "feedbackWeRead": "Vi læser hver eneste besked.",
+    "sendAnother": "Send en til",
+    "feedbackTitle": "Fortæl os hvad du synes",
+    "feedbackSubtitle": "Fejlrapporter, funktionsidéer eller bare sig hej",
+    "feedbackPlaceholder": "Hvad tænker du på?",
+    "weReadEvery": "Vi læser hver besked",
+    "send": "Send",
+    "shareMessage": "Hej, jeg bruger Coasty og det er ret fedt. Det er en AI der faktisk kan bruge en computer for dig. Browsing, klik, tastning, det hele. Prøv det med mit link og vi får begge gratis credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-mail"
+    },
+    "emailSubject": "Tjek dette AI-værktøj ud",
+    "emailBody": "Denne AI kan faktisk bruge en computer for dig. Browsing, klik, tastning, det hele."
+  },
+  "statusPage": {
+    "title": "Systemstatus",
+    "brandTitle": "Coasty Status",
+    "subtitle": "Driftsstatus i realtid for alle Coasty-tjenester. Denne side opdateres automatisk hvert 60. sekund.",
+    "refresh": "Opdater",
+    "statuses": {
+      "operational": "I drift",
+      "degraded": "Nedsat",
+      "outage": "Udfald"
+    },
+    "overallStatuses": {
+      "allOperational": "Alle systemer i drift",
+      "someDegraded": "Nogle systemer er nedsatte",
+      "disruption": "Tjenesteforstyrrelser registreret"
+    },
+    "overallDescriptions": {
+      "allOperational": "Alle tjenester kører problemfrit uden registrerede problemer.",
+      "someDegraded": "Nogle tjenester oplever langsomhed. Vi undersøger det.",
+      "disruption": "Vi er opmærksomme på problemet og arbejder aktivt på en løsning."
+    },
+    "responseTime": "{ms}ms svartid",
+    "uptimeLabel": "90-dages oppetid",
+    "daysAgo": "90 dage siden",
+    "today": "I dag",
+    "overallUptime": "Samlet 90-dages oppetid",
+    "overallUptimeDesc": "Samlet tilgængelighed på tværs af alle tjenester",
+    "services": "Tjenester",
+    "clickUptime": "klik for at se oppetid",
+    "lastChecked": "Sidst kontrolleret {time} · Opdateres automatisk hvert 60s",
+    "experiencingIssues": "Oplever du problemer?",
+    "issuesDescription": "Hvis noget ikke virker rigtigt, kontakt os direkte.",
+    "talkToCofounders": "Tal med grundlæggerne",
+    "emailUs": "E-mail os",
+    "serviceNames": {
+      "website": "Hjemmeside",
+      "aiBackend": "AI Backend",
+      "database": "Database",
+      "authentication": "Autentificering",
+      "aiModels": "AI-modeller",
+      "fileStorage": "Filopbevaring"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - #1 AI-agent til computerbrug | AI-medarbejder til skrivebords- og browserautomatisering",
+      "titleTemplate": "{title} | Coasty - AI-agent til computerbrug",
+      "description": "Coasty er den #1-rangerede AI-agent til computerbrug — 82% på OSWorld benchmark. Styrer et helt skrivebord som et menneske: åbner browsere, klikker, skriver, udfylder formularer, sender e-mails, administrerer regneark. Ægte VM-isolering per session. Fra $20/mo.",
+      "ogTitle": "Coasty - #1 AI-agent til computerbrug | 82% OSWorld Benchmark",
+      "ogDescription": "AI-medarbejder der styrer et skrivebord som et menneske. #1 på OSWorld benchmark (82%). Browserautomatisering, skrivebordskontrol, CAPTCHA-løsning, VM-isolering. Fra $20/mo.",
+      "twitterDescription": "AI-medarbejder der styrer et skrivebord som et menneske. Åbner browsere, klikker, skriver, udfylder formularer, sender e-mails. Ægte VM-isolering. $20/mo mod $3,000/mo menneskelig virtuel assistent."
+    },
+    "compare": {
+      "title": "Sammenlign Coasty - AI-agentalternativer og konkurrentsammenligning",
+      "description": "Se hvordan Coastys #1-rangerede AI-agent til computerbrug klarer sig mod Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath og flere. Funktion-for-funktion sammenligninger med priser.",
+      "ogTitle": "Sammenlign Coasty med AI-agentalternativer",
+      "ogDescription": "Funktion-for-funktion sammenligning af den #1-rangerede AI-agent til computerbrug mod konkurrenter. Benchmarkscorer, priser, funktioner."
+    },
+    "download": {
+      "title": "Download Coasty Desktop — AI-agent til Mac og Windows",
+      "description": "Download Coasty Desktop, den #1-rangerede AI-agent til computerbrug der styrer din lokale maskine. Browserautomatisering, skrivebordskontrol, terminaladgang og filoperationer. Tilgængelig til Windows og macOS.",
+      "ogTitle": "Download Coasty Desktop — AI-agent til Mac og Windows",
+      "ogDescription": "AI der styrer din computer som et menneske. Browser-, skrivebords- og terminalautomatisering i én native app. #1 på OSWorld benchmark."
+    },
+    "guide": {
+      "title": "Hvad kan Coasty gøre? — Den komplette guide til AI-computerautomatisering",
+      "description": "Opdag alt hvad Coasty kan automatisere: salgsopsøgning, e-mailudsendelse, jobansøgninger, QA-test, dataindtastning, sociale medier, rekruttering, research og 100+ flere opgaver.",
+      "ogTitle": "Hvad kan Coasty gøre? — Komplet AI-automatiseringsguide",
+      "ogDescription": "Udforsk 100+ opgaver Coasty kan automatisere. Fra salg til QA-test, se præcis hvordan en AI-computeragent håndterer virkelig arbejde."
+    },
+    "blog": {
+      "title": "Blog - AI-agentindsigter, forskning i computerbrug og casestudier",
+      "description": "Dybdegående analyser af autonome AI-agenter, computerbrugsteknologi, virkelige automatiseringscasestudier og fremtiden for AI-medarbejdere. Fra teamet bag den #1-rangerede computerbrugsagent.",
+      "ogTitle": "Coasty Blog - AI-agentindsigter og casestudier",
+      "ogDescription": "Dybdegående analyser af autonome AI-agenter, computerbrugsteknologi og virkelige automatiseringscasestudier fra den #1-rangerede computerbrugsagent."
+    },
+    "results": {
+      "title": "Demoer og resultater — Se Coasty AI-agent arbejde autonomt",
+      "description": "Se Coasty autonomt køre markedsføringskampagner, søge job, udfylde ansøgninger, QA-teste produkter, sende personlige e-mails og mere. Virkelige casestudier med videodemoer.",
+      "ogTitle": "Demoer — Se Coasty AI-agent arbejde autonomt",
+      "ogDescription": "Virkelige demoer af AI der styrer en computer: markedsføring, jobansøgninger, QA-test, e-mailudsendelse og mere. #1 på OSWorld benchmark."
+    },
+    "terms": {
+      "title": "Servicevilkår",
+      "description": "Coasty Servicevilkår. Læs vilkårene der regulerer brugen af Coasty AI-medarbejderplatformen, computerbrugsagenten og desktopapplikationen.",
+      "ogTitle": "Coasty — Servicevilkår",
+      "ogDescription": "Coasty Servicevilkår. Læs vilkårene der regulerer brugen af Coasty AI-medarbejderplatformen, computerbrugsagenten og desktopapplikationen."
+    },
+    "privacy": {
+      "title": "Privatlivspolitik",
+      "description": "Coasty Privatlivspolitik. Læs om hvordan vi beskytter dine data med VM-niveau isolering, krypterede sessioner, sandkasse-eksekveringsmiljøer og virksomhedsniveau sikkerhed.",
+      "ogTitle": "Coasty — Privatlivspolitik",
+      "ogDescription": "Coasty Privatlivspolitik. Læs om hvordan vi beskytter dine data med VM-niveau isolering, krypterede sessioner, sandkasse-eksekveringsmiljøer og virksomhedsniveau sikkerhed."
+    },
+    "useCases": {
+      "title": "Brugsscenarier - Coasty AI-agent til forretningsdrift",
+      "description": "Opdag 12 måder Coastys AI-agent automatiserer din drift — konkurrentforskning, QA-test, leadgenerering, e-mailudsendelse og mere. Virkelige resultater.",
+      "ogTitle": "Brugsscenarier - Coasty AI-agent",
+      "ogDescription": "12 måder at 10x din produktion på autopilot. Virkelige resultater, virkelige tal."
+    },
+    "computerUse": {
+      "title": "AI-agent til computerbrug — #1-rangeret skrivebords-, browser- og terminalautomatisering",
+      "description": "Coasty er den bedste AI-agent til computerbrug, rangeret #1 på OSWorld (82%). Automatiser enhver skrivebords-, browser- eller terminalopgave med autonom AI der styrer computere som et menneske.",
+      "ogTitle": "Coasty — Den #1 AI-agent til computerbrug",
+      "ogDescription": "Den bedste computerbrugsagent rangeret #1 på OSWorld. Automatiser enhver skrivebords-, browser- eller terminalopgave med AI."
+    },
+    "pricing": {
+      "title": "Priser — Coasty AI-agentplaner og priser",
+      "description": "Coasty-priser fra $20/mo. Erstat virtuelle assistenter til $3,000/mo med en AI-medarbejder. Gratis plan tilgængelig. Kreditbaseret forbrug uden skjulte gebyrer.",
+      "ogTitle": "Coasty-priser — AI-agentplaner",
+      "ogDescription": "AI-medarbejder fra $20/mo. Erstat dyre VA'er med autonom AI. Gratis plan tilgængelig."
+    },
+    "faq": {
+      "q1": "Hvad er Coasty?",
+      "a1": "Coasty er en AI-medarbejderplatform — en computerbrugsagent der styrer et skrivebord som et menneske. Den åbner browsere, klikker, skriver, navigerer apps, udfylder formularer, sender e-mails og administrerer regneark autonomt. Rangeret #1 på OSWorld benchmark med 82% fuldførelsesrate over 369 virkelige opgaver.",
+      "q2": "Hvordan sammenligner Coasty sig med Anthropic Computer Use?",
+      "a2": "Mens Anthropic Computer Use leverer et rå API til computerkontrol, er Coasty en produktionsklar platform med administreret VM-infrastruktur, indbygget CAPTCHA-løsning, desktopapp til Mac og Windows, understøttelse af flere modeller og den højeste OSWorld benchmark-score (82%). Coasty giver den komplette løsning — ikke bare API'et.",
+      "q3": "Hvad koster Coasty?",
+      "a3": "Coasty starter ved $20/month for Starter-planen med en gratis plan tilgængelig. Sammenlign med $3,000+ om måneden for en menneskelig virtuel assistent. Coasty arbejder 24/7 uden pauser, ingen træning nødvendig og øjeblikkelig skalerbarhed.",
+      "q4": "Er Coasty sikkert at bruge?",
+      "a4": "Ja. Hver Coasty-session kører i sin egen isolerede, sandkassebaserede virtuelle maskine. Dine data er sikre, din maskine forbliver urørt, og intet lækker mellem sessioner. Dette er ægte VM-niveau isolering, ikke bare containere i en delt pulje.",
+      "q5": "Hvad er OSWorld benchmark?",
+      "a5": "OSWorld er et benchmark til evaluering af AI-agenter på virkelige computeropgaver. Det tester 369 opgaver i browsere, kontorprogrammer og systemoperationer. Coasty scorede 82%, den højeste af nogen computerbrugsagent — state-of-the-art ydeevne.",
+      "q6": "Hvordan adskiller Coasty sig fra RPA-værktøjer som UiPath?",
+      "a6": "Traditionelle RPA-værktøjer som UiPath kræver skrøbelig scripting og bryder sammen når brugerflader ændres. Coasty bruger AI-vision til at forstå og interagere med enhver brugerflade, tilpasser sig i realtid uden foruddefinerede scripts. Det fungerer som et menneske, ikke en makro. Opsætning tager minutter i stedet for uger.",
+      "q7": "Har Coasty en desktopapp?",
+      "a7": "Ja. Coasty Desktop er tilgængelig til både Mac og Windows. Den kører som et flydende overlay på dit skrivebord og kan styre din lokale browser, filer, terminal og applikationer direkte — ingen VM nødvendig til lokale opgaver.",
+      "q8": "Hvad kan Coasty automatisere?",
+      "a8": "Coasty kan automatisere stort set enhver computeropgave: webbrowsing, formularudfyldning, e-mailafsendelse, regnearkshåndtering, dataindtastning, opslag på sociale medier, jobansøgninger, salgsopsøgning, QA-test, kundesupport, LinkedIn-rekruttering og mere. Hvis et menneske kan gøre det på en computer, kan Coasty også.",
+      "q9": "Hvordan sammenligner Coasty sig med OpenAI Operator?",
+      "a9": "Coasty overgår OpenAI Operator på OSWorld benchmark (82% mod ~40%), tilbyder ægte VM-niveau isolering for hver session, understøtter flere AI-modeller, inkluderer fuld skrivebordskontrol ud over bare browseren og tilbyder et open source-framework.",
+      "q10": "Kan Coasty løse CAPTCHA'er?",
+      "a10": "Ja. Coasty har en indbygget CAPTCHA-løsningspipeline, så den bliver ikke blokeret som konkurrerende AI-agenter. Dette er afgørende for automatisering i den virkelige verden, hvor CAPTCHA'er er almindelige på hjemmesider."
+    },
+    "structuredData": {
+      "appDescription": "Den #1-rangerede AI-agent til computerbrug. Coasty styrer et helt skrivebord som et menneske — åbner browsere, klikker, skriver, udfylder formularer, sender e-mails og administrerer regneark autonomt. 82% på OSWorld benchmark. Ægte VM-niveau isolering. Indbygget CAPTCHA-løsning. Fra $20/month.",
+      "orgDescription": "Coasty bygger den #1-rangerede AI-agent til computerbrug. Vores platform tilbyder autonom skrivebordskontrol, browserautomatisering og orkestrering af flere agenter med ægte VM-niveau isolering.",
+      "productDescription": "AI-computerbrugsagent der styrer et skrivebord som et menneske. #1 på OSWorld benchmark (82%). Autonom browserautomatisering, skrivebordskontrol, e-mailafsendelse, formularudfyldning og regnearkshåndtering med ægte VM-niveau isolering.",
+      "websiteDescription": "#1 AI-agentplatform til computerbrug. 82% OSWorld benchmark. Autonom browser-, skrivebords- og terminalautomatisering med VM-isolering. Fra $20/mo.",
+      "softwareDescription": "AI-computerbrugsagent der styrer et helt skrivebord som et menneske. #1 på OSWorld benchmark med 82% fuldførelsesrate over 369 virkelige opgaver. Autonom browserautomatisering, skrivebordskontrol, terminaloperationer, e-mailafsendelse, formularudfyldning og regnearkshåndtering.",
+      "breadcrumbs": {
+        "home": "Hjem",
+        "caseStudies": "AI-agent casestudier",
+        "blog": "Blog",
+        "download": "Download desktopappen",
+        "compare": "Sammenlign AI-agenter"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Side ikke fundet",
+      "description": "Beklager, denne side findes ikke."
+    },
+    "error": {
+      "title": "Noget gik galt",
+      "description": "Der opstod en uventet fejl. Prøv venligst igen.",
+      "tryAgain": "Prøv igen"
+    }
+  },
+  "schedulesPage": {
+    "title": "Arbejdsstyrke",
+    "subtitle": "Din AI-arbejdsstyrke — tildel opgaver og lad dem klare resten",
+    "guide": "Guide",
+    "hireEmployee": "Ansæt medarbejder",
+    "loading": "Indlæser dine medarbejdere...",
+    "onDuty": "{count} på vagt",
+    "standby": "{count} standby",
+    "company": "Virksomhed",
+    "teams": "{count} teams",
+    "employees": "{count} medarbejdere",
+    "members": "{count} medlemmer",
+    "unassigned": "Ikke tildelt",
+    "add": "Tilføj",
+    "save": "Gem",
+    "cancel": "Annuller",
+    "run": "Kør",
+    "delegate": "deleger",
+    "untitledEmployee": "Unavngivet medarbejder",
+    "untitled": "Unavngivet",
+    "guidelinesPlaceholder": "Retningslinjer...",
+    "today": "I dag",
+    "timesDaily": "{count} × dagligt",
+    "noEmployeesDay": "Ingen medarbejdere denne dag",
+    "noEmployeesScheduled": "Ingen planlagte medarbejdere",
+    "recentActivity": "Seneste aktivitet",
+    "schedule": "Tidsplan",
+    "emptyState": {
+      "openChat": "Åbn en chat og klik på",
+      "assignEmployee": "Tildel medarbejder",
+      "onThe": "i",
+      "topRight": "øverste højre hjørne",
+      "toPutOnAutopilot": "for at sætte den på autopilot",
+      "newChat": "Ny chat"
+    },
+    "emptyWorkforce": {
+      "title": "Ansæt din første medarbejder",
+      "description": "AI-medarbejdere arbejder på dine vegne — tildel en opgave, sæt en tidsplan, og de udfører det automatisk",
+      "flexibleShifts": {
+        "title": "Fleksible vagter",
+        "desc": "Planlæg medarbejdere pr. time, dagligt, ugentligt, månedligt — eller brug et brugerdefineret cron-udtryk"
+      },
+      "fullAutonomy": {
+        "title": "Fuld autonomi",
+        "desc": "Hver medarbejder får fuld adgang til browsing, terminal og dine tilsluttede arbejdsstationer"
+      },
+      "activityLogs": {
+        "title": "Aktivitetslogge",
+        "desc": "Hver udførelse logges, så du kan gennemgå, hvad dine medarbejdere har opnået"
+      },
+      "startFromChat": "Start fra en chat"
+    },
+    "filters": {
+      "all": "Alle",
+      "onDuty": "På vagt",
+      "standby": "Standby"
+    },
+    "noMatch": "Ingen medarbejdere matcher dette filter",
+    "createTeam": {
+      "title": "Nyt team",
+      "subtitle": "Start med en skabelon eller byg fra bunden",
+      "backToTemplates": "Tilbage til skabeloner",
+      "customTeam": "Brugerdefineret team",
+      "customDescription": "Opret et team med din egen konfiguration.",
+      "teamNameLabel": "Teamnavn",
+      "teamNamePlaceholder": "f.eks. Research, Marketing, Engineering",
+      "guidelinesLabel": "Retningslinjer",
+      "optional": "(valgfrit)",
+      "guidelinesPlaceholder": "Delte instruktioner som alle teammedlemmer følger...",
+      "suggestedEmployees": "Foreslåede medarbejdere",
+      "suggestedCredentials": "Foreslåede legitimationsoplysninger",
+      "added": "Tilføjet",
+      "addButton": "+ Tilføj",
+      "credentials": "Legitimationsoplysninger",
+      "addCredential": "+ Tilføj legitimation",
+      "credentialHint": "Legitimationsoplysninger er krypterede. De inkluderes i teamets retningslinjer, så medarbejderne ved, hvad der er tilgængeligt.",
+      "settingUp": "Opsætter...",
+      "createEmployees": "Opret {count} medarbejdere",
+      "createTeamButton": "Opret team"
+    },
+    "noTeams": {
+      "title": "Ingen teams endnu",
+      "description": "Teams lader medarbejdere dele kontekst og hukommelse. Opret et for at bygge dit organisationsdiagram.",
+      "newTeam": "Nyt team"
+    },
+    "howItWorks": {
+      "title": "Sådan fungerer det",
+      "dragEmployees": "Træk medarbejdere ind på et team",
+      "clickToEdit": "Klik for at redigere tidsplan og indstillinger",
+      "teamsShare": "Teams deler hukommelse og retningslinjer",
+      "dashedLines": "Stiplede linjer — delegering mellem medarbejdere"
+    },
+    "inactive": {
+      "title": "{count} inaktive medarbejdere",
+      "missingMachine": "{count} mangler en maskine — kører ikke før aktivering",
+      "wontRun": "Kører ikke før aktivering",
+      "fixInEmployees": "Ret i Medarbejdere"
+    },
+    "dragHint": "Træk ikke-tildelte medarbejdere ind på teams for at tilføje dem",
+    "limits": {
+      "upgradePlan": "Opgrader plan",
+      "manageMachines": "Administrer maskiner",
+      "manageEmployees": "Administrer medarbejdere",
+      "machineLimit": "Du har brug for en cloud-maskine, men du har nået din grænse på {max} maskiner. Opgrader din plan eller slet en ubrugt maskine.",
+      "employeeLimit": "Du har nået din medarbejdergrænse ({max} for {tier}-niveau). Opgrader din plan eller fjern ubrugte medarbejdere.",
+      "templateLimit": "Denne skabelon kræver {needed} medarbejdere, men du har kun {available} pladser tilbage ({max} maks for {tier}-niveau). Opgrader din plan eller fjern ubrugte medarbejdere.",
+      "createFailed": "Kunne ikke oprette nogen medarbejdere. Tjek dine kontogrænser og prøv igen.",
+      "teamFailed": "Kunne ikke oprette team"
+    },
+    "provisioning": {
+      "checking": "Tjekker kontogrænser...",
+      "usingMachine": "Bruger maskine \"{name}\"...",
+      "assigningMachine": "Tildeler til maskine \"{name}\" (kører når maskinen er klar)...",
+      "creatingMachine": "Opretter en ny maskine...",
+      "machineStarted": "Maskinklaregøring startet...",
+      "hiring": "Ansætter {name} ({current}/{total})...",
+      "creatingTeam": "Opretter team..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Team oprettet med {count} medarbejdere ({failedCount} fejlede: {names})",
+      "teamCreated": "{name} team oprettet med {count} medarbejdere"
+    },
+    "credentialInstructions": "[TILGÆNGELIGE LEGITIMATIONSOPLYSNINGER]\nFølgende serviceoplysninger er konfigureret og tilgængelige:\n{list}\nBrug disse legitimationsoplysninger, når du skal logge ind på disse tjenester for at færdiggøre dine opgaver.",
+    "templates": {
+      "contentOps": {
+        "name": "Indholdsdrift",
+        "tagline": "Publicer konsistent uden at løfte en finger",
+        "description": "En slank indholdsmotor — skriver, optimerer og distribuerer indhold på autopilot.",
+        "roles": {
+          "atlas": "Indholdsskribent — skriver blogindlæg, nyhedsbreve og tekster til sociale medier",
+          "echo": "SEO-analytiker — auditerer sider, sporer placeringer, foreslår søgeordsmuligheder",
+          "nova": "Social distributør — poster indhold på platforme og overvåger engagement"
+        },
+        "credentials": {
+          "wordpress": "Publicer og administrer blogindlæg",
+          "twitter": "Post tweets og overvåg engagement",
+          "linkedin": "Publicer professionelt indhold og artikler",
+          "searchConsole": "Spor søgeydelse og indeksering"
+        }
+      },
+      "customerSupport": {
+        "name": "Kundesupport",
+        "tagline": "24/7 supportdækning fra 3 medarbejdere",
+        "description": "Overvåger indbakker, løser almindelige problemer og holder din vidensbase opdateret.",
+        "roles": {
+          "sage": "Indbakke-overvåger — tjekker support-e-mails, kategoriserer og besvarer almindelige forespørgsler",
+          "iris": "Vidensbase-administrator — opdaterer hjælpedokumenter og FAQ baseret på tilbagevendende problemer",
+          "milo": "Feedback-analytiker — samler anmeldelser og supporttendenser i ugentlige rapporter"
+        },
+        "credentials": {
+          "gmail": "Overvåg og besvar support-e-mails",
+          "zendesk": "Administrer supportbilletter (eller din helpdesk)",
+          "notion": "Opdater vidensbase og dokumentation"
+        }
+      },
+      "researchIntel": {
+        "name": "Research og efterretning",
+        "tagline": "Hold dig informeret uden manuelt arbejde",
+        "description": "Overvåger konkurrenter, sporer branchetendenser og udarbejder handlingsorienterede forskningsbriefs.",
+        "roles": {
+          "scout": "Konkurrentovervåger — sporer konkurrenters hjemmesider, priser og funktionsændringer",
+          "wren": "Tendensforsker — scanner branchenyheder, publikationer og sociale medier for tendenser",
+          "quinn": "Brief-sammenstæller — syntetiserer fund til strukturerede ugentlige efterretningsrapporter"
+        },
+        "credentials": {
+          "google": "Webresearch og søgning",
+          "linkedin": "Spor konkurrenters ansættelser og meddelelser",
+          "notion": "Publicer forskningsbriefs og rapporter"
+        }
+      },
+      "marketing": {
+        "name": "Marketingafdeling",
+        "tagline": "Et komplet marketingteam i to maskiner",
+        "description": "Indholdsproduktion, sociale medier, SEO, konkurrentsporing og kampagneanalyse — to koordinerede hold.",
+        "roles": {
+          "atlas": "Indholdsstrateg — planlægger indholdskalender, skriver lange artikler",
+          "nova": "Social media-manager — poster, engagerer og udvikler sociale kanaler",
+          "echo": "SEO-specialist — optimerer sider, opbygger interne links, sporer søgeord",
+          "pixel": "E-mailkampagnemanager — skriver og sender nyhedsbreve, sporer åbninger/klik",
+          "scout": "Konkurrentanalytiker — overvåger konkurrenters marketingtiltag og rapporterer indsigter",
+          "dash": "Annoncekampagneovervåger — sporer annonceudgifter, ROAS og optimeringsmuligheder",
+          "iris": "Analyserapportør — sammenstæller tværkanals ydelsesdashboards"
+        },
+        "credentials": {
+          "wordpress": "Publicer blogindhold",
+          "twitter": "Administration af sociale medier",
+          "linkedin": "Professionel indholdsdistribution",
+          "mailchimp": "E-mailkampagner og nyhedsbreve",
+          "analytics": "Trafik- og konverteringsanalyse",
+          "googleAds": "Google Ads-kampagnestyring",
+          "metaAds": "Meta Ads og social administration"
+        }
+      },
+      "ecommerce": {
+        "name": "E-handelsdrift",
+        "tagline": "Driv din butik mens du sover",
+        "description": "Produktstyring, prisintelligens, lagersporing, anmeldelsesstyring og vækstmarketing for onlinebutikker.",
+        "roles": {
+          "cleo": "Produktopret— opretter og opdaterer produktbeskrivelser, billeder og metadata",
+          "onyx": "Prisovervåger — sporer konkurrentpriser og markerer muligheder for justeringer",
+          "luna": "Lagersporer — overvåger lagerniveauer og advarer om lavt lager",
+          "sage": "Anmeldelsesmanager — besvarer kundeanmeldelser og samler stemning",
+          "dash": "Annoncekampagneoptimerer — administrerer produktannoncer og shopping-kampagner",
+          "flux": "E-mailmarkedsfører — sender forladt-kurv, promo og efter-køb-sekvenser",
+          "wren": "Analyserapportør — sporer omsætning, konverteringsrater og vækstmålinger"
+        },
+        "credentials": {
+          "shopify": "Butiksstyring og produktlister",
+          "amazon": "Amazon markedspladsadministration",
+          "googleAds": "Shopping-annoncer og kampagner",
+          "mailchimp": "Kunde-e-mailsekvenser",
+          "analytics": "Konverterings- og trafikanalyse"
+        }
+      },
+      "engineering": {
+        "name": "Ingeniørteam",
+        "tagline": "Automatiser de kedelige dele af engineering",
+        "description": "Automatiserede kodegennemgange, afhængighedsovervågning, dokumentation, test, implementeringsovervågning og hændelsesrespons.",
+        "roles": {
+          "rune": "Kodereviewer — gennemgår åbne PR'er, foreslår forbedringer, tjekker for sikkerhedsproblemer",
+          "koda": "Afhængighedsovervåger — sporer forældede pakker, sikkerhedsadvarsler og brudende ændringer",
+          "aria": "Dokumentationsskribent — holder API-dokumenter, README'er og changelogs opdateret",
+          "blaze": "Testovervåger — kører testsuiter, sporer ustabile tests, rapporterer dækningstendenser",
+          "frost": "Implementeringsovervåger — overvåger CI/CD-pipelines, advarer om fejl, sporer implementeringsfrekvens",
+          "neon": "Oppetid og logovervåger — overvåger tjenester, scanner logge for fejl, opretter hændelsesrapporter"
+        },
+        "credentials": {
+          "github": "Repository-adgang, PR-gennemgange, issues",
+          "vercel": "Implementeringsovervågning (eller din CI/CD)",
+          "sentry": "Fejlsporing og hændelsesadvarsler",
+          "npm": "Pakkeregister for afhængighedstjek"
+        }
+      },
+      "fullBusiness": {
+        "name": "Fuld forretningsdrift",
+        "tagline": "En hel virksomhed, fuldt automatiseret",
+        "description": "Salg, marketing, support og administration — fire afdelinger der arbejder sammen på tværs af tre maskiner med delt intelligens.",
+        "roles": {
+          "atlas": "Leadgenerator — finder og kvalificerer potentielle kunder fra onlinekilder",
+          "dash": "CRM-manager — opdaterer aftaler, sporer pipeline og sender opfølgningssekvenser",
+          "scout": "Tilbudsskribent — udarbejder salgstilbud og pitch decks fra skabeloner",
+          "nova": "Indholdsmarkedsfører — skriver blogindlæg, casestudier og marketingtekster",
+          "echo": "Social media-manager — poster indhold og engagerer med publikum",
+          "pixel": "E-mailkampagnemanager — kører drypkampagner og nyhedsbrevsekvenser",
+          "sage": "Supportleder — håndterer kundeforespørgsler og løser problemer",
+          "iris": "Vidensmanager — vedligeholder hjælpedokumenter, FAQ og intern wiki",
+          "milo": "Dataanalytiker — sammenstæller tværafdelingsrapporter og KPI-dashboards",
+          "wren": "Markedsforsker — sporer branchetendenser og konkurrenceefterretning",
+          "quinn": "Driftskoordinator — kører ugentlige opsummeringer og tværteam-synkroniseringer"
+        },
+        "credentials": {
+          "gmail": "E-mailkommunikation og support",
+          "hubspot": "CRM og salgspipeline (eller din CRM)",
+          "linkedin": "Leadgenerering og professionelt netværk",
+          "mailchimp": "E-mailmarketingkampagner",
+          "notion": "Intern wiki og dokumentation",
+          "analytics": "Webanalyse og rapportering",
+          "twitter": "Tilstedeværelse på sociale medier",
+          "zendesk": "Kundesupportbilletter"
+        }
+      },
+      "growth": {
+        "name": "Vækst og erhvervelse",
+        "tagline": "Aggressiv vækst på fuld autopilot",
+        "description": "Udgående prospektering, indgående marketing, konverteringsoptimering og analyse — en dedikeret vækstmotor på tværs af tre maskiner.",
+        "roles": {
+          "blaze": "Udgående prospektør — finder beslutningstagere, undersøger virksomheder, opbygger leadlister",
+          "flux": "E-mail-outreach — sender personaliserede kolde e-mails, styrer opfølgningssekvenser",
+          "orion": "LinkedIn-outreach — forbinder med prospekter og sender personaliserede beskeder",
+          "coral": "Indholdsproducent — producerer SEO-indhold, landingssidetekster og leadmagneter",
+          "taro": "Landingssideoptimerer — overvåger konverteringsrater, foreslår og tester forbedringer",
+          "vale": "Annoncekampagnemanager — styrer Google og Meta-annoncekampagner fra start til slut",
+          "ember": "Leadscorer — kvalificerer indgående leads og dirigerer til passende opfølgning",
+          "haze": "Tragtanalytiker — sporer konverteringsmålinger på hvert trin, identificerer flaskehalse",
+          "dune": "Konkurrenceefterretning — overvåger konkurrentkampagner, priser og positioneringsændringer",
+          "kit": "Vækstrapportør — sammenstæller daglige/ugentlige vækstmålinger og eksperimentresultater"
+        },
+        "credentials": {
+          "linkedin": "Prospektering og outreach",
+          "gmail": "Kolde e-mails og opfølgningssekvenser",
+          "hubspot": "Leadstyring og CRM",
+          "googleAds": "Betalte søgekampagner",
+          "metaAds": "Meta-annoncering",
+          "analytics": "Tragt- og konverteringsanalyse",
+          "ahrefs": "SEO-research og konkurrentanalyse"
+        }
+      },
+      "saas": {
+        "name": "SaaS-drift",
+        "tagline": "Kør din SaaS som en velsmurt maskine",
+        "description": "Kundesucces, produktanalyse, churn-forebyggelse, funktionssporing og automatiseret rapportering for SaaS-virksomheder.",
+        "roles": {
+          "luna": "Kundesuccesovervåger — sporer brugerengagement, identificerer risikofyldte konti",
+          "sage": "Onboarding-assistent — guider nye brugere gennem opsætning, overvåger aktiveringsrater",
+          "ivy": "Churn-forebygger — rækker ud til frafaldende brugere med reaktiveringskampagner",
+          "rune": "Funktionsønskesporer — samler brugerfeedback og funktionsønsker fra alle kanaler",
+          "koda": "Produktanalyse — sporer funktionsadoption, brugerrejser og engagementmålinger",
+          "neon": "Fejl- og problemovervåger — overvåger fejllogge, brugerrapporter og statussidehændelser",
+          "aria": "Changelog-skribent — dokumenterer udgivelser, opdaterer vidensbase og hjælpecenter",
+          "frost": "Omsætningsanalytiker — sporer MRR, churn rate, LTV og ekspansionsomsætning",
+          "zara": "Konkurrentsporer — overvåger konkurrentfunktioner, priser og markedspositionering"
+        },
+        "credentials": {
+          "stripe": "Abonnements- og omsætningsdata",
+          "intercom": "Kundemeddelelser og support (eller dit værktøj)",
+          "mixpanel": "Produktanalyse og brugersporing",
+          "gmail": "Kundekommunikation",
+          "notion": "Vidensbase og changelog",
+          "sentry": "Fejlovervågning og fejlsporing",
+          "github": "Problemsporing og funktionsønsker"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "op til 3",
+        "price": "$19/md"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "op til 10",
+        "price": "$50/md"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "op til 50",
+        "price": "$100/md"
+      }
+    },
+    "frequencies": {
+      "daily": "dagligt",
+      "weekly": "ugentligt",
+      "every_30_minutes": "hvert 30. minut",
+      "every_6_hours": "hver 6. time",
+      "every_12_hours": "hver 12. time"
+    },
+    "teamsTab": "Teams"
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "Konfigurer grundlæggende computerindstillinger",
+    "displayName": "Visningsnavn",
+    "defaultName": "Min computer",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "Denne adgangskode er påkrævet for at oprette forbindelse til computeren"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "Fællesskab",
+    "title": "Se hvordan folk bruger det",
+    "subtitle": "Fra leadresearch til QA-test — se hvad fællesskabet automatiserer og bliv inspireret til dit næste workflow.",
+    "sessionCount": "{count} sessioner delt af fællesskabet",
+    "searchPlaceholder": "Søg efter opgave, værktøj eller resultat...",
+    "emptyTitle": "Ingen har delt endnu — vær den første",
+    "emptySubtitle": "Når brugere gør deres sessioner offentlige, vises de her",
+    "noResultsTitle": "Intet matcher den søgning",
+    "noResultsSubtitle": "Prøv andre søgeord",
+    "watchSession": "Se session",
+    "steps": "{count} trin",
+    "tryCoasty": "Prøv Coasty"
+  }
+}

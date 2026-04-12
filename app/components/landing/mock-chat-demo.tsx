@@ -232,7 +232,7 @@ export function MockChatDemo() {
                     <DropdownMenuLabel className={cn(
                       "font-medium",
                       isMobile ? "text-[11px] py-1.5" : "text-xs py-2"
-                    )}>Virtual Machines</DropdownMenuLabel>
+                    )}>My Computers</DropdownMenuLabel>
                     <DropdownMenuSeparator className="bg-border/50" />
                     {dummyMachines.map((machine) => (
                       <DropdownMenuItem

@@ -12,11 +12,13 @@ import {
   listBrowserTabs, openBrowserTab, closeBrowserTab, switchBrowserTab,
 } from './browser-automation'
 import {
-  desktopClick, desktopDoubleClick, desktopType,
+  desktopClick, desktopClickWithModifiers, desktopDoubleClick, desktopType,
   desktopKeyPress, desktopKeyCombo, desktopScroll, desktopDrag,
 } from './desktop-automation'
-import { hideForScreenshot, showAfterScreenshot } from './window-manager'
+import { hideForDesktopAction, showAfterDesktopAction } from './window-manager'
+import { getActiveDisplay } from './display-manager'
 import { execFile } from 'child_process'
+import { BrowserWindow } from 'electron'
 
 type CommandHandler = (params: any) => Promise<any>
 
@@ -99,17 +101,65 @@ export class LocalExecutor {
       p.index = p.tab_index
     }
 
+    // Multi-display coordinate offset: the backend sends coordinates relative
+    // to the captured display, but desktop automation APIs use global screen
+    // coordinates that span all monitors. Offset by the active display's origin
+    // so clicks/drags/scrolls land on the correct screen.
+    //
+    // Defence-in-depth: ALWAYS coerce coordinate fields to Number, even when
+    // offset is (0, 0). This prevents non-numeric strings (e.g. shell injection
+    // payloads) from reaching desktop-automation functions. The automation layer
+    // also validates with validateInt(), but early coercion here ensures NaN
+    // propagates rather than a raw string.
+    const COORD_COMMANDS = new Set(['click', 'click_with_modifiers', 'double_click', 'scroll', 'drag'])
+    if (COORD_COMMANDS.has(command)) {
+      // Unconditional type coercion — turns injection strings into NaN
+      for (const field of ['x', 'y', 'x1', 'y1', 'x2', 'y2'] as const) {
+        if (p[field] !== undefined) p[field] = Number(p[field])
+      }
+      if (p.clicks !== undefined) p.clicks = Number(p.clicks)
+
+      // Apply display offset for multi-monitor setups
+      const { x: ox, y: oy } = getActiveDisplay().bounds
+      if (ox !== 0 || oy !== 0) {
+        if (p.x !== undefined) p.x += ox
+        if (p.y !== undefined) p.y += oy
+        if (p.x1 !== undefined) p.x1 += ox
+        if (p.y1 !== undefined) p.y1 += oy
+        if (p.x2 !== undefined) p.x2 += ox
+        if (p.y2 !== undefined) p.y2 += oy
+      }
+    }
+
     return p
   }
 
-  /** Wrap a handler so the overlay hides before the action and re-shows after. */
+  /**
+   * Wrap a handler so the overlay becomes invisible and click-through before
+   * the action, then fades back in after. Uses opacity + setIgnoreMouseEvents
+   * instead of win.hide()/show() for a seamless, glitch-free experience.
+   */
   private withOverlayHidden(handler: CommandHandler): CommandHandler {
     return async (params) => {
-      await hideForScreenshot()
+      await hideForDesktopAction()
       try {
-        return await handler(params)
+        const result = await handler(params)
+
+        // If a desktop action was denied due to missing macOS permissions,
+        // notify the renderer so it can show an in-app prompt to the user.
+        if (result?.permissionDenied) {
+          const win = BrowserWindow.getAllWindows()[0]
+          if (win && !win.isDestroyed()) {
+            win.webContents.send('permission:denied', {
+              type: result.permissionType,
+              message: result.error,
+            })
+          }
+        }
+
+        return result
       } finally {
-        showAfterScreenshot()
+        showAfterDesktopAction()
       }
     }
   }
@@ -122,6 +172,7 @@ export class LocalExecutor {
 
     // Desktop mouse — hide overlay so clicks don't hit it
     this.handlers.set('click', this.withOverlayHidden((p) => desktopClick(p)))
+    this.handlers.set('click_with_modifiers', this.withOverlayHidden((p) => desktopClickWithModifiers(p)))
     this.handlers.set('double_click', this.withOverlayHidden((p) => desktopDoubleClick(p)))
 
     // Desktop keyboard — hide overlay so it can't steal focus

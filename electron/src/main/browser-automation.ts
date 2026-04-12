@@ -405,8 +405,12 @@ export async function executeBrowser(params: { script?: string; code?: string })
       return { success: false, error: 'No script/code provided' }
     }
 
-    // Wrap in an async IIFE so the script can use await
-    const result = await page.evaluate(`(async () => { ${script} })()`)
+    // Pass script as a serialized argument (not string concatenation) to prevent
+    // IIFE breakout injection. AsyncFunction constructor supports await in the body.
+    const result = await page.evaluate(async (code: string) => {
+      const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor
+      return await new AsyncFunction(code)()
+    }, script)
 
     return {
       success: true,

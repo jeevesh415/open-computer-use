@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "התחל בחינם",
+    "bookDemo": "הזמן הדגמה",
+    "tryCoastyFree": "נסה את Coasty בחינם",
+    "learnMore": "למד עוד",
+    "watchSession": "צפה בהפעלה",
+    "compareAllPlans": "השווה את כל התוכניות והתכונות",
+    "allRightsReserved": "כל הזכויות שמורות.",
+    "privacy": "פרטיות",
+    "terms": "תנאים",
+    "recommended": "מומלץ",
+    "month": "חודש",
+    "creditsPerMonth": "{count} קרדיטים/חודש",
+    "agentsInParallel": "{count} סוכנים במקביל"
+  },
+  "header": {
+    "useCases": "שימושים",
+    "blog": "בלוג",
+    "agentSwarms": "נחילי סוכנים",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "השוואה",
+    "demos": "הדגמות",
+    "pricing": "תמחור",
+    "download": "הורדה",
+    "signIn": "התחבר",
+    "getStarted": "התחל",
+    "useCaseItems": {
+      "competitorIntel": "מודיעין תחרותי",
+      "qaBugReports": "דוחות באגים QA",
+      "seoGapAnalysis": "ניתוח פערי SEO",
+      "dataExtraction": "חילוץ נתונים",
+      "leadGeneration": "יצירת לידים",
+      "siteAudit": "ביקורת אתר",
+      "adIntelligence": "מודיעין פרסומי",
+      "emailOutreach": "אימייל outreach",
+      "designReview": "סקירת עיצוב",
+      "priceMonitoring": "ניטור מחירים",
+      "marketResearch": "מחקר שוק",
+      "emailCampaigns": "קמפיינים באימייל"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} פרופילי מתחרים סופקו",
+      "qaBugReports": "{stat} זרימות משתמש נבדקו להרצה",
+      "seoGapAnalysis": "{stat} פערי מילות מפתח זוהו",
+      "dataExtraction": "{stat} שורות חולצו להרצה",
+      "leadGeneration": "{stat} לידים מוסמכים להרצה",
+      "siteAudit": "{stat} דפים נבדקו להרצה",
+      "adIntelligence": "{stat} קריאייטיבים פרסומיים נלכדו",
+      "emailOutreach": "{stat} אימיילים מותאמים אישית נוסחו",
+      "designReview": "{stat} breakpoints נבדקו לדף",
+      "priceMonitoring": "{stat} מק\"טים הושוו להרצה",
+      "marketResearch": "{stat} נקודות נתונים נאספו",
+      "emailCampaigns": "{stat} אימיילים מותאמים אישית לקמפיין"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "כל הפוסטים",
+      "computerUse": "שימוש במחשב",
+      "compare": "השוואה",
+      "dataEntry": "הזנת נתונים",
+      "webScraping": "Web scraping",
+      "jobApplications": "מועמדויות לעבודה",
+      "demosResults": "הדגמות ותוצאות",
+      "guide": "מדריך"
+    },
+    "blogStats": {
+      "allPosts": "{stat} מאמרים מתפרסמים שבועית",
+      "computerUse": "{stat} ציון benchmark של OSWorld",
+      "compare": "{stat} מתחרים נותחו",
+      "dataEntry": "{stat} מהיר יותר מעבודה ידנית",
+      "webScraping": "{stat} דפים להפעלה",
+      "jobApplications": "{stat} מועמדויות להפעלה",
+      "demosResults": "{stat} מקרי בוחן אמיתיים",
+      "guide": "{stat} הדרכות לשימושים"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "מפעילי מחשב אוטונומיים",
+    "useCases": {
+      "computerAgent": {
+        "label": "סוכן מחשב",
+        "headline": "אוטומט כל משימת דפדפן",
+        "outcome": "סוכן AI ששולט במחשב אמיתי — גולש, לוחץ, מקליד ומספק עבודה מוגמרת. ללא צורך בהגדרה."
+      },
+      "competitorIntel": {
+        "label": "מודיעין תחרותי",
+        "headline": "עקוב אחר כל מתחרה",
+        "outcome": "פרופילי מתחרים מלאים עם תמחור, תכונות ופערי מיצוב — מיוצאים כדוח מוכן לשיתוף."
+      },
+      "qaTesting": {
+        "label": "בדיקות QA",
+        "headline": "מצא באגים לפני המשתמשים",
+        "outcome": "זרימות משתמש קריטיות נבדקו end-to-end, כל באג צולם עם שלבי שחזור ודירוג חומרה."
+      },
+      "seoAnalysis": {
+        "label": "ניתוח SEO",
+        "headline": "חשוף פערי מילות מפתח",
+        "outcome": "פערי מילות מפתח זוהו, תקצירי תוכן נוסחו, מקורות backlinks של מתחרים מופו — אסטרטגיית SEO מעשית."
+      },
+      "dataExtraction": {
+        "label": "חילוץ נתונים",
+        "headline": "סרוק ומבנה כל אתר",
+        "outcome": "נתונים מובנים שנסרקו, נוקו, בוטלו כפילויות ויוצאו כ-CSV — מכל אתר, בכל פורמט."
+      },
+      "leadGeneration": {
+        "label": "יצירת לידים",
+        "headline": "מלא את צינור המכירות שלך",
+        "outcome": "מקבלי החלטות מוסמכים התואמים ל-ICP שלך עם תפקידים מאומתים, חברות ופתיחות outreach מותאמות אישית."
+      },
+      "siteAudit": {
+        "label": "ביקורת אתר",
+        "headline": "בדוק כל דף בקנה מידה",
+        "outcome": "דפים נסרקו, Core Web Vitals דורגו, קישורים שבורים נמצאו, בעיות נגישות דורגו לפי עדיפות תיקון."
+      },
+      "emailOutreach": {
+        "label": "אימייל outreach",
+        "headline": "שלח outreach מותאם אישית",
+        "outcome": "אימיילים מותאמים אישית המתייחסים לחברה, תפקיד ונקודות כאב של כל prospect — מוכנים לשליחה."
+      },
+      "marketResearch": {
+        "label": "מחקר שוק",
+        "headline": "אמת את השוק שלך במהירות",
+        "outcome": "TAM חושב, שחקנים מרכזיים פרופלו, מגמות צמיחה מופו — ממעשרות נקודות נתונים."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "שיווק",
+        "task": "שווק את המוצר שלך ב-Reddit באופן אוטונומי"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "מצא prospects ושלח אימיילים מותאמים אישית"
+      },
+      "qaTesting": {
+        "label": "בדיקות QA",
+        "task": "בדוק כל זרימת checkout ודווח על באגים"
+      },
+      "jobApplication": {
+        "label": "מועמדות לעבודה",
+        "task": "מצא תפקידים, התאם קורות חיים והגש מועמדות"
+      },
+      "formFilling": {
+        "label": "מילוי טפסים",
+        "task": "מלא את הבקשה של YC S26 עבורך"
+      },
+      "socialMedia": {
+        "label": "מדיה חברתית",
+        "task": "פרסם ב-Hacker News והגב לתגובות"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "Benchmark של OSWorld",
+      "sublabel": "#1 computer-use agent בעולם"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "כלים שהסוכן יכול להשתמש בהם",
+      "sublabel": "דפדפן, טרמינל, שולחן עבודה, קבצים"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "פועל לפי לוח זמנים",
+      "sublabel": "אוטומט כל משימה חוזרת"
+    },
+    "setup": {
+      "value": "0",
+      "label": "הגדרה נדרשת",
+      "sublabel": "ללא APIs, ללא אינטגרציות, ללא קוד"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "למה Coasty",
+    "title": "לא צ'אטבוט. לא סקריפט RPA.",
+    "worksLikeHuman": {
+      "title": "עובד כמו בן אדם",
+      "description": "רואה, לוחץ, מקליד, מנווט — בדיוק כמוך"
+    },
+    "noScripts": {
+      "title": "ללא סקריפטים או הגדרה",
+      "description": "עברית פשוטה פנימה, תוצאות החוצה"
+    },
+    "handlesUnexpected": {
+      "title": "מתמודד עם הבלתי צפוי",
+      "description": "מסתגל ל-CAPTCHAs, חלונות קופצים, שינויי תצוגה"
+    },
+    "runsInIsolation": {
+      "title": "פועל בבידוד",
+      "description": "VM מבודד לכל הפעלה — שום דבר לא דולף"
+    }
+  },
+  "howItWorks": {
+    "title": "איך זה עובד",
+    "step1": {
+      "title": "תאר את המשימה שלך",
+      "description": "עברית פשוטה. זהו.",
+      "placeholder": "חקור 100 לידים ב-LinkedIn..."
+    },
+    "step2": {
+      "title": "צפה בסוכן עובד",
+      "description": "פותח דפדפן, לוחץ, מקליד, מנווט"
+    },
+    "step3": {
+      "title": "משימה הושלמה",
+      "description": "כל פעולה מתועדת עם צילומי מסך",
+      "results": {
+        "taskCompleted": "משימה הושלמה",
+        "leadsFound": "12 לידים נמצאו",
+        "addedToCrm": "נוספו ל-CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "מדורג #1 בעולם",
+    "subtitle": "82% ב-OSWorld — ה-benchmark הקשה ביותר לסוכני AI שמשתמשים במחשבים אמיתיים",
+    "agenticFramework": "מסגרת סוכנית",
+    "foundationModel": "מודל בסיס"
+  },
+  "comparison": {
+    "title": "למה לאוטומט עם Coasty?",
+    "subtitle": "אותן משימות שלוקחות לצוות שעות — Coasty משלים בדקות, מסביב לשעון.",
+    "manual": {
+      "title": "לעשות ידנית",
+      "subtitle": "אתה או הצוות שלך, ביד"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 computer-use agent"
+    },
+    "rows": {
+      "timePerTask": "זמן למשימה",
+      "availability": "זמינות",
+      "setupTime": "זמן הגדרה",
+      "errorRate": "שיעור שגיאות",
+      "scaling": "סקלינג",
+      "auditTrail": "מעקב ביקורת"
+    },
+    "manualValues": {
+      "timePerTask": "שעות עד ימים",
+      "availability": "שעות עסקים בלבד",
+      "setupTime": "ללמוד כלים, לכתוב SOPs",
+      "errorRate": "טעויות אנושיות",
+      "scaling": "יותר עבודה = יותר זמן",
+      "auditTrail": "אין"
+    },
+    "coastyValues": {
+      "timePerTask": "דקות",
+      "availability": "24/7, כל יום",
+      "setupTime": "60 שניות",
+      "errorRate": "מתקן עצמית",
+      "scaling": "הרץ משימות ללא הגבלה במקביל",
+      "auditTrail": "כל לחיצה מתועדת + צילומי מסך"
+    },
+    "bottomBar": {
+      "automateTasksThat": "אוטומט משימות שלוקחות",
+      "hoursManually": "שעות ידנית",
+      "startingAt": "החל מ"
+    }
+  },
+  "demo": {
+    "title": "צפה בסוכן בפעולה",
+    "subtitle": "משימות אמיתיות. דפדפנים אמיתיים. כל לחיצה מוקלטת.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty ב-Reddit",
+        "description": "צפה ב-Coasty מנהל באופן אוטונומי קמפיין שיווקי — חוקר מתחרים, מנתח מגמות ובונה מצגת אסטרטגיה.",
+        "tag": "שיווק"
+      },
+      "prospects": {
+        "title": "מציאת לקוחות פוטנציאליים",
+        "description": "Coasty מוצא וחוקר לקוחות פוטנציאליים, אוסף פרטים מרכזיים ליצירת outreach מותאם אישית.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "בדיקות QA עצמיות",
+        "description": "Coasty מריץ אבטחת איכות על המוצר שלו — מנווט בזרימות, תופס באגים ומדווח על בעיות באופן אוטונומי.",
+        "tag": "בדיקות QA"
+      },
+      "email": {
+        "title": "שליחת אימייל בשמך",
+        "description": "מחיבור ועד שליחה — סוכן AI מנסח ומספק אימייל לגמרי בעצמו.",
+        "tag": "תקשורת"
+      },
+      "job": {
+        "title": "הגשת מועמדות לעבודה",
+        "description": "Coasty מוצא תפקיד מתאים, מתאים את קורות החיים שלך ומגיש את המועמדות — הכל בעצמו.",
+        "tag": "מועמדות לעבודה"
+      },
+      "hackernews": {
+        "title": "פרסום ב-Hacker News",
+        "description": "Coasty יוצר ומפרסם פוסט בלוג ב-Hacker News — כותב את התוכן ומגיש אותו באופן אוטונומי.",
+        "tag": "מדיה חברתית"
+      }
+    }
+  },
+  "features": {
+    "title": "נבנה למשימות מחשב אמיתיות",
+    "selfCorrecting": {
+      "title": "מתקן עצמית",
+      "description": "מזהה שגיאות, מנסה נתיבים חלופיים"
+    },
+    "auditTrail": {
+      "title": "מעקב ביקורת מלא",
+      "description": "כל לחיצה מתועדת עם צילומי מסך"
+    },
+    "schedule": {
+      "title": "תזמון 24/7",
+      "description": "פועל על cron — שעתי, יומי, שבועי"
+    },
+    "sandboxed": {
+      "title": "מבודד ומאובטח",
+      "description": "VM מבודד להפעלה, מושמד לאחר מכן"
+    },
+    "benchmark": {
+      "title": "#1 ב-OSWorld",
+      "description": "82% — הציון הגבוה ביותר שנרשם אי פעם"
+    },
+    "swarms": {
+      "title": "נחילי סוכנים",
+      "description": "חלק משימות בין מכונות במקביל"
+    }
+  },
+  "pricing": {
+    "title": "התחל בחינם, תגדיל כשתהיה מוכן",
+    "subtitle": "ללא כרטיס אשראי. סוכן ה-AI שלך מוכן ב-60 שניות.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "נסה את סוכן ה-computer-use מספר 1",
+        "cta": "התחל בחינם"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "אוטומציה יומית קלה",
+        "cta": "קבל Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "אוטומט משימות כל יום",
+        "cta": "קבל Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "הגדל תהליכי עבודה מורכבים",
+        "cta": "בחר Plus",
+        "badge": "הכי פופולרי"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "אוטומציה כבדה ללא הגבלה",
+        "cta": "קבל Pro"
+      }
+    },
+    "vmTemporary": "VM זמני 1 (שעתיים)",
+    "vmDeletedAfterInactivity": "VM 1 (נמחק לאחר חוסר פעילות)",
+    "vmAlwaysOn": "{count} VM פעיל תמיד",
+    "vmAlwaysOnPlural": "{count} VMs פעילים תמיד",
+    "bargain": {
+      "title": "אותה עבודה עולה {oldPrice} בעבודה ידנית",
+      "description": "עוזר וירטואלי עולה $2,000–$4,000/חודש. עובד חלקי עולה יותר. Coasty עושה את אותה עבודה 24/7 החל מ-$0 — עם עקביות מושלמת, מעקב ביקורת מלא ואפס זמן הכשרה."
+    }
+  },
+  "faq": {
+    "title": "שאלות נפוצות",
+    "subtitle": "כל מה שאתה צריך לדעת לפני שמתחילים",
+    "items": {
+      "whatIsCoasty": {
+        "question": "מה זה Coasty?",
+        "answer": "Coasty הוא סוכן ה-computer-use AI הטוב בעולם. אתה מתאר משימה — חקור לידים, בדוק אתר, מלא טפסים, פרסם ברשתות חברתיות — ו-Coasty פותח דפדפן אמיתי, מנווט באפליקציות, לוחץ על כפתורים, מקליד טקסט ומשלים את המשימה מתחילה ועד סוף. ללא APIs, ללא אינטגרציות, ללא קוד."
+      },
+      "howDifferent": {
+        "question": "איך זה שונה מ-ChatGPT או כלי AI אחרים?",
+        "answer": "ChatGPT מייצר טקסט. Coasty משתמש במחשב. הוא לא אומר לך מה לעשות — הוא פותח דפדפן, מנווט לאתר, לוחץ על הכפתורים, ממלא את הטפסים ומספק את העבודה המוגמרת. זה ההבדל בין לקבל הוראות לבין שמישהו עושה את המשימה בשבילך."
+      },
+      "whatTasks": {
+        "question": "אילו משימות Coasty יכול לאוטומט?",
+        "answer": "כל משימה שאתה יכול לעשות על מחשב. מחקר ברשת, יצירת לידים, הזנת נתונים, מילוי טפסים, בדיקות QA, פרסום ברשתות חברתיות, אימייל outreach, עיבוד חשבוניות, ניתוח תחרותי, גיוס — אם זה כולל דפדפן או אפליקציית שולחן עבודה, Coasty יכול לעשות את זה."
+      },
+      "whatAreCredits": {
+        "question": "מה הם קרדיטים ואיך משתמשים בהם?",
+        "answer": "קרדיטים נצרכים כשהסוכן עובד על משימות. משימות ארוכות ומורכבות יותר צורכות יותר קרדיטים. תוכניות בתשלום כוללות קרדיטים חודשיים, ואתה יכול גם לרכוש חבילות קרדיטים נוספות בכל עת."
+      },
+      "localComputer": {
+        "question": "האם Coasty יכול לרוץ על המחשב שלי?",
+        "answer": "כן. אפליקציית שולחן העבודה שלנו רצה כשכבת-על קלה על המחשב שלך, שולטת בדפדפן המקומי ובאפליקציות שלך ישירות. לחלופין, משימות רצות על מכונות ענן מבודדות — הבחירה שלך."
+      },
+      "dataSafe": {
+        "question": "האם הנתונים שלי בטוחים?",
+        "answer": "כל משימה רצה בסביבת sandbox מבודדת. שום דבר לא דולף בין הפעלות. ההרשאות שלך נשארות פרטיות, וכל פעולה מתועדת עם צילומי מסך במעקב ביקורת מלא שאתה יכול לסקור בכל עת."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "שימוש במחשב מונע AI.",
+    "tagline2": "אוטומט כל תהליך עבודה עם סוכנים חכמים.",
+    "columns": {
+      "product": "מוצר",
+      "resources": "משאבים",
+      "company": "חברה",
+      "legal": "משפטי"
+    },
+    "links": {
+      "computerUse": "שימוש במחשב",
+      "guide": "מדריך",
+      "download": "הורדה",
+      "pricing": "תמחור",
+      "agentSwarms": "נחילי סוכנים",
+      "status": "סטטוס",
+      "blog": "בלוג",
+      "useCases": "שימושים",
+      "demos": "הדגמות",
+      "compare": "השוואה",
+      "talkToCofounders": "דבר עם המייסדים והדגמה",
+      "contact": "צור קשר",
+      "privacy": "פרטיות",
+      "terms": "תנאים"
+    }
+  },
+  "languageSwitcher": {
+    "label": "שפה"
+  },
+  "auth": {
+    "brandHeading": "אתה קובע את המטרה.",
+    "brandSubheading": "אנחנו מטפלים בשאר.",
+    "mobileHeading": "אתה קובע את המטרה. אנחנו מטפלים בשאר.",
+    "mobileSubheading": "סוכני AI שגולשים, לוחצים ועובדים כמו חבר צוות אמיתי.",
+    "flowSteps": {
+      "step1": {
+        "label": "אתה מתאר את המשימה",
+        "sub": "\"חקור את 5 המתחרים המובילים שלנו\""
+      },
+      "step2": {
+        "label": "הסוכן משתלט",
+        "sub": "גולש, לוחץ, מקליד באופן אוטונומי"
+      },
+      "step3": {
+        "label": "העבודה הושלמה",
+        "sub": "גיליון אלקטרוני עם 5 פרופילי מתחרים מלאים"
+      }
+    },
+    "complete": "הושלם",
+    "doneIn": "הסתיים ב-8 דקות",
+    "demoCaption": "הפעילו סוכני AI על המחשב שלכם או שלטו בו מהטלפון, מכל מקום.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "המפעיל שלך ממתין",
+      "signUp": "שים את תהליכי העבודה שלך על טייס אוטומטי",
+      "magicLink": "דלג על הסיסמה",
+      "forgotPassword": "בוא נחזיר אותך פנימה"
+    },
+    "viewDescriptions": {
+      "signIn": "המשך בדיוק מאיפה שהפסקת — הסוכנים שלך זוכרים",
+      "signUp": "הפעל את סוכן ה-AI הראשון שלך תוך פחות מדקה",
+      "magicLink": "לחיצה אחת מתיבת הדואר שלך ואתה בפנים",
+      "forgotPassword": "נשלח לך קישור איפוס לאימייל שלך"
+    },
+    "google": {
+      "connecting": "מתחבר...",
+      "continueWithGoogle": "המשך עם Google"
+    },
+    "or": "או",
+    "email": "אימייל",
+    "emailPlaceholder": "you@example.com",
+    "password": "סיסמה",
+    "passwordPlaceholder": "הסיסמה שלך",
+    "confirmPassword": "אשר סיסמה",
+    "confirmPasswordPlaceholder": "אשר את הסיסמה שלך",
+    "minChars": "מינימום 6 תווים",
+    "signingIn": "מתחבר...",
+    "signIn": "התחבר",
+    "creatingAccount": "יוצר חשבון...",
+    "createAccount": "צור חשבון",
+    "sending": "שולח...",
+    "sendMagicLink": "שלח קישור קסם",
+    "sendResetLink": "שלח קישור איפוס",
+    "forgotPassword": "שכחת סיסמה?",
+    "useMagicLink": "השתמש בקישור קסם",
+    "dontHaveAccount": "אין לך חשבון?",
+    "signUp": "הרשם",
+    "alreadyHaveAccount": "כבר יש לך חשבון?",
+    "backToSignIn": "חזור להתחברות",
+    "termsAgreement": "בהמשך, אתה מסכים ל",
+    "terms": "תנאים",
+    "and": "ו",
+    "privacyPolicy": "מדיניות פרטיות",
+    "errors": {
+      "fillAllFields": "אנא מלא את כל השדות",
+      "passwordMinLength": "הסיסמה חייבת להכיל לפחות 6 תווים",
+      "passwordsDoNotMatch": "הסיסמאות אינן תואמות",
+      "supabaseNotConfigured": "Supabase לא מוגדר",
+      "unexpectedError": "אירעה שגיאה בלתי צפויה. אנא נסה שוב.",
+      "confirmEmail": "אנא אשר את האימייל שלך לפני ההתחברות. בדוק את תיבת הדואר.",
+      "invalidCredentials": "אימייל או סיסמה לא תקינים.",
+      "signInFailed": "ההתחברות נכשלה. אנא נסה שוב.",
+      "invalidEmail": "כתובת אימייל לא תקינה.",
+      "emailAlreadyExists": "חשבון עם אימייל זה כבר קיים. נסה להתחבר במקום.",
+      "signUpFailed": "ההרשמה נכשלה. אנא נסה שוב.",
+      "enterEmail": "אנא הזן את האימייל שלך",
+      "noAccountFound": "לא נמצא חשבון עם אימייל זה. אנא הירשם קודם.",
+      "magicLinkFailed": "שליחת קישור הקסם נכשלה. אנא נסה שוב.",
+      "resetFailed": "שליחת אימייל האיפוס נכשלה. אנא נסה שוב.",
+      "updateFailed": "עדכון הסיסמה נכשל. אנא נסה שוב."
+    },
+    "success": {
+      "checkEmailConfirm": "בדוק את האימייל שלך לאישור החשבון לפני ההתחברות.",
+      "checkEmailMagicLink": "בדוק את האימייל שלך לקישור הקסם להתחברות.",
+      "checkEmailReset": "בדוק את האימייל שלך לקישור איפוס הסיסמה.",
+      "passwordUpdated": "הסיסמה עודכנה בהצלחה. מפנה להתחברות..."
+    },
+    "resetPassword": {
+      "title": "אפס את הסיסמה שלך",
+      "subtitle": "הזן את הסיסמה החדשה שלך למטה.",
+      "newPassword": "סיסמה חדשה",
+      "confirmNewPassword": "אשר סיסמה חדשה",
+      "confirmPlaceholder": "אשר את הסיסמה החדשה שלך",
+      "updating": "מעדכן...",
+      "updatePassword": "עדכן סיסמה"
+    },
+    "errorPage": {
+      "title": "שגיאת אימות",
+      "defaultMessage": "אירעה שגיאה במהלך האימות.",
+      "tryAgain": "נסה שוב",
+      "backToChat": "חזור לצ'אט",
+      "needHelp": "צריך עזרה?",
+      "contactSupport": "צור קשר עם התמיכה"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "דלג לעת עתה",
+    "back": "חזור",
+    "continue": "המשך",
+    "getStarted": "התחל",
+    "settingUp": "מגדיר...",
+    "welcome": {
+      "titleReturning": "ברוך שובך{name}!",
+      "titleNew": "ברוכים הבאים ל-Coasty",
+      "descriptionReturning": "נשמח ללמוד עוד קצת עליך כדי לשפר את החוויה שלך",
+      "descriptionNew": "בוא נגדיר את החשבון שלך כדי שנוכל להתאים אישית את החוויה"
+    },
+    "nameLabel": "איך לקרוא לך?",
+    "namePlaceholder": "השם שלך",
+    "companyLabel": "חברה",
+    "optional": "(אופציונלי)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "אתר אינטרנט",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "מה מתאר אותך הכי טוב?",
+      "subtitle": "בחר את כל מה שמתאים — זה עוזר לנו להתאים את החוויה שלך"
+    },
+    "roles": {
+      "founder": "מייסד / מנכ\"ל",
+      "developer": "מפתח",
+      "marketer": "משווק",
+      "designer": "מעצב",
+      "product_manager": "מנהל מוצר",
+      "data_analyst": "נתונים / אנליטיקה",
+      "operations": "תפעול",
+      "other": "אחר"
+    },
+    "teamSizeLabel": "גודל הצוות",
+    "teamSizes": {
+      "solo": "רק אני",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "איך מצאת אותנו?",
+      "subtitle": "נשמח לדעת איפה שמעת על Coasty"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "חבר / עמית",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "אחר"
+    },
+    "useCaseStep": {
+      "title": "מה תאטמט ראשון?",
+      "subtitle": "בחר את כל מה שמתאים — תוכל לחקור הכל מאוחר יותר"
+    },
+    "useCases": {
+      "web_scraping": "גריפת אתרים ומחקר",
+      "browser_automation": "אוטומציית דפדפן",
+      "data_entry": "הזנת נתונים וטפסים",
+      "email_outreach": "אימייל ופנייה",
+      "testing": "QA ובדיקות",
+      "ecommerce": "משימות מסחר אלקטרוני",
+      "social_media": "ניהול רשתות חברתיות",
+      "general_automation": "אוטומציה כללית"
+    },
+    "showcase": {
+      "title": "כל מה שאתה צריך,",
+      "titleHighlight": "מובנה.",
+      "subtitle": "הנה מה ש-Coasty יכול לעשות בשבילך",
+      "noCode": {
+        "title": "ללא קוד",
+        "description": "פשוט תאר מה אתה רוצה בשפה רגילה"
+      },
+      "agentSwarms": {
+        "title": "נחילי סוכנים",
+        "description": "צי סוכנים מקבילי"
+      },
+      "desktopControl": {
+        "title": "שליטה בשולחן העבודה",
+        "description": "לוחץ, מקליד, מנווט"
+      },
+      "browserAutomation": {
+        "title": "אוטומציית דפדפן",
+        "description": "טפסים, לשוניות, גריפה — אוטומטית לחלוטין"
+      },
+      "computerVision": {
+        "title": "ראייה ממוחשבת",
+        "description": "רואה ומבין את המסך שלך בזמן אמת"
+      },
+      "workflows": {
+        "title": "תהליכי עבודה",
+        "description": "זרימות רב-שלביות"
+      },
+      "onDevice": {
+        "title": "על המכשיר",
+        "description": "רץ מקומית"
+      },
+      "autonomous": {
+        "title": "אוטונומי 24/7",
+        "description": "הגדר ושכח — רץ בזמן שאתה ישן"
+      }
+    },
+    "guideCallout": {
+      "title": "חדש כאן? יש לנו מדריך בשבילך",
+      "subtitle": "הפעל את סוכן ה-AI הראשון שלך תוך פחות מדקה"
+    }
+  },
+  "chatInput": {
+    "placeholder": "מה עובד ה-AI שלך צריך לעשות?",
+    "placeholderAlt": "ספר ל-AI שלך מה לעשות במחשב...",
+    "vmError": {
+      "title": "שגיאת מכונה וירטואלית",
+      "description": "המכונה הוירטואלית במצב שגיאה או נמחקת.",
+      "hint": "אנא בדוק את לשונית המכונות כדי לפתור את הבעיה, או בחר \"ללא מחשב נבחר\" לשימוש בחיפוש אינטרנט בלבד.",
+      "gotIt": "הבנתי"
+    },
+    "status": {
+      "creating": "יוצר {name}...",
+      "initiating": "מאתחל סוכן על {name}...",
+      "stopping": "עוצר {name}...",
+      "preparing": "מכין {name}..."
+    },
+    "swarm": {
+      "title": "מצב נחיל",
+      "pro": "PRO",
+      "upgradeLabel": "מצב נחיל — שדרג לפתיחה",
+      "feature1": "ביצוע מקבילי על מכונות זמניות",
+      "feature2": "כל מכונה רצה באופן אוטונומי",
+      "feature3": "3 פעמים ממגבלת המכונות של התוכנית שלך לנחיל",
+      "description": "הרץ פרומפט אחד על 3 פעמים ממגבלת המכונות שלך במקביל — כל אחת מתמודדת עם המשימה בנפרד.",
+      "enableLabel": "הפעל מצב נחיל",
+      "disableLabel": "השבת מצב נחיל",
+      "onTooltip": "מצב נחיל פעיל — הפרומפט שלך ירוץ על מספר מכונות במקביל",
+      "offTooltip": "הפעל מצב נחיל להרצת הפרומפט שלך על מספר מכונות בו-זמנית",
+      "decreaseMachines": "הפחת מספר מכונות",
+      "increaseMachines": "הגדל מספר מכונות",
+      "machineLimit": "עד {max} מכונות נחיל בתוכנית שלך. צריך יותר? צור קשר founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "מצב נחיל"
+    },
+    "desktop": {
+      "connectLabel": "התחבר לשולחן העבודה",
+      "screenLabel": "המסך של {name}",
+      "screenDefault": "שולחן עבודה",
+      "watchTooltip": "צפה בסוכן שלך עובד על מסך נפרד. רק אל תיגע בשום דבר או שהוא יתבייש!",
+      "watchLabel": "שולחן עבודה"
+    },
+    "buttons": {
+      "stop": "עצור",
+      "sendToSwarm": "שלח לנחיל",
+      "taskRunning": "משימה אחרת רצה — לחץ כדי לעצור אותה ולהריץ את שלך",
+      "selectComputer": "בחר מחשב לשליחת הודעות",
+      "waitCreating": "אנא המתן ליצירת ה-VM",
+      "waitStarting": "אנא המתן להפעלת ה-VM",
+      "waitAgent": "אנא המתן לאתחול הסוכן",
+      "vmStopping": "ה-VM נעצר",
+      "send": "שלח",
+      "switching": "מחליף...",
+      "overrideRun": "דרוס והרץ",
+      "stopLabel": "עצור משימה רצה והתחל את זו",
+      "sendLabel": "שלח הודעה"
+    },
+    "search": "חיפוש",
+    "upload": {
+      "label": "העלה קבצים ל-VM",
+      "heading": "העלה קבצים ל-VM",
+      "description": "הקבצים יישמרו בשולחן העבודה",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "שחרר קבצים כאן",
+      "dropDescription": "הקבצים יועלו לתיקיית שולחן העבודה של ה-VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "התחבר כדי לנסות עוד תכונות בחינם",
+      "description": "צור פרויקטים, הזמן חברי צוות ועוד.",
+      "connecting": "מתחבר...",
+      "continueWithGoogle": "המשך עם Google"
+    },
+    "removeFile": "הסר קובץ"
+  },
+  "chat": {
+    "greeting": "שלום",
+    "greetingAuth": "אני אטפל בעבודת המחשב. מה המשימה?",
+    "greetingUnauth": "AI שעובד על המחשב כדי שלא תצטרך. פשוט ספר מה צריך לעשות.",
+    "guide": "מדריך",
+    "saveLogins": "שמור כניסות למילוי אוטומטי",
+    "encryptedNote": "מוצפן, לעולם לא נראה על ידי AI",
+    "roleLabels": [
+      "עמית",
+      "עובד",
+      "חבר",
+      "עוזר",
+      "שותף",
+      "חבר צוות",
+      "משתף פעולה",
+      "מסייע"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "דוח מתחרים של {company}",
+        "warmLeads": "מצא 20 לידים עבור {company}",
+        "pitchDeck": "טיוטת מצגת {company}"
+      },
+      "developer": {
+        "findBugs": "מצא באגים ב-{company}",
+        "performance": "ביקורת ביצועים של {company}",
+        "apiDocs": "חלץ תיעוד API של {company}"
+      },
+      "marketer": {
+        "seoGap": "ניתוח פערי SEO של {company}",
+        "competitorAds": "רגל אחר פרסומות מתחרי {company}",
+        "trendingContent": "רעיונות טרנדיים עבור {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "סיכום ביקורות {company}",
+        "featureComparison": "השוואת תכונות {company}",
+        "competitorLaunches": "עקוב אחר השקות מתחרי {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "ייצא נתוני {company} ל-CSV",
+        "marketSizing": "גודל שוק {company}",
+        "benchmark": "השוואת {company} מול התעשייה"
+      },
+      "operations": {
+        "enterRecords": "הזן רשומות ל-{company}",
+        "cheapestVendor": "מצא ספקים עבור {company}",
+        "invoiceSummary": "סיכום חשבוניות {company}"
+      },
+      "designer": {
+        "designComparison": "{company} מול מתחרים בעיצוב",
+        "responsiveAudit": "ביקורת רספונסיבית של {company}",
+        "inspiration": "השראה לעיצוב עבור {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "חלץ נתוני אתר {company}",
+      "browser_automation": "ייצא דוחות {company}",
+      "data_entry": "הזן נתונים ל-{company}",
+      "email_outreach": "פנייה עבור {company}",
+      "testing": "בדיקת QA של {company}",
+      "ecommerce": "השוואת מחירים של {company}",
+      "social_media": "פרסם על {company}",
+      "general_automation": "אוטומציה של משימה ב-{company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "העתק טקסט",
+    "copied": "הועתק!",
+    "regenerate": "ייצר מחדש",
+    "feedback": {
+      "title": "משוב",
+      "prompts": [
+        "דרג את זה",
+        "משוב",
+        "איך היה?",
+        "מחשבות?",
+        "שתף משוב"
+      ],
+      "tooltip": "שתף את המשוב שלך"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "חיפוש חכם",
+      "description": "חיפוש מונע AI ברחבי האינטרנט"
+    },
+    "collaborate": {
+      "title": "שיתוף פעולה",
+      "description": "עבודה משותפת בזמן אמת"
+    },
+    "globalAccess": {
+      "title": "גישה גלובלית",
+      "description": "חיפוש ביותר מ-50 שפות"
+    },
+    "aiModels": {
+      "title": "מודלי AI",
+      "description": "ספקי AI מרובים"
+    },
+    "freeForever": {
+      "title": "חינם לנצח",
+      "description": "ללא עלויות נסתרות"
+    },
+    "privateSecure": {
+      "title": "פרטי ומאובטח",
+      "description": "הנתונים שלך נשארים שלך"
+    }
+  },
+  "sidebar": {
+    "newTask": "משימה חדשה",
+    "newTaskDescription": "התחל אוטומציית AI חדשה",
+    "activity": "פעילות",
+    "taskHistory": "היסטוריית משימות",
+    "taskHistoryDescription": "סקור משימות קודמות והמשך מאיפה שהפסקת",
+    "taskHistoryPopup": {
+      "title": "המשימות האחרונות שלך",
+      "description": "עיין והמשך שיחות קודמות. כל משימה נשמרת כדי שתוכל להמשיך בדיוק מאיפה שהפסקת."
+    },
+    "swarmRuns": "הרצות נחיל",
+    "swarmRunsDescription": "מעקב אחר תהליכי עבודה מקבילים רב-סוכניים",
+    "swarmRunsPopup": {
+      "title": "תהליכי עבודה רב-סוכניים",
+      "description": "הרץ משימות על מספר מכונות במקביל. כל סוכן עובד באופן עצמאי והתוצאות מתכנסות אוטומטית."
+    },
+    "guide": "מדריך",
+    "guideDescription": "למד איך להפיק את המרב מ-Coasty",
+    "guidePopup": {
+      "title": "מתחילים",
+      "description": "מדריכים שלב אחר שלב ושיטות עבודה מומלצות שיעזרו לך לבצע אוטומציה ביעילות."
+    },
+    "infrastructure": "תשתית",
+    "computer": "מחשב",
+    "computers": "מחשבים",
+    "active": "פעיל",
+    "view": "הצג",
+    "workforce": "לוחות זמנים",
+    "workforceDescription": "תזמון משימות ומפעילים אוטומטיים",
+    "workforcePopup": {
+      "title": "אוטומציה מתוזמנת",
+      "description": "הגדרת משימות חוזרות עם לוחות זמנים של cron ומפעילים בין סוכנים. לוחות הזמנים שלך פועלים בזמן שאתה ישן."
+    },
+    "credentials": "אישורים",
+    "credentialsDescription": "אחסן כניסות בצורה מאובטחת לגישת סוכנים",
+    "credentialsPopup": {
+      "title": "כספת אישורים מאובטחת",
+      "description": "אחסן כניסות ומפתחות API עם הצפנה. סוכנים ממלאים אישורים אוטומטית ללא חשיפת ערכים גולמיים."
+    },
+    "desktopApp": {
+      "getDesktopApp": "קבל אפליקציית שולחן עבודה",
+      "download": "הורד",
+      "downloadDesktopApp": "הורד אפליקציית שולחן עבודה",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "שלוט במחשב שלך מרחוק",
+      "controlDescription": "התקן את אפליקציית שולחן העבודה והרץ משימות על המחשב שלך מלוח הבקרה — מכל מקום, בכל זמן."
+    },
+    "credits": {
+      "runningLow": "קרדיטים — נגמרים",
+      "remaining": "קרדיטים שנותרו",
+      "buy": "קנה",
+      "creditsLeft": "קרדיטים נותרו",
+      "usedLabel": "בשימוש: {count}",
+      "consumed": "{percent}% נצרכו",
+      "usageThisWeek": "שימוש השבוע"
+    },
+    "talkToUs": "דבר איתנו",
+    "talkToUsDesc": "הזמן שיחה של 15 דקות",
+    "inviteEarn": "הזמן והרוויח",
+    "inviteEarnDesc": "קבל קרדיטים בחינם",
+    "user": "משתמש",
+    "account": "חשבון",
+    "tasks": "{count} משימות",
+    "recentActivity": "פעילות אחרונה",
+    "viewAllHistory": "צפה בכל ההיסטוריה →",
+    "swarmRunsCount": "{count} הרצות נחיל",
+    "running": "רץ",
+    "completed": "הושלם",
+    "viewAllSwarms": "צפה בכל הנחילים →",
+    "schedulesCount": "{count} תזמונים",
+    "totalRuns": "{count} הרצות סה\"כ",
+    "paused": "מושהה",
+    "viewAllSchedules": "צפה בכל התזמונים →",
+    "credentialsCount": "{count} אישורים",
+    "encryptedVault": "כספת מוצפנת",
+    "manageCredentials": "נהל אישורים →",
+    "days": [
+      "שני",
+      "שלישי",
+      "רביעי",
+      "חמישי",
+      "שישי",
+      "שבת",
+      "ראשון"
+    ],
+    "resume": "המשך",
+    "result": "תוצאה",
+    "notScheduled": "לא מתוזמן",
+    "overdue": "באיחור",
+    "lessThanMin": "< דקה",
+    "inMinutes": "בעוד {count} דק'",
+    "inHours": "בעוד {count} שע'",
+    "today": "היום",
+    "yesterday": "אתמול"
+  },
+  "appHeader": {
+    "login": "התחבר",
+    "assign": "תזמון",
+    "assignDescription": "תזמון משימה זו לפעול אוטומטית",
+    "computer": "מחשב",
+    "showComputer": "הצג מחשב",
+    "hideComputer": "הסתר מחשב",
+    "employeeHired": "עובד גויס!",
+    "employeeRemoved": "עובד הוסר"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "אוטומציה יומית קלה"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "אוטומציית משימות כל יום"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "הרחב תהליכי עבודה מורכבים",
+        "badge": "הפופולרי ביותר"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "אוטומציה כבדה ללא הגבלה"
+      }
+    },
+    "features": {
+      "vmDeleted": "VM אחד (נמחק לאחר חוסר פעילות)",
+      "vmAlwaysOn": "{count} VM פעיל תמיד",
+      "vmAlwaysOnPlural": "{count} מכונות VM פעילות תמיד",
+      "agentsParallel": "{count} סוכנים במקביל",
+      "basicSearch": "חיפוש בסיסי",
+      "advancedSearch": "חיפוש מתקדם וחילוץ",
+      "standardSupport": "תמיכה רגילה (אנשים אמיתיים)",
+      "prioritySupport": "תמיכה בעדיפות, מענה תוך 24 שעות",
+      "premiumSupport": "תמיכה פרימיום, מענה תוך 12 שעות"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "הגברה קטנה",
+        "description": "טעינה מהירה"
+      },
+      "medium": {
+        "name": "הגברה בינונית",
+        "description": "מילוי רגיל",
+        "savings": "חיסכון של 8%"
+      },
+      "large": {
+        "name": "הגברה גדולה",
+        "description": "רכישה בכמות",
+        "savings": "חיסכון של 17%"
+      }
+    },
+    "timeAgo": {
+      "justNow": "עכשיו",
+      "minutesAgo": "לפני {count} דק'",
+      "hoursAgo": "לפני {count} שע'",
+      "daysAgo": "לפני {count} ימים"
+    },
+    "noActivity": "אין פעילות בתקופה זו",
+    "stats": {
+      "balance": "יתרה",
+      "earned": "הורווח",
+      "used": "בשימוש",
+      "credits": "קרדיטים",
+      "allTime": "כל הזמנים",
+      "lastRange": "{range} אחרונים",
+      "sessions": "{count} הפעלות",
+      "avgDaily": "~{count}/יום ממוצע",
+      "plan": "תוכנית",
+      "free": "חינם",
+      "noPlan": "ללא תוכנית",
+      "canceling": "מבטל"
+    },
+    "monthlyUsage": "שימוש חודשי בקרדיטים",
+    "remaining": "{used} / {total} נותרו",
+    "usedPercent": "{percent}% בשימוש בתקופה זו",
+    "renews": "מתחדש {date}",
+    "choosePlan": "בחר את התוכנית שלך",
+    "choosePlanDescription": "הירשם כמנוי כדי לפתוח תכונות AI ולקבל קרדיטים חודשיים",
+    "savingsVsHuman": "חסוך {amount}/חודש מול עובד",
+    "timeSaved": "{time} נחסכו בחודש",
+    "cheaper": "זול פי {multiplier}",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/חודש",
+    "creditsPerMonth": "{count} קרדיטים /חודש",
+    "processing": "מעבד...",
+    "subscribeTo": "הירשם ל-{name}",
+    "transactionTypes": {
+      "credit_purchase": "רכישת קרדיטים",
+      "agent_usage": "שימוש בסוכן",
+      "refund": "החזר",
+      "bonus": "בונוס פרס",
+      "subscription": "מנוי",
+      "subscription_grant": "הקצאת מנוי",
+      "renewal": "קרדיטי חידוש",
+      "reactivation": "הפעלה מחדש"
+    },
+    "toasts": {
+      "paymentSuccess": "התשלום בוצע בהצלחה! הקרדיטים שלך נוספו.",
+      "subscriptionActivated": "המנוי הופעל בהצלחה!",
+      "paymentCanceled": "התשלום בוטל. לא בוצעו חיובים.",
+      "signInToSubscribe": "אנא התחבר כדי להירשם כמנוי",
+      "subscriptionCheckoutFailed": "תחילת תהליך הרכישה נכשלה. אנא נסה שוב.",
+      "signInToPurchase": "אנא התחבר כדי לרכוש קרדיטים",
+      "needSubscription": "אתה צריך מנוי פעיל כדי לרכוש קרדיטים נוספים",
+      "checkoutFailed": "תחילת תהליך הרכישה נכשלה. אנא נסה שוב.",
+      "manageFailed": "פתיחת ניהול המנוי נכשלה. אנא נסה שוב.",
+      "transactionsExported": "העסקאות יוצאו"
+    }
+  },
+  "apiKeys": {
+    "title": "ספקי מודלים",
+    "new": "חדש",
+    "description": "הוסף מפתחות API משלך כדי לפתוח גישה למודלים.",
+    "securityNote": "המפתחות שלך מאוחסנים באופן מאובטח עם הצפנה מקצה לקצה.",
+    "apiKeyLabel": "מפתח API של {provider}",
+    "getApiKey": "קבל מפתח API",
+    "delete": "מחק",
+    "save": "שמור",
+    "deleteDialog": {
+      "title": "מחק מפתח API",
+      "description": "האם אתה בטוח שברצונך למחוק את מפתח ה-API של {provider}? פעולה זו אינה ניתנת לביטול ותאבד גישה למודלי {provider}.",
+      "cancel": "ביטול",
+      "confirm": "מחק"
+    },
+    "toasts": {
+      "saved": "מפתח API נשמר",
+      "savedDescription": "מפתח ה-API של {provider} נשמר והמודלים נוספו למועדפים שלך.",
+      "updatedDescription": "מפתח ה-API של {provider} עודכן.",
+      "saveFailed": "שמירת מפתח API נכשלה",
+      "saveFailedDescription": "שמירת מפתח ה-API של {provider} נכשלה. אנא נסה שוב.",
+      "deleted": "מפתח API נמחק",
+      "deletedDescription": "מפתח ה-API של {provider} נמחק.",
+      "deleteFailed": "מחיקת מפתח API נכשלה",
+      "deleteFailedDescription": "מחיקת מפתח ה-API של {provider} נכשלה. אנא נסה שוב."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "פרטי פרופיל",
+    "displayName": "שם תצוגה",
+    "namePlaceholder": "השם שלך",
+    "company": "חברה",
+    "companyPlaceholder": "החברה שלך",
+    "website": "אתר אינטרנט",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "שומר...",
+    "saveChanges": "שמור שינויים",
+    "account": "חשבון",
+    "email": "אימייל",
+    "verified": "מאומת",
+    "signOut": "התנתק",
+    "signOutDescription": "התנתק מהמכשיר הזה",
+    "toasts": {
+      "profileUpdated": "הפרופיל עודכן",
+      "profileUpdateFailed": "עדכון הפרופיל נכשל",
+      "signOutFailed": "ההתנתקות נכשלה"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "הנתונים שלך מוגנים",
+    "dataProtectedDescription": "אבטחה ברמה ארגונית עם הצפנה במנוחה ובמעבר",
+    "features": {
+      "encryption": {
+        "title": "הצפנה מקצה לקצה",
+        "description": "מפתחות API מוצפנים עם AES-256-GCM. האישורים שלך לעולם לא נשמרים כטקסט גלוי."
+      },
+      "rls": {
+        "title": "אבטחה ברמת שורה",
+        "description": "בידוד ברמת מסד הנתונים מבטיח שהנתונים שלך נגישים רק לך. אין גישה חוצת-דיירים."
+      },
+      "privacy": {
+        "title": "פרטיות מעוצבת",
+        "description": "אנו אוספים את המינימום הנדרש לספק את השירות. השיחות והקבצים שלך נשארים שלך."
+      },
+      "session": {
+        "title": "אבטחת הפעלה",
+        "description": "הגנת CSRF, עוגיות HTTP-only מאובטחות, וכותרות Content Security Policy בכל בקשה."
+      }
+    },
+    "legal": "משפטי",
+    "privacyPolicy": {
+      "title": "מדיניות פרטיות",
+      "description": "איך אנו אוספים, משתמשים ומגנים על הנתונים שלך"
+    },
+    "termsOfService": {
+      "title": "תנאי שירות",
+      "description": "התנאים וההוראות לשימוש שלנו"
+    }
+  },
+  "layoutSettings": {
+    "layout": "פריסה"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "סיכום",
+      "highlight": "סכם"
+    },
+    "code": {
+      "label": "קוד",
+      "highlight": "בנה"
+    },
+    "research": {
+      "label": "מחקר",
+      "highlight": "נתח"
+    },
+    "create": {
+      "label": "צור",
+      "highlight": "ייצר"
+    },
+    "solve": {
+      "label": "פתור",
+      "highlight": "דבג"
+    },
+    "learn": {
+      "label": "למד",
+      "highlight": "הסבר"
+    }
+  },
+  "loadingMessages": [
+    "מאתחל את המוח הסיליקוני",
+    "מעורר את התודעה הדיגיטלית",
+    "מאתחל נתיבים עצביים",
+    "מסובב את הליבות הקוונטיות",
+    "טוען את קבל השטף",
+    "מפעיל את המיינפריים",
+    "מזין את המטריצה החישובית",
+    "מפעיל מנוע וורפ",
+    "מזמן את רוחות הסיליקון",
+    "מתניע את מנוע האלקטרונים",
+    "מחמם את הטרנזיסטורים",
+    "מרכיב את הביטים והבייטים",
+    "מכייל את הסינפסות הדיגיטליות",
+    "מטעין את גבישי ה-CPU",
+    "טוען את פרוטוקולי התודעה",
+    "מאתחל משאבי מערכת",
+    "מכין סביבה חישובית",
+    "יוצר חיבור מאובטח",
+    "מקצה משאבים וירטואליים",
+    "מגדיר פרמטרי מערכת",
+    "משיק מופע וירטואלי",
+    "מפעיל שולחן עבודה מרוחק",
+    "פורס משאבי ענן",
+    "מתחיל רצף אתחול מערכת",
+    "מכין סביבת הרצה",
+    "מעיר את המחשב הישנוני",
+    "מדגדג את הדוב הדיגיטלי",
+    "מכין קפה חישובי",
+    "מותח את השרירים הדיגיטליים",
+    "פותח את העיניים הדיגיטליות",
+    "מתחיל",
+    "נדלק",
+    "עולה לרשת",
+    "מאתחל מערכת",
+    "מתכונן",
+    "כמעט שם",
+    "מכין סביבת עבודה",
+    "טוען משאבים",
+    "המערכת קמה"
+  ],
+  "quickStart": {
+    "greetingName": "היי {name}!",
+    "greetingDefault": "היי!",
+    "subtitle": "המשימות שלך רצות במחשב וירטואלי מאובטח ומבודד",
+    "tabs": {
+      "start": "התחלה",
+      "desktop": "שולחן עבודה",
+      "swarms": "נחילים",
+      "schedules": "לוחות זמנים"
+    },
+    "items": {
+      "computerReady": "מחשב מוכן",
+      "pickComputer": "בחר מחשב",
+      "createComputer": "צור מחשב",
+      "loginsSaved": "התחברויות נשמרו",
+      "addLogins": "הוסף התחברויות",
+      "askAnything": "שאל כל דבר",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "שליטה מהנייד",
+      "freeDownload": "הורדה חינם",
+      "onePrompt": "פרומפט אחד",
+      "manyAgents": "סוכנים רבים",
+      "combinedResult": "תוצאה משולבת",
+      "setCadence": "הגדר קצב",
+      "autoRuns": "הרצות אוטומטיות",
+      "recurringResults": "תוצאות חוזרות",
+      "computerReadyDesc": "מחובר ומוכן לביצוע משימות",
+      "pickComputerDesc": "בחר מבין המכונות הזמינות שלך",
+      "createComputerDesc": "צור מחשב ענן תוך שניות",
+      "loginsSavedDesc": "אישורים מוצפנים מוכנים למילוי אוטומטי",
+      "addLoginsDesc": "שמור סיסמאות לגישה אוטומטית לאתרים",
+      "askAnythingDesc": "תאר משימה וצפה ב-AI עובד",
+      "macWindowsDesc": "אפליקציה מקורית לשולחן העבודה שלך",
+      "mobileRemoteDesc": "שלוט בסוכן שלך מכל מכשיר",
+      "freeDownloadDesc": "התקנה קלה, פועל תוך שניות",
+      "onePromptDesc": "תאר את המטרה שלך בשפה פשוטה",
+      "manyAgentsDesc": "סוכנים עובדים במקביל על מספר מכונות",
+      "combinedResultDesc": "כל התוצאות מאוחדות בדוח אחד",
+      "setCadenceDesc": "שעתי, יומי, שבועי או cron מותאם אישית",
+      "autoRunsDesc": "סוכנים מבצעים ללא התערבות",
+      "recurringResultsDesc": "דוחות מסופקים לפי לוח הזמנים שלך"
+    },
+    "cta": {
+      "downloadApp": "הורד אפליקציה",
+      "trySwarms": "נסה נחילים",
+      "setUp": "הגדר"
+    }
+  },
+  "machines": {
+    "title": "המחשבים שלי",
+    "subtitle": "נהל את סביבות שולחן העבודה המבוקרות על ידי AI",
+    "guide": "מדריך",
+    "newMachine": "מכונה חדשה",
+    "filters": {
+      "all": "הכל",
+      "running": "פועל",
+      "creating": "יוצר",
+      "stopped": "עצור"
+    },
+    "desktopPromo": {
+      "text": "דלג על VM — הרץ סוכני AI על המחשב שלך עם האפליקציה המקומית. שלוט בשולחן העבודה מהטלפון.",
+      "cta": "קבל את האפליקציה"
+    },
+    "emptyState": {
+      "title": "עובד AI אמיתי עם גישה מלאה למחשב",
+      "description": "הפעל מכונה וירטואלית מבודדת ותן לסוכני AI לגלוש באינטרנט, להריץ טרמינלים ולשלוט בשולחן העבודה — ללא מגע.",
+      "feature1": {
+        "title": "שליטה מלאה בשולחן העבודה",
+        "description": "AI מזיז את העכבר, מקליד, לוחץ ומנווט כמו משתמש אמיתי."
+      },
+      "feature2": {
+        "title": "כל משימה אוטומטית",
+        "description": "דפדפן, טרמינל ו-UI — כל הסוכנים עובדים יחד ב-VM אחד."
+      },
+      "feature3": {
+        "title": "מבודד ובטוח",
+        "description": "כל מכונה רצה בקונטיינר משלה — המערכת המקומית שלך נשארת ללא שינוי."
+      },
+      "cta": "צור את המכונה הראשונה שלך"
+    },
+    "noMachines": "לא נמצאו מכונות.",
+    "noFilteredMachines": "אין מכונות {filter}",
+    "noFilteredDescription": "אין מכונות שכרגע {filter}.",
+    "loadingMachines": "טוען מכונות...",
+    "toasts": {
+      "deleted": "המכונה נמחקה בהצלחה",
+      "readyOpen": "כעת תוכל להתחבר למכונה שלך.",
+      "open": "פתח",
+      "createFailed": "אנא נסה ליצור את המכונה שוב.",
+      "fetchFailed": "טעינת מכונות נכשלה"
+    }
+  },
+  "createMachine": {
+    "title": "מחשב חדש",
+    "subtitle": "הפעל שולחן עבודה בענן — מוכן תוך ~30 שניות",
+    "freeExpiry": "מחשבים חינם פגים אחרי ",
+    "freeExpiry2": "שעתיים",
+    "upgrade": "שדרג",
+    "limitReached": "הגעת למגבלת המחשבים שלך. עצור או מחק מחשב קיים כדי ליצור חדש.",
+    "upgradeMore": "שדרג לעוד →",
+    "nameLabel": "שם המחשב",
+    "namePlaceholder": "השרת שלי בענן",
+    "nameError": "שם המחשב לא יכול להתחיל ב-\"local\"",
+    "nameRequired": "אנא הכנס שם מחשב",
+    "osLabel": "מערכת הפעלה",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "שולחן עבודה Ubuntu 22.04"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "שולחן עבודה Windows — צפה לבאגים"
+    },
+    "osHintWindows": "שולחן עבודה Windows עם Chrome (בטא). מוכן תוך ~2 דקות.",
+    "osHintLinux": "שולחן עבודה Ubuntu, נגיש דרך דפדפן. מוכן תוך ~30 שניות.",
+    "stateLabel": "מצב המחשב",
+    "restorePrevious": "שחזר קודם",
+    "restoreDescription": "המשך מתמונת מצב אחרונה",
+    "startFresh": "התחל מחדש",
+    "startFreshDescription": "סביבת שולחן עבודה נקייה",
+    "cancel": "ביטול",
+    "creating": "יוצר...",
+    "create": "צור מחשב",
+    "toasts": {
+      "restoringSnapshot": "משחזר מחשב מתמונת מצב!",
+      "restoringDescription": "מצב שולחן העבודה הקודם שלך משוחזר. מוכן תוך ~30 שניות.",
+      "windowsCreated": "יצירת מחשב Windows התחילה!",
+      "windowsDescription": "שולחן העבודה Windows שלך מופעל. מוכן תוך ~2 דקות.",
+      "linuxCreated": "שולחן העבודה שלך מופעל. מוכן תוך ~30 שניות.",
+      "sshCreated": "המחשב בענן שלך מופעל. מפתח SSH יהיה זמין כשהמחשב מוכן."
+    }
+  },
+  "secrets": {
+    "title": "פרטי התחברות שמורים",
+    "subtitle": "מאוחסנים בצורה מאובטחת ומשמשים אוטומטית על ידי סוכן ה-AI בעת התחברות",
+    "guide": "מדריך",
+    "import": "ייבוא",
+    "addCredential": "הוסף פרטי התחברות",
+    "securityNote": "פרטי ההתחברות לעולם לא נשלחים למודל ה-AI ולעולם לא נחשפים בצ'אט — הסוכן ממלא אותם ישירות מבלי לראות את הערכים",
+    "username": "שם משתמש",
+    "password": "סיסמה",
+    "hide": "הסתר",
+    "revealFor10s": "הצג ל-10 שנ'",
+    "encrypted": "מוצפן",
+    "emptyState": {
+      "title": "התחברות אוטומטית, ללא מגע",
+      "description": "שמור פרטי התחברות פעם אחת — סוכן ה-AI מתחבר אוטומטית וממשיך בלי להפריע לך",
+      "feature1": {
+        "title": "אפס הפרעות",
+        "description": "הסוכן נתקל בטופס התחברות, ממלא אותו וממשיך במשימה — בלי שאלות, בלי השהיות"
+      },
+      "feature2": {
+        "title": "AI לעולם לא רואה",
+        "description": "פרטי ההתחברות שלך מוזרקים ישירות. מודל ה-AI לעולם לא רואה את הערכים בפועל"
+      },
+      "feature3": {
+        "title": "כל אתר",
+        "description": "עובד עם טפסי התחברות בכל אתר — אימייל, כלי SaaS, דשבורדים, הכל"
+      },
+      "cta": "הוסף את פרטי ההתחברות הראשונים שלך"
+    },
+    "deleteDialog": {
+      "title": "למחוק פרטי התחברות?",
+      "description": "{name} ({service}) יימחק לצמיתות. סוכן ה-AI לא יוכל עוד להשתמש בו.",
+      "cancel": "ביטול",
+      "delete": "מחק"
+    },
+    "toasts": {
+      "loadFailed": "טעינת פרטי התחברות נכשלה",
+      "revealFailed": "הצגת סיסמה נכשלה",
+      "deleted": "פרטי התחברות נמחקו",
+      "deleteFailed": "מחיקת פרטי התחברות נכשלה"
+    },
+    "loading": "טוען פרטי התחברות..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "תמחור פשוט,",
+      "title2": "אוטופילוט אמיתי",
+      "subtitle": "התחל בחינם. שדרג כשאתה צריך יותר כוח."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "נסה את סוכן השימוש במחשב מספר 1",
+        "cta": "התחל בחינם"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "אוטומציה יומית קלה",
+        "cta": "קבל Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "אוטומט משימות כל יום",
+        "cta": "קבל Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "הרחב תהליכי עבודה מורכבים",
+        "cta": "עבור ל-Plus",
+        "badge": "הכי פופולרי"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "אוטומציה כבדה ללא הגבלה",
+        "cta": "קבל Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "דפדפן, שולחן עבודה וטרמינל מלאים",
+        "badge": "ליבה"
+      },
+      "swarmMode": {
+        "name": "מצב נחיל",
+        "sequential": "סדרתי בלבד",
+        "parallel": "{count} סוכנים במקביל",
+        "badge": "חזק"
+      },
+      "security": {
+        "name": "אבטחה",
+        "description": "Sandboxed, מוצפן E2E",
+        "badge": "כל תוכנית"
+      },
+      "monthlyCredits": {
+        "name": "קרדיטים חודשיים",
+        "payAsYouGo": "שלם לפי שימוש",
+        "creditsPerMonth": "{count} קרדיטים/חודש"
+      },
+      "persistentMachines": {
+        "name": "מכונות קבועות",
+        "temporary": "1 VM זמני (2 שעות)",
+        "deletedAfterInactivity": "1 VM (נמחק לאחר חוסר פעילות)",
+        "alwaysOn": "{count} VM תמיד פעיל",
+        "alwaysOnPlural": "{count} VMs תמיד פעילים"
+      },
+      "webSearch": {
+        "name": "חיפוש אינטרנט",
+        "advanced": "חיפוש וחילוץ מתקדמים",
+        "basic": "חיפוש בסיסי"
+      }
+    },
+    "animations": {
+      "agentDescription": "הסוכן שלך שולט במחשב אמיתי — דפדפן, קבצים וטרמינל",
+      "fillForm": "מלא טופס",
+      "searchExtract": "חפש וחלץ",
+      "uploadReport": "העלה דוח",
+      "navigateSite": "נווט באתר",
+      "creditsPerMonth": "קרדיטים לחודש",
+      "cr": "cr",
+      "vm": "VM {num}",
+      "twoHrLimit": "מגבלת 2 שעות",
+      "alwaysOn": "תמיד פעיל",
+      "tempVmDescription": "VM זמני — מתאפס לאחר 2 שעות",
+      "persistentVmDescription": "הקבצים, האפליקציות והסשנים שלך נשמרים בין משימות",
+      "sequentialOnly": "ביצוע סדרתי בלבד בתוכנית זו",
+      "yourTask": "המשימה שלך",
+      "agentsWorking": "{count} סוכנים עובדים בו-זמנית",
+      "upgradeForExtraction": "שדרג לחילוץ מלא",
+      "searchDescription": "חפש, גרד וחלץ נתונים מובנים",
+      "basicSearchIncluded": "חיפוש בסיסי כלול",
+      "e2eEncryption": "הצפנת E2E",
+      "sandboxedVm": "VM מבודד",
+      "destroyedAfterUse": "נהרס לאחר שימוש",
+      "everyPlan": "כל תוכנית. ללא יוצא מן הכלל."
+    },
+    "perMonth": "/חודש",
+    "faqs": {
+      "credits": {
+        "q": "מה נחשב כקרדיט?",
+        "a": "קרדיט אחד שווה בערך לפעולת סוכן אחת — לחיצה, מילוי טופס, שאילתת חיפוש או פעולת קובץ. משימה רב-שלבית טיפוסית משתמשת ב-5–15 קרדיטים."
+      },
+      "persistent": {
+        "q": "מה המשמעות של 'מכונה קבועה'?",
+        "a": "בתוכניות בתשלום, ה-VM שלך ממשיך לרוץ בין משימות — שולחן העבודה, הקבצים, סשני הדפדפן והתוכנות המותקנות נשמרים. כמו מחשב ענן תמיד פעיל משלך."
+      },
+      "swarm": {
+        "q": "מה זה מצב נחיל?",
+        "a": "מצב נחיל מפצל משימה בין מספר מכונות שרצות בו-זמנית. במקום סוכן אחד שעושה 10 חיפושים ברצף, מספר סוכנים עושים אותם במקביל."
+      },
+      "cancel": {
+        "q": "אפשר לבטל בכל עת?",
+        "a": "כן. ללא חוזים, ללא דמי ביטול. בטל מדף החשבון שלך ושמור גישה עד סוף תקופת החיוב."
+      },
+      "security": {
+        "q": "האם הנתונים שלי מאובטחים?",
+        "a": "כל משימה רצה ב-VM מבודד לחלוטין שנהרס לאחר שימוש. כל החיבורים מוצפנים מקצה לקצה ואנחנו אף פעם לא שומרים את פרטי הכניסה שלך."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "קרדיטים מותאמים אישית, VMs ייעודיים, SLA, SSO ותמיכה בעדיפות.",
+      "cta": "צור קשר"
+    },
+    "footer": {
+      "title": "סוכן ה-AI שלך נמצא 60 שניות משם",
+      "subtitle": "הירשם ותן ל-Coasty לטפל בעבודה.",
+      "noCreditCard": "ללא כרטיס אשראי",
+      "cancelAnytime": "ביטול בכל עת",
+      "noCreditCardRequired": "לא נדרש כרטיס אשראי",
+      "cancelAnytimeNoContracts": "ביטול בכל עת — ללא חוזים"
+    },
+    "questions": "שאלות"
+  },
+  "guide": {
+    "pageTitle": "מדריך",
+    "pageSubtitle": "מהגדרה ראשונה ועד תכונות מתקדמות — למד כיצד להפיק את המרב מ-Coasty",
+    "completeGuide": "המדריך המלא",
+    "completeGuideSubtitle": "כל מה שאתה צריך לדעת על Coasty",
+    "completeGuideDescription": "מהגדרה ראשונה ועד תכונות מתקדמות — למד כיצד להפיק את המרב מסוכן ה-AI שלך.",
+    "talkToCofounders": "דבר עם המייסדים",
+    "tabs": {
+      "overview": "סקירה",
+      "gettingStarted": "תחילת עבודה",
+      "chatTasks": "צ'אט ומשימות",
+      "machines": "מכונות",
+      "credentials": "פרטי כניסה",
+      "swarmMode": "מצב נחיל",
+      "workforce": "לוחות זמנים",
+      "desktopApp": "אפליקציית שולחן עבודה",
+      "billing": "חיוב וקרדיטים"
+    },
+    "overview": {
+      "howItWorks": "איך זה עובד",
+      "step1": "תאר את המשימה",
+      "step2": "Coasty מתכנן את הצעדים",
+      "step3": "מבצע באופן אוטונומי",
+      "step": "שלב",
+      "whatCanDo": "מה Coasty יכול לעשות",
+      "taskCount": "40+ משימות ב-10 קטגוריות",
+      "categories": {
+        "sales": {
+          "name": "מכירות",
+          "desc": "מצא 50 לידים, שלח מיילים מותאמים אישית"
+        },
+        "marketing": {
+          "name": "שיווק",
+          "desc": "פרסם פוסטים בבלוג, תזמן מדיה חברתית"
+        },
+        "jobApps": {
+          "name": "מועמדויות לעבודה",
+          "desc": "הגש ל-20 משרות, התאם כל קורות חיים"
+        },
+        "email": {
+          "name": "אימייל",
+          "desc": "טיוטת תשובות, פנייה המונית, ביטול מנויים"
+        },
+        "dataEntry": {
+          "name": "הזנת נתונים",
+          "desc": "העבר נתונים בין אפליקציות, בנה גיליונות"
+        },
+        "research": {
+          "name": "מחקר",
+          "desc": "דוחות מעמיקים, ניטור מתחרים"
+        },
+        "qaTesting": {
+          "name": "בדיקות QA",
+          "desc": "בדוק הרשמות, טפסים, בדיקות תקינות אתר"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "חפש מועמדים, פנייה מותאמת אישית"
+        },
+        "support": {
+          "name": "תמיכה",
+          "desc": "טיוטת תשובות, עדכן מסמכי עזרה"
+        },
+        "productivity": {
+          "name": "פרודוקטיביות",
+          "desc": "הזמן נסיעות, שלם חשבונות, נהל לוחות שנה"
+        }
+      },
+      "whyCoasty": "למה Coasty",
+      "notChatbot": "לא צ'אטבוט. לא סקריפט RPA.",
+      "worksLikeHuman": {
+        "title": "עובד כמו בן אדם",
+        "desc": "רואה, לוחץ, מקליד, מנווט — בדיוק כמוך"
+      },
+      "noScripts": {
+        "title": "ללא סקריפטים או הגדרות",
+        "desc": "שפה פשוטה פנימה, תוצאות החוצה"
+      },
+      "handlesUnexpected": {
+        "title": "מתמודד עם הבלתי צפוי",
+        "desc": "מסתגל ל-CAPTCHAs, חלונות קופצים, שינויי פריסה"
+      },
+      "runsInIsolation": {
+        "title": "רץ בבידוד",
+        "desc": "VM מבודד לכל סשן — שום דבר לא דולף"
+      },
+      "ctaTitle": "בחר משימה כלשהי ונסה",
+      "ctaSubtitle": "מוכן להעסיק את Coasty?",
+      "ctaDescription": "תאר משימה כלשהי מהמדריך הזה וצפה ב-Coasty מטפל בה.",
+      "ctaNote": "התחל בחינם. לא נדרש כרטיס אשראי.",
+      "startTask": "התחל משימה",
+      "startFree": "התחל בחינם",
+      "desktopApp": "אפליקציית שולחן עבודה"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "הרשמה",
+          "desc": "לחיצה אחת להתחיל"
+        },
+        "createMachine": {
+          "title": "צור מכונה",
+          "desc": "הסוכן שלך מקבל מחשב משלו"
+        },
+        "saveCredentials": {
+          "title": "שמור פרטי כניסה",
+          "desc": "כניסות מוצפנות לכל אתר"
+        },
+        "giveTask": {
+          "title": "תן משימה",
+          "desc": "תאר אותה. צפה בה מתרחשת."
+        }
+      },
+      "examplePrompts": [
+        "הגש ל-10 משרות מתאימות ב-LinkedIn עם קורות החיים שלי",
+        "חקור תמחור מתחרים ובנה גיליון השוואה",
+        "כתוב ופרסם פוסט בבלוג על [נושא] ב-WordPress",
+        "בטל את המנוי שלי מכל המיילים השיווקיים ב-Gmail",
+        "בדוק את תהליך ההרשמה באתר שלי ודווח על באגים",
+        "מצא 50 לידים שמתאימים ל-[ICP] ב-LinkedIn והוסף ל-CRM שלי"
+      ],
+      "quickPrompts": "הנחיות מהירות לניסיון",
+      "startFirstTask": "התחל את המשימה הראשונה שלך"
+    },
+    "chatTasks": {
+      "commandCenter": "מרכז הפיקוד שלך",
+      "describeTask": "תאר כל משימה. צפה בה מתרחשת.",
+      "examplePrompt": "מצא את 5 המקלדות האלחוטיות הטובות ביותר מתחת ל-$50 באמזון והשווה אותן בגיליון.",
+      "exampleResponse": "אחפש באמזון ואבנה השוואה. פותח את הדפדפן עכשיו.",
+      "exampleDone": "סיימתי. הגיליון נשמר עם מחיר, דירוג ותכונות לכל 5 המקלדות.",
+      "describePlaceholder": "תאר את המשימה שלך...",
+      "threeAgents": "שלושה סוכנים מתמחים",
+      "autoAssigned": "מוקצים אוטומטית לכל שלב.",
+      "browser": "דפדפן",
+      "browserDesc": "ניווט, לחיצה, מילוי טפסים, גריפה",
+      "terminal": "טרמינל",
+      "terminalDesc": "הרצת פקודות, התקנה, עיבוד קבצים",
+      "desktop": "שולחן עבודה",
+      "desktopDesc": "לחיצה, הקלדה, גלילה, פתיחת אפליקציות",
+      "betterPrompts": "כתוב הנחיות טובות יותר",
+      "specificBeatsVague": "ספציפי מנצח מעורפל. תמיד.",
+      "do": "עשה",
+      "dont": "אל תעשה",
+      "doExample1": "הגש ל-10 משרות הנדסת תוכנה ב-LinkedIn. התאם כל מכתב מלווה לציון ה-tech stack שלהם.",
+      "dontExample1": "הגש למשרות",
+      "doExample2": "חפש ב-Google Flights מ-SFO ל-JFK, 20-25 במרץ, הלוך-חזור. צילום מסך של 3 הזולים ביותר.",
+      "dontExample2": "מצא טיסות",
+      "readyToTry": "מוכן לנסות?",
+      "openChat": "פתח צ'אט ותאר מה אתה צריך שייעשה.",
+      "startChat": "התחל צ'אט"
+    },
+    "machinesTab": {
+      "title": "המכונות שלך",
+      "subtitle": "שולחנות עבודה מלאים של Ubuntu שתוכל להפעיל בשניות.",
+      "lifecycle": "מחזור חיים",
+      "lifecycleDesc": "חמישה מצבים, אוטומטי לחלוטין.",
+      "planLimits": "מגבלות תוכנית",
+      "planCol": "תוכנית",
+      "machinesCol": "מכונות",
+      "swarmAgentsCol": "סוכני נחיל",
+      "temp": "1 זמני",
+      "states": {
+        "creating": "יוצר",
+        "starting": "מפעיל",
+        "running": "פועל",
+        "stopping": "עוצר",
+        "stopped": "עצור"
+      },
+      "newMachine": "+ חדש",
+      "researchVm": "VM מחקר",
+      "emailVm": "VM אימייל",
+      "testingVm": "VM בדיקות",
+      "cores": "{count} ליבות",
+      "gb": "{count} GB",
+      "stop": "עצור",
+      "start": "הפעל",
+      "provisioning": "מכין...",
+      "spinUp": "הפעל מכונה",
+      "goToMachines": "עבור למכונות"
+    },
+    "credentialsTab": {
+      "loginDetected": "זוהתה כניסה",
+      "matched": "הותאם",
+      "credentialFound": "נמצא פרט כניסה",
+      "autoFilled": "מולא אוטומטית",
+      "autoFillTitle": "מילוי אוטומטי בפעולה",
+      "autoFillDesc": "כניסה זוהתה, פרט הותאם, טופס מולא. אוטומטית.",
+      "security": "אבטחה",
+      "encrypted": "מוצפן",
+      "aes256": "AES-256 במנוחה",
+      "vmIsolated": "מבודד ב-VM",
+      "sandboxed": "Sandbox לכל סשן",
+      "neverLogged": "אף פעם לא נרשם",
+      "zeroTrace": "אפס עקבות בלוגים",
+      "savedCredentials": "פרטי כניסה שמורים",
+      "addOnce": "הוסף פעם אחת, מילוי אוטומטי בכל מקום.",
+      "saveFirst": "שמור את פרט הכניסה הראשון שלך",
+      "goToCredentials": "עבור לפרטי כניסה שמורים"
+    },
+    "swarmTab": {
+      "title": "מצב נחיל",
+      "runParallel": "הפעל {count} מכונות במקביל",
+      "sameTask": "אותה משימה, {multiplier}x התפוקה, אותו זמן.",
+      "done": "סיים",
+      "running": "פועל",
+      "pending": "ממתין",
+      "result": "תוצאה",
+      "useCases": {
+        "parallelResearch": {
+          "title": "מחקר מקבילי",
+          "desc": "{count} מתחרים, {count} מכונות, בו-זמנית"
+        },
+        "bulkApplications": {
+          "title": "מועמדויות המוניות",
+          "desc": "הגש בפלטפורמות שונות בו-זמנית"
+        },
+        "multiCitySearch": {
+          "title": "חיפוש רב-עירוני",
+          "desc": "חפש רשימות ב-{count} ערים בבת אחת"
+        },
+        "parallelOutreach": {
+          "title": "פנייה מקבילית",
+          "desc": "מיילים מותאמים לפלחים שונים"
+        },
+        "crossPlatform": {
+          "title": "חוצה-פלטפורמות",
+          "desc": "פרסם ב-{count} פלטפורמות בו-זמנית"
+        },
+        "distributedTesting": {
+          "title": "בדיקות מבוזרות",
+          "desc": "בדוק מספר תרחישים במקביל"
+        }
+      },
+      "whatToSwarm": "מה להנחיל",
+      "availability": "זמינות",
+      "freeNotAvailable": "לא זמין",
+      "litePlus": "Lite+",
+      "agentRange": "2–9 סוכנים",
+      "startSwarm": "התחל נחיל"
+    },
+    "workforceTab": {
+      "title": "כוח עבודה",
+      "subtitle": "חברת ה-AI שלך, על אוטומט",
+      "description": "עובדים, צוותות, טריגרים — פועלים 24/7.",
+      "myCompany": "החברה שלי",
+      "contentOps": "Content Ops",
+      "support": "תמיכה",
+      "writer": "כותב",
+      "seo": "SEO",
+      "social": "חברתי",
+      "inbox": "דואר נכנס",
+      "docs": "מסמכים",
+      "concepts": "מושגי ליבה",
+      "conceptItems": {
+        "employees": {
+          "title": "עובדים",
+          "desc": "סוכני AI שמריצים משימות לפי לוח זמנים, 24/7"
+        },
+        "teams": {
+          "title": "צוותות",
+          "desc": "קבוצות עובדים עם הנחיות משותפות"
+        },
+        "sharedMemory": {
+          "title": "זיכרון משותף",
+          "desc": "אחסון מפתח-ערך שעובדים קוראים וכותבים אליו"
+        },
+        "triggers": {
+          "title": "טריגרים",
+          "desc": "שרשר עובדים: אחד מסיים, הבא מתחיל"
+        },
+        "delegates": {
+          "title": "נציגים",
+          "desc": "עובדים מקצים תת-משימות למומחים"
+        },
+        "orgChart": {
+          "title": "תרשים ארגוני",
+          "desc": "מפה חזותית של היררכיית החברה שלך"
+        }
+      },
+      "chainTitle": "שרשר עובדים יחד",
+      "chainDesc": "הפלט זורם אוטומטית מאחד לבא.",
+      "scout": "Scout",
+      "scoutDesc": "חוקר מתחרים",
+      "atlas": "Atlas",
+      "atlasDesc": "כותב פוסט בבלוג",
+      "nova": "Nova",
+      "novaDesc": "מפרסם לחברתי",
+      "done": "סיים",
+      "onComplete": "on_complete",
+      "waiting": "ממתין",
+      "templates": "התחל מתבנית",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "תמיכת לקוחות",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "שיווק",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} עובדים",
+      "openWorkforce": "פתח כוח עבודה"
+    },
+    "billingTab": {
+      "credits": "קרדיטים",
+      "timeMetric": "זמן הוא המדד היחיד.",
+      "rate": "תעריף",
+      "rateValue": "10",
+      "creditsPerMin": "קרדיטים/דקה",
+      "metered": "נמדד כל 30 שניות",
+      "example": "דוגמה",
+      "minTask": "דקות משימה",
+      "startCredits": "התחלה: {count} קרדיטים",
+      "endCredits": "סיום: {count} קרדיטים",
+      "creditsUsed": "{count} קרדיטים שימשו",
+      "calculation": "{mins} דקות x 10 קרדיטים/דקה",
+      "plans": "תוכניות",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 זמני",
+          "feature": "חיפוש בסיסי"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 תמיד פעיל",
+          "feature": "2 סוכנים מקבילים"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 תמיד פעיל",
+          "feature": "חיפוש מתקדם"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 תמיד פעילים",
+          "feature": "תמיכה בעדיפות"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 תמיד פעילים",
+          "feature": "ערבות SLA"
+        }
+      },
+      "perMonth": "{price}/חודש",
+      "faqTitle": "שאלות נפוצות",
+      "faqs": {
+        "howCharged": {
+          "q": "איך מחויבים קרדיטים?",
+          "a": "10 קרדיטים לדקת ביצוע סוכן, מעוגל למעלה. נבדק כל 30 שניות במהלך סשן."
+        },
+        "runOut": {
+          "q": "מה קורה כשנגמרים?",
+          "a": "אתה צריך לפחות 20 קרדיטים כדי להתחיל משימה. כשמגיעים ל-0 המשימה נעצרת — קנה תוספת כדי להמשיך."
+        },
+        "rollOver": {
+          "q": "האם קרדיטים שלא נוצלו מועברים?",
+          "a": "קרדיטים מתאפסים כל מחזור חיוב. השתמש בהם או תאבד אותם."
+        }
+      },
+      "goToBilling": "עבור לחיוב"
+    },
+    "desktopAppTab": {
+      "overlay": "השכבה",
+      "overlayDesc": "תמיד שם. לחץ להרחבה.",
+      "compact": "קומפקטי",
+      "expanded": "מורחב",
+      "ready": "מוכן",
+      "exampleTask": "עדכן את קורות החיים שלי",
+      "exampleResponse": "פותח resume.docx...",
+      "describePlaceholder": "תאר את המשימה שלך...",
+      "whatItControls": "מה זה שולט",
+      "controls": {
+        "browser": {
+          "name": "דפדפן",
+          "desc": "ניווט, לחיצה, מילוי טפסים"
+        },
+        "files": {
+          "name": "קבצים",
+          "desc": "קריאה, כתיבה, עריכה בכל מקום"
+        },
+        "terminal": {
+          "name": "טרמינל",
+          "desc": "הרצת כל פקודת shell"
+        },
+        "desktop": {
+          "name": "שולחן עבודה",
+          "desc": "לחיצה, הקלדה, גלילה"
+        },
+        "screenshots": {
+          "name": "צילומי מסך",
+          "desc": "רואה מה שאתה רואה"
+        },
+        "apps": {
+          "name": "אפליקציות",
+          "desc": "שליטה בכל אפליקציה מותקנת"
+        }
+      },
+      "twoWays": "שתי דרכים להפעלה",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "Sandbox מבודד לחלוטין",
+        "freshBrowser": "דפדפן נקי, ללא היסטוריה",
+        "maxSecurity": "אבטחה מקסימלית"
+      },
+      "desktopMode": "שולחן עבודה",
+      "desktopFeatures": {
+        "yourFiles": "הקבצים שלך, גישה ישירה",
+        "yourApps": "האפליקציות המותקנות שלך",
+        "yourSessions": "הסשנים המחוברים שלך"
+      },
+      "downloadCta": "הורד אפליקציית שולחן עבודה"
+    }
+  },
+  "comparePage": {
+    "title": "השוואות",
+    "heroTitle": "Coasty מול המתחרים",
+    "heroDescription": "ראו כיצד סוכן ה-AI מספר 1 לשימוש במחשב (82% OSWorld) משתווה לחלופות. פירוט תכונה-מול-תכונה עם נתונים אמיתיים.",
+    "categories": {
+      "aiAgent": "סוכן AI",
+      "infrastructure": "תשתית",
+      "rpa": "RPA",
+      "human": "אנושי"
+    },
+    "vsLabel": "Coasty מול {name}",
+    "ctaTitle": "מוכנים לנסות את סוכן ה-AI מספר 1 לשימוש במחשב?",
+    "ctaButton": "נסו את Coasty בחינם",
+    "noCreditCard": "לא נדרש כרטיס אשראי",
+    "allComparisons": "כל ההשוואות",
+    "featureComparison": "השוואת תכונות",
+    "whyChooseCoasty": "למה לבחור ב-Coasty",
+    "strengthsOf": "החוזקות של {name}",
+    "ctaDescription": "82% OSWorld benchmark. בידוד VM. פתרון CAPTCHA. החל מ-$20/חודש.",
+    "watchCaseStudies": "צפו במקרי בוחן"
+  },
+  "agentSwarms": {
+    "badge": "מצב Agent Swarm",
+    "heroTitle1": "פרומפט אחד.",
+    "heroTitle2": "מכונות אינסופיות.",
+    "heroTitle3": "תוצאות מקבילות.",
+    "heroDescription": "פצלו כל משימה על פני מספר סביבות מבודדות שרצות בו-זמנית. עבודה שלוקחת שעה מסתיימת בדקות.",
+    "trySwarmMode": "נסו מצב Swarm",
+    "seeInAction": "ראו בפעולה",
+    "liveExecution": "swarm-tree — ביצוע חי",
+    "machineCount": "{count} מכונות",
+    "running": "פועל",
+    "threeSteps": "שלושה צעדים לביצוע מקבילי",
+    "steps": {
+      "typePrompt": {
+        "title": "הקלידו את הפרומפט שלכם",
+        "desc": "תארו את המשימה. הפעילו מצב swarm ובחרו כמה מכונות."
+      },
+      "machinesSpinUp": {
+        "title": "המכונות מתחילות לפעול",
+        "desc": "כל אחת מקבלת סביבה מבודדת מלאה — דפדפן, טרמינל, שולחן עבודה."
+      },
+      "resultsStream": {
+        "title": "התוצאות מוזרמות בשידור חי",
+        "desc": "צפו בכל מכונה בזמן אמת דרך תצוגת עץ ה-swarm."
+      }
+    },
+    "demoTitle": "הדגמת Agent Swarms",
+    "demoDescription": "צפו ב-{count} מכונות שמתמודדות עם משימת מחקר CRM בו-זמנית",
+    "prompt": "פרומפט",
+    "swarm": "SWARM",
+    "run": "הפעלה",
+    "reset": "איפוס",
+    "allCompleted": "כל {count} המכונות הושלמו",
+    "speedComparison": "~{swarmTime} דק' במקום ~{seqTime} דק' — {multiplier}x מהיר יותר",
+    "seqVsSwarm": "סדרתי מול Swarm",
+    "tableHeaders": {
+      "task": "משימה",
+      "before": "לפני",
+      "swarm": "Swarm",
+      "speed": "מהירות"
+    },
+    "speedExamples": {
+      "crmResearch": "מחקר 5 כלי CRM",
+      "qaPages": "QA על פני 8 דפים",
+      "leadEnrichment": "העשרת לידים (100)",
+      "priceMonitoring": "ניטור מחירים"
+    },
+    "builtForParallel": "נבנה לעבודה מקבילית",
+    "useCases": {
+      "marketResearch": {
+        "title": "מחקר שוק בקנה מידה גדול",
+        "desc": "חקרו מתחרים, שווקים או מוצרים מרובים בו-זמנית על פני מכונות מבודדות."
+      },
+      "leadGeneration": {
+        "title": "יצירת לידים",
+        "desc": "העשירו פרופילים, מצאו אימיילים ואמתו נוכחות חברתית — שעות עבודה בדקות."
+      },
+      "qaTesting": {
+        "title": "QA ובדיקות רגרסיה",
+        "desc": "הריצו תרחישי בדיקה על פני דפים או תהליכים שונים במקביל."
+      },
+      "contentSocial": {
+        "title": "תוכן ורשתות חברתיות",
+        "desc": "פרסמו במספר פלטפורמות בו-זמנית עם בידוד לכל מכונה."
+      },
+      "dataExtraction": {
+        "title": "חילוץ נתונים",
+        "desc": "גרדו ומבנו נתונים מעשרות מקורות בבת אחת."
+      },
+      "scheduledRuns": {
+        "title": "הרצות מתוזמנות",
+        "desc": "שלבו מצב swarm עם תזמון למשימות מקביליות חוזרות."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "בידוד אמיתי",
+        "desc": "לכל מכונה יש דפדפן, טרמינל ושולחן עבודה משלה."
+      },
+      "tripleMachineLimit": {
+        "title": "מגבלת מכונות x3",
+        "desc": "מצב swarm משלש את קיבולת המכונות של התוכנית שלכם."
+      },
+      "liveTreeView": {
+        "title": "תצוגת עץ חיה",
+        "desc": "צילומי מסך וקריאות כלים מוזרמים בזמן אמת."
+      },
+      "autoAggregation": {
+        "title": "צבירה אוטומטית",
+        "desc": "התוצאות מתאחדות לדוח מאוחד אחד."
+      },
+      "shareableRuns": {
+        "title": "הרצות ניתנות לשיתוף",
+        "desc": "הפעילו מחדש ציריי זמן ביצוע מלאים דרך קישור."
+      },
+      "fullySandboxed": {
+        "title": "Sandbox מלא",
+        "desc": "כל הסביבות נהרסות לאחר השלמה."
+      }
+    },
+    "readyCta": "מוכנים להריץ משימות במקביל?",
+    "includedWithPaid": "מצב swarm כלול בכל תוכנית בתשלום.",
+    "getStarted": "התחילו עכשיו",
+    "viewPricing": "צפו במחירים",
+    "legend": {
+      "messages": "הודעות",
+      "broadcast": "שידור",
+      "sharedMemory": "זיכרון משותף",
+      "help": "עזרה"
+    },
+    "liveSwarmExecution": "ביצוע swarm חי עם תקשורת בין סוכנים",
+    "popular": "פופולרי",
+    "avgRating": "{rating} ממוצע"
+  },
+  "downloadPage": {
+    "title": "אפליקציית שולחן עבודה",
+    "heroTitle": "תנו ל-Coasty להפעיל את המחשב שלכם",
+    "heroDescription": "העוזר ה-AI שלכם שלוקח את ההגה. אוטומציה של הדפדפן, שולחן העבודה והטרמינל — או שליטה במחשב מכל מקום דרך ממשק הווב שלנו.",
+    "seeInAction": "ראו בפעולה",
+    "overlayDescription": "שכבת-על קלת משקל שצפה על שולחן העבודה שלכם. שלטו בה מקומית או מרחוק מכל דפדפן — המחשב שלכם, בדרך שלכם.",
+    "recommended": "מומלץ למערכת שלכם",
+    "coastyFor": "Coasty ל-{platform}",
+    "installerLabel": "מתקין {extension}",
+    "beforeInstall": "לפני ההתקנה",
+    "beforeInstallDescription": "Coasty Desktop הוא חדש לגמרי, כך שמערכת ההפעלה שלכם עדיין לא תזהה אותו. זה לגמרי נורמלי לאפליקציות שהושקו לאחרונה — כך תמשיכו:",
+    "windowsSteps": {
+      "step1": "Windows הגן על המחשב שלך",
+      "step2": "מידע נוסף",
+      "step3": "הפעל בכל זאת"
+    },
+    "macSteps": {
+      "step1": "לא ניתן לפתוח את Coasty Desktop",
+      "step2": "הגדרות מערכת > פרטיות ואבטחה",
+      "step3": "פתח בכל זאת"
+    },
+    "allPlatforms": "כל הפלטפורמות",
+    "systemRequirements": {
+      "title": "דרישות מערכת",
+      "win1": "Windows 10 או מאוחר יותר",
+      "win2": "64-bit (x86_64)",
+      "win3": "מינימום 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) או מאוחר יותר",
+      "mac2": "Apple Silicon או Intel",
+      "mac3": "מינימום 4 GB RAM"
+    },
+    "whatsIncluded": "מה כלול",
+    "features": {
+      "browser": "אוטומציית דפדפן",
+      "desktop": "אוטומציית שולחן עבודה",
+      "terminal": "גישה לטרמינל",
+      "files": "פעולות קבצים",
+      "updates": "עדכונים אוטומטיים",
+      "remote": "שליטה מכל מקום"
+    },
+    "browserCta": "פתחו את Coasty בדפדפן",
+    "browserCtaDescription": "רוצים לשלוט במכונה שלכם מכל מקום?",
+    "loading": "טוען...",
+    "downloadFor": "הורדה ל-{platform}",
+    "download": "הורדה",
+    "unavailable": "לא זמין"
+  },
+  "referralPage": {
+    "shareTitle": "שתפו את Coasty.",
+    "earnTitle": "הרוויחו יחד.",
+    "shareDescription": "תנו לחברים 50 קרדיטים חינם להפעלת סוכן ה-AI הראשון שלהם. גם אתם מקבלים 50 קרדיטים — בכל פעם שמישהו מצטרף.",
+    "features": [
+      "AI שבאמת עובד — דפדפן אמיתי, לחיצות אמיתיות, תוצאות אמיתיות",
+      "מבודד ומאובטח — כל סוכן רץ ב-VM sandbox משלו",
+      "רץ בזמן שאתם ישנים — תזמנו משימות ותנו לסוכנים לטפל בשאר"
+    ],
+    "recentActivity": "הפעילות האחרונה שלכם",
+    "friendsCould": "גם החברים שלכם יכולים לעשות את זה",
+    "giveGet": "תנו לחברים 50 קרדיטים. קבלו 50 לעצמכם. בכל פעם.",
+    "stats": {
+      "invited": "הוזמנו",
+      "earned": "הורווח",
+      "perInvite": "להזמנה"
+    },
+    "tabs": {
+      "invite": "הזמינו חברים",
+      "feedback": "שלחו משוב"
+    },
+    "referralLink": "קישור ההפניה שלכם",
+    "howItWorks": "איך זה עובד",
+    "howSteps": [
+      "שתפו את הקישור שלכם עם חבר",
+      "הם נרשמים ומקבלים 50 קרדיטים חינם",
+      "אתם מיד מרוויחים 50 קרדיטים גם"
+    ],
+    "shareDirectly": "שתפו ישירות",
+    "yourReferrals": "ההפניות שלכם",
+    "invitedYou": "הזמין אותך",
+    "joinedViaLink": "הצטרף דרך הקישור שלכם",
+    "noReferrals": "אין הפניות עדיין",
+    "noReferralsHint": "שתפו את הקישור שלכם למעלה ושניכם תרוויחו 50 קרדיטים",
+    "feedbackThanks": "תודה על המשוב!",
+    "feedbackWeRead": "אנחנו קוראים כל הודעה.",
+    "sendAnother": "שלחו עוד",
+    "feedbackTitle": "ספרו לנו מה אתם חושבים",
+    "feedbackSubtitle": "דיווחי באגים, רעיונות לתכונות, או סתם להגיד שלום",
+    "feedbackPlaceholder": "מה בראש שלכם?",
+    "weReadEvery": "אנחנו קוראים כל הודעה",
+    "send": "שלח",
+    "shareMessage": "היי, אני משתמש ב-Coasty וזה ממש מגניב. זה AI שבאמת יכול להשתמש במחשב בשבילך. כמו גלישה, לחיצות, הקלדה, הכל. נסה עם הקישור שלי ושנינו נקבל קרדיטים חינם!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "אימייל"
+    },
+    "emailSubject": "בדקו את כלי ה-AI הזה",
+    "emailBody": "ה-AI הזה באמת יכול להשתמש במחשב בשבילכם. גלישה, לחיצות, הקלדה, הכל."
+  },
+  "statusPage": {
+    "title": "סטטוס המערכת",
+    "brandTitle": "סטטוס Coasty",
+    "subtitle": "סטטוס תפעולי בזמן אמת של כל שירותי Coasty. דף זה מתרענן אוטומטית כל 60 שניות.",
+    "refresh": "רענון",
+    "statuses": {
+      "operational": "תקין",
+      "degraded": "ביצועים מופחתים",
+      "outage": "תקלה"
+    },
+    "overallStatuses": {
+      "allOperational": "כל המערכות תקינות",
+      "someDegraded": "חלק מהמערכות עם ביצועים מופחתים",
+      "disruption": "זוהה שיבוש בשירות"
+    },
+    "overallDescriptions": {
+      "allOperational": "כל השירותים פועלים בצורה חלקה ללא בעיות שזוהו.",
+      "someDegraded": "חלק מהשירותים חווים איטיות. אנחנו חוקרים.",
+      "disruption": "אנחנו מודעים לבעיה ועובדים באופן פעיל על תיקון."
+    },
+    "responseTime": "{ms}ms זמן תגובה",
+    "uptimeLabel": "זמינות 90 יום",
+    "daysAgo": "לפני 90 יום",
+    "today": "היום",
+    "overallUptime": "זמינות כוללת 90 יום",
+    "overallUptimeDesc": "זמינות מצטברת על פני כל השירותים",
+    "services": "שירותים",
+    "clickUptime": "לחצו לצפייה בזמינות",
+    "lastChecked": "נבדק לאחרונה {time} · מתרענן אוטומטית כל 60 שניות",
+    "experiencingIssues": "חווים בעיות?",
+    "issuesDescription": "אם משהו לא נראה תקין, פנו אלינו ישירות.",
+    "talkToCofounders": "דברו עם המייסדים",
+    "emailUs": "שלחו לנו אימייל",
+    "serviceNames": {
+      "website": "אתר",
+      "aiBackend": "AI Backend",
+      "database": "מסד נתונים",
+      "authentication": "אימות",
+      "aiModels": "מודלי AI",
+      "fileStorage": "אחסון קבצים"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - סוכן AI #1 לשימוש במחשב | עובד AI לאוטומציית שולחן עבודה ודפדפן",
+      "titleTemplate": "{title} | Coasty - סוכן AI לשימוש במחשב",
+      "description": "Coasty הוא סוכן ה-AI #1 לשימוש במחשב — 82% במבחן OSWorld. הוא שולט בשולחן עבודה מלא כמו אדם: פותח דפדפנים, לוחץ, מקליד, ממלא טפסים, שולח מיילים, מנהל גיליונות אלקטרוניים. בידוד אמיתי ברמת VM לכל הפעלה. החל מ-$20/חודש.",
+      "ogTitle": "Coasty - סוכן AI #1 לשימוש במחשב | 82% במבחן OSWorld",
+      "ogDescription": "עובד AI ששולט בשולחן עבודה כמו אדם. #1 במבחן OSWorld (82%). אוטומציית דפדפן, שליטה בשולחן עבודה, פתרון CAPTCHA, בידוד VM. החל מ-$20/חודש.",
+      "twitterDescription": "עובד AI ששולט בשולחן עבודה כמו אדם. פותח דפדפנים, לוחץ, מקליד, ממלא טפסים, שולח מיילים. בידוד VM אמיתי. $20/חודש לעומת $3,000/חודש עוזר אנושי."
+    },
+    "compare": {
+      "title": "השוואת Coasty - חלופות סוכני AI והשוואת מתחרים",
+      "description": "ראו כיצד סוכן ה-AI #1 לשימוש במחשב של Coasty משתווה ל-Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath ועוד. השוואות תכונה-מול-תכונה עם תמחור.",
+      "ogTitle": "השוו את Coasty עם חלופות סוכני AI",
+      "ogDescription": "השוואת תכונה-מול-תכונה של סוכן ה-AI #1 לשימוש במחשב מול מתחרים. ציוני מבחן, תמחור, יכולות."
+    },
+    "download": {
+      "title": "הורדת אפליקציית Coasty לשולחן העבודה — סוכן AI ל-Mac ו-Windows",
+      "description": "הורידו את Coasty Desktop, סוכן ה-AI #1 לשימוש במחשב ששולט במחשב המקומי שלכם. אוטומציית דפדפן, שליטה בשולחן עבודה, גישה לטרמינל ופעולות קבצים. זמין ל-Windows ו-macOS.",
+      "ogTitle": "הורדת Coasty Desktop — סוכן AI ל-Mac ו-Windows",
+      "ogDescription": "AI ששולט במחשב שלכם כמו אדם. אוטומציית דפדפן, שולחן עבודה וטרמינל באפליקציה מקורית אחת. #1 במבחן OSWorld."
+    },
+    "guide": {
+      "title": "מה Coasty יכול לעשות? — המדריך המלא לאוטומציית מחשב עם AI",
+      "description": "גלו את כל מה ש-Coasty יכול לאוטומט: חיפוש לקוחות פוטנציאליים, קמפיינים באימייל, הגשת מועמדות לעבודה, בדיקות QA, הזנת נתונים, רשתות חברתיות, גיוס עובדים, מחקר ועוד למעלה מ-100 משימות נוספות.",
+      "ogTitle": "מה Coasty יכול לעשות? — מדריך מלא לאוטומציית AI",
+      "ogDescription": "חקרו למעלה מ-100 משימות ש-Coasty יכול לאוטומט. מקמפייני מכירות ועד בדיקות QA, ראו בדיוק איך סוכן AI מטפל בעבודה אמיתית."
+    },
+    "blog": {
+      "title": "בלוג - תובנות על סוכני AI, מחקר שימוש במחשב ומקרי בוחן",
+      "description": "צלילות עמוקות לסוכני AI אוטונומיים, טכנולוגיית שימוש במחשב, מקרי בוחן אוטומציה מהעולם האמיתי ועתיד עובדי ה-AI. מהצוות שמאחורי סוכן ה-AI #1 לשימוש במחשב.",
+      "ogTitle": "בלוג Coasty - תובנות על סוכני AI ומקרי בוחן",
+      "ogDescription": "צלילות עמוקות לסוכני AI אוטונומיים, טכנולוגיית שימוש במחשב ומקרי בוחן אוטומציה מהעולם האמיתי מסוכן ה-AI ה-#1."
+    },
+    "results": {
+      "title": "הדגמות ותוצאות — צפו בסוכן ה-AI של Coasty עובד באופן אוטונומי",
+      "description": "צפו ב-Coasty מריץ באופן אוטונומי קמפיינים שיווקיים, מגיש מועמדויות לעבודה, ממלא טפסים, עורך בדיקות QA למוצרים, שולח מיילים מותאמים אישית ועוד. מקרי בוחן אמיתיים עם הדגמות וידאו.",
+      "ogTitle": "הדגמות — צפו בסוכן ה-AI של Coasty עובד באופן אוטונומי",
+      "ogDescription": "הדגמות אמיתיות של AI ששולט במחשב: שיווק, הגשת מועמדויות, בדיקות QA, קמפיינים באימייל ועוד. #1 במבחן OSWorld."
+    },
+    "terms": {
+      "title": "תנאי שימוש",
+      "description": "תנאי השימוש של Coasty. קראו את התנאים המסדירים את השימוש בפלטפורמת עובד ה-AI של Coasty, סוכן שימוש במחשב ואפליקציית שולחן העבודה.",
+      "ogTitle": "Coasty — תנאי שימוש",
+      "ogDescription": "תנאי השימוש של Coasty. קראו את התנאים המסדירים את השימוש בפלטפורמת עובד ה-AI של Coasty, סוכן שימוש במחשב ואפליקציית שולחן העבודה."
+    },
+    "privacy": {
+      "title": "מדיניות פרטיות",
+      "description": "מדיניות הפרטיות של Coasty. למדו כיצד אנו מגנים על הנתונים שלכם עם בידוד ברמת VM, הפעלות מוצפנות, סביבות ביצוע מבודדות ואבטחה ברמה ארגונית.",
+      "ogTitle": "Coasty — מדיניות פרטיות",
+      "ogDescription": "מדיניות הפרטיות של Coasty. למדו כיצד אנו מגנים על הנתונים שלכם עם בידוד ברמת VM, הפעלות מוצפנות, סביבות ביצוע מבודדות ואבטחה ברמה ארגונית."
+    },
+    "useCases": {
+      "title": "מקרי שימוש - סוכן AI של Coasty לתפעול עסקי",
+      "description": "גלו 12 דרכים שבהן סוכן ה-AI של Coasty מאוטומט את הפעולות שלכם — מחקר מתחרים, בדיקות QA, יצירת לידים, קמפיינים באימייל ועוד. תוצאות אמיתיות.",
+      "ogTitle": "מקרי שימוש - סוכן AI של Coasty",
+      "ogDescription": "12 דרכים להכפיל פי 10 את התפוקה שלכם על טייס אוטומטי. תוצאות אמיתיות, מספרים אמיתיים."
+    },
+    "computerUse": {
+      "title": "סוכן AI לשימוש במחשב — אוטומציית שולחן עבודה, דפדפן וטרמינל #1",
+      "description": "Coasty הוא סוכן ה-AI הטוב ביותר לשימוש במחשב, מדורג #1 ב-OSWorld (82%). אוטומטו כל משימת שולחן עבודה, דפדפן או טרמינל עם AI אוטונומי ששולט במחשבים כמו אדם.",
+      "ogTitle": "Coasty — סוכן ה-AI #1 לשימוש במחשב",
+      "ogDescription": "סוכן שימוש במחשב הטוב ביותר, #1 ב-OSWorld. אוטומטו כל משימת שולחן עבודה, דפדפן או טרמינל עם AI."
+    },
+    "pricing": {
+      "title": "תמחור — תוכניות ומחירים של Coasty סוכן AI",
+      "description": "תוכניות תמחור של Coasty החל מ-$20/חודש. החליפו עוזרים וירטואליים ב-$3,000/חודש בעובד AI. שכבה חינמית זמינה. שימוש מבוסס קרדיטים ללא עלויות נסתרות.",
+      "ogTitle": "תמחור Coasty — תוכניות סוכן AI",
+      "ogDescription": "עובד AI החל מ-$20/חודש. החליפו עוזרים וירטואליים יקרים ב-AI אוטונומי. שכבה חינמית זמינה."
+    },
+    "faq": {
+      "q1": "מה זה Coasty?",
+      "a1": "Coasty היא פלטפורמת עובד AI — סוכן שימוש במחשב ששולט בשולחן עבודה כמו אדם. הוא פותח דפדפנים, לוחץ, מקליד, מנווט באפליקציות, ממלא טפסים, שולח מיילים ומנהל גיליונות אלקטרוניים באופן אוטונומי. #1 במבחן OSWorld עם שיעור השלמה של 82% ב-369 משימות מהעולם האמיתי.",
+      "q2": "איך Coasty משתווה ל-Anthropic Computer Use?",
+      "a2": "בעוד ש-Anthropic Computer Use מספק API גולמי לשליטה במחשב, Coasty היא פלטפורמה מוכנה לייצור עם תשתית VM מנוהלת, פתרון CAPTCHA מובנה, אפליקציית שולחן עבודה ל-Mac ו-Windows, תמיכה במספר מודלים והציון הגבוה ביותר במבחן OSWorld (82%). Coasty מספק את הפתרון המלא — לא רק את ה-API.",
+      "q3": "כמה עולה Coasty?",
+      "a3": "Coasty מתחיל ב-$20/חודש עם תוכנית Starter ושכבה חינמית זמינה. זאת בהשוואה ליותר מ-$3,000/חודש לעוזר וירטואלי אנושי. Coasty עובד 24/7 ללא הפסקות, ללא הכשרה ועם יכולת הרחבה מיידית.",
+      "q4": "האם Coasty בטוח לשימוש?",
+      "a4": "כן. כל הפעלה של Coasty רצה במכונה וירטואלית מבודדת ומוגנת משלה. הנתונים שלכם נשארים בטוחים, המחשב שלכם נשאר ללא שינוי ושום דבר לא דולף בין ההפעלות. זהו בידוד אמיתי ברמת VM, לא רק מיכלים בסביבה משותפת.",
+      "q5": "מה זה מבחן OSWorld?",
+      "a5": "OSWorld הוא מבחן להערכת סוכני AI במשימות מחשב מהעולם האמיתי. הוא בודק 369 משימות בדפדפנים, אפליקציות משרדיות ופעולות מערכת. Coasty השיג 82%, הציון הגבוה ביותר של כל סוכן שימוש במחשב — ומשיג ביצועים מתקדמים ביותר.",
+      "q6": "במה Coasty שונה מכלי RPA כמו UiPath?",
+      "a6": "כלי RPA מסורתיים כמו UiPath דורשים סקריפטים שבירים ונשברים כשממשקים משתנים. Coasty משתמש בראייה של AI כדי להבין ולתקשר עם כל ממשק, מתאים את עצמו בזמן אמת ללא סקריפטים מוגדרים מראש. הוא עובד כמו אדם, לא כמו מאקרו. ההגדרה לוקחת דקות במקום שבועות.",
+      "q7": "האם ל-Coasty יש אפליקציית שולחן עבודה?",
+      "a7": "כן. Coasty Desktop זמין גם ל-Mac וגם ל-Windows. הוא פועל כשכבת ציפה על שולחן העבודה שלכם ויכול לשלוט ישירות בדפדפן המקומי, בקבצים, בטרמינל ובאפליקציות — לא נדרש VM למשימות מקומיות.",
+      "q8": "מה Coasty יכול לאוטומט?",
+      "a8": "Coasty יכול לאוטומט כמעט כל משימת מחשב: גלישה באינטרנט, מילוי טפסים, שליחת מיילים, ניהול גיליונות אלקטרוניים, הזנת נתונים, פרסום ברשתות חברתיות, הגשת מועמדויות לעבודה, חיפוש לקוחות פוטנציאליים, בדיקות QA, שירות לקוחות, גיוס ב-LinkedIn ועוד. אם אדם יכול לעשות זאת במחשב, Coasty יכול גם.",
+      "q9": "איך Coasty משתווה ל-OpenAI Operator?",
+      "a9": "Coasty עולה על OpenAI Operator במבחן OSWorld (82% מול ~40%), מציע בידוד אמיתי ברמת VM לכל הפעלה, תומך במספר מודלים של AI, כולל שליטה מלאה בשולחן עבודה מעבר לדפדפן בלבד ומספק מסגרת קוד פתוח.",
+      "q10": "האם Coasty יכול לפתור CAPTCHA?",
+      "a10": "כן. ל-Coasty יש צינור מובנה לפתרון CAPTCHA, כך שהוא לא נחסם כמו סוכני AI מתחרים. זה קריטי לאוטומציה בעולם האמיתי שבו CAPTCHA נפוצים באתרי אינטרנט."
+    },
+    "structuredData": {
+      "appDescription": "סוכן ה-AI #1 לשימוש במחשב. Coasty שולט בשולחן עבודה מלא כמו אדם — פותח דפדפנים, לוחץ, מקליד, ממלא טפסים, שולח מיילים ומנהל גיליונות אלקטרוניים באופן אוטונומי. 82% במבחן OSWorld. בידוד אמיתי ברמת VM. פתרון CAPTCHA מובנה. החל מ-$20/חודש.",
+      "orgDescription": "Coasty בונה את סוכן ה-AI #1 לשימוש במחשב. הפלטפורמה שלנו מספקת שליטה אוטונומית בשולחן עבודה, אוטומציית דפדפן ותזמור מרובה סוכנים עם בידוד אמיתי ברמת VM.",
+      "productDescription": "סוכן AI לשימוש במחשב ששולט בשולחן עבודה כמו אדם. #1 במבחן OSWorld (82%). אוטומציית דפדפן אוטונומית, שליטה בשולחן עבודה, שליחת מיילים, מילוי טפסים וניהול גיליונות אלקטרוניים עם בידוד אמיתי ברמת VM.",
+      "websiteDescription": "פלטפורמת סוכן AI #1 לשימוש במחשב. 82% במבחן OSWorld. אוטומציית דפדפן, שולחן עבודה וטרמינל אוטונומית עם בידוד VM. החל מ-$20/חודש.",
+      "softwareDescription": "סוכן AI לשימוש במחשב ששולט בשולחן עבודה מלא כמו אדם. #1 במבחן OSWorld עם שיעור השלמה של 82% ב-369 משימות מהעולם האמיתי. אוטומציית דפדפן אוטונומית, שליטה בשולחן עבודה, פעולות טרמינל, שליחת מיילים, מילוי טפסים וניהול גיליונות אלקטרוניים.",
+      "breadcrumbs": {
+        "home": "דף הבית",
+        "caseStudies": "מקרי בוחן של סוכן AI",
+        "blog": "בלוג",
+        "download": "הורדת אפליקציית שולחן עבודה",
+        "compare": "השוואת סוכני AI"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – הדף לא נמצא",
+      "description": "מצטערים, דף זה אינו קיים."
+    },
+    "error": {
+      "title": "משהו השתבש",
+      "description": "אירעה שגיאה בלתי צפויה. אנא נסו שוב.",
+      "tryAgain": "נסו שוב"
+    }
+  },
+  "schedulesPage": {
+    "title": "כוח עבודה",
+    "subtitle": "כוח העבודה ה-AI שלך — הקצה משימות ותן להם לטפל בשאר",
+    "guide": "מדריך",
+    "teamsTab": "צוותות",
+    "hireEmployee": "גייס עובד",
+    "loading": "טוען את העובדים שלך...",
+    "onDuty": "{count} במשמרת",
+    "standby": "{count} בהמתנה",
+    "company": "חברה",
+    "teams": "{count} צוותות",
+    "employees": "{count} עובדים",
+    "members": "{count} חברים",
+    "unassigned": "לא משויכים",
+    "add": "הוסף",
+    "save": "שמור",
+    "cancel": "ביטול",
+    "run": "הפעל",
+    "delegate": "האצל",
+    "untitledEmployee": "עובד ללא שם",
+    "untitled": "ללא שם",
+    "guidelinesPlaceholder": "הנחיות...",
+    "today": "היום",
+    "timesDaily": "{count} × ביום",
+    "noEmployeesDay": "אין עובדים ביום זה",
+    "noEmployeesScheduled": "אין עובדים מתוזמנים",
+    "recentActivity": "פעילות אחרונה",
+    "schedule": "לוח זמנים",
+    "emptyState": {
+      "openChat": "פתח כל צ'אט ולחץ על",
+      "assignEmployee": "הקצה עובד",
+      "onThe": "ב",
+      "topRight": "פינה ימנית עליונה",
+      "toPutOnAutopilot": "כדי להעביר לטייס אוטומטי",
+      "newChat": "צ'אט חדש"
+    },
+    "emptyWorkforce": {
+      "title": "גייס את העובד הראשון שלך",
+      "description": "עובדי AI עובדים בשמך — הקצה משימה, קבע לוח זמנים, והם יבצעו אותה אוטומטית",
+      "flexibleShifts": {
+        "title": "משמרות גמישות",
+        "desc": "תזמן עובדים לפי שעה, יום, שבוע, חודש — או השתמש בביטוי cron מותאם אישית"
+      },
+      "fullAutonomy": {
+        "title": "אוטונומיה מלאה",
+        "desc": "כל עובד מקבל גישה מלאה לגלישה, מסוף, ותחנות העבודה המחוברות שלך"
+      },
+      "activityLogs": {
+        "title": "יומני פעילות",
+        "desc": "כל ביצוע נרשם כדי שתוכל לסקור מה העובדים שלך השיגו"
+      },
+      "startFromChat": "התחל מצ'אט"
+    },
+    "filters": {
+      "all": "הכל",
+      "onDuty": "במשמרת",
+      "standby": "בהמתנה"
+    },
+    "noMatch": "אין עובדים התואמים לסינון זה",
+    "createTeam": {
+      "title": "צוות חדש",
+      "subtitle": "התחל מתבנית או בנה מאפס",
+      "backToTemplates": "חזרה לתבניות",
+      "customTeam": "צוות מותאם אישית",
+      "customDescription": "צור צוות עם התצורה שלך.",
+      "teamNameLabel": "שם הצוות",
+      "teamNamePlaceholder": "לדוגמה: Research, Marketing, Engineering",
+      "guidelinesLabel": "הנחיות",
+      "optional": "(אופציונלי)",
+      "guidelinesPlaceholder": "הוראות משותפות שכל חברי הצוות יעקבו אחריהן...",
+      "suggestedEmployees": "עובדים מוצעים",
+      "suggestedCredentials": "אישורים מוצעים",
+      "added": "נוסף",
+      "addButton": "+ הוסף",
+      "credentials": "אישורים",
+      "addCredential": "+ הוסף אישור",
+      "credentialHint": "האישורים מוצפנים. הם ייכללו בהנחיות הצוות כדי שהעובדים ידעו מה זמין.",
+      "settingUp": "מגדיר...",
+      "createEmployees": "צור {count} עובדים",
+      "createTeamButton": "צור צוות"
+    },
+    "noTeams": {
+      "title": "אין עדיין צוותות",
+      "description": "צוותות מאפשרים לעובדים לשתף הקשר וזיכרון. צור אחד כדי לבנות את מבנה הארגון שלך.",
+      "newTeam": "צוות חדש"
+    },
+    "howItWorks": {
+      "title": "איך זה עובד",
+      "dragEmployees": "גרור עובדים לצוות",
+      "clickToEdit": "לחץ כדי לערוך לוח זמנים והגדרות",
+      "teamsShare": "צוותות חולקים זיכרון והנחיות",
+      "dashedLines": "קווים מקווקווים — האצלה בין עובדים"
+    },
+    "inactive": {
+      "title": "{count} עובדים לא פעילים",
+      "missingMachine": "ל-{count} חסר מכונה — לא יפעלו עד להפעלה",
+      "wontRun": "לא יפעל עד להפעלה",
+      "fixInEmployees": "תקן בעובדים"
+    },
+    "dragHint": "גרור עובדים לא משויכים לצוותות כדי להוסיף אותם",
+    "limits": {
+      "upgradePlan": "שדרג תוכנית",
+      "manageMachines": "נהל מכונות",
+      "manageEmployees": "נהל עובדים",
+      "machineLimit": "אתה צריך מכונת ענן אבל הגעת למגבלה של {max} מכונות. שדרג את התוכנית שלך או מחק מכונה שאינה בשימוש.",
+      "employeeLimit": "הגעת למגבלת העובדים ({max} לדרגת {tier}). שדרג את התוכנית שלך או הסר עובדים שאינם בשימוש.",
+      "templateLimit": "תבנית זו צריכה {needed} עובדים אבל נשארו לך רק {available} מקומות ({max} מקסימום לדרגת {tier}). שדרג את התוכנית שלך או הסר עובדים שאינם בשימוש.",
+      "createFailed": "יצירת עובדים נכשלה. בדוק את מגבלות החשבון שלך ונסה שוב.",
+      "teamFailed": "יצירת הצוות נכשלה"
+    },
+    "provisioning": {
+      "checking": "בודק מגבלות חשבון...",
+      "usingMachine": "משתמש במכונה \"{name}\"...",
+      "assigningMachine": "מקצה למכונה \"{name}\" (יפעל כשהמכונה תהיה מוכנה)...",
+      "creatingMachine": "יוצר מכונה חדשה...",
+      "machineStarted": "הקצאת המכונה החלה...",
+      "hiring": "מגייס את {name} ({current}/{total})...",
+      "creatingTeam": "יוצר צוות..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "צוות נוצר עם {count} עובדים ({failedCount} נכשלו: {names})",
+      "teamCreated": "צוות {name} נוצר עם {count} עובדים"
+    },
+    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "templates": {
+      "contentOps": {
+        "name": "תפעול תוכן",
+        "tagline": "פרסם באופן עקבי בלי להרים אצבע",
+        "description": "מנוע תוכן רזה — כותב, מייעל ומפיץ תוכן באוטומט.",
+        "roles": {
+          "atlas": "כותב תוכן — מנסח פוסטים בבלוג, ניוזלטרים וטקסטים לרשתות חברתיות",
+          "echo": "אנליסט SEO — מבקר דפים, עוקב אחר דירוגים, מציע הזדמנויות מילות מפתח",
+          "nova": "מפיץ חברתי — מפרסם תוכן בפלטפורמות ועוקב אחר מעורבות"
+        },
+        "credentials": {
+          "wordpress": "פרסם ונהל פוסטים בבלוג",
+          "twitter": "פרסם ציוצים ועקוב אחר מעורבות",
+          "linkedin": "פרסם תוכן מקצועי ומאמרים",
+          "searchConsole": "עקוב אחר ביצועי חיפוש ואינדוקס"
+        }
+      },
+      "customerSupport": {
+        "name": "תמיכת לקוחות",
+        "tagline": "כיסוי תמיכה 24/7 מ-3 עובדים",
+        "description": "מנטר תיבות דואר, פותר בעיות נפוצות ושומר על בסיס הידע מעודכן.",
+        "roles": {
+          "sage": "מנטר תיבת דואר — בודק מיילים של תמיכה, מסווג ומגיב לשאילתות נפוצות",
+          "iris": "מנהל בסיס ידע — מעדכן מסמכי עזרה ושאלות נפוצות על פי בעיות חוזרות",
+          "milo": "אנליסט משוב — מאגד ביקורות ומגמות תמיכה לדוחות שבועיים"
+        },
+        "credentials": {
+          "gmail": "נטר והגב למיילי תמיכה",
+          "zendesk": "נהל כרטיסי תמיכה (או מערכת העזרה שלך)",
+          "notion": "עדכן בסיס ידע ותיעוד"
+        }
+      },
+      "researchIntel": {
+        "name": "מחקר ומודיעין",
+        "tagline": "הישאר מעודכן ללא עבודה ידנית",
+        "description": "מנטר מתחרים, עוקב אחר מגמות בתעשייה ומרכיב תקצירי מחקר ברי-פעולה.",
+        "roles": {
+          "scout": "מנטר מתחרים — עוקב אחר אתרי מתחרים, תמחור ושינויי תכונות",
+          "wren": "חוקר מגמות — סורק חדשות תעשייה, פרסומים ורשתות חברתיות למגמות",
+          "quinn": "מרכיב תקצירים — מסנתז ממצאים לדוחות מודיעין שבועיים מובנים"
+        },
+        "credentials": {
+          "google": "מחקר אינטרנט וחיפוש",
+          "linkedin": "עקוב אחר גיוסים והודעות של מתחרים",
+          "notion": "פרסם תקצירי מחקר ודוחות"
+        }
+      },
+      "marketing": {
+        "name": "מחלקת שיווק",
+        "tagline": "צוות שיווק מלא בשתי מכונות",
+        "description": "יצירת תוכן, רשתות חברתיות, SEO, מעקב מתחרים ואנליטיקה של קמפיינים — שתי קבוצות מתואמות.",
+        "roles": {
+          "atlas": "אסטרטג תוכן — מתכנן לוח תוכן, כותב תוכן ארוך",
+          "nova": "מנהל רשתות חברתיות — מפרסם, מעורר מעורבות ומגדיל ערוצים חברתיים",
+          "echo": "מומחה SEO — מייעל דפים, בונה קישורים פנימיים, עוקב אחר מילות מפתח",
+          "pixel": "מנהל קמפיינים במייל — כותב ושולח ניוזלטרים, עוקב אחר פתיחות/קליקים",
+          "scout": "אנליסט מתחרים — מנטר מהלכי שיווק של מתחרים ומדווח תובנות",
+          "dash": "מנטר קמפיינים פרסומיים — עוקב אחר הוצאות פרסום, ROAS והזדמנויות אופטימיזציה",
+          "iris": "מדווח אנליטיקה — מרכיב דשבורדים של ביצועים חוצי-ערוצים"
+        },
+        "credentials": {
+          "wordpress": "פרסם תוכן בבלוג",
+          "twitter": "ניהול רשתות חברתיות",
+          "linkedin": "הפצת תוכן מקצועי",
+          "mailchimp": "קמפיינים במייל וניוזלטרים",
+          "analytics": "אנליטיקת תנועה והמרות",
+          "googleAds": "ניהול קמפיינים ב-Google Ads",
+          "metaAds": "Meta Ads וניהול חברתי"
+        }
+      },
+      "ecommerce": {
+        "name": "תפעול מסחר אלקטרוני",
+        "tagline": "הפעל את החנות שלך בזמן שאתה ישן",
+        "description": "ניהול מוצרים, מודיעין תמחור, מעקב מלאי, ניהול ביקורות ושיווק צמיחה לחנויות מקוונות.",
+        "roles": {
+          "cleo": "מפרסם מוצרים — יוצר ומעדכן תיאורי מוצרים, תמונות ומטאדאטה",
+          "onyx": "מנטר מחירים — עוקב אחר מחירי מתחרים ומסמן הזדמנויות להתאמות",
+          "luna": "עוקב מלאי — מנטר רמות מלאי ומתריע על מלאי נמוך",
+          "sage": "מנהל ביקורות — מגיב לביקורות לקוחות ומאגד סנטימנט",
+          "dash": "מייעל קמפיינים פרסומיים — מנהל פרסומות מוצר וקמפיינים של שופינג",
+          "flux": "משווק במייל — שולח סדרות עגלה נטושה, מבצעים ואחרי-רכישה",
+          "wren": "מדווח אנליטיקה — עוקב אחר הכנסות, שיעורי המרה ומדדי צמיחה"
+        },
+        "credentials": {
+          "shopify": "ניהול חנות ורישום מוצרים",
+          "amazon": "ניהול מרקטפלייס של Amazon",
+          "googleAds": "פרסומות שופינג וקמפיינים",
+          "mailchimp": "סדרות מייל ללקוחות",
+          "analytics": "אנליטיקת המרות ותנועה"
+        }
+      },
+      "engineering": {
+        "name": "צוות הנדסה",
+        "tagline": "אוטמט את החלקים המשעממים בהנדסה",
+        "description": "סקירות קוד אוטומטיות, ניטור תלויות, תיעוד, בדיקות, ניטור פריסות ותגובה לתקריות.",
+        "roles": {
+          "rune": "סוקר קוד — סוקר PR פתוחים, מציע שיפורים, בודק בעיות אבטחה",
+          "koda": "מנטר תלויות — עוקב אחר חבילות מיושנות, התראות אבטחה ושינויים שוברים",
+          "aria": "כותב תיעוד — שומר על API docs, README ו-changelog מעודכנים",
+          "blaze": "מנטר בדיקות — מריץ סוויטות בדיקה, עוקב אחר בדיקות לא יציבות, מדווח מגמות כיסוי",
+          "frost": "מנטר פריסות — צופה בצינורות CI/CD, מתריע על כשלים, עוקב אחר תדירות פריסה",
+          "neon": "צופה זמינות ולוגים — מנטר שירותים, סורק לוגים לשגיאות, יוצר דוחות תקריות"
+        },
+        "credentials": {
+          "github": "גישה למאגר, סקירות PR, בעיות",
+          "vercel": "ניטור פריסות (או ה-CI/CD שלך)",
+          "sentry": "מעקב שגיאות והתראות תקריות",
+          "npm": "רישום חבילות לבדיקת תלויות"
+        }
+      },
+      "fullBusiness": {
+        "name": "תפעול עסקי מלא",
+        "tagline": "חברה שלמה, אוטומטית לגמרי",
+        "description": "מכירות, שיווק, תמיכה ואדמין — ארבע מחלקות עובדות בתיאום על שלוש מכונות עם מודיעין משותף.",
+        "roles": {
+          "atlas": "מייצר לידים — מוצא ומאשר לקוחות פוטנציאליים ממקורות מקוונים",
+          "dash": "מנהל CRM — מעדכן עסקאות, עוקב אחר צינור מכירות ושולח סדרות מעקב",
+          "scout": "כותב הצעות — מנסח הצעות מכירה ומצגות מתבניות",
+          "nova": "משווק תוכן — כותב פוסטים בבלוג, מקרי בוחן וטקסטים שיווקיים",
+          "echo": "מנהל רשתות חברתיות — מפרסם תוכן ומעורר מעורבות קהל",
+          "pixel": "מנהל קמפיינים במייל — מריץ קמפיינים טפטוף וסדרות ניוזלטר",
+          "sage": "ראש תמיכה — מטפל בפניות לקוחות ופותר בעיות",
+          "iris": "מנהל ידע — מתחזק מסמכי עזרה, שאלות נפוצות וויקי פנימי",
+          "milo": "אנליסט נתונים — מרכיב דוחות חוצי-מחלקות ודשבורדי KPI",
+          "wren": "חוקר שוק — עוקב אחר מגמות בתעשייה ומודיעין תחרותי",
+          "quinn": "מתאם תפעול — מריץ סיכומים שבועיים וסנכרונים בין צוותות"
+        },
+        "credentials": {
+          "gmail": "תקשורת במייל ותמיכה",
+          "hubspot": "CRM וצינור מכירות (או ה-CRM שלך)",
+          "linkedin": "יצירת לידים ורשת מקצועית",
+          "mailchimp": "קמפיינים של שיווק במייל",
+          "notion": "ויקי פנימי ותיעוד",
+          "analytics": "אנליטיקת אינטרנט ודיווח",
+          "twitter": "נוכחות ברשתות חברתיות",
+          "zendesk": "כרטיסי תמיכת לקוחות"
+        }
+      },
+      "growth": {
+        "name": "צמיחה ורכישה",
+        "tagline": "צמיחה אגרסיבית על טייס אוטומטי מלא",
+        "description": "פנייה יוצאת, שיווק נכנס, אופטימיזציית המרות ואנליטיקה — מנוע צמיחה ייעודי על שלוש מכונות.",
+        "roles": {
+          "blaze": "מחפש פוטנציאלי יוצא — מוצא מקבלי החלטות, חוקר חברות, בונה רשימות לידים",
+          "flux": "פנייה במייל — שולח מיילים קרים מותאמים אישית, מנהל סדרות מעקב",
+          "orion": "פנייה ב-LinkedIn — מתחבר לפוטנציאליים ושולח הודעות מותאמות אישית",
+          "coral": "יוצר תוכן — מייצר תוכן SEO, טקסט לדפי נחיתה ומגנטים ללידים",
+          "taro": "מייעל דפי נחיתה — מנטר שיעורי המרה, מציע ובודק שיפורים",
+          "vale": "מנהל קמפיינים פרסומיים — מנהל קמפיינים ב-Google ו-Meta מקצה לקצה",
+          "ember": "מדרג לידים — מאשר לידים נכנסים ומנתב למעקב מתאים",
+          "haze": "אנליסט משפך — עוקב אחר מדדי המרה בכל שלב, מזהה צווארי בקבוק",
+          "dune": "מודיעין מתחרים — מנטר קמפיינים, תמחור ושינויי מיקום של מתחרים",
+          "kit": "מדווח צמיחה — מרכיב מדדי צמיחה יומיים/שבועיים ותוצאות ניסויים"
+        },
+        "credentials": {
+          "linkedin": "חיפוש ופנייה",
+          "gmail": "מיילים קרים וסדרות מעקב",
+          "hubspot": "ניהול לידים ו-CRM",
+          "googleAds": "קמפיינים בחיפוש בתשלום",
+          "metaAds": "פרסום Meta",
+          "analytics": "אנליטיקת משפך והמרות",
+          "ahrefs": "מחקר SEO ואנליזת מתחרים"
+        }
+      },
+      "saas": {
+        "name": "תפעול SaaS",
+        "tagline": "הפעל את ה-SaaS שלך כמו מכונה משומנת היטב",
+        "description": "הצלחת לקוחות, אנליטיקת מוצר, מניעת נטישה, מעקב תכונות ודיווח אוטומטי לעסקי SaaS.",
+        "roles": {
+          "luna": "מנטר הצלחת לקוחות — עוקב אחר מעורבות משתמשים, מזהה חשבונות בסיכון",
+          "sage": "עוזר קליטה — מנחה משתמשים חדשים בהגדרה, מנטר שיעורי הפעלה",
+          "ivy": "מונע נטישה — פונה למשתמשים שמתנתקים עם קמפיינים של הפעלה מחדש",
+          "rune": "עוקב בקשות תכונות — מאגד משוב משתמשים ובקשות תכונות מכל הערוצים",
+          "koda": "אנליטיקת מוצר — עוקב אחר אימוץ תכונות, מסלולי משתמשים ומדדי מעורבות",
+          "neon": "מנטר באגים ובעיות — צופה בלוגי שגיאות, דיווחי משתמשים ותקריות דף סטטוס",
+          "aria": "כותב changelog — מתעד שחרורים, מעדכן בסיס ידע ומרכז עזרה",
+          "frost": "אנליסט הכנסות — עוקב אחר MRR, שיעור נטישה, LTV והכנסות הרחבה",
+          "zara": "עוקב מתחרים — מנטר תכונות, תמחור ומיקום שוק של מתחרים"
+        },
+        "credentials": {
+          "stripe": "נתוני מנויים והכנסות",
+          "intercom": "הודעות ותמיכת לקוחות (או הכלי שלך)",
+          "mixpanel": "אנליטיקת מוצר ומעקב משתמשים",
+          "gmail": "תקשורת עם לקוחות",
+          "notion": "בסיס ידע ו-changelog",
+          "sentry": "ניטור שגיאות ומעקב באגים",
+          "github": "מעקב בעיות ובקשות תכונות"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "עד 3",
+        "price": "$19/חודש"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "עד 10",
+        "price": "$50/חודש"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "עד 50",
+        "price": "$100/חודש"
+      }
+    },
+    "frequencies": {
+      "daily": "יומי",
+      "weekly": "שבועי",
+      "every_30_minutes": "כל 30 דקות",
+      "every_6_hours": "כל 6 שעות",
+      "every_12_hours": "כל 12 שעות"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "הגדר הגדרות מחשב בסיסיות",
+    "displayName": "שם תצוגה",
+    "defaultName": "המחשב שלי",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "סיסמה זו נדרשת לחיבור למחשב"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "קהילה",
+    "title": "ראו איך אנשים משתמשים בזה",
+    "subtitle": "ממחקר לידים ועד בדיקות QA — ראו מה הקהילה מאטמטת וקבלו השראה לתהליך העבודה הבא שלכם.",
+    "sessionCount": "{count} פגישות ששותפו על ידי הקהילה",
+    "searchPlaceholder": "חפשו לפי משימה, כלי או תוצאה...",
+    "emptyTitle": "אף אחד עדיין לא שיתף — היו הראשונים",
+    "emptySubtitle": "כשמשתמשים הופכים את הפגישות שלהם לציבוריות, הן מופיעות כאן",
+    "noResultsTitle": "אין תוצאות תואמות",
+    "noResultsSubtitle": "נסו מילות מפתח אחרות",
+    "watchSession": "צפו בפגישה",
+    "steps": "{count} צעדים",
+    "tryCoasty": "נסו את Coasty"
+  }
+}

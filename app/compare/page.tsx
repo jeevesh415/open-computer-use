@@ -2,9 +2,11 @@
 
 import Link from "next/link"
 import { LandingHeader } from "@/app/components/landing/landing-header"
+import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { GuideLines } from "@/app/components/landing/guide-lines"
+import { useTranslations } from "next-intl"
 
 const competitors = [
   { slug: "anthropic-computer-use", name: "Anthropic Computer Use", tagline: "Managed platform vs raw API", category: "AI Agent" },
@@ -29,6 +31,8 @@ const fade = {
 }
 
 export default function ComparePage() {
+  const t = useTranslations("comparePage")
+
   return (
     <div className="relative min-h-screen bg-background">
       <GuideLines />
@@ -42,7 +46,7 @@ export default function ComparePage() {
             transition={{ duration: 0.6 }}
             className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/50 mb-4"
           >
-            Comparisons
+            {t("title")}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -50,7 +54,7 @@ export default function ComparePage() {
             transition={{ duration: 0.6, delay: 0.05 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.08] mb-5"
           >
-            Coasty vs. the Competition
+            {t("heroTitle")}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -58,7 +62,7 @@ export default function ComparePage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-muted-foreground text-lg sm:text-xl max-w-2xl leading-relaxed"
           >
-            See how the #1 ranked computer-using AI agent (82% OSWorld) compares to alternatives. Feature-by-feature breakdowns with real data.
+            {t("heroDescription")}
           </motion.p>
         </div>
 
@@ -81,7 +85,7 @@ export default function ComparePage() {
                       <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground/20 group-hover:text-foreground/50 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
                     <h3 className="font-semibold text-foreground group-hover:text-foreground/70 transition-colors duration-200 mb-2 leading-snug">
-                      Coasty vs {comp.name}
+                      {t("vsLabel", { name: comp.name })}
                     </h3>
                     <p className="text-sm text-muted-foreground/70 leading-relaxed flex-1">
                       {comp.tagline}
@@ -103,7 +107,7 @@ export default function ComparePage() {
             className="mt-24 text-center"
           >
             <p className="text-muted-foreground/60 text-sm mb-6">
-              Ready to try the #1 computer-using AI agent?
+              {t("ctaTitle")}
             </p>
             <Link href="/auth">
               <motion.button
@@ -111,16 +115,18 @@ export default function ComparePage() {
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Try Coasty Free
+                {t("ctaButton")}
                 <ArrowRight className="h-4 w-4" />
               </motion.button>
             </Link>
             <p className="text-[11px] text-muted-foreground/30 mt-4">
-              No credit card required
+              {t("noCreditCard")}
             </p>
           </motion.div>
         </div>
       </main>
+
+      <LandingFooter />
     </div>
   )
 }

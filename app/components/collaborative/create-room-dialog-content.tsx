@@ -9,6 +9,7 @@ import { useUser } from "@/lib/user-store/provider"
 import { useChats } from "@/lib/chat-store/chats/provider"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 interface CreateRoomDialogContentProps {
   open: boolean
@@ -17,6 +18,7 @@ interface CreateRoomDialogContentProps {
 }
 
 export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: CreateRoomDialogContentProps) {
+  const t = useTranslations("collaborative")
   const [title, setTitle] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const { user } = useUser()
@@ -29,7 +31,7 @@ export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: C
 
     if (!title.trim()) {
       toast({
-        title: "Room title is required",
+        title: t("createRoom.titleRequired"),
         status: "error",
       })
       return
@@ -44,10 +46,8 @@ export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: C
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userId: user.id,
           title: title.trim(),
           model: "gpt-4o-mini", // Default model
-          isAuthenticated: true,
         }),
       })
 
@@ -76,12 +76,12 @@ export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: C
       }
       
       toast({
-        title: "Task created successfully",
+        title: t("createRoom.taskCreated"),
         status: "success",
       })
     } catch (error) {
       toast({
-        title: "Failed to create task",
+        title: t("createRoom.taskFailed"),
         description: error instanceof Error ? error.message : "An unexpected error occurred",
         status: "error",
       })
@@ -94,18 +94,18 @@ export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: C
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Assign New Task</DialogTitle>
+          <DialogTitle>{t("createRoom.assignTask")}</DialogTitle>
           <DialogDescription>
-            Start a new task with your AI assistant.
+            {t("createRoom.assignTaskDesc")}
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="room-title">Task Name</Label>
+            <Label htmlFor="room-title">{t("createRoom.taskName")}</Label>
             <Input
               id="room-title"
-              placeholder="Enter task name"
+              placeholder={t("createRoom.taskNamePlaceholder")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               onKeyDown={(e) => {
@@ -119,10 +119,10 @@ export function CreateRoomDialogContent({ open, onOpenChange, onRoomCreated }: C
         
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
+            {t("createRoom.cancel")}
           </Button>
           <Button onClick={handleCreateRoom} disabled={isLoading || !title.trim()}>
-            {isLoading ? "Creating..." : "Create Task"}
+            {isLoading ? t("createRoom.creating") : t("createRoom.createTask")}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useAccountDialog } from "@/lib/account-dialog-store"
 import {
   Dialog,
   DialogContent,
@@ -29,30 +29,30 @@ interface InsufficientCreditsModalProps {
 const creditPackages = [
   {
     id: "boost-small",
-    name: "Small Boost",
-    credits: 500,
-    price: 5,
-    displayCredits: 500,
+    name: "Boost",
+    credits: 150,
+    price: 19,
+    displayCredits: 150,
     description: "Quick top-up",
   },
   {
     id: "boost-medium",
-    name: "Medium Boost",
-    credits: 2000,
-    price: 18,
-    displayCredits: 2000,
-    description: "Standard refill",
-    savings: "10% savings",
+    name: "Power Boost",
+    credits: 500,
+    price: 49,
+    displayCredits: 500,
+    description: "Most popular",
+    savings: "23% off",
     popular: true,
   },
   {
     id: "boost-large",
-    name: "Large Boost",
-    credits: 5000,
-    price: 40,
-    displayCredits: 5000,
-    description: "Bulk purchase",
-    savings: "20% savings",
+    name: "Ultra Boost",
+    credits: 1200,
+    price: 99,
+    displayCredits: 1200,
+    description: "Best value",
+    savings: "35% off",
   },
 ]
 
@@ -64,7 +64,7 @@ export function InsufficientCreditsModal({
   estimatedRuntime = 0,
   errorMessage,
 }: InsufficientCreditsModalProps) {
-  const router = useRouter()
+  const openAccountDialog = useAccountDialog((s) => s.open)
   const [isLoading, setIsLoading] = useState(false)
   const [hasSubscription, setHasSubscription] = useState(false)
   const { credits } = useCredits()
@@ -94,10 +94,10 @@ export function InsufficientCreditsModal({
     try {
       if (!hasSubscription) {
         // Redirect to billing section to subscribe first
-        router.push(`/account?section=billing&subscribe=true`)
+        openAccountDialog("billing")
       } else {
         // Redirect to account page billing section with package pre-selected
-        router.push(`/account?section=billing&package=${packageId}`)
+        openAccountDialog("billing")
       }
       onClose()
     } catch (error) {
@@ -109,7 +109,7 @@ export function InsufficientCreditsModal({
 
   const handleSubscribe = () => {
     setIsLoading(true)
-    router.push(`/account?section=billing&subscribe=true`)
+    openAccountDialog("billing")
     onClose()
   }
 
@@ -205,7 +205,7 @@ export function InsufficientCreditsModal({
 
         <div className="flex items-center justify-between pt-4 mt-4 border-t text-xs text-muted-foreground">
           <button
-            onClick={() => { router.push("/account?section=billing"); onClose() }}
+            onClick={() => { openAccountDialog("billing"); onClose() }}
             className="hover:text-foreground transition-colors"
           >
             View all options

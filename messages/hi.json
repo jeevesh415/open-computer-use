@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "मुफ़्त शुरू करें",
+    "bookDemo": "डेमो बुक करें",
+    "tryCoastyFree": "Coasty मुफ़्त आज़माएं",
+    "learnMore": "और जानें",
+    "watchSession": "सत्र देखें",
+    "compareAllPlans": "सभी प्लान और सुविधाओं की तुलना करें",
+    "allRightsReserved": "सर्वाधिकार सुरक्षित।",
+    "privacy": "गोपनीयता",
+    "terms": "शर्तें",
+    "recommended": "अनुशंसित",
+    "month": "महीना",
+    "creditsPerMonth": "{count} क्रेडिट/माह",
+    "agentsInParallel": "{count} एजेंट समानांतर में"
+  },
+  "header": {
+    "useCases": "उपयोग के मामले",
+    "blog": "ब्लॉग",
+    "agentSwarms": "एजेंट स्वार्म",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "तुलना",
+    "demos": "डेमो",
+    "pricing": "मूल्य निर्धारण",
+    "download": "डाउनलोड",
+    "signIn": "साइन इन",
+    "getStarted": "शुरू करें",
+    "useCaseItems": {
+      "competitorIntel": "प्रतिस्पर्धी जानकारी",
+      "qaBugReports": "QA बग रिपोर्ट",
+      "seoGapAnalysis": "SEO गैप विश्लेषण",
+      "dataExtraction": "डेटा निष्कर्षण",
+      "leadGeneration": "लीड जनरेशन",
+      "siteAudit": "साइट ऑडिट",
+      "adIntelligence": "विज्ञापन इंटेलिजेंस",
+      "emailOutreach": "ईमेल आउटरीच",
+      "designReview": "डिज़ाइन समीक्षा",
+      "priceMonitoring": "मूल्य निगरानी",
+      "marketResearch": "बाज़ार अनुसंधान",
+      "emailCampaigns": "ईमेल अभियान"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} प्रतिस्पर्धी प्रोफ़ाइल वितरित",
+      "qaBugReports": "{stat} उपयोगकर्ता फ़्लो प्रति रन परीक्षित",
+      "seoGapAnalysis": "{stat} कीवर्ड गैप पहचाने गए",
+      "dataExtraction": "{stat} पंक्तियाँ प्रति रन निकाली गईं",
+      "leadGeneration": "{stat} योग्य लीड प्रति रन",
+      "siteAudit": "{stat} पेज प्रति रन ऑडिट किए गए",
+      "adIntelligence": "{stat} विज्ञापन क्रिएटिव कैप्चर किए गए",
+      "emailOutreach": "{stat} व्यक्तिगत ईमेल ड्राफ़्ट किए गए",
+      "designReview": "{stat} ब्रेकपॉइंट प्रति पेज परीक्षित",
+      "priceMonitoring": "{stat} SKU प्रति रन तुलना किए गए",
+      "marketResearch": "{stat} डेटा पॉइंट एकत्रित",
+      "emailCampaigns": "{stat} व्यक्तिगत ईमेल प्रति अभियान"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "सभी पोस्ट",
+      "computerUse": "कंप्यूटर उपयोग",
+      "compare": "तुलना",
+      "dataEntry": "डेटा एंट्री",
+      "webScraping": "वेब स्क्रैपिंग",
+      "jobApplications": "नौकरी आवेदन",
+      "demosResults": "डेमो और परिणाम",
+      "guide": "गाइड"
+    },
+    "blogStats": {
+      "allPosts": "{stat} लेख साप्ताहिक प्रकाशित",
+      "computerUse": "{stat} OSWorld बेंचमार्क स्कोर",
+      "compare": "{stat} प्रतिस्पर्धियों का विश्लेषण",
+      "dataEntry": "{stat} मैनुअल से तेज़",
+      "webScraping": "{stat} पेज प्रति सत्र",
+      "jobApplications": "{stat} आवेदन प्रति सत्र",
+      "demosResults": "{stat} वास्तविक केस स्टडी",
+      "guide": "{stat} उपयोग केस वॉकथ्रू"
+    }
+  },
+  "hero": {
+    "badge": "#1 कंप्यूटर-उपयोग एजेंट · {score} OSWorld",
+    "headline": "स्वायत्त कंप्यूटर ऑपरेटर",
+    "useCases": {
+      "computerAgent": {
+        "label": "कंप्यूटर एजेंट",
+        "headline": "किसी भी ब्राउज़र कार्य को स्वचालित करें",
+        "outcome": "एक AI एजेंट जो वास्तविक कंप्यूटर को नियंत्रित करता है — ब्राउज़ करता है, क्लिक करता है, टाइप करता है, और तैयार काम देता है। कोई सेटअप आवश्यक नहीं।"
+      },
+      "competitorIntel": {
+        "label": "प्रतिस्पर्धी जानकारी",
+        "headline": "हर प्रतिस्पर्धी पर नज़र रखें",
+        "outcome": "मूल्य निर्धारण, सुविधाओं और पोज़िशनिंग गैप के साथ पूर्ण प्रतिस्पर्धी प्रोफ़ाइल — साझा करने के लिए तैयार रिपोर्ट के रूप में निर्यात।"
+      },
+      "qaTesting": {
+        "label": "QA परीक्षण",
+        "headline": "उपयोगकर्ताओं से पहले बग खोजें",
+        "outcome": "महत्वपूर्ण उपयोगकर्ता फ़्लो का शुरू से अंत तक परीक्षण, हर बग का स्क्रीनशॉट पुनरुत्पादन चरणों और गंभीरता रैंकिंग के साथ।"
+      },
+      "seoAnalysis": {
+        "label": "SEO विश्लेषण",
+        "headline": "कीवर्ड गैप उजागर करें",
+        "outcome": "कीवर्ड गैप पहचाने गए, कंटेंट ब्रीफ़ तैयार किए गए, प्रतिस्पर्धी बैकलिंक स्रोत मैप किए गए — कार्रवाई योग्य SEO रणनीति।"
+      },
+      "dataExtraction": {
+        "label": "डेटा निष्कर्षण",
+        "headline": "किसी भी साइट को स्क्रैप और संरचित करें",
+        "outcome": "संरचित डेटा स्क्रैप किया गया, साफ़ किया गया, डी-डुप्लिकेट किया गया, और CSV के रूप में निर्यात — किसी भी वेबसाइट से, किसी भी प्रारूप में।"
+      },
+      "leadGeneration": {
+        "label": "लीड जनरेशन",
+        "headline": "अपनी सेल्स पाइपलाइन भरें",
+        "outcome": "आपके ICP से मेल खाने वाले योग्य निर्णयकर्ता, सत्यापित पदों, कंपनियों और व्यक्तिगत आउटरीच ओपनर्स के साथ।"
+      },
+      "siteAudit": {
+        "label": "साइट ऑडिट",
+        "headline": "बड़े पैमाने पर हर पेज का ऑडिट करें",
+        "outcome": "पेज स्कैन किए गए, Core Web Vitals स्कोर किए गए, टूटे लिंक मिले, एक्सेसिबिलिटी समस्याएं फिक्स प्राथमिकता के अनुसार रैंक की गईं।"
+      },
+      "emailOutreach": {
+        "label": "ईमेल आउटरीच",
+        "headline": "व्यक्तिगत आउटरीच भेजें",
+        "outcome": "हर प्रॉस्पेक्ट की कंपनी, भूमिका और समस्याओं का संदर्भ देने वाले व्यक्तिगत ईमेल — भेजने के लिए तैयार।"
+      },
+      "marketResearch": {
+        "label": "बाज़ार अनुसंधान",
+        "headline": "अपने बाज़ार को तेज़ी से मान्य करें",
+        "outcome": "TAM गणना, प्रमुख खिलाड़ियों की प्रोफ़ाइल, विकास रुझान चार्ट — दर्जनों डेटा पॉइंट से प्राप्त।"
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "मार्केटिंग",
+        "task": "Reddit पर अपने उत्पाद का स्वायत्त रूप से मार्केटिंग करें"
+      },
+      "goToMarket": {
+        "label": "गो-टू-मार्केट",
+        "task": "प्रॉस्पेक्ट खोजें और व्यक्तिगत ईमेल भेजें"
+      },
+      "qaTesting": {
+        "label": "QA परीक्षण",
+        "task": "हर चेकआउट फ़्लो का परीक्षण करें और बग रिपोर्ट करें"
+      },
+      "jobApplication": {
+        "label": "नौकरी आवेदन",
+        "task": "भूमिकाएं खोजें, रिज़्यूमे तैयार करें, और आवेदन करें"
+      },
+      "formFilling": {
+        "label": "फ़ॉर्म भरना",
+        "task": "आपके लिए YC S26 आवेदन भरें"
+      },
+      "socialMedia": {
+        "label": "सोशल मीडिया",
+        "task": "Hacker News पर पोस्ट करें और टिप्पणियों पर प्रतिक्रिया दें"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld बेंचमार्क",
+      "sublabel": "विश्व स्तर पर #1 कंप्यूटर-उपयोग एजेंट"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "एजेंट द्वारा उपयोग किए जाने वाले टूल",
+      "sublabel": "ब्राउज़र, टर्मिनल, डेस्कटॉप, फ़ाइलें"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "शेड्यूल पर चलता है",
+      "sublabel": "किसी भी आवर्ती कार्य को स्वचालित करें"
+    },
+    "setup": {
+      "value": "0",
+      "label": "सेटअप आवश्यक",
+      "sublabel": "कोई API नहीं, कोई इंटीग्रेशन नहीं, कोई कोड नहीं"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Coasty क्यों",
+    "title": "न चैटबॉट। न RPA स्क्रिप्ट।",
+    "worksLikeHuman": {
+      "title": "इंसान की तरह काम करता है",
+      "description": "देखता है, क्लिक करता है, टाइप करता है, नेविगेट करता है — बिल्कुल आपकी तरह"
+    },
+    "noScripts": {
+      "title": "कोई स्क्रिप्ट या सेटअप नहीं",
+      "description": "सरल भाषा में बताएं, परिणाम पाएं"
+    },
+    "handlesUnexpected": {
+      "title": "अप्रत्याशित को संभालता है",
+      "description": "CAPTCHA, पॉपअप, लेआउट परिवर्तनों के अनुसार ढलता है"
+    },
+    "runsInIsolation": {
+      "title": "अलगाव में चलता है",
+      "description": "प्रति सत्र सैंडबॉक्स VM — कुछ भी लीक नहीं होता"
+    }
+  },
+  "howItWorks": {
+    "title": "यह कैसे काम करता है",
+    "step1": {
+      "title": "अपना कार्य बताएं",
+      "description": "सरल भाषा में। बस इतना ही।",
+      "placeholder": "LinkedIn पर 100 लीड रिसर्च करें..."
+    },
+    "step2": {
+      "title": "एजेंट को काम करते देखें",
+      "description": "ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, नेविगेट करता है"
+    },
+    "step3": {
+      "title": "कार्य पूरा",
+      "description": "हर क्रिया स्क्रीनशॉट के साथ लॉग की गई",
+      "results": {
+        "taskCompleted": "कार्य पूरा हुआ",
+        "leadsFound": "12 लीड मिले",
+        "addedToCrm": "CRM में जोड़ा गया"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "विश्व स्तर पर #1 बेंचमार्क",
+    "subtitle": "OSWorld पर 82% — वास्तविक कंप्यूटर का उपयोग करने वाले AI एजेंट के लिए सबसे कठिन बेंचमार्क",
+    "agenticFramework": "एजेंटिक फ्रेमवर्क",
+    "foundationModel": "फाउंडेशन मॉडल"
+  },
+  "comparison": {
+    "title": "Coasty के साथ स्वचालित क्यों करें?",
+    "subtitle": "वही कार्य जो एक टीम को घंटों लगते हैं — Coasty मिनटों में, चौबीसों घंटे पूरा करता है।",
+    "manual": {
+      "title": "मैन्युअल रूप से करना",
+      "subtitle": "आप या आपकी टीम, हाथ से"
+    },
+    "coasty": {
+      "title": "Coasty AI एजेंट",
+      "subtitle": "#1 कंप्यूटर-उपयोग एजेंट"
+    },
+    "rows": {
+      "timePerTask": "प्रति कार्य समय",
+      "availability": "उपलब्धता",
+      "setupTime": "सेटअप समय",
+      "errorRate": "त्रुटि दर",
+      "scaling": "स्केलिंग",
+      "auditTrail": "ऑडिट ट्रेल"
+    },
+    "manualValues": {
+      "timePerTask": "घंटों से दिनों तक",
+      "availability": "केवल कार्य समय में",
+      "setupTime": "टूल सीखें, SOP लिखें",
+      "errorRate": "मानवीय गलतियाँ",
+      "scaling": "ज़्यादा करें = ज़्यादा समय लगाएं",
+      "auditTrail": "कोई नहीं"
+    },
+    "coastyValues": {
+      "timePerTask": "मिनट",
+      "availability": "24/7, हर दिन",
+      "setupTime": "60 सेकंड",
+      "errorRate": "स्व-सुधारात्मक",
+      "scaling": "असीमित कार्य समानांतर में चलाएं",
+      "auditTrail": "हर क्लिक लॉग + स्क्रीनशॉट"
+    },
+    "bottomBar": {
+      "automateTasksThat": "ऐसे कार्य स्वचालित करें जिनमें लगते हैं",
+      "hoursManually": "मैन्युअल रूप से घंटे",
+      "startingAt": "शुरुआत"
+    }
+  },
+  "demo": {
+    "title": "एजेंट को काम करते देखें",
+    "subtitle": "वास्तविक कार्य। वास्तविक ब्राउज़र। हर क्लिक रिकॉर्ड।",
+    "sessions": {
+      "reddit": {
+        "title": "Reddit पर Coasty",
+        "description": "देखें कैसे Coasty स्वायत्त रूप से एक मार्केटिंग अभियान चलाता है — प्रतिस्पर्धियों की रिसर्च, ट्रेंड विश्लेषण, और रणनीति डेक बनाना।",
+        "tag": "मार्केटिंग"
+      },
+      "prospects": {
+        "title": "संभावित ग्राहकों की खोज",
+        "description": "Coasty संभावित ग्राहकों को खोजता और रिसर्च करता है, व्यक्तिगत आउटरीच तैयार करने के लिए मुख्य विवरण एकत्र करता है।",
+        "tag": "गो-टू-मार्केट"
+      },
+      "qa": {
+        "title": "स्वयं का QA परीक्षण",
+        "description": "Coasty अपने ही उत्पाद पर गुणवत्ता आश्वासन चलाता है — फ़्लो नेविगेट करना, बग पकड़ना, और स्वायत्त रूप से समस्याएं रिपोर्ट करना।",
+        "tag": "QA परीक्षण"
+      },
+      "email": {
+        "title": "आपकी ओर से ईमेल भेजना",
+        "description": "लिखने से लेकर भेजने तक — एक AI एजेंट पूरी तरह से अपने दम पर ईमेल ड्राफ़्ट और डिलीवर करता है।",
+        "tag": "संचार"
+      },
+      "job": {
+        "title": "नौकरी के लिए आवेदन",
+        "description": "Coasty मिलती-जुलती भूमिका खोजता है, आपका रिज़्यूमे तैयार करता है, और आवेदन जमा करता है — सब अपने आप।",
+        "tag": "नौकरी आवेदन"
+      },
+      "hackernews": {
+        "title": "Hacker News पर पोस्ट करना",
+        "description": "Coasty Hacker News पर एक ब्लॉग पोस्ट बनाता और प्रकाशित करता है — सामग्री लिखना और स्वायत्त रूप से जमा करना।",
+        "tag": "सोशल मीडिया"
+      }
+    }
+  },
+  "features": {
+    "title": "वास्तविक कंप्यूटर कार्यों के लिए बनाया गया",
+    "selfCorrecting": {
+      "title": "स्व-सुधारात्मक",
+      "description": "त्रुटियां पहचानता है, वैकल्पिक रास्ते आज़माता है"
+    },
+    "auditTrail": {
+      "title": "पूर्ण ऑडिट ट्रेल",
+      "description": "हर क्लिक स्क्रीनशॉट के साथ लॉग"
+    },
+    "schedule": {
+      "title": "24/7 शेड्यूल",
+      "description": "क्रॉन पर चलता है — प्रति घंटा, दैनिक, साप्ताहिक"
+    },
+    "sandboxed": {
+      "title": "सैंडबॉक्स और सुरक्षित",
+      "description": "प्रति सत्र अलग VM, बाद में नष्ट"
+    },
+    "benchmark": {
+      "title": "OSWorld पर #1",
+      "description": "82% — अब तक का सबसे उच्च स्कोर"
+    },
+    "swarms": {
+      "title": "एजेंट स्वार्म",
+      "description": "कार्यों को समानांतर में मशीनों पर विभाजित करें"
+    }
+  },
+  "pricing": {
+    "title": "मुफ़्त शुरू करें, तैयार होने पर स्केल करें",
+    "subtitle": "क्रेडिट कार्ड नहीं चाहिए। आपका AI एजेंट 60 सेकंड में तैयार।",
+    "plans": {
+      "free": {
+        "name": "मुफ़्त",
+        "description": "#1 कंप्यूटर-उपयोग एजेंट आज़माएं",
+        "cta": "मुफ़्त शुरू करें"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "हल्का दैनिक स्वचालन",
+        "cta": "Lite लें"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "रोज़ाना कार्य स्वचालित करें",
+        "cta": "Starter लें"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "जटिल वर्कफ़्लो स्केल करें",
+        "cta": "Plus लें",
+        "badge": "सबसे लोकप्रिय"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "असीमित भारी स्वचालन",
+        "cta": "Pro लें"
+      }
+    },
+    "vmTemporary": "1 अस्थायी VM (2 घंटे)",
+    "vmDeletedAfterInactivity": "1 VM (निष्क्रियता के बाद हटाया जाता है)",
+    "vmAlwaysOn": "{count} हमेशा चालू VM",
+    "vmAlwaysOnPlural": "{count} हमेशा चालू VM",
+    "bargain": {
+      "title": "वही काम मैन्युअल श्रम से {oldPrice} खर्च होता है",
+      "description": "एक वर्चुअल असिस्टेंट की लागत $2,000–$4,000/माह होती है। पार्ट-टाइम हायर और भी महंगा। Coasty वही काम 24/7 $0 से शुरू करता है — सही स्थिरता, पूर्ण ऑडिट ट्रेल, और शून्य प्रशिक्षण समय के साथ।"
+    }
+  },
+  "faq": {
+    "title": "अक्सर पूछे जाने वाले प्रश्न",
+    "subtitle": "शुरू करने से पहले आपको जो कुछ जानना चाहिए",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Coasty क्या है?",
+        "answer": "Coasty दुनिया का सबसे अच्छा कंप्यूटर-उपयोग AI एजेंट है। आप एक कार्य बताएं — लीड रिसर्च, वेबसाइट परीक्षण, फ़ॉर्म भरना, सोशल मीडिया पर पोस्ट — और Coasty एक वास्तविक ब्राउज़र खोलता है, ऐप्स नेविगेट करता है, बटन क्लिक करता है, टेक्स्ट टाइप करता है, और कार्य शुरू से अंत तक पूरा करता है। कोई API नहीं, कोई इंटीग्रेशन नहीं, कोई कोड आवश्यक नहीं।"
+      },
+      "howDifferent": {
+        "question": "यह ChatGPT या अन्य AI टूल से कैसे अलग है?",
+        "answer": "ChatGPT टेक्स्ट जनरेट करता है। Coasty कंप्यूटर का उपयोग करता है। यह आपको बताता नहीं कि क्या करना है — यह ब्राउज़र खोलता है, वेबसाइट पर नेविगेट करता है, बटन क्लिक करता है, फ़ॉर्म भरता है, और पूरा किया हुआ काम देता है। यह निर्देश मिलने और काम पूरा हो जाने के बीच का अंतर है।"
+      },
+      "whatTasks": {
+        "question": "Coasty कौन से कार्य स्वचालित कर सकता है?",
+        "answer": "कोई भी कार्य जो आप कंप्यूटर पर कर सकते हैं। वेब रिसर्च, लीड जनरेशन, डेटा एंट्री, फ़ॉर्म भरना, QA परीक्षण, सोशल मीडिया पोस्टिंग, ईमेल आउटरीच, इनवॉइस प्रोसेसिंग, प्रतिस्पर्धी विश्लेषण, भर्ती — अगर इसमें ब्राउज़र या डेस्कटॉप ऐप शामिल है, Coasty कर सकता है।"
+      },
+      "whatAreCredits": {
+        "question": "क्रेडिट क्या हैं और कैसे उपयोग होते हैं?",
+        "answer": "जब एजेंट कार्यों पर काम करता है तब क्रेडिट खर्च होते हैं। लंबे, अधिक जटिल कार्य अधिक क्रेडिट उपयोग करते हैं। भुगतान प्लान में मासिक क्रेडिट शामिल हैं, और आप कभी भी अतिरिक्त क्रेडिट पैक खरीद सकते हैं।"
+      },
+      "localComputer": {
+        "question": "क्या Coasty मेरे अपने कंप्यूटर पर चल सकता है?",
+        "answer": "हाँ। हमारा डेस्कटॉप ऐप आपकी मशीन पर एक हल्के ओवरले के रूप में चलता है, सीधे आपके स्थानीय ब्राउज़र और एप्लिकेशन को नियंत्रित करता है। वैकल्पिक रूप से, कार्य अलग क्लाउड मशीनों पर चलते हैं — आपकी पसंद।"
+      },
+      "dataSafe": {
+        "question": "क्या मेरा डेटा सुरक्षित है?",
+        "answer": "हर कार्य एक अलग सैंडबॉक्स वातावरण में चलता है। सत्रों के बीच कुछ भी लीक नहीं होता। आपके क्रेडेंशियल निजी रहते हैं, और हर क्रिया स्क्रीनशॉट के साथ पूर्ण ऑडिट ट्रेल में लॉग होती है जिसे आप कभी भी समीक्षा कर सकते हैं।"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI-संचालित कंप्यूटर उपयोग।",
+    "tagline2": "बुद्धिमान एजेंट के साथ किसी भी वर्कफ़्लो को स्वचालित करें।",
+    "columns": {
+      "product": "उत्पाद",
+      "resources": "संसाधन",
+      "company": "कंपनी",
+      "legal": "कानूनी"
+    },
+    "links": {
+      "computerUse": "कंप्यूटर उपयोग",
+      "guide": "गाइड",
+      "download": "डाउनलोड",
+      "pricing": "मूल्य निर्धारण",
+      "agentSwarms": "एजेंट स्वार्म",
+      "status": "स्थिति",
+      "blog": "ब्लॉग",
+      "useCases": "उपयोग के मामले",
+      "demos": "डेमो",
+      "compare": "तुलना",
+      "talkToCofounders": "सह-संस्थापकों से बात करें और डेमो",
+      "contact": "संपर्क",
+      "privacy": "गोपनीयता",
+      "terms": "शर्तें"
+    }
+  },
+  "languageSwitcher": {
+    "label": "भाषा"
+  },
+  "auth": {
+    "brandHeading": "लक्ष्य आप तय करें।",
+    "brandSubheading": "बाकी हम संभालेंगे।",
+    "mobileHeading": "लक्ष्य आप तय करें। बाकी हम संभालेंगे।",
+    "mobileSubheading": "AI एजेंट जो असली टीम मेंबर की तरह ब्राउज़, क्लिक और काम करते हैं।",
+    "flowSteps": {
+      "step1": {
+        "label": "आप कार्य बताएं",
+        "sub": "\"हमारे शीर्ष 5 प्रतिस्पर्धियों पर रिसर्च करो\""
+      },
+      "step2": {
+        "label": "एजेंट नियंत्रण लेता है",
+        "sub": "स्वायत्त रूप से ब्राउज़, क्लिक और टाइप करता है"
+      },
+      "step3": {
+        "label": "काम पूरा",
+        "sub": "5 पूर्ण प्रतिस्पर्धी प्रोफाइल वाली स्प्रेडशीट"
+      }
+    },
+    "complete": "पूर्ण",
+    "doneIn": "8 मिनट में पूरा",
+    "demoCaption": "अपने कंप्यूटर पर AI एजेंट चलाएँ या कहीं से भी अपने फ़ोन से कंट्रोल करें।",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "आपका ऑपरेटर तैयार है",
+      "signUp": "अपने वर्कफ़्लो को ऑटोपायलट पर लगाएं",
+      "magicLink": "पासवर्ड छोड़ें",
+      "forgotPassword": "आपकी पहुँच बहाल करते हैं"
+    },
+    "viewDescriptions": {
+      "signIn": "जहां छोड़ा था वहीं से शुरू करें — आपके एजेंट याद रखते हैं",
+      "signUp": "एक मिनट से कम में अपना पहला AI एजेंट तैनात करें",
+      "magicLink": "इनबॉक्स से एक क्लिक और आप अंदर",
+      "forgotPassword": "हम आपके ईमेल पर रीसेट लिंक भेजेंगे"
+    },
+    "google": {
+      "connecting": "कनेक्ट हो रहा है...",
+      "continueWithGoogle": "Google से जारी रखें"
+    },
+    "or": "या",
+    "email": "ईमेल",
+    "emailPlaceholder": "you@example.com",
+    "password": "पासवर्ड",
+    "passwordPlaceholder": "आपका पासवर्ड",
+    "confirmPassword": "पासवर्ड की पुष्टि करें",
+    "confirmPasswordPlaceholder": "अपना पासवर्ड दोबारा दर्ज करें",
+    "minChars": "न्यूनतम 6 अक्षर",
+    "signingIn": "लॉग इन हो रहा है...",
+    "signIn": "लॉग इन",
+    "creatingAccount": "खाता बन रहा है...",
+    "createAccount": "खाता बनाएं",
+    "sending": "भेजा जा रहा है...",
+    "sendMagicLink": "मैजिक लिंक भेजें",
+    "sendResetLink": "रीसेट लिंक भेजें",
+    "forgotPassword": "पासवर्ड भूल गए?",
+    "useMagicLink": "मैजिक लिंक का उपयोग करें",
+    "dontHaveAccount": "खाता नहीं है?",
+    "signUp": "साइन अप करें",
+    "alreadyHaveAccount": "पहले से खाता है?",
+    "backToSignIn": "लॉग इन पर वापस जाएं",
+    "termsAgreement": "जारी रखने पर, आप सहमत होते हैं हमारी",
+    "terms": "शर्तों",
+    "and": "और",
+    "privacyPolicy": "गोपनीयता नीति",
+    "errors": {
+      "fillAllFields": "कृपया सभी फ़ील्ड भरें",
+      "passwordMinLength": "पासवर्ड कम से कम 6 अक्षर का होना चाहिए",
+      "passwordsDoNotMatch": "पासवर्ड मेल नहीं खाते",
+      "supabaseNotConfigured": "Supabase कॉन्फ़िगर नहीं है",
+      "unexpectedError": "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+      "confirmEmail": "लॉग इन करने से पहले कृपया अपना ईमेल पुष्टि करें। अपना इनबॉक्स जांचें।",
+      "invalidCredentials": "अमान्य ईमेल या पासवर्ड।",
+      "signInFailed": "लॉग इन विफल। कृपया पुनः प्रयास करें।",
+      "invalidEmail": "अमान्य ईमेल पता।",
+      "emailAlreadyExists": "इस ईमेल से पहले से एक खाता मौजूद है। लॉग इन करने का प्रयास करें।",
+      "signUpFailed": "साइन अप विफल। कृपया पुनः प्रयास करें।",
+      "enterEmail": "कृपया अपना ईमेल दर्ज करें",
+      "noAccountFound": "इस ईमेल से कोई खाता नहीं मिला। कृपया पहले साइन अप करें।",
+      "magicLinkFailed": "मैजिक लिंक भेजने में विफल। कृपया पुनः प्रयास करें।",
+      "resetFailed": "रीसेट ईमेल भेजने में विफल। कृपया पुनः प्रयास करें।",
+      "updateFailed": "पासवर्ड अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
+    },
+    "success": {
+      "checkEmailConfirm": "लॉग इन करने से पहले अपना खाता पुष्टि करने के लिए अपना ईमेल जांचें।",
+      "checkEmailMagicLink": "लॉग इन के लिए मैजिक लिंक हेतु अपना ईमेल जांचें।",
+      "checkEmailReset": "पासवर्ड रीसेट लिंक के लिए अपना ईमेल जांचें।",
+      "passwordUpdated": "पासवर्ड सफलतापूर्वक अपडेट हुआ। लॉग इन पर रीडायरेक्ट हो रहा है..."
+    },
+    "resetPassword": {
+      "title": "अपना पासवर्ड रीसेट करें",
+      "subtitle": "नीचे अपना नया पासवर्ड दर्ज करें।",
+      "newPassword": "नया पासवर्ड",
+      "confirmNewPassword": "नए पासवर्ड की पुष्टि करें",
+      "confirmPlaceholder": "अपना नया पासवर्ड दोबारा दर्ज करें",
+      "updating": "अपडेट हो रहा है...",
+      "updatePassword": "पासवर्ड अपडेट करें"
+    },
+    "errorPage": {
+      "title": "प्रमाणीकरण त्रुटि",
+      "defaultMessage": "प्रमाणीकरण के दौरान एक त्रुटि हुई।",
+      "tryAgain": "पुनः प्रयास करें",
+      "backToChat": "चैट पर वापस जाएं",
+      "needHelp": "मदद चाहिए?",
+      "contactSupport": "सहायता से संपर्क करें"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "अभी छोड़ें",
+    "back": "पीछे",
+    "continue": "जारी रखें",
+    "getStarted": "शुरू करें",
+    "settingUp": "सेटअप हो रहा है...",
+    "welcome": {
+      "titleReturning": "वापस स्वागत है{name}!",
+      "titleNew": "Coasty में आपका स्वागत है",
+      "descriptionReturning": "आपके अनुभव को बेहतर बनाने के लिए हम आपके बारे में थोड़ा और जानना चाहेंगे",
+      "descriptionNew": "आइए आपका खाता सेट करें ताकि हम आपके अनुभव को व्यक्तिगत बना सकें"
+    },
+    "nameLabel": "हम आपको क्या बुलाएं?",
+    "namePlaceholder": "आपका नाम",
+    "companyLabel": "कंपनी",
+    "optional": "(वैकल्पिक)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "वेबसाइट",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "आपको सबसे अच्छा क्या वर्णित करता है?",
+      "subtitle": "सभी लागू विकल्प चुनें — इससे हम आपके अनुभव को अनुकूलित कर सकते हैं"
+    },
+    "roles": {
+      "founder": "संस्थापक / CEO",
+      "developer": "डेवलपर",
+      "marketer": "मार्केटर",
+      "designer": "डिज़ाइनर",
+      "product_manager": "प्रोडक्ट मैनेजर",
+      "data_analyst": "डेटा / एनालिटिक्स",
+      "operations": "ऑपरेशंस",
+      "other": "अन्य"
+    },
+    "teamSizeLabel": "टीम का आकार",
+    "teamSizes": {
+      "solo": "सिर्फ मैं",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "आपने हमें कैसे खोजा?",
+      "subtitle": "हम जानना चाहेंगे कि आपने Coasty के बारे में कहां सुना"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "दोस्त / सहकर्मी",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "अन्य"
+    },
+    "useCaseStep": {
+      "title": "आप पहले क्या ऑटोमेट करेंगे?",
+      "subtitle": "सभी लागू विकल्प चुनें — बाद में सब कुछ एक्सप्लोर कर सकते हैं"
+    },
+    "useCases": {
+      "web_scraping": "वेब स्क्रैपिंग और रिसर्च",
+      "browser_automation": "ब्राउज़र ऑटोमेशन",
+      "data_entry": "डेटा एंट्री और फॉर्म",
+      "email_outreach": "ईमेल और आउटरीच",
+      "testing": "QA और टेस्टिंग",
+      "ecommerce": "ई-कॉमर्स कार्य",
+      "social_media": "सोशल मीडिया प्रबंधन",
+      "general_automation": "सामान्य ऑटोमेशन"
+    },
+    "showcase": {
+      "title": "जो भी चाहिए,",
+      "titleHighlight": "सब बिल्ट-इन है।",
+      "subtitle": "यहां देखें Coasty आपके लिए क्या कर सकता है",
+      "noCode": {
+        "title": "नो कोड",
+        "description": "बस सरल हिंदी में बताएं कि आप क्या चाहते हैं"
+      },
+      "agentSwarms": {
+        "title": "एजेंट स्वार्म",
+        "description": "समानांतर एजेंट बेड़े"
+      },
+      "desktopControl": {
+        "title": "डेस्कटॉप नियंत्रण",
+        "description": "क्लिक, टाइप, नेविगेट करता है"
+      },
+      "browserAutomation": {
+        "title": "ब्राउज़र ऑटोमेशन",
+        "description": "फॉर्म, टैब, स्क्रैपिंग — पूरी तरह स्वचालित"
+      },
+      "computerVision": {
+        "title": "कंप्यूटर विज़न",
+        "description": "आपकी स्क्रीन को रीयल-टाइम में देखता और समझता है"
+      },
+      "workflows": {
+        "title": "वर्कफ़्लो",
+        "description": "मल्टी-स्टेप फ़्लो"
+      },
+      "onDevice": {
+        "title": "ऑन-डिवाइस",
+        "description": "लोकल पर चलता है"
+      },
+      "autonomous": {
+        "title": "24/7 स्वायत्त",
+        "description": "सेट करें और भूल जाएं — जब आप सोते हैं तब भी चलता है"
+      }
+    },
+    "guideCallout": {
+      "title": "यहां नए हैं? हमारे पास आपके लिए एक गाइड है",
+      "subtitle": "एक मिनट से कम में अपना पहला AI एजेंट तैनात करें"
+    }
+  },
+  "chatInput": {
+    "placeholder": "आपका AI वर्कर क्या करे?",
+    "placeholderAlt": "अपने AI को बताएं कि कंप्यूटर पर क्या करना है...",
+    "vmError": {
+      "title": "वर्चुअल मशीन त्रुटि",
+      "description": "वर्चुअल मशीन त्रुटि स्थिति में है या हटाई जा रही है।",
+      "hint": "कृपया समस्या हल करने के लिए Machines टैब जांचें, या केवल वेब सर्च उपयोग करने के लिए \"No Computer Selected\" चुनें।",
+      "gotIt": "समझ गया"
+    },
+    "status": {
+      "creating": "{name} बनाया जा रहा है...",
+      "initiating": "{name} पर एजेंट शुरू हो रहा है...",
+      "stopping": "{name} रोका जा रहा है...",
+      "preparing": "{name} तैयार हो रहा है..."
+    },
+    "swarm": {
+      "title": "स्वार्म मोड",
+      "pro": "PRO",
+      "upgradeLabel": "स्वार्म मोड — अनलॉक करने के लिए अपग्रेड करें",
+      "feature1": "अस्थायी मशीनों पर समानांतर निष्पादन",
+      "feature2": "प्रत्येक मशीन स्वायत्त रूप से चलती है",
+      "feature3": "प्रति स्वार्म आपके प्लान की मशीन सीमा का 3 गुना",
+      "description": "एक प्रॉम्प्ट को अपनी मशीन सीमा के 3 गुना पर समानांतर चलाएं — प्रत्येक स्वतंत्र रूप से कार्य करता है।",
+      "enableLabel": "स्वार्म मोड सक्षम करें",
+      "disableLabel": "स्वार्म मोड अक्षम करें",
+      "onTooltip": "स्वार्म मोड चालू — आपका प्रॉम्प्ट कई मशीनों पर समानांतर चलेगा",
+      "offTooltip": "अपना प्रॉम्प्ट एक साथ कई मशीनों पर चलाने के लिए स्वार्म मोड सक्षम करें",
+      "decreaseMachines": "मशीन संख्या घटाएं",
+      "increaseMachines": "मशीन संख्या बढ़ाएं",
+      "machineLimit": "आपके प्लान पर अधिकतम {max} स्वार्म मशीनें। और चाहिए? founders@coasty.ai पर संपर्क करें",
+      "label": "Multi-Run",
+      "upgradeCta": "स्वार्म मोड"
+    },
+    "desktop": {
+      "connectLabel": "डेस्कटॉप से कनेक्ट करें",
+      "screenLabel": "{name} की स्क्रीन",
+      "screenDefault": "डेस्कटॉप",
+      "watchTooltip": "अपने एजेंट को अलग स्क्रीन पर काम करते देखें। बस कुछ छुएं नहीं वरना उसे स्टेज फ्राइट हो जाएगी!",
+      "watchLabel": "डेस्कटॉप"
+    },
+    "buttons": {
+      "stop": "रोकें",
+      "sendToSwarm": "स्वार्म पर भेजें",
+      "taskRunning": "एक और कार्य चल रहा है — उसे रोकने और अपना चलाने के लिए क्लिक करें",
+      "selectComputer": "संदेश भेजने के लिए कंप्यूटर चुनें",
+      "waitCreating": "कृपया VM बनने तक प्रतीक्षा करें",
+      "waitStarting": "कृपया VM शुरू होने तक प्रतीक्षा करें",
+      "waitAgent": "कृपया एजेंट के इनिशियलाइज़ होने तक प्रतीक्षा करें",
+      "vmStopping": "VM रुक रहा है",
+      "send": "भेजें",
+      "switching": "स्विच हो रहा है...",
+      "overrideRun": "ओवरराइड और चलाएं",
+      "stopLabel": "चल रहा कार्य रोकें और यह शुरू करें",
+      "sendLabel": "संदेश भेजें"
+    },
+    "search": "खोजें",
+    "upload": {
+      "label": "VM पर फ़ाइलें अपलोड करें",
+      "heading": "VM पर फ़ाइलें अपलोड करें",
+      "description": "फ़ाइलें डेस्कटॉप पर सहेजी जाएंगी",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "फ़ाइलें यहां डालें",
+      "dropDescription": "फ़ाइलें VM के डेस्कटॉप फ़ोल्डर में अपलोड होंगी",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "मुफ़्त में और सुविधाएं आज़माने के लिए लॉग इन करें",
+      "description": "प्रोजेक्ट बनाएं, टीम सदस्यों को आमंत्रित करें, और भी बहुत कुछ।",
+      "connecting": "कनेक्ट हो रहा है...",
+      "continueWithGoogle": "Google से जारी रखें"
+    },
+    "removeFile": "फ़ाइल हटाएं"
+  },
+  "chat": {
+    "greeting": "नमस्ते",
+    "greetingAuth": "मैं कंप्यूटर का काम संभालूंगा। क्या करना है?",
+    "greetingUnauth": "AI जो कंप्यूटर चलाता है ताकि आपको न चलाना पड़े। बस बताएं क्या करना है।",
+    "guide": "गाइड",
+    "saveLogins": "ऑटो-फ़िल के लिए लॉगिन सहेजें",
+    "encryptedNote": "एन्क्रिप्टेड, AI कभी नहीं देखता",
+    "roleLabels": [
+      "सहकर्मी",
+      "कर्मचारी",
+      "मित्र",
+      "सहायक",
+      "साथी",
+      "टीम-साथी",
+      "सहयोगी",
+      "हेल्पर"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} प्रतिस्पर्धी रिपोर्ट",
+        "warmLeads": "{company} के लिए 20 लीड खोजें",
+        "pitchDeck": "{company} पिच डेक ड्राफ़्ट"
+      },
+      "developer": {
+        "findBugs": "{company} पर बग खोजें",
+        "performance": "{company} परफ़ॉर्मेंस ऑडिट",
+        "apiDocs": "{company} API डॉक्स निकालें"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO गैप विश्लेषण",
+        "competitorAds": "{company} प्रतिद्वंद्वियों के विज्ञापन देखें",
+        "trendingContent": "{company} के लिए ट्रेंडिंग आइडिया"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} रिव्यू सारांश",
+        "featureComparison": "{company} फ़ीचर तुलना",
+        "competitorLaunches": "{company} प्रतिद्वंद्वियों के लॉन्च ट्रैक करें"
+      },
+      "data_analyst": {
+        "exportCsv": "{company} डेटा CSV में निर्यात करें",
+        "marketSizing": "{company} मार्केट साइज़िंग",
+        "benchmark": "{company} vs इंडस्ट्री बेंचमार्क"
+      },
+      "operations": {
+        "enterRecords": "{company} में रिकॉर्ड दर्ज करें",
+        "cheapestVendor": "{company} के लिए वेंडर खोजें",
+        "invoiceSummary": "{company} इनवॉइस सारांश"
+      },
+      "designer": {
+        "designComparison": "{company} vs प्रतिस्पर्धी डिज़ाइन",
+        "responsiveAudit": "{company} रिस्पॉन्सिव ऑडिट",
+        "inspiration": "{company} के लिए डिज़ाइन इंस्पिरेशन"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "{company} साइट डेटा निकालें",
+      "browser_automation": "{company} रिपोर्ट निर्यात करें",
+      "data_entry": "{company} में डेटा दर्ज करें",
+      "email_outreach": "{company} के लिए आउटरीच",
+      "testing": "{company} QA टेस्ट",
+      "ecommerce": "{company} मूल्य तुलना",
+      "social_media": "{company} के बारे में पोस्ट करें",
+      "general_automation": "{company} पर कार्य स्वचालित करें"
+    }
+  },
+  "chatMessages": {
+    "copyText": "टेक्स्ट कॉपी करें",
+    "copied": "कॉपी हो गया!",
+    "regenerate": "पुनः बनाएं",
+    "feedback": {
+      "title": "फ़ीडबैक",
+      "prompts": [
+        "इसे रेट करें",
+        "फ़ीडबैक",
+        "कैसा रहा?",
+        "आपकी राय?",
+        "फ़ीडबैक साझा करें"
+      ],
+      "tooltip": "अपना फ़ीडबैक साझा करें"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "स्मार्ट सर्च",
+      "description": "AI-संचालित वेब सर्च"
+    },
+    "collaborate": {
+      "title": "सहयोग करें",
+      "description": "रीयल-टाइम में साथ काम करें"
+    },
+    "globalAccess": {
+      "title": "वैश्विक पहुंच",
+      "description": "50+ भाषाओं में सर्च करें"
+    },
+    "aiModels": {
+      "title": "AI मॉडल",
+      "description": "कई AI प्रदाता"
+    },
+    "freeForever": {
+      "title": "हमेशा मुफ़्त",
+      "description": "कोई छिपी लागत नहीं"
+    },
+    "privateSecure": {
+      "title": "निजी और सुरक्षित",
+      "description": "आपका डेटा आपका रहता है"
+    }
+  },
+  "sidebar": {
+    "newTask": "नया कार्य",
+    "newTaskDescription": "नया AI ऑटोमेशन शुरू करें",
+    "activity": "गतिविधि",
+    "taskHistory": "कार्य इतिहास",
+    "taskHistoryDescription": "पिछले कार्यों की समीक्षा करें और जहां छोड़ा था वहां से जारी रखें",
+    "taskHistoryPopup": {
+      "title": "आपके हालिया कार्य",
+      "description": "पिछली बातचीत ब्राउज़ करें और जारी रखें। हर कार्य सहेजा जाता है ताकि आप ठीक वहीं से शुरू कर सकें जहां छोड़ा था।"
+    },
+    "swarmRuns": "स्वार्म रन",
+    "swarmRunsDescription": "मल्टी-एजेंट समानांतर वर्कफ़्लो मॉनिटर करें",
+    "swarmRunsPopup": {
+      "title": "मल्टी-एजेंट वर्कफ़्लो",
+      "description": "कई मशीनों पर समानांतर में कार्य चलाएं। प्रत्येक एजेंट स्वतंत्र रूप से काम करता है और परिणाम स्वचालित रूप से एकत्रित होते हैं।"
+    },
+    "guide": "गाइड",
+    "guideDescription": "Coasty से अधिकतम लाभ लेना सीखें",
+    "guidePopup": {
+      "title": "शुरुआत करें",
+      "description": "प्रभावी ऑटोमेशन के लिए चरण-दर-चरण मार्गदर्शिका और सर्वोत्तम प्रथाएं।"
+    },
+    "infrastructure": "इंफ्रास्ट्रक्चर",
+    "computer": "कंप्यूटर",
+    "computers": "कंप्यूटर",
+    "active": "सक्रिय",
+    "view": "देखें",
+    "workforce": "शेड्यूल",
+    "workforceDescription": "स्वचालित कार्यों और ट्रिगर्स को शेड्यूल करें",
+    "workforcePopup": {
+      "title": "शेड्यूल्ड ऑटोमेशन",
+      "description": "cron शेड्यूल और एजेंट-टू-एजेंट ट्रिगर्स के साथ आवर्ती कार्य सेट करें। आपके शेड्यूल सोते समय चलते हैं।"
+    },
+    "credentials": "क्रेडेंशियल",
+    "credentialsDescription": "एजेंट एक्सेस के लिए लॉगिन सुरक्षित रूप से स्टोर करें",
+    "credentialsPopup": {
+      "title": "सुरक्षित क्रेडेंशियल वॉल्ट",
+      "description": "एन्क्रिप्शन के साथ लॉगिन और API कुंजियां स्टोर करें। एजेंट कच्चे मान दिखाए बिना क्रेडेंशियल ऑटो-फ़िल करते हैं।"
+    },
+    "desktopApp": {
+      "getDesktopApp": "डेस्कटॉप ऐप लें",
+      "download": "डाउनलोड",
+      "downloadDesktopApp": "डेस्कटॉप ऐप डाउनलोड करें",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "अपना कंप्यूटर दूर से नियंत्रित करें",
+      "controlDescription": "डेस्कटॉप ऐप इंस्टॉल करें और इस डैशबोर्ड से अपने PC पर कार्य चलाएं — कहीं से भी, कभी भी।"
+    },
+    "credits": {
+      "runningLow": "क्रेडिट — कम हो रहे हैं",
+      "remaining": "शेष क्रेडिट",
+      "buy": "खरीदें",
+      "creditsLeft": "क्रेडिट शेष",
+      "usedLabel": "उपयोग किए: {count}",
+      "consumed": "{percent}% खर्च हुए",
+      "usageThisWeek": "इस सप्ताह का उपयोग"
+    },
+    "talkToUs": "हमसे बात करें",
+    "talkToUsDesc": "15 मिनट की कॉल बुक करें",
+    "inviteEarn": "आमंत्रित करें और कमाएं",
+    "inviteEarnDesc": "मुफ्त क्रेडिट पाएं",
+    "user": "उपयोगकर्ता",
+    "account": "खाता",
+    "tasks": "{count} कार्य",
+    "recentActivity": "हालिया गतिविधि",
+    "viewAllHistory": "पूरा इतिहास देखें →",
+    "swarmRunsCount": "{count} स्वार्म रन",
+    "running": "चल रहा है",
+    "completed": "पूर्ण",
+    "viewAllSwarms": "सभी स्वार्म देखें →",
+    "schedulesCount": "{count} शेड्यूल",
+    "totalRuns": "{count} कुल रन",
+    "paused": "रुका हुआ",
+    "viewAllSchedules": "सभी शेड्यूल देखें →",
+    "credentialsCount": "{count} क्रेडेंशियल",
+    "encryptedVault": "एन्क्रिप्टेड वॉल्ट",
+    "manageCredentials": "क्रेडेंशियल प्रबंधित करें →",
+    "days": [
+      "सोम",
+      "मंगल",
+      "बुध",
+      "गुरु",
+      "शुक्र",
+      "शनि",
+      "रवि"
+    ],
+    "resume": "जारी रखें",
+    "result": "परिणाम",
+    "notScheduled": "शेड्यूल नहीं है",
+    "overdue": "अतिदेय",
+    "lessThanMin": "< 1 मिनट",
+    "inMinutes": "{count} मिनट में",
+    "inHours": "{count} घंटे में",
+    "today": "आज",
+    "yesterday": "कल"
+  },
+  "appHeader": {
+    "login": "लॉग इन",
+    "assign": "शेड्यूल",
+    "assignDescription": "इस कार्य को स्वचालित रूप से चलाने के लिए शेड्यूल करें",
+    "computer": "कंप्यूटर",
+    "showComputer": "कंप्यूटर दिखाएं",
+    "hideComputer": "कंप्यूटर छिपाएं",
+    "employeeHired": "कर्मचारी नियुक्त!",
+    "employeeRemoved": "कर्मचारी हटाया गया"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "हल्का दैनिक ऑटोमेशन"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "रोज़ाना कार्य स्वचालित करें"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "जटिल वर्कफ़्लो स्केल करें",
+        "badge": "सबसे लोकप्रिय"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "असीमित भारी ऑटोमेशन"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (निष्क्रियता के बाद हटाया जाता है)",
+      "vmAlwaysOn": "{count} हमेशा चालू VM",
+      "vmAlwaysOnPlural": "{count} हमेशा चालू VM",
+      "agentsParallel": "{count} एजेंट समानांतर में",
+      "basicSearch": "बेसिक सर्च",
+      "advancedSearch": "एडवांस सर्च और एक्सट्रैक्शन",
+      "standardSupport": "स्टैंडर्ड सपोर्ट (असली इंसान)",
+      "prioritySupport": "प्राथमिकता सपोर्ट, 24 घंटे रिस्पॉन्स",
+      "premiumSupport": "प्रीमियम सपोर्ट, 12 घंटे रिस्पॉन्स"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "स्मॉल बूस्ट",
+        "description": "त्वरित टॉप-अप"
+      },
+      "medium": {
+        "name": "मीडियम बूस्ट",
+        "description": "स्टैंडर्ड रीफ़िल",
+        "savings": "8% बचत"
+      },
+      "large": {
+        "name": "लार्ज बूस्ट",
+        "description": "बल्क खरीद",
+        "savings": "17% बचत"
+      }
+    },
+    "timeAgo": {
+      "justNow": "अभी-अभी",
+      "minutesAgo": "{count} मिनट पहले",
+      "hoursAgo": "{count} घंटे पहले",
+      "daysAgo": "{count} दिन पहले"
+    },
+    "noActivity": "इस अवधि में कोई गतिविधि नहीं",
+    "stats": {
+      "balance": "शेष राशि",
+      "earned": "कमाया",
+      "used": "उपयोग किया",
+      "credits": "क्रेडिट",
+      "allTime": "कुल समय",
+      "lastRange": "पिछले {range}",
+      "sessions": "{count} सत्र",
+      "avgDaily": "~{count}/दिन औसत",
+      "plan": "प्लान",
+      "free": "मुफ़्त",
+      "noPlan": "कोई प्लान नहीं",
+      "canceling": "रद्द हो रहा है"
+    },
+    "monthlyUsage": "मासिक क्रेडिट उपयोग",
+    "remaining": "{used} / {total} शेष",
+    "usedPercent": "{percent}% इस अवधि में उपयोग",
+    "renews": "{date} को नवीनीकरण",
+    "choosePlan": "अपना प्लान चुनें",
+    "choosePlanDescription": "AI सुविधाएं अनलॉक करने और मासिक क्रेडिट पाने के लिए सब्सक्राइब करें",
+    "savingsVsHuman": "इंसान की तुलना में {amount}/माह बचाएं",
+    "timeSaved": "मासिक {time} बचत",
+    "cheaper": "{multiplier} सस्ता",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/माह",
+    "creditsPerMonth": "{count} क्रेडिट /माह",
+    "processing": "प्रोसेस हो रहा है...",
+    "subscribeTo": "{name} सब्सक्राइब करें",
+    "transactionTypes": {
+      "credit_purchase": "क्रेडिट खरीद",
+      "agent_usage": "एजेंट उपयोग",
+      "refund": "रिफ़ंड",
+      "bonus": "बोनस रिवॉर्ड",
+      "subscription": "सब्सक्रिप्शन",
+      "subscription_grant": "सब्सक्रिप्शन ग्रांट",
+      "renewal": "नवीनीकरण क्रेडिट",
+      "reactivation": "पुनः सक्रियण"
+    },
+    "toasts": {
+      "paymentSuccess": "भुगतान सफल! आपके क्रेडिट जोड़ दिए गए हैं।",
+      "subscriptionActivated": "सब्सक्रिप्शन सफलतापूर्वक सक्रिय!",
+      "paymentCanceled": "भुगतान रद्द हो गया। कोई शुल्क नहीं लिया गया।",
+      "signInToSubscribe": "सब्सक्राइब करने के लिए कृपया साइन इन करें",
+      "subscriptionCheckoutFailed": "सब्सक्रिप्शन चेकआउट शुरू करने में विफल। कृपया पुनः प्रयास करें।",
+      "signInToPurchase": "क्रेडिट खरीदने के लिए कृपया साइन इन करें",
+      "needSubscription": "अतिरिक्त क्रेडिट खरीदने के लिए एक सक्रिय सब्सक्रिप्शन चाहिए",
+      "checkoutFailed": "चेकआउट शुरू करने में विफल। कृपया पुनः प्रयास करें।",
+      "manageFailed": "सब्सक्रिप्शन प्रबंधन खोलने में विफल। कृपया पुनः प्रयास करें।",
+      "transactionsExported": "लेनदेन निर्यात हो गए"
+    }
+  },
+  "apiKeys": {
+    "title": "मॉडल प्रदाता",
+    "new": "नया",
+    "description": "मॉडल तक पहुंच अनलॉक करने के लिए अपनी API कुंजियां जोड़ें।",
+    "securityNote": "आपकी कुंजियां एंड-टू-एंड एन्क्रिप्शन के साथ सुरक्षित रूप से स्टोर की जाती हैं।",
+    "apiKeyLabel": "{provider} API कुंजी",
+    "getApiKey": "API कुंजी लें",
+    "delete": "हटाएं",
+    "save": "सहेजें",
+    "deleteDialog": {
+      "title": "API कुंजी हटाएं",
+      "description": "क्या आप वाकई अपनी {provider} API कुंजी हटाना चाहते हैं? यह क्रिया पूर्ववत नहीं की जा सकती और आप {provider} मॉडल तक पहुंच खो देंगे।",
+      "cancel": "रद्द करें",
+      "confirm": "हटाएं"
+    },
+    "toasts": {
+      "saved": "API कुंजी सहेजी गई",
+      "savedDescription": "आपकी {provider} API कुंजी सहेजी गई है और मॉडल आपके पसंदीदा में जोड़े गए हैं।",
+      "updatedDescription": "आपकी {provider} API कुंजी अपडेट की गई है।",
+      "saveFailed": "API कुंजी सहेजने में विफल",
+      "saveFailedDescription": "{provider} API कुंजी सहेजने में विफल। कृपया पुनः प्रयास करें।",
+      "deleted": "API कुंजी हटाई गई",
+      "deletedDescription": "आपकी {provider} API कुंजी हटा दी गई है।",
+      "deleteFailed": "API कुंजी हटाने में विफल",
+      "deleteFailedDescription": "{provider} API कुंजी हटाने में विफल। कृपया पुनः प्रयास करें।"
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "प्रोफ़ाइल विवरण",
+    "displayName": "प्रदर्शन नाम",
+    "namePlaceholder": "आपका नाम",
+    "company": "कंपनी",
+    "companyPlaceholder": "आपकी कंपनी",
+    "website": "वेबसाइट",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "सहेजा जा रहा है...",
+    "saveChanges": "बदलाव सहेजें",
+    "account": "खाता",
+    "email": "ईमेल",
+    "verified": "सत्यापित",
+    "signOut": "साइन आउट",
+    "signOutDescription": "इस डिवाइस से लॉग आउट करें",
+    "toasts": {
+      "profileUpdated": "प्रोफ़ाइल अपडेट हुई",
+      "profileUpdateFailed": "प्रोफ़ाइल अपडेट करने में विफल",
+      "signOutFailed": "साइन आउट करने में विफल"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "आपका डेटा सुरक्षित है",
+    "dataProtectedDescription": "रेस्ट और ट्रांज़िट में एन्क्रिप्शन के साथ एंटरप्राइज़-ग्रेड सुरक्षा",
+    "features": {
+      "encryption": {
+        "title": "एंड-टू-एंड एन्क्रिप्शन",
+        "description": "API कुंजियां AES-256-GCM से एन्क्रिप्टेड। आपके क्रेडेंशियल कभी प्लेन टेक्स्ट में स्टोर नहीं होते।"
+      },
+      "rls": {
+        "title": "रो लेवल सिक्योरिटी",
+        "description": "डेटाबेस-स्तरीय आइसोलेशन सुनिश्चित करता है कि आपका डेटा केवल आपको ही सुलभ है। क्रॉस-टेनेंट एक्सेस संभव नहीं।"
+      },
+      "privacy": {
+        "title": "डिज़ाइन द्वारा गोपनीयता",
+        "description": "हम सेवा प्रदान करने के लिए न्यूनतम आवश्यक डेटा एकत्र करते हैं। आपकी बातचीत और फ़ाइलें आपकी रहती हैं।"
+      },
+      "session": {
+        "title": "सत्र सुरक्षा",
+        "description": "CSRF सुरक्षा, सुरक्षित HTTP-only कुकीज़, और हर अनुरोध पर Content Security Policy हेडर।"
+      }
+    },
+    "legal": "कानूनी",
+    "privacyPolicy": {
+      "title": "गोपनीयता नीति",
+      "description": "हम आपका डेटा कैसे एकत्र, उपयोग और सुरक्षित करते हैं"
+    },
+    "termsOfService": {
+      "title": "सेवा की शर्तें",
+      "description": "हमारे उपयोग के नियम और शर्तें"
+    }
+  },
+  "layoutSettings": {
+    "layout": "लेआउट"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "सारांश",
+      "highlight": "संक्षेप करें"
+    },
+    "code": {
+      "label": "कोड",
+      "highlight": "बनाएं"
+    },
+    "research": {
+      "label": "रिसर्च",
+      "highlight": "विश्लेषण"
+    },
+    "create": {
+      "label": "बनाएं",
+      "highlight": "जनरेट"
+    },
+    "solve": {
+      "label": "हल करें",
+      "highlight": "डीबग"
+    },
+    "learn": {
+      "label": "सीखें",
+      "highlight": "समझाएं"
+    }
+  },
+  "loadingMessages": [
+    "सिलिकॉन दिमाग बूट हो रहा है",
+    "डिजिटल चेतना जगाई जा रही है",
+    "न्यूरल पाथवे इनिशियलाइज़ हो रहे हैं",
+    "क्वांटम कोर चालू हो रहे हैं",
+    "फ्लक्स कैपेसिटर चार्ज हो रहा है",
+    "मेनफ़्रेम सक्रिय हो रहा है",
+    "कम्प्यूटेशनल मैट्रिक्स पावर हो रहा है",
+    "वार्प ड्राइव चालू हो रहा है",
+    "सिलिकॉन आत्माएं बुलाई जा रही हैं",
+    "इलेक्ट्रॉन इंजन स्टार्ट हो रहा है",
+    "ट्रांज़िस्टर गरम हो रहे हैं",
+    "बिट्स और बाइट्स असेंबल हो रहे हैं",
+    "डिजिटल सिनैप्स कैलिब्रेट हो रहे हैं",
+    "CPU क्रिस्टल ऊर्जित हो रहे हैं",
+    "चेतना प्रोटोकॉल लोड हो रहे हैं",
+    "सिस्टम संसाधन इनिशियलाइज़ हो रहे हैं",
+    "कम्प्यूटेशनल वातावरण तैयार हो रहा है",
+    "सुरक्षित कनेक्शन स्थापित हो रहा है",
+    "वर्चुअल संसाधन प्रोविज़न हो रहे हैं",
+    "सिस्टम पैरामीटर कॉन्फ़िगर हो रहे हैं",
+    "वर्चुअल इंस्टेंस लॉन्च हो रहा है",
+    "रिमोट डेस्कटॉप सक्रिय हो रहा है",
+    "क्लाउड संसाधन डिप्लॉय हो रहे हैं",
+    "सिस्टम स्टार्टअप सीक्वेंस शुरू हो रहा है",
+    "एक्सीक्यूशन वातावरण तैयार हो रहा है",
+    "सोए हुए कंप्यूटर को जगाया जा रहा है",
+    "डिजिटल भालू को छेड़ा जा रहा है",
+    "कम्प्यूटेशनल कॉफ़ी बनाई जा रही है",
+    "डिजिटल मांसपेशियां खींची जा रही हैं",
+    "डिजिटल आंखें खोली जा रही हैं",
+    "शुरू हो रहा है",
+    "पावर ऑन हो रहा है",
+    "ऑनलाइन आ रहा है",
+    "सिस्टम बूट हो रहा है",
+    "तैयार हो रहा है",
+    "लगभग तैयार",
+    "कार्यक्षेत्र तैयार हो रहा है",
+    "संसाधन लोड हो रहे हैं",
+    "सिस्टम उठ रहा है"
+  ],
+  "quickStart": {
+    "greetingName": "नमस्ते {name}!",
+    "greetingDefault": "नमस्ते!",
+    "subtitle": "आपके कार्य एक सुरक्षित, अलग वर्चुअल कंप्यूटर में चलते हैं",
+    "tabs": {
+      "start": "शुरू",
+      "desktop": "डेस्कटॉप",
+      "swarms": "स्वार्म",
+      "schedules": "शेड्यूल"
+    },
+    "items": {
+      "computerReady": "कंप्यूटर तैयार",
+      "pickComputer": "कंप्यूटर चुनें",
+      "createComputer": "कंप्यूटर बनाएं",
+      "loginsSaved": "लॉगिन सहेजे गए",
+      "addLogins": "लॉगिन जोड़ें",
+      "askAnything": "कुछ भी पूछें",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "मोबाइल रिमोट",
+      "freeDownload": "मुफ्त डाउनलोड",
+      "onePrompt": "एक प्रॉम्प्ट",
+      "manyAgents": "कई एजेंट",
+      "combinedResult": "संयुक्त परिणाम",
+      "setCadence": "आवृत्ति सेट करें",
+      "autoRuns": "ऑटो-रन",
+      "recurringResults": "आवर्ती परिणाम",
+      "computerReadyDesc": "जुड़ा हुआ और कार्य निष्पादित करने के लिए तैयार",
+      "pickComputerDesc": "अपनी उपलब्ध मशीनों में से चुनें",
+      "createComputerDesc": "सेकंडों में क्लाउड कंप्यूटर बनाएं",
+      "loginsSavedDesc": "एन्क्रिप्टेड क्रेडेंशियल ऑटो-फिल के लिए तैयार",
+      "addLoginsDesc": "स्वचालित साइट एक्सेस के लिए पासवर्ड सहेजें",
+      "askAnythingDesc": "एक कार्य बताएं और AI को काम करते देखें",
+      "macWindowsDesc": "आपके डेस्कटॉप के लिए नेटिव ऐप",
+      "mobileRemoteDesc": "किसी भी डिवाइस से अपने एजेंट को नियंत्रित करें",
+      "freeDownloadDesc": "हल्का इंस्टॉल, सेकंडों में चलता है",
+      "onePromptDesc": "अपना लक्ष्य सरल भाषा में बताएं",
+      "manyAgentsDesc": "एजेंट कई मशीनों पर समानांतर काम करते हैं",
+      "combinedResultDesc": "सभी परिणाम एक रिपोर्ट में मिलाए गए",
+      "setCadenceDesc": "प्रति घंटा, दैनिक, साप्ताहिक या कस्टम cron",
+      "autoRunsDesc": "एजेंट बिना हस्तक्षेप के निष्पादित होते हैं",
+      "recurringResultsDesc": "आपकी समयरेखा पर रिपोर्ट वितरित"
+    },
+    "cta": {
+      "downloadApp": "ऐप डाउनलोड करें",
+      "trySwarms": "स्वार्म आज़माएं",
+      "setUp": "सेटअप करें"
+    }
+  },
+  "machines": {
+    "title": "मेरे कंप्यूटर",
+    "subtitle": "AI-नियंत्रित डेस्कटॉप वातावरण प्रबंधित करें",
+    "guide": "गाइड",
+    "newMachine": "नई मशीन",
+    "filters": {
+      "all": "सभी",
+      "running": "चल रही",
+      "creating": "बन रही",
+      "stopped": "रुकी हुई"
+    },
+    "desktopPromo": {
+      "text": "VM छोड़ें — नेटिव ऐप से अपने कंप्यूटर पर AI एजेंट चलाएं। अपने फ़ोन से डेस्कटॉप नियंत्रित करें।",
+      "cta": "ऐप प्राप्त करें"
+    },
+    "emptyState": {
+      "title": "पूर्ण कंप्यूटर एक्सेस वाला सच्चा AI कर्मचारी",
+      "description": "एक अलग वर्चुअल मशीन शुरू करें और AI एजेंट को वेब ब्राउज़ करने, टर्मिनल चलाने और डेस्कटॉप नियंत्रित करने दें — बिना किसी हस्तक्षेप के।",
+      "feature1": {
+        "title": "पूर्ण डेस्कटॉप नियंत्रण",
+        "description": "AI एक असली उपयोगकर्ता की तरह माउस चलाता है, टाइप करता है, क्लिक करता है और नेविगेट करता है।"
+      },
+      "feature2": {
+        "title": "कोई भी कार्य स्वचालित",
+        "description": "ब्राउज़र, टर्मिनल और UI — सभी एजेंट एक VM में मिलकर काम करते हैं।"
+      },
+      "feature3": {
+        "title": "अलग और सुरक्षित",
+        "description": "हर मशीन अपने कंटेनर में चलती है — आपका लोकल सिस्टम अप्रभावित रहता है।"
+      },
+      "cta": "अपनी पहली मशीन बनाएं"
+    },
+    "noMachines": "कोई मशीन नहीं मिली।",
+    "noFilteredMachines": "कोई {filter} मशीन नहीं",
+    "noFilteredDescription": "वर्तमान में कोई {filter} मशीन नहीं है।",
+    "loadingMachines": "मशीनें लोड हो रही हैं...",
+    "toasts": {
+      "deleted": "मशीन सफलतापूर्वक हटा दी गई",
+      "readyOpen": "अब आप अपनी मशीन से कनेक्ट कर सकते हैं।",
+      "open": "खोलें",
+      "createFailed": "कृपया मशीन दोबारा बनाने का प्रयास करें।",
+      "fetchFailed": "मशीनें लोड करने में विफल"
+    }
+  },
+  "createMachine": {
+    "title": "नया कंप्यूटर",
+    "subtitle": "क्लाउड डेस्कटॉप लॉन्च करें — ~30 सेकंड में तैयार",
+    "freeExpiry": "मुफ्त कंप्यूटर इसके बाद समाप्त हो जाते हैं: ",
+    "freeExpiry2": "2 घंटे",
+    "upgrade": "अपग्रेड",
+    "limitReached": "आपने कंप्यूटर सीमा पूरी कर ली है। नया बनाने के लिए किसी मौजूदा कंप्यूटर को रोकें या हटाएं।",
+    "upgradeMore": "अधिक के लिए अपग्रेड करें →",
+    "nameLabel": "कंप्यूटर का नाम",
+    "namePlaceholder": "मेरा क्लाउड सर्वर",
+    "nameError": "कंप्यूटर का नाम \"local\" से शुरू नहीं हो सकता",
+    "nameRequired": "कृपया कंप्यूटर का नाम दर्ज करें",
+    "osLabel": "ऑपरेटिंग सिस्टम",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 डेस्कटॉप"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows डेस्कटॉप — बग की संभावना"
+    },
+    "osHintWindows": "Chrome के साथ Windows डेस्कटॉप (बीटा)। ~2 मिनट में तैयार।",
+    "osHintLinux": "ब्राउज़र से एक्सेस योग्य Ubuntu डेस्कटॉप। ~30 सेकंड में तैयार।",
+    "stateLabel": "कंप्यूटर स्थिति",
+    "restorePrevious": "पिछली स्थिति पुनर्स्थापित करें",
+    "restoreDescription": "अंतिम स्नैपशॉट से फिर शुरू करें",
+    "startFresh": "नई शुरुआत",
+    "startFreshDescription": "साफ़ डेस्कटॉप वातावरण",
+    "cancel": "रद्द करें",
+    "creating": "बन रही है...",
+    "create": "कंप्यूटर बनाएं",
+    "toasts": {
+      "restoringSnapshot": "स्नैपशॉट से कंप्यूटर पुनर्स्थापित हो रहा है!",
+      "restoringDescription": "आपकी पिछली डेस्कटॉप स्थिति पुनर्स्थापित की जा रही है। ~30 सेकंड में तैयार।",
+      "windowsCreated": "Windows कंप्यूटर का निर्माण शुरू हुआ!",
+      "windowsDescription": "आपका Windows डेस्कटॉप लॉन्च हो रहा है। ~2 मिनट में तैयार।",
+      "linuxCreated": "आपका डेस्कटॉप लॉन्च हो रहा है। ~30 सेकंड में तैयार।",
+      "sshCreated": "आपका क्लाउड कंप्यूटर लॉन्च हो रहा है। तैयार होने पर SSH कुंजी उपलब्ध होगी।"
+    }
+  },
+  "secrets": {
+    "title": "सहेजे गए क्रेडेंशियल",
+    "subtitle": "सुरक्षित रूप से संग्रहीत और लॉगिन करते समय AI एजेंट द्वारा स्वचालित रूप से उपयोग किए जाते हैं",
+    "guide": "गाइड",
+    "import": "आयात",
+    "addCredential": "क्रेडेंशियल जोड़ें",
+    "securityNote": "क्रेडेंशियल कभी AI मॉडल को नहीं भेजे जाते और चैट में कभी दिखाई नहीं देते — एजेंट मान देखे बिना सीधे भरता है",
+    "username": "उपयोगकर्ता नाम",
+    "password": "पासवर्ड",
+    "hide": "छुपाएं",
+    "revealFor10s": "10 सेकंड के लिए दिखाएं",
+    "encrypted": "एन्क्रिप्टेड",
+    "emptyState": {
+      "title": "ऑटो-लॉगिन, हैंड्स-फ्री",
+      "description": "क्रेडेंशियल एक बार सहेजें — AI एजेंट स्वचालित रूप से लॉगिन करता है और बिना रुके काम जारी रखता है",
+      "feature1": {
+        "title": "शून्य रुकावट",
+        "description": "एजेंट लॉगिन फ़ॉर्म मिलने पर उसे भरता है और कार्य जारी रखता है — कोई प्रॉम्प्ट नहीं, कोई ठहराव नहीं"
+      },
+      "feature2": {
+        "title": "AI कभी नहीं देखता",
+        "description": "आपके क्रेडेंशियल सीधे इंजेक्ट किए जाते हैं। AI मॉडल कभी असली मान नहीं देखता"
+      },
+      "feature3": {
+        "title": "कोई भी वेबसाइट",
+        "description": "किसी भी साइट के लॉगिन फ़ॉर्म के साथ काम करता है — ईमेल, SaaS टूल, डैशबोर्ड, कुछ भी"
+      },
+      "cta": "अपना पहला क्रेडेंशियल जोड़ें"
+    },
+    "deleteDialog": {
+      "title": "क्रेडेंशियल हटाएं?",
+      "description": "{name} ({service}) स्थायी रूप से हटा दिया जाएगा। AI एजेंट अब इसका उपयोग नहीं कर पाएगा।",
+      "cancel": "रद्द करें",
+      "delete": "हटाएं"
+    },
+    "toasts": {
+      "loadFailed": "क्रेडेंशियल लोड करने में विफल",
+      "revealFailed": "पासवर्ड दिखाने में विफल",
+      "deleted": "क्रेडेंशियल हटा दिया गया",
+      "deleteFailed": "क्रेडेंशियल हटाने में विफल"
+    },
+    "loading": "क्रेडेंशियल लोड हो रहे हैं..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "सरल मूल्य निर्धारण,",
+      "title2": "असली ऑटोपायलट",
+      "subtitle": "मुफ्त में शुरू करें। जब अधिक शक्ति चाहिए तो अपग्रेड करें।"
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "#1 कंप्यूटर-यूज़ एजेंट आज़माएं",
+        "cta": "मुफ्त शुरू करें"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "हल्का दैनिक ऑटोमेशन",
+        "cta": "Lite पाएं"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "हर दिन कार्य स्वचालित करें",
+        "cta": "Starter पाएं"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "जटिल वर्कफ़्लो स्केल करें",
+        "cta": "Plus पर जाएं",
+        "badge": "सबसे लोकप्रिय"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "असीमित भारी ऑटोमेशन",
+        "cta": "Pro पाएं"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "पूर्ण ब्राउज़र, डेस्कटॉप और टर्मिनल",
+        "badge": "कोर"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "केवल क्रमिक",
+        "parallel": "{count} एजेंट समानांतर में",
+        "badge": "शक्तिशाली"
+      },
+      "security": {
+        "name": "सुरक्षा",
+        "description": "सैंडबॉक्स्ड, E2E एन्क्रिप्टेड",
+        "badge": "हर प्लान"
+      },
+      "monthlyCredits": {
+        "name": "मासिक क्रेडिट",
+        "payAsYouGo": "उपयोग के अनुसार भुगतान",
+        "creditsPerMonth": "{count} क्रेडिट/माह"
+      },
+      "persistentMachines": {
+        "name": "स्थायी मशीनें",
+        "temporary": "1 अस्थायी VM (2 घंटे)",
+        "deletedAfterInactivity": "1 VM (निष्क्रियता के बाद हटाया जाता है)",
+        "alwaysOn": "{count} हमेशा-चालू VM",
+        "alwaysOnPlural": "{count} हमेशा-चालू VMs"
+      },
+      "webSearch": {
+        "name": "वेब सर्च",
+        "advanced": "उन्नत खोज और निष्कर्षण",
+        "basic": "बेसिक सर्च"
+      }
+    },
+    "animations": {
+      "agentDescription": "आपका एजेंट एक असली कंप्यूटर नियंत्रित करता है — ब्राउज़र, फ़ाइलें और टर्मिनल",
+      "fillForm": "फ़ॉर्म भरें",
+      "searchExtract": "खोजें और निकालें",
+      "uploadReport": "रिपोर्ट अपलोड करें",
+      "navigateSite": "साइट नेविगेट करें",
+      "creditsPerMonth": "क्रेडिट प्रति माह",
+      "cr": "क्रे",
+      "vm": "VM {num}",
+      "twoHrLimit": "2 घंटे की सीमा",
+      "alwaysOn": "हमेशा चालू",
+      "tempVmDescription": "अस्थायी VM — 2 घंटे बाद रीसेट होता है",
+      "persistentVmDescription": "आपकी फ़ाइलें, ऐप्स और सेशन कार्यों के बीच बने रहते हैं",
+      "sequentialOnly": "इस प्लान पर केवल क्रमिक निष्पादन",
+      "yourTask": "आपका कार्य",
+      "agentsWorking": "{count} एजेंट एक साथ काम कर रहे हैं",
+      "upgradeForExtraction": "पूर्ण निष्कर्षण के लिए अपग्रेड करें",
+      "searchDescription": "संरचित डेटा खोजें, स्क्रैप करें और निकालें",
+      "basicSearchIncluded": "बेसिक सर्च शामिल",
+      "e2eEncryption": "E2E एन्क्रिप्शन",
+      "sandboxedVm": "सैंडबॉक्स्ड VM",
+      "destroyedAfterUse": "उपयोग के बाद नष्ट",
+      "everyPlan": "हर प्लान। कोई अपवाद नहीं।"
+    },
+    "perMonth": "/माह",
+    "faqs": {
+      "credits": {
+        "q": "एक क्रेडिट में क्या गिना जाता है?",
+        "a": "एक क्रेडिट लगभग एक एजेंट कार्रवाई के बराबर है — एक क्लिक, एक फ़ॉर्म भरना, एक सर्च क्वेरी, या एक फ़ाइल ऑपरेशन। एक सामान्य बहु-चरण कार्य 5-15 क्रेडिट उपयोग करता है।"
+      },
+      "persistent": {
+        "q": "'स्थायी मशीन' का क्या मतलब है?",
+        "a": "भुगतान प्लान पर, आपका VM कार्यों के बीच चलता रहता है — आपका डेस्कटॉप, फ़ाइलें, ब्राउज़र सेशन और इंस्टॉल किया गया सॉफ़्टवेयर सब बना रहता है। जैसे आपका अपना हमेशा-चालू क्लाउड कंप्यूटर।"
+      },
+      "swarm": {
+        "q": "स्वार्म मोड क्या है?",
+        "a": "स्वार्म मोड एक कार्य को कई मशीनों में एक साथ विभाजित करता है। एक एजेंट द्वारा 10 खोजें क्रमिक रूप से करने के बजाय, कई एजेंट उन्हें समानांतर में करते हैं।"
+      },
+      "cancel": {
+        "q": "क्या मैं कभी भी रद्द कर सकता हूं?",
+        "a": "हां। कोई अनुबंध नहीं, कोई रद्दीकरण शुल्क नहीं। अपने अकाउंट पेज से रद्द करें और अपनी बिलिंग अवधि के अंत तक एक्सेस रखें।"
+      },
+      "security": {
+        "q": "क्या मेरा डेटा सुरक्षित है?",
+        "a": "हर कार्य पूरी तरह से अलग VM में चलता है जो उपयोग के बाद नष्ट हो जाता है। सभी कनेक्शन एंड-टू-एंड एन्क्रिप्टेड हैं और हम कभी भी आपकी क्रेडेंशियल्स स्टोर नहीं करते।"
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "कस्टम क्रेडिट, समर्पित VMs, SLA, SSO, और प्राथमिकता सहायता।",
+      "cta": "हमसे संपर्क करें"
+    },
+    "footer": {
+      "title": "आपका AI एजेंट बस 60 सेकंड दूर है",
+      "subtitle": "साइन अप करें और Coasty को काम संभालने दें।",
+      "noCreditCard": "क्रेडिट कार्ड नहीं",
+      "cancelAnytime": "कभी भी रद्द करें",
+      "noCreditCardRequired": "क्रेडिट कार्ड आवश्यक नहीं",
+      "cancelAnytimeNoContracts": "कभी भी रद्द करें — कोई अनुबंध नहीं"
+    },
+    "questions": "प्रश्न"
+  },
+  "guide": {
+    "pageTitle": "गाइड",
+    "pageSubtitle": "पहले सेटअप से उन्नत सुविधाओं तक — Coasty से अधिकतम लाभ कैसे उठाएं सीखें",
+    "completeGuide": "संपूर्ण गाइड",
+    "completeGuideSubtitle": "Coasty के बारे में वह सब कुछ जो आपको जानना चाहिए",
+    "completeGuideDescription": "पहले सेटअप से उन्नत सुविधाओं तक — अपने AI एजेंट से अधिकतम लाभ कैसे उठाएं सीखें।",
+    "talkToCofounders": "सह-संस्थापकों से बात करें",
+    "tabs": {
+      "overview": "अवलोकन",
+      "gettingStarted": "शुरुआत",
+      "chatTasks": "चैट और कार्य",
+      "machines": "मशीनें",
+      "credentials": "क्रेडेंशियल्स",
+      "swarmMode": "स्वार्म मोड",
+      "workforce": "शेड्यूल",
+      "desktopApp": "डेस्कटॉप ऐप",
+      "billing": "बिलिंग और क्रेडिट"
+    },
+    "overview": {
+      "howItWorks": "यह कैसे काम करता है",
+      "step1": "कार्य का वर्णन करें",
+      "step2": "Coasty चरण योजना बनाता है",
+      "step3": "स्वायत्त रूप से निष्पादित करता है",
+      "step": "चरण",
+      "whatCanDo": "Coasty क्या कर सकता है",
+      "taskCount": "10 श्रेणियों में 40+ कार्य",
+      "categories": {
+        "sales": {
+          "name": "सेल्स",
+          "desc": "50 लीड खोजें, व्यक्तिगत ईमेल भेजें"
+        },
+        "marketing": {
+          "name": "मार्केटिंग",
+          "desc": "ब्लॉग पोस्ट प्रकाशित करें, सोशल मीडिया शेड्यूल करें"
+        },
+        "jobApps": {
+          "name": "जॉब आवेदन",
+          "desc": "20 जॉब्स पर अप्लाई करें, हर रिज़्यूमे कस्टमाइज़ करें"
+        },
+        "email": {
+          "name": "ईमेल",
+          "desc": "जवाब ड्राफ़्ट करें, बल्क आउटरीच, अनसब्सक्राइब"
+        },
+        "dataEntry": {
+          "name": "डेटा एंट्री",
+          "desc": "ऐप्स के बीच डेटा ट्रांसफ़र करें, स्प्रेडशीट बनाएं"
+        },
+        "research": {
+          "name": "रिसर्च",
+          "desc": "गहन रिपोर्ट, प्रतियोगी निगरानी"
+        },
+        "qaTesting": {
+          "name": "QA टेस्टिंग",
+          "desc": "साइनअप टेस्ट करें, फ़ॉर्म फ़ज़ करें, साइट स्वास्थ्य जांचें"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "उम्मीदवार खोजें, व्यक्तिगत आउटरीच"
+        },
+        "support": {
+          "name": "सपोर्ट",
+          "desc": "जवाब ड्राफ़्ट करें, हेल्प डॉक्स अपडेट करें"
+        },
+        "productivity": {
+          "name": "प्रोडक्टिविटी",
+          "desc": "यात्रा बुक करें, बिल भुगतान करें, कैलेंडर प्रबंधित करें"
+        }
+      },
+      "whyCoasty": "Coasty क्यों",
+      "notChatbot": "चैटबॉट नहीं। RPA स्क्रिप्ट नहीं।",
+      "worksLikeHuman": {
+        "title": "इंसान की तरह काम करता है",
+        "desc": "देखता है, क्लिक करता है, टाइप करता है, नेविगेट करता है — बिल्कुल आपकी तरह"
+      },
+      "noScripts": {
+        "title": "कोई स्क्रिप्ट या सेटअप नहीं",
+        "desc": "सरल भाषा में डालें, परिणाम पाएं"
+      },
+      "handlesUnexpected": {
+        "title": "अप्रत्याशित को संभालता है",
+        "desc": "CAPTCHAs, पॉपअप, लेआउट परिवर्तनों के अनुकूल"
+      },
+      "runsInIsolation": {
+        "title": "अलगाव में चलता है",
+        "desc": "प्रति सेशन सैंडबॉक्स्ड VM — कुछ भी लीक नहीं होता"
+      },
+      "ctaTitle": "कोई भी कार्य चुनें और आज़माएं",
+      "ctaSubtitle": "Coasty को काम पर लगाने के लिए तैयार हैं?",
+      "ctaDescription": "इस गाइड से कोई भी कार्य बताएं और Coasty को संभालते देखें।",
+      "ctaNote": "मुफ्त शुरू करें। क्रेडिट कार्ड आवश्यक नहीं।",
+      "startTask": "कार्य शुरू करें",
+      "startFree": "मुफ्त शुरू करें",
+      "desktopApp": "डेस्कटॉप ऐप"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "साइन अप",
+          "desc": "शुरू करने के लिए एक क्लिक"
+        },
+        "createMachine": {
+          "title": "मशीन बनाएं",
+          "desc": "आपके एजेंट को अपना कंप्यूटर मिलता है"
+        },
+        "saveCredentials": {
+          "title": "क्रेडेंशियल्स सहेजें",
+          "desc": "किसी भी साइट के लिए एन्क्रिप्टेड लॉगिन"
+        },
+        "giveTask": {
+          "title": "कार्य दें",
+          "desc": "बताएं। होते हुए देखें।"
+        }
+      },
+      "examplePrompts": [
+        "LinkedIn पर मेरे रिज़्यूमे के साथ 10 मैचिंग जॉब्स पर अप्लाई करें",
+        "प्रतियोगी मूल्य निर्धारण रिसर्च करें और तुलना स्प्रेडशीट बनाएं",
+        "WordPress पर [विषय] के बारे में ब्लॉग पोस्ट लिखें और प्रकाशित करें",
+        "Gmail में सभी मार्केटिंग ईमेल से अनसब्सक्राइब करें",
+        "मेरी वेबसाइट पर साइनअप फ़्लो टेस्ट करें और बग रिपोर्ट करें",
+        "LinkedIn पर [ICP] से मैच करने वाले 50 लीड खोजें और मेरे CRM में जोड़ें"
+      ],
+      "quickPrompts": "आज़माने के लिए त्वरित प्रॉम्प्ट",
+      "startFirstTask": "अपना पहला कार्य शुरू करें"
+    },
+    "chatTasks": {
+      "commandCenter": "आपका कमांड सेंटर",
+      "describeTask": "कोई भी कार्य बताएं। होते हुए देखें।",
+      "examplePrompt": "Amazon पर $50 से कम की टॉप 5 वायरलेस कीबोर्ड खोजें और स्प्रेडशीट में तुलना करें।",
+      "exampleResponse": "मैं Amazon पर खोजूंगा और तुलना बनाऊंगा। ब्राउज़र अभी खोल रहा हूं।",
+      "exampleDone": "हो गया। सभी 5 कीबोर्ड के मूल्य, रेटिंग और सुविधाओं के साथ स्प्रेडशीट सहेजी गई है।",
+      "describePlaceholder": "अपना कार्य बताएं...",
+      "threeAgents": "तीन विशेष एजेंट",
+      "autoAssigned": "प्रत्येक चरण के लिए स्वचालित रूप से असाइन।",
+      "browser": "ब्राउज़र",
+      "browserDesc": "नेविगेट, क्लिक, फ़ॉर्म भरें, स्क्रैप",
+      "terminal": "टर्मिनल",
+      "terminalDesc": "कमांड चलाएं, इंस्टॉल करें, फ़ाइलें प्रोसेस करें",
+      "desktop": "डेस्कटॉप",
+      "desktopDesc": "क्लिक, टाइप, स्क्रॉल, ऐप्स खोलें",
+      "betterPrompts": "बेहतर प्रॉम्प्ट लिखें",
+      "specificBeatsVague": "विशिष्ट हमेशा अस्पष्ट से जीतता है।",
+      "do": "करें",
+      "dont": "न करें",
+      "doExample1": "LinkedIn पर 10 सॉफ़्टवेयर इंजीनियरिंग जॉब्स पर अप्लाई करें। हर कवर लेटर को उनकी टेक स्टैक का उल्लेख करने के लिए कस्टमाइज़ करें।",
+      "dontExample1": "जॉब्स पर अप्लाई करें",
+      "doExample2": "Google Flights पर SFO से JFK, मार्च 20-25, राउंड ट्रिप खोजें। सबसे सस्ती 3 का स्क्रीनशॉट लें।",
+      "dontExample2": "फ़्लाइट खोजें",
+      "readyToTry": "आज़माने के लिए तैयार हैं?",
+      "openChat": "चैट खोलें और बताएं कि आपको क्या करवाना है।",
+      "startChat": "चैट शुरू करें"
+    },
+    "machinesTab": {
+      "title": "आपकी मशीनें",
+      "subtitle": "पूर्ण Ubuntu डेस्कटॉप जो आप सेकंडों में शुरू कर सकते हैं।",
+      "lifecycle": "जीवनचक्र",
+      "lifecycleDesc": "पांच अवस्थाएं, पूरी तरह स्वचालित।",
+      "planLimits": "प्लान सीमाएं",
+      "planCol": "प्लान",
+      "machinesCol": "मशीनें",
+      "swarmAgentsCol": "स्वार्म एजेंट",
+      "temp": "1 अस्थायी",
+      "states": {
+        "creating": "बन रहा है",
+        "starting": "शुरू हो रहा है",
+        "running": "चल रहा है",
+        "stopping": "रुक रहा है",
+        "stopped": "रुका हुआ"
+      },
+      "newMachine": "+ नया",
+      "researchVm": "रिसर्च VM",
+      "emailVm": "ईमेल VM",
+      "testingVm": "टेस्टिंग VM",
+      "cores": "{count} कोर",
+      "gb": "{count} GB",
+      "stop": "रोकें",
+      "start": "शुरू करें",
+      "provisioning": "प्रोविज़निंग...",
+      "spinUp": "मशीन शुरू करें",
+      "goToMachines": "मशीनों पर जाएं"
+    },
+    "credentialsTab": {
+      "loginDetected": "लॉगिन पहचाना गया",
+      "matched": "मैच हुआ",
+      "credentialFound": "क्रेडेंशियल मिला",
+      "autoFilled": "ऑटो-फ़िल हुआ",
+      "autoFillTitle": "ऑटो-फ़िल कार्य में",
+      "autoFillDesc": "लॉगिन पहचाना, क्रेडेंशियल मैच हुआ, फ़ॉर्म भरा गया। स्वचालित।",
+      "security": "सुरक्षा",
+      "encrypted": "एन्क्रिप्टेड",
+      "aes256": "AES-256 रेस्ट पर",
+      "vmIsolated": "VM-आइसोलेटेड",
+      "sandboxed": "प्रति सेशन सैंडबॉक्स्ड",
+      "neverLogged": "कभी लॉग नहीं होता",
+      "zeroTrace": "लॉग में शून्य निशान",
+      "savedCredentials": "सहेजे गए क्रेडेंशियल्स",
+      "addOnce": "एक बार जोड़ें, हर जगह ऑटो-फ़िल।",
+      "saveFirst": "अपना पहला क्रेडेंशियल सहेजें",
+      "goToCredentials": "सहेजे गए क्रेडेंशियल्स पर जाएं"
+    },
+    "swarmTab": {
+      "title": "स्वार्म मोड",
+      "runParallel": "{count} मशीनें समानांतर में चलाएं",
+      "sameTask": "वही कार्य, {multiplier} गुना आउटपुट, वही समय।",
+      "done": "पूर्ण",
+      "running": "चल रहा है",
+      "pending": "लंबित",
+      "result": "परिणाम",
+      "useCases": {
+        "parallelResearch": {
+          "title": "समानांतर रिसर्च",
+          "desc": "{count} प्रतियोगी, {count} मशीनें, एक साथ"
+        },
+        "bulkApplications": {
+          "title": "बल्क आवेदन",
+          "desc": "एक साथ कई प्लेटफ़ॉर्म पर अप्लाई करें"
+        },
+        "multiCitySearch": {
+          "title": "बहु-शहर खोज",
+          "desc": "एक साथ {count} शहरों में लिस्टिंग खोजें"
+        },
+        "parallelOutreach": {
+          "title": "समानांतर आउटरीच",
+          "desc": "विभिन्न सेगमेंट को व्यक्तिगत ईमेल"
+        },
+        "crossPlatform": {
+          "title": "क्रॉस-प्लेटफ़ॉर्म",
+          "desc": "एक साथ {count} प्लेटफ़ॉर्म पर पोस्ट करें"
+        },
+        "distributedTesting": {
+          "title": "वितरित टेस्टिंग",
+          "desc": "कई परिदृश्यों का समानांतर परीक्षण"
+        }
+      },
+      "whatToSwarm": "क्या स्वार्म करें",
+      "availability": "उपलब्धता",
+      "freeNotAvailable": "उपलब्ध नहीं",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 एजेंट",
+      "startSwarm": "स्वार्म शुरू करें"
+    },
+    "workforceTab": {
+      "title": "वर्कफ़ोर्स",
+      "subtitle": "आपकी AI कंपनी, ऑटोपायलट पर",
+      "description": "कर्मचारी, टीमें, ट्रिगर — 24/7 चल रहे हैं।",
+      "myCompany": "मेरी कंपनी",
+      "contentOps": "कंटेंट ऑप्स",
+      "support": "सपोर्ट",
+      "writer": "राइटर",
+      "seo": "SEO",
+      "social": "सोशल",
+      "inbox": "इनबॉक्स",
+      "docs": "डॉक्स",
+      "concepts": "मूल अवधारणाएं",
+      "conceptItems": {
+        "employees": {
+          "title": "कर्मचारी",
+          "desc": "AI एजेंट जो शेड्यूल पर कार्य चलाते हैं, 24/7"
+        },
+        "teams": {
+          "title": "टीमें",
+          "desc": "साझा निर्देशों वाले कर्मचारी समूह"
+        },
+        "sharedMemory": {
+          "title": "शेयर्ड मेमोरी",
+          "desc": "की-वैल्यू स्टोर जिसे कर्मचारी पढ़ते और लिखते हैं"
+        },
+        "triggers": {
+          "title": "ट्रिगर",
+          "desc": "कर्मचारियों को चेन करें: एक पूरा होता है, अगला शुरू होता है"
+        },
+        "delegates": {
+          "title": "डेलिगेट",
+          "desc": "कर्मचारी विशेषज्ञों को उप-कार्य सौंपते हैं"
+        },
+        "orgChart": {
+          "title": "ऑर्ग चार्ट",
+          "desc": "आपकी कंपनी पदानुक्रम का विज़ुअल मैप"
+        }
+      },
+      "chainTitle": "कर्मचारियों को एक साथ चेन करें",
+      "chainDesc": "आउटपुट एक से अगले में स्वचालित रूप से बहता है।",
+      "scout": "Scout",
+      "scoutDesc": "प्रतियोगियों पर रिसर्च करता है",
+      "atlas": "Atlas",
+      "atlasDesc": "ब्लॉग पोस्ट लिखता है",
+      "nova": "Nova",
+      "novaDesc": "सोशल पर प्रकाशित करता है",
+      "done": "पूर्ण",
+      "onComplete": "on_complete",
+      "waiting": "प्रतीक्षा में",
+      "templates": "टेम्पलेट से शुरू करें",
+      "templateItems": {
+        "contentOps": {
+          "name": "कंटेंट ऑप्स",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "कस्टमर सपोर्ट",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "मार्केटिंग",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "ई-कॉमर्स",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} कर्मचारी",
+      "openWorkforce": "वर्कफ़ोर्स खोलें"
+    },
+    "billingTab": {
+      "credits": "क्रेडिट",
+      "timeMetric": "समय ही एकमात्र मीट्रिक है।",
+      "rate": "दर",
+      "rateValue": "10",
+      "creditsPerMin": "क्रेडिट/मिनट",
+      "metered": "हर 30 सेकंड मापा जाता है",
+      "example": "उदाहरण",
+      "minTask": "मिनट कार्य",
+      "startCredits": "शुरू: {count} क्रेडिट",
+      "endCredits": "अंत: {count} क्रेडिट",
+      "creditsUsed": "{count} क्रेडिट उपयोग किए",
+      "calculation": "{mins} मिनट x 10 क्रेडिट/मिनट",
+      "plans": "प्लान",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 अस्थायी",
+          "feature": "बेसिक सर्च"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 हमेशा-चालू",
+          "feature": "2 समानांतर एजेंट"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 हमेशा-चालू",
+          "feature": "उन्नत खोज"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 हमेशा-चालू",
+          "feature": "प्राथमिकता सहायता"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 हमेशा-चालू",
+          "feature": "SLA गारंटी"
+        }
+      },
+      "perMonth": "{price}/माह",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "क्रेडिट कैसे चार्ज होते हैं?",
+          "a": "एजेंट निष्पादन के प्रति मिनट 10 क्रेडिट, ऊपर की ओर गोल। सेशन के दौरान हर 30 सेकंड जांचा जाता है।"
+        },
+        "runOut": {
+          "q": "जब क्रेडिट खत्म हो जाएं तो क्या होता है?",
+          "a": "कार्य शुरू करने के लिए कम से कम 20 क्रेडिट चाहिए। 0 पर पहुंचने पर कार्य रुक जाता है — जारी रखने के लिए ऐड-ऑन खरीदें।"
+        },
+        "rollOver": {
+          "q": "क्या अप्रयुक्त क्रेडिट आगे बढ़ते हैं?",
+          "a": "क्रेडिट हर बिलिंग चक्र में रीसेट होते हैं। उपयोग करें या खो दें।"
+        }
+      },
+      "goToBilling": "बिलिंग पर जाएं"
+    },
+    "desktopAppTab": {
+      "overlay": "ओवरले",
+      "overlayDesc": "हमेशा वहां। विस्तार के लिए क्लिक करें।",
+      "compact": "कॉम्पैक्ट",
+      "expanded": "विस्तारित",
+      "ready": "तैयार",
+      "exampleTask": "मेरा रिज़्यूमे अपडेट करें",
+      "exampleResponse": "resume.docx खोल रहा हूं...",
+      "describePlaceholder": "अपना कार्य बताएं...",
+      "whatItControls": "यह क्या नियंत्रित करता है",
+      "controls": {
+        "browser": {
+          "name": "ब्राउज़र",
+          "desc": "नेविगेट, क्लिक, फ़ॉर्म भरें"
+        },
+        "files": {
+          "name": "फ़ाइलें",
+          "desc": "कहीं भी पढ़ें, लिखें, संपादित करें"
+        },
+        "terminal": {
+          "name": "टर्मिनल",
+          "desc": "कोई भी शेल कमांड चलाएं"
+        },
+        "desktop": {
+          "name": "डेस्कटॉप",
+          "desc": "क्लिक, टाइप, स्क्रॉल"
+        },
+        "screenshots": {
+          "name": "स्क्रीनशॉट",
+          "desc": "आप जो देखते हैं वो देखें"
+        },
+        "apps": {
+          "name": "ऐप्स",
+          "desc": "किसी भी इंस्टॉल ऐप को नियंत्रित करें"
+        }
+      },
+      "twoWays": "चलाने के दो तरीके",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "पूरी तरह अलग सैंडबॉक्स",
+        "freshBrowser": "ताज़ा ब्राउज़र, कोई इतिहास नहीं",
+        "maxSecurity": "अधिकतम सुरक्षा"
+      },
+      "desktopMode": "डेस्कटॉप",
+      "desktopFeatures": {
+        "yourFiles": "आपकी फ़ाइलें, सीधा एक्सेस",
+        "yourApps": "आपके इंस्टॉल किए गए ऐप्स",
+        "yourSessions": "आपके लॉग-इन सेशन"
+      },
+      "downloadCta": "डेस्कटॉप ऐप डाउनलोड करें"
+    }
+  },
+  "comparePage": {
+    "title": "तुलनाएं",
+    "heroTitle": "Coasty बनाम प्रतियोगी",
+    "heroDescription": "देखें कि #1 रैंक वाला कंप्यूटर-उपयोग AI एजेंट (82% OSWorld) विकल्पों से कैसे तुलना करता है। वास्तविक डेटा के साथ फीचर-दर-फीचर विश्लेषण।",
+    "categories": {
+      "aiAgent": "AI एजेंट",
+      "infrastructure": "इन्फ्रास्ट्रक्चर",
+      "rpa": "RPA",
+      "human": "मानव"
+    },
+    "vsLabel": "Coasty बनाम {name}",
+    "ctaTitle": "#1 कंप्यूटर-उपयोग AI एजेंट आज़माने के लिए तैयार हैं?",
+    "ctaButton": "Coasty मुफ्त आज़माएं",
+    "noCreditCard": "क्रेडिट कार्ड की आवश्यकता नहीं",
+    "allComparisons": "सभी तुलनाएं",
+    "featureComparison": "फीचर तुलना",
+    "whyChooseCoasty": "Coasty क्यों चुनें",
+    "strengthsOf": "{name} की खूबियां",
+    "ctaDescription": "82% OSWorld बेंचमार्क। VM आइसोलेशन। CAPTCHA हल करना। $20/माह से शुरू।",
+    "watchCaseStudies": "केस स्टडीज़ देखें"
+  },
+  "agentSwarms": {
+    "badge": "एजेंट स्वॉर्म मोड",
+    "heroTitle1": "एक प्रॉम्प्ट।",
+    "heroTitle2": "असीमित मशीनें।",
+    "heroTitle3": "समानांतर परिणाम।",
+    "heroDescription": "किसी भी कार्य को एक साथ चलने वाले कई आइसोलेटेड एनवायरनमेंट में बांटें। एक घंटे का काम मिनटों में पूरा होता है।",
+    "trySwarmMode": "स्वॉर्म मोड आज़माएं",
+    "seeInAction": "कार्रवाई में देखें",
+    "liveExecution": "swarm-tree — लाइव एक्ज़ीक्यूशन",
+    "machineCount": "{count} मशीनें",
+    "running": "चल रहा है",
+    "threeSteps": "समानांतर एक्ज़ीक्यूशन के तीन चरण",
+    "steps": {
+      "typePrompt": {
+        "title": "अपना प्रॉम्प्ट टाइप करें",
+        "desc": "कार्य का वर्णन करें। स्वॉर्म मोड चालू करें और मशीनों की संख्या चुनें।"
+      },
+      "machinesSpinUp": {
+        "title": "मशीनें शुरू होती हैं",
+        "desc": "हर एक को पूर्ण आइसोलेटेड एनवायरनमेंट मिलता है — ब्राउज़र, टर्मिनल, डेस्कटॉप।"
+      },
+      "resultsStream": {
+        "title": "परिणाम लाइव स्ट्रीम होते हैं",
+        "desc": "स्वॉर्म ट्री व्यू के माध्यम से हर मशीन को रियल-टाइम में देखें।"
+      }
+    },
+    "demoTitle": "एजेंट स्वॉर्म डेमो",
+    "demoDescription": "{count} मशीनों को एक साथ CRM रिसर्च कार्य करते देखें",
+    "prompt": "प्रॉम्प्ट",
+    "swarm": "SWARM",
+    "run": "चलाएं",
+    "reset": "रीसेट",
+    "allCompleted": "सभी {count} मशीनें पूरी हुईं",
+    "speedComparison": "~{seqTime} मिनट की बजाय ~{swarmTime} मिनट — {multiplier} गुना तेज़",
+    "seqVsSwarm": "अनुक्रमिक बनाम स्वॉर्म",
+    "tableHeaders": {
+      "task": "कार्य",
+      "before": "पहले",
+      "swarm": "स्वॉर्म",
+      "speed": "गति"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM टूल रिसर्च",
+      "qaPages": "8 पेजों पर QA",
+      "leadEnrichment": "लीड एनरिचमेंट (100)",
+      "priceMonitoring": "मूल्य निगरानी"
+    },
+    "builtForParallel": "समानांतर काम के लिए बनाया गया",
+    "useCases": {
+      "marketResearch": {
+        "title": "बड़े पैमाने पर मार्केट रिसर्च",
+        "desc": "आइसोलेटेड मशीनों पर एक साथ कई प्रतियोगियों, बाज़ारों या उत्पादों की रिसर्च करें।"
+      },
+      "leadGeneration": {
+        "title": "लीड जेनरेशन",
+        "desc": "प्रोफ़ाइल एनरिच करें, ईमेल खोजें, और सोशल प्रेज़ेंस सत्यापित करें — घंटों का काम मिनटों में।"
+      },
+      "qaTesting": {
+        "title": "QA और रिग्रेशन टेस्टिंग",
+        "desc": "विभिन्न पेजों या फ्लो पर टेस्ट सिनेरियो समानांतर में चलाएं।"
+      },
+      "contentSocial": {
+        "title": "कंटेंट और सोशल",
+        "desc": "प्रति-मशीन आइसोलेशन के साथ कई प्लेटफ़ॉर्म पर एक साथ पोस्ट करें।"
+      },
+      "dataExtraction": {
+        "title": "डेटा एक्सट्रैक्शन",
+        "desc": "दर्जनों स्रोतों से एक साथ डेटा स्क्रैप और स्ट्रक्चर करें।"
+      },
+      "scheduledRuns": {
+        "title": "शेड्यूल्ड रन",
+        "desc": "आवर्ती समानांतर कार्यों के लिए स्वॉर्म मोड को शेड्यूलिंग के साथ जोड़ें।"
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "पूर्ण आइसोलेशन",
+        "desc": "हर मशीन का अपना ब्राउज़र, टर्मिनल और डेस्कटॉप होता है।"
+      },
+      "tripleMachineLimit": {
+        "title": "3 गुना मशीन सीमा",
+        "desc": "स्वॉर्म मोड आपकी योजना की मशीन क्षमता को 3 गुना करता है।"
+      },
+      "liveTreeView": {
+        "title": "लाइव ट्री व्यू",
+        "desc": "स्क्रीनशॉट और टूल कॉल रियल-टाइम में स्ट्रीम होते हैं।"
+      },
+      "autoAggregation": {
+        "title": "ऑटो एग्रीगेशन",
+        "desc": "परिणाम एक समेकित रिपोर्ट में संयोजित होते हैं।"
+      },
+      "shareableRuns": {
+        "title": "शेयर करने योग्य रन",
+        "desc": "लिंक के माध्यम से पूर्ण एक्ज़ीक्यूशन टाइमलाइन रीप्ले करें।"
+      },
+      "fullySandboxed": {
+        "title": "पूर्ण सैंडबॉक्स",
+        "desc": "पूरा होने के बाद सभी एनवायरनमेंट नष्ट कर दिए जाते हैं।"
+      }
+    },
+    "readyCta": "कार्यों को समानांतर में चलाने के लिए तैयार हैं?",
+    "includedWithPaid": "स्वॉर्म मोड हर पेड प्लान में शामिल है।",
+    "getStarted": "शुरू करें",
+    "viewPricing": "मूल्य देखें",
+    "legend": {
+      "messages": "संदेश",
+      "broadcast": "ब्रॉडकास्ट",
+      "sharedMemory": "शेयर्ड मेमोरी",
+      "help": "सहायता"
+    },
+    "liveSwarmExecution": "एजेंट संचार के साथ लाइव स्वॉर्म एक्ज़ीक्यूशन",
+    "popular": "लोकप्रिय",
+    "avgRating": "औसत {rating}"
+  },
+  "downloadPage": {
+    "title": "डेस्कटॉप ऐप",
+    "heroTitle": "Coasty को अपना कंप्यूटर चलाने दें",
+    "heroDescription": "आपका AI असिस्टेंट जो कमान संभालता है। अपने ब्राउज़र, डेस्कटॉप और टर्मिनल को ऑटोमेट करें — या हमारे वेब इंटरफ़ेस के माध्यम से कहीं से भी अपना कंप्यूटर नियंत्रित करें।",
+    "seeInAction": "कार्रवाई में देखें",
+    "overlayDescription": "आपके डेस्कटॉप पर तैरने वाला एक हल्का ओवरले। इसे स्थानीय रूप से या किसी भी ब्राउज़र से रिमोट से नियंत्रित करें — आपका कंप्यूटर, आपका तरीका।",
+    "recommended": "आपके सिस्टम के लिए अनुशंसित",
+    "coastyFor": "{platform} के लिए Coasty",
+    "installerLabel": "{extension} इंस्टॉलर",
+    "beforeInstall": "इंस्टॉल करने से पहले",
+    "beforeInstallDescription": "Coasty Desktop बिल्कुल नया है, इसलिए आपका ऑपरेटिंग सिस्टम इसे अभी नहीं पहचान सकता। नई रिलीज़ ऐप्स के लिए यह पूरी तरह सामान्य है — इस तरह आगे बढ़ें:",
+    "windowsSteps": {
+      "step1": "Windows ने आपके PC की सुरक्षा की",
+      "step2": "अधिक जानकारी",
+      "step3": "फिर भी चलाएं"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop खोला नहीं जा सकता",
+      "step2": "सिस्टम सेटिंग्स > प्राइवेसी और सिक्योरिटी",
+      "step3": "फिर भी खोलें"
+    },
+    "allPlatforms": "सभी प्लेटफ़ॉर्म",
+    "systemRequirements": {
+      "title": "सिस्टम आवश्यकताएं",
+      "win1": "Windows 10 या बाद का",
+      "win2": "64-बिट (x86_64)",
+      "win3": "न्यूनतम 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) या बाद का",
+      "mac2": "Apple Silicon या Intel",
+      "mac3": "न्यूनतम 4 GB RAM"
+    },
+    "whatsIncluded": "क्या शामिल है",
+    "features": {
+      "browser": "ब्राउज़र ऑटोमेशन",
+      "desktop": "डेस्कटॉप ऑटोमेशन",
+      "terminal": "टर्मिनल एक्सेस",
+      "files": "फ़ाइल ऑपरेशन",
+      "updates": "ऑटो-अपडेट",
+      "remote": "कहीं से भी नियंत्रण"
+    },
+    "browserCta": "ब्राउज़र में Coasty खोलें",
+    "browserCtaDescription": "कहीं से भी अपनी मशीन नियंत्रित करना चाहते हैं?",
+    "loading": "लोड हो रहा है...",
+    "downloadFor": "{platform} के लिए डाउनलोड करें",
+    "download": "डाउनलोड",
+    "unavailable": "अनुपलब्ध"
+  },
+  "referralPage": {
+    "shareTitle": "Coasty शेयर करें।",
+    "earnTitle": "साथ में कमाएं।",
+    "shareDescription": "दोस्तों को अपना पहला AI एजेंट डिप्लॉय करने के लिए 50 मुफ्त क्रेडिट दें। हर बार कोई जुड़ने पर आपको भी 50 क्रेडिट मिलते हैं।",
+    "features": [
+      "AI जो वाकई काम करता है — असली ब्राउज़र, असली क्लिक, असली परिणाम",
+      "आइसोलेटेड और सुरक्षित — हर एजेंट अपने सैंडबॉक्स VM में चलता है",
+      "सोते समय भी चलता है — कार्य शेड्यूल करें और एजेंट को बाकी संभालने दें"
+    ],
+    "recentActivity": "आपकी हालिया गतिविधि",
+    "friendsCould": "आपके दोस्त भी यह कर सकते हैं",
+    "giveGet": "दोस्तों को 50 क्रेडिट दें। खुद के लिए 50 पाएं। हर बार।",
+    "stats": {
+      "invited": "आमंत्रित",
+      "earned": "अर्जित",
+      "perInvite": "प्रति आमंत्रण"
+    },
+    "tabs": {
+      "invite": "दोस्तों को आमंत्रित करें",
+      "feedback": "फ़ीडबैक भेजें"
+    },
+    "referralLink": "आपका रेफ़रल लिंक",
+    "howItWorks": "यह कैसे काम करता है",
+    "howSteps": [
+      "अपना लिंक किसी दोस्त के साथ शेयर करें",
+      "वे साइन अप करते हैं और 50 मुफ्त क्रेडिट पाते हैं",
+      "आपको भी तुरंत 50 क्रेडिट मिलते हैं"
+    ],
+    "shareDirectly": "सीधे शेयर करें",
+    "yourReferrals": "आपके रेफ़रल",
+    "invitedYou": "आपको आमंत्रित किया",
+    "joinedViaLink": "आपके लिंक से जुड़े",
+    "noReferrals": "अभी तक कोई रेफ़रल नहीं",
+    "noReferralsHint": "ऊपर अपना लिंक शेयर करें और दोनों 50 क्रेडिट कमाएं",
+    "feedbackThanks": "आपके फ़ीडबैक के लिए धन्यवाद!",
+    "feedbackWeRead": "हम हर एक संदेश पढ़ते हैं।",
+    "sendAnother": "एक और भेजें",
+    "feedbackTitle": "हमें बताएं आप क्या सोचते हैं",
+    "feedbackSubtitle": "बग रिपोर्ट, फीचर आइडिया, या बस नमस्ते कहें",
+    "feedbackPlaceholder": "आपके मन में क्या है?",
+    "weReadEvery": "हम हर संदेश पढ़ते हैं",
+    "send": "भेजें",
+    "shareMessage": "हे, मैं Coasty इस्तेमाल कर रहा/रही हूं और यह बहुत अच्छा है। यह एक AI है जो वाकई में आपके लिए कंप्यूटर चला सकता है। ब्राउज़िंग, क्लिकिंग, टाइपिंग, सब कुछ। मेरे लिंक से आज़माओ और हम दोनों को मुफ्त क्रेडिट मिलेंगे!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "ईमेल"
+    },
+    "emailSubject": "यह AI टूल देखें",
+    "emailBody": "यह AI वाकई में आपके लिए कंप्यूटर चला सकता है। ब्राउज़िंग, क्लिकिंग, टाइपिंग, सब कुछ।"
+  },
+  "statusPage": {
+    "title": "सिस्टम स्थिति",
+    "brandTitle": "Coasty स्थिति",
+    "subtitle": "सभी Coasty सेवाओं की रियल-टाइम परिचालन स्थिति। यह पेज हर 60 सेकंड में ऑटो-रिफ्रेश होता है।",
+    "refresh": "रिफ्रेश",
+    "statuses": {
+      "operational": "चालू",
+      "degraded": "प्रदर्शन कम",
+      "outage": "सेवा बंद"
+    },
+    "overallStatuses": {
+      "allOperational": "सभी सिस्टम चालू हैं",
+      "someDegraded": "कुछ सिस्टम का प्रदर्शन कम है",
+      "disruption": "सेवा में बाधा का पता चला"
+    },
+    "overallDescriptions": {
+      "allOperational": "सभी सेवाएं बिना किसी समस्या के सुचारू रूप से चल रही हैं।",
+      "someDegraded": "कुछ सेवाएं धीमी चल रही हैं। हम जांच कर रहे हैं।",
+      "disruption": "हमें समस्या की जानकारी है और हम सक्रिय रूप से इसे ठीक कर रहे हैं।"
+    },
+    "responseTime": "{ms}ms प्रतिक्रिया समय",
+    "uptimeLabel": "90-दिन अपटाइम",
+    "daysAgo": "90 दिन पहले",
+    "today": "आज",
+    "overallUptime": "समग्र 90-दिन अपटाइम",
+    "overallUptimeDesc": "सभी सेवाओं की समग्र उपलब्धता",
+    "services": "सेवाएं",
+    "clickUptime": "अपटाइम देखने के लिए क्लिक करें",
+    "lastChecked": "अंतिम जांच {time} · हर 60 सेकंड में ऑटो-रिफ्रेश",
+    "experiencingIssues": "समस्या हो रही है?",
+    "issuesDescription": "अगर कुछ सही नहीं लग रहा, तो सीधे हमसे संपर्क करें।",
+    "talkToCofounders": "सह-संस्थापकों से बात करें",
+    "emailUs": "हमें ईमेल करें",
+    "serviceNames": {
+      "website": "वेबसाइट",
+      "aiBackend": "AI बैकएंड",
+      "database": "डेटाबेस",
+      "authentication": "प्रमाणीकरण",
+      "aiModels": "AI मॉडल",
+      "fileStorage": "फ़ाइल स्टोरेज"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty — #1 कंप्यूटर-उपयोग AI एजेंट | डेस्कटॉप और ब्राउज़र ऑटोमेशन के लिए AI कर्मचारी",
+      "titleTemplate": "{title} | Coasty — AI कंप्यूटर-उपयोग एजेंट",
+      "description": "Coasty #1 रैंक वाला कंप्यूटर-उपयोग AI एजेंट है — OSWorld बेंचमार्क पर 82%। यह इंसान की तरह डेस्कटॉप को नियंत्रित करता है: ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है, स्प्रेडशीट प्रबंधित करता है। प्रति सत्र सच्चा VM-स्तर अलगाव। $20/माह से शुरू।",
+      "ogTitle": "Coasty — #1 कंप्यूटर-उपयोग AI एजेंट | OSWorld 82%",
+      "ogDescription": "इंसान की तरह डेस्कटॉप को नियंत्रित करने वाला AI कर्मचारी। OSWorld बेंचमार्क पर #1 (82%)। ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, CAPTCHA हल, VM अलगाव। $20/माह से शुरू।",
+      "twitterDescription": "इंसान की तरह डेस्कटॉप को नियंत्रित करने वाला AI कर्मचारी। ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है। सच्चा VM अलगाव। मानव वर्चुअल सहायक $3,000/माह के मुकाबले $20/माह।"
+    },
+    "compare": {
+      "title": "Coasty तुलना — AI एजेंट विकल्प और प्रतिस्पर्धी तुलना",
+      "description": "देखें कि Coasty का #1 रैंक वाला कंप्यूटर-उपयोग AI एजेंट Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath और अन्य के मुकाबले कैसा है। मूल्य निर्धारण के साथ फीचर-दर-फीचर तुलना।",
+      "ogTitle": "Coasty की AI एजेंट विकल्पों से तुलना करें",
+      "ogDescription": "#1 कंप्यूटर-उपयोग AI एजेंट बनाम प्रतिस्पर्धियों की फीचर-दर-फीचर तुलना। बेंचमार्क स्कोर, मूल्य, क्षमताएँ।"
+    },
+    "download": {
+      "title": "Coasty Desktop डाउनलोड करें — Mac और Windows के लिए AI एजेंट",
+      "description": "Coasty Desktop डाउनलोड करें — #1 कंप्यूटर-उपयोग AI एजेंट जो आपकी स्थानीय मशीन को नियंत्रित करता है। ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, टर्मिनल एक्सेस, और फ़ाइल संचालन। Windows और macOS के लिए उपलब्ध।",
+      "ogTitle": "Coasty Desktop डाउनलोड करें — Mac और Windows के लिए AI एजेंट",
+      "ogDescription": "इंसान की तरह आपके कंप्यूटर को नियंत्रित करने वाला AI। एक नेटिव ऐप में ब्राउज़र, डेस्कटॉप और टर्मिनल ऑटोमेशन। OSWorld बेंचमार्क पर #1।"
+    },
+    "guide": {
+      "title": "Coasty क्या कर सकता है? — AI कंप्यूटर ऑटोमेशन की संपूर्ण गाइड",
+      "description": "Coasty जो कुछ भी ऑटोमेट कर सकता है वह खोजें: सेल्स प्रॉस्पेक्टिंग, ईमेल आउटरीच, जॉब एप्लिकेशन, QA टेस्टिंग, डेटा एंट्री, सोशल मीडिया, रिक्रूटिंग, रिसर्च, और 100+ और कार्य।",
+      "ogTitle": "Coasty क्या कर सकता है? — संपूर्ण AI ऑटोमेशन गाइड",
+      "ogDescription": "Coasty द्वारा ऑटोमेट किए जा सकने वाले 100+ कार्यों को जानें। सेल्स से QA टेस्टिंग तक, देखें कि AI कंप्यूटर एजेंट वास्तविक काम कैसे करता है।"
+    },
+    "blog": {
+      "title": "ब्लॉग — AI एजेंट इनसाइट्स, कंप्यूटर उपयोग रिसर्च और केस स्टडीज़",
+      "description": "स्वायत्त AI एजेंटों, कंप्यूटर उपयोग तकनीक, वास्तविक ऑटोमेशन केस स्टडीज़, और AI कर्मचारियों के भविष्य पर गहन विश्लेषण। #1 कंप्यूटर-उपयोग एजेंट की टीम से।",
+      "ogTitle": "Coasty ब्लॉग — AI एजेंट इनसाइट्स और केस स्टडीज़",
+      "ogDescription": "स्वायत्त AI एजेंटों, कंप्यूटर उपयोग तकनीक, और #1 रैंक कंप्यूटर-उपयोग एजेंट की वास्तविक ऑटोमेशन केस स्टडीज़ पर गहन विश्लेषण।"
+    },
+    "results": {
+      "title": "डेमो और परिणाम — Coasty AI एजेंट को स्वायत्त रूप से काम करते देखें",
+      "description": "देखें कि Coasty स्वायत्त रूप से मार्केटिंग अभियान चलाता है, नौकरियों के लिए आवेदन करता है, एप्लिकेशन भरता है, QA टेस्ट करता है, व्यक्तिगत ईमेल भेजता है, और भी बहुत कुछ। वीडियो डेमो के साथ वास्तविक केस स्टडीज़।",
+      "ogTitle": "डेमो — Coasty AI एजेंट को स्वायत्त रूप से काम करते देखें",
+      "ogDescription": "AI द्वारा कंप्यूटर नियंत्रित करने के वास्तविक डेमो: मार्केटिंग, जॉब एप्लिकेशन, QA टेस्टिंग, ईमेल आउटरीच, और बहुत कुछ। OSWorld बेंचमार्क पर #1।"
+    },
+    "terms": {
+      "title": "सेवा की शर्तें",
+      "description": "Coasty सेवा की शर्तें। Coasty AI कर्मचारी प्लेटफ़ॉर्म, कंप्यूटर-उपयोग एजेंट, और डेस्कटॉप एप्लिकेशन के उपयोग को नियंत्रित करने वाली शर्तें पढ़ें।",
+      "ogTitle": "Coasty — सेवा की शर्तें",
+      "ogDescription": "Coasty सेवा की शर्तें। Coasty AI कर्मचारी प्लेटफ़ॉर्म, कंप्यूटर-उपयोग एजेंट, और डेस्कटॉप एप्लिकेशन के उपयोग को नियंत्रित करने वाली शर्तें पढ़ें।."
+    },
+    "privacy": {
+      "title": "गोपनीयता नीति",
+      "description": "Coasty गोपनीयता नीति। जानें कि हम VM-स्तर अलगाव, एन्क्रिप्टेड सत्र, सैंडबॉक्स्ड निष्पादन वातावरण, और एंटरप्राइज़-ग्रेड सुरक्षा के साथ आपके डेटा की कैसे रक्षा करते हैं।",
+      "ogTitle": "Coasty — गोपनीयता नीति",
+      "ogDescription": "Coasty गोपनीयता नीति। जानें कि हम VM-स्तर अलगाव, एन्क्रिप्टेड सत्र, सैंडबॉक्स्ड निष्पादन वातावरण, और एंटरप्राइज़-ग्रेड सुरक्षा के साथ आपके डेटा की कैसे रक्षा करते हैं।."
+    },
+    "useCases": {
+      "title": "उपयोग के मामले — व्यापार संचालन के लिए Coasty AI एजेंट",
+      "description": "Coasty AI एजेंट द्वारा आपके संचालन को ऑटोमेट करने के 12 तरीके खोजें — प्रतिस्पर्धी अनुसंधान, QA टेस्टिंग, लीड जनरेशन, ईमेल आउटरीच, और बहुत कुछ। वास्तविक परिणाम।",
+      "ogTitle": "उपयोग के मामले — Coasty AI एजेंट",
+      "ogDescription": "ऑटोपायलट पर अपनी उत्पादकता 10 गुना बढ़ाने के 12 तरीके। वास्तविक परिणाम, वास्तविक संख्याएँ।"
+    },
+    "computerUse": {
+      "title": "कंप्यूटर उपयोग AI एजेंट — #1 रैंक डेस्कटॉप, ब्राउज़र और टर्मिनल ऑटोमेशन",
+      "description": "Coasty सबसे अच्छा कंप्यूटर उपयोग AI एजेंट है, OSWorld पर #1 रैंक (82%)। इंसान की तरह कंप्यूटर को नियंत्रित करने वाले स्वायत्त AI से किसी भी डेस्कटॉप, ब्राउज़र, या टर्मिनल कार्य को ऑटोमेट करें।",
+      "ogTitle": "Coasty — #1 कंप्यूटर उपयोग AI एजेंट",
+      "ogDescription": "OSWorld पर #1 रैंक सबसे अच्छा कंप्यूटर उपयोग एजेंट। AI से किसी भी डेस्कटॉप, ब्राउज़र, या टर्मिनल कार्य को ऑटोमेट करें।"
+    },
+    "pricing": {
+      "title": "मूल्य — Coasty AI एजेंट प्लान और मूल्य निर्धारण",
+      "description": "Coasty मूल्य निर्धारण योजनाएँ $20/माह से शुरू। $3,000/माह के वर्चुअल सहायकों को AI कर्मचारी से बदलें। मुफ्त टियर उपलब्ध। बिना छिपी फीस के क्रेडिट-आधारित बिलिंग।",
+      "ogTitle": "Coasty मूल्य — AI एजेंट प्लान",
+      "ogDescription": "$20/माह से शुरू AI कर्मचारी। महंगे वर्चुअल सहायकों को स्वायत्त AI से बदलें। मुफ्त टियर उपलब्ध।"
+    },
+    "faq": {
+      "q1": "Coasty क्या है?",
+      "a1": "Coasty एक AI कर्मचारी प्लेटफ़ॉर्म है — एक कंप्यूटर-उपयोग एजेंट जो इंसान की तरह डेस्कटॉप को नियंत्रित करता है। यह ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, ऐप्स नेविगेट करता है, फॉर्म भरता है, ईमेल भेजता है, और स्प्रेडशीट स्वायत्त रूप से प्रबंधित करता है। OSWorld बेंचमार्क पर 369 वास्तविक कार्यों में 82% पूर्णता दर के साथ #1 रैंक।",
+      "q2": "Coasty Anthropic Computer Use से कैसे अलग है?",
+      "a2": "जबकि Anthropic Computer Use कंप्यूटर नियंत्रण के लिए एक कच्चा API प्रदान करता है, Coasty एक उत्पादन-तैयार प्लेटफ़ॉर्म है जिसमें प्रबंधित VM इंफ्रास्ट्रक्चर, बिल्ट-इन CAPTCHA समाधान, Mac और Windows के लिए डेस्कटॉप ऐप, मल्टी-मॉडल सपोर्ट, और सबसे उच्च OSWorld बेंचमार्क स्कोर (82%) है। Coasty पूर्ण समाधान प्रदान करता है — सिर्फ API नहीं।",
+      "q3": "Coasty की कीमत कितनी है?",
+      "a3": "Coasty स्टार्टर प्लान $20/माह से शुरू होता है और मुफ्त टियर उपलब्ध है। तुलना में, एक मानव वर्चुअल सहायक $3,000+/माह खर्च करता है। Coasty 24/7 काम करता है बिना ब्रेक, बिना ट्रेनिंग, और तुरंत स्केलेबिलिटी के साथ।",
+      "q4": "क्या Coasty उपयोग करना सुरक्षित है?",
+      "a4": "हाँ। हर Coasty सत्र अपनी अलग, सैंडबॉक्स्ड वर्चुअल मशीन में चलता है। आपका डेटा सुरक्षित रहता है, आपकी मशीन अछूती रहती है, और सत्रों के बीच कुछ भी लीक नहीं होता। यह सच्चा VM-स्तर अलगाव है, साझा पूल में सिर्फ कंटेनर नहीं।",
+      "q5": "OSWorld बेंचमार्क क्या है?",
+      "a5": "OSWorld वास्तविक कंप्यूटर कार्यों पर AI एजेंटों का मूल्यांकन करने के लिए एक बेंचमार्क है। यह ब्राउज़र, ऑफिस ऐप्स, और सिस्टम ऑपरेशन में 369 कार्यों का परीक्षण करता है। Coasty ने 82% स्कोर किया — किसी भी कंप्यूटर-उपयोग एजेंट का सबसे ऊँचा स्कोर।",
+      "q6": "Coasty UiPath जैसे RPA टूल से कैसे अलग है?",
+      "a6": "UiPath जैसे पारंपरिक RPA टूल को नाजुक स्क्रिप्टिंग की आवश्यकता होती है और इंटरफेस बदलने पर टूट जाते हैं। Coasty किसी भी इंटरफेस को समझने और उसके साथ इंटरैक्ट करने के लिए AI विज़न का उपयोग करता है, पूर्वनिर्धारित स्क्रिप्ट के बिना रियल-टाइम में अनुकूलित होता है। यह इंसान की तरह काम करता है, मैक्रो की तरह नहीं। सेटअप में हफ्तों की जगह मिनट लगते हैं।",
+      "q7": "क्या Coasty का डेस्कटॉप ऐप है?",
+      "a7": "हाँ। Coasty Desktop Mac और Windows दोनों के लिए उपलब्ध है। यह आपके डेस्कटॉप पर एक फ्लोटिंग ओवरले के रूप में चलता है और सीधे आपके स्थानीय ब्राउज़र, फ़ाइलों, टर्मिनल, और एप्लिकेशन को नियंत्रित कर सकता है — स्थानीय कार्यों के लिए VM की आवश्यकता नहीं।",
+      "q8": "Coasty क्या ऑटोमेट कर सकता है?",
+      "a8": "Coasty लगभग किसी भी कंप्यूटर कार्य को ऑटोमेट कर सकता है: वेब ब्राउज़िंग, फॉर्म भरना, ईमेल भेजना, स्प्रेडशीट प्रबंधन, डेटा एंट्री, सोशल मीडिया पोस्टिंग, जॉब एप्लिकेशन, सेल्स प्रॉस्पेक्टिंग, QA टेस्टिंग, कस्टमर सपोर्ट, LinkedIn रिक्रूटिंग, और बहुत कुछ। अगर कोई इंसान कंप्यूटर पर कर सकता है, तो Coasty भी कर सकता है।",
+      "q9": "Coasty OpenAI Operator से कैसे तुलना करता है?",
+      "a9": "Coasty OSWorld बेंचमार्क पर OpenAI Operator से आगे है (82% बनाम ~40%), हर सत्र के लिए सच्चा VM-स्तर अलगाव प्रदान करता है, कई AI मॉडल सपोर्ट करता है, सिर्फ ब्राउज़र से परे पूर्ण डेस्कटॉप नियंत्रण शामिल करता है, और ओपन-सोर्स फ्रेमवर्क प्रदान करता है।",
+      "q10": "क्या Coasty CAPTCHA हल कर सकता है?",
+      "a10": "हाँ। Coasty में बिल्ट-इन CAPTCHA-सॉल्विंग पाइपलाइन है, इसलिए यह प्रतिस्पर्धी AI एजेंटों की तरह ब्लॉक नहीं होता। यह वास्तविक ऑटोमेशन के लिए महत्वपूर्ण है जहाँ वेबसाइटों पर CAPTCHA आम है।"
+    },
+    "structuredData": {
+      "appDescription": "#1 रैंक कंप्यूटर-उपयोग AI एजेंट। Coasty इंसान की तरह डेस्कटॉप नियंत्रित करता है — ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है, और स्प्रेडशीट स्वायत्त रूप से प्रबंधित करता है। OSWorld बेंचमार्क पर 82%। सच्चा VM-स्तर अलगाव। बिल्ट-इन CAPTCHA समाधान। $20/माह से शुरू।",
+      "orgDescription": "Coasty #1 कंप्यूटर-उपयोग AI एजेंट बनाता है। हमारा प्लेटफ़ॉर्म सच्चे VM-स्तर अलगाव के साथ स्वायत्त डेस्कटॉप नियंत्रण, ब्राउज़र ऑटोमेशन, और मल्टी-एजेंट ऑर्केस्ट्रेशन प्रदान करता है।",
+      "productDescription": "इंसान की तरह डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। OSWorld बेंचमार्क पर #1 (82%)। सच्चे VM-स्तर अलगाव के साथ स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
+      "websiteDescription": "#1 कंप्यूटर-उपयोग AI एजेंट प्लेटफ़ॉर्म। OSWorld बेंचमार्क 82%। VM अलगाव के साथ स्वायत्त ब्राउज़र, डेस्कटॉप, और टर्मिनल ऑटोमेशन। $20/माह से शुरू।",
+      "softwareDescription": "इंसान की तरह पूर्ण डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। 369 वास्तविक कार्यों में 82% पूर्णता दर के साथ OSWorld बेंचमार्क पर #1। स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, टर्मिनल संचालन, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
+      "breadcrumbs": {
+        "home": "होम",
+        "caseStudies": "AI एजेंट केस स्टडीज़",
+        "blog": "ब्लॉग",
+        "download": "डेस्कटॉप ऐप डाउनलोड करें",
+        "compare": "AI एजेंटों की तुलना करें"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – पेज नहीं मिला",
+      "description": "क्षमा करें, यह पेज मौजूद नहीं है।"
+    },
+    "error": {
+      "title": "कुछ गलत हो गया",
+      "description": "एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।",
+      "tryAgain": "पुनः प्रयास करें"
+    }
+  },
+  "schedulesPage": {
+    "title": "कार्यबल",
+    "subtitle": "आपका AI कार्यबल — कार्य सौंपें और बाकी उन पर छोड़ दें",
+    "guide": "गाइड",
+    "hireEmployee": "कर्मचारी नियुक्त करें",
+    "loading": "आपके कर्मचारी लोड हो रहे हैं...",
+    "onDuty": "{count} ड्यूटी पर",
+    "standby": "{count} स्टैंडबाय पर",
+    "company": "कंपनी",
+    "teams": "{count} टीमें",
+    "employees": "{count} कर्मचारी",
+    "members": "{count} सदस्य",
+    "unassigned": "असाइन नहीं किया गया",
+    "add": "जोड़ें",
+    "save": "सेव करें",
+    "cancel": "रद्द करें",
+    "run": "चलाएं",
+    "delegate": "सौंपें",
+    "untitledEmployee": "शीर्षकहीन कर्मचारी",
+    "untitled": "शीर्षकहीन",
+    "guidelinesPlaceholder": "दिशानिर्देश...",
+    "today": "आज",
+    "timesDaily": "{count} × दैनिक",
+    "noEmployeesDay": "इस दिन कोई कर्मचारी नहीं",
+    "noEmployeesScheduled": "कोई कर्मचारी शेड्यूल नहीं",
+    "recentActivity": "हाल की गतिविधि",
+    "schedule": "शेड्यूल",
+    "emptyState": {
+      "openChat": "कोई भी चैट खोलें और क्लिक करें",
+      "assignEmployee": "कर्मचारी असाइन करें",
+      "onThe": "",
+      "topRight": "ऊपर दाईं ओर",
+      "toPutOnAutopilot": "ऑटोपायलट पर सेट करने के लिए",
+      "newChat": "नई चैट"
+    },
+    "emptyWorkforce": {
+      "title": "अपना पहला कर्मचारी नियुक्त करें",
+      "description": "AI कर्मचारी आपकी ओर से काम करते हैं — कार्य सौंपें, शेड्यूल सेट करें और वे स्वचालित रूप से निष्पादित करेंगे",
+      "flexibleShifts": {
+        "title": "लचीली शिफ्ट",
+        "desc": "कर्मचारियों को प्रति घंटा, दैनिक, साप्ताहिक, मासिक शेड्यूल करें — या कस्टम cron एक्सप्रेशन का उपयोग करें"
+      },
+      "fullAutonomy": {
+        "title": "पूर्ण स्वायत्तता",
+        "desc": "प्रत्येक कर्मचारी को ब्राउज़िंग, टर्मिनल और आपके कनेक्टेड वर्कस्टेशन तक पूर्ण पहुंच मिलती है"
+      },
+      "activityLogs": {
+        "title": "गतिविधि लॉग",
+        "desc": "हर निष्पादन लॉग किया जाता है ताकि आप समीक्षा कर सकें कि आपके कर्मचारियों ने क्या हासिल किया"
+      },
+      "startFromChat": "चैट से शुरू करें"
+    },
+    "filters": {
+      "all": "सभी",
+      "onDuty": "ड्यूटी पर",
+      "standby": "स्टैंडबाय"
+    },
+    "noMatch": "इस फ़िल्टर से कोई कर्मचारी मेल नहीं खाता",
+    "createTeam": {
+      "title": "नई टीम",
+      "subtitle": "टेम्पलेट से शुरू करें या शुरू से बनाएं",
+      "backToTemplates": "टेम्पलेट्स पर वापस",
+      "customTeam": "कस्टम टीम",
+      "customDescription": "अपनी खुद की कॉन्फ़िगरेशन के साथ टीम बनाएं।",
+      "teamNameLabel": "टीम का नाम",
+      "teamNamePlaceholder": "जैसे रिसर्च, मार्केटिंग, इंजीनियरिंग",
+      "guidelinesLabel": "दिशानिर्देश",
+      "optional": "(वैकल्पिक)",
+      "guidelinesPlaceholder": "साझा निर्देश जिनका सभी टीम सदस्य पालन करेंगे...",
+      "suggestedEmployees": "सुझाए गए कर्मचारी",
+      "suggestedCredentials": "सुझाए गए क्रेडेंशियल",
+      "added": "जोड़ा गया",
+      "addButton": "+ जोड़ें",
+      "credentials": "क्रेडेंशियल",
+      "addCredential": "+ क्रेडेंशियल जोड़ें",
+      "credentialHint": "क्रेडेंशियल एन्क्रिप्टेड हैं। ये टीम दिशानिर्देशों में शामिल किए जाएंगे ताकि कर्मचारी जान सकें क्या उपलब्ध है।",
+      "settingUp": "सेटअप हो रहा है...",
+      "createEmployees": "{count} कर्मचारी बनाएं",
+      "createTeamButton": "टीम बनाएं"
+    },
+    "noTeams": {
+      "title": "अभी तक कोई टीम नहीं",
+      "description": "टीमें कर्मचारियों को संदर्भ और मेमोरी साझा करने देती हैं। अपना संगठन चार्ट बनाने के लिए एक बनाएं।",
+      "newTeam": "नई टीम"
+    },
+    "howItWorks": {
+      "title": "कैसे काम करता है",
+      "dragEmployees": "कर्मचारियों को टीम पर ड्रैग करें",
+      "clickToEdit": "शेड्यूल और सेटिंग्स संपादित करने के लिए क्लिक करें",
+      "teamsShare": "टीमें मेमोरी और दिशानिर्देश साझा करती हैं",
+      "dashedLines": "डैश्ड लाइनें — कर्मचारियों के बीच प्रतिनिधिमंडल"
+    },
+    "inactive": {
+      "title": "{count} कर्मचारी निष्क्रिय",
+      "missingMachine": "{count} मशीन गायब — सक्रिय होने तक नहीं चलेगा",
+      "wontRun": "सक्रिय होने तक नहीं चलेगा",
+      "fixInEmployees": "कर्मचारियों में ठीक करें"
+    },
+    "dragHint": "असाइन नहीं किए गए कर्मचारियों को टीमों पर ड्रैग करके जोड़ें",
+    "limits": {
+      "upgradePlan": "प्लान अपग्रेड करें",
+      "manageMachines": "मशीनें प्रबंधित करें",
+      "manageEmployees": "कर्मचारी प्रबंधित करें",
+      "machineLimit": "आपको क्लाउड मशीन चाहिए लेकिन आप {max} मशीनों की सीमा पर पहुंच गए हैं। अपना प्लान अपग्रेड करें या अनुपयोगी मशीन हटाएं।",
+      "employeeLimit": "आप अपनी कर्मचारी सीमा पर पहुंच गए हैं ({tier} टियर के लिए {max})। अपना प्लान अपग्रेड करें या अनुपयोगी कर्मचारी हटाएं।",
+      "templateLimit": "इस टेम्पलेट को {needed} कर्मचारियों की जरूरत है लेकिन आपके पास केवल {available} स्लॉट बचे हैं ({tier} टियर के लिए अधिकतम {max})। अपना प्लान अपग्रेड करें या अनुपयोगी कर्मचारी हटाएं।",
+      "createFailed": "कर्मचारी बनाने में विफल। अपने अकाउंट की सीमाएं जांचें और पुनः प्रयास करें।",
+      "teamFailed": "टीम बनाने में विफल"
+    },
+    "provisioning": {
+      "checking": "अकाउंट सीमाएं जांच रहे हैं...",
+      "usingMachine": "मशीन \"{name}\" का उपयोग हो रहा है...",
+      "assigningMachine": "मशीन \"{name}\" पर असाइन हो रहा है (मशीन तैयार होने पर चलेगा)...",
+      "creatingMachine": "नई मशीन बनाई जा रही है...",
+      "machineStarted": "मशीन प्रोविजनिंग शुरू...",
+      "hiring": "{name} को नियुक्त किया जा रहा है ({current}/{total})...",
+      "creatingTeam": "टीम बनाई जा रही है..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "{count} कर्मचारियों के साथ टीम बनाई गई ({failedCount} विफल: {names})",
+      "teamCreated": "{count} कर्मचारियों के साथ {name} टीम बनाई गई"
+    },
+    "credentialInstructions": "[उपलब्ध क्रेडेंशियल]\nनिम्नलिखित सेवा क्रेडेंशियल कॉन्फ़िगर किए गए हैं और उपयोग के लिए उपलब्ध हैं:\n{list}\nअपने कार्य पूरे करने के लिए इन सेवाओं में लॉग इन करते समय इन क्रेडेंशियल का उपयोग करें।",
+    "templates": {
+      "contentOps": {
+        "name": "कंटेंट संचालन",
+        "tagline": "बिना उंगली उठाए लगातार प्रकाशित करें",
+        "description": "एक कुशल कंटेंट इंजन — ऑटोपायलट पर लिखता, ऑप्टिमाइज़ करता और वितरित करता है।",
+        "roles": {
+          "atlas": "कंटेंट राइटर — ब्लॉग पोस्ट, न्यूज़लेटर और सोशल कॉपी लिखता है",
+          "echo": "SEO एनालिस्ट — पेज ऑडिट करता है, रैंकिंग ट्रैक करता है, कीवर्ड अवसर सुझाता है",
+          "nova": "सोशल डिस्ट्रीब्यूटर — प्लेटफ़ॉर्म पर कंटेंट पोस्ट करता है और एंगेजमेंट मॉनिटर करता है"
+        },
+        "credentials": {
+          "wordpress": "ब्लॉग पोस्ट प्रकाशित और प्रबंधित करें",
+          "twitter": "ट्वीट पोस्ट करें और एंगेजमेंट मॉनिटर करें",
+          "linkedin": "पेशेवर कंटेंट और लेख प्रकाशित करें",
+          "searchConsole": "सर्च प्रदर्शन और इंडेक्सिंग ट्रैक करें"
+        }
+      },
+      "customerSupport": {
+        "name": "ग्राहक सहायता",
+        "tagline": "3 कर्मचारियों से 24/7 सहायता कवरेज",
+        "description": "इनबॉक्स मॉनिटर करता है, सामान्य समस्याएं हल करता है और आपका ज्ञान आधार अपडेट रखता है।",
+        "roles": {
+          "sage": "इनबॉक्स मॉनिटर — सहायता ईमेल जांचता है, वर्गीकृत करता है और सामान्य प्रश्नों का उत्तर देता है",
+          "iris": "ज्ञान आधार प्रबंधक — बार-बार आने वाली समस्याओं के आधार पर सहायता दस्तावेज़ और FAQ अपडेट करता है",
+          "milo": "फ़ीडबैक विश्लेषक — समीक्षाओं और सहायता रुझानों को साप्ताहिक रिपोर्ट में संकलित करता है"
+        },
+        "credentials": {
+          "gmail": "सहायता ईमेल मॉनिटर और उत्तर दें",
+          "zendesk": "सहायता टिकट प्रबंधित करें (या आपका हेल्पडेस्क)",
+          "notion": "ज्ञान आधार और दस्तावेज़ अपडेट करें"
+        }
+      },
+      "researchIntel": {
+        "name": "अनुसंधान और खुफ़िया",
+        "tagline": "मैन्युअल काम के बिना सूचित रहें",
+        "description": "प्रतिस्पर्धियों की निगरानी करता है, उद्योग के रुझान ट्रैक करता है और कार्रवाई योग्य शोध सारांश तैयार करता है।",
+        "roles": {
+          "scout": "प्रतिस्पर्धी मॉनिटर — प्रतिस्पर्धी वेबसाइट, मूल्य निर्धारण और फ़ीचर बदलाव ट्रैक करता है",
+          "wren": "ट्रेंड रिसर्चर — उद्योग समाचार, प्रकाशन और सोशल मीडिया स्कैन करके रुझान पहचानता है",
+          "quinn": "ब्रीफ़ कंपाइलर — निष्कर्षों को संरचित साप्ताहिक खुफ़िया रिपोर्ट में संकलित करता है"
+        },
+        "credentials": {
+          "google": "वेब रिसर्च और खोज",
+          "linkedin": "प्रतिस्पर्धी भर्ती और घोषणाएं ट्रैक करें",
+          "notion": "शोध सारांश और रिपोर्ट प्रकाशित करें"
+        }
+      },
+      "marketing": {
+        "name": "मार्केटिंग विभाग",
+        "tagline": "दो मशीनों में पूर्ण मार्केटिंग टीम",
+        "description": "कंटेंट निर्माण, सोशल मीडिया, SEO, प्रतिस्पर्धी ट्रैकिंग और कैम्पेन एनालिटिक्स — दो समन्वित दल।",
+        "roles": {
+          "atlas": "कंटेंट स्ट्रैटेजिस्ट — कंटेंट कैलेंडर प्लान करता है, लंबे लेख लिखता है",
+          "nova": "सोशल मीडिया मैनेजर — पोस्ट करता है, एंगेज करता है और सोशल चैनल बढ़ाता है",
+          "echo": "SEO विशेषज्ञ — पेज ऑप्टिमाइज़ करता है, आंतरिक लिंक बनाता है, कीवर्ड ट्रैक करता है",
+          "pixel": "ईमेल कैम्पेन मैनेजर — न्यूज़लेटर लिखता और भेजता है, ओपन/क्लिक ट्रैक करता है",
+          "scout": "प्रतिस्पर्धी विश्लेषक — प्रतिस्पर्धी मार्केटिंग गतिविधियों की निगरानी करता है",
+          "dash": "विज्ञापन कैम्पेन मॉनिटर — विज्ञापन खर्च, ROAS और अनुकूलन अवसर ट्रैक करता है",
+          "iris": "एनालिटिक्स रिपोर्टर — क्रॉस-चैनल प्रदर्शन डैशबोर्ड बनाता है"
+        },
+        "credentials": {
+          "wordpress": "ब्लॉग कंटेंट प्रकाशित करें",
+          "twitter": "सोशल मीडिया प्रबंधन",
+          "linkedin": "पेशेवर कंटेंट वितरण",
+          "mailchimp": "ईमेल कैम्पेन और न्यूज़लेटर",
+          "analytics": "ट्रैफ़िक और कन्वर्ज़न एनालिटिक्स",
+          "googleAds": "Google Ads कैम्पेन प्रबंधन",
+          "metaAds": "Meta Ads और सोशल प्रबंधन"
+        }
+      },
+      "ecommerce": {
+        "name": "ई-कॉमर्स संचालन",
+        "tagline": "सोते समय अपना स्टोर चलाएं",
+        "description": "उत्पाद प्रबंधन, मूल्य खुफ़िया, इन्वेंट्री ट्रैकिंग, समीक्षा प्रबंधन और ऑनलाइन स्टोर के लिए ग्रोथ मार्केटिंग।",
+        "roles": {
+          "cleo": "प्रोडक्ट लिस्टर — उत्पाद विवरण, छवियां और मेटाडेटा बनाता और अपडेट करता है",
+          "onyx": "मूल्य मॉनिटर — प्रतिस्पर्धी कीमतें ट्रैक करता है और समायोजन अवसर चिह्नित करता है",
+          "luna": "इन्वेंट्री ट्रैकर — स्टॉक स्तर मॉनिटर करता है और कम इन्वेंट्री पर अलर्ट करता है",
+          "sage": "समीक्षा प्रबंधक — ग्राहक समीक्षाओं का उत्तर देता है और भावना एकत्र करता है",
+          "dash": "कैम्पेन ऑप्टिमाइज़र — उत्पाद विज्ञापन और शॉपिंग कैम्पेन प्रबंधित करता है",
+          "flux": "ईमेल मार्केटर — कार्ट छोड़ने, प्रोमो और खरीदारी के बाद के सीक्वेंस भेजता है",
+          "wren": "एनालिटिक्स रिपोर्टर — राजस्व, कन्वर्ज़न दरें और ग्रोथ मेट्रिक्स ट्रैक करता है"
+        },
+        "credentials": {
+          "shopify": "स्टोर प्रबंधन और उत्पाद सूची",
+          "amazon": "Amazon मार्केटप्लेस प्रबंधन",
+          "googleAds": "शॉपिंग विज्ञापन और कैम्पेन",
+          "mailchimp": "ग्राहक ईमेल सीक्वेंस",
+          "analytics": "कन्वर्ज़न और ट्रैफ़िक एनालिटिक्स"
+        }
+      },
+      "engineering": {
+        "name": "इंजीनियरिंग टीम",
+        "tagline": "इंजीनियरिंग के उबाऊ हिस्सों को स्वचालित करें",
+        "description": "स्वचालित कोड रिव्यू, डिपेंडेंसी मॉनिटरिंग, डॉक्युमेंटेशन, टेस्टिंग, डिप्लॉय मॉनिटरिंग और इंसिडेंट रिस्पॉन्स।",
+        "roles": {
+          "rune": "कोड रिव्यूअर — ओपन PR रिव्यू करता है, सुधार सुझाता है, सुरक्षा समस्याएं जांचता है",
+          "koda": "डिपेंडेंसी मॉनिटर — पुराने पैकेज, सुरक्षा सलाह और ब्रेकिंग चेंज ट्रैक करता है",
+          "aria": "डॉक राइटर — API डॉक्स, README और चेंजलॉग को अपडेट रखता है",
+          "blaze": "टेस्ट मॉनिटर — टेस्ट सूट चलाता है, अस्थिर टेस्ट ट्रैक करता है, कवरेज ट्रेंड रिपोर्ट करता है",
+          "frost": "डिप्लॉय मॉनिटर — CI/CD पाइपलाइन निगरानी करता है, विफलताओं पर अलर्ट करता है",
+          "neon": "अपटाइम और लॉग वॉचर — सेवाओं की निगरानी करता है, लॉग स्कैन करता है, इंसिडेंट रिपोर्ट बनाता है"
+        },
+        "credentials": {
+          "github": "रिपॉज़िटरी एक्सेस, PR रिव्यू, Issues",
+          "vercel": "डिप्लॉय मॉनिटरिंग (या आपका CI/CD)",
+          "sentry": "एरर ट्रैकिंग और इंसिडेंट अलर्ट",
+          "npm": "डिपेंडेंसी चेक के लिए पैकेज रजिस्ट्री"
+        }
+      },
+      "fullBusiness": {
+        "name": "पूर्ण व्यावसायिक संचालन",
+        "tagline": "पूरी कंपनी, पूरी तरह स्वचालित",
+        "description": "बिक्री, मार्केटिंग, सहायता और प्रशासन — चार विभाग तीन मशीनों पर साझा बुद्धिमत्ता के साथ मिलकर काम करते हैं।",
+        "roles": {
+          "atlas": "लीड जेनरेटर — ऑनलाइन स्रोतों से संभावित ग्राहकों को ढूंढता और योग्य बनाता है",
+          "dash": "CRM मैनेजर — डील अपडेट करता है, पाइपलाइन ट्रैक करता है, फ़ॉलो-अप भेजता है",
+          "scout": "प्रस्ताव लेखक — टेम्पलेट से बिक्री प्रस्ताव और पिच डेक बनाता है",
+          "nova": "कंटेंट मार्केटर — ब्लॉग पोस्ट, केस स्टडी और मार्केटिंग कॉपी लिखता है",
+          "echo": "सोशल मीडिया मैनेजर — कंटेंट पोस्ट करता है और दर्शकों से जुड़ता है",
+          "pixel": "ईमेल कैम्पेन मैनेजर — ड्रिप कैम्पेन और न्यूज़लेटर सीक्वेंस चलाता है",
+          "sage": "सहायता प्रमुख — ग्राहक पूछताछ संभालता है और समस्याएं हल करता है",
+          "iris": "ज्ञान प्रबंधक — सहायता दस्तावेज़, FAQ और आंतरिक विकी बनाए रखता है",
+          "milo": "डेटा विश्लेषक — क्रॉस-विभाग रिपोर्ट और KPI डैशबोर्ड बनाता है",
+          "wren": "मार्केट रिसर्चर — उद्योग रुझान और प्रतिस्पर्धी खुफ़िया ट्रैक करता है",
+          "quinn": "ऑपरेशन कोऑर्डिनेटर — साप्ताहिक सारांश और क्रॉस-टीम सिंक चलाता है"
+        },
+        "credentials": {
+          "gmail": "ईमेल संचार और सहायता",
+          "hubspot": "CRM और बिक्री पाइपलाइन (या आपका CRM)",
+          "linkedin": "लीड जनरेशन और पेशेवर नेटवर्किंग",
+          "mailchimp": "ईमेल मार्केटिंग कैम्पेन",
+          "notion": "आंतरिक विकी और दस्तावेज़ीकरण",
+          "analytics": "वेब एनालिटिक्स और रिपोर्टिंग",
+          "twitter": "सोशल मीडिया उपस्थिति",
+          "zendesk": "ग्राहक सहायता टिकट"
+        }
+      },
+      "growth": {
+        "name": "विकास और अधिग्रहण",
+        "tagline": "पूर्ण ऑटोपायलट पर आक्रामक विकास",
+        "description": "आउटबाउंड प्रॉस्पेक्टिंग, इनबाउंड मार्केटिंग, कन्वर्ज़न ऑप्टिमाइज़ेशन और एनालिटिक्स — तीन मशीनों पर समर्पित ग्रोथ इंजन।",
+        "roles": {
+          "blaze": "आउटबाउंड प्रॉस्पेक्टर — निर्णय लेने वालों को ढूंढता है, कंपनियों की रिसर्च करता है, लीड लिस्ट बनाता है",
+          "flux": "ईमेल आउटरीच — व्यक्तिगत कोल्ड ईमेल भेजता है, फ़ॉलो-अप सीक्वेंस प्रबंधित करता है",
+          "orion": "LinkedIn आउटरीच — संभावनाओं से जुड़ता है और व्यक्तिगत संदेश भेजता है",
+          "coral": "कंटेंट क्रिएटर — SEO कंटेंट, लैंडिंग पेज कॉपी और लीड मैग्नेट बनाता है",
+          "taro": "लैंडिंग पेज ऑप्टिमाइज़र — कन्वर्ज़न दरें मॉनिटर करता है, सुधार सुझाता और टेस्ट करता है",
+          "vale": "विज्ञापन कैम्पेन मैनेजर — Google और Meta विज्ञापन कैम्पेन एंड-टू-एंड प्रबंधित करता है",
+          "ember": "लीड स्कोरर — इनबाउंड लीड को योग्य बनाता है और उचित फ़ॉलो-अप में रूट करता है",
+          "haze": "फ़नल एनालिस्ट — हर चरण पर कन्वर्ज़न मेट्रिक्स ट्रैक करता है, बॉटलनेक पहचानता है",
+          "dune": "प्रतिस्पर्धी इंटेल — प्रतिस्पर्धी कैम्पेन, मूल्य निर्धारण और पोजिशनिंग बदलाव मॉनिटर करता है",
+          "kit": "ग्रोथ रिपोर्टर — दैनिक/साप्ताहिक ग्रोथ मेट्रिक्स और प्रयोग परिणाम संकलित करता है"
+        },
+        "credentials": {
+          "linkedin": "प्रॉस्पेक्टिंग और आउटरीच",
+          "gmail": "कोल्ड ईमेल और फ़ॉलो-अप सीक्वेंस",
+          "hubspot": "लीड प्रबंधन और CRM",
+          "googleAds": "पेड सर्च कैम्पेन",
+          "metaAds": "Meta विज्ञापन",
+          "analytics": "फ़नल और कन्वर्ज़न एनालिटिक्स",
+          "ahrefs": "SEO रिसर्च और प्रतिस्पर्धी विश्लेषण"
+        }
+      },
+      "saas": {
+        "name": "SaaS संचालन",
+        "tagline": "अपने SaaS को एक अच्छी तरह से चलने वाली मशीन की तरह चलाएं",
+        "description": "ग्राहक सफलता, उत्पाद एनालिटिक्स, चर्न रोकथाम, फ़ीचर ट्रैकिंग और SaaS व्यवसायों के लिए स्वचालित रिपोर्टिंग।",
+        "roles": {
+          "luna": "ग्राहक सफलता मॉनिटर — उपयोगकर्ता एंगेजमेंट ट्रैक करता है, जोखिम वाले खातों की पहचान करता है",
+          "sage": "ऑनबोर्डिंग असिस्टेंट — नए उपयोगकर्ताओं को सेटअप में गाइड करता है, एक्टिवेशन दरें मॉनिटर करता है",
+          "ivy": "चर्न रोकने वाला — अलग हो रहे उपयोगकर्ताओं से री-एक्टिवेशन कैम्पेन से संपर्क करता है",
+          "rune": "फ़ीचर रिक्वेस्ट ट्रैकर — सभी चैनलों से उपयोगकर्ता फ़ीडबैक और फ़ीचर अनुरोध एकत्र करता है",
+          "koda": "प्रोडक्ट एनालिटिक्स — फ़ीचर अपनाने, उपयोगकर्ता यात्रा और एंगेजमेंट मेट्रिक्स ट्रैक करता है",
+          "neon": "बग और इश्यू मॉनिटर — एरर लॉग, उपयोगकर्ता रिपोर्ट और स्टेटस पेज इंसिडेंट की निगरानी करता है",
+          "aria": "चेंजलॉग राइटर — रिलीज़ डॉक्युमेंट करता है, ज्ञान आधार और हेल्प सेंटर अपडेट करता है",
+          "frost": "राजस्व विश्लेषक — MRR, चर्न दर, LTV और विस्तार राजस्व ट्रैक करता है",
+          "zara": "प्रतिस्पर्धी ट्रैकर — प्रतिस्पर्धी फ़ीचर, मूल्य निर्धारण और बाज़ार पोजिशनिंग मॉनिटर करता है"
+        },
+        "credentials": {
+          "stripe": "सब्सक्रिप्शन और राजस्व डेटा",
+          "intercom": "ग्राहक मैसेजिंग और सहायता (या आपका टूल)",
+          "mixpanel": "प्रोडक्ट एनालिटिक्स और उपयोगकर्ता ट्रैकिंग",
+          "gmail": "ग्राहक संचार",
+          "notion": "ज्ञान आधार और चेंजलॉग",
+          "sentry": "एरर मॉनिटरिंग और बग ट्रैकिंग",
+          "github": "इश्यू ट्रैकिंग और फ़ीचर अनुरोध"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "3 तक",
+        "price": "$19/माह"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "10 तक",
+        "price": "$50/माह"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "50 तक",
+        "price": "$100/माह"
+      }
+    },
+    "frequencies": {
+      "daily": "daily",
+      "weekly": "weekly",
+      "every_30_minutes": "हर 30 मिनट",
+      "every_6_hours": "हर 6 घंटे",
+      "every_12_hours": "हर 12 घंटे"
+    },
+    "teamsTab": "टीमें"
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Room title is required",
+      "taskCreated": "Task created successfully",
+      "taskFailed": "Failed to create task",
+      "assignTask": "Assign New Task",
+      "assignTaskDesc": "Start a new task with your AI assistant.",
+      "taskName": "Task Name",
+      "taskNamePlaceholder": "Enter task name",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createTask": "Create Task"
+    },
+    "joinRoom": {
+      "enterCode": "Please enter an invite code",
+      "joinSuccess": "Successfully joined the project!",
+      "joinFailed": "Failed to join project",
+      "invalidCode": "Invalid invite code or project not found",
+      "title": "Join Project",
+      "description": "Enter an invite code to join an existing project.",
+      "inviteCode": "Invite Code",
+      "placeholder": "e.g. ABC123",
+      "hint": "Ask your team leader for the project invite code",
+      "cancel": "Cancel",
+      "joining": "Joining...",
+      "joinButton": "Join Project"
+    },
+    "participants": {
+      "title": "Room Participants",
+      "copyCode": "Copy Code",
+      "copyLink": "Copy Link",
+      "codeCopied": "Invite code copied!",
+      "codeFailed": "Failed to copy invite code",
+      "linkCopied": "Invite link copied!",
+      "linkFailed": "Failed to copy invite link",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(you)"
+    },
+    "createProject": {
+      "titleRequired": "Room title is required",
+      "created": "Project created successfully!",
+      "failed": "Failed to create room",
+      "title": "Create New Project",
+      "description": "Start a new project to build your product with AI.",
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter project name",
+      "teamSize": "Team Size",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "createButton": "Create Project"
+    }
+  },
+  "whatsNew": {
+    "trigger": "What's New",
+    "title": "What's New in Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "New",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Stay tuned for more updates",
+    "tagline": "Your AI employee that collaborates with everyone"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Bad",
+      "okay": "Okay",
+      "good": "Good",
+      "amazing": "Amazing"
+    },
+    "loginRequired": "Please login to submit feedback",
+    "alreadySubmitted": "You already submitted feedback for this",
+    "thankYou": "Thank you for your feedback!",
+    "creditsEarned": "+{credits} credits earned",
+    "helpImprove": "Your input helps us improve Coasty.",
+    "howsExperience": "How's your experience?",
+    "plusOne": "+1",
+    "tellMore": "Tell us more",
+    "plusFive": "+5",
+    "placeholder": "What's working well? What could improve?",
+    "cancel": "Cancel",
+    "sending": "Sending...",
+    "send": "Send"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Please select a workstation",
+    "enterCron": "Please enter a cron expression",
+    "hireFailed": "Failed to hire employee",
+    "removeFailed": "Failed to remove employee",
+    "editEmployee": "Edit Employee",
+    "configureEmployee": "Configure Employee",
+    "editDescription": "Update schedule, workstation, or instructions",
+    "configureDescription": "Set up an AI employee for this chat",
+    "loading": "Loading configuration...",
+    "name": "Name",
+    "employeeName": "Employee name"
+  },
+  "deleteChat": {
+    "title": "Delete chat?",
+    "description": "This will delete \"{chatTitle}\"",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "paymentHandler": {
+    "success": "Payment successful! Your credits have been added.",
+    "canceled": "Payment was canceled. No charges were made."
+  },
+  "machineSettings": {
+    "generalSettings": "General Settings",
+    "generalDescription": "बुनियादी कंप्यूटर सेटिंग्स कॉन्फ़िगर करें",
+    "displayName": "प्रदर्शन नाम",
+    "defaultName": "मेरा कंप्यूटर",
+    "saveChanges": "Save Changes",
+    "security": "Security",
+    "securityDescription": "Security and access settings",
+    "sshAuth": "SSH Authentication",
+    "username": "Username:",
+    "keyPair": "Key Pair:",
+    "sshKeyDownloaded": "SSH key downloaded",
+    "sshKeyFailed": "Failed to download SSH key",
+    "downloadSshKey": "Download SSH Key",
+    "vncPassword": "VNC Password",
+    "vncPasswordHint": "कंप्यूटर से कनेक्ट करने के लिए यह पासवर्ड आवश्यक है"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
+    "emailSubject": "Check out this AI tool",
+    "timeAgo": {
+      "justNow": "just now",
+      "minutesAgo": "{minutes}m ago",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago",
+      "monthsAgo": "{months}mo ago"
+    },
+    "linkCopied": "Referral link copied!",
+    "headline": "Good friends share memes. Great friends share AI agents.",
+    "subheadline": "You both get {credits} free credits when your friend joins.",
+    "yourLink": "Your referral link",
+    "shareDirectly": "Share directly",
+    "yourReferrals": "Your referrals",
+    "referralCount": "{count} referral(s)",
+    "creditsEarned": "{credits} credits earned",
+    "invitedYou": "Invited you",
+    "joinedViaLink": "Joined via your link",
+    "noInvites": "No users invited yet",
+    "noInvitesHint": "Share your link and you both earn 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Make public",
+    "title": "Your conversation is now public!",
+    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
+    "viewPage": "View Page",
+    "shareOn": "Share on"
+  },
+  "aiCommandPanel": {
+    "title": "AI Control Panel",
+    "subtitle": "Describe what you want the AI to do",
+    "quickCommands": "Quick Commands",
+    "noActions": "No actions performed yet",
+    "success": "Success",
+    "failed": "Failed",
+    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
+    "executing": "Executing...",
+    "executeCommand": "Execute Command"
+  },
+  "discover": {
+    "badge": "समुदाय",
+    "title": "देखें लोग इसे कैसे इस्तेमाल करते हैं",
+    "subtitle": "लीड रिसर्च से QA टेस्टिंग तक — देखें समुदाय क्या ऑटोमेट कर रहा है और अपने अगले वर्कफ़्लो के लिए प्रेरणा पाएं।",
+    "sessionCount": "समुदाय द्वारा साझा किए गए {count} सत्र",
+    "searchPlaceholder": "कार्य, टूल या परिणाम से खोजें...",
+    "emptyTitle": "अभी तक किसी ने साझा नहीं किया — पहले बनें",
+    "emptySubtitle": "जब उपयोगकर्ता अपने सत्र सार्वजनिक करते हैं, तो वे यहाँ दिखाई देते हैं",
+    "noResultsTitle": "कोई मिलान परिणाम नहीं",
+    "noResultsSubtitle": "अलग कीवर्ड आज़माएं",
+    "watchSession": "सत्र देखें",
+    "steps": "{count} चरण",
+    "tryCoasty": "Coasty आज़माएं"
+  }
+}

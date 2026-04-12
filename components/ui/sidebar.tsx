@@ -200,8 +200,8 @@ function Sidebar({
                 animate={{ x: 0 }}
                 exit={{ x: side === "left" ? "-100%" : "100%" }}
                 transition={{
-                  duration: 0.3,
-                  ease: [0.25, 0.46, 0.45, 0.94],
+                  duration: 0.32,
+                  ease: [0.22, 0.68, 0.35, 1.0],
                 }}
                 className={cn(
                   "fixed inset-y-0 z-[100] flex flex-col bg-sidebar text-sidebar-foreground",
@@ -241,8 +241,8 @@ function Sidebar({
               width: collapsible === "offcanvas" && !open ? 0 : currentWidth,
             }}
             transition={{
-              duration: 0.25,
-              ease: [0.25, 0.46, 0.45, 0.94],
+              duration: 0.28,
+              ease: [0.22, 0.68, 0.35, 1.0],
             }}
           />
           {/* The actual sidebar panel */}
@@ -260,8 +260,8 @@ function Sidebar({
               ),
             }}
             transition={{
-              duration: 0.25,
-              ease: [0.25, 0.46, 0.45, 0.94],
+              duration: 0.28,
+              ease: [0.22, 0.68, 0.35, 1.0],
             }}
             onMouseEnter={() => {
               if (collapsible === "icon") setOpen(true)

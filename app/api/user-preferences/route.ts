@@ -34,6 +34,7 @@ export async function GET() {
       if (error.code === "PGRST116") {
         return NextResponse.json({
           layout: "fullscreen",
+          chat_background: "aurora",
           prompt_suggestions: true,
           show_tool_invocations: true,
           show_conversation_previews: true,
@@ -51,6 +52,7 @@ export async function GET() {
 
     return NextResponse.json({
       layout: data.layout,
+      chat_background: data.chat_background || "aurora",
       prompt_suggestions: data.prompt_suggestions,
       show_tool_invocations: data.show_tool_invocations,
       show_conversation_previews: data.show_conversation_previews,
@@ -91,6 +93,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const {
       layout,
+      chat_background,
       prompt_suggestions,
       show_tool_invocations,
       show_conversation_previews,
@@ -116,6 +119,7 @@ export async function PUT(request: NextRequest) {
     // Prepare update object with only provided fields
     const updateData: any = {}
     if (layout !== undefined) updateData.layout = layout
+    if (chat_background !== undefined) updateData.chat_background = chat_background
     if (prompt_suggestions !== undefined)
       updateData.prompt_suggestions = prompt_suggestions
     if (show_tool_invocations !== undefined)
@@ -152,6 +156,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({
       success: true,
       layout: data.layout,
+      chat_background: data.chat_background || "aurora",
       prompt_suggestions: data.prompt_suggestions,
       show_tool_invocations: data.show_tool_invocations,
       show_conversation_previews: data.show_conversation_previews,

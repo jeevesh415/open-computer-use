@@ -1,0 +1,2863 @@
+{
+  "common": {
+    "startFree": "Start gratis",
+    "bookDemo": "Boek een demo",
+    "tryCoastyFree": "Probeer Coasty gratis",
+    "learnMore": "Meer informatie",
+    "watchSession": "Bekijk sessie",
+    "compareAllPlans": "Vergelijk alle plannen en functies",
+    "allRightsReserved": "Alle rechten voorbehouden.",
+    "privacy": "Privacy",
+    "terms": "Voorwaarden",
+    "recommended": "Aanbevolen",
+    "month": "maand",
+    "creditsPerMonth": "{count} credits/maand",
+    "agentsInParallel": "{count} agents parallel"
+  },
+  "header": {
+    "useCases": "Toepassingen",
+    "blog": "Blog",
+    "agentSwarms": "Agent Swarms",
+    "products": "Products",
+    "discover": "Discover",
+    "compare": "Vergelijken",
+    "demos": "Demo's",
+    "pricing": "Prijzen",
+    "download": "Downloaden",
+    "signIn": "Inloggen",
+    "getStarted": "Aan de slag",
+    "useCaseItems": {
+      "competitorIntel": "Concurrentie-informatie",
+      "qaBugReports": "QA-bugrapporten",
+      "seoGapAnalysis": "SEO-gapanalyse",
+      "dataExtraction": "Data-extractie",
+      "leadGeneration": "Leadgeneratie",
+      "siteAudit": "Site-audit",
+      "adIntelligence": "Advertentie-intelligentie",
+      "emailOutreach": "E-mailoutreach",
+      "designReview": "Designbeoordeling",
+      "priceMonitoring": "Prijsbewaking",
+      "marketResearch": "Marktonderzoek",
+      "emailCampaigns": "E-mailcampagnes"
+    },
+    "useCaseStats": {
+      "competitorIntel": "{stat} concurrentieprofielen geleverd",
+      "qaBugReports": "{stat} gebruikersflows getest per run",
+      "seoGapAnalysis": "{stat} zoekwoordgaps geïdentificeerd",
+      "dataExtraction": "{stat} rijen geëxtraheerd per run",
+      "leadGeneration": "{stat} gekwalificeerde leads per run",
+      "siteAudit": "{stat} pagina's geaudit per run",
+      "adIntelligence": "{stat} advertentiecreatives vastgelegd",
+      "emailOutreach": "{stat} gepersonaliseerde e-mails opgesteld",
+      "designReview": "{stat} breakpoints getest per pagina",
+      "priceMonitoring": "{stat} SKU's vergeleken per run",
+      "marketResearch": "{stat} datapunten verzameld",
+      "emailCampaigns": "{stat} gepersonaliseerde e-mails per campagne"
+    },
+    "productItems": {
+      "computerUse": "Computer Use",
+      "agentSwarms": "Agent Swarms",
+      "compare": "Compare"
+    },
+    "productStats": {
+      "computerUse": "{stat} OSWorld benchmark score",
+      "agentSwarms": "{stat} agents in parallel",
+      "compare": "{stat} competitors analyzed"
+    },
+    "blogItems": {
+      "allPosts": "Alle berichten",
+      "computerUse": "Computergebruik",
+      "compare": "Vergelijken",
+      "dataEntry": "Gegevensinvoer",
+      "webScraping": "Web scraping",
+      "jobApplications": "Sollicitaties",
+      "demosResults": "Demo's en resultaten",
+      "guide": "Handleiding"
+    },
+    "blogStats": {
+      "allPosts": "{stat} artikelen wekelijks gepubliceerd",
+      "computerUse": "{stat} OSWorld benchmarkscore",
+      "compare": "{stat} concurrenten geanalyseerd",
+      "dataEntry": "{stat} sneller dan handmatig",
+      "webScraping": "{stat} pagina's per sessie",
+      "jobApplications": "{stat} sollicitaties per sessie",
+      "demosResults": "{stat} echte casestudies",
+      "guide": "{stat} handleidingen voor toepassingen"
+    }
+  },
+  "hero": {
+    "badge": "#1 Computer-Use Agent · {score} OSWorld",
+    "headline": "Autonome computeroperators",
+    "useCases": {
+      "computerAgent": {
+        "label": "Computeragent",
+        "headline": "automatiseer elke browsertaak",
+        "outcome": "Een AI-agent die een echte computer bestuurt — browst, klikt, typt en afgewerkt werk oplevert. Geen setup nodig."
+      },
+      "competitorIntel": {
+        "label": "Concurrentie-informatie",
+        "headline": "monitor elke concurrent",
+        "outcome": "Complete concurrentieprofielen met prijzen, functies en positioneringsgaps — geëxporteerd als kant-en-klaar rapport."
+      },
+      "qaTesting": {
+        "label": "QA-testen",
+        "headline": "vind bugs voordat gebruikers dat doen",
+        "outcome": "Kritieke gebruikersflows end-to-end getest, elke bug gefotografeerd met reproductiestappen en ernstclassificatie."
+      },
+      "seoAnalysis": {
+        "label": "SEO-analyse",
+        "headline": "ontdek zoekwoordgaps",
+        "outcome": "Zoekwoordgaps geïdentificeerd, contentbriefs opgesteld, backlinkbronnen van concurrenten in kaart gebracht — bruikbare SEO-strategie."
+      },
+      "dataExtraction": {
+        "label": "Data-extractie",
+        "headline": "schrapen en structureren van elke site",
+        "outcome": "Gestructureerde data geschraapt, opgeschoond, gededupliceerd en geëxporteerd als CSV — van elke website, elk formaat."
+      },
+      "leadGeneration": {
+        "label": "Leadgeneratie",
+        "headline": "vul je salespipeline",
+        "outcome": "Gekwalificeerde beslissers die aan je ICP voldoen met geverifieerde titels, bedrijven en gepersonaliseerde outreach-openers."
+      },
+      "siteAudit": {
+        "label": "Site-audit",
+        "headline": "audit elke pagina op schaal",
+        "outcome": "Pagina's gescand, Core Web Vitals beoordeeld, gebroken links gevonden, toegankelijkheidsproblemen gerangschikt op fixprioriteit."
+      },
+      "emailOutreach": {
+        "label": "E-mailoutreach",
+        "headline": "stuur gepersonaliseerde outreach",
+        "outcome": "Gepersonaliseerde e-mails die verwijzen naar het bedrijf, de rol en pijnpunten van elke prospect — klaar om te versturen."
+      },
+      "marketResearch": {
+        "label": "Marktonderzoek",
+        "headline": "valideer je markt snel",
+        "outcome": "TAM berekend, belangrijkste spelers geprofileerd, groeitrends in kaart gebracht — uit tientallen datapunten."
+      }
+    },
+    "demoVideos": {
+      "marketing": {
+        "label": "Marketing",
+        "task": "Promoot je product autonoom op Reddit"
+      },
+      "goToMarket": {
+        "label": "Go-to-Market",
+        "task": "Vind prospects en stuur gepersonaliseerde e-mails"
+      },
+      "qaTesting": {
+        "label": "QA-testen",
+        "task": "Test elke afrekenflow en rapporteer bugs"
+      },
+      "jobApplication": {
+        "label": "Sollicitatie",
+        "task": "Vind functies, pas je CV aan en solliciteer"
+      },
+      "formFilling": {
+        "label": "Formulieren invullen",
+        "task": "Vul de YC S26-aanvraag voor je in"
+      },
+      "socialMedia": {
+        "label": "Social media",
+        "task": "Plaats op Hacker News en reageer op comments"
+      }
+    }
+  },
+  "stats": {
+    "osworld": {
+      "value": "82%",
+      "label": "OSWorld benchmark",
+      "sublabel": "#1 computer-use agent wereldwijd"
+    },
+    "tools": {
+      "value": "50+",
+      "label": "Tools die de agent kan gebruiken",
+      "sublabel": "Browser, terminal, desktop, bestanden"
+    },
+    "schedule": {
+      "value": "24/7",
+      "label": "Draait op schema",
+      "sublabel": "Automatiseer elke terugkerende taak"
+    },
+    "setup": {
+      "value": "0",
+      "label": "Setup vereist",
+      "sublabel": "Geen API's, geen integraties, geen code"
+    }
+  },
+  "whyCoasty": {
+    "sectionLabel": "Waarom Coasty",
+    "title": "Geen chatbot. Geen RPA-script.",
+    "worksLikeHuman": {
+      "title": "Werkt als een mens",
+      "description": "Ziet, klikt, typt, navigeert — precies zoals jij"
+    },
+    "noScripts": {
+      "title": "Geen scripts of setup",
+      "description": "Gewoon Nederlands erin, resultaten eruit"
+    },
+    "handlesUnexpected": {
+      "title": "Handelt het onverwachte af",
+      "description": "Past zich aan bij CAPTCHA's, popups, layoutwijzigingen"
+    },
+    "runsInIsolation": {
+      "title": "Draait in isolatie",
+      "description": "Sandbox-VM per sessie — niets lekt"
+    }
+  },
+  "howItWorks": {
+    "title": "Hoe het werkt",
+    "step1": {
+      "title": "Beschrijf je taak",
+      "description": "Gewoon Nederlands. Dat is alles.",
+      "placeholder": "Zoek 100 leads op LinkedIn..."
+    },
+    "step2": {
+      "title": "Kijk hoe de agent werkt",
+      "description": "Opent browser, klikt, typt, navigeert"
+    },
+    "step3": {
+      "title": "Taak voltooid",
+      "description": "Elke actie gelogd met screenshots",
+      "results": {
+        "taskCompleted": "Taak voltooid",
+        "leadsFound": "12 leads gevonden",
+        "addedToCrm": "Toegevoegd aan CRM"
+      }
+    }
+  },
+  "benchmark": {
+    "title": "Gebenchmarkt als #1 wereldwijd",
+    "subtitle": "82% op OSWorld — de moeilijkste benchmark voor AI-agents die echte computers gebruiken",
+    "agenticFramework": "Agentisch framework",
+    "foundationModel": "Basismodel"
+  },
+  "comparison": {
+    "title": "Waarom automatiseren met Coasty?",
+    "subtitle": "Dezelfde taken die een team uren kosten — Coasty voltooit ze in minuten, dag en nacht.",
+    "manual": {
+      "title": "Handmatig doen",
+      "subtitle": "Jij of je team, met de hand"
+    },
+    "coasty": {
+      "title": "Coasty AI Agent",
+      "subtitle": "#1 computer-use agent"
+    },
+    "rows": {
+      "timePerTask": "Tijd per taak",
+      "availability": "Beschikbaarheid",
+      "setupTime": "Setuptijd",
+      "errorRate": "Foutpercentage",
+      "scaling": "Schaalbaarheid",
+      "auditTrail": "Audittrail"
+    },
+    "manualValues": {
+      "timePerTask": "Uren tot dagen",
+      "availability": "Alleen kantooruren",
+      "setupTime": "Tools leren, SOP's schrijven",
+      "errorRate": "Menselijke fouten",
+      "scaling": "Meer doen = meer tijd besteden",
+      "auditTrail": "Geen"
+    },
+    "coastyValues": {
+      "timePerTask": "Minuten",
+      "availability": "24/7, elke dag",
+      "setupTime": "60 seconden",
+      "errorRate": "Zelfcorrigerend",
+      "scaling": "Voer onbeperkt taken parallel uit",
+      "auditTrail": "Elke klik gelogd + screenshots"
+    },
+    "bottomBar": {
+      "automateTasksThat": "Automatiseer taken die",
+      "hoursManually": "uren handmatig kosten",
+      "startingAt": "Vanaf"
+    }
+  },
+  "demo": {
+    "title": "Bekijk de agent in actie",
+    "subtitle": "Echte taken. Echte browsers. Elke klik vastgelegd.",
+    "sessions": {
+      "reddit": {
+        "title": "Coasty op Reddit",
+        "description": "Bekijk hoe Coasty autonoom een marketingcampagne uitvoert — concurrenten onderzoekt, trends analyseert en een strategiedeck bouwt.",
+        "tag": "Marketing"
+      },
+      "prospects": {
+        "title": "Potentiële klanten vinden",
+        "description": "Coasty vindt en onderzoekt potentiële klanten, verzamelt belangrijke details om gepersonaliseerde outreach te maken.",
+        "tag": "Go-to-Market"
+      },
+      "qa": {
+        "title": "QA-test op zichzelf",
+        "description": "Coasty voert kwaliteitscontrole uit op zijn eigen product — navigeert flows, vangt bugs en rapporteert problemen autonoom.",
+        "tag": "QA-testen"
+      },
+      "email": {
+        "title": "Een e-mail namens jou versturen",
+        "description": "Van opstellen tot verzenden — een AI-agent stelt een e-mail op en verstuurt deze volledig zelfstandig.",
+        "tag": "Communicatie"
+      },
+      "job": {
+        "title": "Solliciteren op een baan",
+        "description": "Coasty vindt een passende functie, past je CV aan en dient de sollicitatie in — alles zelfstandig.",
+        "tag": "Sollicitatie"
+      },
+      "hackernews": {
+        "title": "Plaatsen op Hacker News",
+        "description": "Coasty maakt en publiceert een bericht op Hacker News — schrijft de content en plaatst het autonoom.",
+        "tag": "Social media"
+      }
+    }
+  },
+  "features": {
+    "title": "Gebouwd voor echte computertaken",
+    "selfCorrecting": {
+      "title": "Zelfcorrigerend",
+      "description": "Detecteert fouten, probeert alternatieve paden"
+    },
+    "auditTrail": {
+      "title": "Volledige audittrail",
+      "description": "Elke klik gelogd met screenshots"
+    },
+    "schedule": {
+      "title": "Planning 24/7",
+      "description": "Draait op cron — elk uur, dagelijks, wekelijks"
+    },
+    "sandboxed": {
+      "title": "Sandbox en veilig",
+      "description": "Geïsoleerde VM per sessie, daarna verwijderd"
+    },
+    "benchmark": {
+      "title": "#1 op OSWorld",
+      "description": "82% — de hoogste score ooit geregistreerd"
+    },
+    "swarms": {
+      "title": "Agent Swarms",
+      "description": "Verdeel taken over machines parallel"
+    }
+  },
+  "pricing": {
+    "title": "Start gratis, schaal wanneer je wilt",
+    "subtitle": "Geen creditcard nodig. Je AI-agent is klaar in 60 seconden.",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Probeer de #1 computer-use agent",
+        "cta": "Start gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "description": "Lichte dagelijkse automatisering",
+        "cta": "Neem Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatiseer taken elke dag",
+        "cta": "Neem Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Schaal complexe workflows",
+        "cta": "Ga naar Plus",
+        "badge": "Meest populair"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Onbeperkte zware automatisering",
+        "cta": "Neem Pro"
+      }
+    },
+    "vmTemporary": "1 tijdelijke VM (2 uur)",
+    "vmDeletedAfterInactivity": "1 VM (verwijderd na inactiviteit)",
+    "vmAlwaysOn": "{count} altijd-aan VM",
+    "vmAlwaysOnPlural": "{count} altijd-aan VM's",
+    "bargain": {
+      "title": "Hetzelfde werk kost {oldPrice} met handmatige arbeid",
+      "description": "Een virtuele assistent kost $2.000–$4.000/maand. Een parttime kracht kost meer. Coasty doet hetzelfde werk 24/7 vanaf $0 — met perfecte consistentie, volledige audittrails en nul trainingstijd."
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde vragen",
+    "subtitle": "Alles wat je moet weten voordat je begint",
+    "items": {
+      "whatIsCoasty": {
+        "question": "Wat is Coasty?",
+        "answer": "Coasty is 's werelds beste computer-use AI-agent. Beschrijf een taak — leads onderzoeken, een website testen, formulieren invullen, posten op social media — en Coasty opent een echte browser, navigeert door apps, klikt op knoppen, typt tekst en voltooit de taak van begin tot eind. Geen API's, geen integraties, geen code nodig."
+      },
+      "howDifferent": {
+        "question": "Hoe verschilt dit van ChatGPT of andere AI-tools?",
+        "answer": "ChatGPT genereert tekst. Coasty gebruikt een computer. Het vertelt je niet wat je moet doen — het opent een browser, navigeert naar de website, klikt op de knoppen, vult de formulieren in en levert het voltooide werk op. Het verschil tussen instructies krijgen en de taak voor je laten doen."
+      },
+      "whatTasks": {
+        "question": "Welke taken kan Coasty automatiseren?",
+        "answer": "Elke taak die je op een computer kunt doen. Webonderzoek, leadgeneratie, gegevensinvoer, formulieren invullen, QA-testen, social media posts, e-mailoutreach, factuurverwerking, concurrentieanalyse, recruitment — als het een browser of desktop-app betreft, kan Coasty het."
+      },
+      "whatAreCredits": {
+        "question": "Wat zijn credits en hoe worden ze gebruikt?",
+        "answer": "Credits worden verbruikt terwijl de agent aan taken werkt. Langere, complexere taken gebruiken meer credits. Betaalde plannen bevatten maandelijkse credits en je kunt ook altijd extra creditpakketten kopen."
+      },
+      "localComputer": {
+        "question": "Kan Coasty op mijn eigen computer draaien?",
+        "answer": "Ja. Onze desktop-app draait als een lichtgewicht overlay op je machine en bestuurt je lokale browser en applicaties direct. Als alternatief draaien taken op geïsoleerde cloudmachines — jouw keuze."
+      },
+      "dataSafe": {
+        "question": "Zijn mijn gegevens veilig?",
+        "answer": "Elke taak draait in een geïsoleerde sandbox-omgeving. Niets lekt tussen sessies. Je inloggegevens blijven privé en elke actie wordt gelogd met screenshots in een volledige audittrail die je altijd kunt inzien."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "AI-gestuurd computergebruik.",
+    "tagline2": "Automatiseer elke workflow met intelligente agents.",
+    "columns": {
+      "product": "Product",
+      "resources": "Bronnen",
+      "company": "Bedrijf",
+      "legal": "Juridisch"
+    },
+    "links": {
+      "computerUse": "Computergebruik",
+      "guide": "Handleiding",
+      "download": "Downloaden",
+      "pricing": "Prijzen",
+      "agentSwarms": "Agent Swarms",
+      "status": "Status",
+      "blog": "Blog",
+      "useCases": "Toepassingen",
+      "demos": "Demo's",
+      "compare": "Vergelijken",
+      "talkToCofounders": "Praat met de oprichters en demo",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Voorwaarden"
+    }
+  },
+  "languageSwitcher": {
+    "label": "Taal"
+  },
+  "auth": {
+    "brandHeading": "Jij stelt het doel.",
+    "brandSubheading": "Wij doen de rest.",
+    "mobileHeading": "Jij stelt het doel. Wij doen de rest.",
+    "mobileSubheading": "AI-agents die browsen, klikken en werken als een echte teamgenoot.",
+    "flowSteps": {
+      "step1": {
+        "label": "Je beschrijft de taak",
+        "sub": "\"Onderzoek onze top 5 concurrenten\""
+      },
+      "step2": {
+        "label": "De agent neemt het over",
+        "sub": "Browst, klikt, typt autonoom"
+      },
+      "step3": {
+        "label": "Werk opgeleverd",
+        "sub": "Spreadsheet met 5 volledige concurrentieprofielen"
+      }
+    },
+    "complete": "Voltooid",
+    "doneIn": "Klaar in 8 minuten",
+    "demoCaption": "Draai AI-agenten op je computer of bedien hem vanaf je telefoon, waar je ook bent.",
+    "features": {
+      "localControl": {
+        "title": "Run locally on your PC",
+        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+      },
+      "phoneControl": {
+        "title": "Control your PC from your phone",
+        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+      },
+      "cloudOrLocal": {
+        "title": "Cloud or local — your choice",
+        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+      }
+    },
+    "viewTitles": {
+      "signIn": "Je operator staat klaar",
+      "signUp": "Zet je workflows op de automatische piloot",
+      "magicLink": "Sla het wachtwoord over",
+      "forgotPassword": "We helpen je weer binnen"
+    },
+    "viewDescriptions": {
+      "signIn": "Ga verder waar je gebleven was — je agents onthouden alles",
+      "signUp": "Zet je eerste AI-agent in minder dan een minuut in",
+      "magicLink": "Eén klik vanuit je inbox en je bent binnen",
+      "forgotPassword": "We sturen een resetlink naar je e-mail"
+    },
+    "google": {
+      "connecting": "Verbinden...",
+      "continueWithGoogle": "Doorgaan met Google"
+    },
+    "or": "of",
+    "email": "E-mail",
+    "emailPlaceholder": "you@example.com",
+    "password": "Wachtwoord",
+    "passwordPlaceholder": "Je wachtwoord",
+    "confirmPassword": "Bevestig wachtwoord",
+    "confirmPasswordPlaceholder": "Bevestig je wachtwoord",
+    "minChars": "Min. 6 tekens",
+    "signingIn": "Inloggen...",
+    "signIn": "Inloggen",
+    "creatingAccount": "Account aanmaken...",
+    "createAccount": "Account aanmaken",
+    "sending": "Verzenden...",
+    "sendMagicLink": "Magic link versturen",
+    "sendResetLink": "Resetlink versturen",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "useMagicLink": "Magic link gebruiken",
+    "dontHaveAccount": "Nog geen account?",
+    "signUp": "Registreren",
+    "alreadyHaveAccount": "Heb je al een account?",
+    "backToSignIn": "Terug naar inloggen",
+    "termsAgreement": "Door verder te gaan, ga je akkoord met onze",
+    "terms": "Voorwaarden",
+    "and": "en",
+    "privacyPolicy": "Privacybeleid",
+    "errors": {
+      "fillAllFields": "Vul alle velden in",
+      "passwordMinLength": "Wachtwoord moet minimaal 6 tekens bevatten",
+      "passwordsDoNotMatch": "Wachtwoorden komen niet overeen",
+      "supabaseNotConfigured": "Supabase is niet geconfigureerd",
+      "unexpectedError": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+      "confirmEmail": "Bevestig je e-mail voordat je inlogt. Controleer je inbox.",
+      "invalidCredentials": "Ongeldig e-mailadres of wachtwoord.",
+      "signInFailed": "Inloggen mislukt. Probeer het opnieuw.",
+      "invalidEmail": "Ongeldig e-mailadres.",
+      "emailAlreadyExists": "Er bestaat al een account met dit e-mailadres. Probeer in te loggen.",
+      "signUpFailed": "Registratie mislukt. Probeer het opnieuw.",
+      "enterEmail": "Voer je e-mailadres in",
+      "noAccountFound": "Geen account gevonden met dit e-mailadres. Registreer je eerst.",
+      "magicLinkFailed": "Magic link versturen mislukt. Probeer het opnieuw.",
+      "resetFailed": "Reset-e-mail versturen mislukt. Probeer het opnieuw.",
+      "updateFailed": "Wachtwoord bijwerken mislukt. Probeer het opnieuw."
+    },
+    "success": {
+      "checkEmailConfirm": "Controleer je e-mail om je account te bevestigen voordat je inlogt.",
+      "checkEmailMagicLink": "Controleer je e-mail voor de magic link om in te loggen.",
+      "checkEmailReset": "Controleer je e-mail voor de wachtwoord-resetlink.",
+      "passwordUpdated": "Wachtwoord succesvol bijgewerkt. Je wordt doorgestuurd naar inloggen..."
+    },
+    "resetPassword": {
+      "title": "Wachtwoord resetten",
+      "subtitle": "Voer hieronder je nieuwe wachtwoord in.",
+      "newPassword": "Nieuw wachtwoord",
+      "confirmNewPassword": "Bevestig nieuw wachtwoord",
+      "confirmPlaceholder": "Bevestig je nieuwe wachtwoord",
+      "updating": "Bijwerken...",
+      "updatePassword": "Wachtwoord bijwerken"
+    },
+    "errorPage": {
+      "title": "Authenticatiefout",
+      "defaultMessage": "Er is een fout opgetreden tijdens de authenticatie.",
+      "tryAgain": "Opnieuw proberen",
+      "backToChat": "Terug naar chat",
+      "needHelp": "Hulp nodig?",
+      "contactSupport": "Contact opnemen"
+    }
+  },
+  "onboarding": {
+    "skipForNow": "Voorlopig overslaan",
+    "back": "Terug",
+    "continue": "Doorgaan",
+    "getStarted": "Aan de slag",
+    "settingUp": "Instellen...",
+    "welcome": {
+      "titleReturning": "Welkom terug{name}!",
+      "titleNew": "Welkom bij Coasty",
+      "descriptionReturning": "We willen graag iets meer over je weten om je ervaring te verbeteren",
+      "descriptionNew": "Laten we je account instellen zodat we je ervaring kunnen personaliseren"
+    },
+    "nameLabel": "Hoe moeten we je noemen?",
+    "namePlaceholder": "Je naam",
+    "companyLabel": "Bedrijf",
+    "optional": "(optioneel)",
+    "companyPlaceholder": "MacroHard",
+    "websiteLabel": "Website",
+    "websitePlaceholder": "xai.com",
+    "roleStep": {
+      "title": "Wat beschrijft jou het best?",
+      "subtitle": "Selecteer alles wat van toepassing is — dit helpt ons je ervaring af te stemmen"
+    },
+    "roles": {
+      "founder": "Oprichter / CEO",
+      "developer": "Ontwikkelaar",
+      "marketer": "Marketeer",
+      "designer": "Designer",
+      "product_manager": "Productmanager",
+      "data_analyst": "Data / Analytics",
+      "operations": "Operations",
+      "other": "Anders"
+    },
+    "teamSizeLabel": "Teamgrootte",
+    "teamSizes": {
+      "solo": "Alleen ik",
+      "2-5": "2-5",
+      "6-20": "6-20",
+      "21-50": "21-50",
+      "51-200": "51-200",
+      "200+": "200+"
+    },
+    "referralStep": {
+      "title": "Hoe heb je ons gevonden?",
+      "subtitle": "We horen graag waar je over Coasty hebt gehoord"
+    },
+    "referralSources": {
+      "twitter": "Twitter / X",
+      "linkedin": "LinkedIn",
+      "google": "Google Search",
+      "youtube": "YouTube",
+      "friend": "Vriend / Collega",
+      "producthunt": "Product Hunt",
+      "reddit": "Reddit",
+      "other": "Anders"
+    },
+    "useCaseStep": {
+      "title": "Wat ga je als eerste automatiseren?",
+      "subtitle": "Selecteer alles wat van toepassing is — je kunt later alles verkennen"
+    },
+    "useCases": {
+      "web_scraping": "Web Scraping & Onderzoek",
+      "browser_automation": "Browserautomatisering",
+      "data_entry": "Gegevensinvoer & Formulieren",
+      "email_outreach": "E-mail & Outreach",
+      "testing": "QA & Testen",
+      "ecommerce": "E-commerce taken",
+      "social_media": "Social Media Beheer",
+      "general_automation": "Algemene Automatisering"
+    },
+    "showcase": {
+      "title": "Alles wat je nodig hebt,",
+      "titleHighlight": "ingebouwd.",
+      "subtitle": "Dit kan Coasty voor je doen",
+      "noCode": {
+        "title": "Geen Code",
+        "description": "Beschrijf gewoon wat je wilt in gewoon Nederlands"
+      },
+      "agentSwarms": {
+        "title": "Agent Swarms",
+        "description": "Parallelle agent-vloten"
+      },
+      "desktopControl": {
+        "title": "Desktop Besturing",
+        "description": "Klikt, typt, navigeert"
+      },
+      "browserAutomation": {
+        "title": "Browserautomatisering",
+        "description": "Formulieren, tabs, scraping — volledig geautomatiseerd"
+      },
+      "computerVision": {
+        "title": "Computer Vision",
+        "description": "Ziet en begrijpt je scherm in realtime"
+      },
+      "workflows": {
+        "title": "Workflows",
+        "description": "Meerstaps-flows"
+      },
+      "onDevice": {
+        "title": "Op Apparaat",
+        "description": "Draait lokaal"
+      },
+      "autonomous": {
+        "title": "24/7 Autonoom",
+        "description": "Stel het in en vergeet het — draait terwijl je slaapt"
+      }
+    },
+    "guideCallout": {
+      "title": "Nieuw hier? We hebben een gids voor je",
+      "subtitle": "Zet je eerste AI-agent in minder dan een minuut in"
+    }
+  },
+  "chatInput": {
+    "placeholder": "Wat moet je AI-werker doen?",
+    "placeholderAlt": "Vertel je AI wat het op de computer moet doen...",
+    "vmError": {
+      "title": "Virtuele Machine Fout",
+      "description": "De virtuele machine is in een foutstatus of wordt verwijderd.",
+      "hint": "Controleer het tabblad Machines om het probleem op te lossen, of selecteer \"Geen Computer Geselecteerd\" om alleen webzoekopdrachten te gebruiken.",
+      "gotIt": "Begrepen"
+    },
+    "status": {
+      "creating": "{name} aanmaken...",
+      "initiating": "Agent starten op {name}...",
+      "stopping": "{name} stoppen...",
+      "preparing": "{name} voorbereiden..."
+    },
+    "swarm": {
+      "title": "Swarm Modus",
+      "pro": "PRO",
+      "upgradeLabel": "Swarm modus — upgrade om te ontgrendelen",
+      "feature1": "Parallelle uitvoering op tijdelijke machines",
+      "feature2": "Elke machine werkt autonoom",
+      "feature3": "3x de machinelimiet van je plan per swarm",
+      "description": "Voer één prompt uit op 3x je machinelimiet parallel — elk pakt de taak onafhankelijk aan.",
+      "enableLabel": "Swarm modus inschakelen",
+      "disableLabel": "Swarm modus uitschakelen",
+      "onTooltip": "Swarm modus AAN — je prompt wordt op meerdere machines parallel uitgevoerd",
+      "offTooltip": "Schakel swarm modus in om je prompt op meerdere machines tegelijk uit te voeren",
+      "decreaseMachines": "Aantal machines verlagen",
+      "increaseMachines": "Aantal machines verhogen",
+      "machineLimit": "Tot {max} swarm-machines op je plan. Meer nodig? Neem contact op met founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Swarm Modus"
+    },
+    "desktop": {
+      "connectLabel": "Verbinden met desktop",
+      "screenLabel": "Scherm van {name}",
+      "screenDefault": "Desktop",
+      "watchTooltip": "Kijk hoe je agent werkt op een apart scherm. Raak niets aan, anders krijgt hij plankenkoorts!",
+      "watchLabel": "Desktop"
+    },
+    "buttons": {
+      "stop": "Stop",
+      "sendToSwarm": "Naar swarm sturen",
+      "taskRunning": "Er loopt al een taak — klik om deze te stoppen en de jouwe te starten",
+      "selectComputer": "Selecteer een computer om berichten te versturen",
+      "waitCreating": "Wacht tot de VM is aangemaakt",
+      "waitStarting": "Wacht tot de VM is gestart",
+      "waitAgent": "Wacht tot de agent is geïnitialiseerd",
+      "vmStopping": "VM wordt gestopt",
+      "send": "Versturen",
+      "switching": "Wisselen...",
+      "overrideRun": "Overschrijven & Uitvoeren",
+      "stopLabel": "Stop lopende taak en start deze",
+      "sendLabel": "Bericht versturen"
+    },
+    "search": "Zoeken",
+    "upload": {
+      "label": "Bestanden uploaden naar VM",
+      "heading": "Bestanden uploaden naar VM",
+      "description": "Bestanden worden opgeslagen op het Bureaublad",
+      "vmInfo": "VM: {name}",
+      "dropHeading": "Sleep bestanden hierheen",
+      "dropDescription": "Bestanden worden geüpload naar de Desktop-map van de VM",
+      "dropPath": "Path: /home/desktop/Desktop/"
+    },
+    "authPrompt": {
+      "heading": "Log in om meer functies gratis te proberen",
+      "description": "Maak projecten, nodig teamleden uit en meer.",
+      "connecting": "Verbinden...",
+      "continueWithGoogle": "Doorgaan met Google"
+    },
+    "removeFile": "Bestand verwijderen"
+  },
+  "chat": {
+    "greeting": "Hallo",
+    "greetingAuth": "Ik neem het computerwerk op me. Wat is de taak?",
+    "greetingUnauth": "AI die de computer bedient zodat jij dat niet hoeft te doen. Vertel gewoon wat je gedaan wilt hebben.",
+    "guide": "Gids",
+    "saveLogins": "Logins opslaan voor automatisch invullen",
+    "encryptedNote": "versleuteld, nooit gezien door AI",
+    "roleLabels": [
+      "Collega",
+      "Medewerker",
+      "Vriend",
+      "Assistent",
+      "Partner",
+      "Teamgenoot",
+      "Medewerker",
+      "Helper"
+    ],
+    "taskTemplates": {
+      "founder": {
+        "competitorReport": "{company} concurrentierapport",
+        "warmLeads": "Vind 20 leads voor {company}",
+        "pitchDeck": "{company} pitch deck concept"
+      },
+      "developer": {
+        "findBugs": "Vind bugs op {company}",
+        "performance": "{company} prestatie-audit",
+        "apiDocs": "Extraheer {company} API-docs"
+      },
+      "marketer": {
+        "seoGap": "{company} SEO-gap-analyse",
+        "competitorAds": "Bespioneer advertenties van rivalen van {company}",
+        "trendingContent": "Trending ideeën voor {company}"
+      },
+      "product_manager": {
+        "reviewSummary": "{company} recensie-samenvatting",
+        "featureComparison": "{company} functievergelijking",
+        "competitorLaunches": "Volg lanceringen van rivalen van {company}"
+      },
+      "data_analyst": {
+        "exportCsv": "Exporteer {company}-data naar CSV",
+        "marketSizing": "{company} marktomvang",
+        "benchmark": "Benchmark {company} vs industrie"
+      },
+      "operations": {
+        "enterRecords": "Voer records in bij {company}",
+        "cheapestVendor": "Vind leveranciers voor {company}",
+        "invoiceSummary": "{company} factuursamenvatting"
+      },
+      "designer": {
+        "designComparison": "{company} vs concurrenten design",
+        "responsiveAudit": "{company} responsive audit",
+        "inspiration": "Designinspiratie voor {company}"
+      }
+    },
+    "useCaseTemplates": {
+      "web_scraping": "Extraheer {company} sitegegevens",
+      "browser_automation": "Exporteer {company} rapporten",
+      "data_entry": "Voer data in bij {company}",
+      "email_outreach": "Outreach voor {company}",
+      "testing": "QA-test {company}",
+      "ecommerce": "{company} prijsvergelijking",
+      "social_media": "Post over {company}",
+      "general_automation": "Automatiseer taak op {company}"
+    }
+  },
+  "chatMessages": {
+    "copyText": "Tekst kopiëren",
+    "copied": "Gekopieerd!",
+    "regenerate": "Opnieuw genereren",
+    "feedback": {
+      "title": "Feedback",
+      "prompts": [
+        "Beoordeel dit",
+        "Feedback",
+        "Hoe ging het?",
+        "Gedachten?",
+        "Deel feedback"
+      ],
+      "tooltip": "Deel je feedback"
+    }
+  },
+  "collaborativeFeatures": {
+    "smartSearch": {
+      "title": "Slim Zoeken",
+      "description": "AI-gestuurde zoekopdrachten op het web"
+    },
+    "collaborate": {
+      "title": "Samenwerken",
+      "description": "Werk samen in realtime"
+    },
+    "globalAccess": {
+      "title": "Wereldwijde Toegang",
+      "description": "Zoek in meer dan 50 talen"
+    },
+    "aiModels": {
+      "title": "AI-modellen",
+      "description": "Meerdere AI-providers"
+    },
+    "freeForever": {
+      "title": "Voor Altijd Gratis",
+      "description": "Geen verborgen kosten"
+    },
+    "privateSecure": {
+      "title": "Privé & Veilig",
+      "description": "Je gegevens blijven van jou"
+    }
+  },
+  "sidebar": {
+    "newTask": "Nieuwe Taak",
+    "newTaskDescription": "Start een nieuwe AI-automatisering",
+    "activity": "Activiteit",
+    "taskHistory": "Taakgeschiedenis",
+    "taskHistoryDescription": "Bekijk eerdere taken en ga verder waar je gebleven was",
+    "taskHistoryPopup": {
+      "title": "Je recente taken",
+      "description": "Blader door eerdere gesprekken en ga verder. Elke taak wordt opgeslagen zodat je precies kunt hervatten waar je gebleven was."
+    },
+    "swarmRuns": "Swarm Runs",
+    "swarmRunsDescription": "Monitor multi-agent parallelle workflows",
+    "swarmRunsPopup": {
+      "title": "Multi-agent workflows",
+      "description": "Voer taken uit op meerdere machines parallel. Elke agent werkt onafhankelijk en resultaten convergeren automatisch."
+    },
+    "guide": "Gids",
+    "guideDescription": "Leer hoe je het meeste uit Coasty haalt",
+    "guidePopup": {
+      "title": "Aan de slag",
+      "description": "Stapsgewijze handleidingen en best practices om je te helpen effectief te automatiseren."
+    },
+    "infrastructure": "Infrastructuur",
+    "computer": "Computer",
+    "computers": "Computers",
+    "active": "actief",
+    "view": "Bekijken",
+    "workforce": "Schema's",
+    "workforceDescription": "Plan automatische taken en triggers",
+    "workforcePopup": {
+      "title": "Geplande automatisering",
+      "description": "Stel terugkerende taken in met cron-schema's en agent-naar-agent-triggers. Uw schema's draaien terwijl u slaapt."
+    },
+    "credentials": "Inloggegevens",
+    "credentialsDescription": "Sla inloggegevens veilig op voor agenttoegang",
+    "credentialsPopup": {
+      "title": "Beveiligde inlogkluis",
+      "description": "Sla inloggegevens en API-sleutels op met versleuteling. Agents vullen inloggegevens automatisch in zonder ruwe waarden te tonen."
+    },
+    "desktopApp": {
+      "getDesktopApp": "Download Desktop App",
+      "download": "Downloaden",
+      "downloadDesktopApp": "Download Desktop App",
+      "windows": "Windows",
+      "macos": "macOS",
+      "controlRemotely": "Bedien je computer op afstand",
+      "controlDescription": "Installeer de desktop-app en voer taken uit op je pc vanuit dit dashboard — overal, altijd."
+    },
+    "credits": {
+      "runningLow": "Credits — Bijna op",
+      "remaining": "Credits resterend",
+      "buy": "Kopen",
+      "creditsLeft": "credits over",
+      "usedLabel": "Gebruikt: {count}",
+      "consumed": "{percent}% verbruikt",
+      "usageThisWeek": "Gebruik deze week"
+    },
+    "talkToUs": "Praat met ons",
+    "talkToUsDesc": "Boek een 15-min gesprek",
+    "inviteEarn": "Uitnodigen & Verdienen",
+    "inviteEarnDesc": "Verdien gratis credits",
+    "user": "Gebruiker",
+    "account": "Account",
+    "tasks": "{count} Taken",
+    "recentActivity": "Recente activiteit",
+    "viewAllHistory": "Bekijk alle geschiedenis →",
+    "swarmRunsCount": "{count} Swarm Runs",
+    "running": "actief",
+    "completed": "voltooid",
+    "viewAllSwarms": "Bekijk alle swarms →",
+    "schedulesCount": "{count} Schema's",
+    "totalRuns": "{count} totale runs",
+    "paused": "gepauzeerd",
+    "viewAllSchedules": "Bekijk alle schema's →",
+    "credentialsCount": "{count} Inloggegevens",
+    "encryptedVault": "Versleutelde kluis",
+    "manageCredentials": "Inloggegevens beheren →",
+    "days": [
+      "Ma",
+      "Di",
+      "Wo",
+      "Do",
+      "Vr",
+      "Za",
+      "Zo"
+    ],
+    "resume": "HERVATTEN",
+    "result": "RESULTAAT",
+    "notScheduled": "Niet gepland",
+    "overdue": "Achterstallig",
+    "lessThanMin": "< 1 min",
+    "inMinutes": "over {count}m",
+    "inHours": "over {count}u",
+    "today": "vandaag",
+    "yesterday": "gisteren"
+  },
+  "appHeader": {
+    "login": "Inloggen",
+    "assign": "Plannen",
+    "assignDescription": "Deze taak plannen om automatisch uit te voeren",
+    "computer": "Computer",
+    "showComputer": "Computer tonen",
+    "hideComputer": "Computer verbergen",
+    "employeeHired": "Medewerker aangenomen!",
+    "employeeRemoved": "Medewerker verwijderd"
+  },
+  "billing": {
+    "plans": {
+      "lite": {
+        "name": "Lite",
+        "description": "Lichte dagelijkse automatisering"
+      },
+      "starter": {
+        "name": "Starter",
+        "description": "Automatiseer dagelijks taken"
+      },
+      "plus": {
+        "name": "Plus",
+        "description": "Schaal complexe workflows",
+        "badge": "Meest Populair"
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Onbeperkte zware automatisering"
+      }
+    },
+    "features": {
+      "vmDeleted": "1 VM (verwijderd na inactiviteit)",
+      "vmAlwaysOn": "{count} altijd-aan VM",
+      "vmAlwaysOnPlural": "{count} altijd-aan VMs",
+      "agentsParallel": "{count} agents parallel",
+      "basicSearch": "Basiszoekopdrachten",
+      "advancedSearch": "Geavanceerd zoeken & extractie",
+      "standardSupport": "Standaard support (echte mensen)",
+      "prioritySupport": "Prioriteitssupport, 24u respons",
+      "premiumSupport": "Premium support, 12u respons"
+    },
+    "creditPackages": {
+      "small": {
+        "name": "Kleine Boost",
+        "description": "Snelle opwaardering"
+      },
+      "medium": {
+        "name": "Medium Boost",
+        "description": "Standaard bijvulling",
+        "savings": "8% besparing"
+      },
+      "large": {
+        "name": "Grote Boost",
+        "description": "Bulkaankoop",
+        "savings": "17% besparing"
+      }
+    },
+    "timeAgo": {
+      "justNow": "Zojuist",
+      "minutesAgo": "{count}m geleden",
+      "hoursAgo": "{count}u geleden",
+      "daysAgo": "{count}d geleden"
+    },
+    "noActivity": "Geen activiteit in deze periode",
+    "stats": {
+      "balance": "Saldo",
+      "earned": "Verdiend",
+      "used": "Gebruikt",
+      "credits": "credits",
+      "allTime": "totaal",
+      "lastRange": "laatste {range}",
+      "sessions": "{count} sessies",
+      "avgDaily": "~{count}/dag gem.",
+      "plan": "Plan",
+      "free": "Gratis",
+      "noPlan": "Geen plan",
+      "canceling": "Opzeggen"
+    },
+    "monthlyUsage": "Maandelijks Creditgebruik",
+    "remaining": "{used} / {total} resterend",
+    "usedPercent": "{percent}% gebruikt deze periode",
+    "renews": "Verlengt op {date}",
+    "choosePlan": "Kies Je Plan",
+    "choosePlanDescription": "Abonneer je om AI-functies te ontgrendelen en maandelijkse credits te krijgen",
+    "savingsVsHuman": "Bespaar {amount}/mnd vs mens",
+    "timeSaved": "{time} maandelijks bespaard",
+    "cheaper": "{multiplier} goedkoper",
+    "coastyPlan": "Coasty {name}",
+    "perMonth": "/maand",
+    "creditsPerMonth": "{count} credits /maand",
+    "processing": "Verwerken...",
+    "subscribeTo": "Abonneer op {name}",
+    "transactionTypes": {
+      "credit_purchase": "Credit Aankoop",
+      "agent_usage": "Agent Gebruik",
+      "refund": "Terugbetaling",
+      "bonus": "Bonusbeloning",
+      "subscription": "Abonnement",
+      "subscription_grant": "Abonnementscredits",
+      "renewal": "Verlengingscredits",
+      "reactivation": "Heractivering"
+    },
+    "toasts": {
+      "paymentSuccess": "Betaling geslaagd! Je credits zijn toegevoegd.",
+      "subscriptionActivated": "Abonnement succesvol geactiveerd!",
+      "paymentCanceled": "Betaling is geannuleerd. Er zijn geen kosten in rekening gebracht.",
+      "signInToSubscribe": "Log in om te abonneren",
+      "subscriptionCheckoutFailed": "Kon abonnementscheckout niet starten. Probeer het opnieuw.",
+      "signInToPurchase": "Log in om credits te kopen",
+      "needSubscription": "Je hebt een actief abonnement nodig om extra credits te kopen",
+      "checkoutFailed": "Kon checkout niet starten. Probeer het opnieuw.",
+      "manageFailed": "Kon abonnementsbeheer niet openen. Probeer het opnieuw.",
+      "transactionsExported": "Transacties geëxporteerd"
+    }
+  },
+  "apiKeys": {
+    "title": "Modelproviders",
+    "new": "nieuw",
+    "description": "Voeg je eigen API-sleutels toe om toegang tot modellen te ontgrendelen.",
+    "securityNote": "Je sleutels worden veilig opgeslagen met end-to-end versleuteling.",
+    "apiKeyLabel": "{provider} API-sleutel",
+    "getApiKey": "API-sleutel ophalen",
+    "delete": "Verwijderen",
+    "save": "Opslaan",
+    "deleteDialog": {
+      "title": "API-sleutel Verwijderen",
+      "description": "Weet je zeker dat je je {provider} API-sleutel wilt verwijderen? Dit kan niet ongedaan worden gemaakt en je verliest toegang tot {provider} modellen.",
+      "cancel": "Annuleren",
+      "confirm": "Verwijderen"
+    },
+    "toasts": {
+      "saved": "API-sleutel opgeslagen",
+      "savedDescription": "Je {provider} API-sleutel is opgeslagen en modellen zijn toegevoegd aan je favorieten.",
+      "updatedDescription": "Je {provider} API-sleutel is bijgewerkt.",
+      "saveFailed": "API-sleutel opslaan mislukt",
+      "saveFailedDescription": "Kon {provider} API-sleutel niet opslaan. Probeer het opnieuw.",
+      "deleted": "API-sleutel verwijderd",
+      "deletedDescription": "Je {provider} API-sleutel is verwijderd.",
+      "deleteFailed": "API-sleutel verwijderen mislukt",
+      "deleteFailedDescription": "Kon {provider} API-sleutel niet verwijderen. Probeer het opnieuw."
+    }
+  },
+  "accountSettings": {
+    "profileDetails": "Profielgegevens",
+    "displayName": "Weergavenaam",
+    "namePlaceholder": "Je naam",
+    "company": "Bedrijf",
+    "companyPlaceholder": "Je bedrijf",
+    "website": "Website",
+    "websitePlaceholder": "yoursite.com",
+    "saving": "Opslaan...",
+    "saveChanges": "Wijzigingen opslaan",
+    "account": "Account",
+    "email": "E-mail",
+    "verified": "Geverifieerd",
+    "signOut": "Uitloggen",
+    "signOutDescription": "Uitloggen op dit apparaat",
+    "toasts": {
+      "profileUpdated": "Profiel bijgewerkt",
+      "profileUpdateFailed": "Profiel bijwerken mislukt",
+      "signOutFailed": "Uitloggen mislukt"
+    }
+  },
+  "privacySettings": {
+    "dataProtected": "Je gegevens zijn beschermd",
+    "dataProtectedDescription": "Enterprise-grade beveiliging met versleuteling in rust en tijdens verzending",
+    "features": {
+      "encryption": {
+        "title": "End-to-End Versleuteling",
+        "description": "API-sleutels versleuteld met AES-256-GCM. Je inloggegevens worden nooit in platte tekst opgeslagen."
+      },
+      "rls": {
+        "title": "Row Level Security",
+        "description": "Isolatie op databaseniveau zorgt ervoor dat je gegevens alleen door jou toegankelijk zijn. Geen cross-tenant toegang mogelijk."
+      },
+      "privacy": {
+        "title": "Privacy by Design",
+        "description": "We verzamelen minimale gegevens die nodig zijn om de service te leveren. Je gesprekken en bestanden blijven van jou."
+      },
+      "session": {
+        "title": "Sessiebeveiliging",
+        "description": "CSRF-bescherming, beveiligde HTTP-only cookies en Content Security Policy headers bij elk verzoek."
+      }
+    },
+    "legal": "Juridisch",
+    "privacyPolicy": {
+      "title": "Privacybeleid",
+      "description": "Hoe we je gegevens verzamelen, gebruiken en beschermen"
+    },
+    "termsOfService": {
+      "title": "Servicevoorwaarden",
+      "description": "Onze algemene voorwaarden"
+    }
+  },
+  "layoutSettings": {
+    "layout": "Layout"
+  },
+  "suggestions": {
+    "summary": {
+      "label": "Samenvatting",
+      "highlight": "Samenvatten"
+    },
+    "code": {
+      "label": "Code",
+      "highlight": "Bouwen"
+    },
+    "research": {
+      "label": "Onderzoek",
+      "highlight": "Analyseren"
+    },
+    "create": {
+      "label": "Creëren",
+      "highlight": "Genereren"
+    },
+    "solve": {
+      "label": "Oplossen",
+      "highlight": "Debug"
+    },
+    "learn": {
+      "label": "Leren",
+      "highlight": "Uitleggen"
+    }
+  },
+  "loadingMessages": [
+    "Het siliconen brein opstarten",
+    "Het digitale bewustzijn wekken",
+    "Neurale paden initialiseren",
+    "Kwantumkernen opstarten",
+    "De fluxcondensator opladen",
+    "Het mainframe activeren",
+    "De rekenmatrix voeden",
+    "Warp-aandrijving inschakelen",
+    "De siliconen geesten oproepen",
+    "De elektronenmotor aansteken",
+    "De transistors opwarmen",
+    "Bits en bytes assembleren",
+    "Digitale synapsen kalibreren",
+    "CPU-kristallen opladen",
+    "Bewustzijnsprotocollen laden",
+    "Systeembronnen initialiseren",
+    "Computeromgeving voorbereiden",
+    "Beveiligde verbinding opzetten",
+    "Virtuele bronnen inrichten",
+    "Systeemparameters configureren",
+    "Virtuele instantie lanceren",
+    "Extern bureaublad activeren",
+    "Cloudbronnen uitrollen",
+    "Systeemopstartreeks starten",
+    "Uitvoeringsomgeving voorbereiden",
+    "De slaperige computer wakker maken",
+    "De digitale beer prikken",
+    "Computationele koffie zetten",
+    "De digitale spieren strekken",
+    "De digitale ogen openen",
+    "Opstarten",
+    "Aanzetten",
+    "Online komen",
+    "Systeem opstarten",
+    "Klaarmaken",
+    "Bijna klaar",
+    "Werkruimte voorbereiden",
+    "Bronnen laden",
+    "Systeem ontwaakt"
+  ],
+  "quickStart": {
+    "greetingName": "Hoi {name}!",
+    "greetingDefault": "Hoi!",
+    "subtitle": "Je taken draaien op een veilige, geïsoleerde virtuele computer",
+    "tabs": {
+      "start": "Start",
+      "desktop": "Bureaublad",
+      "swarms": "Zwermen",
+      "schedules": "Schema's"
+    },
+    "items": {
+      "computerReady": "Computer gereed",
+      "pickComputer": "Kies een computer",
+      "createComputer": "Computer aanmaken",
+      "loginsSaved": "Inloggegevens opgeslagen",
+      "addLogins": "Inloggegevens toevoegen",
+      "askAnything": "Vraag het maar",
+      "macWindows": "Mac & Windows",
+      "mobileRemote": "Mobiele afstandsbediening",
+      "freeDownload": "Gratis download",
+      "onePrompt": "Eén prompt",
+      "manyAgents": "Veel agents",
+      "combinedResult": "Gecombineerd resultaat",
+      "setCadence": "Stel een cadans in",
+      "autoRuns": "Automatische runs",
+      "recurringResults": "Terugkerende resultaten",
+      "computerReadyDesc": "Verbonden en klaar om taken uit te voeren",
+      "pickComputerDesc": "Kies uit uw beschikbare machines",
+      "createComputerDesc": "Maak een cloudcomputer aan in seconden",
+      "loginsSavedDesc": "Versleutelde inloggegevens klaar voor automatisch invullen",
+      "addLoginsDesc": "Bewaar wachtwoorden voor automatische toegang",
+      "askAnythingDesc": "Beschrijf een taak en zie de AI aan het werk",
+      "macWindowsDesc": "Native app voor uw bureaublad",
+      "mobileRemoteDesc": "Bedien uw agent vanaf elk apparaat",
+      "freeDownloadDesc": "Lichte installatie, draait in seconden",
+      "onePromptDesc": "Beschrijf uw doel in gewone taal",
+      "manyAgentsDesc": "Agenten werken parallel op meerdere machines",
+      "combinedResultDesc": "Alle resultaten samengevoegd in één rapport",
+      "setCadenceDesc": "Elk uur, dagelijks, wekelijks of aangepaste cron",
+      "autoRunsDesc": "Agenten voeren uit zonder tussenkomst",
+      "recurringResultsDesc": "Rapporten geleverd volgens uw planning"
+    },
+    "cta": {
+      "downloadApp": "Download app",
+      "trySwarms": "Probeer zwermen",
+      "setUp": "Instellen"
+    }
+  },
+  "machines": {
+    "title": "Mijn computers",
+    "subtitle": "Beheer je AI-gestuurde desktopomgevingen",
+    "guide": "Gids",
+    "newMachine": "Nieuwe machine",
+    "filters": {
+      "all": "All",
+      "running": "Running",
+      "creating": "Creating",
+      "stopped": "Stopped"
+    },
+    "desktopPromo": {
+      "text": "Skip the VM — run AI agents on your own computer with the native app. Control your desktop from your phone.",
+      "cta": "Get the app"
+    },
+    "emptyState": {
+      "title": "True AI Employee with full computer access",
+      "description": "Spin up an isolated virtual machine and let AI agents browse the web, run terminals, and control the desktop — hands-free.",
+      "feature1": {
+        "title": "Full desktop control",
+        "description": "AI moves the mouse, types, clicks, and navigates like a real user."
+      },
+      "feature2": {
+        "title": "Any task automated",
+        "description": "Browser, terminal, and UI — all agents work together in one VM."
+      },
+      "feature3": {
+        "title": "Isolated & safe",
+        "description": "Each machine runs in its own container — your local system stays untouched."
+      },
+      "cta": "Create your first machine"
+    },
+    "noMachines": "No machines found.",
+    "noFilteredMachines": "No {filter} machines",
+    "noFilteredDescription": "No machines are currently {filter}.",
+    "loadingMachines": "Loading machines...",
+    "toasts": {
+      "deleted": "Machine deleted successfully",
+      "readyOpen": "You can now connect to your machine.",
+      "open": "Open",
+      "createFailed": "Please try creating the machine again.",
+      "fetchFailed": "Failed to load machines"
+    }
+  },
+  "createMachine": {
+    "title": "Nieuwe Computer",
+    "subtitle": "Start een cloud-desktop — klaar in ~30 seconden",
+    "freeExpiry": "Gratis computers verlopen na ",
+    "freeExpiry2": "2 uur",
+    "upgrade": "Upgraden",
+    "limitReached": "Je hebt je computerlimiet bereikt. Stop of verwijder een bestaande computer om een nieuwe te maken.",
+    "upgradeMore": "Upgrade voor meer →",
+    "nameLabel": "Computernaam",
+    "namePlaceholder": "Mijn Cloud Server",
+    "nameError": "Computernaam kan niet beginnen met \"local\"",
+    "nameRequired": "Voer een computernaam in",
+    "osLabel": "Operating System",
+    "linux": {
+      "name": "Linux (Ubuntu)",
+      "description": "Ubuntu 22.04 desktop"
+    },
+    "windows": {
+      "name": "Windows Server",
+      "badge": "BETA",
+      "description": "Windows desktop — expect bugs"
+    },
+    "osHintWindows": "Windows desktop with Chrome (beta). Ready in ~2 minutes.",
+    "osHintLinux": "Ubuntu desktop, accessible via browser. Ready in ~30 seconds.",
+    "stateLabel": "Computerstatus",
+    "restorePrevious": "Restore Previous",
+    "restoreDescription": "Resume from last snapshot",
+    "startFresh": "Start Fresh",
+    "startFreshDescription": "Clean desktop environment",
+    "cancel": "Cancel",
+    "creating": "Creating...",
+    "create": "Computer aanmaken",
+    "toasts": {
+      "restoringSnapshot": "Computer wordt hersteld vanuit snapshot!",
+      "restoringDescription": "Je vorige desktopstatus wordt hersteld. Klaar in ~30 seconden.",
+      "windowsCreated": "Aanmaken van Windows-computer gestart!",
+      "windowsDescription": "Je Windows-desktop wordt gestart. Klaar in ~2 minuten.",
+      "linuxCreated": "Je desktop wordt gestart. Klaar in ~30 seconden.",
+      "sshCreated": "Je cloudcomputer wordt gestart. SSH-sleutel is beschikbaar zodra deze klaar is."
+    }
+  },
+  "secrets": {
+    "title": "Opgeslagen Inloggegevens",
+    "subtitle": "Stored securely and used automatically by the AI agent when logging in",
+    "guide": "Guide",
+    "import": "Import",
+    "addCredential": "Add Credential",
+    "securityNote": "Credentials are never sent to the AI model and are never exposed in chat — the agent fills them in directly without seeing the values",
+    "username": "Username",
+    "password": "Password",
+    "hide": "Hide",
+    "revealFor10s": "Reveal for 10s",
+    "encrypted": "Encrypted",
+    "emptyState": {
+      "title": "Auto-login, hands-free",
+      "description": "Save credentials once — the AI agent logs in automatically and keeps going without ever interrupting you",
+      "feature1": {
+        "title": "Zero interruptions",
+        "description": "The agent encounters a login form, fills it in, and continues the task — no prompts, no pauses"
+      },
+      "feature2": {
+        "title": "Never seen by AI",
+        "description": "Your credentials are injected directly. The AI model never sees the actual values"
+      },
+      "feature3": {
+        "title": "Any website",
+        "description": "Works with login forms across any site — email, SaaS tools, dashboards, anything"
+      },
+      "cta": "Add your first credential"
+    },
+    "deleteDialog": {
+      "title": "Delete credential?",
+      "description": "{name} ({service}) will be permanently deleted. The AI agent will no longer be able to use it.",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "toasts": {
+      "loadFailed": "Failed to load credentials",
+      "revealFailed": "Failed to reveal password",
+      "deleted": "Credential deleted",
+      "deleteFailed": "Failed to delete credential"
+    },
+    "loading": "Loading credentials..."
+  },
+  "pricingPage": {
+    "hero": {
+      "title1": "Eenvoudige prijzen,",
+      "title2": "echte autopilot",
+      "subtitle": "Begin gratis. Upgrade wanneer je meer kracht nodig hebt."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "tagline": "Probeer de #1 computer-use agent",
+        "cta": "Start gratis"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Lichte dagelijkse automatisering",
+        "cta": "Kies Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Automatiseer dagelijks taken",
+        "cta": "Kies Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Schaal complexe workflows",
+        "cta": "Kies Plus",
+        "badge": "Meest populair"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Onbeperkte zware automatisering",
+        "cta": "Kies Pro"
+      }
+    },
+    "features": {
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Volledige browser, desktop & terminal",
+        "badge": "Kern"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "Alleen sequentieel",
+        "parallel": "{count} agents parallel",
+        "badge": "Krachtig"
+      },
+      "security": {
+        "name": "Beveiliging",
+        "description": "Sandbox, E2E versleuteld",
+        "badge": "Elk plan"
+      },
+      "monthlyCredits": {
+        "name": "Maandelijkse credits",
+        "payAsYouGo": "Betaal per gebruik",
+        "creditsPerMonth": "{count} credits/maand"
+      },
+      "persistentMachines": {
+        "name": "Persistente machines",
+        "temporary": "1 tijdelijke VM (2 uur)",
+        "deletedAfterInactivity": "1 VM (verwijderd na inactiviteit)",
+        "alwaysOn": "{count} altijd-aan VM",
+        "alwaysOnPlural": "{count} altijd-aan VMs"
+      },
+      "webSearch": {
+        "name": "Webzoeken",
+        "advanced": "Geavanceerd zoeken & extractie",
+        "basic": "Basis zoeken"
+      }
+    },
+    "animations": {
+      "agentDescription": "Je agent bestuurt een echte computer — browser, bestanden en terminal",
+      "fillForm": "Formulier invullen",
+      "searchExtract": "Zoeken & extraheren",
+      "uploadReport": "Rapport uploaden",
+      "navigateSite": "Site navigeren",
+      "creditsPerMonth": "credits per maand",
+      "cr": "cr",
+      "vm": "VM {num}",
+      "twoHrLimit": "2 uur limiet",
+      "alwaysOn": "Altijd aan",
+      "tempVmDescription": "Tijdelijke VM — reset na 2 uur",
+      "persistentVmDescription": "Je bestanden, apps & sessies blijven behouden tussen taken",
+      "sequentialOnly": "Alleen sequentiële uitvoering op dit plan",
+      "yourTask": "Jouw taak",
+      "agentsWorking": "{count} agents werken gelijktijdig",
+      "upgradeForExtraction": "Upgrade voor volledige extractie",
+      "searchDescription": "Zoek, scrape & extraheer gestructureerde data",
+      "basicSearchIncluded": "Basis zoeken inbegrepen",
+      "e2eEncryption": "E2E-versleuteling",
+      "sandboxedVm": "Sandbox VM",
+      "destroyedAfterUse": "Vernietigd na gebruik",
+      "everyPlan": "Elk plan. Geen uitzonderingen."
+    },
+    "perMonth": "/maand",
+    "faqs": {
+      "credits": {
+        "q": "Wat telt als een credit?",
+        "a": "Eén credit is ongeveer één agentactie — een klik, een formulier invullen, een zoekopdracht of een bestandsbewerking. Een typische multi-stap taak gebruikt 5–15 credits."
+      },
+      "persistent": {
+        "q": "Wat betekent 'persistente machine'?",
+        "a": "Bij betaalde plannen blijft je VM draaien tussen taken — je desktop, bestanden, browsersessies en geïnstalleerde software blijven behouden. Als je eigen altijd-aan cloudcomputer."
+      },
+      "swarm": {
+        "q": "Wat is swarm mode?",
+        "a": "Swarm mode verdeelt een taak over meerdere machines die gelijktijdig draaien. In plaats van één agent die 10 zoekopdrachten achter elkaar doet, doen meerdere agents ze parallel."
+      },
+      "cancel": {
+        "q": "Kan ik op elk moment opzeggen?",
+        "a": "Ja. Geen contracten, geen opzegkosten. Zeg op vanuit je accountpagina en behoud toegang tot het einde van je factureringsperiode."
+      },
+      "security": {
+        "q": "Zijn mijn gegevens veilig?",
+        "a": "Elke taak draait in een volledig geïsoleerde VM die na gebruik wordt vernietigd. Alle verbindingen zijn end-to-end versleuteld en we slaan nooit je inloggegevens op."
+      }
+    },
+    "enterprise": {
+      "title": "Enterprise",
+      "description": "Aangepaste credits, dedicated VMs, SLA, SSO en prioriteitsondersteuning.",
+      "cta": "Neem contact op"
+    },
+    "footer": {
+      "title": "Je AI-agent is 60 seconden verwijderd",
+      "subtitle": "Meld je aan en laat Coasty het werk doen.",
+      "noCreditCard": "Geen creditcard",
+      "cancelAnytime": "Op elk moment opzeggen",
+      "noCreditCardRequired": "Geen creditcard vereist",
+      "cancelAnytimeNoContracts": "Op elk moment opzeggen — geen contracten"
+    },
+    "questions": "Vragen"
+  },
+  "guide": {
+    "pageTitle": "Gids",
+    "pageSubtitle": "Van eerste installatie tot geavanceerde functies — leer hoe je het meeste uit Coasty haalt",
+    "completeGuide": "De complete gids",
+    "completeGuideSubtitle": "Alles wat je moet weten over Coasty",
+    "completeGuideDescription": "Van eerste installatie tot geavanceerde functies — leer hoe je het meeste uit je AI-agent haalt.",
+    "talkToCofounders": "Praat met de oprichters",
+    "tabs": {
+      "overview": "Overzicht",
+      "gettingStarted": "Aan de slag",
+      "chatTasks": "Chat & taken",
+      "machines": "Machines",
+      "credentials": "Inloggegevens",
+      "swarmMode": "Swarm Mode",
+      "workforce": "Schema's",
+      "desktopApp": "Desktop-app",
+      "billing": "Facturering & credits"
+    },
+    "overview": {
+      "howItWorks": "Hoe het werkt",
+      "step1": "Beschrijf de taak",
+      "step2": "Coasty plant de stappen",
+      "step3": "Voert autonoom uit",
+      "step": "Stap",
+      "whatCanDo": "Wat Coasty kan doen",
+      "taskCount": "40+ taken in 10 categorieën",
+      "categories": {
+        "sales": {
+          "name": "Sales",
+          "desc": "Vind 50 leads, verstuur gepersonaliseerde e-mails"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "desc": "Publiceer blogposts, plan social media"
+        },
+        "jobApps": {
+          "name": "Sollicitaties",
+          "desc": "Solliciteer op 20 banen, pas elk CV aan"
+        },
+        "email": {
+          "name": "E-mail",
+          "desc": "Schrijf antwoorden, bulk outreach, uitschrijven"
+        },
+        "dataEntry": {
+          "name": "Gegevensinvoer",
+          "desc": "Verplaats data tussen apps, maak spreadsheets"
+        },
+        "research": {
+          "name": "Onderzoek",
+          "desc": "Diepgaande rapporten, concurrentiemonitoring"
+        },
+        "qaTesting": {
+          "name": "QA-testen",
+          "desc": "Test aanmeldingen, fuzz formulieren, sitecontroles"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Zoek kandidaten, gepersonaliseerd contact"
+        },
+        "support": {
+          "name": "Support",
+          "desc": "Schrijf antwoorden, werk helpdocumenten bij"
+        },
+        "productivity": {
+          "name": "Productiviteit",
+          "desc": "Boek reizen, betaal rekeningen, beheer agenda's"
+        }
+      },
+      "whyCoasty": "Waarom Coasty",
+      "notChatbot": "Geen chatbot. Geen RPA-script.",
+      "worksLikeHuman": {
+        "title": "Werkt als een mens",
+        "desc": "Ziet, klikt, typt, navigeert — precies zoals jij"
+      },
+      "noScripts": {
+        "title": "Geen scripts of installatie",
+        "desc": "Gewoon Nederlands erin, resultaten eruit"
+      },
+      "handlesUnexpected": {
+        "title": "Handelt het onverwachte af",
+        "desc": "Past zich aan bij CAPTCHAs, popups, layoutwijzigingen"
+      },
+      "runsInIsolation": {
+        "title": "Draait geïsoleerd",
+        "desc": "Sandbox VM per sessie — niets lekt"
+      },
+      "ctaTitle": "Kies een taak en probeer het",
+      "ctaSubtitle": "Klaar om Coasty aan het werk te zetten?",
+      "ctaDescription": "Beschrijf een taak uit deze gids en kijk hoe Coasty het afhandelt.",
+      "ctaNote": "Begin gratis. Geen creditcard vereist.",
+      "startTask": "Start een taak",
+      "startFree": "Start gratis",
+      "desktopApp": "Desktop-app"
+    },
+    "gettingStarted": {
+      "steps": {
+        "signUp": {
+          "title": "Aanmelden",
+          "desc": "Eén klik om te beginnen"
+        },
+        "createMachine": {
+          "title": "Maak een machine",
+          "desc": "Je agent krijgt zijn eigen computer"
+        },
+        "saveCredentials": {
+          "title": "Sla inloggegevens op",
+          "desc": "Versleutelde logins voor elke site"
+        },
+        "giveTask": {
+          "title": "Geef een taak",
+          "desc": "Beschrijf het. Kijk hoe het gebeurt."
+        }
+      },
+      "examplePrompts": [
+        "Solliciteer op 10 passende banen op LinkedIn met mijn CV",
+        "Onderzoek concurrentieprijzen en maak een vergelijkingsspreadsheet",
+        "Schrijf en publiceer een blogpost over [onderwerp] op WordPress",
+        "Schrijf me uit van alle marketing-e-mails in Gmail",
+        "Test de aanmeldflow op mijn website en rapporteer eventuele bugs",
+        "Vind 50 leads die overeenkomen met [ICP] op LinkedIn en voeg ze toe aan mijn CRM"
+      ],
+      "quickPrompts": "Snelle prompts om te proberen",
+      "startFirstTask": "Start je eerste taak"
+    },
+    "chatTasks": {
+      "commandCenter": "Jouw commandocentrum",
+      "describeTask": "Beschrijf een taak. Kijk hoe het gebeurt.",
+      "examplePrompt": "Vind de top 5 draadloze toetsenborden onder $50 op Amazon en vergelijk ze in een spreadsheet.",
+      "exampleResponse": "Ik zoek op Amazon en maak een vergelijking. Ik open nu de browser.",
+      "exampleDone": "Klaar. De spreadsheet is opgeslagen met prijs, beoordeling en kenmerken voor alle 5 toetsenborden.",
+      "describePlaceholder": "Beschrijf je taak...",
+      "threeAgents": "Drie gespecialiseerde agents",
+      "autoAssigned": "Automatisch toegewezen per stap.",
+      "browser": "Browser",
+      "browserDesc": "Navigeren, klikken, formulieren invullen, scrapen",
+      "terminal": "Terminal",
+      "terminalDesc": "Commando's uitvoeren, installeren, bestanden verwerken",
+      "desktop": "Desktop",
+      "desktopDesc": "Klikken, typen, scrollen, apps openen",
+      "betterPrompts": "Schrijf betere prompts",
+      "specificBeatsVague": "Specifiek verslaat vaag. Elke keer.",
+      "do": "Wel",
+      "dont": "Niet",
+      "doExample1": "Solliciteer op 10 software engineering banen op LinkedIn. Pas elke sollicitatiebrief aan met vermelding van hun tech stack.",
+      "dontExample1": "Solliciteer op banen",
+      "doExample2": "Zoek op Google Flights naar SFO naar JFK, 20-25 maart, retour. Screenshot de 3 goedkoopste.",
+      "dontExample2": "Zoek vluchten",
+      "readyToTry": "Klaar om het te proberen?",
+      "openChat": "Open een chat en beschrijf wat je nodig hebt.",
+      "startChat": "Start een chat"
+    },
+    "machinesTab": {
+      "title": "Jouw machines",
+      "subtitle": "Volledige Ubuntu-desktops die je in seconden kunt opstarten.",
+      "lifecycle": "Levenscyclus",
+      "lifecycleDesc": "Vijf statussen, volledig automatisch.",
+      "planLimits": "Planlimieten",
+      "planCol": "Plan",
+      "machinesCol": "Machines",
+      "swarmAgentsCol": "Swarm agents",
+      "temp": "1 temp",
+      "states": {
+        "creating": "Aanmaken",
+        "starting": "Opstarten",
+        "running": "Actief",
+        "stopping": "Stoppen",
+        "stopped": "Gestopt"
+      },
+      "newMachine": "+ Nieuw",
+      "researchVm": "Onderzoek-VM",
+      "emailVm": "E-mail-VM",
+      "testingVm": "Test-VM",
+      "cores": "{count} cores",
+      "gb": "{count} GB",
+      "stop": "Stop",
+      "start": "Start",
+      "provisioning": "Inrichten...",
+      "spinUp": "Start een machine",
+      "goToMachines": "Ga naar machines"
+    },
+    "credentialsTab": {
+      "loginDetected": "Login gedetecteerd",
+      "matched": "Overeenkomst",
+      "credentialFound": "Inloggegevens gevonden",
+      "autoFilled": "Automatisch ingevuld",
+      "autoFillTitle": "Auto-invullen in actie",
+      "autoFillDesc": "Login gedetecteerd, inloggegevens gekoppeld, formulier ingevuld. Automatisch.",
+      "security": "Beveiliging",
+      "encrypted": "Versleuteld",
+      "aes256": "AES-256 in rust",
+      "vmIsolated": "VM-geïsoleerd",
+      "sandboxed": "Sandbox per sessie",
+      "neverLogged": "Nooit gelogd",
+      "zeroTrace": "Geen sporen in logs",
+      "savedCredentials": "Opgeslagen inloggegevens",
+      "addOnce": "Eenmaal toevoegen, overal automatisch invullen.",
+      "saveFirst": "Sla je eerste inloggegevens op",
+      "goToCredentials": "Ga naar opgeslagen inloggegevens"
+    },
+    "swarmTab": {
+      "title": "Swarm Mode",
+      "runParallel": "Draai {count} machines parallel",
+      "sameTask": "Dezelfde taak, {multiplier}x de output, dezelfde tijd.",
+      "done": "Klaar",
+      "running": "Actief",
+      "pending": "Wachtend",
+      "result": "RESULTAAT",
+      "useCases": {
+        "parallelResearch": {
+          "title": "Parallel onderzoek",
+          "desc": "{count} concurrenten, {count} machines, gelijktijdig"
+        },
+        "bulkApplications": {
+          "title": "Bulk sollicitaties",
+          "desc": "Solliciteer op meerdere platforms tegelijk"
+        },
+        "multiCitySearch": {
+          "title": "Multi-stad zoeken",
+          "desc": "Zoek listings in {count} steden tegelijk"
+        },
+        "parallelOutreach": {
+          "title": "Parallel contact",
+          "desc": "Gepersonaliseerde e-mails naar verschillende segmenten"
+        },
+        "crossPlatform": {
+          "title": "Cross-platform",
+          "desc": "Post op {count} platforms tegelijk"
+        },
+        "distributedTesting": {
+          "title": "Gedistribueerd testen",
+          "desc": "Test meerdere scenario's parallel"
+        }
+      },
+      "whatToSwarm": "Wat te swarmen",
+      "availability": "Beschikbaarheid",
+      "freeNotAvailable": "Niet beschikbaar",
+      "litePlus": "Lite+",
+      "agentRange": "2 -- 9 agents",
+      "startSwarm": "Start een swarm"
+    },
+    "workforceTab": {
+      "title": "Workforce",
+      "subtitle": "Jouw AI-bedrijf, op autopilot",
+      "description": "Medewerkers, teams, triggers — 24/7 actief.",
+      "myCompany": "Mijn bedrijf",
+      "contentOps": "Content Ops",
+      "support": "Support",
+      "writer": "Schrijver",
+      "seo": "SEO",
+      "social": "Social",
+      "inbox": "Inbox",
+      "docs": "Documenten",
+      "concepts": "Kernconcepten",
+      "conceptItems": {
+        "employees": {
+          "title": "Medewerkers",
+          "desc": "AI-agents die taken uitvoeren op schema, 24/7"
+        },
+        "teams": {
+          "title": "Teams",
+          "desc": "Groepen medewerkers met gedeelde instructies"
+        },
+        "sharedMemory": {
+          "title": "Gedeeld geheugen",
+          "desc": "Key-value opslag waar medewerkers naar lezen en schrijven"
+        },
+        "triggers": {
+          "title": "Triggers",
+          "desc": "Koppel medewerkers: één klaar, volgende start"
+        },
+        "delegates": {
+          "title": "Gedelegeerden",
+          "desc": "Medewerkers wijzen subtaken toe aan specialisten"
+        },
+        "orgChart": {
+          "title": "Organigram",
+          "desc": "Visuele kaart van je bedrijfshiërarchie"
+        }
+      },
+      "chainTitle": "Koppel medewerkers aan elkaar",
+      "chainDesc": "Output stroomt automatisch door naar de volgende.",
+      "scout": "Scout",
+      "scoutDesc": "onderzoekt concurrenten",
+      "atlas": "Atlas",
+      "atlasDesc": "schrijft blogpost",
+      "nova": "Nova",
+      "novaDesc": "publiceert op social",
+      "done": "Klaar",
+      "onComplete": "on_complete",
+      "waiting": "Wachtend",
+      "templates": "Begin met een template",
+      "templateItems": {
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Klantenservice",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
+      },
+      "employees": "{count} medewerkers",
+      "openWorkforce": "Open Workforce"
+    },
+    "billingTab": {
+      "credits": "Credits",
+      "timeMetric": "Tijd is de enige maatstaf.",
+      "rate": "Tarief",
+      "rateValue": "10",
+      "creditsPerMin": "credits/min",
+      "metered": "gemeten elke 30s",
+      "example": "Voorbeeld",
+      "minTask": "min taak",
+      "startCredits": "Start: {count} credits",
+      "endCredits": "Einde: {count} credits",
+      "creditsUsed": "{count} credits gebruikt",
+      "calculation": "{mins} min x 10 credits/min",
+      "plans": "Plannen",
+      "planData": {
+        "free": {
+          "credits": "100",
+          "machines": "1 temp",
+          "feature": "Basis zoeken"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 altijd-aan",
+          "feature": "2 parallelle agents"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 altijd-aan",
+          "feature": "Geavanceerd zoeken"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 altijd-aan",
+          "feature": "Prioriteitsondersteuning"
+        },
+        "pro": {
+          "credits": "1.500",
+          "machines": "3 altijd-aan",
+          "feature": "SLA-garantie"
+        }
+      },
+      "perMonth": "{price}/maand",
+      "faqTitle": "FAQ",
+      "faqs": {
+        "howCharged": {
+          "q": "Hoe worden credits in rekening gebracht?",
+          "a": "10 credits per minuut agentuitvoering, naar boven afgerond. Elke 30 seconden gecontroleerd tijdens een sessie."
+        },
+        "runOut": {
+          "q": "Wat gebeurt er als ze op zijn?",
+          "a": "Je hebt minstens 20 credits nodig om een taak te starten. Op 0 pauzeert de taak — koop een aanvulling om door te gaan."
+        },
+        "rollOver": {
+          "q": "Worden ongebruikte credits overgedragen?",
+          "a": "Credits worden elke factureringscyclus gereset. Gebruik ze of verlies ze."
+        }
+      },
+      "goToBilling": "Ga naar facturering"
+    },
+    "desktopAppTab": {
+      "overlay": "De overlay",
+      "overlayDesc": "Altijd aanwezig. Klik om uit te vouwen.",
+      "compact": "Compact",
+      "expanded": "Uitgevouwen",
+      "ready": "Gereed",
+      "exampleTask": "Werk mijn CV bij",
+      "exampleResponse": "resume.docx openen...",
+      "describePlaceholder": "Beschrijf je taak...",
+      "whatItControls": "Wat het bestuurt",
+      "controls": {
+        "browser": {
+          "name": "Browser",
+          "desc": "Navigeren, klikken, formulieren invullen"
+        },
+        "files": {
+          "name": "Bestanden",
+          "desc": "Lezen, schrijven, overal bewerken"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Elk shell-commando uitvoeren"
+        },
+        "desktop": {
+          "name": "Desktop",
+          "desc": "Klikken, typen, scrollen"
+        },
+        "screenshots": {
+          "name": "Screenshots",
+          "desc": "Ziet wat jij ziet"
+        },
+        "apps": {
+          "name": "Apps",
+          "desc": "Bestuur elke geïnstalleerde app"
+        }
+      },
+      "twoWays": "Twee manieren om te draaien",
+      "cloudVm": "Cloud VM",
+      "cloudFeatures": {
+        "isolated": "Volledig geïsoleerde sandbox",
+        "freshBrowser": "Schone browser, geen geschiedenis",
+        "maxSecurity": "Maximale beveiliging"
+      },
+      "desktopMode": "Desktop",
+      "desktopFeatures": {
+        "yourFiles": "Jouw bestanden, directe toegang",
+        "yourApps": "Jouw geïnstalleerde apps",
+        "yourSessions": "Jouw ingelogde sessies"
+      },
+      "downloadCta": "Download desktop-app"
+    }
+  },
+  "comparePage": {
+    "title": "Vergelijkingen",
+    "heroTitle": "Coasty vs. de concurrentie",
+    "heroDescription": "Ontdek hoe de #1 computer-gebruikende AI-agent (82% OSWorld) zich verhoudt tot alternatieven. Functie-voor-functie vergelijkingen met echte data.",
+    "categories": {
+      "aiAgent": "AI-agent",
+      "infrastructure": "Infrastructuur",
+      "rpa": "RPA",
+      "human": "Mens"
+    },
+    "vsLabel": "Coasty vs {name}",
+    "ctaTitle": "Klaar om de #1 computer-gebruikende AI-agent te proberen?",
+    "ctaButton": "Probeer Coasty gratis",
+    "noCreditCard": "Geen creditcard vereist",
+    "allComparisons": "Alle vergelijkingen",
+    "featureComparison": "Functievergelijking",
+    "whyChooseCoasty": "Waarom Coasty kiezen",
+    "strengthsOf": "Sterke punten van {name}",
+    "ctaDescription": "82% OSWorld benchmark. VM-isolatie. CAPTCHA-oplossing. Vanaf $20/maand.",
+    "watchCaseStudies": "Bekijk casestudies"
+  },
+  "agentSwarms": {
+    "badge": "Agent Swarm-modus",
+    "heroTitle1": "Eén prompt.",
+    "heroTitle2": "Oneindige machines.",
+    "heroTitle3": "Parallelle resultaten.",
+    "heroDescription": "Verdeel elke taak over meerdere geïsoleerde omgevingen die gelijktijdig draaien. Werk dat een uur duurt is in minuten klaar.",
+    "trySwarmMode": "Probeer Swarm-modus",
+    "seeInAction": "Bekijk het in actie",
+    "liveExecution": "swarm-tree — live uitvoering",
+    "machineCount": "{count} machines",
+    "running": "actief",
+    "threeSteps": "Drie stappen naar parallelle uitvoering",
+    "steps": {
+      "typePrompt": {
+        "title": "Typ je prompt",
+        "desc": "Beschrijf de taak. Schakel swarm-modus in en kies hoeveel machines."
+      },
+      "machinesSpinUp": {
+        "title": "Machines starten op",
+        "desc": "Elke machine krijgt een volledig geïsoleerde omgeving — browser, terminal, desktop."
+      },
+      "resultsStream": {
+        "title": "Resultaten streamen live",
+        "desc": "Bekijk elke machine in realtime via de swarm-boomweergave."
+      }
+    },
+    "demoTitle": "Agent Swarms demo",
+    "demoDescription": "Bekijk {count} machines die gelijktijdig een CRM-onderzoekstaak uitvoeren",
+    "prompt": "Prompt",
+    "swarm": "SWARM",
+    "run": "Starten",
+    "reset": "Resetten",
+    "allCompleted": "Alle {count} machines voltooid",
+    "speedComparison": "~{swarmTime} min in plaats van ~{seqTime} min — {multiplier}x sneller",
+    "seqVsSwarm": "Sequentieel vs Swarm",
+    "tableHeaders": {
+      "task": "Taak",
+      "before": "Voorheen",
+      "swarm": "Swarm",
+      "speed": "Snelheid"
+    },
+    "speedExamples": {
+      "crmResearch": "5 CRM-tools onderzoek",
+      "qaPages": "QA over 8 pagina's",
+      "leadEnrichment": "Lead-verrijking (100)",
+      "priceMonitoring": "Prijsmonitoring"
+    },
+    "builtForParallel": "Gebouwd voor parallel werk",
+    "useCases": {
+      "marketResearch": {
+        "title": "Marktonderzoek op schaal",
+        "desc": "Onderzoek meerdere concurrenten, markten of producten gelijktijdig op geïsoleerde machines."
+      },
+      "leadGeneration": {
+        "title": "Leadgeneratie",
+        "desc": "Verrijk profielen, vind e-mails en verifieer sociale aanwezigheid — uren werk in minuten."
+      },
+      "qaTesting": {
+        "title": "QA & regressietesten",
+        "desc": "Voer testscenario's uit over verschillende pagina's of flows in parallel."
+      },
+      "contentSocial": {
+        "title": "Content & social",
+        "desc": "Publiceer op meerdere platformen tegelijk met isolatie per machine."
+      },
+      "dataExtraction": {
+        "title": "Data-extractie",
+        "desc": "Verzamel en structureer data uit tientallen bronnen tegelijk."
+      },
+      "scheduledRuns": {
+        "title": "Geplande uitvoeringen",
+        "desc": "Combineer swarm-modus met planning voor terugkerende parallelle taken."
+      }
+    },
+    "featureStrip": {
+      "trueIsolation": {
+        "title": "Echte isolatie",
+        "desc": "Elke machine heeft zijn eigen browser, terminal en desktop."
+      },
+      "tripleMachineLimit": {
+        "title": "3x machinelimiet",
+        "desc": "Swarm-modus verdrievoudigt de machinecapaciteit van je plan."
+      },
+      "liveTreeView": {
+        "title": "Live boomweergave",
+        "desc": "Screenshots en tool-aanroepen streamen in realtime."
+      },
+      "autoAggregation": {
+        "title": "Automatische aggregatie",
+        "desc": "Resultaten worden gecombineerd in één geconsolideerd rapport."
+      },
+      "shareableRuns": {
+        "title": "Deelbare uitvoeringen",
+        "desc": "Bekijk volledige uitvoeringstijdlijnen via een link."
+      },
+      "fullySandboxed": {
+        "title": "Volledig sandboxed",
+        "desc": "Alle omgevingen worden vernietigd na voltooiing."
+      }
+    },
+    "readyCta": "Klaar om taken parallel uit te voeren?",
+    "includedWithPaid": "Swarm-modus is inbegrepen bij elk betaald plan.",
+    "getStarted": "Aan de slag",
+    "viewPricing": "Bekijk prijzen",
+    "legend": {
+      "messages": "Berichten",
+      "broadcast": "Broadcast",
+      "sharedMemory": "Gedeeld geheugen",
+      "help": "Help"
+    },
+    "liveSwarmExecution": "Live swarm-uitvoering met agentcommunicatie",
+    "popular": "Populair",
+    "avgRating": "{rating} gem."
+  },
+  "downloadPage": {
+    "title": "Desktop-app",
+    "heroTitle": "Laat Coasty je computer bedienen",
+    "heroDescription": "Je AI-assistent die het overneemt. Automatiseer je browser, desktop en terminal — of bedien je computer overal vandaan via onze webinterface.",
+    "seeInAction": "Bekijk het in actie",
+    "overlayDescription": "Een lichtgewicht overlay die op je bureaublad zweeft. Bedien het lokaal of op afstand vanuit elke browser — jouw computer, jouw manier.",
+    "recommended": "Aanbevolen voor jouw systeem",
+    "coastyFor": "Coasty voor {platform}",
+    "installerLabel": "{extension}-installatieprogramma",
+    "beforeInstall": "Voordat je installeert",
+    "beforeInstallDescription": "Coasty Desktop is gloednieuw, dus je besturingssysteem herkent het nog niet. Dit is volkomen normaal voor nieuw uitgebrachte apps — zo ga je verder:",
+    "windowsSteps": {
+      "step1": "Windows heeft je pc beschermd",
+      "step2": "Meer informatie",
+      "step3": "Toch uitvoeren"
+    },
+    "macSteps": {
+      "step1": "Coasty Desktop kan niet worden geopend",
+      "step2": "Systeeminstellingen > Privacy en beveiliging",
+      "step3": "Toch openen"
+    },
+    "allPlatforms": "Alle platformen",
+    "systemRequirements": {
+      "title": "Systeemvereisten",
+      "win1": "Windows 10 of later",
+      "win2": "64-bit (x86_64)",
+      "win3": "Minimaal 4 GB RAM",
+      "mac1": "macOS 10.15 (Catalina) of later",
+      "mac2": "Apple Silicon of Intel",
+      "mac3": "Minimaal 4 GB RAM"
+    },
+    "whatsIncluded": "Wat is inbegrepen",
+    "features": {
+      "browser": "Browserautomatisering",
+      "desktop": "Desktopautomatisering",
+      "terminal": "Terminaltoegang",
+      "files": "Bestandsbewerkingen",
+      "updates": "Automatische updates",
+      "remote": "Overal bedienen"
+    },
+    "browserCta": "Open Coasty in de browser",
+    "browserCtaDescription": "Wil je je machine overal vandaan bedienen?",
+    "loading": "Laden...",
+    "downloadFor": "Downloaden voor {platform}",
+    "download": "Downloaden",
+    "unavailable": "Niet beschikbaar"
+  },
+  "referralPage": {
+    "shareTitle": "Deel Coasty.",
+    "earnTitle": "Verdien samen.",
+    "shareDescription": "Geef vrienden 50 gratis credits om hun eerste AI-agent in te zetten. Jij krijgt ook 50 credits — elke keer dat iemand zich aanmeldt.",
+    "features": [
+      "AI die echt werkt — echte browser, echte klikken, echte resultaten",
+      "Geïsoleerd en veilig — elke agent draait in zijn eigen sandboxed VM",
+      "Werkt terwijl je slaapt — plan taken en laat agents de rest doen"
+    ],
+    "recentActivity": "Je recente activiteit",
+    "friendsCould": "Je vrienden zouden dit ook kunnen doen",
+    "giveGet": "Geef vrienden 50 credits. Krijg 50 voor jezelf. Elke keer.",
+    "stats": {
+      "invited": "Uitgenodigd",
+      "earned": "Verdiend",
+      "perInvite": "Per uitnodiging"
+    },
+    "tabs": {
+      "invite": "Vrienden uitnodigen",
+      "feedback": "Feedback sturen"
+    },
+    "referralLink": "Jouw verwijzingslink",
+    "howItWorks": "Hoe het werkt",
+    "howSteps": [
+      "Deel je link met een vriend",
+      "Ze melden zich aan en krijgen 50 gratis credits",
+      "Jij verdient direct 50 credits"
+    ],
+    "shareDirectly": "Direct delen",
+    "yourReferrals": "Jouw verwijzingen",
+    "invitedYou": "Heeft jou uitgenodigd",
+    "joinedViaLink": "Aangemeld via jouw link",
+    "noReferrals": "Nog geen verwijzingen",
+    "noReferralsHint": "Deel je link hierboven en jullie verdienen allebei 50 credits",
+    "feedbackThanks": "Bedankt voor je feedback!",
+    "feedbackWeRead": "We lezen elk bericht.",
+    "sendAnother": "Nog een versturen",
+    "feedbackTitle": "Vertel ons wat je ervan vindt",
+    "feedbackSubtitle": "Bugrapporten, functie-ideeën, of gewoon even hallo zeggen",
+    "feedbackPlaceholder": "Waar denk je aan?",
+    "weReadEvery": "We lezen elk bericht",
+    "send": "Versturen",
+    "shareMessage": "Hey, ik gebruik Coasty en het is echt gaaf. Het is een AI die je computer voor je kan gebruiken. Browsen, klikken, typen, alles. Probeer het via mijn link en we krijgen allebei gratis credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-mail"
+    },
+    "emailSubject": "Bekijk deze AI-tool",
+    "emailBody": "Deze AI kan je computer voor je gebruiken. Browsen, klikken, typen, alles."
+  },
+  "statusPage": {
+    "title": "Systeemstatus",
+    "brandTitle": "Coasty Status",
+    "subtitle": "Realtime operationele status van alle Coasty-services. Deze pagina wordt elke 60 seconden automatisch ververst.",
+    "refresh": "Vernieuwen",
+    "statuses": {
+      "operational": "Operationeel",
+      "degraded": "Verslechterd",
+      "outage": "Storing"
+    },
+    "overallStatuses": {
+      "allOperational": "Alle systemen operationeel",
+      "someDegraded": "Sommige systemen verslechterd",
+      "disruption": "Servicestoring gedetecteerd"
+    },
+    "overallDescriptions": {
+      "allOperational": "Alle services draaien soepel zonder gedetecteerde problemen.",
+      "someDegraded": "Sommige services ondervinden vertragingen. We onderzoeken het.",
+      "disruption": "We zijn op de hoogte van het probleem en werken actief aan een oplossing."
+    },
+    "responseTime": "{ms}ms responstijd",
+    "uptimeLabel": "Uptime 90 dagen",
+    "daysAgo": "90 dagen geleden",
+    "today": "Vandaag",
+    "overallUptime": "Totale uptime 90 dagen",
+    "overallUptimeDesc": "Geaggregeerde beschikbaarheid van alle services",
+    "services": "Services",
+    "clickUptime": "klik om uptime te bekijken",
+    "lastChecked": "Laatst gecontroleerd {time} · Automatisch vernieuwen elke 60s",
+    "experiencingIssues": "Problemen ondervinden?",
+    "issuesDescription": "Als iets niet goed lijkt, neem dan rechtstreeks contact met ons op.",
+    "talkToCofounders": "Praat met de oprichters",
+    "emailUs": "E-mail ons",
+    "serviceNames": {
+      "website": "Website",
+      "aiBackend": "AI Backend",
+      "database": "Database",
+      "authentication": "Authenticatie",
+      "aiModels": "AI-modellen",
+      "fileStorage": "Bestandsopslag"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Coasty - #1 AI-Agent voor Computergebruik | AI-Medewerker voor Desktop- en Browserautomatisering",
+      "titleTemplate": "{title} | Coasty - AI-Agent voor Computergebruik",
+      "description": "Coasty is de #1 AI-agent voor computergebruik — 82% op de OSWorld-benchmark. Het bestuurt een volledig bureaublad zoals een mens: opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails, beheert spreadsheets. Echte VM-isolatie per sessie. Vanaf $20/mo.",
+      "ogTitle": "Coasty - #1 AI-Agent voor Computergebruik | 82% OSWorld-Benchmark",
+      "ogDescription": "AI-medewerker die een bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark (82%). Browserautomatisering, desktopbesturing, CAPTCHA-oplossing, VM-isolatie. Vanaf $20/mo.",
+      "twitterDescription": "AI-medewerker die een bureaublad bestuurt zoals een mens. Opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails. Echte VM-isolatie. $20/mo vs $3,000/mo menselijke virtuele assistent."
+    },
+    "compare": {
+      "title": "Vergelijk Coasty - AI-Agent Alternatieven en Concurrentievergelijking",
+      "description": "Bekijk hoe Coasty's #1 AI-agent voor computergebruik zich verhoudt tot Anthropic Computer Use, OpenAI Operator, Adept AI, UiPath en meer. Functie-voor-functie vergelijkingen met prijzen.",
+      "ogTitle": "Vergelijk Coasty met AI-Agent Alternatieven",
+      "ogDescription": "Functie-voor-functie vergelijking van de #1 AI-agent voor computergebruik vs concurrenten. Benchmarkscores, prijzen, mogelijkheden."
+    },
+    "download": {
+      "title": "Download Coasty Desktop App — AI-Agent voor Mac en Windows",
+      "description": "Download Coasty Desktop, de #1 AI-agent voor computergebruik die uw lokale machine bestuurt. Browserautomatisering, desktopbesturing, terminaltoegang en bestandsoperaties. Beschikbaar voor Windows en macOS.",
+      "ogTitle": "Download Coasty Desktop — AI-Agent voor Mac en Windows",
+      "ogDescription": "AI die uw computer bestuurt zoals een mens. Browser-, desktop- en terminalautomatisering in één native app. #1 op de OSWorld-benchmark."
+    },
+    "guide": {
+      "title": "Wat Kan Coasty? — De Complete Gids voor AI-Computerautomatisering",
+      "description": "Ontdek alles wat Coasty kan automatiseren: verkoopprospectie, e-mail verzenden, sollicitaties, QA-testen, gegevensinvoer, social media, werving, onderzoek en meer dan 100 andere taken.",
+      "ogTitle": "Wat Kan Coasty? — Complete AI-Automatiseringsgids",
+      "ogDescription": "Verken meer dan 100 taken die Coasty kan automatiseren. Van verkoopprospectie tot QA-testen, zie precies hoe een AI-agent echt werk afhandelt."
+    },
+    "blog": {
+      "title": "Blog - Inzichten over AI-Agenten, Computergebruik Onderzoek en Casestudies",
+      "description": "Diepgaande analyses over autonome AI-agenten, computergebruiktechnologie, praktijkcasestudies over automatisering en de toekomst van AI-medewerkers. Van het team achter de #1 AI-agent voor computergebruik.",
+      "ogTitle": "Coasty Blog - Inzichten over AI-Agenten en Casestudies",
+      "ogDescription": "Diepgaande analyses over autonome AI-agenten, computergebruiktechnologie en praktijkcasestudies over automatisering van de #1 AI-agent voor computergebruik."
+    },
+    "results": {
+      "title": "Demo's en Resultaten — Bekijk de Coasty AI-Agent Autonoom Werken",
+      "description": "Bekijk hoe Coasty autonoom marketingcampagnes uitvoert, solliciteert, formulieren invult, QA-tests uitvoert, gepersonaliseerde e-mails verstuurt en meer. Echte casestudies met videodemo's.",
+      "ogTitle": "Demo's — Bekijk de Coasty AI-Agent Autonoom Werken",
+      "ogDescription": "Echte demo's van AI die een computer bestuurt: marketing, sollicitaties, QA-testen, e-mail verzenden en meer. #1 op de OSWorld-benchmark."
+    },
+    "terms": {
+      "title": "Gebruiksvoorwaarden",
+      "description": "Coasty Gebruiksvoorwaarden. Lees de voorwaarden die het gebruik van het Coasty AI-medewerkerplatform, de computergebruik-agent en de desktopapplicatie regelen.",
+      "ogTitle": "Coasty — Gebruiksvoorwaarden",
+      "ogDescription": "Coasty Gebruiksvoorwaarden. Lees de voorwaarden die het gebruik van het Coasty AI-medewerkerplatform, de computergebruik-agent en de desktopapplicatie regelen."
+    },
+    "privacy": {
+      "title": "Privacybeleid",
+      "description": "Coasty Privacybeleid. Ontdek hoe we uw gegevens beschermen met VM-isolatie, versleutelde sessies, geïsoleerde uitvoeringsomgevingen en beveiliging op bedrijfsniveau.",
+      "ogTitle": "Coasty — Privacybeleid",
+      "ogDescription": "Coasty Privacybeleid. Ontdek hoe we uw gegevens beschermen met VM-isolatie, versleutelde sessies, geïsoleerde uitvoeringsomgevingen en beveiliging op bedrijfsniveau."
+    },
+    "useCases": {
+      "title": "Toepassingen - Coasty AI-Agent voor Bedrijfsoperaties",
+      "description": "Ontdek 12 manieren waarop Coasty's AI-agent uw operaties automatiseert — concurrentieonderzoek, QA-testen, leadgeneratie, e-mail verzenden en meer. Echte resultaten.",
+      "ogTitle": "Toepassingen - Coasty AI-Agent",
+      "ogDescription": "12 manieren om uw output op de automatische piloot te vertienvoudigen. Echte resultaten, echte cijfers."
+    },
+    "computerUse": {
+      "title": "AI-Agent voor Computergebruik — #1 Desktop-, Browser- en Terminalautomatisering",
+      "description": "Coasty is de beste AI-agent voor computergebruik, #1 op OSWorld (82%). Automatiseer elke desktop-, browser- of terminaltaak met autonome AI die computers bestuurt zoals een mens.",
+      "ogTitle": "Coasty — De #1 AI-Agent voor Computergebruik",
+      "ogDescription": "De beste computergebruik-agent, #1 op OSWorld. Automatiseer elke desktop-, browser- of terminaltaak met AI."
+    },
+    "pricing": {
+      "title": "Prijzen — Coasty AI-Agent Plannen en Prijzen",
+      "description": "Coasty-prijsplannen vanaf $20/mo. Vervang virtuele assistenten van $3,000/mo door een AI-medewerker. Gratis tier beschikbaar. Op credits gebaseerd gebruik zonder verborgen kosten.",
+      "ogTitle": "Coasty Prijzen — AI-Agent Plannen",
+      "ogDescription": "AI-medewerker vanaf $20/mo. Vervang dure virtuele assistenten door autonome AI. Gratis tier beschikbaar."
+    },
+    "faq": {
+      "q1": "Wat is Coasty?",
+      "a1": "Coasty is een AI-medewerkerplatform — een computergebruik-agent die een bureaublad bestuurt zoals een mens. Het opent browsers, klikt, typt, navigeert door applicaties, vult formulieren in, verstuurt e-mails en beheert spreadsheets autonoom. #1 op de OSWorld-benchmark met een voltooiingspercentage van 82% over 369 taken uit de echte wereld.",
+      "q2": "Hoe verhoudt Coasty zich tot Anthropic Computer Use?",
+      "a2": "Terwijl Anthropic Computer Use een ruwe API biedt voor computerbesturing, is Coasty een productieklaar platform met beheerde VM-infrastructuur, ingebouwde CAPTCHA-oplossing, een desktopapp voor Mac en Windows, multi-model ondersteuning en de hoogste OSWorld-benchmarkscore (82%). Coasty biedt de complete oplossing — niet alleen de API.",
+      "q3": "Hoeveel kost Coasty?",
+      "a3": "Coasty begint bij $20/maand voor het Starter-plan met een gratis tier beschikbaar. Dit vergeleken met meer dan $3,000 per maand voor een menselijke virtuele assistent. Coasty werkt 24/7 zonder pauzes, zonder training en met directe schaalbaarheid.",
+      "q4": "Is Coasty veilig om te gebruiken?",
+      "a4": "Ja. Elke Coasty-sessie draait in een eigen geïsoleerde, beveiligde virtuele machine. Uw gegevens blijven veilig, uw machine wordt niet aangeraakt en er lekt niets tussen sessies. Dit is echte VM-isolatie, niet alleen containers in een gedeelde pool.",
+      "q5": "Wat is de OSWorld-benchmark?",
+      "a5": "OSWorld is een benchmark voor het evalueren van AI-agenten op computertaken uit de echte wereld. Het test 369 taken in browsers, kantoorapplicaties en systeemoperaties. Coasty scoorde 82%, de hoogste score van alle computergebruik-agenten — en behaalt daarmee state-of-the-art prestaties.",
+      "q6": "Hoe verschilt Coasty van RPA-tools zoals UiPath?",
+      "a6": "Traditionele RPA-tools zoals UiPath vereisen breekbare scripts en breken wanneer interfaces veranderen. Coasty gebruikt AI-visie om elke interface te begrijpen en ermee te interacteren, en past zich in real-time aan zonder voorgedefinieerde scripts. Het werkt als een mens, niet als een macro. De installatie duurt minuten in plaats van weken.",
+      "q7": "Heeft Coasty een desktopapp?",
+      "a7": "Ja. Coasty Desktop is beschikbaar voor zowel Mac als Windows. Het draait als een zwevende overlay op uw bureaublad en kan direct uw lokale browser, bestanden, terminal en applicaties besturen — geen VM nodig voor lokale taken.",
+      "q8": "Wat kan Coasty automatiseren?",
+      "a8": "Coasty kan vrijwel elke computertaak automatiseren: websurfen, formulieren invullen, e-mails versturen, spreadsheetbeheer, gegevensinvoer, social media-berichten, sollicitaties, verkoopprospectie, QA-testen, klantenservice, LinkedIn-werving en meer. Als een mens het op een computer kan doen, kan Coasty het ook.",
+      "q9": "Hoe verhoudt Coasty zich tot OpenAI Operator?",
+      "a9": "Coasty presteert beter dan OpenAI Operator op de OSWorld-benchmark (82% vs ~40%), biedt echte VM-isolatie voor elke sessie, ondersteunt meerdere AI-modellen, bevat volledige desktopbesturing buiten de browser en biedt een open-source framework.",
+      "q10": "Kan Coasty CAPTCHAs oplossen?",
+      "a10": "Ja. Coasty heeft een ingebouwde CAPTCHA-oplossingspipeline, dus het wordt niet geblokkeerd zoals concurrerende AI-agenten. Dit is cruciaal voor automatisering in de echte wereld waar CAPTCHAs gebruikelijk zijn op websites."
+    },
+    "structuredData": {
+      "appDescription": "De #1 AI-agent voor computergebruik. Coasty bestuurt een volledig bureaublad zoals een mens — opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails en beheert spreadsheets autonoom. 82% op de OSWorld-benchmark. Echte VM-isolatie. Ingebouwde CAPTCHA-oplossing. Vanaf $20/maand.",
+      "orgDescription": "Coasty bouwt de #1 AI-agent voor computergebruik. Ons platform biedt autonome desktopbesturing, browserautomatisering en multi-agent orchestratie met echte VM-isolatie.",
+      "productDescription": "AI-computergebruik-agent die een bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark (82%). Autonome browserautomatisering, desktopbesturing, e-mail verzenden, formulieren invullen en spreadsheetbeheer met echte VM-isolatie.",
+      "websiteDescription": "#1 AI-agent platform voor computergebruik. 82% op de OSWorld-benchmark. Autonome browser-, desktop- en terminalautomatisering met VM-isolatie. Vanaf $20/mo.",
+      "softwareDescription": "AI-computergebruik-agent die een volledig bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark met een voltooiingspercentage van 82% over 369 taken uit de echte wereld. Autonome browserautomatisering, desktopbesturing, terminaloperaties, e-mail verzenden, formulieren invullen en spreadsheetbeheer.",
+      "breadcrumbs": {
+        "home": "Home",
+        "caseStudies": "AI-Agent Casestudies",
+        "blog": "Blog",
+        "download": "Desktop App Downloaden",
+        "compare": "AI-Agenten Vergelijken"
+      }
+    }
+  },
+  "errorPages": {
+    "notFound": {
+      "title": "404 – Pagina niet gevonden",
+      "description": "Sorry, deze pagina bestaat niet."
+    },
+    "error": {
+      "title": "Er is iets misgegaan",
+      "description": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+      "tryAgain": "Opnieuw proberen"
+    }
+  },
+  "schedulesPage": {
+    "title": "Workforce",
+    "subtitle": "Jouw AI-workforce — wijs taken toe en laat hen de rest afhandelen",
+    "guide": "Gids",
+    "teamsTab": "Teams",
+    "hireEmployee": "Werknemer aannemen",
+    "loading": "Werknemers laden...",
+    "onDuty": "{count} in dienst",
+    "standby": "{count} stand-by",
+    "company": "Bedrijf",
+    "teams": "{count} teams",
+    "employees": "{count} werknemers",
+    "members": "{count} leden",
+    "unassigned": "Niet toegewezen",
+    "add": "Toevoegen",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "run": "Uitvoeren",
+    "delegate": "delegeren",
+    "untitledEmployee": "Naamloze werknemer",
+    "untitled": "Naamloos",
+    "guidelinesPlaceholder": "Richtlijnen...",
+    "today": "Vandaag",
+    "timesDaily": "{count} × per dag",
+    "noEmployeesDay": "Geen werknemers op deze dag",
+    "noEmployeesScheduled": "Geen werknemers ingepland",
+    "recentActivity": "Recente activiteit",
+    "schedule": "Schema",
+    "emptyState": {
+      "openChat": "Open een chat en klik op",
+      "assignEmployee": "Werknemer toewijzen",
+      "onThe": "aan de",
+      "topRight": "rechtsboven",
+      "toPutOnAutopilot": "om het op autopilot te zetten",
+      "newChat": "Nieuwe chat"
+    },
+    "emptyWorkforce": {
+      "title": "Neem je eerste werknemer aan",
+      "description": "AI-werknemers werken namens jou — wijs een taak toe, stel een schema in en ze voeren het automatisch uit",
+      "flexibleShifts": {
+        "title": "Flexibele diensten",
+        "desc": "Plan werknemers per uur, dag, week, maand — of gebruik een aangepaste cron-expressie"
+      },
+      "fullAutonomy": {
+        "title": "Volledige autonomie",
+        "desc": "Elke werknemer heeft volledige toegang tot browsen, terminal en je verbonden werkstations"
+      },
+      "activityLogs": {
+        "title": "Activiteitslogs",
+        "desc": "Elke uitvoering wordt gelogd zodat je kunt bekijken wat je werknemers hebben bereikt"
+      },
+      "startFromChat": "Start vanuit een chat"
+    },
+    "filters": {
+      "all": "Alles",
+      "onDuty": "In dienst",
+      "standby": "Stand-by"
+    },
+    "noMatch": "Geen werknemers komen overeen met dit filter",
+    "createTeam": {
+      "title": "Nieuw team",
+      "subtitle": "Begin met een sjabloon of bouw vanaf nul",
+      "backToTemplates": "Terug naar sjablonen",
+      "customTeam": "Aangepast team",
+      "customDescription": "Maak een team met je eigen configuratie.",
+      "teamNameLabel": "Teamnaam",
+      "teamNamePlaceholder": "bijv. Onderzoek, Marketing, Engineering",
+      "guidelinesLabel": "Richtlijnen",
+      "optional": "(optioneel)",
+      "guidelinesPlaceholder": "Gedeelde instructies die alle teamleden zullen volgen...",
+      "suggestedEmployees": "Voorgestelde werknemers",
+      "suggestedCredentials": "Voorgestelde inloggegevens",
+      "added": "Toegevoegd",
+      "addButton": "+ Toevoegen",
+      "credentials": "Inloggegevens",
+      "addCredential": "+ Inloggegevens toevoegen",
+      "credentialHint": "Inloggegevens worden versleuteld. Ze worden opgenomen in de teamrichtlijnen zodat werknemers weten wat beschikbaar is.",
+      "settingUp": "Instellen...",
+      "createEmployees": "{count} werknemers aanmaken",
+      "createTeamButton": "Team aanmaken"
+    },
+    "noTeams": {
+      "title": "Nog geen teams",
+      "description": "Teams laten werknemers context en geheugen delen. Maak er een om je organigram op te bouwen.",
+      "newTeam": "Nieuw team"
+    },
+    "howItWorks": {
+      "title": "Hoe het werkt",
+      "dragEmployees": "Sleep werknemers naar een team",
+      "clickToEdit": "Klik om schema en instellingen te bewerken",
+      "teamsShare": "Teams delen geheugen en richtlijnen",
+      "dashedLines": "Stippellijnen — delegatie tussen werknemers"
+    },
+    "inactive": {
+      "title": "{count} werknemers inactief",
+      "missingMachine": "{count} missen een machine — werken niet tot activering",
+      "wontRun": "Werkt niet tot activering",
+      "fixInEmployees": "Oplossen bij werknemers"
+    },
+    "dragHint": "Sleep niet-toegewezen werknemers naar teams om ze toe te voegen",
+    "limits": {
+      "upgradePlan": "Plan upgraden",
+      "manageMachines": "Machines beheren",
+      "manageEmployees": "Werknemers beheren",
+      "machineLimit": "Je hebt een cloudmachine nodig maar je hebt je limiet van {max} machines bereikt. Upgrade je plan of verwijder een ongebruikte machine.",
+      "employeeLimit": "Je hebt je werknemerslimiet bereikt ({max} voor {tier}-abonnement). Upgrade je plan of verwijder ongebruikte werknemers.",
+      "templateLimit": "Dit sjabloon heeft {needed} werknemers nodig maar je hebt nog maar {available} plaatsen over ({max} max voor {tier}-abonnement). Upgrade je plan of verwijder ongebruikte werknemers.",
+      "createFailed": "Kan geen werknemers aanmaken. Controleer je accountlimieten en probeer het opnieuw.",
+      "teamFailed": "Kan team niet aanmaken"
+    },
+    "provisioning": {
+      "checking": "Accountlimieten controleren...",
+      "usingMachine": "Machine \"{name}\" gebruiken...",
+      "assigningMachine": "Toewijzen aan machine \"{name}\" (werkt wanneer de machine klaar is)...",
+      "creatingMachine": "Nieuwe machine aanmaken...",
+      "machineStarted": "Machine-provisioning gestart...",
+      "hiring": "{name} aannemen ({current}/{total})...",
+      "creatingTeam": "Team aanmaken..."
+    },
+    "toasts": {
+      "teamCreatedPartial": "Team aangemaakt met {count} werknemers ({failedCount} mislukt: {names})",
+      "teamCreated": "Team {name} aangemaakt met {count} werknemers"
+    },
+    "credentialInstructions": "[BESCHIKBARE INLOGGEGEVENS]\nDe volgende service-inloggegevens zijn geconfigureerd en beschikbaar voor gebruik:\n{list}\nGebruik deze inloggegevens wanneer je moet inloggen bij deze services om je taken te voltooien.",
+    "templates": {
+      "contentOps": {
+        "name": "Contentoperaties",
+        "tagline": "Publiceer consistent zonder een vinger uit te steken",
+        "description": "Een slanke contentmotor — schrijft, optimaliseert en distribueert content op autopilot.",
+        "roles": {
+          "atlas": "Content Writer — schrijft blogposts, nieuwsbrieven en social media-teksten",
+          "echo": "SEO-analist — auditeert pagina's, volgt rankings, suggereert zoekwoordkansen",
+          "nova": "Sociale distributeur — plaatst content op platforms en monitort engagement"
+        },
+        "credentials": {
+          "wordpress": "Publiceer en beheer blogposts",
+          "twitter": "Plaats tweets en monitor engagement",
+          "linkedin": "Publiceer professionele content en artikelen",
+          "searchConsole": "Volg zoekprestaties en indexering"
+        }
+      },
+      "customerSupport": {
+        "name": "Klantenservice",
+        "tagline": "24/7 supportdekking met 3 werknemers",
+        "description": "Monitort inboxen, lost veelvoorkomende problemen op en houdt je knowledge base up-to-date.",
+        "roles": {
+          "sage": "Inboxmonitor — controleert supportmails, categoriseert en beantwoordt veelvoorkomende vragen",
+          "iris": "Knowledge Base-beheerder — werkt hulpdocumenten en FAQ's bij op basis van terugkerende problemen",
+          "milo": "Feedbackanalist — aggregeert reviews en supporttrends in wekelijkse rapporten"
+        },
+        "credentials": {
+          "gmail": "Monitor en beantwoord supportmails",
+          "zendesk": "Beheer supporttickets (of je helpdesk)",
+          "notion": "Werk knowledge base en documentatie bij"
+        }
+      },
+      "researchIntel": {
+        "name": "Onderzoek en Intelligence",
+        "tagline": "Blijf geïnformeerd zonder het handmatige werk",
+        "description": "Monitort concurrenten, volgt branchetrends en stelt bruikbare onderzoeksbriefings samen.",
+        "roles": {
+          "scout": "Concurrentiemonitor — volgt websites, prijzen en functiewijzigingen van concurrenten",
+          "wren": "Trendonderzoeker — scant branchenieuws, publicaties en social media op trends",
+          "quinn": "Briefingsamensteller — synthetiseert bevindingen in gestructureerde wekelijkse intelligence-rapporten"
+        },
+        "credentials": {
+          "google": "Webonderzoek en zoeken",
+          "linkedin": "Volg aanwervingen en aankondigingen van concurrenten",
+          "notion": "Publiceer onderzoeksbriefings en rapporten"
+        }
+      },
+      "marketing": {
+        "name": "Marketingafdeling",
+        "tagline": "Een compleet marketingteam op twee machines",
+        "description": "Contentcreatie, social media, SEO, concurrentietracking en campagne-analyse — twee gecoördineerde teams.",
+        "roles": {
+          "atlas": "Contentstrateg — plant de contentkalender, schrijft lange artikelen",
+          "nova": "Social Media Manager — plaatst, engageert en laat sociale kanalen groeien",
+          "echo": "SEO-specialist — optimaliseert pagina's, bouwt interne links, volgt zoekwoorden",
+          "pixel": "E-mailcampagnebeheerder — schrijft en verstuurt nieuwsbrieven, volgt opens/kliks",
+          "scout": "Concurrentie-analist — monitort marketingbewegingen van concurrenten en rapporteert inzichten",
+          "dash": "Advertentiecampagnemonitor — volgt advertentie-uitgaven, ROAS en optimalisatiekansen",
+          "iris": "Analytisch rapporteur — stelt cross-channel prestatiedashboards samen"
+        },
+        "credentials": {
+          "wordpress": "Publiceer blogcontent",
+          "twitter": "Social media-beheer",
+          "linkedin": "Professionele contentdistributie",
+          "mailchimp": "E-mailcampagnes en nieuwsbrieven",
+          "analytics": "Verkeer- en conversieanalyse",
+          "googleAds": "Google Ads-campagnebeheer",
+          "metaAds": "Meta Ads en sociaal beheer"
+        }
+      },
+      "ecommerce": {
+        "name": "E-commerceoperaties",
+        "tagline": "Beheer je winkel terwijl je slaapt",
+        "description": "Productbeheer, prijsintelligence, voorraadtracking, reviewbeheer en groeimarketing voor online winkels.",
+        "roles": {
+          "cleo": "Productplaatser — maakt en werkt productbeschrijvingen, afbeeldingen en metadata bij",
+          "onyx": "Prijsmonitor — volgt concurrentieprijzen en signaleert aanpassingsmogelijkheden",
+          "luna": "Voorraadtracker — monitort voorraadniveaus en waarschuwt bij lage voorraad",
+          "sage": "Reviewbeheerder — reageert op klantrecensies en aggregeert sentiment",
+          "dash": "Advertentiecampagne-optimizer — beheert productadvertenties en shoppingcampagnes",
+          "flux": "E-mailmarketeer — verstuurt verlaten winkelwagen-, promo- en post-aankoopreeksen",
+          "wren": "Analytisch rapporteur — volgt omzet, conversieratio's en groeimetrics"
+        },
+        "credentials": {
+          "shopify": "Winkelbeheer en productvermeldingen",
+          "amazon": "Amazon-marktplaatsbeheer",
+          "googleAds": "Shoppingadvertenties en campagnes",
+          "mailchimp": "Klant-e-mailreeksen",
+          "analytics": "Conversie- en verkeersanalyse"
+        }
+      },
+      "engineering": {
+        "name": "Engineeringteam",
+        "tagline": "Automatiseer de saaie delen van engineering",
+        "description": "Geautomatiseerde codereviews, dependency-monitoring, documentatie, testing, deploy-monitoring en incidentrespons.",
+        "roles": {
+          "rune": "Code Reviewer — reviewt open PR's, stelt verbeteringen voor, controleert op beveiligingsproblemen",
+          "koda": "Dependency-monitor — volgt verouderde pakketten, beveiligingsadviezen en breaking changes",
+          "aria": "Doc Writer — houdt API-docs, README's en changelogs up-to-date met de laatste code",
+          "blaze": "Testmonitor — draait testsuites, volgt instabiele tests, rapporteert dekkingstrends",
+          "frost": "Deploy-monitor — bewaakt CI/CD-pipelines, waarschuwt bij fouten, volgt deployfrequentie",
+          "neon": "Uptime- en logbewaker — monitort services, scant logs op fouten, maakt incidentrapporten"
+        },
+        "credentials": {
+          "github": "Repositorytoegang, PR-reviews, issues",
+          "vercel": "Deploymentmonitoring (of je CI/CD)",
+          "sentry": "Foutopsporing en incidentwaarschuwingen",
+          "npm": "Pakketregister voor dependency-controles"
+        }
+      },
+      "fullBusiness": {
+        "name": "Volledige bedrijfsvoering",
+        "tagline": "Een heel bedrijf, volledig geautomatiseerd",
+        "description": "Verkoop, marketing, support en administratie — vier afdelingen die samenwerken op drie machines met gedeelde intelligence.",
+        "roles": {
+          "atlas": "Leadgenerator — vindt en kwalificeert potentiële klanten uit online bronnen",
+          "dash": "CRM-beheerder — werkt deals bij, volgt de pipeline en verstuurt follow-upreeksen",
+          "scout": "Offerteschrijver — stelt verkoopvoorstellen en pitchdecks op vanuit sjablonen",
+          "nova": "Contentmarketeer — schrijft blogposts, casestudy's en marketingteksten",
+          "echo": "Social Media Manager — plaatst content en engageert met het publiek",
+          "pixel": "E-mailcampagnebeheerder — beheert dripcampagnes en nieuwsbriefreeksen",
+          "sage": "Supportleider — behandelt klantvragen en lost problemen op",
+          "iris": "Knowledge Manager — onderhoudt hulpdocumenten, FAQ's en interne wiki",
+          "milo": "Data-analist — stelt afdelingsoverschrijdende rapporten en KPI-dashboards samen",
+          "wren": "Marktonderzoeker — volgt branchetrends en competitieve intelligence",
+          "quinn": "Operatiecoördinator — beheert wekelijkse samenvattingen en cross-team syncs"
+        },
+        "credentials": {
+          "gmail": "E-mailcommunicatie en support",
+          "hubspot": "CRM en verkooppipeline (of je CRM)",
+          "linkedin": "Leadgeneratie en professioneel netwerken",
+          "mailchimp": "E-mailmarketingcampagnes",
+          "notion": "Interne wiki en documentatie",
+          "analytics": "Webanalyse en rapportage",
+          "twitter": "Social media-aanwezigheid",
+          "zendesk": "Klantsupporttickets"
+        }
+      },
+      "growth": {
+        "name": "Groei en acquisitie",
+        "tagline": "Agressieve groei op volledige autopilot",
+        "description": "Outbound prospecting, inbound marketing, conversieoptimalisatie en analyse — een toegewijde groeimotor op drie machines.",
+        "roles": {
+          "blaze": "Outbound prospector — vindt besluitvormers, onderzoekt bedrijven, bouwt leadlijsten",
+          "flux": "E-mail outreach — verstuurt gepersonaliseerde koude e-mails, beheert follow-upreeksen",
+          "orion": "LinkedIn outreach — verbindt met prospects en verstuurt gepersonaliseerde berichten",
+          "coral": "Contentmaker — produceert SEO-content, landingspaginateksten en lead magnets",
+          "taro": "Landingspagina-optimizer — monitort conversieratio's, suggereert en test verbeteringen",
+          "vale": "Advertentiecampagnebeheerder — beheert Google- en Meta-advertentiecampagnes end-to-end",
+          "ember": "Leadkwalificeerder — kwalificeert inbound leads en routeert naar passende follow-up",
+          "haze": "Funnel-analist — volgt conversiemetrics in elke fase, identificeert knelpunten",
+          "dune": "Concurrentie-intelligence — monitort concurrentiecampagnes, prijzen en positionering",
+          "kit": "Groeirapporteur — stelt dagelijkse/wekelijkse groeimetrics en experimentresultaten samen"
+        },
+        "credentials": {
+          "linkedin": "Prospecting en outreach",
+          "gmail": "Koude e-mail en follow-upreeksen",
+          "hubspot": "Leadbeheer en CRM",
+          "googleAds": "Betaalde zoekcampagnes",
+          "metaAds": "Meta-advertenties",
+          "analytics": "Funnel- en conversieanalyse",
+          "ahrefs": "SEO-onderzoek en concurrentieanalyse"
+        }
+      },
+      "saas": {
+        "name": "SaaS-operaties",
+        "tagline": "Beheer je SaaS als een geoliede machine",
+        "description": "Customer success, productanalyse, churnpreventie, functietracking en geautomatiseerde rapportage voor SaaS-bedrijven.",
+        "roles": {
+          "luna": "Customer Success-monitor — volgt gebruikersengagement, identificeert risicoaccounts",
+          "sage": "Onboarding-assistent — begeleidt nieuwe gebruikers bij de installatie, monitort activeringspercentages",
+          "ivy": "Churnpreventie — benadert afhakende gebruikers met heractivatiecampagnes",
+          "rune": "Functieverzoektracker — aggregeert gebruikersfeedback en functieverzoeken uit alle kanalen",
+          "koda": "Productanalyse — volgt functieadoptie, gebruikersreizen en engagementmetrics",
+          "neon": "Bug- en probleemmonitor — bewaakt foutlogs, gebruikersrapporten en statuspagina-incidenten",
+          "aria": "Changelogschrijver — documenteert releases, werkt knowledge base en helpcentrum bij",
+          "frost": "Omzetanalist — volgt MRR, churnpercentage, LTV en expansie-omzet",
+          "zara": "Concurrentietracker — monitort functies, prijzen en marktpositionering van concurrenten"
+        },
+        "credentials": {
+          "stripe": "Abonnements- en omzetgegevens",
+          "intercom": "Klantberichten en support (of je tool)",
+          "mixpanel": "Productanalyse en gebruikerstracking",
+          "gmail": "Klantcommunicatie",
+          "notion": "Knowledge base en changelog",
+          "sentry": "Foutmonitoring en bugtracking",
+          "github": "Issuetracking en functieverzoeken"
+        }
+      }
+    },
+    "tiers": {
+      "starter": {
+        "label": "Starter",
+        "employees": "tot 3",
+        "price": "$19/maand"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "tot 10",
+        "price": "$50/maand"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "tot 50",
+        "price": "$100/maand"
+      }
+    },
+    "frequencies": {
+      "daily": "dagelijks",
+      "weekly": "wekelijks",
+      "every_30_minutes": "elke 30 minuten",
+      "every_6_hours": "elke 6 uur",
+      "every_12_hours": "elke 12 uur"
+    }
+  },
+  "collaborative": {
+    "createRoom": {
+      "titleRequired": "Titel is verplicht",
+      "taskCreated": "Taak succesvol aangemaakt",
+      "taskFailed": "Taak aanmaken mislukt",
+      "assignTask": "Nieuwe taak toewijzen",
+      "assignTaskDesc": "Start een nieuwe taak met je AI-assistent.",
+      "taskName": "Taaknaam",
+      "taskNamePlaceholder": "Voer de taaknaam in",
+      "cancel": "Annuleren",
+      "creating": "Aanmaken...",
+      "createTask": "Taak aanmaken"
+    },
+    "joinRoom": {
+      "enterCode": "Voer een uitnodigingscode in",
+      "joinSuccess": "Succesvol aan het project toegevoegd!",
+      "joinFailed": "Deelnemen aan project mislukt",
+      "invalidCode": "Ongeldige uitnodigingscode of project niet gevonden",
+      "title": "Project deelnemen",
+      "description": "Voer een uitnodigingscode in om deel te nemen aan een bestaand project.",
+      "inviteCode": "Uitnodigingscode",
+      "placeholder": "bijv. ABC123",
+      "hint": "Vraag je teamleider om de uitnodigingscode",
+      "cancel": "Annuleren",
+      "joining": "Deelnemen...",
+      "joinButton": "Project deelnemen"
+    },
+    "participants": {
+      "title": "Deelnemers",
+      "copyCode": "Code kopiëren",
+      "copyLink": "Link kopiëren",
+      "codeCopied": "Uitnodigingscode gekopieerd!",
+      "codeFailed": "Code kopiëren mislukt",
+      "linkCopied": "Uitnodigingslink gekopieerd!",
+      "linkFailed": "Link kopiëren mislukt",
+      "online": "Online",
+      "offline": "Offline",
+      "you": "(jij)"
+    },
+    "createProject": {
+      "titleRequired": "Titel is verplicht",
+      "created": "Project succesvol aangemaakt!",
+      "failed": "Project aanmaken mislukt",
+      "title": "Nieuw project aanmaken",
+      "description": "Start een nieuw project om je product te bouwen met AI.",
+      "projectName": "Projectnaam",
+      "projectNamePlaceholder": "Voer de projectnaam in",
+      "teamSize": "Teamgrootte",
+      "cancel": "Annuleren",
+      "creating": "Aanmaken...",
+      "createButton": "Project aanmaken"
+    }
+  },
+  "whatsNew": {
+    "trigger": "Nieuw",
+    "title": "Nieuw bij Coasty",
+    "updateCount": "{count} updates",
+    "tagNew": "Nieuw",
+    "tagUpdate": "Update",
+    "tagFix": "Fix",
+    "stayTuned": "Blijf op de hoogte voor meer updates",
+    "tagline": "Je AI-medewerker die met iedereen samenwerkt"
+  },
+  "feedbackForm": {
+    "ratings": {
+      "bad": "Slecht",
+      "okay": "Oké",
+      "good": "Goed",
+      "amazing": "Geweldig"
+    },
+    "loginRequired": "Log in om feedback te geven",
+    "alreadySubmitted": "Je hebt al feedback gegeven",
+    "thankYou": "Bedankt voor je feedback!",
+    "creditsEarned": "+{credits} credits verdiend",
+    "helpImprove": "Je feedback helpt ons Coasty te verbeteren.",
+    "howsExperience": "Hoe is je ervaring?",
+    "plusOne": "+1",
+    "tellMore": "Vertel ons meer",
+    "plusFive": "+5",
+    "placeholder": "Wat werkt goed? Wat kan beter?",
+    "cancel": "Annuleren",
+    "sending": "Verzenden...",
+    "send": "Verzenden"
+  },
+  "scheduleDialog": {
+    "selectWorkstation": "Selecteer een werkstation",
+    "enterCron": "Voer een cron-expressie in",
+    "hireFailed": "Medewerker aannemen mislukt",
+    "removeFailed": "Medewerker verwijderen mislukt",
+    "editEmployee": "Medewerker bewerken",
+    "configureEmployee": "Medewerker configureren",
+    "editDescription": "Schema, werkstation of instructies bijwerken",
+    "configureDescription": "Een AI-medewerker instellen voor deze chat",
+    "loading": "Configuratie laden...",
+    "name": "Naam",
+    "employeeName": "Naam medewerker"
+  },
+  "deleteChat": {
+    "title": "Chat verwijderen?",
+    "description": "Dit verwijdert \"{chatTitle}\"",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen"
+  },
+  "paymentHandler": {
+    "success": "Betaling geslaagd! Je credits zijn toegevoegd.",
+    "canceled": "De betaling is geannuleerd. Er zijn geen kosten in rekening gebracht."
+  },
+  "machineSettings": {
+    "generalSettings": "Algemene instellingen",
+    "generalDescription": "Basisinstellingen van de computer configureren",
+    "displayName": "Weergavenaam",
+    "defaultName": "Mijn computer",
+    "saveChanges": "Wijzigingen opslaan",
+    "security": "Beveiliging",
+    "securityDescription": "Beveiligings- en toegangsinstellingen",
+    "sshAuth": "SSH-authenticatie",
+    "username": "Gebruikersnaam:",
+    "keyPair": "Sleutelpaar:",
+    "sshKeyDownloaded": "SSH-sleutel gedownload",
+    "sshKeyFailed": "SSH-sleutel downloaden mislukt",
+    "downloadSshKey": "SSH-sleutel downloaden",
+    "vncPassword": "VNC-wachtwoord",
+    "vncPasswordHint": "Dit wachtwoord is nodig om verbinding te maken met de computer"
+  },
+  "referralPopup": {
+    "shareMessage": "Hey, ik gebruik Coasty en het is echt cool. Het is een AI die een computer voor je kan bedienen. Browsen, klikken, typen, alles. Probeer het met mijn link en we krijgen allebei gratis credits!",
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "E-mail"
+    },
+    "emailSubject": "Bekijk deze AI-tool",
+    "timeAgo": {
+      "justNow": "zojuist",
+      "minutesAgo": "{minutes}m geleden",
+      "hoursAgo": "{hours}u geleden",
+      "daysAgo": "{days}d geleden",
+      "monthsAgo": "{months}ma geleden"
+    },
+    "linkCopied": "Verwijzingslink gekopieerd!",
+    "headline": "Goede vrienden delen memes. Geweldige vrienden delen AI-agenten.",
+    "subheadline": "Jullie krijgen allebei {credits} gratis credits wanneer je vriend zich aanmeldt.",
+    "yourLink": "Je verwijzingslink",
+    "shareDirectly": "Direct delen",
+    "yourReferrals": "Je verwijzingen",
+    "referralCount": "{count} verwijzing(en)",
+    "creditsEarned": "{credits} credits verdiend",
+    "invitedYou": "Heeft je uitgenodigd",
+    "joinedViaLink": "Via jouw link aangesloten",
+    "noInvites": "Nog geen gebruikers uitgenodigd",
+    "noInvitesHint": "Deel je link en verdien allebei 50 credits"
+  },
+  "dialogPublish": {
+    "makePublic": "Openbaar maken",
+    "title": "Je gesprek is nu openbaar!",
+    "description": "Iedereen met de link kan dit gesprek bekijken en het kan verschijnen in community-feeds, uitgelichte pagina's of zoekresultaten.",
+    "viewPage": "Pagina bekijken",
+    "shareOn": "Delen op"
+  },
+  "aiCommandPanel": {
+    "title": "AI-bedieningspaneel",
+    "subtitle": "Beschrijf wat je wilt dat de AI doet",
+    "quickCommands": "Snelcommando's",
+    "noActions": "Nog geen acties uitgevoerd",
+    "success": "Geslaagd",
+    "failed": "Mislukt",
+    "placeholder": "Vertel de AI wat te doen... (Ctrl+Enter om te verzenden)",
+    "executing": "Uitvoeren...",
+    "executeCommand": "Commando uitvoeren"
+  },
+  "discover": {
+    "badge": "Community",
+    "title": "Bekijk hoe mensen het gebruiken",
+    "subtitle": "Van leadonderzoek tot QA-tests — bekijk wat de community automatiseert en laat je inspireren voor je volgende workflow.",
+    "sessionCount": "{count} sessies gedeeld door de community",
+    "searchPlaceholder": "Zoek op taak, tool of resultaat...",
+    "emptyTitle": "Nog niemand heeft gedeeld — wees de eerste",
+    "emptySubtitle": "Wanneer gebruikers hun sessies openbaar maken, verschijnen ze hier",
+    "noResultsTitle": "Geen resultaten voor deze zoekopdracht",
+    "noResultsSubtitle": "Probeer andere zoekwoorden",
+    "watchSession": "Sessie bekijken",
+    "steps": "{count} stappen",
+    "tryCoasty": "Probeer Coasty"
+  }
+}

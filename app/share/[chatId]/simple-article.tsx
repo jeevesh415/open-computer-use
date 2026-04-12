@@ -715,8 +715,8 @@ function SimpleArticleContent({
                   <ChatContainerRoot className="relative w-full h-full">
                     <ChatContainerContent className="flex w-full flex-col items-center pt-4 pb-20">
                       <div className={cn(
-                        "w-full px-4 sm:px-6 md:px-8",
-                        "max-w-3xl",
+                        "w-full px-8 sm:px-10 md:px-12",
+                        !isNavigatorOpen ? "max-w-[44rem]" : "max-w-[47rem]",
                         "mx-auto"
                       )}>
                         {/* Chat title as a subtle header — hidden in embed mode */}
@@ -781,8 +781,8 @@ function SimpleArticleContent({
                 {/* Tool invocations display - positioned at bottom like in main chat */}
                 <div
                   className={cn(
-                    "relative inset-x-0 bottom-0 z-50 mx-auto w-full px-4 sm:px-6 md:px-8 pb-4",
-                    "max-w-3xl"
+                    "relative inset-x-0 bottom-0 z-50 mx-auto w-full px-8 sm:px-10 md:px-12 pb-4",
+                    !isNavigatorOpen ? "max-w-[44rem]" : "max-w-[47rem]"
                   )}
                 >
                   {/* Tool invocations display */}

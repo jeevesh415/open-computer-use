@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useUser } from "@/lib/user-store/provider"
 import { useChats } from "@/lib/chat-store/chats/provider"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
 import { CoastyIcon } from "@/components/icons/coasty"
@@ -42,59 +43,58 @@ interface ReferralStats {
   referredBy: { email: string; credits: number; date: string } | null
 }
 
-const shareMessage =
-  "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!"
-
-const socials = [
-  {
-    id: "twitter",
-    label: "X",
-    icon: TwitterLogo,
-    color: "hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30",
-    urlFn: (link: string) =>
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${shareMessage}`)}%20%F0%9F%A4%96&url=${encodeURIComponent(link)}`,
-  },
-  {
-    id: "linkedin",
-    label: "LinkedIn",
-    icon: LinkedinLogo,
-    color: "hover:bg-[#0A66C2]/10 hover:text-[#0A66C2] hover:border-[#0A66C2]/30",
-    urlFn: (link: string) =>
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`,
-  },
-  {
-    id: "whatsapp",
-    label: "WhatsApp",
-    icon: WhatsappLogo,
-    color: "hover:bg-[#25D366]/10 hover:text-[#25D366] hover:border-[#25D366]/30",
-    urlFn: (link: string) =>
-      `https://wa.me/?text=${encodeURIComponent(`${shareMessage}\n\n${link}`)}`,
-  },
-  {
-    id: "telegram",
-    label: "Telegram",
-    icon: TelegramLogo,
-    color: "hover:bg-[#26A5E4]/10 hover:text-[#26A5E4] hover:border-[#26A5E4]/30",
-    urlFn: (link: string) =>
-      `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareMessage)}`,
-  },
-  {
-    id: "reddit",
-    label: "Reddit",
-    icon: RedditLogo,
-    color: "hover:bg-[#FF4500]/10 hover:text-[#FF4500] hover:border-[#FF4500]/30",
-    urlFn: (link: string) =>
-      `https://reddit.com/submit?url=${encodeURIComponent(link)}&title=${encodeURIComponent("This AI can actually use a computer for you. Browsing, clicking, typing, all of it.")}`,
-  },
-  {
-    id: "email",
-    label: "Email",
-    icon: EnvelopeSimple,
-    color: "hover:bg-foreground/[0.06] hover:text-foreground hover:border-border/50",
-    urlFn: (link: string) =>
-      `mailto:?subject=${encodeURIComponent("Check out this AI tool")}&body=${encodeURIComponent(`${shareMessage}\n\nHere's my link: ${link}`)}`,
-  },
-]
+function buildSocials(shareMessage: string, emailSubject: string, emailBody: string) {
+  return [
+    {
+      id: "twitter",
+      label: "X",
+      icon: TwitterLogo,
+      color: "hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30",
+      urlFn: (link: string) =>
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${shareMessage}`)}%20%F0%9F%A4%96&url=${encodeURIComponent(link)}`,
+    },
+    {
+      id: "linkedin",
+      label: "LinkedIn",
+      icon: LinkedinLogo,
+      color: "hover:bg-[#0A66C2]/10 hover:text-[#0A66C2] hover:border-[#0A66C2]/30",
+      urlFn: (link: string) =>
+        `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`,
+    },
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      icon: WhatsappLogo,
+      color: "hover:bg-[#25D366]/10 hover:text-[#25D366] hover:border-[#25D366]/30",
+      urlFn: (link: string) =>
+        `https://wa.me/?text=${encodeURIComponent(`${shareMessage}\n\n${link}`)}`,
+    },
+    {
+      id: "telegram",
+      label: "Telegram",
+      icon: TelegramLogo,
+      color: "hover:bg-[#26A5E4]/10 hover:text-[#26A5E4] hover:border-[#26A5E4]/30",
+      urlFn: (link: string) =>
+        `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareMessage)}`,
+    },
+    {
+      id: "reddit",
+      label: "Reddit",
+      icon: RedditLogo,
+      color: "hover:bg-[#FF4500]/10 hover:text-[#FF4500] hover:border-[#FF4500]/30",
+      urlFn: (link: string) =>
+        `https://reddit.com/submit?url=${encodeURIComponent(link)}&title=${encodeURIComponent(emailBody)}`,
+    },
+    {
+      id: "email",
+      label: "Email",
+      icon: EnvelopeSimple,
+      color: "hover:bg-foreground/[0.06] hover:text-foreground hover:border-border/50",
+      urlFn: (link: string) =>
+        `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(`${shareMessage}\n\nHere's my link: ${link}`)}`,
+    },
+  ]
+}
 
 function maskEmail(email: string) {
   if (!email || !email.includes("@")) return email
@@ -121,6 +121,7 @@ const easeOut = [0.22, 1, 0.36, 1] as const
 
 
 export function ReferralContent() {
+  const t = useTranslations("referralPage")
   const router = useRouter()
   const { user, isLoading } = useUser()
   const { chats } = useChats()
@@ -136,6 +137,8 @@ export function ReferralContent() {
 
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://coasty.ai"
   const referralLink = user ? `${baseUrl}/?ref=${user.id}` : ""
+
+  const socials = buildSocials(t("shareMessage"), t("emailSubject"), t("emailBody"))
 
   // Get recent chats for the activity showcase
   const recentChats = chats
@@ -226,7 +229,7 @@ export function ReferralContent() {
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className="absolute -top-[40%] -left-[20%] h-[80%] w-[60%] rounded-full opacity-[0.02] dark:opacity-[0.05] blur-[100px]"
           style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
@@ -250,25 +253,20 @@ export function ReferralContent() {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: easeOut }}
-          className="hidden lg:flex flex-col justify-center flex-1 px-12 xl:px-16 max-w-[540px] border-r border-border/[0.15] overflow-y-auto py-12"
+          className="hidden lg:flex flex-col justify-center flex-1 px-12 xl:px-16 max-w-[540px] overflow-y-auto py-12"
         >
           <h1 className="text-4xl xl:text-[2.75rem] font-medium tracking-tight leading-[1.1] text-foreground">
-            Share Coasty.
+            {t("shareTitle")}
             <br />
-            <span className="text-muted-foreground">Earn together.</span>
+            <span className="text-muted-foreground">{t("earnTitle")}</span>
           </h1>
 
           <p className="text-muted-foreground mt-5 text-[15px] leading-relaxed max-w-sm">
-            Give friends 50 free credits to deploy their first AI agent.
-            You get 50 credits too — every time someone joins.
+            {t("shareDescription")}
           </p>
 
           <div className="mt-12 flex flex-col gap-4 text-sm text-muted-foreground/70">
-            {[
-              "AI that actually works — real browser, real clicks, real results",
-              "Isolated & secure — every agent runs in its own sandboxed VM",
-              "Runs while you sleep — schedule tasks and let agents handle the rest",
-            ].map((feature, i) => (
+            {(t.raw("features") as string[]).map((feature, i) => (
               <motion.div
                 key={feature}
                 initial={{ opacity: 0, x: -10 }}
@@ -291,7 +289,7 @@ export function ReferralContent() {
               className="mt-10"
             >
               <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted-foreground/40 mb-3">
-                Your recent activity
+                {t("recentActivity")}
               </p>
               <div className="space-y-1.5">
                 {recentChats.map((chat, i) => (
@@ -310,7 +308,7 @@ export function ReferralContent() {
                 ))}
               </div>
               <p className="text-[11px] text-muted-foreground/30 mt-3">
-                Your friends could be doing this too
+                {t("friendsCould")}
               </p>
             </motion.div>
           )}
@@ -330,11 +328,11 @@ export function ReferralContent() {
                 <CoastyIcon className="size-8" />
               </div>
               <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-center">
-                Share Coasty.{" "}
-                <span className="text-muted-foreground">Earn together.</span>
+                {t("shareTitle")}{" "}
+                <span className="text-muted-foreground">{t("earnTitle")}</span>
               </h1>
               <p className="text-muted-foreground mt-3 text-sm sm:text-base text-center">
-                Give friends 50 credits. Get 50 for yourself. Every time.
+                {t("giveGet")}
               </p>
             </motion.div>
 
@@ -346,9 +344,9 @@ export function ReferralContent() {
               className="grid grid-cols-3 gap-3 mb-8"
             >
               {[
-                { icon: Users, value: stats?.totalReferrals ?? 0, label: "Invited" },
-                { icon: Coins, value: stats?.totalEarned ?? 0, label: "Earned" },
-                { icon: Gift, value: 50, label: "Per invite" },
+                { icon: Users, value: stats?.totalReferrals ?? 0, label: t("stats.invited") },
+                { icon: Coins, value: stats?.totalEarned ?? 0, label: t("stats.earned") },
+                { icon: Gift, value: 50, label: t("stats.perInvite") },
               ].map((stat) => (
                 <div
                   key={stat.label}
@@ -369,8 +367,8 @@ export function ReferralContent() {
               className="flex gap-1 p-1 rounded-xl bg-muted/40 mb-6"
             >
               {[
-                { id: "share" as const, label: "Invite friends", icon: Gift },
-                { id: "feedback" as const, label: "Send feedback", icon: PaperPlaneTilt },
+                { id: "share" as const, label: t("tabs.invite"), icon: Gift },
+                { id: "feedback" as const, label: t("tabs.feedback"), icon: PaperPlaneTilt },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -400,7 +398,7 @@ export function ReferralContent() {
                   {/* Referral link */}
                   <div className="mb-6">
                     <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      Your referral link
+                      {t("referralLink")}
                     </p>
                     <button
                       onClick={handleCopy}
@@ -436,14 +434,10 @@ export function ReferralContent() {
                       <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/20">
                         <Gift size={13} weight="duotone" className="text-emerald-500" />
                       </div>
-                      <p className="text-sm font-medium">How it works</p>
+                      <p className="text-sm font-medium">{t("howItWorks")}</p>
                     </div>
                     <div className="space-y-2.5">
-                      {[
-                        { step: "1", text: "Share your link with a friend" },
-                        { step: "2", text: "They sign up and get 50 free credits" },
-                        { step: "3", text: "You instantly earn 50 credits too" },
-                      ].map((item) => (
+                      {(t.raw("howSteps") as string[]).map((text, i) => ({ step: String(i + 1), text })).map((item) => (
                         <div key={item.step} className="flex items-center gap-3">
                           <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-foreground/[0.06] text-[10px] font-bold text-muted-foreground/60">
                             {item.step}
@@ -457,7 +451,7 @@ export function ReferralContent() {
                   {/* Social share */}
                   <div className="mb-6">
                     <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      Share directly
+                      {t("shareDirectly")}
                     </p>
                     <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                       {socials.map((s) => {
@@ -484,7 +478,7 @@ export function ReferralContent() {
                   {/* Referral history */}
                   <div>
                     <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      Your referrals
+                      {t("yourReferrals")}
                     </p>
                     <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
                       {isLoadingStats ? (
@@ -497,7 +491,7 @@ export function ReferralContent() {
                             <div className="flex items-center justify-between px-4 py-3">
                               <div className="min-w-0">
                                 <p className="text-sm font-medium truncate">{maskEmail(stats.referredBy.email)}</p>
-                                <p className="text-[11px] text-muted-foreground/50">Invited you</p>
+                                <p className="text-[11px] text-muted-foreground/50">{t("invitedYou")}</p>
                               </div>
                               <div className="text-right shrink-0 ml-3">
                                 <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
@@ -511,7 +505,7 @@ export function ReferralContent() {
                             <div key={r.id} className="flex items-center justify-between px-4 py-3">
                               <div className="min-w-0">
                                 <p className="text-sm font-medium truncate">{maskEmail(r.email)}</p>
-                                <p className="text-[11px] text-muted-foreground/50">Joined via your link</p>
+                                <p className="text-[11px] text-muted-foreground/50">{t("joinedViaLink")}</p>
                               </div>
                               <div className="text-right shrink-0 ml-3">
                                 <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
@@ -527,9 +521,9 @@ export function ReferralContent() {
                           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted/60 ring-1 ring-border/30 mb-3">
                             <Users size={18} className="text-muted-foreground/40" />
                           </div>
-                          <p className="text-sm text-muted-foreground/60">No referrals yet</p>
+                          <p className="text-sm text-muted-foreground/60">{t("noReferrals")}</p>
                           <p className="text-[11px] text-muted-foreground/40 mt-1">
-                            Share your link above and you both earn 50 credits
+                            {t("noReferralsHint")}
                           </p>
                         </div>
                       )}
@@ -540,7 +534,7 @@ export function ReferralContent() {
                   {recentChats.length > 0 && (
                     <div className="lg:hidden mt-6">
                       <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                        Your recent activity
+                        {t("recentActivity")}
                       </p>
                       <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-3">
                         <div className="space-y-1">
@@ -552,7 +546,7 @@ export function ReferralContent() {
                           ))}
                         </div>
                         <p className="text-[11px] text-muted-foreground/30 mt-2 pt-2 border-t border-border/20">
-                          Your friends could be doing this too
+                          {t("friendsCould")}
                         </p>
                       </div>
                     </div>
@@ -571,13 +565,13 @@ export function ReferralContent() {
                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/20 mx-auto mb-4">
                         <Check size={20} weight="bold" className="text-emerald-500" />
                       </div>
-                      <p className="text-lg font-medium mb-1">Thanks for your feedback!</p>
-                      <p className="text-sm text-muted-foreground/50 mb-6">We read every single message.</p>
+                      <p className="text-lg font-medium mb-1">{t("feedbackThanks")}</p>
+                      <p className="text-sm text-muted-foreground/50 mb-6">{t("feedbackWeRead")}</p>
                       <button
                         onClick={() => setFeedbackSent(false)}
                         className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
-                        Send another
+                        {t("sendAnother")}
                         <ArrowRight size={14} />
                       </button>
                     </div>
@@ -588,15 +582,15 @@ export function ReferralContent() {
                           <PaperPlaneTilt size={15} weight="duotone" className="text-foreground/60" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium">Tell us what you think</p>
+                          <p className="text-sm font-medium">{t("feedbackTitle")}</p>
                           <p className="text-[12px] text-muted-foreground/50">
-                            Bug reports, feature ideas, or just say hi
+                            {t("feedbackSubtitle")}
                           </p>
                         </div>
                       </div>
 
                       <Textarea
-                        placeholder="What's on your mind?"
+                        placeholder={t("feedbackPlaceholder")}
                         value={feedbackText}
                         onChange={(e) => setFeedbackText(e.target.value)}
                         rows={5}
@@ -610,7 +604,7 @@ export function ReferralContent() {
                       />
                       <div className="flex items-center justify-between">
                         <p className="text-[11px] text-muted-foreground/40">
-                          We read every message
+                          {t("weReadEvery")}
                         </p>
                         <button
                           onClick={handleFeedback}
@@ -627,7 +621,7 @@ export function ReferralContent() {
                           {feedbackSubmitting ? (
                             <CircleNotch size={14} className="animate-spin" />
                           ) : (
-                            "Send"
+                            t("send")
                           )}
                         </button>
                       </div>

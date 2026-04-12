@@ -102,8 +102,8 @@ export function Conversation({
           className="flex w-full flex-col items-center pt-4 pb-4"
         >
           <div className={cn(
-            "w-full px-6 sm:px-8 md:px-10",
-            !isProject || !isNavigatorOpen ? "max-w-[46rem]" : "max-w-[49rem]",
+            "w-full px-8 sm:px-10 md:px-12",
+            !isProject || !isNavigatorOpen ? "max-w-[44rem]" : "max-w-[47rem]",
             "mx-auto"
           )}>
             {/* ── Load earlier messages ────────────────────────────── */}

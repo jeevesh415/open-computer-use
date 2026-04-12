@@ -28,7 +28,7 @@ function PromptSuggestion({
       <Button
         variant={variant || "outline"}
         size={size || "lg"}
-        className={cn("rounded-full", className)}
+        className={cn("rounded-xl", className)}
         {...props}
       >
         {children}
@@ -94,7 +94,7 @@ function PromptSuggestion({
                   {before}
                 </span>
               )}
-              <span className="text-primary font-medium whitespace-pre-wrap">
+              <span className="text-foreground font-medium whitespace-pre-wrap">
                 {actualHighlightedText}
               </span>
               {after && (

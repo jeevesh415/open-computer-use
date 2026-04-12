@@ -1,21 +1,25 @@
+import { createClient } from "@/lib/supabase/server"
 import { createChatInDb } from "./api"
 
 export async function POST(request: Request) {
   try {
-    const { userId, title, model, isAuthenticated, projectId } =
-      await request.json()
-
-    if (!userId) {
-      return new Response(JSON.stringify({ error: "Missing userId" }), {
-        status: 400,
-      })
+    // Authenticate from server-side session — never trust client-provided userId
+    const supabase = await createClient()
+    if (!supabase) {
+      return new Response(JSON.stringify({ error: "Server error" }), { status: 500 })
     }
+    const { data: authData, error: authError } = await supabase.auth.getUser()
+    if (authError || !authData?.user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 })
+    }
+    const userId = authData.user.id
+
+    const { title, model, projectId } = await request.json()
 
     const chat = await createChatInDb({
       userId,
       title,
       model,
-      isAuthenticated,
       projectId,
     })
 

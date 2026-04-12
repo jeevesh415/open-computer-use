@@ -50,8 +50,9 @@ export function TextMorph({
     mass: 0.3,
   }
 
+  const Tag = Component as React.ComponentType<any>
   return (
-    <Component className={cn(className)} aria-label={children} style={style}>
+    <Tag className={cn(className)} aria-label={children} style={style}>
       <AnimatePresence mode="popLayout" initial={false}>
         {characters.map((character) => (
           <motion.span
@@ -69,6 +70,6 @@ export function TextMorph({
           </motion.span>
         ))}
       </AnimatePresence>
-    </Component>
+    </Tag>
   )
 }

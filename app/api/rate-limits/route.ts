@@ -1,18 +1,20 @@
+import { createClient } from "@/lib/supabase/server"
 import { getMessageUsage } from "./api"
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url)
-  const userId = searchParams.get("userId")
-  const isAuthenticated = searchParams.get("isAuthenticated") === "true"
-
-  if (!userId) {
-    return new Response(JSON.stringify({ error: "Missing userId" }), {
-      status: 400,
-    })
-  }
-
   try {
-    const usage = await getMessageUsage(userId, isAuthenticated)
+    // Authenticate from server-side session — never trust client-provided userId
+    const supabase = await createClient()
+    if (!supabase) {
+      return new Response(JSON.stringify({ error: "Server error" }), { status: 500 })
+    }
+    const { data: authData, error: authError } = await supabase.auth.getUser()
+    if (authError || !authData?.user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 })
+    }
+    const userId = authData.user.id
+
+    const usage = await getMessageUsage(userId)
 
     if (!usage) {
       return new Response(

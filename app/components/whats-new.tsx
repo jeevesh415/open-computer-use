@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Sparkles, Search, Globe, Users, Brain, Calendar, Rocket, FileText, Megaphone, Target } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 interface Feature {
   title: string
@@ -78,6 +79,7 @@ const formatDate = (dateString: string) => {
 }
 
 export function WhatsNew() {
+  const t = useTranslations("whatsNew")
   const [open, setOpen] = useState(false)
   const latestFeature = features[0]
   const daysSinceLatest = Math.floor((Date.now() - new Date(latestFeature.date).getTime()) / (1000 * 60 * 60 * 24))
@@ -90,7 +92,7 @@ export function WhatsNew() {
           className="group relative flex w-full items-center rounded-md text-xs font-medium transition-all bg-muted border border-border hover:bg-muted/80 hover:border-border/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring gap-1.5 px-2 py-1"
         >
           <Sparkles size={14} className="shrink-0" />
-          <span className="truncate">What's New</span>
+          <span className="truncate">{t("trigger")}</span>
         </button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl h-[min(85vh,600px)] flex flex-col p-0 gap-0 overflow-hidden">
@@ -101,12 +103,12 @@ export function WhatsNew() {
               <div className="absolute inset-0 rounded-xl bg-primary/20 blur-xl opacity-50" />
             </div>
             <div className="flex items-center gap-2">
-              What's New in Coasty
-              <Badge 
-                variant="outline" 
+              {t("title")}
+              <Badge
+                variant="outline"
                 className="ml-2 text-[10px] border-primary/30 text-primary bg-primary/5"
               >
-                {features.length} updates
+                {t("updateCount", { count: features.length })}
               </Badge>
             </div>
           </DialogTitle>
@@ -140,8 +142,8 @@ export function WhatsNew() {
                               variant="secondary" 
                               className={`${getTypeColor(feature.type)} border-0 font-medium px-2.5 py-0.5 text-xs shadow-sm`}
                             >
-                              {feature.type === "major" ? "New" : 
-                               feature.type === "minor" ? "Update" : "Fix"}
+                              {feature.type === "major" ? t("tagNew") :
+                               feature.type === "minor" ? t("tagUpdate") : t("tagFix")}
                             </Badge>
                           </div>
                           <p className="text-muted-foreground text-sm leading-relaxed mb-3 group-hover:text-muted-foreground/90 transition-colors duration-300">
@@ -161,14 +163,14 @@ export function WhatsNew() {
                 <Separator className="absolute inset-x-0 top-1/2 -translate-y-1/2" />
                 <div className="relative text-center">
                   <span className="bg-background px-4 text-xs text-muted-foreground/70 font-medium">
-                    Stay tuned for more updates
+                    {t("stayTuned")}
                   </span>
                 </div>
               </div>
               <div className="text-center pb-4">
                 <div className="inline-flex items-center gap-2 text-xs text-muted-foreground/60">
                   <Sparkles className="h-3 w-3 animate-pulse" />
-                  <span>Your AI employee that collaborates with everyone</span>
+                  <span>{t("tagline")}</span>
                 </div>
               </div>
             </div>

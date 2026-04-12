@@ -1,6 +1,13 @@
 import React from 'react'
 import { useChatStore, ChatSummary } from '../stores/chat-store'
 
+function stripFileTags(text: string): string {
+  return text
+    .replace(/<file\s[^>]*>[^<]*<\/file>\n?/g, '')
+    .replace(/<directory\s[^>]*>[^<]*<\/directory>\n?/g, '')
+    .trim()
+}
+
 interface ChatSidebarProps {
   isOpen: boolean
   onClose: () => void
@@ -126,7 +133,7 @@ function ChatItem({
           </div>
           {chat.last_message_preview && (
             <div className="text-xs text-neutral-500 truncate mt-0.5">
-              {chat.last_message_preview}
+              {stripFileTags(chat.last_message_preview)}
             </div>
           )}
         </div>

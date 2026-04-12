@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { createGuestServerClient } from "@/lib/supabase/server-guest"
+import { createServiceClient } from "@/lib/supabase/server-guest"
 import { safeUserMetadataFetch } from "@/lib/fetch"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -108,7 +108,7 @@ export async function GET(
     }
 
     // Get admin client to fetch user metadata with avatar URLs
-    const adminClient = await createGuestServerClient()
+    const adminClient = await createServiceClient()
     
     if (adminClient && room.chat_participants) {
       try {

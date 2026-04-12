@@ -31,6 +31,7 @@ import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { Check, Copy, Globe, Spinner } from "@phosphor-icons/react"
 import type React from "react"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 export function DialogPublish() {
   const [openDialog, setOpenDialog] = useState(false)
@@ -38,6 +39,7 @@ export function DialogPublish() {
   const { chatId } = useChatSession()
   const isMobile = useBreakpoint(768)
   const [copied, setCopied] = useState(false)
+  const t = useTranslations("dialogPublish")
 
   if (!isSupabaseEnabled) {
     return null
@@ -113,11 +115,11 @@ export function DialogPublish() {
             ) : (
               <Globe className="size-5" />
             )}
-            <span className="sr-only">Make public</span>
+            <span className="sr-only">{t("makePublic")}</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Make public</p>
+          <p>{t("makePublic")}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -147,10 +149,10 @@ export function DialogPublish() {
       </div>
       <div className="flex gap-2">
         <Button variant="outline" onClick={openPage} className="flex-1">
-          View Page
+          {t("viewPage")}
         </Button>
         <Button onClick={shareOnX} className="flex-1">
-          Share on <XIcon className="text-primary-foreground size-4" />
+          {t("shareOn")} <XIcon className="text-primary-foreground size-4" />
         </Button>
       </div>
     </>
@@ -163,11 +165,9 @@ export function DialogPublish() {
         <Drawer open={openDialog} onOpenChange={setOpenDialog}>
           <DrawerContent className="bg-background border-border">
             <DrawerHeader>
-              <DrawerTitle>Your conversation is now public!</DrawerTitle>
+              <DrawerTitle>{t("title")}</DrawerTitle>
               <DrawerDescription>
-                Anyone with the link can now view this conversation and may
-                appear in community feeds, featured pages, or search results in
-                the future.
+                {t("description")}
               </DrawerDescription>
             </DrawerHeader>
             <div className="flex flex-col gap-4 px-4 pb-6">{content}</div>
@@ -183,11 +183,9 @@ export function DialogPublish() {
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
-            <DialogTitle>Your conversation is now public!</DialogTitle>
+            <DialogTitle>{t("title")}</DialogTitle>
             <DialogDescription>
-              Anyone with the link can now view this conversation and may appear
-              in community feeds, featured pages, or search results in the
-              future.
+              {t("description")}
             </DialogDescription>
           </DialogHeader>
           {content}

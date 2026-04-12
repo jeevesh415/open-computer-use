@@ -37,8 +37,27 @@ contextBridge.exposeInMainWorld('coasty', {
     ipcRenderer.invoke('chats:update', params),
   deleteChat: (chatId: string) => ipcRenderer.invoke('chats:delete', chatId),
 
+  // Resume from human handoff
+  resumeHuman: (machineId: string) => ipcRenderer.invoke('chat:resume-human', machineId),
+
   // Credits / Billing
   getCredits: () => ipcRenderer.invoke('credits:get-balance'),
+
+  // Chat SSE streaming (routed through main process to avoid CORS)
+  sendChatMessage: (params: {
+    requestId: string
+    messages: Array<{ role: string; content: string }>
+    chatId: string
+    userId: string
+    machineId: string
+    model?: string
+  }) => ipcRenderer.invoke('chat:send-message', params),
+  abortChat: (requestId: string) => ipcRenderer.invoke('chat:abort', requestId),
+  onChatSSEEvent: (callback: (data: { requestId: string; type: string; data: string }) => void) => {
+    const handler = (_event: any, data: any) => callback(data)
+    ipcRenderer.on('chat:sse-event', handler)
+    return () => ipcRenderer.removeListener('chat:sse-event', handler)
+  },
 
   // Window mode control
   setWindowMode: (mode: string) => ipcRenderer.invoke('window:set-mode', mode),
@@ -57,9 +76,23 @@ contextBridge.exposeInMainWorld('coasty', {
     return () => ipcRenderer.removeListener('window-opacity-changed', handler)
   },
 
+  // Window size
+  getWindowSize: () => ipcRenderer.invoke('window:get-size'),
+  onWindowSizeChanged: (callback: (size: { width: number; height: number }) => void) => {
+    const handler = (_event: any, size: { width: number; height: number }) => callback(size)
+    ipcRenderer.on('window-size-changed', handler)
+    return () => ipcRenderer.removeListener('window-size-changed', handler)
+  },
+
+  // Custom resize for frameless transparent windows — main process polls cursor
+  getWindowBounds: () => ipcRenderer.invoke('window:get-bounds'),
+  startResize: (edge: string) => ipcRenderer.invoke('window:start-resize', edge),
+  stopResize: () => ipcRenderer.invoke('window:stop-resize'),
+
   // Auto-update
   getUpdateStatus: () => ipcRenderer.invoke('update:get-status'),
   getUpdateVersion: () => ipcRenderer.invoke('update:get-version'),
+  checkForUpdates: () => ipcRenderer.invoke('update:check'),
   installUpdate: () => ipcRenderer.invoke('update:install'),
   onUpdateStatusChanged: (callback: (status: string) => void) => {
     const handler = (_event: any, status: string) => callback(status)
@@ -72,6 +105,11 @@ contextBridge.exposeInMainWorld('coasty', {
   requestAccessibility: () => ipcRenderer.invoke('permissions:request-accessibility'),
   openScreenRecordingSettings: () => ipcRenderer.invoke('permissions:open-screen-recording'),
   openAccessibilitySettings: () => ipcRenderer.invoke('permissions:open-accessibility'),
+  onPermissionDenied: (callback: (data: { type: string; message: string }) => void) => {
+    const handler = (_event: any, data: { type: string; message: string }) => callback(data)
+    ipcRenderer.on('permission:denied', handler)
+    return () => ipcRenderer.removeListener('permission:denied', handler)
+  },
   getPlatform: () => process.platform,
 
   // Action approval
@@ -90,8 +128,18 @@ contextBridge.exposeInMainWorld('coasty', {
     return () => ipcRenderer.removeListener('approval-mode-changed', handler)
   },
 
+  // Display selection (multi-monitor)
+  getDisplays: () => ipcRenderer.invoke('displays:list'),
+  getActiveDisplay: () => ipcRenderer.invoke('displays:get-active'),
+  setActiveDisplay: (id: number | null) => ipcRenderer.invoke('displays:set-active', id),
+
+  // File/folder picker — opens native dialog, returns paths + names
+  selectFiles: (opts?: { directories?: boolean }) =>
+    ipcRenderer.invoke('files:select', opts),
+
   // App lifecycle
   relaunch: () => ipcRenderer.invoke('app:relaunch'),
+  getAppVersion: () => ipcRenderer.invoke('app:get-version'),
 
   // Events from main process
   onConnectionStateChanged: (callback: (state: string) => void) => {
@@ -145,6 +193,8 @@ export interface CoastyAPI {
   deleteChat: (chatId: string) =>
     Promise<{ success: boolean; error?: string }>
 
+  resumeHuman: (machineId: string) => Promise<{ success: boolean; resumed?: boolean; error?: string }>
+
   getCredits: () => Promise<{
     success: boolean
     balance?: number
@@ -153,6 +203,22 @@ export interface CoastyAPI {
     error?: string
   }>
 
+  // Chat SSE streaming (routed through main process)
+  sendChatMessage: (params: {
+    requestId: string
+    messages: Array<{ role: string; content: string }>
+    chatId: string
+    userId: string
+    machineId: string
+    model?: string
+  }) => Promise<{ success: boolean; error?: string; aborted?: boolean }>
+  abortChat: (requestId: string) => Promise<{ success: boolean }>
+  onChatSSEEvent: (callback: (data: {
+    requestId: string
+    type: string
+    data: string
+  }) => void) => () => void
+
   setWindowMode: (mode: string) => Promise<void>
   onWindowModeChanged: (callback: (mode: string) => void) => () => void
 
@@ -160,8 +226,15 @@ export interface CoastyAPI {
   getOpacity: () => Promise<number>
   onOpacityChanged: (callback: (value: number) => void) => () => void
 
+  getWindowSize: () => Promise<{ width: number; height: number }>
+  onWindowSizeChanged: (callback: (size: { width: number; height: number }) => void) => () => void
+  getWindowBounds: () => Promise<{ x: number; y: number; width: number; height: number }>
+  startResize: (edge: string) => Promise<void>
+  stopResize: () => Promise<void>
+
   getUpdateStatus: () => Promise<string>
   getUpdateVersion: () => Promise<string | null>
+  checkForUpdates: () => Promise<void>
   installUpdate: () => Promise<void>
   onUpdateStatusChanged: (callback: (status: string) => void) => () => void
 
@@ -173,6 +246,7 @@ export interface CoastyAPI {
   requestAccessibility: () => Promise<boolean>
   openScreenRecordingSettings: () => Promise<void>
   openAccessibilitySettings: () => Promise<void>
+  onPermissionDenied: (callback: (data: { type: string; message: string }) => void) => () => void
   getPlatform: () => string
 
   // Action approval
@@ -186,7 +260,26 @@ export interface CoastyAPI {
   }) => void) => () => void
   onApprovalModeChanged: (callback: (mode: string) => void) => () => void
 
+  // Display selection (multi-monitor)
+  getDisplays: () => Promise<Array<{
+    id: number
+    name: string
+    width: number
+    height: number
+    isPrimary: boolean
+    scaleFactor: number
+    bounds: { x: number; y: number; width: number; height: number }
+  }>>
+  getActiveDisplay: () => Promise<number | null>
+  setActiveDisplay: (id: number | null) => Promise<void>
+
+  selectFiles: (opts?: { directories?: boolean }) => Promise<{
+    success: boolean
+    files: Array<{ path: string; name: string; ext: string; isDirectory: boolean }>
+  }>
+
   relaunch: () => Promise<void>
+  getAppVersion: () => Promise<string>
 
   onConnectionStateChanged: (callback: (state: string) => void) => () => void
 }

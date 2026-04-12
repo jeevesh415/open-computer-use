@@ -36,20 +36,26 @@ import {
   Sparkles,
   Crown,
   Zap,
+  ChevronLeft,
   ChevronRight,
   AlertTriangle,
   BookOpen,
+  Play,
+  Pause,
+  History,
+  ArrowUpRight,
+  CalendarDays,
+  CheckCircle2,
+  XCircle,
+  SkipForward,
 } from "lucide-react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { CoastyIcon } from "@/components/icons/coasty"
 import { AgentIcon } from "@/components/icons/agent"
 import { trackScheduleTriggered } from "@/lib/posthog/analytics"
-import { ScheduleCalendar, getTasksForDate, type DayTask } from "./schedule-calendar"
-import { ScheduleHistory } from "./schedule-history"
 import { ScheduleDialog } from "./schedule-dialog"
 import { CreateScheduleDialog } from "./create-schedule-dialog"
-import { ScheduleCard } from "./schedule-card"
 import type { UserMachine } from "@/types/machines.types"
 import {
   listSchedules,
@@ -62,8 +68,13 @@ import {
   getDelegates,
   updateTeam,
   formatFrequency,
+  formatNextRun,
   triggerScheduleNow,
+  pauseSchedule,
+  deleteSchedule,
+  getScheduleHistory,
   type ScheduleResponse,
+  type ScheduleHistoryEntry,
   type TeamResponse,
   type DelegateConfig,
 } from "@/lib/services/schedules-api"
@@ -73,26 +84,28 @@ import { SecretDialog } from "@/app/components/secrets/secret-dialog"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 
 /* ─── Team template types & data ─── */
 interface TeamTemplateEmployee {
   name: string
   role: string
+  roleKey: string
   frequency: string
 }
 
 interface TeamTemplateCredential {
   service: string
-  why: string
+  purposeKey: string
 }
 
 interface TeamTemplate {
   id: string
-  name: string
+  nameKey: string
   tier: "starter" | "plus" | "pro"
   icon: React.ComponentType<{ className?: string }>
-  tagline: string
-  description: string
+  taglineKey: string
+  descriptionKey: string
   instructions: string
   employees: TeamTemplateEmployee[]
   credentials: TeamTemplateCredential[]
@@ -102,286 +115,661 @@ const TEAM_TEMPLATES: TeamTemplate[] = [
   // ── STARTER (1 machine, 3 employees) ──
   {
     id: "content-ops",
-    name: "Content Operations",
+    nameKey: "templates.contentOps.name",
     tier: "starter",
     icon: PenTool,
-    tagline: "Publish consistently without lifting a finger",
-    description: "A lean content engine — writes, optimizes, and distributes content on autopilot.",
+    taglineKey: "templates.contentOps.tagline",
+    descriptionKey: "templates.contentOps.description",
     instructions: "You are part of the Content Operations team. Coordinate with team members via shared memory. Always write in the brand voice. Prioritize quality over quantity. Log every published piece to shared memory with its URL and performance metrics.",
     employees: [
-      { name: "Atlas", role: "Content Writer — drafts blog posts, newsletters, and social copy", frequency: "daily" },
-      { name: "Echo", role: "SEO Analyst — audits pages, tracks rankings, suggests keyword opportunities", frequency: "weekly" },
-      { name: "Nova", role: "Social Distributor — posts content to platforms and monitors engagement", frequency: "every_12_hours" },
+      { name: "Atlas", role: "Content Writer — drafts blog posts, newsletters, and social copy", roleKey: "templates.contentOps.roles.atlas", frequency: "daily" },
+      { name: "Echo", role: "SEO Analyst — audits pages, tracks rankings, suggests keyword opportunities", roleKey: "templates.contentOps.roles.echo", frequency: "weekly" },
+      { name: "Nova", role: "Social Distributor — posts content to platforms and monitors engagement", roleKey: "templates.contentOps.roles.nova", frequency: "every_12_hours" },
     ],
     credentials: [
-      { service: "wordpress.com", why: "Publish and manage blog posts" },
-      { service: "twitter.com", why: "Post tweets and monitor engagement" },
-      { service: "linkedin.com", why: "Publish professional content and articles" },
-      { service: "search.google.com/search-console", why: "Track search performance and indexing" },
+      { service: "wordpress.com", purposeKey: "templates.contentOps.credentials.wordpress" },
+      { service: "twitter.com", purposeKey: "templates.contentOps.credentials.twitter" },
+      { service: "linkedin.com", purposeKey: "templates.contentOps.credentials.linkedin" },
+      { service: "search.google.com/search-console", purposeKey: "templates.contentOps.credentials.searchConsole" },
     ],
   },
   {
     id: "customer-support",
-    name: "Customer Support",
+    nameKey: "templates.customerSupport.name",
     tier: "starter",
     icon: HeadphonesIcon,
-    tagline: "24/7 support coverage from 3 employees",
-    description: "Monitors inboxes, resolves common issues, and keeps your knowledge base updated.",
+    taglineKey: "templates.customerSupport.tagline",
+    descriptionKey: "templates.customerSupport.description",
     instructions: "You are part of the Customer Support team. Be empathetic and solution-oriented. Escalate complex issues by logging them to shared memory with tag [ESCALATION]. Update the FAQ whenever you resolve a new type of issue. Track response times and customer satisfaction signals.",
     employees: [
-      { name: "Sage", role: "Inbox Monitor — checks support emails, categorizes and responds to common queries", frequency: "every_30_minutes" },
-      { name: "Iris", role: "Knowledge Base Manager — updates help docs and FAQs based on recurring issues", frequency: "weekly" },
-      { name: "Milo", role: "Feedback Analyst — aggregates reviews and support trends into weekly reports", frequency: "daily" },
+      { name: "Sage", role: "Inbox Monitor — checks support emails, categorizes and responds to common queries", roleKey: "templates.customerSupport.roles.sage", frequency: "every_30_minutes" },
+      { name: "Iris", role: "Knowledge Base Manager — updates help docs and FAQs based on recurring issues", roleKey: "templates.customerSupport.roles.iris", frequency: "weekly" },
+      { name: "Milo", role: "Feedback Analyst — aggregates reviews and support trends into weekly reports", roleKey: "templates.customerSupport.roles.milo", frequency: "daily" },
     ],
     credentials: [
-      { service: "gmail.com", why: "Monitor and respond to support emails" },
-      { service: "zendesk.com", why: "Manage support tickets (or your helpdesk)" },
-      { service: "notion.so", why: "Update knowledge base and documentation" },
+      { service: "gmail.com", purposeKey: "templates.customerSupport.credentials.gmail" },
+      { service: "zendesk.com", purposeKey: "templates.customerSupport.credentials.zendesk" },
+      { service: "notion.so", purposeKey: "templates.customerSupport.credentials.notion" },
     ],
   },
   {
     id: "research-intel",
-    name: "Research & Intel",
+    nameKey: "templates.researchIntel.name",
     tier: "starter",
     icon: Search,
-    tagline: "Stay informed without the manual work",
-    description: "Monitors competitors, tracks industry trends, and compiles actionable research briefs.",
+    taglineKey: "templates.researchIntel.tagline",
+    descriptionKey: "templates.researchIntel.description",
     instructions: "You are part of the Research & Intelligence team. Focus on actionable insights, not information dumps. Always cite sources with URLs. Use shared memory to maintain a running competitive landscape. Flag urgent competitive moves with [ALERT] tag.",
     employees: [
-      { name: "Scout", role: "Competitor Monitor — tracks competitor websites, pricing, and feature changes", frequency: "daily" },
-      { name: "Wren", role: "Trend Researcher — scans industry news, publications, and social media for trends", frequency: "daily" },
-      { name: "Quinn", role: "Brief Compiler — synthesizes findings into structured weekly intelligence reports", frequency: "weekly" },
+      { name: "Scout", role: "Competitor Monitor — tracks competitor websites, pricing, and feature changes", roleKey: "templates.researchIntel.roles.scout", frequency: "daily" },
+      { name: "Wren", role: "Trend Researcher — scans industry news, publications, and social media for trends", roleKey: "templates.researchIntel.roles.wren", frequency: "daily" },
+      { name: "Quinn", role: "Brief Compiler — synthesizes findings into structured weekly intelligence reports", roleKey: "templates.researchIntel.roles.quinn", frequency: "weekly" },
     ],
     credentials: [
-      { service: "google.com", why: "Web research and search" },
-      { service: "linkedin.com", why: "Track competitor hiring and announcements" },
-      { service: "notion.so", why: "Publish research briefs and reports" },
+      { service: "google.com", purposeKey: "templates.researchIntel.credentials.google" },
+      { service: "linkedin.com", purposeKey: "templates.researchIntel.credentials.linkedin" },
+      { service: "notion.so", purposeKey: "templates.researchIntel.credentials.notion" },
     ],
   },
 
   // ── PLUS (2 machines, 10 employees) ──
   {
     id: "marketing-agency",
-    name: "Marketing Department",
+    nameKey: "templates.marketing.name",
     tier: "plus",
     icon: Megaphone,
-    tagline: "A full marketing team in two machines",
-    description: "Content creation, social media, SEO, competitor tracking, and campaign analytics — two coordinated squads.",
+    taglineKey: "templates.marketing.tagline",
+    descriptionKey: "templates.marketing.description",
     instructions: "You are part of the Marketing Department. Content team creates and publishes. Analytics team tracks and optimizes. Share insights via shared memory. Always align content with current campaign themes stored in shared memory under [CAMPAIGN]. Report metrics weekly.",
     employees: [
-      { name: "Atlas", role: "Content Strategist — plans content calendar, writes long-form pieces", frequency: "daily" },
-      { name: "Nova", role: "Social Media Manager — posts, engages, and grows social channels", frequency: "every_6_hours" },
-      { name: "Echo", role: "SEO Specialist — optimizes pages, builds internal links, tracks keywords", frequency: "daily" },
-      { name: "Pixel", role: "Email Campaign Manager — writes and sends newsletters, tracks opens/clicks", frequency: "daily" },
-      { name: "Scout", role: "Competitor Analyst — monitors competitor marketing moves and reports insights", frequency: "daily" },
-      { name: "Dash", role: "Ad Campaign Monitor — tracks ad spend, ROAS, and optimization opportunities", frequency: "every_12_hours" },
-      { name: "Iris", role: "Analytics Reporter — compiles cross-channel performance dashboards", frequency: "weekly" },
+      { name: "Atlas", role: "Content Strategist — plans content calendar, writes long-form pieces", roleKey: "templates.marketing.roles.atlas", frequency: "daily" },
+      { name: "Nova", role: "Social Media Manager — posts, engages, and grows social channels", roleKey: "templates.marketing.roles.nova", frequency: "every_6_hours" },
+      { name: "Echo", role: "SEO Specialist — optimizes pages, builds internal links, tracks keywords", roleKey: "templates.marketing.roles.echo", frequency: "daily" },
+      { name: "Pixel", role: "Email Campaign Manager — writes and sends newsletters, tracks opens/clicks", roleKey: "templates.marketing.roles.pixel", frequency: "daily" },
+      { name: "Scout", role: "Competitor Analyst — monitors competitor marketing moves and reports insights", roleKey: "templates.marketing.roles.scout", frequency: "daily" },
+      { name: "Dash", role: "Ad Campaign Monitor — tracks ad spend, ROAS, and optimization opportunities", roleKey: "templates.marketing.roles.dash", frequency: "every_12_hours" },
+      { name: "Iris", role: "Analytics Reporter — compiles cross-channel performance dashboards", roleKey: "templates.marketing.roles.iris", frequency: "weekly" },
     ],
     credentials: [
-      { service: "wordpress.com", why: "Publish blog content" },
-      { service: "twitter.com", why: "Social media management" },
-      { service: "linkedin.com", why: "Professional content distribution" },
-      { service: "mailchimp.com", why: "Email campaigns and newsletters" },
-      { service: "analytics.google.com", why: "Traffic and conversion analytics" },
-      { service: "ads.google.com", why: "Google Ads campaign management" },
-      { service: "business.facebook.com", why: "Meta Ads and social management" },
+      { service: "wordpress.com", purposeKey: "templates.marketing.credentials.wordpress" },
+      { service: "twitter.com", purposeKey: "templates.marketing.credentials.twitter" },
+      { service: "linkedin.com", purposeKey: "templates.marketing.credentials.linkedin" },
+      { service: "mailchimp.com", purposeKey: "templates.marketing.credentials.mailchimp" },
+      { service: "analytics.google.com", purposeKey: "templates.marketing.credentials.analytics" },
+      { service: "ads.google.com", purposeKey: "templates.marketing.credentials.googleAds" },
+      { service: "business.facebook.com", purposeKey: "templates.marketing.credentials.metaAds" },
     ],
   },
   {
     id: "ecommerce-ops",
-    name: "E-Commerce Operations",
+    nameKey: "templates.ecommerce.name",
     tier: "plus",
     icon: ShoppingCart,
-    tagline: "Run your store while you sleep",
-    description: "Product management, pricing intelligence, inventory tracking, review management, and growth marketing for online stores.",
+    taglineKey: "templates.ecommerce.tagline",
+    descriptionKey: "templates.ecommerce.description",
     instructions: "You are part of E-Commerce Operations. Storefront team maintains listings and customer experience. Growth team drives traffic and conversions. Log all price changes and inventory alerts to shared memory with [PRICE] and [INVENTORY] tags. Never make pricing changes without logging the before/after.",
     employees: [
-      { name: "Cleo", role: "Product Lister — creates and updates product descriptions, images, and metadata", frequency: "daily" },
-      { name: "Onyx", role: "Price Monitor — tracks competitor prices and flags opportunities for adjustments", frequency: "every_6_hours" },
-      { name: "Luna", role: "Inventory Tracker — monitors stock levels and alerts on low inventory", frequency: "every_12_hours" },
-      { name: "Sage", role: "Review Manager — responds to customer reviews and aggregates sentiment", frequency: "daily" },
-      { name: "Dash", role: "Ad Campaign Optimizer — manages product ads and shopping campaigns", frequency: "every_12_hours" },
-      { name: "Flux", role: "Email Marketer — sends abandoned cart, promo, and post-purchase sequences", frequency: "daily" },
-      { name: "Wren", role: "Analytics Reporter — tracks revenue, conversion rates, and growth metrics", frequency: "weekly" },
+      { name: "Cleo", role: "Product Lister — creates and updates product descriptions, images, and metadata", roleKey: "templates.ecommerce.roles.cleo", frequency: "daily" },
+      { name: "Onyx", role: "Price Monitor — tracks competitor prices and flags opportunities for adjustments", roleKey: "templates.ecommerce.roles.onyx", frequency: "every_6_hours" },
+      { name: "Luna", role: "Inventory Tracker — monitors stock levels and alerts on low inventory", roleKey: "templates.ecommerce.roles.luna", frequency: "every_12_hours" },
+      { name: "Sage", role: "Review Manager — responds to customer reviews and aggregates sentiment", roleKey: "templates.ecommerce.roles.sage", frequency: "daily" },
+      { name: "Dash", role: "Ad Campaign Optimizer — manages product ads and shopping campaigns", roleKey: "templates.ecommerce.roles.dash", frequency: "every_12_hours" },
+      { name: "Flux", role: "Email Marketer — sends abandoned cart, promo, and post-purchase sequences", roleKey: "templates.ecommerce.roles.flux", frequency: "daily" },
+      { name: "Wren", role: "Analytics Reporter — tracks revenue, conversion rates, and growth metrics", roleKey: "templates.ecommerce.roles.wren", frequency: "weekly" },
     ],
     credentials: [
-      { service: "shopify.com", why: "Store management and product listings" },
-      { service: "amazon.com/seller", why: "Amazon marketplace management" },
-      { service: "ads.google.com", why: "Shopping ads and campaigns" },
-      { service: "mailchimp.com", why: "Customer email sequences" },
-      { service: "analytics.google.com", why: "Conversion and traffic analytics" },
+      { service: "shopify.com", purposeKey: "templates.ecommerce.credentials.shopify" },
+      { service: "amazon.com/seller", purposeKey: "templates.ecommerce.credentials.amazon" },
+      { service: "ads.google.com", purposeKey: "templates.ecommerce.credentials.googleAds" },
+      { service: "mailchimp.com", purposeKey: "templates.ecommerce.credentials.mailchimp" },
+      { service: "analytics.google.com", purposeKey: "templates.ecommerce.credentials.analytics" },
     ],
   },
   {
     id: "dev-team",
-    name: "Engineering Team",
+    nameKey: "templates.engineering.name",
     tier: "plus",
     icon: Code2,
-    tagline: "Automate the boring parts of engineering",
-    description: "Automated code reviews, dependency monitoring, documentation, testing, deploy monitoring, and incident response.",
+    taglineKey: "templates.engineering.tagline",
+    descriptionKey: "templates.engineering.description",
     instructions: "You are part of the Engineering Team. Engineering squad handles code quality and documentation. DevOps squad monitors infrastructure. Log all incidents to shared memory with [INCIDENT] tag and severity level. Never auto-merge PRs — only review and comment. Flag security issues with [SECURITY] tag immediately.",
     employees: [
-      { name: "Rune", role: "Code Reviewer — reviews open PRs, suggests improvements, checks for security issues", frequency: "every_6_hours" },
-      { name: "Koda", role: "Dependency Monitor — tracks outdated packages, security advisories, and breaking changes", frequency: "daily" },
-      { name: "Aria", role: "Doc Writer — keeps API docs, READMEs, and changelogs up to date with latest code", frequency: "daily" },
-      { name: "Blaze", role: "Test Monitor — runs test suites, tracks flaky tests, reports coverage trends", frequency: "every_12_hours" },
-      { name: "Frost", role: "Deploy Monitor — watches CI/CD pipelines, alerts on failures, tracks deploy frequency", frequency: "every_6_hours" },
-      { name: "Neon", role: "Uptime & Log Watcher — monitors services, scans logs for errors, creates incident reports", frequency: "every_30_minutes" },
+      { name: "Rune", role: "Code Reviewer — reviews open PRs, suggests improvements, checks for security issues", roleKey: "templates.engineering.roles.rune", frequency: "every_6_hours" },
+      { name: "Koda", role: "Dependency Monitor — tracks outdated packages, security advisories, and breaking changes", roleKey: "templates.engineering.roles.koda", frequency: "daily" },
+      { name: "Aria", role: "Doc Writer — keeps API docs, READMEs, and changelogs up to date with latest code", roleKey: "templates.engineering.roles.aria", frequency: "daily" },
+      { name: "Blaze", role: "Test Monitor — runs test suites, tracks flaky tests, reports coverage trends", roleKey: "templates.engineering.roles.blaze", frequency: "every_12_hours" },
+      { name: "Frost", role: "Deploy Monitor — watches CI/CD pipelines, alerts on failures, tracks deploy frequency", roleKey: "templates.engineering.roles.frost", frequency: "every_6_hours" },
+      { name: "Neon", role: "Uptime & Log Watcher — monitors services, scans logs for errors, creates incident reports", roleKey: "templates.engineering.roles.neon", frequency: "every_30_minutes" },
     ],
     credentials: [
-      { service: "github.com", why: "Repository access, PR reviews, issues" },
-      { service: "vercel.com", why: "Deployment monitoring (or your CI/CD)" },
-      { service: "sentry.io", why: "Error tracking and incident alerts" },
-      { service: "npmjs.com", why: "Package registry for dependency checks" },
+      { service: "github.com", purposeKey: "templates.engineering.credentials.github" },
+      { service: "vercel.com", purposeKey: "templates.engineering.credentials.vercel" },
+      { service: "sentry.io", purposeKey: "templates.engineering.credentials.sentry" },
+      { service: "npmjs.com", purposeKey: "templates.engineering.credentials.npm" },
     ],
   },
 
   // ── PRO (3 machines, 50 employees) ──
   {
     id: "full-business",
-    name: "Full Business Operations",
+    nameKey: "templates.fullBusiness.name",
     tier: "pro",
     icon: Building2,
-    tagline: "An entire company, fully automated",
-    description: "Sales, marketing, support, and admin — four departments working in concert across three machines with shared intelligence.",
+    taglineKey: "templates.fullBusiness.tagline",
+    descriptionKey: "templates.fullBusiness.description",
     instructions: "You are part of Full Business Operations. Sales drives revenue, Marketing builds pipeline, Support retains customers, and Admin keeps everything running. Cross-department updates go to shared memory with department tags: [SALES], [MARKETING], [SUPPORT], [ADMIN]. Weekly all-hands summary compiled every Monday. Escalations tagged [URGENT] get priority across all departments.",
     employees: [
-      { name: "Atlas", role: "Lead Generator — finds and qualifies potential customers from online sources", frequency: "daily" },
-      { name: "Dash", role: "CRM Manager — updates deals, tracks pipeline, and sends follow-up sequences", frequency: "every_6_hours" },
-      { name: "Scout", role: "Proposal Writer — drafts sales proposals and pitch decks from templates", frequency: "daily" },
-      { name: "Nova", role: "Content Marketer — writes blog posts, case studies, and marketing copy", frequency: "daily" },
-      { name: "Echo", role: "Social Media Manager — posts content and engages with audience", frequency: "every_6_hours" },
-      { name: "Pixel", role: "Email Campaign Manager — runs drip campaigns and newsletter sequences", frequency: "daily" },
-      { name: "Sage", role: "Support Lead — handles customer inquiries and resolves issues", frequency: "every_30_minutes" },
-      { name: "Iris", role: "Knowledge Manager — maintains help docs, FAQs, and internal wiki", frequency: "weekly" },
-      { name: "Milo", role: "Data Analyst — compiles cross-department reports and KPI dashboards", frequency: "daily" },
-      { name: "Wren", role: "Market Researcher — tracks industry trends and competitive intelligence", frequency: "daily" },
-      { name: "Quinn", role: "Operations Coordinator — runs weekly summaries and cross-team syncs", frequency: "weekly" },
+      { name: "Atlas", role: "Lead Generator — finds and qualifies potential customers from online sources", roleKey: "templates.fullBusiness.roles.atlas", frequency: "daily" },
+      { name: "Dash", role: "CRM Manager — updates deals, tracks pipeline, and sends follow-up sequences", roleKey: "templates.fullBusiness.roles.dash", frequency: "every_6_hours" },
+      { name: "Scout", role: "Proposal Writer — drafts sales proposals and pitch decks from templates", roleKey: "templates.fullBusiness.roles.scout", frequency: "daily" },
+      { name: "Nova", role: "Content Marketer — writes blog posts, case studies, and marketing copy", roleKey: "templates.fullBusiness.roles.nova", frequency: "daily" },
+      { name: "Echo", role: "Social Media Manager — posts content and engages with audience", roleKey: "templates.fullBusiness.roles.echo", frequency: "every_6_hours" },
+      { name: "Pixel", role: "Email Campaign Manager — runs drip campaigns and newsletter sequences", roleKey: "templates.fullBusiness.roles.pixel", frequency: "daily" },
+      { name: "Sage", role: "Support Lead — handles customer inquiries and resolves issues", roleKey: "templates.fullBusiness.roles.sage", frequency: "every_30_minutes" },
+      { name: "Iris", role: "Knowledge Manager — maintains help docs, FAQs, and internal wiki", roleKey: "templates.fullBusiness.roles.iris", frequency: "weekly" },
+      { name: "Milo", role: "Data Analyst — compiles cross-department reports and KPI dashboards", roleKey: "templates.fullBusiness.roles.milo", frequency: "daily" },
+      { name: "Wren", role: "Market Researcher — tracks industry trends and competitive intelligence", roleKey: "templates.fullBusiness.roles.wren", frequency: "daily" },
+      { name: "Quinn", role: "Operations Coordinator — runs weekly summaries and cross-team syncs", roleKey: "templates.fullBusiness.roles.quinn", frequency: "weekly" },
     ],
     credentials: [
-      { service: "gmail.com", why: "Email communication and support" },
-      { service: "hubspot.com", why: "CRM and sales pipeline (or your CRM)" },
-      { service: "linkedin.com", why: "Lead generation and professional networking" },
-      { service: "mailchimp.com", why: "Email marketing campaigns" },
-      { service: "notion.so", why: "Internal wiki and documentation" },
-      { service: "analytics.google.com", why: "Web analytics and reporting" },
-      { service: "twitter.com", why: "Social media presence" },
-      { service: "zendesk.com", why: "Customer support tickets" },
+      { service: "gmail.com", purposeKey: "templates.fullBusiness.credentials.gmail" },
+      { service: "hubspot.com", purposeKey: "templates.fullBusiness.credentials.hubspot" },
+      { service: "linkedin.com", purposeKey: "templates.fullBusiness.credentials.linkedin" },
+      { service: "mailchimp.com", purposeKey: "templates.fullBusiness.credentials.mailchimp" },
+      { service: "notion.so", purposeKey: "templates.fullBusiness.credentials.notion" },
+      { service: "analytics.google.com", purposeKey: "templates.fullBusiness.credentials.analytics" },
+      { service: "twitter.com", purposeKey: "templates.fullBusiness.credentials.twitter" },
+      { service: "zendesk.com", purposeKey: "templates.fullBusiness.credentials.zendesk" },
     ],
   },
   {
     id: "growth-agency",
-    name: "Growth & Acquisition",
+    nameKey: "templates.growth.name",
     tier: "pro",
     icon: Rocket,
-    tagline: "Aggressive growth on full autopilot",
-    description: "Outbound prospecting, inbound marketing, conversion optimization, and analytics — a dedicated growth engine across three machines.",
+    taglineKey: "templates.growth.tagline",
+    descriptionKey: "templates.growth.description",
     instructions: "You are part of the Growth & Acquisition team. Outbound finds leads, Inbound captures demand, and Analytics optimizes the funnel. Log all qualified leads to shared memory with [LEAD] tag including source and score. Track conversion rates at every funnel stage. A/B test results logged with [EXPERIMENT] tag. Weekly growth metrics compiled automatically.",
     employees: [
-      { name: "Blaze", role: "Outbound Prospector — finds decision-makers, researches companies, builds lead lists", frequency: "daily" },
-      { name: "Flux", role: "Email Outreach — sends personalized cold emails, manages follow-up sequences", frequency: "every_6_hours" },
-      { name: "Orion", role: "LinkedIn Outreach — connects with prospects and sends personalized messages", frequency: "daily" },
-      { name: "Coral", role: "Content Creator — produces SEO content, landing page copy, and lead magnets", frequency: "daily" },
-      { name: "Taro", role: "Landing Page Optimizer — monitors conversion rates, suggests and tests improvements", frequency: "daily" },
-      { name: "Vale", role: "Ad Campaign Manager — manages Google and Meta ad campaigns end-to-end", frequency: "every_12_hours" },
-      { name: "Ember", role: "Lead Scorer — qualifies inbound leads and routes to appropriate follow-up", frequency: "every_6_hours" },
-      { name: "Haze", role: "Funnel Analyst — tracks conversion metrics at every stage, identifies bottlenecks", frequency: "daily" },
-      { name: "Dune", role: "Competitor Intel — monitors competitor campaigns, pricing, and positioning changes", frequency: "daily" },
-      { name: "Kit", role: "Growth Reporter — compiles daily/weekly growth metrics and experiment results", frequency: "daily" },
+      { name: "Blaze", role: "Outbound Prospector — finds decision-makers, researches companies, builds lead lists", roleKey: "templates.growth.roles.blaze", frequency: "daily" },
+      { name: "Flux", role: "Email Outreach — sends personalized cold emails, manages follow-up sequences", roleKey: "templates.growth.roles.flux", frequency: "every_6_hours" },
+      { name: "Orion", role: "LinkedIn Outreach — connects with prospects and sends personalized messages", roleKey: "templates.growth.roles.orion", frequency: "daily" },
+      { name: "Coral", role: "Content Creator — produces SEO content, landing page copy, and lead magnets", roleKey: "templates.growth.roles.coral", frequency: "daily" },
+      { name: "Taro", role: "Landing Page Optimizer — monitors conversion rates, suggests and tests improvements", roleKey: "templates.growth.roles.taro", frequency: "daily" },
+      { name: "Vale", role: "Ad Campaign Manager — manages Google and Meta ad campaigns end-to-end", roleKey: "templates.growth.roles.vale", frequency: "every_12_hours" },
+      { name: "Ember", role: "Lead Scorer — qualifies inbound leads and routes to appropriate follow-up", roleKey: "templates.growth.roles.ember", frequency: "every_6_hours" },
+      { name: "Haze", role: "Funnel Analyst — tracks conversion metrics at every stage, identifies bottlenecks", roleKey: "templates.growth.roles.haze", frequency: "daily" },
+      { name: "Dune", role: "Competitor Intel — monitors competitor campaigns, pricing, and positioning changes", roleKey: "templates.growth.roles.dune", frequency: "daily" },
+      { name: "Kit", role: "Growth Reporter — compiles daily/weekly growth metrics and experiment results", roleKey: "templates.growth.roles.kit", frequency: "daily" },
     ],
     credentials: [
-      { service: "linkedin.com", why: "Prospecting and outreach" },
-      { service: "gmail.com", why: "Cold email and follow-up sequences" },
-      { service: "hubspot.com", why: "Lead management and CRM" },
-      { service: "ads.google.com", why: "Paid search campaigns" },
-      { service: "business.facebook.com", why: "Meta advertising" },
-      { service: "analytics.google.com", why: "Funnel and conversion analytics" },
-      { service: "ahrefs.com", why: "SEO research and competitor analysis" },
+      { service: "linkedin.com", purposeKey: "templates.growth.credentials.linkedin" },
+      { service: "gmail.com", purposeKey: "templates.growth.credentials.gmail" },
+      { service: "hubspot.com", purposeKey: "templates.growth.credentials.hubspot" },
+      { service: "ads.google.com", purposeKey: "templates.growth.credentials.googleAds" },
+      { service: "business.facebook.com", purposeKey: "templates.growth.credentials.metaAds" },
+      { service: "analytics.google.com", purposeKey: "templates.growth.credentials.analytics" },
+      { service: "ahrefs.com", purposeKey: "templates.growth.credentials.ahrefs" },
     ],
   },
   {
     id: "saas-operations",
-    name: "SaaS Operations",
+    nameKey: "templates.saas.name",
     tier: "pro",
     icon: Target,
-    tagline: "Run your SaaS like a well-oiled machine",
-    description: "Customer success, product analytics, churn prevention, feature tracking, and automated reporting for SaaS businesses.",
+    taglineKey: "templates.saas.tagline",
+    descriptionKey: "templates.saas.description",
     instructions: "You are part of SaaS Operations. Success team ensures retention, Product team tracks usage, and Growth team expands revenue. Log churn risks to shared memory with [CHURN_RISK] tag and risk score. Feature requests tracked with [FEATURE_REQUEST] tag. MRR changes logged with [REVENUE] tag. Health scores updated daily for all accounts.",
     employees: [
-      { name: "Luna", role: "Customer Success Monitor — tracks user engagement, identifies at-risk accounts", frequency: "daily" },
-      { name: "Sage", role: "Onboarding Assistant — guides new users through setup, monitors activation rates", frequency: "every_6_hours" },
-      { name: "Ivy", role: "Churn Preventer — reaches out to disengaging users with re-activation campaigns", frequency: "daily" },
-      { name: "Rune", role: "Feature Request Tracker — aggregates user feedback and feature requests from all channels", frequency: "daily" },
-      { name: "Koda", role: "Product Analytics — tracks feature adoption, user journeys, and engagement metrics", frequency: "daily" },
-      { name: "Neon", role: "Bug & Issue Monitor — watches error logs, user reports, and status page incidents", frequency: "every_30_minutes" },
-      { name: "Aria", role: "Changelog Writer — documents releases, updates knowledge base and help center", frequency: "weekly" },
-      { name: "Frost", role: "Revenue Analyst — tracks MRR, churn rate, LTV, and expansion revenue", frequency: "daily" },
-      { name: "Zara", role: "Competitor Tracker — monitors competitor features, pricing, and market positioning", frequency: "weekly" },
+      { name: "Luna", role: "Customer Success Monitor — tracks user engagement, identifies at-risk accounts", roleKey: "templates.saas.roles.luna", frequency: "daily" },
+      { name: "Sage", role: "Onboarding Assistant — guides new users through setup, monitors activation rates", roleKey: "templates.saas.roles.sage", frequency: "every_6_hours" },
+      { name: "Ivy", role: "Churn Preventer — reaches out to disengaging users with re-activation campaigns", roleKey: "templates.saas.roles.ivy", frequency: "daily" },
+      { name: "Rune", role: "Feature Request Tracker — aggregates user feedback and feature requests from all channels", roleKey: "templates.saas.roles.rune", frequency: "daily" },
+      { name: "Koda", role: "Product Analytics — tracks feature adoption, user journeys, and engagement metrics", roleKey: "templates.saas.roles.koda", frequency: "daily" },
+      { name: "Neon", role: "Bug & Issue Monitor — watches error logs, user reports, and status page incidents", roleKey: "templates.saas.roles.neon", frequency: "every_30_minutes" },
+      { name: "Aria", role: "Changelog Writer — documents releases, updates knowledge base and help center", roleKey: "templates.saas.roles.aria", frequency: "weekly" },
+      { name: "Frost", role: "Revenue Analyst — tracks MRR, churn rate, LTV, and expansion revenue", roleKey: "templates.saas.roles.frost", frequency: "daily" },
+      { name: "Zara", role: "Competitor Tracker — monitors competitor features, pricing, and market positioning", roleKey: "templates.saas.roles.zara", frequency: "weekly" },
     ],
     credentials: [
-      { service: "stripe.com", why: "Subscription and revenue data" },
-      { service: "intercom.io", why: "Customer messaging and support (or your tool)" },
-      { service: "mixpanel.com", why: "Product analytics and user tracking" },
-      { service: "gmail.com", why: "Customer communication" },
-      { service: "notion.so", why: "Knowledge base and changelog" },
-      { service: "sentry.io", why: "Error monitoring and bug tracking" },
-      { service: "github.com", why: "Issue tracking and feature requests" },
+      { service: "stripe.com", purposeKey: "templates.saas.credentials.stripe" },
+      { service: "intercom.io", purposeKey: "templates.saas.credentials.intercom" },
+      { service: "mixpanel.com", purposeKey: "templates.saas.credentials.mixpanel" },
+      { service: "gmail.com", purposeKey: "templates.saas.credentials.gmail" },
+      { service: "notion.so", purposeKey: "templates.saas.credentials.notion" },
+      { service: "sentry.io", purposeKey: "templates.saas.credentials.sentry" },
+      { service: "github.com", purposeKey: "templates.saas.credentials.github" },
     ],
   },
 ]
 
-const TIER_META: Record<string, { label: string; icon: React.ComponentType<{ className?: string }>; color: string; badgeBg: string; accentHex: string; machines: number; employees: string; price: string }> = {
-  starter: { label: "Starter", icon: Zap, color: "text-emerald-500", badgeBg: "bg-emerald-500/10 dark:bg-emerald-500/15", accentHex: "#10b981", machines: 1, employees: "up to 3", price: "$19/mo" },
-  plus: { label: "Plus", icon: Sparkles, color: "text-blue-500", badgeBg: "bg-blue-500/10 dark:bg-blue-500/15", accentHex: "#3b82f6", machines: 2, employees: "up to 10", price: "$50/mo" },
-  pro: { label: "Pro", icon: Crown, color: "text-amber-500", badgeBg: "bg-amber-500/10 dark:bg-amber-500/15", accentHex: "#f59e0b", machines: 3, employees: "up to 50", price: "$100/mo" },
+const TIER_META: Record<string, { labelKey: string; icon: React.ComponentType<{ className?: string }>; color: string; badgeBg: string; accentHex: string; machines: number; employeesKey: string; priceKey: string }> = {
+  starter: { labelKey: "tiers.starter.label", icon: Zap, color: "text-emerald-500", badgeBg: "bg-emerald-500/10 dark:bg-emerald-500/15", accentHex: "#10b981", machines: 1, employeesKey: "tiers.starter.employees", priceKey: "tiers.starter.price" },
+  plus: { labelKey: "tiers.plus.label", icon: Sparkles, color: "text-blue-500", badgeBg: "bg-blue-500/10 dark:bg-blue-500/15", accentHex: "#3b82f6", machines: 2, employeesKey: "tiers.plus.employees", priceKey: "tiers.plus.price" },
+  pro: { labelKey: "tiers.pro.label", icon: Crown, color: "text-amber-500", badgeBg: "bg-amber-500/10 dark:bg-amber-500/15", accentHex: "#f59e0b", machines: 3, employeesKey: "tiers.pro.employees", priceKey: "tiers.pro.price" },
 }
 
 /* ─── types ─── */
 type Tab = "teams" | "employees"
 
-/* ─── Day task row (compact) ─── */
-function DayTaskItem({ task, onUpdate }: { task: DayTask; onUpdate: () => void }) {
-  const router = useRouter()
-  const s = task.schedule
-  const [loading, setLoading] = useState<string | null>(null)
-  const isActive = s.enabled && !s.paused_reason
+/* ═══════════════════════════════════════════════════════
+   Inline: ScheduleCard
+   ═══════════════════════════════════════════════════════ */
 
-  async function run() {
-    setLoading("run"); try { trackScheduleTriggered(s.chat_id); await triggerScheduleNow(s.chat_id); onUpdate() } catch {} finally { setLoading(null) }
+function ScheduleCard({
+  schedule,
+  onUpdate,
+  onViewHistory,
+  onEdit,
+}: {
+  schedule: ScheduleResponse
+  onUpdate: () => void
+  onViewHistory: (chatId: string) => void
+  onEdit?: (chatId: string) => void
+}) {
+  const router = useRouter()
+  const [actionLoading, setActionLoading] = useState<string | null>(null)
+
+  async function handleRunNow() {
+    setActionLoading("run")
+    try { await triggerScheduleNow(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+  }
+  async function handleTogglePause() {
+    setActionLoading("pause")
+    try { await pauseSchedule(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+  }
+  async function handleDelete() {
+    setActionLoading("delete")
+    try { await deleteSchedule(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+  }
+
+  const isActive = schedule.enabled && !schedule.paused_reason
+  const isFailed = schedule.paused_reason === "too_many_failures"
+  const statusLabel = isActive ? "On Duty"
+    : schedule.paused_reason === "too_many_failures" ? "Needs Attention"
+    : schedule.paused_reason === "insufficient_credits" ? "No Credits"
+    : schedule.paused_reason === "machine_unavailable" ? "Offline"
+    : "Standby"
+
+  return (
+    <motion.div
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className={cn(
+        "group relative flex flex-col rounded-xl overflow-hidden h-full",
+        "border border-border/30 bg-card/50",
+        "hover:border-border/50 hover:shadow-lg hover:shadow-black/[0.04] dark:hover:shadow-black/[0.15]",
+        "transition-[border-color,box-shadow] duration-300",
+        !isActive && !isFailed && "opacity-80 hover:opacity-100",
+      )}
+    >
+      <div className="flex flex-col h-full">
+        <div className="px-5 pt-5 pb-4 flex-1 space-y-4">
+          <div className="flex items-start gap-3">
+            <div className="relative shrink-0">
+              <div className={cn("h-9 w-9 rounded-lg flex items-center justify-center transition-colors duration-300", "bg-muted/50 group-hover:bg-muted/80")}>
+                <CoastyIcon className="h-4 w-4 text-foreground/50 group-hover:text-foreground/70 transition-colors duration-300" />
+              </div>
+              <div className={cn("absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-card transition-all duration-500", isActive ? "bg-emerald-500" : isFailed ? "bg-amber-500" : "bg-muted-foreground/30")} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-sm font-semibold text-foreground truncate cursor-pointer group-hover:text-foreground/80 transition-colors inline-flex items-center gap-1" onClick={() => router.push(`/c/${schedule.chat_id}`)}>
+                {schedule.title || "Untitled Employee"}
+                <ArrowUpRight className="h-3 w-3 text-muted-foreground/0 group-hover:text-muted-foreground/50 transition-all duration-300 -translate-y-px" />
+              </h3>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className={cn("text-[11px] font-medium", isActive ? "text-emerald-600 dark:text-emerald-400" : isFailed ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground/60")}>{statusLabel}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-[11px] text-muted-foreground/60">
+            <span className="flex items-center gap-1.5 bg-muted/40 px-2 py-1 rounded-md"><Clock className="h-3 w-3 text-muted-foreground/40" />{formatFrequency(schedule.frequency)}</span>
+            <span className="bg-muted/40 px-2 py-1 rounded-md tabular-nums">{schedule.run_count} runs</span>
+            {schedule.consecutive_failures > 0 && <span className="bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-1 rounded-md tabular-nums">{schedule.consecutive_failures} failed</span>}
+          </div>
+
+          <div className="space-y-2 pt-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] text-muted-foreground/50">Next shift</span>
+              <span className="text-[11px] text-foreground/80 font-medium tabular-nums">{formatNextRun(schedule.next_run_at)}</span>
+            </div>
+            {schedule.last_run_at && (
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] text-muted-foreground/50">Last active</span>
+                <span className="text-[11px] text-muted-foreground/70 tabular-nums">{new Date(schedule.last_run_at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
+              </div>
+            )}
+          </div>
+
+          {schedule.paused_reason && schedule.paused_reason !== "deleted" && (
+            <div className="flex items-center gap-2 rounded-lg px-3 py-2 bg-muted/30 border border-border/30">
+              <AlertTriangle className="h-3 w-3 shrink-0 text-muted-foreground/50" />
+              <span className="text-[11px] text-muted-foreground/70 truncate">
+                {schedule.paused_reason === "insufficient_credits" ? "Insufficient credits" : schedule.paused_reason === "too_many_failures" ? `${schedule.consecutive_failures} consecutive failures` : schedule.paused_reason === "machine_unavailable" ? "Workstation unavailable" : schedule.paused_reason}
+              </span>
+            </div>
+          )}
+        </div>
+
+        <div className={cn("px-4 py-2.5 flex items-center gap-1.5 border-t border-border/20", "translate-y-0 opacity-100", "sm:translate-y-1 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100", "transition-all duration-300 ease-out")}>
+          <motion.button onClick={handleRunNow} disabled={!!actionLoading} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className={cn("h-7 px-3 rounded-lg text-[11px] font-semibold flex items-center gap-1.5 transition-colors", "bg-muted/50 hover:bg-muted text-foreground/60 hover:text-foreground", "disabled:opacity-40")}>
+            <CoastyIcon className="h-3 w-3" />{actionLoading === "run" ? "\u2026" : "Run"}
+          </motion.button>
+          <motion.button onClick={handleTogglePause} disabled={!!actionLoading} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="h-7 px-2.5 rounded-lg text-[11px] flex items-center gap-1.5 text-muted-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors disabled:opacity-40">
+            {schedule.enabled ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
+            {actionLoading === "pause" ? "\u2026" : schedule.enabled ? "Pause" : "Resume"}
+          </motion.button>
+          <div className="flex-1" />
+          {[
+            { icon: History, action: () => onViewHistory(schedule.chat_id), title: "Work Log" },
+            ...(onEdit ? [{ icon: Pencil, action: () => onEdit(schedule.chat_id), title: "Edit" }] : []),
+            { icon: Trash2, action: handleDelete, title: "Delete" },
+          ].map(({ icon: Icon, action, title }) => (
+            <motion.button key={title} onClick={action} disabled={!!actionLoading} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="h-7 w-7 rounded-lg flex items-center justify-center text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/50 transition-colors disabled:opacity-40" title={title}>
+              <Icon className="h-3.5 w-3.5" />
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════
+   Inline: ScheduleCalendar (day slider)
+   ═══════════════════════════════════════════════════════ */
+
+function parseCronField(field: string, max: number, min = 0): number[] {
+  const vals = new Set<number>()
+  for (const part of field.split(",")) {
+    const step = part.match(/^(\*|\d+(?:-\d+)?)\/(\d+)$/)
+    if (step) {
+      const s = parseInt(step[2])
+      let lo = min, hi = max
+      if (step[1] !== "*") { const [a, b] = step[1].split("-"); lo = parseInt(a); if (b !== undefined) hi = parseInt(b) }
+      for (let i = lo; i <= hi; i += s) vals.add(i)
+      continue
+    }
+    const range = part.match(/^(\d+)-(\d+)$/)
+    if (range) { for (let i = parseInt(range[1]); i <= parseInt(range[2]); i++) vals.add(i); continue }
+    if (part === "*") { for (let i = min; i <= max; i++) vals.add(i); continue }
+    const n = parseInt(part)
+    if (!isNaN(n)) vals.add(n)
+  }
+  return [...vals].sort((a, b) => a - b)
+}
+
+function getOccurrencesForMonth(schedule: ScheduleResponse, year: number, month: number): Map<number, { times: string[]; runsPerDay: number }> {
+  const result = new Map<number, { times: string[]; runsPerDay: number }>()
+  const dim = new Date(year, month + 1, 0).getDate()
+  if (!schedule.cron) return result
+  try {
+    const p = schedule.cron.trim().split(/\s+/)
+    if (p.length !== 5) return result
+    const [minF, hrF, domF, monF, dowF] = p
+    if (monF !== "*" && !parseCronField(monF, 12, 1).includes(month + 1)) return result
+    const hrs = parseCronField(hrF, 23)
+    const mins = parseCronField(minF, 59)
+    const allTimes: string[] = []
+    for (const h of hrs) for (const m of mins) allTimes.push(`${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`)
+    const rpd = allTimes.length
+    const show = rpd > 6 ? allTimes.slice(0, 3) : allTimes
+    const vDom = domF !== "*" ? parseCronField(domF, dim, 1) : null
+    const vDow = dowF !== "*" ? parseCronField(dowF, 6, 0) : null
+    for (let d = 1; d <= dim; d++) {
+      const dow = new Date(year, month, d).getDay()
+      let ok = !vDom && !vDow ? true : vDom && vDow ? vDom.includes(d) || vDow.includes(dow) : vDom ? vDom.includes(d) : vDow ? vDow.includes(dow) : false
+      if (ok) result.set(d, { times: show, runsPerDay: rpd })
+    }
+  } catch { for (let d = 1; d <= dim; d++) result.set(d, { times: [], runsPerDay: 1 }) }
+  return result
+}
+
+function getTasksForDate(schedules: ScheduleResponse[], date: Date) {
+  const y = date.getFullYear(), m = date.getMonth()
+  return schedules.flatMap((s) => {
+    const occ = getOccurrencesForMonth(s, y, m)
+    const info = occ.get(date.getDate())
+    return info ? [{ schedule: s, times: info.times, runsPerDay: info.runsPerDay }] : []
+  })
+}
+
+const SHORT_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+const TINY_DAYS = ["S", "M", "T", "W", "T", "F", "S"]
+
+function ScheduleCalendar({ schedules, selectedDate, onSelectDate, onRun, onPause, onEdit }: { schedules: ScheduleResponse[]; selectedDate: Date; onSelectDate: (d: Date) => void; onRun?: (chatId: string) => void; onPause?: (chatId: string) => void; onEdit?: (chatId: string) => void }) {
+  const today = new Date()
+  const [month, setMonth] = useState(selectedDate.getMonth())
+  const [year, setYear] = useState(selectedDate.getFullYear())
+  const [direction, setDirection] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const days = useMemo(() => {
+    const total = new Date(year, month + 1, 0).getDate()
+    return Array.from({ length: total }, (_, i) => new Date(year, month, i + 1))
+  }, [year, month])
+
+  const taskMap = useMemo(() => {
+    const map = new Map<number, number>()
+    for (const s of schedules) { const occ = getOccurrencesForMonth(s, year, month); for (const [day] of occ) map.set(day, (map.get(day) || 0) + 1) }
+    return map
+  }, [schedules, year, month])
+
+  const selectedTasks = useMemo(() => getTasksForDate(schedules, selectedDate), [schedules, selectedDate])
+
+  const isThisMonth = month === today.getMonth() && year === today.getFullYear()
+  const selDay = selectedDate.getDate(), selMonth = selectedDate.getMonth(), selYear = selectedDate.getFullYear()
+  const isSel = (d: Date) => d.getDate() === selDay && month === selMonth && year === selYear
+  const isTod = (d: Date) => d.getDate() === today.getDate() && d.getMonth() === today.getMonth() && d.getFullYear() === today.getFullYear()
+  const isTodaySelected = selDay === today.getDate() && selMonth === today.getMonth() && selYear === today.getFullYear()
+
+  function nav(delta: number) {
+    setDirection(delta)
+    let m = month + delta, y = year
+    if (m > 11) { m = 0; y++ } if (m < 0) { m = 11; y-- }
+    setMonth(m); setYear(y); onSelectDate(new Date(y, m, 1))
+  }
+
+  useEffect(() => {
+    const el = scrollRef.current; if (!el) return
+    const target = el.querySelector('[data-selected="true"]') as HTMLElement
+    if (target) el.scrollTo({ left: target.offsetLeft - el.offsetWidth / 2 + target.offsetWidth / 2, behavior: "smooth" })
+  }, [month, year])
+
+  useEffect(() => {
+    const el = scrollRef.current; if (!el) return
+    requestAnimationFrame(() => {
+      const target = el.querySelector('[data-today="true"]') as HTMLElement
+      if (target) el.scrollTo({ left: target.offsetLeft - el.offsetWidth / 2 + target.offsetWidth / 2, behavior: "instant" })
+    })
+  }, [])
+
+  const monthSlide = {
+    enter: (dir: number) => ({ x: dir > 0 ? 40 : -40, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? -40 : 40, opacity: 0 }),
   }
 
   return (
-    <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-muted/50 transition-all group">
-      <div className={cn(
-        "w-2 h-2 rounded-full shrink-0",
-        isActive ? "bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.5)]"
-          : s.paused_reason === "too_many_failures" ? "bg-amber-500"
-          : "bg-muted-foreground/30",
-      )} />
-      <div className="flex-1 min-w-0">
-        <p
-          className="text-sm font-medium text-foreground/80 truncate cursor-pointer hover:text-foreground transition-colors"
-          onClick={() => router.push(`/c/${s.chat_id}`)}
-        >
-          {s.title || "Untitled Employee"}
-        </p>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <button onClick={() => nav(-1)} className="p-1.5 rounded-lg hover:bg-muted/50 text-muted-foreground/50 hover:text-foreground transition-all"><ChevronLeft className="h-4 w-4" /></button>
+          <div className="relative overflow-hidden w-[160px] h-7">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.h2 key={`${year}-${month}`} custom={direction} variants={monthSlide} initial="enter" animate="center" exit="exit" transition={{ duration: 0.25, ease: "easeOut" }} className="absolute inset-0 flex items-center text-base font-semibold tracking-tight text-foreground">
+                {new Date(year, month).toLocaleDateString(undefined, { month: "long", year: "numeric" })}
+              </motion.h2>
+            </AnimatePresence>
+          </div>
+          <button onClick={() => nav(1)} className="p-1.5 rounded-lg hover:bg-muted/50 text-muted-foreground/50 hover:text-foreground transition-all"><ChevronRight className="h-4 w-4" /></button>
+        </div>
+        {!isThisMonth && (
+          <motion.button initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} onClick={() => { setDirection(0); setMonth(today.getMonth()); setYear(today.getFullYear()); onSelectDate(today) }} className="text-[11px] px-3 py-1 rounded-lg bg-muted/40 hover:bg-muted/60 text-muted-foreground/60 hover:text-foreground transition-all">
+            Today
+          </motion.button>
+        )}
       </div>
-      <span className="text-xs text-muted-foreground/50 tabular-nums shrink-0">
-        {task.runsPerDay > 6 ? `${task.runsPerDay}\u00d7 daily` : task.times.length > 0 ? task.times[0] : formatFrequency(s.frequency)}
-      </span>
-      <button
-        onClick={run}
-        disabled={!!loading}
-        className="h-6 px-2 rounded-md text-[11px] font-medium bg-muted/60 hover:bg-muted text-foreground/60 hover:text-foreground opacity-0 group-hover:opacity-100 transition-all disabled:opacity-40"
-      >
-        {loading === "run" ? "\u2026" : "Run"}
-      </button>
+
+      <div className="relative">
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div key={`${year}-${month}`} custom={direction} initial={{ x: direction > 0 ? 60 : -60, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: direction > 0 ? -60 : 60, opacity: 0 }} transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}>
+            <div ref={scrollRef} className="flex gap-1.5 sm:gap-2 overflow-x-auto scrollbar-invisible py-1 px-3" style={{ scrollSnapType: "x mandatory" }}>
+              {days.map((day) => {
+                const sel = isSel(day), tod = isTod(day), taskCount = taskMap.get(day.getDate()) || 0
+                return (
+                  <motion.button key={day.getDate()} data-selected={sel ? "true" : undefined} data-today={tod ? "true" : undefined} onClick={() => onSelectDate(day)} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
+                    className={cn("relative flex flex-col items-center gap-1 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-xl shrink-0 transition-all duration-200 min-w-[44px] sm:min-w-[52px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", sel ? "bg-muted ring-1 ring-border shadow-sm" : "hover:bg-muted/40")}
+                    style={{ scrollSnapAlign: "center" }}
+                  >
+                    <span className={cn("text-[10px] font-medium uppercase tracking-wider leading-none", sel ? "text-foreground/60" : "text-muted-foreground/40")}>
+                      <span className="sm:hidden">{TINY_DAYS[day.getDay()]}</span><span className="hidden sm:inline">{SHORT_DAYS[day.getDay()]}</span>
+                    </span>
+                    <span className={cn("text-lg sm:text-xl font-bold leading-none tabular-nums", sel ? "text-foreground" : tod ? "text-foreground/80" : "text-foreground/50")}>{day.getDate()}</span>
+                    <div className="h-1.5 flex items-center justify-center gap-0.5 mt-0.5">
+                      {taskCount > 0 ? (
+                        <>{Array.from({ length: Math.min(taskCount, 3) }, (_, i) => <div key={i} className={cn("w-1 h-1 rounded-full transition-colors duration-300", sel ? "bg-emerald-500" : "bg-muted-foreground/25")} />)}{taskCount > 3 && <span className={cn("text-[8px] leading-none font-bold", sel ? "text-emerald-500" : "text-muted-foreground/25")}>+</span>}</>
+                      ) : <div className="w-1 h-1" />}
+                    </div>
+                    {tod && !sel && <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-muted-foreground/40" />}
+                  </motion.button>
+                )
+              })}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div key={`${selYear}-${selMonth}-${selDay}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2, ease: "easeOut" }} className="rounded-xl border border-border/20 bg-muted/20 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted/50"><CalendarDays className="h-3.5 w-3.5 text-muted-foreground/50" /></div>
+              <div>
+                <h3 className="text-sm font-semibold text-foreground">{selectedDate.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" })}</h3>
+                <p className="text-[11px] text-muted-foreground/50">{selectedTasks.length === 0 ? "No employees scheduled" : `${selectedTasks.length} employee${selectedTasks.length > 1 ? "s" : ""} scheduled`}</p>
+              </div>
+            </div>
+            {isTodaySelected && <span className="text-[10px] uppercase tracking-widest font-semibold text-muted-foreground/40 bg-muted/50 px-2 py-0.5 rounded-md">Today</span>}
+          </div>
+          {selectedTasks.length > 0 ? (
+            <div className="px-2 pb-2 space-y-0.5">
+              {selectedTasks.map((task, i) => {
+                const s = task.schedule, isAct = s.enabled && !s.paused_reason, isFail = s.paused_reason === "too_many_failures"
+                return (
+                  <motion.div key={s.chat_id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05, duration: 0.2 }} className="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-muted/30 transition-all">
+                    {/* Status dot */}
+                    <div className={cn("w-2 h-2 rounded-full shrink-0", isAct ? "bg-emerald-500" : isFail ? "bg-amber-500" : "bg-muted-foreground/25")} />
+                    {/* Info — clickable */}
+                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => onEdit?.(s.chat_id)}>
+                      <div className="flex items-center gap-2">
+                        <p className="text-[13px] font-semibold text-foreground/70 truncate group-hover:text-foreground transition-colors">{s.title || "Untitled"}</p>
+                        <span className={cn("text-[10px] font-medium shrink-0", isAct ? "text-emerald-600 dark:text-emerald-400" : isFail ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground/30")}>{isAct ? "On Duty" : isFail ? "Attention" : "Standby"}</span>
+                      </div>
+                      <p className="text-[11px] text-muted-foreground/35 mt-0.5 tabular-nums">
+                        {task.runsPerDay > 6 ? `${task.runsPerDay}x/day` : task.times.length > 0 ? task.times[0] : formatFrequency(s.frequency)}
+                        {s.run_count > 0 ? ` · ${s.run_count} runs` : ""}
+                        {s.next_run_at ? ` · Next ${formatNextRun(s.next_run_at)}` : ""}
+                      </p>
+                    </div>
+                    {/* Actions */}
+                    <div className="flex items-center gap-0.5 shrink-0 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      {onRun && <ActionButton icon={CoastyIcon} label="Run" onClick={() => onRun(s.chat_id)} />}
+                      {onPause && <ActionButton icon={s.enabled ? Pause : Play} onClick={() => onPause(s.chat_id)} />}
+                      {onEdit && <ActionButton icon={Pencil} onClick={() => onEdit(s.chat_id)} />}
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="pb-6 pt-2 text-center"><CoastyIcon className="h-5 w-5 text-muted-foreground/15 mx-auto mb-1.5" /><p className="text-[11px] text-muted-foreground/30">No employees on this day</p></div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════
+   Inline: ScheduleHistory
+   ═══════════════════════════════════════════════════════ */
+
+function historyStatusConfig(status: string) {
+  switch (status) {
+    case "completed": return { dotColor: "bg-emerald-500", label: "Completed", labelColor: "text-emerald-600 dark:text-emerald-400" }
+    case "failed": return { dotColor: "bg-rose-500", label: "Failed", labelColor: "text-rose-600 dark:text-rose-400" }
+    case "skipped": return { dotColor: "bg-muted-foreground/40", label: "Skipped", labelColor: "text-muted-foreground" }
+    case "cancelled": return { dotColor: "bg-muted-foreground/40", label: "Cancelled", labelColor: "text-muted-foreground" }
+    case "triggered": return { dotColor: "bg-sky-500", label: "Triggered", labelColor: "text-sky-600 dark:text-sky-400" }
+    default: return { dotColor: "bg-muted-foreground/40", label: status, labelColor: "text-muted-foreground" }
+  }
+}
+
+function formatHistoryDate(iso: string) {
+  const d = new Date(iso), now = new Date(), diffMs = now.getTime() - d.getTime()
+  const diffMins = Math.floor(diffMs / 60000), diffHrs = Math.floor(diffMs / 3600000), diffDays = Math.floor(diffMs / 86400000)
+  if (diffMins < 1) return "just now"
+  if (diffMins < 60) return `${diffMins}m ago`
+  if (diffHrs < 24) return `${diffHrs}h ago`
+  if (diffDays === 1) return "yesterday"
+  if (diffDays < 7) return `${diffDays}d ago`
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric" })
+}
+
+function ScheduleHistory({ chatId, limit = 20 }: { chatId?: string; limit?: number }) {
+  const [history, setHistory] = useState<ScheduleHistoryEntry[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    getScheduleHistory(chatId, limit).then(setHistory).catch(() => setHistory([])).finally(() => setLoading(false))
+  }, [chatId, limit])
+
+  if (loading) return (
+    <div className="flex items-center justify-center py-12">
+      <div className="relative h-8 w-8"><div className="absolute inset-0 rounded-full border-2 border-border/20" /><div className="absolute inset-0 rounded-full border-2 border-transparent border-t-muted-foreground/50 animate-spin" /></div>
+    </div>
+  )
+
+  if (history.length === 0) return (
+    <div className="flex flex-col items-center justify-center py-14 text-center">
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-muted/40 mb-3"><History className="h-5 w-5 text-muted-foreground/25" /></div>
+      <p className="text-sm font-medium text-muted-foreground/50">No activity yet</p>
+      <p className="text-[11px] text-muted-foreground/30 mt-1 max-w-[220px]">Logs will appear here once your employees start working</p>
+    </div>
+  )
+
+  return (
+    <div className="divide-y divide-border/10">
+      {history.map((entry, idx) => {
+        const cfg = historyStatusConfig(entry.status)
+        return (
+          <motion.div key={entry.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: idx * 0.03 }} className="group flex items-center gap-3 px-4 py-3 hover:bg-muted/20 transition-colors duration-200">
+            <div className={cn("w-2 h-2 rounded-full shrink-0", cfg.dotColor)} />
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <span className={cn("text-xs font-semibold", cfg.labelColor)}>{cfg.label}</span>
+                {entry.trigger === "manual" && <span className="text-[10px] uppercase tracking-widest font-medium text-muted-foreground/30 bg-muted/40 px-1.5 py-px rounded">manual</span>}
+              </div>
+              {entry.error && <p className="text-[11px] text-muted-foreground/40 truncate mt-0.5" title={entry.error}>{entry.error}</p>}
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              {entry.duration_seconds != null && <span className="hidden sm:inline text-[11px] text-muted-foreground/30 tabular-nums font-medium">{entry.duration_seconds}s</span>}
+              {entry.credits_charged != null && entry.credits_charged > 0 && <span className="hidden sm:inline text-[11px] text-muted-foreground/30 tabular-nums">{entry.credits_charged} cr</span>}
+              <span className="text-[11px] text-muted-foreground/30 tabular-nums min-w-[48px] text-right" title={new Date(entry.executed_at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}>{formatHistoryDate(entry.executed_at)}</span>
+            </div>
+          </motion.div>
+        )
+      })}
     </div>
   )
 }
 
 /* ═══ Full Org Chart — Company → Teams → Employees with delegation arrows ═══ */
 function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse[]; schedules: ScheduleResponse[]; onRefresh: () => void; onEdit: (chatId: string) => void }) {
+  const t = useTranslations("schedulesPage")
   const chartRef = useRef<HTMLDivElement>(null)
   const companyRef = useRef<HTMLDivElement>(null)
   const teamRefs = useRef<Map<string, HTMLDivElement>>(new Map())
@@ -399,7 +787,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
   // All employees in any team
   const allMemberIds = useMemo(() => {
     const ids = new Set<string>()
-    teams.forEach(t => t.members.forEach(m => ids.add(m.chat_id)))
+    teams.forEach(tm => tm.members.forEach(m => ids.add(m.chat_id)))
     return ids
   }, [teams])
 
@@ -418,7 +806,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
     async function load() {
       const map = new Map<string, DelegateConfig[]>()
       const allIds = new Set<string>()
-      teams.forEach(t => t.members.forEach(m => allIds.add(m.chat_id)))
+      teams.forEach(tm => tm.members.forEach(m => allIds.add(m.chat_id)))
       await Promise.all(Array.from(allIds).map(async (chatId) => {
         try {
           const dels = await getDelegates(chatId)
@@ -446,8 +834,8 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
       const cx = cb.left + cb.width / 2 - cr.left
       const cy = cb.bottom - cr.top
 
-      teams.forEach(t => {
-        const te = teamRefs.current.get(t.hub_id)
+      teams.forEach(tm => {
+        const te = teamRefs.current.get(tm.hub_id)
         if (!te) return
         const tb = te.getBoundingClientRect()
         const tx = tb.left + tb.width / 2 - cr.left
@@ -458,14 +846,14 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
     }
 
     // Team → top-tier Employee connectors (skip delegates — they connect via delegation arrows)
-    teams.forEach(t => {
-      const te = teamRefs.current.get(t.hub_id)
+    teams.forEach(tm => {
+      const te = teamRefs.current.get(tm.hub_id)
       if (!te) return
       const tb = te.getBoundingClientRect()
       const tx = tb.left + tb.width / 2 - cr.left
       const ty = tb.bottom - cr.top
 
-      t.members.forEach(m => {
+      tm.members.forEach(m => {
         if (delegateTargetIds.has(m.chat_id)) return // skip — connected via delegation arrow
         const me = memberRefs.current.get(m.chat_id)
         if (!me) return
@@ -594,8 +982,8 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
             <CoastyIcon className="h-4 w-4 sm:h-5 sm:w-5 text-foreground/60" />
           </div>
           <div>
-            <h3 className="text-xs sm:text-sm font-bold text-foreground tracking-tight">Company</h3>
-            <p className="text-[10px] sm:text-[11px] text-muted-foreground/50">{teams.length} team{teams.length !== 1 ? "s" : ""} &middot; {allMemberIds.size} employee{allMemberIds.size !== 1 ? "s" : ""}</p>
+            <h3 className="text-xs sm:text-sm font-bold text-foreground tracking-tight">{t("company")}</h3>
+            <p className="text-[10px] sm:text-[11px] text-muted-foreground/50">{t("teams", { count: teams.length })} &middot; {t("employees", { count: allMemberIds.size })}</p>
           </div>
         </div>
 
@@ -637,20 +1025,20 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
                           className="w-full h-7 rounded-md px-2 text-xs font-semibold bg-muted/60 border border-border/50 text-foreground focus:outline-none focus:border-border transition-all" />
                         <textarea value={editInstructions} onChange={e => setEditInstructions(e.target.value)} rows={1}
                           className="w-full rounded-md px-2 py-1 text-[10px] resize-none bg-muted/60 border border-border/50 text-foreground focus:outline-none focus:border-border transition-all"
-                          placeholder="Guidelines..." />
+                          placeholder={t("guidelinesPlaceholder")} />
                         <div className="flex gap-1.5">
-                          <button onClick={() => saveEdit(team.hub_id, team.name, team.instructions || "")} className="h-6 px-2.5 rounded-md text-[10px] font-semibold text-background bg-foreground hover:bg-foreground/90 transition-all">{busy === "edit" ? "\u2026" : "Save"}</button>
-                          <button onClick={cancelEdit} className="h-6 px-2 rounded-md text-[10px] text-muted-foreground hover:text-foreground transition-all">Cancel</button>
+                          <button onClick={() => saveEdit(team.hub_id, team.name, team.instructions || "")} className="h-6 px-2.5 rounded-md text-[10px] font-semibold text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border/50 transition-all">{busy === "edit" ? "\u2026" : t("save")}</button>
+                          <button onClick={cancelEdit} className="h-6 px-2 rounded-md text-[10px] text-muted-foreground hover:text-foreground transition-all">{t("cancel")}</button>
                         </div>
                       </div>
                     ) : (
                       <div className="min-w-0">
                         <p className="text-xs font-bold text-foreground truncate">{team.name}</p>
-                        <p className="text-[10px] text-muted-foreground/40 leading-tight">{team.members.length} member{team.members.length !== 1 ? "s" : ""}</p>
+                        <p className="text-[10px] text-muted-foreground/40 leading-tight">{t("members", { count: team.members.length })}</p>
                       </div>
                     )}
                     {!isEditing && (
-                      <div className="flex items-center gap-0.5 ml-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                      <div className="flex items-center gap-0.5 ml-1 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shrink-0">
                         <button onClick={() => startEdit(team)} className="h-6 w-6 flex items-center justify-center rounded-md text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/60 transition-all" title="Edit">
                           <Pencil className="h-2.5 w-2.5" />
                         </button>
@@ -691,9 +1079,9 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
                               isActive ? "bg-emerald-500" : "bg-muted-foreground/30",
                             )} />
                           </div>
-                          <p className="text-[10px] sm:text-[11px] font-semibold text-foreground mt-1.5 sm:mt-2 text-center max-w-[80px] sm:max-w-[100px] truncate leading-tight">{m.title || "Untitled"}</p>
+                          <p className="text-[10px] sm:text-[11px] font-semibold text-foreground mt-1.5 sm:mt-2 text-center max-w-[80px] sm:max-w-[100px] truncate leading-tight">{m.title || t("untitled")}</p>
                           {sched && <p className="text-[8px] sm:text-[9px] text-muted-foreground/40 leading-tight mt-0.5">{formatFrequency(sched.frequency)}</p>}
-                          {isDelegate && <span className="text-[8px] font-medium text-muted-foreground/50 mt-0.5 uppercase tracking-wider">delegate</span>}
+                          {isDelegate && <span className="text-[8px] font-medium text-muted-foreground/50 mt-0.5 uppercase tracking-wider">{t("delegate")}</span>}
                           <button
                             onClick={e => { e.stopPropagation(); removeMember(team.hub_id, m.chat_id) }}
                             disabled={!!busy}
@@ -724,7 +1112,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
                             >
                               <Plus className="h-3.5 w-3.5" />
                             </button>
-                            <p className="text-[9px] text-muted-foreground/30 mt-2">Add</p>
+                            <p className="text-[9px] text-muted-foreground/30 mt-2">{t("add")}</p>
                             {showAddMenu === team.hub_id && avail.length > 0 && (
                               <>
                                 <div className="fixed inset-0 z-40" onClick={() => setShowAddMenu(null)} />
@@ -736,7 +1124,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
                                         <CoastyIcon className="h-2.5 w-2.5 text-foreground/60" />
                                       </div>
                                       <div className="min-w-0">
-                                        <p className="text-xs font-medium text-foreground truncate">{s.title || "Untitled"}</p>
+                                        <p className="text-xs font-medium text-foreground truncate">{s.title || t("untitled")}</p>
                                         <p className="text-[10px] text-muted-foreground/60">{formatFrequency(s.frequency)}</p>
                                       </div>
                                     </button>
@@ -766,7 +1154,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
           <div className="mt-8 sm:mt-14 w-full">
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
               <div className="h-px flex-1 bg-border/30" />
-              <span className="text-[9px] sm:text-[10px] font-medium text-muted-foreground/40 uppercase tracking-widest">Unassigned</span>
+              <span className="text-[9px] sm:text-[10px] font-medium text-muted-foreground/40 uppercase tracking-widest">{t("unassigned")}</span>
               <div className="h-px flex-1 bg-border/30" />
             </div>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
@@ -792,7 +1180,7 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
                       )} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-[11px] font-semibold text-foreground truncate leading-tight">{s.title || "Untitled"}</p>
+                      <p className="text-[11px] font-semibold text-foreground truncate leading-tight">{s.title || t("untitled")}</p>
                       <p className="text-[10px] text-muted-foreground/40 leading-tight">{formatFrequency(s.frequency)}</p>
                     </div>
                     <GripVertical className="h-3 w-3 text-muted-foreground/20 shrink-0 ml-1" />
@@ -807,8 +1195,28 @@ function OrgChart({ teams, schedules, onRefresh, onEdit }: { teams: TeamResponse
   )
 }
 
+/* ── Tiny action button ── */
+function ActionButton({ icon: Icon, label, onClick }: { icon: React.ComponentType<{ className?: string }>; label?: string; onClick: () => void }) {
+  return (
+    <motion.button
+      onClick={(e) => { e.stopPropagation(); onClick() }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.92 }}
+      className={cn(
+        "flex items-center gap-1 rounded-md transition-colors",
+        label ? "h-7 px-2 text-[11px] font-medium text-muted-foreground/50 hover:text-foreground hover:bg-muted/50" : "h-7 w-7 justify-center text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/40",
+      )}
+    >
+      <Icon className="h-3 w-3" />
+      {label && <span>{label}</span>}
+    </motion.button>
+  )
+}
+
 /* ═══ Main ═══ */
 export function SchedulesContent() {
+  const t = useTranslations("schedulesPage")
+  const router = useRouter()
   const { user } = useUser()
   const [schedules, setSchedules] = useState<ScheduleResponse[]>([])
   const [loading, setLoading] = useState(true)
@@ -859,13 +1267,9 @@ export function SchedulesContent() {
     [schedules, statusFilter]
   )
 
-  const dayTasks = useMemo(() => getTasksForDate(filteredSchedules, selectedDate), [filteredSchedules, selectedDate])
-
-  const isToday = selectedDate.getDate() === new Date().getDate() && selectedDate.getMonth() === new Date().getMonth() && selectedDate.getFullYear() === new Date().getFullYear()
-
   const tabs: { id: Tab; label: string; icon: React.ComponentType<{ className?: string }>; count?: number }[] = [
-    { id: "teams", label: "Teams", icon: Users, count: teams.length },
-    { id: "employees", label: "Workforce", icon: AgentIcon, count: schedules.length },
+    { id: "teams", label: t("teamsTab"), icon: Users, count: teams.length },
+    { id: "employees", label: t("title"), icon: AgentIcon, count: schedules.length },
   ]
 
   function resetCreateTeam() {
@@ -874,8 +1278,8 @@ export function SchedulesContent() {
     setProvisioning(false); setProvisionStatus(""); setLimitError(null)
   }
 
-  function pickTemplate(t: TeamTemplate) {
-    setSelectedTemplate(t); setNewTeamName(t.name); setNewTeamInstructions(t.instructions); setCreateStep("form")
+  function pickTemplate(tmpl: TeamTemplate) {
+    setSelectedTemplate(tmpl); setNewTeamName(t(tmpl.nameKey)); setNewTeamInstructions(tmpl.instructions); setCreateStep("form")
   }
 
   function buildInstructions(): string {
@@ -908,7 +1312,7 @@ export function SchedulesContent() {
 
     try {
       // 1. Check current limits & machines
-      setProvisionStatus("Checking account limits...")
+      setProvisionStatus(t("provisioning.checking"))
       const machineRes = await fetch("/api/machines")
       const machineData = await machineRes.json()
       const currentMachines: UserMachine[] = machineData.machines ?? []
@@ -926,7 +1330,7 @@ export function SchedulesContent() {
       if (usableCloudMachines.length === 0 && machineSlots <= 0) {
         setProvisioning(false)
         setLimitError({
-          message: `You need a cloud machine but you've reached your limit of ${limits.max_machines}. Upgrade your plan or delete an unused machine.`,
+          message: t("limits.machineLimit", { max: limits.max_machines }),
           needsMachines: 1,
         })
         return
@@ -944,8 +1348,8 @@ export function SchedulesContent() {
         setProvisioning(false)
         setLimitError({
           message: availableSlots <= 0
-            ? `You've reached your employee limit (${maxSchedules} for ${tier} tier). Upgrade your plan or remove unused employees.`
-            : `This template needs ${neededEmployees} employees but you only have ${availableSlots} slot${availableSlots === 1 ? "" : "s"} left (${maxSchedules} max for ${tier} tier). Upgrade your plan or remove unused employees.`,
+            ? t("limits.employeeLimit", { max: maxSchedules, tier })
+            : t("limits.templateLimit", { needed: neededEmployees, available: availableSlots, max: maxSchedules, tier }),
           needsSchedules: neededEmployees - availableSlots,
         })
         return
@@ -957,15 +1361,15 @@ export function SchedulesContent() {
 
       if (runningCloud) {
         targetMachineId = runningCloud.id
-        setProvisionStatus(`Using machine "${runningCloud.displayName}"...`)
+        setProvisionStatus(t("provisioning.usingMachine", { name: runningCloud.displayName }))
       } else if (usableCloudMachines.length > 0) {
         // There's a cloud machine but it's stopped/creating/starting — use it anyway
         // The schedule will run once the machine is available
         targetMachineId = usableCloudMachines[0].id
-        setProvisionStatus(`Assigning to machine "${usableCloudMachines[0].displayName}" (will run when machine is ready)...`)
+        setProvisionStatus(t("provisioning.assigningMachine", { name: usableCloudMachines[0].displayName }))
       } else {
         // No cloud machines at all — create one
-        setProvisionStatus("Creating a new machine...")
+        setProvisionStatus(t("provisioning.creatingMachine"))
         const createRes = await fetch("/api/machines", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -983,7 +1387,7 @@ export function SchedulesContent() {
         const createData = await createRes.json()
         targetMachineId = createData.machine?.id
         if (!targetMachineId) throw new Error("Machine creation returned no ID")
-        setProvisionStatus("Machine provisioning started...")
+        setProvisionStatus(t("provisioning.machineStarted"))
       }
 
       // 3. Create employee chats + schedules
@@ -993,14 +1397,14 @@ export function SchedulesContent() {
 
       for (let i = 0; i < selectedTemplate.employees.length; i++) {
         const emp = selectedTemplate.employees[i]
-        setProvisionStatus(`Hiring ${emp.name} (${i + 1}/${selectedTemplate.employees.length})...`)
+        setProvisionStatus(t("provisioning.hiring", { name: emp.name, current: i + 1, total: selectedTemplate.employees.length }))
 
         try {
           // Create chat
           const chatRes = await fetch("/api/create-chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user?.id, title: emp.name, model: null, isAuthenticated: true }),
+            body: JSON.stringify({ title: emp.name, model: null }),
           })
           if (!chatRes.ok) {
             const errData = await chatRes.json().catch(() => ({}))
@@ -1028,17 +1432,17 @@ export function SchedulesContent() {
       }
 
       if (employeeChatIds.length === 0) {
-        throw new Error("Failed to create any employees. Check your account limits and try again.")
+        throw new Error(t("limits.createFailed"))
       }
 
       // 4. Create team with all members
-      setProvisionStatus("Creating team...")
+      setProvisionStatus(t("provisioning.creatingTeam"))
       await createTeam(newTeamName.trim(), instructions || undefined, employeeChatIds)
 
       if (failedEmployees.length > 0) {
-        toast.success(`Team created with ${employeeChatIds.length} employees (${failedEmployees.length} failed: ${failedEmployees.join(", ")})`)
+        toast.success(t("toasts.teamCreatedPartial", { count: employeeChatIds.length, failedCount: failedEmployees.length, names: failedEmployees.join(", ") }))
       } else {
-        toast.success(`${selectedTemplate.name} team created with ${employeeChatIds.length} employees`)
+        toast.success(t("toasts.teamCreated", { name: t(selectedTemplate.nameKey), count: employeeChatIds.length }))
       }
       resetCreateTeam()
       // Refresh machine list too
@@ -1046,7 +1450,7 @@ export function SchedulesContent() {
       refreshAll()
     } catch (e) {
       console.error("Template provisioning failed:", e)
-      toast.error(e instanceof Error ? e.message : "Failed to create team")
+      toast.error(e instanceof Error ? e.message : t("limits.teamFailed"))
       setProvisioning(false)
     }
   }
@@ -1059,7 +1463,7 @@ export function SchedulesContent() {
             <div className="absolute inset-0 rounded-full border-2 border-foreground/[0.08]" />
             <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/60 animate-spin" />
           </div>
-          <span className="text-sm text-muted-foreground">Loading your employees...</span>
+          <span className="text-sm text-muted-foreground">{t("loading")}</span>
         </div>
       </div>
     )
@@ -1090,26 +1494,26 @@ export function SchedulesContent() {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
           <div>
-            <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">Workforce</h1>
+            <h1 className="text-2xl sm:text-3xl font-medium tracking-tight">{t("title")}</h1>
             <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-              <p className="text-sm text-muted-foreground">Your AI workforce — assign tasks and let them handle the rest</p>
+              <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
               <Link
                 href="/guide?tab=workforce"
                 className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-foreground/[0.05] px-2.5 py-1 text-xs font-medium text-foreground/70 hover:text-foreground hover:border-border hover:bg-foreground/[0.08] transition-all"
               >
                 <BookOpen className="h-3.5 w-3.5" />
-                Guide
+                {t("guide")}
               </Link>
               {schedules.length > 0 && (
                 <>
                   <span className="h-3.5 w-px bg-border/30 hidden sm:block" />
                   <div className="flex items-center gap-3 text-xs">
                     <span className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-medium">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.4)]" />{activeCount} on duty
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.4)]" />{t("onDuty", { count: activeCount })}
                     </span>
                     {pausedCount > 0 && (
                       <span className="flex items-center gap-1.5 text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />{pausedCount} standby
+                        <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/30" />{t("standby", { count: pausedCount })}
                       </span>
                     )}
                   </div>
@@ -1117,8 +1521,8 @@ export function SchedulesContent() {
               )}
             </div>
           </div>
-          <button onClick={() => setShowCreateDialog(true)} className={cn("inline-flex h-9 items-center justify-center rounded-xl px-5 text-sm font-medium gap-2 transition-all bg-foreground text-background hover:bg-foreground/90")}>
-            <UserPlus className="h-4 w-4" />Hire Employee
+          <button onClick={() => setShowCreateDialog(true)} className={cn("inline-flex h-9 items-center justify-center rounded-xl px-5 text-sm font-medium gap-2 transition-all bg-muted hover:bg-muted/80 text-foreground ring-1 ring-border/50 hover:ring-border shadow-sm hover:shadow-md")}>
+            <UserPlus className="h-4 w-4" />{t("hireEmployee")}
           </button>
         </motion.div>
 
@@ -1133,11 +1537,11 @@ export function SchedulesContent() {
           <div className="flex items-start sm:items-center gap-2 sm:gap-3 min-w-0">
             <AgentIcon className="h-3.5 w-3.5 shrink-0 text-muted-foreground mt-0.5 sm:mt-0" />
             <p className="text-xs sm:text-sm text-muted-foreground">
-              Open any chat and click <span className="inline-flex items-center gap-1 font-bold text-foreground"><AgentIcon className="h-3 w-3" />Assign Employee</span> on the <span className="font-bold text-foreground">top right</span> to put it on autopilot
+              {t("emptyState.openChat")} <span className="inline-flex items-center gap-1 font-bold text-foreground"><AgentIcon className="h-3 w-3" />{t("emptyState.assignEmployee")}</span> {t("emptyState.onThe")} <span className="font-bold text-foreground">{t("emptyState.topRight")}</span> {t("emptyState.toPutOnAutopilot")}
             </p>
           </div>
           <Link href="/" className={cn("inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all bg-muted/60 hover:bg-muted text-foreground/70 hover:text-foreground")}>
-            <CoastyIcon className="h-3 w-3" />New Chat
+            <CoastyIcon className="h-3 w-3" />{t("emptyState.newChat")}
           </Link>
         </motion.div>
 
@@ -1208,13 +1612,13 @@ export function SchedulesContent() {
                   <MoreHorizontal className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-muted-foreground/60" />
                 </motion.div>
               </div>
-              <h3 className="text-xl font-bold mb-2 text-foreground">Hire your first employee</h3>
-              <p className="text-sm text-muted-foreground max-w-sm mb-10">AI employees work on your behalf — assign a task, set a schedule, and they'll execute it automatically</p>
+              <h3 className="text-xl font-bold mb-2 text-foreground">{t("emptyWorkforce.title")}</h3>
+              <p className="text-sm text-muted-foreground max-w-sm mb-10">{t("emptyWorkforce.description")}</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 text-left w-full max-w-xl">
                 {[
-                  { icon: Clock, title: "Flexible shifts", desc: "Schedule employees hourly, daily, weekly, monthly — or use a custom cron expression" },
-                  { icon: Cpu, title: "Full autonomy", desc: "Each employee gets full access to browsing, terminal, and your connected workstations" },
-                  { icon: Activity, title: "Activity logs", desc: "Every execution is logged so you can review what your employees accomplished" },
+                  { icon: Clock, title: t("emptyWorkforce.flexibleShifts.title"), desc: t("emptyWorkforce.flexibleShifts.desc") },
+                  { icon: Cpu, title: t("emptyWorkforce.fullAutonomy.title"), desc: t("emptyWorkforce.fullAutonomy.desc") },
+                  { icon: Activity, title: t("emptyWorkforce.activityLogs.title"), desc: t("emptyWorkforce.activityLogs.desc") },
                 ].map(({ icon: Icon, title, desc }, i) => (
                   <motion.div
                     key={title}
@@ -1231,11 +1635,11 @@ export function SchedulesContent() {
                 ))}
               </div>
               <div className="flex items-center gap-3">
-                <button onClick={() => setShowCreateDialog(true)} className={cn("inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-300 text-background bg-foreground hover:bg-foreground/90 hover:scale-[1.02] active:scale-[0.98]")}>
-                  <UserPlus className="h-3.5 w-3.5" />Hire Employee
+                <button onClick={() => setShowCreateDialog(true)} className={cn("inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-300 text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border/50 hover:ring-border shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98]")}>
+                  <UserPlus className="h-3.5 w-3.5" />{t("hireEmployee")}
                 </button>
                 <Link href="/" className={cn("inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all border border-border/30 bg-card/50 text-foreground/80 hover:bg-card/80 hover:border-border/50")}>
-                  <CoastyIcon className="h-3.5 w-3.5" />Start from a chat
+                  <CoastyIcon className="h-3.5 w-3.5" />{t("emptyWorkforce.startFromChat")}
                 </Link>
               </div>
             </div>
@@ -1264,9 +1668,9 @@ export function SchedulesContent() {
                           <div className="h-8 w-8 rounded-xl bg-foreground/[0.06] dark:bg-foreground/[0.08] flex items-center justify-center">
                             <Users className="h-4 w-4 text-foreground/50" />
                           </div>
-                          <h2 className="text-[16px] sm:text-[18px] font-bold text-foreground tracking-tight">New Team</h2>
+                          <h2 className="text-[16px] sm:text-[18px] font-bold text-foreground tracking-tight">{t("createTeam.title")}</h2>
                         </div>
-                        <p className="text-[12px] sm:text-[13px] text-muted-foreground/50 pl-[42px]">Start with a template or build from scratch</p>
+                        <p className="text-[12px] sm:text-[13px] text-muted-foreground/50 pl-[42px]">{t("createTeam.subtitle")}</p>
                       </div>
                     </div>
 
@@ -1274,14 +1678,14 @@ export function SchedulesContent() {
                       {(["starter", "plus", "pro"] as const).map(tier => {
                         const meta = TIER_META[tier]
                         const TierIcon = meta.icon
-                        const tierTemplates = TEAM_TEMPLATES.filter(t => t.tier === tier)
+                        const tierTemplates = TEAM_TEMPLATES.filter(tmpl => tmpl.tier === tier)
                         return (
                           <div key={tier}>
                             {/* Tier header — pill badge with details */}
                             <div className="flex items-center gap-2.5 mb-3">
                               <div className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider shrink-0", meta.color, meta.badgeBg)}>
                                 <TierIcon className="h-3 w-3" />
-                                {meta.label}
+                                {t(meta.labelKey)}
                               </div>
                               <div className="h-px flex-1 bg-border/20" />
                               <div className="hidden sm:flex items-center gap-1.5 text-[10px] text-muted-foreground/40 font-medium tabular-nums shrink-0">
@@ -1289,23 +1693,23 @@ export function SchedulesContent() {
                                   {meta.machines} {meta.machines === 1 ? "machine" : "machines"}
                                 </span>
                                 <span>&middot;</span>
-                                <span>{meta.employees}</span>
+                                <span>{t(meta.employeesKey)}</span>
                                 <span>&middot;</span>
-                                <span className="font-semibold text-foreground/50">{meta.price}</span>
+                                <span className="font-semibold text-foreground/50">{t(meta.priceKey)}</span>
                               </div>
                               <span className={cn("sm:hidden text-[10px] font-semibold shrink-0", meta.color)}>
-                                {meta.price}
+                                {t(meta.priceKey)}
                               </span>
                             </div>
 
                             {/* Template cards */}
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                              {tierTemplates.map(t => {
-                                const Icon = t.icon
+                              {tierTemplates.map(tmpl => {
+                                const Icon = tmpl.icon
                                 return (
                                   <button
-                                    key={t.id}
-                                    onClick={() => pickTemplate(t)}
+                                    key={tmpl.id}
+                                    onClick={() => pickTemplate(tmpl)}
                                     className="group relative text-left rounded-xl border border-border/30 bg-card/50 p-3.5 sm:p-4 overflow-hidden transition-all duration-200 hover:shadow-lg hover:scale-[1.01]"
                                     style={{ "--accent": meta.accentHex } as React.CSSProperties}
                                   >
@@ -1319,11 +1723,11 @@ export function SchedulesContent() {
                                         <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px] text-foreground/40 transition-colors duration-200 group-hover:text-foreground/70" />
                                       </div>
                                       <div className="min-w-0 flex-1 sm:flex-initial">
-                                        <h3 className="text-[12px] sm:text-[13px] font-bold text-foreground/90 mb-0.5 leading-tight group-hover:text-foreground transition-colors">{t.name}</h3>
-                                        <p className="text-[10px] sm:text-[11px] text-muted-foreground/45 leading-relaxed line-clamp-1 sm:line-clamp-2">{t.tagline}</p>
+                                        <h3 className="text-[12px] sm:text-[13px] font-bold text-foreground/90 mb-0.5 leading-tight group-hover:text-foreground transition-colors">{t(tmpl.nameKey)}</h3>
+                                        <p className="text-[10px] sm:text-[11px] text-muted-foreground/45 leading-relaxed line-clamp-1 sm:line-clamp-2">{t(tmpl.taglineKey)}</p>
                                         <div className="flex items-center gap-1.5 mt-2 sm:mt-3">
-                                          <span className="text-[9px] sm:text-[10px] text-muted-foreground/30 font-semibold tabular-nums bg-muted/60 px-1.5 py-0.5 rounded-md">{t.employees.length} employees</span>
-                                          <span className="text-[9px] sm:text-[10px] text-muted-foreground/30 font-semibold tabular-nums bg-muted/60 px-1.5 py-0.5 rounded-md">{t.credentials.length} creds</span>
+                                          <span className="text-[9px] sm:text-[10px] text-muted-foreground/30 font-semibold tabular-nums bg-muted/60 px-1.5 py-0.5 rounded-md">{t("employees", { count: tmpl.employees.length })}</span>
+                                          <span className="text-[9px] sm:text-[10px] text-muted-foreground/30 font-semibold tabular-nums bg-muted/60 px-1.5 py-0.5 rounded-md">{tmpl.credentials.length} creds</span>
                                         </div>
                                       </div>
                                     </div>
@@ -1340,13 +1744,13 @@ export function SchedulesContent() {
                     {/* Footer — custom option */}
                     <div className="px-5 sm:px-7 py-3.5 sm:py-4 flex items-center justify-between border-t border-border/20 bg-muted/20">
                       <button onClick={resetCreateTeam} className="h-8 sm:h-9 px-3 sm:px-4 rounded-lg text-[12px] sm:text-[13px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all">
-                        Cancel
+                        {t("cancel")}
                       </button>
                       <button
                         onClick={() => { setSelectedTemplate(null); setNewTeamName(""); setNewTeamInstructions(""); setCreateStep("form") }}
                         className="h-8 sm:h-9 px-4 sm:px-5 rounded-lg text-[12px] sm:text-[13px] font-medium text-foreground/70 hover:text-foreground border border-border/30 hover:border-border/50 hover:bg-muted/40 transition-all"
                       >
-                        Custom Team
+                        {t("createTeam.customTeam")}
                       </button>
                     </div>
                   </>
@@ -1359,7 +1763,7 @@ export function SchedulesContent() {
                           onClick={() => setCreateStep("templates")}
                           className="inline-flex items-center gap-1 text-[11px] sm:text-[12px] text-muted-foreground/50 hover:text-foreground/70 transition-colors mb-2 sm:mb-3"
                         >
-                          <ArrowLeft className="h-3 w-3" />Back to templates
+                          <ArrowLeft className="h-3 w-3" />{t("createTeam.backToTemplates")}
                         </button>
                         {selectedTemplate ? (
                           <div className="flex items-start gap-3">
@@ -1368,14 +1772,14 @@ export function SchedulesContent() {
                             </div>
                             <div className="min-w-0">
                               <div className="flex items-center gap-2">
-                                <h2 className="text-[17px] font-semibold text-foreground tracking-tight">{selectedTemplate.name}</h2>
+                                <h2 className="text-[17px] font-semibold text-foreground tracking-tight">{t(selectedTemplate.nameKey)}</h2>
                                 {(() => { const meta = TIER_META[selectedTemplate.tier]; const TierIcon = meta.icon; return (
                                   <span className={cn("inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider", meta.color)}>
-                                    <TierIcon className="h-3 w-3" />{meta.label}
+                                    <TierIcon className="h-3 w-3" />{t(meta.labelKey)}
                                   </span>
                                 ) })()}
                               </div>
-                              <p className="text-[12px] text-muted-foreground/50 mt-0.5">{selectedTemplate.description}</p>
+                              <p className="text-[12px] text-muted-foreground/50 mt-0.5">{t(selectedTemplate.descriptionKey)}</p>
                             </div>
                           </div>
                         ) : (
@@ -1383,8 +1787,8 @@ export function SchedulesContent() {
                             <div className="h-10 w-10 rounded-xl bg-foreground/[0.06] dark:bg-foreground/[0.08] flex items-center justify-center mb-3">
                               <Users className="h-4.5 w-4.5 text-foreground/60" />
                             </div>
-                            <h2 className="text-[17px] font-semibold text-foreground tracking-tight">Custom Team</h2>
-                            <p className="text-[13px] text-muted-foreground/60 mt-1">Create a team with your own configuration.</p>
+                            <h2 className="text-[17px] font-semibold text-foreground tracking-tight">{t("createTeam.customTeam")}</h2>
+                            <p className="text-[13px] text-muted-foreground/60 mt-1">{t("createTeam.customDescription")}</p>
                           </>
                         )}
                       </div>
@@ -1393,10 +1797,10 @@ export function SchedulesContent() {
                     {/* Form fields */}
                     <div className="px-4 sm:px-7 pb-2 space-y-3 sm:space-y-4 max-h-[50vh] overflow-y-auto">
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest">Team Name</label>
+                        <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest">{t("createTeam.teamNameLabel")}</label>
                         <input
                           type="text"
-                          placeholder="e.g. Research, Marketing, Engineering"
+                          placeholder={t("createTeam.teamNamePlaceholder")}
                           value={newTeamName}
                           onChange={(e) => setNewTeamName(e.target.value)}
                           onKeyDown={(e) => e.key === "Enter" && handleCreateTeam()}
@@ -1405,9 +1809,9 @@ export function SchedulesContent() {
                         />
                       </div>
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest">Guidelines <span className="text-muted-foreground/30 normal-case tracking-normal font-normal">(optional)</span></label>
+                        <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest">{t("createTeam.guidelinesLabel")} <span className="text-muted-foreground/30 normal-case tracking-normal font-normal">{t("createTeam.optional")}</span></label>
                         <textarea
-                          placeholder="Shared instructions all team members will follow..."
+                          placeholder={t("createTeam.guidelinesPlaceholder")}
                           value={newTeamInstructions}
                           onChange={(e) => setNewTeamInstructions(e.target.value)}
                           rows={3}
@@ -1421,7 +1825,7 @@ export function SchedulesContent() {
                           {/* Suggested employees */}
                           <div className="space-y-2">
                             <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest flex items-center gap-1.5">
-                              <AgentIcon className="h-3 w-3" />Suggested Employees
+                              <AgentIcon className="h-3 w-3" />{t("createTeam.suggestedEmployees")}
                             </label>
                             <div className="space-y-1">
                               {selectedTemplate.employees.map((emp, i) => (
@@ -1434,7 +1838,7 @@ export function SchedulesContent() {
                                       <span className="text-[12px] font-semibold text-foreground/80">{emp.name}</span>
                                       <span className="text-[10px] text-muted-foreground/35 font-medium bg-muted/60 px-1.5 py-0.5 rounded">{formatFrequency(emp.frequency)}</span>
                                     </div>
-                                    <p className="text-[11px] text-muted-foreground/45 leading-relaxed mt-0.5">{emp.role}</p>
+                                    <p className="text-[11px] text-muted-foreground/45 leading-relaxed mt-0.5">{t(emp.roleKey)}</p>
                                   </div>
                                 </div>
                               ))}
@@ -1444,7 +1848,7 @@ export function SchedulesContent() {
                           {/* Required credentials (template) */}
                           <div className="space-y-2">
                             <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest flex items-center gap-1.5">
-                              <Key className="h-3 w-3" />Suggested Credentials
+                              <Key className="h-3 w-3" />{t("createTeam.suggestedCredentials")}
                             </label>
                             <div className="rounded-xl border border-border/30 overflow-hidden divide-y divide-border/20">
                               {selectedTemplate.credentials.map((cred, i) => {
@@ -1462,16 +1866,16 @@ export function SchedulesContent() {
                                     </div>
                                     <div className="min-w-0 flex-1">
                                       <span className={cn("text-[12px] font-medium", isAdded ? "text-foreground/50 line-through decoration-foreground/15" : "text-foreground/70")}>{cred.service}</span>
-                                      <p className="text-[10px] text-muted-foreground/40 leading-snug">{cred.why}</p>
+                                      <p className="text-[10px] text-muted-foreground/40 leading-snug">{t(cred.purposeKey)}</p>
                                     </div>
                                     {isAdded ? (
-                                      <span className="text-[10px] font-medium text-emerald-500 shrink-0">Added</span>
+                                      <span className="text-[10px] font-medium text-emerald-500 shrink-0">{t("createTeam.added")}</span>
                                     ) : (
                                       <button
                                         onClick={() => { setCredDialogService(cred.service); setCredDialogOpen(true) }}
                                         className="text-[10px] font-semibold text-foreground/50 hover:text-foreground bg-muted/60 hover:bg-muted px-2.5 py-1 rounded-md transition-all shrink-0"
                                       >
-                                        + Add
+                                        {t("createTeam.addButton")}
                                       </button>
                                     )}
                                   </div>
@@ -1485,7 +1889,7 @@ export function SchedulesContent() {
                       {/* Custom credentials — always visible */}
                       <div className="space-y-2">
                         <label className="text-[11px] font-medium text-foreground/40 uppercase tracking-widest flex items-center gap-1.5">
-                          <Key className="h-3 w-3" />{selectedTemplate ? "Additional Credentials" : "Credentials"}
+                          <Key className="h-3 w-3" />{selectedTemplate ? t("createTeam.suggestedCredentials") : t("createTeam.credentials")}
                         </label>
 
                         {customCredentials.length > 0 && (
@@ -1514,11 +1918,11 @@ export function SchedulesContent() {
                           onClick={() => { setCredDialogService(""); setCredDialogOpen(true) }}
                           className="w-full flex items-center justify-center gap-1.5 h-9 rounded-xl border border-dashed border-border/40 text-[12px] font-medium text-muted-foreground/50 hover:text-foreground/70 hover:border-border/60 hover:bg-muted/40 transition-all"
                         >
-                          <Plus className="h-3 w-3" />Add credential
+                          <Plus className="h-3 w-3" />{t("createTeam.addCredential")}
                         </button>
 
                         <p className="text-[10px] text-muted-foreground/30 flex items-center gap-1">
-                          <ShieldCheck className="h-3 w-3" />Credentials are encrypted. They&apos;ll be included in team guidelines so employees know what&apos;s available.
+                          <ShieldCheck className="h-3 w-3" />{t("createTeam.credentialHint")}
                         </p>
                       </div>
 
@@ -1549,7 +1953,7 @@ export function SchedulesContent() {
                             href="/billing"
                             className="inline-flex items-center gap-1.5 h-8 px-4 rounded-lg text-[12px] font-semibold bg-amber-600 hover:bg-amber-700 text-white transition-colors"
                           >
-                            <TrendingUp className="h-3 w-3" />Upgrade Plan
+                            <TrendingUp className="h-3 w-3" />{t("limits.upgradePlan")}
                           </Link>
                           {limitError.needsMachines ? (
                             <Link
@@ -1557,14 +1961,14 @@ export function SchedulesContent() {
                               onClick={() => resetCreateTeam()}
                               className="inline-flex items-center gap-1.5 h-8 px-4 rounded-lg text-[12px] font-medium text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
                             >
-                              <Cpu className="h-3 w-3" />Manage Machines
+                              <Cpu className="h-3 w-3" />{t("limits.manageMachines")}
                             </Link>
                           ) : (
                             <button
                               onClick={() => { resetCreateTeam(); setActiveTab("employees") }}
                               className="inline-flex items-center gap-1.5 h-8 px-4 rounded-lg text-[12px] font-medium text-amber-700 dark:text-amber-400 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
                             >
-                              <AgentIcon className="h-3 w-3" />Manage Employees
+                              <AgentIcon className="h-3 w-3" />{t("limits.manageEmployees")}
                             </button>
                           )}
                         </div>
@@ -1587,7 +1991,7 @@ export function SchedulesContent() {
                     {/* Footer */}
                     <div className="px-4 sm:px-7 py-4 sm:py-5 flex items-center justify-end gap-2 sm:gap-2.5 border-t border-border/20 bg-muted/20">
                       <button onClick={resetCreateTeam} disabled={provisioning} className="h-8 sm:h-9 px-3 sm:px-4 rounded-lg text-[12px] sm:text-[13px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all disabled:opacity-40">
-                        Cancel
+                        {t("cancel")}
                       </button>
                       <button
                         onClick={handleCreateTeam}
@@ -1595,11 +1999,11 @@ export function SchedulesContent() {
                         className={cn(
                           "h-8 sm:h-9 px-4 sm:px-5 rounded-lg text-[12px] sm:text-[13px] font-semibold transition-all",
                           newTeamName.trim() && !provisioning
-                            ? "text-background bg-foreground hover:bg-foreground/90 shadow-sm"
+                            ? "text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border/50 shadow-sm"
                             : "text-muted-foreground/40 bg-muted/60 cursor-not-allowed"
                         )}
                       >
-                        {provisioning ? "Setting up..." : selectedTemplate ? `Create ${selectedTemplate.employees.length} Employees` : "Create Team"}
+                        {provisioning ? t("createTeam.settingUp") : selectedTemplate ? t("createTeam.createEmployees", { count: selectedTemplate.employees.length }) : t("createTeam.createTeamButton")}
                       </button>
                     </div>
                   </>
@@ -1611,12 +2015,12 @@ export function SchedulesContent() {
             {teams.length === 0 && (
               <div className="rounded-2xl border border-border/30 bg-card/50 backdrop-blur-sm py-14 text-center">
                 <Users className="h-8 w-8 text-muted-foreground/20 mx-auto mb-3" />
-                <p className="text-sm font-medium text-foreground/70 mb-1">No teams yet</p>
+                <p className="text-sm font-medium text-foreground/70 mb-1">{t("noTeams.title")}</p>
                 <p className="text-xs text-muted-foreground/50 max-w-xs mx-auto mb-5">
-                  Teams let employees share context and memory. Create one to build your org chart.
+                  {t("noTeams.description")}
                 </p>
-                <button onClick={() => setShowCreateTeam(true)} className={cn("inline-flex items-center gap-2 h-9 px-5 rounded-xl text-sm font-medium transition-all text-background bg-foreground hover:bg-foreground/90")}>
-                  <Plus className="h-3.5 w-3.5" />New Team
+                <button onClick={() => setShowCreateTeam(true)} className={cn("inline-flex items-center gap-2 h-9 px-5 rounded-xl text-sm font-medium transition-all text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border/50 shadow-sm")}>
+                  <Plus className="h-3.5 w-3.5" />{t("noTeams.newTeam")}
                 </button>
               </div>
             )}
@@ -1627,7 +2031,7 @@ export function SchedulesContent() {
                 {/* Inactive employees warning */}
                 {(() => {
                   const inactiveInTeams = schedules.filter(s => {
-                    const inTeam = teams.some(t => t.members.some(m => m.chat_id === s.chat_id))
+                    const inTeam = teams.some(tm => tm.members.some(m => m.chat_id === s.chat_id))
                     return inTeam && (!s.enabled || s.paused_reason)
                   })
                   if (inactiveInTeams.length === 0) return null
@@ -1658,12 +2062,12 @@ export function SchedulesContent() {
                         <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-4">
                           <div>
                             <p className="text-[12px] sm:text-[13px] font-semibold text-amber-900 dark:text-amber-200 leading-snug">
-                              {inactiveInTeams.length} employee{inactiveInTeams.length !== 1 ? "s" : ""} inactive
+                              {t("inactive.title", { count: inactiveInTeams.length })}
                             </p>
                             <p className="text-[10px] sm:text-[11px] text-amber-700/70 dark:text-amber-400/60 mt-0.5 leading-relaxed">
                               {noMachine.length > 0
-                                ? `${noMachine.length} missing a machine — won't run until activated`
-                                : "Won't run until activated"}
+                                ? t("inactive.missingMachine", { count: noMachine.length })
+                                : t("inactive.wontRun")}
                             </p>
                           </div>
 
@@ -1681,7 +2085,7 @@ export function SchedulesContent() {
                               "shadow-sm dark:shadow-none",
                             )}
                           >
-                            Fix in Employees
+                            {t("inactive.fixInEmployees")}
                             <ChevronRight className="h-3 w-3" />
                           </button>
                         </div>
@@ -1691,9 +2095,9 @@ export function SchedulesContent() {
                 })()}
 
                 <div className="flex items-center justify-between">
-                  <p className="text-[11px] sm:text-xs text-muted-foreground/50">Drag unassigned employees onto teams to add them</p>
+                  <p className="text-[11px] sm:text-xs text-muted-foreground/50">{t("dragHint")}</p>
                   <button onClick={() => setShowCreateTeam(true)} className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
-                    <Plus className="h-3 w-3" />New Team
+                    <Plus className="h-3 w-3" />{t("noTeams.newTeam")}
                   </button>
                 </div>
                 <div className="relative rounded-xl sm:rounded-2xl border border-border/30 bg-card/50 backdrop-blur-sm p-4 sm:p-6 md:p-10 overflow-x-auto">
@@ -1704,30 +2108,30 @@ export function SchedulesContent() {
                   {/* How it works — bottom-left corner (hidden on very small screens) */}
                   <div className="hidden sm:block absolute bottom-4 left-4 md:bottom-5 md:left-5 z-10 max-w-[190px]">
                     <div className="space-y-1.5 text-[9px] sm:text-[10px] leading-relaxed text-muted-foreground/35">
-                      <p className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground/25 mb-1">How it works</p>
+                      <p className="text-[8px] sm:text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground/25 mb-1">{t("howItWorks.title")}</p>
                       <div className="flex items-start gap-1.5">
                         <div className="h-3.5 w-3.5 rounded-[4px] bg-muted/60 flex items-center justify-center shrink-0 mt-px">
                           <GripVertical className="h-2 w-2 text-muted-foreground/30" />
                         </div>
-                        <span>Drag employees onto a team</span>
+                        <span>{t("howItWorks.dragEmployees")}</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <div className="h-3.5 w-3.5 rounded-[4px] bg-muted/60 flex items-center justify-center shrink-0 mt-px">
                           <Pencil className="h-2 w-2 text-muted-foreground/30" />
                         </div>
-                        <span>Click to edit schedule &amp; settings</span>
+                        <span>{t("howItWorks.clickToEdit")}</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <div className="h-3.5 w-3.5 rounded-[4px] bg-muted/60 flex items-center justify-center shrink-0 mt-px">
                           <Users className="h-2 w-2 text-muted-foreground/30" />
                         </div>
-                        <span>Teams share memory &amp; guidelines</span>
+                        <span>{t("howItWorks.teamsShare")}</span>
                       </div>
                       <div className="flex items-start gap-1.5">
                         <div className="h-3.5 w-3.5 rounded-[4px] bg-muted/60 flex items-center justify-center shrink-0 mt-px">
                           <Activity className="h-2 w-2 text-muted-foreground/30" />
                         </div>
-                        <span>Dashed lines &mdash; delegation between employees</span>
+                        <span>{t("howItWorks.dashedLines")}</span>
                       </div>
                     </div>
                   </div>
@@ -1739,114 +2143,61 @@ export function SchedulesContent() {
 
         {/* ═══ EMPLOYEES TAB ═══ */}
         {schedules.length > 0 && activeTab === "employees" && (
-          <div className="space-y-6">
-            {/* Filter pills */}
-            <div className="flex flex-wrap gap-1.5">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.35 }}
+          >
+            {/* Filters */}
+            <div className="flex items-center gap-1 mb-5">
               {[
-                { id: "all", label: "All", count: schedules.length },
-                { id: "active", label: "On Duty", count: activeCount },
-                { id: "paused", label: "Standby", count: pausedCount },
+                { id: "all", label: t("filters.all"), count: schedules.length },
+                { id: "active", label: t("filters.onDuty"), count: activeCount },
+                { id: "paused", label: t("filters.standby"), count: pausedCount },
               ].map((f) => (
                 <button key={f.id} onClick={() => setStatusFilter(f.id)} className={cn(
-                  "h-8 px-3.5 rounded-lg transition-all text-sm font-medium",
-                  statusFilter === f.id
-                    ? "bg-foreground text-background"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60",
+                  "relative h-8 px-3 text-[13px] font-medium transition-all duration-200",
+                  statusFilter === f.id ? "text-foreground" : "text-muted-foreground/40 hover:text-muted-foreground",
                 )}>
-                  <span className="flex items-center gap-1.5">
-                    {f.label}
-                    {f.count > 0 && (
-                      <span className={cn(
-                        "text-[11px] tabular-nums px-1.5 py-px rounded-full font-medium",
-                        statusFilter === f.id ? "bg-background/20 text-background/80" : "bg-muted/60",
-                      )}>
-                        {f.count}
-                      </span>
-                    )}
-                  </span>
+                  {f.label}
+                  <span className={cn("ml-1 text-[11px] tabular-nums", statusFilter === f.id ? "text-muted-foreground/50" : "text-muted-foreground/20")}>{f.count}</span>
+                  {statusFilter === f.id && (
+                    <motion.div layoutId="emp-filter" className="absolute inset-x-2 -bottom-px h-[2px] rounded-full bg-foreground/40" transition={{ type: "spring", stiffness: 400, damping: 30 }} />
+                  )}
                 </button>
               ))}
             </div>
 
-            {/* Employee grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-              {filteredSchedules.map((s, i) => (
-                <motion.div
-                  key={s.chat_id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.05 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <ScheduleCard schedule={s} onUpdate={loadSchedules} onViewHistory={(id) => { setHistoryChat(id); setShowHistory(true) }} onEdit={setEditChatId} />
-                </motion.div>
-              ))}
-            </div>
+            {/* 2-column layout: left = calendar (employees inside), right = activity */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_340px] gap-6">
 
-            {/* Empty filter state */}
-            {filteredSchedules.length === 0 && schedules.length > 0 && (
-              <div className="flex flex-col items-center py-14">
-                <AgentIcon className="h-8 w-8 text-muted-foreground/20 mb-3" />
-                <p className="text-sm text-muted-foreground/60">No employees match this filter</p>
-              </div>
-            )}
+              {/* ── Left column: Calendar with interactive employee rows ── */}
+              <div className="min-w-0">
+                <ScheduleCalendar
+                  schedules={filteredSchedules}
+                  selectedDate={selectedDate}
+                  onSelectDate={setSelectedDate}
+                  onRun={async (chatId) => { trackScheduleTriggered(chatId); await triggerScheduleNow(chatId); loadSchedules() }}
+                  onPause={async (chatId) => { await pauseSchedule(chatId); loadSchedules() }}
+                  onEdit={setEditChatId}
+                />
 
-            {/* Schedule calendar */}
-            <div className="space-y-2 pt-2">
-              <div className="flex items-center gap-3 px-1">
-                <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">Schedule</h2>
-                <div className="flex-1 h-px bg-border/20" />
-              </div>
-              <div className="rounded-2xl border border-border/30 bg-card/50 backdrop-blur-sm p-4 sm:p-5">
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_320px] gap-4">
-                <ScheduleCalendar schedules={filteredSchedules} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
-                <div className="lg:sticky lg:top-6 lg:self-start">
-                  <div className="rounded-xl overflow-hidden border border-border/30 bg-card/50 backdrop-blur-sm">
-                    <div className="px-4 py-3 border-b border-border/30">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-sm font-semibold text-foreground">
-                            {selectedDate.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" })}
-                          </h3>
-                          <p className="text-[11px] text-muted-foreground/60 mt-0.5">
-                            {dayTasks.length === 0 ? "No employees scheduled" : `${dayTasks.length} employee${dayTasks.length !== 1 ? "s" : ""}`}
-                          </p>
-                        </div>
-                        {isToday && (
-                          <span className="text-[11px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full bg-foreground text-background">
-                            Today
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    {dayTasks.length > 0 ? (
-                      <div className="p-2 space-y-0.5">
-                        {dayTasks.map((t) => (
-                          <DayTaskItem key={t.schedule.chat_id} task={t} onUpdate={loadSchedules} />
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="py-10 text-center">
-                        <AgentIcon className="h-6 w-6 text-muted-foreground/20 mx-auto mb-2" />
-                        <p className="text-[11px] text-muted-foreground/40">No employees on this day</p>
-                      </div>
-                    )}
+                {/* Empty state */}
+                {filteredSchedules.length === 0 && (
+                  <div className="flex flex-col items-center py-12">
+                    <AgentIcon className="h-6 w-6 text-muted-foreground/10 mb-2" />
+                    <p className="text-[13px] text-muted-foreground/25">{t("noMatch")}</p>
                   </div>
-                </div>
+                )}
               </div>
-            </div>
-            </div>
 
-            {/* Activity log */}
-            <div className="space-y-2 pt-2">
-              <div className="flex items-center gap-3 px-1">
-                <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">Recent Activity</h2>
-                <div className="flex-1 h-px bg-border/20" />
-              </div>
-              <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
+              {/* ── Right column: Activity ── */}
+              <div className="min-w-0 lg:border-l lg:border-border/15 lg:pl-6">
+                <p className="text-[11px] font-medium text-muted-foreground/30 uppercase tracking-widest mb-2">{t("recentActivity")}</p>
                 <ScheduleHistory chatId={showHistory ? historyChat : undefined} limit={10} />
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
 
