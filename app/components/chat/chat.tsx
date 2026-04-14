@@ -18,6 +18,7 @@ import { Caveat } from "next/font/google"
 import dynamic from "next/dynamic"
 import { redirect } from "next/navigation"
 import React, { useEffect, useMemo, useState, useRef, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { useTranslations } from "next-intl"
 import { useChatCore } from "./use-chat-core"
 import { InsufficientCreditsModal } from "@/app/components/credits/insufficient-credits-modal"
@@ -28,11 +29,11 @@ import { useProjectNavigator } from "@/lib/project-navigator-store/provider"
 import { useChatStreaming } from "@/lib/chat-streaming-store/provider"
 // import { ResearchSuggestions } from "./research-suggestions" // Removed trending searches
 import { themeConfig } from "@/lib/theme-config"
-import { useGuideStore } from "@/lib/guide-store"
 import { QuickStartGuide } from "./quick-start-guide"
 import { Search, Bug, Globe, FileText, BarChart3, Mail, Zap, Sparkles, PenTool, MonitorSmartphone, Clipboard, Users, TrendingUp, Eye, FileCode, LayoutGrid, Send, ShoppingCart, MessageCircle, Bot } from "lucide-react"
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
 import { SwarmPanel } from "./swarm-panel"
+import { FloatingThumbnails } from "./floating-thumbnails"
+import { CinematicIntro, shouldShowIntro } from "./cinematic-intro"
 import { ActiveSwarmBanner, type ActiveSwarm } from "./active-swarm-banner"
 import { RemoteApproval } from "./remote-approval"
 
@@ -108,13 +109,29 @@ const USE_CASE_TEMPLATE_DATA: Record<string, TaskTemplateData[]> = {
   ],
 }
 
-const TASK_COLORS: Record<string, { icon: string; bg: string; border: string; hover: string }> = {
-  blue:    { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
-  violet:  { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
-  emerald: { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
-  rose:    { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
-  amber:   { icon: "text-neutral-500 dark:text-neutral-400",  bg: "bg-neutral-500/[0.06] dark:bg-neutral-400/[0.06]",  border: "border-neutral-300/40 dark:border-neutral-600/40",  hover: "hover:bg-neutral-500/[0.10] dark:hover:bg-neutral-400/[0.10] hover:border-neutral-300/60 dark:hover:border-neutral-600/60" },
+const TASK_COLORS: Record<string, { icon: string; iconBg: string }> = {
+  blue: {
+    icon: "text-blue-600 dark:text-blue-300",
+    iconBg: "bg-gradient-to-b from-blue-500/[0.16] to-blue-500/[0.06] dark:from-blue-400/[0.22] dark:to-blue-400/[0.08]",
+  },
+  violet: {
+    icon: "text-violet-600 dark:text-violet-300",
+    iconBg: "bg-gradient-to-b from-violet-500/[0.16] to-violet-500/[0.06] dark:from-violet-400/[0.22] dark:to-violet-400/[0.08]",
+  },
+  emerald: {
+    icon: "text-emerald-600 dark:text-emerald-300",
+    iconBg: "bg-gradient-to-b from-emerald-500/[0.16] to-emerald-500/[0.06] dark:from-emerald-400/[0.22] dark:to-emerald-400/[0.08]",
+  },
+  rose: {
+    icon: "text-rose-600 dark:text-rose-300",
+    iconBg: "bg-gradient-to-b from-rose-500/[0.16] to-rose-500/[0.06] dark:from-rose-400/[0.22] dark:to-rose-400/[0.08]",
+  },
+  amber: {
+    icon: "text-amber-600 dark:text-amber-300",
+    iconBg: "bg-gradient-to-b from-amber-500/[0.16] to-amber-500/[0.06] dark:from-amber-400/[0.22] dark:to-amber-400/[0.08]",
+  },
 }
+
 
 // ── Task hover visual components ─────────────────────────────────────
 // Animated mini-previews shown on hover, matching the sidebar pattern
@@ -400,6 +417,20 @@ const handwriting = Caveat({
   subsets: ["latin"],
   weight: ["600"],
 })
+
+// Rotating motivational sublines — picked once per mount.
+const GREETING_TAGLINES = [
+  "Think it. I'll do it.",
+  "You're the strategy. I'm the hands.",
+  "Describe the outcome. I'll find the way.",
+  "Turn an hour of clicks into a sentence.",
+  "Stop doing. Start directing.",
+  "Click nothing. Ship everything.",
+  "You decide. I execute.",
+  "Skip the busywork. Point me at the real problem.",
+  "Describe the finish line. I'll run it.",
+  "Dream bigger. I'll handle the clicks.",
+] as const
 
 
 const DialogAuth = dynamic(
@@ -973,10 +1004,22 @@ export function Chat() {
 
   const showOnboarding = !effectiveChatId && redirectCheckMessages.length === 0
 
-  // Quick start guide — synced via store so the header toggle works too
-  const guideDismissed = useGuideStore((s) => s.dismissed)
-  const hydrateGuide = useGuideStore((s) => s.hydrate)
-  useEffect(() => { hydrateGuide() }, [hydrateGuide])
+  // ── Cinematic intro ──
+  // Initialize as "done" for SSR — useEffect activates on client mount.
+  const [introPhase, setIntroPhase] = useState<"active" | "fading" | "done">("done")
+  useEffect(() => {
+    if (shouldShowIntro()) setIntroPhase("active")
+  }, [])
+  const introVisible = introPhase !== "done" && showOnboarding && !!user
+  const introFading = introPhase === "fading"
+  const showThumbnails = showOnboarding && !!user && (!introVisible || introFading)
+
+  // Pick a random motivational tagline once per mount — client-only to avoid SSR
+  // hydration mismatch (Math.random differs between server and client renders).
+  const [greetingTagline, setGreetingTagline] = useState<string>(GREETING_TAGLINES[0])
+  useEffect(() => {
+    setGreetingTagline(GREETING_TAGLINES[Math.floor(Math.random() * GREETING_TAGLINES.length)])
+  }, [])
 
   // Check if user has saved credentials (for nudge in greeting)
   const [hasCredentials, setHasCredentials] = useState<boolean | null>(null)
@@ -987,11 +1030,6 @@ export function Chat() {
       .then((data) => setHasCredentials((data.secrets ?? []).length > 0))
       .catch(() => {})
   }, [isAuthenticated])
-
-  const showQuickStart =
-    showOnboarding &&
-    !!user &&
-    !guideDismissed
 
   // Task templates based on onboarding role + use-case (activation metric)
   const translateRole = useCallback((role: string, key: string) => t(`taskTemplates.${role}.${key}`, { company: "{company}" }), [t])
@@ -1011,6 +1049,14 @@ export function Chat() {
           swarmFullscreen ? "justify-start" : "justify-end md:justify-center"
         )}
       >
+        <FloatingThumbnails visible={showThumbnails} skipEntrance={introFading} />
+        {introVisible && createPortal(
+          <CinematicIntro
+            onSettled={() => setIntroPhase("fading")}
+            onComplete={() => setIntroPhase("done")}
+          />,
+          document.body
+        )}
         <DialogAuth open={hasDialogAuth} setOpen={setHasDialogAuth} />
         <InsufficientCreditsModal
           isOpen={creditsModalOpen}
@@ -1020,13 +1066,14 @@ export function Chat() {
           estimatedRuntime={creditsModalData.estimatedRuntime}
           errorMessage={creditsModalData.errorMessage}
         />
+        {showOnboarding && !!user && <QuickStartGuide />}
 
       
       <AnimatePresence initial={false} mode="popLayout">
         {showOnboarding && !swarmFullscreen && (
           <motion.div
             key="onboarding"
-            className="absolute bottom-[25%] sm:bottom-auto mx-auto sm:relative w-full overflow-visible pb-16 sm:pb-0"
+            className="relative mx-auto w-full overflow-visible pb-12 sm:pb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: -20, transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] } }}
@@ -1038,25 +1085,7 @@ export function Chat() {
               },
             }}
           >
-            {/* Crossfade between guide and greeting */}
-            <AnimatePresence mode="wait" initial={false}>
-              {showQuickStart ? (
-                <motion.div
-                  key="guide"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="mb-6 sm:mb-8"
-                >
-                  <QuickStartGuide
-                    userName={user?.display_name || undefined}
-                    selectedVMId={selectedVMId}
-                    isUserAuthenticated={isAuthenticated}
-                    hasCredentials={hasCredentials}
-                  />
-                </motion.div>
-              ) : (
+            {/* Greeting */}
                 <motion.div
                   key="greeting"
                   initial={{ opacity: 0, y: 8 }}
@@ -1161,16 +1190,11 @@ export function Chat() {
                     transition={{ delay: 0.2, duration: 0.5 }}
                   >
                     <p className="text-center text-muted-foreground text-sm sm:text-base md:text-lg">
-                      {user
-                        ? t("greetingAuth")
-                        : t("greetingUnauth")
-                      }
+                      {user ? greetingTagline : t("greetingUnauth")}
                     </p>
                   </motion.div>
 
                 </motion.div>
-              )}
-            </AnimatePresence>
 
           </motion.div>
         )}
@@ -1263,105 +1287,47 @@ export function Chat() {
         {showOnboarding && !swarmFullscreen && <ActiveSwarmBanner onSwarmDetected={handleActiveSwarmDetected} />}
         <RemoteApproval machineId={selectedVMId} isElectronMachine={machinesList.some((m: any) => m.id === selectedVMId && m.settings?.provider === 'electron')} />
 
-        {/* Task templates — above input on mobile, below on desktop */}
+        <ChatInput {...chatInputProps} />
+
+        {/* Task templates — Apple-style minimal list with subtle icons */}
         <AnimatePresence>
           {showOnboarding && !swarmMode && !swarmFullscreen && user && (
             <motion.div
-              key="task-templates-mobile"
+              key="task-templates-list"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 6, transition: { duration: 0.15 } }}
               transition={{ delay: 0.3, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-2 -mx-4 sm:hidden"
+              className="mx-auto mt-5 mb-1 w-full max-w-[40rem]"
             >
-              <div
-                className="flex gap-2 overflow-x-auto px-4"
-                style={{ scrollbarWidth: "none" }}
-              >
+              <div className="flex flex-col">
                 {taskTemplates.map((t, i) => {
                   const Icon = t.icon
-                  const colors = TASK_COLORS[t.color] || TASK_COLORS.blue
+                  const summary = getTaskDescription(t.label)
                   return (
                     <motion.button
                       key={t.label}
                       type="button"
                       onClick={() => handleCollaborativeInputChange(t.prompt)}
-                      initial={{ opacity: 0, scale: 0.92 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.35 + i * 0.04, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.35 + i * 0.05, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
                       className={cn(
-                        "group inline-flex shrink-0 items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs whitespace-nowrap transition-all duration-200 cursor-pointer",
-                        colors.border, colors.hover, "bg-card/40",
+                        "group relative flex w-full cursor-pointer items-center gap-3 py-1.5 text-left",
+                        i > 0 && "before:absolute before:left-3 before:right-3 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-foreground/[0.13] before:to-transparent before:content-['']",
                       )}
                     >
-                      <Icon className={cn("size-3", colors.icon)} />
-                      <span className="font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                        {t.label}
+                      <span className="absolute inset-x-1 inset-y-px rounded bg-transparent transition-colors duration-200 ease-out group-hover:bg-foreground/[0.03] dark:group-hover:bg-white/[0.035]" />
+
+                      <Icon
+                        strokeWidth={1.75}
+                        className="relative ml-3 size-3 shrink-0 text-foreground/30 transition-colors duration-300 ease-out group-hover:text-foreground/55"
+                      />
+
+                      <span className="relative min-w-0 flex-1 truncate pr-4 text-[11.5px] font-normal tracking-[-0.005em] text-foreground/55 transition-colors duration-200 ease-out group-hover:text-foreground/90">
+                        {summary}
                       </span>
                     </motion.button>
-                  )
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <ChatInput {...chatInputProps} />
-
-        {/* Task templates — desktop only (below input) */}
-        <AnimatePresence>
-          {showOnboarding && !swarmMode && !swarmFullscreen && user && (
-            <motion.div
-              key="task-templates-desktop"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6, transition: { duration: 0.15 } }}
-              transition={{ delay: 0.3, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mt-3 mb-1 hidden sm:block"
-            >
-              <div className="flex flex-wrap justify-center gap-2">
-                {taskTemplates.map((t, i) => {
-                  const Icon = t.icon
-                  const colors = TASK_COLORS[t.color] || TASK_COLORS.blue
-                  const Visual = getTaskVisual(t.label)
-                  const description = getTaskDescription(t.label)
-                  return (
-                    <HoverCard key={t.label} openDelay={300} closeDelay={150}>
-                      <HoverCardTrigger asChild>
-                        <motion.button
-                          type="button"
-                          onClick={() => handleCollaborativeInputChange(t.prompt)}
-                          initial={{ opacity: 0, scale: 0.92 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.35 + i * 0.04, duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                          className={cn(
-                            "group inline-flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs transition-all duration-200 cursor-pointer",
-                            colors.border, colors.hover, "bg-card/40",
-                          )}
-                        >
-                          <Icon className={cn("size-3", colors.icon)} />
-                          <span className="font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                            {t.label}
-                          </span>
-                        </motion.button>
-                      </HoverCardTrigger>
-                      <HoverCardContent
-                        side="top"
-                        align="center"
-                        sideOffset={10}
-                        className="w-64 p-0 border border-border/50 shadow-xl rounded-xl overflow-hidden"
-                      >
-                        <div className="flex flex-col">
-                          <div className="relative h-[120px] w-full bg-muted/50 border-b border-border/40 overflow-hidden">
-                            <Visual />
-                          </div>
-                          <div className="p-3.5 pt-3">
-                            <h4 className="text-[13px] font-semibold text-foreground leading-tight">{t.label}</h4>
-                            <p className="text-[11.5px] text-foreground/50 mt-1.5 leading-relaxed">{description}</p>
-                          </div>
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
                   )
                 })}
               </div>

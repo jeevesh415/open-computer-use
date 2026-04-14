@@ -14,6 +14,7 @@ import { CreateMachineDialog } from "@/app/components/machines/create-machine-di
 import { UsageStats } from "@/app/components/machines/usage-stats";
 import { motion, AnimatePresence } from "framer-motion";
 import type { UserMachine, MachineUsage } from "@/types/machines.types";
+import { PageLoader } from "@/components/common/page-loader";
 
 interface MachinesData {
   machines: UserMachine[];
@@ -213,20 +214,6 @@ export function MachinesContent() {
     toast.success(t("toasts.deleted"));
   };
 
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 rounded-full border-2 border-muted" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
-          </div>
-          <span className="text-sm text-muted-foreground">{t("loadingMachines")}</span>
-        </div>
-      </div>
-    );
-  }
-
   const runningMachines = machines.filter(m => m.status === "running").length;
   const creatingMachines = machines.filter(m => m.status === "creating").length;
   const stoppedMachines = machines.filter(m => m.status === "stopped").length;
@@ -244,6 +231,11 @@ export function MachinesContent() {
   ];
 
   return (
+    <PageLoader
+      isLoading={loading}
+      title="Your Computers"
+      description="Silicon at your service. Spinning up your fleet now."
+    >
     <div className="h-full overflow-y-auto scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
@@ -527,5 +519,6 @@ export function MachinesContent() {
         />
       </div>
     </div>
+    </PageLoader>
   );
 }

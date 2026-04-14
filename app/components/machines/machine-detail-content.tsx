@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Monitor,
@@ -18,10 +18,13 @@ import {
   Clock,
   CheckCircle,
   Copy,
-  Check
+  Check,
+  Calendar,
+  Server,
+  Activity,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MachineLayout } from "./machine-layout";
 import { SimpleVNCViewer } from "./simple-vnc-viewer";
 import { MachineSettings } from "./machine-settings";
@@ -29,11 +32,188 @@ import { FileTransfer } from "./file-transfer";
 import { SshConnectionPanel } from "./ssh-connection-panel";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import type { UserMachine } from "@/types/machines.types";
 
 interface MachineDetailContentProps {
   machineId: string;
+}
+
+const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.04 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOut } },
+};
+
+type StatusKey =
+  | "running"
+  | "stopped"
+  | "creating"
+  | "starting"
+  | "stopping"
+  | "deleting"
+  | "error";
+
+const statusConfig: Record<
+  StatusKey,
+  {
+    label: string;
+    dot: string;
+    text: string;
+    bg: string;
+    border: string;
+    glow: string;
+    icon: typeof CheckCircle;
+  }
+> = {
+  running: {
+    label: "Running",
+    dot: "bg-emerald-500",
+    text: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
+    glow: "rgba(16,185,129,0.20)",
+    icon: CheckCircle,
+  },
+  stopped: {
+    label: "Stopped",
+    dot: "bg-foreground/30",
+    text: "text-muted-foreground",
+    bg: "bg-foreground/[0.05]",
+    border: "border-border/40",
+    glow: "rgba(120,120,120,0.10)",
+    icon: Square,
+  },
+  creating: {
+    label: "Creating",
+    dot: "bg-blue-500",
+    text: "text-blue-600 dark:text-blue-400",
+    bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
+    glow: "rgba(59,130,246,0.20)",
+    icon: Loader2,
+  },
+  starting: {
+    label: "Starting",
+    dot: "bg-blue-500",
+    text: "text-blue-600 dark:text-blue-400",
+    bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
+    glow: "rgba(59,130,246,0.20)",
+    icon: Loader2,
+  },
+  stopping: {
+    label: "Stopping",
+    dot: "bg-amber-500",
+    text: "text-amber-600 dark:text-amber-400",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    glow: "rgba(245,158,11,0.20)",
+    icon: Loader2,
+  },
+  deleting: {
+    label: "Deleting",
+    dot: "bg-destructive",
+    text: "text-destructive",
+    bg: "bg-destructive/10",
+    border: "border-destructive/20",
+    glow: "rgba(239,68,68,0.20)",
+    icon: Loader2,
+  },
+  error: {
+    label: "Error",
+    dot: "bg-destructive",
+    text: "text-destructive",
+    bg: "bg-destructive/10",
+    border: "border-destructive/20",
+    glow: "rgba(239,68,68,0.20)",
+    icon: AlertCircle,
+  },
+};
+
+interface ActionBtnProps {
+  icon: typeof Play;
+  label: string;
+  onClick: () => void;
+  loading?: boolean;
+  disabled?: boolean;
+  variant?: "primary" | "default" | "destructive";
+}
+
+function ActionBtn({ icon: Icon, label, onClick, loading, disabled, variant = "default" }: ActionBtnProps) {
+  const isDead = disabled || loading;
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      disabled={isDead}
+      whileHover={!isDead ? { y: -1 } : undefined}
+      whileTap={!isDead ? { scale: 0.97 } : undefined}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      className={cn(
+        "h-9 inline-flex items-center gap-2 px-3.5 rounded-xl text-sm font-medium transition-colors shrink-0",
+        "disabled:opacity-40 disabled:cursor-not-allowed",
+        variant === "primary" && "bg-foreground text-background hover:bg-foreground/90 shadow-sm",
+        variant === "default" && "bg-foreground/[0.04] hover:bg-foreground/[0.08] border border-border/40 text-foreground",
+        variant === "destructive" && "bg-foreground/[0.02] hover:bg-destructive/10 border border-destructive/20 text-destructive",
+      )}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {loading ? (
+          <motion.span
+            key="spin"
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            exit={{ opacity: 0, rotate: 90 }}
+            transition={{ duration: 0.18 }}
+          >
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="icon"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.18 }}
+          >
+            <Icon className="h-3.5 w-3.5" />
+          </motion.span>
+        )}
+      </AnimatePresence>
+      <span>{label}</span>
+    </motion.button>
+  );
+}
+
+interface StatCellProps {
+  icon: typeof Activity;
+  label: string;
+  value: ReactNode;
+  action?: ReactNode;
+}
+
+function StatCell({ icon: Icon, label, value, action }: StatCellProps) {
+  return (
+    <div className="group relative flex-1 min-w-0 px-5 py-4 sm:py-5 first:pl-6 sm:first:pl-8 last:pr-6 sm:last:pr-8">
+      <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.14em] text-muted-foreground/55 mb-1.5">
+        <Icon className="h-3 w-3" />
+        {label}
+      </div>
+      <div className="flex items-center justify-between gap-2 min-w-0">
+        <div className="text-sm font-medium tracking-tight truncate min-w-0">{value}</div>
+        {action}
+      </div>
+    </div>
+  );
 }
 
 export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
@@ -44,17 +224,18 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
   const [error, setError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [copiedIp, setCopiedIp] = useState(false);
+  const [now, setNow] = useState(() => Date.now());
+  const [activeTab, setActiveTab] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMachineData();
 
-    // Poll while machine is transitioning. The condition is checked inside the
-    // callback (not in deps) so state changes don't cascade-restart the interval.
     const interval = setInterval(() => {
-      if (machine && (
-        ['creating', 'starting', 'stopping'].includes(machine.status) ||
-        machine.settings?.desktopInitStatus === 'installing'
-      )) {
+      if (
+        machine &&
+        (["creating", "starting", "stopping"].includes(machine.status) ||
+          machine.settings?.desktopInitStatus === "installing")
+      ) {
         fetchMachineData();
       }
     }, 5000);
@@ -62,6 +243,13 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [machineId]);
+
+  // Live uptime tick — only runs while machine is up
+  useEffect(() => {
+    if (machine?.status !== "running") return;
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, [machine?.status]);
 
   const fetchMachineData = async () => {
     try {
@@ -81,8 +269,8 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
       const data = await response.json();
       setMachine(data.machine);
       setUsage(data.usage || []);
-    } catch (error) {
-      console.error("Error fetching machine:", error);
+    } catch (err) {
+      console.error("Error fetching machine:", err);
       setError("Failed to load machine");
     } finally {
       setLoading(false);
@@ -108,8 +296,8 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Action failed");
+        const err = await response.json();
+        throw new Error(err.error || "Action failed");
       }
 
       const data = await response.json();
@@ -119,14 +307,15 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
           "Machine recreated with new password. Please use the new password to connect.",
           { duration: 8000 }
         );
-        setMachine(prev => prev ? { ...prev, vncPassword: data.vncPassword } : null);
+        setMachine((prev) => (prev ? { ...prev, vncPassword: data.vncPassword } : null));
       } else if (action === "snapshot") {
         toast.success(`Snapshot created successfully (${data.amiId})`, { duration: 5000 });
       } else {
-        const message = action === "start" ? "Machine starting..." :
-                        action === "stop" ? "Machine stopping..." :
-                        action === "restart" ? "Machine restarting..." :
-                        "Machine deleted";
+        const message =
+          action === "start" ? "Machine starting..." :
+          action === "stop" ? "Machine stopping..." :
+          action === "restart" ? "Machine restarting..." :
+          "Machine deleted";
         toast.success(message);
       }
 
@@ -135,8 +324,8 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
       } else {
         fetchMachineData();
       }
-    } catch (error: any) {
-      toast.error(error.message || "Action failed");
+    } catch (err: any) {
+      toast.error(err.message || "Action failed");
     } finally {
       setActionLoading(null);
     }
@@ -152,24 +341,39 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
 
   const formatUptime = () => {
     if (!machine?.startedAt || machine.status !== "running") return null;
-    const start = new Date(machine.startedAt);
-    const now = new Date();
-    const hours = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60));
-    const minutes = Math.floor(((now.getTime() - start.getTime()) % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}h ${minutes}m`;
+    const start = new Date(machine.startedAt).getTime();
+    const diff = Math.max(0, now - start);
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    const s = Math.floor((diff % 60_000) / 1000);
+    return `${h}h ${m}m ${s}s`;
   };
 
   if (loading) {
     return (
       <MachineLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
-          <div className="flex flex-col items-center gap-3">
-            <div className="relative h-10 w-10">
-              <div className="absolute inset-0 rounded-full border-2 border-muted" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex flex-col items-center gap-4"
+          >
+            <div className="relative h-12 w-12">
+              <motion.div
+                className="absolute inset-0 rounded-full border border-foreground/15"
+                animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+              />
+              <motion.div
+                className="absolute inset-0 rounded-full border border-foreground/15"
+                animate={{ scale: [1, 1.6], opacity: [0.6, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut", delay: 0.9 }}
+              />
+              <div className="absolute inset-0 rounded-full border-2 border-foreground/10" />
               <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
             </div>
-            <span className="text-sm text-muted-foreground">Loading machine...</span>
-          </div>
+            <span className="text-sm text-muted-foreground tracking-wide">Loading machine</span>
+          </motion.div>
         </div>
       </MachineLayout>
     );
@@ -180,22 +384,19 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
       <MachineLayout>
         <div className="flex items-center justify-center min-h-[60vh]">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            transition={{ duration: 0.5, ease: easeOut }}
+            className="text-center max-w-sm"
           >
-            <div className="h-12 w-12 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-4">
-              <AlertCircle className="h-6 w-6 text-destructive" />
+            <div className="h-14 w-14 rounded-2xl bg-destructive/10 flex items-center justify-center mx-auto mb-5">
+              <AlertCircle className="h-7 w-7 text-destructive" />
             </div>
-            <h3 className="text-lg font-medium mb-1.5">{error || "Machine not found"}</h3>
+            <h3 className="text-xl font-medium tracking-tight mb-2">{error || "Machine not found"}</h3>
             <p className="text-sm text-muted-foreground mb-6">
               The machine may have been deleted or you don&apos;t have access.
             </p>
-            <Button
-              variant="outline"
-              onClick={() => router.push("/machines")}
-              className="rounded-xl"
-            >
+            <Button variant="outline" onClick={() => router.push("/machines")} className="rounded-xl">
               Back to Machines
             </Button>
           </motion.div>
@@ -204,64 +405,109 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
     );
   }
 
-  const isElectron = machine.settings?.provider === 'electron';
-  const isAws = machine.settings?.provider === 'aws';
+  const isElectron = machine.settings?.provider === "electron";
+  const isAws = machine.settings?.provider === "aws";
   const isDesktopAws = isAws && machine.settings?.desktopEnabled;
   const isTransitioning = ["creating", "starting", "stopping", "deleting"].includes(machine.status);
+  const isRunning = machine.status === "running";
+  const status = statusConfig[(machine.status as StatusKey)] ?? statusConfig.stopped;
+  const StatusIcon = status.icon;
 
-  const statusLabel = machine.status === "running" ? "Running"
-    : machine.status === "stopped" ? "Stopped"
-    : machine.status === "creating" ? "Creating"
-    : machine.status === "starting" ? "Starting"
-    : machine.status === "stopping" ? "Stopping"
-    : machine.status === "error" ? "Error"
-    : machine.status === "deleting" ? "Deleting"
-    : machine.status;
+  const tabs: { id: string; label: string; icon: typeof Monitor }[] = isElectron
+    ? [{ id: "settings", label: "Settings", icon: Settings }]
+    : isDesktopAws
+    ? [
+        { id: "desktop", label: "Desktop", icon: Monitor },
+        { id: "ssh", label: "SSH", icon: Terminal },
+        { id: "settings", label: "Settings", icon: Settings },
+      ]
+    : isAws
+    ? [
+        { id: "ssh", label: "SSH", icon: Terminal },
+        { id: "settings", label: "Settings", icon: Settings },
+      ]
+    : [
+        { id: "desktop", label: "Desktop", icon: Monitor },
+        { id: "files", label: "Files", icon: FolderOpen },
+        { id: "settings", label: "Settings", icon: Settings },
+      ];
+
+  const currentTab = activeTab ?? tabs[0]?.id ?? "settings";
 
   const NotRunningState = ({ label = "Start the machine to continue" }: { label?: string }) => (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm"
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.45, ease: easeOut }}
+      className="relative overflow-hidden rounded-3xl border border-border/40 bg-card/30 backdrop-blur-sm"
     >
-      <div className="flex flex-col items-center py-16 px-6 text-center">
-        <div className="h-12 w-12 rounded-2xl bg-foreground/[0.04] flex items-center justify-center mb-4">
-          <Monitor className="h-6 w-6 text-muted-foreground/50" />
-        </div>
-        <h3 className="text-base font-medium mb-1.5">Machine Not Running</h3>
-        <p className="text-sm text-muted-foreground mb-6">{label}</p>
-        <Button
-          onClick={() => handleAction("start")}
-          disabled={actionLoading !== null}
-          className="rounded-xl h-10 px-5 gap-2"
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+          backgroundSize: "22px 22px",
+        }}
+      />
+      <div className="relative flex flex-col items-center py-20 px-6 text-center">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.12, duration: 0.5, ease: easeOut }}
+          className="relative mb-6"
         >
-          {actionLoading === "start" ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <Play className="h-4 w-4" />
-          )}
-          Start Machine
-        </Button>
+          <div className="h-16 w-16 rounded-2xl bg-foreground/[0.04] border border-border/30 flex items-center justify-center">
+            <Monitor className="h-7 w-7 text-muted-foreground/60" />
+          </div>
+        </motion.div>
+        <h3 className="text-lg font-medium tracking-tight mb-1.5">Machine Not Running</h3>
+        <p className="text-sm text-muted-foreground max-w-xs mb-6">{label}</p>
+        <ActionBtn
+          icon={Play}
+          label="Start Machine"
+          variant="primary"
+          onClick={() => handleAction("start")}
+          loading={actionLoading === "start"}
+          disabled={actionLoading !== null}
+        />
       </div>
     </motion.div>
   );
 
   const DesktopInitializing = () => (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm"
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.45, ease: easeOut }}
+      className="relative overflow-hidden rounded-3xl border border-border/40 bg-card/30 backdrop-blur-sm"
     >
-      <div className="flex flex-col items-center py-16 px-6 text-center">
-        <div className="relative h-12 w-12 mb-4">
-          <div className="absolute inset-0 rounded-full border-2 border-muted" />
-          <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
+      <motion.div
+        className="absolute -top-1/2 left-1/2 -translate-x-1/2 h-[400px] w-[600px] pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div className="relative flex flex-col items-center py-20 px-6 text-center">
+        <div className="relative h-16 w-16 mb-6">
+          <motion.div
+            className="absolute inset-0 rounded-2xl border border-blue-500/30"
+            animate={{ scale: [1, 1.5], opacity: [0.6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+          />
+          <motion.div
+            className="absolute inset-0 rounded-2xl border border-blue-500/30"
+            animate={{ scale: [1, 1.5], opacity: [0.6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 1 }}
+          />
+          <div className="absolute inset-0 rounded-2xl bg-blue-500/10 border border-blue-500/20" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Loader2 className="h-7 w-7 text-blue-500 animate-spin" />
+          </div>
         </div>
-        <h3 className="text-base font-medium mb-1.5">Desktop Initializing</h3>
-        <p className="text-sm text-muted-foreground mb-2">
-          Installing desktop environment. This takes 1-3 minutes on first boot.
+        <h3 className="text-lg font-medium tracking-tight mb-1.5">Desktop Initializing</h3>
+        <p className="text-sm text-muted-foreground max-w-sm mb-2">
+          Installing desktop environment. This takes 1–3 minutes on first boot.
         </p>
         <p className="text-xs text-muted-foreground/60">
           You can use SSH while the desktop is being set up.
@@ -272,24 +518,62 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
 
   const DesktopFailed = () => (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-      className="rounded-2xl border border-destructive/20 bg-destructive/[0.02]"
+      initial={{ opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.45, ease: easeOut }}
+      className="relative overflow-hidden rounded-3xl border border-destructive/20 bg-destructive/[0.02]"
     >
-      <div className="flex flex-col items-center py-16 px-6 text-center">
-        <div className="h-12 w-12 rounded-2xl bg-destructive/10 flex items-center justify-center mb-4">
-          <AlertCircle className="h-6 w-6 text-destructive" />
+      <div className="relative flex flex-col items-center py-20 px-6 text-center">
+        <div className="h-16 w-16 rounded-2xl bg-destructive/10 border border-destructive/20 flex items-center justify-center mb-6">
+          <AlertCircle className="h-7 w-7 text-destructive" />
         </div>
-        <h3 className="text-base font-medium mb-1.5">Desktop Setup Failed</h3>
-        <p className="text-sm text-muted-foreground">
-          Check <code className="text-xs bg-foreground/[0.05] px-1.5 py-0.5 rounded">/var/log/desktop-setup.log</code> via SSH for details.
+        <h3 className="text-lg font-medium tracking-tight mb-1.5">Desktop Setup Failed</h3>
+        <p className="text-sm text-muted-foreground max-w-sm">
+          Check{" "}
+          <code className="text-xs bg-foreground/[0.05] px-1.5 py-0.5 rounded font-mono">
+            /var/log/desktop-setup.log
+          </code>{" "}
+          via SSH for details.
         </p>
       </div>
     </motion.div>
   );
 
-  const tabTriggerClass = "gap-2 rounded-lg data-[state=active]:bg-background data-[state=active]:shadow-sm text-sm px-4 py-2";
+  const renderTabContent = () => {
+    switch (currentTab) {
+      case "desktop":
+        if (machine.status !== "running") {
+          return <NotRunningState label="Start the machine to access the desktop" />;
+        }
+        if (isDesktopAws && machine.settings?.desktopInitStatus === "installing") {
+          return <DesktopInitializing />;
+        }
+        if (isDesktopAws && machine.settings?.desktopInitStatus === "failed") {
+          return <DesktopFailed />;
+        }
+        return <SimpleVNCViewer machine={machine} session={null} />;
+      case "files":
+        if (machine.status !== "running") {
+          return <NotRunningState label="Start the machine to access file transfer" />;
+        }
+        return (
+          <FileTransfer
+            machineId={machine.id}
+            connectionInfo={{
+              publicIpAddress: machine.publicIpAddress,
+              vncPort: machine.vncPort,
+              vncPassword: machine.vncPassword,
+            }}
+          />
+        );
+      case "ssh":
+        return <SshConnectionPanel machine={machine} />;
+      case "settings":
+        return <MachineSettings machine={machine} onUpdate={fetchMachineData} />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <MachineLayout
@@ -297,278 +581,310 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
       machineName={machine.displayName}
       machineStatus={machine.status}
     >
-      <div className="py-6 space-y-6">
-        {/* Overview header card */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+        className="py-6"
+      >
+        {/* Unified machine card */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-2xl border border-border/30 bg-card/50 backdrop-blur-sm p-5 sm:p-6"
+          variants={itemVariants}
+          className="relative overflow-hidden rounded-3xl border border-border/40 bg-card/40 backdrop-blur-xl"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            {/* Left: info */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="text-xl sm:text-2xl font-medium tracking-tight">{machine.displayName}</h1>
-                <div className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
-                  machine.status === "running" && "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-                  machine.status === "stopped" && "bg-foreground/[0.05] text-muted-foreground",
-                  machine.status === "error" && "bg-destructive/10 text-destructive",
-                  (machine.status === "creating" || machine.status === "starting") && "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-                  machine.status === "stopping" && "bg-amber-500/10 text-amber-600 dark:text-amber-400",
-                  machine.status === "deleting" && "bg-destructive/10 text-destructive",
-                )}>
-                  {machine.status === "running" && <CheckCircle className="h-3 w-3" />}
-                  {isTransitioning && <Loader2 className="h-3 w-3 animate-spin" />}
-                  {machine.status === "error" && <AlertCircle className="h-3 w-3" />}
-                  {machine.status === "stopped" && <Square className="h-3 w-3" />}
-                  {statusLabel}
+          {/* Status-colored ambient glow */}
+          <motion.div
+            key={machine.status}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.9 }}
+            className="absolute -top-1/2 -right-1/4 h-[420px] w-[620px] pointer-events-none"
+            style={{
+              background: `radial-gradient(circle, ${status.glow} 0%, transparent 60%)`,
+              filter: "blur(70px)",
+            }}
+          />
+          {/* Subtle grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.018] dark:opacity-[0.03] pointer-events-none"
+            style={{
+              backgroundImage: `linear-gradient(rgba(128,128,128,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.4) 1px, transparent 1px)`,
+              backgroundSize: "32px 32px",
+              maskImage: "radial-gradient(ellipse at top right, black 30%, transparent 75%)",
+              WebkitMaskImage: "radial-gradient(ellipse at top right, black 30%, transparent 75%)",
+            }}
+          />
+
+          {/* ── Header section ───────────────────────────── */}
+          <div className="relative p-6 sm:p-8">
+            <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+              <div className="space-y-4 min-w-0 flex-1">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative flex items-center justify-center h-2.5 w-2.5 shrink-0">
+                    <div className={cn("absolute inset-0 rounded-full", status.dot)} />
+                    {isRunning && (
+                      <>
+                        <motion.div
+                          className={cn("absolute inset-0 rounded-full", status.dot)}
+                          animate={{ scale: [1, 3.2], opacity: [0.55, 0] }}
+                          transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
+                        />
+                        <motion.div
+                          className={cn("absolute inset-0 rounded-full", status.dot)}
+                          animate={{ scale: [1, 3.2], opacity: [0.55, 0] }}
+                          transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut", delay: 1.2 }}
+                        />
+                      </>
+                    )}
+                  </div>
+                  <span
+                    className={cn(
+                      "text-[10px] font-medium uppercase tracking-[0.14em]",
+                      status.text
+                    )}
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.span
+                        key={status.label}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.22 }}
+                        className="inline-block"
+                      >
+                        {status.label}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                </div>
+
+                <div className="min-w-0">
+                  <motion.h1
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: easeOut, delay: 0.05 }}
+                    className="text-3xl sm:text-4xl font-medium tracking-tight leading-[1.1] truncate"
+                  >
+                    {machine.displayName}
+                  </motion.h1>
+                  <div className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground/60 font-mono">
+                    <Server className="h-3 w-3" />
+                    <span className="truncate">{machine.id}</span>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
-                <span>Created {new Date(machine.createdAt).toLocaleDateString()}</span>
-                {formatUptime() && (
-                  <span className="flex items-center gap-1 tabular-nums">
-                    <Clock className="h-3.5 w-3.5" />
-                    Uptime {formatUptime()}
-                  </span>
-                )}
-                {!isElectron && machine.publicIpAddress && (
-                  <button
-                    onClick={copyIp}
-                    className="flex items-center gap-1.5 font-mono text-xs hover:text-foreground transition-colors group"
-                  >
-                    <Network className="h-3.5 w-3.5" />
-                    {machine.publicIpAddress}
-                    {copiedIp ? (
-                      <Check className="h-3 w-3 text-emerald-500" />
-                    ) : (
-                      <Copy className="h-3 w-3 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity" />
-                    )}
-                  </button>
-                )}
-                {isElectron && (
-                  <span className="text-xs">Connected via Desktop App</span>
-                )}
-              </div>
+              {!isElectron && (
+                <motion.div
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, ease: easeOut, delay: 0.15 }}
+                  className="flex flex-wrap items-center gap-2"
+                >
+                  <ActionBtn
+                    icon={isRunning ? Square : Play}
+                    label={isRunning ? "Stop" : "Start"}
+                    variant="primary"
+                    onClick={() => handleAction(isRunning ? "stop" : "start")}
+                    loading={actionLoading === "start" || actionLoading === "stop"}
+                    disabled={
+                      actionLoading !== null ||
+                      !["running", "stopped", "error"].includes(machine.status)
+                    }
+                  />
+                  <ActionBtn
+                    icon={RefreshCw}
+                    label="Restart"
+                    onClick={() => handleAction("restart")}
+                    loading={actionLoading === "restart"}
+                    disabled={actionLoading !== null || !isRunning}
+                  />
+                  {isAws && (
+                    <ActionBtn
+                      icon={Save}
+                      label="Snapshot"
+                      onClick={() => handleAction("snapshot")}
+                      loading={actionLoading === "snapshot"}
+                      disabled={actionLoading !== null || !isRunning}
+                    />
+                  )}
+                  <div className="hidden sm:block w-px h-6 bg-border/40 mx-0.5" />
+                  <ActionBtn
+                    icon={Trash2}
+                    label="Delete"
+                    variant="destructive"
+                    onClick={() => handleAction("delete")}
+                    loading={actionLoading === "delete"}
+                    disabled={actionLoading !== null || isRunning}
+                  />
+                </motion.div>
+              )}
             </div>
 
-            {/* Right: actions */}
-            {!isElectron && (
-              <div className="flex flex-wrap items-center gap-2">
-                <Button
-                  variant={machine.status === "running" ? "outline" : "default"}
-                  size="sm"
-                  onClick={() => handleAction(machine.status === "running" ? "stop" : "start")}
-                  disabled={actionLoading !== null || !["running", "stopped", "error"].includes(machine.status)}
-                  className="h-9 rounded-xl gap-2 px-4 font-medium"
+            <AnimatePresence>
+              {machine.statusMessage && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: "auto", marginTop: 24 }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  transition={{ duration: 0.32, ease: easeOut }}
+                  className="overflow-hidden"
                 >
-                  {(actionLoading === "start" || actionLoading === "stop") ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : machine.status === "running" ? (
-                    <>
-                      <Square className="h-3.5 w-3.5" />
-                      Stop
-                    </>
-                  ) : (
-                    <>
-                      <Play className="h-3.5 w-3.5" />
-                      Start
-                    </>
-                  )}
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleAction("restart")}
-                  disabled={actionLoading !== null || machine.status !== "running"}
-                  className="h-9 rounded-xl gap-2 px-4 border-border/40"
-                >
-                  {actionLoading === "restart" ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <>
-                      <RefreshCw className="h-3.5 w-3.5" />
-                      Restart
-                    </>
-                  )}
-                </Button>
-                {isAws && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleAction("snapshot")}
-                    disabled={actionLoading !== null || machine.status !== "running"}
-                    className="h-9 rounded-xl gap-2 px-4 border-border/40"
-                  >
-                    {actionLoading === "snapshot" ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <>
-                        <Save className="h-3.5 w-3.5" />
-                        Snapshot
-                      </>
+                  <div
+                    className={cn(
+                      "rounded-2xl px-4 py-3 text-sm flex items-start gap-2.5",
+                      machine.status === "error"
+                        ? "bg-destructive/[0.06] text-destructive border border-destructive/15"
+                        : "bg-foreground/[0.03] text-muted-foreground border border-border/30"
                     )}
-                  </Button>
-                )}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleAction("delete")}
-                  disabled={actionLoading !== null || machine.status === "running"}
-                  className="h-9 rounded-xl gap-2 px-4 border-destructive/20 text-destructive hover:bg-destructive/10 hover:text-destructive"
-                >
-                  {actionLoading === "delete" ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <>
-                      <Trash2 className="h-3.5 w-3.5" />
-                      Delete
-                    </>
-                  )}
-                </Button>
-              </div>
-            )}
+                  >
+                    <StatusIcon
+                      className={cn("h-4 w-4 mt-0.5 shrink-0", isTransitioning && "animate-spin")}
+                    />
+                    <span className="leading-relaxed">{machine.statusMessage}</span>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Status message */}
-          {machine.statusMessage && (
-            <div className={cn(
-              "mt-4 rounded-xl px-4 py-3 text-sm",
-              machine.status === "error"
-                ? "bg-destructive/[0.06] text-destructive border border-destructive/15"
-                : "bg-foreground/[0.03] text-muted-foreground border border-border/20"
-            )}>
-              {machine.statusMessage}
-            </div>
-          )}
-        </motion.div>
-
-        {/* Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {isElectron ? (
-            <Tabs defaultValue="settings" className="space-y-4">
-              <TabsList className="bg-foreground/[0.04] border border-border/30 rounded-xl p-1 h-auto w-auto inline-flex">
-                <TabsTrigger value="settings" className={tabTriggerClass}>
-                  <Settings className="h-4 w-4" />
-                  Settings
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="settings" className="space-y-4">
-                <MachineSettings machine={machine} onUpdate={fetchMachineData} />
-              </TabsContent>
-            </Tabs>
-          ) : isDesktopAws ? (
-            <Tabs defaultValue="desktop" className="space-y-4">
-              <TabsList className="bg-foreground/[0.04] border border-border/30 rounded-xl p-1 h-auto w-auto inline-flex">
-                <TabsTrigger value="desktop" className={tabTriggerClass}>
-                  <Monitor className="h-4 w-4" />
-                  Desktop
-                </TabsTrigger>
-                <TabsTrigger value="ssh" className={tabTriggerClass}>
-                  <Terminal className="h-4 w-4" />
-                  SSH
-                </TabsTrigger>
-                <TabsTrigger value="settings" className={tabTriggerClass}>
-                  <Settings className="h-4 w-4" />
-                  Settings
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="desktop" className="space-y-4">
-                {machine.status !== "running" ? (
-                  <NotRunningState label="Start the machine to access the desktop" />
-                ) : machine.settings?.desktopInitStatus === 'installing' ? (
-                  <DesktopInitializing />
-                ) : machine.settings?.desktopInitStatus === 'failed' ? (
-                  <DesktopFailed />
+          {/* ── Stats row ────────────────────────────────── */}
+          <div className="relative border-t border-border/30">
+            <div className="flex flex-wrap sm:flex-nowrap divide-y sm:divide-y-0 sm:divide-x divide-border/30">
+              <div className="w-1/2 sm:flex-1 sm:w-auto">
+                <StatCell
+                  icon={Activity}
+                  label="Status"
+                  value={
+                    <span className={cn("inline-flex items-center gap-2", status.text)}>
+                      <span className={cn("h-1.5 w-1.5 rounded-full", status.dot)} />
+                      {status.label}
+                    </span>
+                  }
+                />
+              </div>
+              <div className="w-1/2 sm:flex-1 sm:w-auto">
+                <StatCell
+                  icon={Clock}
+                  label="Uptime"
+                  value={<span className="tabular-nums">{formatUptime() ?? "—"}</span>}
+                />
+              </div>
+              <div className="w-1/2 sm:flex-1 sm:w-auto">
+                {!isElectron && machine.publicIpAddress ? (
+                  <StatCell
+                    icon={Network}
+                    label="Public IP"
+                    value={<span className="font-mono">{machine.publicIpAddress}</span>}
+                    action={
+                      <button
+                        onClick={copyIp}
+                        className="opacity-0 group-hover:opacity-100 transition-opacity p-1.5 rounded-md hover:bg-foreground/[0.06] shrink-0"
+                        aria-label="Copy IP"
+                      >
+                        <AnimatePresence mode="wait" initial={false}>
+                          {copiedIp ? (
+                            <motion.span
+                              key="check"
+                              initial={{ scale: 0.5, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              exit={{ scale: 0.5, opacity: 0 }}
+                              transition={{ duration: 0.18 }}
+                              className="block"
+                            >
+                              <Check className="h-3.5 w-3.5 text-emerald-500" />
+                            </motion.span>
+                          ) : (
+                            <motion.span
+                              key="copy"
+                              initial={{ scale: 0.5, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              exit={{ scale: 0.5, opacity: 0 }}
+                              transition={{ duration: 0.18 }}
+                              className="block"
+                            >
+                              <Copy className="h-3.5 w-3.5 text-muted-foreground" />
+                            </motion.span>
+                          )}
+                        </AnimatePresence>
+                      </button>
+                    }
+                  />
                 ) : (
-                  <SimpleVNCViewer machine={machine} session={null} />
-                )}
-              </TabsContent>
-
-              <TabsContent value="ssh" className="space-y-4">
-                <SshConnectionPanel machine={machine} />
-              </TabsContent>
-
-              <TabsContent value="settings" className="space-y-4">
-                <MachineSettings machine={machine} onUpdate={fetchMachineData} />
-              </TabsContent>
-            </Tabs>
-          ) : isAws ? (
-            <Tabs defaultValue="ssh" className="space-y-4">
-              <TabsList className="bg-foreground/[0.04] border border-border/30 rounded-xl p-1 h-auto w-auto inline-flex">
-                <TabsTrigger value="ssh" className={tabTriggerClass}>
-                  <Terminal className="h-4 w-4" />
-                  SSH
-                </TabsTrigger>
-                <TabsTrigger value="settings" className={tabTriggerClass}>
-                  <Settings className="h-4 w-4" />
-                  Settings
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="ssh" className="space-y-4">
-                <SshConnectionPanel machine={machine} />
-              </TabsContent>
-
-              <TabsContent value="settings" className="space-y-4">
-                <MachineSettings machine={machine} onUpdate={fetchMachineData} />
-              </TabsContent>
-            </Tabs>
-          ) : (
-            <Tabs defaultValue="desktop" className="space-y-4">
-              <TabsList className="bg-foreground/[0.04] border border-border/30 rounded-xl p-1 h-auto w-auto inline-flex">
-                <TabsTrigger value="desktop" className={tabTriggerClass}>
-                  <Monitor className="h-4 w-4" />
-                  Desktop
-                </TabsTrigger>
-                <TabsTrigger value="files" className={tabTriggerClass}>
-                  <FolderOpen className="h-4 w-4" />
-                  Files
-                </TabsTrigger>
-                <TabsTrigger value="settings" className={tabTriggerClass}>
-                  <Settings className="h-4 w-4" />
-                  Settings
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="desktop" className="space-y-4">
-                {machine.status !== "running" ? (
-                  <NotRunningState label="Start the machine to access the desktop" />
-                ) : (
-                  <SimpleVNCViewer machine={machine} session={null} />
-                )}
-              </TabsContent>
-
-              <TabsContent value="files" className="space-y-4">
-                {machine.status !== "running" ? (
-                  <NotRunningState label="Start the machine to access file transfer" />
-                ) : (
-                  <FileTransfer
-                    machineId={machine.id}
-                    connectionInfo={{
-                      publicIpAddress: machine.publicIpAddress,
-                      vncPort: machine.vncPort,
-                      vncPassword: machine.vncPassword
-                    }}
+                  <StatCell
+                    icon={isElectron ? Zap : Network}
+                    label={isElectron ? "Connection" : "Public IP"}
+                    value={isElectron ? "Desktop App" : "—"}
                   />
                 )}
-              </TabsContent>
+              </div>
+              <div className="w-1/2 sm:flex-1 sm:w-auto">
+                <StatCell
+                  icon={Calendar}
+                  label="Created"
+                  value={new Date(machine.createdAt).toLocaleDateString(undefined, {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                />
+              </div>
+            </div>
+          </div>
 
-              <TabsContent value="settings" className="space-y-4">
-                <MachineSettings machine={machine} onUpdate={fetchMachineData} />
-              </TabsContent>
-            </Tabs>
+          {/* ── Tab bar ──────────────────────────────────── */}
+          {tabs.length > 1 && (
+            <div className="relative border-t border-border/30 px-6 sm:px-8 py-3">
+              <div className="relative inline-flex">
+                {tabs.map((tab) => {
+                  const TabIcon = tab.icon;
+                  const isActive = currentTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={cn(
+                        "relative z-10 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-xl transition-colors",
+                        isActive
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {isActive && (
+                        <motion.div
+                          layoutId="machineDetailActiveTab"
+                          className="absolute inset-0 rounded-xl bg-foreground/[0.05] border border-border/40"
+                          transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                      <span className="relative z-10 flex items-center gap-2">
+                        <TabIcon className="h-4 w-4" />
+                        {tab.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           )}
+
+          {/* ── Tab content ──────────────────────────────── */}
+          <div className="relative border-t border-border/30 bg-foreground/[0.012]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentTab}
+                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+                transition={{ duration: 0.32, ease: easeOut }}
+                className="p-4 sm:p-6"
+              >
+                {renderTabContent()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
     </MachineLayout>
   );
 }

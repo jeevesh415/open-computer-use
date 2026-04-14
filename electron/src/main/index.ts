@@ -12,9 +12,10 @@ import {
   openAccessibilitySettings,
 } from './permissions'
 import { ApprovalManager } from './approval-manager'
-import { destroyRainbowBorder, showAmbientRainbow, hideAmbientRainbow, moveRainbowToDisplay } from './rainbow-border'
+import { showAmbientRainbow, hideAmbientRainbow, moveRainbowToDisplay } from './rainbow-border'
 import { warmupNativeScreenshot } from './native-screenshot'
 import { getDisplayList, getActiveDisplayId, setActiveDisplayId, getActiveDisplay } from './display-manager'
+import { performFullShutdown } from './app-shutdown'
 
 // ── Custom protocol for OAuth deep links ──────────────────────────────────
 // Registers coasty:// so the browser can redirect back to the app after
@@ -112,6 +113,15 @@ function createWindow(): void {
     mainWindow?.show()
   })
 
+  // User-initiated close path (Alt+F4, ⌘W, taskbar close, in-app × button).
+  // Runs BEFORE the window is destroyed so the rainbow-border BrowserWindow
+  // is torn down in time for `window-all-closed` to fire. Without this, the
+  // lingering rainbow window blocks quit and the process stays in the
+  // background even though the UI has disappeared.
+  mainWindow.on('close', () => {
+    performFullShutdown({ wsBridge, auth, tray })
+  })
+
   mainWindow.on('closed', () => {
     mainWindow = null
   })
@@ -139,6 +149,53 @@ function createTray(): void {
   tray.on('click', () => {
     mainWindow?.show()
   })
+}
+
+/**
+ * Install a minimal application menu so the standard quit shortcut works.
+ *
+ * The overlay is a frameless transparent window with no native chrome, so
+ * there's no red traffic light or window-menu "Close" item. Without this
+ * menu, ⌘Q on macOS has no owner and does nothing, which is a major reason
+ * the app feels impossible to quit. We keep the menu intentionally tiny —
+ * a single app submenu on macOS with a Quit role, and no visible menu bar
+ * on Windows/Linux (setting null frees the menu entirely).
+ */
+function installAppMenu(): void {
+  if (process.platform === 'darwin') {
+    const template: Electron.MenuItemConstructorOptions[] = [
+      {
+        label: app.name || 'Coasty',
+        submenu: [
+          { label: 'Hide Coasty', role: 'hide' },
+          { label: 'Hide Others', role: 'hideOthers' },
+          { label: 'Show All', role: 'unhide' },
+          { type: 'separator' },
+          {
+            label: 'Quit Coasty',
+            accelerator: 'Command+Q',
+            click: () => app.quit(),
+          },
+        ],
+      },
+      {
+        label: 'Edit',
+        submenu: [
+          { role: 'undo' },
+          { role: 'redo' },
+          { type: 'separator' },
+          { role: 'cut' },
+          { role: 'copy' },
+          { role: 'paste' },
+          { role: 'selectAll' },
+        ],
+      },
+    ]
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+  } else {
+    // Windows / Linux: no visible menu bar, but Alt+F4 / taskbar close still work.
+    Menu.setApplicationMenu(null)
+  }
 }
 
 // Second instance tried to launch — focus existing window instead.
@@ -261,6 +318,13 @@ app.whenReady().then(async () => {
     app.exit(0)
   })
 
+  // Full quit triggered from the renderer (in-app × button in the overlay).
+  // Delegates to `app.quit()` so the before-quit hook runs and cleanup is
+  // funnelled through the single `performFullShutdown` routine.
+  secureHandle('app:quit', () => {
+    app.quit()
+  })
+
   // Auto-update IPC
   secureHandle('update:get-status', () => getUpdateStatus())
   secureHandle('update:get-version', () => getUpdateVersion())
@@ -273,6 +337,7 @@ app.whenReady().then(async () => {
     initAutoUpdater()
   }
 
+  installAppMenu()
   createWindow()
   createTray()
 
@@ -283,13 +348,19 @@ app.whenReady().then(async () => {
 
 })
 
+// Quit the process as soon as the last window is gone, on every platform.
+// The app is an overlay — there is no "dock-only" state the user benefits
+// from, and leaving the process alive when no windows exist causes the
+// ghost-background-task complaint on both macOS and Windows.
 app.on('window-all-closed', () => {
   app.quit()
 })
 
+// Programmatic quit path (tray menu, ⌘Q via app menu, auto-updater install).
+// `performFullShutdown` is idempotent, so running it again after the
+// mainWindow `close` handler is safe and covers the case where quit is
+// initiated without a prior window close.
 app.on('before-quit', () => {
-  wsBridge?.disconnect()
-  destroyRainbowBorder()
-  tray?.destroy()
+  performFullShutdown({ wsBridge, auth, tray })
   tray = null
 })

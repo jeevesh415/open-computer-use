@@ -24,24 +24,9 @@ const backgrounds: {
     description: "Connected star field",
   },
   {
-    id: "aurora",
-    label: "Aurora",
-    description: "Soft gradient mesh",
-  },
-  {
-    id: "isometric",
-    label: "Isometric",
-    description: "3D architect grid",
-  },
-  {
     id: "dotmatrix",
     label: "Dot Matrix",
     description: "Halftone wave pattern",
-  },
-  {
-    id: "seigaiha",
-    label: "Seigaiha",
-    description: "Japanese wave arcs",
   },
   {
     id: "blueprint",
@@ -49,54 +34,9 @@ const backgrounds: {
     description: "Technical drafting grid",
   },
   {
-    id: "zellige",
-    label: "Zellige",
-    description: "Moroccan star mosaic",
-  },
-  {
-    id: "sashiko",
-    label: "Sashiko",
-    description: "Japanese hemp-leaf stitch",
-  },
-  {
-    id: "kolam",
-    label: "Kolam",
-    description: "South Indian threshold art",
-  },
-  {
-    id: "celtic",
-    label: "Celtic Knot",
-    description: "Interlacing eternal bands",
-  },
-  {
-    id: "arabesque",
-    label: "Arabesque",
-    description: "Islamic geometric art",
-  },
-  {
-    id: "kente",
-    label: "Kente",
-    description: "West African weave",
-  },
-  {
-    id: "mayan",
-    label: "Mayan",
-    description: "Mesoamerican step-fret",
-  },
-  {
-    id: "scandinavian",
-    label: "Nordic",
-    description: "Runic wood carving",
-  },
-  {
-    id: "paisley",
-    label: "Paisley",
-    description: "Persian boteh motif",
-  },
-  {
-    id: "batik",
-    label: "Batik",
-    description: "Indonesian kawung pattern",
+    id: "isometric",
+    label: "Isometric",
+    description: "3D architect grid",
   },
 ]
 

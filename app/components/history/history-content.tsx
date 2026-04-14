@@ -46,6 +46,7 @@ import type { Chats } from "@/lib/chat-store/types"
 import { AgentIconFilled } from "@/components/icons/agent"
 import { APP_DOMAIN } from "@/lib/config"
 import { createClient } from "@/lib/supabase/client"
+import { PageLoader } from "@/components/common/page-loader"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -223,22 +224,12 @@ export function HistoryContent() {
     setDeleting(false)
   }, [selectedIds, deleteChat])
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 rounded-full border-2 border-muted" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
-          </div>
-          <span className="text-sm text-muted-foreground">Loading chats...</span>
-        </div>
-      </div>
-    )
-  }
-
   return (
+    <PageLoader
+      isLoading={isLoading}
+      title="Your History"
+      description="A quiet record of every conversation, task, and idea you've explored."
+    >
     <div className="h-full overflow-y-auto scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
@@ -496,6 +487,7 @@ export function HistoryContent() {
         )}
       </div>
     </div>
+    </PageLoader>
   )
 }
 

@@ -586,6 +586,7 @@ const NavButton = memo(function NavButton({
   id,
   isActive,
   href,
+  accentColor,
   hoverInfo,
   livePopup,
   onHoverCardOpen,
@@ -606,38 +607,47 @@ const NavButton = memo(function NavButton({
   const { open, isMobile } = useSidebar()
   const expanded = isMobile || open
 
+  // Layout is intentionally identical in both expanded and collapsed
+  // states so the icon never shifts during the width transition.
+  // With parent px-2 (8) + item px-2 (8) + icon-half (8) = 24, every
+  // icon's center sits at sidebar-x=24px in both modes — only the
+  // label appears alongside as the rail widens.
+  //
+  // Fixed h-[30px] (instead of py-[7px]) keeps item height constant
+  // regardless of whether the label is present. Without this, the
+  // label's natural ~18.75px line-box would push expanded items
+  // 2.75px taller than collapsed ones, accumulating vertical drift
+  // down the nav.
   const content = (
     <span
       className={cn(
-        "group/btn relative flex w-full items-center rounded-lg transition-all duration-200 ease-out",
+        "group/btn relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-lg transition-colors duration-150",
         "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
-        expanded ? "gap-2.5 px-2.5 py-[7px]" : "justify-center p-2",
         variant === "primary"
           ? cn(
               "bg-sidebar-primary text-sidebar-primary-foreground",
-              "shadow-[0_1px_2px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.1)]",
-              "hover:shadow-[0_2px_8px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.12)]",
-              "hover:brightness-[1.08] active:brightness-95 active:scale-[0.98]"
+              "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
+              "hover:shadow-[0_2px_6px_rgba(0,0,0,0.12)]",
+              "hover:brightness-[1.05] active:brightness-95 active:scale-[0.985]",
+              "transition-all duration-200 ease-out"
             )
           : isActive
-            ? "bg-sidebar-accent/80 text-sidebar-accent-foreground"
-            : "text-foreground/45 hover:text-foreground/80 hover:bg-sidebar-accent/40"
+            ? "bg-foreground/[0.07] text-foreground dark:bg-white/[0.08]"
+            : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]"
       )}
     >
-      {isActive && variant !== "primary" && (
-        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-3.5 rounded-r-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.3)]" />
-      )}
       <span className={cn(
-        "shrink-0 flex items-center justify-center w-4 h-4 transition-colors duration-200",
-        isActive ? "text-emerald-500" : variant !== "primary" && "group-hover/btn:text-foreground/70"
+        "shrink-0 flex items-center justify-center w-4 h-4 transition-colors duration-150",
+        variant === "primary"
+          ? ""
+          : isActive
+            ? "text-foreground"
+            : "group-hover/btn:text-foreground/80"
       )}>
         {icon}
       </span>
       {expanded && (
-        <span className={cn(
-          "truncate text-[12.5px] tracking-[-0.01em]",
-          isActive ? "font-semibold text-foreground" : "font-medium"
-        )}>
+        <span className="truncate text-[12.5px] font-medium tracking-[-0.01em]">
           {label}
         </span>
       )}
@@ -720,12 +730,35 @@ const NavButton = memo(function NavButton({
   return linkOrButton
 })
 
-// ─── Section label ─────────────────────────────────────────────────
-function SectionLabel({ children, expanded }: { children: React.ReactNode; expanded: boolean }) {
-  if (!expanded) return <div className="mx-auto my-2 w-5 h-px bg-sidebar-border/20 rounded-full" />
+// ─── Section header ────────────────────────────────────────────────
+//   Apple Music / Mail style: sentence case (not UPPERCASE), 11.5px
+//   medium-weight, low-contrast (foreground/50). The label sits at
+//   the *bottom* of a 28px wrapper, so most of the breathing room
+//   lives ABOVE the label — separating it from the previous group —
+//   while the bottom is tight, pairing the label with its own items.
+//
+//   Both modes are exactly 28px (h-7) tall — critical for preventing
+//   vertical drift between collapsed and expanded. Collapsed mode
+//   shows a centered hairline instead of the label so the icon rail
+//   still has rhythmic group separators.
+//
+//   Label left-edge anchored at sidebar-x=16 (parent px-2 + pl-2),
+//   the same column as nav icon left-edges. This creates a strict
+//   left rail: every section header lines up with the icon column
+//   below it, not the label column. Reads like Apple Music.
+function SectionHeader({ label, expanded }: { label: string; expanded: boolean }) {
+  if (!expanded) {
+    return (
+      <div aria-hidden className="h-7 flex items-center justify-center">
+        <span className="w-5 h-px bg-sidebar-border/15 rounded-full" />
+      </div>
+    )
+  }
   return (
-    <div className="text-[10px] font-semibold text-foreground/35 uppercase tracking-[0.08em] mb-1 mt-0.5 px-2.5 select-none">
-      {children}
+    <div className="h-7 flex items-end px-2 pb-1">
+      <span className="text-[11.5px] font-medium text-foreground/50 select-none leading-none">
+        {label}
+      </span>
     </div>
   )
 }
@@ -806,199 +839,194 @@ export const SidebarNavSection = memo(function SidebarNavSection({
         />
       </div>
 
-      {/* Divider */}
-      <div className={cn(
-        "mx-auto mb-2 transition-all",
-        expanded
-          ? "w-[calc(100%-1.25rem)] h-px bg-gradient-to-r from-transparent via-sidebar-border/20 to-transparent"
-          : "w-5 h-px bg-sidebar-border/15"
-      )} />
-
-      {/* Activity */}
-      <div className="relative pb-1">
-        <SectionLabel expanded={expanded}>{t("activity")}</SectionLabel>
-        <div className="space-y-0.5">
-          <NavButton
-            id="sidebar-history-link"
-            icon={<IconClockPlay size={16} stroke={1.5} className="shrink-0" />}
-            label={t("taskHistory")}
-            tooltip={t("taskHistoryDescription")}
-            href="/history"
-            isActive={isItemActive("/history")}
-            accentColor="text-blue-500"
-            onClick={closeMobileIfNeeded}
-            livePopup={historyPopup}
-            hoverInfo={{
-              description: t("taskHistoryPopup.title"),
-              detail: t("taskHistoryPopup.description"),
-              visual: "history",
-            }}
-          />
-          <NavButton
-            id="sidebar-swarms-link"
-            icon={<IconBinaryTree size={16} stroke={1.5} className="shrink-0" />}
-            label={t("swarmRuns")}
-            tooltip={t("swarmRunsDescription")}
-            href="/swarms"
-            isActive={isItemActive("/swarms")}
-            accentColor="text-violet-500"
-            onClick={closeMobileIfNeeded}
-            livePopup={swarmsPopup}
-            onHoverCardOpen={triggerSwarmsFetch}
-            hoverInfo={{
-              description: t("swarmRunsPopup.title"),
-              detail: t("swarmRunsPopup.description"),
-              visual: "swarms",
-            }}
-          />
-          <NavButton
-            id="sidebar-guide-link"
-            icon={<IconBook2 size={16} stroke={1.5} className="shrink-0" />}
-            label={t("guide")}
-            tooltip={t("guideDescription")}
-            href="/guide"
-            isActive={isItemActive("/guide")}
-            accentColor="text-emerald-500"
-            onClick={closeMobileIfNeeded}
-            hoverInfo={{
-              description: t("guidePopup.title"),
-              detail: t("guidePopup.description"),
-              visual: "guide",
-            }}
-          />
-          <NavButton
-            id="sidebar-discover-link"
-            icon={<IconCompass size={16} stroke={1.5} className="shrink-0" />}
-            label="Community"
-            tooltip="See how people use Coasty"
-            href="/discover"
-            isActive={isItemActive("/discover")}
-            accentColor="text-sky-500"
-            onClick={closeMobileIfNeeded}
-            hoverInfo={{
-              description: "Community Sessions",
-              detail: "See what others are automating and get inspired for your next workflow.",
-              visual: "guide",
-            }}
-          />
-        </div>
+      {/* ── Group 1 · Recent work ─────────────────────────────────
+          History first (highest frequency return destination),
+          then Swarms (its specialized parallel-runs sibling).
+          The section header itself separates this group from the
+          New Task button — no extra hairline needed. */}
+      <SectionHeader label="Recent" expanded={expanded} />
+      <div className="space-y-0.5">
+        <NavButton
+          id="sidebar-history-link"
+          icon={<IconClockPlay size={16} stroke={1.5} className="shrink-0" />}
+          label={t("taskHistory")}
+          tooltip={t("taskHistoryDescription")}
+          href="/history"
+          isActive={isItemActive("/history")}
+          accentColor="text-blue-500 dark:text-blue-400"
+          onClick={closeMobileIfNeeded}
+          livePopup={historyPopup}
+          hoverInfo={{
+            description: t("taskHistoryPopup.title"),
+            detail: t("taskHistoryPopup.description"),
+            visual: "history",
+          }}
+        />
+        <NavButton
+          id="sidebar-swarms-link"
+          icon={<IconBinaryTree size={16} stroke={1.5} className="shrink-0" />}
+          label={t("swarmRuns")}
+          tooltip={t("swarmRunsDescription")}
+          href="/swarms"
+          isActive={isItemActive("/swarms")}
+          accentColor="text-violet-500 dark:text-violet-400"
+          onClick={closeMobileIfNeeded}
+          livePopup={swarmsPopup}
+          onHoverCardOpen={triggerSwarmsFetch}
+          hoverInfo={{
+            description: t("swarmRunsPopup.title"),
+            detail: t("swarmRunsPopup.description"),
+            visual: "swarms",
+          }}
+        />
       </div>
 
-      {/* Infrastructure */}
-      <div className="relative pb-1 mt-2.5">
-        <SectionLabel expanded={expanded}>{t("infrastructure")}</SectionLabel>
-        <div className="space-y-0.5">
-          {/* My Computers */}
-          {expanded ? (
+      <SectionHeader label="Workspace" expanded={expanded} />
+
+      {/* ── Group 2 · Resources ───────────────────────────────────
+          Concrete → abstract: Computers exist, Schedules run on
+          them, Credentials secure them. Reading the group teaches
+          the mental model of the product. */}
+      <div className="space-y-0.5">
+        {/* Computers — single unified button. Same layout as NavButton
+            so the icon stays anchored at sidebar-x=24 in both modes.
+            Running dot floats off the icon's top-right corner as a
+            tiny badge; the count badge appears on the right when
+            expanded only. */}
+        <Tooltip>
+          <TooltipTrigger asChild>
             <button
               id="sidebar-machines-link"
-              className={cn(
-                "group/btn relative flex w-full items-center rounded-lg transition-all duration-200 ease-out",
-                "gap-2.5 px-2.5 py-[7px]",
-                isItemActive("/machines")
-                  ? "bg-sidebar-accent/80 text-sidebar-accent-foreground"
-                  : "text-foreground/45 hover:text-foreground/80 hover:bg-sidebar-accent/40"
-              )}
               type="button"
+              className={cn(
+                "group/btn relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-lg transition-colors duration-150",
+                isItemActive("/machines")
+                  ? "bg-foreground/[0.07] text-foreground dark:bg-white/[0.08]"
+                  : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]"
+              )}
               onClick={() => {
                 router.push("/machines")
                 closeMobileIfNeeded()
               }}
             >
-              {isItemActive("/machines") && (
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-3.5 rounded-r-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.3)]" />
-              )}
               <span className={cn(
-                "shrink-0 flex items-center justify-center w-4 h-4 transition-colors duration-200",
-                isItemActive("/machines") ? "text-emerald-500" : "group-hover/btn:text-foreground/70"
+                "relative shrink-0 flex items-center justify-center w-4 h-4 transition-colors duration-150",
+                isItemActive("/machines")
+                  ? "text-foreground"
+                  : "group-hover/btn:text-foreground/80"
               )}>
                 <IconDeviceDesktop size={16} stroke={1.5} />
+                {!expanded && machineStats.running > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 h-1 w-1 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                )}
               </span>
-              <span className={cn(
-                "truncate text-[12.5px] tracking-[-0.01em]",
-                isItemActive("/machines") ? "font-semibold text-foreground" : "font-medium"
-              )}>
-                {machineStats.total === 1 ? t("computer") : t("computers")}
-              </span>
-              {machineStats.total > 0 && (
-                <span className="ml-auto flex items-center gap-1.5 shrink-0">
-                  {machineStats.running > 0 && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.4)]" />
-                  )}
-                  <span className={cn(
-                    "text-[11px] tabular-nums font-medium",
-                    isItemActive("/machines") ? "text-foreground/50" : "text-foreground/25"
-                  )}>
-                    {machineStats.total}
+              {expanded && (
+                <>
+                  <span className="truncate text-[12.5px] font-medium tracking-[-0.01em]">
+                    {machineStats.total === 1 ? t("computer") : t("computers")}
                   </span>
-                </span>
+                  {machineStats.total > 0 && (
+                    <span className="ml-auto flex items-center gap-1.5 shrink-0">
+                      {machineStats.running > 0 && (
+                        <span className="h-1 w-1 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                      )}
+                      <span className={cn(
+                        "text-[10.5px] tabular-nums font-medium",
+                        isItemActive("/machines") ? "text-foreground/55" : "text-foreground/30"
+                      )}>
+                        {machineStats.total}
+                      </span>
+                    </span>
+                  )}
+                </>
               )}
             </button>
-          ) : (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  id="sidebar-machines-link"
-                  className={cn(
-                    "relative flex w-full items-center justify-center p-2 rounded-lg transition-all duration-200",
-                    isItemActive("/machines")
-                      ? "bg-sidebar-accent/80"
-                      : "text-foreground/45 hover:text-foreground/80 hover:bg-sidebar-accent/40"
-                  )}
-                  onClick={() => router.push("/machines")}
-                >
-                  <IconDeviceDesktop size={16} stroke={1.5} className={isItemActive("/machines") ? "text-emerald-500" : ""} />
-                  {machineStats.running > 0 && (
-                    <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.4)]" />
-                  )}
-                </button>
-              </TooltipTrigger>
-              <TooltipContent side="right" sideOffset={8}>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-semibold">{machineStats.total}</span>
-                  <span className="text-muted-foreground">{machineStats.total === 1 ? t("computer") : t("computers")}</span>
-                  {machineStats.running > 0 && (
-                    <span className="text-emerald-500">({machineStats.running} {t("active")})</span>
-                  )}
-                </div>
-              </TooltipContent>
-            </Tooltip>
+          </TooltipTrigger>
+          {!expanded && (
+            <TooltipContent side="right" sideOffset={8}>
+              <div className="flex items-center gap-1.5">
+                <span className="font-semibold">{machineStats.total}</span>
+                <span className="text-muted-foreground">{machineStats.total === 1 ? t("computer") : t("computers")}</span>
+                {machineStats.running > 0 && (
+                  <span className="text-emerald-500 dark:text-emerald-400">({machineStats.running} {t("active")})</span>
+                )}
+              </div>
+            </TooltipContent>
           )}
-          <NavButton
-            id="sidebar-schedules-link"
-            icon={<IconCalendarClock size={16} stroke={1.5} className="shrink-0" />}
-            label={t("workforce")}
-            tooltip={t("workforceDescription")}
-            href="/schedules"
-            isActive={isItemActive("/schedules")}
-            accentColor="text-amber-500"
-            onClick={closeMobileIfNeeded}
-            livePopup={schedulesPopup}
-            onHoverCardOpen={triggerSchedulesFetch}
-            hoverInfo={{
-              description: t("workforcePopup.title"),
-              detail: t("workforcePopup.description"),
-              visual: "workforce",
-            }}
-          />
-          <NavButton
-            id="sidebar-secrets-link"
-            icon={<IconShieldLock size={16} stroke={1.5} className="shrink-0" />}
-            label={t("credentials")}
-            tooltip={t("credentialsDescription")}
-            href="/secrets"
-            isActive={isItemActive("/secrets")}
-            accentColor="text-rose-500"
-            onClick={closeMobileIfNeeded}
-            livePopup={secretsPopup}
-            onHoverCardOpen={triggerSecretsFetch}
-            hoverInfo={{
-              description: t("credentialsPopup.title"),
-              detail: t("credentialsPopup.description"),
-              visual: "credentials",
-            }}
-          />
-        </div>
+        </Tooltip>
+        <NavButton
+          id="sidebar-schedules-link"
+          icon={<IconCalendarClock size={16} stroke={1.5} className="shrink-0" />}
+          label={t("workforce")}
+          tooltip={t("workforceDescription")}
+          href="/schedules"
+          isActive={isItemActive("/schedules")}
+          accentColor="text-amber-500 dark:text-amber-400"
+          onClick={closeMobileIfNeeded}
+          livePopup={schedulesPopup}
+          onHoverCardOpen={triggerSchedulesFetch}
+          hoverInfo={{
+            description: t("workforcePopup.title"),
+            detail: t("workforcePopup.description"),
+            visual: "workforce",
+          }}
+        />
+        <NavButton
+          id="sidebar-secrets-link"
+          icon={<IconShieldLock size={16} stroke={1.5} className="shrink-0" />}
+          label={t("credentials")}
+          tooltip={t("credentialsDescription")}
+          href="/secrets"
+          isActive={isItemActive("/secrets")}
+          accentColor="text-rose-500 dark:text-rose-400"
+          onClick={closeMobileIfNeeded}
+          livePopup={secretsPopup}
+          onHoverCardOpen={triggerSecretsFetch}
+          hoverInfo={{
+            description: t("credentialsPopup.title"),
+            detail: t("credentialsPopup.description"),
+            visual: "credentials",
+          }}
+        />
+      </div>
+
+      <SectionHeader label="Help" expanded={expanded} />
+
+      {/* ── Group 3 · Help ────────────────────────────────────────
+          Lowest-frequency, passive learning. Lives at the bottom
+          like Apple's "Help" or Settings' "About" — present but
+          never competing for attention. */}
+      <div className="space-y-0.5">
+        <NavButton
+          id="sidebar-guide-link"
+          icon={<IconBook2 size={16} stroke={1.5} className="shrink-0" />}
+          label={t("guide")}
+          tooltip={t("guideDescription")}
+          href="/guide"
+          isActive={isItemActive("/guide")}
+          accentColor="text-emerald-500 dark:text-emerald-400"
+          onClick={closeMobileIfNeeded}
+          hoverInfo={{
+            description: t("guidePopup.title"),
+            detail: t("guidePopup.description"),
+            visual: "guide",
+          }}
+        />
+        <NavButton
+          id="sidebar-discover-link"
+          icon={<IconCompass size={16} stroke={1.5} className="shrink-0" />}
+          label="Community"
+          tooltip="See how people use Coasty"
+          href="/discover"
+          isActive={isItemActive("/discover")}
+          accentColor="text-sky-500 dark:text-sky-400"
+          onClick={closeMobileIfNeeded}
+          hoverInfo={{
+            description: "Community Sessions",
+            detail: "See what others are automating and get inspired for your next workflow.",
+            visual: "guide",
+          }}
+        />
       </div>
     </>
   )

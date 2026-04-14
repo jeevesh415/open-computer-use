@@ -17,7 +17,7 @@ import {
 import { useState } from "react"
 // import { ByokSection } from "./apikeys/byok-section"
 // import { InteractionPreferences } from "./appearance/interaction-preferences"
-// import { LayoutSettings } from "./appearance/layout-settings"
+import { LayoutSettings } from "./appearance/layout-settings"
 // import { ConnectionsPlaceholder } from "./connections/connections-placeholder"
 // import { DeveloperTools } from "./connections/developer-tools"
 // import { OllamaSection } from "./connections/ollama-section" // COMMENTED OUT
@@ -131,6 +131,7 @@ export function SettingsContent({
 
             <TabsContent value="appearance" className="space-y-6 px-6">
               <ThemeSelection />
+              <LayoutSettings />
               <BackgroundSelection />
             </TabsContent>
 
@@ -232,6 +233,7 @@ export function SettingsContent({
 
               <TabsContent value="appearance" className="mt-0 space-y-6">
                 <ThemeSelection />
+                <LayoutSettings />
                 <BackgroundSelection />
               </TabsContent>
 

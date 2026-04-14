@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import { Plus, KeyRound, Eye, EyeOff, MoreHorizontal, Pencil, Trash2, ShieldCheck, LockKeyhole, Globe, MousePointerClick, BookOpen, Download } from "lucide-react"
 import Link from "next/link"
+import { PageLoader } from "@/components/common/page-loader"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -274,21 +275,12 @@ export function SecretsContent() {
     setDialogOpen(true)
   }
 
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 rounded-full border-2 border-foreground/[0.08]" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/60 animate-spin" />
-          </div>
-          <span className="text-sm text-muted-foreground">{t("loading")}</span>
-        </div>
-      </div>
-    )
-  }
-
   return (
+    <PageLoader
+      isLoading={loading}
+      title="Credentials"
+      description="Your secrets are safe with us. Unlocking the vault."
+    >
     <div className="h-full overflow-y-auto scrollbar-invisible relative bg-transparent">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0">
@@ -506,5 +498,6 @@ export function SecretsContent() {
         </AlertDialogContent>
       </AlertDialog>
     </div>
+    </PageLoader>
   )
 }

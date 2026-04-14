@@ -2,8 +2,7 @@
 
 import { type ChatBackground } from "@/lib/user-preference-store/utils"
 import { cn } from "@/lib/utils"
-import { useId, useMemo } from "react"
-import { useTheme } from "next-themes"
+import { useId } from "react"
 /* ─── Constellation: real-world constellations in a large non-repeating tile ─── */
 
 type Star = { x: number; y: number; r: number }
@@ -180,55 +179,17 @@ function ConstellationBackground() {
   )
 }
 
-/* ─── Aurora: static luxury gradient mesh — no animation, no blur, pure GPU layer ─── */
-function AuroraBackground() {
-  const { resolvedTheme } = useTheme()
-  const isDark = resolvedTheme === "dark"
-
-  const background = useMemo(() => {
-    if (isDark) {
-      return [
-        "radial-gradient(ellipse 85% 55% at 10% 15%, rgba(30, 41, 59, 0.45), transparent 65%)",
-        "radial-gradient(ellipse 65% 70% at 85% 10%, rgba(15, 23, 42, 0.40), transparent 60%)",
-        "radial-gradient(ellipse 75% 50% at 50% 90%, rgba(51, 65, 85, 0.30), transparent 60%)",
-        "radial-gradient(ellipse 60% 65% at 20% 70%, rgba(22, 30, 45, 0.35), transparent 60%)",
-        "radial-gradient(ellipse 55% 55% at 78% 60%, rgba(39, 49, 66, 0.25), transparent 55%)",
-        "radial-gradient(ellipse 50% 50% at 55% 30%, rgba(10, 15, 30, 0.35), transparent 55%)",
-      ].join(", ")
-    }
-    return [
-      "radial-gradient(ellipse 85% 55% at 10% 15%, rgba(30, 41, 59, 0.12), transparent 65%)",
-      "radial-gradient(ellipse 65% 70% at 85% 10%, rgba(15, 23, 42, 0.10), transparent 60%)",
-      "radial-gradient(ellipse 75% 50% at 50% 90%, rgba(51, 65, 85, 0.08), transparent 60%)",
-      "radial-gradient(ellipse 60% 65% at 20% 70%, rgba(22, 30, 45, 0.09), transparent 60%)",
-      "radial-gradient(ellipse 55% 55% at 78% 60%, rgba(39, 49, 66, 0.07), transparent 55%)",
-      "radial-gradient(ellipse 50% 50% at 55% 30%, rgba(10, 15, 30, 0.08), transparent 55%)",
-    ].join(", ")
-  }, [isDark])
-
-  return (
-    <div
-      className="pointer-events-none absolute inset-0"
-      style={{
-        background,
-        contain: "strict",
-        willChange: "auto",
-        transform: "translateZ(0)",
-      }}
-    />
-  )
-}
-
 /* ─── Dot Matrix: halftone wave with sinusoidal size modulation ─── */
 
-// Pre-computed dot grid with wave-modulated radii for a halftone effect
-const DOT_COLS = 16
-const DOT_ROWS = 16
-const DOT_SPACING = 18
+// Pre-computed dot grid with wave-modulated radii for a halftone effect.
+// Tuned for restraint: more air between dots, smaller max radius, gentler tonal range.
+const DOT_COLS = 14
+const DOT_ROWS = 14
+const DOT_SPACING = 24
 const TILE_W = DOT_COLS * DOT_SPACING
 const TILE_H = DOT_ROWS * DOT_SPACING
 
-type Dot = { cx: number; cy: number; r: number; opacity: number }
+type Dot = { cx: number; cy: number; r: number; tier: 0 | 1 | 2 }
 
 const dotMatrixDots: Dot[] = (() => {
   const dots: Dot[] = []
@@ -240,9 +201,11 @@ const dotMatrixDots: Dot[] = (() => {
       const wave1 = Math.sin((col / DOT_COLS) * Math.PI * 2.5) * Math.cos((row / DOT_ROWS) * Math.PI * 2)
       const wave2 = Math.sin(((col + row) / (DOT_COLS + DOT_ROWS)) * Math.PI * 4) * 0.5
       const t = (wave1 + wave2) * 0.5 + 0.5 // normalize to 0–1
-      const r = 0.6 + t * 2.8 // radius range: 0.6 to 3.4
-      const opacity = 0.04 + t * 0.14 // opacity range: 0.04 to 0.18
-      dots.push({ cx, cy, r, opacity })
+      // Smaller radius range — barely-there at the troughs, never punchy at the peaks
+      const r = 0.5 + t * 1.6 // 0.5 → 2.1
+      // Three discrete tiers so the wave reads as halftone, not noise
+      const tier: 0 | 1 | 2 = t > 0.72 ? 2 : t > 0.4 ? 1 : 0
+      dots.push({ cx, cy, r, tier })
     }
   }
   return dots
@@ -263,13 +226,13 @@ function DotMatrixBackground() {
               cx={d.cx}
               cy={d.cy}
               r={d.r}
-              className={cn(
-                d.opacity > 0.13
-                  ? "fill-foreground/[0.14] dark:fill-foreground/[0.22]"
-                  : d.opacity > 0.08
-                    ? "fill-foreground/[0.09] dark:fill-foreground/[0.16]"
-                    : "fill-foreground/[0.04] dark:fill-foreground/[0.08]"
-              )}
+              className={
+                d.tier === 2
+                  ? "fill-foreground/[0.08] dark:fill-foreground/[0.13]"
+                  : d.tier === 1
+                    ? "fill-foreground/[0.05] dark:fill-foreground/[0.08]"
+                    : "fill-foreground/[0.025] dark:fill-foreground/[0.04]"
+              }
             />
           ))}
         </pattern>
@@ -914,7 +877,6 @@ export function ChatBackgroundLayer({ background }: { background: ChatBackground
   return (
     <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
       {background === "constellation" && <ConstellationBackground />}
-      {background === "aurora" && <AuroraBackground />}
       {background === "isometric" && <IsometricBackground />}
       {background === "dotmatrix" && <DotMatrixBackground />}
       {background === "seigaiha" && <SeigaihaBackground />}

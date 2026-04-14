@@ -44,6 +44,7 @@ import { cn } from "@/lib/utils";
 import { useSubscription } from "@/hooks/use-subscription";
 import { formatTimeRemaining } from "@/lib/utils/subscription";
 import { WindowsIcon, AppleIcon, LinuxIcon } from "@/components/icons/platform-icons";
+import { MachineCardThumbnail } from "@/app/components/machines/machine-card-thumbnail";
 import type { UserMachine, MachineStatus } from "@/types/machines.types";
 
 interface MachineCardProps {
@@ -252,38 +253,28 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
     <>
       <div
         className={cn(
-          "relative group h-full rounded-2xl transition-all duration-300",
+          "relative group h-full flex flex-col rounded-2xl transition-all duration-300 overflow-hidden",
           "border border-border/40 bg-card/60 backdrop-blur-md",
           "hover:border-border/70 hover:bg-card/90 hover:shadow-xl hover:shadow-black/[0.03] dark:hover:shadow-black/[0.08]",
           "hover:-translate-y-0.5",
           machine.status === "error" && "border-red-500/20 bg-red-500/[0.02]",
         )}
       >
-        {/* Status accent — thin gradient line at top */}
-        <div className={cn(
-          "absolute top-0 inset-x-4 h-px rounded-full",
-          machine.status === "running" && "bg-gradient-to-r from-transparent via-emerald-500/60 to-transparent",
-          (machine.status === "creating" || machine.status === "starting") && "overflow-hidden",
-          machine.status === "stopping" && "bg-gradient-to-r from-transparent via-amber-500/50 to-transparent",
-          machine.status === "error" && "bg-gradient-to-r from-transparent via-red-500/40 to-transparent",
-        )}>
-          {(machine.status === "creating" || machine.status === "starting") && (
-            <div
-              className="h-full w-full"
-              style={{
-                background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.6), transparent)",
-                animation: "slide 2s linear infinite",
-              }}
-            />
-          )}
+        {/* Generative animated thumbnail */}
+        <div className="shrink-0 transition-transform duration-500 group-hover:scale-[1.03] origin-center">
+          <MachineCardThumbnail
+            machineId={machine.id}
+            status={machine.status}
+            platform={machine.settings?.platform}
+          />
         </div>
 
         {/* Card content */}
-        <div className="flex flex-col h-full p-5">
+        <div className="flex flex-col flex-1 px-5 pb-5 pt-4 relative">
           {/* Top row: Name + Status + Menu */}
-          <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="flex items-start justify-between gap-3 mb-3">
             <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2.5 mb-1">
+              <div className="flex items-center gap-2.5 mb-1.5">
                 <h3 className="text-[15px] font-semibold truncate text-foreground/90 tracking-tight">
                   {machine.displayName}
                 </h3>
@@ -301,6 +292,13 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                 )}>
                   {statusLabel}
                 </span>
+                {osInfo && (
+                  <span className="inline-flex items-center gap-1 text-muted-foreground/50 ml-0.5">
+                    <span className="text-[10px]">·</span>
+                    <osInfo.Icon className="h-2.5 w-2.5" />
+                    <span className="text-[11px]">{osInfo.label}</span>
+                  </span>
+                )}
                 {formatUptime() && (
                   <span className="text-[11px] text-muted-foreground/50 tabular-nums ml-1">
                     {formatUptime()}
@@ -355,14 +353,6 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-
-          {/* OS pill */}
-          {osInfo && (
-            <div className="inline-flex items-center gap-1 rounded-md border border-border/40 bg-foreground/[0.03] px-1.5 py-0.5 mb-4 self-start">
-              <osInfo.Icon className="h-2.5 w-2.5 text-muted-foreground/70" />
-              <span className="text-[10px] font-medium text-muted-foreground/80">{osInfo.label}</span>
-            </div>
-          )}
 
           {/* Email identity */}
           {machine.settings?.email_identity?.email && (

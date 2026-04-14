@@ -34,7 +34,7 @@ export async function GET() {
       if (error.code === "PGRST116") {
         return NextResponse.json({
           layout: "fullscreen",
-          chat_background: "aurora",
+          chat_background: "none",
           prompt_suggestions: true,
           show_tool_invocations: true,
           show_conversation_previews: true,
@@ -52,7 +52,7 @@ export async function GET() {
 
     return NextResponse.json({
       layout: data.layout,
-      chat_background: data.chat_background || "aurora",
+      chat_background: data.chat_background || "none",
       prompt_suggestions: data.prompt_suggestions,
       show_tool_invocations: data.show_tool_invocations,
       show_conversation_previews: data.show_conversation_previews,
@@ -156,7 +156,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({
       success: true,
       layout: data.layout,
-      chat_background: data.chat_background || "aurora",
+      chat_background: data.chat_background || "none",
       prompt_suggestions: data.prompt_suggestions,
       show_tool_invocations: data.show_tool_invocations,
       show_conversation_previews: data.show_conversation_previews,

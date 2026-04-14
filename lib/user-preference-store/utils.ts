@@ -1,9 +1,10 @@
 export type LayoutType = "sidebar" | "fullscreen"
 
+export type SidebarStyle = "vertical" | "horizontal"
+
 export type ChatBackground =
   | "none"
   | "constellation"
-  | "aurora"
   | "isometric"
   | "dotmatrix"
   | "seigaiha"
@@ -21,6 +22,7 @@ export type ChatBackground =
 
 export type UserPreferences = {
   layout: LayoutType
+  sidebarStyle: SidebarStyle
   chatBackground: ChatBackground
   promptSuggestions: boolean
   showToolInvocations: boolean
@@ -31,7 +33,8 @@ export type UserPreferences = {
 
 export const defaultPreferences: UserPreferences = {
   layout: "sidebar",
-  chatBackground: "aurora",
+  sidebarStyle: "vertical",
+  chatBackground: "none",
   promptSuggestions: true,
   showToolInvocations: true,
   showConversationPreviews: true,
@@ -40,10 +43,13 @@ export const defaultPreferences: UserPreferences = {
 }
 
 // Helper functions to convert between API format (snake_case) and frontend format (camelCase)
+// Note: `sidebarStyle` is a client-only preference (not yet persisted to Supabase).
+// It is hydrated from localStorage in the provider's fetchUserPreferences merge step.
 export function convertFromApiFormat(apiData: any): UserPreferences {
   return {
     layout: apiData.layout || "fullscreen",
-    chatBackground: apiData.chat_background || "aurora",
+    sidebarStyle: apiData.sidebar_style || "vertical",
+    chatBackground: apiData.chat_background || "none",
     promptSuggestions: apiData.prompt_suggestions ?? true,
     showToolInvocations: apiData.show_tool_invocations ?? true,
     showConversationPreviews: apiData.show_conversation_previews ?? true,

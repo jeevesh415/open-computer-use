@@ -104,33 +104,34 @@ export function AppSidebar() {
           "--sidebar-width": "13.5rem",
         } as React.CSSProperties}
       >
-        {/* ─── Header ─────────────────────────────────────── */}
-        <SidebarHeader className="p-0 border-b border-sidebar-border/10">
-          <div className={cn(
-            "flex items-center min-h-[48px]",
-            expanded ? "px-3 py-2" : "justify-center py-2"
-          )}>
+        {/* ─── Header ───────────────────────────────────────
+            Same padding & layout in both modes so the logo never
+            shifts horizontally. Logo center anchored at sidebar-x=24
+            (parent px-2 + button px-1 + logo-half 12), matching the
+            nav icon column below. Wordmark uses gap-1.5 so its left
+            edge lands at x=42 — same as nav item labels. */}
+        <SidebarHeader className="p-0">
+          <div className="flex items-center min-h-[44px] px-2 pt-2 pb-1">
             <button
               onClick={() => {
                 setLogoClicks(c => c + 1)
                 handleNavigation(() => router.push("/"))
               }}
               className={cn(
-                "flex items-center rounded-lg transition-all duration-200 ease-out",
-                "hover:bg-sidebar-accent/30",
-                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
-                expanded ? "gap-2 flex-1 min-w-0 p-1.5" : "p-2 justify-center"
+                "flex w-full items-center gap-1.5 px-1 py-1.5 rounded-lg transition-colors duration-150",
+                "hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]",
+                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50"
               )}
               title="Coasty"
             >
               <div className={cn(
-                "flex h-7 w-7 items-center justify-center shrink-0 transition-transform duration-500",
+                "flex h-6 w-6 items-center justify-center shrink-0 transition-transform duration-500",
                 partyMode && "animate-spin"
               )}>
                 <CoastyIcon className="h-6 w-6 text-sidebar-primary" />
               </div>
               {expanded && (
-                <span className="text-[13px] font-semibold text-foreground tracking-[-0.01em] leading-normal truncate">
+                <span className="text-[13.5px] font-semibold text-foreground/90 tracking-[-0.015em] leading-tight truncate">
                   Coasty
                 </span>
               )}
@@ -138,11 +139,13 @@ export function AppSidebar() {
           </div>
         </SidebarHeader>
 
-        {/* ─── Content ────────────────────────────────────── */}
+        {/* ─── Content ──────────────────────────────────────
+            Padding is intentionally constant across expand/collapse so
+            every icon stays anchored at sidebar-x=24px and never shifts
+            during the width transition. */}
         <SidebarContent
           className={cn(
-            "pt-2 overflow-y-auto overflow-x-hidden",
-            expanded ? "px-2" : "px-1.5",
+            "pt-2 px-2 overflow-y-auto overflow-x-hidden",
             rainbowMode && "rainbow-wave"
           )}
         >

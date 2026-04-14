@@ -33,6 +33,7 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
   const vignetteRef = useRef<HTMLDivElement>(null)
   const bottomFadeRef = useRef<HTMLDivElement>(null)
   const scrollIndRef = useRef<HTMLDivElement>(null)
+  const bgLayerRef = useRef<HTMLDivElement>(null)
 
   const centerCol = Math.floor(cols / 2)
   const centerRow = Math.floor(rows / 2)
@@ -50,6 +51,16 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
     return () => clearInterval(interval)
   }, [HEADLINES.length])
 
+  // Preload/decode thumbnails on mount — Safari defers lazy decode inside
+  // transformed parents and dumps the work mid-scroll, causing visible stutter.
+  useEffect(() => {
+    VIDEO_IDS.forEach((id) => {
+      const img = new window.Image()
+      img.decoding = "async"
+      img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+    })
+  }, [])
+
   // Pre-compute tile layout
   const tiles = useMemo(() => {
     return Array.from({ length: cols * rows }, (_, i) => {
@@ -64,79 +75,87 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
     })
   }, [cols, rows, centerCol, centerRow])
 
-  // ─── Scroll-driven animation via direct DOM writes ───
+  // ─── Scroll-driven animation via continuous rAF loop ───
+  // We run a rAF loop instead of listening to `scroll` events because Safari
+  // coalesces scroll events during momentum scroll and can even stop updating
+  // window.scrollY mid-gesture — which causes visible jumps. Reading the
+  // container rect fresh every frame tracks the actual visual position.
+  // An IntersectionObserver pauses the loop while the hero is offscreen.
   useEffect(() => {
     const container = containerRef.current
-    const sticky = stickyRef.current
     const grid = gridRef.current
     const overlay = overlayRef.current
     const vignette = vignetteRef.current
     const bottomFade = bottomFadeRef.current
     const scrollInd = scrollIndRef.current
+    const bgLayer = bgLayerRef.current
     if (!container || !grid) return
 
     const maxScale = cols
+    let rafId = 0
+    let isActive = true
+    let lastP = -1
+    const EPS = 0.0005
 
-    let ticking = false
     const update = () => {
-      const rect = container.getBoundingClientRect()
-      const scrollable = container.offsetHeight - window.innerHeight
-      if (scrollable <= 0) {
-        ticking = false
+      if (!isActive) {
+        rafId = 0
         return
       }
+      rafId = requestAnimationFrame(update)
+
+      const rect = container.getBoundingClientRect()
+      const scrollable = container.offsetHeight - window.innerHeight
+      if (scrollable <= 0) return
 
       const scrolled = Math.max(0, -rect.top)
       const p = Math.min(1, scrolled / scrollable) // linear 0 → 1
 
+      // Skip DOM writes when progress is unchanged — Safari still invalidates
+      // composited layers on no-op writes, which contributes to flicker.
+      if (Math.abs(p - lastP) < EPS) return
+      lastP = p
+
       // ── Phase 1: Zoom-out (first 65% of scroll) ──
-      // Stops at ~scale 2.5 so the grid is partially revealed, not fully flat
       const zoomP = Math.min(1, p / 0.65)
       const zoomEased = 1 - Math.pow(1 - zoomP, 3) // cubic ease-out
-      const minScale = 1.5 // don't zoom all the way to 1
+      const minScale = 1.5
       const currentScale = +(maxScale - zoomEased * (maxScale - minScale)).toFixed(3)
 
-      // ── Phase 2: Dissolve (last 35% of scroll, finishes slightly early) ──
+      // ── Phase 2: Dissolve (last 35%) ──
       const dissolveP = Math.min(1, Math.max(0, (p - 0.65) / 0.3))
-      const dissolveEased = Math.min(1, dissolveP * dissolveP * 1.1) // ease-in, overshoots to guarantee 0
+      const dissolveEased = Math.min(1, dissolveP * dissolveP * 1.1)
 
-      // Grid: zoom + dissolve; fully hidden once dissolved to prevent compositor flash
       const gridOpacity = 1 - dissolveEased
-      grid.style.transform = `scale3d(${currentScale}, ${currentScale}, 1)`
+      grid.style.transform = `translate3d(0,0,0) scale3d(${currentScale}, ${currentScale}, 1)`
       grid.style.setProperty("--tile-opacity", String(Math.min(1, p * 3.3)))
       grid.style.opacity = String(gridOpacity)
       grid.style.visibility = gridOpacity <= 0 ? "hidden" : "visible"
 
-      // Hero text overlay: scales down with grid so it visually
-      // "lives inside" the center tile, then fades with dissolve
       if (overlay) {
-        const s = +(currentScale / maxScale).toFixed(4) // 1 → 1/maxScale
+        const s = +(currentScale / maxScale).toFixed(4)
         const overlayOpacity = 1 - dissolveEased
-        overlay.style.transform = `scale3d(${s}, ${s}, 1) translateZ(0)`
+        overlay.style.transform = `translate3d(0,0,0) scale3d(${s}, ${s}, 1)`
         overlay.style.opacity = String(overlayOpacity)
         overlay.style.visibility = overlayOpacity <= 0 ? "hidden" : "visible"
       }
 
-      // Scroll indicator — fades immediately
       if (scrollInd) {
         scrollInd.style.opacity = String(Math.max(0, 1 - p * 8))
       }
 
-      // Vignette: hidden at rest (Beams show), fades in with tiles, then out during zoom
       if (vignette) {
-        const vignetteIn = Math.min(1, p * 4) // appears with tiles over first 25%
+        const vignetteIn = Math.min(1, p * 4)
         const vignetteOut = Math.max(0, 1 - zoomEased * 1.4)
         vignette.style.opacity = String(vignetteIn * vignetteOut)
       }
 
-      // Bottom gradient: fades in during zoom, out during dissolve
       if (bottomFade) {
         const base = Math.max(0, Math.min(1, zoomEased * 2 - 0.5))
         bottomFade.style.opacity = String(base * (1 - dissolveEased))
       }
 
-      // Header + guidelines: fade out quickly, return during dissolve
-      const uiFadeOut = Math.min(1, p * 10) // 0→1 over first 10%
+      const uiFadeOut = Math.min(1, p * 10)
       const uiFadeIn = dissolveP * dissolveP
       const uiOpacity = String(Math.max(0, Math.min(1, 1 - uiFadeOut + uiFadeOut * uiFadeIn)))
 
@@ -150,9 +169,7 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
         guides.style.opacity = uiOpacity
       }
 
-      // Beams background: visible at rest, fade out gradually over first 25%,
-      // return smoothly during dissolve
-      const beamsFadeOut = Math.min(1, p * 4) // 0→1 over first 25%
+      const beamsFadeOut = Math.min(1, p * 4)
       const beamsFadeIn = dissolveP
       const beamsOpacity = String(Math.max(0, Math.min(1, 1 - beamsFadeOut + beamsFadeOut * beamsFadeIn)))
       const beamsEl = document.getElementById("beams-bg")
@@ -160,30 +177,34 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
         beamsEl.style.opacity = beamsOpacity
       }
 
-      // Sticky container: transparent at rest (Beams show through),
-      // solid bg-background during matrix to prevent flicker at sticky release
-      if (sticky) {
-        const needsBg = p > 0.03
-        sticky.style.backgroundColor = needsBg
-          ? "var(--background, hsl(0 0% 100%))"
-          : "transparent"
-      }
-
-      ticking = false
-    }
-
-    const onScroll = () => {
-      if (!ticking) {
-        ticking = true
-        requestAnimationFrame(update)
+      // Separate composited background layer — avoids repainting the sticky
+      // element itself (which on Safari causes the sticky+transform jitter bug).
+      if (bgLayer) {
+        bgLayer.style.opacity = p > 0.03 ? "1" : "0"
       }
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true })
-    update() // set initial state
+    const io = new IntersectionObserver(
+      (entries) => {
+        const nowActive = entries[0]?.isIntersecting ?? true
+        if (nowActive && !isActive) {
+          isActive = true
+          lastP = -1
+          if (!rafId) rafId = requestAnimationFrame(update)
+        } else if (!nowActive && isActive) {
+          isActive = false
+        }
+      },
+      { rootMargin: "200px 0px" }
+    )
+    io.observe(container)
+
+    rafId = requestAnimationFrame(update)
+
     return () => {
-      window.removeEventListener("scroll", onScroll)
-      // Restore all controlled elements on unmount
+      isActive = false
+      if (rafId) cancelAnimationFrame(rafId)
+      io.disconnect()
       const header = document.getElementById("landing-header-wrap")
       const guides = document.getElementById("guide-lines-wrap")
       const beamsEl = document.getElementById("beams-bg")
@@ -200,7 +221,24 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
       style={{ height: isMobile ? "250vh" : "300vh" }}
       className="relative"
     >
-      <div ref={stickyRef} className="sticky top-0 h-screen overflow-hidden flex items-center justify-center">
+      <div
+        ref={stickyRef}
+        className="sticky top-0 h-screen overflow-hidden flex items-center justify-center"
+        style={{
+          // Promote the sticky element to its own compositor layer.
+          // Works around a WebKit bug where child transforms cause the sticky
+          // element to jitter by a few pixels during scroll.
+          willChange: "transform",
+          transform: "translateZ(0)",
+        }}
+      >
+        {/* ─── Background fader (separate layer — avoids repainting sticky) ─── */}
+        <div
+          ref={bgLayerRef}
+          className="absolute inset-0 bg-background pointer-events-none"
+          style={{ opacity: 0, zIndex: 0, willChange: "opacity" }}
+          aria-hidden="true"
+        />
         {/* ─── Video tile grid ─── */}
         <div
           ref={gridRef}
@@ -238,7 +276,10 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
                   <img
                     src={`https://img.youtube.com/vi/${tile.videoId}/hqdefault.jpg`}
                     alt=""
-                    loading="lazy"
+                    width={480}
+                    height={360}
+                    decoding="async"
+                    draggable={false}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/15 dark:bg-black/25" />
@@ -249,14 +290,15 @@ export function HeroVideoMatrix({ isMobile }: { isMobile: boolean }) {
         </div>
 
         {/* ─── Vignette: page bg bleeds in from edges ─── */}
+        {/* Uses a radial-gradient background instead of mask-image because
+            Safari re-rasterizes masks on every opacity change, causing flicker. */}
         <div
           ref={vignetteRef}
-          className="absolute inset-0 pointer-events-none z-[5] bg-background"
+          className="absolute inset-0 pointer-events-none z-[5]"
           style={{
-            maskImage:
-              "radial-gradient(ellipse 55% 45% at 50% 50%, transparent 20%, black 75%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 55% 45% at 50% 50%, transparent 20%, black 75%)",
+            background:
+              "radial-gradient(ellipse 55% 45% at 50% 50%, transparent 20%, var(--background) 75%)",
+            willChange: "opacity",
           }}
         />
 

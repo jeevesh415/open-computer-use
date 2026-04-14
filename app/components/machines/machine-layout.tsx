@@ -80,20 +80,20 @@ export function MachineLayout({
       </div>
 
       {/* Breadcrumb header */}
-      <div className="sticky top-0 z-20 backdrop-blur-md bg-background/80 border-b border-border/30">
+      <div className="sticky top-0 z-20 bg-transparent">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex items-center h-12 gap-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => router.back()}
-              className="h-8 w-8 p-0 rounded-lg text-muted-foreground hover:text-foreground shrink-0"
+              className="h-8 w-8 p-0 rounded-full bg-background/80 backdrop-blur-md border border-border/40 shadow-sm text-muted-foreground hover:text-foreground hover:bg-background/90 shrink-0"
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
 
             {(machineName || breadcrumbItems.length > 0) && (
-              <div className="flex items-center gap-1.5 text-sm min-w-0">
+              <div className="flex items-center gap-1.5 text-sm min-w-0 h-8 px-3 rounded-full bg-background/80 backdrop-blur-md border border-border/40 shadow-sm">
                 <button
                   onClick={() => router.push("/machines")}
                   className="text-muted-foreground hover:text-foreground transition-colors shrink-0"

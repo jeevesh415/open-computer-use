@@ -680,6 +680,18 @@ export function Overlay() {
             </svg>
           </button>
 
+          {/* Quit — fully exits the app (tears down rainbow border + ws bridge + tray) */}
+          <button
+            onClick={() => window.coasty.quit()}
+            className="p-1.5 rounded-lg hover:bg-red-500/20 text-neutral-400 hover:text-red-400 transition-colors"
+            title="Quit Coasty"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+
           {/* Avatar → Account */}
           {isExpanded && (
             <button onClick={() => goToPage('account')} className={`p-0.5 rounded-full transition-all ${page === 'account' ? 'ring-2 ring-brand-500/60' : 'hover:ring-2 hover:ring-neutral-600'}`} title={user?.name || 'Account'}>

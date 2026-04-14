@@ -2360,21 +2360,17 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                     {toolInvocations.length === 0 ? (
                       <div className="flex-1 relative flex flex-col items-center justify-center text-center px-6 rounded-lg m-2 overflow-hidden">
                         {/* Light backdrop */}
-                        <div className="absolute inset-0 dark:hidden" style={{
-                          background: 'radial-gradient(ellipse at 40% 20%, rgba(210,205,230,0.35) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(195,205,225,0.25) 0%, transparent 55%), linear-gradient(to bottom, #f5f4f7, #eeedf0)',
-                        }} />
+                        <div className="absolute inset-0 bg-neutral-50 dark:hidden" />
                         {/* Dark backdrop */}
-                        <div className="absolute inset-0 hidden dark:block" style={{
-                          background: 'radial-gradient(ellipse at 40% 20%, rgba(25,22,40,0.4) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(18,28,45,0.3) 0%, transparent 55%), linear-gradient(to bottom, #0a0a0e, #060608)',
-                        }} />
+                        <div className="absolute inset-0 hidden dark:block bg-neutral-950" />
                         {/* Dot grid — light */}
                         <div className="absolute inset-0 pointer-events-none dark:hidden" style={{
-                          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px)',
+                          backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)',
                           backgroundSize: '24px 24px',
                         }} />
                         {/* Dot grid — dark */}
                         <div className="absolute inset-0 pointer-events-none hidden dark:block" style={{
-                          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                          backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
                           backgroundSize: '24px 24px',
                         }} />
                         <div className="relative z-10">
@@ -2394,21 +2390,17 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                           {/* Clipped background layer */}
                           <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
                             {/* Light backdrop */}
-                            <div className="absolute inset-0 dark:hidden" style={{
-                              background: 'radial-gradient(ellipse at 40% 20%, rgba(210,205,230,0.35) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(195,205,225,0.25) 0%, transparent 55%), linear-gradient(to bottom, #f5f4f7, #eeedf0)',
-                            }} />
+                            <div className="absolute inset-0 bg-neutral-50 dark:hidden" />
                             {/* Dark backdrop */}
-                            <div className="absolute inset-0 hidden dark:block" style={{
-                              background: 'radial-gradient(ellipse at 40% 20%, rgba(25,22,40,0.4) 0%, transparent 60%), radial-gradient(ellipse at 65% 75%, rgba(18,28,45,0.3) 0%, transparent 55%), linear-gradient(to bottom, #0a0a0e, #060608)',
-                            }} />
+                            <div className="absolute inset-0 hidden dark:block bg-neutral-950" />
                             {/* Dot grid — light */}
                             <div className="absolute inset-0 dark:hidden" style={{
-                              backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.045) 1px, transparent 1px)',
+                              backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px)',
                               backgroundSize: '24px 24px',
                             }} />
                             {/* Dot grid — dark */}
                             <div className="absolute inset-0 hidden dark:block" style={{
-                              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)',
+                              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
                               backgroundSize: '24px 24px',
                             }} />
                           </div>

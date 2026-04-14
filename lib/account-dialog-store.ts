@@ -13,6 +13,7 @@ export type AccountSectionType =
   | "feedback"
   | "about"
   | "social"
+  | "public-chats"
 
 interface AccountDialogStore {
   isOpen: boolean

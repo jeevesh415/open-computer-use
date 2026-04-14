@@ -223,6 +223,23 @@ export class ElectronAuth {
     this.cleanupProtocolAuth()
   }
 
+  /**
+   * Release all background resources owned by this instance.
+   *
+   * Called during app shutdown to tear down the token-refresh timer, any
+   * in-flight OAuth/magic-link callback server, and registered token-refresh
+   * listeners. Safe to call multiple times.
+   */
+  dispose(): void {
+    if (this.refreshTimer) {
+      clearTimeout(this.refreshTimer)
+      this.refreshTimer = null
+    }
+    this.refreshPromise = null
+    this.cancelPendingAuth()
+    this.tokenRefreshListeners = []
+  }
+
   // ── Auth methods ───────────────────────────────────────────────────────
 
   async signInWithGoogle(): Promise<{ user: User; session: Session }> {

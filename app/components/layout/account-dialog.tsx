@@ -17,6 +17,7 @@ import {
   Loader2,
   ChevronRight,
   X,
+  Globe,
 } from "lucide-react"
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
@@ -24,10 +25,12 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import { CombinedAccount } from "@/app/components/layout/settings/general/combined-account"
 import { PrivacySection } from "@/app/components/layout/settings/general/privacy-section"
+import { PublicChatsSection } from "@/app/components/layout/settings/general/public-chats-section"
 import { BillingSection } from "@/app/components/layout/settings/billing/billing-section"
 import { ThemeSelection } from "@/app/components/layout/settings/appearance/theme-selection"
 import { BackgroundSelection } from "@/app/components/layout/settings/appearance/background-selection"
 import { LanguageSelection } from "@/app/components/layout/settings/appearance/language-selection"
+// import { LayoutSettings } from "@/app/components/layout/settings/appearance/layout-settings"
 import { FeedbackForm } from "@/components/common/feedback-form"
 import { AppInfoContent } from "@/app/components/layout/app-info/app-info-content"
 import { useUser } from "@/lib/user-store/provider"
@@ -69,6 +72,7 @@ const sections = [
   { id: "account" as SectionType, label: "General", icon: User, description: "Profile and account", component: CombinedAccount },
   { id: "appearance" as SectionType, label: "Appearance", icon: Paintbrush, description: "Theme, language, and background", component: AppearanceSection },
   { id: "billing" as SectionType, label: "Billing", icon: CreditCard, description: "Plans and credits", component: BillingSection },
+  { id: "public-chats" as SectionType, label: "Public Chats", icon: Globe, description: "Manage chats shared via public link", component: PublicChatsSection },
   { id: "privacy" as SectionType, label: "Privacy", icon: Shield, description: "Security and data privacy", component: PrivacySection },
   { id: "notifications" as SectionType, label: "Notifications", icon: Bell, description: "Notification preferences", component: null },
   { id: "api-keys" as SectionType, label: "API Keys", icon: Key, description: "Manage your API keys", component: null },
@@ -79,7 +83,7 @@ const sections = [
 ]
 
 const navGroups = [
-  { label: "Settings", ids: ["account", "appearance", "billing", "privacy"] as SectionType[] },
+  { label: "Settings", ids: ["account", "appearance", "billing", "public-chats", "privacy"] as SectionType[] },
   { label: "Developer", ids: ["notifications", "api-keys", "data"] as SectionType[] },
   { label: "More", ids: ["feedback", "about", "social"] as SectionType[] },
 ]
@@ -132,7 +136,7 @@ function ComingSoonPlaceholder({ icon: Icon, label }: { icon: React.ComponentTyp
   )
 }
 
-const validSections: SectionType[] = ["account", "billing", "privacy", "notifications", "appearance", "api-keys", "data", "feedback", "about", "social"]
+const validSections: SectionType[] = ["account", "billing", "privacy", "notifications", "appearance", "api-keys", "data", "feedback", "about", "social", "public-chats"]
 
 export function AccountDialog() {
   const { isOpen, section, close, setSection, _syncFromUrl } = useAccountDialog()

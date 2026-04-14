@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import Link from "next/link"
-import { useTheme } from "next-themes"
 import {
   MagnifyingGlass,
   ArrowUpRight,
@@ -18,7 +17,6 @@ import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { GuideLines } from "@/app/components/landing/guide-lines"
-import Beams from "@/components/Beams"
 import { PostThumbnail } from "@/components/blog/post-thumbnail"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -52,19 +50,16 @@ function relativeTime(dateStr: string | null): string {
   return `${Math.floor(days / 365)}y ago`
 }
 
-// Raised canvas — full-screen overlay with embedded session replay
+// Session canvas — immersive replay viewer with floating chrome
 function SessionCanvas({
-  chatId,
-  title,
+  chat,
   onClose,
 }: {
-  chatId: string
-  title: string | null
+  chat: DiscoverChat
   onClose: () => void
 }) {
   const [iframeLoaded, setIframeLoaded] = useState(false)
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
@@ -77,78 +72,154 @@ function SessionCanvas({
     }
   }, [onClose])
 
+  const meta = relativeTime(chat.updated_at || chat.created_at)
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       className="fixed inset-0 z-[100] flex items-center justify-center"
     >
-      {/* Backdrop */}
+      {/* Layered backdrop — deep blur + radial spotlight */}
       <div
-        className="absolute inset-0 bg-background/80 backdrop-blur-xl"
+        className="absolute inset-0 bg-background/90 backdrop-blur-2xl"
         onClick={onClose}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(120,120,255,0.10), transparent 65%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04] mix-blend-overlay"
+        aria-hidden
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0)",
+          backgroundSize: "22px 22px",
+        }}
       />
 
       {/* Canvas */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.96, y: 12 }}
+        initial={{ opacity: 0, scale: 0.94, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.97, y: 8 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-[95vw] h-[90vh] max-w-6xl rounded-2xl border border-border/30 bg-background shadow-[0_0_0_1px_rgba(0,0,0,0.02),0_8px_40px_-12px_rgba(0,0,0,0.15),0_30px_80px_-20px_rgba(0,0,0,0.12)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_8px_40px_-12px_rgba(0,0,0,0.4),0_30px_80px_-20px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col"
+        exit={{ opacity: 0, scale: 0.96, y: 16 }}
+        transition={{ type: "spring", damping: 30, stiffness: 280, mass: 0.9 }}
+        className={cn(
+          "relative z-10 flex flex-col overflow-hidden bg-card",
+          // Mobile: edge-to-edge takeover. Desktop: floating card.
+          "h-[100dvh] w-screen sm:h-[88vh] sm:w-[92vw] sm:max-w-[1180px]",
+          "sm:rounded-[20px] sm:border sm:border-border/50",
+          "sm:shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_40px_120px_-20px_rgba(0,0,0,0.55),0_10px_40px_-12px_rgba(0,0,0,0.35)]"
+        )}
       >
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-border/20 flex-shrink-0">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="flex items-center gap-1.5">
-              <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/15" />
-              <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/15" />
-              <div className="h-2.5 w-2.5 rounded-full bg-muted-foreground/15" />
-            </div>
-            {title && (
-              <span className="text-xs text-muted-foreground/50 truncate max-w-sm">
-                {title}
-              </span>
-            )}
+        {/* Decorative top accent line */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(120,120,255,0.5) 20%, rgba(255,120,200,0.5) 50%, rgba(120,120,255,0.5) 80%, transparent 100%)",
+          }}
+        />
+
+        {/* Top chrome */}
+        <div
+          className="flex items-center justify-between gap-3 flex-shrink-0 border-b border-border/40 bg-card/70 backdrop-blur-md px-4 sm:px-5"
+          style={{ paddingTop: "max(env(safe-area-inset-top), 0px)" }}
+        >
+          <div className="flex items-center gap-2.5 min-w-0 h-12 sm:h-14">
+            {/* Live status pulse */}
+            <span className="relative flex h-2 w-2 flex-shrink-0" aria-hidden>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            <span className="truncate text-xs sm:text-[13px] font-medium text-foreground/90">
+              {chat.title || "Untitled session"}
+            </span>
+            <span className="hidden md:inline-flex items-center gap-1 rounded-md border border-border/40 bg-muted/40 px-1.5 py-0.5 text-[10px] tabular-nums text-muted-foreground/70 flex-shrink-0">
+              {chat.messageCount} steps
+            </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              className="h-7 rounded-lg px-3 text-xs gap-1.5"
-              asChild
-            >
-              <Link href="/auth">
-                Try it
-                <ArrowRight className="size-3" weight="bold" />
-              </Link>
-            </Button>
+
+          <div className="flex items-center gap-1 flex-shrink-0">
+            <kbd className="hidden md:inline-flex h-6 items-center rounded-md border border-border/40 bg-muted/30 px-1.5 font-mono text-[10px] text-muted-foreground/60">
+              ESC
+            </kbd>
             <button
               onClick={onClose}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground/40 hover:text-foreground hover:bg-muted/50 transition-colors"
+              aria-label="Close session"
+              className="ml-1 flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground/60 hover:text-foreground hover:bg-muted/60 transition-colors"
             >
-              <X className="size-3.5" weight="bold" />
+              <X className="size-4" weight="bold" />
             </button>
           </div>
         </div>
 
-        {/* Session replay iframe */}
-        <div className="flex-1 relative">
+        {/* Stage */}
+        <div className="relative flex-1 bg-background">
           {!iframeLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <CircleNotch className="size-5 text-muted-foreground/30 animate-spin" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <div className="relative flex h-10 w-10 items-center justify-center">
+                <div className="absolute inset-0 rounded-full border border-border/40" />
+                <CircleNotch className="size-4 text-muted-foreground/50 animate-spin" />
+              </div>
+              <span className="text-[11px] tracking-wide text-muted-foreground/50">
+                Loading session…
+              </span>
             </div>
           )}
           <iframe
-            src={`/share/${chatId}?embed=true&autoplay=true`}
+            src={`/share/${chat.id}?embed=true&autoplay=true`}
             className={cn(
-              "w-full h-full border-0 transition-opacity duration-300",
+              "h-full w-full border-0 transition-opacity duration-500",
               iframeLoaded ? "opacity-100" : "opacity-0"
             )}
             onLoad={() => setIframeLoaded(true)}
-            title={title || "Session replay"}
+            title={chat.title || "Session replay"}
           />
+
+          {/* Subtle vignette to ground the iframe in the canvas */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden
+            style={{
+              boxShadow: "inset 0 0 60px rgba(0,0,0,0.18)",
+            }}
+          />
+        </div>
+
+        {/* Bottom CTA chrome */}
+        <div
+          className="flex items-center justify-between gap-3 flex-shrink-0 border-t border-border/40 bg-card/70 backdrop-blur-md px-4 sm:px-5 h-14 sm:h-16"
+          style={{ paddingBottom: "max(env(safe-area-inset-bottom), 0px)" }}
+        >
+          <div className="flex items-center gap-2 min-w-0 text-[11px] text-muted-foreground/60">
+            <span className="truncate tabular-nums">{meta}</span>
+            <span className="text-muted-foreground/20">·</span>
+            <span className="hidden sm:inline truncate">
+              {chat.messageCount} steps
+            </span>
+          </div>
+
+          <Button
+            size="sm"
+            className="group/cta h-9 flex-shrink-0 gap-2 rounded-xl px-3.5 text-xs sm:text-[13px]"
+            asChild
+          >
+            <Link href="/auth">
+              <span>Try this yourself</span>
+              <ArrowRight
+                className="size-3.5 transition-transform group-hover/cta:translate-x-0.5"
+                weight="bold"
+              />
+            </Link>
+          </Button>
         </div>
       </motion.div>
     </motion.div>
@@ -163,13 +234,9 @@ export default function DiscoverPage() {
   const [hasMore, setHasMore] = useState(false)
   const [total, setTotal] = useState(0)
   const [search, setSearch] = useState("")
-  const [mounted, setMounted] = useState(false)
   const [activeSession, setActiveSession] = useState<DiscoverChat | null>(null)
-  const { resolvedTheme } = useTheme()
   const sentinelRef = useRef<HTMLDivElement>(null)
   const t = useTranslations("discover")
-
-  useEffect(() => { setMounted(true) }, [])
 
   const fetchChats = useCallback(async (pageNum: number, append = false) => {
     if (pageNum === 0) setIsLoading(true)
@@ -224,30 +291,6 @@ export default function DiscoverPage() {
   return (
     <div className="min-h-screen bg-background relative">
       <GuideLines />
-
-      {/* Beams background */}
-      <div
-        className={cn(
-          "fixed inset-0 z-0 pointer-events-none",
-          mounted && resolvedTheme !== "dark" && "invert"
-        )}
-        aria-hidden="true"
-      >
-        <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 relative">
-          <div className="absolute inset-y-0 left-4 sm:left-6 right-4 sm:right-6 overflow-hidden [mask-image:radial-gradient(ellipse_100%_90%_at_50%_45%,black_0%,black_40%,transparent_85%)]">
-            <Beams
-              beamWidth={3}
-              beamHeight={30}
-              beamNumber={20}
-              lightColor="#ffffff"
-              speed={2}
-              noiseIntensity={1.75}
-              scale={0.2}
-              rotation={30}
-            />
-          </div>
-        </div>
-      </div>
 
       <LandingHeader />
 
@@ -406,8 +449,7 @@ export default function DiscoverPage() {
       <AnimatePresence>
         {activeSession && (
           <SessionCanvas
-            chatId={activeSession.id}
-            title={activeSession.title}
+            chat={activeSession}
             onClose={() => setActiveSession(null)}
           />
         )}

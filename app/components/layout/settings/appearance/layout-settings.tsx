@@ -1,5 +1,6 @@
 import {
   LayoutType,
+  SidebarStyle,
   useUserPreferences,
 } from "@/lib/user-preference-store/provider"
 import { cn } from "@/lib/utils"
@@ -237,43 +238,166 @@ const LayoutFullscreen = (props: SVGProps<SVGSVGElement>) => {
   )
 }
 
+// ─── Sidebar style mini-previews ──────────────────────────────────
+//   Pure Tailwind div compositions — no SVG. Each preview shows the
+//   shape of the chosen layout: vertical sidebar on the left vs.
+//   horizontal nav across the top. Same border/secondary tokens as
+//   the SVG previews above so they feel like the same family.
+
+function VerticalLayoutPreview() {
+  return (
+    <div className="aspect-[16/9] w-full rounded-md border border-border bg-background p-2 flex gap-1.5">
+      {/* Sidebar */}
+      <div className="w-1/4 rounded-sm border border-border bg-secondary flex flex-col gap-1 p-1.5">
+        <div className="h-1 w-3/4 rounded-full bg-foreground/25" />
+        <div className="mt-1 h-[3px] w-full rounded-full bg-foreground/15" />
+        <div className="h-[3px] w-2/3 rounded-full bg-foreground/15" />
+        <div className="h-[3px] w-3/4 rounded-full bg-foreground/15" />
+        <div className="h-[3px] w-1/2 rounded-full bg-foreground/15" />
+      </div>
+      {/* Main column */}
+      <div className="flex-1 flex flex-col gap-1.5">
+        <div className="h-2 rounded-sm border border-border bg-secondary" />
+        <div className="flex-1 rounded-sm border border-border bg-secondary/40" />
+      </div>
+    </div>
+  )
+}
+
+function HorizontalLayoutPreview() {
+  return (
+    <div className="aspect-[16/9] w-full rounded-md border border-border bg-background p-2 flex flex-col gap-1.5">
+      {/* Top bar */}
+      <div className="h-3 rounded-sm border border-border bg-secondary flex items-center gap-1 px-1.5">
+        <div className="h-1 w-1 rounded-full bg-foreground/25" />
+        <div className="h-[3px] w-3 rounded-full bg-foreground/20" />
+        <div className="mx-0.5 h-2 w-px bg-foreground/15" />
+        <div className="h-[3px] w-2.5 rounded-full bg-foreground/15" />
+        <div className="h-[3px] w-2.5 rounded-full bg-foreground/15" />
+        <div className="mx-0.5 h-2 w-px bg-foreground/15" />
+        <div className="h-[3px] w-2.5 rounded-full bg-foreground/15" />
+        <div className="h-[3px] w-2.5 rounded-full bg-foreground/15" />
+        <div className="ml-auto h-1 w-1 rounded-full bg-foreground/20" />
+      </div>
+      {/* Main */}
+      <div className="flex-1 rounded-sm border border-border bg-secondary/40" />
+    </div>
+  )
+}
+
 export function LayoutSettings() {
   const t = useTranslations("layoutSettings")
-  const { preferences, setLayout } = useUserPreferences()
+  const { preferences, setLayout, setSidebarStyle } = useUserPreferences()
 
   const handleLayoutChange = (layout: LayoutType) => {
     setLayout(layout)
   }
 
-  return (
-    <div>
-      <h3 className="mb-3 text-sm font-medium">{t("layout")}</h3>
-      <div className="grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onClick={() => handleLayoutChange("sidebar")}
-          className={cn(
-            "rounded-lg border p-3 text-left transition-colors",
-            preferences.layout === "sidebar"
-              ? "border-primary ring-primary/30 ring-2"
-              : "border-border hover:bg-muted/50"
-          )}
-        >
-          <LayoutSidebar className="h-full w-full" />
-        </button>
+  const handleSidebarStyleChange = (style: SidebarStyle) => {
+    setSidebarStyle(style)
+  }
 
-        <button
-          type="button"
-          onClick={() => handleLayoutChange("fullscreen")}
-          className={cn(
-            "rounded-lg border p-3 text-left transition-colors",
-            preferences.layout === "fullscreen"
-              ? "border-primary ring-primary/30 ring-2"
-              : "border-border hover:bg-muted/50"
-          )}
-        >
-          <LayoutFullscreen className="h-full w-full" />
-        </button>
+  // The "Sidebar style" sub-section is only meaningful when the
+  // primary layout is "sidebar". When fullscreen is chosen there's
+  // no sidebar to style, so the section is dimmed and inert.
+  const sidebarStyleEnabled = preferences.layout === "sidebar"
+  const currentStyle = preferences.sidebarStyle ?? "vertical"
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="mb-3 text-sm font-medium">{t("layout")}</h3>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => handleLayoutChange("sidebar")}
+            className={cn(
+              "rounded-lg border p-3 text-left transition-colors",
+              preferences.layout === "sidebar"
+                ? "border-primary ring-primary/30 ring-2"
+                : "border-border hover:bg-muted/50"
+            )}
+          >
+            <LayoutSidebar className="h-full w-full" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleLayoutChange("fullscreen")}
+            className={cn(
+              "rounded-lg border p-3 text-left transition-colors",
+              preferences.layout === "fullscreen"
+                ? "border-primary ring-primary/30 ring-2"
+                : "border-border hover:bg-muted/50"
+            )}
+          >
+            <LayoutFullscreen className="h-full w-full" />
+          </button>
+        </div>
+      </div>
+
+      {/* ── Sidebar style ── */}
+      <div
+        className={cn(
+          "transition-opacity",
+          !sidebarStyleEnabled && "opacity-50 pointer-events-none"
+        )}
+      >
+        <div className="mb-3 flex items-baseline justify-between">
+          <h3 className="text-sm font-medium">Sidebar style</h3>
+          <span className="text-[11px] text-muted-foreground">
+            {sidebarStyleEnabled
+              ? "Choose where the navigation lives"
+              : "Available when Layout is set to Sidebar"}
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            disabled={!sidebarStyleEnabled}
+            onClick={() => handleSidebarStyleChange("vertical")}
+            className={cn(
+              "rounded-lg border p-3 text-left transition-colors",
+              currentStyle === "vertical"
+                ? "border-primary ring-primary/30 ring-2"
+                : "border-border hover:bg-muted/50"
+            )}
+          >
+            <VerticalLayoutPreview />
+            <div className="mt-2.5 flex items-baseline justify-between px-0.5">
+              <span className="text-[12.5px] font-semibold text-foreground">
+                Vertical
+              </span>
+              <span className="text-[10.5px] text-muted-foreground">Default</span>
+            </div>
+            <p className="mt-0.5 px-0.5 text-[10.5px] leading-snug text-muted-foreground">
+              Classic left rail with labels and credits in the footer.
+            </p>
+          </button>
+
+          <button
+            type="button"
+            disabled={!sidebarStyleEnabled}
+            onClick={() => handleSidebarStyleChange("horizontal")}
+            className={cn(
+              "rounded-lg border p-3 text-left transition-colors",
+              currentStyle === "horizontal"
+                ? "border-primary ring-primary/30 ring-2"
+                : "border-border hover:bg-muted/50"
+            )}
+          >
+            <HorizontalLayoutPreview />
+            <div className="mt-2.5 flex items-baseline justify-between px-0.5">
+              <span className="text-[12.5px] font-semibold text-foreground">
+                Horizontal
+              </span>
+              <span className="text-[10.5px] text-muted-foreground">Sleek</span>
+            </div>
+            <p className="mt-0.5 px-0.5 text-[10.5px] leading-snug text-muted-foreground">
+              Single top bar with everything in one row. More canvas height.
+            </p>
+          </button>
+        </div>
       </div>
     </div>
   )

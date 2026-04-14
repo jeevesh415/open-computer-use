@@ -41,6 +41,7 @@ import { cn } from "@/lib/utils"
 import { Markdown } from "@/components/prompt-kit/markdown"
 import { APP_DOMAIN } from "@/lib/config"
 import { SwarmTree, type SwarmEvent } from "./swarm-tree"
+import { PageLoader } from "@/components/common/page-loader"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -149,22 +150,12 @@ export function SwarmsContent() {
     [swarms, statusFilter]
   )
 
-  // Loading state
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 rounded-full border-2 border-muted" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground animate-spin" />
-          </div>
-          <span className="text-sm text-muted-foreground">Loading swarm runs...</span>
-        </div>
-      </div>
-    )
-  }
-
   return (
+    <PageLoader
+      isLoading={loading}
+      title="Swarm Intelligence"
+      description="Many minds, one mission. Rounding up your agents now."
+    >
     <div className="h-full overflow-y-auto scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
@@ -381,6 +372,7 @@ export function SwarmsContent() {
         )}
       </div>
     </div>
+    </PageLoader>
   )
 }
 

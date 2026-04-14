@@ -717,7 +717,39 @@ function SimpleArticleContent({
                       <div className={cn(
                         "w-full px-8 sm:px-10 md:px-12",
                         !isNavigatorOpen ? "max-w-[44rem]" : "max-w-[47rem]",
-                        "mx-auto"
+                        "mx-auto",
+                        // Embed mode (session canvas):
+                        //  - Match the tool invocation card's curvature so the
+                        //    bubble reads as the same family stacked above it.
+                        //  - Strip the heavy padding/border/shadow.
+                        //  - Add `mx-1` so the bubble sits at the exact same
+                        //    horizontal gutter as the tool card (whose wrapper
+                        //    uses `px-1`). This is what stops the bubble from
+                        //    bulging 8px wider than the tool card below.
+                        //  - `min-w-0` + `break-words` + `overflow-hidden`
+                        //    prevent long unbroken strings (URLs, code) from
+                        //    forcing the bubble to overflow its column.
+                        //  - We deliberately do NOT set `w-full`/`max-w-fit` —
+                        //    flex-column stretch already handles the width and
+                        //    `max-w-fit` resolves to `max-content` for long
+                        //    text, which is what was causing the overflow.
+                        isEmbed && [
+                          "[&_.bg-muted.rounded-3xl]:rounded-2xl!",
+                          "[&_.bg-muted.rounded-3xl]:px-4!",
+                          "[&_.bg-muted.rounded-3xl]:py-2.5!",
+                          "[&_.bg-muted.rounded-3xl]:shadow-none!",
+                          "[&_.bg-muted.rounded-3xl]:border-0!",
+                          "[&_.bg-muted.rounded-3xl]:ring-0!",
+                          // 20px (1.25rem) inset on each side: that's the
+                          // tool card's px-1 wrapper (4px) + its rounded-2xl
+                          // corner radius (16px). The bubble now ends exactly
+                          // where the tool card's curve starts below it.
+                          "[&_.bg-muted.rounded-3xl]:mx-5!",
+                          "[&_.bg-muted.rounded-3xl]:min-w-0!",
+                          "[&_.bg-muted.rounded-3xl]:max-w-[calc(100%-2.5rem)]!",
+                          "[&_.bg-muted.rounded-3xl]:overflow-hidden!",
+                          "[&_.bg-muted.rounded-3xl]:break-words!",
+                        ].join(" ")
                       )}>
                         {/* Chat title as a subtle header — hidden in embed mode */}
                         <div className={cn("mb-8 text-center", isEmbed && "hidden")}>
@@ -785,15 +817,18 @@ function SimpleArticleContent({
                     !isNavigatorOpen ? "max-w-[44rem]" : "max-w-[47rem]"
                   )}
                 >
-                  {/* Tool invocations display */}
-                  <AnimatePresence mode="wait">
+                  {/* Tool invocations display — stable key so the wrapper
+                      doesn't remount on every tool change. New tools update
+                      the persisted ToolInvocation in place instead of sliding
+                      up from the bottom each time. */}
+                  <AnimatePresence>
                     {currentToolInvocations.length > 0 && (
-                      <motion.div 
-                        key={`tools-${currentToolInvocations.map(t => t.toolName || '').join('-')}`}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
+                      <motion.div
+                        key="tools-panel"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
                         className="relative z-0 mb-1 px-1"
                       >
                         <ToolInvocation toolInvocations={currentToolInvocations} fullyRounded />

@@ -1,320 +1,227 @@
 "use client"
 
+import { useState, useEffect, useCallback } from "react"
+import { motion, AnimatePresence } from "motion/react"
 import Link from "next/link"
-import { AnimatePresence, motion } from "motion/react"
-import { useState, useEffect, useCallback, useMemo } from "react"
-import {
-  Monitor,
-  KeyRound,
-  MessageSquareText,
-  Smartphone,
-  Workflow,
-  CalendarDays,
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Check,
-} from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Caveat } from "next/font/google"
-import { CreateMachineDialog } from "@/app/components/machines/create-machine-dialog"
-
-const handwriting = Caveat({ subsets: ["latin"], weight: ["600"] })
-import type { UserMachine } from "@/types/machines.types"
-import { useTranslations } from "next-intl"
+import { ChevronLeft, ChevronRight, X } from "lucide-react"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { useGuideStore } from "@/lib/guide-store"
+import { cn } from "@/lib/utils"
 
-/* ─── Types ──────────────────────────────────────────────────────────── */
-
-interface QuickStartGuideProps {
-  userName?: string
-  selectedVMId: string | null
-  isUserAuthenticated: boolean
-  hasCredentials: boolean | null
-}
-
-type Tone = "ready" | "pending" | "optional" | "neutral"
-type SlideId = "quickstart" | "desktop" | "swarms" | "schedules"
-
-const selectableStatuses = new Set(["running", "creating", "starting", "stopped"])
-
-interface StepData {
-  icon: LucideIcon
-  label: string
-  tone: Tone
-  href?: string
-  onClick?: () => void
-}
-
-interface SlideData {
-  id: SlideId
-  tab: string
-  tabIcon: LucideIcon
-  items: StepData[] | ((ctx: SlideContext) => StepData[])
+interface Slide {
+  id: string
+  eyebrow: string
+  title: string
+  description: string
+  image: string
+  imageAlt: string
+  imageMode: "cover" | "contain"
   cta?: { text: string; href: string }
 }
 
-interface SlideContext {
-  hasMachine: boolean
-  hasAvailable: boolean
-  hasCredentials: boolean | null
-  onCreateMachine: () => void
-}
+const slides: Slide[] = [
+  {
+    id: "welcome",
+    eyebrow: "Welcome",
+    title: "Meet Coasty",
+    description: "An AI agent that controls a real computer to research, browse, type, and complete tasks for you — all from a chat.",
+    image: "/demo-screenshot.png",
+    imageAlt: "Coasty in action",
+    imageMode: "cover",
+  },
+  {
+    id: "desktop",
+    eyebrow: "Desktop",
+    title: "Native on Mac and Windows",
+    description: "Run Coasty as a sleek floating overlay on your own machine. It drives your browser, types for you, and asks before sensitive actions.",
+    image: "/demo-screenshot.png",
+    imageAlt: "Coasty desktop app",
+    imageMode: "cover",
+    cta: { text: "Download for desktop", href: "/download" },
+  },
+  {
+    id: "mobile",
+    eyebrow: "Mobile",
+    title: "Control it from anywhere",
+    description: "Send a task from your phone, watch screenshots stream live, and approve actions on the go.",
+    image: "/demo-screenshot-mobile.png",
+    imageAlt: "Coasty on mobile",
+    imageMode: "contain",
+  },
+  {
+    id: "swarms",
+    eyebrow: "Swarms",
+    title: "Run many agents in parallel",
+    description: "Spin up multiple agents to tackle big tasks at once. Each works independently, then results merge into one clean report.",
+    image: "/demo-screenshot.png",
+    imageAlt: "Coasty swarms",
+    imageMode: "cover",
+    cta: { text: "Try swarms", href: "/swarms" },
+  },
+]
 
-/* ─── Tone colors ────────────────────────────────────────────────────── */
-
-const toneDot: Record<Tone, string> = {
-  ready: "bg-emerald-500/70",
-  pending: "bg-amber-500/70",
-  optional: "bg-foreground/15",
-  neutral: "bg-foreground/10",
-}
-
-/* ─── Slide definitions ──────────────────────────────────────────────── */
-
-function buildSlides(t: ReturnType<typeof useTranslations>): SlideData[] {
-  return [
-    {
-      id: "quickstart",
-      tab: t("tabs.start"),
-      tabIcon: Check,
-      items: (ctx) => [
-        {
-          icon: Monitor,
-          label: ctx.hasMachine ? t("items.computerReady") : ctx.hasAvailable ? t("items.pickComputer") : t("items.createComputer"),
-          tone: ctx.hasMachine ? "ready" : "pending",
-          onClick: ctx.hasAvailable ? undefined : ctx.onCreateMachine,
-        },
-        {
-          icon: KeyRound,
-          label: ctx.hasCredentials ? t("items.loginsSaved") : t("items.addLogins"),
-          tone: ctx.hasCredentials ? "ready" : "optional",
-          href: "/secrets",
-        },
-        {
-          icon: MessageSquareText,
-          label: t("items.askAnything"),
-          tone: ctx.hasMachine ? "ready" : "neutral",
-        },
-      ],
-    },
-    {
-      id: "desktop",
-      tab: t("tabs.desktop"),
-      tabIcon: Monitor,
-      items: [
-        { icon: Monitor, label: t("items.macWindows"), tone: "ready" },
-        { icon: Smartphone, label: t("items.mobileRemote"), tone: "optional" },
-      ],
-      cta: { text: t("cta.downloadApp"), href: "/download" },
-    },
-    {
-      id: "swarms",
-      tab: t("tabs.swarms"),
-      tabIcon: Workflow,
-      items: [
-        { icon: Workflow, label: t("items.manyAgents"), tone: "ready" },
-        { icon: MessageSquareText, label: t("items.onePrompt"), tone: "neutral" },
-      ],
-      cta: { text: t("cta.trySwarms"), href: "/swarms" },
-    },
-    {
-      id: "schedules",
-      tab: t("tabs.schedules"),
-      tabIcon: CalendarDays,
-      items: [
-        { icon: CalendarDays, label: t("items.setCadence"), tone: "optional" },
-        { icon: Workflow, label: t("items.autoRuns"), tone: "ready" },
-      ],
-      cta: { text: t("cta.setUp"), href: "/schedules" },
-    },
-  ]
-}
-
-/* ─── Main ───────────────────────────────────────────────────────────── */
-
-export function QuickStartGuide({
-  userName,
-  selectedVMId,
-  isUserAuthenticated,
-  hasCredentials,
-}: QuickStartGuideProps) {
-  const [machines, setMachines] = useState<UserMachine[]>([])
-  const [showCreateDialog, setShowCreateDialog] = useState(false)
+export function QuickStartGuide() {
+  const dismissed = useGuideStore((s) => s.dismissed)
+  const hydrated = useGuideStore((s) => s.hydrated)
+  const hydrate = useGuideStore((s) => s.hydrate)
+  const toggle = useGuideStore((s) => s.toggle)
   const [active, setActive] = useState(0)
-  const t = useTranslations("quickStart")
-  const slides = useMemo(() => buildSlides(t), [t])
-  const total = slides.length
-
-  const prev = useCallback(() => setActive((p) => (p - 1 + total) % total), [total])
-  const next = useCallback(() => setActive((p) => (p + 1) % total), [total])
-
-  const fetchMachines = useCallback(async () => {
-    if (!isUserAuthenticated) return
-    try {
-      const res = await fetch("/api/machines")
-      if (!res.ok) return
-      const data = await res.json()
-      setMachines(
-        (data.machines || []).filter((m: UserMachine) => {
-          if (m.settings?.provider === "electron") return true
-          if (m.settings?.isLocal && m.settings?.provider !== "docker") return false
-          return selectableStatuses.has(m.status)
-        })
-      )
-    } catch { /* silent */ }
-  }, [isUserAuthenticated])
 
   useEffect(() => {
-    fetchMachines()
-    const iv = setInterval(fetchMachines, 10000)
-    return () => clearInterval(iv)
-  }, [fetchMachines])
+    hydrate()
+  }, [hydrate])
 
-  const hasMachine = Boolean(selectedVMId)
-  const hasAvailable = machines.length > 0
+  const open = hydrated && !dismissed
+  const total = slides.length
   const slide = slides[active]
+  const isLast = active === total - 1
 
-  const ctx: SlideContext = useMemo(() => ({
-    hasMachine,
-    hasAvailable,
-    hasCredentials,
-    onCreateMachine: () => setShowCreateDialog(true),
-  }), [hasMachine, hasAvailable, hasCredentials])
+  const handleOpenChange = useCallback(
+    (newOpen: boolean) => {
+      // Sync dismissed flag with dialog open state: dismissed === !open
+      if (newOpen === dismissed) toggle()
+      if (!newOpen) setActive(0)
+    },
+    [dismissed, toggle],
+  )
 
-  const items = typeof slide.items === "function" ? slide.items(ctx) : slide.items
+  const goNext = () => {
+    if (isLast) {
+      handleOpenChange(false)
+    } else {
+      setActive((a) => Math.min(total - 1, a + 1))
+    }
+  }
+  const goPrev = () => setActive((a) => Math.max(0, a - 1))
 
   return (
-    <>
-      <div className="mx-auto w-full max-w-[22rem] px-2">
-        {/* Greeting */}
-        <motion.div
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-3"
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent
+        hasCloseButton={false}
+        className="w-[calc(100%-2rem)] max-w-[640px] gap-0 overflow-hidden rounded-2xl border border-black/[0.08] bg-background p-0 shadow-2xl dark:border-white/[0.08] sm:max-w-[640px]"
+      >
+        <DialogTitle className="sr-only">{slide.title}</DialogTitle>
+
+        {/* Close */}
+        <button
+          type="button"
+          onClick={() => handleOpenChange(false)}
+          aria-label="Close"
+          className="absolute right-3 top-3 z-20 flex size-7 items-center justify-center rounded-full bg-foreground/[0.06] text-foreground/45 backdrop-blur-md transition-colors duration-200 hover:bg-foreground/[0.12] hover:text-foreground/80"
         >
-          <h2 className={cn("text-xl sm:text-2xl text-primary -rotate-[0.8deg]", handwriting.className)}>
-            {userName ? t("greetingName", { name: userName }) : t("greetingDefault")}
-          </h2>
-          <p className="text-[10px] text-muted-foreground/50 mt-0.5 tracking-wide">
-            {t("subtitle")}
-          </p>
-        </motion.div>
+          <X className="size-3.5" strokeWidth={2.5} />
+        </button>
 
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-          className="relative"
-        >
-          {/* Close */}
-          <button
-            type="button"
-            onClick={useGuideStore.getState().toggle}
-            className="absolute -top-1.5 -right-1 z-10 flex size-5 items-center justify-center rounded-full border border-foreground/[0.06] bg-background/80 text-foreground/25 hover:text-foreground/50 hover:border-foreground/15 transition-all duration-150"
-          >
-            <X className="size-2.5" strokeWidth={2.5} />
-          </button>
-
-          {/* Card */}
-          <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] dark:bg-white/[0.02] overflow-hidden">
-
-            {/* Tab bar */}
-            <div className="flex items-center border-b border-foreground/[0.04]">
-              {slides.map((s, i) => {
-                const TabIcon = s.tabIcon
-                const isActive = i === active
-                return (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    className={cn(
-                      "flex-1 flex items-center justify-center gap-1.5 py-2 text-[10px] font-medium tracking-wide transition-all duration-200 relative",
-                      isActive
-                        ? "text-foreground/70"
-                        : "text-foreground/25 hover:text-foreground/40",
-                    )}
-                  >
-                    <TabIcon className="size-3" strokeWidth={1.6} />
-                    <span className="hidden sm:inline">{s.tab}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="guide-tab-indicator"
-                        className="absolute bottom-0 inset-x-3 h-px bg-foreground/20"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                )
-              })}
-            </div>
-
-            {/* Steps */}
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={slide.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-                className="px-3 py-2"
-              >
-                <div className="flex flex-col gap-0.5">
-                  {items.map((item) => {
-                    const Icon = item.icon
-                    const Wrapper = item.href ? Link : item.onClick ? "button" : "div"
-                    const wrapperProps = item.href
-                      ? { href: item.href }
-                      : item.onClick
-                        ? { type: "button" as const, onClick: item.onClick }
-                        : {}
-                    return (
-                      <Wrapper
-                        key={item.label}
-                        {...(wrapperProps as any)}
-                        className={cn(
-                          "group flex items-center gap-2.5 py-1.5 px-2 rounded-lg transition-all duration-150",
-                          (item.href || item.onClick) && "cursor-pointer hover:bg-foreground/[0.03]",
-                        )}
-                      >
-                        <div className={cn("size-1 rounded-full shrink-0", toneDot[item.tone])} />
-                        <Icon className="size-3.5 text-foreground/25 shrink-0" strokeWidth={1.5} />
-                        <span className="text-[11.5px] text-foreground/55 font-medium leading-tight flex-1 text-left truncate">
-                          {item.label}
-                        </span>
-                        {(item.href || item.onClick) && (
-                          <ArrowRight className="size-2.5 text-foreground/15 opacity-0 group-hover:opacity-100 transition-opacity duration-150 shrink-0" />
-                        )}
-                      </Wrapper>
-                    )
-                  })}
+        {/* Image */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-black/[0.06] bg-gradient-to-br from-neutral-50 to-neutral-100 dark:border-white/[0.06] dark:from-neutral-900 dark:to-neutral-950">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, scale: 1.015 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.985 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+              className="absolute inset-0"
+            >
+              {slide.imageMode === "contain" ? (
+                <div className="flex h-full w-full items-center justify-center p-6">
+                  <img
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    className="max-h-full max-w-full rounded-[2rem] object-contain ring-1 ring-black/[0.06] drop-shadow-[0_12px_28px_rgba(0,0,0,0.22)] dark:ring-white/[0.08]"
+                  />
                 </div>
+              ) : (
+                <img
+                  src={slide.image}
+                  alt={slide.imageAlt}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-                {/* CTA */}
-                {slide.cta && (
-                  <Link
-                    href={slide.cta.href}
-                    className="flex items-center justify-center gap-1 mt-1.5 rounded-lg border border-foreground/[0.05] bg-foreground/[0.02] hover:bg-foreground/[0.04] hover:border-foreground/[0.08] py-1.5 text-[10px] font-medium text-foreground/35 hover:text-foreground/55 transition-all duration-200"
-                  >
-                    {slide.cta.text}
-                    <ArrowRight className="size-2.5" />
-                  </Link>
+        {/* Content */}
+        <div className="flex min-h-[170px] flex-col px-7 pb-2 pt-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="flex flex-col gap-2"
+            >
+              <span className="text-[10.5px] font-medium uppercase tracking-[0.1em] text-foreground/40">
+                {slide.eyebrow}
+              </span>
+              <h2 className="text-[20px] font-semibold leading-tight tracking-[-0.015em] text-foreground">
+                {slide.title}
+              </h2>
+              <p className="max-w-[44ch] text-[13.5px] leading-relaxed text-foreground/55">
+                {slide.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between gap-3 px-7 pb-6 pt-4">
+          {/* Dots */}
+          <div className="flex items-center gap-1.5">
+            {slides.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300 ease-out",
+                  i === active
+                    ? "w-5 bg-foreground/70"
+                    : "w-1.5 bg-foreground/20 hover:bg-foreground/40",
                 )}
-              </motion.div>
-            </AnimatePresence>
+              />
+            ))}
           </div>
-        </motion.div>
-      </div>
 
-      <CreateMachineDialog
-        open={showCreateDialog}
-        onOpenChange={setShowCreateDialog}
-        onMachineCreated={fetchMachines}
-      />
-    </>
+          {/* Actions */}
+          <div className="flex items-center gap-1.5">
+            {slide.cta && (
+              <Link
+                href={slide.cta.href}
+                onClick={() => handleOpenChange(false)}
+                className="rounded-full px-3 py-1.5 text-[12.5px] font-medium text-foreground/55 transition-colors duration-200 hover:text-foreground"
+              >
+                {slide.cta.text}
+              </Link>
+            )}
+            {active > 0 && (
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Previous"
+                className="flex size-8 items-center justify-center rounded-full text-foreground/45 transition-colors duration-200 hover:bg-foreground/[0.05] hover:text-foreground/80"
+              >
+                <ChevronLeft className="size-4" strokeWidth={2} />
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={goNext}
+              className={cn(
+                "flex h-8 items-center gap-1 rounded-full bg-foreground px-4 text-[12.5px] font-medium text-background transition-all duration-200",
+                "hover:bg-foreground/85",
+                "shadow-[0_1px_2px_rgba(0,0,0,0.08),0_4px_12px_-4px_rgba(0,0,0,0.18)]",
+              )}
+            >
+              {isLast ? "Get started" : "Next"}
+              {!isLast && <ChevronRight className="size-3.5" strokeWidth={2.5} />}
+            </button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }

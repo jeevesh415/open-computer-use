@@ -754,3 +754,86 @@ describe('Integration: full PKCE callback flow', () => {
     auth.cancelPendingAuth()
   })
 })
+
+// ── ElectronAuth.dispose() ────────────────────────────────────────────────
+//
+// dispose() is called from performFullShutdown during app exit. It must
+// release every background resource the instance holds so the event loop
+// can drain and the process can actually terminate.
+
+describe('ElectronAuth.dispose', () => {
+  let auth: ElectronAuth
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    auth = new ElectronAuth()
+  })
+
+  it('clears the token refresh timer', () => {
+    // Install a fake refresh timer (as scheduleTokenRefresh would).
+    const internal = auth as any
+    internal.refreshTimer = setTimeout(() => {
+      throw new Error('refresh timer should have been cleared')
+    }, 60_000)
+
+    auth.dispose()
+
+    expect(internal.refreshTimer).toBeNull()
+  })
+
+  it('closes any in-flight OAuth callback server', async () => {
+    // Spin up a real callback server like the production flow does.
+    const { redirectUrl } = await (auth as any).startCallbackServer(60_000)
+    const port = parseInt(new URL(redirectUrl).port, 10)
+
+    // Sanity: server is up and responding.
+    expect((auth as any).pendingCallbackServer).toBeDefined()
+
+    auth.dispose()
+
+    // After dispose the port must be free — i.e. connections are rejected.
+    await expect(
+      httpRequest({
+        hostname: '127.0.0.1',
+        port,
+        path: '/auth/callback/anything',
+        method: 'GET',
+      }),
+    ).rejects.toThrow()
+
+    expect((auth as any).pendingCallbackServer).toBeNull()
+  })
+
+  it('drops registered token-refresh listeners', () => {
+    const listener = vi.fn()
+    auth.onTokenRefresh(listener)
+    expect((auth as any).tokenRefreshListeners.length).toBe(1)
+
+    auth.dispose()
+    expect((auth as any).tokenRefreshListeners.length).toBe(0)
+  })
+
+  it('is safe to call multiple times', () => {
+    expect(() => {
+      auth.dispose()
+      auth.dispose()
+      auth.dispose()
+    }).not.toThrow()
+  })
+
+  it('is safe to call when nothing is in flight', () => {
+    // Fresh instance, no pending server, no refresh timer, no listeners.
+    expect(() => auth.dispose()).not.toThrow()
+  })
+
+  it('clears both a live timer and a live server in one call', async () => {
+    const internal = auth as any
+    internal.refreshTimer = setTimeout(() => {}, 60_000)
+    await (auth as any).startCallbackServer(60_000)
+
+    auth.dispose()
+
+    expect(internal.refreshTimer).toBeNull()
+    expect(internal.pendingCallbackServer).toBeNull()
+  })
+})

@@ -8,12 +8,14 @@ import {
   defaultPreferences,
   type ChatBackground,
   type LayoutType,
+  type SidebarStyle,
   type UserPreferences,
 } from "./utils"
 
 export {
   type ChatBackground,
   type LayoutType,
+  type SidebarStyle,
   type UserPreferences,
   convertFromApiFormat,
   convertToApiFormat,
@@ -25,6 +27,7 @@ const LAYOUT_STORAGE_KEY = "preferred-layout"
 interface UserPreferencesContextType {
   preferences: UserPreferences
   setLayout: (layout: LayoutType) => void
+  setSidebarStyle: (style: SidebarStyle) => void
   setChatBackground: (background: ChatBackground) => void
   setPromptSuggestions: (enabled: boolean) => void
   setShowToolInvocations: (enabled: boolean) => void
@@ -45,7 +48,26 @@ async function fetchUserPreferences(): Promise<UserPreferences> {
     throw new Error("Failed to fetch user preferences")
   }
   const data = await response.json()
-  return convertFromApiFormat(data)
+  const fromApi = convertFromApiFormat(data)
+
+  // sidebarStyle is client-only — DB schema doesn't have a column for it.
+  // Hydrate from localStorage so the user's choice survives across reloads
+  // and across React Query refetches that would otherwise reset it.
+  if (typeof window !== "undefined") {
+    try {
+      const stored = localStorage.getItem(PREFERENCES_STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed?.sidebarStyle === "horizontal" || parsed?.sidebarStyle === "vertical") {
+          fromApi.sidebarStyle = parsed.sidebarStyle
+        }
+      }
+    } catch {
+      // ignore — fall back to default
+    }
+  }
+
+  return fromApi
 }
 
 async function updateUserPreferences(
@@ -201,6 +223,23 @@ export function UserPreferencesProvider({
     }
   }
 
+  // sidebarStyle is client-only: persisted to localStorage, not Supabase.
+  // We update the React Query cache directly and write through to
+  // localStorage, bypassing the API mutation entirely.
+  const setSidebarStyle = (sidebarStyle: SidebarStyle) => {
+    const queryKey = ["user-preferences", userId]
+    const previous = queryClient.getQueryData<UserPreferences>(queryKey)
+    const updated: UserPreferences = { ...(previous ?? preferences), sidebarStyle }
+    queryClient.setQueryData(queryKey, updated)
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(PREFERENCES_STORAGE_KEY, JSON.stringify(updated))
+      } catch {
+        // ignore quota / serialization errors
+      }
+    }
+  }
+
   const setChatBackground = (chatBackground: ChatBackground) => {
     updatePreferences({ chatBackground })
   }
@@ -240,6 +279,7 @@ export function UserPreferencesProvider({
       value={{
         preferences,
         setLayout,
+        setSidebarStyle,
         setChatBackground,
         setPromptSuggestions,
         setShowToolInvocations,

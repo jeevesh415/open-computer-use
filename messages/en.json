@@ -12,7 +12,9 @@
     "recommended": "Recommended",
     "month": "month",
     "creditsPerMonth": "{count} credits/mo",
-    "agentsInParallel": "{count} agents in parallel"
+    "agentsInParallel": "{count} agents in parallel",
+    "whatsIncluded": "What's included",
+    "hideDetails": "Hide details"
   },
   "header": {
     "useCases": "Use Cases",
@@ -862,13 +864,13 @@
     "newTask": "New Task",
     "newTaskDescription": "Start a new AI automation",
     "activity": "Activity",
-    "taskHistory": "Task History",
+    "taskHistory": "History",
     "taskHistoryDescription": "Review past tasks and resume where you left off",
     "taskHistoryPopup": {
       "title": "Your recent tasks",
       "description": "Browse and continue past conversations. Every task is saved so you can resume right where you left off."
     },
-    "swarmRuns": "Swarm Runs",
+    "swarmRuns": "Swarms",
     "swarmRunsDescription": "Monitor multi-agent parallel workflows",
     "swarmRunsPopup": {
       "title": "Multi-agent workflows",
@@ -898,7 +900,7 @@
       "description": "Store logins and API keys with encryption. Agents auto-fill credentials without exposing raw values."
     },
     "desktopApp": {
-      "getDesktopApp": "Get Desktop App",
+      "getDesktopApp": "Run Coasty locally",
       "download": "Download",
       "downloadDesktopApp": "Download Desktop App",
       "windows": "Windows",

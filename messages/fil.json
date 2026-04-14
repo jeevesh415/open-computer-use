@@ -12,7 +12,9 @@
     "recommended": "Inirerekomenda",
     "month": "buwan",
     "creditsPerMonth": "{count} credits/buwan",
-    "agentsInParallel": "{count} agents nang sabay-sabay"
+    "agentsInParallel": "{count} agents nang sabay-sabay",
+    "whatsIncluded": "Ano ang kasama",
+    "hideDetails": "Itago ang detalye"
   },
   "header": {
     "useCases": "Mga Gamit",

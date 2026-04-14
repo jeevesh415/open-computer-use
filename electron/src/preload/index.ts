@@ -139,6 +139,7 @@ contextBridge.exposeInMainWorld('coasty', {
 
   // App lifecycle
   relaunch: () => ipcRenderer.invoke('app:relaunch'),
+  quit: () => ipcRenderer.invoke('app:quit'),
   getAppVersion: () => ipcRenderer.invoke('app:get-version'),
 
   // Events from main process
@@ -279,6 +280,7 @@ export interface CoastyAPI {
   }>
 
   relaunch: () => Promise<void>
+  quit: () => Promise<void>
   getAppVersion: () => Promise<string>
 
   onConnectionStateChanged: (callback: (state: string) => void) => () => void

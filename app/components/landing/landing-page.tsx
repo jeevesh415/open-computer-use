@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 // HeroParallaxChat removed — demo section is now static
-import { Check, Zap, Shield, Globe, Code, Users, Sparkles, ChevronRight, Star, ArrowRight, Bot, Brain, Rocket, X, MessageSquare, FileText, Search, Terminal, Cloud, Cpu, Monitor, HardDrive, Clock, Infinity, Play, Download, CalendarCheck, RefreshCw, GitFork } from "lucide-react"
+import { Check, Zap, Shield, Globe, Code, Users, Sparkles, ChevronRight, ChevronDown, Star, ArrowRight, Bot, Brain, Rocket, X, MessageSquare, FileText, Search, Terminal, Cloud, Cpu, Monitor, HardDrive, Clock, Infinity, Play, Download, CalendarCheck, RefreshCw, GitFork } from "lucide-react"
 import { CoastyIcon } from "@/components/icons/coasty"
 import Link from "next/link"
 import { useState, useEffect, useCallback, useRef } from "react"
@@ -120,6 +120,9 @@ export function LandingPage() {
   // removing sticky so offsetTop chain gives the true layout position.
   const [scrollProgress, setScrollProgress] = useState(0)
   const activeLandingSection = Math.round(scrollProgress)
+
+  // Pricing card: which plan has "What's included" expanded. Null = all collapsed.
+  const [expandedPlan, setExpandedPlan] = useState<string | null>(null)
 
   useEffect(() => {
     const sectionEls = LANDING_NAV_SECTIONS
@@ -448,7 +451,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 1 } : undefined}
         >
@@ -457,7 +460,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-6">
               <h2 className={cn(
@@ -643,7 +646,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 2 } : undefined}
         >
@@ -652,6 +655,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
+            className="w-full my-auto"
           >
             {/* CSS animations for visual cards (used across multiple sections) */}
             <style dangerouslySetInnerHTML={{ __html: `
@@ -846,7 +850,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 3 } : undefined}
         >
@@ -855,7 +859,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-8">
               <h2 className={cn(
@@ -1026,7 +1030,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 4 } : undefined}
         >
@@ -1035,7 +1039,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-8">
               <h2 className={cn(
@@ -1129,7 +1133,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 5 } : undefined}
         >
@@ -1138,7 +1142,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-8">
               <h2 className={cn(
@@ -1284,7 +1288,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 6 } : undefined}
         >
@@ -1293,7 +1297,7 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             <motion.div variants={itemVariants} className="text-center mb-8">
               <h2 className={cn(
@@ -1510,7 +1514,7 @@ export function LandingPage() {
           className={cn(
             isMobile
               ? "py-16 px-7"
-              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top"
+              : "sticky rounded-2xl border border-border/20 bg-background lp-card-glass lp-section-card px-8 lg:px-10 pt-10 pb-8 mb-6 will-change-[transform,opacity,filter] h-[calc(100vh-8rem)] overflow-hidden origin-top flex flex-col"
           )}
           style={!isMobile ? { top: '5.5rem', zIndex: 7 } : undefined}
         >
@@ -1519,10 +1523,10 @@ export function LandingPage() {
             initial="hidden"
             whileInView="visible"
             viewport={sectionViewport}
-            className="max-w-5xl mx-auto"
+            className="max-w-5xl w-full mx-auto my-auto"
           >
             {/* Header */}
-            <motion.div variants={itemVariants} className="text-center mb-8">
+            <motion.div variants={itemVariants} className="text-center mb-6 sm:mb-8">
               <h2 className={cn(
                 "font-bold tracking-tight",
                 isMobile ? "text-3xl" : "text-3xl sm:text-4xl"
@@ -1537,14 +1541,27 @@ export function LandingPage() {
               </p>
             </motion.div>
 
-            {/* Plan cards — 5-col grid */}
+            {/* Plan cards — responsive grid: 1 → 2 → 3 → 5 columns */}
             <div className={cn(
               "grid gap-3",
-              isMobile ? "grid-cols-1" : "grid-cols-2 lg:grid-cols-5"
+              isMobile
+                ? "grid-cols-1 max-w-md mx-auto"
+                : "grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
             )}>
-              {PLAN_DATA.map((plan, planIdx) => (
+              {PLAN_DATA.map((plan, planIdx) => {
+                const isExpanded = expandedPlan === plan.key
+                const vmLabel =
+                  plan.machines === 0
+                    ? t("pricing.vmTemporary")
+                    : plan.key === "lite"
+                      ? t("pricing.vmDeletedAfterInactivity")
+                      : plan.machines > 1
+                        ? t("pricing.vmAlwaysOnPlural", { count: plan.machines })
+                        : t("pricing.vmAlwaysOn", { count: plan.machines })
+                return (
                 <motion.div
                   key={plan.key}
+                  layout="position"
                   initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   whileInView={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -1552,7 +1569,7 @@ export function LandingPage() {
                   onMouseMove={!isMobile ? handleCardMouseMove : undefined}
                   onMouseLeave={!isMobile ? handleCardMouseLeave : undefined}
                   className={cn(
-                    "relative rounded-xl border p-5 flex flex-col group",
+                    "relative rounded-xl border p-4 sm:p-5 flex flex-col group min-w-0",
                     plan.highlighted
                       ? "border-foreground/20 bg-foreground/[0.03]"
                       : "border-border/50 hover:border-border/70"
@@ -1561,34 +1578,23 @@ export function LandingPage() {
                 >
                   <div className="absolute inset-0 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: 'radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(59, 130, 246, 0.07), transparent 40%)' }} />
                   {plan.highlighted && (
-                    <span className="absolute -top-2.5 left-4 rounded-full bg-foreground text-background px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
+                    <span className="absolute -top-2.5 left-4 rounded-full bg-foreground text-background px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider z-10">
                       {t(`pricing.plans.${plan.key}.badge`)}
                     </span>
                   )}
 
-                  <div className="mb-4">
+                  {/* Header: name + price + description */}
+                  <div className="mb-4 relative">
                     <h3 className="text-sm font-semibold text-foreground">{t(`pricing.plans.${plan.key}.name`)}</h3>
                     <div className="mt-2 flex items-baseline gap-1">
-                      <span className="text-3xl font-bold tracking-tight">{plan.price}</span>
-                      <span className="text-sm text-muted-foreground">/{tc("month")}</span>
+                      <span className="text-2xl sm:text-3xl font-bold tracking-tight">{plan.price}</span>
+                      <span className="text-xs sm:text-sm text-muted-foreground">/{tc("month")}</span>
                     </div>
-                    <p className="mt-1.5 text-xs text-muted-foreground">{t(`pricing.plans.${plan.key}.description`)}</p>
+                    <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">{t(`pricing.plans.${plan.key}.description`)}</p>
                   </div>
 
-                  {/* Key details */}
-                  <div className="space-y-1.5 mb-4 flex-1">
-                    {plan.credits > 0 && (
-                      <p className="text-xs text-muted-foreground">{tc("creditsPerMonth", { count: plan.credits.toLocaleString() })}</p>
-                    )}
-                    <p className="text-xs text-muted-foreground">
-                      {plan.machines === 0 ? t("pricing.vmTemporary") : plan.key === "lite" ? t("pricing.vmDeletedAfterInactivity") : plan.machines > 1 ? t("pricing.vmAlwaysOnPlural", { count: plan.machines }) : t("pricing.vmAlwaysOn", { count: plan.machines })}
-                    </p>
-                    {plan.swarm > 0 && (
-                      <p className="text-xs text-muted-foreground">
-                        {tc("agentsInParallel", { count: plan.swarm })}
-                      </p>
-                    )}
-                  </div>
+                  {/* Spacer pushes CTA + toggle to the bottom */}
+                  <div className="flex-1" />
 
                   <Button
                     className="w-full"
@@ -1601,8 +1607,59 @@ export function LandingPage() {
                       <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
                     </Link>
                   </Button>
+
+                  {/* Collapsible "What's included" — compact by default on every device */}
+                  <button
+                    type="button"
+                    onClick={() => setExpandedPlan(isExpanded ? null : plan.key)}
+                    aria-expanded={isExpanded}
+                    aria-controls={`plan-details-${plan.key}`}
+                    className="mt-3 flex items-center justify-between gap-2 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors relative z-10"
+                  >
+                    <span>{isExpanded ? tc("hideDetails") : tc("whatsIncluded")}</span>
+                    <ChevronDown
+                      className={cn(
+                        "h-3.5 w-3.5 transition-transform duration-300",
+                        isExpanded && "rotate-180"
+                      )}
+                    />
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        id={`plan-details-${plan.key}`}
+                        key="details"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <ul className="mt-3 space-y-1.5 border-t border-border/40 pt-3">
+                          {plan.credits > 0 && (
+                            <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                              <Check className="h-3 w-3 mt-0.5 flex-shrink-0 text-foreground/60" />
+                              <span>{tc("creditsPerMonth", { count: plan.credits.toLocaleString() })}</span>
+                            </li>
+                          )}
+                          <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <Check className="h-3 w-3 mt-0.5 flex-shrink-0 text-foreground/60" />
+                            <span>{vmLabel}</span>
+                          </li>
+                          {plan.swarm > 0 && (
+                            <li className="flex items-start gap-2 text-xs text-muted-foreground">
+                              <Check className="h-3 w-3 mt-0.5 flex-shrink-0 text-foreground/60" />
+                              <span>{tc("agentsInParallel", { count: plan.swarm })}</span>
+                            </li>
+                          )}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
-              ))}
+              )
+              })}
             </div>
 
           </motion.div>

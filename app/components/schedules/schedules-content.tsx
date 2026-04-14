@@ -85,6 +85,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
+import { PageLoader } from "@/components/common/page-loader"
 
 /* ─── Team template types & data ─── */
 interface TeamTemplateEmployee {
@@ -1455,21 +1456,12 @@ export function SchedulesContent() {
     }
   }
 
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
-          <div className="relative h-10 w-10">
-            <div className="absolute inset-0 rounded-full border-2 border-foreground/[0.08]" />
-            <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/60 animate-spin" />
-          </div>
-          <span className="text-sm text-muted-foreground">{t("loading")}</span>
-        </div>
-      </div>
-    )
-  }
-
   return (
+    <PageLoader
+      isLoading={loading}
+      title="Schedules"
+      description="Right on time, every time. Syncing your automations."
+    >
     <div className="h-full overflow-y-auto scrollbar-invisible relative bg-transparent">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0">
@@ -2206,5 +2198,6 @@ export function SchedulesContent() {
         <ScheduleDialog open={!!editChatId} onOpenChange={(open) => { if (!open) setEditChatId(null) }} chatId={editChatId} chatTitle={schedules.find((s) => s.chat_id === editChatId)?.title ?? undefined} machines={machines} defaultMachineId={schedules.find((s) => s.chat_id === editChatId)?.machine_id} onScheduleCreated={() => { setEditChatId(null); loadSchedules() }} onScheduleDeleted={() => { setEditChatId(null); loadSchedules() }} />
       )}
     </div>
+    </PageLoader>
   )
 }
