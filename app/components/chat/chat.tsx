@@ -33,7 +33,7 @@ import { QuickStartGuide } from "./quick-start-guide"
 import { Search, Bug, Globe, FileText, BarChart3, Mail, Zap, Sparkles, PenTool, MonitorSmartphone, Clipboard, Users, TrendingUp, Eye, FileCode, LayoutGrid, Send, ShoppingCart, MessageCircle, Bot } from "lucide-react"
 import { SwarmPanel } from "./swarm-panel"
 import { FloatingThumbnails } from "./floating-thumbnails"
-import { CinematicIntro, shouldShowIntro } from "./cinematic-intro"
+import { CinematicIntro, TaglineIntro, shouldShowIntro, isIntroDismissed } from "./cinematic-intro"
 import { ActiveSwarmBanner, type ActiveSwarm } from "./active-swarm-banner"
 import { RemoteApproval } from "./remote-approval"
 
@@ -1005,14 +1005,20 @@ export function Chat() {
   const showOnboarding = !effectiveChatId && redirectCheckMessages.length === 0
 
   // ── Cinematic intro ──
-  // Initialize as "done" for SSR — useEffect activates on client mount.
-  const [introPhase, setIntroPhase] = useState<"active" | "fading" | "done">("done")
+  // Starts as "done" for SSR. Client mount resolves to the real state via useEffect.
+  // "pending" is a transient client-only state that shows a blank blocking overlay
+  // so chat content never flashes before the intro portal mounts.
+  const [introPhase, setIntroPhase] = useState<"pending" | "active" | "tagline-only" | "fading" | "done">("done")
+  const [introResolved, setIntroResolved] = useState(false)
   useEffect(() => {
     if (shouldShowIntro()) setIntroPhase("active")
+    else if (isIntroDismissed()) setIntroPhase("tagline-only")
+    else setIntroPhase("done")
+    setIntroResolved(true)
   }, [])
-  const introVisible = introPhase !== "done" && showOnboarding && !!user
+  const introVisible = (introPhase === "active" || introPhase === "fading") && showOnboarding && !!user
   const introFading = introPhase === "fading"
-  const showThumbnails = showOnboarding && !!user && (!introVisible || introFading)
+  const showThumbnails = showOnboarding && !!user && introPhase === "done"
 
   // Pick a random motivational tagline once per mount — client-only to avoid SSR
   // hydration mismatch (Math.random differs between server and client renders).
@@ -1056,6 +1062,16 @@ export function Chat() {
             onComplete={() => setIntroPhase("done")}
           />,
           document.body
+        )}
+        {introPhase === "tagline-only" && showOnboarding && !!user && createPortal(
+          <TaglineIntro
+            onSettled={() => {}}
+            onComplete={() => setIntroPhase("done")}
+          />,
+          document.body
+        )}
+        {!introResolved && showOnboarding && (
+          <div className="fixed inset-0 z-[200] bg-background" />
         )}
         <DialogAuth open={hasDialogAuth} setOpen={setHasDialogAuth} />
         <InsufficientCreditsModal

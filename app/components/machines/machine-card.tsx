@@ -253,15 +253,15 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
     <>
       <div
         className={cn(
-          "relative group h-full flex flex-col rounded-2xl transition-all duration-300 overflow-hidden",
-          "border border-border/40 bg-card/60 backdrop-blur-md",
-          "hover:border-border/70 hover:bg-card/90 hover:shadow-xl hover:shadow-black/[0.03] dark:hover:shadow-black/[0.08]",
-          "hover:-translate-y-0.5",
-          machine.status === "error" && "border-red-500/20 bg-red-500/[0.02]",
+          "relative group h-full flex flex-col rounded-2xl overflow-hidden",
+          "bg-card border border-border/40",
+          "transition-all duration-300 ease-out",
+          "hover:border-border/80 hover:shadow-lg hover:shadow-black/[0.04] dark:hover:shadow-black/[0.12]",
+          machine.status === "error" && "border-red-500/20",
         )}
       >
-        {/* Generative animated thumbnail */}
-        <div className="shrink-0 transition-transform duration-500 group-hover:scale-[1.03] origin-center">
+        {/* Gradient header */}
+        <div className="shrink-0">
           <MachineCardThumbnail
             machineId={machine.id}
             status={machine.status}
@@ -269,50 +269,22 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
           />
         </div>
 
-        {/* Card content */}
-        <div className="flex flex-col flex-1 px-5 pb-5 pt-4 relative">
-          {/* Top row: Name + Status + Menu */}
-          <div className="flex items-start justify-between gap-3 mb-3">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2.5 mb-1.5">
-                <h3 className="text-[15px] font-semibold truncate text-foreground/90 tracking-tight">
-                  {machine.displayName}
-                </h3>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className={statusDot} />
-                <span className={cn(
-                  "text-xs font-medium",
-                  machine.status === "running" && "text-emerald-600 dark:text-emerald-400",
-                  machine.status === "stopped" && "text-muted-foreground/60",
-                  machine.status === "error" && "text-red-500",
-                  (machine.status === "creating" || machine.status === "starting") && "text-blue-600 dark:text-blue-400",
-                  machine.status === "stopping" && "text-amber-600 dark:text-amber-400",
-                  machine.status === "deleting" && "text-red-500",
-                )}>
-                  {statusLabel}
-                </span>
-                {osInfo && (
-                  <span className="inline-flex items-center gap-1 text-muted-foreground/50 ml-0.5">
-                    <span className="text-[10px]">·</span>
-                    <osInfo.Icon className="h-2.5 w-2.5" />
-                    <span className="text-[11px]">{osInfo.label}</span>
-                  </span>
-                )}
-                {formatUptime() && (
-                  <span className="text-[11px] text-muted-foreground/50 tabular-nums ml-1">
-                    {formatUptime()}
-                  </span>
-                )}
-              </div>
+        {/* Card body */}
+        <div className="flex flex-col flex-1 px-5 pb-4 pt-0.5 relative">
+          {/* Name row */}
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className={cn(statusDot, "shrink-0")} />
+              <h3 className="text-[15px] font-semibold truncate text-foreground tracking-[-0.01em]">
+                {machine.displayName}
+              </h3>
             </div>
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-7 w-7 p-0 rounded-lg text-muted-foreground/40 hover:text-foreground sm:opacity-0 sm:group-hover:opacity-100 transition-opacity"
+                  className="h-7 w-7 p-0 rounded-lg text-muted-foreground/30 hover:text-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0"
                 >
                   <MoreVertical className="h-3.5 w-3.5" />
                 </Button>
@@ -354,88 +326,103 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
             </DropdownMenu>
           </div>
 
+          {/* Status meta line */}
+          <div className="flex items-center gap-1.5 text-[11px] mb-4">
+            <span className={cn(
+              "font-medium",
+              machine.status === "running" && "text-emerald-600 dark:text-emerald-400",
+              machine.status === "stopped" && "text-muted-foreground/40",
+              machine.status === "error" && "text-red-500",
+              (machine.status === "creating" || machine.status === "starting") && "text-blue-600 dark:text-blue-400",
+              machine.status === "stopping" && "text-amber-600 dark:text-amber-400",
+              machine.status === "deleting" && "text-red-500",
+            )}>
+              {statusLabel}
+            </span>
+            {osInfo && (
+              <>
+                <span className="text-muted-foreground/20">·</span>
+                <span className="text-muted-foreground/40">{osInfo.label}</span>
+              </>
+            )}
+            {formatUptime() && (
+              <>
+                <span className="text-muted-foreground/20">·</span>
+                <span className="tabular-nums text-muted-foreground/40">{formatUptime()}</span>
+              </>
+            )}
+          </div>
+
           {/* Email identity */}
           {machine.settings?.email_identity?.email && (
-            <div className="flex items-center gap-2 rounded-lg border border-border/30 bg-foreground/[0.02] px-3 py-2 mb-3 group/email">
-              <Mail className="h-3 w-3 text-muted-foreground/40 shrink-0" />
-              <span className="text-[11px] text-muted-foreground/60 truncate font-mono flex-1">
+            <button
+              onClick={handleCopyEmail}
+              className="flex items-center gap-2.5 text-left w-full rounded-xl border border-border/30 px-3 py-2 mb-3 group/email hover:border-border/50 transition-colors"
+            >
+              <Mail className="h-3.5 w-3.5 text-muted-foreground/25 shrink-0" />
+              <span className="text-[11px] text-muted-foreground/50 truncate font-mono flex-1">
                 {machine.settings.email_identity.email}
               </span>
-              <button
-                onClick={handleCopyEmail}
-                className="shrink-0 p-0.5 rounded text-muted-foreground/30 hover:text-muted-foreground/70 opacity-0 group-hover/email:opacity-100 transition-all"
-              >
-                {emailCopied ? (
-                  <Check className="h-3 w-3 text-emerald-500" />
-                ) : (
-                  <Copy className="h-3 w-3" />
-                )}
-              </button>
-            </div>
+              {emailCopied ? (
+                <Check className="h-3 w-3 text-emerald-500 shrink-0" />
+              ) : (
+                <Copy className="h-3 w-3 text-muted-foreground/15 group-hover/email:text-muted-foreground/40 shrink-0 transition-colors" />
+              )}
+            </button>
           )}
 
           {/* Snapshot indicator */}
           {machine.settings?.restoredFromSnapshot && (
-            <div className="flex items-center gap-1.5 text-[11px] text-blue-500/70 mb-3">
+            <div className="flex items-center gap-1.5 text-[11px] text-blue-500/50 mb-3">
               <History className="h-3 w-3" />
               <span>Restored from snapshot</span>
             </div>
           )}
 
-          {/* Free tier auto-deletion countdown */}
+          {/* Free tier countdown */}
           {timeRemaining && isFreeTier && !subscriptionLoading && (
             <div
               className={cn(
-                "flex items-center justify-between gap-2 rounded-xl border px-3 py-2 mb-3",
+                "flex items-center justify-between gap-2 rounded-xl border px-3 py-2 mb-3 text-[11px]",
                 timeRemaining.isExpiringSoon
-                  ? "border-red-500/20 bg-red-500/[0.03]"
-                  : "border-border/30 bg-foreground/[0.02]",
+                  ? "border-red-500/15 bg-red-500/[0.03]"
+                  : "border-border/30",
               )}
             >
-              <div className="flex items-center gap-2 min-w-0">
-                <Clock className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50" />
-                <p className="text-[11px] text-muted-foreground/70 truncate">
-                  {timeRemaining.timeString === "Expired" ? (
-                    <span className="font-medium text-red-500">Computer expired</span>
-                  ) : (
-                    <>
-                      Deletes in{" "}
-                      <span className="font-medium text-foreground/80">{timeRemaining.timeString}</span>
-                    </>
-                  )}
-                </p>
+              <div className="flex items-center gap-1.5 min-w-0 truncate text-muted-foreground/50">
+                <Clock className="h-3 w-3 shrink-0 opacity-60" />
+                {timeRemaining.timeString === "Expired" ? (
+                  <span className="font-medium text-red-500">Expired</span>
+                ) : (
+                  <span>Deletes in <span className="font-medium text-foreground/60">{timeRemaining.timeString}</span></span>
+                )}
               </div>
               <button
                 onClick={() => useAccountDialog.getState().open("billing")}
-                className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium text-foreground/60 hover:text-foreground transition-colors"
+                className="shrink-0 font-medium text-foreground/40 hover:text-foreground transition-colors"
               >
                 Upgrade
-                <ArrowRight className="h-3 w-3" />
               </button>
             </div>
           )}
 
           {/* Status message */}
           {machine.statusMessage && (
-            <p
-              className={cn(
-                "text-[11px] leading-relaxed mb-3",
-                machine.status === "error" ? "text-red-500/80" : "text-muted-foreground/50",
-              )}
-            >
+            <p className={cn(
+              "text-[11px] leading-relaxed mb-3",
+              machine.status === "error" ? "text-red-500/60" : "text-muted-foreground/35",
+            )}>
               {machine.statusMessage}
             </p>
           )}
 
           {/* Error state */}
           {machine.status === "error" && (
-            <div className="rounded-xl border border-red-500/10 bg-red-500/[0.03] px-3 py-2.5 mb-3">
-              <div className="flex items-start gap-2">
-                <AlertCircle className="h-3.5 w-3.5 text-red-500/60 shrink-0 mt-0.5" />
-                <p className="text-[11px] text-red-500/70 leading-relaxed">
-                  Computer encountered an error. Try starting it again or contact support.
-                </p>
-              </div>
+            <div className="flex items-start gap-2 rounded-xl border border-red-500/10 bg-red-500/[0.03] px-3 py-2 mb-3">
+              <AlertCircle className="h-3.5 w-3.5 text-red-500/40 shrink-0 mt-px" />
+              <p className="text-[11px] text-red-500/50 leading-relaxed">
+                Error encountered. Try starting again or contact support.
+              </p>
             </div>
           )}
 
@@ -443,16 +430,16 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
           <div className="flex-1" />
 
           {/* Action buttons */}
-          <div className="flex gap-2 pt-2 mt-1 border-t border-border/20">
+          <div className="flex gap-2 pt-3">
             {isElectron ? (
               <Button
                 size="sm"
-                variant="ghost"
+                variant="outline"
                 onClick={handleConnect}
-                className="flex-1 h-9 rounded-xl font-medium text-xs hover:bg-foreground/[0.05]"
+                className="flex-1 h-9 rounded-xl font-medium text-xs border-border/40 hover:border-border/70 hover:bg-foreground/[0.03]"
               >
                 View Details
-                <ExternalLink className="h-3 w-3 ml-1.5 opacity-50" />
+                <ExternalLink className="h-3 w-3 ml-1.5 opacity-40" />
               </Button>
             ) : (
               <>
@@ -467,7 +454,7 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                       <Loader2 className="h-3.5 w-3.5 animate-spin" />
                     ) : (
                       <>
-                        <Play className="h-3.5 w-3.5 mr-1.5" />
+                        <Play className="h-3 w-3 mr-1.5" />
                         {machine.status === "error" ? "Retry" : "Start"}
                       </>
                     )}
@@ -483,22 +470,22 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                     >
                       {isAws ? (
                         <>
-                          <Terminal className="h-3.5 w-3.5 mr-1.5" />
+                          <Terminal className="h-3 w-3 mr-1.5" />
                           Connect
                         </>
                       ) : (
                         <>
-                          <Monitor className="h-3.5 w-3.5 mr-1.5" />
+                          <Monitor className="h-3 w-3 mr-1.5" />
                           Open
                         </>
                       )}
                     </Button>
                     <Button
                       size="sm"
-                      variant="ghost"
+                      variant="outline"
                       onClick={() => handleAction("stop")}
                       disabled={loading !== null}
-                      className="h-9 w-9 p-0 rounded-xl text-muted-foreground/60 hover:text-red-500 hover:bg-red-500/[0.05]"
+                      className="h-9 w-9 p-0 rounded-xl border-border/40 text-muted-foreground/50 hover:text-red-500 hover:border-red-500/30 hover:bg-red-500/[0.04]"
                     >
                       {loading === "stop" ? (
                         <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -512,9 +499,7 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                 {(isTransitioning || (isTemporary && machine.status === "creating")) && (
                   <Button size="sm" disabled className="flex-1 h-9 rounded-xl text-xs">
                     <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
-                    {isTemporary
-                      ? "Creating..."
-                      : `${statusLabel}...`}
+                    {isTemporary ? "Creating..." : `${statusLabel}...`}
                   </Button>
                 )}
               </>

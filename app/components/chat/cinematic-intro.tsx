@@ -108,6 +108,11 @@ export function shouldShowIntro(): boolean {
   return !localStorage.getItem(DISMISS_KEY)
 }
 
+export function isIntroDismissed(): boolean {
+  if (typeof window === "undefined") return false
+  return !!localStorage.getItem(DISMISS_KEY)
+}
+
 export function CinematicIntro({
   onSettled,
   onComplete,
@@ -494,3 +499,74 @@ const Thumb = memo(function Thumb({
     </motion.div>
   )
 })
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Tagline-only intro — shown when full intro was previously dismissed
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function TaglineIntro({
+  onSettled,
+  onComplete,
+}: {
+  onSettled: () => void
+  onComplete: () => void
+}) {
+  const [phase, setPhase] = useState<"tagline" | "done">("tagline")
+  const reducedMotion = useReducedMotion()
+
+  const onSettledRef = useRef(onSettled)
+  const onCompleteRef = useRef(onComplete)
+  onSettledRef.current = onSettled
+  onCompleteRef.current = onComplete
+
+  useEffect(() => {
+    if (reducedMotion) {
+      onSettledRef.current()
+      onCompleteRef.current()
+      return
+    }
+    onSettledRef.current()
+    const t = setTimeout(
+      () => setPhase("done"),
+      T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT
+    )
+    return () => clearTimeout(t)
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (phase === "done") {
+      const t = setTimeout(() => onCompleteRef.current(), T.OVERLAY_FADE + 50)
+      return () => clearTimeout(t)
+    }
+  }, [phase])
+
+  if (reducedMotion) return null
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: phase === "done" ? 0 : 1 }}
+      transition={{ duration: T.OVERLAY_FADE / 1000, ease: EASE_OUT_EXPO }}
+      className="fixed inset-0 z-[200] bg-background"
+    >
+      <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{
+            opacity: phase === "tagline" ? [0, 1, 1, 0] : 0,
+            y: phase === "tagline" ? [12, 0, 0, -6] : -6,
+          }}
+          transition={{
+            duration:
+              (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT) / 1000,
+            times: [0, 0.2, 0.8, 1],
+            ease: EASE_OUT_EXPO,
+          }}
+          className="max-w-2xl px-8 text-center text-[clamp(24px,4vw,44px)] font-semibold leading-[1.15] tracking-[-0.03em] text-shine text-foreground"
+        >
+          Do anything, just as a human can do with a computer
+        </motion.h1>
+      </div>
+    </motion.div>
+  )
+}

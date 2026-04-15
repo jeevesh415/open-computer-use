@@ -14,89 +14,395 @@ import {
 import { validateEmailForSignup } from "@/lib/email-validation"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, memo } from "react"
 import { captureUtmParams, trackSignIn, trackSignUp } from "@/lib/posthog/analytics"
 import { HeaderGoBack } from "../components/header-go-back"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { CoastyIcon } from "@/components/icons/coasty"
-import Image from "next/image"
+import { ArrowUp } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-/* ── Left Brand Panel ── */
+/* ── Cinematic loop constants ── */
+
+const CINE_VIDEO_IDS = [
+  "icxgLDephHE",
+  "qTvmGfg3HVw",
+  "Wbo2o74hVIo",
+  "mH-csaCa508",
+  "AnHJuRMLCnE",
+  "A_OvNh51Npg",
+]
+
+const CINE_INITIAL_TEXT = "Show me what\u2019s possible\u2026"
+const CINE_TASKS = [
+  "Research my competitors",
+  "Fill out job applications",
+  "Book a flight to Tokyo",
+  "Track my website uptime",
+  "Schedule social posts",
+  "Analyze quarterly trends",
+]
+
+const CINE_SPAWN_ORDER = [1, 4, 0, 2, 3, 5]
+const CINE_SPAWN_RANK: number[] = []
+CINE_SPAWN_ORDER.forEach((thumbIdx, rank) => {
+  CINE_SPAWN_RANK[thumbIdx] = rank
+})
+
+const CINE_EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const
+const CINE_EASE_OUT_BACK = [0.34, 1.3, 0.64, 1] as const
+const CINE_EASE_IN_QUAD = [0.26, 0, 0.6, 0.2] as const
+
+const CINE_SHOWCASE = [
+  { left: 30, top: 28, rotate: -5, scale: 0.85 },
+  { left: 50, top: 24, rotate: 1, scale: 0.9 },
+  { left: 70, top: 28, rotate: 4, scale: 0.85 },
+  { left: 30, top: 72, rotate: 4, scale: 0.82 },
+  { left: 50, top: 76, rotate: -2, scale: 0.85 },
+  { left: 70, top: 72, rotate: -4, scale: 0.82 },
+]
+
+const CINE_DRIFT = [
+  { dx: 5, dy: 4, durX: 6, durY: 5 },
+  { dx: -4, dy: 5, durX: 7, durY: 5.5 },
+  { dx: -5, dy: -3, durX: 5.5, durY: 6 },
+  { dx: 4, dy: -4, durX: 6.5, durY: 5 },
+  { dx: 3, dy: 4, durX: 5, durY: 5.8 },
+  { dx: -4, dy: -5, durX: 6, durY: 5.2 },
+]
+
+const CT = {
+  CHAR_INITIAL: 32,
+  CHAR_TASK: 24,
+  PAUSE_AFTER_TYPE: 200,
+  SEND_HOLD: 300,
+  CLEAR_DUR: 160,
+  HERO_HOLD: 800,
+  EXIT_THUMB_DUR: 800,
+  EXIT_THUMB_STAGGER: 80,
+  EXIT_WAIT: 1300,
+  TAGLINE_FADE_IN: 600,
+  TAGLINE_HOLD: 2500,
+  TAGLINE_FADE_OUT: 500,
+  RESET_PAUSE: 1200,
+} as const
+
+type CinePhase = "cycling" | "hero" | "exit" | "tagline" | "resetting" | "idle"
+type CineStep = "typing" | "sent" | "clearing"
+
+/* ── Left Brand Panel — Looping Cinematic ── */
 function LeftBrandPanel() {
-  const t = useTranslations("auth")
+  const [cycle, setCycle] = useState(0)
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className="hidden lg:flex relative flex-[1.4] xl:flex-[1.6] flex-col justify-center items-center min-h-dvh overflow-hidden bg-zinc-950"
+      className="hidden lg:flex relative flex-[1.4] xl:flex-[1.6] flex-col min-h-dvh overflow-hidden bg-black"
     >
-      {/* Ambient glow layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/40 via-zinc-950 to-violet-950/30" />
-      <div className="absolute top-0 right-0 w-[60%] h-[50%] bg-indigo-500/[0.07] rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-[50%] h-[40%] bg-violet-500/[0.05] rounded-full blur-[100px]" />
+      {/* Background — pure black */}
 
-      {/* Subtle noise texture */}
-      <div
-        className="absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
+      {/* Cinematic animation */}
+      <CinematicLoop key={cycle} onLoop={() => setCycle((c) => c + 1)} />
 
-      {/* Demo image — large, floating with perspective */}
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-[92%] xl:w-[88%] mx-auto"
-      >
-        {/* Smoke gradient layers behind the image */}
-        <div className="absolute -inset-16 rounded-[40px] blur-[80px] opacity-60 bg-gradient-to-br from-indigo-600/20 via-purple-500/10 to-transparent animate-pulse [animation-duration:8s]" />
-        <div className="absolute -inset-12 rounded-[40px] blur-[60px] opacity-40 bg-gradient-to-tl from-violet-500/15 via-blue-500/10 to-transparent animate-pulse [animation-duration:12s] [animation-delay:2s]" />
-        <div className="absolute -inset-20 rounded-[50px] blur-[100px] opacity-30 bg-gradient-to-r from-fuchsia-500/10 via-indigo-400/15 to-cyan-500/5 animate-pulse [animation-duration:10s] [animation-delay:4s]" />
-        <div className="absolute -inset-10 rounded-3xl blur-[40px] opacity-50 bg-gradient-to-b from-indigo-500/10 via-purple-600/8 to-violet-500/10" />
-
-        <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] shadow-[0_32px_80px_-12px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.05]">
-          <Image
-            src="/demo-3-2.png"
-            alt="Coasty desktop app"
-            width={1200}
-            height={800}
-            className="w-full h-auto"
-            priority
-          />
-        </div>
-      </motion.div>
-
-      {/* Bottom content overlay */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 p-10 xl:p-14">
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent" />
-        <div className="relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="flex items-center gap-3 mb-5">
-              <CoastyIcon className="size-7 text-white/90" />
-              <span className="text-white/50 text-[11px] font-semibold tracking-[0.25em] uppercase">Coasty</span>
-            </div>
-            <h2 className="text-white text-2xl xl:text-[28px] font-medium leading-[1.3] tracking-[-0.02em] max-w-lg">
-              Autopilot computers that work for you. No humans needed.
-            </h2>
-            <p className="text-white/40 text-[15px] xl:text-base font-normal leading-relaxed max-w-md mt-3">
-              Delegate hours of repetitive work to AI agents that research, browse, and execute tasks on your computer — while you focus on what actually matters.
-            </p>
-          </motion.div>
-        </div>
+      {/* Bottom branding — always visible, overlaid */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 px-8 xl:px-10 pb-8 xl:pb-10">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10"
+        >
+          <div className="flex items-center gap-2.5 mb-3">
+            <CoastyIcon className="size-5 text-white/70" />
+            <span className="text-white/30 text-[10px] font-semibold tracking-[0.3em] uppercase">Coasty</span>
+          </div>
+          <p className="text-white/25 text-[13px] font-normal leading-relaxed max-w-xs">
+            AI agents that control computers like humans do.
+          </p>
+        </motion.div>
       </div>
     </motion.div>
   )
 }
+
+/* ── Looping cinematic animation ── */
+function CinematicLoop({ onLoop }: { onLoop: () => void }) {
+  const [phase, setPhase] = useState<CinePhase>("cycling")
+  const [taskIdx, setTaskIdx] = useState(-1)
+  const [step, setStep] = useState<CineStep>("typing")
+  const [revealed, setRevealed] = useState(0)
+  const textRef = useRef<HTMLSpanElement>(null)
+  const onLoopRef = useRef(onLoop)
+  onLoopRef.current = onLoop
+
+  const text = taskIdx === -1 ? CINE_INITIAL_TEXT : CINE_TASKS[taskIdx]
+  const isLast = taskIdx === CINE_TASKS.length - 1
+
+  // Preload thumbnails
+  useEffect(() => {
+    CINE_VIDEO_IDS.forEach((id) => {
+      const img = new window.Image()
+      img.src = `https://img.youtube.com/vi/${id}/mqdefault.jpg`
+    })
+  }, [])
+
+  // 1. Typing
+  useEffect(() => {
+    if (phase !== "cycling" || step !== "typing") return
+    const el = textRef.current
+    if (!el) return
+    el.textContent = ""
+    const charMs = taskIdx === -1 ? CT.CHAR_INITIAL : CT.CHAR_TASK
+    let rafId: number
+    let start: number | null = null
+    let shown = 0
+
+    function tick(ts: number) {
+      if (!start) start = ts
+      const target = Math.min(Math.floor((ts - start) / charMs), text.length)
+      if (target > shown) {
+        shown = target
+        el!.textContent = text.slice(0, shown)
+      }
+      if (shown >= text.length) {
+        setTimeout(() => setStep("sent"), CT.PAUSE_AFTER_TYPE)
+        return
+      }
+      rafId = requestAnimationFrame(tick)
+    }
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [phase, step, text, taskIdx])
+
+  // 2. Sent
+  useEffect(() => {
+    if (phase !== "cycling" || step !== "sent") return
+    if (taskIdx >= 0) setRevealed((c) => c + 1)
+    const t = setTimeout(() => {
+      if (taskIdx >= 0 && isLast) {
+        setPhase("hero")
+      } else {
+        setStep("clearing")
+      }
+    }, CT.SEND_HOLD)
+    return () => clearTimeout(t)
+  }, [phase, step, taskIdx, isLast])
+
+  // 3. Clearing
+  useEffect(() => {
+    if (phase !== "cycling" || step !== "clearing") return
+    const t = setTimeout(() => {
+      setTaskIdx((i) => i + 1)
+      setStep("typing")
+    }, CT.CLEAR_DUR)
+    return () => clearTimeout(t)
+  }, [phase, step])
+
+  // 4. Phase progression
+  useEffect(() => {
+    if (phase === "hero") {
+      const t = setTimeout(() => setPhase("exit"), CT.HERO_HOLD)
+      return () => clearTimeout(t)
+    }
+    if (phase === "exit") {
+      const t = setTimeout(() => setPhase("tagline"), CT.EXIT_WAIT)
+      return () => clearTimeout(t)
+    }
+    if (phase === "tagline") {
+      const t = setTimeout(
+        () => setPhase("resetting"),
+        CT.TAGLINE_FADE_IN + CT.TAGLINE_HOLD + CT.TAGLINE_FADE_OUT
+      )
+      return () => clearTimeout(t)
+    }
+    if (phase === "resetting") {
+      const t = setTimeout(() => onLoopRef.current(), CT.RESET_PAUSE)
+      return () => clearTimeout(t)
+    }
+  }, [phase])
+
+  const inputVisible = phase === "cycling" || phase === "hero" || phase === "exit"
+
+  return (
+    <div
+      className="absolute inset-0 z-10 overflow-hidden"
+      style={{ perspective: "800px", perspectiveOrigin: "50% 50%" }}
+    >
+      {/* Drift keyframes */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes auth-dx{0%,100%{transform:translateX(0)}50%{transform:translateX(var(--dx))}}
+          @keyframes auth-dy{0%,100%{transform:translateY(0)}50%{transform:translateY(var(--dy))}}
+          .auth-fx{animation:auth-dx var(--tx) ease-in-out infinite}
+          .auth-fy{animation:auth-dy var(--ty) ease-in-out infinite}
+        `,
+      }} />
+
+      {/* Thumbnails */}
+      {CINE_VIDEO_IDS.map((id, i) => (
+        <CineThumb
+          key={id}
+          videoId={id}
+          index={i}
+          phase={phase}
+          revealed={CINE_SPAWN_RANK[i] < revealed}
+        />
+      ))}
+
+      {/* Chat input mock */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{
+            opacity: inputVisible ? 1 : 0,
+            y: inputVisible ? 0 : 16,
+            scale: inputVisible ? 1 : 0.97,
+          }}
+          transition={{
+            duration: inputVisible ? 0.5 : 0.4,
+            ease: CINE_EASE_OUT_EXPO,
+          }}
+          className="w-[88%] max-w-md"
+        >
+          <div className="relative rounded-xl bg-white/[0.07] backdrop-blur-sm border border-white/[0.08] shadow-2xl">
+            <div className="min-h-[38px] px-3.5 pt-2.5 pb-0.5 text-[14px] leading-[1.3] text-white/90">
+              <motion.span
+                key={taskIdx}
+                ref={textRef}
+                initial={taskIdx > -1 ? { opacity: 0 } : false}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1 }}
+              />
+              {step === "typing" && phase === "cycling" && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                  className="ml-px inline-block h-[1.1em] w-[1.5px] rounded-full bg-white/40 align-text-bottom"
+                />
+              )}
+            </div>
+            <div className="flex w-full items-center justify-end px-2 pb-2">
+              <motion.div
+                animate={{ scale: step === "sent" ? [1, 1.15, 1] : 1 }}
+                transition={{ duration: 0.25, ease: CINE_EASE_OUT_BACK }}
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-white/90"
+              >
+                <ArrowUp size={12} strokeWidth={2.5} className="text-zinc-900" />
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Tagline */}
+      {(phase === "tagline" || phase === "resetting") && (
+        <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{
+              opacity: phase === "tagline" ? [0, 1, 1, 0] : 0,
+              y: phase === "tagline" ? [10, 0, 0, -4] : -4,
+            }}
+            transition={{
+              duration: (CT.TAGLINE_FADE_IN + CT.TAGLINE_HOLD + CT.TAGLINE_FADE_OUT) / 1000,
+              times: [0, 0.18, 0.82, 1],
+              ease: CINE_EASE_OUT_EXPO,
+            }}
+            className="max-w-sm px-8 text-center text-[clamp(20px,2.8vw,32px)] font-semibold leading-[1.2] tracking-[-0.03em] text-white"
+          >
+            Do anything a human can do with a computer
+          </motion.h1>
+        </div>
+      )}
+
+      {/* Soft vignette */}
+      <div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 25%, black 85%)",
+        }}
+      />
+    </div>
+  )
+}
+
+/* ── Cinematic thumbnail ── */
+const CineThumb = memo(function CineThumb({
+  videoId,
+  index,
+  phase,
+  revealed,
+}: {
+  videoId: string
+  index: number
+  phase: CinePhase
+  revealed: boolean
+}) {
+  const s = CINE_SHOWCASE[index]
+  const d = CINE_DRIFT[index]
+  const exiting = phase === "exit" || phase === "tagline" || phase === "resetting"
+  const floating = revealed && !exiting
+
+  const exitRank = CINE_SPAWN_ORDER.indexOf(index)
+
+  const target = (() => {
+    if (exiting && revealed) {
+      return { x: "-50%", y: "-50%", z: 700, scale: 2.5, rotate: s.rotate, opacity: 0 }
+    }
+    if (revealed) {
+      return { x: "-50%", y: "-50%", z: 0, scale: s.scale, rotate: s.rotate, opacity: 0.8 }
+    }
+    return { x: "-50%", y: "-50%", z: 0, scale: 0, rotate: -15 + index * 5, opacity: 0 }
+  })()
+
+  const transition = exiting
+    ? {
+        duration: CT.EXIT_THUMB_DUR / 1000,
+        ease: CINE_EASE_IN_QUAD,
+        delay: exitRank * (CT.EXIT_THUMB_STAGGER / 1000),
+        opacity: { ease: [0.7, 0, 1, 1], duration: CT.EXIT_THUMB_DUR / 1000 },
+      }
+    : { duration: 0.75, ease: CINE_EASE_OUT_BACK }
+
+  return (
+    <motion.div
+      className="absolute z-[5]"
+      style={{ left: `${s.left}%`, top: `${s.top}%` }}
+      initial={{ x: "-50%", y: "-50%", z: 0, scale: 0, rotate: -15 + index * 5, opacity: 0 }}
+      animate={target}
+      transition={transition}
+    >
+      <div
+        className={floating ? "auth-fx" : undefined}
+        style={floating ? ({ "--dx": `${d.dx}px`, "--tx": `${d.durX}s` } as React.CSSProperties) : undefined}
+      >
+        <div
+          className={floating ? "auth-fy" : undefined}
+          style={floating ? ({ "--dy": `${d.dy}px`, "--ty": `${d.durY}s` } as React.CSSProperties) : undefined}
+        >
+          <div className="w-[140px] xl:w-[170px] aspect-video rounded-lg overflow-hidden shadow-md ring-1 ring-white/[0.06]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
+              alt=""
+              width={320}
+              height={180}
+              decoding="async"
+              draggable={false}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+})
 
 type AuthView = "sign-in" | "sign-up" | "magic-link" | "forgot-password"
 
@@ -332,25 +638,6 @@ export default function LoginPage() {
 
       {/* Right form panel */}
       <div className="relative flex flex-1 flex-col min-h-dvh">
-        {/* Ambient gradient mesh background — right side only */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div
-            className="absolute -top-[40%] -left-[20%] h-[80%] w-[60%] rounded-full opacity-[0.03] dark:opacity-[0.06] blur-[100px]"
-            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-          />
-          <div
-            className="absolute -bottom-[30%] -right-[10%] h-[70%] w-[50%] rounded-full opacity-[0.025] dark:opacity-[0.05] blur-[100px]"
-            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-          />
-          <div
-            className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
-            style={{
-              backgroundImage: `linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)`,
-              backgroundSize: "80px 80px",
-            }}
-          />
-        </div>
-
         <HeaderGoBack href="/" />
 
         <main className="relative flex flex-1 flex-col items-center justify-center z-10 py-4 sm:py-10 px-4 sm:px-6 lg:px-16">

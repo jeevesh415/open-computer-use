@@ -30,6 +30,7 @@ import { BillingSection } from "@/app/components/layout/settings/billing/billing
 import { ThemeSelection } from "@/app/components/layout/settings/appearance/theme-selection"
 import { BackgroundSelection } from "@/app/components/layout/settings/appearance/background-selection"
 import { LanguageSelection } from "@/app/components/layout/settings/appearance/language-selection"
+import { IntroPreference } from "@/app/components/layout/settings/appearance/intro-preference"
 // import { LayoutSettings } from "@/app/components/layout/settings/appearance/layout-settings"
 import { FeedbackForm } from "@/components/common/feedback-form"
 import { AppInfoContent } from "@/app/components/layout/app-info/app-info-content"
@@ -63,6 +64,12 @@ function AppearanceSection() {
       <div className="space-y-4">
         <h3 className="text-[13px] font-medium text-foreground/70">Background</h3>
         <BackgroundSelection />
+      </div>
+
+      {/* Personalization */}
+      <div className="space-y-4">
+        <h3 className="text-[13px] font-medium text-foreground/70">Personalization</h3>
+        <IntroPreference />
       </div>
     </div>
   )
