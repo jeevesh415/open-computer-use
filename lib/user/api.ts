@@ -1,5 +1,7 @@
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { createClient } from "@/lib/supabase/server"
+import { hashApiKeyToUserId } from "@/lib/auth/current-identity"
+import { getCoastyApiKey, isOssMode } from "@/lib/oss-mode"
 import {
   convertFromApiFormat,
   defaultPreferences,
@@ -18,6 +20,26 @@ export async function getSupabaseUser() {
 }
 
 export async function getUserProfile(): Promise<UserProfile | null> {
+  // OSS mode: synthesize a profile keyed by sha256(COASTY_API_KEY) so the
+  // chat-store / preferences / messages caches stay coherent across reloads
+  // without leaking the raw key. Must short-circuit BEFORE any Supabase
+  // call because OSS deployments don't have a Supabase project at all.
+  if (isOssMode()) {
+    const key = getCoastyApiKey()
+    if (!key) return null
+    return {
+      id: hashApiKeyToUserId(key),
+      // DB type requires `string` (not null) — use empty string as a
+      // non-PII placeholder. The UI hides email-edit surfaces when
+      // `anonymous` is true.
+      email: "",
+      display_name: "Coasty user",
+      profile_image: "",
+      anonymous: true,
+      preferences: defaultPreferences,
+    } as UserProfile
+  }
+
   if (!isSupabaseEnabled) {
     // return fake user profile for no supabase
     return {

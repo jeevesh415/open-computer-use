@@ -304,42 +304,122 @@ export class AwsEc2Service {
   /**
    * Create an AMI from a running or stopped instance.
    * This captures the full machine state including all files, browser data, etc.
+   *
+   * Returns `null` if the instance has already been terminated or is in a
+   * transient state that EC2 won't snapshot from. The previous behaviour was
+   * to surface AWS's `InvalidParameterValue: Instance is not in state
+   * 'running' or 'stopping' or 'stopped'` directly to the caller — a problem
+   * for the 6-hour `runPeriodicSnapshots` loop, which races against
+   * lite-machine cleanup that calls `TerminateInstancesCommand` on the same
+   * instance. The race produced one full-stack `Error: [Object]` traceback
+   * per audit window with no actual user impact (the snapshot was no longer
+   * needed anyway). Resolving the race in code rather than logs:
+   *   1. `DescribeInstances` first — cheap one-RPC pre-check
+   *   2. Skip with a single info-level log if state is terminating/terminated/pending
+   *   3. Fall back to the existing AWS error path only if the state check itself fails
+   *      (so we never silently swallow a genuine snapshot failure)
    */
   async createMachineImage(
     instanceId: string,
     userId: string,
     machineName?: string
-  ): Promise<{ amiId: string; name: string }> {
-    const ts = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 15);
-    const name = `coasty-snapshot-${userId.substring(0, 8)}-${ts}`;
-
-    const result = await this.client.send(
-      new CreateImageCommand({
-        InstanceId: instanceId,
-        Name: name,
-        Description: `Snapshot of ${machineName || instanceId} for user ${userId.substring(0, 8)}`,
-        NoReboot: true, // don't interrupt the running instance
-        TagSpecifications: [
-          {
-            ResourceType: "image",
-            Tags: [
-              { Key: "Name", Value: name },
-              { Key: "UserId", Value: userId },
-              { Key: "ManagedBy", Value: "coasty-snapshot" },
-              { Key: "SourceInstance", Value: instanceId },
-            ],
-          },
-        ],
-      })
-    );
-
-    const amiId = result.ImageId;
-    if (!amiId) {
-      throw new Error("CreateImage returned no image ID");
+  ): Promise<{ amiId: string; name: string } | null> {
+    // Pre-flight: confirm the instance is in a snapshottable state.
+    // EC2 only allows CreateImage when state ∈ {running, stopping, stopped}.
+    // {pending, shutting-down, terminated} all reject with InvalidParameterValue.
+    let preflightState: string | undefined;
+    try {
+      const describe = await this.client.send(
+        new DescribeInstancesCommand({ InstanceIds: [instanceId] })
+      );
+      preflightState = describe.Reservations?.[0]?.Instances?.[0]?.State?.Name;
+    } catch (err: any) {
+      // If the instance is already gone, AWS returns InvalidInstanceID.NotFound.
+      // Treat as "no snapshot needed" rather than as an error.
+      if (err?.name === "InvalidInstanceID.NotFound") {
+        console.log(
+          `[snapshot] Skipping ${instanceId}: instance not found (already terminated)`
+        );
+        return null;
+      }
+      // For any other DescribeInstances error, fall through to the original
+      // CreateImage path so we get a real failure signal — never silently swallow.
+      console.warn(
+        `[snapshot] DescribeInstances pre-check failed for ${instanceId} ` +
+          `(${err?.name}: ${err?.message}); attempting CreateImage anyway.`
+      );
     }
 
-    console.log(`Created snapshot AMI ${amiId} (${name}) from instance ${instanceId}`);
-    return { amiId, name };
+    if (preflightState && !["running", "stopping", "stopped"].includes(preflightState)) {
+      console.log(
+        `[snapshot] Skipping ${instanceId}: state='${preflightState}' is not snapshottable ` +
+          `(must be running/stopping/stopped). Likely race with cleanup termination.`
+      );
+      return null;
+    }
+
+    const ts = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 15);
+    // Defense-in-depth: even with the cross-replica cron lock holding most of
+    // the line, we still append a per-call random hex jitter so two callers
+    // racing in the same wall-clock second can never collide on the AMI Name
+    // (`InvalidAMIName.Duplicate`). 6 hex chars = 16M space, ample for the
+    // ~handful of CreateImage calls per second in production.
+    const jitter = Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padStart(6, "0");
+    const name = `coasty-snapshot-${userId.substring(0, 8)}-${ts}-${jitter}`;
+
+    try {
+      const result = await this.client.send(
+        new CreateImageCommand({
+          InstanceId: instanceId,
+          Name: name,
+          Description: `Snapshot of ${machineName || instanceId} for user ${userId.substring(0, 8)}`,
+          NoReboot: true, // don't interrupt the running instance
+          TagSpecifications: [
+            {
+              ResourceType: "image",
+              Tags: [
+                { Key: "Name", Value: name },
+                { Key: "UserId", Value: userId },
+                { Key: "ManagedBy", Value: "coasty-snapshot" },
+                { Key: "SourceInstance", Value: instanceId },
+              ],
+            },
+          ],
+        })
+      );
+
+      const amiId = result.ImageId;
+      if (!amiId) {
+        throw new Error("CreateImage returned no image ID");
+      }
+
+      console.log(`Created snapshot AMI ${amiId} (${name}) from instance ${instanceId}`);
+      return { amiId, name };
+    } catch (err: any) {
+      // TOCTOU: instance state changed between DescribeInstances and CreateImage.
+      // The pre-flight check eliminates ~99% of these but the window is non-zero.
+      // Treat the same as the pre-flight skip rather than propagating.
+      if (
+        err?.name === "InvalidParameterValue" &&
+        typeof err?.message === "string" &&
+        /Instance is not in state/i.test(err.message)
+      ) {
+        console.log(
+          `[snapshot] Skipping ${instanceId}: TOCTOU race — instance state changed ` +
+            `between pre-flight and CreateImage (${err.message})`
+        );
+        return null;
+      }
+      if (err?.name === "InvalidInstanceID.NotFound") {
+        console.log(
+          `[snapshot] Skipping ${instanceId}: instance terminated between pre-flight and CreateImage`
+        );
+        return null;
+      }
+      throw err;
+    }
   }
 
   /**
@@ -547,11 +627,114 @@ export class AwsEc2Service {
   }
 
   /**
+   * Strips pure-comment lines and collapses blank-line runs in a bash script,
+   * preserving heredoc bodies VERBATIM. Used to slim UserData before gzip
+   * since AWS RunInstances limits raw user data to 16384 bytes after base64
+   * decode. Source code stays readable; only the wire format is compact.
+   */
+  private minifyBash(src: string): string {
+    const lines = src.split("\n");
+    const out: string[] = [];
+    let inHeredoc: string | null = null;
+    let lastBlank = false;
+    for (const line of lines) {
+      if (inHeredoc !== null) {
+        out.push(line);
+        if (line.trim() === inHeredoc) inHeredoc = null;
+        continue;
+      }
+      const hd = line.match(/<<\s*['"]?(\w+)['"]?/);
+      if (hd) {
+        out.push(line);
+        inHeredoc = hd[1];
+        continue;
+      }
+      if (line.startsWith("#!")) {
+        out.push(line);
+        lastBlank = false;
+        continue;
+      }
+      if (/^\s*#/.test(line)) continue; // pure comment
+      const blank = line.trim() === "";
+      if (blank && lastBlank) continue;
+      lastBlank = blank;
+      out.push(line);
+    }
+    return out.join("\n");
+  }
+
+  /**
+   * Strips pure-comment lines and collapses blank-line runs in Python source.
+   * Conservative: only touches lines that are entirely a comment (after
+   * leading whitespace) and consecutive blank lines. Does NOT strip
+   * docstrings or inline comments — too risky to do without a real parser.
+   */
+  private minifyPython(src: string): string {
+    const lines = src.split("\n");
+    const out: string[] = [];
+    let lastBlank = false;
+    for (const line of lines) {
+      // Preserve shebang
+      if (line.startsWith("#!")) {
+        out.push(line);
+        lastBlank = false;
+        continue;
+      }
+      // Pure-comment line (after any indentation)
+      if (/^\s*#/.test(line)) continue;
+      const blank = line.trim() === "";
+      if (blank && lastBlank) continue;
+      lastBlank = blank;
+      out.push(line);
+    }
+    return out.join("\n");
+  }
+
+  /**
+   * Strips pure-comment lines and collapses blank-line runs in a PowerShell
+   * script, preserving here-string (@"..."@ / @'...'@) bodies VERBATIM.
+   */
+  private minifyPowerShell(src: string): string {
+    const lines = src.split("\n");
+    const out: string[] = [];
+    let inHereString: '"' | "'" | null = null;
+    let lastBlank = false;
+    for (const line of lines) {
+      if (inHereString !== null) {
+        out.push(line);
+        // PowerShell here-string close marker MUST be at column 0
+        if (line === inHereString + "@") inHereString = null;
+        continue;
+      }
+      // Detect here-string opens that DON'T close on the same line
+      const opensDouble = line.includes('@"') && !/@"[\s\S]*"@/.test(line);
+      const opensSingle = line.includes("@'") && !/@'[\s\S]*'@/.test(line);
+      if (opensDouble) {
+        out.push(line);
+        inHereString = '"';
+        continue;
+      }
+      if (opensSingle) {
+        out.push(line);
+        inHereString = "'";
+        continue;
+      }
+      if (/^\s*#/.test(line)) continue; // pure comment
+      const blank = line.trim() === "";
+      if (blank && lastBlank) continue;
+      lastBlank = blank;
+      out.push(line);
+    }
+    return out.join("\n");
+  }
+
+  /**
    * Returns the Python AI agent source code, shared by both full and golden AMI UserData.
    */
   private getAgentSource(): string {
     return `#!/usr/bin/env python3
 import asyncio,base64,io,json,os,subprocess,tempfile,time
+import urllib.request,urllib.parse
 from typing import Any,Dict
 try:
  import mss;_HAS_MSS=True
@@ -576,10 +759,154 @@ VNC_PASSWORD=os.environ.get("VNC_PASSWORD","")
 PORT=int(os.environ.get("AGENT_PORT","8080"))
 HOST=os.environ.get("AGENT_HOST","0.0.0.0")
 _browser_instance=None
+# Country (ISO-3166 alpha-2) -> primary BCP 47 language tag for matched browser locale.
+# Used when geo lookup returns a country but no explicit COASTY_LANG override.
+_COUNTRY_LANG={"US":"en-US","GB":"en-GB","CA":"en-CA","AU":"en-AU","NZ":"en-NZ","IE":"en-IE","ZA":"en-ZA","IN":"en-IN","DE":"de-DE","FR":"fr-FR","ES":"es-ES","IT":"it-IT","NL":"nl-NL","SE":"sv-SE","NO":"nb-NO","DK":"da-DK","FI":"fi-FI","PL":"pl-PL","PT":"pt-PT","BR":"pt-BR","MX":"es-MX","AR":"es-AR","JP":"ja-JP","KR":"ko-KR","CN":"zh-CN","TW":"zh-TW","HK":"zh-HK","SG":"en-SG","RU":"ru-RU","TR":"tr-TR","SA":"ar-SA","AE":"ar-AE","IL":"he-IL","ID":"id-ID","TH":"th-TH","VN":"vi-VN","PH":"en-PH","MY":"en-MY"}
+_LOCALE=None
+def _resolve_locale():
+ # Returns {"tz":..., "lang":..., "accept":..., "country":...} matched to the egress IP.
+ # Uses HTTPS_PROXY/https_proxy when set so the geo reflects the proxy, not the EC2 host.
+ # Operator overrides: COASTY_TZ pins timezone, COASTY_LANG pins BCP 47 lang tag.
+ global _LOCALE
+ if _LOCALE is not None:return _LOCALE
+ tz=os.environ.get("COASTY_TZ","").strip()
+ lang=os.environ.get("COASTY_LANG","").strip()
+ country=""
+ if not(tz and lang):
+  try:
+   proxy=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+   req=urllib.request.Request("https://ipinfo.io/json",headers={"User-Agent":"coasty/1"})
+   op=urllib.request.build_opener(urllib.request.ProxyHandler({"https":proxy,"http":proxy})) if proxy else urllib.request.build_opener()
+   resp=op.open(req,timeout=4);d=json.loads(resp.read().decode())
+   if not tz:tz=(d.get("timezone") or "").strip()
+   country=(d.get("country") or "").strip().upper()
+  except Exception as e:print(f"[locale] geo lookup failed: {e}",flush=True)
+ if not lang:lang=_COUNTRY_LANG.get(country,"en-US")
+ if not tz:tz="America/New_York"
+ base=lang.split("-")[0]
+ _LOCALE={"tz":tz,"lang":lang,"accept":lang+","+base+";q=0.9","country":country}
+ print(f"[locale] tz={tz} lang={lang} country={country or '?'} accept={_LOCALE['accept']}",flush=True)
+ return _LOCALE
+def _apply_tz():
+ # Sets TZ env + tzset so this Python process AND its child processes
+ # (geckodriver -> Firefox) inherit the matched timezone. Firefox reads
+ # TZ via libc tzset() and exposes it via Intl.DateTimeFormat resolvedOptions.
+ loc=_resolve_locale();os.environ["TZ"]=loc["tz"]
+ try:time.tzset()
+ except:pass
+ return loc
 def _xdo(*a):
  env={**os.environ,"DISPLAY":DISPLAY}
  r=subprocess.run(["xdotool"]+list(a),capture_output=True,text=True,env=env,timeout=10)
  return r.stdout.strip()
+# ===== Behavioral mimicry & stealth =====
+# Bigram dwell-time table approximated from CMU keystroke dynamics + KeyRecs
+# datasets — common digrams have shorter inter-keystroke intervals than rare
+# ones because the typing motor program is more practiced. Values in ms.
+import random as _rng
+# Bigram inter-keystroke intervals (ms) calibrated to Aalto 136M-keystroke
+# study: mean IKI ~238ms, sigma ~111ms, floor ~60ms. Common bimanual bigrams
+# get a 0.55-0.70 multiplier vs the mean (faster motor program); same-finger
+# bigrams 1.3-1.5x slower. Target sustained WPM ~45 (range 25-90).
+_BIGRAM_DELAY={"th":105,"he":110,"in":115,"er":115,"an":120,"re":120,"on":125,"at":125,"en":125,"nd":130,"ti":130,"es":130,"or":130,"te":135,"of":135,"ed":135,"is":135,"it":135,"al":135,"ar":140,"st":140,"to":140,"nt":140,"ng":140,"se":145,"ha":145,"as":145,"ou":150,"io":150,"le":150,"ve":155,"co":155,"me":155,"de":160,"hi":160,"ri":160,"ro":160,"ic":165,"ne":165,"ea":165,"ra":170,"ce":170,"li":150,"ch":175,"ll":160,"be":165,"ma":165,"si":170,"om":170,"ur":175,"ca":175,"el":175,"ta":170,"la":170,"ns":170}
+# Common Linux desktop resolutions (StatCounter 2024-2025). 1920x1080
+# dominates; weighted by repetition to sample the real distribution.
+_VP_POOL=[(1920,1080),(1920,1080),(1920,1080),(1920,1080),(1366,768),(1366,768),(1536,864),(1440,900),(1280,720),(1600,900),(2560,1440)]
+# Cached per-process so a single VM presents a stable identity across actions.
+_VIEWPORT=None
+# Real-Linux Firefox UA. Mozilla froze the UA architecture token years ago
+# so even ARM64 t4g Firefox reports "Linux x86_64" by default. Firefox 140
+# is the current ESR base (FF 128 ESR EOL'd 2025-09-16). FF doesn't emit
+# Sec-CH-UA, so the UA<->ClientHints mismatch trap doesn't apply.
+_UA_POOL=["Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0","Mozilla/5.0 (X11; Linux x86_64; rv:142.0) Gecko/20100101 Firefox/142.0","Mozilla/5.0 (X11; Linux x86_64; rv:141.0) Gecko/20100101 Firefox/141.0"]
+_UA=None
+def _viewport():
+ global _VIEWPORT
+ if _VIEWPORT is None:_VIEWPORT=_rng.choice(_VP_POOL)
+ return _VIEWPORT
+def _user_agent():
+ global _UA
+ if _UA is None:_UA=_rng.choice(_UA_POOL)
+ return _UA
+def _human_move(x,y,steps=14):
+ # Cubic Bezier curve from current pointer position to (x,y) with random
+ # perpendicular control points. Matches the variable-speed / curved
+ # trajectory real cursors trace; defeats naive "instant teleport" detectors.
+ # ~10-15% probability of overshoot+correction (real-human pattern).
+ import math
+ env={**os.environ,"DISPLAY":DISPLAY}
+ try:
+  r=subprocess.run(["xdotool","getmouselocation","--shell"],capture_output=True,text=True,env=env,timeout=2)
+  loc={k:int(v) for k,v in (l.split("=",1) for l in r.stdout.strip().split("\\n") if "=" in l and l.split("=",1)[0] in("X","Y"))}
+  sx,sy=loc.get("X",x),loc.get("Y",y)
+ except:sx,sy=x,y
+ dx,dy=x-sx,y-sy
+ d=math.hypot(dx,dy)
+ if d<3:_xdo("mousemove",str(x),str(y));return
+ # Perpendicular unit + jitter scaled to distance (Fitts-ish)
+ ux,uy=-dy/d,dx/d
+ j=min(d*0.15,35.0)
+ cx1=sx+dx*0.30+ux*_rng.uniform(-j,j);cy1=sy+dy*0.30+uy*_rng.uniform(-j,j)
+ cx2=sx+dx*0.70+ux*_rng.uniform(-j,j);cy2=sy+dy*0.70+uy*_rng.uniform(-j,j)
+ overshoot=(_rng.random()<0.12 and d>80)
+ ex=x+_rng.randint(6,18)*(1 if _rng.random()<0.5 else -1) if overshoot else x
+ ey=y+_rng.randint(4,14)*(1 if _rng.random()<0.5 else -1) if overshoot else y
+ for i in range(1,steps+1):
+  t=i/steps;te=t*t*(3-2*t)  # smoothstep ease-in-out
+  px=(1-te)**3*sx+3*(1-te)**2*te*cx1+3*(1-te)*te*te*cx2+te**3*ex
+  py=(1-te)**3*sy+3*(1-te)**2*te*cy1+3*(1-te)*te*te*cy2+te**3*ey
+  _xdo("mousemove",str(int(px)),str(int(py)))
+  time.sleep(_rng.uniform(0.008,0.020))
+ if overshoot:
+  time.sleep(_rng.uniform(0.04,0.09))
+  _xdo("mousemove",str(x),str(y))
+def _human_type_delay(prev,ch):
+ # Returns the time.sleep delay (seconds) AFTER pressing the current char.
+ # Aalto 136M-keystroke distribution: mean IKI ~238ms, sigma ~111ms,
+ # hard floor 60ms (faster = bot territory). Common bigrams are sampled
+ # from the precomputed table; unknown ones sample from a normal-ish
+ # range centered on the mean.
+ bg=(prev+ch).lower() if prev else ""
+ base=_BIGRAM_DELAY.get(bg,_rng.uniform(170,310))
+ d=base*_rng.uniform(0.85,1.18)
+ if ch.isupper() and prev and not prev.isupper():d+=_rng.uniform(60,130)
+ if ch in".,!?;:":d+=_rng.uniform(90,220)
+ if ch==" " and prev not in" \\t\\n":d+=_rng.uniform(20,70)
+ # Hard floor: real human typists never go below ~60ms IKI sustained
+ if d<60:d=60
+ return d/1000.0
+def _xclip_paste(text,env):
+ # Set the X11 clipboard via xclip, then synthesize Ctrl+V. Returns the
+ # selection name on success ("clipboard"), or None on failure so the
+ # caller can fall back to direct xdotool type. Failure modes:
+ #   * xclip not installed (FileNotFoundError)
+ #   * xclip can't open DISPLAY (CalledProcessError)
+ #   * keyboard synthesis fails (CalledProcessError)
+ # Empty text is a no-op and returns "clipboard" so the caller treats
+ # it as success (matches xdotool type "" behavior).
+ if not text:return "clipboard"
+ try:
+  # Encode as bytes so xclip receives raw UTF-8 without locale-dependent
+  # re-encoding. -selection clipboard is the modern Ctrl+V target;
+  # -selection primary is the middle-click target (not used here).
+  r=subprocess.run(["xclip","-selection","clipboard"],input=text.encode("utf-8"),env=env,timeout=5,capture_output=True)
+  if r.returncode!=0:return None
+  # Brief settle so the X server fully commits the clipboard selection
+  # before the paste event reads it. 10 ms is enough on every X server
+  # observed; without it, fast back-to-back paste calls race.
+  time.sleep(0.01)
+  # --clearmodifiers releases stuck Shift/Ctrl/etc. from prior actions
+  # so Ctrl+V isn't shadowed by a held Alt or similar.
+  r=subprocess.run(["xdotool","key","--clearmodifiers","ctrl+v"],env=env,timeout=5,capture_output=True)
+  if r.returncode!=0:return None
+  return "clipboard"
+ except FileNotFoundError:
+  # xclip not installed — caller falls back. We avoid logging here
+  # because typing is in the request hot-path; the fallback is the
+  # signal.
+  return None
+ except Exception:
+  return None
 def _shot():
  env={**os.environ,"DISPLAY":DISPLAY};img=None
  if _HAS_MSS:
@@ -608,8 +935,70 @@ def _get_browser():
   except:_browser_instance=None
  if not _HAS_SEL:raise RuntimeError("selenium unavailable")
  import shutil
+ from urllib.parse import urlparse as _urlp
+ # Match TZ + Accept-Language to (proxy) egress IP BEFORE spawning geckodriver
+ # so Firefox inherits both via libc tzset and Firefox prefs respectively.
+ loc=_apply_tz()
+ vw,vh=_viewport()
+ ua=_user_agent()
  opts=FFOptions()
- opts.add_argument("--width=1280");opts.add_argument("--height=720")
+ opts.add_argument(f"--width={vw}");opts.add_argument(f"--height={vh}")
+ # ── Locale ────────────────────────────────────────────────────────────
+ opts.set_preference("intl.accept_languages",loc["accept"])
+ opts.set_preference("javascript.use_us_english_locale",False)
+ # ── Stealth: webdriver tell ──────────────────────────────────────────
+ # Hides navigator.webdriver. The classic check; still table-stakes.
+ opts.set_preference("dom.webdriver.enabled",False)
+ opts.set_preference("useAutomationExtension",False)
+ # Marionette is needed by geckodriver, can't disable that pref or driver breaks.
+ # ── Stealth: realistic UA (Linux x86_64 ~95% of Linux Firefox UAs) ───
+ opts.set_preference("general.useragent.override",ua)
+ # ── Stealth: WebRTC IP leak (don't disable WebRTC entirely — only ~2%
+ # of users do that, which is itself a tell). Restrict ICE candidates
+ # so STUN can't reveal the real public IP behind a proxy.
+ opts.set_preference("media.peerconnection.ice.no_host",True)
+ opts.set_preference("media.peerconnection.ice.default_address_only",True)
+ opts.set_preference("media.peerconnection.ice.proxy_only_if_behind_proxy",True)
+ # ── Stealth: telemetry / phone-home (rare on real users) ────────────
+ opts.set_preference("toolkit.telemetry.enabled",False)
+ opts.set_preference("toolkit.telemetry.unified",False)
+ opts.set_preference("toolkit.telemetry.archive.enabled",False)
+ opts.set_preference("datareporting.healthreport.uploadEnabled",False)
+ opts.set_preference("datareporting.policy.dataSubmissionEnabled",False)
+ opts.set_preference("app.shield.optoutstudies.enabled",False)
+ opts.set_preference("app.normandy.enabled",False)
+ opts.set_preference("browser.discovery.enabled",False)
+ # ── Stealth: geo prompt (real users rarely allow it for a fresh tab) ─
+ opts.set_preference("geo.enabled",False)
+ # ── Stealth: dom.battery (deprecated but some sites still probe) ────
+ opts.set_preference("dom.battery.enabled",False)
+ # NB: privacy.resistFingerprinting is INTENTIONALLY left off.
+ # It normalizes fingerprint, but creates its own RFP-cluster signature
+ # AND forces tz=UTC, undoing our proxy-matched timezone.
+ # ── Proxy via prefs (Firefox doesn't read HTTP_PROXY env on Linux) ──
+ proxy_url=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+ if proxy_url:
+  try:
+   pu=_urlp(proxy_url)
+   if pu.hostname and pu.port:
+    opts.set_preference("network.proxy.type",1)
+    opts.set_preference("network.proxy.http",pu.hostname)
+    opts.set_preference("network.proxy.http_port",pu.port)
+    opts.set_preference("network.proxy.ssl",pu.hostname)
+    opts.set_preference("network.proxy.ssl_port",pu.port)
+    opts.set_preference("network.proxy.share_proxy_settings",True)
+    # SOCKS support if scheme indicates it (auto-falls-through harmlessly otherwise)
+    if pu.scheme.startswith("socks"):
+     opts.set_preference("network.proxy.socks",pu.hostname)
+     opts.set_preference("network.proxy.socks_port",pu.port)
+     opts.set_preference("network.proxy.socks_version",5 if "5" in pu.scheme else 4)
+     # Critical: route DNS through the SOCKS proxy too (otherwise DNS leaks via EC2)
+     opts.set_preference("network.proxy.socks_remote_dns",True)
+    # Don't proxy localhost (agent talks to itself / Xvnc)
+    opts.set_preference("network.proxy.no_proxies_on","localhost,127.0.0.1")
+    print(f"[browser] proxy via {pu.hostname}:{pu.port} (auth: {'yes' if pu.username else 'no'})",flush=True)
+  except Exception as e:print(f"[browser] proxy parse failed: {e}",flush=True)
+ print(f"[browser] viewport={vw}x{vh} ua={ua[:60]}...",flush=True)
  gd=None
  for p in ["/usr/local/bin/geckodriver","/usr/bin/geckodriver"]:
   if os.path.exists(p):gd=p;break
@@ -618,8 +1007,103 @@ def _get_browser():
   svc=FFService(executable_path=gd)
   _browser_instance=webdriver.Firefox(service=svc,options=opts)
  else:_browser_instance=webdriver.Firefox(options=opts)
- _browser_instance.set_window_size(1280,720)
+ _browser_instance.set_window_size(vw,vh)
  return _browser_instance
+# ===== Smart navigation: API bypass for hostile-WAF sites + block detection =====
+# Cloudflare's bot scoring weights datacenter ASN heavily; even with perfect
+# browser stealth, EC2 IPs hit the gauntlet. For sites with a clean public
+# API (Reddit, Hacker News, etc.) we route there instead of the browser.
+def _is_blocked(html,status=200):
+ # Detects common Cloudflare / DataDome / hostile-WAF block pages by markers.
+ # status >= 400 + known interstitial strings = blocked.
+ if status in(403,429,503):return True
+ if not html:return False
+ m=["Just a moment...","Attention Required! | Cloudflare","Access denied","cf-chl-","challenges.cloudflare","Please verify you are a human","Sorry, we just need to make sure","DDoS protection by"]
+ return any(x in html for x in m)
+def _reddit_fetch(url):
+ # Translates www.reddit.com/<path> -> www.reddit.com/<path>.json (or
+ # oauth.reddit.com if REDDIT_OAUTH_TOKEN set, granting 100 QPM vs 10 unauth).
+ # Reddit's JSON API is on a different request path that bypasses CF Turnstile.
+ # Returns (ok:bool, data:dict|list|None).
+ try:
+  pu=urllib.parse.urlparse(url)
+  host=(pu.netloc or "").lower()
+  if "reddit.com" not in host:return False,None
+  path=pu.path or "/"
+  if path.endswith("/"):path=path[:-1]
+  if not path.endswith(".json"):path+=".json"
+  json_url=f"https://www.reddit.com{path}"
+  if pu.query:json_url+="?"+pu.query
+  # Reddit asks for UA in form "platform:app-id:version (by /u/handle)"
+  ua=os.environ.get("COASTY_REDDIT_UA","linux:ai.coasty.agent:1.0 (by /u/coasty-agent)")
+  headers={"User-Agent":ua,"Accept":"application/json"}
+  token=os.environ.get("REDDIT_OAUTH_TOKEN","").strip()
+  if token:
+   headers["Authorization"]="Bearer "+token
+   json_url=json_url.replace("www.reddit.com","oauth.reddit.com")
+  proxy=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+  req=urllib.request.Request(json_url,headers=headers)
+  op=urllib.request.build_opener(urllib.request.ProxyHandler({"https":proxy,"http":proxy})) if proxy else urllib.request.build_opener()
+  resp=op.open(req,timeout=10)
+  body=resp.read().decode("utf-8","replace")
+  if resp.status>=400:return False,None
+  return True,json.loads(body)
+ except Exception as e:
+  print(f"[reddit-api] fetch failed: {e}",flush=True);return False,None
+def _reddit_render(data,url):
+ # Render Reddit JSON listing or comment thread as readable HTML so the
+ # agent's existing browser_get_dom flow extracts content unchanged.
+ try:
+  import html as _h
+  esc=_h.escape
+  parts=['<!doctype html><html><head><title>Reddit</title><meta charset="utf-8"></head><body>']
+  parts.append(f'<h1>{esc(url)}</h1><p><em>(rendered from official Reddit API to bypass anti-bot)</em></p>')
+  def render_post(d):
+   title=esc(d.get("title","") or "")
+   author=esc(d.get("author","") or "?")
+   subr=esc(d.get("subreddit","") or "")
+   score=d.get("score",0);ncm=d.get("num_comments",0)
+   body=esc((d.get("selftext","") or d.get("body","") or "")[:3000])
+   pl=esc(d.get("permalink","") or "")
+   ext=esc(d.get("url_overridden_by_dest","") or "")
+   t=f"<article><h2>{title or '(comment)'}</h2><p>r/{subr} · u/{author} · {score} pts · {ncm} comments</p><div>{body}</div>"
+   if pl:t+=f'<p><a href="https://www.reddit.com{pl}">View thread</a></p>'
+   if ext and ext!=pl:t+=f'<p>Link: <a href="{ext}">{ext}</a></p>'
+   return t+"</article>"
+  if isinstance(data,list):
+   for item in data:
+    if isinstance(item,dict) and "data" in item:
+     for c in item.get("data",{}).get("children",[])[:40]:
+      parts.append(render_post(c.get("data",{})))
+  elif isinstance(data,dict) and "data" in data:
+   for c in data.get("data",{}).get("children",[])[:60]:
+    parts.append(render_post(c.get("data",{})))
+  parts.append("</body></html>")
+  return "".join(parts)
+ except Exception as e:
+  print(f"[reddit-api] render failed: {e}",flush=True);return None
+def _navigate_smart(b,url):
+ # Site-specific bypass router. Tries clean API path first; falls back to
+ # raw browser navigation; surfaces blocked status so the orchestrator can
+ # route to Electron / proxy / human.
+ # Returns dict to merge into _bn/_bo response (no 'success' key — caller adds).
+ if "reddit.com" in url and not url.startswith("data:"):
+  ok,data=_reddit_fetch(url)
+  if ok:
+   html=_reddit_render(data,url)
+   if html:
+    b.get("data:text/html;charset=utf-8;base64,"+base64.b64encode(html.encode()).decode())
+    print(f"[smart-nav] reddit-api OK for {url}",flush=True)
+    return{"url":url,"title":b.title,"source":"reddit-api"}
+  print(f"[smart-nav] reddit-api unavailable, falling back to browser for {url}",flush=True)
+ b.get(url)
+ try:
+  body=b.execute_script("return document.documentElement.outerHTML")
+  body=body[:8000] if body else ""
+ except:body=""
+ if _is_blocked(body):
+  return{"url":b.current_url,"title":b.title,"blocked":True,"error":"blocked by anti-bot (likely datacenter IP); set HTTPS_PROXY for residential routing or hand off to Electron"}
+ return{"url":b.current_url,"title":b.title}
 class Agent:
  def __init__(self):self._t=time.time();self._n=0
  async def serve(self,ws):
@@ -669,19 +1153,99 @@ class Agent:
   i=_shot()
   return{"success":True,"screenshot":i,"timestamp":time.time()} if i else{"success":False,"error":"screenshot failed"}
  def _cl(self,p):
-  x,y=int(p.get("x",0)),int(p.get("y",0));b={"left":"1","middle":"2","right":"3"}.get(p.get("button","left"),"1")
-  _xdo("mousemove",str(x),str(y),"click",b);return{"success":True,"action":"click","x":x,"y":y}
+  x,y=int(p.get("x",0)),int(p.get("y",0))
+  b={"left":"1","middle":"2","right":"3"}.get(p.get("button","left"),"1")
+  # Bezier curve mouse path (Fitts's-law-ish timing) before clicking, so
+  # behavioral detectors don't see instant teleport-then-click.
+  _human_move(x,y)
+  time.sleep(_rng.uniform(0.04,0.10))  # settle pause before click
+  _xdo("click",b)
+  return{"success":True,"action":"click","x":x,"y":y}
  def _dc(self,p):
-  x,y=int(p.get("x",0)),int(p.get("y",0));_xdo("mousemove",str(x),str(y),"click","--repeat","2","1");return{"success":True}
- def _rc(self,p):
-  x,y=int(p.get("x",0)),int(p.get("y",0));_xdo("mousemove",str(x),str(y),"click","3");return{"success":True}
- def _ty(self,p):
-  env={**os.environ,"DISPLAY":DISPLAY};subprocess.run(["xdotool","type","--delay",str(p.get("interval",50)),"--",p.get("text","")],env=env,timeout=30)
-  return{"success":True,"action":"type"}
- def _kp(self,p):
-  env={**os.environ,"DISPLAY":DISPLAY}
-  for k in(p.get("keys") or[p.get("key","")]):subprocess.run(["xdotool","key","--",k],env=env,timeout=10)
+  x,y=int(p.get("x",0)),int(p.get("y",0))
+  _human_move(x,y);time.sleep(_rng.uniform(0.04,0.09))
+  # Real human double-click inter-click gap ~80-180ms (well under OS
+  # double-click threshold ~500ms but still visibly two events).
+  _xdo("click","1");time.sleep(_rng.uniform(0.08,0.18));_xdo("click","1")
   return{"success":True}
+ def _rc(self,p):
+  x,y=int(p.get("x",0)),int(p.get("y",0))
+  _human_move(x,y);time.sleep(_rng.uniform(0.05,0.11))
+  _xdo("click","3")
+  return{"success":True}
+ def _ty(self,p):
+  # ── Typing modes (2026-05-11 perf rewrite) ──
+  # The legacy default forked a new xdotool subprocess PER CHARACTER
+  # (~30 ms fork × N) AND slept 238 ms Aalto IKI between every char,
+  # producing ~3 s for 11 chars = ~3-4 WPM effective. Every additional
+  # blocker below has been removed:
+  #
+  #   instant   — xdotool --delay 0, ONE subprocess. ~30-50 ms total
+  #               regardless of length. Used by paste-style fills.
+  #   fast      — DEFAULT. xdotool --delay 1-3 ms, ONE subprocess.
+  #               Auto-promotes to clipboard for text >= 50 chars
+  #               (massive speedup for URLs/paragraphs). For 100 chars
+  #               via clipboard: ~50 ms. Via direct xdotool: ~150 ms.
+  #               Falls back to plain xdotool if xclip is missing.
+  #   clipboard — Explicit xclip + Ctrl+V. ~40 ms regardless of length.
+  #               Best for long text but mutates clipboard and some
+  #               apps (terminal, password fields) block Ctrl+V.
+  #   human     — Legacy Aalto-calibrated per-char loop. Preserved for
+  #               stealth-critical contexts.
+  #
+  # Back-compat: interval=0 / fast=true still map to instant mode so
+  # existing callers see identical wire behaviour to before this fix.
+  text=p.get("text","");env={**os.environ,"DISPLAY":DISPLAY}
+  if not text:return{"success":True,"action":"type","chars":0}
+  mode=(p.get("mode") or "").lower()
+  if not mode:
+   if p.get("interval")==0 or p.get("fast"):mode="instant"
+   else:mode="fast"
+  # Aliases: "paste" routes to clipboard.
+  if mode=="paste":mode="clipboard"
+  # ── instant ──
+  if mode=="instant":
+   to=max(15,int(2+len(text)/100))
+   subprocess.run(["xdotool","type","--delay","0","--",text],env=env,timeout=to)
+   return{"success":True,"action":"type","chars":len(text),"mode":mode}
+  # ── clipboard (explicit) ──
+  if mode=="clipboard":
+   r=_xclip_paste(text,env)
+   if r is not None:return{"success":True,"action":"type","chars":len(text),"mode":"clipboard","method":r}
+   # xclip missing or failed → fall through to fast (don't silently no-op)
+   mode="fast"
+  # ── fast (default) — auto-promote to clipboard for long text ──
+  if mode=="fast":
+   if len(text)>=50:
+    r=_xclip_paste(text,env)
+    if r is not None:return{"success":True,"action":"type","chars":len(text),"mode":"clipboard","auto_promoted":True,"method":r}
+    # xclip unavailable — fall through to direct xdotool
+   # Direct xdotool path: --delay floor 1ms, ceiling 3ms. xdotool's
+   # internal usleep is jittered per call so a sequence of types
+   # doesn't produce a perfectly-flat IKI fingerprint, but stays
+   # within the 80-300 WPM range that feels instant to a human user.
+   d=_rng.randint(1,3)
+   to=max(15,int(5+(len(text)*d*5)/1000))
+   subprocess.run(["xdotool","type","--delay",str(d),"--",text],env=env,timeout=to)
+   return{"success":True,"action":"type","chars":len(text),"mode":"fast","delay_ms":d}
+  # ── human (legacy stealth path) — preserved verbatim for opt-in use ──
+  prev=" "
+  for ch in text:
+   subprocess.run(["xdotool","type","--delay","0","--",ch],env=env,timeout=10)
+   time.sleep(_human_type_delay(prev,ch))
+   prev=ch
+  return{"success":True,"action":"type","chars":len(text),"mode":"human"}
+ def _kp(self,p):
+  # Batch multiple keys into ONE xdotool invocation. xdotool key accepts
+  # multiple key arguments and presses them sequentially in-process
+  # (with its own --delay between them). The legacy per-key subprocess
+  # loop paid ~30 ms fork × N keys; this version is 1 fork total.
+  env={**os.environ,"DISPLAY":DISPLAY}
+  keys=[k for k in (p.get("keys") or [p.get("key","")]) if k]
+  if not keys:return{"success":True}
+  to=max(10,len(keys)*2)
+  subprocess.run(["xdotool","key","--clearmodifiers","--"]+keys,env=env,timeout=to)
+  return{"success":True,"keys":len(keys)}
  def _kc(self,p):_xdo("key","+".join(p.get("keys",[])));return{"success":True}
  def _tt(self,p):
   env={**os.environ,"DISPLAY":DISPLAY};subprocess.run(["xdotool","type","--",p.get("text","")],env=env,timeout=10);return{"success":True}
@@ -774,10 +1338,15 @@ class Agent:
   b64=img_data.split(",",1)[1];img=Image.open(io.BytesIO(base64.b64decode(b64)))
   return{"success":True,"text":pytesseract.image_to_string(img),"screenshot":img_data}
  def _bo(self,p):
-  try:b=_get_browser();u=p.get("url","about:blank");b.get(u) if u!="about:blank" else None;return{"success":True}
+  try:
+   b=_get_browser();u=p.get("url","about:blank")
+   if u=="about:blank":return{"success":True}
+   res=_navigate_smart(b,u);return{"success":not res.get("blocked",False),**res}
   except Exception as e:return{"success":False,"error":str(e)}
  def _bn(self,p):
-  try:b=_get_browser();b.get(p.get("url",""));return{"success":True,"url":b.current_url,"title":b.title}
+  try:
+   b=_get_browser();res=_navigate_smart(b,p.get("url",""))
+   return{"success":not res.get("blocked",False),**res}
   except Exception as e:return{"success":False,"error":str(e)}
  def _bc(self,p):
   try:_get_browser().find_element(By.CSS_SELECTOR,p.get("selector","")).click();return{"success":True}
@@ -799,18 +1368,31 @@ class Agent:
   try:b=_get_browser();return{"success":True,"url":b.current_url,"title":b.title}
   except Exception as e:return{"success":False,"error":str(e)}
 async def main():
+ try:_apply_tz()
+ except Exception as e:print(f"[locale] startup apply failed: {e}",flush=True)
  agent=Agent()
  print(f"AI Agent listening on {HOST}:{PORT}",flush=True)
- async with websockets.serve(agent.serve,HOST,PORT,max_size=100*1024*1024,ping_interval=None,ping_timeout=None,close_timeout=60,compression=None):
+ # ping_interval=20 / ping_timeout=10 — server-side keep-alive (2026-05-17 NAT fix).
+ # The backend (vm_control.py) already pings every 20s on its side; adding the
+ # server-side ping closes the asymmetry where a partition losing the
+ # backend->VM direction first would keep the VM-side socket alive for the
+ # full TCP keepalive window (~2h on Linux defaults). With both sides
+ # pinging at 20s, AWS NAT GW's 350s idle timeout can never expire on
+ # a healthy connection. Existing AMI'd instances do NOT pick this up
+ # automatically — see operator runbook for rolling restart guidance.
+ async with websockets.serve(agent.serve,HOST,PORT,max_size=100*1024*1024,ping_interval=20,ping_timeout=10,close_timeout=60,compression=None):
   await asyncio.Future()
 if __name__=="__main__":asyncio.run(main())
 `;
   }
 
   private generateDesktopUserData(vncPassword: string): string {
-    const agentPy = this.getAgentSource();
+    // Minify Python (strip pure-comment lines + collapse blanks) before
+    // gzip; cuts ~10-15% off the embedded agent payload after gzip.
+    const agentPy = this.minifyPython(this.getAgentSource());
 
-    // Gzip-compress the Python agent to fit within AWS UserData 25,600 byte base64 limit
+    // Gzip-compress the Python agent to fit within AWS UserData 16384-byte
+    // RAW limit (after base64 decode at AWS).
     const agentGz = zlib.gzipSync(Buffer.from(agentPy), { level: 9 });
     const agentB64 = agentGz.toString("base64").match(/.{1,76}/g)?.join("\n") ?? "";
 
@@ -843,6 +1425,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \\
   net-tools \\
   scrot \\
   xdotool \\
+  xclip \\
   wmctrl \\
   tesseract-ocr \\
   tesseract-ocr-eng \\
@@ -850,7 +1433,23 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \\
   xdg-utils \\
   fonts-liberation \\
   software-properties-common \\
+  locales \\
+  tzdata \\
   sudo
+
+# Pre-generate locales the AI agent may switch into at runtime based on
+# proxy egress IP geo. Without these, Firefox can't render its UI for the
+# requested locale and falls back to en_US — that fallback is observable
+# via document.fonts and Intl.Collator.compare and contradicts the spoofed
+# Accept-Language header. Generating a small set covers the common markets
+# without bloating the AMI.
+locale-gen \\
+  en_US.UTF-8 en_GB.UTF-8 en_CA.UTF-8 en_AU.UTF-8 \\
+  de_DE.UTF-8 fr_FR.UTF-8 es_ES.UTF-8 es_MX.UTF-8 \\
+  it_IT.UTF-8 nl_NL.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 \\
+  ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_TW.UTF-8 \\
+  ru_RU.UTF-8 tr_TR.UTF-8 ar_SA.UTF-8 he_IL.UTF-8 \\
+  pl_PL.UTF-8 sv_SE.UTF-8
 
 # Grant ubuntu user passwordless sudo (full admin access for AI agent)
 echo "ubuntu ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ubuntu-nopasswd
@@ -1015,7 +1614,7 @@ Wants=vncserver@:1.service
 [Service]
 Type=simple
 User=root
-ExecStartPre=/bin/bash -c 'for i in $(seq 1 30); do ss -tln | grep -q :5901 && exit 0; sleep 1; done; exit 1'
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 150); do ss -tln | grep -q :5901 && exit 0; sleep 0.2; done; exit 1'
 ExecStart=/opt/novnc/utils/novnc_proxy --vnc localhost:5901 --listen 6080
 Restart=on-failure
 RestartSec=5
@@ -1024,13 +1623,12 @@ RestartSec=5
 WantedBy=multi-user.target
 SYSTEMD_NOVNC_EOF
 
-# Enable and start services
+# Enable and start services. noVNC's own ExecStartPre waits for port 5901,
+# so we can fire both starts in parallel via --no-block — saves ~5s of
+# sequential wait. systemd's After=/Wants= chain handles ordering.
 systemctl daemon-reload
-systemctl enable vncserver@:1.service
-systemctl enable novnc.service
-systemctl start vncserver@:1.service
-sleep 5
-systemctl start novnc.service
+systemctl enable vncserver@:1.service novnc.service
+systemctl start --no-block vncserver@:1.service novnc.service
 
 # Comprehensive screen keep-alive script (prevents sleep/lock)
 cat > /usr/local/bin/keep-screen-alive.sh << 'KEEPALIVE_EOF'
@@ -1113,7 +1711,7 @@ Wants=vncserver@:1.service
 Type=simple
 User=ubuntu
 Environment=DISPLAY=:1
-ExecStartPre=/bin/bash -c 'for i in $(seq 1 60); do xdpyinfo -display :1 >/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 300); do xdpyinfo -display :1 >/dev/null 2>&1 && exit 0; sleep 0.2; done; exit 1'
 ExecStart=/usr/local/bin/keep-screen-alive.sh
 Restart=always
 RestartSec=5
@@ -1190,12 +1788,46 @@ ${agentB64}
 AGENT_B64_EOF
 chown ubuntu:ubuntu /opt/ai-agent/server.py
 
-# Create systemd service for AI agent with full environment
+# Create systemd service for AI agent with full environment.
+# NOTE: NO After=/Wants=vncserver dependency. The agent starts as soon as
+# multi-user.target is up so port 8080 is reachable for orchestrator probes
+# in seconds (vs ~10s waiting for Xvnc). Browser commands lazily wait for
+# X via xdpyinfo inside the Python agent (already imports try/except);
+# terminal/file/screenshot ops work as soon as their underlying tool is
+# usable.
+#
+# HARDENING (2026-05-11 audit follow-up): the 2026-05-10 13:02Z incident
+# saw two EC2 hosts die in lockstep with Errno 111 on :8080 — host up,
+# Python listener gone, never recovered. Root cause was almost certainly
+# systemd's default StartLimitBurst=5/10s tripping after a short crash
+# loop, leaving the unit in 'failed' state with no further restart.
+# The mitigations below address each failure mode explicitly:
+#   - StartLimitBurst=10 + StartLimitIntervalSec=60 lets us absorb 10
+#     crashes per minute before refusing further restarts.
+#   - Restart=always (not on-failure) catches clean exits too — a
+#     deadlocked asyncio loop that eventually returns 0 is still bad.
+#   - RuntimeMaxSec=14400 forces a preventive restart every 4 h to
+#     bound slow leaks (Selenium / Chrome / mss can all leak FDs).
+#   - MemoryMax=1G + MemoryHigh=768M doubles the prior 512M/384M caps;
+#     t4g.small has 2 GB and the old caps put the agent on the edge of
+#     OOM during burst workloads (Counter-Strike gameplay test agent).
+#   - ExecStopPost kills orphan chromium/chromedriver/pyautogui procs
+#     so a restart doesn't fight leftover Chrome profiles for the lock.
+#   - LimitNOFILE=65536 prevents file-descriptor exhaustion under load.
+#   - TasksMax=512 bounds child-process growth.
+#   - OOMPolicy=restart keeps the existing behavior on kernel OOM.
+# A separate tcp-listener-watchdog.service (defined below) provides
+# defense-in-depth against the "process alive but listener gone" case
+# that systemd alone can't detect.
 cat > /etc/systemd/system/ai-agent.service << 'AGENT_SVC_EOF'
 [Unit]
 Description=LLMHub AI Agent WebSocket Server
-After=vncserver@:1.service
-Wants=vncserver@:1.service
+After=network-online.target
+Wants=network-online.target
+# Be patient with restart bursts: default is 5 in 10s which is too
+# strict for an agent under heavy load. Allow 10 in 60s before giving up.
+StartLimitBurst=10
+StartLimitIntervalSec=60
 
 [Service]
 Type=simple
@@ -1208,15 +1840,33 @@ Environment=AGENT_HOST=0.0.0.0
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 Environment=XDG_RUNTIME_DIR=/tmp/runtime-ubuntu
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/tmp/runtime-ubuntu/bus
+# Python: line-buffered stdout/stderr + fault handler for crash tracebacks
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONFAULTHANDLER=1
 EnvironmentFile=/opt/ai-agent/.env
 ExecStartPre=/bin/bash -c 'mkdir -p /tmp/runtime-ubuntu && chmod 700 /tmp/runtime-ubuntu && chown ubuntu:ubuntu /tmp/runtime-ubuntu'
-ExecStartPre=/bin/bash -c 'for i in $(seq 1 60); do xdpyinfo -display :1 >/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
 ExecStart=/usr/bin/python3 /opt/ai-agent/server.py
-Restart=on-failure
-RestartSec=5
-MemoryMax=512M
-MemoryHigh=384M
+# Always restart, not just on-failure — a clean exit from a deadlocked
+# event loop still leaves the agent dead and should trigger restart.
+Restart=always
+RestartSec=2
+# Preventive periodic restart to bound slow leaks. 4 h is short enough
+# that any leak gets bounded but long enough to not interrupt user
+# work mid-session (typical CUA session is <30 min).
+RuntimeMaxSec=14400
+# Memory caps — doubled from the prior 512M/384M to give Python +
+# Selenium + Chrome more headroom on bursty workloads. t4g.small has
+# 2 GB total; 1 G for the agent + 1 G for OS/Chrome/Xvnc is safe.
+MemoryMax=1G
+MemoryHigh=768M
 OOMPolicy=restart
+# Resource limits to prevent FD / process exhaustion under load.
+LimitNOFILE=65536
+TasksMax=512
+# Clean up orphan browser processes on stop so a restart doesn't fight
+# leftover Chrome profiles for the user-data-dir lock. The agent itself
+# spawns chromium via Selenium and Selenium doesn't always reap.
+ExecStopPost=/bin/bash -c 'pkill -9 -f "chromium-browser" 2>/dev/null || true; pkill -9 -f "chromedriver" 2>/dev/null || true; pkill -9 -f "[c]hrome --type=" 2>/dev/null || true; rm -f /tmp/.X1-lock 2>/dev/null || true'
 
 [Install]
 WantedBy=multi-user.target
@@ -1231,7 +1881,10 @@ echo '/swapfile none swap sw 0 0' >> /etc/fstab
 echo 'vm.swappiness=10' >> /etc/sysctl.d/99-swap.conf
 sysctl -p /etc/sysctl.d/99-swap.conf
 
-# Memory watchdog - kills excess browser processes before OOM
+# Memory watchdog - kills excess browser processes before OOM and
+# recovers ai-agent.service from systemd's 'failed' state (which is the
+# terminal state after StartLimitBurst exhaustion — the exact failure
+# mode the 2026-05-11 audit found on the lockstep-dead VMs).
 cat > /usr/local/bin/memory-watchdog.sh << 'WATCHDOG_EOF'
 #!/bin/bash
 THRESHOLD_WARN=80
@@ -1247,6 +1900,19 @@ kill_excess_browser_procs() {
     local zombies=$(ps aux | grep -i "[d]efunct" | awk '{print $2}')
     for pid in $zombies; do kill -9 "$pid" 2>/dev/null; done
 }
+recover_failed_agent() {
+    # If ai-agent.service is in 'failed' state (typically after
+    # StartLimitBurst exhaustion), reset-failed and start it back up.
+    # This catches the 2026-05-10 13:02Z lockstep failure mode that
+    # left both VMs with the unit permanently dead.
+    local state=$(systemctl is-active ai-agent.service 2>/dev/null || true)
+    local sub=$(systemctl is-failed ai-agent.service 2>/dev/null || true)
+    if [ "$state" = "failed" ] || [ "$sub" = "failed" ]; then
+        logger -t memory-watchdog "RECOVERY: ai-agent.service in failed state — reset-failed + start"
+        systemctl reset-failed ai-agent.service 2>/dev/null || true
+        systemctl start ai-agent.service 2>/dev/null || true
+    fi
+}
 while true; do
     MEM_PCT=$(get_mem_pct)
     if [ "$MEM_PCT" -ge "$THRESHOLD_KILL" ]; then
@@ -1256,6 +1922,9 @@ while true; do
         logger -t memory-watchdog "WARNING: Memory at \${MEM_PCT}% - clearing caches"
         cleanup_browser_cache
     fi
+    # Check every loop iteration (every 30s) whether the agent unit
+    # has fallen into 'failed' state and resurrect it if so. Cheap.
+    recover_failed_agent
     sleep 30
 done
 WATCHDOG_EOF
@@ -1274,17 +1943,121 @@ RestartSec=10
 WantedBy=multi-user.target
 WATCHDOG_SVC_EOF
 
+# TCP-listener watchdog — catches the exact failure mode the 2026-05-11
+# audit found: host responding to ping, ai-agent.service shows "active",
+# but the Python listener on :8080 is gone (Errno 111 TCP refused).
+# systemd alone can't detect this — the process is alive, just not
+# listening. We probe localhost:8080 every 15s; 3 consecutive failures
+# trigger a clean restart of the agent. This is the load-bearing fix
+# for the 491-event lockstep failure on 2026-05-10 13:02Z.
+cat > /usr/local/bin/tcp-listener-watchdog.sh << 'TCPWD_EOF'
+#!/bin/bash
+# Watches ai-agent.service's TCP listener on $PORT. If the listener
+# disappears for $FAILURE_THRESHOLD consecutive probes, restart the
+# service. Resets the failed-state first so systemd's StartLimit doesn't
+# block the restart.
+set -u
+PORT="\${AGENT_PORT:-8080}"
+PROBE_INTERVAL=15        # seconds between probes
+FAILURE_THRESHOLD=3      # consecutive failures before restart
+CONNECT_TIMEOUT=3        # seconds for each probe
+RESTART_COOLDOWN=60      # seconds between restart attempts
+SERVICE="ai-agent.service"
+
+probe_listener() {
+    # /dev/tcp/host/port is bash built-in — no curl/nc dependency.
+    # Timeout via the 'timeout' coreutil; bash builtin alone can hang
+    # if the host is up but firewalled (rare but possible).
+    timeout "\$CONNECT_TIMEOUT" bash -c "</dev/tcp/127.0.0.1/\$PORT" 2>/dev/null
+}
+
+restart_agent() {
+    logger -t tcp-listener-watchdog "RESTART: listener gone on :\$PORT, restarting \$SERVICE"
+    # Clear any failed-state backoff so the restart fires immediately
+    # rather than being silently rejected by systemd's StartLimit.
+    systemctl reset-failed "\$SERVICE" 2>/dev/null || true
+    systemctl restart "\$SERVICE" 2>/dev/null || true
+}
+
+failures=0
+last_restart=0
+
+# Wait for the agent to come up initially before starting the watch
+# loop — avoid restart-storm during boot when the agent is still
+# starting up.
+for i in 1 2 3 4 5 6 7 8 9 10; do
+    if probe_listener; then
+        logger -t tcp-listener-watchdog "initial probe OK on :\$PORT"
+        break
+    fi
+    sleep 5
+done
+
+while true; do
+    if probe_listener; then
+        if [ "\$failures" -gt 0 ]; then
+            logger -t tcp-listener-watchdog "listener recovered after \$failures failed probes"
+        fi
+        failures=0
+    else
+        failures=\$((failures + 1))
+        logger -t tcp-listener-watchdog "probe failed on :\$PORT (failures=\$failures/\$FAILURE_THRESHOLD)"
+        if [ "\$failures" -ge "\$FAILURE_THRESHOLD" ]; then
+            now=\$(date +%s)
+            since=\$((now - last_restart))
+            if [ "\$since" -ge "\$RESTART_COOLDOWN" ]; then
+                restart_agent
+                last_restart=\$now
+                failures=0
+                # Give the restart time to take effect before probing again
+                sleep 10
+            else
+                logger -t tcp-listener-watchdog "in cooldown (\${since}s since last restart < \${RESTART_COOLDOWN}s); skipping"
+            fi
+        fi
+    fi
+    sleep "\$PROBE_INTERVAL"
+done
+TCPWD_EOF
+chmod 755 /usr/local/bin/tcp-listener-watchdog.sh
+
+cat > /etc/systemd/system/tcp-listener-watchdog.service << 'TCPWD_SVC_EOF'
+[Unit]
+Description=AI Agent TCP listener watchdog (defense-in-depth for :8080)
+# Start after the agent so the initial probe loop has a chance to
+# succeed; if the agent unit is dead at boot the watchdog will detect
+# and restart it just like at runtime.
+After=ai-agent.service network-online.target
+Wants=ai-agent.service network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/tcp-listener-watchdog.sh
+Restart=always
+RestartSec=10
+# Keep the watchdog itself trim — it's just a probe loop.
+MemoryMax=32M
+TasksMax=8
+
+[Install]
+WantedBy=multi-user.target
+TCPWD_SVC_EOF
+
 systemctl daemon-reload
-systemctl enable ai-agent.service memory-watchdog.service
+systemctl enable ai-agent.service memory-watchdog.service tcp-listener-watchdog.service
 systemctl start ai-agent.service
 systemctl start memory-watchdog.service
+systemctl start tcp-listener-watchdog.service
 
 echo "DESKTOP_INIT_STATUS=ready" > /var/run/desktop-init-status
 echo "Desktop setup complete at $(date)"
 `;
 
-    // Gzip the entire script — cloud-init auto-detects gzip magic bytes
-    const scriptGz = zlib.gzipSync(Buffer.from(script), { level: 9 });
+    // Strip comments + collapse blank lines (preserves heredoc bodies),
+    // then gzip. AWS RunInstances enforces 16384 bytes RAW after base64
+    // decode; cloud-init auto-detects gzip magic bytes for us on Linux.
+    const minified = this.minifyBash(script);
+    const scriptGz = zlib.gzipSync(Buffer.from(minified), { level: 9 });
     return scriptGz.toString("base64");
   }
 
@@ -1296,6 +2069,7 @@ echo "Desktop setup complete at $(date)"
   private getWindowsAgentSource(): string {
     return `#!/usr/bin/env python3
 import asyncio,base64,io,json,os,subprocess,tempfile,time,sys
+import urllib.request
 from typing import Any,Dict
 try:
  import mss;_HAS_MSS=True
@@ -1321,6 +2095,96 @@ HOST=os.environ.get("AGENT_HOST","0.0.0.0")
 HOME_DIR=os.path.expanduser("~")
 DESKTOP_DIR=os.path.join(HOME_DIR,"Desktop")
 _browser_instance=None
+_COUNTRY_LANG={"US":"en-US","GB":"en-GB","CA":"en-CA","AU":"en-AU","NZ":"en-NZ","IE":"en-IE","ZA":"en-ZA","IN":"en-IN","DE":"de-DE","FR":"fr-FR","ES":"es-ES","IT":"it-IT","NL":"nl-NL","SE":"sv-SE","NO":"nb-NO","DK":"da-DK","FI":"fi-FI","PL":"pl-PL","PT":"pt-PT","BR":"pt-BR","MX":"es-MX","AR":"es-AR","JP":"ja-JP","KR":"ko-KR","CN":"zh-CN","TW":"zh-TW","HK":"zh-HK","SG":"en-SG","RU":"ru-RU","TR":"tr-TR","SA":"ar-SA","AE":"ar-AE","IL":"he-IL","ID":"id-ID","TH":"th-TH","VN":"vi-VN","PH":"en-PH","MY":"en-MY"}
+_LOCALE=None
+def _resolve_locale():
+ # Returns {"tz":..., "lang":..., "accept":..., "country":...} matched to the egress IP.
+ # Honors HTTPS_PROXY/https_proxy. Operator overrides: COASTY_TZ, COASTY_LANG.
+ global _LOCALE
+ if _LOCALE is not None:return _LOCALE
+ tz=os.environ.get("COASTY_TZ","").strip()
+ lang=os.environ.get("COASTY_LANG","").strip()
+ country=""
+ if not(tz and lang):
+  try:
+   proxy=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+   req=urllib.request.Request("https://ipinfo.io/json",headers={"User-Agent":"coasty/1"})
+   op=urllib.request.build_opener(urllib.request.ProxyHandler({"https":proxy,"http":proxy})) if proxy else urllib.request.build_opener()
+   resp=op.open(req,timeout=4);d=json.loads(resp.read().decode())
+   if not tz:tz=(d.get("timezone") or "").strip()
+   country=(d.get("country") or "").strip().upper()
+  except Exception as e:print(f"[locale] geo lookup failed: {e}",flush=True)
+ if not lang:lang=_COUNTRY_LANG.get(country,"en-US")
+ if not tz:tz="America/New_York"
+ base=lang.split("-")[0]
+ _LOCALE={"tz":tz,"lang":lang,"accept":lang+","+base+";q=0.9","country":country}
+ print(f"[locale] tz={tz} lang={lang} country={country or '?'} accept={_LOCALE['accept']}",flush=True)
+ return _LOCALE
+def _apply_tz():
+ # Sets TZ env var; on Windows Chrome reads timezone via Win32 GetTimeZoneInformation
+ # (not TZ env), so this only matters for the Python process. The Chrome --lang flag
+ # and intl.accept_languages pref below cover the browser-visible signals.
+ loc=_resolve_locale();os.environ["TZ"]=loc["tz"]
+ try:time.tzset()
+ except:pass
+ return loc
+# ===== Behavioral mimicry & stealth (Windows / pyautogui) =====
+import random as _rng
+_BIGRAM_DELAY={"th":105,"he":110,"in":115,"er":115,"an":120,"re":120,"on":125,"at":125,"en":125,"nd":130,"ti":130,"es":130,"or":130,"te":135,"of":135,"ed":135,"is":135,"it":135,"al":135,"ar":140,"st":140,"to":140,"nt":140,"ng":140,"se":145,"ha":145,"as":145,"ou":150,"io":150,"le":150,"ve":155,"co":155,"me":155,"de":160,"hi":160,"ri":160,"ro":160,"ic":165,"ne":165,"ea":165,"ra":170,"ce":170,"li":150,"ch":175,"ll":160}
+# Common Windows desktop resolutions (StatCounter 2024-2025)
+_VP_POOL=[(1920,1080),(1920,1080),(1920,1080),(1920,1080),(1366,768),(1536,864),(1440,900),(2560,1440),(1600,900),(1280,720)]
+_VIEWPORT=None
+# Real Chrome on Windows UA distribution (Chrome 130+ stable channel as of late 2025)
+_UA_POOL=["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36"]
+_UA=None
+def _viewport():
+ global _VIEWPORT
+ if _VIEWPORT is None:_VIEWPORT=_rng.choice(_VP_POOL)
+ return _VIEWPORT
+def _user_agent():
+ global _UA
+ if _UA is None:_UA=_rng.choice(_UA_POOL)
+ return _UA
+def _human_move(x,y,steps=14):
+ # pyautogui.moveTo with cubic Bezier path. pyautogui's tweens support
+ # easing but don't include curve perpendicular jitter, so we manually
+ # walk a Bezier with smoothstep ease-in-out + optional overshoot.
+ if not _HAS_PAG:return
+ import math
+ try:sx,sy=pyautogui.position()
+ except:sx,sy=x,y
+ dx,dy=x-sx,y-sy;d=math.hypot(dx,dy)
+ if d<3:
+  try:pyautogui.moveTo(x,y,duration=0)
+  except:pass
+  return
+ ux,uy=-dy/d,dx/d;j=min(d*0.15,35.0)
+ cx1=sx+dx*0.30+ux*_rng.uniform(-j,j);cy1=sy+dy*0.30+uy*_rng.uniform(-j,j)
+ cx2=sx+dx*0.70+ux*_rng.uniform(-j,j);cy2=sy+dy*0.70+uy*_rng.uniform(-j,j)
+ overshoot=(_rng.random()<0.12 and d>80)
+ ex=x+_rng.randint(6,18)*(1 if _rng.random()<0.5 else -1) if overshoot else x
+ ey=y+_rng.randint(4,14)*(1 if _rng.random()<0.5 else -1) if overshoot else y
+ for i in range(1,steps+1):
+  t=i/steps;te=t*t*(3-2*t)
+  px=(1-te)**3*sx+3*(1-te)**2*te*cx1+3*(1-te)*te*te*cx2+te**3*ex
+  py=(1-te)**3*sy+3*(1-te)**2*te*cy1+3*(1-te)*te*te*cy2+te**3*ey
+  try:pyautogui.moveTo(int(px),int(py),duration=0)
+  except:pass
+  time.sleep(_rng.uniform(0.008,0.020))
+ if overshoot:
+  time.sleep(_rng.uniform(0.04,0.09))
+  try:pyautogui.moveTo(x,y,duration=0)
+  except:pass
+def _human_type_delay(prev,ch):
+ # Aalto-calibrated bigram-aware inter-key delay. See Linux agent for refs.
+ bg=(prev+ch).lower() if prev else ""
+ base=_BIGRAM_DELAY.get(bg,_rng.uniform(170,310))
+ d=base*_rng.uniform(0.85,1.18)
+ if ch.isupper() and prev and not prev.isupper():d+=_rng.uniform(60,130)
+ if ch in".,!?;:":d+=_rng.uniform(90,220)
+ if ch==" " and prev not in" \\t\\n":d+=_rng.uniform(20,70)
+ if d<60:d=60
+ return d/1000.0
 def _shot():
  img=None
  if _HAS_MSS:
@@ -1352,11 +2216,57 @@ def _get_browser():
   except:_browser_instance=None
  if not _HAS_SEL:raise RuntimeError("selenium unavailable")
  import shutil
+ from urllib.parse import urlparse as _urlp
+ # Match browser-visible locale to (proxy) egress IP. On Windows, system tz
+ # is set out-of-band; Chrome here just needs --lang + Accept-Language.
+ loc=_apply_tz()
+ vw,vh=_viewport()
+ ua=_user_agent()
  opts=ChromeOptions()
- opts.add_argument("--window-size=1280,720")
+ # ── Window size ──────────────────────────────────────────────────────
+ opts.add_argument(f"--window-size={vw},{vh}")
  opts.add_argument("--no-sandbox")
  opts.add_argument("--disable-dev-shm-usage")
  opts.add_argument("--disable-gpu")
+ # ── Locale ────────────────────────────────────────────────────────────
+ opts.add_argument(f"--lang={loc['lang']}")
+ # ── Stealth: kill the WebDriver / automation tells ───────────────────
+ # The blink-features flag flips navigator.webdriver back to undefined,
+ # kills the automation infobar, and removes cdc_ window properties
+ # that anti-bot scripts grep for.
+ opts.add_argument("--disable-blink-features=AutomationControlled")
+ opts.add_experimental_option("excludeSwitches",["enable-automation"])
+ opts.add_experimental_option("useAutomationExtension",False)
+ # ── Stealth: realistic UA (Chrome on Windows, current stable channel) ─
+ opts.add_argument(f"--user-agent={ua}")
+ # ── Stealth: noise / tracking signals real users have off ────────────
+ opts.add_argument("--disable-features=Translate,TranslateUI,IsolateOrigins,site-per-process,InterestCohort")
+ opts.add_argument("--disable-default-apps")
+ opts.add_argument("--disable-extensions-file-access-check")
+ opts.add_argument("--disable-popup-blocking")
+ opts.add_argument("--no-first-run")
+ opts.add_argument("--no-default-browser-check")
+ # ── Prefs: locale + disable phone-home ───────────────────────────────
+ prefs={
+  "intl.accept_languages":loc["accept"],
+  "credentials_enable_service":False,
+  "profile.password_manager_enabled":False,
+  "profile.default_content_setting_values.geolocation":2,  # block geo prompt
+  "profile.default_content_setting_values.notifications":2,
+ }
+ opts.add_experimental_option("prefs",prefs)
+ # ── Proxy support (HTTPS_PROXY env -> --proxy-server) ────────────────
+ proxy_url=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+ if proxy_url:
+  try:
+   pu=_urlp(proxy_url)
+   if pu.hostname and pu.port:
+    scheme=pu.scheme if pu.scheme.startswith("socks") else "http"
+    opts.add_argument(f"--proxy-server={scheme}://{pu.hostname}:{pu.port}")
+    opts.add_argument("--proxy-bypass-list=<-loopback>;localhost;127.0.0.1")
+    print(f"[browser] proxy via {pu.hostname}:{pu.port}",flush=True)
+  except Exception as e:print(f"[browser] proxy parse failed: {e}",flush=True)
+ print(f"[browser] viewport={vw}x{vh} ua={ua[:60]}...",flush=True)
  chrome_path=_find_chrome()
  if chrome_path:opts.binary_location=chrome_path
  drv=None
@@ -1368,8 +2278,96 @@ def _get_browser():
   svc=ChromeService(executable_path=drv)
   _browser_instance=webdriver.Chrome(service=svc,options=opts)
  else:_browser_instance=webdriver.Chrome(options=opts)
- _browser_instance.set_window_size(1280,720)
+ _browser_instance.set_window_size(vw,vh)
+ # CDP-level shims to back up the --disable-blink-features flag (defense in
+ # depth). Override navigator.webdriver to undefined and patch a few
+ # well-known automation tells before any page script runs.
+ try:
+  _browser_instance.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument",{
+   "source":"Object.defineProperty(navigator,'webdriver',{get:()=>undefined});"
+            "window.chrome={runtime:{}};"
+  })
+ except Exception:pass
  return _browser_instance
+# ===== Smart navigation: API bypass for hostile-WAF sites + block detection =====
+import urllib.request as _urlreq, urllib.parse as _urlpars
+def _is_blocked(html,status=200):
+ if status in(403,429,503):return True
+ if not html:return False
+ m=["Just a moment...","Attention Required! | Cloudflare","Access denied","cf-chl-","challenges.cloudflare","Please verify you are a human","Sorry, we just need to make sure","DDoS protection by"]
+ return any(x in html for x in m)
+def _reddit_fetch(url):
+ try:
+  pu=_urlpars.urlparse(url)
+  if "reddit.com" not in (pu.netloc or "").lower():return False,None
+  path=pu.path or "/"
+  if path.endswith("/"):path=path[:-1]
+  if not path.endswith(".json"):path+=".json"
+  json_url=f"https://www.reddit.com{path}"
+  if pu.query:json_url+="?"+pu.query
+  ua=os.environ.get("COASTY_REDDIT_UA","windows:ai.coasty.agent:1.0 (by /u/coasty-agent)")
+  headers={"User-Agent":ua,"Accept":"application/json"}
+  token=os.environ.get("REDDIT_OAUTH_TOKEN","").strip()
+  if token:
+   headers["Authorization"]="Bearer "+token
+   json_url=json_url.replace("www.reddit.com","oauth.reddit.com")
+  proxy=os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+  req=_urlreq.Request(json_url,headers=headers)
+  op=_urlreq.build_opener(_urlreq.ProxyHandler({"https":proxy,"http":proxy})) if proxy else _urlreq.build_opener()
+  resp=op.open(req,timeout=10)
+  body=resp.read().decode("utf-8","replace")
+  if resp.status>=400:return False,None
+  return True,json.loads(body)
+ except Exception as e:
+  print(f"[reddit-api] fetch failed: {e}",flush=True);return False,None
+def _reddit_render(data,url):
+ try:
+  import html as _h
+  esc=_h.escape
+  parts=['<!doctype html><html><head><title>Reddit</title><meta charset="utf-8"></head><body>']
+  parts.append(f'<h1>{esc(url)}</h1><p><em>(rendered from official Reddit API to bypass anti-bot)</em></p>')
+  def render_post(d):
+   title=esc(d.get("title","") or "")
+   author=esc(d.get("author","") or "?")
+   subr=esc(d.get("subreddit","") or "")
+   score=d.get("score",0);ncm=d.get("num_comments",0)
+   body=esc((d.get("selftext","") or d.get("body","") or "")[:3000])
+   pl=esc(d.get("permalink","") or "")
+   ext=esc(d.get("url_overridden_by_dest","") or "")
+   t=f"<article><h2>{title or '(comment)'}</h2><p>r/{subr} · u/{author} · {score} pts · {ncm} comments</p><div>{body}</div>"
+   if pl:t+=f'<p><a href="https://www.reddit.com{pl}">View thread</a></p>'
+   if ext and ext!=pl:t+=f'<p>Link: <a href="{ext}">{ext}</a></p>'
+   return t+"</article>"
+  if isinstance(data,list):
+   for item in data:
+    if isinstance(item,dict) and "data" in item:
+     for c in item.get("data",{}).get("children",[])[:40]:
+      parts.append(render_post(c.get("data",{})))
+  elif isinstance(data,dict) and "data" in data:
+   for c in data.get("data",{}).get("children",[])[:60]:
+    parts.append(render_post(c.get("data",{})))
+  parts.append("</body></html>")
+  return "".join(parts)
+ except Exception as e:
+  print(f"[reddit-api] render failed: {e}",flush=True);return None
+def _navigate_smart(b,url):
+ if "reddit.com" in url and not url.startswith("data:"):
+  ok,data=_reddit_fetch(url)
+  if ok:
+   html=_reddit_render(data,url)
+   if html:
+    b.get("data:text/html;charset=utf-8;base64,"+base64.b64encode(html.encode()).decode())
+    print(f"[smart-nav] reddit-api OK for {url}",flush=True)
+    return{"url":url,"title":b.title,"source":"reddit-api"}
+  print(f"[smart-nav] reddit-api unavailable, falling back to browser for {url}",flush=True)
+ b.get(url)
+ try:
+  body=b.execute_script("return document.documentElement.outerHTML")
+  body=body[:8000] if body else ""
+ except:body=""
+ if _is_blocked(body):
+  return{"url":b.current_url,"title":b.title,"blocked":True,"error":"blocked by anti-bot (likely datacenter IP); set HTTPS_PROXY for residential routing or hand off to Electron"}
+ return{"url":b.current_url,"title":b.title}
 class Agent:
  def __init__(self):self._t=time.time();self._n=0
  async def serve(self,ws):
@@ -1420,17 +2418,56 @@ class Agent:
   return{"success":True,"screenshot":i,"timestamp":time.time()} if i else{"success":False,"error":"screenshot failed"}
  def _cl(self,p):
   x,y=int(p.get("x",0)),int(p.get("y",0));b=p.get("button","left");c=int(p.get("clicks",1))
+  _human_move(x,y);time.sleep(_rng.uniform(0.04,0.10))
   pyautogui.click(x,y,clicks=c,button=b);return{"success":True,"action":"click","x":x,"y":y}
  def _dc(self,p):
-  x,y=int(p.get("x",0)),int(p.get("y",0));pyautogui.doubleClick(x,y);return{"success":True}
- def _rc(self,p):
-  x,y=int(p.get("x",0)),int(p.get("y",0));pyautogui.rightClick(x,y);return{"success":True}
- def _ty(self,p):
-  text=p.get("text","");interval=float(p.get("interval",50))/1000.0
-  pyautogui.write(text,interval=interval);return{"success":True,"action":"type"}
- def _kp(self,p):
-  for k in(p.get("keys") or[p.get("key","")]):pyautogui.press(k)
+  x,y=int(p.get("x",0)),int(p.get("y",0))
+  _human_move(x,y);time.sleep(_rng.uniform(0.04,0.09))
+  pyautogui.click(x,y);time.sleep(_rng.uniform(0.08,0.18));pyautogui.click(x,y)
   return{"success":True}
+ def _rc(self,p):
+  x,y=int(p.get("x",0)),int(p.get("y",0))
+  _human_move(x,y);time.sleep(_rng.uniform(0.05,0.11))
+  pyautogui.rightClick(x,y);return{"success":True}
+ def _ty(self,p):
+  # Mirror of the Linux agent's mode-dispatch _ty. Windows has no
+  # subprocess fork cost (pyautogui calls Win32 SendInput directly), so
+  # the speed-up over the legacy default isn't as dramatic — but it's
+  # still material. Modes:
+  #   instant   — pyautogui.write(text, interval=0). ~5 ms regardless.
+  #   fast      — DEFAULT. interval jittered in 2-4 ms. ~95-200 WPM.
+  #   human     — Legacy Aalto-calibrated per-char loop, preserved.
+  # No clipboard mode here: pyautogui's hotkey/write path is already
+  # fast enough that adding pywin32 clipboard APIs isn't worth the
+  # dependency cost.
+  text=p.get("text","")
+  if not text:return{"success":True,"action":"type","chars":0}
+  mode=(p.get("mode") or "").lower()
+  if not mode:
+   if p.get("interval")==0 or p.get("fast"):mode="instant"
+   else:mode="fast"
+  if mode=="instant":
+   pyautogui.write(text,interval=0)
+   return{"success":True,"action":"type","chars":len(text),"mode":mode}
+  if mode=="fast":
+   d=_rng.uniform(0.002,0.004)
+   pyautogui.write(text,interval=d)
+   return{"success":True,"action":"type","chars":len(text),"mode":mode,"delay_ms":int(d*1000)}
+  # human (legacy stealth path) — preserved verbatim
+  prev=" "
+  for ch in text:
+   try:pyautogui.write(ch,interval=0)
+   except Exception:pass
+   time.sleep(_human_type_delay(prev,ch));prev=ch
+  return{"success":True,"action":"type","chars":len(text),"mode":"human"}
+ def _kp(self,p):
+  # pyautogui.press takes a list — single in-process call for multi-key
+  # sequences. Already efficient (no fork), but the explicit list form
+  # avoids the per-key dict lookup in pyautogui's KEYBOARD_KEYS map.
+  keys=[k for k in (p.get("keys") or [p.get("key","")]) if k]
+  if not keys:return{"success":True}
+  pyautogui.press(keys)
+  return{"success":True,"keys":len(keys)}
  def _kc(self,p):pyautogui.hotkey(*p.get("keys",[]));return{"success":True}
  def _scr(self,p):
   amt=int(p.get("amount",3));d=p.get("direction","down")
@@ -1495,6 +2532,18 @@ class Agent:
  def _fld(self,p):
   try:
    path=os.path.expanduser(p.get("dirpath",p.get("path",HOME_DIR)))
+   # Cross-OS path remap: the web UI historically defaulted to
+   # /home/desktop/<...> which the Linux Ubuntu agent maps to
+   # /home/ubuntu/<...>.  Apply the same convention on Windows so
+   # the FILES tab works on a fresh Windows VM without the user
+   # having to re-navigate — map /home/desktop[...] to the user's
+   # Desktop folder, and /home/ubuntu[...] to the Windows home.
+   if path.startswith("/home/desktop"):
+    rest=path[len("/home/desktop"):].lstrip("/")
+    path=os.path.join(DESKTOP_DIR,rest) if rest else DESKTOP_DIR
+   elif path.startswith("/home/ubuntu"):
+    rest=path[len("/home/ubuntu"):].lstrip("/")
+    path=os.path.join(HOME_DIR,rest) if rest else HOME_DIR
    if not os.path.isdir(path):return{"success":False,"error":f"Not a directory: {path}"}
    files=[]
    for e in sorted(os.listdir(path)):
@@ -1525,10 +2574,15 @@ class Agent:
   b64=img_data.split(",",1)[1];img=Image.open(io.BytesIO(base64.b64decode(b64)))
   return{"success":True,"text":pytesseract.image_to_string(img),"screenshot":img_data}
  def _bo(self,p):
-  try:b=_get_browser();u=p.get("url","about:blank");b.get(u) if u!="about:blank" else None;return{"success":True}
+  try:
+   b=_get_browser();u=p.get("url","about:blank")
+   if u=="about:blank":return{"success":True}
+   res=_navigate_smart(b,u);return{"success":not res.get("blocked",False),**res}
   except Exception as e:return{"success":False,"error":str(e)}
  def _bn(self,p):
-  try:b=_get_browser();b.get(p.get("url",""));return{"success":True,"url":b.current_url,"title":b.title}
+  try:
+   b=_get_browser();res=_navigate_smart(b,p.get("url",""))
+   return{"success":not res.get("blocked",False),**res}
   except Exception as e:return{"success":False,"error":str(e)}
  def _bc(self,p):
   try:_get_browser().find_element(By.CSS_SELECTOR,p.get("selector","")).click();return{"success":True}
@@ -1550,9 +2604,16 @@ class Agent:
   try:b=_get_browser();return{"success":True,"url":b.current_url,"title":b.title}
   except Exception as e:return{"success":False,"error":str(e)}
 async def main():
+ try:_apply_tz()
+ except Exception as e:print(f"[locale] startup apply failed: {e}",flush=True)
  agent=Agent()
  print(f"AI Agent listening on {HOST}:{PORT}",flush=True)
- async with websockets.serve(agent.serve,HOST,PORT,max_size=100*1024*1024,ping_interval=None,ping_timeout=None,close_timeout=60,compression=None):
+ # ping_interval=20 / ping_timeout=10 — server-side keep-alive (Windows variant).
+ # Mirrors the Linux agent fix in generateUserData. See the Linux agent's
+ # main() for the full NAT-idle-timeout rationale. Existing Windows AMI
+ # instances do NOT pick this up automatically — recycle them via the
+ # operator runbook before this side becomes effective.
+ async with websockets.serve(agent.serve,HOST,PORT,max_size=100*1024*1024,ping_interval=20,ping_timeout=10,close_timeout=60,compression=None):
   await asyncio.Future()
 if __name__=="__main__":asyncio.run(main())
 `;
@@ -1579,7 +2640,8 @@ if __name__=="__main__":asyncio.run(main())
    * Gzips the Python agent to stay well under the 16KB UserData limit.
    */
   private generateWindowsGoldenUserData(vncPassword: string): string {
-    const agentPy = this.getWindowsAgentSource();
+    // Minify Python before gzip (cuts ~10-15% post-gzip size)
+    const agentPy = this.minifyPython(this.getWindowsAgentSource());
 
     // Gzip + base64 to reduce size (same approach as Linux agent)
     const agentGz = zlib.gzipSync(Buffer.from(agentPy), { level: 9 });
@@ -1778,7 +2840,34 @@ Set-Content -Path "C:\\coasty\\status.txt" -Value "ready"
 shutdown /r /t 10 /c "Coasty setup complete - activating desktop" /f
 </powershell>`;
 
-    return Buffer.from(script).toString("base64");
+    // ── UserData size optimization ─────────────────────────────────────
+    // AWS RunInstances enforces 16384 bytes RAW (after base64 decode).
+    // Linux cloud-init auto-decompresses gzip; Windows EC2Launch does NOT,
+    // so we (1) minify the PowerShell to strip comments + blank lines
+    // (preserving here-string bodies verbatim), (2) gzip the inner script,
+    // (3) wrap in a tiny self-decompressing bootstrap that gunzips + runs
+    // it via a temp .ps1 file.
+    const innerScript = this.minifyPowerShell(
+      script
+        .replace(/^\s*<powershell>\r?\n?/, "")
+        .replace(/\r?\n?<\/powershell>\s*$/, "")
+    );
+    const innerGz = zlib.gzipSync(Buffer.from(innerScript), { level: 9 });
+    const innerB64 = innerGz.toString("base64");
+
+    const bootstrap = `<powershell>
+$g=[Convert]::FromBase64String("${innerB64}")
+$m=New-Object IO.MemoryStream(,$g)
+$d=New-Object IO.Compression.GZipStream($m,[IO.Compression.CompressionMode]::Decompress)
+$r=New-Object IO.StreamReader($d)
+$s=$r.ReadToEnd()
+$r.Close();$d.Close();$m.Close()
+$f=Join-Path $env:TEMP "coasty-init.ps1"
+[IO.File]::WriteAllText($f,$s)
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $f
+</powershell>`;
+
+    return Buffer.from(bootstrap).toString("base64");
   }
 
   /**
@@ -1787,7 +2876,7 @@ shutdown /r /t 10 /c "Coasty setup complete - activating desktop" /f
    * This only injects the VNC password, deploys the Python agent, and starts services.
    */
   private generateGoldenAmiUserData(vncPassword: string): string {
-    const agentPy = this.getAgentSource();
+    const agentPy = this.minifyPython(this.getAgentSource());
 
     const agentGz = zlib.gzipSync(Buffer.from(agentPy), { level: 9 });
     const agentB64 = agentGz.toString("base64").match(/.{1,76}/g)?.join("\n") ?? "";
@@ -1799,45 +2888,90 @@ exec > /var/log/desktop-setup.log 2>&1
 echo "DESKTOP_INIT_STATUS=starting" > /var/run/desktop-init-status
 echo "Golden AMI boot started at $(date)"
 
-# 1. Stop any services that may already be running (snapshot restore case)
-systemctl stop ai-agent.service vncserver@:1.service novnc.service keep-screen-alive.service memory-watchdog.service 2>/dev/null || true
+# Mask Ubuntu cruft that runs at boot but we never use on a headless
+# automation VM. Each one shaves 0.5-3s off boot; combined ~5-10s.
+# Use mask (not disable) — disable can be undone by package post-install
+# scripts, mask wins via a /dev/null symlink. Idempotent. Effects apply
+# on NEXT boot. Cheap insurance if the golden AMI bake missed any.
+(
+  systemctl mask --now \
+    snapd.service snapd.socket snapd.seeded.service \
+    unattended-upgrades.service \
+    apport.service apport-autoreport.service \
+    ModemManager.service \
+    bluetooth.service \
+    cups.service cups-browsed.service \
+    accounts-daemon.service \
+    motd-news.service motd-news.timer \
+    fwupd.service fwupd-refresh.service \
+    apt-daily.service apt-daily.timer apt-daily-upgrade.service apt-daily-upgrade.timer \
+    ua-timer.service ua-timer.timer ua-reboot-cmds.service \
+    2>/dev/null || true
+) &
 
-# 2. Set VNC password
+# Stop our services in parallel — they may be running from the prior boot
+# (golden AMI auto-starts them) or from a snapshot restore. Background +
+# wait so all five stop concurrently instead of serially. Saves ~2-3s.
+systemctl stop ai-agent.service vncserver@:1.service novnc.service keep-screen-alive.service memory-watchdog.service tcp-listener-watchdog.service 2>/dev/null &
+SVCS_STOP_PID=$!
+
+# In parallel with the stops, do all per-instance file setup (none of
+# these depend on services being down — only on filesystem access).
 USER_HOME=/home/ubuntu
-mkdir -p $USER_HOME/.vnc
+mkdir -p $USER_HOME/.vnc /opt/ai-agent
 echo "${vncPassword}" | vncpasswd -f > $USER_HOME/.vnc/passwd
 chmod 600 $USER_HOME/.vnc/passwd
 chown ubuntu:ubuntu $USER_HOME/.vnc/passwd
-
-# 3. Deploy AI agent
-mkdir -p /opt/ai-agent
 printf 'VNC_PASSWORD=%s\\n' "${vncPassword}" > /opt/ai-agent/.env
 chmod 600 /opt/ai-agent/.env && chown ubuntu:ubuntu /opt/ai-agent/.env
-
 base64 -d << 'AGENT_B64_EOF' | gunzip > /opt/ai-agent/server.py
 ${agentB64}
 AGENT_B64_EOF
 chown ubuntu:ubuntu /opt/ai-agent/server.py
 
-# 4. Enable swap (pre-created in golden AMI)
+# Locale-gen runs FULLY in background — agent doesn't need locales at
+# startup (it sets TZ/lang via env at runtime). If a locale is missing
+# when the agent first switches into it, the user's first request takes
+# ~5s longer. After that, cached forever. Massive boot-time win.
+if command -v locale-gen >/dev/null 2>&1; then
+  (
+    needed="en_US.UTF-8 en_GB.UTF-8 en_CA.UTF-8 en_AU.UTF-8 de_DE.UTF-8 fr_FR.UTF-8 es_ES.UTF-8 es_MX.UTF-8 it_IT.UTF-8 nl_NL.UTF-8 pt_BR.UTF-8 pt_PT.UTF-8 ja_JP.UTF-8 ko_KR.UTF-8 zh_CN.UTF-8 zh_TW.UTF-8 ru_RU.UTF-8 tr_TR.UTF-8 ar_SA.UTF-8 he_IL.UTF-8 pl_PL.UTF-8 sv_SE.UTF-8"
+    installed=$(locale -a 2>/dev/null | tr '[:upper:]' '[:lower:]' | sed 's/utf8/UTF-8/g')
+    missing=""
+    for lc in $needed; do
+      if ! echo "$installed" | grep -qiF "$lc"; then missing="$missing $lc"; fi
+    done
+    if [ -n "$missing" ]; then locale-gen $missing 2>/dev/null || true; fi
+  ) &
+fi
+
+# Enable swap (cheap, no need to background)
 swapon /swapfile 2>/dev/null || true
 sysctl -p /etc/sysctl.d/99-swap.conf 2>/dev/null || true
 
-# 5. Start all services (restart to pick up new password)
-systemctl daemon-reload
-systemctl enable vncserver@:1.service novnc.service keep-screen-alive.service ai-agent.service memory-watchdog.service
-systemctl restart vncserver@:1.service
-sleep 3
-systemctl restart novnc.service
-systemctl restart keep-screen-alive.service
-systemctl restart ai-agent.service
-systemctl restart memory-watchdog.service
+# Wait for service stops to complete before restarting (avoid systemd
+# "queued restart while still stopping" backoff).
+wait $SVCS_STOP_PID 2>/dev/null || true
+
+# Clear any failed-state backoff so restart fires immediately.
+systemctl reset-failed vncserver@:1.service novnc.service keep-screen-alive.service ai-agent.service memory-watchdog.service tcp-listener-watchdog.service 2>/dev/null || true
+
+# Skip daemon-reload + enable: golden AMI has both already done. If a
+# future change adds a new .service file in slim UserData, add reload
+# back (and update the regression test).
+#
+# --no-block: returns immediately, lets systemd's After=/Wants= chain
+# handle ordering in parallel. vncserver starts first, novnc + agent +
+# keep-alive wait for it via their own ExecStartPre xdpyinfo/port checks.
+# Saves ~10s of sequential restart waits.
+systemctl restart --no-block vncserver@:1.service novnc.service keep-screen-alive.service ai-agent.service memory-watchdog.service tcp-listener-watchdog.service
 
 echo "DESKTOP_INIT_STATUS=ready" > /var/run/desktop-init-status
 echo "Golden AMI boot complete at $(date)"
 `;
 
-    const scriptGz = zlib.gzipSync(Buffer.from(script), { level: 9 });
+    const minified = this.minifyBash(script);
+    const scriptGz = zlib.gzipSync(Buffer.from(minified), { level: 9 });
     return scriptGz.toString("base64");
   }
 

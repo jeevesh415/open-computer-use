@@ -9,19 +9,17 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { VMSelector } from "@/components/common/vm-selector/vm-selector"
-import { ArrowUpIcon, StopIcon, WarningCircle, CircleNotch, ArrowsClockwise, GitFork, Lock, Lightning, ArrowRight, Monitor } from "@phosphor-icons/react"
-import { MacMiniIcon } from "@/components/icons/mac-mini"
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card"
+import { ArrowUpIcon, StopIcon, WarningCircle, CircleNotch, ArrowsClockwise } from "@phosphor-icons/react"
+import { CloudDesktopIcon } from "@/components/icons/cloud-desktop"
 import { useCallback, useMemo, useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
-import { useAccountDialog } from "@/lib/account-dialog-store"
 import { PromptSystem } from "../suggestions/prompt-system"
 import { AnimatePresence, motion } from "motion/react"
 import type { UserMachine } from "@/types/machines.types"
 import { themeConfig } from "@/lib/theme-config"
 // File upload imports
 import { ButtonVMFileUpload } from "./button-vm-file-upload"
+import { ButtonViewScreen } from "./button-view-screen"
 import { FileList } from "./file-list"
 
 type ChatInputProps = {
@@ -141,7 +139,7 @@ function VMStatusBar({ isVisible, machineName, status, startupMessages, t }: { i
               <span className="text-sm font-medium">
                 {getStatusMessage()}
               </span>
-              <MacMiniIcon className={`h-5 w-5 ${getIconColor()}`} />
+              <CloudDesktopIcon className={`h-5 w-5 ${getIconColor()}`} />
             </div>
           </div>
         </motion.div>
@@ -673,241 +671,28 @@ export function ChatInput({
             className="min-h-[44px] pt-3 px-4 text-base leading-[1.3] sm:text-base md:text-base"
           />
           <PromptInputActions className="mt-5 w-full justify-between px-2 sm:px-3 pb-3">
-            <div className="flex gap-1 sm:gap-2 overflow-hidden">
-              {!swarmMode && (
-                <VMSelector
-                  selectedVMId={selectedVMId}
-                  setSelectedVMId={setSelectedVMId}
-                  isUserAuthenticated={isUserAuthenticated}
-                  className="h-9 min-w-0 flex-shrink"
-                />
-              )}
-              {/* Swarm mode toggle — next to machine selector */}
-              {onSwarmModeChange && (
-                <div className="flex items-center gap-1">
-                  <HoverCard openDelay={200} closeDelay={150}>
-                    <HoverCardTrigger asChild>
-                      <Button
-                        size="sm"
-                        variant={!isSwarmLocked && swarmMode ? "default" : "secondary"}
-                        type="button"
-                        onClick={() => !isSwarmLocked && onSwarmModeChange(!swarmMode)}
-                        className={cn(
-                          "border-border h-9 rounded-full border px-2.5 sm:px-3 transition-all duration-200",
-                          isSwarmLocked
-                            ? "bg-transparent dark:bg-secondary opacity-70 hover:opacity-100 cursor-default"
-                            : swarmMode
-                              ? "bg-amber-500 hover:bg-amber-600 text-white border-amber-500"
-                              : "bg-transparent dark:bg-secondary"
-                        )}
-                        aria-label={isSwarmLocked ? t("swarm.upgradeLabel") : swarmMode ? t("swarm.disableLabel") : t("swarm.enableLabel")}
-                      >
-                        <div className="relative">
-                          <GitFork className="size-4 flex-shrink-0" weight={!isSwarmLocked && swarmMode ? "duotone" : "regular"} />
-                          {isSwarmLocked && (
-                            <Lock className="size-2.5 absolute -bottom-0.5 -right-1 text-amber-500" weight="fill" />
-                          )}
-                        </div>
-                        <span className="hidden sm:inline text-xs ml-1.5">Swarm</span>
-                      </Button>
-                    </HoverCardTrigger>
-                    <HoverCardContent
-                      side="top"
-                      align="center"
-                      sideOffset={8}
-                      className="w-[340px] p-0 rounded-xl border border-amber-500/20 dark:border-amber-500/15 !bg-background dark:!bg-neutral-900 shadow-2xl shadow-amber-500/5 overflow-hidden"
-                    >
-                      {/* Animated graph header */}
-                      <div className="relative px-5 pt-5 pb-3 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/[0.06] to-transparent dark:from-amber-500/[0.04]" />
-
-                        {/* Mini swarm visualization — animated node graph */}
-                        <div className="relative mb-3">
-                          <svg viewBox="0 0 300 100" className="w-full h-[80px]" fill="none">
-                            {[0, 25, 50, 75, 100].map((y) => (
-                              <line key={`grid-${y}`} x1="0" y1={y} x2="300" y2={y} stroke="currentColor" strokeOpacity="0.04" strokeWidth="0.5" />
-                            ))}
-
-                            <circle cx="30" cy="50" r="8" className="fill-amber-500/20 stroke-amber-500" strokeWidth="1.5">
-                              <animate attributeName="r" values="7;8.5;7" dur="3s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="30" cy="50" r="3" className="fill-amber-500" />
-
-                            {[
-                              { x: 120, y: 15 },
-                              { x: 120, y: 50 },
-                              { x: 120, y: 85 },
-                            ].map((target, i) => (
-                              <line
-                                key={`conn-${i}`}
-                                x1="38"
-                                y1="50"
-                                x2={target.x - 12}
-                                y2={target.y}
-                                className="stroke-amber-500/40"
-                                strokeWidth="1"
-                                strokeDasharray="4 3"
-                              >
-                                <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.2 + i * 0.3}s`} repeatCount="indefinite" />
-                              </line>
-                            ))}
-
-                            {[
-                              { x: 120, y: 15, delay: "0s" },
-                              { x: 120, y: 50, delay: "0.15s" },
-                              { x: 120, y: 85, delay: "0.3s" },
-                            ].map((node, i) => (
-                              <g key={`machine-${i}`}>
-                                <rect x={node.x - 10} y={node.y - 8} width="20" height="16" rx="3" className="fill-amber-500/10 stroke-amber-500/60" strokeWidth="1">
-                                  <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" begin={node.delay} repeatCount="indefinite" />
-                                </rect>
-                                <rect x={node.x - 6} y={node.y - 3} width="0" height="2" rx="1" className="fill-amber-400">
-                                  <animate attributeName="width" values="0;12;12;0" dur={`${2 + i * 0.5}s`} begin={node.delay} repeatCount="indefinite" />
-                                </rect>
-                                <rect x={node.x - 6} y={node.y + 1} width="0" height="2" rx="1" className="fill-amber-400/60">
-                                  <animate attributeName="width" values="0;8;8;0" dur={`${2.3 + i * 0.4}s`} begin={node.delay} repeatCount="indefinite" />
-                                </rect>
-                              </g>
-                            ))}
-
-                            {[
-                              { x1: 130, y1: 15, x2: 200, y2: 15 },
-                              { x1: 130, y1: 50, x2: 200, y2: 50 },
-                              { x1: 130, y1: 85, x2: 200, y2: 85 },
-                            ].map((line, i) => (
-                              <line
-                                key={`out-${i}`}
-                                x1={line.x1}
-                                y1={line.y1}
-                                x2={line.x2}
-                                y2={line.y2}
-                                className="stroke-amber-500/30"
-                                strokeWidth="1"
-                                strokeDasharray="4 3"
-                              >
-                                <animate attributeName="stroke-dashoffset" values="0;-14" dur={`${1.5 + i * 0.2}s`} repeatCount="indefinite" />
-                              </line>
-                            ))}
-
-                            {[
-                              { x: 200, y: 15, width: 80, speed: "3s" },
-                              { x: 200, y: 50, width: 65, speed: "3.5s" },
-                              { x: 200, y: 85, width: 90, speed: "2.8s" },
-                            ].map((bar, i) => (
-                              <g key={`result-${i}`}>
-                                <rect x={bar.x} y={bar.y - 5} width="90" height="10" rx="3" className="fill-muted/50 stroke-border/50" strokeWidth="0.5" />
-                                <rect x={bar.x + 2} y={bar.y - 3} width="0" height="6" rx="2" className="fill-amber-500/50">
-                                  <animate attributeName="width" values={`0;${bar.width};${bar.width}`} dur={bar.speed} repeatCount="indefinite" />
-                                </rect>
-                                <circle cx={bar.x + 82} cy={bar.y} r="0" className="fill-green-500/70">
-                                  <animate attributeName="r" values="0;0;0;3.5;3.5" dur={bar.speed} repeatCount="indefinite" />
-                                </circle>
-                              </g>
-                            ))}
-
-                            <text x="30" y="72" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Prompt</text>
-                            <text x="120" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Machines</text>
-                            <text x="245" y="105" textAnchor="middle" className="fill-muted-foreground text-[7px]" fontFamily="system-ui" opacity="0.6">Parallel tasks</text>
-                          </svg>
-                        </div>
-
-                        <div className="relative flex items-center gap-2 mb-1">
-                          <div className="flex items-center justify-center size-6 rounded-md bg-amber-500/15">
-                            <GitFork className="size-3.5 text-amber-500" weight="duotone" />
-                          </div>
-                          <h4 className="text-sm font-semibold tracking-tight">{t("swarm.title")}</h4>
-                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">{t("swarm.pro")}</span>
-                        </div>
-                      </div>
-
-                      {/* Feature list */}
-                      <div className="px-5 pb-2">
-                        <p className="text-xs text-muted-foreground leading-relaxed mb-3">
-                          {t("swarm.description")}
-                        </p>
-                        <div className="space-y-2">
-                          {[
-                            { icon: Lightning, text: t("swarm.feature1") },
-                            { icon: GitFork, text: t("swarm.feature2") },
-                            { icon: Monitor, text: t("swarm.feature3") },
-                          ].map((feature, i) => (
-                            <div key={i} className="flex items-center gap-2.5">
-                              <div className="flex items-center justify-center size-5 rounded bg-amber-500/10 flex-shrink-0">
-                                <feature.icon className="size-3 text-amber-500" weight="duotone" />
-                              </div>
-                              <span className="text-[11px] text-muted-foreground">{feature.text}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Footer — differs by tier */}
-                      {isSwarmLocked ? (
-                        <div className="px-4 pb-4 pt-3 space-y-2">
-                          <button
-                            onClick={() => useAccountDialog.getState().open("billing")}
-                            className="flex items-center justify-center gap-2 w-full h-9 rounded-lg text-xs font-semibold text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/30 transition-all duration-200 active:scale-[0.98]"
-                          >
-                            Upgrade to unlock Swarm
-                            <ArrowRight className="size-3.5" weight="bold" />
-                          </button>
-                          <p className="text-[10px] text-muted-foreground text-center">
-                            Need custom limits?{" "}
-                            <a href="mailto:founders@coasty.ai" className="text-amber-600 dark:text-amber-400 hover:underline">founders@coasty.ai</a>
-                          </p>
-                        </div>
-                      ) : (
-                        <div className="px-4 pb-4 pt-3">
-                          <button
-                            onClick={() => onSwarmModeChange(!swarmMode)}
-                            className={cn(
-                              "flex items-center justify-center gap-2 w-full h-9 rounded-lg text-xs font-semibold transition-all duration-200 active:scale-[0.98]",
-                              swarmMode
-                                ? "text-amber-700 dark:text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20"
-                                : "text-white bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/30"
-                            )}
-                          >
-                            <GitFork className="size-3.5" weight="duotone" />
-                            {swarmMode ? t("swarm.disableLabel") : t("swarm.enableLabel")}
-                          </button>
-                        </div>
-                      )}
-                    </HoverCardContent>
-                  </HoverCard>
-                  {/* Machine count controls — visible when swarm is active */}
-                  {!isSwarmLocked && swarmMode && onSwarmCountChange && (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="flex items-center gap-0.5 h-9 rounded-full border border-amber-500/40 bg-amber-500/10 px-1">
-                          <button
-                            type="button"
-                            onClick={() => onSwarmCountChange(Math.max(2, (swarmCount || 2) - 1))}
-                            className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
-                            aria-label={t("swarm.decreaseMachines")}
-                          >
-                            −
-                          </button>
-                          <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 min-w-[2ch] text-center tabular-nums">
-                            {swarmCount || 2}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => onSwarmCountChange(Math.min(maxSwarmMachines, (swarmCount || 2) + 1))}
-                            className="size-6 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 transition-colors text-sm font-medium"
-                            aria-label={t("swarm.increaseMachines")}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent side="top" className="max-w-[240px] text-center">
-                        {t("swarm.machineLimit", { max: String(maxSwarmMachines) })}
-                      </TooltipContent>
-                    </Tooltip>
-                  )}
-                </div>
-              )}
-              {/* File upload feature - only show when VM is selected and not in swarm mode */}
+            <div className="flex gap-1 sm:gap-2 overflow-hidden items-center">
+              <VMSelector
+                selectedVMId={selectedVMId}
+                setSelectedVMId={setSelectedVMId}
+                isUserAuthenticated={isUserAuthenticated}
+                className="h-9 min-w-0 flex-shrink"
+                swarmMode={swarmMode}
+                onSwarmModeChange={onSwarmModeChange}
+                swarmCount={swarmCount}
+                onSwarmCountChange={onSwarmCountChange}
+                isSwarmLocked={isSwarmLocked}
+                maxSwarmMachines={maxSwarmMachines}
+              />
+              {/* Screen — view live feed of selected cloud machine */}
+              {!swarmMode &&
+                currentMachine &&
+                currentMachine.status === "running" &&
+                !!currentMachine.publicIpAddress &&
+                currentMachine.settings?.provider !== "electron" && (
+                  <ButtonViewScreen machine={currentMachine} />
+                )}
+              {/* File upload — only when VM selected and not in swarm mode */}
               {selectedVMId && selectedVMId !== "none" && !swarmMode && (
                 <ButtonVMFileUpload
                   onFileUpload={onFileUpload}

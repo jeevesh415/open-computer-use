@@ -32,8 +32,8 @@ import { themeConfig } from "@/lib/theme-config"
 import { QuickStartGuide } from "./quick-start-guide"
 import { Search, Bug, Globe, FileText, BarChart3, Mail, Zap, Sparkles, PenTool, MonitorSmartphone, Clipboard, Users, TrendingUp, Eye, FileCode, LayoutGrid, Send, ShoppingCart, MessageCircle, Bot } from "lucide-react"
 import { SwarmPanel } from "./swarm-panel"
-import { FloatingThumbnails } from "./floating-thumbnails"
-import { CinematicIntro, TaglineIntro, shouldShowIntro, isIntroDismissed } from "./cinematic-intro"
+import { CinematicIntro, TaglineIntro } from "./cinematic-intro"
+import { useIntroStore } from "@/lib/intro-store"
 import { ActiveSwarmBanner, type ActiveSwarm } from "./active-swarm-banner"
 import { RemoteApproval } from "./remote-approval"
 
@@ -1005,20 +1005,22 @@ export function Chat() {
   const showOnboarding = !effectiveChatId && redirectCheckMessages.length === 0
 
   // ── Cinematic intro ──
-  // Starts as "done" for SSR. Client mount resolves to the real state via useEffect.
-  // "pending" is a transient client-only state that shows a blank blocking overlay
-  // so chat content never flashes before the intro portal mounts.
-  const [introPhase, setIntroPhase] = useState<"pending" | "active" | "tagline-only" | "fading" | "done">("done")
+  // Phase lives in a shared store so the app header (rendered above us in
+  // LayoutApp) can stay invisible until the intro completes — otherwise it
+  // flashes in for a frame before the overlay portal covers the screen.
+  const introPhase = useIntroStore((s) => s.phase)
+  const setIntroPhase = useIntroStore((s) => s.setPhase)
+  const resolveIntro = useIntroStore((s) => s.resolve)
   const [introResolved, setIntroResolved] = useState(false)
+  const introInitializedRef = useRef(false)
   useEffect(() => {
-    if (shouldShowIntro()) setIntroPhase("active")
-    else if (isIntroDismissed()) setIntroPhase("tagline-only")
-    else setIntroPhase("done")
+    if (introInitializedRef.current) return
+    introInitializedRef.current = true
+    resolveIntro(showOnboarding && !!user)
     setIntroResolved(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const introVisible = (introPhase === "active" || introPhase === "fading") && showOnboarding && !!user
-  const introFading = introPhase === "fading"
-  const showThumbnails = showOnboarding && !!user && introPhase === "done"
 
   // Pick a random motivational tagline once per mount — client-only to avoid SSR
   // hydration mismatch (Math.random differs between server and client renders).
@@ -1055,7 +1057,6 @@ export function Chat() {
           swarmFullscreen ? "justify-start" : "justify-end md:justify-center"
         )}
       >
-        <FloatingThumbnails visible={showThumbnails} skipEntrance={introFading} />
         {introVisible && createPortal(
           <CinematicIntro
             onSettled={() => setIntroPhase("fading")}
@@ -1071,7 +1072,7 @@ export function Chat() {
           document.body
         )}
         {!introResolved && showOnboarding && (
-          <div className="fixed inset-0 z-[200] bg-background" />
+          <div className="fixed inset-0 z-[2147483647] bg-background" />
         )}
         <DialogAuth open={hasDialogAuth} setOpen={setHasDialogAuth} />
         <InsufficientCreditsModal
@@ -1314,39 +1315,29 @@ export function Chat() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 6, transition: { duration: 0.15 } }}
               transition={{ delay: 0.3, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mx-auto mt-5 mb-1 w-full max-w-[40rem]"
+              className="mx-auto mt-5 mb-1 flex w-full max-w-[34rem] flex-col items-center"
             >
-              <div className="flex flex-col">
-                {taskTemplates.map((t, i) => {
-                  const Icon = t.icon
-                  const summary = getTaskDescription(t.label)
-                  return (
-                    <motion.button
-                      key={t.label}
-                      type="button"
-                      onClick={() => handleCollaborativeInputChange(t.prompt)}
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.35 + i * 0.05, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
-                      className={cn(
-                        "group relative flex w-full cursor-pointer items-center gap-3 py-1.5 text-left",
-                        i > 0 && "before:absolute before:left-3 before:right-3 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-foreground/[0.13] before:to-transparent before:content-['']",
-                      )}
-                    >
-                      <span className="absolute inset-x-1 inset-y-px rounded bg-transparent transition-colors duration-200 ease-out group-hover:bg-foreground/[0.03] dark:group-hover:bg-white/[0.035]" />
-
-                      <Icon
-                        strokeWidth={1.75}
-                        className="relative ml-3 size-3 shrink-0 text-foreground/30 transition-colors duration-300 ease-out group-hover:text-foreground/55"
-                      />
-
-                      <span className="relative min-w-0 flex-1 truncate pr-4 text-[11.5px] font-normal tracking-[-0.005em] text-foreground/55 transition-colors duration-200 ease-out group-hover:text-foreground/90">
-                        {summary}
-                      </span>
-                    </motion.button>
-                  )
-                })}
-              </div>
+              {taskTemplates.map((t, i) => {
+                const summary = getTaskDescription(t.label)
+                return (
+                  <motion.button
+                    key={t.label}
+                    type="button"
+                    onClick={() => handleCollaborativeInputChange(t.prompt)}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 + i * 0.05, duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+                    className={cn(
+                      "group relative flex w-full cursor-pointer items-center justify-center py-2 text-center",
+                      i > 0 && "before:absolute before:left-1/2 before:top-0 before:h-px before:w-24 before:-translate-x-1/2 before:bg-foreground/[0.07] before:content-['']",
+                    )}
+                  >
+                    <span className="relative truncate px-4 text-[11.5px] font-normal tracking-[-0.005em] text-foreground/45 transition-colors duration-200 ease-out group-hover:text-foreground/85">
+                      {summary}
+                    </span>
+                  </motion.button>
+                )
+              })}
             </motion.div>
           )}
         </AnimatePresence>

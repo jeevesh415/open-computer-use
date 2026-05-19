@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
+import { PURCHASABLE_DB_TIERS } from "@/lib/pricing/tiers"
 
 export const runtime = "nodejs"
 
@@ -13,6 +14,7 @@ const STRIPE_PRICE_IDS: Record<string, string> = {
   lite: process.env.STRIPE_PRICE_LITE || "",
   starter: process.env.STRIPE_PRICE_STARTER || "",
   professional: process.env.STRIPE_PRICE_PROFESSIONAL || "",
+  unlimited: process.env.STRIPE_PRICE_UNLIMITED || "",
   enterprise: process.env.STRIPE_PRICE_ENTERPRISE || "",
 }
 
@@ -59,6 +61,18 @@ export async function POST(req: NextRequest) {
     if (!tier || !STRIPE_PRICE_IDS[tier]) {
       return NextResponse.json(
         { error: "Invalid subscription tier" },
+        { status: 400 }
+      )
+    }
+
+    // Block checkout for any tier that is not currently live for purchase.
+    // Defence-in-depth: even if the UI is hiding decommissioned plans, a
+    // crafted request must not be allowed to bypass and create a
+    // subscription on a hidden tier.  Toggle a tier's `purchasable` flag
+    // in lib/pricing/tiers.ts (and add to PURCHASABLE_DB_TIERS) to relist.
+    if (!PURCHASABLE_DB_TIERS.has(tier)) {
+      return NextResponse.json(
+        { error: "This plan is no longer available for new subscriptions." },
         { status: 400 }
       )
     }

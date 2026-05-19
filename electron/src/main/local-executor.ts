@@ -19,6 +19,31 @@ import { hideForDesktopAction, showAfterDesktopAction } from './window-manager'
 import { getActiveDisplay } from './display-manager'
 import { execFile } from 'child_process'
 import { BrowserWindow } from 'electron'
+import { tryInterceptShellCommand, checkUnsupportedShellCommand } from './shell-intercept'
+import { isTestMode } from './test-mode'
+
+// ─── Test-only globals ──────────────────────────────────────────────────
+// Real-Electron Playwright tests can't ``import('./file-ops')`` inside
+// ``app.evaluate`` because electron-vite bundles main into a single
+// ``out/main/index.js`` — no individual module files survive at runtime.
+//
+// To let those tests exercise real fs / shell behaviour on each OS without
+// going through the full WebSocket-bridge command path, we expose the file-
+// ops and terminal handlers on a global gated by ``COASTY_TEST_MODE``.
+// Production users never set that env var, so the global stays absent in
+// real installs.
+if (isTestMode()) {
+  ;(globalThis as Record<string, unknown>).__coastyTestExports__ = {
+    fileOps: {
+      readFile, writeFile, editFile, appendFile, deleteFile, fileExists,
+      listDirectory, deleteDirectory,
+    },
+    terminal: {
+      executeTerminal, connectTerminal, readTerminal, closeTerminal,
+      typeTerminal, clearTerminal,
+    },
+  }
+}
 
 type CommandHandler = (params: any) => Promise<any>
 
@@ -32,6 +57,10 @@ function runShellForResult(opts: {
   return new Promise((resolve) => {
     execFile(opts.cmd, opts.args, {
       timeout: 8000,
+      // 10 MB — raised from the 1 MB default on 2026-05-17 after
+      // ERR_CHILD_PROCESS_STDIO_MAXBUFFER reports from update-script
+      // codepaths. See terminal.ts MAX_OUTPUT_BUFFER_BYTES for sizing.
+      maxBuffer: 10 * 1024 * 1024,
       env: opts.env ? { ...process.env, ...opts.env } : undefined,
     }, (error, stdout) => {
       if (error) {
@@ -55,6 +84,64 @@ export class LocalExecutor {
   }
 
   async executeCommand(command: string, parameters: any = {}): Promise<any> {
+    // ── Cross-platform shell interception ──────────────────────────────
+    // Some agents emit Linux-only tools (xdotool, wmctrl, …) via
+    // terminal_execute even on Windows / macOS. Catch those before they hit
+    // the shell and route them to the equivalent native handler so the
+    // agent's output Just Works regardless of OS. Multi-statement chains
+    // (joined by `&&` or `;`) are recognized as drag / modifier-click /
+    // sequence patterns. Anything not recognized falls through.
+    if (command === 'terminal_execute' || command === 'execute_command') {
+      const intercept = tryInterceptShellCommand(parameters?.command)
+      if (intercept) {
+        console.log(`[LocalExecutor] Intercepted: ${intercept.reason}`)
+        return this.dispatchIntercept(intercept.command, intercept.parameters)
+      }
+      // Safety net: if the agent emitted an unrecognized chain of Linux-only
+      // tools (xdotool / wmctrl) on Windows or macOS, refuse cleanly instead
+      // of letting PowerShell choke on `&&` or "command not found." Avoids
+      // confusing failures that look like shell bugs but are really missing
+      // intercept patterns we should add.
+      const unsupported = checkUnsupportedShellCommand(parameters?.command)
+      if (unsupported) {
+        console.warn(`[LocalExecutor] ${unsupported.error}`)
+        return unsupported
+      }
+    }
+
+    return this.dispatchIntercept(command, parameters)
+  }
+
+  /**
+   * Dispatch a (possibly intercepted) command to its handler. Knows how to
+   * unfold the synthetic `__sequence` pseudo-command into a serial run of
+   * sub-commands so multi-step shell chains can be executed natively.
+   */
+  private async dispatchIntercept(command: string, parameters: any): Promise<any> {
+    if (command === '__sequence') {
+      const steps: Array<{ command: string; parameters: any }> = parameters?.steps ?? []
+      const results: any[] = []
+      for (const step of steps) {
+        const r = await this.executeCommand(step.command, step.parameters)
+        results.push(r)
+        // Stop on first failure — matches `&&` semantics in shell
+        if (r && r.success === false) break
+      }
+      const allOk = results.length > 0 && results.every((r) => r && r.success !== false)
+      const output = results.map((r) => r?.output ?? '').filter(Boolean).join('\n').slice(0, 5000)
+      return {
+        success: allOk,
+        steps: results,
+        output,
+        ...(allOk ? {} : { error: results.find((r) => r?.success === false)?.error ?? 'sequence step failed' }),
+      }
+    }
+
+    if (command === '__noop') {
+      // sleep-only / no-op — succeed silently
+      return { success: true, output: '' }
+    }
+
     const handler = this.handlers.get(command)
     if (!handler) {
       console.warn(`[LocalExecutor] Unknown command: ${command}`)
@@ -62,7 +149,6 @@ export class LocalExecutor {
     }
 
     try {
-      // Normalize parameters before passing to handler
       const normalized = this.normalizeParams(command, parameters)
       return await handler(normalized)
     } catch (error: any) {
@@ -135,6 +221,27 @@ export class LocalExecutor {
   }
 
   /**
+   * Dispatch the `permission:denied` IPC event to the renderer so the
+   * PermissionToast component can show its in-app prompt.
+   *
+   * Centralised here so EVERY command path (desktop automation,
+   * screenshot, and any future capability) routes through the same
+   * dispatcher with the same shape — previously only commands wrapped
+   * in `withOverlayHidden` fired the event, which meant screenshot
+   * failures silently dropped on the floor and Nitish never saw the
+   * "Granted? Restart" toast on screenshot-only denials.
+   */
+  private dispatchPermissionDenied(result: any): void {
+    if (!result?.permissionDenied) return
+    const win = BrowserWindow.getAllWindows()[0]
+    if (!win || win.isDestroyed()) return
+    win.webContents.send('permission:denied', {
+      type: result.permissionType,
+      message: result.error,
+    })
+  }
+
+  /**
    * Wrap a handler so the overlay becomes invisible and click-through before
    * the action, then fades back in after. Uses opacity + setIgnoreMouseEvents
    * instead of win.hide()/show() for a seamless, glitch-free experience.
@@ -144,19 +251,7 @@ export class LocalExecutor {
       await hideForDesktopAction()
       try {
         const result = await handler(params)
-
-        // If a desktop action was denied due to missing macOS permissions,
-        // notify the renderer so it can show an in-app prompt to the user.
-        if (result?.permissionDenied) {
-          const win = BrowserWindow.getAllWindows()[0]
-          if (win && !win.isDestroyed()) {
-            win.webContents.send('permission:denied', {
-              type: result.permissionType,
-              message: result.error,
-            })
-          }
-        }
-
+        this.dispatchPermissionDenied(result)
         return result
       } finally {
         showAfterDesktopAction()
@@ -168,7 +263,17 @@ export class LocalExecutor {
     // ========================
     // DESKTOP / SCREENSHOT
     // ========================
-    this.handlers.set('screenshot', () => captureScreenshot())
+    // Screenshot is NOT wrapped in withOverlayHidden because the
+    // overlay-hide / native-helper / desktopCapturer sequence inside
+    // captureScreenshot() already handles its own window visibility.
+    // We still need to dispatch permission:denied if the capture failed
+    // because the user revoked Screen Recording — so the toast fires
+    // and Nitish can hit "Restart" without leaving the app.
+    this.handlers.set('screenshot', async () => {
+      const result = await captureScreenshot()
+      this.dispatchPermissionDenied(result)
+      return result
+    })
 
     // Desktop mouse — hide overlay so clicks don't hit it
     this.handlers.set('click', this.withOverlayHidden((p) => desktopClick(p)))

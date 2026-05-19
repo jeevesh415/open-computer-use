@@ -11,6 +11,133 @@
   50% { opacity: 0; }
 }
 
+/* Pure-CSS entrance animations for any clickable card/CTA on public pages.
+ *
+ * Why pure CSS instead of framer-motion: wrapping a Next.js <Link>, <button>,
+ * or any clickable element in <motion.*> causes a mobile double-tap bug.
+ * Motion's gesture system (whileTap/whileHover/drag detection) intercepts
+ * the first pointerdown on touch devices to disambiguate tap vs drag, which
+ * swallows the click — users have to tap twice to navigate. CSS keyframes
+ * have no such gesture layer, so the first tap fires the link/button
+ * immediately.
+ *
+ * Stagger model: each card sets `--card-i: <index>` inline; the delay is
+ * `--card-i * --card-stagger-ms` (default 40ms). Single-element fade-ups
+ * use `--card-d: <ms>` for an explicit delay. */
+@keyframes public-fade-up {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.public-card-enter {
+  animation: public-fade-up 500ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--card-i, 0) * var(--card-stagger-ms, 40ms));
+}
+.public-fade-up {
+  animation: public-fade-up 600ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--card-d, 0) * 1ms);
+}
+
+/* Legacy aliases — kept so existing blog-list-client.tsx markup still works.
+ * `--blog-card-i` is mapped onto `--card-i` via the same delay formula. */
+.blog-card-enter {
+  animation: public-fade-up 500ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--blog-card-i, 0) * 40ms);
+}
+@keyframes blog-featured-enter {
+  0%   { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.blog-featured-enter {
+  animation: blog-featured-enter 700ms cubic-bezier(0.25, 0.1, 0.25, 1) 200ms both;
+}
+
+/* ─── CUA timeline — magical line treatments ─────────────────
+   Two coupled effects on the left rail of the CUA section:
+     • cua-line-draw  : on first mount, the line draws itself top-down
+     • cua-caret-drift: while streaming, a soft glow drifts top-down
+   The gradient line itself is static inline CSS, not a keyframe.
+   Both keyframes are auto-disabled by the prefers-reduced-motion
+   block below. */
+@keyframes cua-line-draw {
+  0%   { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
+@keyframes cua-caret-drift {
+  /* `top` animates from above-viewport to past-bottom of the parent.
+     Using top (not transform) because percentages on transform refer
+     to the caret's own size, not the parent's. The caret is purely
+     decorative so the minor layout cost is acceptable.
+
+     Opacity envelope:
+       0–12%   fade in as the caret crosses the top edge of the rail
+       12–75%  full bright — the comet stays lit for the majority of
+               its trip so it visibly travels deep toward the bottom
+       75–92%  slow ~0.7s dissolve as the caret nears and crosses the
+               bottom edge — soft enough to read as "fading out" rather
+               than "snapping out"
+       92–100% held at 0 while the position completes its drift past
+               the bottom, ready for the next cycle. */
+  0%   { top: -60px; opacity: 0; }
+  12%  { opacity: 1; }
+  75%  { opacity: 1; }
+  92%  { opacity: 0; }
+  100% { top: calc(100% + 60px); opacity: 0; }
+}
+.cua-line-draw {
+  transform-origin: top;
+  animation: cua-line-draw 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cua-caret-drift {
+  animation: cua-caret-drift 4s linear infinite;
+  will-change: top, opacity;
+}
+
+/* Respect reduced-motion preferences — disable entrances entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .public-card-enter, .public-fade-up,
+  .blog-card-enter, .blog-featured-enter,
+  .cua-line-draw, .cua-caret-drift {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* iOS double-tap defense.
+ *
+ * Why this rule exists. The keyframes above animate
+ *   transform: translateY(24px) → translateY(0)
+ * with `animation-fill-mode: both`, so every animated card has a
+ * persistent `transform: translateY(0)` on it after the animation ends.
+ * That is NOT a no-op on iOS Safari:
+ *   - It promotes the element to its own GPU compositor layer.
+ *   - On a touch device, Safari then has a known hit-testing
+ *     off-by-subpixel bug for taps that land on a `<Link>` whose
+ *     ancestor (or itself) is a transformed compositor layer. The
+ *     first tap "misses" and resolves to the document body; the second
+ *     tap (after the layer has settled) lands correctly. Users
+ *     experience this as needing to double-tap every blog card to
+ *     navigate.
+ *
+ * The fix: on any touch-only viewport, drop the animation completely.
+ * No transform, no compositor layer, no hit-test bug. The cards just
+ * appear in place — a perfectly fine UX on phones, where the staggered
+ * fade was visual polish, not load-bearing.
+ *
+ * `(hover: none)` matches phones, iPad in pure-touch mode, and most
+ * Android devices. `(max-width: 639px)` is the belt-and-suspenders
+ * fallback for any device that mis-reports `hover` (some webviews do)
+ * but is clearly a phone by viewport width. Either condition disables
+ * the animation. */
+@media (hover: none), (max-width: 639px) {
+  .public-card-enter, .public-fade-up,
+  .blog-card-enter, .blog-featured-enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Shimmer animation for tool invocation placeholder */
 @keyframes shimmer {
   0% {
@@ -95,6 +222,16 @@
   );
 }
 
+/* Shimmer sweep driver for .shimmer-text (Super Humans thinking indicator) */
+@keyframes super-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* Shine sweep for page loader titles */
 @keyframes text-shine {
   0% {
@@ -175,6 +312,34 @@
   -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
 }
 
+/* Kill iOS Safari's 300ms double-tap-to-zoom delay on every interactive
+   element. Without this, every tap on a link/button waits ~300ms to see
+   if a second tap is coming, which feels exactly like "I have to double-
+   click". `manipulation` permits panning + pinch-zoom on the page itself
+   (so the page stays scrollable / zoomable), but disables the per-element
+   double-tap zoom that introduces the delay. Also disables the iOS tap
+   highlight flash so the press feels instant rather than wash-then-fire. */
+a, button, [role="button"], [role="link"], input[type="button"], input[type="submit"], label[for] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sign-out kill-switch.
+   `markSigningOut()` (lib/user-store/sign-out-state.ts) adds
+   `.coasty-signing-out` to <body> when the sign-out flow begins. This
+   rule hides every Sonner toast surface for the brief window between
+   supabase.auth.signOut() and window.location.replace("/"). Without it,
+   any in-flight chat stream / fetch / query that errors during the
+   cookie-cleared window flashes a red "Something went wrong" toast on
+   the way to the landing page. Pure-CSS so it can't be bypassed by
+   direct sonner imports, multi-sweep dismiss races, or React re-render
+   timing. `display: none` (not opacity) so the element doesn't even
+   take up layout space mid-fade. */
+body.coasty-signing-out [data-sonner-toaster],
+body.coasty-signing-out [data-sonner-toast] {
+  display: none !important;
+}
+
 /* Global scrollbar hiding */
 *::-webkit-scrollbar {
   display: none;
@@ -241,6 +406,12 @@
   --font-mono: var(--font-geist-mono);
   --spacing-app-header: 56px;
   --spacing-input-area: 134px;
+
+  /* Custom breakpoint sized to land just below 13" MacBook Air width
+     (1440 logical px) so the hero gutter cards mount on small Macs.
+     Tailwind's stock 2xl is 1536, which excludes every laptop smaller
+     than the 16" MBP. Used as `mac:` (e.g. mac:block). */
+  --breakpoint-mac: 90rem;
 
   @keyframes loading-dots {
     0%,
@@ -829,6 +1000,59 @@
     transform-origin: center;
     animation-delay: -5s;
     transform: translateZ(0);
+  }
+
+  /* ─── Unlimited-tier cinematic drift ────────────────────────────────────
+     Three looping keyframes used by app/components/effects/unlimited-smoke.tsx
+     to render a dark moody aurora (gold/wine/midnight) behind Unlimited
+     surfaces.  Very slow + small movements — the whole point is patient
+     ambient atmosphere, like watching dust suspended in golden hour light. */
+  @keyframes unlimited-drift-1 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.55;
+    }
+    50% {
+      transform: translate3d(22px, -18px, 0) scale(1.05);
+      opacity: 0.72;
+    }
+  }
+  @keyframes unlimited-drift-2 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate3d(-26px, 20px, 0) scale(0.96);
+      opacity: 0.65;
+    }
+  }
+  @keyframes unlimited-drift-3 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.48;
+    }
+    50% {
+      transform: translate3d(18px, 24px, 0) scale(1.04);
+      opacity: 0.62;
+    }
+  }
+  .animate-unlimited-drift-1 {
+    animation: unlimited-drift-1 64s ease-in-out infinite;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  .animate-unlimited-drift-2 {
+    animation: unlimited-drift-2 78s ease-in-out infinite;
+    animation-delay: -20s;
+    transform: translateZ(0);
+    will-change: transform, opacity;
+  }
+  .animate-unlimited-drift-3 {
+    animation: unlimited-drift-3 56s ease-in-out infinite;
+    animation-delay: -36s;
+    transform: translateZ(0);
+    will-change: transform, opacity;
   }
 
 }

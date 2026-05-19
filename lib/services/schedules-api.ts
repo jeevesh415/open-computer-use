@@ -2,7 +2,17 @@
  * Frontend API client for employee scheduling.
  *
  * Calls the Next.js proxy routes which forward to the Python backend.
+ *
+ * # Error handling
+ *
+ * All non-OK responses go through `sanitizeBackendError` so the UI sees
+ * a user-friendly message rather than backend internals (header names,
+ * middleware names, exception class names).  This was the fix for the
+ * "CSRF token missing" string showing up in the schedule dialog.  See
+ * `lib/services/error-passthrough.ts` for the full rationale.
  */
+
+import { sanitizeBackendError, type SanitizeOptions } from "./error-passthrough"
 
 export interface ScheduleConfig {
   frequency: string
@@ -83,7 +93,11 @@ export interface DelegateConfig {
   added_at?: string
 }
 
-async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Response> {
+async function fetchWithAuth(
+  url: string,
+  options: RequestInit = {},
+  sanitize: SanitizeOptions = {},
+): Promise<Response> {
   const res = await fetch(url, {
     ...options,
     headers: {
@@ -93,15 +107,11 @@ async function fetchWithAuth(url: string, options: RequestInit = {}): Promise<Re
   })
 
   if (!res.ok) {
-    const body = await res.text()
-    let message = body
-    try {
-      const parsed = JSON.parse(body)
-      message = parsed.detail || parsed.error || body
-    } catch {
-      // use raw text
-    }
-    throw new Error(message)
+    // Always sanitize: even when the backend message looks user-friendly
+    // it can carry middleware names ("CSRF token missing") that confuse
+    // users and brittle-couple the UI to backend internals.  The helper
+    // logs the raw body to console.error so engineers can still debug.
+    throw await sanitizeBackendError(res, sanitize)
   }
 
   return res
@@ -111,10 +121,20 @@ export async function createSchedule(
   chatId: string,
   config: ScheduleConfig
 ): Promise<ScheduleResponse> {
-  const res = await fetchWithAuth(`/api/schedules/${chatId}`, {
-    method: 'POST',
-    body: JSON.stringify(config),
-  })
+  const res = await fetchWithAuth(
+    `/api/schedules/${chatId}`,
+    { method: 'POST', body: JSON.stringify(config) },
+    {
+      action: "create the schedule",
+      404: "Couldn't find the chat to schedule.",
+      // No 403 override here: the allowlist passthrough catches the
+      // genuinely user-friendly 403 cases ("Schedule limit reached",
+      // "Insufficient credits") so the user sees the actionable
+      // billing message.  Unsafe 403s ("CSRF token missing") fall
+      // through to the status-coded default, which is what we want.
+      passthroughIfSafe: true,
+    },
+  )
   const data = await res.json()
   return data.schedule
 }
@@ -122,13 +142,27 @@ export async function createSchedule(
 export async function getSchedule(
   chatId: string
 ): Promise<ScheduleResponse | null> {
-  const res = await fetchWithAuth(`/api/schedules/${chatId}`)
+  const res = await fetchWithAuth(`/api/schedules/${chatId}`, {}, {
+    action: "load the schedule",
+  })
   const data = await res.json()
   return data.schedule ?? null
 }
 
 export async function deleteSchedule(chatId: string): Promise<void> {
-  await fetchWithAuth(`/api/schedules/${chatId}`, { method: 'DELETE' })
+  await fetchWithAuth(
+    `/api/schedules/${chatId}`,
+    { method: 'DELETE' },
+    {
+      // The bug case.  Status-specific overrides keep the message
+      // recoverable and friendly even when the backend returns a
+      // 403 with "CSRF token missing" (the symptom this whole audit
+      // exists to prevent from ever reaching the UI again).
+      action: "remove the schedule",
+      403: "Couldn't remove the schedule. Please refresh the page and try again.",
+      404: "This schedule no longer exists.",
+    },
+  )
 }
 
 export async function listSchedules(): Promise<ScheduleResponse[]> {
@@ -152,13 +186,27 @@ export async function getScheduleHistory(
 }
 
 export async function triggerScheduleNow(chatId: string): Promise<void> {
-  await fetchWithAuth(`/api/schedules/${chatId}?action=run-now`, { method: 'POST' })
+  await fetchWithAuth(
+    `/api/schedules/${chatId}?action=run-now`,
+    { method: 'POST' },
+    {
+      action: "run the schedule",
+      // 409 = "already running" — surface that as the actual conflict.
+      409: "This schedule is already running. Wait for it to finish.",
+      passthroughIfSafe: true,
+    },
+  )
 }
 
 export async function pauseSchedule(chatId: string): Promise<{ enabled: boolean }> {
-  const res = await fetchWithAuth(`/api/schedules/${chatId}?action=pause`, {
-    method: 'PATCH',
-  })
+  const res = await fetchWithAuth(
+    `/api/schedules/${chatId}?action=pause`,
+    { method: 'PATCH' },
+    {
+      action: "pause the schedule",
+      404: "This schedule no longer exists.",
+    },
+  )
   const data = await res.json()
   return { enabled: data.enabled }
 }

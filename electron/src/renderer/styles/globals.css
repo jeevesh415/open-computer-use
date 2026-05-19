@@ -34,6 +34,287 @@ html, body {
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* ─── Motion tokens (shared easings) ───────────────────── */
+:root {
+  --ease-apple:  cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-enter:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/**
+ * Apple-style premium shadow stack — pure-inset so the rounded clip can
+ * never leak square edges to the transparent window beneath.
+ *  1. 0.5px inset hairline → crisp rounded outline along the radius
+ *  2. bright top-inside highlight → specular light from above
+ *  3. dark bottom-inside shade → grounds the pill
+ *  4. subtle inside depth → gentle ambient occlusion
+ */
+.premium-shadow {
+  box-shadow:
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.085),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45),
+    inset 0 0 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Press / hover micro-interactions — universal on every interactive surface */
+.press-scale {
+  transition: transform 180ms var(--ease-apple),
+              background-color 180ms var(--ease-apple),
+              color 180ms var(--ease-apple),
+              opacity 180ms var(--ease-apple);
+}
+.press-scale:active { transform: scale(0.94); }
+
+.hover-lift {
+  transition: transform 240ms var(--ease-spring),
+              background-color 240ms var(--ease-apple),
+              box-shadow 240ms var(--ease-apple);
+}
+.hover-lift:hover  { transform: translateY(-0.5px); }
+.hover-lift:active { transform: translateY(0) scale(0.98); }
+
+/* Liquid iOS Send / Stop FABs — radial-gradient highlight + inset specular */
+.send-fab {
+  background:
+    radial-gradient(120% 120% at 30% 20%,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(235, 235, 235, 1) 60%,
+      rgba(210, 210, 210, 1) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 0 0 0.5px rgba(255, 255, 255, 0.4);
+  transition: transform 220ms var(--ease-spring),
+              filter 180ms var(--ease-apple);
+}
+.send-fab:hover    { filter: brightness(1.05); transform: scale(1.03); }
+.send-fab:active   { transform: scale(0.92); }
+.send-fab:disabled {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+  filter: none;
+  transform: none;
+}
+
+.stop-fab {
+  background:
+    radial-gradient(120% 120% at 30% 20%,
+      rgba(255, 90, 90, 1) 0%,
+      rgba(230, 50, 50, 1) 60%,
+      rgba(195, 30, 30, 1) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(200, 40, 40, 0.35);
+  transition: transform 220ms var(--ease-spring),
+              filter 180ms var(--ease-apple);
+}
+.stop-fab:hover  { filter: brightness(1.08); transform: scale(1.03); }
+.stop-fab:active { transform: scale(0.92); }
+
+/* Smooth border-radius animation when the pill morphs between modes. */
+.morph-radius {
+  transition: border-radius 320ms var(--ease-spring);
+}
+
+/* ─── Welcome screen — magical entrance choreography ───── */
+
+/* Words rise from below with a brief blur — used to stagger the tagline
+   one word at a time, and chips one row at a time. Combined with
+   inline animation-delay this creates a poem-like staggered reveal. */
+@keyframes word-rise {
+  0%   { opacity: 0; transform: translate3d(0, 6px, 0); filter: blur(3px); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0);   filter: blur(0); }
+}
+.word-rise { animation: word-rise 520ms var(--ease-enter) both; }
+
+/* Slow aurora wash drifting behind the greeting — gives the screen
+   a living, breathing feel without distracting from the type. */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0)     rotate(0deg);   opacity: 0.55; }
+  33%      { transform: translate3d(8px, -6px, 0) rotate(2deg);   opacity: 0.7;  }
+  66%      { transform: translate3d(-6px, 6px, 0) rotate(-2deg);  opacity: 0.5;  }
+}
+.aurora-drift { animation: aurora-drift 14s ease-in-out infinite; }
+
+/* Arrow nudges right when its parent .group is hovered — Apple's
+   "tap me" affordance pattern. */
+.nudge-arrow {
+  transition: transform 240ms var(--ease-spring),
+              color 200ms var(--ease-apple);
+}
+.group:hover .nudge-arrow { transform: translateX(2px); }
+
+/* Hairline divider that draws itself in from a center point —
+   used between sections of the welcome screen for a cinematic
+   "act break" feel. Combined with .word-rise it appears to draw
+   horizontally as the screen reveals top → bottom. */
+@keyframes hairline-draw {
+  0%   { opacity: 0; transform: scaleX(0); }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+.hairline-draw { animation: hairline-draw 800ms var(--ease-enter) both; }
+
+/* Silver-gradient text fill — Apple-grade premium hero typography
+   (the same kind used in Apple TV+ titles). A vertical bright→dim
+   gradient clipped to the text shape gives words a subtle metallic
+   sheen without color, so it stays minimal but feels expensive. */
+.text-silver {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(225, 225, 230, 0.78) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Slow horizontal shimmer that sweeps across a surface every ~7s.
+   Used on premium cards to make the surface feel alive without being
+   distracting — you notice it after the second look, not the first. */
+@keyframes surface-shimmer {
+  0%, 88%, 100% { transform: translateX(-150%); opacity: 0; }
+  92%           { opacity: 1; }
+  98%           { transform: translateX(150%); opacity: 1; }
+}
+.shimmer-sweep { position: relative; overflow: hidden; }
+.shimmer-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.06) 48%,
+    rgba(255, 255, 255, 0.10) 52%,
+    transparent 65%
+  );
+  transform: translateX(-150%);
+  animation: surface-shimmer 7s ease-in-out infinite;
+  border-radius: inherit;
+}
+
+/* Soft pulsing aura around an icon — handoff "ready" indicator.
+   Two concentric rings expanding + fading, staggered, on a 3s loop.
+   Quiet at rest, brightens on hover via .group:hover. */
+@keyframes aura-pulse {
+  0%   { transform: scale(0.65); opacity: 0.55; }
+  100% { transform: scale(1.9);  opacity: 0; }
+}
+.aura-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(96, 165, 250, 0.55);
+  pointer-events: none;
+  animation: aura-pulse 3s var(--ease-enter) infinite;
+}
+.aura-ring-2 { animation-delay: 1.5s; }
+.group:hover .aura-ring { border-color: rgba(96, 165, 250, 0.85); }
+
+/* Subtle vertical float — used for "alive" rest state on cards */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-1.2px); }
+}
+.float-y { animation: float-y 5.5s ease-in-out infinite; }
+
+/* Quoted-prompt card with rest-state float, hover-lift + soft glow + a
+   2px accent bar that grows from the left edge. Tied together so the
+   prompt feels like a tactile object that responds to attention. */
+.quote-row {
+  position: relative;
+  transition: transform 320ms var(--ease-spring),
+              box-shadow 320ms var(--ease-apple),
+              background-color 240ms var(--ease-apple);
+}
+.quote-row::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.85), transparent);
+  border-radius: 1px;
+  transform: translateY(-50%);
+  transition: height 360ms var(--ease-spring);
+  pointer-events: none;
+}
+.quote-row:hover::before { height: 65%; }
+.quote-row:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.10);
+}
+
+/* Reduced-motion fallback — disables every animation/transition. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .shimmer-text { -webkit-text-fill-color: #e5e5e5; background: none; }
+}
+
+/* ─── Streaming ticker — cinematic crossfade ─────────────── */
+/**
+ * Centered vertical motion. Text rises into focus from below with a
+ * soft blur + micro letter-spacing breath, settles to crisp center,
+ * and on exit lifts upward and dissolves. Reads like a film title or
+ * a now-playing label rather than a sliding ticker.
+ */
+@keyframes ticker-in {
+  0%   { opacity: 0; transform: translate3d(0, 7px, 0);  filter: blur(6px); letter-spacing: 0.02em; }
+  55%  { opacity: 1; transform: translate3d(0, 0, 0);    filter: blur(0);   letter-spacing: -0.005em; }
+  100% { opacity: 1; transform: translate3d(0, 0, 0);    filter: blur(0);   letter-spacing: -0.005em; }
+}
+@keyframes ticker-out {
+  0%   { opacity: 1; transform: translate3d(0, 0, 0);    filter: blur(0); }
+  100% { opacity: 0; transform: translate3d(0, -7px, 0); filter: blur(6px); }
+}
+.ticker-in  { animation: ticker-in  520ms cubic-bezier(0.16, 1, 0.3, 1) both; will-change: transform, opacity, filter; }
+.ticker-out { animation: ticker-out 320ms cubic-bezier(0.4, 0, 0.6, 1)  both; will-change: transform, opacity, filter; }
+
+/* Symmetric edge mask so any overflow fades equally on both sides. */
+.ticker-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* Slow premium shimmer — text reads like a backlit film subtitle. */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.shimmer-text {
+  background: linear-gradient(90deg,
+    rgba(229, 229, 229, 0.62) 0%,
+    rgba(255, 255, 255, 1.00) 48%,
+    rgba(229, 229, 229, 0.62) 100%);
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3.6s linear infinite;
+  /* Subtle glow tuned to fit inside the container's vertical margins. */
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+/* Breathing emerald ring around the connection-status dot. */
+@keyframes breathe-emerald {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(16, 185, 129, 0.45); }
+  70%      { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);    }
+}
+.breathe-emerald { animation: breathe-emerald 2s ease-out infinite; }
+
 /* ── Shining beam border ── */
 @property --beam-angle {
   syntax: '<angle>';
@@ -265,4 +546,61 @@ html, body {
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin: 1rem 0;
+}
+
+/* ─── CUA "thinking" pulse ─────────────────────────────────
+   Foot-of-timeline live indicator while the agent is mid-stream.
+   The visual itself is just a muted "Thinking" label using the
+   .shimmer-text class above for its glow sweep — this rule only
+   adds a soft entrance animation when the label first mounts. */
+.thinking-pulse-enter {
+  animation: ticker-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Per-item stream-in for the CUA timeline. CSS animations only fire on
+   element mount, so existing items (history load) animate once when the
+   chat opens and new streamed items animate as they're appended.
+   Both/forwards fill-mode holds the final state so the item doesn't
+   flicker if React re-renders the same key mid-stream. */
+@keyframes cua-item-in {
+  0%   { opacity: 0; transform: translate3d(0, 6px, 0); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.cua-item-in {
+  animation: cua-item-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── CUA timeline — magical line treatments ─────────────────
+   Two coupled effects on the left rail:
+     • cua-line-draw  : on first mount, the line draws itself top-down
+     • cua-caret-drift: while streaming, a soft glow drifts top-down
+   The gradient line itself is static inline CSS, not a keyframe.
+   The reduced-motion media query above auto-disables both. */
+@keyframes cua-line-draw {
+  0%   { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
+@keyframes cua-caret-drift {
+  /* Opacity envelope:
+       0–12%   fade in as the caret crosses the top edge of the rail
+       12–75%  full bright — the comet stays lit for the majority of
+               its trip so it visibly travels deep toward the bottom
+       75–92%  slow ~0.7s dissolve as the caret nears and crosses the
+               bottom edge — soft enough to read as "fading out" rather
+               than "snapping out"
+       92–100% held at 0 while position completes its drift, ready for
+               the next cycle. */
+  0%   { top: -60px; opacity: 0; }
+  12%  { opacity: 1; }
+  75%  { opacity: 1; }
+  92%  { opacity: 0; }
+  100% { top: calc(100% + 60px); opacity: 0; }
+}
+.cua-line-draw {
+  transform-origin: top;
+  animation: cua-line-draw 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cua-caret-drift {
+  animation: cua-caret-drift 4s linear infinite;
+  will-change: top, opacity;
 }

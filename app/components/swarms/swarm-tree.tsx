@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 import {
   CheckCircle,
   XCircle,
@@ -32,6 +32,12 @@ import {
   Lightning,
   ArrowBendUpRight,
   HandPalm,
+  TreeStructure,
+  SquaresFour,
+  Play,
+  Pause,
+  SkipForward,
+  ClipboardText,
 } from "@phosphor-icons/react"
 import { AnimatePresence, motion } from "motion/react"
 import { createPortal } from "react-dom"
@@ -469,6 +475,10 @@ export function buildTimelineSteps(events: SwarmEvent[]): TimelineStep[] {
 // ---------------------------------------------------------------------------
 
 const EASE = [0.22, 1, 0.36, 1] as const
+// Header geometry. The fork from the prompt and the inter-agent communication
+// band live in a single SVG so the arcs visibly anchor to the column tops.
+const FORK_HEIGHT = 52
+const BAND_HEIGHT = 88
 const MIN_ZOOM = 0.15
 const MAX_ZOOM = 2
 const ZOOM_STEP = 0.15
@@ -538,6 +548,21 @@ export function SwarmTree({
   )
   const hasInteractions = swarmInteractions.length > 0
 
+  // Per-machine subtask text from the swarm planner. SwarmPanel emits these as
+  // a swarm_planning event whose content is "Machine N: <subtask>\n..."; we
+  // parse them back out here so the Machines view can show each card's brief.
+  const machineSubtasks = useMemo(() => {
+    const map: Record<number, string> = {}
+    for (const event of events) {
+      if (event.event_type !== "swarm_planning") continue
+      for (const line of event.content.split("\n")) {
+        const m = line.match(/^Machine\s+(\d+):\s*(.+)$/)
+        if (m) map[parseInt(m[1], 10)] = m[2].trim()
+      }
+    }
+    return map
+  }, [events])
+
   // Collect latest screenshot per machine (for matrix view)
   const latestScreenshots = useMemo(() => {
     const map: Record<number, { src: string; toolName: string }> = {}
@@ -554,8 +579,30 @@ export function SwarmTree({
 
   const screenshotCount = Object.keys(latestScreenshots).length
   const [showScreenshotMatrix, setShowScreenshotMatrix] = useState(false)
+  // View mode: "machines" shows a grid of player-style cards (one per machine);
+  // "graph" shows the pan/zoom tree. Default to machines — the per-machine
+  // player cards are the more direct read of "what's happening right now".
+  const [viewMode, setViewMode] = useState<"graph" | "machines">("machines")
 
-  const cols = machineIndices.length || machineCount
+  // Stabilise column count: prefer the declared machineCount so the canvas does
+  // NOT snap-to-fit each time a new machine reports its first event mid-stream.
+  const cols = Math.max(machineIndices.length, machineCount || 0) || 1
+
+  // The set of machine slots to render. Always include every expected machine
+  // (0..machineCount-1) AND every machine that has emitted at least one event,
+  // sorted ascending. This means:
+  //  - During boot, all N slots show as "Booting…" placeholders.
+  //  - As machines start reporting, their slots populate with real data while
+  //    the rest stay as placeholders — no card disappears or reappears as
+  //    events stream in.
+  //  - When machineCount is unknown (0), we just show the real machines.
+  const displayMachineIndices = useMemo(() => {
+    const set = new Set<number>(machineIndices)
+    if (machineCount && machineCount > 0) {
+      for (let i = 0; i < machineCount; i++) set.add(i)
+    }
+    return Array.from(set).sort((a, b) => a - b)
+  }, [machineIndices, machineCount])
 
   // Pan/zoom state
   const containerRef = useRef<HTMLDivElement>(null)
@@ -567,51 +614,83 @@ export function SwarmTree({
   const panOrigin = useRef({ x: 0, y: 0 })
   const lastPinchDist = useRef<number | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  // Hide the canvas for one paint so the initial fit lands without a visible snap.
+  const [hasFitted, setHasFitted] = useState(false)
 
-  // Auto-pan down as new steps arrive during live execution
-  const prevEventCount = useRef(events.length)
   const isLive = status === "running" || status === "creating" || status === "planning" || status === "aggregating"
 
-  useEffect(() => {
-    if (isLive && events.length > prevEventCount.current && prevEventCount.current > 0) {
-      setPan((p) => ({ ...p, y: p.y - 28 }))
-    }
-    prevEventCount.current = events.length
-  }, [events.length, isLive])
+  // Both views share the same pan/zoom canvas; only the inner content's
+  // natural width differs. Compute it from viewMode + cols so auto-fit, resetView,
+  // and the panned content's wrapper all agree.
+  const naturalContentWidth = useMemo(() => {
+    if (viewMode === "graph") return Math.max(cols * 220, 300)
+    return Math.max(
+      cols * MACHINE_CARD_WIDTH + Math.max(0, cols - 1) * MACHINE_CARD_GAP,
+      320
+    )
+  }, [viewMode, cols])
 
-  // Auto-fit on mount + detect mobile
-  useEffect(() => {
+  // Auto-fit before paint so the first frame the user sees is already centered.
+  // Refits whenever the view mode toggles (cards and tree have different natural
+  // widths), but NOT when more machines stream in mid-run — that's what made
+  // the original feel unstable.
+  useLayoutEffect(() => {
     if (!containerRef.current || !contentRef.current) return
     const containerW = containerRef.current.clientWidth
     setIsMobile(containerW < 768)
-    const contentW = Math.max(cols * 220, 300)
-    const fit = Math.min(1, (containerW - 32) / contentW)
+    const fit = Math.min(1, (containerW - 32) / naturalContentWidth)
     const clamped = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, fit))
     setZoom(clamped)
-    const scaledW = contentW * clamped
+    const scaledW = naturalContentWidth * clamped
     setPan({ x: Math.max(0, (containerW - scaledW) / 2), y: 0 })
-  }, [cols])
+    setHasFitted(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewMode])
 
-  // Non-passive wheel listener so preventDefault() stops page scroll
+  // Keep mobile flag in sync on container resize without triggering a refit.
+  useEffect(() => {
+    if (!containerRef.current || typeof ResizeObserver === "undefined") return
+    const el = containerRef.current
+    const ro = new ResizeObserver(() => setIsMobile(el.clientWidth < 768))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  // Non-passive wheel listener so preventDefault() stops page scroll.
+  // Convention (Figma / Excalidraw / Miro): ctrl/cmd + wheel zooms around the
+  // cursor; plain wheel pans. Mac trackpad pinch fires wheel with ctrlKey=true,
+  // and two-finger scroll fires wheel with ctrlKey=false — so this gives Mac
+  // users intuitive pan + pinch-zoom out of the box.
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
     const onWheel = (e: WheelEvent) => {
       e.preventDefault()
       e.stopPropagation()
-      const rect = el.getBoundingClientRect()
-      const cursorX = e.clientX - rect.left
-      const cursorY = e.clientY - rect.top
-      setZoom((prev) => {
-        const dir = e.deltaY < 0 ? 1 : -1
-        const next = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, prev + dir * ZOOM_STEP))
-        const ratio = next / prev
+      const isZoom = e.ctrlKey || e.metaKey
+      if (isZoom) {
+        const rect = el.getBoundingClientRect()
+        const cursorX = e.clientX - rect.left
+        const cursorY = e.clientY - rect.top
+        // Continuous, pixel-proportional zoom so trackpad pinch feels smooth
+        // (not staircased like the discrete ZOOM_STEP would produce).
+        setZoom((prev) => {
+          const factor = Math.exp(-e.deltaY * 0.01)
+          const next = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, prev * factor))
+          const ratio = next / prev
+          setPan((p) => ({
+            x: cursorX - ratio * (cursorX - p.x),
+            y: cursorY - ratio * (cursorY - p.y),
+          }))
+          return next
+        })
+      } else {
+        const sensitivity = e.deltaMode === 0 ? 1 : 16
         setPan((p) => ({
-          x: cursorX - ratio * (cursorX - p.x),
-          y: cursorY - ratio * (cursorY - p.y),
+          x: p.x - e.deltaX * sensitivity,
+          y: p.y - e.deltaY * sensitivity,
         }))
-        return next
-      })
+      }
     }
     el.addEventListener("wheel", onWheel, { passive: false })
     return () => el.removeEventListener("wheel", onWheel)
@@ -699,15 +778,14 @@ export function SwarmTree({
   const resetView = useCallback(() => {
     if (!containerRef.current) return
     const containerW = containerRef.current.clientWidth
-    const contentW = Math.max(cols * 220, 300)
-    const fit = Math.min(1, (containerW - 32) / contentW)
+    const fit = Math.min(1, (containerW - 32) / naturalContentWidth)
     const clamped = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, fit))
     setZoom(clamped)
-    const scaledW = contentW * clamped
+    const scaledW = naturalContentWidth * clamped
     setPan({ x: Math.max(0, (containerW - scaledW) / 2), y: 0 })
-  }, [cols])
+  }, [naturalContentWidth])
 
-  if (machineIndices.length === 0) {
+  if (displayMachineIndices.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-full py-16 text-center">
         <Terminal className="size-6 text-muted-foreground/30 mb-2" />
@@ -720,7 +798,7 @@ export function SwarmTree({
 
   return (
     <div className={cn("relative h-full", className)}>
-      {/* Dotted canvas background */}
+      {/* Dotted canvas background — both modes pan/zoom over the same canvas */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.35] dark:opacity-[0.18]"
@@ -733,7 +811,52 @@ export function SwarmTree({
         <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-blue-500/[0.03] dark:bg-blue-400/[0.04] blur-3xl" />
       </div>
 
-      {/* Controls overlay */}
+      {/* View-mode pill — top-left segmented toggle between Graph and Machines */}
+      <div className="absolute top-3 left-3 z-[10]">
+        <div className="inline-flex rounded-lg border border-border/40 bg-background/90 backdrop-blur-sm shadow-sm p-0.5 gap-0.5">
+          <button
+            type="button"
+            onClick={() => setViewMode("graph")}
+            className={cn(
+              "h-6 px-2.5 inline-flex items-center gap-1.5 rounded-[6px] text-[11px] font-medium transition-all duration-150",
+              viewMode === "graph"
+                ? "bg-foreground/[0.08] text-foreground shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                : "text-muted-foreground/70 hover:text-foreground"
+            )}
+            aria-pressed={viewMode === "graph"}
+            title="Graph view"
+          >
+            <TreeStructure
+              className="size-3.5"
+              weight={viewMode === "graph" ? "fill" : "regular"}
+            />
+            <span className="hidden sm:inline">Graph</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewMode("machines")}
+            className={cn(
+              "h-6 px-2.5 inline-flex items-center gap-1.5 rounded-[6px] text-[11px] font-medium transition-all duration-150",
+              viewMode === "machines"
+                ? "bg-foreground/[0.08] text-foreground shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                : "text-muted-foreground/70 hover:text-foreground"
+            )}
+            aria-pressed={viewMode === "machines"}
+            title="Machines view"
+          >
+            <SquaresFour
+              className="size-3.5"
+              weight={viewMode === "machines" ? "fill" : "regular"}
+            />
+            <span className="hidden sm:inline">Machines</span>
+            <span className="text-[10px] font-mono tabular-nums text-muted-foreground/60 ml-0.5">
+              {machineIndices.length}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Top-right pan/zoom controls — both modes share the same canvas */}
       <div className="absolute top-3 right-3 z-[10] flex items-center gap-1">
         <span className="text-[10px] tabular-nums text-muted-foreground/50 mr-1 select-none">
           {zoomPercent}%
@@ -776,7 +899,7 @@ export function SwarmTree({
         </button>
       </div>
 
-      {/* D-pad navigation — small screens & touch devices */}
+      {/* D-pad navigation — small screens & touch devices, both modes */}
       {isMobile && (
         <div className="absolute bottom-14 left-3 z-[10] flex flex-col items-center gap-1" data-no-pan>
           <button
@@ -819,7 +942,7 @@ export function SwarmTree({
         </div>
       )}
 
-      {/* Hint */}
+      {/* Hint \u2014 applies to both modes (canvas pan/zoom) */}
       <div className={cn(
         "absolute left-3 z-[10] flex items-center gap-1.5 text-[10px] text-muted-foreground/35 select-none pointer-events-none",
         isMobile ? "bottom-2.5 right-3 justify-center" : "bottom-2.5"
@@ -828,7 +951,8 @@ export function SwarmTree({
         <span>{isMobile ? "Pinch to zoom \u00b7 Use D-pad to pan" : "Drag to pan \u00b7 Scroll to zoom"}</span>
       </div>
 
-      {/* Pan/zoom viewport */}
+      {/* Pan/zoom viewport \u2014 shared by both modes. The transform/cursor/handlers
+          are mode-agnostic; only the inner content differs (tree vs cards). */}
       <div
         ref={containerRef}
         className={cn("relative z-[1] overflow-hidden h-full select-none", containerClassName)}
@@ -848,83 +972,95 @@ export function SwarmTree({
           ref={contentRef}
           className="origin-top-left will-change-transform"
           style={{
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-            transition: isPanning.current ? "none" : "transform 0.15s ease-out",
+            transform: `translate3d(${pan.x}px, ${pan.y}px, 0) scale(${zoom})`,
+            transition: isPanning.current
+              ? "none"
+              : "transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease-out",
+            opacity: hasFitted ? 1 : 0,
+            backfaceVisibility: "hidden",
           }}
         >
-          <div className="px-6 py-6" style={{ width: Math.max(cols * 220, 300) }}>
-            {/* Root prompt node */}
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: EASE }}
-              className="flex justify-center mb-1"
-            >
-              <div className="relative max-w-md px-5 py-3 rounded-xl border border-border/40 bg-background/90 backdrop-blur-sm text-center shadow-sm">
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
-                <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-1 font-medium">Prompt</p>
-                <p className="text-sm leading-snug line-clamp-2">{prompt}</p>
-              </div>
-            </motion.div>
-
-            {/* Fork connector SVG */}
-            <div className="flex justify-center">
-              <svg
-                width={Math.max(cols * 220, 200)}
-                height={52}
-                viewBox={`0 0 ${Math.max(cols * 220, 200)} 52`}
-                className="shrink-0"
+          {viewMode === "graph" ? (
+            <div className="px-6 py-6" style={{ width: naturalContentWidth }}>
+              {/* Root prompt node */}
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                className="flex justify-center mb-1"
               >
-                {machineIndices.map((_, i) => {
-                  const totalW = Math.max(cols * 220, 200)
-                  const colW = totalW / cols
-                  const startX = totalW / 2
-                  const endX = colW * i + colW / 2
-                  const midY = 26
-                  return (
-                    <motion.path
-                      key={i}
-                      d={`M ${startX} 0 C ${startX} ${midY}, ${endX} ${midY}, ${endX} 52`}
-                      fill="none"
-                      className="stroke-border/50"
-                      strokeWidth={1.5}
-                      strokeDasharray="4 3"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ pathLength: 1, opacity: 1 }}
-                      transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: "easeOut" }}
-                    />
-                  )
-                })}
-              </svg>
-            </div>
+                <div className="relative max-w-md px-5 py-3 rounded-xl border border-border/40 bg-background/90 backdrop-blur-sm text-center shadow-sm">
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-1 font-medium">Prompt</p>
+                  <p className="text-sm leading-snug line-clamp-2">{prompt}</p>
+                </div>
+              </motion.div>
 
-            {/* Machine branches — wrapped in relative for overlay positioning */}
-            <div className="relative">
-              {/* Swarm connections overlay — absolutely positioned over machine headers */}
-              {hasInteractions && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.4, ease: EASE }}
-                  className="absolute inset-x-0 top-0 z-[2] pointer-events-none"
+              {/* Unified header connector — fork beziers from the prompt fanning
+                  out to each machine column, plus the inter-agent communication
+                  band when interactions exist. */}
+              <motion.div
+                className="flex justify-center overflow-hidden"
+                initial={false}
+                animate={{ height: hasInteractions ? FORK_HEIGHT + BAND_HEIGHT : FORK_HEIGHT }}
+                transition={{ duration: 0.45, ease: EASE }}
+              >
+                <svg
+                  width={Math.max(cols * 220, 200)}
+                  height={FORK_HEIGHT + BAND_HEIGHT}
+                  viewBox={`0 0 ${Math.max(cols * 220, 200)} ${FORK_HEIGHT + BAND_HEIGHT}`}
+                  className="shrink-0"
                 >
-                  <SwarmConnectionsOverlay
-                    interactions={swarmInteractions}
-                    machineIndices={machineIndices}
-                    totalWidth={Math.max(cols * 220, 300)}
-                  />
-                </motion.div>
-              )}
+                  <SwarmConnectionDefs />
 
+                  {/* Fork beziers — prompt center → each machine column top.
+                      Use displayMachineIndices so all expected columns appear
+                      from the moment the swarm starts, not only after the first
+                      per-machine event for each one arrives. */}
+                  {displayMachineIndices.map((_, i) => {
+                    const totalW = Math.max(cols * 220, 200)
+                    const colW = totalW / cols
+                    const startX = totalW / 2
+                    const endX = colW * i + colW / 2
+                    const midY = 26
+                    return (
+                      <motion.path
+                        key={`fork-${i}`}
+                        d={`M ${startX} 0 C ${startX} ${midY}, ${endX} ${midY}, ${endX} ${FORK_HEIGHT}`}
+                        fill="none"
+                        className="stroke-border/50"
+                        strokeWidth={1.5}
+                        strokeDasharray="4 3"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        animate={{ pathLength: 1, opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+                      />
+                    )
+                  })}
+
+                  {/* Communication band */}
+                  {hasInteractions && (
+                    <SwarmConnectionBand
+                      interactions={swarmInteractions}
+                      machineIndices={displayMachineIndices}
+                      totalWidth={Math.max(cols * 220, 200)}
+                      bandTop={FORK_HEIGHT}
+                      bandHeight={BAND_HEIGHT}
+                    />
+                  )}
+                </svg>
+              </motion.div>
+
+              {/* Machine branches */}
               <div
                 className="grid gap-4"
                 style={{
                   gridTemplateColumns: `repeat(${cols}, minmax(180px, 1fr))`,
                 }}
               >
-                {machineIndices.map((idx, i) => {
+                {displayMachineIndices.map((idx, i) => {
                   const steps = perMachineSteps[idx] || []
-                  const mStatus = machineStatuses[idx]
+                  const mStatus = machineStatuses[idx] || "pending"
                   return (
                     <motion.div
                       key={idx}
@@ -943,12 +1079,24 @@ export function SwarmTree({
                 })}
               </div>
             </div>
-          </div>
+          ) : (
+            <MachineGridView
+              machineIndices={displayMachineIndices}
+              perMachineSteps={perMachineSteps}
+              machineStatuses={machineStatuses}
+              latestScreenshots={latestScreenshots}
+              swarmInteractions={swarmInteractions}
+              machineSubtasks={machineSubtasks}
+              isLive={isLive}
+              prompt={prompt}
+            />
+          )}
         </div>
       </div>
 
-      {/* Interaction legend — floating bottom-left, next to pan hint */}
-      {hasInteractions && (
+      {/* Interaction legend — floating bottom-left, only in graph mode (the
+          machine cards already show their own per-machine interaction badges) */}
+      {viewMode === "graph" && hasInteractions && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -962,8 +1110,8 @@ export function SwarmTree({
         </motion.div>
       )}
 
-      {/* Live screenshot strip — bottom-right on desktop, auto-visible */}
-      {!isMobile && screenshotCount > 0 && !showScreenshotMatrix && (
+      {/* Live screenshot strip — graph mode only; machines view already shows the screenshots prominently */}
+      {viewMode === "graph" && !isMobile && screenshotCount > 0 && !showScreenshotMatrix && (
         <div className="absolute bottom-2.5 right-3 z-[10] max-w-[55%]">
           <div className="flex items-end gap-1.5 justify-end">
             {machineIndices.map((idx, i) => {
@@ -1056,7 +1204,13 @@ export function SwarmTree({
 }
 
 // ---------------------------------------------------------------------------
-// Swarm connections overlay — SVG arcs between machine columns
+// Swarm header connector — SVG <defs> + a <g> group that renders all
+// inter-agent communication inside the unified header SVG (fork + band).
+//
+// Coordinate system: the parent SVG has its origin at the prompt; the fork
+// occupies y = 0 → FORK_HEIGHT; the band occupies y = bandTop → bandBottom
+// where bandBottom is the top edge of the machine header pills. Every arc
+// anchors at y = bandBottom so it visibly emerges from a machine column.
 // ---------------------------------------------------------------------------
 
 interface ConnectionGroup {
@@ -1067,30 +1221,16 @@ interface ConnectionGroup {
   label: string
 }
 
-function SwarmConnectionsOverlay({
-  interactions,
-  machineIndices,
-  totalWidth,
-}: {
-  interactions: SwarmInteraction[]
-  machineIndices: number[]
-  totalWidth: number
-}) {
-  if (interactions.length === 0 || machineIndices.length < 2) return null
-
-  const cols = machineIndices.length
-  const colW = totalWidth / cols
-
-  // Deduplicate: group by (type, from, to) and count
-  const groupMap = new Map<string, ConnectionGroup>()
+function groupSwarmInteractions(interactions: SwarmInteraction[]): ConnectionGroup[] {
+  const map = new Map<string, ConnectionGroup>()
   for (const i of interactions) {
     const key = `${i.type}-${i.fromMachine}-${i.toMachine}`
-    const existing = groupMap.get(key)
+    const existing = map.get(key)
     if (existing) {
       existing.count++
       if (!existing.label && i.label) existing.label = i.label
     } else {
-      groupMap.set(key, {
+      map.set(key, {
         type: i.type,
         fromMachine: i.fromMachine,
         toMachine: i.toMachine,
@@ -1099,265 +1239,922 @@ function SwarmConnectionsOverlay({
       })
     }
   }
+  return Array.from(map.values())
+}
 
-  const groups = Array.from(groupMap.values())
-  // Separate broadcasts and direct connections
+function SwarmConnectionDefs() {
+  return (
+    <defs>
+      <style>{`
+        @keyframes swarm-flow { to { stroke-dashoffset: -20; } }
+        .swarm-arc { animation: swarm-flow 1.8s linear infinite; }
+        @keyframes swarm-pulse-soft {
+          0%, 100% { opacity: 0.32; }
+          50%      { opacity: 0.78; }
+        }
+        .swarm-pulse-soft { animation: swarm-pulse-soft 2.2s ease-in-out infinite; }
+        @keyframes swarm-hub-pulse {
+          0%, 100% { opacity: 0.05; }
+          50%      { opacity: 0.13; }
+        }
+        .swarm-hub-pulse { animation: swarm-hub-pulse 3.4s ease-in-out infinite; }
+      `}</style>
+      {Object.entries(INTERACTION_STROKE_COLORS).map(([type, color]) => (
+        <filter
+          key={`glow-${type}`}
+          id={`glow-${type}`}
+          x="-50%" y="-50%" width="200%" height="200%"
+        >
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+          <feFlood floodColor={color} floodOpacity="0.5" result="color" />
+          <feComposite in="color" in2="blur" operator="in" result="glow" />
+          <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      ))}
+      {Object.entries(INTERACTION_STROKE_COLORS).map(([type, color]) => (
+        <marker
+          key={`arrow-${type}`}
+          id={`swarm-arrow-${type}`}
+          markerWidth="6"
+          markerHeight="4"
+          refX="5"
+          refY="2"
+          orient="auto"
+        >
+          <path d="M 0 0 L 6 2 L 0 4 z" fill={color} opacity="0.85" />
+        </marker>
+      ))}
+    </defs>
+  )
+}
+
+function SwarmConnectionBand({
+  interactions,
+  machineIndices,
+  totalWidth,
+  bandTop,
+  bandHeight,
+  anchor = "bottom",
+  xForMachine,
+}: {
+  interactions: SwarmInteraction[]
+  machineIndices: number[]
+  totalWidth: number
+  bandTop: number
+  bandHeight: number
+  // Where the arcs hook back to the machine columns.
+  //  - "bottom" (graph view): the band sits ABOVE the machines, arcs rise UP.
+  //  - "top" (machines view): the band sits BELOW the cards, arcs drop DOWN.
+  anchor?: "top" | "bottom"
+  // Override how each machine's X is computed. Default is evenly distributed
+  // across totalWidth (correct for the graph view's `repeat(N, 1fr)` grid).
+  // Machines view uses fixed-width cards, so it passes its own mapper.
+  xForMachine?: (machineIndex: number) => number
+}) {
+  if (interactions.length === 0 || machineIndices.length === 0) return null
+
+  const cols = machineIndices.length
+  const colW = totalWidth / cols
+  const bandBottom = bandTop + bandHeight
+  const centerX = totalWidth / 2
+
+  // Where arcs and badges hook to the machine columns.
+  const anchorY = anchor === "bottom" ? bandBottom : bandTop
+  // Direction arcs flex AWAY from the anchor (-1 = up, +1 = down).
+  const peakDir = anchor === "bottom" ? -1 : 1
+
+  function machineX(machineIndex: number): number {
+    if (xForMachine) return xForMachine(machineIndex)
+    const colIdx = machineIndices.indexOf(machineIndex)
+    if (colIdx === -1) return centerX
+    return colW * colIdx + colW / 2
+  }
+
+  const groups = groupSwarmInteractions(interactions)
   const directConnections = groups.filter(
-    (g) => g.type === "direct_message" && g.toMachine !== null
+    (g) => g.type === "direct_message" && g.toMachine !== null && g.fromMachine !== g.toMachine
   )
   const broadcasts = groups.filter((g) => g.type === "broadcast")
   const memoryOps = groups.filter(
     (g) => g.type === "shared_memory_write" || g.type === "shared_memory_read"
   )
   const coordOps = groups.filter((g) =>
-    ["help_request", "expertise_claim", "decision_proposal", "dependency_wait"].includes(g.type)
+    ["help_request", "expertise_claim", "decision_proposal", "dependency_wait", "resume_task"].includes(g.type)
   )
 
-  const svgH = 56
-  const centerX = totalWidth / 2
+  // MEM hub geometry — sits centered, biased slightly AWAY from the anchor
+  // so shared-memory S-curves arrive at a flat angle.
+  const hubW = 96
+  const hubH = 22
+  const hubCY = anchor === "bottom"
+    ? bandTop + Math.round(bandHeight * 0.55)
+    : bandTop + Math.round(bandHeight * 0.45)
+  const hubY = hubCY - hubH / 2
+  const hubX = centerX - hubW / 2
+  // Direction from hub toward the machine column (used to place S-curve control points).
+  const hubToMachineDy = anchorY > hubCY ? 1 : -1
 
-  function machineX(machineIndex: number): number {
-    const colIdx = machineIndices.indexOf(machineIndex)
-    if (colIdx === -1) return centerX
-    return colW * colIdx + colW / 2
-  }
-
-  // Stack offset for overlapping arcs
+  // Stack offset so overlapping direct-message arcs are visually separable.
   let arcIndex = 0
 
   return (
-    <div className="relative w-full" style={{ height: 0, overflow: "visible" }}>
-      <svg
-        width={totalWidth}
-        height={svgH}
-        viewBox={`0 0 ${totalWidth} ${svgH}`}
-        className="pointer-events-none"
-        style={{ position: "relative", top: -2 }}
-      >
-        <defs>
-          {/* Animated dash flow */}
-          <style>{`
-            @keyframes swarm-flow {
-              to { stroke-dashoffset: -20; }
-            }
-            .swarm-arc {
-              animation: swarm-flow 1.5s linear infinite;
-            }
-            @keyframes swarm-pulse {
-              0%, 100% { opacity: 0.5; }
-              50% { opacity: 1; }
-            }
-            .swarm-pulse {
-              animation: swarm-pulse 2s ease-in-out infinite;
-            }
-          `}</style>
-          {/* Glow filters for each color */}
-          {Object.entries(INTERACTION_STROKE_COLORS).map(([type, color]) => (
-            <filter key={type} id={`glow-${type}`} x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
-              <feFlood floodColor={color} floodOpacity="0.3" result="color" />
-              <feComposite in="color" in2="blur" operator="in" result="glow" />
-              <feMerge>
-                <feMergeNode in="glow" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          ))}
-          {/* Arrow marker */}
-          <marker id="swarm-arrow-blue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-            <path d="M 0 0 L 6 2 L 0 4 z" fill="#3b82f6" opacity="0.7" />
-          </marker>
-          <marker id="swarm-arrow-cyan" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-            <path d="M 0 0 L 6 2 L 0 4 z" fill="#06b6d4" opacity="0.7" />
-          </marker>
-          <marker id="swarm-arrow-violet" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-            <path d="M 0 0 L 6 2 L 0 4 z" fill="#8b5cf6" opacity="0.7" />
-          </marker>
-          <marker id="swarm-arrow-amber" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-            <path d="M 0 0 L 6 2 L 0 4 z" fill="#f59e0b" opacity="0.7" />
-          </marker>
-        </defs>
+    <g>
+      {/* Faint dashed column continuation. Only rendered when the band sits
+          BETWEEN the fork end and the machine column tops (graph view), where
+          the stubs bridge a real visual gap. In the machines view the band
+          sits directly under the cards with no gap — arcs touch the card edge
+          already, so adding stubs would dangle into empty space below. */}
+      {anchor === "bottom" && machineIndices.map((idx, i) => (
+        <motion.line
+          key={`stub-${idx}`}
+          x1={machineX(idx)} y1={bandTop}
+          x2={machineX(idx)} y2={bandBottom}
+          className="stroke-border/45"
+          strokeWidth={1}
+          strokeDasharray="2 4"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.55 + i * 0.05, ease: "easeOut" }}
+        />
+      ))}
 
-        {/* Direct message arcs */}
-        {directConnections.map((conn) => {
-          const fromX = machineX(conn.fromMachine)
-          const toX = machineX(conn.toMachine!)
-          const dist = Math.abs(toX - fromX)
-          const offset = (arcIndex++ % 3) * 4
-          const arcH = Math.max(16, Math.min(40, dist * 0.18)) + offset
-          const midX = (fromX + toX) / 2
-          const stroke = INTERACTION_STROKE_COLORS[conn.type]
-          return (
-            <g key={`dm-${conn.fromMachine}-${conn.toMachine}`}>
-              {/* Glow path */}
-              <path
-                d={`M ${fromX} ${svgH} Q ${midX} ${svgH - arcH}, ${toX} ${svgH}`}
-                fill="none"
-                stroke={stroke}
-                strokeWidth={3}
-                opacity={0.1}
-                filter={`url(#glow-${conn.type})`}
-              />
-              {/* Main arc */}
-              <path
-                d={`M ${fromX} ${svgH} Q ${midX} ${svgH - arcH}, ${toX} ${svgH}`}
-                fill="none"
-                stroke={stroke}
-                strokeWidth={1.5}
-                strokeDasharray="6 4"
-                className="swarm-arc"
-                opacity={0.7}
-                markerEnd="url(#swarm-arrow-blue)"
-              />
-              {/* Count badge */}
-              {conn.count > 1 && (
-                <>
-                  <circle cx={midX} cy={svgH - arcH - 1} r={7} fill={stroke} opacity={0.15} />
-                  <text
-                    x={midX}
-                    y={svgH - arcH + 2.5}
-                    textAnchor="middle"
-                    fontSize={8}
-                    fontWeight={600}
-                    fill={stroke}
-                    opacity={0.8}
-                  >
-                    {conn.count}
-                  </text>
-                </>
-              )}
-            </g>
-          )
-        })}
+      {/* Hub soft halo — rendered before arcs so arcs render on top */}
+      {memoryOps.length > 0 && (
+        <ellipse
+          cx={centerX} cy={hubCY}
+          rx={hubW / 2 + 14}
+          ry={hubH / 2 + 10}
+          fill={INTERACTION_STROKE_COLORS.shared_memory_write}
+          className="swarm-hub-pulse"
+        />
+      )}
 
-        {/* Broadcast arcs — fan from source to center, then to all */}
-        {broadcasts.map((conn) => {
-          const fromX = machineX(conn.fromMachine)
-          const stroke = INTERACTION_STROKE_COLORS.broadcast
-          return (
-            <g key={`bc-${conn.fromMachine}`}>
-              {machineIndices
-                .filter((idx) => idx !== conn.fromMachine)
-                .map((targetIdx) => {
-                  const toX = machineX(targetIdx)
-                  const dist = Math.abs(toX - fromX)
-                  const arcH = Math.max(14, Math.min(36, dist * 0.16))
-                  const midX = (fromX + toX) / 2
-                  return (
-                    <g key={`bc-${conn.fromMachine}-${targetIdx}`}>
-                      <path
-                        d={`M ${fromX} ${svgH} Q ${midX} ${svgH - arcH}, ${toX} ${svgH}`}
-                        fill="none"
-                        stroke={stroke}
-                        strokeWidth={1}
-                        strokeDasharray="4 4"
-                        className="swarm-arc"
-                        opacity={0.45}
-                      />
-                    </g>
-                  )
-                })}
-              {/* Broadcast origin pulse */}
-              <circle cx={fromX} cy={svgH - 2} r={4} fill={stroke} opacity={0.2} className="swarm-pulse" />
-              <circle cx={fromX} cy={svgH - 2} r={2} fill={stroke} opacity={0.5} />
-            </g>
-          )
-        })}
-
-        {/* Shared memory ops — arcs to/from center "memory" node */}
-        {memoryOps.length > 0 && (
-          <g>
-            {/* Central memory node */}
-            <rect
-              x={centerX - 16}
-              y={4}
-              width={32}
-              height={16}
-              rx={4}
-              fill={INTERACTION_STROKE_COLORS.shared_memory_write}
-              opacity={0.12}
-              stroke={INTERACTION_STROKE_COLORS.shared_memory_write}
-              strokeWidth={0.5}
-              strokeOpacity={0.3}
+      {/* Direct message arcs — quadratic Bezier flexing AWAY from the anchor */}
+      {directConnections.map((conn) => {
+        const fromX = machineX(conn.fromMachine)
+        const toX = machineX(conn.toMachine!)
+        const dist = Math.abs(toX - fromX)
+        const offset = (arcIndex++ % 3) * 5
+        const rawH = Math.max(34, Math.min(64, dist * 0.16)) + offset
+        const arcH = Math.min(rawH, bandHeight - 14)
+        const peakY = anchorY + peakDir * arcH
+        const badgeY = peakY + peakDir * 7
+        const midX = (fromX + toX) / 2
+        const stroke = INTERACTION_STROKE_COLORS[conn.type]
+        return (
+          <motion.g
+            key={`dm-${conn.fromMachine}-${conn.toMachine}-${conn.count}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.45, delay: 0.85, ease: EASE }}
+          >
+            <path
+              d={`M ${fromX} ${anchorY} Q ${midX} ${peakY}, ${toX} ${anchorY}`}
+              fill="none"
+              stroke={stroke}
+              strokeWidth={3.5}
+              opacity={0.14}
+              filter={`url(#glow-${conn.type})`}
             />
-            <text
-              x={centerX}
-              y={15}
-              textAnchor="middle"
-              fontSize={7}
-              fontWeight={600}
-              fill={INTERACTION_STROKE_COLORS.shared_memory_write}
-              opacity={0.6}
-            >
-              MEM
-            </text>
-            {memoryOps.map((conn) => {
-              const mX = machineX(conn.fromMachine)
-              const stroke = INTERACTION_STROKE_COLORS[conn.type]
-              const isWrite = conn.type === "shared_memory_write"
-              const midX = (mX + centerX) / 2
-              return (
-                <g key={`mem-${conn.type}-${conn.fromMachine}`}>
+            <path
+              d={`M ${fromX} ${anchorY} Q ${midX} ${peakY}, ${toX} ${anchorY}`}
+              fill="none"
+              stroke={stroke}
+              strokeWidth={1.5}
+              strokeDasharray="6 4"
+              className="swarm-arc"
+              opacity={0.82}
+              markerEnd={`url(#swarm-arrow-${conn.type})`}
+            />
+            <circle cx={fromX} cy={anchorY} r={2.5} fill={stroke} opacity={0.85} />
+            {conn.count > 1 && (
+              <g>
+                <circle cx={midX} cy={badgeY} r={8.5} fill="hsl(var(--background))" />
+                <circle cx={midX} cy={badgeY} r={8.5} fill={stroke} opacity={0.18} />
+                <circle cx={midX} cy={badgeY} r={8.5}
+                  fill="none"
+                  stroke={stroke}
+                  strokeOpacity={0.45}
+                  strokeWidth={0.75}
+                />
+                <text
+                  x={midX} y={badgeY + 2.8}
+                  textAnchor="middle"
+                  fontSize={9.5}
+                  fontWeight={600}
+                  fill={stroke}
+                >
+                  {conn.count}
+                </text>
+              </g>
+            )}
+          </motion.g>
+        )
+      })}
+
+      {/* Broadcasts — fan from origin to every other machine */}
+      {broadcasts.map((conn) => {
+        const fromX = machineX(conn.fromMachine)
+        const stroke = INTERACTION_STROKE_COLORS.broadcast
+        return (
+          <motion.g
+            key={`bc-${conn.fromMachine}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.95, ease: EASE }}
+          >
+            {machineIndices
+              .filter((idx) => idx !== conn.fromMachine)
+              .map((targetIdx) => {
+                const toX = machineX(targetIdx)
+                const dist = Math.abs(toX - fromX)
+                const arcH = Math.min(Math.max(28, dist * 0.14), bandHeight - 20)
+                const peakY = anchorY + peakDir * arcH
+                const midX = (fromX + toX) / 2
+                return (
                   <path
-                    d={
-                      isWrite
-                        ? `M ${mX} ${svgH} Q ${midX} ${svgH * 0.25}, ${centerX} 20`
-                        : `M ${centerX} 20 Q ${midX} ${svgH * 0.25}, ${mX} ${svgH}`
-                    }
+                    key={`bc-${conn.fromMachine}-${targetIdx}`}
+                    d={`M ${fromX} ${anchorY} Q ${midX} ${peakY}, ${toX} ${anchorY}`}
                     fill="none"
                     stroke={stroke}
-                    strokeWidth={1}
-                    strokeDasharray="4 3"
+                    strokeWidth={1.2}
+                    strokeDasharray="3 4"
                     className="swarm-arc"
-                    opacity={0.5}
-                    markerEnd="url(#swarm-arrow-violet)"
+                    opacity={0.55}
                   />
-                </g>
+                )
+              })}
+            <circle cx={fromX} cy={anchorY} r={6} fill={stroke} className="swarm-pulse-soft" />
+            <circle cx={fromX} cy={anchorY} r={2.5} fill={stroke} opacity={0.85} />
+          </motion.g>
+        )
+      })}
+
+      {/* Shared-memory arcs — smooth S-curve between each machine and the hub side */}
+      {memoryOps.map((conn) => {
+        const mX = machineX(conn.fromMachine)
+        const stroke = INTERACTION_STROKE_COLORS[conn.type]
+        const isWrite = conn.type === "shared_memory_write"
+        const hubSideX = mX < centerX ? hubX : hubX + hubW
+        // Control points are offset from the hub TOWARD the machine column so
+        // the S-curve approaches the hub at a flat angle regardless of whether
+        // the machine sits above or below the hub.
+        const ctrlA = hubCY + hubToMachineDy * 14
+        const ctrlB = hubCY + hubToMachineDy * 12
+        const path = isWrite
+          ? `M ${mX} ${anchorY} C ${mX} ${ctrlA}, ${hubSideX} ${ctrlB}, ${hubSideX} ${hubCY}`
+          : `M ${hubSideX} ${hubCY} C ${hubSideX} ${ctrlB}, ${mX} ${ctrlA}, ${mX} ${anchorY}`
+        return (
+          <motion.g
+            key={`mem-${conn.type}-${conn.fromMachine}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.45, delay: 1.05, ease: EASE }}
+          >
+            <path
+              d={path}
+              fill="none"
+              stroke={stroke}
+              strokeWidth={3}
+              opacity={0.1}
+              filter={`url(#glow-${conn.type})`}
+            />
+            <path
+              d={path}
+              fill="none"
+              stroke={stroke}
+              strokeWidth={1.25}
+              strokeDasharray="4 3"
+              className="swarm-arc"
+              opacity={0.75}
+              markerEnd={`url(#swarm-arrow-${conn.type})`}
+            />
+          </motion.g>
+        )
+      })}
+
+      {/* MEM hub pill — drawn after memory arcs so it sits on top */}
+      {memoryOps.length > 0 && (
+        <motion.g
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.45, delay: 1.1, ease: EASE }}
+          style={{ transformOrigin: `${centerX}px ${hubCY}px`, transformBox: "fill-box" }}
+        >
+          <rect x={hubX} y={hubY} width={hubW} height={hubH} rx={hubH / 2}
+            fill="hsl(var(--background))" />
+          <rect x={hubX} y={hubY} width={hubW} height={hubH} rx={hubH / 2}
+            fill={INTERACTION_STROKE_COLORS.shared_memory_write} opacity={0.1} />
+          <rect x={hubX} y={hubY} width={hubW} height={hubH} rx={hubH / 2}
+            fill="none"
+            stroke={INTERACTION_STROKE_COLORS.shared_memory_write}
+            strokeOpacity={0.5}
+            strokeWidth={0.75}
+          />
+          <g transform={`translate(${hubX + 12}, ${hubCY}) rotate(45)`}>
+            <rect x={-3.5} y={-3.5} width={7} height={7} rx={1}
+              fill={INTERACTION_STROKE_COLORS.shared_memory_write}
+              opacity={0.9}
+            />
+          </g>
+          <text
+            x={centerX + 9}
+            y={hubCY + 3.2}
+            textAnchor="middle"
+            fontSize={9.5}
+            fontWeight={600}
+            fill={INTERACTION_STROKE_COLORS.shared_memory_write}
+            opacity={0.95}
+            style={{ letterSpacing: "0.08em" }}
+          >
+            SHARED MEM
+          </text>
+        </motion.g>
+      )}
+
+      {/* Coordination badges — small attached circles just inside the band near each machine */}
+      {coordOps.map((conn, ci) => {
+        const mX = machineX(conn.fromMachine)
+        const stroke = INTERACTION_STROKE_COLORS[conn.type]
+        const badgeY = anchorY + peakDir * (12 + (ci % 2) * 16)
+        const glyph =
+          conn.type === "help_request" ? "?"
+          : conn.type === "expertise_claim" ? "\u2605"
+          : conn.type === "decision_proposal" ? "\u2696"
+          : conn.type === "dependency_wait" ? "\u23F3"
+          : "\u21BB"
+        return (
+          <motion.g
+            key={`coord-${conn.type}-${conn.fromMachine}-${ci}`}
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35, delay: 1.15 + ci * 0.05, ease: EASE }}
+            style={{ transformOrigin: `${mX}px ${badgeY}px`, transformBox: "fill-box" }}
+          >
+            <circle cx={mX} cy={badgeY} r={8} fill="hsl(var(--background))" />
+            <circle cx={mX} cy={badgeY} r={8} fill={stroke} opacity={0.2} />
+            <circle cx={mX} cy={badgeY} r={8}
+              fill="none"
+              stroke={stroke}
+              strokeOpacity={0.55}
+              strokeWidth={0.75}
+            />
+            <text
+              x={mX} y={badgeY + 3.2}
+              textAnchor="middle"
+              fontSize={9.5}
+              fontWeight={700}
+              fill={stroke}
+            >
+              {glyph}
+            </text>
+          </motion.g>
+        )
+      })}
+    </g>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Machines view — responsive grid of player-style cards, one per machine.
+// Activated via the Graph/Machines pill toggle at the top-left of SwarmTree.
+// Screenshot is the dominant visual; metadata strip below is intentionally
+// slim so a row of cards reads like a multi-cam dashboard.
+// ---------------------------------------------------------------------------
+
+// Card width is fixed in machines view so the fork beziers can terminate
+// at the precise X-center of each card and the visual "trunk → branch → card"
+// metaphor stays intact regardless of screen width. The container scrolls
+// horizontally when N machines exceed the viewport.
+const MACHINE_CARD_WIDTH = 280
+const MACHINE_CARD_GAP = 16
+
+function MachineGridView({
+  machineIndices,
+  perMachineSteps,
+  machineStatuses,
+  latestScreenshots,
+  swarmInteractions,
+  machineSubtasks,
+  isLive,
+  prompt,
+}: {
+  machineIndices: number[]
+  perMachineSteps: Record<number, TimelineStep[]>
+  machineStatuses: Record<number, "success" | "error" | "pending">
+  latestScreenshots: Record<number, { src: string; toolName: string }>
+  swarmInteractions: SwarmInteraction[]
+  machineSubtasks: Record<number, string>
+  isLive: boolean
+  prompt: string
+}) {
+  // Group interactions by their origin machine so each card shows its own activity.
+  const interactionsByMachine = useMemo(() => {
+    const map: Record<number, SwarmInteraction[]> = {}
+    for (const i of swarmInteractions) {
+      if (!map[i.fromMachine]) map[i.fromMachine] = []
+      map[i.fromMachine].push(i)
+    }
+    return map
+  }, [swarmInteractions])
+
+  const cols = machineIndices.length
+  // Width of the cards row (and therefore the fork SVG). Card centers land
+  // at i * (W + gap) + W/2 from the left edge of this content block.
+  const contentWidth = Math.max(
+    cols * MACHINE_CARD_WIDTH + Math.max(0, cols - 1) * MACHINE_CARD_GAP,
+    320
+  )
+
+  return (
+    // Sits inside the SwarmTree pan/zoom canvas — no own scroll, no own
+    // background. The outer canvas owns drag/wheel/pinch behaviour for both
+    // views, so this component just emits its content at its natural width.
+    <div className="px-6 py-6" style={{ width: contentWidth }}>
+      {/* Root prompt — same chrome as the graph view so the two modes
+          read as one design */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: EASE }}
+          className="flex justify-center mb-1"
+        >
+          <div className="relative max-w-md px-5 py-3 rounded-xl border border-border/40 bg-background/95 text-center shadow-sm">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+            <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 mb-1 font-medium">Prompt</p>
+            <p className="text-sm leading-snug line-clamp-2">{prompt}</p>
+          </div>
+        </motion.div>
+
+        {/* Fork SVG — prompt center fans out to each card's center. Same bezier
+            family as the graph view's fork so toggling feels like a re-skin
+            rather than a different visualisation. */}
+        <div className="flex justify-center">
+          <svg
+            width={contentWidth}
+            height={FORK_HEIGHT}
+            viewBox={`0 0 ${contentWidth} ${FORK_HEIGHT}`}
+            className="shrink-0"
+          >
+            {machineIndices.map((_, i) => {
+              const startX = contentWidth / 2
+              const endX = i * (MACHINE_CARD_WIDTH + MACHINE_CARD_GAP) + MACHINE_CARD_WIDTH / 2
+              const midY = 26
+              return (
+                <motion.path
+                  key={`fork-${i}`}
+                  d={`M ${startX} 0 C ${startX} ${midY}, ${endX} ${midY}, ${endX} ${FORK_HEIGHT}`}
+                  fill="none"
+                  className="stroke-border/50"
+                  strokeWidth={1.5}
+                  strokeDasharray="4 3"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 + i * 0.08, ease: "easeOut" }}
+                />
               )
             })}
-          </g>
+          </svg>
+        </div>
+
+        {/* Player-card row — fixed widths so each card's center sits exactly
+            under its fork bezier's endpoint. Wrap behaviour is intentionally
+            disabled; the container scrolls horizontally on narrow viewports
+            (same metaphor as the graph canvas's pan). */}
+        <div
+          className="flex"
+          style={{ gap: MACHINE_CARD_GAP, width: contentWidth }}
+        >
+          {machineIndices.map((idx, i) => (
+            <div
+              key={idx}
+              className="shrink-0"
+              style={{ width: MACHINE_CARD_WIDTH }}
+            >
+              <MachinePlayerCard
+                machineIndex={idx}
+                steps={perMachineSteps[idx] || []}
+                status={machineStatuses[idx] || "pending"}
+                screenshot={latestScreenshots[idx]}
+                interactions={interactionsByMachine[idx] || []}
+                subtask={machineSubtasks[idx]}
+                isLive={isLive}
+                delay={i * 0.05}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Inter-agent communication band — sits BELOW the cards (the space
+            beneath the cards row was otherwise empty). Arcs drop DOWN from
+            each card's bottom edge, the MEM hub is centered, and coordination
+            badges float just under their machine. Same component as the graph
+            view — only the `anchor` direction and `xForMachine` mapping change. */}
+        {swarmInteractions.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.5, ease: EASE }}
+            className="flex justify-center mt-1"
+          >
+            <svg
+              width={contentWidth}
+              height={BAND_HEIGHT}
+              viewBox={`0 0 ${contentWidth} ${BAND_HEIGHT}`}
+              className="shrink-0 overflow-visible"
+            >
+              <SwarmConnectionDefs />
+              <SwarmConnectionBand
+                interactions={swarmInteractions}
+                machineIndices={machineIndices}
+                totalWidth={contentWidth}
+                bandTop={0}
+                bandHeight={BAND_HEIGHT}
+                anchor="top"
+                xForMachine={(idx) => {
+                  const i = machineIndices.indexOf(idx)
+                  if (i === -1) return contentWidth / 2
+                  return i * (MACHINE_CARD_WIDTH + MACHINE_CARD_GAP) + MACHINE_CARD_WIDTH / 2
+                }}
+              />
+            </svg>
+          </motion.div>
+        )}
+    </div>
+  )
+}
+
+function MachinePlayerCard({
+  machineIndex,
+  steps,
+  status,
+  screenshot,
+  interactions,
+  subtask,
+  isLive,
+  delay,
+}: {
+  machineIndex: number
+  steps: TimelineStep[]
+  status: "success" | "error" | "pending"
+  screenshot: { src: string; toolName: string } | undefined
+  interactions: SwarmInteraction[]
+  subtask: string | undefined
+  isLive: boolean
+  delay: number
+}) {
+  const totalSteps = steps.length
+
+  // Per-card playhead. Starts at the latest step; auto-advances when new steps
+  // arrive *while* the user is already on the latest (so live cards keep
+  // following), but stays put when the user has scrubbed back into history.
+  const [currentStepIndex, setCurrentStepIndex] = useState(() =>
+    Math.max(0, totalSteps - 1)
+  )
+  const prevTotal = useRef(totalSteps)
+  useEffect(() => {
+    if (totalSteps === 0) {
+      prevTotal.current = 0
+      return
+    }
+    const wasAtLatest = currentStepIndex >= prevTotal.current - 1
+    if (totalSteps > prevTotal.current && wasAtLatest) {
+      setCurrentStepIndex(totalSteps - 1)
+    } else if (currentStepIndex >= totalSteps) {
+      setCurrentStepIndex(totalSteps - 1)
+    }
+    prevTotal.current = totalSteps
+  }, [totalSteps, currentStepIndex])
+
+  const currentStep = totalSteps > 0 ? steps[currentStepIndex] : undefined
+  const isLatest = totalSteps === 0 || currentStepIndex >= totalSteps - 1
+  const isRunning = isLive && status === "pending"
+  const isFollowingLive = isLatest && isRunning
+
+  // Resolve which screenshot to show in the frame:
+  //   1. The current step's screenshot, if it has one.
+  //   2. Else: the most recent screenshot at or before the current step.
+  //   3. Else: the live "latest" from the parent (so brand-new machines that
+  //      have only sent screenshots — no steps yet — still render their frame).
+  const frameScreenshot = useMemo(() => {
+    if (currentStep?.screenshot) return currentStep.screenshot
+    for (let i = currentStepIndex; i >= 0; i--) {
+      if (steps[i]?.screenshot) return steps[i].screenshot
+    }
+    return screenshot?.src ?? null
+  }, [currentStep, currentStepIndex, steps, screenshot])
+
+  // The action ticker — text or, if absent, the last tool call's name.
+  const currentAction = useMemo(() => {
+    if (!currentStep) return ""
+    if (currentStep.text) return stripAgentTags(currentStep.text)
+    const lastTool = currentStep.toolCalls[currentStep.toolCalls.length - 1]
+    if (lastTool) return lastTool.name
+    return ""
+  }, [currentStep])
+
+  const interactionsByType = useMemo(() => {
+    const counts: Partial<Record<SwarmToolType, number>> = {}
+    for (const i of interactions) {
+      counts[i.type] = (counts[i.type] || 0) + 1
+    }
+    return counts
+  }, [interactions])
+
+  const cardBorder =
+    status === "success"
+      ? "border-emerald-500/25 dark:border-emerald-500/30"
+      : status === "error"
+        ? "border-red-500/25 dark:border-red-500/30"
+        : isRunning
+          ? "border-blue-500/25 dark:border-blue-400/25"
+          : "border-border/50"
+
+  const canPrev = currentStepIndex > 0
+  const canNext = currentStepIndex < totalSteps - 1
+  const goPrev = useCallback(() => setCurrentStepIndex((i) => Math.max(0, i - 1)), [])
+  const goNext = useCallback(
+    () => setCurrentStepIndex((i) => Math.min(totalSteps - 1, i + 1)),
+    [totalSteps]
+  )
+  const goLive = useCallback(
+    () => setCurrentStepIndex(Math.max(0, totalSteps - 1)),
+    [totalSteps]
+  )
+
+  // Step strip: render last 16 segments, but remember the actual indices so
+  // click-to-jump and the playhead highlight land on the right step.
+  const stripWindow = 16
+  const stripStart = Math.max(0, totalSteps - stripWindow)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.4, delay, ease: EASE }}
+      className={cn(
+        "group relative rounded-2xl border overflow-hidden bg-background shadow-sm",
+        "transition-shadow duration-200 hover:shadow-md",
+        cardBorder
+      )}
+    >
+      {/* Screenshot frame — 16:10, dominant visual */}
+      <div className="relative aspect-[16/10] bg-foreground/[0.03] overflow-hidden">
+        {frameScreenshot ? (
+          <motion.img
+            key={frameScreenshot}
+            src={frameScreenshot}
+            alt={`Machine ${machineIndex + 1} screen`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+            <Monitor className="size-7 text-muted-foreground/20" />
+            <span className="text-[10px] text-muted-foreground/40">
+              {isRunning ? "Booting…" : "No screenshot yet"}
+            </span>
+          </div>
         )}
 
-        {/* Coordination ops — small arcs going up with icon */}
-        {coordOps.map((conn, ci) => {
-          const mX = machineX(conn.fromMachine)
-          const stroke = INTERACTION_STROKE_COLORS[conn.type]
-          const yOff = 8 + ci * 6
-          return (
-            <g key={`coord-${conn.type}-${conn.fromMachine}`}>
-              <line
-                x1={mX}
-                y1={svgH}
-                x2={mX}
-                y2={yOff + 8}
-                stroke={stroke}
-                strokeWidth={1}
-                strokeDasharray="3 3"
-                opacity={0.4}
-                className="swarm-arc"
-              />
-              <circle cx={mX} cy={yOff + 4} r={5} fill={stroke} opacity={0.15} />
-              <text
-                x={mX}
-                y={yOff + 7}
-                textAnchor="middle"
-                fontSize={6}
-                fill={stroke}
-                opacity={0.7}
-              >
-                {conn.type === "help_request"
-                  ? "?"
-                  : conn.type === "expertise_claim"
-                    ? "\u2605"
-                    : conn.type === "decision_proposal"
-                      ? "\u2696"
-                      : "\u23F3"}
-              </text>
-            </g>
-          )
-        })}
-      </svg>
-    </div>
+        {/* Top gradient so the chrome pills stay legible on bright screenshots */}
+        <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-background/55 via-background/10 to-transparent pointer-events-none" />
+
+        {/* Top-left: machine identity pill */}
+        <div className="absolute top-2 left-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-background/85 backdrop-blur-sm border border-border/40 text-[10px] font-medium shadow-sm">
+          <span
+            className={cn(
+              "relative flex size-1.5",
+              isRunning && "items-center justify-center"
+            )}
+          >
+            {isRunning && (
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-blue-500 opacity-65" />
+            )}
+            <span
+              className={cn(
+                "relative inline-flex size-1.5 rounded-full",
+                status === "success" ? "bg-emerald-500" :
+                status === "error" ? "bg-red-500" :
+                isRunning ? "bg-blue-500" :
+                "bg-muted-foreground/40"
+              )}
+            />
+          </span>
+          <span className="tracking-tight">Machine #{machineIndex + 1}</span>
+        </div>
+
+        {/* Top-right: status / live indicator */}
+        <div className="absolute top-2 right-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-background/85 backdrop-blur-sm border border-border/40 text-[10px] font-medium shadow-sm">
+          {status === "success" ? (
+            <>
+              <CheckCircle className="size-2.5 text-emerald-500" weight="fill" />
+              <span className="text-muted-foreground">Done</span>
+            </>
+          ) : status === "error" ? (
+            <>
+              <XCircle className="size-2.5 text-red-500" weight="fill" />
+              <span className="text-muted-foreground">Error</span>
+            </>
+          ) : isRunning ? (
+            <>
+              <Play className="size-2.5 text-blue-500" weight="fill" />
+              <span className="text-muted-foreground tabular-nums">
+                {totalSteps} {totalSteps === 1 ? "step" : "steps"}
+              </span>
+            </>
+          ) : (
+            <>
+              <Pause className="size-2.5 text-muted-foreground" weight="fill" />
+              <span className="text-muted-foreground">Idle</span>
+            </>
+          )}
+        </div>
+
+        {/* Bottom gradient + player transport — reveal on hover (and always
+            when scrubbing through history, so users see how to get back) */}
+        <div
+          className={cn(
+            "absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-background/70 via-background/25 to-transparent pointer-events-none transition-opacity duration-200",
+            isFollowingLive ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+          )}
+        />
+        <div
+          className={cn(
+            "absolute inset-x-0 bottom-0 px-2 pb-2 flex items-center justify-center gap-1.5 transition-opacity duration-200",
+            isFollowingLive ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+          )}
+        >
+          <button
+            type="button"
+            onClick={goPrev}
+            disabled={!canPrev}
+            className="h-7 w-7 inline-flex items-center justify-center rounded-full bg-background/90 backdrop-blur-sm border border-border/40 text-foreground/85 hover:text-foreground hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
+            title="Previous step"
+            aria-label="Previous step"
+          >
+            <CaretLeft className="size-3.5" weight="bold" />
+          </button>
+
+          <div className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-full bg-background/90 backdrop-blur-sm border border-border/40 text-[10px] font-medium shadow-sm">
+            {isFollowingLive ? (
+              <>
+                <span className="relative flex size-1.5">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-blue-500 opacity-65" />
+                  <span className="relative inline-flex size-1.5 rounded-full bg-blue-500" />
+                </span>
+                <span className="tracking-tight">Live</span>
+              </>
+            ) : totalSteps > 0 ? (
+              <span className="tabular-nums tracking-tight">
+                {currentStepIndex + 1} <span className="text-muted-foreground/55">/ {totalSteps}</span>
+              </span>
+            ) : (
+              <span className="text-muted-foreground/60">—</span>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={goNext}
+            disabled={!canNext}
+            className="h-7 w-7 inline-flex items-center justify-center rounded-full bg-background/90 backdrop-blur-sm border border-border/40 text-foreground/85 hover:text-foreground hover:bg-background disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
+            title="Next step"
+            aria-label="Next step"
+          >
+            <CaretRight className="size-3.5" weight="bold" />
+          </button>
+
+          {!isLatest && (
+            <button
+              type="button"
+              onClick={goLive}
+              className={cn(
+                "h-7 px-2 inline-flex items-center gap-1 rounded-full backdrop-blur-sm border text-[10px] font-medium transition-all shadow-sm",
+                isRunning
+                  ? "bg-blue-500/15 border-blue-500/30 text-blue-600 dark:text-blue-300 hover:bg-blue-500/20"
+                  : "bg-background/90 border-border/40 text-foreground/85 hover:text-foreground hover:bg-background"
+              )}
+              title={isRunning ? "Jump to live" : "Jump to latest step"}
+            >
+              <SkipForward className="size-3" weight="fill" />
+              <span>{isRunning ? "Live" : "Latest"}</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Body strip */}
+      <div className="px-3.5 py-3 space-y-2.5">
+        {/* Subtask brief — the prompt this specific machine was given by the
+            swarm planner. Stays muted/italic so the action ticker below is
+            clearly the live element. */}
+        {subtask && (
+          <div className="flex items-start gap-1.5">
+            <ClipboardText
+              className="size-3 text-amber-500/85 shrink-0 mt-[3px]"
+              weight="fill"
+            />
+            <p className="text-[11px] italic text-muted-foreground/85 leading-relaxed line-clamp-2">
+              {subtask}
+            </p>
+          </div>
+        )}
+
+        {/* Action ticker — what the (currently selected) step is doing */}
+        {currentAction ? (
+          <div className="flex items-start gap-1.5 min-h-[2.4em]">
+            <span
+              className={cn(
+                "mt-[5px] size-1 rounded-full shrink-0",
+                isFollowingLive ? "bg-blue-500" :
+                currentStep?.status === "success" ? "bg-emerald-500" :
+                currentStep?.status === "error" ? "bg-red-500" :
+                currentStep?.status === "awaiting_human" ? "bg-amber-500" :
+                "bg-muted-foreground/40"
+              )}
+            />
+            <p className="text-[12px] text-foreground/85 line-clamp-2 leading-relaxed">
+              {currentAction}
+            </p>
+          </div>
+        ) : (
+          <p className="text-[12px] text-muted-foreground/50 italic min-h-[2.4em]">
+            Waiting for activity…
+          </p>
+        )}
+
+        {/* Click-to-scrub step strip — each segment is a real step.
+            The current playhead is the brighter, slightly taller segment. */}
+        {totalSteps > 0 && (
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-[2px] flex-1 h-2">
+              {steps.slice(stripStart).map((step, i) => {
+                const actualIndex = stripStart + i
+                const isCurrent = actualIndex === currentStepIndex
+                const baseColor =
+                  step.status === "success" ? "bg-emerald-500" :
+                  step.status === "error" ? "bg-red-500" :
+                  step.status === "awaiting_human" ? "bg-amber-500" :
+                  "bg-muted-foreground"
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setCurrentStepIndex(actualIndex)}
+                    title={`Step ${actualIndex + 1}`}
+                    aria-label={`Jump to step ${actualIndex + 1}`}
+                    className={cn(
+                      "flex-1 rounded-full transition-all duration-200 cursor-pointer",
+                      isCurrent
+                        ? cn(baseColor, "h-2 opacity-95 shadow-[0_0_0_1.5px_hsl(var(--background)),0_0_0_2.5px_var(--ring,rgb(59,130,246))]")
+                        : cn(baseColor, "h-1 opacity-55 hover:opacity-80")
+                    )}
+                  />
+                )
+              })}
+            </div>
+            <span className="text-[10px] font-mono tabular-nums text-muted-foreground/55 shrink-0">
+              {currentStepIndex + 1}/{totalSteps}
+            </span>
+          </div>
+        )}
+
+        {/* Interaction badges row */}
+        {Object.keys(interactionsByType).length > 0 && (
+          <div className="flex flex-wrap gap-1 pt-0.5">
+            {(Object.entries(interactionsByType) as Array<[SwarmToolType, number]>).map(
+              ([type, count]) => {
+                const meta = SWARM_TOOL_META[type]
+                if (!meta) return null
+                const Icon = meta.icon
+                return (
+                  <span
+                    key={type}
+                    className={cn(
+                      "inline-flex items-center gap-1 text-[9px] font-medium px-1.5 py-0.5 rounded-full border",
+                      meta.bgColor,
+                      meta.color
+                    )}
+                    title={`${meta.label}${count > 1 ? ` × ${count}` : ""}`}
+                  >
+                    <Icon className="size-2.5" weight="fill" />
+                    {count > 1 && <span className="tabular-nums">{count}</span>}
+                  </span>
+                )
+              }
+            )}
+          </div>
+        )}
+      </div>
+    </motion.div>
   )
 }
 
@@ -1611,12 +2408,12 @@ function MachineBranch({
     <div className="flex flex-col items-center">
       <div
         className={cn(
-          "w-full rounded-xl border px-3 py-2.5 text-center transition-colors shadow-sm backdrop-blur-sm",
+          "w-full rounded-xl border px-3 py-2.5 text-center transition-colors shadow-sm",
           status === "success"
-            ? "border-emerald-500/25 bg-emerald-50/80 dark:bg-emerald-950/30"
+            ? "border-emerald-500/25 bg-emerald-50 dark:bg-emerald-950/40"
             : status === "error"
-              ? "border-red-500/25 bg-red-50/80 dark:bg-red-950/30"
-              : "border-border/40 bg-background/80"
+              ? "border-red-500/25 bg-red-50 dark:bg-red-950/40"
+              : "border-border/40 bg-background"
         )}
       >
         <div className="flex items-center justify-center gap-1.5">
@@ -1723,10 +2520,10 @@ function BranchStepCard({
 
       <div
         className={cn(
-          "mx-1 mt-2 rounded-lg border px-3 py-2 text-left transition-all shadow-sm",
+          "mx-1 mt-2 rounded-lg border px-3 py-2 text-left transition-colors duration-150 shadow-sm",
           step.status === "awaiting_human"
-            ? "border-amber-300/50 bg-amber-50/50 dark:border-amber-600/30 dark:bg-amber-950/20 p-0 overflow-hidden"
-            : "border-border/30 bg-background/85 backdrop-blur-sm hover:border-border/50 hover:bg-background/95"
+            ? "border-amber-300/50 bg-amber-50/60 dark:border-amber-600/30 dark:bg-amber-950/25 p-0 overflow-hidden"
+            : "border-border/30 bg-background/95 hover:border-border/55 hover:bg-background"
         )}
       >
         {step.status === "awaiting_human" ? (
@@ -2014,8 +2811,7 @@ function ScreenshotDotSmall({ src }: { src: string }) {
   return (
     <>
       <motion.div
-        className="cursor-pointer z-[2]"
-        whileHover={{ scale: 1.2 }}
+        className="cursor-pointer z-[2] transition-transform duration-150 hover:scale-[1.2]"
         whileTap={{ scale: 0.95 }}
         transition={{ type: "spring", stiffness: 500, damping: 15 }}
         onClick={() => setLightboxOpen(true)}
@@ -2069,8 +2865,7 @@ function ScreenshotInline({ src }: { src: string }) {
   return (
     <>
       <motion.div
-        className="mt-1.5 cursor-pointer inline-block"
-        whileHover={{ scale: 1.02 }}
+        className="mt-1.5 cursor-pointer inline-block transition-transform duration-150 hover:scale-[1.02]"
         whileTap={{ scale: 0.98 }}
         onClick={() => setLightboxOpen(true)}
       >

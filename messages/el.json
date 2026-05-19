@@ -12,13 +12,15 @@
     "recommended": "Προτεινόμενο",
     "month": "μήνα",
     "creditsPerMonth": "{count} πιστώσεις/μήνα",
-    "agentsInParallel": "{count} agents παράλληλα"
+    "agentsInParallel": "{count} agents παράλληλα",
+    "whatsIncluded": "Τι περιλαμβάνεται",
+    "hideDetails": "Απόκρυψη λεπτομερειών"
   },
   "header": {
     "useCases": "Περιπτώσεις χρήσης",
     "blog": "Blog",
     "agentSwarms": "Σμήνη agents",
-    "products": "Products",
+    "products": "Προϊόντα",
     "discover": "Discover",
     "compare": "Σύγκριση",
     "demos": "Επιδείξεις",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} εξατομικευμένα e-mail ανά καμπάνια"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Χρήση υπολογιστή",
+      "agentSwarms": "Σμήνη agents",
+      "compare": "Σύγκριση"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} βαθμολογία benchmark OSWorld",
+      "agentSwarms": "{stat} agents παράλληλα",
+      "compare": "{stat} ανταγωνιστές αναλύθηκαν"
     },
     "blogItems": {
       "allPosts": "Όλα τα άρθρα",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "Αιτήσεις εργασίας",
       "demosResults": "Επιδείξεις και αποτελέσματα",
-      "guide": "Οδηγός"
+      "guide": "Οδηγός",
+      "discover": "Κοινότητα"
     },
     "blogStats": {
       "allPosts": "{stat} άρθρα δημοσιεύονται εβδομαδιαία",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} σελίδες ανά συνεδρία",
       "jobApplications": "{stat} αιτήσεις ανά συνεδρία",
       "demosResults": "{stat} πραγματικές μελέτες περιπτώσεων",
-      "guide": "{stat} αναλυτικοί οδηγοί χρήσης"
-    }
+      "guide": "{stat} αναλυτικοί οδηγοί χρήσης",
+      "discover": "Δείτε πώς το χρησιμοποιούν"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Αυτόνομοι χειριστές υπολογιστών",
+    "headline": "Ο καλύτερος πράκτορας χρήσης υπολογιστή",
     "useCases": {
       "computerAgent": {
         "label": "Agent υπολογιστή",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Κοινωνικά δίκτυα",
         "task": "Δημοσιεύστε στο Hacker News και αλληλεπιδράστε με σχόλια"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "εξοικονόμηση τον μήνα",
+        "sublabel": "έναντι ενός full-time VA"
+      },
+      "time": {
+        "value": "30 ώρες",
+        "label": "κερδισμένες την εβδομάδα",
+        "sublabel": "χειρωνακτική εργασία εξαφανίστηκε"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "ταχύτερη παραγωγή",
+        "sublabel": "εργασίες σε λεπτά, όχι ημέρες"
+      },
+      "effort": {
+        "value": "0",
+        "label": "κώδικας ή προσλήψεις",
+        "sublabel": "πλήρως διαχειριζόμενο από άκρη σε άκρη"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Απεριόριστη βαριά αυτοματοποίηση",
         "cta": "Αποκτήστε Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Χωρίς όρια credits — ποτέ",
+        "cta": "Επιλογή Unlimited",
+        "badge": "Καλύτερη αξία"
       }
     },
     "vmTemporary": "1 προσωρινό VM (2 ώρες)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Η ίδια εργασία κοστίζει {oldPrice} με χειρωνακτική εργασία",
       "description": "Ένας εικονικός βοηθός κοστίζει $2.000–$4.000/μήνα. Μια μερική πρόσληψη κοστίζει περισσότερο. Το Coasty κάνει την ίδια δουλειά 24/7 από $0 — με τέλεια συνέπεια, πλήρη ιχνηλασιμότητα και μηδενικό χρόνο εκπαίδευσης."
-    }
+    },
+    "unlimitedCredits": "Απεριόριστα credits"
   },
   "faq": {
     "title": "Συχνές ερωτήσεις",
@@ -429,7 +463,8 @@
       "contact": "Επικοινωνία",
       "privacy": "Απόρρητο",
       "terms": "Όροι"
-    }
+    },
+    "status": "Όλα τα συστήματα λειτουργούν"
   },
   "languageSwitcher": {
     "label": "Γλώσσα"
@@ -458,16 +493,16 @@
     "demoCaption": "Εκτελέστε AI agents στον υπολογιστή σας ή ελέγξτε τον από το κινητό σας, οπουδήποτε.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Εκτέλεση τοπικά στον υπολογιστή σας",
+        "desc": "Κατεβάστε την εφαρμογή για επιτραπέζιους υπολογιστές και αφήστε την AI να ελέγξει τον υπολογιστή σας απευθείας — χωρίς cloud VM."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Ελέγξτε τον υπολογιστή σας από το κινητό",
+        "desc": "Ξεκινήστε μια εργασία από το κινητό σας και παρακολουθήστε τον AI agent να εργάζεται στον υπολογιστή σας σε πραγματικό χρόνο."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Cloud ή τοπικά — δική σας επιλογή",
+        "desc": "Χρησιμοποιήστε cloud VMs για απομονωμένες εργασίες ή τρέξτε τοπικά για πλήρη πρόσβαση στις εφαρμογές και τα αρχεία σας."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Σύνδεση...",
       "continueWithGoogle": "Συνέχεια με Google"
+    },
+    "inAppBrowser": {
+      "blocked": "Η σύνδεση μέσω Google δεν λειτουργεί σε ενσωματωμένους περιηγητές. Ανοίξτε αυτή τη σελίδα στον περιηγητή σας ή χρησιμοποιήστε magic link.",
+      "blockedNamed": "Η σύνδεση μέσω Google δεν λειτουργεί μέσα στο {app}. Ανοίξτε αυτή τη σελίδα στον περιηγητή σας ή χρησιμοποιήστε magic link.",
+      "copyLink": "Αντιγραφή συνδέσμου",
+      "copied": "Αντιγράφηκε!",
+      "useMagicLink": "Χρήση magic link"
     },
     "or": "ή",
     "email": "Email",
@@ -560,18 +602,21 @@
     "getStarted": "Ξεκινήστε",
     "settingUp": "Ρύθμιση...",
     "welcome": {
-      "titleReturning": "Καλώς ήρθατε πίσω{name}!",
-      "titleNew": "Καλώς ήρθατε στο Coasty",
-      "descriptionReturning": "Θα θέλαμε να μάθουμε λίγα περισσότερα για εσάς για να βελτιώσουμε την εμπειρία σας",
-      "descriptionNew": "Ας ρυθμίσουμε τον λογαριασμό σας για να εξατομικεύσουμε την εμπειρία σας"
+      "titleReturning": "Καλώς ήρθες πίσω{name}",
+      "titleNew": "Καλώς ήρθες στο Coasty",
+      "eyebrowNew": "Ας γνωριστούμε",
+      "eyebrowReturning": "Σχεδόν έτοιμοι",
+      "descriptionReturning": "Μερικές ακόμη λεπτομέρειες και το Coasty θα είναι πλήρως προσαρμοσμένο στον τρόπο που εργάζεσαι.",
+      "descriptionNew": "Το Coasty δουλεύει σε πραγματικούς υπολογιστές — περιηγείται, κάνει κλικ, πληκτρολογεί, παραδίδει. Μερικές γρήγορες λεπτομέρειες για να ταιριάζει στο στυλ σου.",
+      "footerNote": "Παίρνει περίπου ένα λεπτό. Μπορείς να αλλάξεις τα πάντα αργότερα στις Ρυθμίσεις."
     },
-    "nameLabel": "Πώς να σας αποκαλούμε;",
-    "namePlaceholder": "Το όνομά σας",
-    "companyLabel": "Εταιρεία",
+    "nameLabel": "Πώς να σε αποκαλούμε;",
+    "namePlaceholder": "Μόνο το όνομά σου",
+    "companyLabel": "Πού εργάζεσαι;",
     "optional": "(προαιρετικό)",
-    "companyPlaceholder": "MacroHard",
-    "websiteLabel": "Ιστοσελίδα",
-    "websitePlaceholder": "xai.com",
+    "companyPlaceholder": "Η εταιρεία ή η ομάδα σου",
+    "websiteLabel": "Ιστότοπος",
+    "websitePlaceholder": "etaireia-sou.com",
     "roleStep": {
       "title": "Τι σας περιγράφει καλύτερα;",
       "subtitle": "Επιλέξτε όσα ισχύουν — αυτό μας βοηθά να προσαρμόσουμε την εμπειρία σας"
@@ -581,7 +626,7 @@
       "developer": "Προγραμματιστής",
       "marketer": "Marketer",
       "designer": "Σχεδιαστής",
-      "product_manager": "Product Manager",
+      "product_manager": "Υπεύθυνος Προϊόντος",
       "data_analyst": "Δεδομένα / Αναλυτική",
       "operations": "Λειτουργίες",
       "other": "Άλλο"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Τι πρέπει να κάνει ο AI εργαζόμενός σας;",
-    "placeholderAlt": "Πείτε στο AI σας τι να κάνει στον υπολογιστή...",
+    "placeholder": "Πες μου τι να κάνω σε αυτόν τον υπολογιστή...",
+    "placeholderAlt": "Επιλέξτε έναν υπολογιστή για να ξεκινήσετε...",
     "vmError": {
       "title": "Σφάλμα Εικονικής Μηχανής",
       "description": "Η εικονική μηχανή βρίσκεται σε κατάσταση σφάλματος ή διαγράφεται.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Μείωση αριθμού μηχανημάτων",
       "increaseMachines": "Αύξηση αριθμού μηχανημάτων",
       "machineLimit": "Έως {max} μηχανήματα σμήνους στο πλάνο σας. Χρειάζεστε περισσότερα; Επικοινωνήστε founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "Πολλαπλή εκτέλεση",
       "upgradeCta": "Λειτουργία Σμήνους"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Σύρετε αρχεία εδώ",
       "dropDescription": "Τα αρχεία θα μεταφορτωθούν στον φάκελο Επιφάνεια Εργασίας του VM",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Διαδρομή: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Συνδεθείτε για να δοκιμάσετε περισσότερες δυνατότητες δωρεάν",
@@ -797,10 +842,32 @@
       "browser_automation": "Εξαγωγή αναφορών {company}",
       "data_entry": "Εισαγωγή δεδομένων στο {company}",
       "email_outreach": "Outreach για {company}",
-      "testing": "QA test {company}",
+      "testing": "QA δοκιμή {company}",
       "ecommerce": "Σύγκριση τιμών {company}",
       "social_media": "Δημοσίευση για {company}",
       "general_automation": "Αυτοματοποίηση εργασίας στο {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Η ανθρώπινη παράδοση ολοκληρώθηκε",
+      "yourTurn": "Η σειρά σας",
+      "connectToDesktop": "Σύνδεση με επιφάνεια εργασίας",
+      "resuming": "Συνέχιση...",
+      "doneContinue": "Έτοιμο, συνέχεια"
+    },
+    "feedback": {
+      "promptRun": "Πώς ήταν αυτή η εκτέλεση;",
+      "promptSwarm": "Πώς ήταν αυτό το σμήνος;",
+      "reactionBad": "Κακό",
+      "reactionOkay": "Εντάξει",
+      "reactionGood": "Καλό",
+      "reactionAmazing": "Καταπληκτικό",
+      "tellUsMore": "Πείτε μας περισσότερα",
+      "commentPlaceholder": "Τι θα μπορούσε να είναι καλύτερο;",
+      "npsPrompt": "Θα προτείνατε το Coasty;",
+      "npsNotLikely": "Όχι πιθανό",
+      "npsVeryLikely": "Πολύ πιθανό",
+      "thanks": "Ευχαριστούμε για τα σχόλια",
+      "creditsLabel": "μονάδες"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Απεριόριστη βαριά αυτοματοποίηση"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Χωρίς όρια credits — ποτέ",
+        "badge": "Καλύτερη αξία"
       }
     },
     "features": {
@@ -1061,7 +1133,7 @@
     "new": "νέο",
     "description": "Προσθέστε τα δικά σας API keys για πρόσβαση σε μοντέλα.",
     "securityNote": "Τα κλειδιά σας αποθηκεύονται με ασφάλεια με end-to-end κρυπτογράφηση.",
-    "apiKeyLabel": "{provider} API Key",
+    "apiKeyLabel": "Κλειδί API {provider}",
     "getApiKey": "Λήψη API key",
     "delete": "Διαγραφή",
     "save": "Αποθήκευση",
@@ -1113,7 +1185,7 @@
         "description": "Τα API keys κρυπτογραφούνται με AES-256-GCM. Τα διαπιστευτήριά σας δεν αποθηκεύονται ποτέ σε απλό κείμενο."
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "Ασφάλεια σε επίπεδο γραμμής",
         "description": "Η απομόνωση σε επίπεδο βάσης δεδομένων διασφαλίζει ότι τα δεδομένα σας είναι προσβάσιμα μόνο από εσάς. Δεν είναι δυνατή η πρόσβαση μεταξύ tenants."
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Διάταξη"
+    "layout": "Διάταξη",
+    "sidebarStyle": "Στυλ πλευρικής γραμμής",
+    "sidebarStyleHint": "Επιλέξτε πού θα βρίσκεται η πλοήγηση",
+    "sidebarStyleDisabled": "Διαθέσιμο όταν η διάταξη έχει οριστεί σε πλευρική γραμμή",
+    "vertical": "Κάθετο",
+    "verticalBadge": "Προεπιλογή",
+    "verticalDescription": "Κλασική αριστερή στήλη με ετικέτες και μονάδες στο υποσέλιδο.",
+    "horizontal": "Οριζόντιο",
+    "horizontalBadge": "Κομψό",
+    "horizontalDescription": "Μία πάνω γραμμή με τα πάντα σε μία σειρά. Μεγαλύτερο ύψος καμβά."
   },
   "suggestions": {
     "summary": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Απεριόριστη βαριά αυτοματοποίηση",
         "cta": "Αποκτήστε Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Χωρίς όρια credits — ποτέ",
+        "cta": "Επιλογή Unlimited",
+        "badge": "Καλύτερη αξία"
       }
     },
     "features": {
@@ -1564,7 +1651,7 @@
           "desc": "Εμπεριστατωμένες αναφορές, παρακολούθηση ανταγωνισμού"
         },
         "qaTesting": {
-          "name": "QA Testing",
+          "name": "QA δοκιμές",
           "desc": "Δοκιμάστε εγγραφές, φόρμες, ελέγχους υγείας ιστοσελίδας"
         },
         "hr": {
@@ -1681,9 +1768,9 @@
         "stopped": "Σταματημένο"
       },
       "newMachine": "+ Νέο",
-      "researchVm": "Research VM",
-      "emailVm": "Email VM",
-      "testingVm": "Testing VM",
+      "researchVm": "VM έρευνας",
+      "emailVm": "VM email",
+      "testingVm": "VM δοκιμών",
       "cores": "{count} πυρήνες",
       "gb": "{count} GB",
       "stop": "Διακοπή",
@@ -1737,7 +1824,7 @@
           "desc": "Εξατομικευμένα emails σε διαφορετικά segments"
         },
         "crossPlatform": {
-          "title": "Cross-platform",
+          "title": "Πολυπλατφορμικό",
           "desc": "Δημοσίευση σε {count} πλατφόρμες ταυτόχρονα"
         },
         "distributedTesting": {
@@ -1757,11 +1844,11 @@
       "subtitle": "Η AI εταιρεία σας, σε αυτόματο πιλότο",
       "description": "Υπάλληλοι, ομάδες, triggers — λειτουργία 24/7.",
       "myCompany": "Η εταιρεία μου",
-      "contentOps": "Content Ops",
+      "contentOps": "Λειτουργίες περιεχομένου",
       "support": "Υποστήριξη",
       "writer": "Συγγραφέας",
       "seo": "SEO",
-      "social": "Social",
+      "social": "Κοινωνικά δίκτυα",
       "inbox": "Εισερχόμενα",
       "docs": "Έγγραφα",
       "concepts": "Βασικές έννοιες",
@@ -1779,7 +1866,7 @@
           "desc": "Αποθηκευτικός χώρος key-value που διαβάζουν και γράφουν οι υπάλληλοι"
         },
         "triggers": {
-          "title": "Triggers",
+          "title": "Εκκινητές",
           "desc": "Αλυσιδωτοί υπάλληλοι: ένας τελειώνει, ο επόμενος ξεκινά"
         },
         "delegates": {
@@ -1805,7 +1892,7 @@
       "templates": "Ξεκινήστε από πρότυπο",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "Λειτουργίες περιεχομένου",
           "plan": "Starter",
           "count": "3"
         },
@@ -1829,7 +1916,7 @@
       "openWorkforce": "Άνοιγμα εργατικού δυναμικού"
     },
     "billingTab": {
-      "credits": "Credits",
+      "credits": "Πιστώσεις",
       "timeMetric": "Ο χρόνος είναι η μόνη μετρική.",
       "rate": "Τιμή",
       "rateValue": "10",
@@ -1867,6 +1954,11 @@
           "credits": "1.500",
           "machines": "3 πάντα ενεργά",
           "feature": "Εγγύηση SLA"
+        },
+        "unlimited": {
+          "credits": "Απεριόριστα",
+          "machines": "2 πάντα ενεργές",
+          "feature": "1 ταυτόχρονος agent"
         }
       },
       "perMonth": "{price}/μήνα",
@@ -1988,7 +2080,7 @@
     },
     "demoTitle": "Επίδειξη Agent Swarms",
     "demoDescription": "Παρακολουθήστε {count} μηχανήματα να αντιμετωπίζουν μια εργασία έρευνας CRM ταυτόχρονα",
-    "prompt": "Prompt",
+    "prompt": "Προτροπή",
     "swarm": "SWARM",
     "run": "Εκτέλεση",
     "reset": "Επαναφορά",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 AI Agent Χρήσης Υπολογιστή | AI Υπάλληλος για Αυτοματοποίηση Επιφάνειας Εργασίας & Προγράμματος Περιήγησης",
+      "title": "Coasty - #1 AI Agent Χρήσης Υπολογιστή | $249/mo Απεριόριστο (Το Φθηνότερο στην Αγορά)",
       "titleTemplate": "{title} | Coasty - AI Agent Χρήσης Υπολογιστή",
-      "description": "Το Coasty είναι ο #1 κατατασσόμενος AI agent χρήσης υπολογιστή — 82% στο benchmark OSWorld. Ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος: ανοίγει προγράμματα περιήγησης, κάνει κλικ, πληκτρολογεί, συμπληρώνει φόρμες, στέλνει email, διαχειρίζεται υπολογιστικά φύλλα. Πραγματική απομόνωση σε επίπεδο VM ανά συνεδρία. Από $20/μήνα.",
-      "ogTitle": "Coasty - #1 AI Agent Χρήσης Υπολογιστή | 82% OSWorld Benchmark",
-      "ogDescription": "AI υπάλληλος που ελέγχει επιφάνεια εργασίας σαν άνθρωπος. #1 στο benchmark OSWorld (82%). Αυτοματοποίηση προγράμματος περιήγησης, έλεγχος επιφάνειας εργασίας, επίλυση CAPTCHA, απομόνωση VM. Από $20/μήνα.",
-      "twitterDescription": "AI υπάλληλος που ελέγχει επιφάνεια εργασίας σαν άνθρωπος. Ανοίγει προγράμματα περιήγησης, κάνει κλικ, πληκτρολογεί, συμπληρώνει φόρμες, στέλνει email. Πραγματική απομόνωση VM. $20/μήνα vs $3.000/μήνα ανθρώπινος βοηθός."
+      "description": "Το Coasty είναι ο #1 κατατασσόμενος AI agent χρήσης υπολογιστή — 82% στο benchmark OSWorld — και το μοναδικό πλάνο Απεριόριστο με σταθερή χρέωση για χρήση υπολογιστή στα $249/mo (φθηνότερο από το Devin Team $500+ACU, το OpenAI Operator $200 με όριο αιτημάτων και τους ανταγωνιστές με όριο πιστωτικών μονάδων). Ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος: προγράμματα περιήγησης, φόρμες, email, υπολογιστικά φύλλα. Απομόνωση σε επίπεδο VM. Από $19/mo με το Starter ή $249/mo Απεριόριστο.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Απεριόριστο (Ο Φθηνότερος Agent Χρήσης Υπολογιστή)",
+      "ogDescription": "#1 στο OSWorld (82%). Σταθερή χρέωση $249/mo Απεριόριστο — φθηνότερο από το Devin Team ($500+ACU) με υψηλότερο σκορ benchmark. Αυτοματοποίηση προγράμματος περιήγησης, επιφάνειας εργασίας και τερματικού. Απομόνωση VM ανά συνεδρία. Εγγενής εφαρμογή πολλαπλών πλατφορμών + REST API + MCP server.",
+      "twitterDescription": "AI agent που λειτουργεί έναν πραγματικό υπολογιστή. 82% OSWorld (#1). $249/mo Απεριόριστο — το φθηνότερο πλάνο σταθερής χρέωσης στην κατηγορία. Starter από $19/mo. Απομόνωση VM + MCP server με 26 εργαλεία."
     },
     "compare": {
       "title": "Σύγκριση Coasty - Εναλλακτικές AI Agent & Σύγκριση Ανταγωνιστών",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Ο καλύτερος agent χρήσης υπολογιστή, #1 στο OSWorld. Αυτοματοποιήστε οποιαδήποτε εργασία επιφάνειας εργασίας, προγράμματος περιήγησης ή τερματικού με AI."
     },
     "pricing": {
-      "title": "Τιμολόγηση — Πλάνα & Τιμές Coasty AI Agent",
-      "description": "Πλάνα τιμολόγησης Coasty από $20/μήνα. Αντικαταστήστε εικονικούς βοηθούς $3.000/μήνα με AI υπάλληλο. Διαθέσιμο δωρεάν πλάνο. Χρήση με βάση πιστωτικές μονάδες χωρίς κρυφές χρεώσεις.",
-      "ogTitle": "Τιμολόγηση Coasty — Πλάνα AI Agent",
-      "ogDescription": "AI υπάλληλος από $20/μήνα. Αντικαταστήστε ακριβούς εικονικούς βοηθούς με αυτόνομο AI. Δωρεάν πλάνο διαθέσιμο."
+      "title": "Τιμολόγηση — $19/mo Starter ή $249/mo Απεριόριστο (Το Φθηνότερο στην Αγορά)",
+      "description": "Τιμολόγηση Coasty: Starter $19/mo (200 πιστωτικές μονάδες) ή Απεριόριστο $249/mo (το φθηνότερο πλάνο σταθερής χρέωσης για απεριόριστη χρήση υπολογιστή στην αγορά — φθηνότερο από το Devin Team $500+ACU, το Genspark Pro $249 με όριο πιστωτικών μονάδων και το Manus Extended $200 με όριο). Αντικαθιστά ανθρώπινους εικονικούς βοηθούς $3.000+/mo. Χωρίς κρυφές χρεώσεις.",
+      "ogTitle": "Τιμολόγηση Coasty — $19/mo Starter, $249/mo Απεριόριστο",
+      "ogDescription": "Σταθερή χρέωση $249/mo Απεριόριστο — το φθηνότερο πλάνο απεριόριστης χρήσης υπολογιστή στην αγορά. Ή $19/mo Starter για ιδιώτες. Εξοικονομεί $36.000/έτος έναντι ανθρώπινων βοηθών."
     },
     "faq": {
       "q1": "Τι είναι το Coasty;",
@@ -2292,7 +2384,7 @@
       "q2": "Πώς συγκρίνεται το Coasty με το Anthropic Computer Use;",
       "a2": "Ενώ το Anthropic Computer Use παρέχει ένα raw API για έλεγχο υπολογιστή, το Coasty είναι μια πλατφόρμα έτοιμη για παραγωγή με διαχειριζόμενη υποδομή VM, ενσωματωμένη επίλυση CAPTCHA, εφαρμογή desktop για Mac και Windows, υποστήριξη πολλαπλών μοντέλων και την υψηλότερη βαθμολογία στο benchmark OSWorld (82%). Το Coasty παρέχει την πλήρη λύση — όχι μόνο το API.",
       "q3": "Πόσο κοστίζει το Coasty;",
-      "a3": "Το Coasty ξεκινά από $20/μήνα με το πλάνο Starter και διατίθεται δωρεάν πλάνο. Αυτό σε σύγκριση με πάνω από $3.000/μήνα για έναν ανθρώπινο εικονικό βοηθό. Το Coasty εργάζεται 24/7 χωρίς διαλείμματα, χωρίς εκπαίδευση και με άμεση κλιμάκωση.",
+      "a3": "Το Coasty διαθέτει δύο ενεργά πλάνα: Starter στα $19/mo (200 πιστωτικές μονάδες, 1 μηχάνημα, ιδανικό για ιδιώτες) και Απεριόριστο στα $249/mo χωρίς όρια πιστωτικών μονάδων. Το πλάνο Απεριόριστο των $249 είναι το φθηνότερο διαθέσιμο πλάνο σταθερής χρέωσης για απεριόριστη χρήση υπολογιστή — φθηνότερο από το Devin Team ($500/mo + χρέωση υπέρβασης ACU), το OpenAI Operator ChatGPT Pro ($200/mo με όριο αιτημάτων), το Genspark Pro ($249.99 με όριο 125k πιστωτικών μονάδων) και το Manus Extended ($200 με όριο 40k πιστωτικών μονάδων). Και τα δύο αντικαθιστούν έναν ανθρώπινο εικονικό βοηθό άνω των $3.000/mo· το Απεριόριστο εξοικονομεί πάνω από $33.000/έτος σε σύγκριση με έναν ανθρώπινο βοηθό, με μείωση κόστους 92%.",
       "q4": "Είναι ασφαλές να χρησιμοποιώ το Coasty;",
       "a4": "Ναι. Κάθε συνεδρία Coasty εκτελείται στη δική της απομονωμένη, sandboxed εικονική μηχανή. Τα δεδομένα σας παραμένουν ασφαλή, ο υπολογιστής σας παραμένει ανέπαφος και τίποτα δεν διαρρέει μεταξύ συνεδριών. Αυτή είναι πραγματική απομόνωση σε επίπεδο VM, όχι απλά containers σε ένα κοινόχρηστο pool.",
       "q5": "Τι είναι το benchmark OSWorld;",
@@ -2309,11 +2401,11 @@
       "a10": "Ναι. Το Coasty διαθέτει ενσωματωμένο pipeline επίλυσης CAPTCHA, ώστε να μην μπλοκάρεται όπως οι ανταγωνιστικοί AI agents. Αυτό είναι κρίσιμο για πραγματική αυτοματοποίηση όπου τα CAPTCHA είναι συνηθισμένα στους ιστότοπους."
     },
     "structuredData": {
-      "appDescription": "Ο #1 κατατασσόμενος AI agent χρήσης υπολογιστή. Το Coasty ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος — ανοίγει προγράμματα περιήγησης, κάνει κλικ, πληκτρολογεί, συμπληρώνει φόρμες, στέλνει email και διαχειρίζεται υπολογιστικά φύλλα αυτόνομα. 82% στο benchmark OSWorld. Πραγματική απομόνωση σε επίπεδο VM. Ενσωματωμένη επίλυση CAPTCHA. Από $20/μήνα.",
-      "orgDescription": "Το Coasty κατασκευάζει τον #1 AI agent χρήσης υπολογιστή. Η πλατφόρμα μας παρέχει αυτόνομο έλεγχο επιφάνειας εργασίας, αυτοματοποίηση προγράμματος περιήγησης και ενορχήστρωση πολλαπλών agents με πραγματική απομόνωση σε επίπεδο VM.",
-      "productDescription": "AI agent χρήσης υπολογιστή που ελέγχει μια επιφάνεια εργασίας σαν άνθρωπος. #1 στο benchmark OSWorld (82%). Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, έλεγχος επιφάνειας εργασίας, αποστολή email, συμπλήρωση φορμών και διαχείριση υπολογιστικών φύλλων με πραγματική απομόνωση σε επίπεδο VM.",
-      "websiteDescription": "#1 πλατφόρμα AI agent χρήσης υπολογιστή. 82% OSWorld benchmark. Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, επιφάνειας εργασίας και τερματικού με απομόνωση VM. Από $20/μήνα.",
-      "softwareDescription": "AI agent χρήσης υπολογιστή που ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος. #1 στο benchmark OSWorld με ποσοστό ολοκλήρωσης 82% σε 369 πραγματικές εργασίες. Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, έλεγχος επιφάνειας εργασίας, λειτουργίες τερματικού, αποστολή email, συμπλήρωση φορμών και διαχείριση υπολογιστικών φύλλων.",
+      "appDescription": "Ο #1 κατατασσόμενος AI agent χρήσης υπολογιστή και το φθηνότερο πλάνο Απεριόριστο σταθερής χρέωσης για χρήση υπολογιστή στην αγορά, στα $249/mo. Το Coasty ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος — ανοίγει προγράμματα περιήγησης, κάνει κλικ, πληκτρολογεί, συμπληρώνει φόρμες, στέλνει email και διαχειρίζεται υπολογιστικά φύλλα αυτόνομα. 82% στο benchmark OSWorld σε 369 πραγματικές εργασίες. Πραγματική απομόνωση σε επίπεδο VM ανά συνεδρία. Ενσωματωμένη επίλυση CAPTCHA. Πλάνα: $19/mo Starter ή $249/mo Απεριόριστο.",
+      "orgDescription": "Το Coasty κατασκευάζει τον #1 AI agent χρήσης υπολογιστή (82% OSWorld) και προσφέρει το μοναδικό πλάνο Απεριόριστο σταθερής χρέωσης για χρήση υπολογιστή στα $249/mo — φθηνότερο από το Devin Team, το OpenAI Operator και τους ανταγωνιστές με όριο πιστωτικών μονάδων στην ίδια κατηγορία τιμής. Η πλατφόρμα μας παρέχει αυτόνομο έλεγχο επιφάνειας εργασίας, αυτοματοποίηση προγράμματος περιήγησης και ενορχήστρωση πολλαπλών agents με πραγματική απομόνωση σε επίπεδο VM.",
+      "productDescription": "AI agent χρήσης υπολογιστή που ελέγχει μια επιφάνεια εργασίας σαν άνθρωπος. #1 στο benchmark OSWorld (82%). Το πλάνο Απεριόριστο των $249/mo είναι το φθηνότερο διαθέσιμο πλάνο σταθερής χρέωσης για απεριόριστη χρήση υπολογιστή. Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, έλεγχος επιφάνειας εργασίας, αποστολή email, συμπλήρωση φορμών και διαχείριση υπολογιστικών φύλλων με πραγματική απομόνωση σε επίπεδο VM.",
+      "websiteDescription": "#1 πλατφόρμα AI agent χρήσης υπολογιστή — 82% OSWorld benchmark και το φθηνότερο πλάνο Απεριόριστο σταθερής χρέωσης στα $249/mo. Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, επιφάνειας εργασίας και τερματικού με απομόνωση VM. Από $19/mo με Starter ή $249/mo Απεριόριστο.",
+      "softwareDescription": "AI agent χρήσης υπολογιστή που ελέγχει μια πλήρη επιφάνεια εργασίας σαν άνθρωπος. #1 στο benchmark OSWorld με ποσοστό ολοκλήρωσης 82% σε 369 πραγματικές εργασίες. Το πλάνο Απεριόριστο των $249/mo είναι το φθηνότερο πλάνο σταθερής χρέωσης για απεριόριστη χρήση υπολογιστή στην αγορά. Αυτόνομη αυτοματοποίηση προγράμματος περιήγησης, έλεγχος επιφάνειας εργασίας, λειτουργίες τερματικού, αποστολή email, συμπλήρωση φορμών και διαχείριση υπολογιστικών φύλλων.",
       "breadcrumbs": {
         "home": "Αρχική",
         "caseStudies": "Μελέτες Περιπτώσεων AI Agent",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Η σελίδα δεν βρέθηκε",
-      "description": "Λυπούμαστε, αυτή η σελίδα δεν υπάρχει."
+      "description": "Λυπούμαστε, αυτή η σελίδα δεν υπάρχει.",
+      "metaTitle": "404 · Η σελίδα δεν βρέθηκε",
+      "metaDescription": "Στείλαμε τον καλύτερο AI πράκτορά μας. Γύρισε με άδεια χέρια. Επιστρέψτε στο Coasty, τον #1 AI πράκτορα για αυτοματισμό επιφάνειας εργασίας και browser.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "σάρωση: ολόκληρο το internet",
+        "step2": "σάρωση: κάθε ανοιχτή καρτέλα",
+        "step3": "σάρωση: κάτω από τον καναπέ",
+        "result": "ετυμηγορία: η σελίδα δεν υπάρχει"
+      },
+      "ok": "OK",
+      "fail": "ΑΠΟΤΥΧΙΑ",
+      "primaryCta": "Επιστροφή στην αρχική",
+      "secondaryCta": "Προσλάβετε έναν AI πράκτορα",
+      "navLabel": "Προτεινόμενες σελίδες",
+      "links": {
+        "home": "Αρχική",
+        "computerUse": "Χρήση υπολογιστή",
+        "pricing": "Τιμές",
+        "download": "Λήψη",
+        "blog": "Blog",
+        "guide": "Οδηγός"
+      }
     },
     "error": {
       "title": "Κάτι πήγε στραβά",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Ο τίτλος του δωματίου είναι υποχρεωτικός",
+      "taskCreated": "Η εργασία δημιουργήθηκε επιτυχώς",
+      "taskFailed": "Αποτυχία δημιουργίας εργασίας",
+      "assignTask": "Ανάθεση νέας εργασίας",
+      "assignTaskDesc": "Ξεκινήστε μια νέα εργασία με τον AI βοηθό σας.",
+      "taskName": "Όνομα εργασίας",
+      "taskNamePlaceholder": "Εισάγετε όνομα εργασίας",
+      "cancel": "Άκυρο",
+      "creating": "Δημιουργία...",
+      "createTask": "Δημιουργία εργασίας"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Παρακαλώ εισάγετε έναν κωδικό πρόσκλησης",
+      "joinSuccess": "Επιτυχής συμμετοχή στο έργο!",
+      "joinFailed": "Αποτυχία συμμετοχής στο έργο",
+      "invalidCode": "Μη έγκυρος κωδικός πρόσκλησης ή το έργο δεν βρέθηκε",
+      "title": "Συμμετοχή σε έργο",
+      "description": "Εισάγετε κωδικό πρόσκλησης για να συμμετάσχετε σε υπάρχον έργο.",
+      "inviteCode": "Κωδικός πρόσκλησης",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Ζητήστε από τον επικεφαλής της ομάδας τον κωδικό πρόσκλησης του έργου",
+      "cancel": "Άκυρο",
+      "joining": "Συμμετοχή...",
+      "joinButton": "Συμμετοχή στο έργο"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "Συμμετέχοντες δωματίου",
+      "copyCode": "Αντιγραφή κωδικού",
+      "copyLink": "Αντιγραφή συνδέσμου",
+      "codeCopied": "Ο κωδικός πρόσκλησης αντιγράφηκε!",
+      "codeFailed": "Αποτυχία αντιγραφής κωδικού πρόσκλησης",
+      "linkCopied": "Ο σύνδεσμος πρόσκλησης αντιγράφηκε!",
+      "linkFailed": "Αποτυχία αντιγραφής συνδέσμου πρόσκλησης",
+      "online": "Συνδεδεμένος",
+      "offline": "Εκτός σύνδεσης",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Ο τίτλος του δωματίου είναι υποχρεωτικός",
+      "created": "Το έργο δημιουργήθηκε επιτυχώς!",
+      "failed": "Αποτυχία δημιουργίας δωματίου",
+      "title": "Δημιουργία νέου έργου",
+      "description": "Ξεκινήστε ένα νέο έργο για να χτίσετε το προϊόν σας με AI.",
+      "projectName": "Όνομα έργου",
+      "projectNamePlaceholder": "Εισάγετε όνομα έργου",
+      "teamSize": "Μέγεθος ομάδας",
+      "cancel": "Άκυρο",
+      "creating": "Δημιουργία...",
+      "createButton": "Δημιουργία έργου"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Τι νέο υπάρχει",
+    "title": "Τι νέο υπάρχει στο Coasty",
+    "updateCount": "{count} ενημερώσεις",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Ενημέρωση",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Μείνετε συντονισμένοι για περισσότερες ενημερώσεις",
+    "tagline": "Ο AI υπάλληλός σας που συνεργάζεται με όλους"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Καταπληκτικό"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Παρακαλώ συνδεθείτε για να υποβάλετε σχόλια",
+    "alreadySubmitted": "Έχετε ήδη υποβάλει σχόλια για αυτό",
+    "thankYou": "Ευχαριστούμε για τα σχόλιά σας!",
+    "creditsEarned": "+{credits} πιστώσεις κερδίσατε",
+    "helpImprove": "Τα σχόλιά σας μας βοηθούν να βελτιώσουμε το Coasty.",
+    "howsExperience": "Πώς είναι η εμπειρία σας;",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Πείτε μας περισσότερα",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Τι λειτουργεί καλά; Τι θα μπορούσε να βελτιωθεί;",
+    "cancel": "Άκυρο",
+    "sending": "Αποστολή...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Παρακαλώ επιλέξτε έναν σταθμό εργασίας",
+    "enterCron": "Παρακαλώ εισάγετε μια έκφραση cron",
+    "hireFailed": "Αποτυχία πρόσληψης υπαλλήλου",
+    "removeFailed": "Αποτυχία αφαίρεσης υπαλλήλου",
+    "editEmployee": "Επεξεργασία υπαλλήλου",
+    "configureEmployee": "Διαμόρφωση υπαλλήλου",
+    "editDescription": "Ενημέρωση προγράμματος, σταθμού εργασίας ή οδηγιών",
+    "configureDescription": "Ρυθμίστε έναν AI υπάλληλο για αυτή τη συνομιλία",
+    "loading": "Φόρτωση διαμόρφωσης...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Όνομα υπαλλήλου"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Διαγραφή συνομιλίας;",
+    "description": "Αυτό θα διαγράψει το \"{chatTitle}\"",
+    "cancel": "Άκυρο",
+    "delete": "Διαγραφή"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Επιτυχής πληρωμή! Οι πιστώσεις σας προστέθηκαν.",
+    "canceled": "Η πληρωμή ακυρώθηκε. Δεν έγινε καμία χρέωση."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Γενικές ρυθμίσεις",
     "generalDescription": "Διαμόρφωση βασικών ρυθμίσεων υπολογιστή",
     "displayName": "Εμφανιζόμενο όνομα",
     "defaultName": "Ο υπολογιστής μου",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Αποθήκευση αλλαγών",
+    "security": "Ασφάλεια",
+    "securityDescription": "Ρυθμίσεις ασφάλειας και πρόσβασης",
+    "sshAuth": "Ταυτοποίηση SSH",
+    "username": "Όνομα χρήστη:",
+    "keyPair": "Ζεύγος κλειδιών:",
+    "sshKeyDownloaded": "Το κλειδί SSH κατέβηκε",
+    "sshKeyFailed": "Αποτυχία λήψης κλειδιού SSH",
+    "downloadSshKey": "Λήψη κλειδιού SSH",
+    "vncPassword": "Κωδικός VNC",
     "vncPasswordHint": "Αυτός ο κωδικός απαιτείται για σύνδεση στον υπολογιστή"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Γεια, χρησιμοποιώ το Coasty και είναι αρκετά εντυπωσιακό. Είναι μια AI που μπορεί όντως να χρησιμοποιεί υπολογιστή για σένα — να περιηγείται, να κάνει κλικ, να πληκτρολογεί, όλα. Δοκίμασέ το με το σύνδεσμό μου και κερδίζουμε και οι δύο δωρεάν πιστώσεις!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Δες αυτό το εργαλείο AI",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "μόλις τώρα",
+      "minutesAgo": "πριν {minutes} λ.",
+      "hoursAgo": "πριν {hours} ώ.",
+      "daysAgo": "πριν {days} ημ.",
+      "monthsAgo": "πριν {months} μ."
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Ο σύνδεσμος παραπομπής αντιγράφηκε!",
+    "headline": "Οι καλοί φίλοι μοιράζονται memes. Οι καλύτεροι μοιράζονται AI agents.",
+    "subheadline": "Παίρνετε και οι δύο {credits} δωρεάν πιστώσεις όταν εγγραφεί ο φίλος σας.",
+    "yourLink": "Ο σύνδεσμος παραπομπής σας",
+    "shareDirectly": "Μοιραστείτε απευθείας",
+    "yourReferrals": "Οι παραπομπές σας",
+    "referralCount": "{count} παραπομπή(ές)",
+    "creditsEarned": "{credits} πιστώσεις κερδίσατε",
+    "invitedYou": "Σας προσκάλεσε",
+    "joinedViaLink": "Εγγράφηκε μέσω του συνδέσμου σας",
+    "noInvites": "Κανένας χρήστης δεν έχει προσκληθεί ακόμη",
+    "noInvitesHint": "Μοιραστείτε τον σύνδεσμό σας και κερδίζετε και οι δύο 50 πιστώσεις"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Δημοσιοποίηση",
+    "title": "Η συνομιλία σας είναι πλέον δημόσια!",
+    "description": "Όποιος έχει τον σύνδεσμο μπορεί τώρα να δει αυτή τη συνομιλία και ενδέχεται να εμφανιστεί σε feeds κοινότητας, προτεινόμενες σελίδες ή αποτελέσματα αναζήτησης στο μέλλον.",
+    "viewPage": "Προβολή σελίδας",
+    "shareOn": "Κοινοποίηση σε"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "Πίνακας ελέγχου AI",
+    "subtitle": "Περιγράψτε τι θέλετε να κάνει η AI",
+    "quickCommands": "Γρήγορες εντολές",
+    "noActions": "Δεν έχουν εκτελεστεί ακόμη ενέργειες",
+    "success": "Επιτυχία",
+    "failed": "Αποτυχία",
+    "placeholder": "Πείτε στην AI τι να κάνει... (Ctrl+Enter για αποστολή)",
+    "executing": "Εκτέλεση...",
+    "executeCommand": "Εκτέλεση εντολής"
   },
   "discover": {
     "badge": "Κοινότητα",
@@ -2859,5 +2973,190 @@
     "watchSession": "Παρακολούθηση συνεδρίας",
     "steps": "{count} βήματα",
     "tryCoasty": "Δοκιμάστε το Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Μνήμη",
+    "sidebarDescription": "Πλαίσιο που εφαρμόζεται σε κάθε εκτέλεση πράκτορα",
+    "dialog": {
+      "title": "Μνήμη",
+      "description": "Μια σύντομη σημείωση που η Coasty εφαρμόζει κάθε φορά που εργάζεται για εσάς.",
+      "openFull": "Πλήρες άνοιγμα",
+      "visualMemoryLabel": "Μνήμη",
+      "visualSynced": "Συγχρονισμένο",
+      "visualContextChat": "Συνομιλία",
+      "visualContextSchedules": "Προγραμματισμοί",
+      "visualContextSwarm": "Σμήνος"
+    },
+    "section": {
+      "title": "Μνήμη",
+      "tag": "προαιρετικό · προσωπικό",
+      "description": "Μια σύντομη σημείωση για εσάς που συνοδεύει κάθε εκτέλεση πράκτορα — συνομιλία, προγραμματισμένες εργασίες, μηχανές σμήνους, ανατεθειμένοι πράκτορες."
+    },
+    "presetsLabel": "Δοκιμάστε",
+    "presets": {
+      "useFirstName": "Χρήση μικρού ονόματος",
+      "useFirstNameSentence": "Απευθύνσου σε εμένα με το μικρό μου όνομα.",
+      "beTerse": "Να είσαι σύντομος",
+      "beTerseSentence": "Προτίμα σύντομες, άμεσες απαντήσεις. Χωρίς γέμισμα.",
+      "imDeveloper": "Είμαι προγραμματιστής",
+      "imDeveloperSentence": "Είμαι μηχανικός λογισμικού· άνετα με τον κώδικα.",
+      "noEmojis": "Χωρίς emoji",
+      "noEmojisSentence": "Απόφυγε τα emoji στις απαντήσεις.",
+      "metricUnits": "Μετρικές μονάδες",
+      "metricUnitsSentence": "Χρησιμοποίησε μετρικές μονάδες (μέτρα, κιλά, °C).",
+      "citeSources": "Αναφέρω πηγές",
+      "citeSourcesSentence": "Αναφέρω πηγές όταν παρουσιάζω γεγονότα."
+    },
+    "placeholder": "Παράδειγμα:\nΑπευθύνσου σε εμένα με το μικρό μου όνομα.\nΠροτίμα σύντομες απαντήσεις.\nΔουλεύω με TypeScript και Python.\nΠοτέ μη διαγράφεις αρχεία χωρίς επιβεβαίωση.",
+    "loading": "Φόρτωση…",
+    "saving": "Αποθήκευση…",
+    "saved": "Αποθηκεύτηκε",
+    "unsavedChanges": "Μη αποθηκευμένες αλλαγές",
+    "empty": "Κενό",
+    "savedRelative": "Αποθηκεύτηκε · {time}",
+    "errorLoad": "Δεν ήταν δυνατή η φόρτωση της μνήμης σας.",
+    "errorSave": "Δεν ήταν δυνατή η αποθήκευση της μνήμης σας.",
+    "willBeShortened": "θα συντομευτεί",
+    "clear": "Εκκαθάριση",
+    "footerNote": "Η Coasty θα λάβει υπόψη αυτές τις προτιμήσεις όταν εργάζεται για εσάς.",
+    "time": {
+      "justNow": "μόλις τώρα",
+      "secondsAgo": "πριν {n}″",
+      "minutesAgo": "πριν {n}′",
+      "hoursAgo": "πριν {n} ώ",
+      "daysAgo": "πριν {n} ημ"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Ρυθμίσεις",
+    "navGroups": {
+      "settings": "Ρυθμίσεις",
+      "developer": "Προγραμματιστής",
+      "more": "Περισσότερα",
+      "resources": "Πόροι"
+    },
+    "sections": {
+      "account": {
+        "label": "Γενικά",
+        "description": "Προφίλ και λογαριασμός"
+      },
+      "appearance": {
+        "label": "Εμφάνιση",
+        "description": "Θέμα, γλώσσα και φόντο"
+      },
+      "billing": {
+        "label": "Χρέωση",
+        "description": "Πακέτα και πιστώσεις"
+      },
+      "publicChats": {
+        "label": "Δημόσιες συνομιλίες",
+        "description": "Διαχειριστείτε συνομιλίες που έχουν μοιραστεί μέσω δημόσιου συνδέσμου"
+      },
+      "privacy": {
+        "label": "Απόρρητο",
+        "description": "Ασφάλεια και απόρρητο δεδομένων"
+      },
+      "notifications": {
+        "label": "Ειδοποιήσεις",
+        "description": "Προτιμήσεις ειδοποιήσεων"
+      },
+      "apiKeys": {
+        "label": "Κλειδιά API",
+        "description": "Διαχειριστείτε τα κλειδιά API σας"
+      },
+      "data": {
+        "label": "Δεδομένα",
+        "description": "Εξάγετε και διαχειριστείτε τα δεδομένα σας"
+      },
+      "feedback": {
+        "label": "Σχόλια",
+        "description": "Στείλτε μας τα σχόλιά σας"
+      },
+      "about": {
+        "label": "Σχετικά",
+        "description": "Σχετικά με την Coasty"
+      },
+      "social": {
+        "label": "Σύνδεση",
+        "description": "Σύνδεσμοι κοινωνικής δικτύωσης"
+      },
+      "guide": {
+        "label": "Οδηγός",
+        "description": "Μάθε πώς να χρησιμοποιείς το Coasty"
+      },
+      "referral": {
+        "label": "Παραπομπή",
+        "description": "Πρόσκαλε φίλους και κέρδισε μονάδες"
+      }
+    },
+    "appearance": {
+      "theme": "Θέμα",
+      "language": "Γλώσσα",
+      "background": "Φόντο",
+      "personalization": "Εξατομίκευση",
+      "intro": {
+        "title": "Κινηματογραφική εισαγωγή",
+        "description": "Εμφάνιση του κινούμενου εισαγωγικού στην αρχική σελίδα"
+      },
+      "interaction": {
+        "title": "Κλήσεις εργαλείων",
+        "description": "Εμφάνιση λεπτομερειών εκτέλεσης εργαλείων στις συνομιλίες"
+      }
+    },
+    "comingSoon": {
+      "badge": "Σύντομα",
+      "placeholder": "Αυτή η ενότητα έρχεται σε μελλοντική ενημέρωση."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Δείξε μου τι είναι δυνατό…",
+    "tasks": [
+      "Έρευνα ανταγωνιστών μου",
+      "Συμπλήρωσε αιτήσεις εργασίας",
+      "Κλείσε πτήση για Τόκιο",
+      "Παρακολούθηση χρόνου λειτουργίας ιστοτόπου",
+      "Προγραμμάτισε αναρτήσεις social",
+      "Ανάλυσε τριμηνιαίες τάσεις"
+    ],
+    "dontShowAgain": "Να μην εμφανιστεί ξανά",
+    "skip": "Παράλειψη",
+    "tagline": "Κάνε οτιδήποτε, όπως ένας άνθρωπος με έναν υπολογιστή"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Οι υπολογιστές σου",
+      "description": "Πυρίτιο στη διάθεσή σου. Ξεκινάμε τον στόλο σου."
+    },
+    "swarms": {
+      "title": "Νοημοσύνη σμήνους",
+      "description": "Πολλά μυαλά, μία αποστολή. Συγκεντρώνουμε τους πράκτορές σου."
+    },
+    "developers": {
+      "title": "API προγραμματιστών",
+      "description": "Φόρτωση του πίνακά σου."
+    },
+    "secrets": {
+      "title": "Διαπιστευτήρια",
+      "description": "Τα μυστικά σου είναι ασφαλή μαζί μας. Ξεκλειδώνουμε τον θησαυρό."
+    },
+    "schedules": {
+      "title": "Προγράμματα",
+      "description": "Πάντα στην ώρα τους. Συγχρονίζουμε τις αυτοματοποιήσεις σου."
+    },
+    "history": {
+      "title": "Το ιστορικό σου",
+      "description": "Μια ήσυχη καταγραφή κάθε συνομιλίας, εργασίας και ιδέας που εξερεύνησες."
+    },
+    "referral": {
+      "title": "Παραπομπές",
+      "description": "Μοιράσου το Coasty. Κερδίστε μαζί."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Τα δεδομένα σου, ο έλεγχός σου",
+    "heroDescription": "Αποθηκεύουμε μόνο ό,τι χρειάζεται για την εκτέλεση των συνεδριών σας. Όλη η κίνηση είναι κρυπτογραφημένη κατά τη μεταφορά και μπορείτε να επεκτείνετε την κρυπτογράφηση σε ηρεμία στις παρακάτω κατηγορίες. Τα δεδομένα σας δεν χρησιμοποιούνται ποτέ για την εκπαίδευση μοντέλων AI.",
+    "trustTransit": "TLS 1.3 κατά τη μεταφορά",
+    "trustAtRest": "AES-256-GCM σε ηρεμία",
+    "trustNoTraining": "Καμία εκπαίδευση με τα δεδομένα σου"
   }
 }

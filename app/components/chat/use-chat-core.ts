@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { insertMessageToDb } from "@/lib/chat-store/messages/api"
 import { InsufficientCreditsModal } from "@/app/components/credits/insufficient-credits-modal"
+import { isSigningOut } from "@/lib/user-store/sign-out-state"
 
 // Attachment type matching backend expectations
 type Attachment = {
@@ -93,9 +94,21 @@ export function useChatCore({
 
   // Handle errors directly in onError callback
   const handleError = useCallback((error: Error) => {
+    // Sign-out tear-down: while the user is being signed out, the auth
+    // cookie is cleared and any in-flight chat stream gets killed by
+    // the server, surfacing here as `error.message === "An error
+    // occurred"` (the AI SDK's generic stream-failure message). Without
+    // this guard, the user sees a red "Something went wrong" toast for
+    // 50–200ms before the page navigates to /. We log it for diagnostics
+    // but stay silent in the UI — the user is intentionally going away.
+    if (isSigningOut()) {
+      console.warn("[chat] Suppressing in-flight error during sign-out:", error.message)
+      return
+    }
+
     console.error("Chat error:", error)
     console.error("Error message:", error.message)
-    
+
     // Check if this is a 402 Payment Required error (insufficient credits)
     const errorMsg = error.message || "Something went wrong."
     

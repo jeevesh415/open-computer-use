@@ -1,9 +1,18 @@
 import { createClient } from "@/lib/supabase/server"
 
 export async function POST(request: Request) {
+  let body: { chatId?: string; model?: string }
+  try {
+    body = await request.json()
+  } catch {
+    return new Response(
+      JSON.stringify({ error: "Invalid JSON body" }),
+      { status: 400 }
+    )
+  }
   try {
     const supabase = await createClient()
-    const { chatId, model } = await request.json()
+    const { chatId, model } = body
 
     if (!chatId || !model) {
       return new Response(

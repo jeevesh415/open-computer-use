@@ -132,6 +132,7 @@ const STRIP_EXACT_ENV = new Set([
   'STRIPE_PRICE_STARTER',
   'STRIPE_PRICE_PROFESSIONAL',
   'STRIPE_PRICE_ENTERPRISE',
+  'STRIPE_PRICE_UNLIMITED',
   'POSTHOG_API_KEY',
   'NEXT_PUBLIC_SUPABASE_ANON_KEY',
   'GOOGLE_SEARCH_KEY',
@@ -373,8 +374,27 @@ export function validateFilePath(
     }
   }
 
+  // ── Symlink canonicalisation (P1-03) ──────────────────────────────────────
+  // A symlink inside an allowed directory pointing to a credential file (e.g.
+  // ~/Documents/foo -> ~/.ssh/id_rsa) would otherwise bypass the credential
+  // pattern check below, because the literal `resolved` path lives in
+  // ~/Documents and not in ~/.ssh. Resolve symlinks to the real target and
+  // run the credential + system-dir checks against BOTH paths so a symlink
+  // hop cannot launder a sensitive target into an allowed location.
+  let canonical: string | null = null
+  try {
+    const real = fs.realpathSync(resolved)
+    if (real !== resolved) {
+      canonical = real
+    }
+  } catch {
+    // File doesn't exist yet — no symlink to resolve. This is fine for write
+    // operations to new paths; the literal `resolved` check still applies.
+  }
+
   // Use forward-slash for consistent pattern matching across platforms.
   const normalised = resolved.replace(/\\/g, '/')
+  const canonicalNormalised = canonical ? canonical.replace(/\\/g, '/') : null
 
   // ── Windows reserved device names ─────────────────────────────────────────
   // CON, PRN, AUX, NUL, COM0-9, LPT0-9 are special on Windows regardless of
@@ -398,6 +418,8 @@ export function validateFilePath(
     userDataDir = '' // app not ready — skip this check
   }
 
+  // Note: userData is the app's own directory and is never a symlink we need
+  // to follow — it's an internal sentinel check using the literal path.
   if (userDataDir && normalised.startsWith(userDataDir + '/')) {
     const relative = normalised.slice(userDataDir.length + 1).toLowerCase()
     if (relative === '.session' || relative === 'approval-config.json') {
@@ -407,12 +429,28 @@ export function validateFilePath(
       }
     }
   }
+  // Also reject if the symlink target lands on the userData sentinel files.
+  if (userDataDir && canonicalNormalised && canonicalNormalised.startsWith(userDataDir + '/')) {
+    const relative = canonicalNormalised.slice(userDataDir.length + 1).toLowerCase()
+    if (relative === '.session' || relative === 'approval-config.json') {
+      return {
+        allowed: false,
+        reason: `Blocked: "${path.basename(resolved)}" resolves to an internal app credential file and cannot be accessed by the agent.`,
+      }
+    }
+  }
 
   // ── Sensitive credential files (blocked for ALL operations) ───────────────
+  // Check both the literal resolved path AND the symlink-canonicalised path.
+  // A symlink in an allowed directory pointing to ~/.ssh/id_rsa must be
+  // blocked even though its literal location isn't under ~/.ssh.
   const home = os.homedir().replace(/\\/g, '/')
-  const relToHome = normalised.startsWith(home + '/') ? normalised.slice(home.length) : null
+  const credCheckPaths: string[] = [normalised]
+  if (canonicalNormalised) credCheckPaths.push(canonicalNormalised)
 
-  if (relToHome) {
+  for (const p of credCheckPaths) {
+    const relToHome = p.startsWith(home + '/') ? p.slice(home.length) : null
+    if (!relToHome) continue
     for (const { pattern, label } of CREDENTIAL_PATTERNS) {
       if (pattern.test(relToHome)) {
         return {
@@ -431,21 +469,26 @@ export function validateFilePath(
       ? SYSTEM_DIR_PATTERNS_WIN32
       : SYSTEM_DIR_PATTERNS_UNIX
 
-    for (const { pattern, label } of patterns) {
-      if (pattern.test(normalised)) {
-        return {
-          allowed: false,
-          reason: `Blocked: cannot ${operation} in ${label} (${path.dirname(resolved)}). ` +
-            `Modifying system directories could destabilise the OS.`,
+    const sysCheckPaths: string[] = [normalised]
+    if (canonicalNormalised) sysCheckPaths.push(canonicalNormalised)
+
+    for (const p of sysCheckPaths) {
+      for (const { pattern, label } of patterns) {
+        if (pattern.test(p)) {
+          return {
+            allowed: false,
+            reason: `Blocked: cannot ${operation} in ${label} (${path.dirname(resolved)}). ` +
+              `Modifying system directories could destabilise the OS.`,
+          }
         }
       }
-    }
 
-    // Block writing/deleting the filesystem root itself
-    if (/^[A-Z]:\/?$/i.test(normalised) || normalised === '/') {
-      return {
-        allowed: false,
-        reason: `Blocked: cannot ${operation} the filesystem root.`,
+      // Block writing/deleting the filesystem root itself
+      if (/^[A-Z]:\/?$/i.test(p) || p === '/') {
+        return {
+          allowed: false,
+          reason: `Blocked: cannot ${operation} the filesystem root.`,
+        }
       }
     }
   }

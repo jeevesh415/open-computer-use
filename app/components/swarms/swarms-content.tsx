@@ -40,8 +40,10 @@ import { createPortal } from "react-dom"
 import { cn } from "@/lib/utils"
 import { Markdown } from "@/components/prompt-kit/markdown"
 import { APP_DOMAIN } from "@/lib/config"
+import { EXPORT_SANS_STACK, EXPORT_MONO_STACK } from "@/lib/fonts"
 import { SwarmTree, type SwarmEvent } from "./swarm-tree"
 import { PageLoader } from "@/components/common/page-loader"
+import { useTranslations } from "next-intl"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -70,6 +72,7 @@ interface SwarmRun {
 // ---------------------------------------------------------------------------
 
 export function SwarmsContent() {
+  const tLoader = useTranslations("pageLoaders.swarms")
   const [swarms, setSwarms] = useState<SwarmRun[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
@@ -153,10 +156,10 @@ export function SwarmsContent() {
   return (
     <PageLoader
       isLoading={loading}
-      title="Swarm Intelligence"
-      description="Many minds, one mission. Rounding up your agents now."
+      title={tLoader("title")}
+      description={tLoader("description")}
     >
-    <div className="h-full overflow-y-auto scrollbar-invisible relative">
+    <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div
@@ -166,14 +169,6 @@ export function SwarmsContent() {
         <div
           className="absolute -bottom-[20%] -left-[10%] h-[50%] w-[40%] rounded-full opacity-[0.015] dark:opacity-[0.035] blur-[100px]"
           style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(128,128,128,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,.3) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
         />
       </div>
 
@@ -995,7 +990,7 @@ function SwarmRunSummary({ summary }: { summary: string }) {
       <style>
         @page { margin: 0; size: A4; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif; max-width: 100%; margin: 0; padding: 0; color: #1d1d1f; font-size: 13px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        body { font-family: ${EXPORT_SANS_STACK}; max-width: 100%; margin: 0; padding: 0; color: #1d1d1f; font-size: 13px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
         /* ── Header ── */
         .cover { padding: 48px 56px 0 56px; }
@@ -1014,7 +1009,7 @@ function SwarmRunSummary({ summary }: { summary: string }) {
         h2:first-child { margin-top: 0; }
         h3 { font-size: 14px; font-weight: 600; margin-top: 22px; margin-bottom: 4px; color: #3a3a3c; letter-spacing: -0.1px; }
         p { margin: 8px 0; color: #3a3a3c; }
-        code { background: #f5f5f7; padding: 2px 7px; border-radius: 5px; font-size: 11.5px; font-family: "SF Mono", "Fira Code", "Consolas", monospace; color: #1d1d1f; }
+        code { background: #f5f5f7; padding: 2px 7px; border-radius: 5px; font-size: 11.5px; font-family: ${EXPORT_MONO_STACK}; color: #1d1d1f; }
         blockquote { border-left: 3px solid #f97316; margin: 16px 0; padding: 10px 20px; color: #6e6e73; font-size: 12.5px; background: #fffbf5; border-radius: 0 8px 8px 0; }
         ul { padding-left: 20px; margin: 8px 0; }
         li { margin: 5px 0; color: #3a3a3c; }

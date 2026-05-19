@@ -1,6 +1,9 @@
 import { create } from 'zustand'
 
-type ConnectionState = 'disconnected' | 'connecting' | 'connected' | 'error'
+// Must mirror ws-bridge.ts in the main process.
+// 'error'      → transient connection error, auto-retry continues
+// 'auth_error' → backend rejected JWT, fatal (triggers sign-out in App.tsx)
+type ConnectionState = 'disconnected' | 'connecting' | 'connected' | 'error' | 'auth_error'
 
 interface ConnectionStoreState {
   state: ConnectionState

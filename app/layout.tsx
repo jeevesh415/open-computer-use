@@ -14,13 +14,15 @@ import { getUserProfile } from "@/lib/user/api"
 import { ThemeProvider } from "next-themes"
 import Script from "next/script"
 import { LayoutClient } from "./layout-client"
+import { AnimatedFavicon } from "@/components/animated-favicon"
 import { PostHogProvider } from "@/lib/posthog/provider"
 import { PostHogPageView } from "@/lib/posthog/page-view"
 import { LocalizedSEOSchemas } from "./seo-schemas"
-import { NextIntlClientProvider } from "next-intl"
+import { IntlClientProvider } from "./intl-client-provider"
 import { getLocale, getMessages, getTranslations } from "next-intl/server"
 import { locales, rtlLocales, type Locale } from "@/i18n/config"
-import { getHreflangAlternates } from "@/lib/seo"
+import { getHreflangAlternates, PRODUCT_IMAGES, MERCHANT_LISTING_EXTRAS } from "@/lib/seo"
+import { VISIBLE_TIERS, BOOST_PACKAGES } from "@/lib/pricing/tiers"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,7 +89,8 @@ export async function generateMetadata(): Promise<Metadata> {
       title: t("home.ogTitle"),
       description: t("home.twitterDescription"),
       images: ["/demo-screenshot.png"],
-      creator: "@coasty_ai",
+      creator: "@coastyai",
+      site: "@coastyai",
     },
     robots: {
       index: true,
@@ -149,6 +152,59 @@ export default async function RootLayout({
   const dir = rtlLocales.includes(locale as Locale) ? "rtl" : "ltr"
   const availableLanguages = locales.map(l => l === "fil" ? "Filipino" : l)
 
+  // ─── Canonical pricing → JSON-LD offers ──────────────────────────────────
+  // Sourced from `lib/pricing/tiers.ts` so structured data never goes stale.
+  // Used by the WebApplication and SoftwareApplication blocks below.
+  //
+  // Merchant Listings: every Offer spreads MERCHANT_LISTING_EXTRAS from
+  // `lib/seo.ts`, which carries the SaaS-correct `availability` + digital
+  // `shippingDetails` + `hasMerchantReturnPolicy` shapes Google Search
+  // Console expects on any Offer with price + priceCurrency. Removing them
+  // (as we briefly did) triggered GSC warnings — they belong on every
+  // Offer even for digital subscriptions.
+  const purchasableTiers = VISIBLE_TIERS.filter(t => t.priceUSD !== null)
+  // Omit eligibleQuantity for the "unlimited" tier — its sentinel credit
+  // value (999_999_999) would otherwise leak as a structured-data spam
+  // signal to crawlers. Use a description field instead.
+  const tierOffers = purchasableTiers.map(tier => {
+    const isUnlimitedTier = tier.id === "unlimited"
+    return {
+      "@type": "Offer",
+      "name": `${tier.name} Plan`,
+      "price": String(tier.priceUSD),
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": tier.priceUSD,
+        "priceCurrency": "USD",
+        "billingDuration": "P1M",
+        "billingIncrement": 1
+      },
+      "category": "subscription",
+      ...(isUnlimitedTier
+        ? {
+            "description":
+              "Unlimited computer-use agent runs at a flat $249/month — the cheapest flat-rate unlimited plan in the computer-use category. Includes 2 machines, 10 schedules, and 1 concurrent agent (abuse cap).",
+          }
+        : {
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": tier.creditsPerMonth,
+              "unitText": "credits/month"
+            },
+          }),
+      "priceValidUntil": "2027-12-31",
+      "url": `https://coasty.ai/pricing#${tier.id}`,
+      ...MERCHANT_LISTING_EXTRAS,
+    }
+  })
+  // High/low for the SoftwareApplication AggregateOffer summary.
+  const tierPrices = purchasableTiers.map(t => t.priceUSD as number)
+  const boostPrices = BOOST_PACKAGES.map(p => p.priceUSD)
+  const allPrices = [...tierPrices, ...boostPrices]
+  const lowPrice = Math.min(...allPrices)
+  const highPrice = Math.max(...allPrices)
+
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
@@ -171,68 +227,24 @@ export default async function RootLayout({
             "alternateName": ["Coasty AI", "Coasty Computer Use Agent", "Coasty AI Employee"],
             "url": "https://coasty.ai",
             "logo": "https://coasty.ai/logo_light.svg",
+            "image": PRODUCT_IMAGES,
             "description": seoT("structuredData.appDescription"),
             "applicationCategory": "ProductivityApplication",
             "operatingSystem": "Web Browser, Windows, macOS",
-            "offers": [
-              {
-                "@type": "Offer",
-                "name": "Free Tier",
-                "price": "0",
-                "priceCurrency": "USD",
-                "priceValidUntil": "2027-12-31",
-                "availability": "https://schema.org/InStock",
-                "shippingDetails": {
-                  "@type": "OfferShippingDetails",
-                  "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
-                  "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "d" },
-                    "transitTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "d" }
-                  },
-                  "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" }
-                },
-                "hasMerchantReturnPolicy": {
-                  "@type": "MerchantReturnPolicy",
-                  "applicableCountry": "US",
-                  "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                  "merchantReturnDays": "0"
-                }
-              },
-              {
-                "@type": "Offer",
-                "name": "Starter Plan",
-                "price": "20",
-                "priceCurrency": "USD",
-                "billingIncrement": "month",
-                "priceValidUntil": "2027-12-31",
-                "availability": "https://schema.org/InStock",
-                "shippingDetails": {
-                  "@type": "OfferShippingDetails",
-                  "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "USD" },
-                  "deliveryTime": {
-                    "@type": "ShippingDeliveryTime",
-                    "handlingTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "d" },
-                    "transitTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "d" }
-                  },
-                  "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" }
-                },
-                "hasMerchantReturnPolicy": {
-                  "@type": "MerchantReturnPolicy",
-                  "applicableCountry": "US",
-                  "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted",
-                  "merchantReturnDays": "0"
-                }
-              }
-            ],
+            "offers": tierOffers,
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "4.8",
               "bestRating": "5",
               "ratingCount": "1250"
             },
-            "award": "#1 Ranked Computer-Use Agent — 82% OSWorld Benchmark (369 real-world tasks)",
+            "award": [
+              "#1 Ranked Computer-Use Agent — 82% OSWorld Benchmark (369 real-world tasks)",
+              "Cheapest flat-rate Unlimited computer-use plan — $249/month"
+            ],
             "featureList": [
+              "82% OSWorld Benchmark — #1 in production",
+              "$249/mo Unlimited plan — flat-rate, no credit caps",
               "Autonomous Browser Automation",
               "Desktop Application Control",
               "Terminal & Command Execution",
@@ -247,12 +259,14 @@ export default async function RootLayout({
               "Web Scraping & Data Extraction",
               "Multi-Agent Orchestration",
               "Desktop App for Mac & Windows",
+              "First-party MCP Server (26 tools, Claude Desktop / Cursor / Windsurf compatible)",
               "Open Source Framework",
               "24/7 Autonomous Operation"
             ],
             "screenshot": "https://coasty.ai/demo-screenshot.png",
             "sameAs": [
-              "https://x.com/coasty_ai",
+              "https://x.com/coastyai",
+              "https://www.linkedin.com/company/coastyai/",
               "https://github.com/anthropics/open-computer-use"
             ]
           })
@@ -268,21 +282,26 @@ export default async function RootLayout({
             "name": "Coasty",
             "alternateName": "Coasty AI",
             "url": "https://coasty.ai",
-            "logo": "https://coasty.ai/logo_light.svg",
+            "logo": "https://coasty.ai/logo_dark.svg",
             "description": seoT("structuredData.orgDescription"),
             "foundingDate": "2025",
             "knowsAbout": ["Computer Use Agents", "AI Automation", "Desktop Automation", "Browser Automation", "Autonomous AI Agents", "Virtual Machine Isolation"],
             "sameAs": [
-              "https://x.com/coasty_ai",
+              "https://x.com/coastyai",
+              "https://twitter.com/coastyai",
               "https://github.com/anthropics/open-computer-use",
+              "https://www.linkedin.com/company/coastyai/",
               "https://www.producthunt.com/products/coasty"
             ],
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "contactType": "customer support",
-              "email": "support@coasty.ai",
-              "availableLanguage": availableLanguages
-            }
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "email": "founders@coasty.ai",
+                "areaServed": "Worldwide",
+                "availableLanguage": availableLanguages
+              }
+            ]
           })
         }}
       />
@@ -318,19 +337,34 @@ export default async function RootLayout({
             "name": "Coasty AI Employee",
             "alternateName": ["Coasty Desktop", "Coasty Computer Use Agent"],
             "url": "https://coasty.ai",
+            "image": PRODUCT_IMAGES,
             "downloadUrl": "https://coasty.ai/download",
             "applicationCategory": "BusinessApplication",
             "operatingSystem": "Web Browser, Windows 10+, macOS 10.15+",
             "softwareVersion": "1.5.0",
             "description": seoT("structuredData.softwareDescription"),
-            "award": "#1 Ranked Computer-Use Agent — 82% OSWorld Benchmark",
+            "award": [
+              "#1 Ranked Computer-Use Agent — 82% OSWorld Benchmark",
+              "Cheapest flat-rate Unlimited computer-use plan — $249/month"
+            ],
             "isAccessibleForFree": true,
             "offers": {
               "@type": "AggregateOffer",
-              "lowPrice": "0",
-              "highPrice": "20",
+              "lowPrice": String(lowPrice),
+              "highPrice": String(highPrice),
               "priceCurrency": "USD",
-              "offerCount": "2"
+              "offerCount": String(tierOffers.length + BOOST_PACKAGES.length),
+              // Mirror the merchant fields on the AggregateOffer node itself.
+              // Google's Merchant Listings crawler may pick the parent node
+              // as "the seller Offer" and flag the fields as missing on
+              // THAT node, even when the nested children have them. Spreading
+              // the helper here keeps belt-and-suspenders coverage so both
+              // the summary and the per-tier children pass validation.
+              ...MERCHANT_LISTING_EXTRAS,
+              // Embed the individual Offers so each tier's `shippingDetails`,
+              // `hasMerchantReturnPolicy`, and `availability` are also visible
+              // on each detailed Offer (Google parses both layers).
+              "offers": tierOffers,
             },
             "aggregateRating": {
               "@type": "AggregateRating",
@@ -339,13 +373,15 @@ export default async function RootLayout({
               "ratingCount": "1250"
             },
             "featureList": [
-              "82% OSWorld Benchmark Score",
+              "82% OSWorld Benchmark Score (#1 in production)",
+              "$249/month Unlimited plan — flat-rate, no credit caps (cheapest in market)",
               "Autonomous Browser Automation",
               "Full Desktop Control",
               "Built-in CAPTCHA Solving",
               "VM-Level Session Isolation",
               "Multi-Model AI (OpenAI, Anthropic, Google, Mistral)",
               "Desktop App for Mac & Windows",
+              "First-party MCP Server (npx -y @coasty/mcp, 26 tools)",
               "24/7 Operation",
               "Open Source Framework"
             ],
@@ -359,7 +395,8 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <AnimatedFavicon />
+        <IntlClientProvider locale={locale} messages={messages as Record<string, unknown>}>
           <PostHogProvider>
             <PostHogPageView />
             <TanstackQueryProvider>
@@ -392,7 +429,7 @@ export default async function RootLayout({
               </UserProvider>
             </TanstackQueryProvider>
           </PostHogProvider>
-        </NextIntlClientProvider>
+        </IntlClientProvider>
       </body>
     </html>
   )

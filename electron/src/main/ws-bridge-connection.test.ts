@@ -134,12 +134,12 @@ describe('WebSocketBridge — connection state & reconnect', () => {
       expect(bridge.getState()).toBe('connected')
     })
 
-    it('transitions to error on auth_failed', () => {
+    it('transitions to auth_error on auth_failed (distinct from generic connection error)', () => {
       const { bridge } = createBridge()
       bridge.connect()
       h.currentWs.simulateOpen()
       h.currentWs.simulateMessage({ type: 'auth_failed', reason: 'invalid token' })
-      expect(bridge.getState()).toBe('error')
+      expect(bridge.getState()).toBe('auth_error')
     })
 
     it('transitions to disconnected on unintentional close', () => {
@@ -182,13 +182,13 @@ describe('WebSocketBridge — connection state & reconnect', () => {
       expect(mockSend).toHaveBeenCalledWith('connection-state-changed', 'connected')
     })
 
-    it('broadcasts error state on auth_failed', () => {
+    it('broadcasts auth_error state on auth_failed', () => {
       const { bridge } = createBridge()
       bridge.connect()
       h.currentWs.simulateOpen()
       mockSend.mockClear()
       h.currentWs.simulateMessage({ type: 'auth_failed', reason: 'bad token' })
-      expect(mockSend).toHaveBeenCalledWith('connection-state-changed', 'error')
+      expect(mockSend).toHaveBeenCalledWith('connection-state-changed', 'auth_error')
     })
 
     it('broadcasts disconnected state on unintentional close', () => {
@@ -215,8 +215,8 @@ describe('WebSocketBridge — connection state & reconnect', () => {
       // Advance timers well past any backoff delay
       vi.advanceTimersByTime(60000)
 
-      // State should still be error, no reconnect attempt
-      expect(bridge.getState()).toBe('error')
+      // State should still be auth_error, no reconnect attempt
+      expect(bridge.getState()).toBe('auth_error')
     })
 
     it('closes the WebSocket after auth_failed', () => {

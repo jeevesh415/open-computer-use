@@ -371,9 +371,6 @@ export function ToolInvocation({
           onClick={() => setIsOpen(!isOpen)}
           type="button"
           whileTap={{ scale: 0.995 }}
-          whileHover="hovered"
-          initial="idle"
-          animate="idle"
           className={cn(
             "group relative w-full",
             fullyRounded ? "rounded-2xl" : "rounded-t-2xl rounded-b-none",
@@ -385,11 +382,7 @@ export function ToolInvocation({
           <div className="flex items-center gap-3">
             {/* Screenshot thumbnail */}
             <motion.div
-              className="relative h-11 w-[4.5rem] flex-shrink-0 rounded-lg overflow-hidden ring-1 ring-black/5 dark:ring-white/10 bg-neutral-200 dark:bg-neutral-700"
-              variants={{
-                idle: { scale: 1 },
-                hovered: { scale: 1.25 },
-              }}
+              className="relative h-11 w-[4.5rem] flex-shrink-0 rounded-lg overflow-hidden ring-1 ring-black/5 dark:ring-white/10 bg-neutral-200 dark:bg-neutral-700 transition-transform duration-200 ease-out group-hover:scale-125"
               transition={{ type: "spring", stiffness: 500, damping: 15 }}
             >
               <AnimatePresence mode="wait">

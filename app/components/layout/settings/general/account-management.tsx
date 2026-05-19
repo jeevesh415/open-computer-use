@@ -2,26 +2,19 @@
 
 import { Button } from "@/components/ui/button"
 import { toast } from "@/components/ui/toast"
-import { useChats } from "@/lib/chat-store/chats/provider"
-import { useMessages } from "@/lib/chat-store/messages/provider"
-import { clearAllIndexedDBStores } from "@/lib/chat-store/persist"
 import { useUser } from "@/lib/user-store/provider"
 import { SignOut } from "@phosphor-icons/react"
-import { useRouter } from "next/navigation"
 
 export function AccountManagement() {
   const { signOut } = useUser()
-  const { resetChats } = useChats()
-  const { resetMessages } = useMessages()
-  const router = useRouter()
 
+  // signOut() (in user-store/provider) now does the full reset + redirect to /
+  // atomically — no need to manually reset chats / IndexedDB / push the route
+  // here. Keeping this as a thin wrapper for the toast-on-failure path; the
+  // redirect path won't reach the catch because the page unloads first.
   const handleSignOut = async () => {
     try {
-      await resetMessages()
-      await resetChats()
       await signOut()
-      await clearAllIndexedDBStores()
-      router.push("/")
     } catch (e) {
       console.error("Sign out failed:", e)
       toast({ title: "Failed to sign out", status: "error" })

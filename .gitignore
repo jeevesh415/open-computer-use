@@ -4,7 +4,9 @@
 /backend
 
 # dependencies
+
 /node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -13,8 +15,10 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# testing — root-anchored AND unanchored so vitest/jest output in any
+# sub-package gets ignored (e.g. mcp/coverage/).
 /coverage
+coverage/
 
 # next.js
 /.next/
@@ -150,3 +154,28 @@ campaigns/config.py
 scripts/setup-posthog-dashboards.mjs
 scripts/build-golden-ami.mjs
 scripts/build-windows-golden-ami.mjs
+supabase/migrations/
+supabase/scripts/
+campaigns/*
+
+# infra docker secrets
+infra/docker/.env
+
+# Local deploy audit log — contains usernames, timestamps, and git messages
+# we don't want public.  Written by build-and-push and rollback.
+infra/docker/deployments.log
+
+# ── MCP server (TypeScript package — @coasty/mcp) ──
+# node_modules is already covered by the unanchored rule at the top, but
+# we list the build/cache outputs explicitly so a tooling change (yarn,
+# pnpm, bun) can't accidentally start tracking dist/ files.
+mcp/dist/
+mcp/coverage/
+mcp/.vitest-cache/
+mcp/*.tsbuildinfo
+mcp/.env
+temp/*
+
+# OSWorld showcase artifacts — pushed to the dedicated coasty-ai/coasty-osworld
+results/
+logs/

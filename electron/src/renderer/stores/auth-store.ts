@@ -19,6 +19,11 @@ interface AuthState {
   loading: boolean
   /** True when waiting for user to click email link (sign-up confirmation or magic link) */
   waitingForEmail: boolean
+  /** Last session-death reason, if any. Cleared on new sign-in. Used
+   *  by the AuthScreen to show a contextual banner ("your session
+   *  expired", "we lost connection to the server", etc.) instead of
+   *  just dumping the user back to a blank sign-in form. */
+  lastSessionDiedReason: string | null
 
   checkSession: () => Promise<void>
   signIn: () => Promise<boolean>
@@ -28,14 +33,19 @@ interface AuthState {
   resetPassword: (email: string) => Promise<AuthResult>
   cancelAuth: () => Promise<void>
   signOut: () => Promise<void>
+  /** Subscribe to the main process's ``auth:session-died`` IPC event.
+   *  Returns the cleanup function. Called once at app start from
+   *  App.tsx (NOT from each component — the listener is global). */
+  initSessionDeathListener: () => () => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   isAuthenticated: false,
   user: null,
   machineId: null,
   loading: true,
   waitingForEmail: false,
+  lastSessionDiedReason: null,
 
   checkSession: async () => {
     try {
@@ -167,5 +177,45 @@ export const useAuthStore = create<AuthState>((set) => ({
       localStorage.removeItem('coasty_permissions_granted')
     } catch { /* localStorage may be unavailable */ }
     set({ isAuthenticated: false, user: null, machineId: null })
+  },
+
+  /**
+   * Wire up the main process's ``auth:session-died`` event.
+   *
+   * When the auth layer in main declares the session permanently
+   * dead (refresh failed, network error, scheduled refresh failed,
+   * bridge auth_rejected, ...), this listener fires and we
+   * IMMEDIATELY sign the user out at the UI level — even before
+   * the next IPC call would have failed with 401. The user goes
+   * straight to the AuthScreen with a reason flag set, so the
+   * sign-in surface can show "Your session expired" or "We lost
+   * connection — please sign in again" depending on the cause.
+   *
+   * The contract from the user: "if there are any issues just sign
+   * the user out simple as that". This is the implementation. No
+   * retry loops, no zombie states, no half-authenticated UI.
+   *
+   * Idempotency: signOut on an already-signed-out store is a no-op
+   * after the local clear; multiple session-died events for the
+   * same death are coalesced by the main process's
+   * ``sessionDeadFired`` latch so the renderer never sees them.
+   */
+  initSessionDeathListener: () => {
+    const cleanup = window.coasty.onSessionDied(async ({ reason }) => {
+      console.warn(`[auth-store] session-died received: reason="${reason}" — signing out`)
+      // Stash the reason BEFORE the signOut() call clears state so
+      // the AuthScreen can read it after the navigation.
+      set({ lastSessionDiedReason: reason })
+      // Re-use signOut so we clear localStorage etc.
+      try {
+        await get().signOut()
+      } catch (err) {
+        // If signOut fails (e.g. IPC torn down), still clear local
+        // state so the UI returns to AuthScreen.
+        console.error('[auth-store] signOut on session-died failed:', err)
+        set({ isAuthenticated: false, user: null, machineId: null })
+      }
+    })
+    return cleanup
   },
 }))

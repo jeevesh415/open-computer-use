@@ -1,6 +1,5 @@
 "use client"
 
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { Button } from "@/components/ui/button"
 import { RainbowButton } from "@/components/magicui/rainbow-button"
 import {
@@ -18,6 +17,7 @@ import {
   FileText,
   Lock,
   TerminalSquare,
+  Infinity as InfinityIcon,
   type LucideIcon,
 } from "lucide-react"
 import Link from "next/link"
@@ -25,13 +25,18 @@ import { useState, useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
+import { UnlimitedSmoke } from "@/app/components/effects/unlimited-smoke"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTranslations } from "next-intl"
+import {
+  VISIBLE_TIERS,
+  type SubscriptionTierId,
+} from "@/lib/pricing/tiers"
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 interface Plan {
-  id: string
+  id: SubscriptionTierId
   name: string
   price: number
   tagline: string
@@ -44,6 +49,16 @@ interface Plan {
   search: boolean
 }
 
+interface PlanViewModel {
+  id: SubscriptionTierId
+  price: number
+  credits: number
+  machines: number
+  swarm: number
+  highlighted: boolean
+  search: boolean
+}
+
 interface Feature {
   icon: LucideIcon
   title: string
@@ -52,14 +67,25 @@ interface Feature {
 }
 
 // ─── Static data (non-translatable) ────────────────────────────────────────
+//
+// Numeric data is derived from `lib/pricing/tiers.ts` (canonical). Names,
+// taglines, CTAs, and badges still come from i18n via `t("plans.<id>.*")`.
+// Enterprise is filtered out — it's surfaced separately in the Enterprise
+// callout block below the main grid.
 
-const planData = [
-  { id: "free", price: 0, credits: 0, machines: 0, swarm: 0, highlighted: false, search: false },
-  { id: "lite", price: 9, credits: 100, machines: 1, swarm: 2, highlighted: false, search: false },
-  { id: "starter", price: 19, credits: 200, machines: 1, swarm: 3, highlighted: false, search: true },
-  { id: "plus", price: 50, credits: 600, machines: 2, swarm: 6, highlighted: true, search: true },
-  { id: "pro", price: 100, credits: 1500, machines: 3, swarm: 9, highlighted: false, search: true },
-] as const
+const planData: PlanViewModel[] = VISIBLE_TIERS
+  .filter((tier) => tier.id !== "enterprise")
+  .map((tier) => ({
+    id: tier.id,
+    price: tier.priceUSD ?? 0,
+    credits: tier.creditsPerMonth,
+    machines: tier.machinesIncluded,
+    swarm: tier.swarmAgentsLimit,
+    highlighted: tier.highlighted,
+    // Preserve current pricing-page heuristic: starter + professional API
+    // tier (plus, pro) get the "advanced search" perk in the feature grid.
+    search: tier.id === "starter" || tier.apiTier === "professional",
+  }))
 
 const featureIcons: LucideIcon[] = [Monitor, Workflow, Shield, Zap, HardDrive, Globe]
 
@@ -147,6 +173,7 @@ function CreditsVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTransl
   ]
 
   const tasks = taskLabels.map((label, i) => ({ label, cost: taskCosts[i] }))
+  const isUnlimited = plan.id === "unlimited"
 
   return (
     <div className="h-full flex flex-col items-center justify-center gap-5 p-6">
@@ -157,15 +184,33 @@ function CreditsVisual({ plan, t }: { plan: Plan; t: ReturnType<typeof useTransl
         transition={{ duration: 0.4, ease }}
         className="text-center"
       >
-        <motion.span
-          key={plan.credits}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl font-bold tracking-tight text-foreground"
-        >
-          {plan.credits === 0 ? t("plans.free.name") : plan.credits.toLocaleString()}
-        </motion.span>
-        <p className="text-sm text-muted-foreground mt-1">{plan.credits === 0 ? t("features.monthlyCredits.payAsYouGo") : t("animations.creditsPerMonth")}</p>
+        {isUnlimited ? (
+          <motion.div
+            key="unlimited"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 text-5xl font-bold tracking-tight text-foreground"
+          >
+            <InfinityIcon className="h-12 w-12 text-amber-500" strokeWidth={2.25} />
+            <span>Unlimited</span>
+          </motion.div>
+        ) : (
+          <motion.span
+            key={plan.credits}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl font-bold tracking-tight text-foreground"
+          >
+            {plan.credits === 0 ? t("plans.free.name") : plan.credits.toLocaleString()}
+          </motion.span>
+        )}
+        <p className="text-sm text-muted-foreground mt-1">
+          {isUnlimited
+            ? "credits — no caps, no overages"
+            : plan.credits === 0
+              ? t("features.monthlyCredits.payAsYouGo")
+              : t("animations.creditsPerMonth")}
+        </p>
       </motion.div>
 
       {/* Animated task list showing credit usage */}
@@ -511,7 +556,13 @@ function FeatureVisual({ featureIndex, plan, t }: { featureIndex: number; plan: 
 
 export default function PricingPage() {
   const t = useTranslations("pricingPage")
-  const [selectedPlan, setSelectedPlan] = useState(3)
+  // Default to the flagship "unlimited" tab if it's purchasable, otherwise
+  // the last visible plan.  `planData` is filtered upstream via VISIBLE_TIERS
+  // (which respects `purchasable`), so this index is always safe.
+  const [selectedPlan, setSelectedPlan] = useState(() => {
+    const idx = planData.findIndex((p) => p.id === "unlimited")
+    return idx >= 0 ? idx : Math.max(0, planData.length - 1)
+  })
   const [activeFeature, setActiveFeature] = useState(0)
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
 
@@ -520,7 +571,11 @@ export default function PricingPage() {
     name: t(`plans.${p.id}.name` as any),
     tagline: t(`plans.${p.id}.tagline` as any),
     cta: t(`plans.${p.id}.cta` as any),
-    badge: p.id === "plus" ? t("plans.plus.badge") : undefined,
+    badge: p.id === "plus"
+      ? t("plans.plus.badge")
+      : p.id === "unlimited"
+        ? t("plans.unlimited.badge")
+        : undefined,
   })), [t])
 
   const featureList: Feature[] = useMemo(() => [
@@ -533,7 +588,13 @@ export default function PricingPage() {
     {
       icon: featureIcons[1],
       title: t("features.swarmMode.name"),
-      subtitle: (p: Plan) => p.swarm === 0 ? t("features.swarmMode.sequential") : t("features.swarmMode.parallel", { count: p.swarm }),
+      // Singular grammar fix for the "1 concurrent agent" case (unlimited).
+      subtitle: (p: Plan) =>
+        p.swarm === 0
+          ? t("features.swarmMode.sequential")
+          : p.swarm === 1
+            ? "1 concurrent agent"
+            : t("features.swarmMode.parallel", { count: p.swarm }),
       highlight: { label: t("features.swarmMode.badge"), ...featureHighlights[1]! },
     },
     {
@@ -545,7 +606,11 @@ export default function PricingPage() {
     {
       icon: featureIcons[3],
       title: t("features.monthlyCredits.name"),
-      subtitle: (p: Plan) => p.credits === 0 ? t("features.monthlyCredits.payAsYouGo") : t("features.monthlyCredits.creditsPerMonth", { count: p.credits.toLocaleString() }),
+      subtitle: (p: Plan) => p.id === "unlimited"
+        ? "Unlimited credits — no caps, no overages"
+        : p.credits === 0
+          ? t("features.monthlyCredits.payAsYouGo")
+          : t("features.monthlyCredits.creditsPerMonth", { count: p.credits.toLocaleString() }),
     },
     {
       icon: featureIcons[4],
@@ -569,7 +634,6 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      <GuideLines />
       <LandingHeader />
 
       {/* ─── Hero ──────────────────────────────────────────────────────── */}
@@ -615,7 +679,12 @@ export default function PricingPage() {
                 )}
               >
                 {p.badge && (
-                  <span className="absolute -top-1 left-1/2 -translate-x-1/2 rounded-full bg-primary px-2 py-0.5 text-[9px] font-semibold text-primary-foreground uppercase tracking-wider leading-none">
+                  <span className={cn(
+                    "absolute -top-1 left-1/2 -translate-x-1/2 rounded-full px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider leading-none",
+                    p.id === "unlimited"
+                      ? "bg-amber-500 text-white shadow-[0_2px_8px_-2px_rgba(245,158,11,0.55)]"
+                      : "bg-primary text-primary-foreground"
+                  )}>
                     {p.badge}
                   </span>
                 )}
@@ -642,29 +711,85 @@ export default function PricingPage() {
               transition={{ duration: 0.3, ease }}
             >
               <div className={cn(
-                "rounded-2xl border overflow-hidden",
-                plan.highlighted
-                  ? "border-primary/30 bg-gradient-to-b from-primary/[0.04] to-transparent"
-                  : "border-border/60 bg-card/40"
+                "relative rounded-2xl border overflow-hidden isolate",
+                plan.id === "unlimited"
+                  // Cinematic dark base — the card itself is a "dark pocket"
+                  // regardless of page theme, so the smoke reads as candlelit
+                  // gold + oxblood against deep ink, never as colorful wash
+                  // over a bright surface.  Feature/footer sections below
+                  // still pull bg-background/75 to tint back to the page
+                  // palette, so only the banner area shows the dark base.
+                  ? "border-white/10 bg-neutral-950 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
+                  : plan.highlighted
+                    ? "border-primary/30 bg-gradient-to-b from-primary/[0.04] to-transparent"
+                    : "border-border/60 bg-card/40"
               )}>
+                {/* Unlimited-only: slow amber smoke wash behind the card. */}
+                {plan.id === "unlimited" && <UnlimitedSmoke variant="wide" />}
+
                 {/* Price header */}
-                <div className="px-6 sm:px-8 pt-6 sm:pt-8 pb-5 border-b border-border/30">
-                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <div className={cn(
+                  "relative px-6 sm:px-8 pt-6 sm:pt-8 pb-5 border-b",
+                  plan.id === "unlimited" ? "border-white/10" : "border-border/30"
+                )}>
+                  {/* Banner-only vignette — deepens the edges so the smoke
+                      sits in a soft pool of darkness rather than spreading
+                      uniformly.  Sits between smoke and content. */}
+                  {plan.id === "unlimited" && (
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_85%_75%_at_50%_35%,transparent_30%,rgba(0,0,0,0.45))]"
+                    />
+                  )}
+                  <div className="relative flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">{plan.tagline}</p>
+                      {plan.id === "unlimited" && (
+                        // Dark-mode pill — chrome tuned for the neutral-950
+                        // base so it reads regardless of page theme.
+                        <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] px-2.5 py-1">
+                          <InfinityIcon className="h-3 w-3 text-white/80" strokeWidth={2.5} />
+                          <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
+                            {plan.badge ?? "Best Value"}
+                          </span>
+                        </div>
+                      )}
+                      <p className={cn(
+                        "text-sm mb-1",
+                        plan.id === "unlimited" ? "text-white/65" : "text-muted-foreground"
+                      )}>{plan.tagline}</p>
                       <div className="flex items-baseline gap-1.5">
                         <motion.span
                           key={plan.id}
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="text-5xl sm:text-6xl font-bold tracking-tight"
+                          className={cn(
+                            "text-5xl sm:text-6xl font-bold tracking-tight",
+                            plan.id === "unlimited" && "text-white"
+                          )}
                         >
                           ${price}
                         </motion.span>
-                        <span className="text-lg text-muted-foreground">{t("perMonth")}</span>
+                        <span className={cn(
+                          "text-lg",
+                          plan.id === "unlimited" ? "text-white/55" : "text-muted-foreground"
+                        )}>{t("perMonth")}</span>
                       </div>
+                      {plan.id === "unlimited" && (
+                        <p className="mt-2 text-xs text-white/55 font-medium">
+                          No usage caps · No overages · Run agents as much as you want
+                        </p>
+                      )}
                     </div>
-                    {plan.highlighted ? (
+                    {plan.id === "unlimited" ? (
+                      // Light CTA on the dark banner — inverts cleanly in
+                      // both page themes since the banner itself is dark.
+                      <Button
+                        className="h-11 px-8 flex-shrink-0 bg-white text-neutral-950 hover:bg-white/90 border-0 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.6)]"
+                        asChild
+                      >
+                        <Link href="/auth">{plan.cta}<ArrowRight className="ml-2 h-4 w-4" /></Link>
+                      </Button>
+                    ) : plan.highlighted ? (
                       <RainbowButton className="h-11 px-8 text-sm sm:text-base flex-shrink-0" asChild>
                         <Link href="/auth">{plan.cta}<ArrowRight className="ml-2 h-4 w-4" /></Link>
                       </RainbowButton>
@@ -677,7 +802,7 @@ export default function PricingPage() {
                 </div>
 
                 {/* Split: features left, visual right */}
-                <div className="flex flex-col lg:flex-row">
+                <div className="relative flex flex-col lg:flex-row bg-background/75 backdrop-blur-md">
                   {/* Feature list — left */}
                   <div className="flex-1 p-4 sm:p-6 lg:border-r border-border/30">
                     <div className="space-y-0.5">
@@ -740,7 +865,7 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div className="px-6 sm:px-8 py-3 border-t border-border/30 text-center">
+                <div className="relative px-6 sm:px-8 py-3 border-t border-border/30 text-center bg-background/75 backdrop-blur-md">
                   <p className="text-xs text-muted-foreground">
                     {plan.price === 0 ? t("footer.noCreditCardRequired") : t("footer.cancelAnytimeNoContracts")}
                   </p>

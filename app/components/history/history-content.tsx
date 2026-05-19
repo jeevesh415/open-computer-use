@@ -45,8 +45,11 @@ import { useChats } from "@/lib/chat-store/chats/provider"
 import type { Chats } from "@/lib/chat-store/types"
 import { AgentIconFilled } from "@/components/icons/agent"
 import { APP_DOMAIN } from "@/lib/config"
-import { createClient } from "@/lib/supabase/client"
+// Note: messages are now fetched via the /api/chats/[chatId]/messages
+// server route (so encrypted frontendScreenshot values get decrypted
+// server-side) — direct Supabase client access is no longer needed here.
 import { PageLoader } from "@/components/common/page-loader"
+import { useTranslations } from "next-intl"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -109,6 +112,7 @@ function extractStepsFromParts(parts: any[] | null): ExtractedStep[] {
 // ---------------------------------------------------------------------------
 
 export function HistoryContent() {
+  const tLoader = useTranslations("pageLoaders.history")
   const { chats, isLoading, isLoadingMore, hasMore, loadMore, refresh, deleteChat, updateChat } = useChats()
   const [search, setSearch] = useState("")
   const [refreshing, setRefreshing] = useState(false)
@@ -227,10 +231,10 @@ export function HistoryContent() {
   return (
     <PageLoader
       isLoading={isLoading}
-      title="Your History"
-      description="A quiet record of every conversation, task, and idea you've explored."
+      title={tLoader("title")}
+      description={tLoader("description")}
     >
-    <div className="h-full overflow-y-auto scrollbar-invisible relative">
+    <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div
@@ -406,7 +410,7 @@ export function HistoryContent() {
                 ))}
               </div>
 
-              <h2 className="text-2xl font-medium tracking-tight mb-2.5">No chats yet</h2>
+              <h2 className="text-2xl font-medium tracking-tight mb-2.5">No tasks yet</h2>
               <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-relaxed mb-8">
                 Start a new task to get going. Your task history will appear here.
               </p>
@@ -537,22 +541,36 @@ function ChatCard({
 
   const hasMessages = chat.last_message_preview != null
 
-  // Fetch messages on first expand
+  // Fetch messages on first expand. Routed through the server endpoint
+  // (rather than direct Supabase) so encrypted `frontendScreenshot` values
+  // get decrypted server-side before reaching the browser — the
+  // ENCRYPTION_KEY must never ship to the client.
   useEffect(() => {
     if (isExpanded && !messagesFetched) {
       setMessagesLoading(true)
-      const supabase = createClient()
-      if (supabase) {
-        supabase
-          .from("messages")
-          .select("id, role, content, created_at, model, experimental_attachments, parts")
-          .eq("chat_id", chat.id)
-          .order("created_at", { ascending: true })
-          .then(({ data }: { data: ChatMessage[] | null }) => {
-            setMessages(data || [])
-            setMessagesFetched(true)
+      let cancelled = false
+      ;(async () => {
+        try {
+          const res = await fetch(`/api/chats/${chat.id}/messages`, {
+            cache: "no-store",
+            credentials: "include",
           })
-          .finally(() => setMessagesLoading(false))
+          if (!res.ok || cancelled) return
+          const { messages: rows } = (await res.json()) as {
+            messages: ChatMessage[]
+          }
+          if (!cancelled) setMessages(rows || [])
+        } catch (e) {
+          if (!cancelled) console.warn("history-content messages fetch failed:", e)
+        } finally {
+          if (!cancelled) {
+            setMessagesFetched(true)
+            setMessagesLoading(false)
+          }
+        }
+      })()
+      return () => {
+        cancelled = true
       }
     }
   }, [isExpanded, messagesFetched, chat.id])
@@ -1644,8 +1662,7 @@ function ScreenshotThumb({ src, alt }: { src: string; alt: string }) {
     <>
       <motion.button
         type="button"
-        className="shrink-0 cursor-pointer focus:outline-none"
-        whileHover={{ scale: 1.03 }}
+        className="shrink-0 cursor-pointer focus:outline-none transition-transform duration-150 hover:scale-[1.03]"
         whileTap={{ scale: 0.97 }}
         onClick={() => setOpen(true)}
       >

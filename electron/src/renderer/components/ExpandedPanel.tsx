@@ -42,14 +42,30 @@ export function ExpandedPanel() {
   const {
     messages, isStreaming, chatTitle,
     canSend, handleSubmit, handleStop, clearMessages,
+    isMachineBusy, isStoppingMachine, forceStopAndSend, dismissBusyState,
   } = useChatSubmit()
 
   const [input, setInput] = React.useState('')
   const [files, setFiles] = React.useState<FileRef[]>([])
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
 
+  // Dismiss busy state when input is cleared so subsequent typing goes
+  // through the normal pre-check path. Same pattern as CompactPill.
+  React.useEffect(() => {
+    if (isMachineBusy && !input.trim()) {
+      dismissBusyState()
+    }
+  }, [input, isMachineBusy, dismissBusyState])
+
   const onSubmit = (e?: React.FormEvent) => {
     e?.preventDefault()
+    if (isMachineBusy) {
+      // Yellow Override & Run path: stop the running task, then send.
+      forceStopAndSend(input, files.length > 0 ? files : undefined)
+      setInput('')
+      setFiles([])
+      return
+    }
     if (!canSend(input)) return
     handleSubmit(input, files.length > 0 ? files : undefined)
     setInput('')
@@ -203,6 +219,19 @@ export function ExpandedPanel() {
               className="px-3 py-2 bg-red-600/20 border border-red-600/30 text-red-400 rounded-xl text-xs font-medium hover:bg-red-600/30 transition-colors flex-shrink-0"
             >
               Stop
+            </button>
+          ) : isMachineBusy && input.trim() ? (
+            // Yellow Override & Run — same colour family as the web app
+            // chat-input.tsx Override button. Submitting the form (Enter
+            // or click) routes through onSubmit, which routes through
+            // forceStopAndSend when isMachineBusy is true.
+            <button
+              type="submit"
+              disabled={isStoppingMachine}
+              title="Stop running task and start this one"
+              className="px-3 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
+            >
+              {isStoppingMachine ? 'Switching…' : 'Override & Run'}
             </button>
           ) : (
             <button

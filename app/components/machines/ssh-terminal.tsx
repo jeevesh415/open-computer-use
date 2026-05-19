@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Loader2, RotateCcw, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TERMINAL_MONO_STACK } from "@/lib/fonts";
 import "@xterm/xterm/css/xterm.css";
 
 interface SshTerminalProps {
@@ -179,8 +180,7 @@ export function SshTerminal({ machineId }: SshTerminalProps) {
       term = new Terminal({
         cursorBlink: true,
         fontSize: 14,
-        fontFamily:
-          '"JetBrains Mono", Menlo, Monaco, "Courier New", monospace',
+        fontFamily: TERMINAL_MONO_STACK,
         theme: {
           background: "#0d1117",
           foreground: "#c9d1d9",

@@ -12,16 +12,74 @@ files:
   - "!node_modules/**/*"
   - node_modules/puppeteer-core/**/*
   - node_modules/ws/**/*
+  # @nut-tree-fork/libnut — replaces PowerShell Add-Type + user32.dll P/Invoke
+  # for desktop automation. The .node binaries are signed N-API addons and
+  # don't trip Windows AMSI / Defender heuristics the way runtime C# does.
+  - node_modules/@nut-tree-fork/**/*
+  # libnut's transitive runtime deps. Without these the entry point
+  # (`libnut-{win32,darwin,linux}/index.js`) crashes at first call with:
+  #   "Cannot find module 'bindings'"
+  # because the asar excludes everything in node_modules and only allowlists
+  # what we name explicitly. `bindings` is what resolves the path of the
+  # `.node` file at runtime; `file-uri-to-path` is its direct dep. The same
+  # chain applies on EVERY platform — libnut-darwin's permissionCheck.js
+  # also does `require("bindings")("libnut")`.
+  - node_modules/bindings/**/*
+  - node_modules/file-uri-to-path/**/*
+  # Optional macOS-only dep used by libnut-darwin/permissionCheck.js to
+  # auto-prompt for Accessibility / Screen Recording. The require is wrapped
+  # in try/catch on the libnut side, so the app works without it (our own
+  # permissions.ts handles the prompts via Electron's macOS APIs). But when
+  # `npm install` does fetch it on a macOS host, we want it shipped — without
+  # this allowlist line the package would land on the macOS host's disk
+  # during build but get filtered out of the asar by the `!node_modules/**`
+  # exclusion. The line is a no-op on Windows / Linux builds where the
+  # optional dep was never installed.
+  - node_modules/@nut-tree-fork/node-mac-permissions/**/*
+asarUnpack:
+  # The native .node binary cannot be loaded from inside an ASAR archive —
+  # Node's dlopen needs a real filesystem path. asarUnpack copies it next to
+  # the asar so `require()` resolves it properly.
+  #
+  # The wildcard `libnut-*` matches darwin / win32 / linux equally; the
+  # `@nut-tree-fork/libnut` meta-package declares all three platform
+  # sub-packages as `dependencies`, so npm installs ALL of them on every
+  # host. Each one carries its own .node file at build/Release/libnut.node,
+  # and our runtime loader (libnut-loader.ts) picks the right one via
+  # `process.platform`. Unpacking all three is harmless: only the active
+  # platform's binary actually gets loaded.
+  - node_modules/@nut-tree-fork/libnut-*/**/*.node
+  - node_modules/@nut-tree-fork/libnut-*/build/**/*
+  # node-mac-permissions has its own native binary (Objective-C bridge to
+  # AVCaptureDevice for permission queries). On macOS builds where it's
+  # installed, unpack so its dlopen works post-asar.
+  - node_modules/@nut-tree-fork/node-mac-permissions/**/*.node
+  - node_modules/@nut-tree-fork/node-mac-permissions/build/**/*
 extraResources:
   - from: build/icon.png
     to: icon.png
 publish:
-  provider: generic
-  url: https://updates.coasty.ai
+  # Order matters: electron-updater reads app-update.yml (generated from this
+  # block at build time) and uses the FIRST entry as the runtime update feed.
+  # We want clients to check updates.coasty.ai (CDN we control) — keeping
+  # github here is for build-time artifact upload only (mirror / changelog).
+  - provider: generic
+    url: https://updates.coasty.ai
+  - provider: github
+    owner: LLmHub-dev
+    repo: open-computer-use
+    releaseType: release
 win:
   target:
     - nsis
   icon: build/icon.ico
+  # All artifact names use literal dashes ("Coasty-Desktop-...") instead of
+  # ${productName} expansion. productName is "Coasty Desktop" (with a space)
+  # for menu/about-screen display, but space-bearing filenames break URL
+  # construction (manual %20 encoding everywhere) and confuse CDN/S3 caches
+  # when staff mix dashed/spaced spellings. The hand-rename to dashed names
+  # in latest.yml means every target's output filename has to match.
+  artifactName: Coasty-Desktop-Setup-${version}.${ext}
   azureSignOptions:
     endpoint: "https://eus.codesigning.azure.net/"
     codeSigningAccountName: "coastyai"
@@ -38,13 +96,111 @@ mac:
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.plist
   notarize: true
+  # Info.plist additions — REQUIRED for a signed/notarized macOS bundle to
+  # actually receive TCC permissions (Screen Recording, Accessibility,
+  # Apple Events). Without these strings macOS silently denies the
+  # permission prompt in production, and downstream calls like
+  # `desktopCapturer.getSources()` and `systemPreferences.getMediaAccessStatus`
+  # can hang waiting for a prompt that will never appear — which presents
+  # as the overlay pill being stuck on the "working" / "connecting" state.
+  # In `npm run dev` these don't matter because Electron's dev binary is
+  # not signed-and-notarized and TCC applies to "Electron" (the helper),
+  # which the developer has typically already granted.
+  extendInfo:
+    NSScreenCaptureUsageDescription: >-
+      Coasty needs Screen Recording access to see your screen so its AI
+      agent can read what you're working on and take actions on your
+      behalf.
+    NSAccessibilityUsageDescription: >-
+      Coasty needs Accessibility access to control your keyboard and
+      mouse so its AI agent can carry out the actions you ask it to
+      perform.
+    NSAppleEventsUsageDescription: >-
+      Coasty uses Apple Events (System Events / osascript) to switch
+      between application windows and list visible windows on your
+      behalf.
+  # Default for non-DMG mac targets — i.e. the ZIP that electron-updater
+  # downloads for differential updates. The "-mac" suffix is mandatory: that
+  # is what electron-updater greps for in latest-mac.yml. Override per-target
+  # below for DMG (no "-mac" needed there).
+  artifactName: Coasty-Desktop-${version}-${arch}-mac.${ext}
 linux:
+  # Three Linux targets, chosen to cover every distro + cross-build scenario:
+  #
+  #   AppImage — primary; one file, runs anywhere with libfuse2 (most distros).
+  #              Ubuntu 24.04 dropped libfuse2; users there can run with
+  #              `./Coasty.AppImage --appimage-extract-and-run` OR install
+  #              libfuse2t64 OR use the .deb / .tar.gz alternatives below.
+  #
+  #   deb     — Debian/Ubuntu native install; integrates with apt + menus.
+  #
+  #   tar.gz  — Pure tarball, no system deps to install; works on Windows
+  #              cross-build (no mksquashfs, no fakeroot needed). User
+  #              extracts and runs `./coasty-desktop`. The "out of box"
+  #              fallback when AppImage/deb tooling is unavailable on the
+  #              build host or unwanted on the user's distro.
   target:
-    - AppImage
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+    - target: tar.gz
+      arch: [x64]
   icon: build/icon.png
   category: Utility
+  description: AI agent for your local machine — desktop automation and chat overlay.
+  synopsis: AI agent for your local machine
+  desktop:
+    entry:
+      Name: Coasty Desktop
+      GenericName: AI Desktop Assistant
+      Comment: AI agent for your local machine
+      Categories: Utility;Network;Office;
+      Keywords: ai;automation;desktop;assistant;agent;
+      MimeType: x-scheme-handler/coasty;
+      StartupNotify: "true"
+      StartupWMClass: coasty-desktop
+  # Pass Wayland-friendly flags to the Chromium runtime. Electron 40
+  # has a known bug where the GPU process doesn't inherit the ozone
+  # platform flags from the zygote, causing ~5x CPU overhead on
+  # multi-monitor Wayland setups (electron/electron#50462). Setting
+  # WaylandLinuxDrmSyncobj here ensures the GPU process uses the right
+  # synchronization path. Once we move past Electron 40, this can be
+  # removed.
+  executableArgs:
+    - --enable-features=WaylandLinuxDrmSyncobj
+    - --ozone-platform-hint=auto
+  # Default for any linux target without its own artifactName — i.e. tar.gz.
+  # appImage and deb each set their own artifactName below and override this.
+  artifactName: Coasty-Desktop-${version}-${arch}.${ext}
+appImage:
+  license: build/LICENSE.txt
+  artifactName: Coasty-Desktop-${version}-${arch}.${ext}
+deb:
+  artifactName: Coasty-Desktop-${version}-${arch}.${ext}
+  # Runtime libs Electron + the overlay need on Debian/Ubuntu. Specifies
+  # `libayatana-appindicator3-1` (current standard — `libappindicator3-1`
+  # was removed from Debian 11+ / Ubuntu 22.04+). xdotool + wmctrl are
+  # used by desktop-automation.ts for click/type/scroll/window mgmt.
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libuuid1
+    - libsecret-1-0
+    - libayatana-appindicator3-1
+    - xdotool
+    - wmctrl
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
+dmg:
+  # Override the mac.artifactName default — DMG installers don't carry the
+  # "-mac" suffix electron-updater needs on the ZIP.
+  artifactName: Coasty-Desktop-${version}-${arch}.${ext}

@@ -109,6 +109,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
 
     const settings = machine.settings as any;
     const isAws = settings?.provider === 'aws';
+    const isElectron = settings?.provider === 'electron' || settings?.isLocal === true;
 
     switch (body.action) {
       case "start":
@@ -315,6 +316,53 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
         }
 
       case "delete":
+        // Electron devices: unregister instead of delete. We don't call
+        // external cleanup (there's no cloud resource) and we must keep
+        // the DB row with an ``unregistered`` flag so a running Electron
+        // install can't silently re-register on its next heartbeat.
+        if (isElectron) {
+          const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8001";
+          const INTERNAL_API_KEY = process.env.INTERNAL_API_KEY || "";
+          try {
+            const unregRes = await fetch(
+              `${PYTHON_BACKEND_URL}/api/electron/machines/${encodeURIComponent(machineId)}/unregister`,
+              {
+                method: "POST",
+                headers: {
+                  "X-User-ID": userId,
+                  ...(INTERNAL_API_KEY && { "X-Internal-Key": INTERNAL_API_KEY }),
+                },
+                // Don't let an unresponsive backend hang the UI indefinitely.
+                signal: AbortSignal.timeout(10_000),
+              }
+            );
+            if (!unregRes.ok) {
+              // FastAPI errors are JSON (`{detail: "..."}`); plain-text
+              // fallback handles proxies / unexpected error pages.
+              let detail = "";
+              try {
+                const body: any = await unregRes.clone().json();
+                detail = body?.detail || body?.error || "";
+              } catch {
+                detail = await unregRes.text().catch(() => "");
+              }
+              const status = unregRes.status === 404 || unregRes.status === 400
+                ? unregRes.status
+                : 500;
+              return NextResponse.json(
+                { error: `Failed to unregister device${detail ? `: ${detail}` : ""}` },
+                { status }
+              );
+            }
+          } catch (err: any) {
+            const msg = err?.name === "TimeoutError" || err?.name === "AbortError"
+              ? "Timed out reaching backend to unregister device"
+              : (err?.message || "Failed to reach backend to unregister device");
+            return NextResponse.json({ error: msg }, { status: 502 });
+          }
+          return NextResponse.json({ message: "Local device unregistered" });
+        }
+
         if (machine.status === "running") {
           return NextResponse.json(
             { error: "Cannot delete running machine. Please stop it first." },
@@ -339,24 +387,27 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
                 userId,
                 machine.display_name
               );
-              console.log(`Created pre-delete snapshot: ${snapshot.amiId}`);
+              // null = instance already gone / non-snapshottable. Race-safe skip.
+              if (snapshot) {
+                console.log(`Created pre-delete snapshot: ${snapshot.amiId}`);
 
-              await supabase.from("machine_snapshots").insert({
-                machine_id: machineId,
-                user_id: userId,
-                snapshot_name: snapshot.name,
-                snapshot_type: "pre_shutdown",
-                storage_location: snapshot.amiId,
-                size_gb: settings?.storageGb || 16,
-                os_state: {
-                  provider: "aws",
-                  region: settings?.awsRegion || process.env.AWS_REGION || "us-east-1",
-                  source_instance: instanceId,
-                  desktop_enabled: settings?.desktopEnabled,
-                },
-              });
+                await supabase.from("machine_snapshots").insert({
+                  machine_id: machineId,
+                  user_id: userId,
+                  snapshot_name: snapshot.name,
+                  snapshot_type: "pre_shutdown",
+                  storage_location: snapshot.amiId,
+                  size_gb: settings?.storageGb || 16,
+                  os_state: {
+                    provider: "aws",
+                    region: settings?.awsRegion || process.env.AWS_REGION || "us-east-1",
+                    source_instance: instanceId,
+                    desktop_enabled: settings?.desktopEnabled,
+                  },
+                });
 
-              await awsService.cleanupOldSnapshots(userId, 2);
+                await awsService.cleanupOldSnapshots(userId, 2);
+              }
             } catch (snapErr: any) {
               console.warn(`Failed to snapshot before delete:`, snapErr.message);
             }
@@ -408,6 +459,22 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
             userId,
             machine.display_name
           );
+
+          // Manual snapshot endpoint — surface the skip to the user as a 409
+          // (Conflict) so they understand the request didn't take. The
+          // background snapshot paths absorb null silently because they're
+          // best-effort racing cleanup.
+          if (!snapshot) {
+            return NextResponse.json(
+              {
+                error:
+                  "Instance is no longer in a snapshottable state " +
+                  "(pending/shutting-down/terminated). It may have just been " +
+                  "terminated by cleanup; refresh the machines list.",
+              },
+              { status: 409 }
+            );
+          }
 
           await supabase.from("machine_snapshots").insert({
             machine_id: machineId,

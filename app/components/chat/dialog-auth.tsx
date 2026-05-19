@@ -12,8 +12,9 @@ import {
 import { signInWithGoogle } from "@/lib/api"
 import { createClient } from "@/lib/supabase/client"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
+import { detectInAppBrowser } from "@/lib/detect-in-app-browser"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 
 type DialogAuthProps = {
   open: boolean
@@ -23,6 +24,7 @@ type DialogAuthProps = {
 export function DialogAuth({ open, setOpen }: DialogAuthProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const inAppBrowser = useMemo(() => detectInAppBrowser(), [])
 
   if (!isSupabaseEnabled) {
     return null
@@ -35,6 +37,12 @@ export function DialogAuth({ open, setOpen }: DialogAuthProps) {
   }
 
   const handleSignInWithGoogle = async () => {
+    // In-app browsers block Google OAuth — redirect to auth page which handles this
+    if (inAppBrowser.isInApp) {
+      window.location.href = "/auth"
+      return
+    }
+
     try {
       setIsLoading(true)
       setError(null)

@@ -2475,7 +2475,6 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                                       transformOrigin: 'right center',
                                     }}
                                     animate={{ rotateY: 4 }}
-                                    whileHover={prevShot ? { x: 14, rotateY: 1 } : undefined}
                                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                     onClick={prevShot ? () => {
                                       setHasUserNavigated(true)
@@ -2543,7 +2542,6 @@ export function ProjectNavigator({ isOpen, onToggle, disableAutoOpen = false }: 
                                       transformOrigin: 'left center',
                                     }}
                                     animate={{ rotateY: -4 }}
-                                    whileHover={nextShot ? { x: -14, rotateY: -1 } : undefined}
                                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                                     onClick={nextShot ? () => {
                                       setHasUserNavigated(true)

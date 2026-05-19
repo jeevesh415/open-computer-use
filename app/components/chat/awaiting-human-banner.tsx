@@ -8,6 +8,7 @@ import {
   CheckCircle,
   CircleNotch,
 } from "@phosphor-icons/react"
+import { useTranslations } from "next-intl"
 import { useState, useEffect, useCallback } from "react"
 
 interface AwaitingHumanBannerProps {
@@ -53,6 +54,7 @@ export function AwaitingHumanBanner({
   isActive,
   className,
 }: AwaitingHumanBannerProps) {
+  const t = useTranslations("chat.awaitingHuman")
   const [elapsed, setElapsed] = useState(0)
   const [resuming, setResuming] = useState(false)
   const [resumed, setResumed] = useState(false)
@@ -113,7 +115,7 @@ export function AwaitingHumanBanner({
       >
         <CheckCircle className="size-4 shrink-0 text-emerald-500" weight="fill" />
         <span className="text-xs text-zinc-500 dark:text-zinc-400">
-          Human handoff completed
+          {t("completed")}
         </span>
       </div>
     )
@@ -138,7 +140,7 @@ export function AwaitingHumanBanner({
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <div className="flex items-center gap-2">
             <span className="text-[13px] font-semibold text-amber-800 dark:text-amber-200">
-              Your turn
+              {t("yourTurn")}
             </span>
             <span className="text-[10px] tabular-nums text-amber-500/70 dark:text-amber-400/50">
               {timeStr}
@@ -170,7 +172,7 @@ export function AwaitingHumanBanner({
           ) : (
             <Desktop className="size-4" />
           )}
-          Connect to desktop
+          {t("connectToDesktop")}
         </button>
         <button
           type="button"
@@ -190,7 +192,7 @@ export function AwaitingHumanBanner({
           ) : (
             <Play className="size-4" weight="fill" />
           )}
-          {resuming ? "Resuming..." : "Done, Continue"}
+          {resuming ? t("resuming") : t("doneContinue")}
         </button>
       </div>
     </div>

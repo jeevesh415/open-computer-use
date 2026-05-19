@@ -8,15 +8,23 @@ import {
   SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { useUser } from "@/lib/user-store/provider"
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useCallback, useRef } from "react"
+import { IconPin, IconPinFilled } from "@tabler/icons-react"
 import { DialogCollaborativeAuth } from "../../collaborative/dialog-collaborative-auth"
 import { CoastyIcon } from "@/components/icons/coasty"
 import { cn } from "@/lib/utils"
 import { ReferralPopup } from "../../referral/referral-popup"
 import { SidebarNavSection } from "./sidebar-nav-section"
 import { SidebarFooterSection } from "./sidebar-footer-section"
+
+const SIDEBAR_PINNED_KEY = "coasty:sidebar:pinned"
 
 // Import static CSS instead of inline <style jsx global>
 import "./sidebar-animations.css"
@@ -53,9 +61,39 @@ function useSecretSequence(sequence: string, onActivate: () => void) {
 // ─── Main sidebar (slim orchestrator) ─────────────────────────────
 export function AppSidebar() {
   const isMobile = useBreakpoint(768)
-  const { setOpenMobile, open, isMobile: isMobileSidebar } = useSidebar()
+  const { setOpenMobile, open, isMobile: isMobileSidebar, setOpen } = useSidebar()
   const expanded = isMobileSidebar || open
   const { user } = useUser()
+
+  // ─── Pin state ────────────────────────────────────────────────
+  // When pinned, we swap the sidebar's `collapsible` prop from
+  // "icon" (hover-to-expand, mouse-leave collapses) to "none" (no
+  // hover behavior at all). The Sidebar's mouse handlers only fire
+  // when collapsible === "icon", so flipping the prop is enough to
+  // freeze the sidebar in its current open state — no need to fork
+  // the underlying ui/sidebar component.
+  const [pinned, setPinned] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false
+    return window.localStorage.getItem(SIDEBAR_PINNED_KEY) === "true"
+  })
+
+  // On first paint after a pinned restore, ensure the sidebar is
+  // actually open (the cookie-based default may say otherwise).
+  useEffect(() => {
+    if (pinned) setOpen(true)
+    // We only want this on mount + when pin state changes.
+  }, [pinned, setOpen])
+
+  const togglePinned = useCallback(() => {
+    setPinned((prev) => {
+      const next = !prev
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(SIDEBAR_PINNED_KEY, String(next))
+      }
+      if (next) setOpen(true)
+      return next
+    })
+  }, [setOpen])
 
   const [isCollaborativeAuthDialogOpen, setIsCollaborativeAuthDialogOpen] = useState(false)
   const [isReferralPopupOpen, setIsReferralPopupOpen] = useState(false)
@@ -99,7 +137,10 @@ export function AppSidebar() {
       <Sidebar
         side="left"
         variant="sidebar"
-        collapsible="icon"
+        // `none` while pinned freezes the hover-to-expand behavior —
+        // mouseLeave no longer collapses the rail. Flipping back to
+        // `icon` restores the default hover-driven behavior.
+        collapsible={pinned ? "none" : "icon"}
         style={{
           "--sidebar-width": "13.5rem",
         } as React.CSSProperties}
@@ -109,16 +150,21 @@ export function AppSidebar() {
             shifts horizontally. Logo center anchored at sidebar-x=24
             (parent px-2 + button px-1 + logo-half 12), matching the
             nav icon column below. Wordmark uses gap-1.5 so its left
-            edge lands at x=42 — same as nav item labels. */}
+            edge lands at x=42 — same as nav item labels.
+
+            The pin button only renders when expanded — it would have
+            no room in the 48px collapsed rail. Logo button takes
+            `flex-1 min-w-0` so it shrinks gracefully when the pin
+            button shows, instead of pushing it offscreen. */}
         <SidebarHeader className="p-0">
-          <div className="flex items-center min-h-[44px] px-2 pt-2 pb-1">
+          <div className="flex items-center min-h-[44px] px-2 pt-2 pb-1 gap-0.5">
             <button
               onClick={() => {
                 setLogoClicks(c => c + 1)
                 handleNavigation(() => router.push("/"))
               }}
               className={cn(
-                "flex w-full items-center gap-1.5 px-1 py-1.5 rounded-lg transition-colors duration-150",
+                "flex flex-1 min-w-0 items-center gap-1.5 px-1 py-1.5 rounded-lg transition-colors duration-150",
                 "hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]",
                 "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50"
               )}
@@ -136,6 +182,53 @@ export function AppSidebar() {
                 </span>
               )}
             </button>
+
+            {/* ── Pin toggle ──
+                Desktop-only — on mobile the sidebar is a sheet
+                drawer with no hover-to-expand, so pinning has no
+                meaning. Filled-pin tilted 45° in pinned state reads
+                as "stuck"; outline-pin upright reads as "loose /
+                will close on mouse-out". Color shifts from a quiet
+                foreground/30 to a deliberate foreground/75 with a
+                subtle bg when active. */}
+            {expanded && !isMobile && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    onClick={togglePinned}
+                    aria-label={pinned ? "Unpin sidebar" : "Keep sidebar open"}
+                    aria-pressed={pinned}
+                    className={cn(
+                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors duration-150",
+                      "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
+                      pinned
+                        ? "text-foreground/75 bg-foreground/[0.05] hover:bg-foreground/[0.08] dark:bg-white/[0.05] dark:hover:bg-white/[0.08]"
+                        : "text-foreground/30 hover:text-foreground/70 hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]"
+                    )}
+                  >
+                    {pinned ? (
+                      <IconPinFilled
+                        size={13}
+                        stroke={1.5}
+                        className="rotate-45 transition-transform duration-200"
+                      />
+                    ) : (
+                      <IconPin
+                        size={13}
+                        stroke={1.75}
+                        className="transition-transform duration-200"
+                      />
+                    )}
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="right" sideOffset={8}>
+                  <span className="font-medium text-[12px]">
+                    {pinned ? "Unpin sidebar" : "Keep sidebar open"}
+                  </span>
+                </TooltipContent>
+              </Tooltip>
+            )}
           </div>
         </SidebarHeader>
 

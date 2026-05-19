@@ -1,0 +1,13 @@
+# Post-deploy suite dependencies — pinned to what's in prod where we can.
+pytest==8.3.3
+pytest-asyncio==0.24.0     # @pytest.mark.asyncio for concurrent DoS tests
+pytest-xdist==3.6.1        # -n auto for parallel execution
+pytest-timeout==2.3.1      # per-test wall-clock budgets (@pytest.mark.timeout)
+httpx[http2]==0.27.2       # HTTP/2 + timeouts, plays nice with Cloudflare
+websockets==13.1           # ws client for /api/electron/ws upgrade tests
+boto3==1.35.49             # ECS / ELBv2 / CloudWatch clients
+botocore==1.35.49
+python-dotenv==1.0.1       # loads tests/post_deploy/.env
+supabase==2.9.1            # db round-trip tests as a real user
+tenacity==9.0.0            # retry helpers for eventually-consistent checks
+cryptography==43.0.1       # ACM cert expiry parsing

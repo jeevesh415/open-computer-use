@@ -53,9 +53,14 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  let body: { name?: string; service?: string; username?: string; password?: string; notes?: string }
+  try {
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
   try {
     const { id } = await params
-    const body = await request.json()
 
     const { name, service, username, password, notes } = body
     if (

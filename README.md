@@ -100,7 +100,7 @@ Browser automation · Terminal access · Desktop control · Multi-agent orchestr
 
 ## What is this?
 
-Open Computer Use is an open-source platform that gives AI agents real computer control. Unlike chatbots that only *talk* about tasks, agents here **actually perform them** — browsing the web, running commands, clicking through UIs, and orchestrating multi-step workflows in isolated containers.
+Open Computer Use is an open-source platform that gives AI agents real computer control. Unlike chatbots that only *talk* about tasks, agents here **actually perform them** — browsing the web, running commands, clicking through UIs, and orchestrating multi-step workflows.
 
 > Computer use capabilities similar to Anthropic's Claude Computer Use, but fully open-source and extensible.
 
@@ -126,111 +126,30 @@ Open Computer Use is an open-source platform that gives AI agents real computer 
 
 <br />
 
-## Architecture
-
-```
-Frontend (Next.js 15)         Backend (FastAPI)              VM (Docker)
-┌──────────────────┐     ┌─────────────────────────┐     ┌──────────────────┐
-│  Chat UI         │────▶│  Multi-Agent Executor    │────▶│  Chrome Browser  │
-│  Model Selector  │ SSE │  ├─ Planner Agent        │ WS  │  Terminal        │
-│  VM Management   │◀────│  ├─ Browser Agent        │◀────│  Desktop (XFCE)  │
-│  Zustand Stores  │     │  ├─ Terminal Agent       │     │  Agent Server    │
-└──────────────────┘     │  └─ Desktop Agent        │     │  VNC :5900       │
-                         │  WebSocket · DB · Billing│     └──────────────────┘
-                         └─────────────────────────┘
-```
-
-<br />
-
----
-
-<br />
-
 ## Quick Start
 
-### Prerequisites
-
-Node.js 20+ · Python 3.10+ · Docker · [Supabase](https://supabase.com) account · AI provider API key
-
-### 1. Clone & install
+You only need **one API key**. Get a free sandbox key at [coasty.ai/developers](https://coasty.ai/developers).
 
 ```bash
 git clone https://github.com/coasty-ai/open-computer-use.git
 cd open-computer-use
-
-# Frontend
 npm install
-
-# Backend
-cd backend
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-cd ..
+cp .env.oss.example .env.local
 ```
 
-### 2. Configure environment
-
-```bash
-cp .env.example .env
-cp backend/.env.example backend/.env
-```
-
-Set these in both `.env` files:
+Open `.env.local` and paste your key:
 
 ```env
-# Supabase (required)
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE=your-service-role-key
-
-# Security (required — generate with: openssl rand -hex 32)
-ENCRYPTION_KEY=...
-CSRF_SECRET=...
-
-# AI provider (at least one)
-OPENAI_API_KEY=sk-...
-ANTHROPIC_API_KEY=sk-ant-...
-
-# Google Search (required for web search)
-GOOGLE_SEARCH_KEY=...
-GOOGLE_SEARCH_CX=...
+COASTY_API_KEY=sk-coasty-test-your-key-here
 ```
 
-### 3. Set up database
+Then run:
 
 ```bash
-# Via Supabase CLI
-npm install -g supabase
-supabase login
-supabase link --project-ref your-project-ref
-supabase db push
-
-# Or paste supabase/schema.sql into the Supabase SQL Editor
-```
-
-### 4. Run
-
-**Docker (recommended):**
-
-```bash
-docker-compose up --build
-```
-
-**Manual:**
-
-```bash
-# Terminal 1 — Frontend
 npm run dev
-
-# Terminal 2 — Backend
-cd backend && python main.py
-
-# Terminal 3 — AI Desktop VM (optional)
-docker-compose -f docker-compose.ai-desktop.yml up --build
 ```
 
-Open **http://localhost:3000**, sign in, start a chat, and give your agent a task.
+Open **[http://localhost:3000](http://localhost:3000)** and start a chat. That's it.
 
 <br />
 
@@ -238,37 +157,17 @@ Open **http://localhost:3000**, sign in, start a chat, and give your agent a tas
 
 <br />
 
-## Tech Stack
+## Desktop App
 
-| Layer | Technologies |
-| --- | --- |
-| **Frontend** | Next.js 15, React 19, TypeScript, Tailwind CSS, Radix UI, Zustand, Vercel AI SDK |
-| **Backend** | FastAPI, Python 3.10+, WebSockets, asyncio, uvicorn |
-| **AI Providers** | OpenAI, Anthropic, Google, Azure, xAI, Mistral, Perplexity, OpenRouter |
-| **Infrastructure** | Docker, Ubuntu 22.04 + XFCE, Chrome, Selenium, Supabase, Stripe |
-| **Desktop App** | Electron 40, Puppeteer-core, platform-native automation (Win32 / CoreGraphics / xdotool) |
-
-<br />
-
----
-
-<br />
-
-## Electron Desktop App
-
-A lightweight overlay that runs AI agent commands directly on your local machine instead of a remote VM.
-
-- Floating always-on-top pill UI with expanded chat panel
-- Platform-native automation (PowerShell/Win32 on Windows, CoreGraphics/osascript on macOS, xdotool on Linux)
-- Browser control via Puppeteer-core, shell execution, file operations
-- WebSocket bridge to backend with auto-reconnect
+A lightweight overlay that runs AI agent commands directly on your local machine.
 
 ```bash
 cd electron
 npm install
-npm run dev        # Development with hot reload
-npm run package    # Build for current platform
+npm run dev
 ```
+
+Native automation on Windows, macOS, and Linux. Floating always-on-top pill UI with expanded chat panel.
 
 <br />
 
@@ -276,26 +175,15 @@ npm run package    # Build for current platform
 
 <br />
 
-## Project Structure
+## MCP Server
 
+Use the same API key with Claude Desktop, Cursor, or Windsurf via MCP:
+
+```bash
+npx @coasty/mcp
 ```
-├── app/                    # Next.js routes & pages
-├── components/             # React components (UI, chat, prompts)
-├── lib/                    # Stores, providers, services, utilities
-├── backend/
-│   └── app/
-│       ├── api/routes/     # FastAPI endpoints
-│       ├── services/       # Multi-agent executor, VM control, billing
-│       ├── providers/      # AI provider integrations
-│       └── core/           # Config, middleware, logging
-├── electron/
-│   └── src/
-│       ├── main/           # App lifecycle, IPC, automation modules
-│       ├── preload/        # Context bridge API
-│       └── renderer/       # React UI, stores, components
-├── docker/ai-desktop/      # Ubuntu VM container
-└── supabase/               # Database schema
-```
+
+See [`mcp/`](./mcp) for details.
 
 <br />
 
@@ -323,7 +211,6 @@ Bug reports and feature requests welcome in [Issues](https://github.com/coasty-a
 - [ ] Multi-VM parallel orchestration
 - [ ] Visual workflow builder
 - [ ] Agent marketplace & templates
-- [ ] Windows / macOS VM support
 - [ ] Plugin system for custom tools
 - [ ] Collaborative sessions
 - [ ] Voice control & video understanding

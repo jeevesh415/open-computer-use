@@ -30,9 +30,14 @@ function validateCredential(cred: CreateSecretRequest): string | null {
 }
 
 export async function POST(request: Request) {
+  let body: { credentials?: CreateSecretRequest[] }
   try {
-    const body = await request.json()
-    const credentials: CreateSecretRequest[] = body.credentials
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
+  try {
+    const credentials: CreateSecretRequest[] = body.credentials as CreateSecretRequest[]
 
     if (!Array.isArray(credentials) || credentials.length === 0) {
       return NextResponse.json({ error: "No credentials provided" }, { status: 400 })

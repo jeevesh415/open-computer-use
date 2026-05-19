@@ -12,13 +12,15 @@
     "recommended": "موصى به",
     "month": "شهر",
     "creditsPerMonth": "{count} رصيد/شهر",
-    "agentsInParallel": "{count} وكلاء بالتوازي"
+    "agentsInParallel": "{count} وكلاء بالتوازي",
+    "whatsIncluded": "ما المتضمن",
+    "hideDetails": "إخفاء التفاصيل"
   },
   "header": {
     "useCases": "حالات الاستخدام",
     "blog": "المدوّنة",
     "agentSwarms": "أسراب الوكلاء",
-    "products": "Products",
+    "products": "المنتجات",
     "discover": "Discover",
     "compare": "مقارنة",
     "demos": "عروض توضيحية",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} بريد إلكتروني مخصص لكل حملة"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "استخدام الكمبيوتر",
+      "agentSwarms": "أسراب الوكلاء",
+      "compare": "مقارنة"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "درجة قياس OSWorld {stat}",
+      "agentSwarms": "{stat} وكيل بالتوازي",
+      "compare": "{stat} منافس تم تحليله"
     },
     "blogItems": {
       "allPosts": "جميع المقالات",
@@ -72,7 +74,8 @@
       "webScraping": "استخراج بيانات الويب",
       "jobApplications": "طلبات التوظيف",
       "demosResults": "العروض والنتائج",
-      "guide": "دليل"
+      "guide": "دليل",
+      "discover": "المجتمع"
     },
     "blogStats": {
       "allPosts": "{stat} مقالة تُنشر أسبوعياً",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} صفحة لكل جلسة",
       "jobApplications": "{stat} طلب لكل جلسة",
       "demosResults": "{stat} دراسة حالة حقيقية",
-      "guide": "{stat} شرح لحالات الاستخدام"
-    }
+      "guide": "{stat} شرح لحالات الاستخدام",
+      "discover": "شاهد كيف يستخدمه الناس"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "الوكيل رقم 1 لاستخدام الحاسوب · {score} OSWorld",
-    "headline": "مشغّلو حاسوب مستقلون",
+    "headline": "أفضل وكيل لاستخدام الحاسوب",
     "useCases": {
       "computerAgent": {
         "label": "وكيل الحاسوب",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "وسائل التواصل الاجتماعي",
         "task": "انشر على Hacker News وتفاعل مع التعليقات"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "موفّرة شهريًا",
+        "sublabel": "مقابل مساعد افتراضي بدوام كامل"
+      },
+      "time": {
+        "value": "30 ساعة",
+        "label": "مستردّة أسبوعيًا",
+        "sublabel": "من العمل اليدوي، تم تقليصه"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "إنتاج أسرع",
+        "sublabel": "مهام تُنجز في دقائق، لا في أيام"
+      },
+      "effort": {
+        "value": "0",
+        "label": "كود أو توظيف",
+        "sublabel": "مُدار بالكامل من البداية إلى النهاية"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "أتمتة ثقيلة غير محدودة",
         "cta": "احصل على Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "بلا حدود للأرصدة — على الإطلاق",
+        "cta": "اشترك في Unlimited",
+        "badge": "أفضل قيمة"
       }
     },
     "vmTemporary": "1 VM مؤقت (ساعتان)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "نفس العمل يكلف {oldPrice} بالعمالة اليدوية",
       "description": "مساعد افتراضي يكلف $2,000–$4,000/شهر. توظيف جزئي يكلف أكثر. Coasty ينجز نفس العمل 24/7 بدءاً من $0 — بدقة تامة، سجلات مراجعة كاملة، وبدون وقت تدريب."
-    }
+    },
+    "unlimitedCredits": "أرصدة غير محدودة"
   },
   "faq": {
     "title": "الأسئلة الشائعة",
@@ -429,7 +463,8 @@
       "contact": "اتصل بنا",
       "privacy": "الخصوصية",
       "terms": "الشروط"
-    }
+    },
+    "status": "جميع الأنظمة تعمل"
   },
   "languageSwitcher": {
     "label": "اللغة"
@@ -458,16 +493,16 @@
     "demoCaption": "شغّل وكلاء الذكاء الاصطناعي على حاسوبك أو تحكّم به من هاتفك، أينما كنت.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "شغّله محلياً على جهازك",
+        "desc": "نزّل تطبيق سطح المكتب ودع الذكاء الاصطناعي يتحكم في حاسوبك مباشرة — دون الحاجة إلى جهاز افتراضي سحابي."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "تحكم في حاسوبك من هاتفك",
+        "desc": "ابدأ مهمة من هاتفك وشاهد وكيل الذكاء الاصطناعي يعمل على حاسوبك في الوقت الفعلي."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "السحابة أو محلياً — اختيارك",
+        "desc": "استخدم الأجهزة الافتراضية السحابية للمهام المعزولة، أو شغّل محلياً للوصول الكامل إلى تطبيقاتك وملفاتك."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "جارٍ الاتصال...",
       "continueWithGoogle": "المتابعة مع Google"
+    },
+    "inAppBrowser": {
+      "blocked": "تسجيل الدخول عبر Google لا يعمل في المتصفحات المدمجة. افتح هذه الصفحة في متصفحك، أو استخدم رابطاً سحرياً بدلاً من ذلك.",
+      "blockedNamed": "تسجيل الدخول عبر Google لا يعمل داخل {app}. افتح هذه الصفحة في متصفحك، أو استخدم رابطاً سحرياً بدلاً من ذلك.",
+      "copyLink": "نسخ الرابط",
+      "copied": "تم النسخ!",
+      "useMagicLink": "استخدم رابطاً سحرياً"
     },
     "or": "أو",
     "email": "البريد الإلكتروني",
@@ -560,18 +602,21 @@
     "getStarted": "ابدأ الآن",
     "settingUp": "جارٍ الإعداد...",
     "welcome": {
-      "titleReturning": "مرحباً بعودتك{name}!",
+      "titleReturning": "مرحباً بعودتك{name}",
       "titleNew": "مرحباً بك في Coasty",
-      "descriptionReturning": "نودّ معرفة المزيد عنك لتحسين تجربتك",
-      "descriptionNew": "لنقم بإعداد حسابك لنتمكن من تخصيص تجربتك"
+      "eyebrowNew": "لنتعرّف عليك",
+      "eyebrowReturning": "اقتربنا",
+      "descriptionReturning": "بضع تفاصيل أخرى وسيكون Coasty مضبوطاً تماماً لأسلوب عملك.",
+      "descriptionNew": "Coasty يعمل على أجهزة كمبيوتر حقيقية — يتصفح، ينقر، يكتب، ينجز. بضعة تفاصيل سريعة ليناسب طريقة عملك.",
+      "footerNote": "يستغرق دقيقة تقريباً. يمكنك تغيير أي شيء لاحقاً في الإعدادات."
     },
-    "nameLabel": "ماذا نناديك؟",
-    "namePlaceholder": "اسمك",
-    "companyLabel": "الشركة",
+    "nameLabel": "ماذا نسميك؟",
+    "namePlaceholder": "اسمك الأول فقط",
+    "companyLabel": "أين تعمل؟",
     "optional": "(اختياري)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "شركتك أو فريقك",
     "websiteLabel": "الموقع الإلكتروني",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "yourcompany.com",
     "roleStep": {
       "title": "ما الذي يصفك بشكل أفضل؟",
       "subtitle": "اختر كل ما ينطبق — هذا يساعدنا في تخصيص تجربتك"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "ماذا يجب أن يفعل مساعد AI الخاص بك؟",
-    "placeholderAlt": "أخبر AI بما يجب فعله على الكمبيوتر...",
+    "placeholder": "أخبرني ماذا أفعل على هذا الكمبيوتر...",
+    "placeholderAlt": "اختر جهاز كمبيوتر للبدء...",
     "vmError": {
       "title": "خطأ في الجهاز الافتراضي",
       "description": "الجهاز الافتراضي في حالة خطأ أو يتم حذفه.",
@@ -801,6 +846,28 @@
       "ecommerce": "مقارنة أسعار {company}",
       "social_media": "انشر عن {company}",
       "general_automation": "أتمتة مهمة على {company}"
+    },
+    "awaitingHuman": {
+      "completed": "تم تسليم العمل من الإنسان",
+      "yourTurn": "دورك",
+      "connectToDesktop": "الاتصال بسطح المكتب",
+      "resuming": "جارٍ الاستئناف...",
+      "doneContinue": "تم، متابعة"
+    },
+    "feedback": {
+      "promptRun": "كيف كان هذا التشغيل؟",
+      "promptSwarm": "كيف كان هذا السرب؟",
+      "reactionBad": "سيء",
+      "reactionOkay": "مقبول",
+      "reactionGood": "جيد",
+      "reactionAmazing": "ممتاز",
+      "tellUsMore": "أخبرنا المزيد",
+      "commentPlaceholder": "ما الذي يمكن تحسينه؟",
+      "npsPrompt": "هل توصي بـ Coasty؟",
+      "npsNotLikely": "غير محتمل",
+      "npsVeryLikely": "مرجح جدًا",
+      "thanks": "شكرًا على ملاحظاتك",
+      "creditsLabel": "رصيد"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "أتمتة ثقيلة غير محدودة"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "بلا حدود للأرصدة — على الإطلاق",
+        "badge": "أفضل قيمة"
       }
     },
     "features": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "التخطيط"
+    "layout": "التخطيط",
+    "sidebarStyle": "نمط الشريط الجانبي",
+    "sidebarStyleHint": "اختر مكان وجود التنقل",
+    "sidebarStyleDisabled": "متاح عند تعيين التخطيط إلى الشريط الجانبي",
+    "vertical": "عمودي",
+    "verticalBadge": "افتراضي",
+    "verticalDescription": "شريط جانبي كلاسيكي مع التسميات والأرصدة في التذييل.",
+    "horizontal": "أفقي",
+    "horizontalBadge": "أنيق",
+    "horizontalDescription": "شريط علوي واحد مع كل شيء في صف واحد. ارتفاع لوحة أكبر."
   },
   "suggestions": {
     "summary": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "أتمتة ثقيلة غير محدودة",
         "cta": "احصل على Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "بلا حدود للأرصدة — على الإطلاق",
+        "cta": "اشترك في Unlimited",
+        "badge": "أفضل قيمة"
       }
     },
     "features": {
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 دائم",
           "feature": "ضمان SLA"
+        },
+        "unlimited": {
+          "credits": "غير محدود",
+          "machines": "اثنتان دائمتا التشغيل",
+          "feature": "وكيل واحد متزامن"
         }
       },
       "perMonth": "{price}/شهر",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "طريقتان للتشغيل",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "جهاز افتراضي سحابي",
       "cloudFeatures": {
         "isolated": "بيئة معزولة تمامًا",
         "freshBrowser": "متصفح نظيف، بدون سجل",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر | موظف ذكاء اصطناعي لأتمتة سطح المكتب والمتصفح",
+      "title": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر | خطة Unlimited بسعر $249/شهر (الأرخص في السوق)",
       "titleTemplate": "{title} | Coasty — وكيل ذكاء اصطناعي لاستخدام الكمبيوتر",
-      "description": "Coasty هو وكيل الذكاء الاصطناعي رقم 1 في استخدام الكمبيوتر — 82% على معيار OSWorld. يتحكم بسطح المكتب كالإنسان: يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات. عزل حقيقي على مستوى الآلات الافتراضية لكل جلسة. ابتداءً من $20/شهر.",
-      "ogTitle": "Coasty — وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر | OSWorld 82%",
-      "ogDescription": "موظف ذكاء اصطناعي يتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld (82%). أتمتة المتصفح، التحكم بسطح المكتب، حل CAPTCHA، عزل الآلة الافتراضية. ابتداءً من $20/شهر.",
-      "twitterDescription": "موظف ذكاء اصطناعي يتحكم بسطح المكتب كالإنسان. يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل البريد الإلكتروني. عزل حقيقي للآلة الافتراضية. $20/شهر مقابل $3,000/شهر لمساعد افتراضي بشري."
+      "description": "Coasty هو وكيل الذكاء الاصطناعي رقم 1 في استخدام الكمبيوتر — 82% على معيار OSWorld — وخطة Unlimited الوحيدة بسعر ثابت $249/شهر لاستخدام الكمبيوتر (أرخص من Devin Team $500+ACU وOpenAI Operator $200 المحدود بمعدّل الاستخدام والمنافسين المقيّدين بنظام الرصيد). يتحكم بسطح المكتب كاملاً كالإنسان: المتصفحات، النماذج، البريد الإلكتروني، جداول البيانات. عزل على مستوى الآلة الافتراضية. ابتداءً من $19/شهر لخطة Starter أو $249/شهر لخطة Unlimited.",
+      "ogTitle": "Coasty — 82% OSWorld + خطة Unlimited بسعر $249/شهر (أرخص وكيل لاستخدام الكمبيوتر)",
+      "ogDescription": "رقم 1 على OSWorld (82%). $249/شهر لخطة Unlimited بسعر ثابت — أرخص من Devin Team ($500+ACU) مع نتيجة أعلى على المعيار. أتمتة المتصفح وسطح المكتب والطرفية. عزل الآلة الافتراضية لكل جلسة. تطبيق أصلي متعدد المنصات + REST API + خادم MCP.",
+      "twitterDescription": "وكيل ذكاء اصطناعي يشغّل سطح مكتب حقيقي. 82% OSWorld (رقم 1). $249/شهر لخطة Unlimited — أرخص خطة بسعر ثابت في هذه الفئة. خطة Starter ابتداءً من $19/شهر. عزل الآلة الافتراضية + خادم MCP بـ 26 أداة."
     },
     "compare": {
       "title": "مقارنة Coasty — بدائل ومقارنة وكلاء الذكاء الاصطناعي",
@@ -2281,10 +2373,10 @@
       "ogDescription": "أفضل وكيل استخدام كمبيوتر، رقم 1 على OSWorld. أتمتة أي مهمة على سطح المكتب أو المتصفح أو الطرفية باستخدام الذكاء الاصطناعي."
     },
     "pricing": {
-      "title": "الأسعار — خطط وأسعار وكيل Coasty للذكاء الاصطناعي",
-      "description": "خطط أسعار Coasty تبدأ من $20/شهر. استبدل المساعدين الافتراضيين بتكلفة $3,000/شهر بموظف ذكاء اصطناعي. خطة مجانية متاحة. فوترة قائمة على الرصيد بدون رسوم مخفية.",
-      "ogTitle": "أسعار Coasty — خطط وكيل الذكاء الاصطناعي",
-      "ogDescription": "موظف ذكاء اصطناعي ابتداءً من $20/شهر. استبدل المساعدين الافتراضيين المكلفين بذكاء اصطناعي مستقل. خطة مجانية متاحة."
+      "title": "الأسعار — خطة Starter بـ $19/شهر أو Unlimited بـ $249/شهر (الأرخص في السوق)",
+      "description": "أسعار Coasty: خطة Starter بـ $19/شهر (200 رصيد) أو Unlimited بـ $249/شهر (أرخص خطة Unlimited بسعر ثابت لاستخدام الكمبيوتر في السوق — أرخص من Devin Team $500+ACU وGenspark Pro $249 المقيّدة بالرصيد وManus Extended $200 المقيّدة). تستبدل مساعدين افتراضيين بشريين بتكلفة $3,000+/شهر. بدون رسوم مخفية.",
+      "ogTitle": "أسعار Coasty — Starter $19/شهر، Unlimited $249/شهر",
+      "ogDescription": "$249/شهر لخطة Unlimited بسعر ثابت — أرخص خطة Unlimited لاستخدام الكمبيوتر في السوق. أو $19/شهر لخطة Starter للأفراد. توفّر $36k سنوياً مقارنة بمساعد افتراضي بشري."
     },
     "faq": {
       "q1": "ما هو Coasty؟",
@@ -2292,7 +2384,7 @@
       "q2": "كيف يختلف Coasty عن Anthropic Computer Use؟",
       "a2": "بينما يوفر Anthropic Computer Use واجهة برمجة تطبيقات خام للتحكم بالكمبيوتر، فإن Coasty منصة جاهزة للإنتاج مع بنية تحتية مُدارة للآلات الافتراضية، وحل CAPTCHA مدمج، وتطبيق سطح مكتب لـ Mac وWindows، ودعم نماذج متعددة، وأعلى نتيجة على معيار OSWorld (82%). Coasty يوفر الحل الكامل — وليس فقط الواجهة البرمجية.",
       "q3": "كم يكلف Coasty؟",
-      "a3": "يبدأ Coasty من $20/شهر لخطة المبتدئين مع توفر خطة مجانية. مقارنة بذلك، يكلف المساعد الافتراضي البشري أكثر من $3,000/شهر. Coasty يعمل على مدار الساعة بدون استراحات، بدون تدريب، وبقابلية توسع فورية.",
+      "a3": "لدى Coasty خطتان فعّالتان: Starter بـ $19/شهر (200 رصيد، آلة واحدة، مثالية للأفراد) وUnlimited بـ $249/شهر بدون أي قيود على الرصيد. خطة Unlimited بـ $249 هي أرخص خطة Unlimited بسعر ثابت لاستخدام الكمبيوتر متوفّرة — أرخص من Devin Team ($500/شهر + رسوم زائدة عن ACU)، وOpenAI Operator ChatGPT Pro ($200/شهر محدودة بمعدّل الاستخدام)، وGenspark Pro ($249.99 بسقف 125k رصيد)، وManus Extended ($200 بسقف 40k رصيد). كلتا الخطتين تستبدلان مساعداً افتراضياً بشرياً بتكلفة $3,000+/شهر؛ وخطة Unlimited توفّر أكثر من $33,000 سنوياً مقارنة بالمساعد البشري — أي خفض التكلفة بنسبة 92%.",
       "q4": "هل استخدام Coasty آمن؟",
       "a4": "نعم. كل جلسة في Coasty تعمل في آلة افتراضية معزولة خاصة بها. بياناتك آمنة، جهازك لا يُمس، ولا يتسرب شيء بين الجلسات. هذا عزل حقيقي على مستوى الآلة الافتراضية، وليس مجرد حاويات في مجموعة مشتركة.",
       "q5": "ما هو معيار OSWorld؟",
@@ -2309,11 +2401,11 @@
       "a10": "نعم. لدى Coasty خط أنابيب مدمج لحل CAPTCHA، لذلك لا يُحظر كما يحدث مع وكلاء الذكاء الاصطناعي المنافسين. هذا أمر بالغ الأهمية للأتمتة الواقعية حيث تكون CAPTCHA شائعة على المواقع."
     },
     "structuredData": {
-      "appDescription": "وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. Coasty يتحكم بسطح المكتب كالإنسان — يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات بشكل مستقل. 82% على معيار OSWorld. عزل حقيقي على مستوى الآلة الافتراضية. حل CAPTCHA مدمج. ابتداءً من $20/شهر.",
-      "orgDescription": "Coasty يبني وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. توفر منصتنا التحكم المستقل بسطح المكتب، وأتمتة المتصفح، وتنسيق الوكلاء المتعددين مع عزل حقيقي على مستوى الآلة الافتراضية.",
-      "productDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld (82%). أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات مع عزل حقيقي على مستوى الآلة الافتراضية.",
-      "websiteDescription": "منصة وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر. 82% على معيار OSWorld. أتمتة مستقلة للمتصفح وسطح المكتب والطرفية مع عزل الآلة الافتراضية. ابتداءً من $20/شهر.",
-      "softwareDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld بنسبة إنجاز 82% عبر 369 مهمة حقيقية. أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، عمليات الطرفية، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات.",
+      "appDescription": "وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر وأرخص خطة Unlimited بسعر ثابت لاستخدام الكمبيوتر في السوق بقيمة $249/شهر. Coasty يتحكم بسطح المكتب كاملاً كالإنسان — يفتح المتصفحات، ينقر، يكتب، يملأ النماذج، يرسل رسائل البريد الإلكتروني، ويدير جداول البيانات بشكل مستقل. 82% على معيار OSWorld عبر 369 مهمة حقيقية. عزل حقيقي على مستوى الآلة الافتراضية لكل جلسة. حل CAPTCHA مدمج. الخطط: $19/شهر لـ Starter أو $249/شهر لـ Unlimited.",
+      "orgDescription": "Coasty يبني وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر (82% OSWorld) ويُطلق خطة Unlimited الوحيدة بسعر ثابت بقيمة $249/شهر — أرخص من Devin Team وOpenAI Operator والمنافسين المقيّدين بنظام الرصيد في نفس الشريحة السعرية. توفر منصتنا التحكم المستقل بسطح المكتب، وأتمتة المتصفح، وتنسيق الوكلاء المتعددين مع عزل حقيقي على مستوى الآلة الافتراضية.",
+      "productDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كالإنسان. رقم 1 على معيار OSWorld (82%). خطة Unlimited بـ $249/شهر هي أرخص خطة Unlimited بسعر ثابت لاستخدام الكمبيوتر متوفّرة. أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات مع عزل حقيقي على مستوى الآلة الافتراضية.",
+      "websiteDescription": "منصة وكيل الذكاء الاصطناعي رقم 1 لاستخدام الكمبيوتر — 82% على معيار OSWorld وأرخص خطة Unlimited بسعر ثابت بقيمة $249/شهر. أتمتة مستقلة للمتصفح وسطح المكتب والطرفية مع عزل الآلة الافتراضية. ابتداءً من $19/شهر لـ Starter أو $249/شهر لـ Unlimited.",
+      "softwareDescription": "وكيل ذكاء اصطناعي يستخدم الكمبيوتر ويتحكم بسطح المكتب كاملاً كالإنسان. رقم 1 على معيار OSWorld بنسبة إنجاز 82% عبر 369 مهمة حقيقية. خطة Unlimited بـ $249/شهر هي أرخص خطة Unlimited بسعر ثابت لاستخدام الكمبيوتر في السوق. أتمتة مستقلة للمتصفح، التحكم بسطح المكتب، عمليات الطرفية، إرسال البريد الإلكتروني، ملء النماذج، وإدارة جداول البيانات.",
       "breadcrumbs": {
         "home": "الرئيسية",
         "caseStudies": "دراسات حالة وكيل الذكاء الاصطناعي",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – الصفحة غير موجودة",
-      "description": "عذرًا، هذه الصفحة غير موجودة."
+      "description": "عذرًا، هذه الصفحة غير موجودة.",
+      "metaTitle": "404 · الصفحة غير موجودة",
+      "metaDescription": "أرسلنا أفضل وكيل ذكاء اصطناعي لدينا. عاد فارغ اليدين. عد إلى Coasty، الوكيل الذكي رقم 1 لأتمتة سطح المكتب والمتصفح.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "مسح: الإنترنت بالكامل",
+        "step2": "مسح: كل علامات التبويب المفتوحة",
+        "step3": "مسح: تحت الأريكة",
+        "result": "النتيجة: الصفحة غير موجودة"
+      },
+      "ok": "موافق",
+      "fail": "فشل",
+      "primaryCta": "العودة للرئيسية",
+      "secondaryCta": "وظف وكيل ذكاء اصطناعي",
+      "navLabel": "صفحات مقترحة",
+      "links": {
+        "home": "الرئيسية",
+        "computerUse": "استخدام الكمبيوتر",
+        "pricing": "الأسعار",
+        "download": "تحميل",
+        "blog": "المدونة",
+        "guide": "الدليل"
+      }
     },
     "error": {
       "title": "حدث خطأ ما",
@@ -2666,7 +2780,7 @@
     },
     "frequencies": {
       "daily": "daily",
-      "weekly": "weekly",
+      "weekly": "أسبوعياً",
       "every_30_minutes": "كل 30 دقيقة",
       "every_6_hours": "كل 6 ساعات",
       "every_12_hours": "كل 12 ساعة"
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "عنوان الغرفة مطلوب",
+      "taskCreated": "تم إنشاء المهمة بنجاح",
+      "taskFailed": "فشل إنشاء المهمة",
+      "assignTask": "إسناد مهمة جديدة",
+      "assignTaskDesc": "ابدأ مهمة جديدة مع مساعد الذكاء الاصطناعي.",
+      "taskName": "اسم المهمة",
+      "taskNamePlaceholder": "أدخل اسم المهمة",
+      "cancel": "إلغاء",
+      "creating": "جارٍ الإنشاء...",
+      "createTask": "إنشاء المهمة"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "يرجى إدخال رمز الدعوة",
+      "joinSuccess": "تم الانضمام إلى المشروع بنجاح!",
+      "joinFailed": "فشل الانضمام إلى المشروع",
+      "invalidCode": "رمز الدعوة غير صالح أو المشروع غير موجود",
+      "title": "انضم إلى المشروع",
+      "description": "أدخل رمز دعوة للانضمام إلى مشروع قائم.",
+      "inviteCode": "رمز الدعوة",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "اطلب من قائد فريقك رمز دعوة المشروع",
+      "cancel": "إلغاء",
+      "joining": "جارٍ الانضمام...",
+      "joinButton": "انضم إلى المشروع"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "أعضاء الغرفة",
+      "copyCode": "نسخ الرمز",
+      "copyLink": "نسخ الرابط",
+      "codeCopied": "تم نسخ رمز الدعوة!",
+      "codeFailed": "فشل نسخ رمز الدعوة",
+      "linkCopied": "تم نسخ رابط الدعوة!",
+      "linkFailed": "فشل نسخ رابط الدعوة",
+      "online": "متصل",
+      "offline": "غير متصل",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "عنوان الغرفة مطلوب",
+      "created": "تم إنشاء المشروع بنجاح!",
+      "failed": "فشل إنشاء الغرفة",
+      "title": "إنشاء مشروع جديد",
+      "description": "ابدأ مشروعاً جديداً لبناء منتجك باستخدام الذكاء الاصطناعي.",
+      "projectName": "اسم المشروع",
+      "projectNamePlaceholder": "أدخل اسم المشروع",
+      "teamSize": "حجم الفريق",
+      "cancel": "إلغاء",
+      "creating": "جارٍ الإنشاء...",
+      "createButton": "إنشاء المشروع"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "ما الجديد",
+    "title": "ما الجديد في Coasty",
+    "updateCount": "{count} تحديثات",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "تحديث",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "ترقّب المزيد من التحديثات",
+    "tagline": "موظفك بالذكاء الاصطناعي الذي يتعاون مع الجميع"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "رائع"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "يرجى تسجيل الدخول لإرسال الملاحظات",
+    "alreadySubmitted": "لقد أرسلت ملاحظات عن هذا بالفعل",
+    "thankYou": "شكراً على ملاحظاتك!",
+    "creditsEarned": "+{credits} رصيد مكتسب",
+    "helpImprove": "ملاحظاتك تساعدنا على تحسين Coasty.",
+    "howsExperience": "كيف هي تجربتك؟",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "أخبرنا المزيد",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "ما الذي يعمل جيداً؟ ما الذي يمكن تحسينه؟",
+    "cancel": "إلغاء",
+    "sending": "جارٍ الإرسال...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "يرجى اختيار محطة عمل",
+    "enterCron": "يرجى إدخال تعبير cron",
+    "hireFailed": "فشل توظيف الموظف",
+    "removeFailed": "فشل إزالة الموظف",
+    "editEmployee": "تعديل الموظف",
+    "configureEmployee": "إعداد الموظف",
+    "editDescription": "تحديث الجدول أو محطة العمل أو التعليمات",
+    "configureDescription": "أعدّ موظفاً بالذكاء الاصطناعي لهذه المحادثة",
+    "loading": "جارٍ تحميل الإعدادات...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "اسم الموظف"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "حذف المحادثة؟",
+    "description": "سيؤدي ذلك إلى حذف \"{chatTitle}\"",
+    "cancel": "إلغاء",
+    "delete": "حذف"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "تم الدفع بنجاح! تمت إضافة أرصدتك.",
+    "canceled": "تم إلغاء الدفع. لم يتم تحصيل أي رسوم."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "الإعدادات العامة",
     "generalDescription": "تكوين إعدادات الكمبيوتر الأساسية",
     "displayName": "اسم العرض",
     "defaultName": "جهاز كمبيوتري",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "حفظ التغييرات",
+    "security": "الأمان",
+    "securityDescription": "إعدادات الأمان والوصول",
+    "sshAuth": "مصادقة SSH",
+    "username": "اسم المستخدم:",
+    "keyPair": "زوج المفاتيح:",
+    "sshKeyDownloaded": "تم تنزيل مفتاح SSH",
+    "sshKeyFailed": "فشل تنزيل مفتاح SSH",
+    "downloadSshKey": "تنزيل مفتاح SSH",
+    "vncPassword": "كلمة مرور VNC",
     "vncPasswordHint": "كلمة المرور هذه مطلوبة للاتصال بالكمبيوتر"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "مرحباً، أستخدم Coasty وهو رائع جداً. ذكاء اصطناعي يستطيع فعلاً استخدام الحاسوب نيابة عنك. التصفح والنقر والكتابة، كل ذلك. جربه عبر رابطي ونحصل كلانا على أرصدة مجانية!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "ألقِ نظرة على أداة الذكاء الاصطناعي هذه",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "الآن",
+      "minutesAgo": "منذ {minutes} د",
+      "hoursAgo": "منذ {hours} س",
+      "daysAgo": "منذ {days} ي",
+      "monthsAgo": "منذ {months} ش"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "تم نسخ رابط الإحالة!",
+    "headline": "الأصدقاء الجيدون يتشاركون الميمز. الأصدقاء الرائعون يتشاركون وكلاء الذكاء الاصطناعي.",
+    "subheadline": "يحصل كلاكما على {credits} رصيد مجاني عند انضمام صديقك.",
+    "yourLink": "رابط الإحالة الخاص بك",
+    "shareDirectly": "شارك مباشرة",
+    "yourReferrals": "إحالاتك",
+    "referralCount": "{count} إحالة",
+    "creditsEarned": "{credits} رصيد مكتسب",
+    "invitedYou": "دعاك",
+    "joinedViaLink": "انضم عبر رابطك",
+    "noInvites": "لم تتم دعوة أي مستخدمين بعد",
+    "noInvitesHint": "شارك رابطك واكسبا 50 رصيداً معاً"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "اجعلها عامة",
+    "title": "محادثتك الآن عامة!",
+    "description": "يمكن لأي شخص يملك الرابط الآن مشاهدة هذه المحادثة، وقد تظهر في موجزات المجتمع أو الصفحات المميزة أو نتائج البحث مستقبلاً.",
+    "viewPage": "عرض الصفحة",
+    "shareOn": "شارك على"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "لوحة تحكم الذكاء الاصطناعي",
+    "subtitle": "صف ما تريد من الذكاء الاصطناعي فعله",
+    "quickCommands": "أوامر سريعة",
+    "noActions": "لم يتم تنفيذ أي إجراءات بعد",
+    "success": "نجح",
+    "failed": "فشل",
+    "placeholder": "أخبر الذكاء الاصطناعي ماذا يفعل... (Ctrl+Enter للإرسال)",
+    "executing": "جارٍ التنفيذ...",
+    "executeCommand": "تنفيذ الأمر"
   },
   "discover": {
     "badge": "المجتمع",
@@ -2859,5 +2973,190 @@
     "watchSession": "شاهد الجلسة",
     "steps": "{count} خطوة",
     "tryCoasty": "جرب Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "الذاكرة",
+    "sidebarDescription": "السياق المطبق على كل تشغيل للوكيل",
+    "dialog": {
+      "title": "الذاكرة",
+      "description": "ملاحظة قصيرة تطبقها Coasty في كل مرة تعمل من أجلك.",
+      "openFull": "فتح كامل",
+      "visualMemoryLabel": "الذاكرة",
+      "visualSynced": "تمت المزامنة",
+      "visualContextChat": "دردشة",
+      "visualContextSchedules": "الجداول",
+      "visualContextSwarm": "السرب"
+    },
+    "section": {
+      "title": "الذاكرة",
+      "tag": "اختياري · شخصي",
+      "description": "ملاحظة قصيرة عنك ترافق كل تشغيل للوكيل — الدردشة، المهام المجدولة، آلات السرب، الوكلاء المفوّضون."
+    },
+    "presetsLabel": "جرّب",
+    "presets": {
+      "useFirstName": "استخدام اسمي الأول",
+      "useFirstNameSentence": "خاطبني باسمي الأول.",
+      "beTerse": "كن موجزًا",
+      "beTerseSentence": "فضّل ردودًا موجزة ومباشرة. بدون حشو.",
+      "imDeveloper": "أنا مطور",
+      "imDeveloperSentence": "أنا مهندس برمجيات؛ معتاد على البرمجة.",
+      "noEmojis": "بدون رموز تعبيرية",
+      "noEmojisSentence": "تجنب استخدام الرموز التعبيرية في الردود.",
+      "metricUnits": "وحدات مترية",
+      "metricUnitsSentence": "استخدم الوحدات المترية (أمتار، كيلوغرامات، °م).",
+      "citeSources": "اذكر المصادر",
+      "citeSourcesSentence": "اذكر المصادر عند تقديم ادعاءات وقائعية."
+    },
+    "placeholder": "مثال:\nخاطبني باسمي الأول.\nفضّل ردودًا موجزة.\nأعمل بـ TypeScript و Python.\nلا تحذف الملفات أبدًا دون تأكيد.",
+    "loading": "جارٍ التحميل…",
+    "saving": "جارٍ الحفظ…",
+    "saved": "تم الحفظ",
+    "unsavedChanges": "تغييرات غير محفوظة",
+    "empty": "فارغ",
+    "savedRelative": "تم الحفظ · {time}",
+    "errorLoad": "تعذر تحميل ذاكرتك.",
+    "errorSave": "تعذر حفظ ذاكرتك.",
+    "willBeShortened": "سيتم اختصاره",
+    "clear": "مسح",
+    "footerNote": "ستأخذ Coasty هذه التفضيلات في الاعتبار عندما تعمل من أجلك.",
+    "time": {
+      "justNow": "الآن",
+      "secondsAgo": "منذ {n} ث",
+      "minutesAgo": "منذ {n} د",
+      "hoursAgo": "منذ {n} س",
+      "daysAgo": "منذ {n} ي"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "الإعدادات",
+    "navGroups": {
+      "settings": "الإعدادات",
+      "developer": "المطور",
+      "more": "المزيد",
+      "resources": "الموارد"
+    },
+    "sections": {
+      "account": {
+        "label": "عام",
+        "description": "الملف الشخصي والحساب"
+      },
+      "appearance": {
+        "label": "المظهر",
+        "description": "السمة واللغة والخلفية"
+      },
+      "billing": {
+        "label": "الفوترة",
+        "description": "الخطط والأرصدة"
+      },
+      "publicChats": {
+        "label": "المحادثات العامة",
+        "description": "إدارة المحادثات المشتركة عبر رابط عام"
+      },
+      "privacy": {
+        "label": "الخصوصية",
+        "description": "الأمان وخصوصية البيانات"
+      },
+      "notifications": {
+        "label": "الإشعارات",
+        "description": "تفضيلات الإشعارات"
+      },
+      "apiKeys": {
+        "label": "مفاتيح API",
+        "description": "إدارة مفاتيح API الخاصة بك"
+      },
+      "data": {
+        "label": "البيانات",
+        "description": "تصدير وإدارة بياناتك"
+      },
+      "feedback": {
+        "label": "ملاحظات",
+        "description": "أرسل لنا ملاحظاتك"
+      },
+      "about": {
+        "label": "حول",
+        "description": "حول Coasty"
+      },
+      "social": {
+        "label": "تواصل",
+        "description": "روابط التواصل الاجتماعي"
+      },
+      "guide": {
+        "label": "الدليل",
+        "description": "تعرف على كيفية استخدام Coasty"
+      },
+      "referral": {
+        "label": "الإحالة",
+        "description": "ادعُ الأصدقاء واكسب أرصدة"
+      }
+    },
+    "appearance": {
+      "theme": "المظهر",
+      "language": "اللغة",
+      "background": "الخلفية",
+      "personalization": "التخصيص",
+      "intro": {
+        "title": "مقدمة سينمائية",
+        "description": "عرض المقدمة المتحركة عند زيارة الصفحة الرئيسية"
+      },
+      "interaction": {
+        "title": "استدعاءات الأدوات",
+        "description": "عرض تفاصيل تنفيذ الأدوات في المحادثات"
+      }
+    },
+    "comingSoon": {
+      "badge": "قريبًا",
+      "placeholder": "سيتم إضافة هذا القسم في تحديث مستقبلي."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "أرني ما هو ممكن…",
+    "tasks": [
+      "ابحث عن منافسي",
+      "املأ طلبات الوظائف",
+      "احجز رحلة إلى طوكيو",
+      "تتبع وقت تشغيل موقعي",
+      "جدول منشورات وسائل التواصل",
+      "حلل اتجاهات ربعية"
+    ],
+    "dontShowAgain": "لا تعرض مرة أخرى",
+    "skip": "تخطى",
+    "tagline": "افعل أي شيء، تمامًا كما يفعل الإنسان بالكمبيوتر"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "حواسيبك",
+      "description": "السيليكون في خدمتك. نقوم بتشغيل أسطولك الآن."
+    },
+    "swarms": {
+      "title": "ذكاء السرب",
+      "description": "عقول كثيرة، مهمة واحدة. نجمع وكلاءك الآن."
+    },
+    "developers": {
+      "title": "واجهة برمجة المطورين",
+      "description": "جارٍ تحميل لوحة التحكم."
+    },
+    "secrets": {
+      "title": "بيانات الاعتماد",
+      "description": "أسرارك في أمان معنا. نفتح الخزنة."
+    },
+    "schedules": {
+      "title": "الجداول",
+      "description": "في الوقت المحدد، في كل مرة. نزامن أتمتاتك."
+    },
+    "history": {
+      "title": "سجلك",
+      "description": "سجل هادئ لكل محادثة ومهمة وفكرة استكشفتها."
+    },
+    "referral": {
+      "title": "الإحالات",
+      "description": "شارك Coasty. اربحوا معًا."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "بياناتك، تحكمك",
+    "heroDescription": "نخزن فقط ما يلزم لتشغيل جلساتك. كل البيانات مشفرة أثناء النقل، ويمكنك توسيع التشفير في حالة السكون ليشمل الفئات أدناه. لا تُستخدم بياناتك أبدًا لتدريب نماذج الذكاء الاصطناعي.",
+    "trustTransit": "TLS 1.3 أثناء النقل",
+    "trustAtRest": "AES-256-GCM في حالة السكون",
+    "trustNoTraining": "لا تدريب على بياناتك"
   }
 }

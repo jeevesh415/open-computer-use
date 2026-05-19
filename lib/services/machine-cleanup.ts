@@ -1,5 +1,10 @@
 import { createServiceClient } from "@/lib/supabase/service";
 import { deleteSwarmMailbox } from "@/lib/services/workmail-service";
+import { withCronLock } from "@/lib/services/cross-replica-lock";
+import {
+  runAgentHealthCheck,
+  type AgentHealthCheckStats,
+} from "@/lib/services/agent-health-check";
 
 interface CleanupStats {
   deleted: number;
@@ -7,14 +12,42 @@ interface CleanupStats {
   processed: number;
 }
 
+// Cross-replica lock bucket sizes (in minutes). The interval loop fires every
+// 2 hours, so a 120-min bucket means each cycle's runs (across all replicas)
+// race for the same lock; exactly one replica wins per cycle.
+const CLEANUP_BUCKET_MINUTES = 120;
+
+// The agent-health-check cron runs much more frequently (every 2 minutes)
+// than the heavy cleanup jobs above. Its bucket size matches its tick rate
+// so each tick across all replicas races for one lock, and exactly one
+// replica polls the backend + runs the SSM/EC2 remediation per cycle.
+//
+// Why a separate constant: the 2-hour cron is fundamentally
+// "snapshot-and-delete free user machines"; the 2-min cron is
+// "self-heal unresponsive agents." They don't share a cadence or a
+// failure model, so coupling them via a shared bucket would be wrong.
+const AGENT_HEALTH_CHECK_BUCKET_MINUTES = 2;
+
 export class MachineCleanupService {
   private intervalId: NodeJS.Timeout | null = null;
+  private agentHealthIntervalId: NodeJS.Timeout | null = null;
   private isRunning = false;
 
   constructor() {}
 
   /**
-   * Start the periodic cleanup service (runs every 2 hours)
+   * Start the periodic cleanup service.
+   *
+   * Two cadences:
+   *   * Heavy cleanup (snapshot, free-user purge, swarm reap) — every 2 hours
+   *   * Agent health check (post-incident 2026-05-17) — every 2 minutes
+   *
+   * Both share the same cross-replica leader-election helper
+   * (`withCronLock`) but with different bucket sizes so they elect leaders
+   * independently. The agent-health-check job is intentionally short and
+   * idempotent — even if the lock briefly slips between replicas (e.g. row
+   * deletion between buckets), the worst case is "we try SSM restart twice"
+   * which is harmless.
    */
   start() {
     if (this.intervalId) {
@@ -24,19 +57,120 @@ export class MachineCleanupService {
 
     console.log("Starting machine cleanup service - runs every 2 hours");
 
-    // Run immediately on start
-    this.runCleanup();
-    this.cleanupLiteMachines();
-    this.runPeriodicSnapshots();
-    this.cleanupSwarmMachines();
+    // Run immediately on start. All inner cleanups are wrapped in a
+    // cross-replica advisory lock (cron_runs table + 23505 unique-violation)
+    // so only one Next.js replica actually executes per bucket. See
+    // lib/services/cross-replica-lock.ts and migration 013 for details.
+    this.runCleanupLocked();
+    this.cleanupLiteMachinesLocked();
+    this.runPeriodicSnapshotsLocked();
+    this.cleanupSwarmMachinesLocked();
 
     // Then run every 2 hours (2 * 60 * 60 * 1000 ms)
     this.intervalId = setInterval(() => {
-      this.runCleanup();
-      this.cleanupLiteMachines();
-      this.runPeriodicSnapshots();
-      this.cleanupSwarmMachines();
+      this.runCleanupLocked();
+      this.cleanupLiteMachinesLocked();
+      this.runPeriodicSnapshotsLocked();
+      this.cleanupSwarmMachinesLocked();
     }, 2 * 60 * 60 * 1000);
+
+    // Agent-health auto-recovery loop. Kill switch: setting
+    // DISABLE_AGENT_AUTO_REPLACE=true at the env layer keeps the cron
+    // mounted (for telemetry) but the inner runAgentHealthCheck no-ops
+    // — see lib/services/agent-health-check.ts for the gate.
+    console.log("Starting agent-health auto-recovery loop - runs every 2 minutes");
+    this.runAgentHealthCheckLocked();
+    this.agentHealthIntervalId = setInterval(() => {
+      this.runAgentHealthCheckLocked();
+    }, 2 * 60 * 1000);
+  }
+
+  /**
+   * Cross-replica-locked wrapper for runCleanup. Only the replica that wins
+   * the cron_runs INSERT for this bucket actually runs the work; other
+   * replicas log + skip. Fail-safe: if the DB / migration is unavailable,
+   * the lock returns null and we skip rather than risk the original
+   * double-execution race.
+   */
+  private async runCleanupLocked(): Promise<void> {
+    await withCronLock("runCleanup", CLEANUP_BUCKET_MINUTES, async (report) => {
+      const stats = await this.runCleanup();
+      report({ deleted: stats.deleted, errors: stats.errors, processed: stats.processed });
+    });
+  }
+
+  /**
+   * Cross-replica-locked wrapper for cleanupLiteMachines.
+   */
+  private async cleanupLiteMachinesLocked(): Promise<void> {
+    await withCronLock("cleanupLiteMachines", CLEANUP_BUCKET_MINUTES, async () => {
+      await this.cleanupLiteMachines();
+    });
+  }
+
+  /**
+   * Cross-replica-locked wrapper for runPeriodicSnapshots. This is the
+   * concrete cron the 2026-05-02 NEW-3 audit caught firing on both replicas
+   * → 6× InvalidAMIName.Duplicate. The lock makes only one replica run
+   * createMachineImage per bucket; the AMI-name jitter in
+   * lib/aws/ec2-service.ts is defense-in-depth for the rest.
+   */
+  private async runPeriodicSnapshotsLocked(): Promise<void> {
+    await withCronLock("runPeriodicSnapshots", CLEANUP_BUCKET_MINUTES, async () => {
+      await this.runPeriodicSnapshots();
+    });
+  }
+
+  /**
+   * Cross-replica-locked wrapper for cleanupSwarmMachines.
+   */
+  private async cleanupSwarmMachinesLocked(): Promise<void> {
+    await withCronLock("cleanupSwarmMachines", CLEANUP_BUCKET_MINUTES, async () => {
+      await this.cleanupSwarmMachines();
+    });
+  }
+
+  /**
+   * Cross-replica-locked wrapper for `runAgentHealthCheck`.
+   *
+   * Background — 2026-05-17 incident
+   * --------------------------------
+   * A single EC2 cloud VM agent died but the EC2 instance stayed "running".
+   * The backend retried 7× per call (~38s each) and produced 91 dial
+   * timeouts in CloudWatch over 24 minutes. NO alarm fired, NO recovery
+   * kicked in, the user's CUA session sat broken. The only available
+   * recovery path was the user manually stopping + relaunching the machine.
+   *
+   * Fix
+   * ---
+   * vm_control.py now flips an `agent_unresponsive` circuit breaker after
+   * 3 consecutive dial failures within 5 minutes. /api/internal/vm-health
+   * lists the flagged machines. This cron polls that endpoint every 2 min
+   * (under a cross-replica lock so only one Next.js replica per bucket
+   * issues SSM commands) and for each entry:
+   *   1. SSM RunCommand `systemctl restart ai-agent.service`. Wait 60s.
+   *   2. If still flagged: terminate + relaunch the EC2 instance, update
+   *      Supabase, notify the user via WebSocket.
+   *
+   * `withCronLock` returns `false` when this replica didn't win the lock —
+   * we report nothing in that case because the winning replica will write
+   * the cron_runs row with the real numbers.
+   */
+  private async runAgentHealthCheckLocked(): Promise<void> {
+    await withCronLock(
+      "runAgentHealthCheck",
+      AGENT_HEALTH_CHECK_BUCKET_MINUTES,
+      async (report) => {
+        const stats: AgentHealthCheckStats = await runAgentHealthCheck();
+        report({
+          polled: stats.polled,
+          ssmRestarted: stats.ssmRestarted,
+          ec2Replaced: stats.ec2Replaced,
+          errors: stats.errors,
+          skipped: stats.skipped,
+        });
+      }
+    );
   }
 
   /**
@@ -47,6 +181,11 @@ export class MachineCleanupService {
       clearInterval(this.intervalId);
       this.intervalId = null;
       console.log("Machine cleanup service stopped");
+    }
+    if (this.agentHealthIntervalId) {
+      clearInterval(this.agentHealthIntervalId);
+      this.agentHealthIntervalId = null;
+      console.log("Agent-health auto-recovery loop stopped");
     }
   }
 
@@ -285,6 +424,15 @@ export class MachineCleanupService {
             machine.display_name
           );
 
+          // createMachineImage returns null when the instance has been
+          // terminated or is in a non-snapshottable state — racy with the
+          // lite-machine cleanup loop. Treat as a benign skip rather than
+          // an error so we don't pollute logs with an InvalidParameterValue
+          // traceback per audit window.
+          if (!snapshot) {
+            continue;
+          }
+
           await (supabase as any).from("machine_snapshots").insert({
             machine_id: machine.id,
             user_id: machine.user_id,
@@ -387,24 +535,27 @@ export class MachineCleanupService {
               machine.user_id,
               machine.display_name
             );
-            console.log(`Created pre-termination snapshot: ${snapshot.amiId}`);
+            // null = instance already terminated/non-snapshottable. Race-safe skip.
+            if (snapshot) {
+              console.log(`Created pre-termination snapshot: ${snapshot.amiId}`);
 
-            await (supabase as any).from("machine_snapshots").insert({
-              machine_id: machine.id,
-              user_id: machine.user_id,
-              snapshot_name: snapshot.name,
-              snapshot_type: "pre_shutdown",
-              storage_location: snapshot.amiId,
-              size_gb: settings.storageGb || 16,
-              os_state: {
-                provider: "aws",
-                region: settings.awsRegion || process.env.AWS_REGION || "us-east-1",
-                source_instance: settings.awsInstanceId,
-                desktop_enabled: settings.desktopEnabled,
-              },
-            });
+              await (supabase as any).from("machine_snapshots").insert({
+                machine_id: machine.id,
+                user_id: machine.user_id,
+                snapshot_name: snapshot.name,
+                snapshot_type: "pre_shutdown",
+                storage_location: snapshot.amiId,
+                size_gb: settings.storageGb || 16,
+                os_state: {
+                  provider: "aws",
+                  region: settings.awsRegion || process.env.AWS_REGION || "us-east-1",
+                  source_instance: settings.awsInstanceId,
+                  desktop_enabled: settings.desktopEnabled,
+                },
+              });
 
-            await awsService.cleanupOldSnapshots(machine.user_id, 2);
+              await awsService.cleanupOldSnapshots(machine.user_id, 2);
+            }
           } catch (snapError) {
             console.warn(`Failed to snapshot instance ${settings.awsInstanceId}:`, snapError);
             // Continue with termination — snapshot failure shouldn't block cleanup
@@ -467,7 +618,9 @@ export class MachineCleanupService {
     return {
       isRunning: this.isRunning,
       hasScheduledCleanup: this.intervalId !== null,
-      nextCleanupIn: this.intervalId ? "Within 2 hours" : "Not scheduled"
+      nextCleanupIn: this.intervalId ? "Within 2 hours" : "Not scheduled",
+      hasScheduledAgentHealthCheck: this.agentHealthIntervalId !== null,
+      nextAgentHealthCheckIn: this.agentHealthIntervalId ? "Within 2 minutes" : "Not scheduled",
     };
   }
 }

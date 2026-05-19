@@ -164,7 +164,7 @@ export function ResearchSuggestions({ onSelectSuggestion, className }: ResearchS
                   key={`desktop-${index}`}
                   onClick={() => onSelectSuggestion(suggestion)}
                   className={cn(
-                    "inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium transition-all active:scale-95",
+                    "inline-flex items-center rounded-full px-3 py-1.5 text-xs font-medium transition-all active:scale-95 hover:scale-105",
                     "border backdrop-blur-sm whitespace-nowrap",
                     "hover:shadow-md cursor-pointer",
                     colorScheme.bg,
@@ -173,7 +173,6 @@ export function ResearchSuggestions({ onSelectSuggestion, className }: ResearchS
                     colorScheme.border,
                     colorScheme.shadow
                   )}
-                  whileHover={{ scale: 1.05 }}
                 >
                   <Sparkles className="h-3 w-3 mr-1.5 opacity-70" />
                   <span className="font-medium">{truncateText(suggestion, 60)}</span>

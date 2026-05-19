@@ -11,6 +11,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "out"]
+  "include": ["src/**/*", "e2e/**/*", "playwright.config.ts"],
+  "exclude": ["node_modules", "out", "dist", "test-results"]
 }

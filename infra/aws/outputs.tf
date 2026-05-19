@@ -62,3 +62,23 @@ output "logs_command" {
   description = "Command to tail live container logs"
   value       = "aws logs tail /ecs/${var.project_name} --follow --region ${var.aws_region}"
 }
+
+# -----------------------------------------------------------------------------
+# Cache (ElastiCache Valkey)
+# -----------------------------------------------------------------------------
+
+output "redis_primary_endpoint" {
+  description = "Primary endpoint hostname for the Valkey replication group"
+  value       = aws_elasticache_replication_group.main.primary_endpoint_address
+}
+
+output "redis_reader_endpoint" {
+  description = "Reader endpoint (for read-replica fan-out — currently unused; the backend uses primary only)"
+  value       = aws_elasticache_replication_group.main.reader_endpoint_address
+}
+
+output "redis_url" {
+  description = "rediss:// URL for the backend's REDIS_URL env var (TLS, primary endpoint, port 6379)"
+  value       = "rediss://${aws_elasticache_replication_group.main.primary_endpoint_address}:6379"
+  sensitive   = false
+}

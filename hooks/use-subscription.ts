@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useUser } from '@/lib/user-store/provider';
 import { isUserOnFreeTier, getUserTier, UserSubscription } from '@/lib/utils/subscription';
+import type { UserTier } from '@/lib/tier';
 
 interface UseSubscriptionReturn {
   isFreeTier: boolean;
-  tier: string;
+  tier: UserTier;
   subscriptions: UserSubscription[] | null;
   loading: boolean;
   error: string | null;

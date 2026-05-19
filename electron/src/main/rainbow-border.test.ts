@@ -38,6 +38,19 @@ const h = vi.hoisted(() => {
     }
   }
 
+  // Mock for the main overlay BrowserWindow — rainbow-border imports
+  // getMainWindow from window-manager to re-raise it above the rainbow on
+  // every z-order change. We stub it with vi.fns so tests can assert
+  // setAlwaysOnTop + moveTop are called.
+  function freshMockMainWindow() {
+    return {
+      isDestroyed: vi.fn(() => false),
+      setAlwaysOnTop: vi.fn(),
+      moveTop: vi.fn(),
+    }
+  }
+  let mockMainWindow: any = freshMockMainWindow()
+
   let constructorCount = 0
 
   return {
@@ -50,6 +63,12 @@ const h = vi.hoisted(() => {
     get constructorCount() { return constructorCount },
     incrementConstructor() { constructorCount++ },
     resetConstructorCount() { constructorCount = 0 },
+    get mockMainWindow() { return mockMainWindow },
+    resetMainWindow() { mockMainWindow = freshMockMainWindow() },
+    setMainWindowDestroyed(destroyed: boolean) {
+      mockMainWindow.isDestroyed = vi.fn(() => destroyed)
+    },
+    setMainWindowNull() { mockMainWindow = null },
   }
 })
 
@@ -68,6 +87,7 @@ vi.mock('electron', () => ({
 
 vi.mock('./window-manager', () => ({
   get contentProtectionReliable() { return h.contentProtectionReliable.value },
+  getMainWindow: () => h.mockMainWindow,
 }))
 
 vi.mock('./display-manager', () => ({
@@ -94,6 +114,7 @@ function resetState(): void {
   h.resetConstructorCount()
   h.mockWebContents.executeJavaScript.mockResolvedValue(undefined)
   h.contentProtectionReliable.value = false
+  h.resetMainWindow()
 }
 
 // ── Tests ──────────────────────────────────────────────────────────
@@ -154,7 +175,7 @@ describe('rainbow-border', () => {
     it('creates window if none exists and shows it', async () => {
       await showRainbowBorder()
       expect(h.mockWindow.showInactive).toHaveBeenCalled()
-      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'screen-saver', 0)
+      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'floating', 0)
     })
 
     it('sets intensity to 1.0 (full)', async () => {
@@ -303,7 +324,7 @@ describe('rainbow-border', () => {
       hideRainbowForScreenshot()
       showRainbowAfterScreenshot()
 
-      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'screen-saver', 0)
+      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'floating', 0)
 
       for (let i = 0; i < 20; i++) {
         vi.advanceTimersByTime(16)
@@ -465,6 +486,168 @@ describe('rainbow-border', () => {
         showRainbowBorder(),
       ])
       expect(h.mockWindow.showInactive).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  // ── Z-order reassertion (the "pill must always be above rainbow") ──
+  //
+  // On Windows, both 'screen-saver' and 'floating' levels translate to the
+  // same HWND_TOPMOST flag. Z-order between two TOPMOST windows depends on
+  // which was last raised. So whenever the rainbow's z-order changes, we
+  // must immediately re-raise the main overlay so the pill stays on top.
+  describe('z-order reassertion (main overlay above rainbow)', () => {
+    it('rainbow uses floating level (lower than main overlay screen-saver on macOS)', async () => {
+      await showRainbowBorder()
+      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'floating', 0)
+    })
+
+    it('initial createWindow uses floating level', () => {
+      initRainbowBorder()
+      expect(h.mockWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'floating', 0)
+    })
+
+    it('reassert calls main.setAlwaysOnTop with screen-saver level on rainbow show', async () => {
+      await showRainbowBorder()
+      expect(h.mockMainWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'screen-saver', 1)
+    })
+
+    it('reassert calls main.moveTop on rainbow show', async () => {
+      await showRainbowBorder()
+      expect(h.mockMainWindow.moveTop).toHaveBeenCalled()
+    })
+
+    it('reassert calls main.moveTop multiple times (immediate + retries)', async () => {
+      vi.useFakeTimers()
+      await showRainbowBorder()
+      // Immediate call
+      expect(h.mockMainWindow.moveTop).toHaveBeenCalledTimes(1)
+      // setImmediate microtask
+      await vi.advanceTimersToNextTimerAsync()
+      expect(h.mockMainWindow.moveTop.mock.calls.length).toBeGreaterThanOrEqual(2)
+      // 120ms retry
+      vi.advanceTimersByTime(120)
+      expect(h.mockMainWindow.moveTop.mock.calls.length).toBeGreaterThanOrEqual(3)
+      // 280ms retry
+      vi.advanceTimersByTime(170)
+      expect(h.mockMainWindow.moveTop.mock.calls.length).toBeGreaterThanOrEqual(4)
+      vi.useRealTimers()
+    })
+
+    it('rainbow show happens BEFORE main.moveTop (main wins last setAlwaysOnTop)', async () => {
+      // Pre-create the rainbow window so mockWindow is stable — otherwise
+      // showRainbowBorder() calls createWindow() and replaces our mock with
+      // a fresh one, dropping the mockImplementations we attach below.
+      initRainbowBorder()
+      vi.clearAllMocks()
+
+      const callOrder: string[] = []
+      h.mockWindow.showInactive.mockImplementation(() => callOrder.push('rainbow.showInactive'))
+      h.mockWindow.setAlwaysOnTop.mockImplementation(() => callOrder.push('rainbow.setAlwaysOnTop'))
+      h.mockMainWindow.setAlwaysOnTop.mockImplementation(() => callOrder.push('main.setAlwaysOnTop'))
+      h.mockMainWindow.moveTop.mockImplementation(() => callOrder.push('main.moveTop'))
+
+      await showRainbowBorder()
+
+      // Critical ordering: rainbow's z-order changes must happen FIRST,
+      // then main's reassert. Otherwise main's call gets overwritten.
+      const rainbowShowIdx = callOrder.indexOf('rainbow.showInactive')
+      const rainbowAOTIdx = callOrder.indexOf('rainbow.setAlwaysOnTop')
+      const mainAOTIdx = callOrder.indexOf('main.setAlwaysOnTop')
+      const mainMoveTopIdx = callOrder.indexOf('main.moveTop')
+
+      expect(rainbowShowIdx).toBeGreaterThanOrEqual(0)
+      expect(rainbowAOTIdx).toBeGreaterThanOrEqual(0)
+      expect(mainAOTIdx).toBeGreaterThan(rainbowShowIdx)
+      expect(mainAOTIdx).toBeGreaterThan(rainbowAOTIdx)
+      expect(mainMoveTopIdx).toBeGreaterThan(mainAOTIdx)
+    })
+
+    it('reassert is safe when main window is null (logged out / pre-auth)', async () => {
+      h.setMainWindowNull()
+      // Should NOT throw despite main being null
+      await expect(showRainbowBorder()).resolves.toBeUndefined()
+    })
+
+    it('reassert is safe when main window is destroyed', async () => {
+      h.setMainWindowDestroyed(true)
+      await expect(showRainbowBorder()).resolves.toBeUndefined()
+      // setAlwaysOnTop should NOT be called on a destroyed window
+      expect(h.mockMainWindow.setAlwaysOnTop).not.toHaveBeenCalled()
+      expect(h.mockMainWindow.moveTop).not.toHaveBeenCalled()
+    })
+
+    it('reassert survives main.setAlwaysOnTop throwing', async () => {
+      h.mockMainWindow.setAlwaysOnTop.mockImplementation(() => {
+        throw new Error('OS rejected setAlwaysOnTop')
+      })
+      // Must not bubble — rainbow show should still complete cleanly
+      await expect(showRainbowBorder()).resolves.toBeUndefined()
+    })
+
+    it('reassert fires again on showRainbowAfterScreenshot', async () => {
+      await showRainbowBorder()
+      h.mockMainWindow.setAlwaysOnTop.mockClear()
+      h.mockMainWindow.moveTop.mockClear()
+      h.mockWindow.isVisible.mockReturnValue(true)
+
+      hideRainbowForScreenshot()
+      showRainbowAfterScreenshot()
+
+      // Reassert called again so the post-screenshot z-order reset doesn't
+      // leave the rainbow above the pill.
+      expect(h.mockMainWindow.setAlwaysOnTop).toHaveBeenCalledWith(true, 'screen-saver', 1)
+      expect(h.mockMainWindow.moveTop).toHaveBeenCalled()
+    })
+
+    it('reassert does NOT fire on hideRainbowBorder (rainbow gone, no z-order conflict)', async () => {
+      await showRainbowBorder()
+      h.mockMainWindow.setAlwaysOnTop.mockClear()
+      h.mockMainWindow.moveTop.mockClear()
+
+      hideRainbowBorder()
+
+      // No need to reassert — there's no rainbow to be on top of
+      expect(h.mockMainWindow.setAlwaysOnTop).not.toHaveBeenCalled()
+      expect(h.mockMainWindow.moveTop).not.toHaveBeenCalled()
+    })
+
+    it('reassert does NOT fire on already-visible second showRainbowBorder', async () => {
+      await showRainbowBorder()
+      h.mockMainWindow.setAlwaysOnTop.mockClear()
+      h.mockMainWindow.moveTop.mockClear()
+
+      // Second show — rainbow is already visible, no z-order change needed
+      await showRainbowBorder()
+
+      // The `if (!visible)` guard skips both showInactive AND reassert
+      expect(h.mockWindow.showInactive).toHaveBeenCalledTimes(1)
+      expect(h.mockMainWindow.setAlwaysOnTop).not.toHaveBeenCalled()
+    })
+
+    it('reassert fires with screen-saver level z=1 (HIGHER than rainbow z=0)', async () => {
+      await showRainbowBorder()
+      // The third arg is the relativeLevel within the level. Higher = on top.
+      // Rainbow uses 'floating', 0. Main reassert uses 'screen-saver', 1.
+      // Both above ensure main is structurally on top.
+      const mainAOTCall = h.mockMainWindow.setAlwaysOnTop.mock.calls[0]
+      expect(mainAOTCall[2]).toBe(1)
+    })
+
+    it('full task lifecycle keeps main on top across show + screenshot + restore', async () => {
+      await showRainbowBorder()
+      const showAssertCount = h.mockMainWindow.setAlwaysOnTop.mock.calls.length
+
+      h.mockMainWindow.setAlwaysOnTop.mockClear()
+      h.mockMainWindow.moveTop.mockClear()
+      h.mockWindow.isVisible.mockReturnValue(true)
+
+      hideRainbowForScreenshot()
+      showRainbowAfterScreenshot()
+      const screenshotAssertCount = h.mockMainWindow.setAlwaysOnTop.mock.calls.length
+
+      // Both lifecycle events triggered reassertion
+      expect(showAssertCount).toBeGreaterThan(0)
+      expect(screenshotAssertCount).toBeGreaterThan(0)
     })
   })
 })

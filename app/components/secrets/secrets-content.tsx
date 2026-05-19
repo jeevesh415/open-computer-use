@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
@@ -75,6 +75,44 @@ function getDomain(service: string): string | null {
   }
 }
 
+/* ─── Aurora thumbnail for credential cards (same as machine-card-thumbnail) ─── */
+
+const CRED_PALETTES = [
+  { a: "#6366f1", b: "#a78bfa", c: "#818cf8" },
+  { a: "#3b82f6", b: "#8b5cf6", c: "#60a5fa" },
+  { a: "#06b6d4", b: "#6366f1", c: "#22d3ee" },
+  { a: "#8b5cf6", b: "#ec4899", c: "#c084fc" },
+  { a: "#f43f5e", b: "#f97316", c: "#fb7185" },
+  { a: "#10b981", b: "#06b6d4", c: "#34d399" },
+  { a: "#f59e0b", b: "#ef4444", c: "#fbbf24" },
+  { a: "#ec4899", b: "#8b5cf6", c: "#f9a8d4" },
+  { a: "#14b8a6", b: "#3b82f6", c: "#2dd4bf" },
+  { a: "#a855f7", b: "#f43f5e", c: "#d946ef" },
+]
+
+function useCredVisuals(id: string) {
+  return useMemo(() => {
+    let hash = 0
+    for (let i = 0; i < id.length; i++) {
+      hash = id.charCodeAt(i) + ((hash << 5) - hash)
+    }
+    const r = (seed: number) => {
+      const x = Math.sin(seed * 9301 + 49297) * 49297
+      return x - Math.floor(x)
+    }
+    return {
+      palette: CRED_PALETTES[Math.abs(hash) % CRED_PALETTES.length],
+      blobPos: {
+        x1: 15 + r(hash + 1) * 30,
+        y1: 20 + r(hash + 2) * 30,
+        x2: 55 + r(hash + 3) * 30,
+        y2: 30 + r(hash + 4) * 40,
+      },
+      uid: id.slice(0, 8),
+    }
+  }, [id])
+}
+
 function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, onDelete }: SecretCardProps) {
   const t = useTranslations("secrets")
   const { resolvedTheme } = useTheme()
@@ -82,20 +120,71 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
   const domain = getDomain(secret.service)
   const faviconUrl = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null
   const coastyLogo = resolvedTheme === "light" ? "/logo_dark.svg" : "/logo_light.svg"
+  const { palette, blobPos, uid } = useCredVisuals(secret.id)
 
   return (
     <div className={cn(
-      "group relative overflow-hidden rounded-xl transition-all duration-300 h-full",
-      "border border-border/30 bg-card/50 backdrop-blur-sm",
-      "hover:bg-card/80 hover:border-border/50 hover:shadow-lg hover:shadow-foreground/[0.02]",
+      "group relative h-full flex flex-col rounded-2xl overflow-hidden",
+      "bg-card border border-border/40",
+      "transition-all duration-300 ease-out",
+      "hover:border-border/80 hover:shadow-lg hover:shadow-black/[0.04] dark:hover:shadow-black/[0.12]",
     )}>
-      {/* Subtle top line */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/[0.08] to-transparent" />
+      {/* Aurora thumbnail header */}
+      <div className="relative h-24 w-full overflow-hidden shrink-0">
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes cr-drift-${uid} {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(8px, -6px) scale(1.05); }
+            66% { transform: translate(-6px, 8px) scale(0.97); }
+          }
+          @keyframes cr-drift2-${uid} {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10px, 6px) scale(1.04); }
+          }
+          @keyframes cr-shimmer-${uid} {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+          }
+        ` }} />
 
-      {/* Card content */}
-      <div className="flex flex-col h-full">
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(135deg, ${palette.a}15 0%, transparent 50%, ${palette.b}10 100%)` }}
+        />
+        <div
+          className="absolute will-change-transform rounded-full"
+          style={{
+            width: "70%", height: "140%",
+            left: `${blobPos.x1}%`, top: `${blobPos.y1 - 40}%`,
+            background: `radial-gradient(ellipse at center, ${palette.a}30, transparent 70%)`,
+            filter: "blur(24px)",
+            animation: `cr-drift-${uid} 10s ease-in-out infinite`,
+          }}
+        />
+        <div
+          className="absolute will-change-transform rounded-full"
+          style={{
+            width: "60%", height: "120%",
+            left: `${blobPos.x2}%`, top: `${blobPos.y2 - 30}%`,
+            background: `radial-gradient(ellipse at center, ${palette.b}25, transparent 70%)`,
+            filter: "blur(20px)",
+            animation: `cr-drift2-${uid} 8s ease-in-out infinite`,
+          }}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `linear-gradient(105deg, transparent 40%, ${palette.c}08 50%, transparent 60%)`,
+            animation: `cr-shimmer-${uid} 6s ease-in-out infinite`,
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card to-transparent" />
+      </div>
+
+      {/* Card body */}
+      <div className="flex flex-col flex-1 px-5 pb-4 pt-0.5 relative">
         {/* Header */}
-        <div className="px-6 pt-6 pb-4 flex justify-between items-start">
+        <div className="flex justify-between items-start mb-3">
           <div className="space-y-1 min-w-0 flex-1">
             <div className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-muted/60 overflow-hidden">
@@ -138,7 +227,7 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
         </div>
 
         {/* Credential fields */}
-        <div className="px-6 pb-5 space-y-3 flex-1">
+        <div className="space-y-3 flex-1">
           <div className="space-y-1.5">
             <span className="text-[11px] font-medium text-muted-foreground">{t("username")}</span>
             <div className="flex items-center gap-2 rounded-lg bg-muted/40 px-3 py-2">
@@ -166,12 +255,12 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
             <p className="text-xs text-muted-foreground leading-relaxed pt-1">{secret.notes}</p>
           )}
         </div>
+      </div>
 
-        {/* Footer */}
-        <div className="border-t border-border/30 px-6 py-3 flex items-center gap-1.5">
-          <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground/50 shrink-0" />
-          <span className="text-xs text-muted-foreground">{t("encrypted")}</span>
-        </div>
+      {/* Footer */}
+      <div className="border-t border-border/30 px-5 py-3 flex items-center gap-1.5">
+        <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground/30 shrink-0" />
+        <span className="text-[11px] text-muted-foreground/40">{t("encrypted")}</span>
       </div>
     </div>
   )
@@ -181,6 +270,7 @@ function SecretCard({ secret, revealedPassword, isRevealing, onReveal, onEdit, o
 
 export function SecretsContent() {
   const t = useTranslations("secrets")
+  const tLoader = useTranslations("pageLoaders.secrets")
   const [secrets, setSecrets] = useState<UserSecret[]>([])
   const [loading, setLoading] = useState(true)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -278,21 +368,14 @@ export function SecretsContent() {
   return (
     <PageLoader
       isLoading={loading}
-      title="Credentials"
-      description="Your secrets are safe with us. Unlocking the vault."
+      title={tLoader("title")}
+      description={tLoader("description")}
     >
-    <div className="h-full overflow-y-auto scrollbar-invisible relative bg-transparent">
-      {/* Ambient background */}
+    <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative bg-transparent">
+      {/* Ambient background — soft blur orbs only; grid removed for calm */}
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute -top-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-foreground/[0.02] dark:bg-foreground/[0.04] blur-3xl" />
         <div className="absolute -bottom-1/4 -left-1/4 h-[500px] w-[500px] rounded-full bg-foreground/[0.02] dark:bg-foreground/[0.04] blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
-          style={{
-            backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
       </div>
 
       <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl space-y-6 relative">

@@ -1,48 +1,85 @@
 "use client"
 
-/**
- * Vertical guide lines that frame the page content.
- * Use as a direct child of a `relative` container that wraps the full page.
- */
+import { cn } from "@/lib/utils"
+
+// ─── GuideLines (vertical side rails) ──────────────────────────────
+// Used by the rest of the app (api-docs, pricing, blog, etc.). The
+// landing page intentionally does NOT render these any more, but the
+// export is kept here so those other pages compile.
+
+const FADE_MASK =
+  "linear-gradient(to bottom, transparent 0%, #000 1.5%, #000 98.5%, transparent 100%)"
+
+const OUTER_GRADIENT = `linear-gradient(to right,
+  transparent 0%,
+  color-mix(in srgb, var(--foreground) 4%, transparent) 28%,
+  color-mix(in srgb, var(--foreground) 18%, transparent) 50%,
+  color-mix(in srgb, var(--foreground) 4%, transparent) 72%,
+  transparent 100%)`
+
 export function GuideLines() {
   return (
     <div className="absolute inset-0 pointer-events-none z-[1]" aria-hidden="true">
       <div className="mx-auto h-full max-w-7xl px-4 sm:px-6 relative">
-        {/* Left double lines */}
-        <div className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-border/50 dark:bg-border/35" />
-        <div className="absolute left-5 sm:left-[32px] top-0 bottom-0 w-px bg-border/30 dark:bg-border/20" />
-        {/* Right double lines */}
-        <div className="absolute right-5 sm:right-[32px] top-0 bottom-0 w-px bg-border/30 dark:bg-border/20" />
-        <div className="absolute right-4 sm:right-6 top-0 bottom-0 w-px bg-border/50 dark:bg-border/35" />
+        <GuideRail side="left" />
+        <GuideRail side="right" />
       </div>
     </div>
   )
 }
 
+function GuideRail({ side }: { side: "left" | "right" }) {
+  const isLeft = side === "left"
+  const outerOffset = isLeft ? "left-5 sm:left-6" : "right-5 sm:right-6"
+  const innerOffset = isLeft ? "left-[24px] sm:left-[32px]" : "right-[24px] sm:right-[32px]"
+  const haloShift = isLeft ? { marginLeft: -3 } : { marginRight: -3 }
+
+  return (
+    <>
+      <div
+        className={cn("absolute top-0 bottom-0", outerOffset)}
+        style={{
+          width: 7,
+          background: OUTER_GRADIENT,
+          maskImage: FADE_MASK,
+          WebkitMaskImage: FADE_MASK,
+          ...haloShift,
+        }}
+      />
+      <div
+        className={cn(
+          "absolute top-0 bottom-0 w-px bg-foreground/[0.07] dark:bg-foreground/[0.05]",
+          innerOffset
+        )}
+        style={{ maskImage: FADE_MASK, WebkitMaskImage: FADE_MASK }}
+      />
+    </>
+  )
+}
+
 /**
- * Horizontal divider with diamond cross-marks aligned to guide lines.
+ * Horizontal section divider — a single hairline that fades to nothing
+ * at both edges.
+ *
+ * No diamonds, no cross-marks, no chrome. Just a thin beam of light
+ * across the section break. The 5-stop horizontal gradient gives the
+ * line a soft halo at its centre and dissolves to transparent before
+ * touching the page edges, so the divider reads as atmospheric
+ * punctuation rather than a ruled line.
  */
 export function SectionDivider() {
   return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6" aria-hidden="true">
-      <div className="relative h-px">
-        {/* Horizontal line */}
-        <div className="absolute inset-x-0 h-px bg-border/30 dark:bg-border/20" />
-        {/* Left cross marks */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2">
-          <div className="w-[7px] h-[7px] rotate-45 border border-border/40 dark:border-border/25 bg-background" />
-        </div>
-        <div className="absolute left-[4px] sm:left-[8px] top-1/2 -translate-y-1/2 -translate-x-1/2">
-          <div className="w-[5px] h-[5px] rotate-45 border border-border/25 dark:border-border/15 bg-background" />
-        </div>
-        {/* Right cross marks */}
-        <div className="absolute right-[4px] sm:right-[8px] top-1/2 -translate-y-1/2 translate-x-1/2">
-          <div className="w-[5px] h-[5px] rotate-45 border border-border/25 dark:border-border/15 bg-background" />
-        </div>
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2">
-          <div className="w-[7px] h-[7px] rotate-45 border border-border/40 dark:border-border/25 bg-background" />
-        </div>
-      </div>
-    </div>
+    <div
+      aria-hidden="true"
+      className="mx-auto h-px w-full max-w-7xl"
+      style={{
+        background: `linear-gradient(to right,
+          transparent 0%,
+          color-mix(in srgb, var(--foreground) 4%, transparent) 22%,
+          color-mix(in srgb, var(--foreground) 14%, transparent) 50%,
+          color-mix(in srgb, var(--foreground) 4%, transparent) 78%,
+          transparent 100%)`,
+      }}
+    />
   )
 }

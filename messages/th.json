@@ -12,13 +12,15 @@
     "recommended": "แนะนำ",
     "month": "เดือน",
     "creditsPerMonth": "{count} เครดิต/เดือน",
-    "agentsInParallel": "{count} เอเจนต์พร้อมกัน"
+    "agentsInParallel": "{count} เอเจนต์พร้อมกัน",
+    "whatsIncluded": "สิ่งที่รวมอยู่",
+    "hideDetails": "ซ่อนรายละเอียด"
   },
   "header": {
     "useCases": "กรณีใช้งาน",
     "blog": "บล็อก",
-    "agentSwarms": "Agent Swarms",
-    "products": "Products",
+    "agentSwarms": "ฝูงเอเจนต์",
+    "products": "ผลิตภัณฑ์",
     "discover": "Discover",
     "compare": "เปรียบเทียบ",
     "demos": "สาธิต",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} อีเมลส่วนบุคคลต่อแคมเปญ"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "การใช้งานคอมพิวเตอร์",
+      "agentSwarms": "ฝูงเอเจนต์",
+      "compare": "เปรียบเทียบ"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "คะแนนเบนช์มาร์ก OSWorld {stat}",
+      "agentSwarms": "{stat} เอเจนต์ทำงานพร้อมกัน",
+      "compare": "วิเคราะห์คู่แข่งแล้ว {stat} ราย"
     },
     "blogItems": {
       "allPosts": "บทความทั้งหมด",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "สมัครงาน",
       "demosResults": "สาธิตและผลลัพธ์",
-      "guide": "คู่มือ"
+      "guide": "คู่มือ",
+      "discover": "ชุมชน"
     },
     "blogStats": {
       "allPosts": "{stat} บทความที่เผยแพร่รายสัปดาห์",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} หน้าต่อเซสชัน",
       "jobApplications": "{stat} ใบสมัครต่อเซสชัน",
       "demosResults": "{stat} กรณีศึกษาจริง",
-      "guide": "{stat} บทแนะนำกรณีใช้งาน"
-    }
+      "guide": "{stat} บทแนะนำกรณีใช้งาน",
+      "discover": "ดูวิธีที่ผู้คนใช้งาน"
+    },
+    "api": "API"
   },
   "hero": {
-    "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "ผู้ควบคุมคอมพิวเตอร์อัตโนมัติ",
+    "badge": "เอเจนต์ใช้งานคอมพิวเตอร์อันดับ #1 · OSWorld {score}",
+    "headline": "เอเจนต์ใช้งานคอมพิวเตอร์ที่ดีที่สุด",
     "useCases": {
       "computerAgent": {
         "label": "เอเจนต์คอมพิวเตอร์",
@@ -141,7 +146,7 @@
         "task": "ทำการตลาดสินค้าบน Reddit โดยอัตโนมัติ"
       },
       "goToMarket": {
-        "label": "Go-to-Market",
+        "label": "การออกตลาด",
         "task": "หาลูกค้าเป้าหมายและส่งอีเมลส่วนบุคคล"
       },
       "qaTesting": {
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "โซเชียลมีเดีย",
         "task": "โพสต์บน Hacker News และมีส่วนร่วมกับความคิดเห็น"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "ประหยัดต่อเดือน",
+        "sublabel": "เทียบกับ VA เต็มเวลา"
+      },
+      "time": {
+        "value": "30 ชม.",
+        "label": "กลับคืนต่อสัปดาห์",
+        "sublabel": "งานทำมือถูกขจัด"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "ผลงานเร็วขึ้น",
+        "sublabel": "งานเสร็จเป็นนาที ไม่ใช่หลายวัน"
+      },
+      "effort": {
+        "value": "0",
+        "label": "โค้ดหรือการจ้างงาน",
+        "sublabel": "จัดการเต็มรูปแบบตั้งแต่ต้นจนจบ"
       }
     }
   },
@@ -284,7 +311,7 @@
       "prospects": {
         "title": "ค้นหาลูกค้าเป้าหมาย",
         "description": "Coasty ค้นหาและวิจัยลูกค้าเป้าหมาย รวบรวมรายละเอียดสำคัญเพื่อสร้างอีเมลเข้าถึงส่วนบุคคล",
-        "tag": "Go-to-Market"
+        "tag": "การออกตลาด"
       },
       "qa": {
         "title": "QA ทดสอบตัวเอง",
@@ -331,7 +358,7 @@
       "description": "82% — คะแนนสูงสุดที่เคยบันทึก"
     },
     "swarms": {
-      "title": "Agent Swarms",
+      "title": "ฝูงเอเจนต์",
       "description": "แบ่งงานข้ามเครื่องแบบขนาน"
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "ระบบอัตโนมัติหนักไม่จำกัด",
         "cta": "เลือก Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "ไม่จำกัดเครดิต — ตลอดไป",
+        "cta": "เลือก Unlimited",
+        "badge": "คุ้มที่สุด"
       }
     },
     "vmTemporary": "1 VM ชั่วคราว (2 ชม.)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "งานเดียวกันต้องจ่าย {oldPrice} ถ้าใช้แรงงานคน",
       "description": "ผู้ช่วยเสมือนราคา $2,000–$4,000/เดือน พนักงานพาร์ทไทม์แพงกว่า Coasty ทำงานเดียวกัน 24/7 เริ่มต้นที่ $0 — ด้วยความสม่ำเสมอสมบูรณ์แบบ ร่องรอยการตรวจสอบเต็มรูปแบบ และไม่ต้องฝึกอบรม"
-    }
+    },
+    "unlimitedCredits": "เครดิตไม่จำกัด"
   },
   "faq": {
     "title": "คำถามที่พบบ่อย",
@@ -419,7 +453,7 @@
       "guide": "คู่มือ",
       "download": "ดาวน์โหลด",
       "pricing": "ราคา",
-      "agentSwarms": "Agent Swarms",
+      "agentSwarms": "ฝูงเอเจนต์",
       "status": "สถานะ",
       "blog": "บล็อก",
       "useCases": "กรณีใช้งาน",
@@ -429,7 +463,8 @@
       "contact": "ติดต่อ",
       "privacy": "ความเป็นส่วนตัว",
       "terms": "ข้อกำหนด"
-    }
+    },
+    "status": "ทุกระบบทำงานปกติ"
   },
   "languageSwitcher": {
     "label": "ภาษา"
@@ -458,16 +493,16 @@
     "demoCaption": "รันเอเจนต์ AI บนคอมพิวเตอร์ของคุณ หรือควบคุมจากโทรศัพท์ได้ทุกที่",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "เรียกใช้แบบโลคัลบนพีซีของคุณ",
+        "desc": "ดาวน์โหลดแอปเดสก์ท็อปและให้ AI ควบคุมคอมพิวเตอร์ของคุณโดยตรง — ไม่ต้องใช้ VM บนคลาวด์"
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "ควบคุมพีซีของคุณจากโทรศัพท์",
+        "desc": "เริ่มงานจากโทรศัพท์ของคุณและดูเอเจนต์ AI ทำงานบนคอมพิวเตอร์แบบเรียลไทม์"
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "คลาวด์หรือโลคัล — คุณเลือกได้",
+        "desc": "ใช้ VM บนคลาวด์สำหรับงานแบบแยกส่วน หรือใช้แบบโลคัลเพื่อเข้าถึงแอปและไฟล์ของคุณเต็มรูปแบบ"
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "กำลังเชื่อมต่อ...",
       "continueWithGoogle": "ดำเนินต่อด้วย Google"
+    },
+    "inAppBrowser": {
+      "blocked": "การเข้าสู่ระบบด้วย Google ไม่สามารถใช้งานได้ในเบราว์เซอร์ที่ฝังอยู่ เปิดหน้านี้ในเบราว์เซอร์ของคุณ หรือใช้ลิงก์มายากลแทน",
+      "blockedNamed": "การเข้าสู่ระบบด้วย Google ไม่สามารถใช้งานได้ใน {app} เปิดหน้านี้ในเบราว์เซอร์ของคุณ หรือใช้ลิงก์มายากลแทน",
+      "copyLink": "คัดลอกลิงก์",
+      "copied": "คัดลอกแล้ว!",
+      "useMagicLink": "ใช้ลิงก์มายากล"
     },
     "or": "หรือ",
     "email": "อีเมล",
@@ -560,18 +602,21 @@
     "getStarted": "เริ่มต้นใช้งาน",
     "settingUp": "กำลังตั้งค่า...",
     "welcome": {
-      "titleReturning": "ยินดีต้อนรับกลับ{name}!",
+      "titleReturning": "ยินดีต้อนรับกลับ{name}",
       "titleNew": "ยินดีต้อนรับสู่ Coasty",
-      "descriptionReturning": "เราอยากเรียนรู้เพิ่มเติมเกี่ยวกับคุณเพื่อปรับปรุงประสบการณ์การใช้งาน",
-      "descriptionNew": "มาตั้งค่าบัญชีเพื่อปรับแต่งประสบการณ์ของคุณกัน"
+      "eyebrowNew": "มาทำความรู้จักกัน",
+      "eyebrowReturning": "ใกล้เสร็จแล้ว",
+      "descriptionReturning": "อีกเพียงไม่กี่รายละเอียด แล้ว Coasty จะถูกปรับให้เข้ากับวิธีการทำงานของคุณอย่างสมบูรณ์",
+      "descriptionNew": "Coasty ทำงานบนคอมพิวเตอร์จริง — ท่อง คลิก พิมพ์ ส่งมอบ รายละเอียดสั้น ๆ ไม่กี่ข้อเพื่อปรับให้เข้ากับสไตล์ของคุณ",
+      "footerNote": "ใช้เวลาประมาณหนึ่งนาที คุณสามารถเปลี่ยนแปลงได้ทุกอย่างในการตั้งค่าภายหลัง"
     },
     "nameLabel": "เราควรเรียกคุณว่าอะไร?",
-    "namePlaceholder": "ชื่อของคุณ",
-    "companyLabel": "บริษัท",
+    "namePlaceholder": "แค่ชื่อจริงก็พอ",
+    "companyLabel": "คุณทำงานที่ไหน?",
     "optional": "(ไม่บังคับ)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "บริษัทหรือทีมของคุณ",
     "websiteLabel": "เว็บไซต์",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "yourcompany.com",
     "roleStep": {
       "title": "คุณเป็นใครมากที่สุด?",
       "subtitle": "เลือกทั้งหมดที่ตรง — ช่วยให้เราปรับแต่งประสบการณ์ให้คุณ"
@@ -632,7 +677,7 @@
         "description": "แค่อธิบายสิ่งที่คุณต้องการเป็นภาษาธรรมดา"
       },
       "agentSwarms": {
-        "title": "Agent Swarms",
+        "title": "ฝูงเอเจนต์",
         "description": "กองเอเจนต์แบบขนาน"
       },
       "desktopControl": {
@@ -644,7 +689,7 @@
         "description": "แบบฟอร์ม แท็บ การดึงข้อมูล — อัตโนมัติเต็มรูปแบบ"
       },
       "computerVision": {
-        "title": "Computer Vision",
+        "title": "คอมพิวเตอร์วิชัน",
         "description": "เห็นและเข้าใจหน้าจอของคุณแบบเรียลไทม์"
       },
       "workflows": {
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "AI ของคุณควรทำอะไร?",
-    "placeholderAlt": "บอก AI ของคุณว่าต้องทำอะไรบนคอมพิวเตอร์...",
+    "placeholder": "บอกฉันว่าต้องทำอะไรบนคอมพิวเตอร์เครื่องนี้...",
+    "placeholderAlt": "เลือกคอมพิวเตอร์เพื่อเริ่มต้น...",
     "vmError": {
       "title": "ข้อผิดพลาด Virtual Machine",
       "description": "Virtual Machine อยู่ในสถานะผิดพลาดหรือกำลังถูกลบ",
@@ -695,7 +740,7 @@
       "decreaseMachines": "ลดจำนวนเครื่อง",
       "increaseMachines": "เพิ่มจำนวนเครื่อง",
       "machineLimit": "สูงสุด {max} เครื่อง swarm ในแผนของคุณ ต้องการมากกว่านี้? ติดต่อ founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "หลายรอบ",
       "upgradeCta": "โหมด Swarm"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "วางไฟล์ที่นี่",
       "dropDescription": "ไฟล์จะถูกอัปโหลดไปยังโฟลเดอร์เดสก์ท็อปของ VM",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "พาธ: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "เข้าสู่ระบบเพื่อทดลองฟีเจอร์เพิ่มเติมฟรี",
@@ -801,6 +846,28 @@
       "ecommerce": "เปรียบเทียบราคา {company}",
       "social_media": "โพสต์เกี่ยวกับ {company}",
       "general_automation": "ทำงานอัตโนมัติบน {company}"
+    },
+    "awaitingHuman": {
+      "completed": "การส่งต่อโดยมนุษย์เสร็จสมบูรณ์",
+      "yourTurn": "ตาคุณแล้ว",
+      "connectToDesktop": "เชื่อมต่อกับเดสก์ท็อป",
+      "resuming": "กำลังดำเนินการต่อ...",
+      "doneContinue": "เสร็จแล้ว, ดำเนินการต่อ"
+    },
+    "feedback": {
+      "promptRun": "การทำงานนี้เป็นอย่างไร?",
+      "promptSwarm": "ฝูงนี้เป็นอย่างไร?",
+      "reactionBad": "แย่",
+      "reactionOkay": "พอใช้",
+      "reactionGood": "ดี",
+      "reactionAmazing": "เยี่ยม",
+      "tellUsMore": "บอกเราเพิ่มเติม",
+      "commentPlaceholder": "อะไรที่สามารถดีขึ้นได้?",
+      "npsPrompt": "คุณจะแนะนำ Coasty ไหม?",
+      "npsNotLikely": "ไม่น่าจะใช่",
+      "npsVeryLikely": "น่าจะใช่อย่างยิ่ง",
+      "thanks": "ขอบคุณสำหรับความคิดเห็น",
+      "creditsLabel": "เครดิต"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "ระบบอัตโนมัติหนักไม่จำกัด"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "ไม่จำกัดเครดิต — ตลอดไป",
+        "badge": "คุ้มที่สุด"
       }
     },
     "features": {
@@ -1061,7 +1133,7 @@
     "new": "ใหม่",
     "description": "เพิ่ม API key ของคุณเพื่อปลดล็อกการเข้าถึงโมเดล",
     "securityNote": "คีย์ของคุณถูกเก็บอย่างปลอดภัยด้วยการเข้ารหัสแบบ end-to-end",
-    "apiKeyLabel": "{provider} API Key",
+    "apiKeyLabel": "คีย์ API ของ {provider}",
     "getApiKey": "รับ API key",
     "delete": "ลบ",
     "save": "บันทึก",
@@ -1113,7 +1185,7 @@
         "description": "API key เข้ารหัสด้วย AES-256-GCM ข้อมูลรับรองของคุณไม่เคยถูกเก็บเป็นข้อความธรรมดา"
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "ความปลอดภัยระดับแถว",
         "description": "การแยกระดับฐานข้อมูลรับประกันว่าข้อมูลของคุณเข้าถึงได้โดยคุณเท่านั้น ไม่สามารถเข้าถึงข้ามผู้เช่าได้"
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "เลย์เอาต์"
+    "layout": "เลย์เอาต์",
+    "sidebarStyle": "รูปแบบแถบด้านข้าง",
+    "sidebarStyleHint": "เลือกตำแหน่งของการนำทาง",
+    "sidebarStyleDisabled": "ใช้ได้เมื่อตั้งค่าเลย์เอาต์เป็นแถบด้านข้าง",
+    "vertical": "แนวตั้ง",
+    "verticalBadge": "ค่าเริ่มต้น",
+    "verticalDescription": "แถบซ้ายแบบคลาสสิกพร้อมป้ายและเครดิตในส่วนท้าย",
+    "horizontal": "แนวนอน",
+    "horizontalBadge": "ทันสมัย",
+    "horizontalDescription": "แถบบนเดียวพร้อมทุกอย่างในแถวเดียว เพิ่มความสูงของพื้นที่ทำงาน"
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "บันทึกข้อมูลเข้าสู่ระบบแล้ว",
       "addLogins": "เพิ่มข้อมูลเข้าสู่ระบบ",
       "askAnything": "ถามอะไรก็ได้",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac และ Windows",
       "mobileRemote": "รีโมทจากมือถือ",
       "freeDownload": "ดาวน์โหลดฟรี",
       "onePrompt": "หนึ่งพรอมต์",
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "ระบบอัตโนมัติหนักไม่จำกัด",
         "cta": "รับ Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "ไม่จำกัดเครดิต — ตลอดไป",
+        "cta": "เลือก Unlimited",
+        "badge": "คุ้มที่สุด"
       }
     },
     "features": {
@@ -1757,7 +1844,7 @@
       "subtitle": "บริษัท AI ของคุณ บนออโต้ไพลอต",
       "description": "พนักงาน ทีม ทริกเกอร์ — ทำงาน 24/7",
       "myCompany": "บริษัทของฉัน",
-      "contentOps": "Content Ops",
+      "contentOps": "ปฏิบัติการคอนเทนต์",
       "support": "สนับสนุน",
       "writer": "นักเขียน",
       "seo": "SEO",
@@ -1805,7 +1892,7 @@
       "templates": "เริ่มจากเทมเพลต",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "ปฏิบัติการคอนเทนต์",
           "plan": "Starter",
           "count": "3"
         },
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 เปิดตลอด",
           "feature": "การรับประกัน SLA"
+        },
+        "unlimited": {
+          "credits": "ไม่จำกัด",
+          "machines": "2 เปิดตลอด",
+          "feature": "1 เอเจนต์พร้อมกัน"
         }
       },
       "perMonth": "{price}/เดือน",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "สองวิธีในการรัน",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "VM บนคลาวด์",
       "cloudFeatures": {
         "isolated": "แซนด์บ็อกซ์แยกเต็มรูปแบบ",
         "freshBrowser": "เบราว์เซอร์ใหม่ ไม่มีประวัติ",
@@ -1936,7 +2028,7 @@
         "yourApps": "แอปที่ติดตั้งของคุณ",
         "yourSessions": "เซสชันที่เข้าสู่ระบบของคุณ"
       },
-      "downloadCta": "Download Desktop App"
+      "downloadCta": "ดาวน์โหลดแอปเดสก์ท็อป"
     }
   },
   "comparePage": {
@@ -1949,7 +2041,7 @@
       "rpa": "RPA",
       "human": "มนุษย์"
     },
-    "vsLabel": "Coasty vs {name}",
+    "vsLabel": "Coasty เทียบกับ {name}",
     "ctaTitle": "พร้อมลอง AI เอเจนต์ใช้คอมพิวเตอร์อันดับ 1 หรือยัง?",
     "ctaButton": "ลองใช้ Coasty ฟรี",
     "noCreditCard": "ไม่ต้องใช้บัตรเครดิต",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 | พนักงาน AI สำหรับระบบอัตโนมัติเดสก์ท็อปและเบราว์เซอร์",
+      "title": "Coasty - ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 | ไม่จำกัด $249/mo (ถูกที่สุดในตลาด)",
       "titleTemplate": "{title} | Coasty - ตัวแทน AI ใช้คอมพิวเตอร์",
-      "description": "Coasty คือตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 — 82% บน OSWorld benchmark ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์: เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล จัดการสเปรดชีต แยก VM ต่อเซสชัน เริ่มต้นที่ $20/mo",
-      "ogTitle": "Coasty - ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 | 82% OSWorld Benchmark",
-      "ogDescription": "พนักงาน AI ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark (82%) ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป แก้ CAPTCHA แยก VM เริ่มต้นที่ $20/mo",
-      "twitterDescription": "พนักงาน AI ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล แยก VM จริง $20/mo เทียบกับ $3,000/mo สำหรับผู้ช่วยเสมือนจริง"
+      "description": "Coasty คือตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 — 82% บน OSWorld benchmark — และเป็นแผนไม่จำกัดแบบเหมาจ่ายเพียงรายเดียวที่ $249/mo (ถูกกว่า Devin Team $500+ACU, OpenAI Operator $200 ที่จำกัดอัตรา และคู่แข่งที่จำกัดเครดิต) ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์: เบราว์เซอร์ แบบฟอร์ม อีเมล สเปรดชีต แยก VM ระดับลึก เริ่มต้นที่ Starter $19/mo หรือไม่จำกัด $249/mo",
+      "ogTitle": "Coasty — 82% OSWorld + ไม่จำกัด $249/mo (ตัวแทนใช้คอมพิวเตอร์ที่ถูกที่สุด)",
+      "ogDescription": "อันดับ 1 บน OSWorld (82%) ไม่จำกัดแบบเหมาจ่าย $249/mo — ถูกกว่า Devin Team ($500+ACU) ที่ benchmark สูงกว่า ระบบอัตโนมัติเบราว์เซอร์ เดสก์ท็อป เทอร์มินัล แยก VM ต่อเซสชัน เนทีฟข้ามแพลตฟอร์ม + REST API + MCP server",
+      "twitterDescription": "ตัวแทน AI ที่ใช้งานเดสก์ท็อปจริง 82% OSWorld (อันดับ 1) ไม่จำกัด $249/mo — แผนเหมาจ่ายที่ถูกที่สุดในหมวดหมู่นี้ Starter เริ่มต้นที่ $19/mo แยก VM + MCP server 26 เครื่องมือ"
     },
     "compare": {
       "title": "เปรียบเทียบ Coasty - ทางเลือกตัวแทน AI และการเปรียบเทียบคู่แข่ง",
@@ -2281,10 +2373,10 @@
       "ogDescription": "ตัวแทนใช้คอมพิวเตอร์ที่ดีที่สุด อันดับ 1 บน OSWorld ทำให้งานเดสก์ท็อป เบราว์เซอร์ หรือเทอร์มินัลใดๆ เป็นอัตโนมัติด้วย AI"
     },
     "pricing": {
-      "title": "ราคา — แผนและราคาตัวแทน AI Coasty",
-      "description": "แผนราคา Coasty เริ่มต้นที่ $20/mo แทนที่ผู้ช่วยเสมือนจริง $3,000/mo ด้วยพนักงาน AI มีแผนฟรี ใช้งานแบบเครดิตไม่มีค่าธรรมเนียมแอบแฝง",
-      "ogTitle": "ราคา Coasty — แผนตัวแทน AI",
-      "ogDescription": "พนักงาน AI เริ่มต้นที่ $20/mo แทนที่ VA ราคาแพงด้วย AI อัตโนมัติ มีแผนฟรี"
+      "title": "ราคา — Starter $19/mo หรือไม่จำกัด $249/mo (ถูกที่สุดในตลาด)",
+      "description": "ราคา Coasty: Starter $19/mo (200 เครดิต) หรือไม่จำกัด $249/mo (แผนไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดในตลาด — ถูกกว่า Devin Team $500+ACU, Genspark Pro $249 ที่จำกัดเครดิต และ Manus Extended $200 ที่จำกัด) แทนที่ผู้ช่วยเสมือนที่เป็นมนุษย์ราคา $3,000+/mo ไม่มีค่าธรรมเนียมแอบแฝง",
+      "ogTitle": "ราคา Coasty — Starter $19/mo, ไม่จำกัด $249/mo",
+      "ogDescription": "ไม่จำกัดแบบเหมาจ่าย $249/mo — แผนใช้คอมพิวเตอร์ไม่จำกัดที่ถูกที่สุดในตลาด หรือ Starter $19/mo สำหรับบุคคล ประหยัด $36k/ปี เทียบกับ VA มนุษย์"
     },
     "faq": {
       "q1": "Coasty คืออะไร?",
@@ -2292,7 +2384,7 @@
       "q2": "Coasty เปรียบเทียบกับ Anthropic Computer Use อย่างไร?",
       "a2": "ในขณะที่ Anthropic Computer Use ให้ API ดิบสำหรับการควบคุมคอมพิวเตอร์ Coasty เป็นแพลตฟอร์มพร้อมใช้งานจริงพร้อมโครงสร้าง VM ที่จัดการ การแก้ CAPTCHA ในตัว แอปเดสก์ท็อปสำหรับ Mac และ Windows รองรับหลายโมเดล และคะแนน OSWorld benchmark สูงสุด (82%) Coasty ให้โซลูชันครบวงจร — ไม่ใช่แค่ API",
       "q3": "Coasty ราคาเท่าไร?",
-      "a3": "Coasty เริ่มต้นที่ $20/month สำหรับแผน Starter โดยมีแผนฟรี เปรียบเทียบกับ $3,000+ ต่อเดือนสำหรับผู้ช่วยเสมือนจริง Coasty ทำงาน 24/7 ไม่พัก ไม่ต้องฝึก และขยายได้ทันที",
+      "a3": "Coasty มีแผนที่ใช้งานได้สองแผน: Starter ที่ $19/month (200 เครดิต, 1 เครื่อง, เหมาะสำหรับบุคคล) และไม่จำกัดที่ $249/month โดยไม่มีการจำกัดเครดิต แผนไม่จำกัด $249 เป็นแผนใช้คอมพิวเตอร์ไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดที่มี — ถูกกว่า Devin Team ($500/month + ACU ส่วนเกิน), OpenAI Operator ChatGPT Pro ($200/month จำกัดอัตรา), Genspark Pro ($249.99 จำกัดเครดิตที่ 125k เครดิต) และ Manus Extended ($200 จำกัดที่ 40k เครดิต) ทั้งสองแผนทดแทนผู้ช่วยเสมือนที่เป็นมนุษย์ราคา $3,000+/month ได้ แผนไม่จำกัดประหยัด $33,000+/ปี เทียบกับ VA มนุษย์ ลดต้นทุน 92%",
       "q4": "Coasty ปลอดภัยไหม?",
       "a4": "ใช่ ทุกเซสชันของ Coasty ทำงานใน VM แบบแยกและ sandbox ของตัวเอง ข้อมูลของคุณปลอดภัย เครื่องของคุณไม่ถูกแตะต้อง และไม่มีอะไรรั่วไหลระหว่างเซสชัน นี่คือการแยก VM จริง ไม่ใช่แค่คอนเทนเนอร์ในพูลร่วม",
       "q5": "OSWorld benchmark คืออะไร?",
@@ -2309,11 +2401,11 @@
       "a10": "ได้ Coasty มีระบบแก้ CAPTCHA ในตัว จึงไม่ถูกบล็อกเหมือนตัวแทน AI คู่แข่ง นี่สำคัญมากสำหรับระบบอัตโนมัติในโลกจริงที่เว็บไซต์มักมี CAPTCHA"
     },
     "structuredData": {
-      "appDescription": "ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 Coasty ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ — เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล และจัดการสเปรดชีตโดยอัตโนมัติ 82% บน OSWorld benchmark แยก VM จริง แก้ CAPTCHA ในตัว เริ่มต้นที่ $20/month",
-      "orgDescription": "Coasty สร้างตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 แพลตฟอร์มของเราให้การควบคุมเดสก์ท็อปอัตโนมัติ ระบบอัตโนมัติเบราว์เซอร์ และการจัดการหลายตัวแทนพร้อมแยก VM จริง",
-      "productDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark (82%) ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีตด้วยแยก VM จริง",
-      "websiteDescription": "แพลตฟอร์มตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 82% OSWorld benchmark ระบบอัตโนมัติเบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลพร้อมแยก VM เริ่มต้นที่ $20/mo",
-      "softwareDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark ด้วยอัตราสำเร็จ 82% จาก 369 งานในโลกจริง ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ดำเนินการเทอร์มินัล ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีต",
+      "appDescription": "ตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 และเป็นแผนไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดในตลาดที่ $249/month Coasty ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ — เปิดเบราว์เซอร์ คลิก พิมพ์ กรอกแบบฟอร์ม ส่งอีเมล และจัดการสเปรดชีตโดยอัตโนมัติ 82% บน OSWorld benchmark จาก 369 งานในโลกจริง แยก VM จริงต่อเซสชัน แก้ CAPTCHA ในตัว แผน: Starter $19/mo หรือไม่จำกัด $249/mo",
+      "orgDescription": "Coasty สร้างตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 (82% OSWorld) และเป็นเจ้าเดียวที่เปิดแผนไม่จำกัดแบบเหมาจ่ายที่ $249/month — ถูกกว่า Devin Team, OpenAI Operator และคู่แข่งที่จำกัดเครดิตในระดับราคาเดียวกัน แพลตฟอร์มของเราให้การควบคุมเดสก์ท็อปอัตโนมัติ ระบบอัตโนมัติเบราว์เซอร์ และการจัดการหลายตัวแทนพร้อมแยก VM จริง",
+      "productDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark (82%) แผนไม่จำกัด $249/mo เป็นแผนไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดที่มี ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีตด้วยแยก VM จริง",
+      "websiteDescription": "แพลตฟอร์มตัวแทน AI ใช้คอมพิวเตอร์อันดับ 1 — 82% OSWorld benchmark และเป็นแผนไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดที่ $249/month ระบบอัตโนมัติเบราว์เซอร์ เดสก์ท็อป และเทอร์มินัลพร้อมแยก VM เริ่มต้นที่ Starter $19/mo หรือไม่จำกัด $249/mo",
+      "softwareDescription": "ตัวแทน AI ใช้คอมพิวเตอร์ที่ควบคุมเดสก์ท็อปเต็มรูปแบบเหมือนมนุษย์ อันดับ 1 บน OSWorld benchmark ด้วยอัตราสำเร็จ 82% จาก 369 งานในโลกจริง แผนไม่จำกัด $249/month เป็นแผนใช้คอมพิวเตอร์ไม่จำกัดแบบเหมาจ่ายที่ถูกที่สุดในตลาด ระบบอัตโนมัติเบราว์เซอร์ ควบคุมเดสก์ท็อป ดำเนินการเทอร์มินัล ส่งอีเมล กรอกแบบฟอร์ม และจัดการสเปรดชีต",
       "breadcrumbs": {
         "home": "หน้าแรก",
         "caseStudies": "กรณีศึกษาตัวแทน AI",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 — ไม่พบหน้า",
-      "description": "ขออภัย หน้านี้ไม่มีอยู่"
+      "description": "ขออภัย หน้านี้ไม่มีอยู่",
+      "metaTitle": "404 · ไม่พบหน้า",
+      "metaDescription": "เราส่ง AI agent ที่ดีที่สุดของเรา เขากลับมามือเปล่า กลับไปที่ Coasty, AI agent อันดับ 1 สำหรับการทำงานอัตโนมัติบนเดสก์ท็อปและเบราว์เซอร์",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "สแกน: ทั้งอินเทอร์เน็ต",
+        "step2": "สแกน: ทุกแท็บที่เปิด",
+        "step3": "สแกน: ใต้โซฟา",
+        "result": "ผลลัพธ์: หน้าไม่มีอยู่จริง"
+      },
+      "ok": "OK",
+      "fail": "ล้มเหลว",
+      "primaryCta": "กลับหน้าแรก",
+      "secondaryCta": "จ้าง AI agent",
+      "navLabel": "หน้าที่แนะนำ",
+      "links": {
+        "home": "หน้าแรก",
+        "computerUse": "การใช้คอมพิวเตอร์",
+        "pricing": "ราคา",
+        "download": "ดาวน์โหลด",
+        "blog": "บล็อก",
+        "guide": "คู่มือ"
+      }
     },
     "error": {
       "title": "เกิดข้อผิดพลาด",
@@ -2457,7 +2571,7 @@
       "teamCreatedPartial": "สร้างทีมแล้วพร้อม {count} พนักงาน ({failedCount} ล้มเหลว: {names})",
       "teamCreated": "สร้างทีม {name} แล้วพร้อม {count} พนักงาน"
     },
-    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "credentialInstructions": "[ข้อมูลรับรองที่ใช้ได้]\nข้อมูลรับรองบริการต่อไปนี้ได้รับการกำหนดค่าและพร้อมใช้งาน:\n{list}\nใช้ข้อมูลรับรองเหล่านี้เมื่อคุณต้องเข้าสู่ระบบบริการเหล่านี้เพื่อทำงานให้เสร็จสมบูรณ์",
     "templates": {
       "contentOps": {
         "name": "ปฏิบัติการเนื้อหา",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "ต้องระบุชื่อห้อง",
+      "taskCreated": "สร้างงานสำเร็จแล้ว",
+      "taskFailed": "สร้างงานไม่สำเร็จ",
+      "assignTask": "มอบหมายงานใหม่",
+      "assignTaskDesc": "เริ่มงานใหม่กับผู้ช่วย AI ของคุณ",
+      "taskName": "ชื่องาน",
+      "taskNamePlaceholder": "กรอกชื่องาน",
+      "cancel": "ยกเลิก",
+      "creating": "กำลังสร้าง...",
+      "createTask": "สร้างงาน"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "กรุณากรอกรหัสคำเชิญ",
+      "joinSuccess": "เข้าร่วมโปรเจกต์สำเร็จ!",
+      "joinFailed": "เข้าร่วมโปรเจกต์ไม่สำเร็จ",
+      "invalidCode": "รหัสคำเชิญไม่ถูกต้องหรือไม่พบโปรเจกต์",
+      "title": "เข้าร่วมโปรเจกต์",
+      "description": "กรอกรหัสคำเชิญเพื่อเข้าร่วมโปรเจกต์ที่มีอยู่",
+      "inviteCode": "รหัสคำเชิญ",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "ขอรหัสคำเชิญโปรเจกต์จากหัวหน้าทีมของคุณ",
+      "cancel": "ยกเลิก",
+      "joining": "กำลังเข้าร่วม...",
+      "joinButton": "เข้าร่วมโปรเจกต์"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "ผู้ร่วมห้อง",
+      "copyCode": "คัดลอกรหัส",
+      "copyLink": "คัดลอกลิงก์",
+      "codeCopied": "คัดลอกรหัสคำเชิญแล้ว!",
+      "codeFailed": "คัดลอกรหัสคำเชิญไม่สำเร็จ",
+      "linkCopied": "คัดลอกลิงก์คำเชิญแล้ว!",
+      "linkFailed": "คัดลอกลิงก์คำเชิญไม่สำเร็จ",
+      "online": "ออนไลน์",
+      "offline": "ออฟไลน์",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "ต้องระบุชื่อห้อง",
+      "created": "สร้างโปรเจกต์สำเร็จแล้ว!",
+      "failed": "สร้างห้องไม่สำเร็จ",
+      "title": "สร้างโปรเจกต์ใหม่",
+      "description": "เริ่มโปรเจกต์ใหม่เพื่อสร้างผลิตภัณฑ์ของคุณด้วย AI",
+      "projectName": "ชื่อโปรเจกต์",
+      "projectNamePlaceholder": "กรอกชื่อโปรเจกต์",
+      "teamSize": "ขนาดทีม",
+      "cancel": "ยกเลิก",
+      "creating": "กำลังสร้าง...",
+      "createButton": "สร้างโปรเจกต์"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "มีอะไรใหม่",
+    "title": "มีอะไรใหม่ใน Coasty",
+    "updateCount": "{count} อัปเดต",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "อัปเดต",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "ติดตามอัปเดตเพิ่มเติมเร็วๆ นี้",
+    "tagline": "พนักงาน AI ของคุณที่ทำงานร่วมกับทุกคน"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "ยอดเยี่ยม"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "กรุณาเข้าสู่ระบบเพื่อส่งความคิดเห็น",
+    "alreadySubmitted": "คุณได้ส่งความคิดเห็นสำหรับสิ่งนี้แล้ว",
+    "thankYou": "ขอบคุณสำหรับความคิดเห็น!",
+    "creditsEarned": "ได้รับ +{credits} เครดิต",
+    "helpImprove": "ความคิดเห็นของคุณช่วยให้เราปรับปรุง Coasty ได้ดียิ่งขึ้น",
+    "howsExperience": "ประสบการณ์ของคุณเป็นอย่างไร?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "บอกเราเพิ่มเติม",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "อะไรใช้งานได้ดี? อะไรที่ควรปรับปรุง?",
+    "cancel": "ยกเลิก",
+    "sending": "กำลังส่ง...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "กรุณาเลือกเวิร์กสเตชัน",
+    "enterCron": "กรุณากรอก cron expression",
+    "hireFailed": "จ้างพนักงานไม่สำเร็จ",
+    "removeFailed": "ลบพนักงานไม่สำเร็จ",
+    "editEmployee": "แก้ไขพนักงาน",
+    "configureEmployee": "กำหนดค่าพนักงาน",
+    "editDescription": "อัปเดตตารางเวลา เวิร์กสเตชัน หรือคำสั่ง",
+    "configureDescription": "ตั้งค่าพนักงาน AI สำหรับแชตนี้",
+    "loading": "กำลังโหลดการกำหนดค่า...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "ชื่อพนักงาน"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "ลบแชต?",
+    "description": "การดำเนินการนี้จะลบ \"{chatTitle}\"",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "ชำระเงินสำเร็จ! เครดิตของคุณถูกเพิ่มแล้ว",
+    "canceled": "การชำระเงินถูกยกเลิก ไม่มีการเรียกเก็บเงิน"
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "การตั้งค่าทั่วไป",
     "generalDescription": "กำหนดค่าพื้นฐานของคอมพิวเตอร์",
     "displayName": "ชื่อที่แสดง",
     "defaultName": "คอมพิวเตอร์ของฉัน",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "บันทึกการเปลี่ยนแปลง",
+    "security": "ความปลอดภัย",
+    "securityDescription": "การตั้งค่าความปลอดภัยและการเข้าถึง",
+    "sshAuth": "การยืนยันตัวตน SSH",
+    "username": "ชื่อผู้ใช้:",
+    "keyPair": "คู่คีย์:",
+    "sshKeyDownloaded": "ดาวน์โหลดคีย์ SSH แล้ว",
+    "sshKeyFailed": "ดาวน์โหลดคีย์ SSH ไม่สำเร็จ",
+    "downloadSshKey": "ดาวน์โหลดคีย์ SSH",
+    "vncPassword": "รหัสผ่าน VNC",
     "vncPasswordHint": "รหัสผ่านนี้จำเป็นสำหรับการเชื่อมต่อกับคอมพิวเตอร์"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "เฮ้ ฉันใช้ Coasty อยู่และมันเจ๋งมาก เป็น AI ที่ใช้คอมพิวเตอร์แทนคุณได้จริง ทั้งเปิดเว็บ คลิก พิมพ์ ทำได้หมด ลองใช้ลิงก์ของฉันสิ เราทั้งคู่จะได้เครดิตฟรี!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "ลองดูเครื่องมือ AI ตัวนี้สิ",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "เมื่อสักครู่",
+      "minutesAgo": "{minutes} นาทีที่แล้ว",
+      "hoursAgo": "{hours} ชั่วโมงที่แล้ว",
+      "daysAgo": "{days} วันที่แล้ว",
+      "monthsAgo": "{months} เดือนที่แล้ว"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "คัดลอกลิงก์แนะนำแล้ว!",
+    "headline": "เพื่อนดีๆ แชร์มีม เพื่อนสุดยอดแชร์เอเจนต์ AI",
+    "subheadline": "คุณทั้งคู่ได้รับเครดิตฟรี {credits} เมื่อเพื่อนของคุณเข้าร่วม",
+    "yourLink": "ลิงก์แนะนำของคุณ",
+    "shareDirectly": "แชร์โดยตรง",
+    "yourReferrals": "การแนะนำของคุณ",
+    "referralCount": "{count} การแนะนำ",
+    "creditsEarned": "ได้รับ {credits} เครดิต",
+    "invitedYou": "เชิญคุณ",
+    "joinedViaLink": "เข้าร่วมผ่านลิงก์ของคุณ",
+    "noInvites": "ยังไม่มีผู้ใช้ที่ได้รับเชิญ",
+    "noInvitesHint": "แชร์ลิงก์ของคุณแล้วทั้งคู่จะได้รับ 50 เครดิต"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "ทำเป็นสาธารณะ",
+    "title": "บทสนทนาของคุณเป็นสาธารณะแล้ว!",
+    "description": "ใครก็ตามที่มีลิงก์สามารถดูบทสนทนานี้ได้ และอาจปรากฏในฟีดของชุมชน หน้าที่นำเสนอ หรือผลการค้นหาในอนาคต",
+    "viewPage": "ดูหน้า",
+    "shareOn": "แชร์บน"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "แผงควบคุม AI",
+    "subtitle": "อธิบายว่าคุณต้องการให้ AI ทำอะไร",
+    "quickCommands": "คำสั่งด่วน",
+    "noActions": "ยังไม่มีการดำเนินการ",
+    "success": "สำเร็จ",
+    "failed": "ล้มเหลว",
+    "placeholder": "บอก AI ว่าต้องทำอะไร... (Ctrl+Enter เพื่อส่ง)",
+    "executing": "กำลังดำเนินการ...",
+    "executeCommand": "ดำเนินการคำสั่ง"
   },
   "discover": {
     "badge": "ชุมชน",
@@ -2859,5 +2973,190 @@
     "watchSession": "ดูเซสชัน",
     "steps": "{count} ขั้นตอน",
     "tryCoasty": "ลองใช้ Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "ความจำ",
+    "sidebarDescription": "บริบทที่ใช้กับการเรียกใช้เอเจนต์ทุกครั้ง",
+    "dialog": {
+      "title": "ความจำ",
+      "description": "บันทึกสั้นๆ ที่ Coasty นำไปใช้ทุกครั้งที่ทำงานให้คุณ",
+      "openFull": "เปิดเต็ม",
+      "visualMemoryLabel": "ความจำ",
+      "visualSynced": "ซิงค์แล้ว",
+      "visualContextChat": "แชท",
+      "visualContextSchedules": "กำหนดการ",
+      "visualContextSwarm": "ฝูง"
+    },
+    "section": {
+      "title": "ความจำ",
+      "tag": "ไม่บังคับ · ส่วนตัว",
+      "description": "บันทึกสั้นๆ เกี่ยวกับคุณที่ติดไปกับการเรียกใช้เอเจนต์ทุกครั้ง — แชท งานที่กำหนดเวลา เครื่องในฝูง เอเจนต์ที่มอบหมาย"
+    },
+    "presetsLabel": "ลอง",
+    "presets": {
+      "useFirstName": "ใช้ชื่อ",
+      "useFirstNameSentence": "เรียกฉันด้วยชื่อจริงของฉัน",
+      "beTerse": "กระชับ",
+      "beTerseSentence": "ขอคำตอบที่กระชับและตรงประเด็น ไม่ต้องมีคำเติม",
+      "imDeveloper": "ฉันเป็นนักพัฒนา",
+      "imDeveloperSentence": "ฉันเป็นวิศวกรซอฟต์แวร์ คุ้นเคยกับโค้ด",
+      "noEmojis": "ไม่ใช้อิโมจิ",
+      "noEmojisSentence": "หลีกเลี่ยงอิโมจิในคำตอบ",
+      "metricUnits": "หน่วยเมตริก",
+      "metricUnitsSentence": "ใช้หน่วยเมตริก (เมตร กิโลกรัม °C)",
+      "citeSources": "อ้างอิงแหล่งที่มา",
+      "citeSourcesSentence": "อ้างอิงแหล่งที่มาเมื่อนำเสนอข้อเท็จจริง"
+    },
+    "placeholder": "ตัวอย่าง:\nเรียกฉันด้วยชื่อจริงของฉัน\nขอคำตอบที่กระชับ\nฉันทำงานกับ TypeScript และ Python\nอย่าลบไฟล์โดยไม่ยืนยัน",
+    "loading": "กำลังโหลด…",
+    "saving": "กำลังบันทึก…",
+    "saved": "บันทึกแล้ว",
+    "unsavedChanges": "การเปลี่ยนแปลงที่ยังไม่บันทึก",
+    "empty": "ว่างเปล่า",
+    "savedRelative": "บันทึก · {time}",
+    "errorLoad": "ไม่สามารถโหลดความจำของคุณ",
+    "errorSave": "ไม่สามารถบันทึกความจำของคุณ",
+    "willBeShortened": "จะถูกย่อ",
+    "clear": "ล้าง",
+    "footerNote": "Coasty จะคำนึงถึงการตั้งค่าเหล่านี้เมื่อทำงานให้คุณ",
+    "time": {
+      "justNow": "เมื่อสักครู่",
+      "secondsAgo": "{n} วินาทีที่แล้ว",
+      "minutesAgo": "{n} นาทีที่แล้ว",
+      "hoursAgo": "{n} ชม. ที่แล้ว",
+      "daysAgo": "{n} วันที่แล้ว"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "การตั้งค่า",
+    "navGroups": {
+      "settings": "การตั้งค่า",
+      "developer": "นักพัฒนา",
+      "more": "เพิ่มเติม",
+      "resources": "ทรัพยากร"
+    },
+    "sections": {
+      "account": {
+        "label": "ทั่วไป",
+        "description": "โปรไฟล์และบัญชี"
+      },
+      "appearance": {
+        "label": "ลักษณะ",
+        "description": "ธีม ภาษา และพื้นหลัง"
+      },
+      "billing": {
+        "label": "การเรียกเก็บเงิน",
+        "description": "แผนและเครดิต"
+      },
+      "publicChats": {
+        "label": "แชทสาธารณะ",
+        "description": "จัดการแชทที่แชร์ผ่านลิงก์สาธารณะ"
+      },
+      "privacy": {
+        "label": "ความเป็นส่วนตัว",
+        "description": "ความปลอดภัยและความเป็นส่วนตัวของข้อมูล"
+      },
+      "notifications": {
+        "label": "การแจ้งเตือน",
+        "description": "การตั้งค่าการแจ้งเตือน"
+      },
+      "apiKeys": {
+        "label": "คีย์ API",
+        "description": "จัดการคีย์ API ของคุณ"
+      },
+      "data": {
+        "label": "ข้อมูล",
+        "description": "ส่งออกและจัดการข้อมูลของคุณ"
+      },
+      "feedback": {
+        "label": "ความคิดเห็น",
+        "description": "ส่งความคิดเห็นให้เรา"
+      },
+      "about": {
+        "label": "เกี่ยวกับ",
+        "description": "เกี่ยวกับ Coasty"
+      },
+      "social": {
+        "label": "เชื่อมต่อ",
+        "description": "ลิงก์โซเชียล"
+      },
+      "guide": {
+        "label": "คู่มือ",
+        "description": "เรียนรู้วิธีใช้ Coasty"
+      },
+      "referral": {
+        "label": "การแนะนำ",
+        "description": "ชวนเพื่อนและรับเครดิต"
+      }
+    },
+    "appearance": {
+      "theme": "ธีม",
+      "language": "ภาษา",
+      "background": "พื้นหลัง",
+      "personalization": "การปรับแต่ง",
+      "intro": {
+        "title": "อินโทรซีเนมาติก",
+        "description": "แสดงอินโทรอนิเมชั่นเมื่อเข้าหน้าหลัก"
+      },
+      "interaction": {
+        "title": "การเรียกใช้เครื่องมือ",
+        "description": "แสดงรายละเอียดการเรียกใช้เครื่องมือในการสนทนา"
+      }
+    },
+    "comingSoon": {
+      "badge": "เร็วๆ นี้",
+      "placeholder": "ส่วนนี้จะมีในการอัปเดตในอนาคต"
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "แสดงให้ฉันเห็นว่าทำอะไรได้บ้าง…",
+    "tasks": [
+      "ค้นคว้าคู่แข่งของฉัน",
+      "กรอกใบสมัครงาน",
+      "จองตั๋วเครื่องบินไปโตเกียว",
+      "ติดตาม uptime เว็บไซต์ของฉัน",
+      "ตั้งเวลาโพสต์โซเชียล",
+      "วิเคราะห์เทรนด์รายไตรมาส"
+    ],
+    "dontShowAgain": "ไม่ต้องแสดงอีก",
+    "skip": "ข้าม",
+    "tagline": "ทำทุกอย่างได้ เหมือนที่มนุษย์ทำได้กับคอมพิวเตอร์"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "คอมพิวเตอร์ของคุณ",
+      "description": "ซิลิคอนพร้อมรับใช้ กำลังเปิดฟลีตของคุณ"
+    },
+    "swarms": {
+      "title": "ปัญญาฝูง",
+      "description": "หลายความคิด หนึ่งภารกิจ กำลังรวบรวมเอเจนต์"
+    },
+    "developers": {
+      "title": "API นักพัฒนา",
+      "description": "กำลังโหลดแดชบอร์ดของคุณ"
+    },
+    "secrets": {
+      "title": "ข้อมูลรับรอง",
+      "description": "ความลับของคุณปลอดภัยกับเรา กำลังเปิดห้องนิรภัย"
+    },
+    "schedules": {
+      "title": "ตารางเวลา",
+      "description": "ตรงเวลาเสมอ กำลังซิงค์ระบบอัตโนมัติของคุณ"
+    },
+    "history": {
+      "title": "ประวัติของคุณ",
+      "description": "บันทึกเงียบงันของทุกบทสนทนา ภารกิจ และความคิดที่คุณได้สำรวจ"
+    },
+    "referral": {
+      "title": "การแนะนำ",
+      "description": "แชร์ Coasty หารายได้ร่วมกัน"
+    }
+  },
+  "dataSection": {
+    "heroTitle": "ข้อมูลของคุณ การควบคุมของคุณ",
+    "heroDescription": "เราเก็บเฉพาะข้อมูลที่จำเป็นในการรันเซสชันของคุณ การรับส่งข้อมูลทั้งหมดเข้ารหัสระหว่างการส่ง และคุณสามารถขยายการเข้ารหัสที่อยู่นิ่งไปยังหมวดหมู่ด้านล่าง ข้อมูลของคุณจะไม่ถูกใช้ในการฝึกโมเดล AI",
+    "trustTransit": "TLS 1.3 ระหว่างการส่ง",
+    "trustAtRest": "AES-256-GCM ขณะจัดเก็บ",
+    "trustNoTraining": "ไม่นำข้อมูลของคุณไปฝึกโมเดล"
   }
 }

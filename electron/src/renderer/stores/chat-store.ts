@@ -17,6 +17,39 @@ export interface ChatMessage {
   createdAt: string
 }
 
+/**
+ * Normalize a message's `content` field to a string. The backend's
+ * ``db_service.get_chat_messages`` will JSON-parse stringified arrays
+ * back into native arrays (for OpenAI-style multi-part content). The
+ * Electron renderer always wants a flat string — so collapse those
+ * shapes back into a readable form here rather than letting them flow
+ * to MessageItem where ``<Markdown>{message.content}</Markdown>`` would
+ * silently render an empty bubble.
+ */
+export function normalizeMessageContent(raw: unknown): string {
+  if (raw == null) return ''
+  if (typeof raw === 'string') return raw
+  if (Array.isArray(raw)) {
+    const parts: string[] = []
+    for (const part of raw) {
+      if (typeof part === 'string') { parts.push(part); continue }
+      if (part && typeof part === 'object') {
+        // OpenAI-style: { type: 'text', text: '...' }
+        if (typeof (part as any).text === 'string') { parts.push((part as any).text); continue }
+        // Anthropic-style: { type: 'text', source: { text: '...' } }
+        const t = (part as any)?.source?.text
+        if (typeof t === 'string') { parts.push(t); continue }
+      }
+    }
+    if (parts.length > 0) return parts.join('\n')
+    try { return JSON.stringify(raw) } catch { return '' }
+  }
+  if (typeof raw === 'object') {
+    try { return JSON.stringify(raw) } catch { return '' }
+  }
+  return String(raw)
+}
+
 export interface ChatSummary {
   id: string
   title: string | null
@@ -48,6 +81,20 @@ interface ChatState {
   chatList: ChatSummary[]
   chatListLoading: boolean
 
+  /** True while loadChat is fetching messages for the active chat.
+   *  Surfaced to MessageList so the user sees a spinner instead of an
+   *  empty thread between click and IPC resolution. */
+  isLoadingMessages: boolean
+  /** When the most recent loadChat call failed, this carries the error
+   *  text so the UI can surface a banner ("Not authenticated", "backend
+   *  502: ...", "IPC timed out") rather than leaving the user staring
+   *  at an empty thread with no signal that anything happened. */
+  loadError: string | null
+  /** Token used by loadChat to ignore stale IPC resolutions when the
+   *  user clicked a different chat mid-flight. Internal only — UI does
+   *  not need to read this. */
+  _activeLoadToken: number
+
   addUserMessage: (content: string) => void
   setStreaming: (streaming: boolean) => void
   setAwaitingHuman: (state: AwaitingHumanState | null) => void
@@ -66,6 +113,8 @@ interface ChatState {
   loadChatList: () => Promise<void>
   /** Switch to an existing chat and load its messages */
   loadChat: (chatId: string) => Promise<void>
+  /** Clear the loadError banner (UI dismiss handler) */
+  clearLoadError: () => void
   /** Delete a chat */
   removeChat: (chatId: string) => Promise<void>
   /** Update chat title */
@@ -103,6 +152,9 @@ export const useChatStore = create<ChatState>((set, get) => ({
   awaitingHuman: null,
   chatList: [],
   chatListLoading: false,
+  isLoadingMessages: false,
+  loadError: null,
+  _activeLoadToken: 0,
 
   addUserMessage: (content) => {
     set((state) => ({
@@ -158,9 +210,29 @@ export const useChatStore = create<ChatState>((set, get) => ({
       const messages = [...state.messages]
       const last = messages[messages.length - 1]
 
-      if (last?.role === 'assistant') {
+      if (last?.role === 'assistant' && !last.id.startsWith('final_')) {
         const tools = [...(last.toolInvocations || []), invocation]
         messages[messages.length - 1] = { ...last, toolInvocations: tools }
+      } else {
+        // ── Tool-only assistant turn ────────────────────────────────────
+        // The assistant streamed NO text before this tool call (e.g. a
+        // pure ``cua_screenshot`` turn). Without creating an assistant
+        // message here, the tool invocation would be silently dropped
+        // because the last message is still ``user`` and the
+        // ``last?.role === 'assistant'`` guard above filters it out.
+        //
+        // The CUA executor regularly produces tool-only turns —
+        // think of an agent that decides "I need to see the screen
+        // first" and emits ``cua_screenshot`` with no preamble. The
+        // user must see the tool activity in the chat thread to
+        // understand what's happening.
+        messages.push({
+          id: `streaming_${Date.now()}`,
+          role: 'assistant',
+          content: '',
+          toolInvocations: [invocation],
+          createdAt: new Date().toISOString(),
+        })
       }
 
       return { messages }
@@ -197,6 +269,23 @@ export const useChatStore = create<ChatState>((set, get) => ({
           content: content || last.content,
           toolInvocations: toolInvocations || last.toolInvocations,
         }
+      } else if (content || (toolInvocations && toolInvocations.length > 0)) {
+        // ── Finish-only assistant turn ─────────────────────────────────
+        // The backend ended the turn without any prior text / tool-call
+        // events but the finish payload DOES carry content or final tool
+        // invocations. Without this branch, that content is lost and the
+        // chat thread is missing the assistant's reply entirely.
+        //
+        // Real example: a backend race where the SSE stream closes
+        // before the 'a' tool-result events flushed, but the 'd' event
+        // includes the tool invocations in its payload.
+        messages.push({
+          id: `final_${Date.now()}`,
+          role: 'assistant',
+          content: content || '',
+          toolInvocations: toolInvocations || undefined,
+          createdAt: new Date().toISOString(),
+        })
       }
 
       return { messages, isStreaming: false, awaitingHuman: null }
@@ -260,41 +349,107 @@ export const useChatStore = create<ChatState>((set, get) => ({
   },
 
   loadChat: async (chatId: string) => {
-    // Abort any active stream before switching chats
+    // ── Abort any active stream before switching chats ────────────────
+    // The previous chat may still be streaming. Tear it down BEFORE we
+    // swap chatId so the in-flight SSE callbacks don't paint into the
+    // new chat thread.
     const { abortController } = get()
     if (abortController) abortController.abort()
-    set({ isStreaming: false, abortController: null })
+
+    // ── Race protection ───────────────────────────────────────────────
+    // Each loadChat call gets a monotonically increasing token. The
+    // store records the latest token in `_activeLoadToken`. When the
+    // IPC promise resolves, we check that OUR token still matches; if
+    // not (the user clicked another chat in the meantime), we drop the
+    // stale result on the floor. Without this guard, rapid clicks like
+    // A→B→A can land in the WRONG chat because the slower IPC wins the
+    // setState race.
+    const myToken = get()._activeLoadToken + 1
+
+    // Snap to the new chat immediately so the UI feels responsive:
+    //   - chatId moves to the target
+    //   - messages cleared (last chat's thread vanishes)
+    //   - title pulled from chatList if available
+    //   - isLoadingMessages=true → MessageList renders spinner
+    //   - loadError cleared so any prior banner disappears
+    const chatInfo = get().chatList.find((c) => c.id === chatId)
+    set({
+      chatId,
+      messages: [],
+      isStreaming: false,
+      abortController: null,
+      isSynced: true,
+      chatTitle: chatInfo?.title || null,
+      isLoadingMessages: true,
+      loadError: null,
+      awaitingHuman: null,
+      _activeLoadToken: myToken,
+    })
+
+    const stillCurrent = () => get()._activeLoadToken === myToken
 
     try {
-      const result = await withTimeout(window.coasty.getChatMessages(chatId), IPC_TIMEOUT_MS, 'getChatMessages')
-      if (result.success && result.messages) {
-        // Transform DB messages to ChatMessage format
-        const messages: ChatMessage[] = result.messages.map((msg: any) => ({
-          id: String(msg.id),
-          role: msg.role as 'user' | 'assistant',
-          content: msg.content || '',
-          createdAt: msg.created_at || new Date().toISOString(),
-          toolInvocations: msg.parts
-            ? msg.parts
-                .filter((p: any) => p.type === 'tool-invocation')
-                .map((p: any) => p.toolInvocation)
-            : undefined,
-        }))
+      const result = await withTimeout(
+        window.coasty.getChatMessages(chatId),
+        IPC_TIMEOUT_MS,
+        'getChatMessages',
+      )
 
-        // Find the chat in chatList for the title
-        const chatInfo = get().chatList.find((c) => c.id === chatId)
-
-        set({
-          chatId,
-          messages,
-          isSynced: true,
-          chatTitle: chatInfo?.title || null,
-        })
+      if (!stillCurrent()) {
+        // User clicked a different chat while we were waiting — drop
+        // this result silently. The newer loadChat owns the store.
+        return
       }
-    } catch (err) {
-      console.error('Failed to load chat messages:', err)
+
+      if (!result || result.success !== true) {
+        const errText = (result && (result.error as string)) || 'Unknown error'
+        console.warn('[chat-store] loadChat IPC returned failure:', { chatId, errText, result })
+        set({
+          isLoadingMessages: false,
+          loadError: `Couldn't load chat: ${errText}`,
+        })
+        return
+      }
+
+      const rawMessages = Array.isArray(result.messages) ? result.messages : []
+
+      // Transform DB messages to ChatMessage format. Tolerant to a
+      // variety of backend shapes — see normalizeMessageContent for
+      // why content may not be a plain string.
+      const messages: ChatMessage[] = rawMessages.map((msg: any) => {
+        const role = msg?.role === 'assistant' ? 'assistant' : 'user'
+        const partsArr = Array.isArray(msg?.parts) ? msg.parts : []
+        const toolInvocations = partsArr
+          .filter((p: any) => p && p.type === 'tool-invocation' && p.toolInvocation)
+          .map((p: any) => p.toolInvocation)
+        return {
+          id: String(msg?.id ?? `msg_${Math.random().toString(36).slice(2, 10)}`),
+          role,
+          content: normalizeMessageContent(msg?.content),
+          createdAt: msg?.created_at || new Date().toISOString(),
+          toolInvocations: toolInvocations.length > 0 ? toolInvocations : undefined,
+        }
+      })
+
+      if (!stillCurrent()) return
+
+      set({
+        messages,
+        isLoadingMessages: false,
+        loadError: null,
+      })
+    } catch (err: any) {
+      if (!stillCurrent()) return
+      const msg = err?.message || String(err)
+      console.error('[chat-store] loadChat failed:', msg, err)
+      set({
+        isLoadingMessages: false,
+        loadError: `Couldn't load chat: ${msg}`,
+      })
     }
   },
+
+  clearLoadError: () => set({ loadError: null }),
 
   removeChat: async (chatId: string) => {
     try {

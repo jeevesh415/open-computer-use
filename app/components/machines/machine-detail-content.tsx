@@ -155,12 +155,12 @@ function ActionBtn({ icon: Icon, label, onClick, loading, disabled, variant = "d
       type="button"
       onClick={onClick}
       disabled={isDead}
-      whileHover={!isDead ? { y: -1 } : undefined}
       whileTap={!isDead ? { scale: 0.97 } : undefined}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
       className={cn(
-        "h-9 inline-flex items-center gap-2 px-3.5 rounded-xl text-sm font-medium transition-colors shrink-0",
+        "h-9 inline-flex items-center gap-2 px-3.5 rounded-xl text-sm font-medium transition-all duration-150 shrink-0",
         "disabled:opacity-40 disabled:cursor-not-allowed",
+        !isDead && "hover:-translate-y-px",
         variant === "primary" && "bg-foreground text-background hover:bg-foreground/90 shadow-sm",
         variant === "default" && "bg-foreground/[0.04] hover:bg-foreground/[0.08] border border-border/40 text-foreground",
         variant === "destructive" && "bg-foreground/[0.02] hover:bg-destructive/10 border border-destructive/20 text-destructive",
@@ -563,6 +563,15 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
               publicIpAddress: machine.publicIpAddress,
               vncPort: machine.vncPort,
               vncPassword: machine.vncPassword,
+              // Pass the VM OS so FileTransfer picks an OS-appropriate
+              // starting directory.  Without this the panel hard-coded a
+              // Linux-style /home/desktop/Desktop, which only worked on
+              // Ubuntu cloud VMs (whose agent has a remap for that prefix);
+              // Windows VMs and freshly-launched machines whose UserData
+              // hadn't created the Desktop folder yet showed an empty
+              // list with no error — the deployed-but-not-local symptom.
+              osType: machine.settings?.osType,
+              provider: machine.settings?.provider,
             }}
           />
         );
@@ -602,16 +611,6 @@ export function MachineDetailContent({ machineId }: MachineDetailContentProps) {
             style={{
               background: `radial-gradient(circle, ${status.glow} 0%, transparent 60%)`,
               filter: "blur(70px)",
-            }}
-          />
-          {/* Subtle grid pattern */}
-          <div
-            className="absolute inset-0 opacity-[0.018] dark:opacity-[0.03] pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(rgba(128,128,128,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.4) 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
-              maskImage: "radial-gradient(ellipse at top right, black 30%, transparent 75%)",
-              WebkitMaskImage: "radial-gradient(ellipse at top right, black 30%, transparent 75%)",
             }}
           />
 

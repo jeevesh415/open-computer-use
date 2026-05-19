@@ -12,7 +12,9 @@
     "recommended": "Aanbevolen",
     "month": "maand",
     "creditsPerMonth": "{count} credits/maand",
-    "agentsInParallel": "{count} agents parallel"
+    "agentsInParallel": "{count} agents parallel",
+    "whatsIncluded": "Wat is inbegrepen",
+    "hideDetails": "Details verbergen"
   },
   "header": {
     "useCases": "Toepassingen",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} gepersonaliseerde e-mails per campagne"
     },
     "productItems": {
-      "computerUse": "Computer Use",
+      "computerUse": "Computergebruik",
       "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "compare": "Vergelijken"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} OSWorld benchmarkscore",
+      "agentSwarms": "{stat} agents parallel",
+      "compare": "{stat} concurrenten geanalyseerd"
     },
     "blogItems": {
       "allPosts": "Alle berichten",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "Sollicitaties",
       "demosResults": "Demo's en resultaten",
-      "guide": "Handleiding"
+      "guide": "Handleiding",
+      "discover": "Community"
     },
     "blogStats": {
       "allPosts": "{stat} artikelen wekelijks gepubliceerd",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} pagina's per sessie",
       "jobApplications": "{stat} sollicitaties per sessie",
       "demosResults": "{stat} echte casestudies",
-      "guide": "{stat} handleidingen voor toepassingen"
-    }
+      "guide": "{stat} handleidingen voor toepassingen",
+      "discover": "Zie hoe mensen het gebruiken"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonome computeroperators",
+    "headline": "De beste agent voor computergebruik",
     "useCases": {
       "computerAgent": {
         "label": "Computeragent",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Social media",
         "task": "Plaats op Hacker News en reageer op comments"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "per maand bespaard",
+        "sublabel": "vs. een fulltime VA"
+      },
+      "time": {
+        "value": "30 uur",
+        "label": "per week teruggewonnen",
+        "sublabel": "handwerk geëlimineerd"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "snellere output",
+        "sublabel": "taken in minuten, niet dagen"
+      },
+      "effort": {
+        "value": "0",
+        "label": "code of aannames",
+        "sublabel": "volledig end-to-end beheerd"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Onbeperkte zware automatisering",
         "cta": "Neem Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Geen creditlimieten — nooit",
+        "cta": "Kies Unlimited",
+        "badge": "Beste waarde"
       }
     },
     "vmTemporary": "1 tijdelijke VM (2 uur)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Hetzelfde werk kost {oldPrice} met handmatige arbeid",
       "description": "Een virtuele assistent kost $2.000–$4.000/maand. Een parttime kracht kost meer. Coasty doet hetzelfde werk 24/7 vanaf $0 — met perfecte consistentie, volledige audittrails en nul trainingstijd."
-    }
+    },
+    "unlimitedCredits": "Onbeperkte credits"
   },
   "faq": {
     "title": "Veelgestelde vragen",
@@ -429,7 +463,8 @@
       "contact": "Contact",
       "privacy": "Privacy",
       "terms": "Voorwaarden"
-    }
+    },
+    "status": "Alle systemen operationeel"
   },
   "languageSwitcher": {
     "label": "Taal"
@@ -458,16 +493,16 @@
     "demoCaption": "Draai AI-agenten op je computer of bedien hem vanaf je telefoon, waar je ook bent.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Draai lokaal op je pc",
+        "desc": "Download de desktop-app en laat AI je computer direct besturen — geen cloud-VM nodig."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Bestuur je pc vanaf je telefoon",
+        "desc": "Start een taak vanaf je telefoon en kijk hoe de AI-agent in realtime op je computer werkt."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Cloud of lokaal — jouw keuze",
+        "desc": "Gebruik cloud-VMs voor geïsoleerde taken, of ga lokaal voor volledige toegang tot je apps en bestanden."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Verbinden...",
       "continueWithGoogle": "Doorgaan met Google"
+    },
+    "inAppBrowser": {
+      "blocked": "Inloggen met Google werkt niet in ingebedde browsers. Open deze pagina in je browser of gebruik een magische link.",
+      "blockedNamed": "Inloggen met Google werkt niet in {app}. Open deze pagina in je browser of gebruik een magische link.",
+      "copyLink": "Link kopiëren",
+      "copied": "Gekopieerd!",
+      "useMagicLink": "Magische link gebruiken"
     },
     "or": "of",
     "email": "E-mail",
@@ -560,18 +602,21 @@
     "getStarted": "Aan de slag",
     "settingUp": "Instellen...",
     "welcome": {
-      "titleReturning": "Welkom terug{name}!",
+      "titleReturning": "Welkom terug{name}",
       "titleNew": "Welkom bij Coasty",
-      "descriptionReturning": "We willen graag iets meer over je weten om je ervaring te verbeteren",
-      "descriptionNew": "Laten we je account instellen zodat we je ervaring kunnen personaliseren"
+      "eyebrowNew": "Laten we kennismaken",
+      "eyebrowReturning": "Bijna klaar",
+      "descriptionReturning": "Nog een paar details en Coasty is volledig afgestemd op jouw manier van werken.",
+      "descriptionNew": "Coasty werkt op echte computers — bladert, klikt, typt, levert. Een paar snelle details zodat het bij jouw stijl past.",
+      "footerNote": "Duurt ongeveer een minuut. Je kunt alles later wijzigen in Instellingen."
     },
     "nameLabel": "Hoe moeten we je noemen?",
-    "namePlaceholder": "Je naam",
-    "companyLabel": "Bedrijf",
+    "namePlaceholder": "Gewoon je voornaam",
+    "companyLabel": "Waar werk je?",
     "optional": "(optioneel)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Je bedrijf of team",
     "websiteLabel": "Website",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "jouwbedrijf.nl",
     "roleStep": {
       "title": "Wat beschrijft jou het best?",
       "subtitle": "Selecteer alles wat van toepassing is — dit helpt ons je ervaring af te stemmen"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Wat moet je AI-werker doen?",
-    "placeholderAlt": "Vertel je AI wat het op de computer moet doen...",
+    "placeholder": "Vertel me wat ik op deze computer moet doen...",
+    "placeholderAlt": "Selecteer een computer om te beginnen...",
     "vmError": {
       "title": "Virtuele Machine Fout",
       "description": "De virtuele machine is in een foutstatus of wordt verwijderd.",
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Sleep bestanden hierheen",
       "dropDescription": "Bestanden worden geüpload naar de Desktop-map van de VM",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Pad: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Log in om meer functies gratis te proberen",
@@ -788,7 +833,7 @@
       },
       "designer": {
         "designComparison": "{company} vs concurrenten design",
-        "responsiveAudit": "{company} responsive audit",
+        "responsiveAudit": "Responsive-audit voor {company}",
         "inspiration": "Designinspiratie voor {company}"
       }
     },
@@ -801,6 +846,28 @@
       "ecommerce": "{company} prijsvergelijking",
       "social_media": "Post over {company}",
       "general_automation": "Automatiseer taak op {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Menselijke overdracht voltooid",
+      "yourTurn": "Jouw beurt",
+      "connectToDesktop": "Verbinden met bureaublad",
+      "resuming": "Hervatten...",
+      "doneContinue": "Klaar, doorgaan"
+    },
+    "feedback": {
+      "promptRun": "Hoe was deze run?",
+      "promptSwarm": "Hoe was deze swarm?",
+      "reactionBad": "Slecht",
+      "reactionOkay": "Oké",
+      "reactionGood": "Goed",
+      "reactionAmazing": "Geweldig",
+      "tellUsMore": "Vertel meer",
+      "commentPlaceholder": "Wat kan beter?",
+      "npsPrompt": "Zou je Coasty aanbevelen?",
+      "npsNotLikely": "Niet waarschijnlijk",
+      "npsVeryLikely": "Zeer waarschijnlijk",
+      "thanks": "Bedankt voor de feedback",
+      "creditsLabel": "credits"
     }
   },
   "chatMessages": {
@@ -887,7 +954,7 @@
     "desktopApp": {
       "getDesktopApp": "Download Desktop App",
       "download": "Downloaden",
-      "downloadDesktopApp": "Download Desktop App",
+      "downloadDesktopApp": "Download desktop-app",
       "windows": "Windows",
       "macos": "macOS",
       "controlRemotely": "Bedien je computer op afstand",
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Onbeperkte zware automatisering"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Geen creditlimieten — nooit",
+        "badge": "Beste waarde"
       }
     },
     "features": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Layout"
+    "layout": "Lay-out",
+    "sidebarStyle": "Zijbalkstijl",
+    "sidebarStyleHint": "Kies waar de navigatie zich bevindt",
+    "sidebarStyleDisabled": "Beschikbaar wanneer Layout is ingesteld op Zijbalk",
+    "vertical": "Verticaal",
+    "verticalBadge": "Standaard",
+    "verticalDescription": "Klassieke linkerbalk met labels en credits in de footer.",
+    "horizontal": "Horizontaal",
+    "horizontalBadge": "Strak",
+    "horizontalDescription": "Eén bovenbalk met alles op één rij. Meer canvashoogte."
   },
   "suggestions": {
     "summary": {
@@ -1248,7 +1329,7 @@
       "recurringResultsDesc": "Rapporten geleverd volgens uw planning"
     },
     "cta": {
-      "downloadApp": "Download app",
+      "downloadApp": "App downloaden",
       "trySwarms": "Probeer zwermen",
       "setUp": "Instellen"
     }
@@ -1260,27 +1341,27 @@
     "newMachine": "Nieuwe machine",
     "filters": {
       "all": "All",
-      "running": "Running",
-      "creating": "Creating",
-      "stopped": "Stopped"
+      "running": "Actief",
+      "creating": "Wordt aangemaakt",
+      "stopped": "Gestopt"
     },
     "desktopPromo": {
       "text": "Skip the VM — run AI agents on your own computer with the native app. Control your desktop from your phone.",
-      "cta": "Get the app"
+      "cta": "Haal de app"
     },
     "emptyState": {
-      "title": "True AI Employee with full computer access",
+      "title": "Een echte AI-medewerker met volledige computertoegang",
       "description": "Spin up an isolated virtual machine and let AI agents browse the web, run terminals, and control the desktop — hands-free.",
       "feature1": {
-        "title": "Full desktop control",
-        "description": "AI moves the mouse, types, clicks, and navigates like a real user."
+        "title": "Volledige desktopbesturing",
+        "description": "AI beweegt de muis, typt, klikt en navigeert als een echte gebruiker."
       },
       "feature2": {
-        "title": "Any task automated",
+        "title": "Elke taak geautomatiseerd",
         "description": "Browser, terminal, and UI — all agents work together in one VM."
       },
       "feature3": {
-        "title": "Isolated & safe",
+        "title": "Geïsoleerd en veilig",
         "description": "Each machine runs in its own container — your local system stays untouched."
       },
       "cta": "Create your first machine"
@@ -1309,7 +1390,7 @@
     "namePlaceholder": "Mijn Cloud Server",
     "nameError": "Computernaam kan niet beginnen met \"local\"",
     "nameRequired": "Voer een computernaam in",
-    "osLabel": "Operating System",
+    "osLabel": "Besturingssysteem",
     "linux": {
       "name": "Linux (Ubuntu)",
       "description": "Ubuntu 22.04 desktop"
@@ -1317,17 +1398,17 @@
     "windows": {
       "name": "Windows Server",
       "badge": "BETA",
-      "description": "Windows desktop — expect bugs"
+      "description": "Windows-desktop — verwacht bugs"
     },
-    "osHintWindows": "Windows desktop with Chrome (beta). Ready in ~2 minutes.",
-    "osHintLinux": "Ubuntu desktop, accessible via browser. Ready in ~30 seconds.",
+    "osHintWindows": "Windows-desktop met Chrome (bèta). Klaar in ~2 minuten.",
+    "osHintLinux": "Ubuntu-desktop, toegankelijk via de browser. Klaar in ~30 seconden.",
     "stateLabel": "Computerstatus",
-    "restorePrevious": "Restore Previous",
-    "restoreDescription": "Resume from last snapshot",
-    "startFresh": "Start Fresh",
-    "startFreshDescription": "Clean desktop environment",
-    "cancel": "Cancel",
-    "creating": "Creating...",
+    "restorePrevious": "Vorige herstellen",
+    "restoreDescription": "Hervat vanaf laatste snapshot",
+    "startFresh": "Fris beginnen",
+    "startFreshDescription": "Schone desktopomgeving",
+    "cancel": "Annuleren",
+    "creating": "Bezig met aanmaken...",
     "create": "Computer aanmaken",
     "toasts": {
       "restoringSnapshot": "Computer wordt hersteld vanuit snapshot!",
@@ -1340,46 +1421,46 @@
   },
   "secrets": {
     "title": "Opgeslagen Inloggegevens",
-    "subtitle": "Stored securely and used automatically by the AI agent when logging in",
+    "subtitle": "Veilig opgeslagen en automatisch gebruikt door de AI-agent bij het inloggen",
     "guide": "Guide",
-    "import": "Import",
-    "addCredential": "Add Credential",
-    "securityNote": "Credentials are never sent to the AI model and are never exposed in chat — the agent fills them in directly without seeing the values",
-    "username": "Username",
-    "password": "Password",
+    "import": "Importeren",
+    "addCredential": "Inloggegevens toevoegen",
+    "securityNote": "Inloggegevens worden nooit naar het AI-model verzonden en nooit getoond in chat — de agent vult ze direct in zonder de waarden te zien",
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
     "hide": "Hide",
-    "revealFor10s": "Reveal for 10s",
-    "encrypted": "Encrypted",
+    "revealFor10s": "10s tonen",
+    "encrypted": "Versleuteld",
     "emptyState": {
-      "title": "Auto-login, hands-free",
-      "description": "Save credentials once — the AI agent logs in automatically and keeps going without ever interrupting you",
+      "title": "Automatisch inloggen, handsfree",
+      "description": "Sla inloggegevens één keer op — de AI-agent logt automatisch in en gaat door zonder je ooit te onderbreken",
       "feature1": {
-        "title": "Zero interruptions",
-        "description": "The agent encounters a login form, fills it in, and continues the task — no prompts, no pauses"
+        "title": "Geen onderbrekingen",
+        "description": "De agent komt een inlogformulier tegen, vult het in en gaat door met de taak — geen vragen, geen pauzes"
       },
       "feature2": {
-        "title": "Never seen by AI",
-        "description": "Your credentials are injected directly. The AI model never sees the actual values"
+        "title": "Nooit gezien door AI",
+        "description": "Je inloggegevens worden direct ingevuld. Het AI-model ziet de werkelijke waarden nooit"
       },
       "feature3": {
-        "title": "Any website",
-        "description": "Works with login forms across any site — email, SaaS tools, dashboards, anything"
+        "title": "Elke website",
+        "description": "Werkt met inlogformulieren op elke site — e-mail, SaaS-tools, dashboards, alles"
       },
-      "cta": "Add your first credential"
+      "cta": "Voeg je eerste inloggegevens toe"
     },
     "deleteDialog": {
-      "title": "Delete credential?",
-      "description": "{name} ({service}) will be permanently deleted. The AI agent will no longer be able to use it.",
-      "cancel": "Cancel",
-      "delete": "Delete"
+      "title": "Inloggegevens verwijderen?",
+      "description": "{name} ({service}) wordt permanent verwijderd. De AI-agent kan deze niet meer gebruiken.",
+      "cancel": "Annuleren",
+      "delete": "Verwijderen"
     },
     "toasts": {
-      "loadFailed": "Failed to load credentials",
-      "revealFailed": "Failed to reveal password",
-      "deleted": "Credential deleted",
-      "deleteFailed": "Failed to delete credential"
+      "loadFailed": "Inloggegevens laden mislukt",
+      "revealFailed": "Wachtwoord tonen mislukt",
+      "deleted": "Inloggegevens verwijderd",
+      "deleteFailed": "Inloggegevens verwijderen mislukt"
     },
-    "loading": "Loading credentials..."
+    "loading": "Inloggegevens laden..."
   },
   "pricingPage": {
     "hero": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Onbeperkte zware automatisering",
         "cta": "Kies Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Geen creditlimieten — nooit",
+        "cta": "Kies Unlimited",
+        "badge": "Beste waarde"
       }
     },
     "features": {
@@ -1422,7 +1509,7 @@
         "badge": "Kern"
       },
       "swarmMode": {
-        "name": "Swarm Mode",
+        "name": "Swarm Modus",
         "sequential": "Alleen sequentieel",
         "parallel": "{count} agents parallel",
         "badge": "Krachtig"
@@ -1525,7 +1612,7 @@
       "chatTasks": "Chat & taken",
       "machines": "Machines",
       "credentials": "Inloggegevens",
-      "swarmMode": "Swarm Mode",
+      "swarmMode": "Swarm Modus",
       "workforce": "Schema's",
       "desktopApp": "Desktop-app",
       "billing": "Facturering & credits"
@@ -1712,7 +1799,7 @@
       "goToCredentials": "Ga naar opgeslagen inloggegevens"
     },
     "swarmTab": {
-      "title": "Swarm Mode",
+      "title": "Swarm Modus",
       "runParallel": "Draai {count} machines parallel",
       "sameTask": "Dezelfde taak, {multiplier}x de output, dezelfde tijd.",
       "done": "Klaar",
@@ -1867,6 +1954,11 @@
           "credits": "1.500",
           "machines": "3 altijd-aan",
           "feature": "SLA-garantie"
+        },
+        "unlimited": {
+          "credits": "Onbeperkt",
+          "machines": "2 altijd actief",
+          "feature": "1 gelijktijdige agent"
         }
       },
       "perMonth": "{price}/maand",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 AI-Agent voor Computergebruik | AI-Medewerker voor Desktop- en Browserautomatisering",
+      "title": "Coasty - #1 AI-Agent voor Computergebruik | $249/mo Onbeperkt (Goedkoopste in de Markt)",
       "titleTemplate": "{title} | Coasty - AI-Agent voor Computergebruik",
-      "description": "Coasty is de #1 AI-agent voor computergebruik — 82% op de OSWorld-benchmark. Het bestuurt een volledig bureaublad zoals een mens: opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails, beheert spreadsheets. Echte VM-isolatie per sessie. Vanaf $20/mo.",
-      "ogTitle": "Coasty - #1 AI-Agent voor Computergebruik | 82% OSWorld-Benchmark",
-      "ogDescription": "AI-medewerker die een bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark (82%). Browserautomatisering, desktopbesturing, CAPTCHA-oplossing, VM-isolatie. Vanaf $20/mo.",
-      "twitterDescription": "AI-medewerker die een bureaublad bestuurt zoals een mens. Opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails. Echte VM-isolatie. $20/mo vs $3,000/mo menselijke virtuele assistent."
+      "description": "Coasty is de #1 gerangschikte AI-agent voor computergebruik — 82% op de OSWorld-benchmark — en het enige flatrate Onbeperkte computergebruik-abonnement voor $249/mo (goedkoper dan Devin Team $500+ACU, OpenAI Operator $200 met snelheidslimiet en credit-gelimiteerde concurrenten). Bestuurt een volledig bureaublad zoals een mens: browsers, formulieren, e-mails, spreadsheets. VM-isolatie. Vanaf $19/mo Starter of $249/mo Onbeperkt.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Onbeperkt (Goedkoopste Computergebruik-Agent)",
+      "ogDescription": "#1 op OSWorld (82%). $249/mo flatrate Onbeperkt — goedkoper dan Devin Team ($500+ACU) bij een hogere benchmark. Browser-, desktop- en terminalautomatisering. VM-isolatie per sessie. Cross-platform native + REST API + MCP-server.",
+      "twitterDescription": "AI-agent die een echt bureaublad bestuurt. 82% OSWorld (#1). $249/mo Onbeperkt — het goedkoopste flatrate-abonnement in de categorie. Starter vanaf $19/mo. VM-isolatie + 26-tool MCP-server."
     },
     "compare": {
       "title": "Vergelijk Coasty - AI-Agent Alternatieven en Concurrentievergelijking",
@@ -2281,10 +2373,10 @@
       "ogDescription": "De beste computergebruik-agent, #1 op OSWorld. Automatiseer elke desktop-, browser- of terminaltaak met AI."
     },
     "pricing": {
-      "title": "Prijzen — Coasty AI-Agent Plannen en Prijzen",
-      "description": "Coasty-prijsplannen vanaf $20/mo. Vervang virtuele assistenten van $3,000/mo door een AI-medewerker. Gratis tier beschikbaar. Op credits gebaseerd gebruik zonder verborgen kosten.",
-      "ogTitle": "Coasty Prijzen — AI-Agent Plannen",
-      "ogDescription": "AI-medewerker vanaf $20/mo. Vervang dure virtuele assistenten door autonome AI. Gratis tier beschikbaar."
+      "title": "Prijzen — $19/mo Starter of $249/mo Onbeperkt (Goedkoopste in de Markt)",
+      "description": "Coasty-prijzen: Starter $19/mo (200 credits) of Onbeperkt $249/mo (het goedkoopste flatrate onbeperkte computergebruik-abonnement in de markt — goedkoper dan Devin Team $500+ACU, Genspark Pro $249 credit-gelimiteerd en Manus Extended $200 gelimiteerd). Vervangt menselijke virtuele assistenten van $3,000+/mo. Geen verborgen kosten.",
+      "ogTitle": "Coasty Prijzen — $19/mo Starter, $249/mo Onbeperkt",
+      "ogDescription": "$249/mo flatrate Onbeperkt — het goedkoopste onbeperkte computergebruik-abonnement in de markt. Of $19/mo Starter voor individuen. Bespaart $36,000/jaar t.o.v. menselijke VA's."
     },
     "faq": {
       "q1": "Wat is Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Hoe verhoudt Coasty zich tot Anthropic Computer Use?",
       "a2": "Terwijl Anthropic Computer Use een ruwe API biedt voor computerbesturing, is Coasty een productieklaar platform met beheerde VM-infrastructuur, ingebouwde CAPTCHA-oplossing, een desktopapp voor Mac en Windows, multi-model ondersteuning en de hoogste OSWorld-benchmarkscore (82%). Coasty biedt de complete oplossing — niet alleen de API.",
       "q3": "Hoeveel kost Coasty?",
-      "a3": "Coasty begint bij $20/maand voor het Starter-plan met een gratis tier beschikbaar. Dit vergeleken met meer dan $3,000 per maand voor een menselijke virtuele assistent. Coasty werkt 24/7 zonder pauzes, zonder training en met directe schaalbaarheid.",
+      "a3": "Coasty heeft twee actieve abonnementen: Starter voor $19/mo (200 credits, 1 machine, ideaal voor individuen) en Onbeperkt voor $249/mo zonder creditlimiet. Het Onbeperkt-abonnement van $249 is het goedkoopste flatrate onbeperkte computergebruik-abonnement dat beschikbaar is — goedkoper dan Devin Team ($500/mo + ACU overschrijding), OpenAI Operator ChatGPT Pro ($200/mo met snelheidslimiet), Genspark Pro ($249,99 met creditlimiet op 125k credits) en Manus Extended ($200 gelimiteerd op 40k credits). Beide vervangen een menselijke virtuele assistent van $3,000+/mo; Onbeperkt bespaart $33,000+/jaar t.o.v. een menselijke VA met 92% kostenreductie.",
       "q4": "Is Coasty veilig om te gebruiken?",
       "a4": "Ja. Elke Coasty-sessie draait in een eigen geïsoleerde, beveiligde virtuele machine. Uw gegevens blijven veilig, uw machine wordt niet aangeraakt en er lekt niets tussen sessies. Dit is echte VM-isolatie, niet alleen containers in een gedeelde pool.",
       "q5": "Wat is de OSWorld-benchmark?",
@@ -2309,11 +2401,11 @@
       "a10": "Ja. Coasty heeft een ingebouwde CAPTCHA-oplossingspipeline, dus het wordt niet geblokkeerd zoals concurrerende AI-agenten. Dit is cruciaal voor automatisering in de echte wereld waar CAPTCHAs gebruikelijk zijn op websites."
     },
     "structuredData": {
-      "appDescription": "De #1 AI-agent voor computergebruik. Coasty bestuurt een volledig bureaublad zoals een mens — opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails en beheert spreadsheets autonoom. 82% op de OSWorld-benchmark. Echte VM-isolatie. Ingebouwde CAPTCHA-oplossing. Vanaf $20/maand.",
-      "orgDescription": "Coasty bouwt de #1 AI-agent voor computergebruik. Ons platform biedt autonome desktopbesturing, browserautomatisering en multi-agent orchestratie met echte VM-isolatie.",
-      "productDescription": "AI-computergebruik-agent die een bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark (82%). Autonome browserautomatisering, desktopbesturing, e-mail verzenden, formulieren invullen en spreadsheetbeheer met echte VM-isolatie.",
-      "websiteDescription": "#1 AI-agent platform voor computergebruik. 82% op de OSWorld-benchmark. Autonome browser-, desktop- en terminalautomatisering met VM-isolatie. Vanaf $20/mo.",
-      "softwareDescription": "AI-computergebruik-agent die een volledig bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark met een voltooiingspercentage van 82% over 369 taken uit de echte wereld. Autonome browserautomatisering, desktopbesturing, terminaloperaties, e-mail verzenden, formulieren invullen en spreadsheetbeheer.",
+      "appDescription": "De #1 gerangschikte AI-agent voor computergebruik en het goedkoopste flatrate Onbeperkt computergebruik-abonnement in de markt voor $249/mo. Coasty bestuurt een volledig bureaublad zoals een mens — opent browsers, klikt, typt, vult formulieren in, verstuurt e-mails en beheert spreadsheets autonoom. 82% op de OSWorld-benchmark over 369 taken uit de echte wereld. Echte VM-isolatie per sessie. Ingebouwde CAPTCHA-oplossing. Abonnementen: $19/mo Starter of $249/mo Onbeperkt.",
+      "orgDescription": "Coasty bouwt de #1 AI-agent voor computergebruik (82% OSWorld) en levert het enige flatrate Onbeperkt computergebruik-abonnement voor $249/mo — goedkoper dan Devin Team, OpenAI Operator en credit-gelimiteerde concurrenten in dezelfde prijsklasse. Ons platform biedt autonome desktopbesturing, browserautomatisering en multi-agent orchestratie met echte VM-isolatie.",
+      "productDescription": "AI-agent voor computergebruik die een bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark (82%). Het Onbeperkt-abonnement van $249/mo is het goedkoopste flatrate onbeperkte computergebruik-abonnement dat beschikbaar is. Autonome browserautomatisering, desktopbesturing, e-mail verzenden, formulieren invullen en spreadsheetbeheer met echte VM-isolatie.",
+      "websiteDescription": "#1 AI-agent platform voor computergebruik — 82% OSWorld-benchmark en het goedkoopste flatrate Onbeperkt-abonnement voor $249/mo. Autonome browser-, desktop- en terminalautomatisering met VM-isolatie. Vanaf $19/mo Starter of $249/mo Onbeperkt.",
+      "softwareDescription": "AI-agent voor computergebruik die een volledig bureaublad bestuurt zoals een mens. #1 op de OSWorld-benchmark met een voltooiingspercentage van 82% over 369 taken uit de echte wereld. Het Onbeperkt-abonnement van $249/mo is het goedkoopste flatrate onbeperkte computergebruik-abonnement op de markt. Autonome browserautomatisering, desktopbesturing, terminaloperaties, e-mail verzenden, formulieren invullen en spreadsheetbeheer.",
       "breadcrumbs": {
         "home": "Home",
         "caseStudies": "AI-Agent Casestudies",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Pagina niet gevonden",
-      "description": "Sorry, deze pagina bestaat niet."
+      "description": "Sorry, deze pagina bestaat niet.",
+      "metaTitle": "404 · Pagina niet gevonden",
+      "metaDescription": "We stuurden onze beste AI-agent. Hij kwam met lege handen terug. Ga terug naar Coasty, de #1 AI-agent voor desktop- en browserautomatisering.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "scan: het hele internet",
+        "step2": "scan: elk open tabblad",
+        "step3": "scan: onder de bank",
+        "result": "oordeel: pagina bestaat niet"
+      },
+      "ok": "OK",
+      "fail": "MISLUKT",
+      "primaryCta": "Naar de homepage",
+      "secondaryCta": "Huur een AI-agent in",
+      "navLabel": "Voorgestelde pagina's",
+      "links": {
+        "home": "Home",
+        "computerUse": "Computergebruik",
+        "pricing": "Prijzen",
+        "download": "Downloaden",
+        "blog": "Blog",
+        "guide": "Gids"
+      }
     },
     "error": {
       "title": "Er is iets misgegaan",
@@ -2859,5 +2973,190 @@
     "watchSession": "Sessie bekijken",
     "steps": "{count} stappen",
     "tryCoasty": "Probeer Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Geheugen",
+    "sidebarDescription": "Context toegepast op elke agent-uitvoering",
+    "dialog": {
+      "title": "Geheugen",
+      "description": "Een korte notitie die Coasty gebruikt telkens wanneer het voor je werkt.",
+      "openFull": "Volledig openen",
+      "visualMemoryLabel": "Geheugen",
+      "visualSynced": "Gesynchroniseerd",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Planningen",
+      "visualContextSwarm": "Zwerm"
+    },
+    "section": {
+      "title": "Geheugen",
+      "tag": "optioneel · persoonlijk",
+      "description": "Een korte notitie over jou die meegaat met elke agent-uitvoering — chat, geplande taken, zwerm-machines, gedelegeerde agents."
+    },
+    "presetsLabel": "Probeer",
+    "presets": {
+      "useFirstName": "Gebruik mijn voornaam",
+      "useFirstNameSentence": "Spreek me aan met mijn voornaam.",
+      "beTerse": "Wees beknopt",
+      "beTerseSentence": "Geef de voorkeur aan beknopte, directe antwoorden. Geen opvulling.",
+      "imDeveloper": "Ik ben ontwikkelaar",
+      "imDeveloperSentence": "Ik ben software-engineer; vertrouwd met code.",
+      "noEmojis": "Geen emoji's",
+      "noEmojisSentence": "Vermijd emoji's in antwoorden.",
+      "metricUnits": "Metrische eenheden",
+      "metricUnitsSentence": "Gebruik metrische eenheden (meters, kilogrammen, °C).",
+      "citeSources": "Vermeld bronnen",
+      "citeSourcesSentence": "Vermeld bronnen bij feitelijke uitspraken."
+    },
+    "placeholder": "Voorbeeld:\nSpreek me aan met mijn voornaam.\nGeef de voorkeur aan beknopte antwoorden.\nIk werk met TypeScript en Python.\nVerwijder nooit bestanden zonder bevestiging.",
+    "loading": "Laden…",
+    "saving": "Opslaan…",
+    "saved": "Opgeslagen",
+    "unsavedChanges": "Niet-opgeslagen wijzigingen",
+    "empty": "Leeg",
+    "savedRelative": "Opgeslagen · {time}",
+    "errorLoad": "Kon je geheugen niet laden.",
+    "errorSave": "Kon je geheugen niet opslaan.",
+    "willBeShortened": "wordt ingekort",
+    "clear": "Wissen",
+    "footerNote": "Coasty houdt rekening met deze voorkeuren wanneer het voor je werkt.",
+    "time": {
+      "justNow": "zojuist",
+      "secondsAgo": "{n} s geleden",
+      "minutesAgo": "{n} min geleden",
+      "hoursAgo": "{n} u geleden",
+      "daysAgo": "{n} d geleden"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Instellingen",
+    "navGroups": {
+      "settings": "Instellingen",
+      "developer": "Ontwikkelaar",
+      "more": "Meer",
+      "resources": "Bronnen"
+    },
+    "sections": {
+      "account": {
+        "label": "Algemeen",
+        "description": "Profiel en account"
+      },
+      "appearance": {
+        "label": "Weergave",
+        "description": "Thema, taal en achtergrond"
+      },
+      "billing": {
+        "label": "Facturering",
+        "description": "Abonnementen en tegoeden"
+      },
+      "publicChats": {
+        "label": "Openbare chats",
+        "description": "Beheer chats gedeeld via openbare link"
+      },
+      "privacy": {
+        "label": "Privacy",
+        "description": "Beveiliging en gegevensprivacy"
+      },
+      "notifications": {
+        "label": "Meldingen",
+        "description": "Meldingsvoorkeuren"
+      },
+      "apiKeys": {
+        "label": "API-sleutels",
+        "description": "Beheer je API-sleutels"
+      },
+      "data": {
+        "label": "Gegevens",
+        "description": "Gegevens exporteren en beheren"
+      },
+      "feedback": {
+        "label": "Feedback",
+        "description": "Stuur ons je feedback"
+      },
+      "about": {
+        "label": "Over",
+        "description": "Over Coasty"
+      },
+      "social": {
+        "label": "Verbinden",
+        "description": "Sociale links"
+      },
+      "guide": {
+        "label": "Gids",
+        "description": "Leer hoe je Coasty gebruikt"
+      },
+      "referral": {
+        "label": "Verwijzing",
+        "description": "Nodig vrienden uit en verdien credits"
+      }
+    },
+    "appearance": {
+      "theme": "Thema",
+      "language": "Taal",
+      "background": "Achtergrond",
+      "personalization": "Personalisatie",
+      "intro": {
+        "title": "Cinematische intro",
+        "description": "Toon de geanimeerde intro bij bezoek aan de homepage"
+      },
+      "interaction": {
+        "title": "Tool-aanroepen",
+        "description": "Toon tool-uitvoeringsdetails in gesprekken"
+      }
+    },
+    "comingSoon": {
+      "badge": "Binnenkort",
+      "placeholder": "Dit gedeelte komt in een toekomstige update."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Laat zien wat mogelijk is…",
+    "tasks": [
+      "Onderzoek mijn concurrenten",
+      "Vul sollicitaties in",
+      "Boek een vlucht naar Tokio",
+      "Volg de uptime van mijn website",
+      "Plan social media-berichten",
+      "Analyseer kwartaaltrends"
+    ],
+    "dontShowAgain": "Niet meer tonen",
+    "skip": "Overslaan",
+    "tagline": "Doe alles, net zoals een mens met een computer kan"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Jouw computers",
+      "description": "Silicium tot je dienst. We starten je vloot op."
+    },
+    "swarms": {
+      "title": "Zwermintelligentie",
+      "description": "Vele geesten, één missie. We verzamelen je agenten."
+    },
+    "developers": {
+      "title": "Ontwikkelaars-API",
+      "description": "Je dashboard wordt geladen."
+    },
+    "secrets": {
+      "title": "Inloggegevens",
+      "description": "Je geheimen zijn veilig bij ons. We openen de kluis."
+    },
+    "schedules": {
+      "title": "Schema's",
+      "description": "Altijd op tijd. We synchroniseren je automatiseringen."
+    },
+    "history": {
+      "title": "Jouw geschiedenis",
+      "description": "Een stille opname van elk gesprek, elke taak en elk idee dat je hebt verkend."
+    },
+    "referral": {
+      "title": "Verwijzingen",
+      "description": "Deel Coasty. Verdien samen."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Jouw data, jouw controle",
+    "heroDescription": "We bewaren alleen wat nodig is om je sessies uit te voeren. Al het verkeer is versleuteld tijdens verzending, en je kunt versleuteling in rust uitbreiden naar onderstaande categorieën. Jouw data wordt nooit gebruikt om AI-modellen te trainen.",
+    "trustTransit": "TLS 1.3 tijdens transport",
+    "trustAtRest": "AES-256-GCM in rust",
+    "trustNoTraining": "Geen training op jouw data"
   }
 }

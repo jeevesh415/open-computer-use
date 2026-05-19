@@ -3,10 +3,12 @@
 import { Switch } from "@/components/ui/switch"
 import { useState, useEffect } from "react"
 import { Film } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 const DISMISS_KEY = "coasty-skip-intro"
 
 export function IntroPreference() {
+  const t = useTranslations("accountDialog.appearance.intro")
   const [enabled, setEnabled] = useState(true)
   const [mounted, setMounted] = useState(false)
 
@@ -33,9 +35,9 @@ export function IntroPreference() {
           <Film className="h-3.5 w-3.5 text-muted-foreground/40" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[13px] font-medium text-foreground leading-tight">Cinematic intro</p>
+          <p className="text-[13px] font-medium text-foreground leading-tight">{t("title")}</p>
           <p className="text-[11px] text-muted-foreground/40 mt-0.5 leading-relaxed">
-            Show the animated intro when visiting the homepage
+            {t("description")}
           </p>
         </div>
         <Switch checked={enabled} onCheckedChange={toggle} />

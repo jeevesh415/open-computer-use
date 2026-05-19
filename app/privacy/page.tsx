@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { motion, AnimatePresence } from "framer-motion"
 
 const privacySections = [
@@ -194,7 +193,6 @@ export default function PrivacyPolicyPage() {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <GuideLines />
       <LandingHeader />
 
       {/* Main Content */}
@@ -260,8 +258,8 @@ export default function PrivacyPolicyPage() {
                   <motion.div
                     key={section.id}
                     variants={itemVariants}
-                    whileHover={{ scale: 1.01 }}
                     transition={{ duration: 0.2 }}
+                    className="transition-transform duration-200 hover:scale-[1.01]"
                   >
                     <Card 
                       className={cn(

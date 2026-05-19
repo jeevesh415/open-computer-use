@@ -12,7 +12,8 @@ import {
 import { signInWithGoogle } from "@/lib/api"
 import { createClient } from "@/lib/supabase/client"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
-import { useState } from "react"
+import { detectInAppBrowser } from "@/lib/detect-in-app-browser"
+import { useState, useMemo } from "react"
 
 type DialogCollaborativeAuthProps = {
   open: boolean
@@ -22,6 +23,7 @@ type DialogCollaborativeAuthProps = {
 export function DialogCollaborativeAuth({ open, setOpen }: DialogCollaborativeAuthProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const inAppBrowser = useMemo(() => detectInAppBrowser(), [])
 
   if (!isSupabaseEnabled) {
     return null
@@ -34,6 +36,12 @@ export function DialogCollaborativeAuth({ open, setOpen }: DialogCollaborativeAu
   }
 
   const handleSignInWithGoogle = async () => {
+    // In-app browsers block Google OAuth — redirect to auth page which handles this
+    if (inAppBrowser.isInApp) {
+      window.location.href = "/auth"
+      return
+    }
+
     try {
       setIsLoading(true)
       setError(null)

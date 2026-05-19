@@ -1,8 +1,25 @@
 "use client"
 
 import { motion, useReducedMotion } from "motion/react"
-import { useState, useEffect, useRef, useCallback, memo, useMemo } from "react"
+import { useTranslations } from "next-intl"
+import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { ArrowUp } from "lucide-react"
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Mobile detection
+// ─────────────────────────────────────────────────────────────────────────────
+
+function useIsMobile(breakpoint = 640) {
+  const [mobile, setMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`)
+    setMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setMobile(e.matches)
+    mq.addEventListener("change", handler)
+    return () => mq.removeEventListener("change", handler)
+  }, [breakpoint])
+  return mobile
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Thumbnail data
@@ -21,16 +38,9 @@ const VIDEO_IDS = [
 // Copy
 // ─────────────────────────────────────────────────────────────────────────────
 
-const INITIAL_TEXT = "Show me what\u2019s possible\u2026"
-
-const TASKS = [
-  "Research my competitors",
-  "Fill out job applications",
-  "Book a flight to Tokyo",
-  "Track my website uptime",
-  "Schedule social posts",
-  "Analyze quarterly trends",
-]
+// INITIAL_TEXT and TASKS now sourced from the cinematicIntro namespace
+// via useTranslations inside the component, so the typed prompts render
+// in the user's locale. Length and indexing semantics are unchanged.
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Animation constants
@@ -50,7 +60,7 @@ const EASE_IN_QUAD = [0.26, 0, 0.6, 0.2] as const // smooth accelerate
 
 // Showcase grid: tightly clustered, overlapping like fanned cards
 // Top row ~30%, bottom row ~70% — close to the input so they overlap each other
-const SHOWCASE = [
+const SHOWCASE_DESKTOP = [
   { left: 35, top: 30, rotate: -5, scale: 0.88 },
   { left: 50, top: 27, rotate: 1, scale: 0.92 },
   { left: 65, top: 30, rotate: 4, scale: 0.88 },
@@ -59,14 +69,33 @@ const SHOWCASE = [
   { left: 65, top: 70, rotate: -4, scale: 0.85 },
 ]
 
+// Mobile grid: 2 columns, 3 rows — tighter, no edge clipping
+const SHOWCASE_MOBILE = [
+  { left: 36, top: 22, rotate: -4, scale: 0.82 },
+  { left: 64, top: 20, rotate: 3, scale: 0.85 },
+  { left: 34, top: 44, rotate: 2, scale: 0.8 },
+  { left: 66, top: 42, rotate: -3, scale: 0.82 },
+  { left: 36, top: 66, rotate: -2, scale: 0.8 },
+  { left: 64, top: 68, rotate: 4, scale: 0.78 },
+]
+
 // Subtle idle drift per thumbnail (different speeds so they feel independent)
-const DRIFT = [
+const DRIFT_DESKTOP = [
   { dx: 6, dy: 5, durX: 6, durY: 5 },
   { dx: -5, dy: 6, durX: 7, durY: 5.5 },
   { dx: -6, dy: -4, durX: 5.5, durY: 6 },
   { dx: 5, dy: -5, durX: 6.5, durY: 5 },
   { dx: 4, dy: 5, durX: 5, durY: 5.8 },
   { dx: -5, dy: -6, durX: 6, durY: 5.2 },
+]
+
+const DRIFT_MOBILE = [
+  { dx: 3, dy: 3, durX: 6, durY: 5 },
+  { dx: -3, dy: 3, durX: 7, durY: 5.5 },
+  { dx: -3, dy: -2, durX: 5.5, durY: 6 },
+  { dx: 3, dy: -3, durX: 6.5, durY: 5 },
+  { dx: 2, dy: 3, durX: 5, durY: 5.8 },
+  { dx: -3, dy: -3, durX: 6, durY: 5.2 },
 ]
 
 // Exit stagger order — same as spawn so it mirrors
@@ -88,10 +117,10 @@ const T = {
   EXIT_WAIT: 1450, // total wait for all thumbnails to finish
   INPUT_FADE_DUR: 500, // input fade-out duration
   INPUT_FADE_WAIT: 550, // wait for input fade before removing overlay
-  TAGLINE_FADE_IN: 700, // tagline text fade in
-  TAGLINE_HOLD: 3500, // how long tagline stays visible
-  TAGLINE_FADE_OUT: 600, // tagline fade out
-  OVERLAY_FADE: 200, // final overlay fade
+  TAGLINE_FADE_IN: 600, // tagline text fade in
+  TAGLINE_HOLD: 3000, // how long tagline stays visible
+  TAGLINE_FADE_OUT: 500, // tagline fade out
+  OVERLAY_FADE: 500, // final overlay fade — matches tagline fade-out so no black gap
 } as const
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -120,11 +149,16 @@ export function CinematicIntro({
   onSettled: () => void
   onComplete: () => void
 }) {
+  const t = useTranslations("cinematicIntro")
+  const INITIAL_TEXT = t("initialText")
+  const TASKS = t.raw("tasks") as string[]
+
   const [phase, setPhase] = useState<Phase>("cycling")
   const [taskIdx, setTaskIdx] = useState(-1) // -1 = initial prompt
   const [step, setStep] = useState<CycleStep>("typing")
   const [revealed, setRevealed] = useState(0)
   const reducedMotion = useReducedMotion()
+  const isMobile = useIsMobile()
   const textRef = useRef<HTMLSpanElement>(null)
 
   const onSettledRef = useRef(onSettled)
@@ -205,14 +239,11 @@ export function CinematicIntro({
     }
     if (phase === "tagline") {
       onSettledRef.current()
+      // Start overlay fade as tagline begins fading out — no black gap
       const t = setTimeout(
         () => setPhase("done"),
-        T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT
+        T.TAGLINE_FADE_IN + T.TAGLINE_HOLD
       )
-      return () => clearTimeout(t)
-    }
-    if (phase === "done") {
-      const t = setTimeout(() => onCompleteRef.current(), T.OVERLAY_FADE + 50)
       return () => clearTimeout(t)
     }
   }, [phase])
@@ -253,8 +284,11 @@ export function CinematicIntro({
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "done" ? 0 : 1 }}
-      transition={{ duration: T.OVERLAY_FADE / 1000, ease: EASE_OUT_EXPO }}
-      className="fixed inset-0 z-[200] bg-background"
+      transition={{ duration: T.OVERLAY_FADE / 1000, ease: "easeInOut" }}
+      onAnimationComplete={() => {
+        if (phase === "done") onCompleteRef.current()
+      }}
+      className="fixed inset-0 z-[2147483647] overflow-hidden bg-background"
       style={{ perspective: "900px", perspectiveOrigin: "50% 50%" }}
     >
       {/* Drift keyframes — injected once */}
@@ -273,21 +307,21 @@ export function CinematicIntro({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8, ease: EASE_OUT_EXPO }}
-          className="absolute right-4 top-4 z-50 flex items-center gap-2 sm:right-6 sm:top-6"
+          className="absolute right-3 top-3 z-50 flex items-center gap-1.5 sm:right-6 sm:top-6 sm:gap-2"
         >
           <button
             type="button"
             onClick={dismissForever}
-            className="rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide text-muted-foreground/50 transition-colors duration-200 hover:text-muted-foreground/80"
+            className="hidden sm:block rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide text-muted-foreground/50 transition-colors duration-200 hover:text-muted-foreground/80"
           >
-            Don&apos;t show again
+            {t("dontShowAgain")}
           </button>
           <button
             type="button"
             onClick={skip}
-            className="rounded-full border border-border/40 bg-foreground/[0.04] px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-muted-foreground/70 backdrop-blur-sm transition-colors duration-200 hover:bg-foreground/[0.08] hover:text-foreground/90"
+            className="rounded-full border border-border/40 bg-foreground/[0.04] px-3 py-1.5 text-[10px] sm:px-3.5 sm:text-[11px] font-medium tracking-wide text-muted-foreground/70 backdrop-blur-sm transition-colors duration-200 hover:bg-foreground/[0.08] hover:text-foreground/90"
           >
-            Skip
+            {t("skip")}
           </button>
         </motion.div>
       )}
@@ -300,6 +334,7 @@ export function CinematicIntro({
           index={i}
           phase={phase}
           revealed={SPAWN_RANK[i] < revealed}
+          isMobile={isMobile}
         />
       ))}
 
@@ -316,11 +351,11 @@ export function CinematicIntro({
             duration: inputVisible ? 0.6 : T.INPUT_FADE_DUR / 1000,
             ease: EASE_OUT_EXPO,
           }}
-          className="w-full max-w-3xl px-4 sm:px-6 md:px-8"
+          className="w-full max-w-3xl px-3 sm:px-6 md:px-8"
         >
           <div className="relative rounded-2xl bg-neutral-100 shadow-lg dark:bg-neutral-800">
             {/* Text area */}
-            <div className="min-h-[44px] px-4 pt-3 pb-1 text-base leading-[1.3] text-foreground">
+            <div className="min-h-[40px] sm:min-h-[44px] px-3 sm:px-4 pt-2.5 sm:pt-3 pb-1 text-[15px] sm:text-base leading-[1.3] text-foreground">
               <motion.span
                 key={taskIdx}
                 ref={textRef}
@@ -363,18 +398,23 @@ export function CinematicIntro({
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
             animate={{
-              opacity: phase === "tagline" ? [0, 1, 1, 0] : 0,
-              y: phase === "tagline" ? [12, 0, 0, -6] : -6,
+              opacity: [0, 1, 1, 0],
+              y: [12, 0, 0, -6],
             }}
             transition={{
               duration:
                 (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT) / 1000,
-              times: [0, 0.2, 0.8, 1],
+              times: [
+                0,
+                T.TAGLINE_FADE_IN / (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT),
+                (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD) / (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT),
+                1,
+              ],
               ease: EASE_OUT_EXPO,
             }}
-            className="max-w-2xl px-8 text-center text-[clamp(24px,4vw,44px)] font-semibold leading-[1.15] tracking-[-0.03em] text-shine text-foreground"
+            className="max-w-2xl px-5 sm:px-8 text-center text-[clamp(22px,5vw,44px)] font-semibold leading-[1.15] tracking-[-0.02em] sm:tracking-[-0.03em] text-shine text-foreground"
           >
-            Do anything, just as a human can do with a computer
+            {t("tagline")}
           </motion.h1>
         </div>
       )}
@@ -391,14 +431,16 @@ const Thumb = memo(function Thumb({
   index,
   phase,
   revealed,
+  isMobile,
 }: {
   videoId: string
   index: number
   phase: Phase
   revealed: boolean
+  isMobile: boolean
 }) {
-  const s = SHOWCASE[index]
-  const d = DRIFT[index]
+  const s = isMobile ? SHOWCASE_MOBILE[index] : SHOWCASE_DESKTOP[index]
+  const d = isMobile ? DRIFT_MOBILE[index] : DRIFT_DESKTOP[index]
   const exiting = phase === "exit" || phase === "inputFade" || phase === "tagline" || phase === "done"
   const floating = revealed && !exiting
 
@@ -409,8 +451,8 @@ const Thumb = memo(function Thumb({
       return {
         x: "-50%",
         y: "-50%",
-        z: 880,
-        scale: 3,
+        z: isMobile ? 500 : 880,
+        scale: isMobile ? 2.2 : 3,
         rotate: s.rotate,
         opacity: 0,
       }
@@ -422,7 +464,7 @@ const Thumb = memo(function Thumb({
         z: 0,
         scale: s.scale,
         rotate: s.rotate,
-        opacity: 0.85,
+        opacity: isMobile ? 0.75 : 0.85,
       }
     }
     return {
@@ -481,7 +523,7 @@ const Thumb = memo(function Thumb({
               : undefined
           }
         >
-          <div className="w-[180px] sm:w-[220px] aspect-video rounded-xl overflow-hidden shadow-md ring-1 ring-foreground/[0.06]">
+          <div className="w-[130px] sm:w-[180px] md:w-[220px] aspect-video rounded-lg sm:rounded-xl overflow-hidden shadow-md ring-1 ring-foreground/[0.06]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`}
@@ -511,6 +553,7 @@ export function TaglineIntro({
   onSettled: () => void
   onComplete: () => void
 }) {
+  const t = useTranslations("cinematicIntro")
   const [phase, setPhase] = useState<"tagline" | "done">("tagline")
   const reducedMotion = useReducedMotion()
 
@@ -526,19 +569,13 @@ export function TaglineIntro({
       return
     }
     onSettledRef.current()
+    // Start overlay fade as tagline begins fading out
     const t = setTimeout(
       () => setPhase("done"),
-      T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT
+      T.TAGLINE_FADE_IN + T.TAGLINE_HOLD
     )
     return () => clearTimeout(t)
   }, [reducedMotion])
-
-  useEffect(() => {
-    if (phase === "done") {
-      const t = setTimeout(() => onCompleteRef.current(), T.OVERLAY_FADE + 50)
-      return () => clearTimeout(t)
-    }
-  }, [phase])
 
   if (reducedMotion) return null
 
@@ -546,25 +583,33 @@ export function TaglineIntro({
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: phase === "done" ? 0 : 1 }}
-      transition={{ duration: T.OVERLAY_FADE / 1000, ease: EASE_OUT_EXPO }}
-      className="fixed inset-0 z-[200] bg-background"
+      transition={{ duration: T.OVERLAY_FADE / 1000, ease: "easeInOut" }}
+      onAnimationComplete={() => {
+        if (phase === "done") onCompleteRef.current()
+      }}
+      className="fixed inset-0 z-[2147483647] overflow-hidden bg-background"
     >
       <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
         <motion.h1
           initial={{ opacity: 0, y: 12 }}
           animate={{
-            opacity: phase === "tagline" ? [0, 1, 1, 0] : 0,
-            y: phase === "tagline" ? [12, 0, 0, -6] : -6,
+            opacity: [0, 1, 1, 0],
+            y: [12, 0, 0, -6],
           }}
           transition={{
             duration:
               (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT) / 1000,
-            times: [0, 0.2, 0.8, 1],
+            times: [
+              0,
+              T.TAGLINE_FADE_IN / (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT),
+              (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD) / (T.TAGLINE_FADE_IN + T.TAGLINE_HOLD + T.TAGLINE_FADE_OUT),
+              1,
+            ],
             ease: EASE_OUT_EXPO,
           }}
-          className="max-w-2xl px-8 text-center text-[clamp(24px,4vw,44px)] font-semibold leading-[1.15] tracking-[-0.03em] text-shine text-foreground"
+          className="max-w-2xl px-5 sm:px-8 text-center text-[clamp(22px,5vw,44px)] font-semibold leading-[1.15] tracking-[-0.02em] sm:tracking-[-0.03em] text-shine text-foreground"
         >
-          Do anything, just as a human can do with a computer
+          {t("tagline")}
         </motion.h1>
       </div>
     </motion.div>

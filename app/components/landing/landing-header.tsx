@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import {
-  Menu, X, ArrowRight, ChevronDown, Search, Bug, TrendingUp,
+  Menu, X, ArrowRight, ChevronDown, ChevronRight, Search, Bug, TrendingUp,
   FileText, Mail, ShoppingCart, Users, BarChart3, Globe, Eye,
   Send, MonitorSmartphone, Monitor, Keyboard, GitCompare,
   BookOpen, Newspaper, Compass, Download, Layers,
@@ -11,10 +11,10 @@ import Image from "next/image"
 import { useState, useEffect, useCallback, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "framer-motion"
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler"
 import { useTheme } from "next-themes"
 import { useTranslations } from "next-intl"
 import { LanguageSwitcherCompact } from "@/components/language-switcher"
+import { DEVELOPERS_API_ENABLED } from "@/lib/feature-flags"
 
 /* ─── data ─── */
 
@@ -43,11 +43,14 @@ const blogDropdownDef = [
   { href: "/blog", labelKey: "allPosts", icon: Newspaper, stat: "50+", statKey: "allPosts" },
   { href: "/guide", labelKey: "guide", icon: BookOpen, stat: "12", statKey: "guide" },
   { href: "/results", labelKey: "demosResults", icon: Eye, stat: "20+", statKey: "demosResults" },
+  { href: "/discover", labelKey: "discover", icon: Compass, stat: "1k+", statKey: "discover" },
 ]
 
 const navItemsDef = [
-  { href: "/discover", labelKey: "discover", external: true },
-  { href: "/pricing", labelKey: "pricing", external: true },
+  { href: "/pricing", labelKey: "pricing", label: "Pricing", external: true },
+  ...(DEVELOPERS_API_ENABLED
+    ? [{ href: "/api-docs", labelKey: "api", label: "API", external: true }]
+    : []),
 ]
 
 /* ─── spring configs ─── */
@@ -235,59 +238,79 @@ function DropdownPanel({
   )
 }
 
-/* ─── mobile accordion section ─── */
+/* ─── drawer helpers ─── */
 
-function MobileAccordionSection({
+// Path-active matcher used by the mobile drawer rows. Exact match for "/"
+// (otherwise it'd light up for every page); for everything else, treat any
+// nested route as active too so e.g. /use-cases/competitor-intel highlights
+// the "Use Cases" row in the drawer.
+function isPathActive(href: string, currentPath: string): boolean {
+  if (href === "/") return currentPath === "/" || currentPath === ""
+  return currentPath === href || currentPath.startsWith(href + "/")
+}
+
+// A single row in the mobile drawer — typography-first, hairline-quiet.
+// The fixed-position chevron prevents layout shift on hover (a chevron
+// that grows into existence is more nervous than one that just changes
+// alpha). `delay` lets the parent stagger the rows in as the drawer
+// settles, so the eye is led down the list rather than smacked with all
+// 10 items at once.
+function DrawerRow({
+  href,
   label,
-  isOpen,
-  onToggle,
-  isActive,
-  children,
+  onClick,
+  active,
   delay = 0,
 }: {
+  href: string
   label: string
-  isOpen: boolean
-  onToggle: () => void
-  isActive: boolean
-  children: React.ReactNode
+  onClick: () => void
+  active?: boolean
   delay?: number
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -12 }}
+      initial={{ opacity: 0, x: 14 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay, duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
-      <button
-        onClick={onToggle}
+      <Link
+        href={href}
+        onClick={onClick}
         className={cn(
-          "flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-150",
-          "text-[15px] font-medium tracking-[-0.01em]",
-          isActive
-            ? "text-foreground bg-foreground/[0.04]"
-            : "text-foreground/50 hover:text-foreground hover:bg-foreground/[0.03] active:bg-foreground/[0.05]"
+          "group flex items-center justify-between px-3 py-3 rounded-lg transition-colors duration-150",
+          active
+            ? "bg-foreground/[0.05] text-foreground"
+            : "text-foreground/75 hover:text-foreground hover:bg-foreground/[0.03] active:bg-foreground/[0.06]",
         )}
       >
-        {label}
-        <ChevronDown className={cn(
-          "h-4 w-4 text-muted-foreground/40 transition-transform duration-200",
-          isOpen && "rotate-180"
-        )} />
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <span className="text-[15px] font-medium tracking-[-0.01em]">
+          {label}
+        </span>
+        <ChevronRight
+          className={cn(
+            "h-4 w-4 transition-colors duration-150",
+            active
+              ? "text-foreground/40"
+              : "text-foreground/15 group-hover:text-foreground/35",
+          )}
+          strokeWidth={1.8}
+        />
+      </Link>
     </motion.div>
+  )
+}
+
+// Tiny uppercase label used to delineate sections in the drawer. Quiet
+// enough that the eye scans past it as scaffolding, loud enough that the
+// section break is unambiguous.
+function DrawerSectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="px-3 pt-2 pb-1.5">
+      <span className="text-[10px] font-semibold tracking-[0.16em] uppercase text-foreground/30">
+        {children}
+      </span>
+    </div>
   )
 }
 
@@ -303,14 +326,11 @@ export function LandingHeader({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [useCasesOpen, setUseCasesOpen] = useState(false)
   const [hoveredUseCase, setHoveredUseCase] = useState(0)
-  const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
   const [hoveredProduct, setHoveredProduct] = useState(0)
-  const [mobileProductsOpen, setMobileProductsOpen] = useState(false)
   const productsDropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [blogOpen, setBlogOpen] = useState(false)
   const [hoveredBlogItem, setHoveredBlogItem] = useState(0)
-  const [mobileBlogOpen, setMobileBlogOpen] = useState(false)
   const blogDropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const { resolvedTheme } = useTheme()
@@ -405,8 +425,13 @@ export function LandingHeader({
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        // `top` reads the `--top-banner-h` custom property set by the
+        // optional TopAnnouncementBanner. Defaults to 0 when the banner is
+        // absent or dismissed, so the header sits flush with the viewport
+        // edge as before.
+        style={{ top: "var(--top-banner-h, 0px)" }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "fixed left-0 right-0 z-50 transition-[top,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
           scrolled ? "py-2" : "py-2.5 sm:py-3.5",
         )}
       >
@@ -417,33 +442,89 @@ export function LandingHeader({
               scrolled ? "max-w-5xl" : "",
             )}
           >
-            {/* glass shell — always present, opacity fades in on scroll */}
-            <div
-              className={cn(
-                "absolute inset-0 rounded-2xl",
-                "backdrop-blur-2xl backdrop-saturate-[1.8]",
-                "transition-[background-color,box-shadow,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                scrolled
-                  ? "bg-white/60 dark:bg-neutral-950/55 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_4px_16px_rgba(0,0,0,0.15)]"
-                  : "bg-white/0 dark:bg-neutral-950/0 shadow-[0_0_0_rgba(0,0,0,0),0_0_0_rgba(0,0,0,0)]",
-              )}
-            />
-            {/* border ring — separate div so opacity can be transitioned smoothly */}
+            {/* ── Chrome layers ─────────────────────────────────────────
+                Premium pill: a tinted glass body, a subtle ring, an inner
+                top sheen, a top highlight hairline, and a bottom hairline.
+                Each layer is a separate sibling so opacities and shadows
+                can interpolate independently between rest and scrolled. */}
+
+            {/* Glass body — split treatment between mobile and desktop so the
+                navbar is *guaranteed* visible on both.
+                  • Mobile (< 640px): solid-ish backgrounds — `bg-white/75`
+                    light, `dark:bg-neutral-900/75` dark. iOS Safari's
+                    backdrop-filter is flaky and the static cursor murmuration
+                    behind the bar shines straight through low-alpha tints.
+                    Solid colors guarantee separation regardless of GPU
+                    composition. neutral-900 in dark mode is a notch lighter
+                    than the near-black page bg, so the pill reads as a card
+                    above the page rather than a hole in it. backdrop-blur
+                    is also dropped on mobile — it's a perf cost (the
+                    murmuration animates behind the bar) and pointless once
+                    the body is mostly opaque.
+                  • Desktop (sm+): the original premium glass treatment —
+                    `bg-foreground/[0.025–0.05]` with `backdrop-blur-xl`. The
+                    foreground-derived alpha auto-flips per mode. */}
             <div
               className={cn(
                 "absolute inset-0 rounded-2xl pointer-events-none",
-                "ring-1 ring-black/[0.06] dark:ring-white/[0.08]",
-                "transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                scrolled ? "opacity-100" : "opacity-0",
+                "sm:backdrop-blur-xl sm:backdrop-saturate-150",
+                "transition-[background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                scrolled
+                  ? "bg-white/90 dark:bg-neutral-900/85 sm:bg-foreground/[0.04] sm:dark:bg-foreground/[0.05]"
+                  : "bg-white/75 dark:bg-neutral-900/75 sm:bg-foreground/[0.025] sm:dark:bg-foreground/[0.03]",
               )}
             />
-            {/* top edge highlight */}
-            <div className={cn(
-              "absolute inset-x-0 top-0 h-px rounded-t-2xl pointer-events-none",
-              "bg-gradient-to-r from-transparent via-white/60 dark:via-white/10 to-transparent",
-              "transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              scrolled ? "opacity-100" : "opacity-0",
-            )} />
+            {/* Inner top sheen — a soft 1/2-height gradient that fades
+                downward, gives the glass a "lit from above" quality.
+                Held inside a clipping wrapper so its box can't bleed past
+                the rounded corners. */}
+            <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
+              <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/[0.06] dark:from-white/[0.04] to-transparent" />
+            </div>
+            {/* Ring — single hairline border that intensifies on scroll.
+                Foreground-based so it adapts to both modes by definition.
+                Mobile gets a noticeably stronger ring to define the pill
+                edges crisply against the busy hero backdrop. */}
+            <div
+              className={cn(
+                "absolute inset-0 rounded-2xl pointer-events-none",
+                "transition-[box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                scrolled
+                  ? "ring-1 ring-foreground/[0.18] dark:ring-foreground/[0.20] sm:ring-foreground/[0.08] sm:dark:ring-foreground/[0.10]"
+                  : "ring-1 ring-foreground/[0.12] dark:ring-foreground/[0.14] sm:ring-foreground/[0.04] sm:dark:ring-foreground/[0.06]",
+              )}
+            />
+            {/* Top edge highlight — a 1px gradient line painted on top of
+                the ring, simulating a lit upper edge. Brighter in light
+                mode (white sheen) and present-but-restrained in dark. */}
+            <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl pointer-events-none bg-gradient-to-r from-transparent via-white/70 dark:via-white/[0.18] to-transparent" />
+            {/* Bottom hairline — a thin foreground-tinted line that sets
+                the lower edge of the pill, completing the architectural
+                "two horizontal rails + glass body" look. */}
+            <div
+              className={cn(
+                "absolute inset-x-0 bottom-0 h-px rounded-b-2xl pointer-events-none bg-gradient-to-r from-transparent to-transparent",
+                "transition-[--tw-gradient-via-color] duration-500",
+                scrolled
+                  ? "via-foreground/[0.10] dark:via-foreground/[0.08]"
+                  : "via-foreground/[0.05] dark:via-foreground/[0.04]",
+              )}
+            />
+            {/* Outer drop shadow — only on scroll. Layered with three offsets
+                (close + medium + far) so the shadow feels like depth, not
+                a single soft blob. Dark mode uses pure black at higher alpha
+                because the surrounding bg is dark and lower alpha would
+                disappear. */}
+            <div
+              aria-hidden
+              className={cn(
+                "absolute inset-0 rounded-2xl pointer-events-none -z-10",
+                "transition-[box-shadow,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                scrolled
+                  ? "opacity-100 shadow-[0_1px_3px_rgba(0,0,0,0.05),0_8px_20px_-6px_rgba(0,0,0,0.07),0_24px_48px_-16px_rgba(0,0,0,0.10)] dark:shadow-[0_1px_3px_rgba(0,0,0,0.5),0_8px_20px_-6px_rgba(0,0,0,0.55),0_24px_48px_-16px_rgba(0,0,0,0.6)]"
+                  : "opacity-0",
+              )}
+            />
 
             {/* nav content */}
             <nav
@@ -456,11 +537,10 @@ export function LandingHeader({
               <Link href="/" className="flex items-center gap-2.5 group flex-shrink-0">
                 <motion.div
                   layoutId={animateBrandFromIntro ? "landing-brand-logo" : undefined}
-                  whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.96 }}
                   transition={{ duration: 0.15 }}
                   className={cn(
-                    "relative transition-all duration-500 flex-shrink-0",
+                    "relative transition-all duration-500 flex-shrink-0 group-hover:scale-[1.04]",
                     scrolled ? "h-7 w-7 sm:h-8 sm:w-8" : "h-8 w-8 sm:h-9 sm:w-9",
                   )}
                 >
@@ -611,7 +691,7 @@ export function LandingHeader({
                     <li key={item.labelKey} className="relative">
                       {item.external ? (
                         <Link href={item.href} className={cls}>
-                          {t(item.labelKey)}
+                          {item.label}
                           {isActive && (
                             <motion.span
                               layoutId="nav-active-indicator"
@@ -626,7 +706,7 @@ export function LandingHeader({
                           onClick={(e) => handleNavClick(e, item.href, item.external)}
                           className={cls}
                         >
-                          {t(item.labelKey)}
+                          {item.label}
                           {isActive && (
                             <motion.span
                               layoutId="nav-active-indicator"
@@ -707,12 +787,6 @@ export function LandingHeader({
                   <Download className={cn(scrolled ? "h-3.5 w-3.5" : "h-4 w-4")} strokeWidth={1.8} />
                 </Link>
                 <LanguageSwitcherCompact />
-                <AnimatedThemeToggler
-                  className={cn(
-                    "rounded-lg transition-all duration-200 text-foreground/40 hover:text-foreground/70 hover:bg-foreground/[0.05]",
-                    scrolled ? "h-7 w-7 p-1.5 text-sm" : "h-9 w-9 p-2",
-                  )}
-                />
                 <div className="w-px h-4 bg-foreground/[0.08] mx-0.5" />
                 <Link
                   href="/auth"
@@ -734,7 +808,6 @@ export function LandingHeader({
               {/* ── mobile controls ── */}
               <div className="flex items-center gap-1 lg:hidden">
                 <LanguageSwitcherCompact />
-                <AnimatedThemeToggler className="p-1.5 rounded-lg h-8 w-8 text-foreground/40 hover:text-foreground/70 hover:bg-foreground/[0.05] inline-flex items-center justify-center transition-all duration-200" />
                 <button
                   className={cn(
                     "inline-flex items-center justify-center rounded-lg h-9 w-9 transition-all duration-200",
@@ -764,223 +837,150 @@ export function LandingHeader({
         </div>
       </motion.header>
 
-      {/* ━━━ mobile menu ━━━ */}
+      {/* ━━━ mobile drawer ━━━
+          Modal side sheet pulled in from the right. Sits ABOVE the page
+          header (z-[60] vs z-50) so the drawer reads as its own page,
+          not as a panel hanging off the nav — the page header behind it
+          would otherwise show through and create a duplicated logo.
+          Structure: fixed-height header, scrollable nav body sectioned
+          into Product / Resources, pinned-bottom CTA. No accordions —
+          each item is a single tap; deeper exploration happens on the
+          destination page (e.g. /use-cases lays out all 12 use cases
+          with breathing room a 320px-wide drawer could never afford). */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            {/* backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-40 bg-black/20 dark:bg-black/40 backdrop-blur-sm lg:hidden"
-              onClick={closeMobileMenu}
-            />
+        {mobileMenuOpen && (() => {
+          // Two flat sections, ordered by intent. Product = what we sell
+          // (highest commercial intent at the top); Resources = secondary
+          // material the visitor reaches for after deciding to evaluate.
+          const productLinks = [
+            { href: "/use-cases", label: t("useCases") },
+            { href: "/computer-use", label: t("productItems.computerUse") },
+            { href: "/agent-swarms", label: t("productItems.agentSwarms") },
+            { href: "/compare", label: t("productItems.compare") },
+            { href: "/pricing", label: "Pricing" },
+          ]
+          const resourceLinks = [
+            { href: "/blog", label: t("blog") },
+            { href: "/guide", label: t("blogItems.guide") },
+            ...(DEVELOPERS_API_ENABLED
+              ? [{ href: "/api-docs", label: "API" }]
+              : []),
+            { href: "/download", label: t("download") },
+          ]
+          // 35ms stagger keeps the cascade brisk — at 10 rows that's a
+          // 315ms tail, finishing inside the drawer's own 320ms slide.
+          const STAGGER = 0.035
+          const HEAD_DELAY = 0.05
 
-            {/* panel */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-x-0 top-0 z-40 lg:hidden pt-[56px] sm:pt-[64px]"
-            >
-              <div className="mx-3 sm:mx-5 overflow-hidden rounded-b-2xl">
-                {/* glass bg */}
-                <div className={cn(
-                  "relative",
-                  "bg-white/85 dark:bg-neutral-950/85",
-                  "backdrop-blur-2xl backdrop-saturate-150",
-                  "ring-1 ring-black/[0.06] dark:ring-white/[0.08]",
-                  "shadow-[0_8px_40px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.3)]",
-                )}>
-                  {/* top highlight */}
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/[0.06] to-transparent" />
+          return (
+            <>
+              {/* backdrop — dims the page beneath; tap to dismiss. The
+                  blur is deliberately light (2px) — heavier blur looks
+                  expensive on phones and the dim alone reads as modal. */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="fixed inset-0 z-[55] bg-black/35 dark:bg-black/55 backdrop-blur-[2px] lg:hidden"
+                onClick={closeMobileMenu}
+              />
 
-                  <nav className="relative flex flex-col px-2 py-2.5 gap-0.5 max-h-[calc(100dvh-80px)] overflow-y-auto">
-                    {/* Use Cases accordion */}
-                    <MobileAccordionSection
-                      label={t("useCases")}
-                      isOpen={mobileUseCasesOpen}
-                      onToggle={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
-                      isActive={isUseCaseActive}
-                      delay={0}
+              {/* drawer — 88vw with a 360px cap. Wide enough that rows
+                  feel comfortable on phablets, narrow enough that ~12vw
+                  of dimmed page stays visible on small phones so the
+                  modal layer is unmistakable. */}
+              <motion.aside
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                className="fixed inset-y-0 right-0 z-[60] w-[88vw] max-w-[360px] lg:hidden"
+              >
+                <div
+                  className={cn(
+                    "relative h-full flex flex-col overflow-hidden",
+                    "bg-white dark:bg-neutral-950",
+                    "shadow-[-12px_0_48px_rgba(0,0,0,0.12)] dark:shadow-[-12px_0_48px_rgba(0,0,0,0.5)]",
+                  )}
+                >
+                  {/* leading-edge hairline — the drawer's left rail */}
+                  <div className="absolute inset-y-0 left-0 w-px bg-foreground/[0.08]" />
+
+                  {/* drawer header — fixed height so the body height
+                      math (flex-1 + bottom CTA) stays predictable. */}
+                  <header className="relative flex items-center justify-between pl-5 pr-2.5 h-[60px] flex-shrink-0 border-b border-foreground/[0.05]">
+                    <Link
+                      href="/"
+                      onClick={closeMobileMenu}
+                      className="flex items-center gap-2.5"
                     >
-                      <div className="grid grid-cols-2 gap-0.5 px-1 py-1.5">
-                        {useCaseDropdownDef.map((uc) => {
-                          const Icon = uc.icon
-                          const ucHref = "href" in uc ? (uc as { href: string }).href : `/use-cases/${uc.slug}`
-                          return (
-                            <Link
-                              key={uc.slug}
-                              href={ucHref}
-                              onClick={closeMobileMenu}
-                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-foreground/[0.04] active:bg-foreground/[0.06] transition-all duration-150"
-                            >
-                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-foreground/[0.04]">
-                                <Icon className="size-3 text-muted-foreground/50" strokeWidth={1.8} />
-                              </span>
-                              <span className="text-[13px] font-medium text-foreground/55">
-                                {t(`useCaseItems.${uc.labelKey}`)}
-                              </span>
-                            </Link>
-                          )
-                        })}
-                      </div>
-                      <Link
-                        href="/use-cases"
+                      {mounted && (
+                        <Image
+                          src={resolvedTheme === "dark" ? "/logo_light.svg" : "/logo_dark.svg"}
+                          alt="Coasty"
+                          width={26}
+                          height={26}
+                          className="h-[26px] w-[26px] object-contain"
+                        />
+                      )}
+                      <span className="font-semibold text-[15px] tracking-[-0.02em] text-foreground">
+                        Coasty
+                      </span>
+                    </Link>
+                    <button
+                      onClick={closeMobileMenu}
+                      aria-label="Close menu"
+                      className="inline-flex items-center justify-center rounded-lg h-9 w-9 text-foreground/45 hover:text-foreground hover:bg-foreground/[0.05] active:bg-foreground/[0.10] transition-all duration-150"
+                    >
+                      <X className="h-[18px] w-[18px]" strokeWidth={1.5} />
+                    </button>
+                  </header>
+
+                  {/* nav body — scrollable in the unlikely event the
+                      viewport is short (landscape phones, browsers with
+                      tall toolbars). Two sections, hairline-divided. */}
+                  <nav className="relative flex-1 overflow-y-auto px-2 py-3">
+                    <DrawerSectionLabel>Product</DrawerSectionLabel>
+                    {productLinks.map((link, i) => (
+                      <DrawerRow
+                        key={link.href}
+                        href={link.href}
+                        label={link.label}
                         onClick={closeMobileMenu}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2.5 mx-1 mb-1 rounded-xl hover:bg-foreground/[0.04] transition-all"
-                      >
-                        <span className="text-[12px] font-medium text-muted-foreground/40">View all use cases</span>
-                        <ArrowRight className="h-3 w-3 text-muted-foreground/30" />
-                      </Link>
-                    </MobileAccordionSection>
+                        active={isPathActive(link.href, currentPath)}
+                        delay={HEAD_DELAY + i * STAGGER}
+                      />
+                    ))}
 
-                    {/* Products accordion */}
-                    <MobileAccordionSection
-                      label={t("products")}
-                      isOpen={mobileProductsOpen}
-                      onToggle={() => setMobileProductsOpen(!mobileProductsOpen)}
-                      isActive={isProductActive}
-                      delay={0.03}
-                    >
-                      <div className="grid grid-cols-1 gap-0.5 px-1 py-1.5">
-                        {productDropdownDef.map((item) => {
-                          const Icon = item.icon
-                          return (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              onClick={closeMobileMenu}
-                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-foreground/[0.04] active:bg-foreground/[0.06] transition-all duration-150"
-                            >
-                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-foreground/[0.04]">
-                                <Icon className="size-3 text-muted-foreground/50" strokeWidth={1.8} />
-                              </span>
-                              <span className="text-[13px] font-medium text-foreground/55">
-                                {t(`productItems.${item.labelKey}`)}
-                              </span>
-                            </Link>
-                          )
-                        })}
-                      </div>
-                    </MobileAccordionSection>
+                    <div className="mx-3 my-3 h-px bg-foreground/[0.05]" />
 
-                    {/* regular nav items */}
-                    {navItemsDef.map((item, index) => {
-                      const isActive = item.external
-                        ? currentPath === item.href
-                        : (currentPath === "/" || currentPath === "") &&
-                          activeSection === item.href.substring(2)
-
-                      const cls = cn(
-                        "flex items-center px-4 py-3 rounded-xl transition-all duration-150",
-                        "text-[15px] font-medium tracking-[-0.01em]",
-                        isActive
-                          ? "text-foreground bg-foreground/[0.04]"
-                          : "text-foreground/50 hover:text-foreground hover:bg-foreground/[0.03] active:bg-foreground/[0.05]",
-                      )
-
-                      return (
-                        <motion.div
-                          key={item.labelKey}
-                          initial={{ opacity: 0, x: -12 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: (index + 1) * 0.03,
-                            duration: 0.25,
-                            ease: [0.22, 1, 0.36, 1],
-                          }}
-                        >
-                          {item.external ? (
-                            <Link href={item.href} className={cls} onClick={closeMobileMenu}>
-                              {t(item.labelKey)}
-                            </Link>
-                          ) : (
-                            <a
-                              href={item.href}
-                              onClick={(e) => handleNavClick(e, item.href, item.external)}
-                              className={cls}
-                            >
-                              {t(item.labelKey)}
-                            </a>
-                          )}
-                        </motion.div>
-                      )
-                    })}
-
-                    {/* Blog accordion */}
-                    <MobileAccordionSection
-                      label={t("blog")}
-                      isOpen={mobileBlogOpen}
-                      onToggle={() => setMobileBlogOpen(!mobileBlogOpen)}
-                      isActive={isBlogActive}
-                      delay={(navItemsDef.length + 1) * 0.03}
-                    >
-                      <div className="grid grid-cols-2 gap-0.5 px-1 py-1.5">
-                        {blogDropdownDef.map((item) => {
-                          const Icon = item.icon
-                          return (
-                            <Link
-                              key={item.href}
-                              href={item.href}
-                              onClick={closeMobileMenu}
-                              className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-foreground/[0.04] active:bg-foreground/[0.06] transition-all duration-150"
-                            >
-                              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-foreground/[0.04]">
-                                <Icon className="size-3 text-muted-foreground/50" strokeWidth={1.8} />
-                              </span>
-                              <span className="text-[13px] font-medium text-foreground/55">
-                                {t(`blogItems.${item.labelKey}`)}
-                              </span>
-                            </Link>
-                          )
-                        })}
-                      </div>
-                      <Link
-                        href="/blog"
+                    <DrawerSectionLabel>Resources</DrawerSectionLabel>
+                    {resourceLinks.map((link, i) => (
+                      <DrawerRow
+                        key={link.href}
+                        href={link.href}
+                        label={link.label}
                         onClick={closeMobileMenu}
-                        className="flex items-center justify-center gap-1.5 px-3 py-2.5 mx-1 mb-1 rounded-xl hover:bg-foreground/[0.04] transition-all"
-                      >
-                        <span className="text-[12px] font-medium text-muted-foreground/40">View all posts</span>
-                        <ArrowRight className="h-3 w-3 text-muted-foreground/30" />
-                      </Link>
-                    </MobileAccordionSection>
+                        active={isPathActive(link.href, currentPath)}
+                        delay={HEAD_DELAY + (productLinks.length + i) * STAGGER}
+                      />
+                    ))}
+                  </nav>
 
-                    {/* Download link */}
+                  {/* CTA — pinned bottom, the drawer's single signature
+                      element. Everything above is quiet typography so
+                      the eye is led down to this. Bottom padding adds a
+                      safe-area-ish gap from the screen edge. */}
+                  <div className="relative flex-shrink-0 px-4 pt-3 pb-5 border-t border-foreground/[0.05]">
                     <motion.div
-                      initial={{ opacity: 0, x: -12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        delay: (navItemsDef.length + 2) * 0.03,
-                        duration: 0.25,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      <Link
-                        href="/download"
-                        onClick={closeMobileMenu}
-                        className="flex items-center gap-2.5 px-4 py-3 rounded-xl text-[15px] font-medium tracking-[-0.01em] text-foreground/50 hover:text-foreground hover:bg-foreground/[0.03] active:bg-foreground/[0.05] transition-all duration-150"
-                      >
-                        <Download className="size-4 text-muted-foreground/40" strokeWidth={1.8} />
-                        {t("download")}
-                      </Link>
-                    </motion.div>
-
-                    {/* divider */}
-                    <div className="my-1.5 mx-4 border-t border-foreground/[0.05]" />
-
-                    {/* CTA */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: (navItemsDef.length + 2) * 0.03,
-                        duration: 0.25,
+                        delay: HEAD_DELAY + (productLinks.length + resourceLinks.length) * STAGGER,
+                        duration: 0.32,
+                        ease: [0.22, 1, 0.36, 1],
                       }}
-                      className="px-1.5 pb-1.5"
                     >
                       <Link
                         href="/auth"
@@ -989,7 +989,7 @@ export function LandingHeader({
                           "flex items-center justify-center gap-2 w-full rounded-xl h-12",
                           "text-[15px] font-semibold tracking-[-0.01em]",
                           "bg-foreground text-background",
-                          "hover:opacity-90 active:scale-[0.98]",
+                          "hover:opacity-95 active:scale-[0.98]",
                           "shadow-[0_1px_3px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.1)]",
                           "dark:shadow-[0_1px_3px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.06)]",
                           "transition-all duration-150",
@@ -999,12 +999,12 @@ export function LandingHeader({
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </motion.div>
-                  </nav>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </>
-        )}
+              </motion.aside>
+            </>
+          )
+        })()}
       </AnimatePresence>
     </>
   )

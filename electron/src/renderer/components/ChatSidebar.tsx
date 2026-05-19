@@ -14,7 +14,17 @@ interface ChatSidebarProps {
 }
 
 export function ChatSidebar({ isOpen, onClose }: ChatSidebarProps) {
-  const { chatList, chatListLoading, chatId, loadChatList, loadChat, removeChat, clearMessages } = useChatStore()
+  const {
+    chatList,
+    chatListLoading,
+    chatId,
+    isLoadingMessages,
+    loadChatList,
+    loadChat,
+    removeChat,
+    clearMessages,
+  } = useChatStore()
+  const [pendingId, setPendingId] = React.useState<string | null>(null)
 
   // Refresh list when sidebar opens
   React.useEffect(() => {
@@ -23,9 +33,19 @@ export function ChatSidebar({ isOpen, onClose }: ChatSidebarProps) {
     }
   }, [isOpen])
 
+  // When the store reports the load finished, drop the local pending
+  // pointer so the row stops spinning.
+  React.useEffect(() => {
+    if (!isLoadingMessages) setPendingId(null)
+  }, [isLoadingMessages])
+
   const handleSelectChat = (id: string) => {
-    if (id === chatId) return
-    loadChat(id)
+    if (id === chatId || pendingId) return
+    setPendingId(id)
+    // Fire-and-forget — loadChat manages its own state via the store.
+    // Errors surface as `loadError` in the chat thread (MessageList
+    // renders a banner), not as exceptions here.
+    void loadChat(id)
     onClose()
   }
 
@@ -86,7 +106,7 @@ export function ChatSidebar({ isOpen, onClose }: ChatSidebarProps) {
           )}
 
           {!chatListLoading && chatList.length === 0 && (
-            <div className="text-xs text-neutral-500 text-center py-8">No chats yet</div>
+            <div className="text-xs text-neutral-500 text-center py-8">No tasks yet</div>
           )}
 
           {chatList.map((chat) => (
@@ -94,6 +114,7 @@ export function ChatSidebar({ isOpen, onClose }: ChatSidebarProps) {
               key={chat.id}
               chat={chat}
               isActive={chat.id === chatId}
+              isLoading={pendingId === chat.id}
               onSelect={() => handleSelectChat(chat.id)}
               onDelete={(e) => handleDelete(e, chat.id)}
             />
@@ -107,11 +128,13 @@ export function ChatSidebar({ isOpen, onClose }: ChatSidebarProps) {
 function ChatItem({
   chat,
   isActive,
+  isLoading,
   onSelect,
   onDelete,
 }: {
   chat: ChatSummary
   isActive: boolean
+  isLoading?: boolean
   onSelect: () => void
   onDelete: (e: React.MouseEvent) => void
 }) {
@@ -139,6 +162,12 @@ function ChatItem({
         </div>
 
         <div className="flex items-center gap-1 flex-shrink-0">
+          {isLoading && (
+            <svg className="w-3 h-3 animate-spin text-neutral-400" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          )}
           <span className="text-[10px] text-neutral-600">{timeAgo}</span>
           <button
             onClick={onDelete}

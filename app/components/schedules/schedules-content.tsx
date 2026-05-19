@@ -86,6 +86,7 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { PageLoader } from "@/components/common/page-loader"
+import { getScheduleLimit, normalizeTier } from "@/lib/tier"
 
 /* ─── Team template types & data ─── */
 interface TeamTemplateEmployee {
@@ -371,17 +372,45 @@ function ScheduleCard({
   const router = useRouter()
   const [actionLoading, setActionLoading] = useState<string | null>(null)
 
+  // Surface errors via toast instead of silently swallowing them.  The
+  // schedules-api functions already sanitize backend responses, so
+  // `err.message` here is guaranteed to be user-friendly (no
+  // "CSRF token missing", no exception class names, no file paths).
   async function handleRunNow() {
     setActionLoading("run")
-    try { await triggerScheduleNow(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+    try {
+      await triggerScheduleNow(schedule.chat_id)
+      onUpdate()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Couldn't run the schedule.")
+    } finally {
+      setActionLoading(null)
+    }
   }
   async function handleTogglePause() {
     setActionLoading("pause")
-    try { await pauseSchedule(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+    try {
+      await pauseSchedule(schedule.chat_id)
+      onUpdate()
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Couldn't update the schedule.")
+    } finally {
+      setActionLoading(null)
+    }
   }
   async function handleDelete() {
     setActionLoading("delete")
-    try { await deleteSchedule(schedule.chat_id); onUpdate() } catch {} finally { setActionLoading(null) }
+    try {
+      await deleteSchedule(schedule.chat_id)
+      onUpdate()
+    } catch (err) {
+      // The bug case: surface a user-friendly message instead of
+      // letting the user click Delete and see nothing happen.  The
+      // sanitizer in schedules-api ensures `err.message` is safe.
+      toast.error(err instanceof Error ? err.message : "Couldn't remove the schedule.")
+    } finally {
+      setActionLoading(null)
+    }
   }
 
   const isActive = schedule.enabled && !schedule.paused_reason
@@ -394,13 +423,13 @@ function ScheduleCard({
 
   return (
     <motion.div
-      whileHover={{ y: -2 }}
       transition={{ duration: 0.2, ease: "easeOut" }}
       className={cn(
         "group relative flex flex-col rounded-xl overflow-hidden h-full",
         "border border-border/30 bg-card/50",
         "hover:border-border/50 hover:shadow-lg hover:shadow-black/[0.04] dark:hover:shadow-black/[0.15]",
-        "transition-[border-color,box-shadow] duration-300",
+        "hover:-translate-y-0.5",
+        "transition-all duration-300 ease-out",
         !isActive && !isFailed && "opacity-80 hover:opacity-100",
       )}
     >
@@ -454,10 +483,10 @@ function ScheduleCard({
         </div>
 
         <div className={cn("px-4 py-2.5 flex items-center gap-1.5 border-t border-border/20", "translate-y-0 opacity-100", "sm:translate-y-1 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100", "transition-all duration-300 ease-out")}>
-          <motion.button onClick={handleRunNow} disabled={!!actionLoading} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className={cn("h-7 px-3 rounded-lg text-[11px] font-semibold flex items-center gap-1.5 transition-colors", "bg-muted/50 hover:bg-muted text-foreground/60 hover:text-foreground", "disabled:opacity-40")}>
+          <motion.button onClick={handleRunNow} disabled={!!actionLoading} whileTap={{ scale: 0.96 }} className={cn("h-7 px-3 rounded-lg text-[11px] font-semibold flex items-center gap-1.5 transition-all duration-150", "bg-muted/50 hover:bg-muted text-foreground/60 hover:text-foreground hover:scale-[1.04]", "disabled:opacity-40")}>
             <CoastyIcon className="h-3 w-3" />{actionLoading === "run" ? "\u2026" : "Run"}
           </motion.button>
-          <motion.button onClick={handleTogglePause} disabled={!!actionLoading} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} className="h-7 px-2.5 rounded-lg text-[11px] flex items-center gap-1.5 text-muted-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors disabled:opacity-40">
+          <motion.button onClick={handleTogglePause} disabled={!!actionLoading} whileTap={{ scale: 0.96 }} className="h-7 px-2.5 rounded-lg text-[11px] flex items-center gap-1.5 text-muted-foreground/60 hover:text-foreground hover:bg-muted/50 hover:scale-[1.04] transition-all duration-150 disabled:opacity-40">
             {schedule.enabled ? <Pause className="h-3 w-3" /> : <Play className="h-3 w-3" />}
             {actionLoading === "pause" ? "\u2026" : schedule.enabled ? "Pause" : "Resume"}
           </motion.button>
@@ -467,7 +496,7 @@ function ScheduleCard({
             ...(onEdit ? [{ icon: Pencil, action: () => onEdit(schedule.chat_id), title: "Edit" }] : []),
             { icon: Trash2, action: handleDelete, title: "Delete" },
           ].map(({ icon: Icon, action, title }) => (
-            <motion.button key={title} onClick={action} disabled={!!actionLoading} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="h-7 w-7 rounded-lg flex items-center justify-center text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/50 transition-colors disabled:opacity-40" title={title}>
+            <motion.button key={title} onClick={action} disabled={!!actionLoading} whileTap={{ scale: 0.9 }} className="h-7 w-7 rounded-lg flex items-center justify-center text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/50 hover:scale-110 transition-all duration-150 disabled:opacity-40" title={title}>
               <Icon className="h-3.5 w-3.5" />
             </motion.button>
           ))}
@@ -620,8 +649,8 @@ function ScheduleCalendar({ schedules, selectedDate, onSelectDate, onRun, onPaus
               {days.map((day) => {
                 const sel = isSel(day), tod = isTod(day), taskCount = taskMap.get(day.getDate()) || 0
                 return (
-                  <motion.button key={day.getDate()} data-selected={sel ? "true" : undefined} data-today={tod ? "true" : undefined} onClick={() => onSelectDate(day)} whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}
-                    className={cn("relative flex flex-col items-center gap-1 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-xl shrink-0 transition-all duration-200 min-w-[44px] sm:min-w-[52px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", sel ? "bg-muted ring-1 ring-border shadow-sm" : "hover:bg-muted/40")}
+                  <motion.button key={day.getDate()} data-selected={sel ? "true" : undefined} data-today={tod ? "true" : undefined} onClick={() => onSelectDate(day)} whileTap={{ scale: 0.94 }}
+                    className={cn("relative flex flex-col items-center gap-1 px-2.5 sm:px-3 py-2.5 sm:py-3 rounded-xl shrink-0 transition-all duration-200 min-w-[44px] sm:min-w-[52px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring hover:scale-[1.06]", sel ? "bg-muted ring-1 ring-border shadow-sm" : "hover:bg-muted/40")}
                     style={{ scrollSnapAlign: "center" }}
                   >
                     <span className={cn("text-[10px] font-medium uppercase tracking-wider leading-none", sel ? "text-foreground/60" : "text-muted-foreground/40")}>
@@ -667,6 +696,11 @@ function ScheduleCalendar({ schedules, selectedDate, onSelectDate, onRun, onPaus
                       <div className="flex items-center gap-2">
                         <p className="text-[13px] font-semibold text-foreground/70 truncate group-hover:text-foreground transition-colors">{s.title || "Untitled"}</p>
                         <span className={cn("text-[10px] font-medium shrink-0", isAct ? "text-emerald-600 dark:text-emerald-400" : isFail ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground/30")}>{isAct ? "On Duty" : isFail ? "Attention" : "Standby"}</span>
+                        {/* API source badge — only shown for schedules created via /v1/schedules.
+                            The backend writes settings.source = 'api' on those rows. */}
+                        {(s as { source?: string })?.source === "api" && (
+                          <span className="text-[8px] font-mono font-semibold px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0">API</span>
+                        )}
                       </div>
                       <p className="text-[11px] text-muted-foreground/35 mt-0.5 tabular-nums">
                         {task.runsPerDay > 6 ? `${task.runsPerDay}x/day` : task.times.length > 0 ? task.times[0] : formatFrequency(s.frequency)}
@@ -1201,10 +1235,9 @@ function ActionButton({ icon: Icon, label, onClick }: { icon: React.ComponentTyp
   return (
     <motion.button
       onClick={(e) => { e.stopPropagation(); onClick() }}
-      whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.92 }}
       className={cn(
-        "flex items-center gap-1 rounded-md transition-colors",
+        "flex items-center gap-1 rounded-md transition-all duration-150 hover:scale-[1.08]",
         label ? "h-7 px-2 text-[11px] font-medium text-muted-foreground/50 hover:text-foreground hover:bg-muted/50" : "h-7 w-7 justify-center text-muted-foreground/30 hover:text-muted-foreground hover:bg-muted/40",
       )}
     >
@@ -1217,11 +1250,12 @@ function ActionButton({ icon: Icon, label, onClick }: { icon: React.ComponentTyp
 /* ═══ Main ═══ */
 export function SchedulesContent() {
   const t = useTranslations("schedulesPage")
+  const tLoader = useTranslations("pageLoaders.schedules")
   const router = useRouter()
   const { user } = useUser()
   const [schedules, setSchedules] = useState<ScheduleResponse[]>([])
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState<Tab>("teams")
+  const [activeTab, setActiveTab] = useState<Tab>("employees")
   const [statusFilter, setStatusFilter] = useState<string>("all")
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [machines, setMachines] = useState<UserMachine[]>([])
@@ -1269,7 +1303,7 @@ export function SchedulesContent() {
   )
 
   const tabs: { id: Tab; label: string; icon: React.ComponentType<{ className?: string }>; count?: number }[] = [
-    { id: "teams", label: t("teamsTab"), icon: Users, count: teams.length },
+    // { id: "teams", label: t("teamsTab"), icon: Users, count: teams.length },
     { id: "employees", label: t("title"), icon: AgentIcon, count: schedules.length },
   ]
 
@@ -1337,12 +1371,12 @@ export function SchedulesContent() {
         return
       }
 
-      // Check schedule limits — current employees + template employees
+      // Check schedule limits — current employees + template employees.
+      // Limits come from lib/tier.ts (canonical, mirrors backend).
       const neededEmployees = selectedTemplate.employees.length
       const currentScheduleCount = schedules.filter(s => s.enabled && !s.paused_reason).length
-      const tier = machineData.subscriptionTier || "free"
-      const scheduleLimits: Record<string, number> = { free: 3, starter: 3, basic: 3, professional: 10, pro: 10, enterprise: 50 }
-      const maxSchedules = scheduleLimits[tier] ?? 3
+      const tier = normalizeTier(machineData.subscriptionTier)
+      const maxSchedules = getScheduleLimit(tier)
       const availableSlots = maxSchedules - currentScheduleCount
 
       if (availableSlots < neededEmployees) {
@@ -1459,21 +1493,14 @@ export function SchedulesContent() {
   return (
     <PageLoader
       isLoading={loading}
-      title="Schedules"
-      description="Right on time, every time. Syncing your automations."
+      title={tLoader("title")}
+      description={tLoader("description")}
     >
-    <div className="h-full overflow-y-auto scrollbar-invisible relative bg-transparent">
-      {/* Ambient background */}
+    <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative bg-transparent">
+      {/* Ambient background — soft blur orbs only; grid removed for calm */}
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute -top-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-foreground/[0.02] dark:bg-foreground/[0.04] blur-3xl" />
         <div className="absolute -bottom-1/4 -left-1/4 h-[500px] w-[500px] rounded-full bg-foreground/[0.02] dark:bg-foreground/[0.04] blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-[0.015] dark:opacity-[0.03]"
-          style={{
-            backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
       </div>
 
       <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl space-y-6 relative">
@@ -1538,7 +1565,7 @@ export function SchedulesContent() {
         </motion.div>
 
         {/* Tabs */}
-        {schedules.length > 0 && (
+        {schedules.length > 0 && tabs.length > 1 && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -1667,7 +1694,13 @@ export function SchedulesContent() {
                     </div>
 
                     <div className="px-5 sm:px-7 pb-5 sm:pb-6 max-h-[60vh] overflow-y-auto space-y-5 sm:space-y-7 scrollbar-thin">
-                      {(["starter", "plus", "pro"] as const).map(tier => {
+                      {/* Only render template categories for plans that
+                          are currently purchasable. Plus/pro template
+                          definitions stay in TEAM_TEMPLATES — re-add "plus"
+                          / "pro" to this array when those plans are
+                          re-listed.  Source of truth: lib/pricing/tiers.ts
+                          PURCHASABLE_TIER_IDS. */}
+                      {(["starter"] as const).map(tier => {
                         const meta = TIER_META[tier]
                         const TierIcon = meta.icon
                         const tierTemplates = TEAM_TEMPLATES.filter(tmpl => tmpl.tier === tier)

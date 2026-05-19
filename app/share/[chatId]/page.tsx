@@ -1,6 +1,7 @@
 import { APP_DOMAIN } from "@/lib/config"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { createClient } from "@/lib/supabase/server"
+import { decryptScreenshotsInMessages } from "@/lib/screenshot-encryption"
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import SimpleArticle from "./simple-article"
@@ -107,10 +108,19 @@ export default async function ShareChat({
     redirect("/")
   }
 
+  // Decrypt any `frontendScreenshot` values that were encrypted under the
+  // chat owner's encryption preferences. Public viewers of the chat
+  // legitimately need to see them — the encryption is an at-rest control
+  // against DB leaks, not a per-viewer access control. Failures fall back
+  // to dropping the screenshot (the rest of the message still renders).
+  // The walker preserves row shape; the cast keeps the Supabase-derived
+  // row type from being widened to `unknown` by TS's generic inference.
+  const messages = decryptScreenshotsInMessages(messagesData) as typeof messagesData
+
   return (
     <SimpleArticle
       chatId={chatId}
-      messages={messagesData}
+      messages={messages}
       date={chatData.created_at || ""}
       title={chatData.title || ""}
       subtitle={"Autonomous execution by Coasty Agent"}

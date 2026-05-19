@@ -54,8 +54,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  let body: { name?: string; service?: string; username?: string; password?: string; notes?: string }
   try {
-    const body = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
+  try {
     const { name, service, username, password, notes } = body
 
     if (!name || !service || !username || !password) {

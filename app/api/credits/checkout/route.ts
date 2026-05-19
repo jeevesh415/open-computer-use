@@ -1,19 +1,13 @@
 import { createClient } from "@/lib/supabase/server"
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
+import { getBoostPackage, type BoostPackageId } from "@/lib/pricing/tiers"
 
 export const runtime = "nodejs"
 
 const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
   apiVersion: "2025-08-27.basil",
 })
-
-// Server-side credit packages — single source of truth for pricing
-const CREDIT_PACKAGES: Record<string, { credits: number; price: number; name: string }> = {
-  "boost-small": { credits: 150, price: 19, name: "Boost" },
-  "boost-medium": { credits: 500, price: 49, name: "Power Boost" },
-  "boost-large": { credits: 1200, price: 99, name: "Ultra Boost" },
-}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 
@@ -55,8 +49,10 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { packageId } = body
 
-    // Look up package server-side — never trust client-sent price/credits
-    const pkg = CREDIT_PACKAGES[packageId]
+    // Look up package server-side — never trust client-sent price/credits.
+    // Source of truth is `lib/pricing/tiers.ts`; this route only resolves
+    // `boost-small | boost-medium | boost-large` ids, anything else 400s.
+    const pkg = getBoostPackage(packageId as BoostPackageId)
     if (!pkg) {
       return NextResponse.json(
         { error: "Invalid package ID" },
@@ -64,7 +60,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { credits, price, name } = pkg
+    const { credits, priceUSD: price, name } = pkg
 
     // Get or create Stripe customer
     let stripeCustomerId: string
@@ -125,6 +121,7 @@ export async function POST(req: NextRequest) {
         user_id: user.id,
         credits: credits.toString(),
         package_id: packageId || "",
+        usd_price: price.toString(),
       },
     })
 

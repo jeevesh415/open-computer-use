@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!--
+    Coasty MCP — minimalist mark.
+    A solid square (the desktop) with a stylized cursor + terminal cursor inside it,
+    representing the multi-surface (desktop + browser + terminal) coverage.
+    Designed to render legibly at 16×16 (Claude Desktop sidebar) and 256×256 (directory cards).
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="#334155" stroke-width="1"/>
+  <!-- terminal prompt + blinking-style cursor (the > symbol + a block) -->
+  <path d="M14 22 L20 28 L14 34" stroke="#A78BFA" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="24" y="30" width="10" height="3" rx="0.5" fill="#A78BFA"/>
+  <!-- mouse pointer cursor -->
+  <path d="M40 32 L40 50 L45 45 L48 51 L50.5 49.5 L47 43.5 L53 43.5 Z"
+        fill="#F8FAFC" stroke="#0F172A" stroke-width="1.2" stroke-linejoin="round"/>
+</svg>

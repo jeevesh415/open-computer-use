@@ -5,13 +5,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/toast"
-import { useChats } from "@/lib/chat-store/chats/provider"
-import { useMessages } from "@/lib/chat-store/messages/provider"
-import { clearAllIndexedDBStores } from "@/lib/chat-store/persist"
 import { useUser } from "@/lib/user-store/provider"
 import { SignOut, Envelope, CalendarBlank, Spinner } from "@phosphor-icons/react"
 import { CoastyIcon } from "@/components/icons/coasty"
-import { useRouter } from "next/navigation"
 import { Building2, Globe, User, Check, Camera, Shield } from "lucide-react"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
@@ -27,9 +23,6 @@ const fadeUp = (delay: number) => ({
 export function CombinedAccount() {
   const t = useTranslations("accountSettings")
   const { user, signOut, updateUser, isLoading } = useUser()
-  const { resetChats } = useChats()
-  const { resetMessages } = useMessages()
-  const router = useRouter()
 
   const [displayName, setDisplayName] = useState("")
   const [company, setCompany] = useState("")
@@ -72,12 +65,11 @@ export function CombinedAccount() {
   }
 
   const handleSignOut = async () => {
+    // signOut() (in user-store/provider) now does the full reset + redirect to /
+    // atomically. Cleanup of chats/messages/IndexedDB and the route push are
+    // all owned by the provider, so this stays a thin wrapper.
     try {
-      await resetMessages()
-      await resetChats()
       await signOut()
-      await clearAllIndexedDBStores()
-      router.push("/")
     } catch (e) {
       console.error("Sign out failed:", e)
       toast({ title: t("toasts.signOutFailed"), status: "error" })

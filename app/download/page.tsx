@@ -1,6 +1,5 @@
 "use client"
 
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
@@ -8,6 +7,7 @@ import { RainbowButton } from "@/components/magicui/rainbow-button"
 import { WindowsIcon, AppleIcon } from "@/components/icons/platform-icons"
 import {
   ArrowRight,
+  ArrowUpRight,
   Download,
   Monitor,
   Globe,
@@ -18,6 +18,8 @@ import {
   Loader2,
   ShieldAlert,
   Smartphone,
+  Github,
+  Code2,
   X,
 } from "lucide-react"
 import Link from "next/link"
@@ -90,8 +92,19 @@ export default function DownloadPage() {
   const [downloadData, setDownloadData] = useState<DownloadData | null>(null)
   const [loading, setLoading] = useState(true)
   const [showSplash, setShowSplash] = useState(true)
+  const [postDownloadOpen, setPostDownloadOpen] = useState(false)
 
   const closeSplash = useCallback(() => setShowSplash(false), [])
+
+  const GITHUB_RELEASES_URL = "https://github.com/coasty-ai/open-computer-use/releases/"
+  const GITHUB_REPO_URL = "https://github.com/coasty-ai/open-computer-use"
+
+  const handleDownloadClick = useCallback((platform: Platform) => {
+    trackDesktopAppDownloaded(platform)
+    setShowSplash(false)
+    // Let the browser kick off the download before drawing attention away.
+    window.setTimeout(() => setPostDownloadOpen(true), 700)
+  }, [])
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768)
@@ -168,7 +181,7 @@ export default function DownloadPage() {
     if (data) {
       return variant === "hero" ? (
         <RainbowButton size="lg" className="w-full sm:w-auto" asChild>
-          <a href={data.downloadUrl} onClick={() => trackDesktopAppDownloaded(platform)}>
+          <a href={data.downloadUrl} onClick={() => handleDownloadClick(platform)}>
             <Download className="mr-2 h-4 w-4" />
             {t("downloadFor", { platform: meta.label })}
           </a>
@@ -180,7 +193,7 @@ export default function DownloadPage() {
           className="w-full"
           asChild
         >
-          <a href={data.downloadUrl} onClick={() => trackDesktopAppDownloaded(platform)}>
+          <a href={data.downloadUrl} onClick={() => handleDownloadClick(platform)}>
             <Download className="mr-1.5 h-3.5 w-3.5" />
             {t("download")}
           </a>
@@ -375,7 +388,7 @@ export default function DownloadPage() {
                     {splashPlatform ? (
                       <a
                         href={splashPlatform.downloadUrl}
-                        onClick={() => trackDesktopAppDownloaded(detectedPlatform)}
+                        onClick={() => handleDownloadClick(detectedPlatform)}
                         className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white px-5 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-black transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98]"
                       >
                         <Download className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -403,7 +416,133 @@ export default function DownloadPage() {
         )}
       </AnimatePresence>
 
-      <GuideLines />
+      {/* ─── Post-download popup ─── */}
+      <AnimatePresence>
+        {postDownloadOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[55] flex items-center justify-center bg-black/50 backdrop-blur-md px-4 py-6 overflow-y-auto"
+            onClick={() => setPostDownloadOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 14, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 8, scale: 0.98 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-lg rounded-2xl border border-border/60 bg-background shadow-2xl overflow-hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="post-download-title"
+            >
+              {/* Close */}
+              <button
+                type="button"
+                onClick={() => setPostDownloadOpen(false)}
+                className="absolute right-3 top-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-background/80 text-muted-foreground/80 backdrop-blur-sm transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Close"
+              >
+                <X className="h-3.5 w-3.5" strokeWidth={1.75} />
+              </button>
+
+              {/* Hero — demo screenshot */}
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted/40">
+                <Image
+                  src="/demo-screenshot.png"
+                  alt="Coasty desktop app"
+                  width={1456}
+                  height={816}
+                  className="h-full w-full object-cover object-top"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+                {/* Status pill */}
+                <div className="absolute left-4 top-4">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-background/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-emerald-700 backdrop-blur-md dark:text-emerald-300">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    </span>
+                    Download started
+                  </div>
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="px-6 sm:px-7 pt-5 pb-6">
+                <div className="inline-flex items-center gap-2.5 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/60">
+                  <span className="h-px w-6 bg-border/60" aria-hidden />
+                  Having trouble?
+                </div>
+
+                <h3
+                  id="post-download-title"
+                  className="mt-3 text-xl sm:text-[22px] font-semibold tracking-tight leading-tight"
+                >
+                  Grab it from GitHub instead.
+                </h3>
+
+                <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed">
+                  Coasty Desktop is fully open source. If your installer didn{"'"}t download or you{"'"}d
+                  rather audit before you run, every release is published on GitHub.
+                </p>
+
+                {/* Meta row */}
+                <div className="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border/50 bg-border/50 text-[11px]">
+                  <div className="flex items-center gap-2 bg-card/60 px-3 py-2.5">
+                    <Github className="h-3.5 w-3.5 text-muted-foreground" />
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground/60">
+                        Repo
+                      </span>
+                      <span className="font-mono text-foreground/90 truncate">coasty-ai/open-computer-use</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-card/60 px-3 py-2.5">
+                    <Code2 className="h-3.5 w-3.5 text-muted-foreground" />
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground/60">
+                        License
+                      </span>
+                      <span className="text-foreground/90">Open source</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="rounded-full text-muted-foreground hover:text-foreground"
+                    onClick={() => setPostDownloadOpen(false)}
+                  >
+                    Got it
+                  </Button>
+                  <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center">
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
+                      <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
+                        <Code2 className="mr-1.5 h-3.5 w-3.5" />
+                        View source
+                      </a>
+                    </Button>
+                    <Button size="sm" className="rounded-full" asChild>
+                      <a href={GITHUB_RELEASES_URL} target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-1.5 h-3.5 w-3.5" />
+                        GitHub Releases
+                        <ArrowUpRight className="ml-1 h-3 w-3 opacity-70" />
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <LandingHeader />
 
       <main className={cn("relative", isMobile ? "pt-16" : "pt-20")}>
@@ -672,6 +811,46 @@ export default function DownloadPage() {
                     <span className="text-sm">{f.label}</span>
                   </div>
                 ))}
+              </div>
+            </motion.div>
+
+            {/* Open source */}
+            <motion.div variants={itemVariants} className="mb-16">
+              <div className="mx-auto max-w-2xl">
+                <div className="flex flex-col items-center text-center">
+                  <div className="inline-flex items-center gap-2.5 text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/60">
+                    <span className="h-px w-7 bg-border/60" aria-hidden />
+                    Open Source
+                    <span className="h-px w-7 bg-border/60" aria-hidden />
+                  </div>
+                  <h3
+                    className={cn(
+                      "mt-4 font-semibold tracking-tight",
+                      isMobile ? "text-2xl" : "text-3xl"
+                    )}
+                  >
+                    Inspect every line.
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground max-w-md leading-relaxed">
+                    The desktop app is open source. Browse the code, file an issue, or grab installers
+                    directly from GitHub if the auto-download doesn{"'"}t work for you.
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                    <Button variant="outline" size="sm" className="rounded-full" asChild>
+                      <a href={GITHUB_RELEASES_URL} target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-1.5 h-3.5 w-3.5" />
+                        GitHub Releases
+                        <ArrowUpRight className="ml-1 h-3 w-3 opacity-60" />
+                      </a>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="rounded-full" asChild>
+                      <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
+                        <Code2 className="mr-1.5 h-3.5 w-3.5" />
+                        View Source
+                      </a>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </motion.div>
 

@@ -3,15 +3,17 @@
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { motion, AnimatePresence } from "motion/react"
+import { useTranslations } from "next-intl"
 import { useUser } from "@/lib/user-store/provider"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import { ThumbsDown, ThumbsUp, Meh, Sparkles, ArrowUp, X } from "lucide-react"
 
+// `labelKey` resolves under `chat.feedback.*` at render time.
 const REACTIONS = [
-  { icon: ThumbsDown, label: "Bad", value: 1 },
-  { icon: Meh, label: "Okay", value: 2 },
-  { icon: ThumbsUp, label: "Good", value: 3 },
-  { icon: Sparkles, label: "Amazing", value: 4 },
+  { icon: ThumbsDown, labelKey: "reactionBad", value: 1 },
+  { icon: Meh, labelKey: "reactionOkay", value: 2 },
+  { icon: ThumbsUp, labelKey: "reactionGood", value: 3 },
+  { icon: Sparkles, labelKey: "reactionAmazing", value: 4 },
 ] as const
 
 type FeedbackState = "idle" | "rated" | "commenting" | "nps" | "submitted"
@@ -31,6 +33,7 @@ export function RunFeedbackBar({
   feedbackType = "run",
   className,
 }: RunFeedbackBarProps) {
+  const t = useTranslations("chat.feedback")
   const { user } = useUser()
   const [state, setState] = useState<FeedbackState>("idle")
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
@@ -117,7 +120,7 @@ export function RunFeedbackBar({
             className="flex items-center gap-3"
           >
             <span className="text-[13px] text-muted-foreground select-none">
-              How was this {feedbackType === "swarm" ? "swarm" : "run"}?
+              {t(feedbackType === "swarm" ? "promptSwarm" : "promptRun")}
             </span>
             <div className="flex items-center gap-1">
               {REACTIONS.map((r) => {
@@ -128,7 +131,7 @@ export function RunFeedbackBar({
                     onClick={() => handleRating(r.value)}
                     disabled={isSubmitting}
                     className="group p-1.5 rounded-full transition-all duration-150 hover:bg-foreground/[0.06] hover:scale-110 active:scale-95 disabled:opacity-30"
-                    title={r.label}
+                    title={t(r.labelKey)}
                     type="button"
                   >
                     <Icon className="size-4 text-muted-foreground transition-colors duration-150 group-hover:text-foreground" strokeWidth={1.75} />
@@ -154,7 +157,7 @@ export function RunFeedbackBar({
               return (
                 <span className="flex items-center gap-1.5 text-[13px] text-muted-foreground">
                   <Icon className="size-3.5" strokeWidth={1.75} />
-                  {selectedReaction.label}
+                  {t(selectedReaction.labelKey)}
                 </span>
               )
             })()}
@@ -169,7 +172,7 @@ export function RunFeedbackBar({
               className="text-[13px] text-muted-foreground/60 hover:text-foreground transition-colors"
               type="button"
             >
-              Tell us more
+              {t("tellUsMore")}
             </button>
 
             <button
@@ -203,7 +206,7 @@ export function RunFeedbackBar({
                   handleCommentSubmit()
                 }
               }}
-              placeholder="What could be better?"
+              placeholder={t("commentPlaceholder")}
               className="flex-1 bg-transparent text-[13px] text-foreground placeholder:text-muted-foreground/40 outline-none"
               maxLength={500}
               disabled={isSubmitting}
@@ -236,7 +239,7 @@ export function RunFeedbackBar({
           >
             <div className="flex items-center justify-between">
               <span className="text-[13px] text-muted-foreground select-none">
-                Would you recommend Coasty?
+                {t("npsPrompt")}
               </span>
               <button
                 onClick={() => setState("submitted")}
@@ -260,8 +263,8 @@ export function RunFeedbackBar({
               ))}
             </div>
             <div className="flex justify-between text-[11px] text-muted-foreground/40 px-0.5">
-              <span>Not likely</span>
-              <span>Very likely</span>
+              <span>{t("npsNotLikely")}</span>
+              <span>{t("npsVeryLikely")}</span>
             </div>
           </motion.div>
         )}
@@ -276,7 +279,8 @@ export function RunFeedbackBar({
             transition={{ duration: 0.3 }}
           >
             <span className="text-[13px] text-muted-foreground">
-              Thanks for the feedback{creditsEarned > 0 && <> · +{creditsEarned} credits</>}
+              {t("thanks")}
+              {creditsEarned > 0 && <> · +{creditsEarned} {t("creditsLabel")}</>}
             </span>
           </motion.div>
         )}

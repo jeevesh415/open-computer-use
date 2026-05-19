@@ -12,13 +12,15 @@
     "recommended": "Anbefalt",
     "month": "maned",
     "creditsPerMonth": "{count} kreditter/mnd",
-    "agentsInParallel": "{count} agenter parallelt"
+    "agentsInParallel": "{count} agenter parallelt",
+    "whatsIncluded": "Hva er inkludert",
+    "hideDetails": "Skjul detaljer"
   },
   "header": {
     "useCases": "Bruksomrader",
     "blog": "Blogg",
     "agentSwarms": "Agentsverm",
-    "products": "Products",
+    "products": "Produkter",
     "discover": "Discover",
     "compare": "Sammenlign",
     "demos": "Demoer",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} personlige e-poster per kampanje"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Datamaskinbruk",
+      "agentSwarms": "Agentsvermer",
+      "compare": "Sammenlign"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} på OSWorld-benchmark",
+      "agentSwarms": "{stat} agenter parallelt",
+      "compare": "{stat} konkurrenter analysert"
     },
     "blogItems": {
       "allPosts": "Alle innlegg",
@@ -72,7 +74,8 @@
       "webScraping": "Web Scraping",
       "jobApplications": "Jobbsoknader",
       "demosResults": "Demoer og resultater",
-      "guide": "Veiledning"
+      "guide": "Veiledning",
+      "discover": "Fellesskap"
     },
     "blogStats": {
       "allPosts": "{stat} artikler publisert ukentlig",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} sider per okt",
       "jobApplications": "{stat} soknader per okt",
       "demosResults": "{stat} ekte casestudier",
-      "guide": "{stat} bruksomradegjennomganger"
-    }
+      "guide": "{stat} bruksomradegjennomganger",
+      "discover": "Se hvordan folk bruker det"
+    },
+    "api": "API"
   },
   "hero": {
-    "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonome datamaskinoperatorer",
+    "badge": "#1 datamaskinagent · {score} OSWorld",
+    "headline": "Den beste agenten for datamaskinbruk",
     "useCases": {
       "computerAgent": {
         "label": "Datamaskinagent",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Sosiale medier",
         "task": "Publiser pa Hacker News og engasjer med kommentarer"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "spart pr. måned",
+        "sublabel": "mot en fulltids-VA"
+      },
+      "time": {
+        "value": "30 t.",
+        "label": "gjenvunnet pr. uke",
+        "sublabel": "manuelt arbeid eliminert"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "raskere resultat",
+        "sublabel": "oppgaver på minutter, ikke dager"
+      },
+      "effort": {
+        "value": "0",
+        "label": "kode eller ansettelser",
+        "sublabel": "fullt administrert ende til ende"
       }
     }
   },
@@ -240,7 +267,7 @@
     },
     "coasty": {
       "title": "Coasty AI-agent",
-      "subtitle": "#1 computer-use agent"
+      "subtitle": "#1 datamaskinagent"
     },
     "rows": {
       "timePerTask": "Tid per oppgave",
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Ubegrenset tung automatisering",
         "cta": "Velg Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Ingen kredittgrenser — noensinne",
+        "cta": "Velg Unlimited",
+        "badge": "Beste verdi"
       }
     },
     "vmTemporary": "1 midlertidig VM (2 timer)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Det samme arbeidet koster {oldPrice} med manuell arbeidskraft",
       "description": "En virtuell assistent koster $2 000–$4 000/mnd. En deltidsansatt koster mer. Coasty gjor det samme arbeidet 24/7 fra $0 — med perfekt konsistens, fullstendige revisjonsspor og null opplaeringstid."
-    }
+    },
+    "unlimitedCredits": "Ubegrensede kreditter"
   },
   "faq": {
     "title": "Ofte stilte sporsmal",
@@ -429,7 +463,8 @@
       "contact": "Kontakt",
       "privacy": "Personvern",
       "terms": "Vilkar"
-    }
+    },
+    "status": "Alle systemer er operative"
   },
   "languageSwitcher": {
     "label": "Sprak"
@@ -458,16 +493,16 @@
     "demoCaption": "Kjør AI-agenter på datamaskinen din eller styr den fra telefonen, uansett hvor du er.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Kjør lokalt på PC-en din",
+        "desc": "Last ned skrivebordsappen og la AI styre datamaskinen din direkte — ingen sky-VM nødvendig."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Styr PC-en din fra mobilen",
+        "desc": "Start en oppgave fra mobilen og se AI-agenten jobbe på datamaskinen din i sanntid."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Sky eller lokalt — du velger",
+        "desc": "Bruk sky-VM-er til isolerte oppgaver, eller gå lokalt for full tilgang til appene og filene dine."
       }
     },
     "viewTitles": {
@@ -486,6 +521,13 @@
       "connecting": "Kobler til...",
       "continueWithGoogle": "Fortsett med Google"
     },
+    "inAppBrowser": {
+      "blocked": "Google-innlogging fungerer ikke i innebygde nettlesere. Åpne denne siden i nettleseren din, eller bruk en magisk lenke.",
+      "blockedNamed": "Google-innlogging fungerer ikke i {app}. Åpne denne siden i nettleseren din, eller bruk en magisk lenke.",
+      "copyLink": "Kopier lenke",
+      "copied": "Kopiert!",
+      "useMagicLink": "Bruk magisk lenke"
+    },
     "or": "eller",
     "email": "E-post",
     "emailPlaceholder": "deg@eksempel.no",
@@ -499,7 +541,7 @@
     "creatingAccount": "Oppretter konto...",
     "createAccount": "Opprett konto",
     "sending": "Sender...",
-    "sendMagicLink": "Send magic link",
+    "sendMagicLink": "Send magisk lenke",
     "sendResetLink": "Send tilbakestillingslenke",
     "forgotPassword": "Glemt passord?",
     "useMagicLink": "Bruk magic link",
@@ -560,30 +602,33 @@
     "getStarted": "Kom i gang",
     "settingUp": "Setter opp...",
     "welcome": {
-      "titleReturning": "Velkommen tilbake{name}!",
+      "titleReturning": "Velkommen tilbake{name}",
       "titleNew": "Velkommen til Coasty",
-      "descriptionReturning": "Vi vil gjerne laere litt mer om deg for a forbedre opplevelsen din",
-      "descriptionNew": "La oss sette opp kontoen din sa vi kan tilpasse opplevelsen din"
+      "eyebrowNew": "La oss bli kjent",
+      "eyebrowReturning": "Nesten ferdig",
+      "descriptionReturning": "Bare noen flere detaljer og Coasty vil være helt tilpasset måten du jobber på.",
+      "descriptionNew": "Coasty jobber på ekte datamaskiner — surfer, klikker, skriver, leverer. Noen raske detaljer slik at det passer til din stil.",
+      "footerNote": "Tar omtrent et minutt. Du kan endre alt senere i Innstillinger."
     },
     "nameLabel": "Hva skal vi kalle deg?",
-    "namePlaceholder": "Navnet ditt",
-    "companyLabel": "Selskap",
+    "namePlaceholder": "Bare fornavnet ditt",
+    "companyLabel": "Hvor jobber du?",
     "optional": "(valgfritt)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Din bedrift eller team",
     "websiteLabel": "Nettsted",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "dittfirma.no",
     "roleStep": {
       "title": "Hva beskriver deg best?",
       "subtitle": "Velg alle som passer — dette hjelper oss a tilpasse opplevelsen din"
     },
     "roles": {
-      "founder": "Founder / CEO",
-      "developer": "Developer",
+      "founder": "Gründer / CEO",
+      "developer": "Utvikler",
       "marketer": "Marketer",
       "designer": "Designer",
       "product_manager": "Product Manager",
       "data_analyst": "Data / Analytics",
-      "operations": "Operations",
+      "operations": "Drift",
       "other": "Annet"
     },
     "teamSizeLabel": "Teamstorrelse",
@@ -618,7 +663,7 @@
       "browser_automation": "Nettleserautomatisering",
       "data_entry": "Dataregistrering & Skjemaer",
       "email_outreach": "E-post & Kontakt",
-      "testing": "QA & Testing",
+      "testing": "QA og testing",
       "ecommerce": "E-handel-oppgaver",
       "social_media": "Administrasjon av sosiale medier",
       "general_automation": "Generell automatisering"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Hva skal AI-arbeideren din gjore?",
-    "placeholderAlt": "Fortell AI-en din hva den skal gjore pa datamaskinen...",
+    "placeholder": "Fortell meg hva jeg skal gjoere paa denne datamaskinen...",
+    "placeholderAlt": "Velg en datamaskin for aa komme i gang...",
     "vmError": {
       "title": "Virtuell maskin-feil",
       "description": "Den virtuelle maskinen er i feiltilstand eller blir slettet.",
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Slipp filer her",
       "dropDescription": "Filer lastes opp til VM-ens skrivebordsmappe",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Sti: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Logg inn for a prove flere funksjoner gratis",
@@ -801,6 +846,28 @@
       "ecommerce": "{company} prissammenligning",
       "social_media": "Publiser om {company}",
       "general_automation": "Automatiser oppgave pa {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Menneskelig overlevering fullført",
+      "yourTurn": "Din tur",
+      "connectToDesktop": "Koble til skrivebord",
+      "resuming": "Gjenopptar...",
+      "doneContinue": "Ferdig, fortsett"
+    },
+    "feedback": {
+      "promptRun": "Hvordan var denne kjøringen?",
+      "promptSwarm": "Hvordan var denne svermen?",
+      "reactionBad": "Dårlig",
+      "reactionOkay": "Greit",
+      "reactionGood": "Bra",
+      "reactionAmazing": "Fantastisk",
+      "tellUsMore": "Fortell mer",
+      "commentPlaceholder": "Hva kunne vært bedre?",
+      "npsPrompt": "Vil du anbefale Coasty?",
+      "npsNotLikely": "Lite sannsynlig",
+      "npsVeryLikely": "Veldig sannsynlig",
+      "thanks": "Takk for tilbakemeldingen",
+      "creditsLabel": "kreditter"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Ubegrenset tung automatisering"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Ingen kredittgrenser — noensinne",
+        "badge": "Beste verdi"
       }
     },
     "features": {
@@ -1061,7 +1133,7 @@
     "new": "ny",
     "description": "Legg til dine egne API-nokler for a lase opp tilgang til modeller.",
     "securityNote": "Noklene dine lagres sikkert med ende-til-ende-kryptering.",
-    "apiKeyLabel": "{provider} API Key",
+    "apiKeyLabel": "{provider} API-nøkkel",
     "getApiKey": "Fa API-nokkel",
     "delete": "Slett",
     "save": "Lagre",
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Oppsett"
+    "layout": "Oppsett",
+    "sidebarStyle": "Sidepanelstil",
+    "sidebarStyleHint": "Velg hvor navigasjonen er",
+    "sidebarStyleDisabled": "Tilgjengelig når Oppsett er satt til Sidepanel",
+    "vertical": "Vertikal",
+    "verticalBadge": "Standard",
+    "verticalDescription": "Klassisk venstre skinne med etiketter og kreditter i bunnteksten.",
+    "horizontal": "Horisontal",
+    "horizontalBadge": "Elegant",
+    "horizontalDescription": "Enkel topplinje med alt på én rad. Mer lerretshøyde."
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "Pålogginger lagret",
       "addLogins": "Legg til pålogginger",
       "askAnything": "Spør om hva som helst",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac og Windows",
       "mobileRemote": "Mobilfjernstyring",
       "freeDownload": "Gratis nedlasting",
       "onePrompt": "Én forespørsel",
@@ -1260,27 +1341,27 @@
     "newMachine": "Ny maskin",
     "filters": {
       "all": "All",
-      "running": "Running",
-      "creating": "Creating",
-      "stopped": "Stopped"
+      "running": "Kjører",
+      "creating": "Oppretter",
+      "stopped": "Stoppet"
     },
     "desktopPromo": {
       "text": "Skip the VM — run AI agents on your own computer with the native app. Control your desktop from your phone.",
-      "cta": "Get the app"
+      "cta": "Last ned appen"
     },
     "emptyState": {
-      "title": "True AI Employee with full computer access",
+      "title": "Ekte AI-ansatt med full datamaskintilgang",
       "description": "Spin up an isolated virtual machine and let AI agents browse the web, run terminals, and control the desktop — hands-free.",
       "feature1": {
-        "title": "Full desktop control",
-        "description": "AI moves the mouse, types, clicks, and navigates like a real user."
+        "title": "Full skrivebordskontroll",
+        "description": "AI beveger musen, skriver, klikker og navigerer som en ekte bruker."
       },
       "feature2": {
-        "title": "Any task automated",
+        "title": "Alle oppgaver automatisert",
         "description": "Browser, terminal, and UI — all agents work together in one VM."
       },
       "feature3": {
-        "title": "Isolated & safe",
+        "title": "Isolert og trygt",
         "description": "Each machine runs in its own container — your local system stays untouched."
       },
       "cta": "Create your first machine"
@@ -1309,25 +1390,25 @@
     "namePlaceholder": "Min skyserver",
     "nameError": "Datamaskinnavn kan ikke starte med \"local\"",
     "nameRequired": "Vennligst skriv inn et datamaskinnavn",
-    "osLabel": "Operating System",
+    "osLabel": "Operativsystem",
     "linux": {
       "name": "Linux (Ubuntu)",
-      "description": "Ubuntu 22.04 desktop"
+      "description": "Ubuntu 22.04-skrivebord"
     },
     "windows": {
       "name": "Windows Server",
       "badge": "BETA",
-      "description": "Windows desktop — expect bugs"
+      "description": "Windows-skrivebord — forvent feil"
     },
-    "osHintWindows": "Windows desktop with Chrome (beta). Ready in ~2 minutes.",
-    "osHintLinux": "Ubuntu desktop, accessible via browser. Ready in ~30 seconds.",
+    "osHintWindows": "Windows-skrivebord med Chrome (beta). Klart på ca. 2 minutter.",
+    "osHintLinux": "Ubuntu-skrivebord, tilgjengelig via nettleser. Klart på ca. 30 sekunder.",
     "stateLabel": "Datamaskinstatus",
-    "restorePrevious": "Restore Previous",
-    "restoreDescription": "Resume from last snapshot",
-    "startFresh": "Start Fresh",
-    "startFreshDescription": "Clean desktop environment",
-    "cancel": "Cancel",
-    "creating": "Creating...",
+    "restorePrevious": "Gjenopprett forrige",
+    "restoreDescription": "Fortsett fra siste øyeblikksbilde",
+    "startFresh": "Start på nytt",
+    "startFreshDescription": "Rent skrivebordsmiljø",
+    "cancel": "Avbryt",
+    "creating": "Oppretter...",
     "create": "Opprett datamaskin",
     "toasts": {
       "restoringSnapshot": "Gjenoppretter datamaskin fra øyeblikksbilde!",
@@ -1340,46 +1421,46 @@
   },
   "secrets": {
     "title": "Lagrede Innlogginger",
-    "subtitle": "Stored securely and used automatically by the AI agent when logging in",
+    "subtitle": "Lagret trygt og brukt automatisk av AI-agenten ved innlogging",
     "guide": "Guide",
-    "import": "Import",
-    "addCredential": "Add Credential",
-    "securityNote": "Credentials are never sent to the AI model and are never exposed in chat — the agent fills them in directly without seeing the values",
-    "username": "Username",
-    "password": "Password",
+    "import": "Importer",
+    "addCredential": "Legg til innlogging",
+    "securityNote": "Innloggingsdata sendes aldri til AI-modellen og vises aldri i chatten — agenten fyller dem inn direkte uten å se verdiene",
+    "username": "Brukernavn",
+    "password": "Passord",
     "hide": "Hide",
-    "revealFor10s": "Reveal for 10s",
-    "encrypted": "Encrypted",
+    "revealFor10s": "Vis i 10 sek.",
+    "encrypted": "Kryptert",
     "emptyState": {
-      "title": "Auto-login, hands-free",
-      "description": "Save credentials once — the AI agent logs in automatically and keeps going without ever interrupting you",
+      "title": "Automatisk innlogging, helt håndfritt",
+      "description": "Lagre innloggingen én gang — AI-agenten logger inn automatisk og fortsetter uten å avbryte deg",
       "feature1": {
-        "title": "Zero interruptions",
-        "description": "The agent encounters a login form, fills it in, and continues the task — no prompts, no pauses"
+        "title": "Null avbrudd",
+        "description": "Agenten møter et innloggingsskjema, fyller det ut og fortsetter oppgaven — ingen spørsmål, ingen pauser"
       },
       "feature2": {
-        "title": "Never seen by AI",
-        "description": "Your credentials are injected directly. The AI model never sees the actual values"
+        "title": "Aldri sett av AI",
+        "description": "Innloggingsdataene dine fylles inn direkte. AI-modellen ser aldri de faktiske verdiene"
       },
       "feature3": {
-        "title": "Any website",
-        "description": "Works with login forms across any site — email, SaaS tools, dashboards, anything"
+        "title": "Hvilken som helst nettside",
+        "description": "Fungerer med innloggingsskjemaer på alle nettsteder — e-post, SaaS-verktøy, dashbord, alt mulig"
       },
-      "cta": "Add your first credential"
+      "cta": "Legg til din første innlogging"
     },
     "deleteDialog": {
-      "title": "Delete credential?",
-      "description": "{name} ({service}) will be permanently deleted. The AI agent will no longer be able to use it.",
-      "cancel": "Cancel",
-      "delete": "Delete"
+      "title": "Slette innlogging?",
+      "description": "{name} ({service}) vil bli slettet permanent. AI-agenten vil ikke lenger kunne bruke den.",
+      "cancel": "Avbryt",
+      "delete": "Slett"
     },
     "toasts": {
-      "loadFailed": "Failed to load credentials",
-      "revealFailed": "Failed to reveal password",
-      "deleted": "Credential deleted",
-      "deleteFailed": "Failed to delete credential"
+      "loadFailed": "Kunne ikke laste innloggingsdata",
+      "revealFailed": "Kunne ikke vise passord",
+      "deleted": "Innlogging slettet",
+      "deleteFailed": "Kunne ikke slette innlogging"
     },
-    "loading": "Loading credentials..."
+    "loading": "Laster innloggingsdata..."
   },
   "pricingPage": {
     "hero": {
@@ -1413,11 +1494,17 @@
         "name": "Pro",
         "tagline": "Ubegrenset tung automatisering",
         "cta": "Velg Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Ingen kredittgrenser — noensinne",
+        "cta": "Velg Unlimited",
+        "badge": "Beste verdi"
       }
     },
     "features": {
       "computerAgent": {
-        "name": "Coasty Computer Agent",
+        "name": "Coasty Datamaskinagent",
         "description": "Full nettleser, skrivebord og terminal",
         "badge": "Kjerne"
       },
@@ -1572,7 +1659,7 @@
           "desc": "Finn kandidater, personalisert kontakt"
         },
         "support": {
-          "name": "Support",
+          "name": "Kundestøtte",
           "desc": "Skriv svar, oppdater hjelpedokumenter"
         },
         "productivity": {
@@ -1753,12 +1840,12 @@
       "startSwarm": "Start en swarm"
     },
     "workforceTab": {
-      "title": "Workforce",
+      "title": "Arbeidsstyrke",
       "subtitle": "Ditt AI-selskap, på autopilot",
       "description": "Ansatte, team, triggere — kjører 24/7.",
       "myCompany": "Mitt selskap",
       "contentOps": "Content Ops",
-      "support": "Support",
+      "support": "Kundestøtte",
       "writer": "Skribent",
       "seo": "SEO",
       "social": "Sosiale medier",
@@ -1829,18 +1916,18 @@
       "openWorkforce": "Åpne Workforce"
     },
     "billingTab": {
-      "credits": "Credits",
+      "credits": "Kreditter",
       "timeMetric": "Tid er den eneste målestokken.",
       "rate": "Sats",
       "rateValue": "10",
-      "creditsPerMin": "credits/min",
+      "creditsPerMin": "kreditter/min",
       "metered": "målt hvert 30. sekund",
       "example": "Eksempel",
       "minTask": "min oppgave",
-      "startCredits": "Start: {count} credits",
+      "startCredits": "Start: {count} kreditter",
       "endCredits": "Slutt: {count} credits",
       "creditsUsed": "{count} credits brukt",
-      "calculation": "{mins} min x 10 credits/min",
+      "calculation": "{mins} min × 10 kreditter/min",
       "plans": "Planer",
       "planData": {
         "free": {
@@ -1867,6 +1954,11 @@
           "credits": "1 500",
           "machines": "3 alltid-på",
           "feature": "SLA-garanti"
+        },
+        "unlimited": {
+          "credits": "Ubegrenset",
+          "machines": "2 alltid på",
+          "feature": "1 samtidig agent"
         }
       },
       "perMonth": "{price}/måned",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "To måter å kjøre på",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "Sky-VM",
       "cloudFeatures": {
         "isolated": "Fullstendig isolert sandbox",
         "freshBrowser": "Ren nettleser, ingen historikk",
@@ -1949,7 +2041,7 @@
       "rpa": "RPA",
       "human": "Menneske"
     },
-    "vsLabel": "Coasty vs {name}",
+    "vsLabel": "Coasty vs. {name}",
     "ctaTitle": "Klar til å prøve den #1 databrukende AI-agenten?",
     "ctaButton": "Prøv Coasty gratis",
     "noCreditCard": "Ingen kredittkort nødvendig",
@@ -1988,7 +2080,7 @@
     },
     "demoTitle": "Agent Swarms-demo",
     "demoDescription": "Se {count} maskiner takle en CRM-forskningsoppgave samtidig",
-    "prompt": "Prompt",
+    "prompt": "Ledetekst",
     "swarm": "SWARM",
     "run": "Kjør",
     "reset": "Tilbakestill",
@@ -2066,7 +2158,7 @@
     "viewPricing": "Se priser",
     "legend": {
       "messages": "Meldinger",
-      "broadcast": "Broadcast",
+      "broadcast": "Kringkast",
       "sharedMemory": "Delt minne",
       "help": "Hjelp"
     },
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 AI-agent for datamaskinbruk | AI-ansatt for skrivebords- og nettleserautomatisering",
+      "title": "Coasty - #1 AI-agent for datamaskinbruk | $249/mo Ubegrenset (Billigst i markedet)",
       "titleTemplate": "{title} | Coasty - AI-agent for datamaskinbruk",
-      "description": "Coasty er den #1-rangerte AI-agenten for datamaskinbruk — 82% på OSWorld benchmark. Styrer et helt skrivebord som et menneske: åpner nettlesere, klikker, skriver, fyller ut skjemaer, sender e-post, administrerer regneark. Ekte VM-isolering per økt. Fra $20/mo.",
-      "ogTitle": "Coasty - #1 AI-agent for datamaskinbruk | 82% OSWorld Benchmark",
-      "ogDescription": "AI-ansatt som styrer et skrivebord som et menneske. #1 på OSWorld benchmark (82%). Nettleserautomatisering, skrivebordskontroll, CAPTCHA-løsning, VM-isolering. Fra $20/mo.",
-      "twitterDescription": "AI-ansatt som styrer et skrivebord som et menneske. Åpner nettlesere, klikker, skriver, fyller ut skjemaer, sender e-post. Ekte VM-isolering. $20/mo mot $3,000/mo menneskelig virtuell assistent."
+      "description": "Coasty er den #1-rangerte AI-agenten for datamaskinbruk — 82% på OSWorld benchmark — og den eneste Ubegrensede datamaskinbruksplanen med fastpris på $249/mo (billigere enn Devin Team $500+ACU, OpenAI Operator $200 med hastighetsbegrensning og kredittbegrensede konkurrenter). Styrer et helt skrivebord som et menneske: nettlesere, skjemaer, e-post, regneark. VM-isolering. Fra $19/mo Starter eller $249/mo Ubegrenset.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Ubegrenset (Billigste datamaskinbruksagent)",
+      "ogDescription": "#1 på OSWorld (82%). $249/mo fast Ubegrenset — billigere enn Devin Team ($500+ACU) på en høyere benchmark. Nettleser-, skrivebords- og terminalautomatisering. VM-isolering per økt. Plattformsuavhengig native + REST API + MCP-server.",
+      "twitterDescription": "AI-agent som kjører et ekte skrivebord. 82% OSWorld (#1). $249/mo Ubegrenset — billigste planen med fastpris i kategorien. Starter fra $19/mo. VM-isolering + 26-tool MCP-server."
     },
     "compare": {
       "title": "Sammenlign Coasty - AI-agentalternativer og konkurrentsammenligning",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Den beste datamaskinbruksagenten rangert #1 på OSWorld. Automatiser enhver skrivebords-, nettleser- eller terminaloppgave med AI."
     },
     "pricing": {
-      "title": "Priser — Coasty AI-agentplaner og priser",
-      "description": "Coasty-priser fra $20/mo. Erstatt virtuelle assistenter til $3,000/mo med en AI-ansatt. Gratis plan tilgjengelig. Kredittbasert forbruk uten skjulte avgifter.",
-      "ogTitle": "Coasty-priser — AI-agentplaner",
-      "ogDescription": "AI-ansatt fra $20/mo. Erstatt dyre VA-er med autonom AI. Gratis plan tilgjengelig."
+      "title": "Priser — $19/mo Starter eller $249/mo Ubegrenset (Billigst i markedet)",
+      "description": "Coasty-priser: Starter $19/mo (200 kreditter) eller Ubegrenset $249/mo (den billigste Ubegrensede datamaskinbruksplanen med fastpris i markedet — billigere enn Devin Team $500+ACU, Genspark Pro $249 kredittbegrenset og Manus Extended $200 begrenset). Erstatter menneskelige virtuelle assistenter til $3,000+/mo. Ingen skjulte avgifter.",
+      "ogTitle": "Coasty-priser — $19/mo Starter, $249/mo Ubegrenset",
+      "ogDescription": "$249/mo fast Ubegrenset — den billigste ubegrensede datamaskinbruksplanen i markedet. Eller $19/mo Starter for enkeltpersoner. Sparer $36,000/år mot menneskelige VA-er."
     },
     "faq": {
       "q1": "Hva er Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Hvordan sammenligner Coasty seg med Anthropic Computer Use?",
       "a2": "Mens Anthropic Computer Use tilbyr et rått API for datamaskinkontroll, er Coasty en produksjonsklar plattform med administrert VM-infrastruktur, innebygd CAPTCHA-løsning, skrivebordsapp for Mac og Windows, støtte for flere modeller og den høyeste OSWorld benchmark-poengsummen (82%). Coasty gir den komplette løsningen — ikke bare API-et.",
       "q3": "Hva koster Coasty?",
-      "a3": "Coasty starter på $20/month for Starter-planen med en gratis plan tilgjengelig. Sammenlign med $3,000+ per måned for en menneskelig virtuell assistent. Coasty jobber 24/7 uten pauser, ingen opplæring nødvendig og umiddelbar skalerbarhet.",
+      "a3": "Coasty har to aktive planer: Starter på $19/mo (200 kreditter, 1 maskin, ideelt for enkeltpersoner) og Ubegrenset på $249/mo uten kredittbegrensninger. $249 Ubegrenset-planen er den billigste Ubegrensede datamaskinbruksplanen med fastpris som finnes — billigere enn Devin Team ($500/mo + ACU-overskridelse), OpenAI Operator ChatGPT Pro ($200/mo med hastighetsbegrensning), Genspark Pro ($249,99 kredittbegrenset til 125k kreditter) og Manus Extended ($200 begrenset til 40k kreditter). Begge erstatter en menneskelig virtuell assistent til $3,000+/mo; Ubegrenset sparer $33,000+/år mot en menneskelig VA med 92% kostnadsreduksjon.",
       "q4": "Er Coasty trygt å bruke?",
       "a4": "Ja. Hver Coasty-økt kjører i sin egen isolerte, sandkassebaserte virtuelle maskin. Dataene dine er trygge, maskinen din forblir urørt, og ingenting lekker mellom økter. Dette er ekte VM-nivå isolering, ikke bare containere i en delt pool.",
       "q5": "Hva er OSWorld benchmark?",
@@ -2309,11 +2401,11 @@
       "a10": "Ja. Coasty har en innebygd CAPTCHA-løsningspipeline, så den blir ikke blokkert slik konkurrerende AI-agenter gjør. Dette er avgjørende for automatisering i den virkelige verden der CAPTCHA-er er vanlige på nettsider."
     },
     "structuredData": {
-      "appDescription": "Den #1-rangerte AI-agenten for datamaskinbruk. Coasty styrer et helt skrivebord som et menneske — åpner nettlesere, klikker, skriver, fyller ut skjemaer, sender e-post og administrerer regneark autonomt. 82% på OSWorld benchmark. Ekte VM-nivå isolering. Innebygd CAPTCHA-løsning. Fra $20/month.",
-      "orgDescription": "Coasty bygger den #1-rangerte AI-agenten for datamaskinbruk. Vår plattform tilbyr autonom skrivebordskontroll, nettleserautomatisering og orkestrering av flere agenter med ekte VM-nivå isolering.",
-      "productDescription": "AI-datamaskinbruksagent som styrer et skrivebord som et menneske. #1 på OSWorld benchmark (82%). Autonom nettleserautomatisering, skrivebordskontroll, e-postsending, skjemautfylling og regnearkhåndtering med ekte VM-nivå isolering.",
-      "websiteDescription": "#1 AI-agentplattform for datamaskinbruk. 82% OSWorld benchmark. Autonom nettleser-, skrivebords- og terminalautomatisering med VM-isolering. Fra $20/mo.",
-      "softwareDescription": "AI-datamaskinbruksagent som styrer et helt skrivebord som et menneske. #1 på OSWorld benchmark med 82% fullføringsrate over 369 virkelige oppgaver. Autonom nettleserautomatisering, skrivebordskontroll, terminaloperasjoner, e-postsending, skjemautfylling og regnearkhåndtering.",
+      "appDescription": "Den #1-rangerte AI-agenten for datamaskinbruk og den billigste Ubegrensede datamaskinbruksplanen med fastpris i markedet for $249/mo. Coasty styrer et helt skrivebord som et menneske — åpner nettlesere, klikker, skriver, fyller ut skjemaer, sender e-post og administrerer regneark autonomt. 82% på OSWorld benchmark over 369 virkelige oppgaver. Ekte VM-nivå isolering per økt. Innebygd CAPTCHA-løsning. Planer: $19/mo Starter eller $249/mo Ubegrenset.",
+      "orgDescription": "Coasty bygger den #1-rangerte AI-agenten for datamaskinbruk (82% OSWorld) og leverer den eneste Ubegrensede datamaskinbruksplanen med fastpris på $249/mo — billigere enn Devin Team, OpenAI Operator og kredittbegrensede konkurrenter i samme prisklasse. Vår plattform tilbyr autonom skrivebordskontroll, nettleserautomatisering og orkestrering av flere agenter med ekte VM-nivå isolering.",
+      "productDescription": "AI-datamaskinbruksagent som styrer et skrivebord som et menneske. #1 på OSWorld benchmark (82%). $249/mo Ubegrenset-planen er den billigste Ubegrensede datamaskinbruksplanen med fastpris som finnes. Autonom nettleserautomatisering, skrivebordskontroll, e-postsending, skjemautfylling og regnearkhåndtering med ekte VM-nivå isolering.",
+      "websiteDescription": "#1 AI-agentplattform for datamaskinbruk — 82% OSWorld benchmark og den billigste Ubegrensede planen med fastpris på $249/mo. Autonom nettleser-, skrivebords- og terminalautomatisering med VM-isolering. Fra $19/mo Starter eller $249/mo Ubegrenset.",
+      "softwareDescription": "AI-datamaskinbruksagent som styrer et helt skrivebord som et menneske. #1 på OSWorld benchmark med 82% fullføringsrate over 369 virkelige oppgaver. $249/mo Ubegrenset-planen er den billigste Ubegrensede datamaskinbruksplanen med fastpris i markedet. Autonom nettleserautomatisering, skrivebordskontroll, terminaloperasjoner, e-postsending, skjemautfylling og regnearkhåndtering.",
       "breadcrumbs": {
         "home": "Hjem",
         "caseStudies": "AI-agent casestudier",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Siden ble ikke funnet",
-      "description": "Beklager, denne siden finnes ikke."
+      "description": "Beklager, denne siden finnes ikke.",
+      "metaTitle": "404 · Siden ble ikke funnet",
+      "metaDescription": "Vi sendte vår beste AI-agent. Den kom tomhendt tilbake. Tilbake til Coasty, den #1-rangerte AI-agenten for skrivebords- og nettleserautomatisering.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "skann: hele internett",
+        "step2": "skann: hver åpne fane",
+        "step3": "skann: under sofaen",
+        "result": "konklusjon: siden eksisterer ikke"
+      },
+      "ok": "OK",
+      "fail": "MISLYKKES",
+      "primaryCta": "Tilbake til forsiden",
+      "secondaryCta": "Lei en AI-agent",
+      "navLabel": "Foreslåtte sider",
+      "links": {
+        "home": "Hjem",
+        "computerUse": "Datamaskinbruk",
+        "pricing": "Priser",
+        "download": "Last ned",
+        "blog": "Blogg",
+        "guide": "Veiledning"
+      }
     },
     "error": {
       "title": "Noe gikk galt",
@@ -2335,7 +2449,7 @@
     }
   },
   "schedulesPage": {
-    "title": "Workforce",
+    "title": "Arbeidsstyrke",
     "subtitle": "Din AI-arbeidsstyrke — tildel oppgaver og la dem håndtere resten",
     "guide": "Guide",
     "teamsTab": "Team",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Romtittel er påkrevd",
+      "taskCreated": "Oppgave opprettet",
+      "taskFailed": "Kunne ikke opprette oppgave",
+      "assignTask": "Tildel ny oppgave",
+      "assignTaskDesc": "Start en ny oppgave med AI-assistenten din.",
+      "taskName": "Oppgavenavn",
+      "taskNamePlaceholder": "Skriv inn oppgavenavn",
+      "cancel": "Avbryt",
+      "creating": "Oppretter...",
+      "createTask": "Opprett oppgave"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Skriv inn en invitasjonskode",
+      "joinSuccess": "Du har blitt med i prosjektet!",
+      "joinFailed": "Kunne ikke bli med i prosjektet",
+      "invalidCode": "Ugyldig invitasjonskode eller prosjekt ikke funnet",
+      "title": "Bli med i prosjekt",
+      "description": "Skriv inn en invitasjonskode for å bli med i et eksisterende prosjekt.",
+      "inviteCode": "Invitasjonskode",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Spør teamlederen din om prosjektets invitasjonskode",
+      "cancel": "Avbryt",
+      "joining": "Blir med...",
+      "joinButton": "Bli med i prosjekt"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "Deltakere i rommet",
+      "copyCode": "Kopier kode",
+      "copyLink": "Kopier lenke",
+      "codeCopied": "Invitasjonskode kopiert!",
+      "codeFailed": "Kunne ikke kopiere invitasjonskode",
+      "linkCopied": "Invitasjonslenke kopiert!",
+      "linkFailed": "Kunne ikke kopiere invitasjonslenke",
+      "online": "Pålogget",
+      "offline": "Avlogget",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Romtittel er påkrevd",
+      "created": "Prosjekt opprettet!",
+      "failed": "Kunne ikke opprette rom",
+      "title": "Opprett nytt prosjekt",
+      "description": "Start et nytt prosjekt for å bygge produktet ditt med AI.",
+      "projectName": "Prosjektnavn",
+      "projectNamePlaceholder": "Skriv inn prosjektnavn",
+      "teamSize": "Teamstørrelse",
+      "cancel": "Avbryt",
+      "creating": "Oppretter...",
+      "createButton": "Opprett prosjekt"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Nyheter",
+    "title": "Nyheter i Coasty",
+    "updateCount": "{count} oppdateringer",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Oppdatering",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Følg med for flere oppdateringer",
+    "tagline": "Din AI-ansatte som samarbeider med alle"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Fantastisk"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Logg inn for å sende tilbakemelding",
+    "alreadySubmitted": "Du har allerede sendt tilbakemelding for dette",
+    "thankYou": "Takk for tilbakemeldingen!",
+    "creditsEarned": "+{credits} kreditter opptjent",
+    "helpImprove": "Tilbakemeldingen din hjelper oss å forbedre Coasty.",
+    "howsExperience": "Hvordan opplever du Coasty?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Fortell mer",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Hva fungerer bra? Hva kan bli bedre?",
+    "cancel": "Avbryt",
+    "sending": "Sender...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Velg en arbeidsstasjon",
+    "enterCron": "Skriv inn et cron-uttrykk",
+    "hireFailed": "Kunne ikke ansette",
+    "removeFailed": "Kunne ikke fjerne ansatt",
+    "editEmployee": "Rediger ansatt",
+    "configureEmployee": "Konfigurer ansatt",
+    "editDescription": "Oppdater plan, arbeidsstasjon eller instruksjoner",
+    "configureDescription": "Sett opp en AI-ansatt for denne chatten",
+    "loading": "Laster konfigurasjon...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Navn på ansatt"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Slette chat?",
+    "description": "Dette vil slette «{chatTitle}»",
+    "cancel": "Avbryt",
+    "delete": "Slett"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Betaling vellykket! Kredittene dine er lagt til.",
+    "canceled": "Betalingen ble avbrutt. Ingen belastning utført."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Generelle innstillinger",
     "generalDescription": "Konfigurer grunnleggende datamaskininnstillinger",
     "displayName": "Visningsnavn",
     "defaultName": "Min datamaskin",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Lagre endringer",
+    "security": "Sikkerhet",
+    "securityDescription": "Sikkerhets- og tilgangsinnstillinger",
+    "sshAuth": "SSH-autentisering",
+    "username": "Brukernavn:",
+    "keyPair": "Nøkkelpar:",
+    "sshKeyDownloaded": "SSH-nøkkel lastet ned",
+    "sshKeyFailed": "Kunne ikke laste ned SSH-nøkkel",
+    "downloadSshKey": "Last ned SSH-nøkkel",
+    "vncPassword": "VNC-passord",
     "vncPasswordHint": "Dette passordet kreves for å koble til datamaskinen"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Hei, jeg har brukt Coasty i det siste, og det er ganske kult. Det er en AI som faktisk kan bruke datamaskinen for deg. Surfe, klikke, skrive, alt sammen. Prøv det med lenken min, så får vi begge gratis kreditter!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Sjekk ut dette AI-verktøyet",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "akkurat nå",
+      "minutesAgo": "{minutes}m siden",
+      "hoursAgo": "{hours}t siden",
+      "daysAgo": "{days}d siden",
+      "monthsAgo": "{months}mnd siden"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Vervelenke kopiert!",
+    "headline": "Gode venner deler memes. De beste vennene deler AI-agenter.",
+    "subheadline": "Dere får begge {credits} gratis kreditter når vennen din blir med.",
+    "yourLink": "Din vervelenke",
+    "shareDirectly": "Del direkte",
+    "yourReferrals": "Dine vervinger",
+    "referralCount": "{count} verving(er)",
+    "creditsEarned": "{credits} kreditter opptjent",
+    "invitedYou": "Inviterte deg",
+    "joinedViaLink": "Ble med via lenken din",
+    "noInvites": "Ingen brukere invitert ennå",
+    "noInvitesHint": "Del lenken din, så får dere begge 50 kreditter"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Gjør offentlig",
+    "title": "Samtalen din er nå offentlig!",
+    "description": "Alle med lenken kan nå se denne samtalen, og den kan dukke opp i fellesskapsfeeder, utvalgte sider eller søkeresultater i framtiden.",
+    "viewPage": "Vis side",
+    "shareOn": "Del på"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "AI-kontrollpanel",
+    "subtitle": "Beskriv hva du vil at AI skal gjøre",
+    "quickCommands": "Hurtigkommandoer",
+    "noActions": "Ingen handlinger utført ennå",
+    "success": "Vellykket",
+    "failed": "Mislyktes",
+    "placeholder": "Fortell AI hva som skal gjøres... (Ctrl+Enter for å sende)",
+    "executing": "Utfører...",
+    "executeCommand": "Utfør kommando"
   },
   "discover": {
     "badge": "Fellesskap",
@@ -2859,5 +2973,190 @@
     "watchSession": "Se økt",
     "steps": "{count} trinn",
     "tryCoasty": "Prøv Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Minne",
+    "sidebarDescription": "Kontekst anvendt på hver agentkjøring",
+    "dialog": {
+      "title": "Minne",
+      "description": "En kort notat som Coasty bruker hver gang den arbeider for deg.",
+      "openFull": "Åpne fullt",
+      "visualMemoryLabel": "Minne",
+      "visualSynced": "Synkronisert",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Planer",
+      "visualContextSwarm": "Sverm"
+    },
+    "section": {
+      "title": "Minne",
+      "tag": "valgfritt · personlig",
+      "description": "Et kort notat om deg som følger med hver agentkjøring — chat, planlagte oppgaver, svermmaskiner, delegerte agenter."
+    },
+    "presetsLabel": "Prøv",
+    "presets": {
+      "useFirstName": "Bruk fornavn",
+      "useFirstNameSentence": "Tiltal meg ved fornavnet mitt.",
+      "beTerse": "Vær konsis",
+      "beTerseSentence": "Foretrekk konsise, direkte svar. Ingen fyll.",
+      "imDeveloper": "Jeg er utvikler",
+      "imDeveloperSentence": "Jeg er programvareingeniør; komfortabel med kode.",
+      "noEmojis": "Ingen emojier",
+      "noEmojisSentence": "Unngå emojier i svar.",
+      "metricUnits": "Metriske enheter",
+      "metricUnitsSentence": "Bruk metriske enheter (meter, kilogram, °C).",
+      "citeSources": "Siter kilder",
+      "citeSourcesSentence": "Siter kilder ved faktiske påstander."
+    },
+    "placeholder": "Eksempel:\nTiltal meg ved fornavnet mitt.\nForetrekk konsise svar.\nJeg jobber med TypeScript og Python.\nSlett aldri filer uten bekreftelse.",
+    "loading": "Laster…",
+    "saving": "Lagrer…",
+    "saved": "Lagret",
+    "unsavedChanges": "Ulagrede endringer",
+    "empty": "Tomt",
+    "savedRelative": "Lagret · {time}",
+    "errorLoad": "Kunne ikke laste inn minnet ditt.",
+    "errorSave": "Kunne ikke lagre minnet ditt.",
+    "willBeShortened": "vil bli forkortet",
+    "clear": "Tøm",
+    "footerNote": "Coasty tar hensyn til disse preferansene når den arbeider for deg.",
+    "time": {
+      "justNow": "akkurat nå",
+      "secondsAgo": "{n}s siden",
+      "minutesAgo": "{n}m siden",
+      "hoursAgo": "{n}t siden",
+      "daysAgo": "{n}d siden"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Innstillinger",
+    "navGroups": {
+      "settings": "Innstillinger",
+      "developer": "Utvikler",
+      "more": "Mer",
+      "resources": "Ressurser"
+    },
+    "sections": {
+      "account": {
+        "label": "Generelt",
+        "description": "Profil og konto"
+      },
+      "appearance": {
+        "label": "Utseende",
+        "description": "Tema, språk og bakgrunn"
+      },
+      "billing": {
+        "label": "Fakturering",
+        "description": "Abonnementer og kreditter"
+      },
+      "publicChats": {
+        "label": "Offentlige chatter",
+        "description": "Administrer chatter delt via offentlig lenke"
+      },
+      "privacy": {
+        "label": "Personvern",
+        "description": "Sikkerhet og datapersonvern"
+      },
+      "notifications": {
+        "label": "Varsler",
+        "description": "Varselinnstillinger"
+      },
+      "apiKeys": {
+        "label": "API-nøkler",
+        "description": "Administrer API-nøklene dine"
+      },
+      "data": {
+        "label": "Data",
+        "description": "Eksporter og administrer dataene dine"
+      },
+      "feedback": {
+        "label": "Tilbakemelding",
+        "description": "Send oss din tilbakemelding"
+      },
+      "about": {
+        "label": "Om",
+        "description": "Om Coasty"
+      },
+      "social": {
+        "label": "Koble til",
+        "description": "Sosiale lenker"
+      },
+      "guide": {
+        "label": "Guide",
+        "description": "Lær hvordan du bruker Coasty"
+      },
+      "referral": {
+        "label": "Henvisning",
+        "description": "Inviter venner og tjen kreditter"
+      }
+    },
+    "appearance": {
+      "theme": "Tema",
+      "language": "Språk",
+      "background": "Bakgrunn",
+      "personalization": "Tilpasning",
+      "intro": {
+        "title": "Filmisk intro",
+        "description": "Vis den animerte introen ved besøk på hjemmesiden"
+      },
+      "interaction": {
+        "title": "Verktøykall",
+        "description": "Vis verktøyutførelsesdetaljer i samtaler"
+      }
+    },
+    "comingSoon": {
+      "badge": "Snart",
+      "placeholder": "Denne delen kommer i en fremtidig oppdatering."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Vis meg hva som er mulig…",
+    "tasks": [
+      "Undersøk mine konkurrenter",
+      "Fyll ut jobbsøknader",
+      "Bestill flyreise til Tokyo",
+      "Spor oppetiden til nettstedet mitt",
+      "Planlegg sosiale innlegg",
+      "Analyser kvartalsvise trender"
+    ],
+    "dontShowAgain": "Ikke vis igjen",
+    "skip": "Hopp over",
+    "tagline": "Gjør hva som helst, akkurat som et menneske kan med en datamaskin"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Dine datamaskiner",
+      "description": "Silisium til din tjeneste. Starter flåten din nå."
+    },
+    "swarms": {
+      "title": "Svermintelligens",
+      "description": "Mange sinn, ett oppdrag. Samler agentene dine."
+    },
+    "developers": {
+      "title": "Utvikler-API",
+      "description": "Laster dashbordet ditt."
+    },
+    "secrets": {
+      "title": "Påloggingsinfo",
+      "description": "Hemmelighetene dine er trygge hos oss. Åpner hvelvet."
+    },
+    "schedules": {
+      "title": "Tidsplaner",
+      "description": "Alltid i tide. Synkroniserer automatiseringene dine."
+    },
+    "history": {
+      "title": "Din historikk",
+      "description": "En stille oversikt over hver samtale, oppgave og idé du har utforsket."
+    },
+    "referral": {
+      "title": "Henvisninger",
+      "description": "Del Coasty. Tjen sammen."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Dine data, din kontroll",
+    "heroDescription": "Vi lagrer kun det som er nødvendig for å kjøre øktene dine. All trafikk er kryptert under overføring, og du kan utvide kryptering i hvile til kategoriene nedenfor. Dataene dine brukes aldri til å trene KI-modeller.",
+    "trustTransit": "TLS 1.3 under overføring",
+    "trustAtRest": "AES-256-GCM i hvile",
+    "trustNoTraining": "Ingen trening på dataene dine"
   }
 }

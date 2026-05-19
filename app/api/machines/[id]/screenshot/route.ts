@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import type { VMScreenshot } from "@/types/vm-context.types";
+import { SVG_MONO_STACK } from "@/lib/fonts";
 import WebSocket from 'ws';
 
 interface RouteParams {
@@ -248,22 +249,22 @@ function createPlaceholderScreenshot(): string {
     <svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
       <rect width="1920" height="1080" fill="#1e1e1e"/>
       <rect x="0" y="0" width="1920" height="30" fill="#2d2d2d"/>
-      <text x="960" y="540" text-anchor="middle" fill="#666" font-size="48" font-family="monospace">
+      <text x="960" y="540" text-anchor="middle" fill="#666" font-size="48" font-family="${SVG_MONO_STACK}">
         VM Desktop Screenshot
       </text>
-      <text x="960" y="600" text-anchor="middle" fill="#444" font-size="24" font-family="monospace">
+      <text x="960" y="600" text-anchor="middle" fill="#444" font-size="24" font-family="${SVG_MONO_STACK}">
         ${new Date().toLocaleString()}
       </text>
       <rect x="100" y="100" width="400" height="300" fill="#2a2a2a" stroke="#444" stroke-width="1"/>
-      <text x="300" y="250" text-anchor="middle" fill="#888" font-size="16" font-family="monospace">
+      <text x="300" y="250" text-anchor="middle" fill="#888" font-size="16" font-family="${SVG_MONO_STACK}">
         Terminal
       </text>
       <rect x="600" y="100" width="600" height="400" fill="#252525" stroke="#444" stroke-width="1"/>
-      <text x="900" y="300" text-anchor="middle" fill="#888" font-size="16" font-family="monospace">
+      <text x="900" y="300" text-anchor="middle" fill="#888" font-size="16" font-family="${SVG_MONO_STACK}">
         Code Editor
       </text>
       <rect x="1300" y="100" width="500" height="800" fill="#2a2a2a" stroke="#444" stroke-width="1"/>
-      <text x="1550" y="500" text-anchor="middle" fill="#888" font-size="16" font-family="monospace">
+      <text x="1550" y="500" text-anchor="middle" fill="#888" font-size="16" font-family="${SVG_MONO_STACK}">
         Browser
       </text>
     </svg>

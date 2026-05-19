@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react"
 import { useUser } from "@/lib/user-store/provider"
+import {
+  normalizeTier,
+  isPaidTier,
+  tierAtLeast,
+  type UserTier,
+} from "@/lib/tier"
 
 interface UserSubscription {
   id: string
@@ -10,6 +16,12 @@ interface UserSubscription {
   created_at?: string
 }
 
+const PAID_STATUSES = new Set(["active", "trialing", "past_due"])
+
+/**
+ * Reads /api/subscription/status and exposes canonical tier helpers.
+ * Single tier helper module is lib/tier.ts.
+ */
 export function useSubscription() {
   const { user } = useUser()
   const [subscription, setSubscription] = useState<UserSubscription | null>(null)
@@ -44,20 +56,35 @@ export function useSubscription() {
     fetchSubscription()
   }, [user])
 
-  // Helper functions
-  const isActiveSubscriber = subscription?.status === "active"
-  const isProfessionalTier = subscription?.tier === "professional"
-  const isEnterpriseTier = subscription?.tier === "enterprise"
-  const isUnlimitedTier = isProfessionalTier || isEnterpriseTier
+  // Canonical tier — never returns a legacy alias.
+  const tier: UserTier = normalizeTier(subscription?.tier)
+  const isActiveSubscriber = !!subscription && PAID_STATUSES.has(subscription.status) && isPaidTier(tier)
+  const isLiteTier = tier === "lite"
+  const isStarterTier = tier === "starter"
+  const isProfessionalTier = tier === "professional"
+  const isEnterpriseTier = tier === "enterprise"
+  const isPaid = isPaidTier(tier)
+  // "Unlimited" historically meant Plus or Pro.  Keep semantics: ≥ professional.
+  // (Now also includes the literal "unlimited" tier introduced in migration 017.)
+  const isUnlimitedTier = tierAtLeast(tier, "professional")
+  // Strict check for the literal "unlimited" subscription tier (Stripe plan).
+  // Use this when you need to specifically detect the Unlimited plan, NOT the
+  // legacy ">=professional" semantic above.
+  const isUnlimitedPlan = tier === "unlimited"
 
   return {
     subscription,
     loading,
     error,
+    tier,
     isActiveSubscriber,
+    isLiteTier,
+    isStarterTier,
     isProfessionalTier,
     isEnterpriseTier,
+    isPaid,
     isUnlimitedTier,
-    refetch: fetchSubscription
+    isUnlimitedPlan,
+    refetch: fetchSubscription,
   }
 }

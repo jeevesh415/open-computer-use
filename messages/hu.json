@@ -12,13 +12,15 @@
     "recommended": "Ajánlott",
     "month": "hónap",
     "creditsPerMonth": "{count} kredit/hó",
-    "agentsInParallel": "{count} ügynök párhuzamosan"
+    "agentsInParallel": "{count} ügynök párhuzamosan",
+    "whatsIncluded": "Mit tartalmaz",
+    "hideDetails": "Részletek elrejtése"
   },
   "header": {
     "useCases": "Felhasználási esetek",
     "blog": "Blog",
     "agentSwarms": "Ügynökrajok",
-    "products": "Products",
+    "products": "Termékek",
     "discover": "Discover",
     "compare": "Összehasonlítás",
     "demos": "Demók",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} személyre szabott e-mail kampányonként"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Számítógép-használat",
+      "agentSwarms": "Ügynökrajok",
+      "compare": "Összehasonlítás"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} OSWorld benchmark-pontszám",
+      "agentSwarms": "{stat} ügynök párhuzamosan",
+      "compare": "{stat} versenytárs elemezve"
     },
     "blogItems": {
       "allPosts": "Összes bejegyzés",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "Álláspályázatok",
       "demosResults": "Demók és eredmények",
-      "guide": "Útmutató"
+      "guide": "Útmutató",
+      "discover": "Közösség"
     },
     "blogStats": {
       "allPosts": "{stat} cikk megjelenik hetente",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} oldal munkamenetenként",
       "jobApplications": "{stat} pályázat munkamenetenként",
       "demosResults": "{stat} valós esettanulmány",
-      "guide": "{stat} felhasználási eset bemutató"
-    }
+      "guide": "{stat} felhasználási eset bemutató",
+      "discover": "Nézze meg, hogyan használják"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonóm számítógép-operátorok",
+    "headline": "A legjobb számítógép-használati ügynök",
     "useCases": {
       "computerAgent": {
         "label": "Számítógépes ügynök",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Közösségi média",
         "task": "Posztolj a Hacker News-ra és reagálj a kommentekre"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "megspórolva havonta",
+        "sublabel": "egy teljes munkaidős VA-hoz képest"
+      },
+      "time": {
+        "value": "30 óra",
+        "label": "visszanyerve hetente",
+        "sublabel": "manuális munka megszüntetve"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "gyorsabb kimenet",
+        "sublabel": "feladatok percek, nem napok alatt"
+      },
+      "effort": {
+        "value": "0",
+        "label": "kód vagy felvétel",
+        "sublabel": "végponttól végpontig kezelve"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Korlátlan nehéz automatizálás",
         "cta": "Pro beszerzése"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Nincs kreditkorlát — soha",
+        "cta": "Unlimited választása",
+        "badge": "Legjobb érték"
       }
     },
     "vmTemporary": "1 ideiglenes VM (2 óra)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Ugyanez a munka {oldPrice}-ba kerül kézi munkával",
       "description": "Egy virtuális asszisztens $2 000–$4 000/hó. Egy részmunkaidős alkalmazott még többe kerül. A Coasty ugyanazt a munkát végzi 24/7, $0-tól indulva — tökéletes konzisztenciával, teljes audit nyomvonallal és nulla betanulási idővel."
-    }
+    },
+    "unlimitedCredits": "Korlátlan kreditek"
   },
   "faq": {
     "title": "Gyakran ismételt kérdések",
@@ -429,7 +463,8 @@
       "contact": "Kapcsolat",
       "privacy": "Adatvédelem",
       "terms": "Feltételek"
-    }
+    },
+    "status": "Minden rendszer működik"
   },
   "languageSwitcher": {
     "label": "Nyelv"
@@ -458,16 +493,16 @@
     "demoCaption": "Futtass AI-ügynököket a számítógépeden vagy irányítsd a telefonodról, bárhonnan.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Futtasd helyben a PC-den",
+        "desc": "Töltsd le az asztali alkalmazást, és hagyd, hogy az MI közvetlenül vezérelje a számítógépedet — felhős virtuális gép nélkül."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Vezéreld a PC-d a telefonodról",
+        "desc": "Indíts el egy feladatot a telefonodról, és nézd valós időben, ahogy az MI-ügynök dolgozik a számítógépeden."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Felhő vagy helyi — te döntesz",
+        "desc": "Használj felhős virtuális gépeket elszigetelt feladatokhoz, vagy válaszd a helyi futtatást a teljes hozzáférésért az alkalmazásaidhoz és fájljaidhoz."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Csatlakozás...",
       "continueWithGoogle": "Folytatás Google-lal"
+    },
+    "inAppBrowser": {
+      "blocked": "A Google-bejelentkezés nem működik beágyazott böngészőkben. Nyisd meg ezt az oldalt a böngésződben, vagy használj magic linket.",
+      "blockedNamed": "A Google-bejelentkezés nem működik a(z) {app} alkalmazásban. Nyisd meg ezt az oldalt a böngésződben, vagy használj magic linket.",
+      "copyLink": "Link másolása",
+      "copied": "Másolva!",
+      "useMagicLink": "Magic link használata"
     },
     "or": "vagy",
     "email": "E-mail",
@@ -560,18 +602,21 @@
     "getStarted": "Kezdés",
     "settingUp": "Beállítás...",
     "welcome": {
-      "titleReturning": "Üdv újra{name}!",
-      "titleNew": "Üdvözlünk a Coasty-ban",
-      "descriptionReturning": "Szeretnénk egy kicsit jobban megismerni téged, hogy javíthassuk az élményed",
-      "descriptionNew": "Állítsuk be a fiókodat, hogy személyre szabhassuk az élményed"
+      "titleReturning": "Üdv újra itt{name}",
+      "titleNew": "Üdvözlünk a Coastynál",
+      "eyebrowNew": "Ismerkedjünk meg",
+      "eyebrowReturning": "Mindjárt kész",
+      "descriptionReturning": "Még néhány részlet, és a Coasty teljesen a munkamódszeredre lesz hangolva.",
+      "descriptionNew": "A Coasty igazi számítógépeken dolgozik — böngészik, kattint, gépel, szállít. Néhány gyors részlet, hogy az ízlésedhez igazodjon.",
+      "footerNote": "Körülbelül egy percig tart. Bármit módosíthatsz később a Beállításokban."
     },
     "nameLabel": "Hogyan szólítsunk?",
-    "namePlaceholder": "A neved",
-    "companyLabel": "Vállalat",
+    "namePlaceholder": "Elég a keresztneved",
+    "companyLabel": "Hol dolgozol?",
     "optional": "(opcionális)",
-    "companyPlaceholder": "MacroHard",
-    "websiteLabel": "Weboldal",
-    "websitePlaceholder": "xai.com",
+    "companyPlaceholder": "A céged vagy csapatod",
+    "websiteLabel": "Webhely",
+    "websitePlaceholder": "ceged.hu",
     "roleStep": {
       "title": "Mi jellemez téged a legjobban?",
       "subtitle": "Válaszd ki az összes releváns lehetőséget — ez segít nekünk személyre szabni az élményed"
@@ -644,7 +689,7 @@
         "description": "Űrlapok, lapok, scraping — teljesen automatizált"
       },
       "computerVision": {
-        "title": "Computer Vision",
+        "title": "Számítógépes látás",
         "description": "Látja és érti a képernyődet valós időben"
       },
       "workflows": {
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Mit csináljon az AI munkásod?",
-    "placeholderAlt": "Mondd el az AI-nak, mit csináljon a számítógépen...",
+    "placeholder": "Mondd el, mit csináljak ezen a számítógépen...",
+    "placeholderAlt": "Válassz egy számítógépet a kezdéshez...",
     "vmError": {
       "title": "Virtuális gép hiba",
       "description": "A virtuális gép hibás állapotban van vagy törlés alatt áll.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Gépek számának csökkentése",
       "increaseMachines": "Gépek számának növelése",
       "machineLimit": "Legfeljebb {max} raj gép a csomagodban. Többre van szükséged? Írj a founders@coasty.ai címre",
-      "label": "Multi-Run",
+      "label": "Több futtatás",
       "upgradeCta": "Raj mód"
     },
     "desktop": {
@@ -801,6 +846,28 @@
       "ecommerce": "{company} ár-összehasonlítás",
       "social_media": "Posztolás a {company}-ról",
       "general_automation": "Feladat automatizálása a {company} oldalon"
+    },
+    "awaitingHuman": {
+      "completed": "Emberi átadás befejeződött",
+      "yourTurn": "Te jössz",
+      "connectToDesktop": "Csatlakozás az asztalhoz",
+      "resuming": "Folytatás...",
+      "doneContinue": "Kész, folytatás"
+    },
+    "feedback": {
+      "promptRun": "Milyen volt ez a futtatás?",
+      "promptSwarm": "Milyen volt ez a swarm?",
+      "reactionBad": "Rossz",
+      "reactionOkay": "Rendben",
+      "reactionGood": "Jó",
+      "reactionAmazing": "Csodálatos",
+      "tellUsMore": "Mondj többet",
+      "commentPlaceholder": "Mit lehetne javítani?",
+      "npsPrompt": "Ajánlanád a Coastyt?",
+      "npsNotLikely": "Nem valószínű",
+      "npsVeryLikely": "Nagyon valószínű",
+      "thanks": "Köszi a visszajelzést",
+      "creditsLabel": "kredit"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Korlátlan nehéz automatizálás"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Nincs kreditkorlát — soha",
+        "badge": "Legjobb érték"
       }
     },
     "features": {
@@ -1113,7 +1185,7 @@
         "description": "API kulcsok AES-256-GCM-mel titkosítva. A hitelesítő adataid soha nem kerülnek egyszerű szövegként tárolásra."
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "Sor szintű biztonság",
         "description": "Az adatbázis szintű izoláció biztosítja, hogy az adataid csak te férhess hozzá. Nincs lehetőség bérlők közötti hozzáférésre."
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Elrendezés"
+    "layout": "Elrendezés",
+    "sidebarStyle": "Oldalsáv stílusa",
+    "sidebarStyleHint": "Válaszd ki, hol legyen a navigáció",
+    "sidebarStyleDisabled": "Elérhető, ha az elrendezés Oldalsávra van állítva",
+    "vertical": "Függőleges",
+    "verticalBadge": "Alapértelmezett",
+    "verticalDescription": "Klasszikus bal oldali sáv címkékkel és kreditekkel a láblécben.",
+    "horizontal": "Vízszintes",
+    "horizontalBadge": "Letisztult",
+    "horizontalDescription": "Egyetlen felső sáv mindennel egy sorban. Több vászonmagasság."
   },
   "suggestions": {
     "summary": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Korlátlan nehéz automatizálás",
         "cta": "Pro csomag"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Nincs kreditkorlát — soha",
+        "cta": "Unlimited választása",
+        "badge": "Legjobb érték"
       }
     },
     "features": {
@@ -1422,7 +1509,7 @@
         "badge": "Alap"
       },
       "swarmMode": {
-        "name": "Swarm Mode",
+        "name": "Raj mód",
         "sequential": "Csak szekvenciális",
         "parallel": "{count} ügynök párhuzamosan",
         "badge": "Erőteljes"
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 mindig aktív",
           "feature": "SLA garancia"
+        },
+        "unlimited": {
+          "credits": "Korlátlan",
+          "machines": "2 mindig aktív",
+          "feature": "1 egyidejű ügynök"
         }
       },
       "perMonth": "{price}/hó",
@@ -2066,7 +2158,7 @@
     "viewPricing": "Arak megtekintese",
     "legend": {
       "messages": "Uzenetek",
-      "broadcast": "Broadcast",
+      "broadcast": "Sugárzás",
       "sharedMemory": "Megosztott memoria",
       "help": "Segitseg"
     },
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 Számítógépet használó AI ügynök | AI alkalmazott asztali és böngésző automatizáláshoz",
+      "title": "Coasty - #1 Számítógépet használó AI ügynök | $249/mo Korlátlan (A legolcsóbb a piacon)",
       "titleTemplate": "{title} | Coasty - AI számítógép-használati ügynök",
-      "description": "A Coasty a #1 rangsorolt számítógépet használó AI ügynök — 82% az OSWorld benchmarkon. Teljes asztalt irányít, mint egy ember: böngészőket nyit, kattint, gépel, űrlapokat tölt ki, e-maileket küld, táblázatokat kezel. Valódi VM-szintű izoláció munkamenetenként. $20/hó-tól.",
-      "ogTitle": "Coasty - #1 Számítógépet használó AI ügynök | 82% OSWorld benchmark",
-      "ogDescription": "AI alkalmazott, amely asztalt irányít, mint egy ember. #1 az OSWorld benchmarkon (82%). Böngésző automatizálás, asztal vezérlés, CAPTCHA megoldás, VM izoláció. $20/hó-tól.",
-      "twitterDescription": "AI alkalmazott, amely asztalt irányít, mint egy ember. Böngészőket nyit, kattint, gépel, űrlapokat tölt ki, e-maileket küld. Valódi VM izoláció. $20/hó vs $3 000/hó emberi asszisztens."
+      "description": "A Coasty a #1 rangsorolt számítógépet használó AI ügynök — 82% az OSWorld benchmarkon — és az egyetlen átalánydíjas Korlátlan számítógép-használati csomag $249/mo áron (olcsóbb mint a Devin Team $500+ACU, az OpenAI Operator $200 lekérdezés-korláttal és a kreditkorlátos versenytársak). Teljes asztalt irányít, mint egy ember: böngészők, űrlapok, e-mailek, táblázatok. VM-szintű izoláció. $19/mo a Starter csomaggal vagy $249/mo Korlátlan.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Korlátlan (A legolcsóbb számítógép-használati ügynök)",
+      "ogDescription": "#1 az OSWorld-ön (82%). Átalánydíjas $249/mo Korlátlan — olcsóbb mint a Devin Team ($500+ACU) magasabb benchmark eredménnyel. Böngésző, asztal és terminál automatizálás. Munkamenetenkénti VM izoláció. Platformfüggetlen natív alkalmazás + REST API + MCP szerver.",
+      "twitterDescription": "AI ügynök, amely igazi asztalt működtet. 82% OSWorld (#1). $249/mo Korlátlan — a kategória legolcsóbb átalánydíjas csomagja. A Starter már $19/mo-tól. VM izoláció + 26 eszközös MCP szerver."
     },
     "compare": {
       "title": "Coasty összehasonlítás - AI ügynök alternatívák és versenytárs összehasonlítás",
@@ -2281,10 +2373,10 @@
       "ogDescription": "A legjobb számítógép-használati ügynök, #1 az OSWorld-ön. Automatizáljon bármilyen asztali, böngésző vagy terminál feladatot AI-val."
     },
     "pricing": {
-      "title": "Árazás — Coasty AI ügynök csomagok és árak",
-      "description": "Coasty árazási csomagok $20/hó-tól. Cserélje le a $3 000/hó virtuális asszisztenseket AI alkalmazottra. Ingyenes szint elérhető. Kredit alapú használat rejtett díjak nélkül.",
-      "ogTitle": "Coasty árazás — AI ügynök csomagok",
-      "ogDescription": "AI alkalmazott $20/hó-tól. Cserélje le a drága virtuális asszisztenseket autonóm AI-ra. Ingyenes szint elérhető."
+      "title": "Árazás — $19/mo Starter vagy $249/mo Korlátlan (A legolcsóbb a piacon)",
+      "description": "Coasty árazás: Starter $19/mo (200 kredit) vagy Korlátlan $249/mo (a piac legolcsóbb átalánydíjas korlátlan számítógép-használati csomagja — olcsóbb mint a Devin Team $500+ACU, a Genspark Pro $249 kreditkorláttal és a Manus Extended $200 korláttal). Helyettesít $3 000/mo feletti emberi virtuális asszisztenseket. Nincsenek rejtett díjak.",
+      "ogTitle": "Coasty árazás — $19/mo Starter, $249/mo Korlátlan",
+      "ogDescription": "Átalánydíjas $249/mo Korlátlan — a piac legolcsóbb korlátlan számítógép-használati csomagja. Vagy $19/mo Starter magánszemélyeknek. Évente $36 000 megtakarítás emberi asszisztensekhez képest."
     },
     "faq": {
       "q1": "Mi az a Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Hogyan hasonlít a Coasty az Anthropic Computer Use-hoz?",
       "a2": "Míg az Anthropic Computer Use nyers API-t biztosít a számítógép vezérléséhez, a Coasty egy éles környezetre kész platform kezelt VM infrastruktúrával, beépített CAPTCHA megoldással, asztali alkalmazással Mac és Windows rendszerekre, több modell támogatásával és a legmagasabb OSWorld benchmark pontszámmal (82%). A Coasty a teljes megoldást nyújtja — nem csak az API-t.",
       "q3": "Mennyibe kerül a Coasty?",
-      "a3": "A Coasty $20/hónaptól indul a Starter csomaggal, és ingyenes szint is elérhető. Ez összehasonlítva több mint $3 000/hónap egy emberi virtuális asszisztensért. A Coasty 24/7 dolgozik szünetek nélkül, betanítás nélkül és azonnali skálázhatósággal.",
+      "a3": "A Coasty két élő csomagot kínál: Starter $19/mo áron (200 kredit, 1 gép, magánszemélyeknek ideális) és Korlátlan $249/mo áron, kreditkorlát nélkül. A $249-es Korlátlan csomag a legolcsóbb elérhető átalánydíjas korlátlan számítógép-használati csomag — olcsóbb mint a Devin Team ($500/mo + ACU túlhasználati díj), az OpenAI Operator ChatGPT Pro ($200/mo lekérdezés-korláttal), a Genspark Pro ($249.99 125k kredites korláttal) és a Manus Extended ($200 40k kredites korláttal). Mindkettő helyettesít egy $3 000/mo feletti emberi virtuális asszisztenst; a Korlátlan évente több mint $33 000 megtakarítást jelent egy emberi asszisztenshez képest, ami 92%-os költségcsökkentés.",
       "q4": "Biztonságos a Coasty használata?",
       "a4": "Igen. Minden Coasty munkamenet saját izolált, sandboxolt virtuális gépen fut. Az adatai biztonságban maradnak, a gépe érintetlen marad, és semmi nem szivárog a munkamenetek között. Ez valódi VM-szintű izoláció, nem csak konténerek egy megosztott környezetben.",
       "q5": "Mi az OSWorld benchmark?",
@@ -2309,11 +2401,11 @@
       "a10": "Igen. A Coasty beépített CAPTCHA-megoldó pipeline-nal rendelkezik, így nem akad el, ahogy a versenytárs AI ügynökök. Ez kritikus a valós automatizáláshoz, ahol a CAPTCHA-k gyakoriak a weboldalakon."
     },
     "structuredData": {
-      "appDescription": "A #1 rangsorolt számítógépet használó AI ügynök. A Coasty teljes asztalt irányít, mint egy ember — böngészőket nyit, kattint, gépel, űrlapokat tölt ki, e-maileket küld és táblázatokat kezel önállóan. 82% az OSWorld benchmarkon. Valódi VM-szintű izoláció. Beépített CAPTCHA megoldás. $20/hónaptól.",
-      "orgDescription": "A Coasty a #1 számítógépet használó AI ügynököt fejleszti. Platformunk autonóm asztali vezérlést, böngésző automatizálást és több ügynökös vezénylést biztosít valódi VM-szintű izolációval.",
-      "productDescription": "Számítógépet használó AI ügynök, amely úgy irányítja az asztalt, mint egy ember. #1 az OSWorld benchmarkon (82%). Autonóm böngésző automatizálás, asztali vezérlés, e-mail küldés, űrlap kitöltés és táblázatkezelés valódi VM-szintű izolációval.",
-      "websiteDescription": "#1 számítógépet használó AI ügynök platform. 82% OSWorld benchmark. Autonóm böngésző, asztali és terminál automatizálás VM izolációval. $20/hó-tól.",
-      "softwareDescription": "Számítógépet használó AI ügynök, amely teljes asztalt irányít, mint egy ember. #1 az OSWorld benchmarkon 82%-os teljesítési aránnyal 369 valós feladat esetén. Autonóm böngésző automatizálás, asztali vezérlés, terminál műveletek, e-mail küldés, űrlap kitöltés és táblázatkezelés.",
+      "appDescription": "A #1 rangsorolt számítógépet használó AI ügynök és a piac legolcsóbb átalánydíjas Korlátlan számítógép-használati csomagja $249/mo áron. A Coasty teljes asztalt irányít, mint egy ember — böngészőket nyit, kattint, gépel, űrlapokat tölt ki, e-maileket küld és táblázatokat kezel önállóan. 82% az OSWorld benchmarkon 369 valós feladat közül. Valódi VM-szintű izoláció munkamenetenként. Beépített CAPTCHA megoldás. Csomagok: $19/mo Starter vagy $249/mo Korlátlan.",
+      "orgDescription": "A Coasty a #1 számítógépet használó AI ügynököt fejleszti (82% OSWorld), és kizárólag az egyetlen átalánydíjas Korlátlan számítógép-használati csomagot kínálja $249/mo áron — olcsóbb mint a Devin Team, az OpenAI Operator és az ugyanazon árkategóriában lévő kreditkorlátos versenytársak. Platformunk autonóm asztali vezérlést, böngésző automatizálást és több ügynökös vezénylést biztosít valódi VM-szintű izolációval.",
+      "productDescription": "Számítógépet használó AI ügynök, amely úgy irányítja az asztalt, mint egy ember. #1 az OSWorld benchmarkon (82%). A $249/mo Korlátlan csomag a legolcsóbb elérhető átalánydíjas korlátlan számítógép-használati csomag. Autonóm böngésző automatizálás, asztali vezérlés, e-mail küldés, űrlap kitöltés és táblázatkezelés valódi VM-szintű izolációval.",
+      "websiteDescription": "#1 számítógépet használó AI ügynök platform — 82% OSWorld benchmark és a legolcsóbb átalánydíjas Korlátlan csomag $249/mo áron. Autonóm böngésző, asztali és terminál automatizálás VM izolációval. $19/mo Starter vagy $249/mo Korlátlan.",
+      "softwareDescription": "Számítógépet használó AI ügynök, amely teljes asztalt irányít, mint egy ember. #1 az OSWorld benchmarkon 82%-os teljesítési aránnyal 369 valós feladat esetén. A $249/mo Korlátlan csomag a piacon elérhető legolcsóbb átalánydíjas korlátlan számítógép-használati csomag. Autonóm böngésző automatizálás, asztali vezérlés, terminál műveletek, e-mail küldés, űrlap kitöltés és táblázatkezelés.",
       "breadcrumbs": {
         "home": "Kezdőlap",
         "caseStudies": "AI ügynök esettanulmányok",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Az oldal nem talalhato",
-      "description": "Sajnaljuk, ez az oldal nem letezik."
+      "description": "Sajnaljuk, ez az oldal nem letezik.",
+      "metaTitle": "404 · Az oldal nem található",
+      "metaDescription": "Elküldtük a legjobb AI-ügynökünket. Üres kézzel tért vissza. Vissza a Coasty-hoz, a #1 AI-ügynökhöz asztali és böngésző automatizáláshoz.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "vizsgálat: az egész internet",
+        "step2": "vizsgálat: minden nyitott lap",
+        "step3": "vizsgálat: a kanapé alatt",
+        "result": "ítélet: az oldal nem létezik"
+      },
+      "ok": "OK",
+      "fail": "HIBA",
+      "primaryCta": "Vissza a főoldalra",
+      "secondaryCta": "Bérelj fel egy AI-ügynököt",
+      "navLabel": "Javasolt oldalak",
+      "links": {
+        "home": "Főoldal",
+        "computerUse": "Számítógép-használat",
+        "pricing": "Árak",
+        "download": "Letöltés",
+        "blog": "Blog",
+        "guide": "Útmutató"
+      }
     },
     "error": {
       "title": "Valami hiba tortent",
@@ -2362,288 +2476,288 @@
     "recentActivity": "Legutóbbi tevékenység",
     "schedule": "Ütemezés",
     "emptyState": {
-      "openChat": "Open any chat and click",
-      "assignEmployee": "Assign Employee",
-      "onThe": "on the",
-      "topRight": "top right",
-      "toPutOnAutopilot": "to put it on autopilot",
-      "newChat": "New Chat"
+      "openChat": "Nyiss meg bármilyen csevegést és kattints az",
+      "assignEmployee": "Alkalmazott hozzárendelése",
+      "onThe": "gombra a",
+      "topRight": "jobb felső sarokban",
+      "toPutOnAutopilot": "hogy robotpilótára kapcsold",
+      "newChat": "Új csevegés"
     },
     "emptyWorkforce": {
-      "title": "Hire your first employee",
-      "description": "AI employees work on your behalf — assign a task, set a schedule, and they'll execute it automatically",
+      "title": "Vedd fel az első alkalmazottadat",
+      "description": "Az MI-alkalmazottak helyetted dolgoznak — adj feladatot, állíts be ütemezést, és automatikusan elvégzik.",
       "flexibleShifts": {
-        "title": "Flexible shifts",
-        "desc": "Schedule employees hourly, daily, weekly, monthly — or use a custom cron expression"
+        "title": "Rugalmas műszakok",
+        "desc": "Óránként, naponta, hetente, havonta ütemezz alkalmazottakat — vagy használj egyedi cron-kifejezést."
       },
       "fullAutonomy": {
-        "title": "Full autonomy",
-        "desc": "Each employee gets full access to browsing, terminal, and your connected workstations"
+        "title": "Teljes autonómia",
+        "desc": "Minden alkalmazott teljes hozzáférést kap a böngészéshez, terminálhoz és a csatlakoztatott munkaállomásaidhoz."
       },
       "activityLogs": {
-        "title": "Activity logs",
-        "desc": "Every execution is logged so you can review what your employees accomplished"
+        "title": "Tevékenységnaplók",
+        "desc": "Minden végrehajtás naplózva van, így átnézheted, mit végeztek az alkalmazottaid."
       },
-      "startFromChat": "Start from a chat"
+      "startFromChat": "Indítsd egy csevegésből"
     },
     "filters": {
       "all": "All",
-      "onDuty": "On Duty",
-      "standby": "Standby"
+      "onDuty": "Szolgálatban",
+      "standby": "Készenlétben"
     },
-    "noMatch": "No employees match this filter",
+    "noMatch": "Nincs alkalmazott, aki megfelelne ennek a szűrőnek",
     "createTeam": {
-      "title": "New Team",
-      "subtitle": "Start with a template or build from scratch",
-      "backToTemplates": "Back to templates",
-      "customTeam": "Custom Team",
-      "customDescription": "Create a team with your own configuration.",
-      "teamNameLabel": "Team Name",
+      "title": "Új csapat",
+      "subtitle": "Indulj egy sablonnal vagy építsd fel a nulláról",
+      "backToTemplates": "Vissza a sablonokhoz",
+      "customTeam": "Egyedi csapat",
+      "customDescription": "Hozz létre csapatot saját konfigurációval.",
+      "teamNameLabel": "Csapat neve",
       "teamNamePlaceholder": "e.g. Research, Marketing, Engineering",
-      "guidelinesLabel": "Guidelines",
-      "optional": "(optional)",
-      "guidelinesPlaceholder": "Shared instructions all team members will follow...",
-      "suggestedEmployees": "Suggested Employees",
-      "suggestedCredentials": "Suggested Credentials",
+      "guidelinesLabel": "Irányelvek",
+      "optional": "(opcionális)",
+      "guidelinesPlaceholder": "Közös utasítások, amelyeket minden csapattag követni fog...",
+      "suggestedEmployees": "Javasolt alkalmazottak",
+      "suggestedCredentials": "Javasolt hitelesítő adatok",
       "added": "Added",
       "addButton": "+ Add",
-      "credentials": "Credentials",
-      "addCredential": "+ Add credential",
-      "credentialHint": "Credentials are encrypted. They'll be included in team guidelines so employees know what's available.",
-      "settingUp": "Setting up...",
-      "createEmployees": "Create {count} Employees",
-      "createTeamButton": "Create Team"
+      "credentials": "Hitelesítő adatok",
+      "addCredential": "+ Hitelesítő adat hozzáadása",
+      "credentialHint": "A hitelesítő adatok titkosítva vannak. Bekerülnek a csapat irányelveibe, hogy az alkalmazottak tudják, mi áll rendelkezésre.",
+      "settingUp": "Beállítás...",
+      "createEmployees": "{count} alkalmazott létrehozása",
+      "createTeamButton": "Csapat létrehozása"
     },
     "noTeams": {
-      "title": "No teams yet",
-      "description": "Teams let employees share context and memory. Create one to build your org chart.",
-      "newTeam": "New Team"
+      "title": "Még nincsenek csapatok",
+      "description": "A csapatok révén az alkalmazottak megoszthatják a kontextust és a memóriát. Hozz létre egyet a szervezeti ábrád felépítéséhez.",
+      "newTeam": "Új csapat"
     },
     "howItWorks": {
-      "title": "How it works",
-      "dragEmployees": "Drag employees onto a team",
-      "clickToEdit": "Click to edit schedule & settings",
-      "teamsShare": "Teams share memory & guidelines",
-      "dashedLines": "Dashed lines — delegation between employees"
+      "title": "Hogyan működik",
+      "dragEmployees": "Húzd az alkalmazottakat egy csapatra",
+      "clickToEdit": "Kattints az ütemezés és beállítások szerkesztéséhez",
+      "teamsShare": "A csapatok megosztják a memóriát és az irányelveket",
+      "dashedLines": "Szaggatott vonalak — delegálás az alkalmazottak között"
     },
     "inactive": {
-      "title": "{count} employees inactive",
-      "missingMachine": "{count} missing a machine — won't run until activated",
-      "wontRun": "Won't run until activated",
-      "fixInEmployees": "Fix in Employees"
+      "title": "{count} inaktív alkalmazott",
+      "missingMachine": "{count} esetében hiányzik a gép — nem fog futni aktiválásig",
+      "wontRun": "Nem fut, amíg nincs aktiválva",
+      "fixInEmployees": "Javítás az Alkalmazottaknál"
     },
-    "dragHint": "Drag unassigned employees onto teams to add them",
+    "dragHint": "Húzd a hozzá nem rendelt alkalmazottakat a csapatokra a hozzáadáshoz",
     "limits": {
-      "upgradePlan": "Upgrade Plan",
-      "manageMachines": "Manage Machines",
-      "manageEmployees": "Manage Employees",
-      "machineLimit": "You need a cloud machine but you've reached your limit of {max} machines. Upgrade your plan or delete an unused machine.",
-      "employeeLimit": "You've reached your employee limit ({max} for {tier} tier). Upgrade your plan or remove unused employees.",
-      "templateLimit": "This template needs {needed} employees but you only have {available} slots left ({max} max for {tier} tier). Upgrade your plan or remove unused employees.",
-      "createFailed": "Failed to create any employees. Check your account limits and try again.",
-      "teamFailed": "Failed to create team"
+      "upgradePlan": "Csomag bővítése",
+      "manageMachines": "Gépek kezelése",
+      "manageEmployees": "Alkalmazottak kezelése",
+      "machineLimit": "Felhős gépre van szükséged, de elérted a {max} gépes korlátodat. Bővítsd a csomagodat, vagy törölj egy nem használt gépet.",
+      "employeeLimit": "Elérted az alkalmazotti korlátodat ({max} a(z) {tier} szinten). Bővítsd a csomagodat, vagy távolíts el nem használt alkalmazottakat.",
+      "templateLimit": "Ehhez a sablonhoz {needed} alkalmazott szükséges, de csak {available} hely maradt ({max} max a(z) {tier} szinten). Bővítsd a csomagodat, vagy távolíts el nem használt alkalmazottakat.",
+      "createFailed": "Nem sikerült alkalmazottat létrehozni. Ellenőrizd a fiókod korlátait, és próbáld újra.",
+      "teamFailed": "A csapat létrehozása sikertelen"
     },
     "provisioning": {
-      "checking": "Checking account limits...",
-      "usingMachine": "Using machine \"{name}\"...",
-      "assigningMachine": "Assigning to machine \"{name}\" (will run when machine is ready)...",
-      "creatingMachine": "Creating a new machine...",
-      "machineStarted": "Machine provisioning started...",
-      "hiring": "Hiring {name} ({current}/{total})...",
-      "creatingTeam": "Creating team..."
+      "checking": "Fiók korlátainak ellenőrzése...",
+      "usingMachine": "A(z) „{name}\" gép használata...",
+      "assigningMachine": "Hozzárendelés a(z) „{name}\" géphez (fut, amint a gép készen áll)...",
+      "creatingMachine": "Új gép létrehozása...",
+      "machineStarted": "Gép kiépítése elindult...",
+      "hiring": "{name} felvétele ({current}/{total})...",
+      "creatingTeam": "Csapat létrehozása..."
     },
     "toasts": {
-      "teamCreatedPartial": "Team created with {count} employees ({failedCount} failed: {names})",
-      "teamCreated": "{name} team created with {count} employees"
+      "teamCreatedPartial": "A csapat létrejött {count} alkalmazottal ({failedCount} sikertelen: {names})",
+      "teamCreated": "A(z) {name} csapat létrejött {count} alkalmazottal"
     },
-    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "credentialInstructions": "[ELÉRHETŐ HITELESÍTŐ ADATOK]\nA következő szolgáltatási hitelesítő adatokat konfiguráltuk, és használatra állnak rendelkezésre:\n{list}\nHasználd ezeket a hitelesítő adatokat, ha be kell jelentkezned ezekbe a szolgáltatásokba a feladataid elvégzéséhez.",
     "templates": {
       "contentOps": {
-        "name": "Content Operations",
-        "tagline": "Publish consistently without lifting a finger",
-        "description": "A lean content engine — writes, optimizes, and distributes content on autopilot.",
+        "name": "Tartalomoperációk",
+        "tagline": "Publikálj következetesen, anélkül, hogy a kisujjadat is mozdítanád",
+        "description": "Karcsú tartalomgyár — robotpilótán ír, optimalizál és terjeszt tartalmat.",
         "roles": {
-          "atlas": "Content Writer — drafts blog posts, newsletters, and social copy",
-          "echo": "SEO Analyst — audits pages, tracks rankings, suggests keyword opportunities",
-          "nova": "Social Distributor — posts content to platforms and monitors engagement"
+          "atlas": "Tartalomíró — blogbejegyzések, hírlevelek és közösségi szövegek megírása",
+          "echo": "SEO-elemző — oldalakat auditál, helyezéseket követ, kulcsszó-lehetőségeket javasol",
+          "nova": "Közösségi terjesztő — platformokra posztol és figyeli az interakciókat"
         },
         "credentials": {
-          "wordpress": "Publish and manage blog posts",
-          "twitter": "Post tweets and monitor engagement",
-          "linkedin": "Publish professional content and articles",
-          "searchConsole": "Track search performance and indexing"
+          "wordpress": "Blogbejegyzések publikálása és kezelése",
+          "twitter": "Tweetek küldése és interakciók figyelése",
+          "linkedin": "Szakmai tartalom és cikkek publikálása",
+          "searchConsole": "Keresési teljesítmény és indexelés követése"
         }
       },
       "customerSupport": {
-        "name": "Customer Support",
-        "tagline": "24/7 support coverage from 3 employees",
-        "description": "Monitors inboxes, resolves common issues, and keeps your knowledge base updated.",
+        "name": "Ügyfélszolgálat",
+        "tagline": "24/7 ügyfélszolgálati lefedettség 3 alkalmazottal",
+        "description": "Figyeli a beérkező leveleket, megoldja a gyakori problémákat, és karbantartja a tudásbázist.",
         "roles": {
-          "sage": "Inbox Monitor — checks support emails, categorizes and responds to common queries",
-          "iris": "Knowledge Base Manager — updates help docs and FAQs based on recurring issues",
-          "milo": "Feedback Analyst — aggregates reviews and support trends into weekly reports"
+          "sage": "Beérkező figyelő — ellenőrzi az ügyfélszolgálati e-maileket, kategorizálja és válaszol a gyakori kérdésekre",
+          "iris": "Tudásbázis-kezelő — a visszatérő problémák alapján frissíti a súgódokumentumokat és a GYIK-et",
+          "milo": "Visszajelzés-elemző — a véleményeket és ügyfélszolgálati trendeket heti jelentésekbe összegzi"
         },
         "credentials": {
-          "gmail": "Monitor and respond to support emails",
-          "zendesk": "Manage support tickets (or your helpdesk)",
-          "notion": "Update knowledge base and documentation"
+          "gmail": "Ügyfélszolgálati e-mailek figyelése és megválaszolása",
+          "zendesk": "Ügyfélszolgálati jegyek kezelése (vagy a saját helpdesked)",
+          "notion": "Tudásbázis és dokumentáció frissítése"
         }
       },
       "researchIntel": {
-        "name": "Research & Intel",
-        "tagline": "Stay informed without the manual work",
-        "description": "Monitors competitors, tracks industry trends, and compiles actionable research briefs.",
+        "name": "Kutatás és felderítés",
+        "tagline": "Maradj naprakész manuális munka nélkül",
+        "description": "Figyeli a versenytársakat, követi az iparági trendeket és gyakorlatias kutatási összefoglalókat állít össze.",
         "roles": {
-          "scout": "Competitor Monitor — tracks competitor websites, pricing, and feature changes",
-          "wren": "Trend Researcher — scans industry news, publications, and social media for trends",
-          "quinn": "Brief Compiler — synthesizes findings into structured weekly intelligence reports"
+          "scout": "Versenytárs-figyelő — követi a versenytársak weboldalait, árazását és funkcióváltozásait",
+          "wren": "Trendkutató — iparági híreket, kiadványokat és közösségi médiát fésül át trendekért",
+          "quinn": "Összefoglaló-szerkesztő — strukturált heti hírszerzési jelentésekbe szintetizálja a felderített információkat"
         },
         "credentials": {
-          "google": "Web research and search",
-          "linkedin": "Track competitor hiring and announcements",
-          "notion": "Publish research briefs and reports"
+          "google": "Webes kutatás és keresés",
+          "linkedin": "Versenytársak toborzásának és bejelentéseinek nyomon követése",
+          "notion": "Kutatási összefoglalók és jelentések közzététele"
         }
       },
       "marketing": {
         "name": "Marketing Department",
-        "tagline": "A full marketing team in two machines",
-        "description": "Content creation, social media, SEO, competitor tracking, and campaign analytics — two coordinated squads.",
+        "tagline": "Egy teljes marketingcsapat két gépen",
+        "description": "Tartalomkészítés, közösségi média, SEO, versenytárs-követés és kampányanalitika — két összehangolt egység.",
         "roles": {
-          "atlas": "Content Strategist — plans content calendar, writes long-form pieces",
-          "nova": "Social Media Manager — posts, engages, and grows social channels",
-          "echo": "SEO Specialist — optimizes pages, builds internal links, tracks keywords",
-          "pixel": "Email Campaign Manager — writes and sends newsletters, tracks opens/clicks",
-          "scout": "Competitor Analyst — monitors competitor marketing moves and reports insights",
-          "dash": "Ad Campaign Monitor — tracks ad spend, ROAS, and optimization opportunities",
-          "iris": "Analytics Reporter — compiles cross-channel performance dashboards"
+          "atlas": "Tartalomstratéga — tervezi a tartalomnaptárat, hosszú anyagokat ír",
+          "nova": "Közösségi média menedzser — posztol, interakcióba lép és növeli a közösségi csatornákat",
+          "echo": "SEO-specialista — oldalakat optimalizál, belső linkeket épít, kulcsszavakat követ",
+          "pixel": "E-mail kampánymenedzser — hírleveleket ír és küld, megnyitásokat és kattintásokat követ",
+          "scout": "Versenytárs-elemző — figyeli a versenytársak marketinglépéseit és jelenti a felismeréseket",
+          "dash": "Hirdetési kampányfigyelő — követi a hirdetési költést, a ROAS-t és az optimalizálási lehetőségeket",
+          "iris": "Analitikai jelentő — csatornaközi teljesítmény-irányítópultokat állít össze"
         },
         "credentials": {
-          "wordpress": "Publish blog content",
-          "twitter": "Social media management",
-          "linkedin": "Professional content distribution",
-          "mailchimp": "Email campaigns and newsletters",
-          "analytics": "Traffic and conversion analytics",
-          "googleAds": "Google Ads campaign management",
-          "metaAds": "Meta Ads and social management"
+          "wordpress": "Blogtartalom publikálása",
+          "twitter": "Közösségi média kezelés",
+          "linkedin": "Szakmai tartalom terjesztése",
+          "mailchimp": "E-mail kampányok és hírlevelek",
+          "analytics": "Forgalmi és konverziós analitika",
+          "googleAds": "Google Ads kampánykezelés",
+          "metaAds": "Meta Ads és közösségi kezelés"
         }
       },
       "ecommerce": {
         "name": "E-Commerce Operations",
-        "tagline": "Run your store while you sleep",
-        "description": "Product management, pricing intelligence, inventory tracking, review management, and growth marketing for online stores.",
+        "tagline": "Üzemeltesd a boltodat, miközben alszol",
+        "description": "Termékkezelés, árazási intelligencia, készletkövetés, értékeléskezelés és növekedési marketing online boltoknak.",
         "roles": {
-          "cleo": "Product Lister — creates and updates product descriptions, images, and metadata",
-          "onyx": "Price Monitor — tracks competitor prices and flags opportunities for adjustments",
-          "luna": "Inventory Tracker — monitors stock levels and alerts on low inventory",
-          "sage": "Review Manager — responds to customer reviews and aggregates sentiment",
-          "dash": "Ad Campaign Optimizer — manages product ads and shopping campaigns",
-          "flux": "Email Marketer — sends abandoned cart, promo, and post-purchase sequences",
-          "wren": "Analytics Reporter — tracks revenue, conversion rates, and growth metrics"
+          "cleo": "Termékfeltöltő — termékleírásokat, képeket és metaadatokat hoz létre és frissít",
+          "onyx": "Ármonitor — követi a versenytársak árait és jelzi a korrekciós lehetőségeket",
+          "luna": "Készletkövető — figyeli a készletszinteket és riaszt alacsony készlet esetén",
+          "sage": "Értékeléskezelő — válaszol az ügyfél-értékelésekre és összegzi a hangulatot",
+          "dash": "Hirdetési kampányoptimalizáló — termékhirdetéseket és vásárlási kampányokat kezel",
+          "flux": "E-mail marketinges — elhagyott kosár, promóciós és vásárlás utáni szekvenciákat küld",
+          "wren": "Analitikai jelentő — követi a bevételt, a konverziós arányokat és a növekedési mutatókat"
         },
         "credentials": {
-          "shopify": "Store management and product listings",
-          "amazon": "Amazon marketplace management",
-          "googleAds": "Shopping ads and campaigns",
-          "mailchimp": "Customer email sequences",
-          "analytics": "Conversion and traffic analytics"
+          "shopify": "Bolt kezelése és terméklisták",
+          "amazon": "Amazon marketplace kezelés",
+          "googleAds": "Vásárlási hirdetések és kampányok",
+          "mailchimp": "Ügyfél e-mail szekvenciák",
+          "analytics": "Konverziós és forgalmi analitika"
         }
       },
       "engineering": {
-        "name": "Engineering Team",
-        "tagline": "Automate the boring parts of engineering",
-        "description": "Automated code reviews, dependency monitoring, documentation, testing, deploy monitoring, and incident response.",
+        "name": "Mérnöki csapat",
+        "tagline": "Automatizáld a mérnöki munka unalmas részeit",
+        "description": "Automatikus kódellenőrzés, függőségfigyelés, dokumentáció, tesztelés, telepítés-figyelés és incidenskezelés.",
         "roles": {
-          "rune": "Code Reviewer — reviews open PRs, suggests improvements, checks for security issues",
-          "koda": "Dependency Monitor — tracks outdated packages, security advisories, and breaking changes",
-          "aria": "Doc Writer — keeps API docs, READMEs, and changelogs up to date with latest code",
-          "blaze": "Test Monitor — runs test suites, tracks flaky tests, reports coverage trends",
-          "frost": "Deploy Monitor — watches CI/CD pipelines, alerts on failures, tracks deploy frequency",
-          "neon": "Uptime & Log Watcher — monitors services, scans logs for errors, creates incident reports"
+          "rune": "Kódellenőrző — átnézi a nyitott PR-eket, javításokat javasol, biztonsági problémákat keres",
+          "koda": "Függőség-monitor — követi az elavult csomagokat, biztonsági figyelmeztetéseket és kompatibilitási töréseket",
+          "aria": "Dokumentációíró — naprakészen tartja az API-dokumentációkat, README-ket és changelogokat a legfrissebb kód alapján",
+          "blaze": "Tesztmonitor — futtatja a tesztcsomagokat, követi a flaky teszteket, jelenti a lefedettségi trendeket",
+          "frost": "Telepítés-monitor — figyeli a CI/CD pipeline-okat, riaszt hibák esetén, követi a telepítés gyakoriságát",
+          "neon": "Uptime- és naplófigyelő — szolgáltatásokat monitoroz, naplókban hibákat keres, incidensjelentéseket készít"
         },
         "credentials": {
-          "github": "Repository access, PR reviews, issues",
-          "vercel": "Deployment monitoring (or your CI/CD)",
-          "sentry": "Error tracking and incident alerts",
-          "npm": "Package registry for dependency checks"
+          "github": "Tárolóhozzáférés, PR-ellenőrzések, issue-k",
+          "vercel": "Telepítés-figyelés (vagy a saját CI/CD-d)",
+          "sentry": "Hibakövetés és incidens-riasztások",
+          "npm": "Csomag-regisztrációs ellenőrzések függőségekhez"
         }
       },
       "fullBusiness": {
-        "name": "Full Business Operations",
-        "tagline": "An entire company, fully automated",
-        "description": "Sales, marketing, support, and admin — four departments working in concert across three machines with shared intelligence.",
+        "name": "Teljes üzleti működés",
+        "tagline": "Egy egész cég, teljesen automatizálva",
+        "description": "Értékesítés, marketing, ügyfélszolgálat és adminisztráció — négy részleg dolgozik összhangban három gépen, megosztott intelligenciával.",
         "roles": {
-          "atlas": "Lead Generator — finds and qualifies potential customers from online sources",
-          "dash": "CRM Manager — updates deals, tracks pipeline, and sends follow-up sequences",
-          "scout": "Proposal Writer — drafts sales proposals and pitch decks from templates",
-          "nova": "Content Marketer — writes blog posts, case studies, and marketing copy",
-          "echo": "Social Media Manager — posts content and engages with audience",
-          "pixel": "Email Campaign Manager — runs drip campaigns and newsletter sequences",
-          "sage": "Support Lead — handles customer inquiries and resolves issues",
-          "iris": "Knowledge Manager — maintains help docs, FAQs, and internal wiki",
-          "milo": "Data Analyst — compiles cross-department reports and KPI dashboards",
-          "wren": "Market Researcher — tracks industry trends and competitive intelligence",
-          "quinn": "Operations Coordinator — runs weekly summaries and cross-team syncs"
+          "atlas": "Leadgyűjtő — potenciális ügyfeleket keres és minősít online forrásokból",
+          "dash": "CRM-kezelő — frissíti az üzleteket, követi a pipeline-t és követő szekvenciákat küld",
+          "scout": "Ajánlatíró — értékesítési ajánlatokat és pitchdeckeket készít sablonok alapján",
+          "nova": "Tartalommarketinges — blogbejegyzéseket, esettanulmányokat és marketingszövegeket ír",
+          "echo": "Közösségi média menedzser — tartalmat posztol és interakcióba lép a közönséggel",
+          "pixel": "E-mail kampánymenedzser — drip-kampányokat és hírlevél-szekvenciákat futtat",
+          "sage": "Ügyfélszolgálati vezető — kezeli az ügyfélkérdéseket és megoldja a problémákat",
+          "iris": "Tudáskezelő — karbantartja a súgódokumentumokat, GYIK-et és belső wikit",
+          "milo": "Adatelemző — részlegközi jelentéseket és KPI-irányítópultokat állít össze",
+          "wren": "Piackutató — iparági trendeket és versenytárs-felderítést követ",
+          "quinn": "Üzemeltetési koordinátor — heti összefoglalókat és csapatközi egyeztetéseket vezényel"
         },
         "credentials": {
-          "gmail": "Email communication and support",
-          "hubspot": "CRM and sales pipeline (or your CRM)",
-          "linkedin": "Lead generation and professional networking",
-          "mailchimp": "Email marketing campaigns",
-          "notion": "Internal wiki and documentation",
-          "analytics": "Web analytics and reporting",
-          "twitter": "Social media presence",
-          "zendesk": "Customer support tickets"
+          "gmail": "E-mail kommunikáció és ügyfélszolgálat",
+          "hubspot": "CRM és értékesítési pipeline (vagy a saját CRM-ed)",
+          "linkedin": "Leadgenerálás és szakmai kapcsolatépítés",
+          "mailchimp": "E-mail marketingkampányok",
+          "notion": "Belső wiki és dokumentáció",
+          "analytics": "Webanalitika és jelentéskészítés",
+          "twitter": "Közösségi média jelenlét",
+          "zendesk": "Ügyfélszolgálati jegyek"
         }
       },
       "growth": {
-        "name": "Growth & Acquisition",
-        "tagline": "Aggressive growth on full autopilot",
-        "description": "Outbound prospecting, inbound marketing, conversion optimization, and analytics — a dedicated growth engine across three machines.",
+        "name": "Növekedés és akvizíció",
+        "tagline": "Agresszív növekedés teljes robotpilótán",
+        "description": "Outbound prospektálás, inbound marketing, konverzió-optimalizálás és analitika — dedikált növekedési motor három gépen.",
         "roles": {
-          "blaze": "Outbound Prospector — finds decision-makers, researches companies, builds lead lists",
-          "flux": "Email Outreach — sends personalized cold emails, manages follow-up sequences",
-          "orion": "LinkedIn Outreach — connects with prospects and sends personalized messages",
-          "coral": "Content Creator — produces SEO content, landing page copy, and lead magnets",
-          "taro": "Landing Page Optimizer — monitors conversion rates, suggests and tests improvements",
-          "vale": "Ad Campaign Manager — manages Google and Meta ad campaigns end-to-end",
-          "ember": "Lead Scorer — qualifies inbound leads and routes to appropriate follow-up",
-          "haze": "Funnel Analyst — tracks conversion metrics at every stage, identifies bottlenecks",
-          "dune": "Competitor Intel — monitors competitor campaigns, pricing, and positioning changes",
-          "kit": "Growth Reporter — compiles daily/weekly growth metrics and experiment results"
+          "blaze": "Outbound prospektáló — döntéshozókat keres, cégeket kutat, leadlistákat épít",
+          "flux": "E-mail outreach — személyre szabott hideg e-maileket küld, követi a follow-up szekvenciákat",
+          "orion": "LinkedIn outreach — kapcsolódik a prospektokhoz és személyre szabott üzeneteket küld",
+          "coral": "Tartalomkészítő — SEO-tartalmat, landing page-szövegeket és leadmágneseket gyárt",
+          "taro": "Landing page optimalizáló — figyeli a konverziós arányokat, javításokat javasol és tesztel",
+          "vale": "Hirdetési kampánymenedzser — Google és Meta hirdetési kampányokat kezel végpontok között",
+          "ember": "Lead-pontozó — minősíti a beérkező leadeket és továbbítja a megfelelő follow-uphoz",
+          "haze": "Tölcsér-elemző — minden szakaszon követi a konverziós mutatókat, szűk keresztmetszeteket azonosít",
+          "dune": "Versenytárs-felderítő — figyeli a versenytársak kampányait, árazását és pozícióváltásait",
+          "kit": "Növekedési jelentő — napi/heti növekedési mutatókat és kísérleti eredményeket állít össze"
         },
         "credentials": {
-          "linkedin": "Prospecting and outreach",
-          "gmail": "Cold email and follow-up sequences",
-          "hubspot": "Lead management and CRM",
-          "googleAds": "Paid search campaigns",
-          "metaAds": "Meta advertising",
-          "analytics": "Funnel and conversion analytics",
-          "ahrefs": "SEO research and competitor analysis"
+          "linkedin": "Prospektálás és outreach",
+          "gmail": "Hideg e-mail és follow-up szekvenciák",
+          "hubspot": "Lead-kezelés és CRM",
+          "googleAds": "Fizetett keresési kampányok",
+          "metaAds": "Meta hirdetés",
+          "analytics": "Tölcsér- és konverziós analitika",
+          "ahrefs": "SEO-kutatás és versenytárs-elemzés"
         }
       },
       "saas": {
-        "name": "SaaS Operations",
-        "tagline": "Run your SaaS like a well-oiled machine",
-        "description": "Customer success, product analytics, churn prevention, feature tracking, and automated reporting for SaaS businesses.",
+        "name": "SaaS-üzemeltetés",
+        "tagline": "Üzemeltesd a SaaS-od, mint egy jól olajozott gép",
+        "description": "Customer success, termékanalitika, churn-megelőzés, funkciókövetés és automatizált jelentéskészítés SaaS-cégeknek.",
         "roles": {
-          "luna": "Customer Success Monitor — tracks user engagement, identifies at-risk accounts",
-          "sage": "Onboarding Assistant — guides new users through setup, monitors activation rates",
-          "ivy": "Churn Preventer — reaches out to disengaging users with re-activation campaigns",
-          "rune": "Feature Request Tracker — aggregates user feedback and feature requests from all channels",
-          "koda": "Product Analytics — tracks feature adoption, user journeys, and engagement metrics",
-          "neon": "Bug & Issue Monitor — watches error logs, user reports, and status page incidents",
-          "aria": "Changelog Writer — documents releases, updates knowledge base and help center",
-          "frost": "Revenue Analyst — tracks MRR, churn rate, LTV, and expansion revenue",
-          "zara": "Competitor Tracker — monitors competitor features, pricing, and market positioning"
+          "luna": "Customer success-monitor — követi a felhasználói aktivitást, azonosítja a kockázatos fiókokat",
+          "sage": "Onboarding-asszisztens — végigvezeti az új felhasználókat a beállításon, figyeli az aktiválási arányokat",
+          "ivy": "Churn-megelőző — leszakadó felhasználókat keres meg újraaktiválási kampányokkal",
+          "rune": "Funkciókérés-követő — összegyűjti a felhasználói visszajelzéseket és funkciókéréseket minden csatornáról",
+          "koda": "Termékanalitika — követi a funkcióadaptációt, felhasználói utakat és aktivitási mutatókat",
+          "neon": "Hiba- és issue-monitor — figyeli a hibanaplókat, felhasználói jelentéseket és status page incidenseket",
+          "aria": "Changelog-szerkesztő — dokumentálja a kiadásokat, frissíti a tudásbázist és a súgóközpontot",
+          "frost": "Bevétel-elemző — követi az MRR-t, churn-arányt, LTV-t és bővülési bevételt",
+          "zara": "Versenytárs-követő — figyeli a versenytársak funkcióit, árazását és piaci pozicionálását"
         },
         "credentials": {
-          "stripe": "Subscription and revenue data",
-          "intercom": "Customer messaging and support (or your tool)",
-          "mixpanel": "Product analytics and user tracking",
-          "gmail": "Customer communication",
-          "notion": "Knowledge base and changelog",
-          "sentry": "Error monitoring and bug tracking",
-          "github": "Issue tracking and feature requests"
+          "stripe": "Előfizetési és bevételi adatok",
+          "intercom": "Ügyfélüzenetküldés és támogatás (vagy a saját eszközöd)",
+          "mixpanel": "Termékanalitika és felhasználókövetés",
+          "gmail": "Ügyfélkommunikáció",
+          "notion": "Tudásbázis és changelog",
+          "sentry": "Hibafigyelés és hibakövetés",
+          "github": "Issue-követés és funkciókérések"
         }
       }
     },
@@ -2666,139 +2780,139 @@
     },
     "frequencies": {
       "daily": "daily",
-      "weekly": "weekly",
-      "every_30_minutes": "every 30 minutes",
-      "every_6_hours": "every 6 hours",
-      "every_12_hours": "every 12 hours"
+      "weekly": "hetente",
+      "every_30_minutes": "30 percenként",
+      "every_6_hours": "6 óránként",
+      "every_12_hours": "12 óránként"
     },
     "teamsTab": "Csapatok"
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "A szoba címe kötelező",
+      "taskCreated": "Feladat sikeresen létrehozva",
+      "taskFailed": "A feladat létrehozása sikertelen",
+      "assignTask": "Új feladat hozzárendelése",
+      "assignTaskDesc": "Indíts új feladatot az MI-asszisztenseddel.",
+      "taskName": "Feladat neve",
+      "taskNamePlaceholder": "Add meg a feladat nevét",
+      "cancel": "Mégse",
+      "creating": "Létrehozás...",
+      "createTask": "Feladat létrehozása"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Adj meg egy meghívókódot",
+      "joinSuccess": "Sikeresen csatlakoztál a projekthez!",
+      "joinFailed": "A projekthez való csatlakozás sikertelen",
+      "invalidCode": "Érvénytelen meghívókód vagy a projekt nem található",
+      "title": "Csatlakozás projekthez",
+      "description": "Adj meg egy meghívókódot a meglévő projekthez való csatlakozáshoz.",
+      "inviteCode": "Meghívókód",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Kérd el a csapatvezetődtől a projekt meghívókódját",
+      "cancel": "Mégse",
+      "joining": "Csatlakozás...",
+      "joinButton": "Csatlakozás projekthez"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
+      "title": "Szoba résztvevői",
+      "copyCode": "Kód másolása",
+      "copyLink": "Link másolása",
+      "codeCopied": "Meghívókód másolva!",
+      "codeFailed": "A meghívókód másolása sikertelen",
+      "linkCopied": "Meghívó link másolva!",
+      "linkFailed": "A meghívó link másolása sikertelen",
       "online": "Online",
       "offline": "Offline",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "A szoba címe kötelező",
+      "created": "A projekt sikeresen létrejött!",
+      "failed": "A szoba létrehozása sikertelen",
+      "title": "Új projekt létrehozása",
+      "description": "Indíts új projektet, hogy MI-vel építsd a termékedet.",
+      "projectName": "Projekt neve",
+      "projectNamePlaceholder": "Add meg a projekt nevét",
+      "teamSize": "Csapatméret",
+      "cancel": "Mégse",
+      "creating": "Létrehozás...",
+      "createButton": "Projekt létrehozása"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Újdonságok",
+    "title": "Újdonságok a Coastyban",
+    "updateCount": "{count} frissítés",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Frissítés",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Maradj velünk a további frissítésekért",
+    "tagline": "Az MI-alkalmazottad, aki mindenkivel együttműködik"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Csodás"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Visszajelzés küldéséhez jelentkezz be",
+    "alreadySubmitted": "Erre már küldtél visszajelzést",
+    "thankYou": "Köszönjük a visszajelzésed!",
+    "creditsEarned": "+{credits} kredit szerezve",
+    "helpImprove": "A visszajelzésed segít, hogy jobbá tegyük a Coastyt.",
+    "howsExperience": "Milyen a tapasztalatod?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Mesélj többet",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Mi működik jól? Min lehetne javítani?",
+    "cancel": "Mégse",
+    "sending": "Küldés...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Válassz munkaállomást",
+    "enterCron": "Adj meg egy cron-kifejezést",
+    "hireFailed": "Az alkalmazott felvétele sikertelen",
+    "removeFailed": "Az alkalmazott eltávolítása sikertelen",
+    "editEmployee": "Alkalmazott szerkesztése",
+    "configureEmployee": "Alkalmazott konfigurálása",
+    "editDescription": "Frissítsd az ütemezést, munkaállomást vagy utasításokat",
+    "configureDescription": "Állíts be MI-alkalmazottat ehhez a csevegéshez",
+    "loading": "Konfiguráció betöltése...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Alkalmazott neve"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Törlöd a csevegést?",
+    "description": "Ez törli a(z) „{chatTitle}\" csevegést",
+    "cancel": "Mégse",
+    "delete": "Törlés"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Sikeres fizetés! A krediteid jóváírva.",
+    "canceled": "A fizetés megszakadt. Nem terheltünk meg semmit."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Általános beállítások",
     "generalDescription": "Alapvető számítógép-beállítások konfigurálása",
     "displayName": "Megjelenítési név",
     "defaultName": "Számítógépem",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Módosítások mentése",
+    "security": "Biztonság",
+    "securityDescription": "Biztonsági és hozzáférési beállítások",
+    "sshAuth": "SSH-hitelesítés",
+    "username": "Felhasználónév:",
+    "keyPair": "Kulcspár:",
+    "sshKeyDownloaded": "SSH-kulcs letöltve",
+    "sshKeyFailed": "Az SSH-kulcs letöltése sikertelen",
+    "downloadSshKey": "SSH-kulcs letöltése",
+    "vncPassword": "VNC-jelszó",
     "vncPasswordHint": "Ez a jelszó szükséges a számítógéphez való csatlakozáshoz"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Szia, mostanában a Coastyt használom, és elég menő. Egy MI, ami tényleg el tudja használni helyetted a számítógépet. Böngészés, kattintás, gépelés, minden. Próbáld ki a linkemmel, és mindketten kapunk ingyen krediteket!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Nézd meg ezt az MI-eszközt",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "épp most",
+      "minutesAgo": "{minutes} perce",
+      "hoursAgo": "{hours} órája",
+      "daysAgo": "{days} napja",
+      "monthsAgo": "{months} hónapja"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Ajánlói link másolva!",
+    "headline": "A jó barátok mémeket osztanak meg. A nagyszerű barátok MI-ügynököket.",
+    "subheadline": "Mindketten kaptok {credits} ingyen kreditet, ha a barátod csatlakozik.",
+    "yourLink": "A te ajánlói linked",
+    "shareDirectly": "Megosztás közvetlenül",
+    "yourReferrals": "A te ajánlásaid",
+    "referralCount": "{count} ajánlás",
+    "creditsEarned": "{credits} kredit szerezve",
+    "invitedYou": "Meghívott téged",
+    "joinedViaLink": "A linkeden keresztül csatlakozott",
+    "noInvites": "Még senki sem lett meghívva",
+    "noInvitesHint": "Oszd meg a linkedet, és mindketten 50 kreditet kaptok"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Tedd publikussá",
+    "title": "A beszélgetésed mostantól nyilvános!",
+    "description": "Bárki, aki rendelkezik a linkkel, megnézheti ezt a beszélgetést, és a jövőben megjelenhet közösségi feedekben, kiemelt oldalakon vagy keresési találatokban.",
+    "viewPage": "Oldal megtekintése",
+    "shareOn": "Megosztás itt:"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "MI vezérlőpult",
+    "subtitle": "Írd le, mit szeretnél, hogy az MI csináljon",
+    "quickCommands": "Gyors parancsok",
+    "noActions": "Még nem hajtottál végre műveletet",
+    "success": "Sikeres",
+    "failed": "Sikertelen",
+    "placeholder": "Mondd el az MI-nek, mit csináljon... (Ctrl+Enter a küldéshez)",
+    "executing": "Végrehajtás...",
+    "executeCommand": "Parancs végrehajtása"
   },
   "discover": {
     "badge": "Közösség",
@@ -2859,5 +2973,190 @@
     "watchSession": "Munkamenet megtekintése",
     "steps": "{count} lépés",
     "tryCoasty": "Coasty kipróbálása"
+  },
+  "memory": {
+    "sidebarLabel": "Memória",
+    "sidebarDescription": "Minden ügynökfutásra alkalmazott kontextus",
+    "dialog": {
+      "title": "Memória",
+      "description": "Rövid feljegyzés, amelyet a Coasty minden alkalommal alkalmaz, amikor érted dolgozik.",
+      "openFull": "Teljes megnyitás",
+      "visualMemoryLabel": "Memória",
+      "visualSynced": "Szinkronizálva",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Ütemezések",
+      "visualContextSwarm": "Raj"
+    },
+    "section": {
+      "title": "Memória",
+      "tag": "opcionális · személyes",
+      "description": "Rövid feljegyzés rólad, amely minden ügynökfutást elkísér — chat, ütemezett feladatok, rajgépek, delegált ügynökök."
+    },
+    "presetsLabel": "Próbáld ki",
+    "presets": {
+      "useFirstName": "Keresztnév használata",
+      "useFirstNameSentence": "Szólíts a keresztnevemen.",
+      "beTerse": "Légy tömör",
+      "beTerseSentence": "Részesítsd előnyben a tömör, közvetlen válaszokat. Töltelék nélkül.",
+      "imDeveloper": "Fejlesztő vagyok",
+      "imDeveloperSentence": "Szoftvermérnök vagyok; otthon vagyok a kódban.",
+      "noEmojis": "Nincs emoji",
+      "noEmojisSentence": "Kerüld az emojikat a válaszokban.",
+      "metricUnits": "Metrikus egységek",
+      "metricUnitsSentence": "Használj metrikus egységeket (méter, kilogramm, °C).",
+      "citeSources": "Forrásmegjelölés",
+      "citeSourcesSentence": "Adj meg forrást a tényállítások mellé."
+    },
+    "placeholder": "Példa:\nSzólíts a keresztnevemen.\nRészesítsd előnyben a tömör válaszokat.\nTypeScriptben és Pythonban dolgozom.\nSoha ne törölj fájlt megerősítés nélkül.",
+    "loading": "Betöltés…",
+    "saving": "Mentés…",
+    "saved": "Mentve",
+    "unsavedChanges": "Mentetlen módosítások",
+    "empty": "Üres",
+    "savedRelative": "Mentve · {time}",
+    "errorLoad": "Nem sikerült betölteni a memóriát.",
+    "errorSave": "Nem sikerült menteni a memóriát.",
+    "willBeShortened": "rövidítésre kerül",
+    "clear": "Törlés",
+    "footerNote": "A Coasty figyelembe veszi ezeket a beállításokat, amikor érted dolgozik.",
+    "time": {
+      "justNow": "épp most",
+      "secondsAgo": "{n} mp",
+      "minutesAgo": "{n} p",
+      "hoursAgo": "{n} ó",
+      "daysAgo": "{n} n"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Beállítások",
+    "navGroups": {
+      "settings": "Beállítások",
+      "developer": "Fejlesztő",
+      "more": "Több",
+      "resources": "Erőforrások"
+    },
+    "sections": {
+      "account": {
+        "label": "Általános",
+        "description": "Profil és fiók"
+      },
+      "appearance": {
+        "label": "Megjelenés",
+        "description": "Téma, nyelv és háttér"
+      },
+      "billing": {
+        "label": "Számlázás",
+        "description": "Csomagok és kreditek"
+      },
+      "publicChats": {
+        "label": "Nyilvános csevegések",
+        "description": "Nyilvános linken megosztott csevegések kezelése"
+      },
+      "privacy": {
+        "label": "Adatvédelem",
+        "description": "Biztonság és adatvédelem"
+      },
+      "notifications": {
+        "label": "Értesítések",
+        "description": "Értesítési beállítások"
+      },
+      "apiKeys": {
+        "label": "API-kulcsok",
+        "description": "API-kulcsok kezelése"
+      },
+      "data": {
+        "label": "Adatok",
+        "description": "Adatok exportálása és kezelése"
+      },
+      "feedback": {
+        "label": "Visszajelzés",
+        "description": "Küldj nekünk visszajelzést"
+      },
+      "about": {
+        "label": "Névjegy",
+        "description": "A Coasty névjegye"
+      },
+      "social": {
+        "label": "Csatlakozás",
+        "description": "Közösségi linkek"
+      },
+      "guide": {
+        "label": "Útmutató",
+        "description": "Tanuld meg, hogyan használd a Coastyt"
+      },
+      "referral": {
+        "label": "Ajánlás",
+        "description": "Hívj meg barátokat és szerezz kreditet"
+      }
+    },
+    "appearance": {
+      "theme": "Téma",
+      "language": "Nyelv",
+      "background": "Háttér",
+      "personalization": "Személyre szabás",
+      "intro": {
+        "title": "Filmes bevezető",
+        "description": "Animált bevezető megjelenítése a kezdőlap meglátogatásakor"
+      },
+      "interaction": {
+        "title": "Eszközhívások",
+        "description": "Eszközfuttatási részletek megjelenítése a beszélgetésekben"
+      }
+    },
+    "comingSoon": {
+      "badge": "Hamarosan",
+      "placeholder": "Ez a szakasz egy jövőbeli frissítésben érkezik."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Mutasd meg, mi a lehetséges…",
+    "tasks": [
+      "Kutasd a versenytársaimat",
+      "Töltsd ki az állásjelentkezéseket",
+      "Foglalj járatot Tokióba",
+      "Kövesd nyomon a weboldalam üzemidejét",
+      "Időzítsd a közösségi posztokat",
+      "Elemezd a negyedéves trendeket"
+    ],
+    "dontShowAgain": "Ne jelenjen meg újra",
+    "skip": "Kihagyás",
+    "tagline": "Csinálj bármit, ahogy egy ember a számítógépen"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "A számítógépeid",
+      "description": "Szilícium szolgálatodban. Felpörgetjük a flottádat."
+    },
+    "swarms": {
+      "title": "Rajintelligencia",
+      "description": "Sok elme, egy küldetés. Összegyűjtjük az ügynökeidet."
+    },
+    "developers": {
+      "title": "Fejlesztői API",
+      "description": "Műszerfalad betöltése."
+    },
+    "secrets": {
+      "title": "Hitelesítő adatok",
+      "description": "A titkaid biztonságban vannak nálunk. Nyitjuk a széfet."
+    },
+    "schedules": {
+      "title": "Időzítések",
+      "description": "Mindig pontosan. Szinkronizáljuk az automatizálásaidat."
+    },
+    "history": {
+      "title": "Az előzményeid",
+      "description": "Csendes feljegyzés minden beszélgetésről, feladatról és ötletről, amit feltártál."
+    },
+    "referral": {
+      "title": "Ajánlások",
+      "description": "Oszd meg a Coastyt. Keressetek együtt."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Az adataid, a te irányításod",
+    "heroDescription": "Csak azt tároljuk, ami a munkameneteid futtatásához szükséges. Minden forgalom titkosított az átvitel során, és kiterjesztheted a nyugalmi titkosítást az alábbi kategóriákra. Az adataidat soha nem használjuk MI-modellek tanításához.",
+    "trustTransit": "TLS 1.3 átvitel közben",
+    "trustAtRest": "AES-256-GCM nyugalomban",
+    "trustNoTraining": "Nincs tréning az adataidon"
   }
 }

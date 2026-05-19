@@ -101,7 +101,7 @@ export function Header({ hasSidebar }: HeaderProps) {
 
   return (
     <>
-      <header className="h-app-header pointer-events-none absolute top-0 right-0 left-0 z-40">
+      <header className="h-app-header bg-background pointer-events-none absolute top-0 right-0 left-0 z-40">
         <div className="relative mx-auto flex h-full max-w-full items-center justify-between px-2 sm:px-4 lg:px-6 xl:px-8">
           <div className="flex w-full items-center justify-between min-w-0">
             {/* Left */}

@@ -12,13 +12,15 @@
     "recommended": "Recommandé",
     "month": "mois",
     "creditsPerMonth": "{count} crédits/mois",
-    "agentsInParallel": "{count} agents en parallèle"
+    "agentsInParallel": "{count} agents en parallèle",
+    "whatsIncluded": "Ce qui est inclus",
+    "hideDetails": "Masquer les détails"
   },
   "header": {
     "useCases": "Cas d'usage",
     "blog": "Blog",
     "agentSwarms": "Essaims d'agents",
-    "products": "Products",
+    "products": "Produits",
     "discover": "Discover",
     "compare": "Comparer",
     "demos": "Démos",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} e-mails personnalisés par campagne"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Utilisation d'ordinateur",
+      "agentSwarms": "Essaims d'agents",
+      "compare": "Comparer"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "Score {stat} au benchmark OSWorld",
+      "agentSwarms": "{stat} agents en parallèle",
+      "compare": "{stat} concurrents analysés"
     },
     "blogItems": {
       "allPosts": "Tous les articles",
@@ -72,7 +74,8 @@
       "webScraping": "Extraction web",
       "jobApplications": "Candidatures",
       "demosResults": "Démos et résultats",
-      "guide": "Guide"
+      "guide": "Guide",
+      "discover": "Communauté"
     },
     "blogStats": {
       "allPosts": "{stat} articles publiés par semaine",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} pages par session",
       "jobApplications": "{stat} candidatures par session",
       "demosResults": "{stat} études de cas réelles",
-      "guide": "{stat} guides de cas d'usage"
-    }
+      "guide": "{stat} guides de cas d'usage",
+      "discover": "Voyez comment les gens l'utilisent"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "Agent n°1 d'utilisation d'ordinateur · {score} OSWorld",
-    "headline": "Opérateurs informatiques autonomes",
+    "headline": "Le meilleur agent d'utilisation d'ordinateur",
     "useCases": {
       "computerAgent": {
         "label": "Agent informatique",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Réseaux sociaux",
         "task": "Publiez sur Hacker News et interagissez avec les commentaires"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "économisés par mois",
+        "sublabel": "vs. un VA à temps plein"
+      },
+      "time": {
+        "value": "30 h",
+        "label": "récupérées par semaine",
+        "sublabel": "travail manuel éliminé"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "production plus rapide",
+        "sublabel": "tâches en minutes, pas en jours"
+      },
+      "effort": {
+        "value": "0",
+        "label": "code ni embauche",
+        "sublabel": "géré de bout en bout"
       }
     }
   },
@@ -239,7 +266,7 @@
       "subtitle": "Vous ou votre équipe, à la main"
     },
     "coasty": {
-      "title": "Coasty AI Agent",
+      "title": "Agent IA Coasty",
       "subtitle": "Agent n°1 d'utilisation d'ordinateur"
     },
     "rows": {
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Automatisation intensive illimitée",
         "cta": "Choisir Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Aucune limite de crédits — jamais",
+        "cta": "Choisir Unlimited",
+        "badge": "Meilleure offre"
       }
     },
     "vmTemporary": "1 VM temporaire (2h)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Le même travail coûte {oldPrice} en main-d'œuvre",
       "description": "Un assistant virtuel coûte 2 000 à 4 000 $/mois. Un employé à temps partiel coûte encore plus. Coasty fait le même travail 24/7 à partir de $0 — avec une cohérence parfaite, une traçabilité complète et zéro temps de formation."
-    }
+    },
+    "unlimitedCredits": "Crédits illimités"
   },
   "faq": {
     "title": "Questions fréquemment posées",
@@ -429,7 +463,8 @@
       "contact": "Contact",
       "privacy": "Confidentialité",
       "terms": "Conditions"
-    }
+    },
+    "status": "Tous les systèmes opérationnels"
   },
   "languageSwitcher": {
     "label": "Langue"
@@ -458,16 +493,16 @@
     "demoCaption": "Lancez des agents IA sur votre ordinateur ou contrôlez-le depuis votre téléphone, où que vous soyez.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Exécutez en local sur votre PC",
+        "desc": "Téléchargez l'application de bureau et laissez l'IA contrôler votre ordinateur directement — pas besoin de VM cloud."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Contrôlez votre PC depuis votre téléphone",
+        "desc": "Lancez une tâche depuis votre téléphone et regardez l'agent IA travailler sur votre ordinateur en temps réel."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Cloud ou local — c'est vous qui choisissez",
+        "desc": "Utilisez des VM cloud pour des tâches isolées, ou passez en local pour un accès complet à vos applications et fichiers."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Connexion...",
       "continueWithGoogle": "Continuer avec Google"
+    },
+    "inAppBrowser": {
+      "blocked": "La connexion Google ne fonctionne pas dans les navigateurs intégrés. Ouvrez cette page dans votre navigateur ou utilisez un lien magique.",
+      "blockedNamed": "La connexion Google ne fonctionne pas dans {app}. Ouvrez cette page dans votre navigateur ou utilisez un lien magique.",
+      "copyLink": "Copier le lien",
+      "copied": "Copié !",
+      "useMagicLink": "Utiliser un lien magique"
     },
     "or": "ou",
     "email": "Email",
@@ -560,18 +602,21 @@
     "getStarted": "Commencer",
     "settingUp": "Configuration...",
     "welcome": {
-      "titleReturning": "Bon retour{name} !",
+      "titleReturning": "Bon retour{name}",
       "titleNew": "Bienvenue sur Coasty",
-      "descriptionReturning": "Nous aimerions en savoir un peu plus sur vous pour améliorer votre expérience",
-      "descriptionNew": "Configurons votre compte pour personnaliser votre expérience"
+      "eyebrowNew": "Faisons connaissance",
+      "eyebrowReturning": "Presque fini",
+      "descriptionReturning": "Encore quelques détails et Coasty sera parfaitement adapté à votre façon de travailler.",
+      "descriptionNew": "Coasty travaille sur de vrais ordinateurs — navigue, clique, tape, livre. Quelques détails rapides pour qu'il s'adapte à votre style.",
+      "footerNote": "Prend environ une minute. Vous pouvez tout modifier plus tard dans les Paramètres."
     },
     "nameLabel": "Comment devons-nous vous appeler ?",
-    "namePlaceholder": "Votre nom",
-    "companyLabel": "Entreprise",
+    "namePlaceholder": "Juste votre prénom",
+    "companyLabel": "Où travaillez-vous ?",
     "optional": "(facultatif)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Votre entreprise ou équipe",
     "websiteLabel": "Site web",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "votreentreprise.com",
     "roleStep": {
       "title": "Qu'est-ce qui vous décrit le mieux ?",
       "subtitle": "Sélectionnez tout ce qui s'applique — cela nous aide à personnaliser votre expérience"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Que doit faire votre assistant IA ?",
-    "placeholderAlt": "Dites à votre IA quoi faire sur l'ordinateur...",
+    "placeholder": "Dites-moi quoi faire sur cet ordinateur...",
+    "placeholderAlt": "Sélectionnez un ordinateur pour commencer...",
     "vmError": {
       "title": "Erreur de machine virtuelle",
       "description": "La machine virtuelle est en état d'erreur ou en cours de suppression.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Réduire le nombre de machines",
       "increaseMachines": "Augmenter le nombre de machines",
       "machineLimit": "Jusqu'à {max} machines d'essaim sur votre plan. Besoin de plus ? Contactez founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "Multi-exécution",
       "upgradeCta": "Mode Essaim"
     },
     "desktop": {
@@ -801,6 +846,28 @@
       "ecommerce": "Comparatif de prix de {company}",
       "social_media": "Publier sur {company}",
       "general_automation": "Automatiser une tâche sur {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Transfert humain terminé",
+      "yourTurn": "À vous",
+      "connectToDesktop": "Connecter au bureau",
+      "resuming": "Reprise...",
+      "doneContinue": "Terminé, continuer"
+    },
+    "feedback": {
+      "promptRun": "Comment s'est passée cette exécution ?",
+      "promptSwarm": "Comment s'est passé ce swarm ?",
+      "reactionBad": "Mauvais",
+      "reactionOkay": "Correct",
+      "reactionGood": "Bien",
+      "reactionAmazing": "Génial",
+      "tellUsMore": "En dire plus",
+      "commentPlaceholder": "Qu'est-ce qui pourrait être mieux ?",
+      "npsPrompt": "Recommanderiez-vous Coasty ?",
+      "npsNotLikely": "Peu probable",
+      "npsVeryLikely": "Très probable",
+      "thanks": "Merci pour le retour",
+      "creditsLabel": "crédits"
     }
   },
   "chatMessages": {
@@ -808,7 +875,7 @@
     "copied": "Copié !",
     "regenerate": "Régénérer",
     "feedback": {
-      "title": "Feedback",
+      "title": "Commentaires",
       "prompts": [
         "Notez ceci",
         "Feedback",
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Automatisation intensive illimitée"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Aucune limite de crédits — jamais",
+        "badge": "Meilleure offre"
       }
     },
     "features": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Mise en page"
+    "layout": "Mise en page",
+    "sidebarStyle": "Style de la barre latérale",
+    "sidebarStyleHint": "Choisissez où vit la navigation",
+    "sidebarStyleDisabled": "Disponible lorsque la disposition est définie sur Barre latérale",
+    "vertical": "Vertical",
+    "verticalBadge": "Par défaut",
+    "verticalDescription": "Barre gauche classique avec libellés et crédits dans le pied de page.",
+    "horizontal": "Horizontal",
+    "horizontalBadge": "Élégant",
+    "horizontalDescription": "Une seule barre supérieure avec tout sur une ligne. Plus de hauteur de canvas."
   },
   "suggestions": {
     "summary": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Automatisation intensive illimitée",
         "cta": "Choisir Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Aucune limite de crédits — jamais",
+        "cta": "Choisir Unlimited",
+        "badge": "Meilleure offre"
       }
     },
     "features": {
@@ -1757,11 +1844,11 @@
       "subtitle": "Votre entreprise IA, en pilote automatique",
       "description": "Employés, équipes, déclencheurs — en service 24h/24, 7j/7.",
       "myCompany": "Mon entreprise",
-      "contentOps": "Content Ops",
+      "contentOps": "Opérations de contenu",
       "support": "Support",
       "writer": "Rédacteur",
       "seo": "SEO",
-      "social": "Social",
+      "social": "Réseaux sociaux",
       "inbox": "Boîte de réception",
       "docs": "Docs",
       "concepts": "Concepts clés",
@@ -1805,7 +1892,7 @@
       "templates": "Partir d'un modèle",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "Opérations de contenu",
           "plan": "Starter",
           "count": "3"
         },
@@ -1820,7 +1907,7 @@
           "count": "7"
         },
         "ecommerce": {
-          "name": "E-Commerce",
+          "name": "E-commerce",
           "plan": "Plus",
           "count": "7"
         }
@@ -1867,6 +1954,11 @@
           "credits": "1 500",
           "machines": "3 permanentes",
           "feature": "Garantie SLA"
+        },
+        "unlimited": {
+          "credits": "Illimité",
+          "machines": "2 toujours actives",
+          "feature": "1 agent simultané"
         }
       },
       "perMonth": "{price}/mois",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "Deux modes d'exécution",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "VM cloud",
       "cloudFeatures": {
         "isolated": "Environnement isolé complet",
         "freshBrowser": "Navigateur vierge, sans historique",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - Agent IA d'Utilisation d'Ordinateur #1 | Employé IA pour l'Automatisation du Bureau et du Navigateur",
+      "title": "Coasty - Agent IA d'Utilisation d'Ordinateur #1 | $249/mo Unlimited (le moins cher du marché)",
       "titleTemplate": "{title} | Coasty - Agent IA d'Utilisation d'Ordinateur",
-      "description": "Coasty est l'agent IA d'utilisation d'ordinateur #1 — 82% sur le benchmark OSWorld. Il contrôle un bureau complet comme un humain : ouvre les navigateurs, clique, tape, remplit les formulaires, envoie des e-mails, gère les tableurs. Véritable isolation au niveau VM par session. À partir de $20/mo.",
-      "ogTitle": "Coasty - Agent IA d'Utilisation d'Ordinateur #1 | 82% Benchmark OSWorld",
-      "ogDescription": "Employé IA qui contrôle un bureau comme un humain. #1 sur le benchmark OSWorld (82%). Automatisation du navigateur, contrôle du bureau, résolution de CAPTCHA, isolation VM. À partir de $20/mo.",
-      "twitterDescription": "Employé IA qui contrôle un bureau comme un humain. Ouvre les navigateurs, clique, tape, remplit les formulaires, envoie des e-mails. Véritable isolation VM. $20/mo vs $3,000/mo assistant virtuel humain."
+      "description": "Coasty est l'agent IA d'utilisation d'ordinateur #1 — 82% sur le benchmark OSWorld — et le seul forfait Unlimited à tarif fixe pour l'utilisation d'ordinateur à $249/mois (moins cher que Devin Team $500+ACU, OpenAI Operator $200 avec limitation de débit et les concurrents plafonnés en crédits). Contrôle un bureau complet comme un humain : navigateurs, formulaires, e-mails, tableurs. Isolation au niveau VM. À partir de $19/mo Starter ou $249/mo Unlimited.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Unlimited (l'agent d'utilisation d'ordinateur le moins cher)",
+      "ogDescription": "#1 sur OSWorld (82%). $249/mo Unlimited à tarif fixe — moins cher que Devin Team ($500+ACU) avec un meilleur score au benchmark. Automatisation du navigateur, du bureau et du terminal. Isolation VM par session. Natif multi-plateforme + REST API + serveur MCP.",
+      "twitterDescription": "Agent IA qui pilote un véritable bureau. 82% OSWorld (#1). $249/mo Unlimited — le forfait à tarif fixe le moins cher de la catégorie. Starter à partir de $19/mo. Isolation VM + serveur MCP avec 26 outils."
     },
     "compare": {
       "title": "Comparer Coasty - Alternatives d'Agents IA et Comparaison des Concurrents",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Le meilleur agent d'utilisation d'ordinateur classé #1 sur OSWorld. Automatisez toute tâche de bureau, navigateur ou terminal avec l'IA."
     },
     "pricing": {
-      "title": "Tarifs — Plans et Tarifs de l'Agent IA Coasty",
-      "description": "Plans tarifaires Coasty à partir de $20/mo. Remplacez les assistants virtuels à $3,000/mo par un employé IA. Niveau gratuit disponible. Utilisation basée sur les crédits sans frais cachés.",
-      "ogTitle": "Tarifs Coasty — Plans d'Agent IA",
-      "ogDescription": "Employé IA à partir de $20/mo. Remplacez les assistants virtuels coûteux par une IA autonome. Niveau gratuit disponible."
+      "title": "Tarifs — $19/mo Starter ou $249/mo Unlimited (le moins cher du marché)",
+      "description": "Tarifs Coasty : Starter $19/mo (200 crédits) ou Unlimited $249/mo (le forfait à tarif fixe illimité pour l'utilisation d'ordinateur le moins cher du marché — moins cher que Devin Team $500+ACU, Genspark Pro $249 plafonné en crédits et Manus Extended $200 plafonné). Remplace les assistants virtuels humains à $3,000+/mo. Aucuns frais cachés.",
+      "ogTitle": "Tarifs Coasty — $19/mo Starter, $249/mo Unlimited",
+      "ogDescription": "$249/mo Unlimited à tarif fixe — le forfait illimité pour l'utilisation d'ordinateur le moins cher du marché. Ou $19/mo Starter pour les particuliers. Économise $36k par an par rapport à un assistant virtuel humain."
     },
     "faq": {
       "q1": "Qu'est-ce que Coasty ?",
@@ -2292,7 +2384,7 @@
       "q2": "Comment Coasty se compare-t-il à Anthropic Computer Use ?",
       "a2": "Alors qu'Anthropic Computer Use fournit une API brute pour le contrôle d'ordinateur, Coasty est une plateforme prête pour la production avec une infrastructure VM gérée, une résolution de CAPTCHA intégrée, une application de bureau pour Mac et Windows, un support multi-modèle et le score le plus élevé au benchmark OSWorld (82%). Coasty fournit la solution complète — pas seulement l'API.",
       "q3": "Combien coûte Coasty ?",
-      "a3": "Coasty commence à $20/mois pour le plan Starter avec un niveau gratuit disponible. Cela se compare à plus de $3,000 par mois pour un assistant virtuel humain. Coasty travaille 24/7 sans pauses, sans formation et avec une scalabilité instantanée.",
+      "a3": "Coasty propose deux forfaits actifs : Starter à $19/mois (200 crédits, 1 machine, idéal pour les particuliers) et Unlimited à $249/mois sans plafond de crédits. Le forfait Unlimited à $249 est le forfait à tarif fixe illimité pour l'utilisation d'ordinateur le moins cher disponible — moins cher que Devin Team ($500/mois + dépassement ACU), OpenAI Operator ChatGPT Pro ($200/mois avec limitation de débit), Genspark Pro ($249,99 plafonné à 125k crédits) et Manus Extended ($200 plafonné à 40k crédits). Les deux remplacent un assistant virtuel humain à $3,000+/mois ; Unlimited fait économiser $33,000+/an par rapport à un assistant humain, soit une réduction des coûts de 92%.",
       "q4": "Coasty est-il sûr à utiliser ?",
       "a4": "Oui. Chaque session Coasty s'exécute dans sa propre machine virtuelle isolée et protégée. Vos données restent en sécurité, votre machine n'est pas touchée et rien ne fuite entre les sessions. C'est une véritable isolation au niveau VM, pas seulement des conteneurs dans un pool partagé.",
       "q5": "Qu'est-ce que le benchmark OSWorld ?",
@@ -2309,11 +2401,11 @@
       "a10": "Oui. Coasty dispose d'un pipeline de résolution de CAPTCHA intégré, il n'est donc pas bloqué comme les agents IA concurrents. C'est essentiel pour l'automatisation réelle où les CAPTCHAs sont courants sur les sites web."
     },
     "structuredData": {
-      "appDescription": "L'agent IA d'utilisation d'ordinateur #1. Coasty contrôle un bureau complet comme un humain — ouvre les navigateurs, clique, tape, remplit les formulaires, envoie des e-mails et gère les tableurs de manière autonome. 82% sur le benchmark OSWorld. Véritable isolation au niveau VM. Résolution de CAPTCHA intégrée. À partir de $20/mois.",
-      "orgDescription": "Coasty développe l'agent IA d'utilisation d'ordinateur #1. Notre plateforme fournit un contrôle autonome du bureau, une automatisation du navigateur et une orchestration multi-agent avec une véritable isolation au niveau VM.",
-      "productDescription": "Agent IA d'utilisation d'ordinateur qui contrôle un bureau comme un humain. #1 sur le benchmark OSWorld (82%). Automatisation autonome du navigateur, contrôle du bureau, envoi d'e-mails, remplissage de formulaires et gestion de tableurs avec une véritable isolation au niveau VM.",
-      "websiteDescription": "Plateforme d'agent IA d'utilisation d'ordinateur #1. 82% au benchmark OSWorld. Automatisation autonome du navigateur, du bureau et du terminal avec isolation VM. À partir de $20/mo.",
-      "softwareDescription": "Agent IA d'utilisation d'ordinateur qui contrôle un bureau complet comme un humain. #1 sur le benchmark OSWorld avec un taux de réussite de 82% sur 369 tâches réelles. Automatisation autonome du navigateur, contrôle du bureau, opérations de terminal, envoi d'e-mails, remplissage de formulaires et gestion de tableurs.",
+      "appDescription": "L'agent IA d'utilisation d'ordinateur #1 et le forfait Unlimited à tarif fixe pour l'utilisation d'ordinateur le moins cher du marché à $249/mois. Coasty contrôle un bureau complet comme un humain — ouvre les navigateurs, clique, tape, remplit les formulaires, envoie des e-mails et gère les tableurs de manière autonome. 82% sur le benchmark OSWorld sur 369 tâches réelles. Véritable isolation au niveau VM par session. Résolution de CAPTCHA intégrée. Forfaits : $19/mo Starter ou $249/mo Unlimited.",
+      "orgDescription": "Coasty développe l'agent IA d'utilisation d'ordinateur #1 (82% OSWorld) et propose le seul forfait Unlimited à tarif fixe pour l'utilisation d'ordinateur à $249/mois — moins cher que Devin Team, OpenAI Operator et les concurrents plafonnés en crédits dans la même gamme de prix. Notre plateforme fournit un contrôle autonome du bureau, une automatisation du navigateur et une orchestration multi-agent avec une véritable isolation au niveau VM.",
+      "productDescription": "Agent IA d'utilisation d'ordinateur qui contrôle un bureau comme un humain. #1 sur le benchmark OSWorld (82%). Le forfait Unlimited à $249/mo est le forfait à tarif fixe illimité pour l'utilisation d'ordinateur le moins cher disponible. Automatisation autonome du navigateur, contrôle du bureau, envoi d'e-mails, remplissage de formulaires et gestion de tableurs avec une véritable isolation au niveau VM.",
+      "websiteDescription": "Plateforme d'agent IA d'utilisation d'ordinateur #1 — 82% au benchmark OSWorld et le forfait Unlimited à tarif fixe le moins cher à $249/mois. Automatisation autonome du navigateur, du bureau et du terminal avec isolation VM. À partir de $19/mo Starter ou $249/mo Unlimited.",
+      "softwareDescription": "Agent IA d'utilisation d'ordinateur qui contrôle un bureau complet comme un humain. #1 sur le benchmark OSWorld avec un taux de réussite de 82% sur 369 tâches réelles. Le forfait Unlimited à $249/mois est le forfait à tarif fixe illimité pour l'utilisation d'ordinateur le moins cher du marché. Automatisation autonome du navigateur, contrôle du bureau, opérations de terminal, envoi d'e-mails, remplissage de formulaires et gestion de tableurs.",
       "breadcrumbs": {
         "home": "Accueil",
         "caseStudies": "Études de Cas d'Agents IA",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Page introuvable",
-      "description": "Désolé, cette page n'existe pas."
+      "description": "Désolé, cette page n'existe pas.",
+      "metaTitle": "404 · Page introuvable",
+      "metaDescription": "Nous avons envoyé notre meilleur agent IA. Il est revenu bredouille. Retournez sur Coasty, l'agent IA n°1 pour l'automatisation du bureau et du navigateur.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "scan : tout internet",
+        "step2": "scan : tous les onglets ouverts",
+        "step3": "scan : sous le canapé",
+        "result": "verdict : la page n'existe pas"
+      },
+      "ok": "OK",
+      "fail": "ÉCHEC",
+      "primaryCta": "Retour à l'accueil",
+      "secondaryCta": "Embaucher un agent IA",
+      "navLabel": "Pages suggérées",
+      "links": {
+        "home": "Accueil",
+        "computerUse": "Utilisation de l'ordinateur",
+        "pricing": "Tarifs",
+        "download": "Télécharger",
+        "blog": "Blog",
+        "guide": "Guide"
+      }
     },
     "error": {
       "title": "Une erreur est survenue",
@@ -2666,7 +2780,7 @@
     },
     "frequencies": {
       "daily": "daily",
-      "weekly": "weekly",
+      "weekly": "hebdomadaire",
       "every_30_minutes": "toutes les 30 minutes",
       "every_6_hours": "toutes les 6 heures",
       "every_12_hours": "toutes les 12 heures"
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Le titre de la salle est obligatoire",
+      "taskCreated": "Tâche créée avec succès",
+      "taskFailed": "Échec de la création de la tâche",
+      "assignTask": "Attribuer une nouvelle tâche",
+      "assignTaskDesc": "Lancez une nouvelle tâche avec votre assistant IA.",
+      "taskName": "Nom de la tâche",
+      "taskNamePlaceholder": "Saisissez le nom de la tâche",
+      "cancel": "Annuler",
+      "creating": "Création...",
+      "createTask": "Créer la tâche"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Veuillez saisir un code d'invitation",
+      "joinSuccess": "Vous avez rejoint le projet avec succès !",
+      "joinFailed": "Échec de l'adhésion au projet",
+      "invalidCode": "Code d'invitation invalide ou projet introuvable",
+      "title": "Rejoindre le projet",
+      "description": "Saisissez un code d'invitation pour rejoindre un projet existant.",
+      "inviteCode": "Code d'invitation",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Demandez le code d'invitation à votre chef d'équipe",
+      "cancel": "Annuler",
+      "joining": "Adhésion en cours...",
+      "joinButton": "Rejoindre le projet"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "Participants de la salle",
+      "copyCode": "Copier le code",
+      "copyLink": "Copier le lien",
+      "codeCopied": "Code d'invitation copié !",
+      "codeFailed": "Échec de la copie du code d'invitation",
+      "linkCopied": "Lien d'invitation copié !",
+      "linkFailed": "Échec de la copie du lien d'invitation",
+      "online": "En ligne",
+      "offline": "Hors ligne",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Le titre de la salle est obligatoire",
+      "created": "Projet créé avec succès !",
+      "failed": "Échec de la création de la salle",
+      "title": "Créer un nouveau projet",
+      "description": "Lancez un nouveau projet pour construire votre produit avec l'IA.",
+      "projectName": "Nom du projet",
+      "projectNamePlaceholder": "Saisissez le nom du projet",
+      "teamSize": "Taille de l'équipe",
+      "cancel": "Annuler",
+      "creating": "Création...",
+      "createButton": "Créer le projet"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Nouveautés",
+    "title": "Nouveautés de Coasty",
+    "updateCount": "{count} mises à jour",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Mise à jour",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Restez à l'affût des prochaines mises à jour",
+    "tagline": "Votre employé IA qui collabore avec tout le monde"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Excellent"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Veuillez vous connecter pour envoyer un commentaire",
+    "alreadySubmitted": "Vous avez déjà envoyé un commentaire à ce sujet",
+    "thankYou": "Merci pour votre commentaire !",
+    "creditsEarned": "+{credits} crédits gagnés",
+    "helpImprove": "Vos retours nous aident à améliorer Coasty.",
+    "howsExperience": "Comment se passe votre expérience ?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Dites-nous en plus",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Qu'est-ce qui fonctionne bien ? Que peut-on améliorer ?",
+    "cancel": "Annuler",
+    "sending": "Envoi...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Veuillez sélectionner un poste de travail",
+    "enterCron": "Veuillez saisir une expression cron",
+    "hireFailed": "Échec de l'embauche de l'employé",
+    "removeFailed": "Échec de la suppression de l'employé",
+    "editEmployee": "Modifier l'employé",
+    "configureEmployee": "Configurer l'employé",
+    "editDescription": "Mettre à jour la planification, le poste de travail ou les instructions",
+    "configureDescription": "Configurer un employé IA pour ce chat",
+    "loading": "Chargement de la configuration...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Nom de l'employé"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Supprimer le chat ?",
+    "description": "Cela supprimera « {chatTitle} »",
+    "cancel": "Annuler",
+    "delete": "Supprimer"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Paiement réussi ! Vos crédits ont été ajoutés.",
+    "canceled": "Le paiement a été annulé. Aucun frais n'a été prélevé."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Paramètres généraux",
     "generalDescription": "Configurer les parametres de base de l'ordinateur",
     "displayName": "Nom d'affichage",
     "defaultName": "Mon ordinateur",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Enregistrer les modifications",
+    "security": "Sécurité",
+    "securityDescription": "Paramètres de sécurité et d'accès",
+    "sshAuth": "Authentification SSH",
+    "username": "Nom d'utilisateur :",
+    "keyPair": "Paire de clés :",
+    "sshKeyDownloaded": "Clé SSH téléchargée",
+    "sshKeyFailed": "Échec du téléchargement de la clé SSH",
+    "downloadSshKey": "Télécharger la clé SSH",
+    "vncPassword": "Mot de passe VNC",
     "vncPasswordHint": "Ce mot de passe est requis pour se connecter a l'ordinateur"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Salut, j'utilise Coasty et c'est vraiment cool. C'est une IA qui sait réellement utiliser un ordinateur à ta place. Naviguer, cliquer, taper, tout ça. Essaie avec mon lien, on gagne tous les deux des crédits gratuits !",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Découvre cet outil IA",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "à l'instant",
+      "minutesAgo": "il y a {minutes} min",
+      "hoursAgo": "il y a {hours} h",
+      "daysAgo": "il y a {days} j",
+      "monthsAgo": "il y a {months} mois"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Lien de parrainage copié !",
+    "headline": "Les bons amis partagent des memes. Les meilleurs amis partagent des agents IA.",
+    "subheadline": "Vous gagnez tous les deux {credits} crédits gratuits quand votre ami rejoint Coasty.",
+    "yourLink": "Votre lien de parrainage",
+    "shareDirectly": "Partager directement",
+    "yourReferrals": "Vos parrainages",
+    "referralCount": "{count} parrainage(s)",
+    "creditsEarned": "{credits} crédits gagnés",
+    "invitedYou": "Vous a invité",
+    "joinedViaLink": "A rejoint via votre lien",
+    "noInvites": "Aucun utilisateur invité pour le moment",
+    "noInvitesHint": "Partagez votre lien et gagnez tous les deux 50 crédits"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Rendre public",
+    "title": "Votre conversation est désormais publique !",
+    "description": "Toute personne disposant du lien peut désormais consulter cette conversation, qui pourra apparaître dans les fils communautaires, les pages mises en avant ou les résultats de recherche à l'avenir.",
+    "viewPage": "Voir la page",
+    "shareOn": "Partager sur"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "Panneau de contrôle IA",
+    "subtitle": "Décrivez ce que vous voulez que l'IA fasse",
+    "quickCommands": "Commandes rapides",
+    "noActions": "Aucune action effectuée pour le moment",
+    "success": "Réussite",
+    "failed": "Échec",
+    "placeholder": "Dites à l'IA quoi faire... (Ctrl+Entrée pour envoyer)",
+    "executing": "Exécution...",
+    "executeCommand": "Exécuter la commande"
   },
   "discover": {
     "badge": "Communauté",
@@ -2859,5 +2973,190 @@
     "watchSession": "Voir la session",
     "steps": "{count} étapes",
     "tryCoasty": "Essayer Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Mémoire",
+    "sidebarDescription": "Contexte appliqué à chaque tâche d'agent",
+    "dialog": {
+      "title": "Mémoire",
+      "description": "Une note que Coasty applique chaque fois qu'il travaille pour vous.",
+      "openFull": "Ouvrir en grand",
+      "visualMemoryLabel": "Mémoire",
+      "visualSynced": "Synchronisé",
+      "visualContextChat": "Discussion",
+      "visualContextSchedules": "Planifications",
+      "visualContextSwarm": "Essaim"
+    },
+    "section": {
+      "title": "Mémoire",
+      "tag": "optionnel · personnel",
+      "description": "Une note vous concernant qui accompagne chaque tâche d'agent — discussion, tâches planifiées, machines en essaim, agents délégués."
+    },
+    "presetsLabel": "Essayer",
+    "presets": {
+      "useFirstName": "Utiliser mon prénom",
+      "useFirstNameSentence": "Adresse-toi à moi par mon prénom.",
+      "beTerse": "Sois concis",
+      "beTerseSentence": "Préfère des réponses concises et directes. Sans remplissage.",
+      "imDeveloper": "Je suis développeur",
+      "imDeveloperSentence": "Je suis ingénieur logiciel ; à l'aise avec le code.",
+      "noEmojis": "Pas d'emojis",
+      "noEmojisSentence": "Évite les emojis dans les réponses.",
+      "metricUnits": "Unités métriques",
+      "metricUnitsSentence": "Utilise les unités métriques (mètres, kilogrammes, °C).",
+      "citeSources": "Citer les sources",
+      "citeSourcesSentence": "Cite les sources lors d'affirmations factuelles."
+    },
+    "placeholder": "Exemple :\nAdresse-toi à moi par mon prénom.\nPréfère des réponses concises.\nJe travaille en TypeScript et Python.\nNe supprime jamais de fichiers sans confirmer.",
+    "loading": "Chargement…",
+    "saving": "Enregistrement…",
+    "saved": "Enregistré",
+    "unsavedChanges": "Modifications non enregistrées",
+    "empty": "Vide",
+    "savedRelative": "Enregistré · {time}",
+    "errorLoad": "Impossible de charger votre mémoire.",
+    "errorSave": "Impossible d'enregistrer votre mémoire.",
+    "willBeShortened": "sera raccourci",
+    "clear": "Effacer",
+    "footerNote": "Coasty prendra ces préférences en compte chaque fois qu'il travaille pour vous.",
+    "time": {
+      "justNow": "à l'instant",
+      "secondsAgo": "il y a {n} s",
+      "minutesAgo": "il y a {n} min",
+      "hoursAgo": "il y a {n} h",
+      "daysAgo": "il y a {n} j"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Paramètres",
+    "navGroups": {
+      "settings": "Paramètres",
+      "developer": "Développeur",
+      "more": "Plus",
+      "resources": "Ressources"
+    },
+    "sections": {
+      "account": {
+        "label": "Général",
+        "description": "Profil et compte"
+      },
+      "appearance": {
+        "label": "Apparence",
+        "description": "Thème, langue et arrière-plan"
+      },
+      "billing": {
+        "label": "Facturation",
+        "description": "Forfaits et crédits"
+      },
+      "publicChats": {
+        "label": "Discussions publiques",
+        "description": "Gérer les discussions partagées par lien public"
+      },
+      "privacy": {
+        "label": "Confidentialité",
+        "description": "Sécurité et confidentialité des données"
+      },
+      "notifications": {
+        "label": "Notifications",
+        "description": "Préférences de notification"
+      },
+      "apiKeys": {
+        "label": "Clés API",
+        "description": "Gérer vos clés API"
+      },
+      "data": {
+        "label": "Données",
+        "description": "Exporter et gérer vos données"
+      },
+      "feedback": {
+        "label": "Commentaires",
+        "description": "Envoyez-nous vos commentaires"
+      },
+      "about": {
+        "label": "À propos",
+        "description": "À propos de Coasty"
+      },
+      "social": {
+        "label": "Réseaux",
+        "description": "Liens sociaux"
+      },
+      "guide": {
+        "label": "Guide",
+        "description": "Apprends à utiliser Coasty"
+      },
+      "referral": {
+        "label": "Parrainage",
+        "description": "Invite des amis et gagne des crédits"
+      }
+    },
+    "appearance": {
+      "theme": "Thème",
+      "language": "Langue",
+      "background": "Arrière-plan",
+      "personalization": "Personnalisation",
+      "intro": {
+        "title": "Intro cinématographique",
+        "description": "Afficher l'intro animée sur la page d'accueil"
+      },
+      "interaction": {
+        "title": "Appels d'outils",
+        "description": "Afficher les détails d'exécution des outils dans les conversations"
+      }
+    },
+    "comingSoon": {
+      "badge": "Bientôt",
+      "placeholder": "Cette section arrivera dans une future mise à jour."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Montre-moi ce qui est possible…",
+    "tasks": [
+      "Recherche mes concurrents",
+      "Remplir des candidatures",
+      "Réserver un vol pour Tokyo",
+      "Surveille la disponibilité de mon site",
+      "Planifier des publications sur les réseaux",
+      "Analyser les tendances trimestrielles"
+    ],
+    "dontShowAgain": "Ne plus afficher",
+    "skip": "Passer",
+    "tagline": "Fais tout ce qu'un humain peut faire avec un ordinateur"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Tes ordinateurs",
+      "description": "Le silicium à ton service. On démarre ta flotte."
+    },
+    "swarms": {
+      "title": "Intelligence en essaim",
+      "description": "De nombreux esprits, une seule mission. On rassemble tes agents."
+    },
+    "developers": {
+      "title": "API développeur",
+      "description": "Chargement de votre tableau de bord."
+    },
+    "secrets": {
+      "title": "Identifiants",
+      "description": "Tes secrets sont en sécurité avec nous. On ouvre le coffre."
+    },
+    "schedules": {
+      "title": "Planifications",
+      "description": "À l'heure, à chaque fois. Synchronisation de tes automatisations."
+    },
+    "history": {
+      "title": "Ton historique",
+      "description": "Un calme registre de chaque conversation, tâche et idée que tu as explorée."
+    },
+    "referral": {
+      "title": "Parrainages",
+      "description": "Partage Coasty. Gagnez ensemble."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Vos données, votre contrôle",
+    "heroDescription": "Nous ne stockons que ce qui est nécessaire à l'exécution de vos sessions. Tout le trafic est chiffré en transit, et vous pouvez étendre le chiffrement au repos aux catégories ci-dessous. Vos données ne sont jamais utilisées pour entraîner des modèles d'IA.",
+    "trustTransit": "TLS 1.3 en transit",
+    "trustAtRest": "AES-256-GCM au repos",
+    "trustNoTraining": "Aucun entraînement sur vos données"
   }
 }

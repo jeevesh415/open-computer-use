@@ -1,27 +1,18 @@
-"use client"
-
-import { useEffect } from "react"
-import { useAccountDialog } from "@/lib/account-dialog-store"
-import { LayoutApp } from "@/app/components/layout/layout-app"
-
-function CreditsOpener() {
-  const { isOpen, _syncFromUrl } = useAccountDialog()
-
-  useEffect(() => {
-    if (!isOpen) {
-      useAccountDialog.setState({ _previousPath: "/" })
-      _syncFromUrl("billing")
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return null
-}
+import { OssLinkOut } from "@/components/common/oss-link-out"
+import { isOssMode } from "@/lib/oss-mode"
+import { CreditsContent } from "./credits-content"
 
 export default function CreditsPage() {
-  return (
-    <LayoutApp>
-      <CreditsOpener />
-    </LayoutApp>
-  )
+  if (isOssMode()) {
+    return (
+      <OssLinkOut
+        title="Credits"
+        description="Credits and billing are managed on coasty.ai."
+        href="https://coasty.ai/account?section=billing"
+        ctaLabel="Open billing on coasty.ai"
+      />
+    )
+  }
+
+  return <CreditsContent />
 }

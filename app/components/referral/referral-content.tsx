@@ -2,32 +2,38 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Textarea } from "@/components/ui/textarea"
 import { useUser } from "@/lib/user-store/provider"
-import { useChats } from "@/lib/chat-store/chats/provider"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { toast } from "sonner"
 import { createClient } from "@/lib/supabase/client"
-import { CoastyIcon } from "@/components/icons/coasty"
+import { PageLoader } from "@/components/common/page-loader"
 import {
   Copy,
   Check,
+  Gift,
+  Users,
+  Coins,
+  Send,
+  ArrowRight,
+  Loader2,
+  Link2,
+  MessageSquare,
+} from "lucide-react"
+import {
   TwitterLogo,
   LinkedinLogo,
   WhatsappLogo,
   TelegramLogo,
   RedditLogo,
   EnvelopeSimple,
-  CircleNotch,
-  Gift,
-  Users,
-  Coins,
-  PaperPlaneTilt,
-  ChatCircleDots,
-  ArrowRight,
+  BookOpen,
 } from "@phosphor-icons/react"
+
+const EASE = [0.22, 1, 0.36, 1] as const
 
 interface Referral {
   id: string
@@ -43,21 +49,23 @@ interface ReferralStats {
   referredBy: { email: string; credits: number; date: string } | null
 }
 
+type TabId = "share" | "feedback"
+
 function buildSocials(shareMessage: string, emailSubject: string, emailBody: string) {
   return [
     {
       id: "twitter",
       label: "X",
       icon: TwitterLogo,
-      color: "hover:bg-[#1DA1F2]/10 hover:text-[#1DA1F2] hover:border-[#1DA1F2]/30",
+      tint: "#1DA1F2",
       urlFn: (link: string) =>
-        `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${shareMessage}`)}%20%F0%9F%A4%96&url=${encodeURIComponent(link)}`,
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}%20%F0%9F%A4%96&url=${encodeURIComponent(link)}`,
     },
     {
       id: "linkedin",
       label: "LinkedIn",
       icon: LinkedinLogo,
-      color: "hover:bg-[#0A66C2]/10 hover:text-[#0A66C2] hover:border-[#0A66C2]/30",
+      tint: "#0A66C2",
       urlFn: (link: string) =>
         `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(link)}`,
     },
@@ -65,7 +73,7 @@ function buildSocials(shareMessage: string, emailSubject: string, emailBody: str
       id: "whatsapp",
       label: "WhatsApp",
       icon: WhatsappLogo,
-      color: "hover:bg-[#25D366]/10 hover:text-[#25D366] hover:border-[#25D366]/30",
+      tint: "#25D366",
       urlFn: (link: string) =>
         `https://wa.me/?text=${encodeURIComponent(`${shareMessage}\n\n${link}`)}`,
     },
@@ -73,7 +81,7 @@ function buildSocials(shareMessage: string, emailSubject: string, emailBody: str
       id: "telegram",
       label: "Telegram",
       icon: TelegramLogo,
-      color: "hover:bg-[#26A5E4]/10 hover:text-[#26A5E4] hover:border-[#26A5E4]/30",
+      tint: "#26A5E4",
       urlFn: (link: string) =>
         `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareMessage)}`,
     },
@@ -81,7 +89,7 @@ function buildSocials(shareMessage: string, emailSubject: string, emailBody: str
       id: "reddit",
       label: "Reddit",
       icon: RedditLogo,
-      color: "hover:bg-[#FF4500]/10 hover:text-[#FF4500] hover:border-[#FF4500]/30",
+      tint: "#FF4500",
       urlFn: (link: string) =>
         `https://reddit.com/submit?url=${encodeURIComponent(link)}&title=${encodeURIComponent(emailBody)}`,
     },
@@ -89,11 +97,11 @@ function buildSocials(shareMessage: string, emailSubject: string, emailBody: str
       id: "email",
       label: "Email",
       icon: EnvelopeSimple,
-      color: "hover:bg-foreground/[0.06] hover:text-foreground hover:border-border/50",
+      tint: null,
       urlFn: (link: string) =>
         `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(`${shareMessage}\n\nHere's my link: ${link}`)}`,
     },
-  ]
+  ] as const
 }
 
 function maskEmail(email: string) {
@@ -117,20 +125,194 @@ function timeAgo(dateStr: string) {
   return `${Math.floor(days / 30)}mo ago`
 }
 
-const easeOut = [0.22, 1, 0.36, 1] as const
+function formatNum(n: number): string {
+  if (n < 1000) return n.toLocaleString()
+  if (n < 10_000) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "k"
+  if (n < 1_000_000) return Math.round(n / 1000) + "k"
+  return (n / 1_000_000).toFixed(1).replace(/\.0$/, "") + "M"
+}
 
+/* ═══════════════════════════════════════════════════════════════════
+   Stat Tile — same language as developers page
+   ═══════════════════════════════════════════════════════════════════ */
+
+function StatTile({
+  label,
+  value,
+  suffix,
+  hint,
+  accent,
+}: {
+  label: string
+  value: string
+  suffix?: string
+  hint?: string
+  accent?: "emerald" | "default"
+}) {
+  return (
+    <div className="group relative rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] dark:bg-foreground/[0.02] p-5 overflow-hidden transition-colors hover:border-foreground/[0.1]">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/[0.08] to-transparent" />
+
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-muted-foreground/45">
+          {label}
+        </span>
+        {accent === "emerald" && (
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+        )}
+      </div>
+
+      <div className="flex items-baseline gap-1.5">
+        <span className="text-[26px] font-medium tracking-tight text-foreground leading-none tabular-nums">
+          {value}
+        </span>
+        {suffix && (
+          <span className="text-[11px] text-muted-foreground/45 leading-none">{suffix}</span>
+        )}
+      </div>
+
+      {hint && (
+        <div className="mt-2.5 h-3.5 flex items-center">
+          <span className="text-[10.5px] text-muted-foreground/45 truncate">{hint}</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Section card with hairline accent — shared chrome
+   ═══════════════════════════════════════════════════════════════════ */
+
+function Section({
+  eyebrow,
+  title,
+  meta,
+  children,
+}: {
+  eyebrow?: string
+  title?: string
+  meta?: React.ReactNode
+  children: React.ReactNode
+}) {
+  return (
+    <div className="relative rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] dark:bg-foreground/[0.02] overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/[0.08] to-transparent" />
+      <div className="px-5 sm:px-6 pt-4 pb-5">
+        {(eyebrow || title || meta) && (
+          <div className="flex items-baseline justify-between gap-3 mb-4">
+            <div className="min-w-0">
+              {eyebrow && (
+                <div className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-muted-foreground/45 mb-1.5">
+                  {eyebrow}
+                </div>
+              )}
+              {title && (
+                <h2 className="text-[15px] font-medium text-foreground tracking-[-0.005em]">
+                  {title}
+                </h2>
+              )}
+            </div>
+            {meta && <div className="shrink-0">{meta}</div>}
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Hero referral-link card — signature aurora surface
+   ═══════════════════════════════════════════════════════════════════ */
+
+function ReferralLinkCard({
+  link,
+  copied,
+  onCopy,
+  eyebrow,
+  perInviteCopy,
+}: {
+  link: string
+  copied: boolean
+  onCopy: () => void
+  eyebrow: string
+  perInviteCopy: string
+}) {
+  return (
+    <div className="relative rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] dark:bg-foreground/[0.02] overflow-hidden">
+      {/* Signature emerald hairline */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/35 to-transparent" />
+
+      {/* Soft aurora blobs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-20 left-1/4 h-56 w-56 rounded-full bg-emerald-500/[0.05] blur-3xl" />
+        <div className="absolute -bottom-24 -right-12 h-64 w-64 rounded-full bg-foreground/[0.025] blur-3xl" />
+      </div>
+
+      <div className="relative px-5 sm:px-6 pt-5 pb-5">
+        <div className="flex items-baseline justify-between gap-3 mb-3.5">
+          <span className="text-[10.5px] font-medium uppercase tracking-[0.16em] text-muted-foreground/45">
+            {eyebrow}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-[10.5px] tabular-nums text-muted-foreground/55">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+            {perInviteCopy}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={onCopy}
+          aria-label={copied ? "Link copied" : "Copy referral link"}
+          className={cn(
+            "group/copy flex w-full items-center gap-3 rounded-xl border bg-background/60 px-4 py-3 transition-all active:scale-[0.995]",
+            copied
+              ? "border-emerald-500/25 bg-emerald-500/[0.04]"
+              : "border-foreground/[0.08] hover:border-foreground/15 hover:bg-background/80",
+          )}
+        >
+          <Link2
+            className={cn(
+              "h-3.5 w-3.5 shrink-0 transition-colors",
+              copied ? "text-emerald-500/70" : "text-muted-foreground/40",
+            )}
+            strokeWidth={1.8}
+          />
+          <code className="flex-1 min-w-0 font-mono text-[12.5px] sm:text-[13px] text-foreground/75 overflow-x-auto whitespace-nowrap scrollbar-invisible text-left select-all">
+            {link}
+          </code>
+          <span
+            className={cn(
+              "inline-flex shrink-0 items-center gap-1.5 h-7 px-2.5 rounded-md text-[11px] font-medium transition-colors",
+              copied
+                ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                : "bg-foreground/[0.06] text-foreground/75 group-hover/copy:bg-foreground/[0.1]",
+            )}
+          >
+            {copied ? <Check className="h-3 w-3" strokeWidth={2.4} /> : <Copy className="h-3 w-3" />}
+            {copied ? "Copied" : "Copy"}
+          </span>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Main
+   ═══════════════════════════════════════════════════════════════════ */
 
 export function ReferralContent() {
   const t = useTranslations("referralPage")
+  const tLoader = useTranslations("pageLoaders.referral")
   const router = useRouter()
   const { user, isLoading } = useUser()
-  const { chats } = useChats()
   const [isCopied, setIsCopied] = useState(false)
   const [stats, setStats] = useState<ReferralStats | null>(null)
   const [isLoadingStats, setIsLoadingStats] = useState(true)
-  const [activeTab, setActiveTab] = useState<"share" | "feedback">("share")
+  const [activeTab, setActiveTab] = useState<TabId>("share")
 
-  // Feedback state
   const [feedbackText, setFeedbackText] = useState("")
   const [feedbackSubmitting, setFeedbackSubmitting] = useState(false)
   const [feedbackSent, setFeedbackSent] = useState(false)
@@ -139,11 +321,6 @@ export function ReferralContent() {
   const referralLink = user ? `${baseUrl}/?ref=${user.id}` : ""
 
   const socials = buildSocials(t("shareMessage"), t("emailSubject"), t("emailBody"))
-
-  // Get recent chats for the activity showcase
-  const recentChats = chats
-    .filter((c) => c.title && c.title !== "New Chat")
-    .slice(0, 5)
 
   const fetchStats = useCallback(async () => {
     setIsLoadingStats(true)
@@ -216,423 +393,440 @@ export function ReferralContent() {
     }
   }
 
-  if (isLoading) {
-    return (
-      <div className="w-full h-full flex items-center justify-center">
-        <CircleNotch size={20} className="animate-spin text-foreground/20" />
-      </div>
-    )
-  }
+  if (!isLoading && !user) return null
 
-  if (!user) return null
+  const howSteps = t.raw("howSteps") as string[]
+  const features = t.raw("features") as string[]
+
+  const tabs: { id: TabId; label: string; icon: typeof Gift }[] = [
+    { id: "share", label: t("tabs.invite"), icon: Gift },
+    { id: "feedback", label: t("tabs.feedback"), icon: MessageSquare },
+  ]
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
-      {/* Ambient background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -top-[40%] -left-[20%] h-[80%] w-[60%] rounded-full opacity-[0.02] dark:opacity-[0.05] blur-[100px]"
-          style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        <div
-          className="absolute -bottom-[30%] -right-[10%] h-[70%] w-[50%] rounded-full opacity-[0.02] dark:opacity-[0.04] blur-[100px]"
-          style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
-          }}
-        />
-      </div>
+    <PageLoader
+      isLoading={isLoading}
+      title={tLoader("title")}
+      description={tLoader("description")}
+    >
+      <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative">
+        {/* Ambient background — matches /history and /machines. Two soft
+            radial blooms plus a faint grid so the page reads as part of
+            the same surface family. */}
+        <div className="pointer-events-none fixed inset-0 overflow-hidden">
+          <div
+            className="absolute -top-[30%] -right-[15%] h-[60%] w-[50%] rounded-full opacity-[0.02] dark:opacity-[0.04] blur-[120px]"
+            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
+          />
+          <div
+            className="absolute -bottom-[20%] -left-[10%] h-[50%] w-[40%] rounded-full opacity-[0.015] dark:opacity-[0.035] blur-[100px]"
+            style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
+          />
+          <div
+            className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(128,128,128,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,.3) 1px, transparent 1px)",
+              backgroundSize: "80px 80px",
+            }}
+          />
+        </div>
 
-      <div className="relative flex flex-col lg:flex-row h-full">
-        {/* Left brand panel — lg+ */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: easeOut }}
-          className="hidden lg:flex flex-col justify-center flex-1 px-12 xl:px-16 max-w-[540px] overflow-y-auto py-12"
-        >
-          <h1 className="text-4xl xl:text-[2.75rem] font-medium tracking-tight leading-[1.1] text-foreground">
-            {t("shareTitle")}
-            <br />
-            <span className="text-muted-foreground">{t("earnTitle")}</span>
-          </h1>
-
-          <p className="text-muted-foreground mt-5 text-[15px] leading-relaxed max-w-sm">
-            {t("shareDescription")}
-          </p>
-
-          <div className="mt-12 flex flex-col gap-4 text-sm text-muted-foreground/70">
-            {(t.raw("features") as string[]).map((feature, i) => (
-              <motion.div
-                key={feature}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: easeOut }}
-                className="flex items-center gap-3"
-              >
-                <div className="h-px w-5 bg-border" />
-                <span>{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Recent activity — user's chats */}
-          {recentChats.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.7, ease: easeOut }}
-              className="mt-10"
-            >
-              <p className="text-[11px] font-semibold tracking-[0.1em] uppercase text-muted-foreground/40 mb-3">
-                {t("recentActivity")}
-              </p>
-              <div className="space-y-1.5">
-                {recentChats.map((chat, i) => (
-                  <motion.div
-                    key={chat.id}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.8 + i * 0.06, ease: easeOut }}
-                    className="flex items-center gap-2.5 py-1.5 group"
-                  >
-                    <ChatCircleDots size={13} weight="duotone" className="text-muted-foreground/30 shrink-0" />
-                    <p className="text-[13px] text-muted-foreground/50 truncate group-hover:text-muted-foreground/70 transition-colors">
-                      {chat.title}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-              <p className="text-[11px] text-muted-foreground/30 mt-3">
-                {t("friendsCould")}
-              </p>
-            </motion.div>
-          )}
-        </motion.div>
-
-        {/* Right action panel */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-10 py-8 sm:py-10 lg:py-12">
-            {/* Mobile header */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: easeOut }}
-              className="lg:hidden mb-8"
-            >
-              <div className="flex justify-center mb-4">
-                <CoastyIcon className="size-8" />
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-center">
-                {t("shareTitle")}{" "}
-                <span className="text-muted-foreground">{t("earnTitle")}</span>
+        <div className="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl space-y-6 relative z-10">
+          {/* ── Header — mirrors /history: a single page title with an
+                inline count badge, short subtitle, and a Guide link.
+                The primary action (Copy link) sits on the right at md+. ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: EASE }}
+            className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+          >
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-medium tracking-tight flex items-center gap-2.5">
+                Referrals
+                {stats && stats.totalReferrals > 0 && (
+                  <span className="text-sm font-normal text-muted-foreground ml-1">
+                    ({stats.totalReferrals})
+                  </span>
+                )}
               </h1>
-              <p className="text-muted-foreground mt-3 text-sm sm:text-base text-center">
-                {t("giveGet")}
-              </p>
-            </motion.div>
-
-            {/* Stats row */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.05, ease: easeOut }}
-              className="grid grid-cols-3 gap-3 mb-8"
+              <div className="flex items-center gap-3 mt-1.5">
+                <p className="text-muted-foreground text-sm">
+                  {t("shareDescription")}
+                </p>
+                <Link
+                  href="/guide"
+                  className="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-foreground/[0.05] px-2.5 py-1 text-xs font-medium text-foreground/70 hover:text-foreground hover:border-border hover:bg-foreground/[0.08] transition-all"
+                >
+                  <BookOpen size={14} weight="duotone" />
+                  Guide
+                </Link>
+              </div>
+            </div>
+            <button
+              onClick={handleCopy}
+              className={cn(
+                "hidden sm:inline-flex h-9 items-center justify-center rounded-xl px-4 text-[12.5px] font-medium gap-1.5 transition-all shrink-0 shadow-sm",
+                "bg-foreground text-background hover:bg-foreground/90 active:scale-[0.98]"
+              )}
             >
-              {[
-                { icon: Users, value: stats?.totalReferrals ?? 0, label: t("stats.invited") },
-                { icon: Coins, value: stats?.totalEarned ?? 0, label: t("stats.earned") },
-                { icon: Gift, value: 50, label: t("stats.perInvite") },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-4 text-center"
-                >
-                  <stat.icon size={15} weight="duotone" className="mx-auto mb-2 text-muted-foreground/40" />
-                  <p className="text-2xl font-bold tracking-tight">{stat.value.toLocaleString()}</p>
-                  <p className="text-[11px] text-muted-foreground/50 mt-0.5">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
+              {isCopied ? <Check className="h-3.5 w-3.5" strokeWidth={2.4} /> : <Copy className="h-3.5 w-3.5" />}
+              {isCopied ? "Copied" : "Copy link"}
+            </button>
+          </motion.div>
 
-            {/* Tabs */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.09, ease: easeOut }}
-              className="flex gap-1 p-1 rounded-xl bg-muted/40 mb-6"
-            >
-              {[
-                { id: "share" as const, label: t("tabs.invite"), icon: Gift },
-                { id: "feedback" as const, label: t("tabs.feedback"), icon: PaperPlaneTilt },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={cn(
-                    "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-                    activeTab === tab.id
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground/60 hover:text-muted-foreground"
-                  )}
-                >
-                  <tab.icon size={15} weight={activeTab === tab.id ? "duotone" : "regular"} />
-                  {tab.label}
-                </button>
-              ))}
-            </motion.div>
+          {/* ── Stats row ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.05, ease: EASE }}
+            className="grid grid-cols-3 gap-3"
+          >
+            <StatTile
+              label={t("stats.invited")}
+              value={formatNum(stats?.totalReferrals ?? 0)}
+              suffix={(stats?.totalReferrals ?? 0) === 1 ? "friend" : "friends"}
+              hint={stats && stats.totalReferrals > 0 ? "Joined via your link" : "Share your link to start"}
+            />
+            <StatTile
+              label={t("stats.earned")}
+              value={formatNum(stats?.totalEarned ?? 0)}
+              suffix="credits"
+              hint={stats && stats.totalEarned > 0 ? `+${formatNum(stats.totalEarned)} from referrals` : "No earnings yet"}
+              accent="emerald"
+            />
+            <StatTile
+              label={t("stats.perInvite")}
+              value="50"
+              suffix="credits"
+              hint="Both of you earn"
+            />
+          </motion.div>
 
-            <AnimatePresence mode="wait">
-              {activeTab === "share" ? (
-                <motion.div
-                  key="share"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25, ease: easeOut }}
-                >
-                  {/* Referral link */}
-                  <div className="mb-6">
-                    <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      {t("referralLink")}
-                    </p>
-                    <button
-                      onClick={handleCopy}
-                      className={cn(
-                        "group flex w-full items-center justify-between rounded-xl border px-4 py-3.5 transition-all duration-150",
-                        "active:scale-[0.99]",
-                        isCopied
-                          ? "border-foreground/15 bg-foreground/[0.04]"
-                          : "border-border/30 bg-card/50 backdrop-blur-sm hover:border-border/50"
-                      )}
-                    >
-                      <span className="text-sm font-mono text-foreground/60 truncate mr-3">
-                        {referralLink}
-                      </span>
-                      <div
-                        className={cn(
-                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors",
-                          isCopied ? "bg-foreground/10" : "bg-muted/60"
-                        )}
+          {/* ── Tab nav ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1, ease: EASE }}
+            className="rounded-2xl border border-foreground/[0.06] bg-background/60 dark:bg-background/40 backdrop-blur-2xl p-1.5 shadow-sm w-fit"
+          >
+            <nav className="flex items-center gap-0.5" role="tablist">
+              {tabs.map((tab) => {
+                const Icon = tab.icon
+                const isActive = activeTab === tab.id
+                return (
+                  <button
+                    key={tab.id}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={cn(
+                      "relative flex items-center justify-center gap-1.5 rounded-xl px-3 sm:px-3.5 py-1.5 text-[11px] sm:text-[12.5px] font-medium transition-all duration-200",
+                      isActive
+                        ? "bg-foreground/[0.08] dark:bg-foreground/[0.12] text-foreground"
+                        : "text-muted-foreground/55 hover:text-foreground/80 hover:bg-foreground/[0.04]",
+                    )}
+                  >
+                    <Icon className="h-3.5 w-3.5 shrink-0" strokeWidth={isActive ? 2.2 : 1.8} />
+                    <span className="truncate">{tab.label}</span>
+                  </button>
+                )
+              })}
+            </nav>
+          </motion.div>
+
+          {/* ── Tab content ── */}
+          <AnimatePresence mode="wait">
+            {activeTab === "share" ? (
+              <motion.div
+                key="share"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: EASE }}
+                className="space-y-5"
+              >
+                {/* Hero link card — signature surface */}
+                <ReferralLinkCard
+                  link={referralLink}
+                  copied={isCopied}
+                  onCopy={handleCopy}
+                  eyebrow={t("referralLink")}
+                  perInviteCopy={t("giveGet")}
+                />
+
+                {/* How it works — horizontal stepper */}
+                <Section eyebrow="Steps" title={t("howItWorks")}>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {howSteps.map((step, i) => (
+                      <motion.div
+                        key={step}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: 0.05 + i * 0.06, ease: EASE }}
+                        className="relative rounded-xl border border-foreground/[0.06] bg-background/40 px-4 py-3.5"
                       >
-                        {isCopied ? (
-                          <Check size={14} weight="bold" className="text-foreground" />
-                        ) : (
-                          <Copy size={14} className="text-muted-foreground" />
-                        )}
-                      </div>
-                    </button>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/[0.08] text-[10px] font-semibold text-foreground/60 tabular-nums">
+                            {i + 1}
+                          </span>
+                          {i < howSteps.length - 1 && (
+                            <div className="hidden sm:block flex-1 h-px bg-foreground/[0.06]" />
+                          )}
+                          {i === howSteps.length - 1 && (
+                            <span className="ml-auto inline-flex items-center gap-0.5 text-[9.5px] font-medium text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                              <Coins className="h-2.5 w-2.5" strokeWidth={2} />
+                              +50
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[12px] text-foreground/70 leading-snug">{step}</p>
+                      </motion.div>
+                    ))}
                   </div>
+                </Section>
 
-                  {/* What they get */}
-                  <div className="mb-6 rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-4">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/20">
-                        <Gift size={13} weight="duotone" className="text-emerald-500" />
-                      </div>
-                      <p className="text-sm font-medium">{t("howItWorks")}</p>
+                {/* Share directly */}
+                <Section eyebrow="Channels" title={t("shareDirectly")}>
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                    {socials.map((s, i) => {
+                      const Icon = s.icon
+                      return (
+                        <motion.button
+                          key={s.id}
+                          type="button"
+                          onClick={() => handleShare(s.urlFn)}
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: 0.05 + i * 0.04, ease: EASE }}
+                          style={s.tint ? ({ ["--tint" as string]: s.tint } as React.CSSProperties) : undefined}
+                          className={cn(
+                            "group/social relative flex flex-col items-center gap-2 rounded-xl border border-foreground/[0.06] bg-background/40 px-3 py-3.5 transition-all overflow-hidden",
+                            s.tint
+                              ? "hover:border-[color:var(--tint)]/30 hover:bg-[color:var(--tint)]/[0.04]"
+                              : "hover:border-foreground/15 hover:bg-background/70",
+                          )}
+                        >
+                          <Icon
+                            size={18}
+                            weight="bold"
+                            className={cn(
+                              "transition-colors",
+                              s.tint
+                                ? "text-foreground/65 group-hover/social:text-[color:var(--tint)]"
+                                : "text-foreground/65 group-hover/social:text-foreground",
+                            )}
+                          />
+                          <span
+                            className={cn(
+                              "text-[10.5px] font-medium transition-colors",
+                              s.tint
+                                ? "text-muted-foreground/60 group-hover/social:text-[color:var(--tint)]"
+                                : "text-muted-foreground/60 group-hover/social:text-foreground",
+                            )}
+                          >
+                            {s.label}
+                          </span>
+                        </motion.button>
+                      )
+                    })}
+                  </div>
+                </Section>
+
+                {/* Your referrals — activity list */}
+                <Section
+                  eyebrow="Activity"
+                  title={t("yourReferrals")}
+                  meta={
+                    stats && (stats.totalReferrals > 0 || stats.referredBy) ? (
+                      <span className="text-[10.5px] tabular-nums text-muted-foreground/35">
+                        {stats.totalReferrals} {stats.totalReferrals === 1 ? "referral" : "referrals"}
+                        {stats.totalEarned > 0 && <> · +{formatNum(stats.totalEarned)} cr</>}
+                      </span>
+                    ) : null
+                  }
+                >
+                  {isLoadingStats ? (
+                    <div className="flex items-center justify-center py-10">
+                      <Loader2 className="h-4 w-4 animate-spin text-muted-foreground/30" />
                     </div>
-                    <div className="space-y-2.5">
-                      {(t.raw("howSteps") as string[]).map((text, i) => ({ step: String(i + 1), text })).map((item) => (
-                        <div key={item.step} className="flex items-center gap-3">
-                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-foreground/[0.06] text-[10px] font-bold text-muted-foreground/60">
-                            {item.step}
+                  ) : stats && (stats.totalReferrals > 0 || stats.referredBy) ? (
+                    <div className="rounded-xl border border-foreground/[0.06] bg-foreground/[0.015] overflow-hidden divide-y divide-foreground/[0.04]">
+                      {stats.referredBy && (
+                        <div className="flex items-center gap-3 px-4 py-3">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 ring-1 ring-emerald-500/20">
+                            <ArrowRight className="h-3 w-3 text-emerald-600 dark:text-emerald-400 -rotate-45" strokeWidth={2.2} />
                           </div>
-                          <p className="text-[13px] text-muted-foreground/70">{item.text}</p>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[12.5px] font-medium text-foreground/85 truncate">
+                              {maskEmail(stats.referredBy.email)}
+                            </p>
+                            <p className="text-[10.5px] text-muted-foreground/50">{t("invitedYou")}</p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <p className="text-[12.5px] font-medium tabular-nums text-emerald-600 dark:text-emerald-400">
+                              +{stats.referredBy.credits.toLocaleString()}
+                            </p>
+                            <p className="text-[10.5px] tabular-nums text-muted-foreground/40">
+                              {timeAgo(stats.referredBy.date)}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      {stats.referrals.map((r) => (
+                        <div key={r.id} className="flex items-center gap-3 px-4 py-3">
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-foreground/[0.05]">
+                            <Users className="h-3 w-3 text-muted-foreground/60" strokeWidth={1.8} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[12.5px] font-medium text-foreground/85 truncate">
+                              {maskEmail(r.email)}
+                            </p>
+                            <p className="text-[10.5px] text-muted-foreground/50">{t("joinedViaLink")}</p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <p className="text-[12.5px] font-medium tabular-nums text-emerald-600 dark:text-emerald-400">
+                              +{r.credits.toLocaleString()}
+                            </p>
+                            <p className="text-[10.5px] tabular-nums text-muted-foreground/40">
+                              {timeAgo(r.date)}
+                            </p>
+                          </div>
                         </div>
                       ))}
                     </div>
-                  </div>
-
-                  {/* Social share */}
-                  <div className="mb-6">
-                    <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      {t("shareDirectly")}
-                    </p>
-                    <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-                      {socials.map((s) => {
-                        const Icon = s.icon
-                        return (
-                          <button
-                            key={s.id}
-                            type="button"
-                            onClick={() => handleShare(s.urlFn)}
-                            className={cn(
-                              "flex flex-col items-center gap-1.5 rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm px-3 py-3 transition-all duration-200",
-                              "text-muted-foreground",
-                              s.color
-                            )}
-                          >
-                            <Icon size={18} weight="bold" />
-                            <span className="text-[10px] font-medium">{s.label}</span>
-                          </button>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Referral history */}
-                  <div>
-                    <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                      {t("yourReferrals")}
-                    </p>
-                    <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm overflow-hidden">
-                      {isLoadingStats ? (
-                        <div className="flex items-center justify-center py-10">
-                          <CircleNotch size={18} className="animate-spin text-foreground/20" />
+                  ) : (
+                    <div className="relative rounded-xl border border-foreground/[0.06] bg-foreground/[0.012] overflow-hidden">
+                      <div className="pointer-events-none absolute inset-0">
+                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 h-32 w-48 rounded-full bg-foreground/[0.02] blur-3xl" />
+                      </div>
+                      <div className="relative flex flex-col items-center justify-center py-10 px-6 text-center">
+                        <div className="relative h-10 w-10 mb-3 flex items-center justify-center">
+                          <div className="absolute inset-0 rounded-xl border border-foreground/[0.08] bg-foreground/[0.03]" />
+                          <Users className="relative h-4 w-4 text-foreground/55" strokeWidth={1.6} />
+                          <motion.span
+                            className="absolute inset-0 rounded-xl border border-foreground/15"
+                            animate={{ opacity: [0, 0.5, 0], scale: [1, 1.18, 1.3] }}
+                            transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+                          />
                         </div>
-                      ) : stats && (stats.totalReferrals > 0 || stats.referredBy) ? (
-                        <div className="divide-y divide-border/20">
-                          {stats.referredBy && (
-                            <div className="flex items-center justify-between px-4 py-3">
-                              <div className="min-w-0">
-                                <p className="text-sm font-medium truncate">{maskEmail(stats.referredBy.email)}</p>
-                                <p className="text-[11px] text-muted-foreground/50">{t("invitedYou")}</p>
-                              </div>
-                              <div className="text-right shrink-0 ml-3">
-                                <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                                  +{stats.referredBy.credits.toLocaleString()}
-                                </p>
-                                <p className="text-[11px] text-muted-foreground/50">{timeAgo(stats.referredBy.date)}</p>
-                              </div>
-                            </div>
-                          )}
-                          {stats.referrals.map((r) => (
-                            <div key={r.id} className="flex items-center justify-between px-4 py-3">
-                              <div className="min-w-0">
-                                <p className="text-sm font-medium truncate">{maskEmail(r.email)}</p>
-                                <p className="text-[11px] text-muted-foreground/50">{t("joinedViaLink")}</p>
-                              </div>
-                              <div className="text-right shrink-0 ml-3">
-                                <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                                  +{r.credits.toLocaleString()}
-                                </p>
-                                <p className="text-[11px] text-muted-foreground/50">{timeAgo(r.date)}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="flex flex-col items-center justify-center py-10 text-center">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted/60 ring-1 ring-border/30 mb-3">
-                            <Users size={18} className="text-muted-foreground/40" />
-                          </div>
-                          <p className="text-sm text-muted-foreground/60">{t("noReferrals")}</p>
-                          <p className="text-[11px] text-muted-foreground/40 mt-1">
-                            {t("noReferralsHint")}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Mobile recent chats */}
-                  {recentChats.length > 0 && (
-                    <div className="lg:hidden mt-6">
-                      <p className="text-[11px] font-semibold text-muted-foreground/50 tracking-widest uppercase mb-2">
-                        {t("recentActivity")}
-                      </p>
-                      <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-3">
-                        <div className="space-y-1">
-                          {recentChats.slice(0, 3).map((chat) => (
-                            <div key={chat.id} className="flex items-center gap-2.5 py-1.5">
-                              <ChatCircleDots size={13} weight="duotone" className="text-muted-foreground/30 shrink-0" />
-                              <p className="text-[13px] text-muted-foreground/50 truncate">{chat.title}</p>
-                            </div>
-                          ))}
-                        </div>
-                        <p className="text-[11px] text-muted-foreground/30 mt-2 pt-2 border-t border-border/20">
-                          {t("friendsCould")}
+                        <p className="text-[13px] font-medium text-foreground/85">{t("noReferrals")}</p>
+                        <p className="text-[11px] text-muted-foreground/50 mt-1 max-w-xs leading-relaxed">
+                          {t("noReferralsHint")}
                         </p>
                       </div>
                     </div>
                   )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="feedback"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.25, ease: easeOut }}
-                >
-                  {feedbackSent ? (
-                    <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-8 text-center">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500/10 ring-1 ring-emerald-500/20 mx-auto mb-4">
-                        <Check size={20} weight="bold" className="text-emerald-500" />
+                </Section>
+
+                {/* Why share — features list, restrained */}
+                {features?.length > 0 && (
+                  <Section eyebrow="Why" title={t("friendsCould")}>
+                    <div className="space-y-2.5">
+                      {features.map((feature, i) => (
+                        <motion.div
+                          key={feature}
+                          initial={{ opacity: 0, x: -6 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: 0.05 + i * 0.05, ease: EASE }}
+                          className="flex items-center gap-3"
+                        >
+                          <div className="h-px w-4 bg-foreground/[0.12] shrink-0" />
+                          <span className="text-[12.5px] text-muted-foreground/70 leading-relaxed">
+                            {feature}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </Section>
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="feedback"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: EASE }}
+              >
+                {feedbackSent ? (
+                  <div className="relative rounded-2xl border border-foreground/[0.06] bg-foreground/[0.015] dark:bg-foreground/[0.02] overflow-hidden">
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/35 to-transparent" />
+                    <div className="pointer-events-none absolute inset-0">
+                      <div className="absolute -top-16 left-1/2 -translate-x-1/2 h-40 w-72 rounded-full bg-emerald-500/[0.04] blur-3xl" />
+                    </div>
+                    <div className="relative flex flex-col items-center px-6 py-14 text-center">
+                      <div className="relative h-12 w-12 mb-5 flex items-center justify-center">
+                        <div className="absolute inset-0 rounded-2xl border border-emerald-500/25 bg-emerald-500/[0.08]" />
+                        <Check className="relative h-5 w-5 text-emerald-500" strokeWidth={2.2} />
                       </div>
-                      <p className="text-lg font-medium mb-1">{t("feedbackThanks")}</p>
-                      <p className="text-sm text-muted-foreground/50 mb-6">{t("feedbackWeRead")}</p>
+                      <p className="text-[15px] font-medium tracking-[-0.005em]">
+                        {t("feedbackThanks")}
+                      </p>
+                      <p className="text-[12.5px] text-muted-foreground/55 mt-1 max-w-xs leading-relaxed">
+                        {t("feedbackWeRead")}
+                      </p>
                       <button
                         onClick={() => setFeedbackSent(false)}
-                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        className="mt-5 inline-flex items-center gap-1.5 h-8 px-3.5 rounded-lg border border-foreground/[0.08] text-[11.5px] font-medium text-muted-foreground/70 hover:text-foreground hover:border-foreground/20 hover:bg-foreground/[0.03] transition-all"
                       >
                         {t("sendAnother")}
-                        <ArrowRight size={14} />
+                        <ArrowRight className="h-3 w-3" />
                       </button>
                     </div>
-                  ) : (
-                    <div className="rounded-xl border border-border/30 bg-card/50 backdrop-blur-sm p-5">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted/60 ring-1 ring-border/30">
-                          <PaperPlaneTilt size={15} weight="duotone" className="text-foreground/60" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">{t("feedbackTitle")}</p>
-                          <p className="text-[12px] text-muted-foreground/50">
-                            {t("feedbackSubtitle")}
-                          </p>
-                        </div>
-                      </div>
-
-                      <Textarea
-                        placeholder={t("feedbackPlaceholder")}
-                        value={feedbackText}
-                        onChange={(e) => setFeedbackText(e.target.value)}
-                        rows={5}
+                  </div>
+                ) : (
+                  <Section eyebrow="Direct line" title={t("feedbackTitle")}>
+                    <p className="text-[12.5px] text-muted-foreground/60 leading-relaxed mb-4">
+                      {t("feedbackSubtitle")}
+                    </p>
+                    <Textarea
+                      placeholder={t("feedbackPlaceholder")}
+                      value={feedbackText}
+                      onChange={(e) => setFeedbackText(e.target.value)}
+                      rows={6}
+                      className={cn(
+                        "resize-none text-[13px] leading-relaxed rounded-xl mb-3",
+                        "bg-background/60 text-foreground",
+                        "border-foreground/[0.08] hover:border-foreground/15 focus-visible:border-foreground/25",
+                        "placeholder:text-muted-foreground/40",
+                        "transition-all duration-200",
+                      )}
+                    />
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-[10.5px] text-muted-foreground/40">
+                        {t("weReadEvery")}
+                      </p>
+                      <button
+                        onClick={handleFeedback}
+                        disabled={!feedbackText.trim() || feedbackSubmitting}
                         className={cn(
-                          "resize-none text-sm leading-relaxed rounded-lg mb-3",
-                          "bg-muted/40 text-foreground",
-                          "border-border/30 hover:border-border/50 focus-visible:border-border",
-                          "placeholder:text-muted-foreground/40",
-                          "transition-all duration-200",
+                          "inline-flex h-9 items-center justify-center rounded-xl px-4 text-[12.5px] font-medium gap-1.5 transition-all",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/20",
+                          "disabled:opacity-40 disabled:cursor-not-allowed",
+                          feedbackText.trim() && !feedbackSubmitting
+                            ? "bg-foreground text-background hover:bg-foreground/90 shadow-sm"
+                            : "bg-foreground/[0.08] text-muted-foreground/60",
                         )}
-                      />
-                      <div className="flex items-center justify-between">
-                        <p className="text-[11px] text-muted-foreground/40">
-                          {t("weReadEvery")}
-                        </p>
-                        <button
-                          onClick={handleFeedback}
-                          disabled={!feedbackText.trim() || feedbackSubmitting}
-                          className={cn(
-                            "h-9 px-5 rounded-lg text-sm font-semibold transition-all duration-200",
-                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                            "disabled:opacity-40 disabled:cursor-not-allowed",
-                            feedbackText.trim() && !feedbackSubmitting
-                              ? "text-background bg-foreground hover:bg-foreground/90"
-                              : "text-muted-foreground bg-muted/60"
-                          )}
-                        >
-                          {feedbackSubmitting ? (
-                            <CircleNotch size={14} className="animate-spin" />
-                          ) : (
-                            t("send")
-                          )}
-                        </button>
-                      </div>
+                      >
+                        {feedbackSubmitting ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : (
+                          <>
+                            <Send className="h-3.5 w-3.5" strokeWidth={1.9} />
+                            {t("send")}
+                          </>
+                        )}
+                      </button>
                     </div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                  </Section>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
-    </div>
+    </PageLoader>
   )
 }

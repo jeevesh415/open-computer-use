@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { GitFork, CircleNotch, ArrowRight } from "@phosphor-icons/react"
-import { cn } from "@/lib/utils"
 import { SwarmTree, type SwarmEvent } from "@/app/components/swarms/swarm-tree"
 import Link from "next/link"
 
@@ -28,8 +27,24 @@ export function ActiveSwarmBanner({ fullscreen, onSwarmDetected }: ActiveSwarmBa
   const [events, setEvents] = useState<SwarmEvent[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Check for running swarms on mount
-  const fetchActive = useCallback(async () => {
+  // Merge incoming events with the in-memory array by id so unchanged rows
+  // keep referential identity. Returns the previous reference when there is
+  // nothing new — this keeps the heavy useMemos in <SwarmTree /> stable across
+  // polls and prevents Framer Motion from re-running entrance animations.
+  const mergeEvents = useCallback((prev: SwarmEvent[], incoming: SwarmEvent[]) => {
+    if (incoming.length === 0) return prev.length === 0 ? prev : []
+    if (incoming.length === prev.length) {
+      let identical = true
+      for (let i = 0; i < incoming.length; i++) {
+        if (incoming[i].id !== prev[i].id) { identical = false; break }
+      }
+      if (identical) return prev
+    }
+    const byId = new Map(prev.map((e) => [e.id, e]))
+    return incoming.map((e) => byId.get(e.id) ?? e)
+  }, [])
+
+  const refresh = useCallback(async () => {
     try {
       const res = await fetch("/api/swarms")
       if (!res.ok) return
@@ -39,17 +54,20 @@ export function ActiveSwarmBanner({ fullscreen, onSwarmDetected }: ActiveSwarmBa
         (s: any) => s.status === "running" || s.status === "creating" || s.status === "paused"
       )
       if (active) {
-        setSwarm(active)
+        setSwarm((prev) =>
+          prev && prev.swarm_id === active.swarm_id && prev.status === active.status
+            ? prev
+            : active
+        )
         onSwarmDetected?.(active)
-        // Fetch events for the active swarm
         const evRes = await fetch(`/api/swarms/${active.swarm_id}`)
         if (evRes.ok) {
           const evData = await evRes.json()
-          setEvents(evData.events || [])
+          setEvents((prev) => mergeEvents(prev, evData.events || []))
         }
       } else {
         setSwarm(null)
-        setEvents([])
+        setEvents((prev) => (prev.length === 0 ? prev : []))
         onSwarmDetected?.(null)
       }
     } catch {
@@ -57,42 +75,23 @@ export function ActiveSwarmBanner({ fullscreen, onSwarmDetected }: ActiveSwarmBa
     } finally {
       setLoading(false)
     }
-  }, [onSwarmDetected])
+  }, [onSwarmDetected, mergeEvents])
 
   useEffect(() => {
-    fetchActive()
-  }, [fetchActive])
+    refresh()
+  }, [refresh])
 
-  // Poll every 5s while active
+  // Poll every 5s while active. Pause polling when the tab is hidden so we
+  // don't burn cycles on background tabs (and so we don't smash state on
+  // re-focus all at once).
   useEffect(() => {
     if (!swarm) return
-    const interval = setInterval(async () => {
-      try {
-        // Re-check status
-        const res = await fetch("/api/swarms")
-        if (!res.ok) return
-        const data = await res.json()
-        const runs = data.swarms || []
-        const active = runs.find(
-          (s: any) => s.status === "running" || s.status === "creating" || s.status === "paused"
-        )
-        if (active) {
-          setSwarm(active)
-          onSwarmDetected?.(active)
-          const evRes = await fetch(`/api/swarms/${active.swarm_id}`)
-          if (evRes.ok) {
-            const evData = await evRes.json()
-            setEvents(evData.events || [])
-          }
-        } else {
-          setSwarm(null)
-          setEvents([])
-          onSwarmDetected?.(null)
-        }
-      } catch {}
+    const interval = setInterval(() => {
+      if (typeof document !== "undefined" && document.visibilityState === "hidden") return
+      refresh()
     }, 5000)
     return () => clearInterval(interval)
-  }, [swarm])
+  }, [swarm, refresh])
 
   if (loading || !swarm) return null
 

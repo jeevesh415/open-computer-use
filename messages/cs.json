@@ -12,13 +12,15 @@
     "recommended": "Doporučeno",
     "month": "měsíc",
     "creditsPerMonth": "{count} kreditů/měs.",
-    "agentsInParallel": "{count} agentů paralelně"
+    "agentsInParallel": "{count} agentů paralelně",
+    "whatsIncluded": "Co je zahrnuto",
+    "hideDetails": "Skrýt podrobnosti"
   },
   "header": {
     "useCases": "Případy užití",
     "blog": "Blog",
     "agentSwarms": "Roje agentů",
-    "products": "Products",
+    "products": "Produkty",
     "discover": "Discover",
     "compare": "Porovnat",
     "demos": "Ukázky",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} personalizovaných e-mailů na kampaň"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Práce s počítačem",
+      "agentSwarms": "Roje agentů",
+      "compare": "Srovnání"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "Skóre benchmarku OSWorld {stat}",
+      "agentSwarms": "{stat} agentů paralelně",
+      "compare": "Analyzováno {stat} konkurentů"
     },
     "blogItems": {
       "allPosts": "Všechny příspěvky",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "Žádosti o práci",
       "demosResults": "Ukázky a výsledky",
-      "guide": "Průvodce"
+      "guide": "Průvodce",
+      "discover": "Komunita"
     },
     "blogStats": {
       "allPosts": "{stat} článků publikováno týdně",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} stránek za relaci",
       "jobApplications": "{stat} žádostí za relaci",
       "demosResults": "{stat} skutečných případových studií",
-      "guide": "{stat} návodů pro případy užití"
-    }
+      "guide": "{stat} návodů pro případy užití",
+      "discover": "Podívejte se, jak ji lidé používají"
+    },
+    "api": "API"
   },
   "hero": {
-    "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonomní operátoři počítačů",
+    "badge": "#1 agent pro práci s počítačem · OSWorld {score}",
+    "headline": "Nejlepší agent pro ovládání počítače",
     "useCases": {
       "computerAgent": {
         "label": "Počítačový agent",
@@ -141,7 +146,7 @@
         "task": "Autonomně propagujte svůj produkt na Reddit"
       },
       "goToMarket": {
-        "label": "Go-to-Market",
+        "label": "Uvedení na trh",
         "task": "Najděte prospekty a odešlete personalizované e-maily"
       },
       "qaTesting": {
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Sociální média",
         "task": "Publikujte na Hacker News a reagujte na komentáře"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "ušetřeno měsíčně",
+        "sublabel": "oproti VA na plný úvazek"
+      },
+      "time": {
+        "value": "30 h",
+        "label": "získáno týdně",
+        "sublabel": "manuální práce odstraněna"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "rychlejší výstup",
+        "sublabel": "úkoly v minutách, ne ve dnech"
+      },
+      "effort": {
+        "value": "0",
+        "label": "kódu ani náborů",
+        "sublabel": "kompletně řízeno od A do Z"
       }
     }
   },
@@ -240,7 +267,7 @@
     },
     "coasty": {
       "title": "Coasty AI Agent",
-      "subtitle": "#1 computer-use agent"
+      "subtitle": "#1 agent pro práci s počítačem"
     },
     "rows": {
       "timePerTask": "Čas na úkol",
@@ -284,7 +311,7 @@
       "prospects": {
         "title": "Hledání potenciálních zákazníků",
         "description": "Coasty nachází a zkoumá potenciální zákazníky, shromažďuje klíčové detaily pro vytvoření personalizovaného oslovení.",
-        "tag": "Go-to-Market"
+        "tag": "Uvedení na trh"
       },
       "qa": {
         "title": "QA testování sebe sama",
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Neomezená náročná automatizace",
         "cta": "Získat Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Žádné limity kreditů — nikdy",
+        "cta": "Zvolit Unlimited",
+        "badge": "Nejlepší hodnota"
       }
     },
     "vmTemporary": "1 dočasný VM (2 hod.)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Stejná práce stojí {oldPrice} při manuální práci",
       "description": "Virtuální asistent stojí $2 000–$4 000/měs. Částečný úvazek stojí více. Coasty odvede stejnou práci 24/7 od $0 — s dokonalou konzistencí, kompletní auditní stopou a nulovým časem na zaškolení."
-    }
+    },
+    "unlimitedCredits": "Neomezené kredity"
   },
   "faq": {
     "title": "Často kladené otázky",
@@ -429,7 +463,8 @@
       "contact": "Kontakt",
       "privacy": "Soukromí",
       "terms": "Podmínky"
-    }
+    },
+    "status": "Všechny systémy v provozu"
   },
   "languageSwitcher": {
     "label": "Jazyk"
@@ -458,16 +493,16 @@
     "demoCaption": "Spouštějte AI agenty na svém počítači nebo jej ovládejte z telefonu, odkudkoli.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Spusťte lokálně na svém PC",
+        "desc": "Stáhněte si desktopovou aplikaci a nechte AI ovládat váš počítač přímo — bez potřeby cloudového VM."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Ovládejte své PC z telefonu",
+        "desc": "Spusťte úkol z telefonu a sledujte AI agenta při práci na vašem počítači v reálném čase."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Cloud nebo lokálně — vaše volba",
+        "desc": "Použijte cloudové VM pro izolované úkoly, nebo lokální režim pro plný přístup k vašim aplikacím a souborům."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Připojování...",
       "continueWithGoogle": "Pokračovat přes Google"
+    },
+    "inAppBrowser": {
+      "blocked": "Přihlášení přes Google nefunguje ve vestavěných prohlížečích. Otevřete tuto stránku v prohlížeči, nebo použijte magický odkaz.",
+      "blockedNamed": "Přihlášení přes Google nefunguje v aplikaci {app}. Otevřete tuto stránku v prohlížeči, nebo použijte magický odkaz.",
+      "copyLink": "Kopírovat odkaz",
+      "copied": "Zkopírováno!",
+      "useMagicLink": "Použít magický odkaz"
     },
     "or": "nebo",
     "email": "E-mail",
@@ -560,18 +602,21 @@
     "getStarted": "Začít",
     "settingUp": "Nastavování...",
     "welcome": {
-      "titleReturning": "Vítejte zpět{name}!",
+      "titleReturning": "Vítejte zpět{name}",
       "titleNew": "Vítejte v Coasty",
-      "descriptionReturning": "Rádi bychom se o vás dozvěděli trochu více, abychom zlepšili váš zážitek",
-      "descriptionNew": "Pojďme nastavit váš účet, abychom mohli přizpůsobit váš zážitek"
+      "eyebrowNew": "Pojďme se poznat",
+      "eyebrowReturning": "Skoro hotovo",
+      "descriptionReturning": "Ještě pár detailů a Coasty bude plně přizpůsoben vašemu způsobu práce.",
+      "descriptionNew": "Coasty pracuje na skutečných počítačích — prohlíží, klikne, píše, doručuje. Pár rychlých detailů, aby seděl vašemu stylu.",
+      "footerNote": "Trvá to asi minutu. Cokoli můžete později změnit v Nastavení."
     },
-    "nameLabel": "Jak vám máme říkat?",
-    "namePlaceholder": "Vaše jméno",
-    "companyLabel": "Společnost",
+    "nameLabel": "Jak vás máme oslovovat?",
+    "namePlaceholder": "Stačí křestní jméno",
+    "companyLabel": "Kde pracujete?",
     "optional": "(volitelné)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Vaše firma nebo tým",
     "websiteLabel": "Web",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "vasefirma.com",
     "roleStep": {
       "title": "Co vás nejlépe vystihuje?",
       "subtitle": "Vyberte vše, co platí — pomůže nám to přizpůsobit váš zážitek"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Co má váš AI pracovník udělat?",
-    "placeholderAlt": "Řekněte svému AI, co má udělat na počítači...",
+    "placeholder": "Řekněte mi, co mám dělat na tomto počítači...",
+    "placeholderAlt": "Vyberte počítač pro začátek...",
     "vmError": {
       "title": "Chyba virtuálního stroje",
       "description": "Virtuální stroj je v chybovém stavu nebo je odstraňován.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Snížit počet strojů",
       "increaseMachines": "Zvýšit počet strojů",
       "machineLimit": "Až {max} rojových strojů na vašem plánu. Potřebujete více? Kontaktujte founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "Více běhů",
       "upgradeCta": "Režim roje"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Přetáhněte soubory sem",
       "dropDescription": "Soubory budou nahrány do složky Plocha na VM",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Cesta: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Přihlaste se a vyzkoušejte více funkcí zdarma",
@@ -801,6 +846,28 @@
       "ecommerce": "Cenové srovnání {company}",
       "social_media": "Publikovat o {company}",
       "general_automation": "Automatizovat úkol na {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Předání člověku dokončeno",
+      "yourTurn": "Jsi na řadě",
+      "connectToDesktop": "Připojit k ploše",
+      "resuming": "Pokračování...",
+      "doneContinue": "Hotovo, pokračovat"
+    },
+    "feedback": {
+      "promptRun": "Jaký byl tento běh?",
+      "promptSwarm": "Jaký byl tento swarm?",
+      "reactionBad": "Špatné",
+      "reactionOkay": "Ujde to",
+      "reactionGood": "Dobré",
+      "reactionAmazing": "Úžasné",
+      "tellUsMore": "Řekněte nám víc",
+      "commentPlaceholder": "Co by mohlo být lepší?",
+      "npsPrompt": "Doporučili byste Coasty?",
+      "npsNotLikely": "Nepravděpodobné",
+      "npsVeryLikely": "Velmi pravděpodobné",
+      "thanks": "Děkujeme za zpětnou vazbu",
+      "creditsLabel": "kreditů"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Neomezená těžká automatizace"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Žádné limity kreditů — nikdy",
+        "badge": "Nejlepší hodnota"
       }
     },
     "features": {
@@ -1113,7 +1185,7 @@
         "description": "API klíče šifrovány pomocí AES-256-GCM. Vaše přihlašovací údaje nejsou nikdy uloženy v prostém textu."
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "Zabezpečení na úrovni řádků",
         "description": "Izolace na úrovni databáze zajišťuje, že vaše data jsou přístupná pouze vám. Žádný přístup mezi tenanty není možný."
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Rozvržení"
+    "layout": "Rozvržení",
+    "sidebarStyle": "Styl postranního panelu",
+    "sidebarStyleHint": "Vyberte umístění navigace",
+    "sidebarStyleDisabled": "Dostupné, když je rozvržení nastaveno na postranní panel",
+    "vertical": "Svislé",
+    "verticalBadge": "Výchozí",
+    "verticalDescription": "Klasická levá lišta se štítky a kredity v zápatí.",
+    "horizontal": "Vodorovné",
+    "horizontalBadge": "Elegantní",
+    "horizontalDescription": "Jeden horní pruh se vším v jednom řádku. Větší výška plátna."
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "Přihlášení uložena",
       "addLogins": "Přidat přihlášení",
       "askAnything": "Zeptejte se na cokoliv",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac a Windows",
       "mobileRemote": "Mobilní ovládání",
       "freeDownload": "Stažení zdarma",
       "onePrompt": "Jeden příkaz",
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Neomezená těžká automatizace",
         "cta": "Získat Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Žádné limity kreditů — nikdy",
+        "cta": "Zvolit Unlimited",
+        "badge": "Nejlepší hodnota"
       }
     },
     "features": {
@@ -1757,7 +1844,7 @@
       "subtitle": "Vaše AI firma na autopilotu",
       "description": "Zaměstnanci, týmy, triggery — běží 24/7.",
       "myCompany": "Moje firma",
-      "contentOps": "Content Ops",
+      "contentOps": "Obsahové operace",
       "support": "Podpora",
       "writer": "Autor",
       "seo": "SEO",
@@ -1805,7 +1892,7 @@
       "templates": "Začněte ze šablony",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "Obsahové operace",
           "plan": "Starter",
           "count": "3"
         },
@@ -1820,7 +1907,7 @@
           "count": "7"
         },
         "ecommerce": {
-          "name": "E-Commerce",
+          "name": "E-commerce",
           "plan": "Plus",
           "count": "7"
         }
@@ -1867,6 +1954,11 @@
           "credits": "1 500",
           "machines": "3 stále zapnuté",
           "feature": "Garance SLA"
+        },
+        "unlimited": {
+          "credits": "Neomezeně",
+          "machines": "2 trvale spuštěné",
+          "feature": "1 souběžný agent"
         }
       },
       "perMonth": "{price}/měs.",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 AI agent ovládající počítač | AI zaměstnanec pro automatizaci desktopu a prohlížeče",
+      "title": "Coasty - #1 AI agent ovládající počítač | Neomezený za $249/mo (Nejlevnější na trhu)",
       "titleTemplate": "{title} | Coasty - AI agent pro ovládání počítače",
-      "description": "Coasty je #1 hodnocený AI agent ovládající počítač — 82% v benchmarku OSWorld. Ovládá plný desktop jako člověk: otevírá prohlížeče, kliká, píše, vyplňuje formuláře, posílá e-maily, spravuje tabulky. Skutečná izolace na úrovni VM pro každou relaci. Od $20/měs.",
-      "ogTitle": "Coasty - #1 AI agent ovládající počítač | 82% OSWorld benchmark",
-      "ogDescription": "AI zaměstnanec, který ovládá desktop jako člověk. #1 v benchmarku OSWorld (82%). Automatizace prohlížeče, ovládání desktopu, řešení CAPTCHA, izolace VM. Od $20/měs.",
-      "twitterDescription": "AI zaměstnanec, který ovládá desktop jako člověk. Otevírá prohlížeče, kliká, píše, vyplňuje formuláře, posílá e-maily. Skutečná izolace VM. $20/měs. vs $3 000/měs. lidský asistent."
+      "description": "Coasty je #1 hodnocený AI agent ovládající počítač — 82% v benchmarku OSWorld — a jediný plán Neomezený s pevnou sazbou za ovládání počítače za $249/mo (levnější než Devin Team $500+ACU, OpenAI Operator $200 s omezením požadavků a konkurence s limitem kreditů). Ovládá plný desktop jako člověk: prohlížeče, formuláře, e-maily, tabulky. Izolace na úrovni VM. Od $19/mo s plánem Starter nebo $249/mo Neomezený.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Neomezený (Nejlevnější agent ovládající počítač)",
+      "ogDescription": "#1 v OSWorld (82%). Pevná sazba $249/mo Neomezený — levnější než Devin Team ($500+ACU) při vyšším skóre benchmarku. Automatizace prohlížeče, desktopu a terminálu. Izolace VM pro každou relaci. Nativní aplikace napříč platformami + REST API + MCP server.",
+      "twitterDescription": "AI agent ovládající skutečný desktop. 82% OSWorld (#1). $249/mo Neomezený — nejlevnější plán s pevnou sazbou v této kategorii. Starter od $19/mo. Izolace VM + MCP server s 26 nástroji."
     },
     "compare": {
       "title": "Porovnání Coasty - Alternativy AI agentů a srovnání s konkurencí",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Nejlepší agent pro ovládání počítače, #1 v OSWorld. Automatizujte jakoukoli úlohu na desktopu, v prohlížeči nebo terminálu s AI."
     },
     "pricing": {
-      "title": "Ceník — Plány a ceny AI agenta Coasty",
-      "description": "Cenové plány Coasty od $20/měs. Nahraďte virtuální asistenty za $3 000/měs. AI zaměstnancem. K dispozici bezplatný tarif. Kreditové využití bez skrytých poplatků.",
-      "ogTitle": "Ceník Coasty — Plány AI agenta",
-      "ogDescription": "AI zaměstnanec od $20/měs. Nahraďte drahé virtuální asistenty autonomním AI. Bezplatný tarif k dispozici."
+      "title": "Ceník — $19/mo Starter nebo $249/mo Neomezený (Nejlevnější na trhu)",
+      "description": "Ceník Coasty: Starter $19/mo (200 kreditů) nebo Neomezený $249/mo (nejlevnější plán s pevnou sazbou pro neomezené ovládání počítače na trhu — levnější než Devin Team $500+ACU, Genspark Pro $249 s limitem kreditů a Manus Extended $200 s limitem). Nahrazuje lidské virtuální asistenty za více než $3 000/mo. Bez skrytých poplatků.",
+      "ogTitle": "Ceník Coasty — $19/mo Starter, $249/mo Neomezený",
+      "ogDescription": "Pevná sazba $249/mo Neomezený — nejlevnější plán neomezeného ovládání počítače na trhu. Nebo $19/mo Starter pro jednotlivce. Úspora $36 000 ročně oproti lidským asistentům."
     },
     "faq": {
       "q1": "Co je Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Jak se Coasty srovnává s Anthropic Computer Use?",
       "a2": "Zatímco Anthropic Computer Use poskytuje surové API pro ovládání počítače, Coasty je produkčně připravená platforma se spravovanou VM infrastrukturou, vestavěným řešením CAPTCHA, desktopovou aplikací pro Mac a Windows, podporou více modelů a nejvyšším skóre v benchmarku OSWorld (82%). Coasty poskytuje kompletní řešení — nejen API.",
       "q3": "Kolik stojí Coasty?",
-      "a3": "Coasty začíná na $20/měsíc s plánem Starter a bezplatný tarif je k dispozici. To ve srovnání s více než $3 000/měsíc za lidského virtuálního asistenta. Coasty pracuje 24/7 bez přestávek, bez školení a s okamžitou škálovatelností.",
+      "a3": "Coasty má dva dostupné plány: Starter za $19/mo (200 kreditů, 1 počítač, ideální pro jednotlivce) a Neomezený za $249/mo bez limitu kreditů. Plán Neomezený za $249 je nejlevnější dostupný plán neomezeného ovládání počítače s pevnou sazbou — levnější než Devin Team ($500/mo + příplatky za ACU), OpenAI Operator ChatGPT Pro ($200/mo s omezením požadavků), Genspark Pro ($249.99 s limitem 125k kreditů) a Manus Extended ($200 s limitem 40k kreditů). Oba plány nahrazují lidského virtuálního asistenta za více než $3 000/mo; plán Neomezený šetří přes $33 000 ročně oproti lidskému asistentovi, což představuje 92% snížení nákladů.",
       "q4": "Je Coasty bezpečný?",
       "a4": "Ano. Každá relace Coasty běží ve vlastním izolovaném, sandboxovaném virtuálním stroji. Vaše data zůstávají v bezpečí, váš stroj zůstává nedotčen a nic neuniká mezi relacemi. Toto je skutečná izolace na úrovni VM, nikoli jen kontejnery ve sdíleném prostředí.",
       "q5": "Co je benchmark OSWorld?",
@@ -2309,11 +2401,11 @@
       "a10": "Ano. Coasty má vestavěný pipeline pro řešení CAPTCHA, takže se nezasekne jako konkurenční AI agenti. To je zásadní pro reálnou automatizaci, kde jsou CAPTCHA na webových stránkách běžné."
     },
     "structuredData": {
-      "appDescription": "#1 hodnocený AI agent ovládající počítač. Coasty ovládá plný desktop jako člověk — otevírá prohlížeče, kliká, píše, vyplňuje formuláře, posílá e-maily a spravuje tabulky autonomně. 82% v benchmarku OSWorld. Skutečná izolace na úrovni VM. Vestavěné řešení CAPTCHA. Od $20/měsíc.",
-      "orgDescription": "Coasty vyvíjí #1 AI agenta ovládajícího počítač. Naše platforma poskytuje autonomní ovládání desktopu, automatizaci prohlížeče a orchestraci více agentů se skutečnou izolací na úrovni VM.",
-      "productDescription": "AI agent ovládající počítač, který řídí desktop jako člověk. #1 v benchmarku OSWorld (82%). Autonomní automatizace prohlížeče, ovládání desktopu, odesílání e-mailů, vyplňování formulářů a správa tabulek se skutečnou izolací na úrovni VM.",
-      "websiteDescription": "#1 platforma AI agenta ovládajícího počítač. 82% OSWorld benchmark. Autonomní automatizace prohlížeče, desktopu a terminálu s izolací VM. Od $20/měs.",
-      "softwareDescription": "AI agent ovládající počítač, který řídí plný desktop jako člověk. #1 v benchmarku OSWorld s 82% mírou dokončení u 369 reálných úkolů. Autonomní automatizace prohlížeče, ovládání desktopu, terminálové operace, odesílání e-mailů, vyplňování formulářů a správa tabulek.",
+      "appDescription": "#1 hodnocený AI agent ovládající počítač a nejlevnější plán s pevnou sazbou pro neomezené ovládání počítače na trhu za $249/mo. Coasty ovládá plný desktop jako člověk — otevírá prohlížeče, kliká, píše, vyplňuje formuláře, posílá e-maily a spravuje tabulky autonomně. 82% v benchmarku OSWorld u 369 reálných úkolů. Skutečná izolace na úrovni VM pro každou relaci. Vestavěné řešení CAPTCHA. Plány: $19/mo Starter nebo $249/mo Neomezený.",
+      "orgDescription": "Coasty vyvíjí #1 AI agenta ovládajícího počítač (82% OSWorld) a dodává jediný plán s pevnou sazbou pro neomezené ovládání počítače za $249/mo — levnější než Devin Team, OpenAI Operator a konkurence s limitem kreditů ve stejné cenové kategorii. Naše platforma poskytuje autonomní ovládání desktopu, automatizaci prohlížeče a orchestraci více agentů se skutečnou izolací na úrovni VM.",
+      "productDescription": "AI agent ovládající počítač, který řídí desktop jako člověk. #1 v benchmarku OSWorld (82%). Plán Neomezený za $249/mo je nejlevnější dostupný plán neomezeného ovládání počítače s pevnou sazbou. Autonomní automatizace prohlížeče, ovládání desktopu, odesílání e-mailů, vyplňování formulářů a správa tabulek se skutečnou izolací na úrovni VM.",
+      "websiteDescription": "#1 platforma AI agenta ovládajícího počítač — 82% benchmark OSWorld a nejlevnější plán Neomezený s pevnou sazbou za $249/mo. Autonomní automatizace prohlížeče, desktopu a terminálu s izolací VM. Od $19/mo s plánem Starter nebo $249/mo Neomezený.",
+      "softwareDescription": "AI agent ovládající počítač, který řídí plný desktop jako člověk. #1 v benchmarku OSWorld s 82% mírou dokončení u 369 reálných úkolů. Plán Neomezený za $249/mo je nejlevnější plán s pevnou sazbou pro neomezené ovládání počítače na trhu. Autonomní automatizace prohlížeče, ovládání desktopu, terminálové operace, odesílání e-mailů, vyplňování formulářů a správa tabulek.",
       "breadcrumbs": {
         "home": "Domů",
         "caseStudies": "Případové studie AI agenta",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Stránka nenalezena",
-      "description": "Omlouváme se, tato stránka neexistuje."
+      "description": "Omlouváme se, tato stránka neexistuje.",
+      "metaTitle": "404 · Stránka nenalezena",
+      "metaDescription": "Poslali jsme našeho nejlepšího AI agenta. Vrátil se s prázdnou. Zpět na Coasty, AI agenta #1 pro automatizaci desktopu a prohlížeče.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "sken: celý internet",
+        "step2": "sken: každá otevřená karta",
+        "step3": "sken: pod gaučem",
+        "result": "verdikt: stránka neexistuje"
+      },
+      "ok": "OK",
+      "fail": "CHYBA",
+      "primaryCta": "Zpět na hlavní stránku",
+      "secondaryCta": "Najměte AI agenta",
+      "navLabel": "Doporučené stránky",
+      "links": {
+        "home": "Domů",
+        "computerUse": "Použití počítače",
+        "pricing": "Ceník",
+        "download": "Stáhnout",
+        "blog": "Blog",
+        "guide": "Průvodce"
+      }
     },
     "error": {
       "title": "Něco se pokazilo",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Název místnosti je povinný",
+      "taskCreated": "Úkol byl úspěšně vytvořen",
+      "taskFailed": "Vytvoření úkolu se nezdařilo",
+      "assignTask": "Přiřadit nový úkol",
+      "assignTaskDesc": "Začněte nový úkol se svým AI asistentem.",
+      "taskName": "Název úkolu",
+      "taskNamePlaceholder": "Zadejte název úkolu",
+      "cancel": "Zrušit",
+      "creating": "Vytváření...",
+      "createTask": "Vytvořit úkol"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Zadejte prosím kód pozvánky",
+      "joinSuccess": "Úspěšně jste se připojili k projektu!",
+      "joinFailed": "Připojení k projektu se nezdařilo",
+      "invalidCode": "Neplatný kód pozvánky nebo projekt nebyl nalezen",
+      "title": "Připojit se k projektu",
+      "description": "Zadejte kód pozvánky pro připojení k existujícímu projektu.",
+      "inviteCode": "Kód pozvánky",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Požádejte vedoucího týmu o kód pozvánky k projektu",
+      "cancel": "Zrušit",
+      "joining": "Připojování...",
+      "joinButton": "Připojit se k projektu"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
+      "title": "Účastníci místnosti",
+      "copyCode": "Kopírovat kód",
+      "copyLink": "Kopírovat odkaz",
+      "codeCopied": "Kód pozvánky byl zkopírován!",
+      "codeFailed": "Kopírování kódu pozvánky se nezdařilo",
+      "linkCopied": "Odkaz pozvánky byl zkopírován!",
+      "linkFailed": "Kopírování odkazu pozvánky se nezdařilo",
       "online": "Online",
       "offline": "Offline",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Název místnosti je povinný",
+      "created": "Projekt byl úspěšně vytvořen!",
+      "failed": "Vytvoření místnosti se nezdařilo",
+      "title": "Vytvořit nový projekt",
+      "description": "Začněte nový projekt a vybudujte svůj produkt s AI.",
+      "projectName": "Název projektu",
+      "projectNamePlaceholder": "Zadejte název projektu",
+      "teamSize": "Velikost týmu",
+      "cancel": "Zrušit",
+      "creating": "Vytváření...",
+      "createButton": "Vytvořit projekt"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Co je nového",
+    "title": "Co je nového v Coasty",
+    "updateCount": "{count} aktualizací",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Aktualizace",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Sledujte další aktualizace",
+    "tagline": "Váš AI zaměstnanec, který spolupracuje s každým"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Skvělé"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Pro odeslání zpětné vazby se prosím přihlaste",
+    "alreadySubmitted": "Pro toto jste již zpětnou vazbu odeslali",
+    "thankYou": "Děkujeme za vaši zpětnou vazbu!",
+    "creditsEarned": "+{credits} získaných kreditů",
+    "helpImprove": "Váš názor nám pomáhá vylepšovat Coasty.",
+    "howsExperience": "Jak se vám pracuje?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Řekněte nám více",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Co funguje dobře? Co by se dalo vylepšit?",
+    "cancel": "Zrušit",
+    "sending": "Odesílání...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Vyberte prosím pracovní stanici",
+    "enterCron": "Zadejte prosím cron výraz",
+    "hireFailed": "Najmutí zaměstnance se nezdařilo",
+    "removeFailed": "Odebrání zaměstnance se nezdařilo",
+    "editEmployee": "Upravit zaměstnance",
+    "configureEmployee": "Konfigurovat zaměstnance",
+    "editDescription": "Aktualizujte rozvrh, pracovní stanici nebo pokyny",
+    "configureDescription": "Nastavte AI zaměstnance pro tento chat",
+    "loading": "Načítání konfigurace...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Jméno zaměstnance"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Smazat chat?",
+    "description": "Tímto smažete \"{chatTitle}\"",
+    "cancel": "Zrušit",
+    "delete": "Smazat"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Platba úspěšná! Vaše kredity byly přidány.",
+    "canceled": "Platba byla zrušena. Žádné poplatky nebyly účtovány."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Obecná nastavení",
     "generalDescription": "Konfigurujte základní nastavení počítače",
     "displayName": "Zobrazovaný název",
     "defaultName": "Můj počítač",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Uložit změny",
+    "security": "Zabezpečení",
+    "securityDescription": "Nastavení zabezpečení a přístupu",
+    "sshAuth": "Ověřování SSH",
+    "username": "Uživatelské jméno:",
+    "keyPair": "Klíčový pár:",
+    "sshKeyDownloaded": "SSH klíč stažen",
+    "sshKeyFailed": "Stažení SSH klíče se nezdařilo",
+    "downloadSshKey": "Stáhnout SSH klíč",
+    "vncPassword": "Heslo VNC",
     "vncPasswordHint": "Toto heslo je vyžadováno pro připojení k počítači"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Ahoj, používám Coasty a je to fakt dobré. Je to AI, která za tebe umí ovládat počítač. Brouzdat po webu, klikat, psát, prostě všechno. Vyzkoušej to s mým odkazem a oba dostaneme kredity zdarma!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Podívej se na tento AI nástroj",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "právě teď",
+      "minutesAgo": "před {minutes} min",
+      "hoursAgo": "před {hours} h",
+      "daysAgo": "před {days} dny",
+      "monthsAgo": "před {months} měs"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Odkaz pro doporučení byl zkopírován!",
+    "headline": "Dobří přátelé sdílejí memy. Skvělí přátelé sdílejí AI agenty.",
+    "subheadline": "Oba získáte {credits} kreditů zdarma, když se váš přítel připojí.",
+    "yourLink": "Váš odkaz pro doporučení",
+    "shareDirectly": "Sdílet přímo",
+    "yourReferrals": "Vaše doporučení",
+    "referralCount": "{count} doporučení",
+    "creditsEarned": "{credits} získaných kreditů",
+    "invitedYou": "Pozval(a) vás",
+    "joinedViaLink": "Připojil(a) se přes váš odkaz",
+    "noInvites": "Zatím nebyli pozváni žádní uživatelé",
+    "noInvitesHint": "Sdílejte svůj odkaz a oba získáte 50 kreditů"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Zveřejnit",
+    "title": "Vaše konverzace je nyní veřejná!",
+    "description": "Kdokoli s odkazem nyní může zobrazit tuto konverzaci a může se v budoucnu objevit ve feedech komunity, na vybraných stránkách nebo ve výsledcích vyhledávání.",
+    "viewPage": "Zobrazit stránku",
+    "shareOn": "Sdílet na"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "Ovládací panel AI",
+    "subtitle": "Popište, co má AI udělat",
+    "quickCommands": "Rychlé příkazy",
+    "noActions": "Zatím nebyly provedeny žádné akce",
+    "success": "Úspěch",
+    "failed": "Selhalo",
+    "placeholder": "Řekněte AI, co má dělat... (Ctrl+Enter pro odeslání)",
+    "executing": "Provádění...",
+    "executeCommand": "Spustit příkaz"
   },
   "discover": {
     "badge": "Komunita",
@@ -2859,5 +2973,190 @@
     "watchSession": "Sledovat relaci",
     "steps": "{count} kroků",
     "tryCoasty": "Vyzkoušet Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Paměť",
+    "sidebarDescription": "Kontext aplikovaný na každý běh agenta",
+    "dialog": {
+      "title": "Paměť",
+      "description": "Krátká poznámka, kterou Coasty aplikuje vždy, když pro vás pracuje.",
+      "openFull": "Otevřít celé",
+      "visualMemoryLabel": "Paměť",
+      "visualSynced": "Synchronizováno",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Plány",
+      "visualContextSwarm": "Roj"
+    },
+    "section": {
+      "title": "Paměť",
+      "tag": "volitelné · osobní",
+      "description": "Krátká poznámka o vás, která doprovází každý běh agenta — chat, naplánované úkoly, stroje v roji, delegovaní agenti."
+    },
+    "presetsLabel": "Vyzkoušejte",
+    "presets": {
+      "useFirstName": "Použít křestní jméno",
+      "useFirstNameSentence": "Oslovuj mě křestním jménem.",
+      "beTerse": "Buď stručný",
+      "beTerseSentence": "Preferuj stručné, přímé odpovědi. Bez výplně.",
+      "imDeveloper": "Jsem vývojář",
+      "imDeveloperSentence": "Jsem softwarový inženýr; pohodlně pracuji s kódem.",
+      "noEmojis": "Bez emoji",
+      "noEmojisSentence": "Vyhýbej se emoji v odpovědích.",
+      "metricUnits": "Metrické jednotky",
+      "metricUnitsSentence": "Používej metrické jednotky (metry, kilogramy, °C).",
+      "citeSources": "Uváděj zdroje",
+      "citeSourcesSentence": "Uváděj zdroje při faktických tvrzeních."
+    },
+    "placeholder": "Příklad:\nOslovuj mě křestním jménem.\nPreferuj stručné odpovědi.\nPracuji s TypeScriptem a Pythonem.\nNikdy nemaž soubory bez potvrzení.",
+    "loading": "Načítání…",
+    "saving": "Ukládání…",
+    "saved": "Uloženo",
+    "unsavedChanges": "Neuložené změny",
+    "empty": "Prázdné",
+    "savedRelative": "Uloženo · {time}",
+    "errorLoad": "Paměť se nepodařilo načíst.",
+    "errorSave": "Paměť se nepodařilo uložit.",
+    "willBeShortened": "bude zkráceno",
+    "clear": "Vymazat",
+    "footerNote": "Coasty bude tyto preference brát v úvahu, když pro vás pracuje.",
+    "time": {
+      "justNow": "právě teď",
+      "secondsAgo": "před {n} s",
+      "minutesAgo": "před {n} min",
+      "hoursAgo": "před {n} h",
+      "daysAgo": "před {n} dny"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Nastavení",
+    "navGroups": {
+      "settings": "Nastavení",
+      "developer": "Vývojář",
+      "more": "Další",
+      "resources": "Zdroje"
+    },
+    "sections": {
+      "account": {
+        "label": "Obecné",
+        "description": "Profil a účet"
+      },
+      "appearance": {
+        "label": "Vzhled",
+        "description": "Motiv, jazyk a pozadí"
+      },
+      "billing": {
+        "label": "Fakturace",
+        "description": "Plány a kredity"
+      },
+      "publicChats": {
+        "label": "Veřejné chaty",
+        "description": "Správa chatů sdílených veřejným odkazem"
+      },
+      "privacy": {
+        "label": "Soukromí",
+        "description": "Zabezpečení a ochrana dat"
+      },
+      "notifications": {
+        "label": "Oznámení",
+        "description": "Předvolby oznámení"
+      },
+      "apiKeys": {
+        "label": "API klíče",
+        "description": "Správa vašich API klíčů"
+      },
+      "data": {
+        "label": "Data",
+        "description": "Export a správa vašich dat"
+      },
+      "feedback": {
+        "label": "Zpětná vazba",
+        "description": "Pošlete nám zpětnou vazbu"
+      },
+      "about": {
+        "label": "O aplikaci",
+        "description": "O Coasty"
+      },
+      "social": {
+        "label": "Připojit",
+        "description": "Sociální odkazy"
+      },
+      "guide": {
+        "label": "Průvodce",
+        "description": "Naučte se používat Coasty"
+      },
+      "referral": {
+        "label": "Doporučení",
+        "description": "Pozvi přátele a získej kredity"
+      }
+    },
+    "appearance": {
+      "theme": "Motiv",
+      "language": "Jazyk",
+      "background": "Pozadí",
+      "personalization": "Přizpůsobení",
+      "intro": {
+        "title": "Filmový úvod",
+        "description": "Zobrazit animovaný úvod při návštěvě domovské stránky"
+      },
+      "interaction": {
+        "title": "Volání nástrojů",
+        "description": "Zobrazit podrobnosti o spuštění nástrojů v konverzacích"
+      }
+    },
+    "comingSoon": {
+      "badge": "Brzy",
+      "placeholder": "Tato sekce přijde v budoucí aktualizaci."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Ukaž mi, co je možné…",
+    "tasks": [
+      "Prozkoumej mou konkurenci",
+      "Vyplň žádosti o zaměstnání",
+      "Rezervuj let do Tokia",
+      "Sleduj dostupnost mého webu",
+      "Naplánuj příspěvky na sociálních sítích",
+      "Analyzuj čtvrtletní trendy"
+    ],
+    "dontShowAgain": "Příště nezobrazovat",
+    "skip": "Přeskočit",
+    "tagline": "Udělej cokoli, stejně jako to dokáže člověk na počítači"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Vaše počítače",
+      "description": "Křemík ve vašich službách. Roztáčíme vaši flotilu."
+    },
+    "swarms": {
+      "title": "Inteligence roje",
+      "description": "Mnoho myslí, jedna mise. Sbíráme tvé agenty."
+    },
+    "developers": {
+      "title": "Vývojářské API",
+      "description": "Načítání tvého panelu."
+    },
+    "secrets": {
+      "title": "Přihlašovací údaje",
+      "description": "Vaše tajemství jsou u nás v bezpečí. Otevíráme trezor."
+    },
+    "schedules": {
+      "title": "Plány",
+      "description": "Vždy přesně načas. Synchronizujeme tvé automatizace."
+    },
+    "history": {
+      "title": "Vaše historie",
+      "description": "Tichý záznam každé konverzace, úkolu a nápadu, který jsi prozkoumal."
+    },
+    "referral": {
+      "title": "Doporučení",
+      "description": "Sdílej Coasty. Vydělávejte společně."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Vaše data, vaše kontrola",
+    "heroDescription": "Ukládáme jen to, co je potřeba ke spuštění vašich relací. Veškerá komunikace je šifrována během přenosu a šifrování v klidu můžete rozšířit na níže uvedené kategorie. Vaše data nikdy nepoužíváme k trénování modelů AI.",
+    "trustTransit": "TLS 1.3 při přenosu",
+    "trustAtRest": "AES-256-GCM v klidu",
+    "trustNoTraining": "Žádné trénování na vašich datech"
   }
 }

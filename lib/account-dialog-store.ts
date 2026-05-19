@@ -6,14 +6,15 @@ export type AccountSectionType =
   | "account"
   | "billing"
   | "privacy"
-  | "notifications"
   | "appearance"
-  | "api-keys"
   | "data"
   | "feedback"
   | "about"
   | "social"
   | "public-chats"
+  | "memory"
+  | "guide"
+  | "referral"
 
 interface AccountDialogStore {
   isOpen: boolean

@@ -131,29 +131,33 @@ export async function deleteMachine(machine: any): Promise<CleanupResult> {
             machine.user_id,
             machine.display_name
           );
-          console.log(`Created pre-termination snapshot: ${snapshot.amiId}`);
+          // null = instance already terminated/in non-snapshottable state.
+          // Skip the DB write but proceed with the rest of cleanup.
+          if (snapshot) {
+            console.log(`Created pre-termination snapshot: ${snapshot.amiId}`);
 
-          // Store snapshot reference in database
-          const supabaseForSnapshot = await createClient();
-          if (supabaseForSnapshot) {
-            await supabaseForSnapshot.from("machine_snapshots").insert({
-              machine_id: machine.id,
-              user_id: machine.user_id,
-              snapshot_name: snapshot.name,
-              snapshot_type: "pre_shutdown",
-              storage_location: snapshot.amiId,
-              size_gb: settings.storageGb || 16,
-              os_state: {
-                provider: "aws",
-                region: settings.awsRegion || process.env.AWS_REGION || "us-east-1",
-                source_instance: settings.awsInstanceId,
-                desktop_enabled: settings.desktopEnabled,
-              },
-            });
+            // Store snapshot reference in database
+            const supabaseForSnapshot = await createClient();
+            if (supabaseForSnapshot) {
+              await supabaseForSnapshot.from("machine_snapshots").insert({
+                machine_id: machine.id,
+                user_id: machine.user_id,
+                snapshot_name: snapshot.name,
+                snapshot_type: "pre_shutdown",
+                storage_location: snapshot.amiId,
+                size_gb: settings.storageGb || 16,
+                os_state: {
+                  provider: "aws",
+                  region: settings.awsRegion || process.env.AWS_REGION || "us-east-1",
+                  source_instance: settings.awsInstanceId,
+                  desktop_enabled: settings.desktopEnabled,
+                },
+              });
+            }
+
+            // Clean up old snapshots (keep latest 2)
+            await awsService.cleanupOldSnapshots(machine.user_id, 2);
           }
-
-          // Clean up old snapshots (keep latest 2)
-          await awsService.cleanupOldSnapshots(machine.user_id, 2);
         } catch (snapError: any) {
           console.warn(`Failed to snapshot instance ${settings.awsInstanceId}:`, snapError.message);
           // Continue with termination — snapshot failure shouldn't block cleanup

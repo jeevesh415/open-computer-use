@@ -58,3 +58,40 @@ resource "aws_iam_role" "ecs_task" {
 #     ]
 #   })
 # }
+
+# -----------------------------------------------------------------------------
+# CloudWatch custom-metric publishing
+#
+# Allows the backend containers to publish:
+#   * Coasty/SSE::ActiveStreams   (from the coasty-sse service)
+#   * Coasty/WS::LocalConnections (from the coasty-ws service)
+#
+# These metrics drive the target-tracking autoscaling policies in
+# ecs_split.tf (aws_appautoscaling_policy.split_sse_streams /
+# split_ws_connections).  `PutMetricData` has no resource-level ARN support —
+# AWS requires `Resource = "*"` — so the scope is narrowed via a Condition
+# that restricts writes to only the two namespaces we use.  A compromised
+# task can't spam AWS/* or unrelated namespaces.
+# -----------------------------------------------------------------------------
+
+resource "aws_iam_role_policy" "ecs_task_metrics" {
+  name = "${var.project_name}-task-metrics"
+  role = aws_iam_role.ecs_task.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid      = "PublishCustomMetrics"
+        Effect   = "Allow"
+        Action   = ["cloudwatch:PutMetricData"]
+        Resource = "*"
+        Condition = {
+          StringEquals = {
+            "cloudwatch:namespace" = ["Coasty/SSE", "Coasty/WS"]
+          }
+        }
+      }
+    ]
+  })
+}

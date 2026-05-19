@@ -116,3 +116,4 @@ docker/
 infra/
 supabase/
 backend/
+results/

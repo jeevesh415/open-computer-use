@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import { createServiceClient } from "@/lib/supabase/server-guest"
+import { decryptScreenshotsInMessages } from "@/lib/screenshot-encryption"
 import { NextRequest, NextResponse } from "next/server"
 
 // GET: Get all messages in a collaborative room with enhanced user data
@@ -110,10 +111,16 @@ export async function GET(
         })
       )
       
-      return NextResponse.json({ messages: enhancedMessages })
+      // Decrypt frontendScreenshot values inside JSONB parts. Done AFTER
+      // the user-metadata enhancement so we walk the final shape once.
+      return NextResponse.json({
+        messages: decryptScreenshotsInMessages(enhancedMessages),
+      })
     }
 
-    return NextResponse.json({ messages })
+    return NextResponse.json({
+      messages: decryptScreenshotsInMessages(messages || []),
+    })
   } catch (err) {
     console.error("Error in collaborative room messages GET:", err)
     return NextResponse.json(

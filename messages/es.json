@@ -12,13 +12,15 @@
     "recommended": "Recomendado",
     "month": "mes",
     "creditsPerMonth": "{count} créditos/mes",
-    "agentsInParallel": "{count} agentes en paralelo"
+    "agentsInParallel": "{count} agentes en paralelo",
+    "whatsIncluded": "Qué incluye",
+    "hideDetails": "Ocultar detalles"
   },
   "header": {
     "useCases": "Casos de uso",
     "blog": "Blog",
     "agentSwarms": "Enjambres de agentes",
-    "products": "Products",
+    "products": "Productos",
     "discover": "Discover",
     "compare": "Comparar",
     "demos": "Demos",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} emails personalizados por campaña"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Uso de computadora",
+      "agentSwarms": "Enjambres de agentes",
+      "compare": "Comparar"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "Puntuación de {stat} en el benchmark OSWorld",
+      "agentSwarms": "{stat} agentes en paralelo",
+      "compare": "{stat} competidores analizados"
     },
     "blogItems": {
       "allPosts": "Todas las publicaciones",
@@ -72,7 +74,8 @@
       "webScraping": "Web Scraping",
       "jobApplications": "Solicitudes de empleo",
       "demosResults": "Demos y resultados",
-      "guide": "Guía"
+      "guide": "Guía",
+      "discover": "Comunidad"
     },
     "blogStats": {
       "allPosts": "{stat} artículos publicados semanalmente",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} páginas por sesión",
       "jobApplications": "{stat} solicitudes por sesión",
       "demosResults": "{stat} casos de estudio reales",
-      "guide": "{stat} guías de casos de uso"
-    }
+      "guide": "{stat} guías de casos de uso",
+      "discover": "Vea cómo lo usan las personas"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 Agente de uso de computadora · {score} OSWorld",
-    "headline": "Operadores de computadora autónomos",
+    "headline": "El mejor agente de uso de computadora",
     "useCases": {
       "computerAgent": {
         "label": "Agente de computadora",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Redes sociales",
         "task": "Publica en Hacker News e interactúa con comentarios"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "ahorrados al mes",
+        "sublabel": "vs. un VA a tiempo completo"
+      },
+      "time": {
+        "value": "30 h",
+        "label": "recuperadas por semana",
+        "sublabel": "trabajo manual eliminado"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "resultados más rápidos",
+        "sublabel": "tareas en minutos, no días"
+      },
+      "effort": {
+        "value": "0",
+        "label": "código ni contrataciones",
+        "sublabel": "gestionado de extremo a extremo"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Automatización pesada ilimitada",
         "cta": "Obtener Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Sin límites de créditos — nunca",
+        "cta": "Obtener Unlimited",
+        "badge": "Mejor valor"
       }
     },
     "vmTemporary": "1 VM temporal (2hr)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "El mismo trabajo cuesta {oldPrice} con trabajo manual",
       "description": "Un asistente virtual cuesta $2,000–$4,000/mes. Una contratación a tiempo parcial cuesta más. Coasty hace el mismo trabajo 24/7 desde $0 — con consistencia perfecta, registros de auditoría completos y cero tiempo de capacitación."
-    }
+    },
+    "unlimitedCredits": "Créditos ilimitados"
   },
   "faq": {
     "title": "Preguntas frecuentes",
@@ -429,7 +463,8 @@
       "contact": "Contacto",
       "privacy": "Privacidad",
       "terms": "Términos"
-    }
+    },
+    "status": "Todos los sistemas operativos"
   },
   "languageSwitcher": {
     "label": "Idioma"
@@ -458,16 +493,16 @@
     "demoCaption": "Ejecuta agentes de IA en tu ordenador o contrólalo desde tu móvil, estés donde estés.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Ejecuta en local en tu PC",
+        "desc": "Descarga la app de escritorio y deja que la IA controle tu computadora directamente — sin necesidad de VM en la nube."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Controla tu PC desde el móvil",
+        "desc": "Inicia una tarea desde el móvil y mira al agente de IA trabajar en tu computadora en tiempo real."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Nube o local — tú decides",
+        "desc": "Usa VMs en la nube para tareas aisladas, o ve a local para tener acceso completo a tus apps y archivos."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Conectando...",
       "continueWithGoogle": "Continuar con Google"
+    },
+    "inAppBrowser": {
+      "blocked": "El inicio de sesión con Google no funciona en navegadores integrados. Abre esta página en tu navegador o usa un enlace mágico.",
+      "blockedNamed": "El inicio de sesión con Google no funciona dentro de {app}. Abre esta página en tu navegador o usa un enlace mágico.",
+      "copyLink": "Copiar enlace",
+      "copied": "¡Copiado!",
+      "useMagicLink": "Usar enlace mágico"
     },
     "or": "o",
     "email": "Correo electrónico",
@@ -560,18 +602,21 @@
     "getStarted": "Comenzar",
     "settingUp": "Configurando...",
     "welcome": {
-      "titleReturning": "¡Bienvenido de nuevo{name}!",
+      "titleReturning": "Bienvenido de nuevo{name}",
       "titleNew": "Bienvenido a Coasty",
-      "descriptionReturning": "Nos encantaría saber un poco más de ti para mejorar tu experiencia",
-      "descriptionNew": "Configuremos tu cuenta para personalizar tu experiencia"
+      "eyebrowNew": "Conozcámonos",
+      "eyebrowReturning": "Casi listo",
+      "descriptionReturning": "Solo unos detalles más y Coasty estará perfectamente ajustado a tu forma de trabajar.",
+      "descriptionNew": "Coasty trabaja en computadoras reales — navega, hace clic, escribe, entrega. Unos detalles rápidos para que encaje con tu estilo.",
+      "footerNote": "Toma alrededor de un minuto. Puedes cambiar todo después en Ajustes."
     },
     "nameLabel": "¿Cómo debemos llamarte?",
-    "namePlaceholder": "Tu nombre",
-    "companyLabel": "Empresa",
+    "namePlaceholder": "Solo tu nombre de pila",
+    "companyLabel": "¿Dónde trabajas?",
     "optional": "(opcional)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Tu empresa o equipo",
     "websiteLabel": "Sitio web",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "tuempresa.com",
     "roleStep": {
       "title": "¿Qué te describe mejor?",
       "subtitle": "Selecciona todas las que apliquen — esto nos ayuda a personalizar tu experiencia"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "¿Qué debe hacer tu trabajador de IA?",
-    "placeholderAlt": "Dile a tu IA qué hacer en la computadora...",
+    "placeholder": "Dime qué hacer en esta computadora...",
+    "placeholderAlt": "Selecciona una computadora para comenzar...",
     "vmError": {
       "title": "Error de máquina virtual",
       "description": "La máquina virtual está en estado de error o se está eliminando.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Reducir cantidad de máquinas",
       "increaseMachines": "Aumentar cantidad de máquinas",
       "machineLimit": "Hasta {max} máquinas de enjambre en tu plan. ¿Necesitas más? Contacta a founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "Ejecución múltiple",
       "upgradeCta": "Modo enjambre"
     },
     "desktop": {
@@ -801,6 +846,28 @@
       "ecommerce": "Comparación de precios de {company}",
       "social_media": "Publicar sobre {company}",
       "general_automation": "Automatizar tarea en {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Transferencia humana completada",
+      "yourTurn": "Tu turno",
+      "connectToDesktop": "Conectar al escritorio",
+      "resuming": "Reanudando...",
+      "doneContinue": "Listo, continuar"
+    },
+    "feedback": {
+      "promptRun": "¿Cómo estuvo esta ejecución?",
+      "promptSwarm": "¿Cómo estuvo este enjambre?",
+      "reactionBad": "Mal",
+      "reactionOkay": "Aceptable",
+      "reactionGood": "Bien",
+      "reactionAmazing": "Increíble",
+      "tellUsMore": "Cuéntanos más",
+      "commentPlaceholder": "¿Qué podría mejorar?",
+      "npsPrompt": "¿Recomendarías Coasty?",
+      "npsNotLikely": "Poco probable",
+      "npsVeryLikely": "Muy probable",
+      "thanks": "Gracias por los comentarios",
+      "creditsLabel": "créditos"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Automatización pesada ilimitada"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Sin límites de créditos — nunca",
+        "badge": "Mejor valor"
       }
     },
     "features": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Diseño"
+    "layout": "Diseño",
+    "sidebarStyle": "Estilo de barra lateral",
+    "sidebarStyleHint": "Elige dónde vive la navegación",
+    "sidebarStyleDisabled": "Disponible cuando el diseño está configurado como barra lateral",
+    "vertical": "Vertical",
+    "verticalBadge": "Predeterminado",
+    "verticalDescription": "Carril izquierdo clásico con etiquetas y créditos en el pie.",
+    "horizontal": "Horizontal",
+    "horizontalBadge": "Elegante",
+    "horizontalDescription": "Una sola barra superior con todo en una fila. Más altura de lienzo."
   },
   "suggestions": {
     "summary": {
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Automatización pesada ilimitada",
         "cta": "Obtener Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Sin límites de créditos — nunca",
+        "cta": "Obtener Unlimited",
+        "badge": "Mejor valor"
       }
     },
     "features": {
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 siempre activas",
           "feature": "Garantía SLA"
+        },
+        "unlimited": {
+          "credits": "Ilimitado",
+          "machines": "2 siempre activas",
+          "feature": "1 agente simultáneo"
         }
       },
       "perMonth": "{price}/mes",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - Agente IA de Uso de Computadora #1 | Empleado IA para Automatización de Escritorio y Navegador",
+      "title": "Coasty - Agente IA de Uso de Computadora #1 | $249/mo Unlimited (el más barato del mercado)",
       "titleTemplate": "{title} | Coasty - Agente IA de Uso de Computadora",
-      "description": "Coasty es el agente IA de uso de computadora #1 — 82% en el benchmark OSWorld. Controla un escritorio completo como un humano: abre navegadores, hace clic, escribe, completa formularios, envía correos electrónicos, gestiona hojas de cálculo. Verdadero aislamiento a nivel de VM por sesión. Desde $20/mo.",
-      "ogTitle": "Coasty - Agente IA de Uso de Computadora #1 | 82% Benchmark OSWorld",
-      "ogDescription": "Empleado IA que controla un escritorio como un humano. #1 en el benchmark OSWorld (82%). Automatización de navegador, control de escritorio, resolución de CAPTCHA, aislamiento de VM. Desde $20/mo.",
-      "twitterDescription": "Empleado IA que controla un escritorio como un humano. Abre navegadores, hace clic, escribe, completa formularios, envía correos. Verdadero aislamiento de VM. $20/mo vs $3,000/mo asistente virtual humano."
+      "description": "Coasty es el agente IA de uso de computadora #1 — 82% en el benchmark OSWorld — y el único plan Unlimited de tarifa plana para uso de computadora a $249/mes (más barato que Devin Team $500+ACU, OpenAI Operator $200 con límite de uso y los competidores con tope de créditos). Controla un escritorio completo como un humano: navegadores, formularios, correos, hojas de cálculo. Aislamiento a nivel de VM. Desde $19/mo Starter o $249/mo Unlimited.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Unlimited (el agente de uso de computadora más barato)",
+      "ogDescription": "#1 en OSWorld (82%). $249/mo Unlimited de tarifa plana — más barato que Devin Team ($500+ACU) y con mejor puntuación en el benchmark. Automatización de navegador, escritorio y terminal. Aislamiento de VM por sesión. Nativo multiplataforma + REST API + servidor MCP.",
+      "twitterDescription": "Agente IA que opera un escritorio real. 82% OSWorld (#1). $249/mo Unlimited — el plan de tarifa plana más barato de la categoría. Starter desde $19/mo. Aislamiento de VM + servidor MCP de 26 herramientas."
     },
     "compare": {
       "title": "Comparar Coasty - Alternativas de Agentes IA y Comparación de Competidores",
@@ -2281,10 +2373,10 @@
       "ogDescription": "El mejor agente de uso de computadora clasificado #1 en OSWorld. Automatice cualquier tarea de escritorio, navegador o terminal con IA."
     },
     "pricing": {
-      "title": "Precios — Planes y Precios del Agente IA Coasty",
-      "description": "Planes de precios de Coasty desde $20/mo. Reemplace asistentes virtuales de $3,000/mo con un empleado IA. Nivel gratuito disponible. Uso basado en créditos sin costos ocultos.",
-      "ogTitle": "Precios de Coasty — Planes de Agente IA",
-      "ogDescription": "Empleado IA desde $20/mo. Reemplace costosos asistentes virtuales con IA autónoma. Nivel gratuito disponible."
+      "title": "Precios — $19/mo Starter o $249/mo Unlimited (el más barato del mercado)",
+      "description": "Precios de Coasty: Starter $19/mo (200 créditos) o Unlimited $249/mo (el plan de tarifa plana ilimitada para uso de computadora más barato del mercado — más barato que Devin Team $500+ACU, Genspark Pro $249 con tope de créditos y Manus Extended $200 con tope). Reemplaza asistentes virtuales humanos de $3,000+/mo. Sin costos ocultos.",
+      "ogTitle": "Precios de Coasty — $19/mo Starter, $249/mo Unlimited",
+      "ogDescription": "$249/mo Unlimited de tarifa plana — el plan ilimitado para uso de computadora más barato del mercado. O $19/mo Starter para individuos. Ahorra $36k al año frente a un asistente virtual humano."
     },
     "faq": {
       "q1": "¿Qué es Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "¿Cómo se compara Coasty con Anthropic Computer Use?",
       "a2": "Mientras que Anthropic Computer Use proporciona una API básica para el control de computadoras, Coasty es una plataforma lista para producción con infraestructura de VM gestionada, resolución de CAPTCHA integrada, una aplicación de escritorio para Mac y Windows, soporte multi-modelo y la puntuación más alta en el benchmark OSWorld (82%). Coasty proporciona la solución completa — no solo la API.",
       "q3": "¿Cuánto cuesta Coasty?",
-      "a3": "Coasty comienza en $20/mes para el plan Starter con un nivel gratuito disponible. Esto se compara con más de $3,000 al mes para un asistente virtual humano. Coasty trabaja 24/7 sin descansos, sin capacitación y con escalabilidad instantánea.",
+      "a3": "Coasty tiene dos planes activos: Starter a $19/mes (200 créditos, 1 máquina, ideal para individuos) y Unlimited a $249/mes sin límite de créditos. El plan Unlimited de $249 es el plan de tarifa plana ilimitada para uso de computadora más barato disponible — más barato que Devin Team ($500/mes + excedente ACU), OpenAI Operator ChatGPT Pro ($200/mes con límite de uso), Genspark Pro ($249.99 con tope de 125k créditos) y Manus Extended ($200 con tope de 40k créditos). Ambos reemplazan a un asistente virtual humano de $3,000+/mes; Unlimited ahorra $33,000+/año frente a un asistente humano, una reducción de costos del 92%.",
       "q4": "¿Es seguro usar Coasty?",
       "a4": "Sí. Cada sesión de Coasty se ejecuta en su propia máquina virtual aislada y protegida. Sus datos permanecen seguros, su máquina no se toca y nada se filtra entre sesiones. Este es un verdadero aislamiento a nivel de VM, no solo contenedores en un grupo compartido.",
       "q5": "¿Qué es el benchmark OSWorld?",
@@ -2309,11 +2401,11 @@
       "a10": "Sí. Coasty tiene un pipeline de resolución de CAPTCHA integrado, por lo que no se bloquea como lo hacen los agentes IA de la competencia. Esto es fundamental para la automatización del mundo real donde los CAPTCHAs son comunes en los sitios web."
     },
     "structuredData": {
-      "appDescription": "El agente IA de uso de computadora #1. Coasty controla un escritorio completo como un humano — abre navegadores, hace clic, escribe, completa formularios, envía correos electrónicos y gestiona hojas de cálculo de forma autónoma. 82% en el benchmark OSWorld. Verdadero aislamiento a nivel de VM. Resolución de CAPTCHA integrada. Desde $20/mes.",
-      "orgDescription": "Coasty desarrolla el agente IA de uso de computadora #1. Nuestra plataforma proporciona control autónomo de escritorio, automatización de navegador y orquestación multi-agente con verdadero aislamiento a nivel de VM.",
-      "productDescription": "Agente IA de uso de computadora que controla un escritorio como un humano. #1 en el benchmark OSWorld (82%). Automatización autónoma de navegador, control de escritorio, envío de correos, completar formularios y gestión de hojas de cálculo con verdadero aislamiento a nivel de VM.",
-      "websiteDescription": "Plataforma de agente IA de uso de computadora #1. 82% en el benchmark OSWorld. Automatización autónoma de navegador, escritorio y terminal con aislamiento de VM. Desde $20/mo.",
-      "softwareDescription": "Agente IA de uso de computadora que controla un escritorio completo como un humano. #1 en el benchmark OSWorld con una tasa de finalización del 82% en 369 tareas del mundo real. Automatización autónoma de navegador, control de escritorio, operaciones de terminal, envío de correos, completar formularios y gestión de hojas de cálculo.",
+      "appDescription": "El agente IA de uso de computadora #1 y el plan Unlimited de tarifa plana para uso de computadora más barato del mercado a $249/mes. Coasty controla un escritorio completo como un humano — abre navegadores, hace clic, escribe, completa formularios, envía correos electrónicos y gestiona hojas de cálculo de forma autónoma. 82% en el benchmark OSWorld en 369 tareas del mundo real. Verdadero aislamiento a nivel de VM por sesión. Resolución de CAPTCHA integrada. Planes: $19/mo Starter o $249/mo Unlimited.",
+      "orgDescription": "Coasty desarrolla el agente IA de uso de computadora #1 (82% OSWorld) y lanza el único plan Unlimited de tarifa plana para uso de computadora a $249/mes — más barato que Devin Team, OpenAI Operator y los competidores con tope de créditos en el mismo rango de precio. Nuestra plataforma proporciona control autónomo de escritorio, automatización de navegador y orquestación multi-agente con verdadero aislamiento a nivel de VM.",
+      "productDescription": "Agente IA de uso de computadora que controla un escritorio como un humano. #1 en el benchmark OSWorld (82%). El plan Unlimited de $249/mo es el plan de tarifa plana ilimitada para uso de computadora más barato disponible. Automatización autónoma de navegador, control de escritorio, envío de correos, completar formularios y gestión de hojas de cálculo con verdadero aislamiento a nivel de VM.",
+      "websiteDescription": "Plataforma de agente IA de uso de computadora #1 — 82% en el benchmark OSWorld y el plan Unlimited de tarifa plana más barato a $249/mes. Automatización autónoma de navegador, escritorio y terminal con aislamiento de VM. Desde $19/mo Starter o $249/mo Unlimited.",
+      "softwareDescription": "Agente IA de uso de computadora que controla un escritorio completo como un humano. #1 en el benchmark OSWorld con una tasa de finalización del 82% en 369 tareas del mundo real. El plan Unlimited de $249/mes es el plan de tarifa plana ilimitada para uso de computadora más barato del mercado. Automatización autónoma de navegador, control de escritorio, operaciones de terminal, envío de correos, completar formularios y gestión de hojas de cálculo.",
       "breadcrumbs": {
         "home": "Inicio",
         "caseStudies": "Casos de Estudio de Agentes IA",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Página no encontrada",
-      "description": "Lo sentimos, esta página no existe."
+      "description": "Lo sentimos, esta página no existe.",
+      "metaTitle": "404 · Página no encontrada",
+      "metaDescription": "Enviamos a nuestro mejor agente de IA. Volvió con las manos vacías. Vuelve a Coasty, el agente de IA #1 para automatización de escritorio y navegador.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "escaneo: todo internet",
+        "step2": "escaneo: todas las pestañas abiertas",
+        "step3": "escaneo: debajo del sofá",
+        "result": "veredicto: la página no existe"
+      },
+      "ok": "OK",
+      "fail": "ERROR",
+      "primaryCta": "Llévame a inicio",
+      "secondaryCta": "Contratar un agente de IA",
+      "navLabel": "Páginas sugeridas",
+      "links": {
+        "home": "Inicio",
+        "computerUse": "Uso de computadora",
+        "pricing": "Precios",
+        "download": "Descargar",
+        "blog": "Blog",
+        "guide": "Guía"
+      }
     },
     "error": {
       "title": "Algo salió mal",
@@ -2859,5 +2973,190 @@
     "watchSession": "Ver sesión",
     "steps": "{count} pasos",
     "tryCoasty": "Probar Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Memoria",
+    "sidebarDescription": "Contexto aplicado a cada tarea del agente",
+    "dialog": {
+      "title": "Memoria",
+      "description": "Una breve nota que Coasty aplica siempre que trabaja para ti.",
+      "openFull": "Abrir completo",
+      "visualMemoryLabel": "Memoria",
+      "visualSynced": "Sincronizado",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Programaciones",
+      "visualContextSwarm": "Enjambre"
+    },
+    "section": {
+      "title": "Memoria",
+      "tag": "opcional · personal",
+      "description": "Una breve nota sobre ti que viaja con cada tarea del agente — chat, tareas programadas, máquinas en enjambre y agentes delegados."
+    },
+    "presetsLabel": "Prueba",
+    "presets": {
+      "useFirstName": "Usar mi nombre",
+      "useFirstNameSentence": "Diríjete a mí por mi nombre.",
+      "beTerse": "Sé conciso",
+      "beTerseSentence": "Prefiere respuestas concisas y directas. Sin relleno.",
+      "imDeveloper": "Soy desarrollador",
+      "imDeveloperSentence": "Soy ingeniero de software; me siento cómodo con el código.",
+      "noEmojis": "Sin emojis",
+      "noEmojisSentence": "Evita los emojis en las respuestas.",
+      "metricUnits": "Unidades métricas",
+      "metricUnitsSentence": "Usa unidades métricas (metros, kilogramos, °C).",
+      "citeSources": "Citar fuentes",
+      "citeSourcesSentence": "Cita las fuentes al hacer afirmaciones fácticas."
+    },
+    "placeholder": "Ejemplo:\nDiríjete a mí por mi nombre.\nPrefiere respuestas concisas.\nTrabajo con TypeScript y Python.\nNunca elimines archivos sin confirmar.",
+    "loading": "Cargando…",
+    "saving": "Guardando…",
+    "saved": "Guardado",
+    "unsavedChanges": "Cambios sin guardar",
+    "empty": "Vacío",
+    "savedRelative": "Guardado · {time}",
+    "errorLoad": "No se pudo cargar tu memoria.",
+    "errorSave": "No se pudo guardar tu memoria.",
+    "willBeShortened": "se acortará",
+    "clear": "Borrar",
+    "footerNote": "Coasty tendrá en cuenta estas preferencias siempre que trabaje para ti.",
+    "time": {
+      "justNow": "justo ahora",
+      "secondsAgo": "hace {n} s",
+      "minutesAgo": "hace {n} min",
+      "hoursAgo": "hace {n} h",
+      "daysAgo": "hace {n} d"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Ajustes",
+    "navGroups": {
+      "settings": "Ajustes",
+      "developer": "Desarrollador",
+      "more": "Más",
+      "resources": "Recursos"
+    },
+    "sections": {
+      "account": {
+        "label": "General",
+        "description": "Perfil y cuenta"
+      },
+      "appearance": {
+        "label": "Apariencia",
+        "description": "Tema, idioma y fondo"
+      },
+      "billing": {
+        "label": "Facturación",
+        "description": "Planes y créditos"
+      },
+      "publicChats": {
+        "label": "Chats públicos",
+        "description": "Gestiona los chats compartidos por enlace público"
+      },
+      "privacy": {
+        "label": "Privacidad",
+        "description": "Seguridad y privacidad de datos"
+      },
+      "notifications": {
+        "label": "Notificaciones",
+        "description": "Preferencias de notificaciones"
+      },
+      "apiKeys": {
+        "label": "Claves de API",
+        "description": "Gestiona tus claves de API"
+      },
+      "data": {
+        "label": "Datos",
+        "description": "Exporta y gestiona tus datos"
+      },
+      "feedback": {
+        "label": "Comentarios",
+        "description": "Envíanos tus comentarios"
+      },
+      "about": {
+        "label": "Acerca de",
+        "description": "Acerca de Coasty"
+      },
+      "social": {
+        "label": "Redes",
+        "description": "Redes sociales"
+      },
+      "guide": {
+        "label": "Guía",
+        "description": "Aprende a usar Coasty"
+      },
+      "referral": {
+        "label": "Referidos",
+        "description": "Invita amigos y gana créditos"
+      }
+    },
+    "appearance": {
+      "theme": "Tema",
+      "language": "Idioma",
+      "background": "Fondo",
+      "personalization": "Personalización",
+      "intro": {
+        "title": "Introducción cinematográfica",
+        "description": "Mostrar la introducción animada al visitar la página de inicio"
+      },
+      "interaction": {
+        "title": "Invocaciones de herramientas",
+        "description": "Mostrar detalles de ejecución de herramientas en las conversaciones"
+      }
+    },
+    "comingSoon": {
+      "badge": "Pronto",
+      "placeholder": "Esta sección llegará en una futura actualización."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Muéstrame lo que es posible…",
+    "tasks": [
+      "Investiga a mis competidores",
+      "Completa solicitudes de empleo",
+      "Reserva un vuelo a Tokio",
+      "Monitorea el uptime de mi sitio web",
+      "Programa publicaciones sociales",
+      "Analiza tendencias trimestrales"
+    ],
+    "dontShowAgain": "No mostrar de nuevo",
+    "skip": "Omitir",
+    "tagline": "Haz cualquier cosa, igual que un humano con una computadora"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Tus computadoras",
+      "description": "Silicio a tu servicio. Iniciando tu flota ahora."
+    },
+    "swarms": {
+      "title": "Inteligencia de enjambre",
+      "description": "Muchas mentes, una misión. Reuniendo a tus agentes."
+    },
+    "developers": {
+      "title": "API para desarrolladores",
+      "description": "Cargando tu panel."
+    },
+    "secrets": {
+      "title": "Credenciales",
+      "description": "Tus secretos están a salvo con nosotros. Abriendo la bóveda."
+    },
+    "schedules": {
+      "title": "Programaciones",
+      "description": "Puntual, siempre. Sincronizando tus automatizaciones."
+    },
+    "history": {
+      "title": "Tu historial",
+      "description": "Un registro silencioso de cada conversación, tarea e idea que has explorado."
+    },
+    "referral": {
+      "title": "Referidos",
+      "description": "Comparte Coasty. Ganen juntos."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Tus datos, tu control",
+    "heroDescription": "Solo almacenamos lo necesario para ejecutar tus sesiones. Todo el tráfico está cifrado durante la transmisión y puedes extender el cifrado en reposo a las siguientes categorías. Tus datos nunca se utilizan para entrenar modelos de IA.",
+    "trustTransit": "TLS 1.3 en tránsito",
+    "trustAtRest": "AES-256-GCM en reposo",
+    "trustNoTraining": "Sin entrenamiento con tus datos"
   }
 }

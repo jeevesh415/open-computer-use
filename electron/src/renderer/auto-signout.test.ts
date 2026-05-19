@@ -1,9 +1,11 @@
 /**
- * Tests for auto sign-out on connection error.
+ * Tests for auto sign-out on auth failure.
  *
- * When the WebSocket bridge enters 'error' state (backend rejects auth),
- * the app should automatically sign out the user instead of showing
- * a "Sign in again" button.
+ * When the WebSocket bridge enters 'auth_error' state (backend explicitly
+ * rejected the JWT via an auth_failed message), the app should automatically
+ * sign out.  Generic 'error' states (transient connection failures) should
+ * NOT trigger sign-out — otherwise a TLS hiccup / 503 / DNS blip right after
+ * sign-in yanks the user back to the auth screen and sign-in appears broken.
  *
  * This tests the logic in App.tsx's useEffect that watches connectionState.
  */
@@ -13,26 +15,26 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // We extract and test the decision logic directly rather than mounting
 // React components, keeping the test fast and dependency-free.
 
-describe('Auto sign-out on connection error', () => {
-  let signOut: ReturnType<typeof vi.fn>
-  let setMode: ReturnType<typeof vi.fn>
+describe('Auto sign-out on auth failure', () => {
+  let signOut: ReturnType<typeof vi.fn<() => void>>
+  let setMode: ReturnType<typeof vi.fn<(mode: string) => void>>
 
   beforeEach(() => {
-    signOut = vi.fn()
-    setMode = vi.fn()
+    signOut = vi.fn<() => void>()
+    setMode = vi.fn<(mode: string) => void>()
   })
 
   /**
    * Simulates the effect logic from App.tsx:
    *
    *   useEffect(() => {
-   *     if (connectionState === 'error' && isAuthenticated) {
+   *     if (connectionState === 'auth_error' && isAuthenticated) {
    *       signOut()
    *     }
    *   }, [connectionState])
    */
   function runConnectionEffect(connectionState: string, isAuthenticated: boolean) {
-    if (connectionState === 'error' && isAuthenticated) {
+    if (connectionState === 'auth_error' && isAuthenticated) {
       signOut()
     }
   }
@@ -56,13 +58,20 @@ describe('Auto sign-out on connection error', () => {
 
   // ── Core behavior ───────────────────────────────────────────────
 
-  it('calls signOut when connection state becomes error and user is authenticated', () => {
-    runConnectionEffect('error', true)
+  it('calls signOut when state becomes auth_error and user is authenticated', () => {
+    runConnectionEffect('auth_error', true)
     expect(signOut).toHaveBeenCalledTimes(1)
   })
 
-  it('does NOT call signOut when connection state is error but user is already signed out', () => {
-    runConnectionEffect('error', false)
+  it('does NOT call signOut when auth_error fires but user is already signed out', () => {
+    runConnectionEffect('auth_error', false)
+    expect(signOut).not.toHaveBeenCalled()
+  })
+
+  // The critical regression guard: a transient WS error right after sign-in
+  // must NOT kick the user back to the auth screen.
+  it('does NOT call signOut on generic connection error (transient network issue)', () => {
+    runConnectionEffect('error', true)
     expect(signOut).not.toHaveBeenCalled()
   })
 
@@ -81,11 +90,11 @@ describe('Auto sign-out on connection error', () => {
     expect(signOut).not.toHaveBeenCalled()
   })
 
-  // ── Full flow: error → signOut → auth screen ────────────────────
+  // ── Full flow: auth_error → signOut → auth screen ───────────────
 
-  it('full flow: error triggers signOut, then auth effect switches to auth screen', () => {
-    // Step 1: connection error while authenticated → auto sign out
-    runConnectionEffect('error', true)
+  it('full flow: auth_error triggers signOut, then auth effect switches to auth screen', () => {
+    // Step 1: backend rejects JWT → auto sign out
+    runConnectionEffect('auth_error', true)
     expect(signOut).toHaveBeenCalledTimes(1)
 
     // Step 2: after signOut completes, isAuthenticated becomes false
@@ -95,24 +104,30 @@ describe('Auto sign-out on connection error', () => {
   })
 
   it('auth effect does not switch mode if already on auth screen', () => {
-    runConnectionEffect('error', true)
+    runConnectionEffect('auth_error', true)
     expect(signOut).toHaveBeenCalledTimes(1)
 
     runAuthEffect(false, 'auth')
     expect(setMode).not.toHaveBeenCalled()
   })
 
-  // ── Repeated error state ────────────────────────────────────────
+  // ── Repeated error states ───────────────────────────────────────
 
-  it('only calls signOut once per error transition', () => {
-    // First error
+  it('only calls signOut once per auth_error transition', () => {
+    runConnectionEffect('auth_error', true)
+    expect(signOut).toHaveBeenCalledTimes(1)
+
+    // After signOut, isAuthenticated becomes false — no double signOut
+    runConnectionEffect('auth_error', false)
+    expect(signOut).toHaveBeenCalledTimes(1)
+  })
+
+  // Repeated 'error' states from reconnect loop must not sign the user out.
+  it('does not sign out on repeated generic errors during reconnect backoff', () => {
     runConnectionEffect('error', true)
-    expect(signOut).toHaveBeenCalledTimes(1)
-
-    // After signOut, isAuthenticated becomes false
-    // If effect fires again with error but not authenticated, no double signOut
-    runConnectionEffect('error', false)
-    expect(signOut).toHaveBeenCalledTimes(1)
+    runConnectionEffect('error', true)
+    runConnectionEffect('error', true)
+    expect(signOut).not.toHaveBeenCalled()
   })
 })
 
@@ -122,11 +137,14 @@ describe('ConnectionStatus and Overlay — no "Sign in again" button on error', 
   /**
    * Simulates the button visibility logic from Overlay.tsx / ConnectionStatus.tsx.
    *
-   * Before the change:
-   *   - error → show "Reconnect" + "Sign in again"
-   * After the change:
-   *   - error → auto sign-out (no buttons shown since user is redirected)
-   *   - disconnected → show "Reconnect" only
+   * Current behavior:
+   *   - error         → show "Reconnect" (user stays signed in, bridge retries)
+   *   - disconnected  → show "Reconnect"
+   *   - auth_error    → triggers auto sign-out → AuthScreen (no buttons shown)
+   *
+   * The "Sign in again" button is intentionally absent: an auth failure sends
+   * the user back to the auth screen automatically, so the extra CTA is
+   * redundant.
    */
   function getVisibleButtons(connectionState: string): string[] {
     const buttons: string[] = []

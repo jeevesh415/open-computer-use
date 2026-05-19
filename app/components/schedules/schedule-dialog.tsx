@@ -447,6 +447,11 @@ export function ScheduleDialog({
       onScheduleDeleted?.()
       onOpenChange(false)
     } catch (err: unknown) {
+      // Anti-regression for the original bug: `deleteSchedule` calls
+      // `sanitizeBackendError` so `err.message` is guaranteed safe — no
+      // "CSRF token missing", no header names, no exception classes.
+      // The `t("removeFailed")` fallback is the very last resort if
+      // the thrown value was somehow not an Error.
       setError(err instanceof Error ? err.message : t("removeFailed"))
     } finally {
       setLoading(false)
@@ -493,13 +498,13 @@ export function ScheduleDialog({
                 <motion.button
                   type="button"
                   onClick={() => setEmployeeName(randomEmployeeName())}
-                  whileHover={{ scale: 1.05, rotate: 15 }}
                   whileTap={{ scale: 0.9, rotate: -15 }}
                   className={cn(
                     "shrink-0 h-12 w-12 flex items-center justify-center rounded-xl",
                     "bg-muted/30 border border-border/30",
                     "text-muted-foreground hover:text-foreground hover:bg-muted/50",
-                    "transition-colors duration-200",
+                    "hover:scale-105 hover:rotate-[15deg]",
+                    "transition-all duration-200",
                   )}
                   title="Randomize name"
                 >
@@ -557,10 +562,9 @@ export function ScheduleDialog({
                       key={pill.value}
                       type="button"
                       onClick={() => handleConfigChange({ frequency: pill.value })}
-                      whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       className={cn(
-                        "relative px-3 py-3 rounded-xl text-xs font-semibold transition-all duration-300",
+                        "relative px-3 py-3 rounded-xl text-xs font-semibold transition-all duration-300 hover:scale-[1.03]",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         isSelected
                           ? "text-foreground bg-muted ring-1 ring-border shadow-sm"
@@ -606,11 +610,10 @@ export function ScheduleDialog({
                       key={d.value}
                       type="button"
                       onClick={() => handleConfigChange({ dayOfWeek: d.value })}
-                      whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
                       title={d.full}
                       className={cn(
-                        "flex-1 h-12 rounded-xl text-xs font-bold transition-all duration-300",
+                        "flex-1 h-12 rounded-xl text-xs font-bold transition-all duration-300 hover:scale-[1.08]",
                         config.dayOfWeek === d.value
                           ? "text-foreground bg-muted ring-1 ring-border shadow-sm"
                           : "bg-muted/30 text-muted-foreground border border-border/30 hover:bg-muted/50 hover:text-foreground"
@@ -696,10 +699,9 @@ export function ScheduleDialog({
                         key={m.id}
                         type="button"
                         onClick={() => handleConfigChange({ machineId: m.id })}
-                        whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         className={cn(
-                          "group/machine relative flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-left transition-all duration-300",
+                          "group/machine relative flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-left transition-all duration-300 hover:scale-[1.01]",
                           isSelected
                             ? "bg-muted border-2 border-border shadow-sm"
                             : "bg-muted/20 border border-border/30 hover:border-border/50 hover:bg-muted/30 hover:shadow-sm"
@@ -1090,10 +1092,9 @@ export function ScheduleDialog({
             <motion.button
               onClick={handleDelete}
               disabled={loading}
-              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className={cn(
-                "h-10 px-4 rounded-xl text-xs font-semibold mr-auto transition-all duration-200",
+                "h-10 px-4 rounded-xl text-xs font-semibold mr-auto transition-all duration-200 hover:scale-[1.02]",
                 "text-muted-foreground hover:text-foreground hover:bg-muted/60",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
                 "flex items-center gap-1.5",
@@ -1109,10 +1110,9 @@ export function ScheduleDialog({
               {step > 0 ? (
                 <motion.button
                   onClick={goBack}
-                  whileHover={{ x: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className={cn(
-                    "h-10 px-4 rounded-xl text-sm font-medium transition-all duration-200",
+                    "h-10 px-4 rounded-xl text-sm font-medium transition-all duration-200 hover:-translate-x-0.5",
                     "text-muted-foreground hover:text-foreground hover:bg-muted/50",
                     "flex items-center gap-2",
                   )}
@@ -1135,14 +1135,13 @@ export function ScheduleDialog({
             <motion.button
               onClick={isLastStep ? handleSave : goNext}
               disabled={loading || (isLastStep && !canSubmit)}
-              whileHover={!loading && (isLastStep ? !!canSubmit : true) ? { scale: 1.03 } : {}}
               whileTap={!loading && (isLastStep ? !!canSubmit : true) ? { scale: 0.97 } : {}}
               className={cn(
                 "relative h-10 px-6 rounded-xl text-sm font-semibold transition-all duration-300",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
                 (isLastStep ? canSubmit : true) && !loading
-                  ? "text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border shadow-sm hover:shadow-md"
+                  ? "text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border shadow-sm hover:shadow-md hover:scale-[1.03]"
                   : "text-muted-foreground bg-muted/50"
               )}
             >

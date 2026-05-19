@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og"
+import { SVG_SYSTEM_STACK } from "@/lib/fonts"
 
 export const alt = "Coasty - #1 Computer-Use AI Agent"
 export const size = {
@@ -19,7 +20,7 @@ export default function OpenGraphImage() {
           alignItems: "center",
           justifyContent: "center",
           background: "linear-gradient(135deg, #000000 0%, #0a0a0a 40%, #111111 100%)",
-          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontFamily: SVG_SYSTEM_STACK,
         }}
       >
         {/* Logo */}

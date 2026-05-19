@@ -1,19 +1,20 @@
 "use client"
 
-import { memo, useMemo, type ReactNode } from "react"
+import { memo, useMemo, useState, useEffect, useCallback, type ReactNode } from "react"
 import { useTranslations } from "next-intl"
 import { useRouter, usePathname } from "next/navigation"
 import {
   IconPlus,
   IconClockPlay,
   IconBinaryTree,
-  IconBook2,
-  IconCompass,
   IconDeviceDesktop,
   IconCalendarClock,
   IconShieldLock,
   IconKey,
+  IconStack2,
+  IconBrain,
 } from "@tabler/icons-react"
+import { MemoryDialog } from "@/app/components/layout/settings/general/memory-dialog"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import {
@@ -26,16 +27,22 @@ import {
   HoverCardTrigger,
   HoverCardContent,
 } from "@/components/ui/hover-card"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover"
 import { useSidebar } from "@/components/ui/sidebar"
 import { useChats } from "@/lib/chat-store/chats/provider"
 import { useSidebarMachines } from "./hooks/use-sidebar-machines"
 import { useLazyFetch } from "./hooks/use-lazy-fetch"
+import { DEVELOPERS_API_ENABLED } from "@/lib/feature-flags"
 
 // ─── Types ────────────────────────────────────────────────────────
 type HoverInfo = {
   description: string
   detail: string
-  visual: "history" | "swarms" | "guide" | "machines" | "workforce" | "credentials"
+  visual: "history" | "swarms" | "guide" | "machines" | "workforce" | "credentials" | "developers"
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -317,6 +324,42 @@ function CredentialsVisual() {
   )
 }
 
+function DevelopersVisual() {
+  return (
+    <div className="w-full h-full flex flex-col px-3 py-2 gap-1.5">
+      <div className="flex items-center gap-1.5 shv-row" style={{ animationDelay: "0s" }}>
+        <div className="flex items-center gap-1 px-2 py-[4px] rounded border border-foreground/10 bg-foreground/[0.03] flex-1">
+          <div className="w-[5px] h-[5px] rounded-full bg-purple-500/50" />
+          <div className="h-[3px] w-12 bg-foreground/10 rounded-full" />
+          <div className="ml-auto h-[3px] w-6 bg-foreground/[0.06] rounded-full" />
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5 px-1 shv-row" style={{ animationDelay: "0.2s" }}>
+        <span className="text-[5px] font-bold text-emerald-500/60 tracking-wide">POST</span>
+        <div className="h-[3px] w-20 bg-foreground/10 rounded-full" />
+        <span className="text-[5px] text-foreground/20 font-mono ml-auto">5 cr</span>
+      </div>
+      <div className="flex items-center gap-1.5 px-1 shv-row" style={{ animationDelay: "0.4s" }}>
+        <span className="text-[5px] font-bold text-blue-500/60 tracking-wide">GET</span>
+        <div className="h-[3px] w-16 bg-foreground/10 rounded-full" />
+        <span className="text-[5px] text-foreground/20 font-mono ml-auto">free</span>
+      </div>
+      <div className="flex items-center gap-1 mt-1 shv-fade-up" style={{ animationDelay: "0.8s" }}>
+        <div className="flex-1 px-2 py-[3px] rounded border border-foreground/10 bg-foreground/[0.02]">
+          <div className="flex items-center gap-[1px]">
+            {Array.from("sk-coasty-live-").map((c, i) => (
+              <span key={i} className="text-[5px] text-purple-500/40 font-mono shv-type-char" style={{ animationDelay: `${1 + i * 0.04}s` }}>{c}</span>
+            ))}
+            {Array.from("...").map((c, i) => (
+              <span key={`d${i}`} className="text-[5px] text-foreground/20 font-mono shv-type-char" style={{ animationDelay: `${1.6 + i * 0.05}s` }}>{c}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const visualComponents: Record<string, React.FC> = {
   history: HistoryVisual,
   swarms: SwarmsVisual,
@@ -324,6 +367,7 @@ const visualComponents: Record<string, React.FC> = {
   machines: MachinesVisual,
   workforce: WorkforceVisual,
   credentials: CredentialsVisual,
+  developers: DevelopersVisual,
 }
 
 // ─── Shared popup components ──────────────────────────────────────
@@ -452,108 +496,6 @@ function SwarmsLivePopup({ swarms }: { swarms: { swarm_id: string; status?: stri
       </GlassSection>
       <Link href="/swarms" className="block px-4 pb-3 hover:opacity-80 transition-opacity">
         <span className="text-[10px] font-medium text-violet-500 dark:text-violet-400">{t("viewAllSwarms")}</span>
-      </Link>
-    </PopupShell>
-  )
-}
-
-function WorkforceLivePopup({ schedules }: { schedules: { chat_id: string; title: string | null; enabled: boolean; frequency: string; next_run_at: string | null; run_count: number; consecutive_failures: number }[] }) {
-  const t = useTranslations("sidebar")
-  const recent = schedules.slice(0, 4)
-  const active = schedules.filter(s => s.enabled).length
-  const totalRuns = schedules.reduce((acc, s) => acc + s.run_count, 0)
-
-  const formatNext = (d: string | null) => {
-    if (!d) return t("notScheduled")
-    const ms = new Date(d).getTime() - Date.now()
-    if (ms < 0) return t("overdue")
-    if (ms < 60_000) return t("lessThanMin")
-    if (ms < 3_600_000) return t("inMinutes", { count: Math.round(ms / 60_000) })
-    if (ms < 86_400_000) return t("inHours", { count: Math.round(ms / 3_600_000) })
-    return new Date(d).toLocaleDateString(undefined, { month: "short", day: "numeric" })
-  }
-
-  return (
-    <PopupShell>
-      <div className="px-4 pt-4 pb-2">
-        <div className="flex items-baseline justify-between">
-          <span className="text-sm font-semibold text-popover-foreground">{t("schedulesCount", { count: schedules.length })}</span>
-          <span className="text-[10px] text-muted-foreground">{t("totalRuns", { count: totalRuns })}</span>
-        </div>
-        <div className="flex gap-3 mt-1.5">
-          <span className="text-[9px] text-amber-500 dark:text-amber-400/70">{active} {t("active")}</span>
-          <span className="text-[9px] text-muted-foreground">{schedules.length - active} {t("paused")}</span>
-        </div>
-      </div>
-      <GlassSection>
-        <div className="space-y-1.5">
-          {recent.map((s) => (
-            <div key={s.chat_id} className="flex items-center gap-2 px-2 py-1.5 rounded-md">
-              <div className={cn(
-                "w-1.5 h-1.5 rounded-full shrink-0",
-                s.enabled ? "bg-amber-500 dark:bg-amber-400" : "bg-foreground/15",
-                s.consecutive_failures > 0 && "bg-red-500 dark:bg-red-400"
-              )} />
-              <div className="flex-1 min-w-0">
-                <p className="text-[11px] text-popover-foreground/70 truncate font-medium">
-                  {s.title || "Untitled schedule"}
-                </p>
-                <p className="text-[9px] text-muted-foreground">{s.frequency} · {s.run_count} runs</p>
-              </div>
-              <span className={cn(
-                "text-[9px] shrink-0 tabular-nums",
-                s.enabled ? "text-amber-500/60 dark:text-amber-400/50" : "text-muted-foreground/50"
-              )}>
-                {s.enabled ? formatNext(s.next_run_at) : t("paused")}
-              </span>
-            </div>
-          ))}
-        </div>
-      </GlassSection>
-      <Link href="/schedules" className="block px-4 pb-3 hover:opacity-80 transition-opacity">
-        <span className="text-[10px] font-medium text-amber-500 dark:text-amber-400">{t("viewAllSchedules")}</span>
-      </Link>
-    </PopupShell>
-  )
-}
-
-function CredentialsLivePopup({ secrets }: { secrets: { id: string; name: string; service: string; username: string; updatedAt: string }[] }) {
-  const t = useTranslations("sidebar")
-  const recent = secrets.slice(0, 4)
-
-  const timeAgo = (d: string) => {
-    const ms = Date.now() - new Date(d).getTime()
-    if (ms < 86_400_000) return t("today")
-    if (ms < 172_800_000) return t("yesterday")
-    return `${Math.round(ms / 86_400_000)}d ago`
-  }
-
-  return (
-    <PopupShell>
-      <div className="px-4 pt-4 pb-2">
-        <div className="flex items-baseline justify-between">
-          <span className="text-sm font-semibold text-popover-foreground">{t("credentialsCount", { count: secrets.length })}</span>
-          <span className="text-[10px] text-muted-foreground">{t("encryptedVault")}</span>
-        </div>
-      </div>
-      <GlassSection>
-        <div className="space-y-1.5">
-          {recent.map((s) => (
-            <div key={s.id} className="flex items-center gap-2 px-2 py-1.5 rounded-md">
-              <div className="w-5 h-5 rounded bg-foreground/[0.06] border border-foreground/[0.08] flex items-center justify-center shrink-0">
-                <IconKey size={10} stroke={1.5} className="text-rose-500/70 dark:text-rose-400/70" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[11px] text-popover-foreground/70 truncate font-medium">{s.name || s.service}</p>
-                <p className="text-[9px] text-muted-foreground truncate">{s.username}</p>
-              </div>
-              <span className="text-[9px] text-muted-foreground/50 shrink-0 tabular-nums">{timeAgo(s.updatedAt)}</span>
-            </div>
-          ))}
-        </div>
-      </GlassSection>
-      <Link href="/secrets" className="block px-4 pb-3 hover:opacity-80 transition-opacity">
-        <span className="text-[10px] font-medium text-rose-500 dark:text-rose-400">{t("manageCredentials")}</span>
       </Link>
     </PopupShell>
   )
@@ -764,6 +706,383 @@ function SectionHeader({ label, expanded }: { label: string; expanded: boolean }
 }
 
 // ═══════════════════════════════════════════════════════════════════
+//  ResourceDropdown — disclosure row for Computers · Schedules · Creds
+//
+//  A 30px "Resources" trigger row with a custom-drawn caret; expands
+//  inline to reveal three indented destinations along a gradient rail.
+//  Defaults closed so the caret is the affordance; auto-opens when
+//  the user is on a child route, and remembers manual toggles in
+//  localStorage.
+//
+//  Details the eye registers without naming:
+//   · Caret is hand-drawn at 10px with round caps — Tabler's default
+//     has square joins that telegraph "stock icon".
+//   · Open state paints a whisper of bg (foreground/[0.025]) behind
+//     the trigger so it reads as a container, not a button.
+//   · Rail fades top/bottom with a gradient instead of flat 1px line,
+//     so its endpoints don't compete with adjacent rows.
+//   · Active item paints a 2px caret bar exactly on the rail axis,
+//     so the rail visually "lights up" where the user is.
+//   · Items animate in with shv-row's slide-from-left, staggered 30ms.
+//
+//  Collapsed mode gets ResourcesFlyout — a click-popover with the
+//  same three destinations in a compact shell.
+// ═══════════════════════════════════════════════════════════════════
+// A resource row can either navigate to a route OR trigger an action
+// (open a dialog/popover). Exactly one of `href` and `onAction` is set;
+// when `onAction` is provided we render a button instead of a Link, and
+// the row's `active` state typically defaults to false (no URL to match).
+type ResourceItem = {
+  id: string
+  icon: ReactNode
+  label: string
+  count?: number
+  active: boolean
+  dot?: boolean
+  onNavigate: () => void
+} & (
+  | { href: string; onAction?: never }
+  | { href?: never; onAction: () => void }
+)
+
+const RESOURCES_STORAGE_KEY = "coasty:sidebar:resources-open"
+
+function Caret({ open, className }: { open: boolean; className?: string }) {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 10 10"
+      aria-hidden="true"
+      className={cn(
+        "shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
+        open && "rotate-90",
+        className
+      )}
+    >
+      <path
+        d="M3.75 2.5L6.25 5L3.75 7.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  )
+}
+
+function ResourceDropdown({ items, label }: { items: ResourceItem[]; label: string }) {
+  const anyActive = items.some((i) => i.active)
+  const anyDot = items.some((i) => i.dot)
+
+  // `null` = user hasn't set a preference; fall back to anyActive.
+  const [userOpen, setUserOpen] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const saved = window.localStorage.getItem(RESOURCES_STORAGE_KEY)
+    if (saved === "true") setUserOpen(true)
+    else if (saved === "false") setUserOpen(false)
+  }, [])
+
+  const open = userOpen ?? anyActive
+
+  const toggle = useCallback(() => {
+    setUserOpen((prev) => {
+      const next = !(prev ?? anyActive)
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(RESOURCES_STORAGE_KEY, String(next))
+      }
+      return next
+    })
+  }, [anyActive])
+
+  // Re-mount the items wrapper on each open so the shv-row stagger replays.
+  // Closing still animates smoothly via the outer grid-rows.
+  const [mountKey, setMountKey] = useState(0)
+  useEffect(() => {
+    if (open) setMountKey((k) => k + 1)
+  }, [open])
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={toggle}
+        aria-expanded={open}
+        aria-controls="sidebar-resources-panel"
+        className={cn(
+          "group/trig relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-lg",
+          "transition-[background-color,color] duration-200 ease-out",
+          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
+          open
+            ? "text-foreground/80 bg-foreground/[0.025] dark:bg-white/[0.03]"
+            : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.035] dark:hover:bg-white/[0.035]"
+        )}
+      >
+        <span className="relative shrink-0 flex items-center justify-center w-4 h-4">
+          <IconStack2
+            size={16}
+            stroke={1.5}
+            className={cn(
+              "transition-colors duration-200",
+              open ? "text-foreground/75" : "group-hover/trig:text-foreground/80"
+            )}
+          />
+          {anyDot && !open && (
+            <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-[1.5px] ring-sidebar dark:bg-emerald-400" />
+          )}
+        </span>
+        <span className="flex-1 text-left truncate text-[12.5px] font-medium tracking-[-0.01em]">
+          {label}
+        </span>
+        <Caret open={open} className={open ? "text-foreground/55" : "text-foreground/30"} />
+      </button>
+
+      <div
+        id="sidebar-resources-panel"
+        className={cn(
+          "grid transition-[grid-template-rows,opacity] ease-[cubic-bezier(0.32,0.72,0,1)]",
+          open
+            ? "grid-rows-[1fr] opacity-100 duration-300"
+            : "grid-rows-[0fr] opacity-0 duration-200"
+        )}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div key={mountKey} className="relative pl-4 pr-0 pt-1 pb-0.5 space-y-[1px]">
+            {/* Gradient rail — fades at the endpoints so it doesn't
+                bleed into the trigger above or the sibling row below. */}
+            <div
+              className="pointer-events-none absolute left-[15px] top-0 bottom-0 w-px
+                         bg-gradient-to-b from-transparent via-foreground/15 to-transparent
+                         dark:via-white/[0.09]"
+            />
+            {items.map((item, i) => {
+              // Identical inner row — only the wrapper differs between
+              // navigation rows (Link) and action rows (button).
+              const inner = (
+                <span
+                  className={cn(
+                    "group/item relative flex w-full items-center gap-2.5 pl-3 pr-2 h-[28px] rounded-md",
+                    "transition-[background-color,color] duration-150",
+                    item.active
+                      ? "bg-foreground/[0.06] text-foreground dark:bg-white/[0.07]"
+                      : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.035] dark:hover:bg-white/[0.035]"
+                  )}
+                >
+                  {/* Active caret bar sits exactly on the rail axis. */}
+                  {item.active && (
+                    <span className="absolute left-[-1px] top-[7px] bottom-[7px] w-[2px] rounded-full bg-foreground/55" />
+                  )}
+                  <span className="relative shrink-0 flex items-center justify-center w-4 h-4">
+                    {item.icon}
+                    {item.dot && (
+                      <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-[1.5px] ring-sidebar dark:bg-emerald-400" />
+                    )}
+                  </span>
+                  <span className="flex-1 truncate text-[12px] font-medium tracking-[-0.01em] text-left">
+                    {item.label}
+                  </span>
+                  {typeof item.count === "number" && item.count > 0 && (
+                    <span
+                      className={cn(
+                        "shrink-0 text-[10px] tabular-nums tracking-wide transition-colors",
+                        item.active ? "text-foreground/55" : "text-foreground/30 group-hover/item:text-foreground/50"
+                      )}
+                    >
+                      {item.count}
+                    </span>
+                  )}
+                </span>
+              )
+
+              // Key, className and style are identical between the
+              // navigation row and the action row; we pass key inline
+              // (not via spread) so the linter can see it.
+              const rowClass = "block w-full shv-row"
+              const rowStyle = {
+                animationDelay: `${i * 30}ms`,
+                animationDuration: "280ms",
+              }
+
+              if (item.onAction) {
+                return (
+                  <button
+                    key={item.id}
+                    id={item.id}
+                    type="button"
+                    className={rowClass}
+                    style={rowStyle}
+                    onClick={() => {
+                      item.onAction()
+                      item.onNavigate()
+                    }}
+                  >
+                    {inner}
+                  </button>
+                )
+              }
+              return (
+                <Link
+                  key={item.id}
+                  id={item.id}
+                  href={item.href}
+                  className={rowClass}
+                  style={rowStyle}
+                  onClick={item.onNavigate}
+                >
+                  {inner}
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── ResourcesFlyout ─────────────────────────────────────────────
+//   Collapsed-sidebar affordance for the resources group. A single
+//   IconStack2 button with an emerald dot if anything is live; on
+//   click, a compact popover reveals the same three destinations.
+//   Matches the visual language of the inline dropdown so the two
+//   modes feel like the same component at different scales.
+function ResourcesFlyout({
+  items,
+  dot,
+  anyActive,
+}: {
+  items: ResourceItem[]
+  dot: boolean
+  anyActive: boolean
+}) {
+  const [open, setOpen] = useState(false)
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>
+            <button
+              id="sidebar-resources-collapsed"
+              type="button"
+              aria-label="Resources"
+              className={cn(
+                "group/trig relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-lg",
+                "transition-[background-color,color] duration-200 ease-out",
+                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring/50",
+                open || anyActive
+                  ? "bg-foreground/[0.06] text-foreground dark:bg-white/[0.07]"
+                  : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.035] dark:hover:bg-white/[0.035]"
+              )}
+            >
+              <span className="relative shrink-0 flex items-center justify-center w-4 h-4">
+                <IconStack2 size={16} stroke={1.5} />
+                {dot && (
+                  <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-[1.5px] ring-sidebar dark:bg-emerald-400" />
+                )}
+              </span>
+            </button>
+          </PopoverTrigger>
+        </TooltipTrigger>
+        {!open && (
+          <TooltipContent side="right" sideOffset={8}>
+            <span className="font-medium text-[12px]">Resources</span>
+          </TooltipContent>
+        )}
+      </Tooltip>
+      <PopoverContent
+        side="right"
+        align="start"
+        sideOffset={10}
+        className="w-52 p-1 rounded-xl border border-border/60 bg-popover shadow-2xl dark:border-white/[0.06]"
+      >
+        <div className="px-2.5 pt-2 pb-1.5">
+          <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-muted-foreground">
+            Resources
+          </span>
+        </div>
+        <div className="h-px bg-border/40 dark:bg-white/[0.05] mx-1 mb-1" />
+        <div className="space-y-[1px]">
+          {items.map((item, i) => {
+            const inner = (
+              <span
+                className={cn(
+                  "group/row relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-md",
+                  "transition-[background-color,color] duration-150",
+                  item.active
+                    ? "bg-foreground/[0.06] text-foreground dark:bg-white/[0.07]"
+                    : "text-foreground/65 hover:text-foreground hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]"
+                )}
+              >
+                <span className="relative shrink-0 flex items-center justify-center w-4 h-4">
+                  {item.icon}
+                  {item.dot && (
+                    <span className="absolute -top-0.5 -right-0.5 h-1.5 w-1.5 rounded-full bg-emerald-500 ring-[1.5px] ring-popover dark:bg-emerald-400" />
+                  )}
+                </span>
+                <span className="flex-1 truncate text-[12px] font-medium tracking-[-0.01em] text-left">
+                  {item.label}
+                </span>
+                {typeof item.count === "number" && item.count > 0 && (
+                  <span
+                    className={cn(
+                      "shrink-0 text-[10px] tabular-nums",
+                      item.active ? "text-foreground/55" : "text-foreground/35"
+                    )}
+                  >
+                    {item.count}
+                  </span>
+                )}
+              </span>
+            )
+
+            const rowClass = "block w-full shv-row"
+            const rowStyle = {
+              animationDelay: `${i * 25}ms`,
+              animationDuration: "240ms",
+            }
+
+            if (item.onAction) {
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={rowClass}
+                  style={rowStyle}
+                  onClick={() => {
+                    item.onAction()
+                    item.onNavigate()
+                    setOpen(false)
+                  }}
+                >
+                  {inner}
+                </button>
+              )
+            }
+            return (
+              <Link
+                key={item.id}
+                href={item.href}
+                className={rowClass}
+                style={rowStyle}
+                onClick={() => {
+                  item.onNavigate()
+                  setOpen(false)
+                }}
+              >
+                {inner}
+              </Link>
+            )
+          })}
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════
 //  SidebarNavSection — owns machine polling + lazy popup data
 //  so state changes here don't re-render the footer
 // ═══════════════════════════════════════════════════════════════════
@@ -781,26 +1100,26 @@ export const SidebarNavSection = memo(function SidebarNavSection({
   handleNavigation: (fn: () => void) => void
 }) {
   const t = useTranslations("sidebar")
+  const tMemory = useTranslations("memory")
   const router = useRouter()
   const pathname = usePathname()
   const { chats: allChats } = useChats()
   const { stats: machineStats } = useSidebarMachines(user)
 
-  // Lazy-fetch popup data — only fetched on first hover
+  // Memory quick-edit popup state. Opened from the "Memory" entry in
+  // the Resources group (both expanded inline and collapsed flyout
+  // modes). The dialog component is mounted unconditionally so its
+  // mount/unmount lifecycle doesn't fight Radix's portal cleanup.
+  const [memoryDialogOpen, setMemoryDialogOpen] = useState<boolean>(false)
+
+  // Lazy-fetch popup data — only fetched on first hover. Schedules and
+  // secrets previews are handled inside the Resources dropdown itself,
+  // so only history (always shown) and swarms (its own nav row) need
+  // lazy fetches here.
   const [sidebarSwarms, triggerSwarmsFetch] = useLazyFetch(
     "/api/swarms",
-    (d: any) => d.swarms || [],
+    (d: { swarms?: { swarm_id: string; status?: string; created_at: string; prompt?: string; machine_count?: number }[] }) => d.swarms || [],
     [] as { swarm_id: string; status?: string; created_at: string; prompt?: string; machine_count?: number }[]
-  )
-  const [sidebarSchedules, triggerSchedulesFetch] = useLazyFetch(
-    "/api/schedules",
-    (d: any) => d.schedules || [],
-    [] as { chat_id: string; title: string | null; enabled: boolean; frequency: string; next_run_at: string | null; run_count: number; consecutive_failures: number }[]
-  )
-  const [sidebarSecrets, triggerSecretsFetch] = useLazyFetch(
-    "/api/secrets",
-    (d: any) => d.secrets || [],
-    [] as { id: string; name: string; service: string; username: string; updatedAt: string }[]
   )
 
   const isItemActive = (href: string) => {
@@ -816,14 +1135,6 @@ export const SidebarNavSection = memo(function SidebarNavSection({
   const swarmsPopup = useMemo(
     () => sidebarSwarms.length > 0 ? <SwarmsLivePopup swarms={sidebarSwarms} /> : undefined,
     [sidebarSwarms]
-  )
-  const schedulesPopup = useMemo(
-    () => sidebarSchedules.length > 0 ? <WorkforceLivePopup schedules={sidebarSchedules} /> : undefined,
-    [sidebarSchedules]
-  )
-  const secretsPopup = useMemo(
-    () => sidebarSecrets.length > 0 ? <CredentialsLivePopup secrets={sidebarSecrets} /> : undefined,
-    [sidebarSecrets]
   )
 
   return (
@@ -884,150 +1195,96 @@ export const SidebarNavSection = memo(function SidebarNavSection({
       <SectionHeader label="Workspace" expanded={expanded} />
 
       {/* ── Group 2 · Resources ───────────────────────────────────
-          Concrete → abstract: Computers exist, Schedules run on
-          them, Credentials secure them. Reading the group teaches
-          the mental model of the product. */}
+          Expanded: a collapsible "Resources" row with a rotating
+          caret that expands inline to show Computers / Schedules /
+          Credentials along a gradient rail. Defaults closed so the
+          caret is an obvious affordance; auto-opens on child routes
+          and remembers manual toggles in localStorage.
+          Collapsed: a single IconStack2 button that opens a popover
+          flyout with the same three destinations — so no items are
+          hidden in the narrow rail. Developers stays as its own
+          row below — it's a distinct destination, not a resource. */}
       <div className="space-y-0.5">
-        {/* Computers — single unified button. Same layout as NavButton
-            so the icon stays anchored at sidebar-x=24 in both modes.
-            Running dot floats off the icon's top-right corner as a
-            tiny badge; the count badge appears on the right when
-            expanded only. */}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              id="sidebar-machines-link"
-              type="button"
-              className={cn(
-                "group/btn relative flex w-full items-center gap-2.5 px-2 h-[30px] rounded-lg transition-colors duration-150",
-                isItemActive("/machines")
-                  ? "bg-foreground/[0.07] text-foreground dark:bg-white/[0.08]"
-                  : "text-foreground/55 hover:text-foreground/90 hover:bg-foreground/[0.04] dark:hover:bg-white/[0.04]"
-              )}
-              onClick={() => {
-                router.push("/machines")
-                closeMobileIfNeeded()
-              }}
-            >
-              <span className={cn(
-                "relative shrink-0 flex items-center justify-center w-4 h-4 transition-colors duration-150",
-                isItemActive("/machines")
-                  ? "text-foreground"
-                  : "group-hover/btn:text-foreground/80"
-              )}>
-                <IconDeviceDesktop size={16} stroke={1.5} />
-                {!expanded && machineStats.running > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 h-1 w-1 rounded-full bg-emerald-500 dark:bg-emerald-400" />
-                )}
-              </span>
-              {expanded && (
-                <>
-                  <span className="truncate text-[12.5px] font-medium tracking-[-0.01em]">
-                    {machineStats.total === 1 ? t("computer") : t("computers")}
-                  </span>
-                  {machineStats.total > 0 && (
-                    <span className="ml-auto flex items-center gap-1.5 shrink-0">
-                      {machineStats.running > 0 && (
-                        <span className="h-1 w-1 rounded-full bg-emerald-500 dark:bg-emerald-400" />
-                      )}
-                      <span className={cn(
-                        "text-[10.5px] tabular-nums font-medium",
-                        isItemActive("/machines") ? "text-foreground/55" : "text-foreground/30"
-                      )}>
-                        {machineStats.total}
-                      </span>
-                    </span>
-                  )}
-                </>
-              )}
-            </button>
-          </TooltipTrigger>
-          {!expanded && (
-            <TooltipContent side="right" sideOffset={8}>
-              <div className="flex items-center gap-1.5">
-                <span className="font-semibold">{machineStats.total}</span>
-                <span className="text-muted-foreground">{machineStats.total === 1 ? t("computer") : t("computers")}</span>
-                {machineStats.running > 0 && (
-                  <span className="text-emerald-500 dark:text-emerald-400">({machineStats.running} {t("active")})</span>
-                )}
-              </div>
-            </TooltipContent>
-          )}
-        </Tooltip>
-        <NavButton
-          id="sidebar-schedules-link"
-          icon={<IconCalendarClock size={16} stroke={1.5} className="shrink-0" />}
-          label={t("workforce")}
-          tooltip={t("workforceDescription")}
-          href="/schedules"
-          isActive={isItemActive("/schedules")}
-          accentColor="text-amber-500 dark:text-amber-400"
-          onClick={closeMobileIfNeeded}
-          livePopup={schedulesPopup}
-          onHoverCardOpen={triggerSchedulesFetch}
-          hoverInfo={{
-            description: t("workforcePopup.title"),
-            detail: t("workforcePopup.description"),
-            visual: "workforce",
-          }}
-        />
-        <NavButton
-          id="sidebar-secrets-link"
-          icon={<IconShieldLock size={16} stroke={1.5} className="shrink-0" />}
-          label={t("credentials")}
-          tooltip={t("credentialsDescription")}
-          href="/secrets"
-          isActive={isItemActive("/secrets")}
-          accentColor="text-rose-500 dark:text-rose-400"
-          onClick={closeMobileIfNeeded}
-          livePopup={secretsPopup}
-          onHoverCardOpen={triggerSecretsFetch}
-          hoverInfo={{
-            description: t("credentialsPopup.title"),
-            detail: t("credentialsPopup.description"),
-            visual: "credentials",
-          }}
-        />
+        {(() => {
+          const resourceItems: ResourceItem[] = [
+            {
+              id: "sidebar-machines-link",
+              icon: <IconDeviceDesktop size={16} stroke={1.5} />,
+              label: t(machineStats.total === 1 ? "computer" : "computers"),
+              count: machineStats.total,
+              href: "/machines",
+              active: isItemActive("/machines"),
+              dot: machineStats.running > 0,
+              onNavigate: closeMobileIfNeeded,
+            },
+            {
+              id: "sidebar-schedules-link",
+              icon: <IconCalendarClock size={16} stroke={1.5} />,
+              label: t("workforce"),
+              href: "/schedules",
+              active: isItemActive("/schedules"),
+              onNavigate: closeMobileIfNeeded,
+            },
+            {
+              id: "sidebar-secrets-link",
+              icon: <IconShieldLock size={16} stroke={1.5} />,
+              label: t("credentials"),
+              href: "/secrets",
+              active: isItemActive("/secrets"),
+              onNavigate: closeMobileIfNeeded,
+            },
+            // Memory — quick-edit popup. Unlike the other resources
+            // it has no dedicated route here; clicking opens a sleek
+            // dialog with the same editor used in Account → Memory.
+            // The full settings page is one click away via the
+            // dialog's footer link.
+            {
+              id: "sidebar-memory-action",
+              icon: <IconBrain size={16} stroke={1.5} />,
+              // Localized via the dedicated memory namespace so the
+              // sidebar label switches with the user's language.
+              label: tMemory("sidebarLabel"),
+              // No route to highlight; the dialog itself is the
+              // affordance. `active` stays false so the rail's caret
+              // bar doesn't appear here.
+              active: false,
+              onAction: () => setMemoryDialogOpen(true),
+              onNavigate: closeMobileIfNeeded,
+            },
+          ]
+          const anyResourceActive = resourceItems.some((r) => r.active)
+          return expanded ? (
+            <ResourceDropdown label="Resources" items={resourceItems} />
+          ) : (
+            <ResourcesFlyout
+              items={resourceItems}
+              dot={machineStats.running > 0}
+              anyActive={anyResourceActive}
+            />
+          )
+        })()}
+        {DEVELOPERS_API_ENABLED && (
+          <NavButton
+            id="sidebar-developers-link"
+            icon={<IconKey size={16} stroke={1.5} className="shrink-0" />}
+            label="Developers"
+            tooltip="API, MCP & integrations"
+            href="/developers"
+            isActive={isItemActive("/developers")}
+            accentColor="text-purple-500 dark:text-purple-400"
+            onClick={closeMobileIfNeeded}
+            hoverInfo={{
+              description: "Developers",
+              detail: "API keys, MCP, SDKs, and everything to integrate computer-use intelligence into your apps.",
+              visual: "developers",
+            }}
+          />
+        )}
       </div>
 
-      <SectionHeader label="Help" expanded={expanded} />
-
-      {/* ── Group 3 · Help ────────────────────────────────────────
-          Lowest-frequency, passive learning. Lives at the bottom
-          like Apple's "Help" or Settings' "About" — present but
-          never competing for attention. */}
-      <div className="space-y-0.5">
-        <NavButton
-          id="sidebar-guide-link"
-          icon={<IconBook2 size={16} stroke={1.5} className="shrink-0" />}
-          label={t("guide")}
-          tooltip={t("guideDescription")}
-          href="/guide"
-          isActive={isItemActive("/guide")}
-          accentColor="text-emerald-500 dark:text-emerald-400"
-          onClick={closeMobileIfNeeded}
-          hoverInfo={{
-            description: t("guidePopup.title"),
-            detail: t("guidePopup.description"),
-            visual: "guide",
-          }}
-        />
-        <NavButton
-          id="sidebar-discover-link"
-          icon={<IconCompass size={16} stroke={1.5} className="shrink-0" />}
-          label="Community"
-          tooltip="See how people use Coasty"
-          href="/discover"
-          isActive={isItemActive("/discover")}
-          accentColor="text-sky-500 dark:text-sky-400"
-          onClick={closeMobileIfNeeded}
-          hoverInfo={{
-            description: "Community Sessions",
-            detail: "See what others are automating and get inspired for your next workflow.",
-            visual: "guide",
-          }}
-        />
-      </div>
+      {/* Memory quick-edit popup — mounted unconditionally so its open
+          animation always plays from a stable DOM root. */}
+      <MemoryDialog open={memoryDialogOpen} onOpenChange={setMemoryDialogOpen} />
     </>
   )
 })

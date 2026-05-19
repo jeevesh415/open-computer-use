@@ -186,7 +186,11 @@ $$;
 ALTER FUNCTION "public"."can_user_create_machine"("p_user_id" "uuid") OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."can_user_join_room"("p_invite_code" "text", "p_user_id" "uuid") RETURNS TABLE("chat_id" "uuid", "can_join" boolean, "reason" "text")
+-- OUT columns are prefixed with ``out_`` (migration 015) for defence-in-depth
+-- against the RETURNS-TABLE shadowing footgun that caused the
+-- update_subscription_status 42702 bug (NEW-1).  Body uses table aliases on
+-- chat_participants so the column reference can never shadow the OUT param.
+CREATE OR REPLACE FUNCTION "public"."can_user_join_room"("p_invite_code" "text", "p_user_id" "uuid") RETURNS TABLE("out_chat_id" "uuid", "out_can_join" boolean, "out_reason" "text")
     LANGUAGE "plpgsql"
     AS $$
 DECLARE
@@ -203,31 +207,31 @@ BEGIN
     AND i.is_active = true
     AND (i.expires_at IS NULL OR i.expires_at > CURRENT_TIMESTAMP)
     AND (i.max_uses IS NULL OR i.uses_count < i.max_uses);
-    
+
     IF NOT FOUND THEN
         RETURN QUERY SELECT NULL::UUID, false, 'Invalid or expired invitation code';
         RETURN;
     END IF;
-    
+
     -- Check if user is already a participant
     IF EXISTS (
-        SELECT 1 FROM chat_participants
-        WHERE chat_id = v_invitation.chat_id AND user_id = p_user_id
+        SELECT 1 FROM chat_participants cp
+        WHERE cp.chat_id = v_invitation.chat_id AND cp.user_id = p_user_id
     ) THEN
         RETURN QUERY SELECT v_invitation.chat_id, false, 'You are already a participant in this room';
         RETURN;
     END IF;
-    
+
     -- Check if room is at capacity
     SELECT COUNT(*) INTO v_participant_count
-    FROM chat_participants
-    WHERE chat_id = v_invitation.chat_id;
-    
+    FROM chat_participants cp
+    WHERE cp.chat_id = v_invitation.chat_id;
+
     IF v_participant_count >= v_invitation.max_participants THEN
         RETURN QUERY SELECT v_invitation.chat_id, false, 'Room is at maximum capacity';
         RETURN;
     END IF;
-    
+
     RETURN QUERY SELECT v_invitation.chat_id, true, 'Can join room';
 END;
 $$;
@@ -1429,46 +1433,135 @@ $$;
 ALTER FUNCTION "public"."update_machine_last_active"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."update_subscription_status"("p_stripe_subscription_id" "text", "p_status" "text", "p_period_start" timestamp with time zone DEFAULT NULL::timestamp with time zone, "p_period_end" timestamp with time zone DEFAULT NULL::timestamp with time zone, "p_cancel_at_period_end" boolean DEFAULT NULL::boolean) RETURNS "void"
+-- See supabase/migrations/011_unify_tier_vocabulary.sql for full documentation.
+-- Single writer for tier state.  Updates user_subscriptions, user_credits,
+-- and machine_limits.tier atomically.  Called by Stripe webhook.
+CREATE OR REPLACE FUNCTION "public"."update_subscription_status"(
+    "p_stripe_subscription_id" "text",
+    "p_status"                  "text",
+    "p_period_start"            timestamp with time zone DEFAULT NULL,
+    "p_period_end"              timestamp with time zone DEFAULT NULL,
+    "p_cancel_at_period_end"    boolean                  DEFAULT NULL,
+    "p_subscription_plan_id"    "uuid"                   DEFAULT NULL
+) RETURNS TABLE (
+    "user_id"       "uuid",
+    "resolved_tier" "text",
+    "is_paid"       boolean
+)
     LANGUAGE "plpgsql"
+    SECURITY DEFINER
+    SET search_path = public
     AS $$
+DECLARE
+    v_user_id   uuid;
+    v_plan_tier text;
+    v_new_tier  text;
+    v_is_paid   boolean;
 BEGIN
-    UPDATE user_subscriptions
-    SET status = p_status,
-        current_period_start = COALESCE(p_period_start, current_period_start),
-        current_period_end = COALESCE(p_period_end, current_period_end),
-        cancel_at_period_end = COALESCE(p_cancel_at_period_end, cancel_at_period_end),
-        updated_at = NOW()
-    WHERE stripe_subscription_id = p_stripe_subscription_id;
-    
-    -- Update user_credits subscription status
-    IF p_status = 'active' THEN
-        UPDATE user_credits
-        SET has_active_subscription = TRUE,
-            subscription_tier = (
-                SELECT sp.tier 
-                FROM user_subscriptions us
-                JOIN subscription_plans sp ON us.subscription_plan_id = sp.id
-                WHERE us.stripe_subscription_id = p_stripe_subscription_id
-            )
-        WHERE user_id = (
-            SELECT user_id FROM user_subscriptions 
-            WHERE stripe_subscription_id = p_stripe_subscription_id
-        );
-    ELSIF p_status IN ('canceled', 'incomplete_expired', 'unpaid') THEN
-        UPDATE user_credits
-        SET has_active_subscription = FALSE,
-            subscription_tier = NULL
-        WHERE user_id = (
-            SELECT user_id FROM user_subscriptions 
-            WHERE stripe_subscription_id = p_stripe_subscription_id
-        );
+    v_is_paid := p_status IN ('active','trialing','past_due');
+
+    UPDATE public.user_subscriptions
+    SET    status               = p_status,
+           current_period_start = COALESCE(p_period_start, current_period_start),
+           current_period_end   = COALESCE(p_period_end,   current_period_end),
+           cancel_at_period_end = COALESCE(p_cancel_at_period_end, cancel_at_period_end),
+           subscription_plan_id = COALESCE(p_subscription_plan_id, subscription_plan_id),
+           canceled_at          = CASE WHEN p_status = 'canceled' THEN COALESCE(canceled_at, NOW()) ELSE canceled_at END,
+           updated_at           = NOW()
+    WHERE  stripe_subscription_id = p_stripe_subscription_id
+    RETURNING user_subscriptions.user_id INTO v_user_id;
+
+    IF v_user_id IS NULL THEN
+        RAISE NOTICE 'update_subscription_status: subscription % not found', p_stripe_subscription_id;
+        RETURN;
     END IF;
+
+    IF v_is_paid THEN
+        SELECT sp.tier INTO v_plan_tier
+        FROM   public.user_subscriptions us
+        LEFT JOIN public.subscription_plans sp ON sp.id = us.subscription_plan_id
+        WHERE  us.stripe_subscription_id = p_stripe_subscription_id;
+
+        IF v_plan_tier IS NULL THEN
+            RAISE WARNING 'update_subscription_status: no plan resolved for sub %; tier unchanged', p_stripe_subscription_id;
+            RETURN QUERY SELECT v_user_id, NULL::text, v_is_paid;
+            RETURN;
+        END IF;
+        v_new_tier := v_plan_tier;
+    ELSE
+        v_new_tier := 'free';
+    END IF;
+
+    UPDATE public.user_credits
+    SET    has_active_subscription = v_is_paid,
+           subscription_tier       = CASE WHEN v_is_paid THEN v_new_tier ELSE NULL END,
+           updated_at              = NOW()
+    WHERE  user_credits.user_id = v_user_id;
+
+    IF NOT FOUND THEN
+        INSERT INTO public.user_credits (user_id, balance, has_active_subscription, subscription_tier)
+        VALUES (v_user_id, 0, v_is_paid, CASE WHEN v_is_paid THEN v_new_tier ELSE NULL END)
+        ON CONFLICT (user_id) DO UPDATE
+        SET    has_active_subscription = EXCLUDED.has_active_subscription,
+               subscription_tier       = EXCLUDED.subscription_tier,
+               updated_at              = NOW();
+    END IF;
+
+    INSERT INTO public.machine_limits (user_id, tier)
+    VALUES (v_user_id, v_new_tier)
+    ON CONFLICT (user_id) DO UPDATE
+    SET    tier       = EXCLUDED.tier,
+           updated_at = NOW();
+
+    RETURN QUERY SELECT v_user_id, v_new_tier, v_is_paid;
 END;
 $$;
 
 
-ALTER FUNCTION "public"."update_subscription_status"("p_stripe_subscription_id" "text", "p_status" "text", "p_period_start" timestamp with time zone, "p_period_end" timestamp with time zone, "p_cancel_at_period_end" boolean) OWNER TO "postgres";
+ALTER FUNCTION "public"."update_subscription_status"("p_stripe_subscription_id" "text", "p_status" "text", "p_period_start" timestamp with time zone, "p_period_end" timestamp with time zone, "p_cancel_at_period_end" boolean, "p_subscription_plan_id" "uuid") OWNER TO "postgres";
+
+-- Reconciliation helper.  Re-derives a user's tier from current
+-- user_subscriptions state and projects it through to user_credits and
+-- machine_limits.  Used by customer.subscription.deleted and any cleanup job
+-- that needs to reset tier from scratch.
+CREATE OR REPLACE FUNCTION "public"."sync_user_tier"("p_user_id" "uuid")
+RETURNS "text"
+    LANGUAGE "plpgsql"
+    SECURITY DEFINER
+    SET search_path = public
+    AS $$
+DECLARE
+    v_tier text;
+BEGIN
+    SELECT sp.tier INTO v_tier
+    FROM   public.user_subscriptions us
+    JOIN   public.subscription_plans sp ON sp.id = us.subscription_plan_id
+    WHERE  us.user_id = p_user_id
+      AND  us.status  IN ('active','trialing','past_due')
+    ORDER BY us.current_period_end DESC NULLS LAST,
+             us.created_at         DESC
+    LIMIT 1;
+
+    v_tier := COALESCE(v_tier, 'free');
+
+    UPDATE public.user_credits
+    SET    has_active_subscription = (v_tier <> 'free'),
+           subscription_tier       = CASE WHEN v_tier <> 'free' THEN v_tier ELSE NULL END,
+           updated_at              = NOW()
+    WHERE  user_id = p_user_id;
+
+    INSERT INTO public.machine_limits (user_id, tier)
+    VALUES (p_user_id, v_tier)
+    ON CONFLICT (user_id) DO UPDATE
+    SET    tier       = EXCLUDED.tier,
+           updated_at = NOW();
+
+    RETURN v_tier;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."sync_user_tier"("p_user_id" "uuid") OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."update_updated_at_column"() RETURNS "trigger"
@@ -1721,7 +1814,7 @@ CREATE TABLE IF NOT EXISTS "public"."machine_limits" (
     "allow_snapshots" boolean DEFAULT false,
     "allow_custom_software" boolean DEFAULT false,
     "updated_at" timestamp with time zone DEFAULT "now"(),
-    CONSTRAINT "machine_limits_tier_check" CHECK (("tier" = ANY (ARRAY['free'::"text", 'basic'::"text", 'pro'::"text", 'enterprise'::"text"])))
+    CONSTRAINT "machine_limits_tier_check" CHECK (("tier" = ANY (ARRAY['free'::"text", 'lite'::"text", 'starter'::"text", 'professional'::"text", 'enterprise'::"text"])))
 );
 
 

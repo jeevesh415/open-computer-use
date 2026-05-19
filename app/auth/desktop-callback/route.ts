@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { SYSTEM_SANS_STACK } from "@/lib/fonts"
 
 /**
  * Intermediate callback page for Electron desktop OAuth.
@@ -24,7 +25,7 @@ export async function GET(request: Request) {
   <title>Redirecting to Coasty</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:#0a0a0a;color:#fff;padding:20px}
+    body{display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:${SYSTEM_SANS_STACK};background:#0a0a0a;color:#fff;padding:20px}
     .card{text-align:center;display:flex;flex-direction:column;align-items:center;gap:20px;max-width:400px;opacity:0;animation:slideUp .5s cubic-bezier(.22,1,.36,1) forwards}
     .logo{width:40px;height:40px}
     h2{font-size:20px;font-weight:600;letter-spacing:-.02em}

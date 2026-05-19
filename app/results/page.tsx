@@ -8,7 +8,6 @@ import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { ArrowRight, ArrowUpRight, Play } from "lucide-react"
 import { motion } from "framer-motion"
-import { GuideLines } from "@/app/components/landing/guide-lines"
 
 const videos = [
   { label: "Marketing", task: "Market your product on Reddit autonomously", videoId: "icxgLDephHE" },
@@ -58,14 +57,12 @@ const sessions = [
   },
 ]
 
-const fade = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.06, ease: [0.25, 0.1, 0.25, 1] as const },
-  }),
-}
+// Stagger between staggered cards (ms). See globals.css `.public-card-enter`.
+// We use CSS keyframes instead of framer-motion variants because wrapping a
+// clickable <Link>/<button> in <motion.*> causes a mobile double-tap bug —
+// motion's gesture detection (whileTap/whileHover/drag) intercepts the first
+// pointerdown to disambiguate tap vs drag, which swallows the click.
+const CARD_STAGGER_MS = 60
 
 function VideoPlayer({
   videoId,
@@ -145,17 +142,21 @@ function VideoPlayer({
                 : "bg-gradient-to-t from-black/35 via-black/5 to-transparent group-hover:from-black/45"
             )} />
 
-            {/* Play button */}
+            {/* Play button — plain <div> with `active:scale-[0.94]` for the
+                press-feedback. Originally `<motion.div whileTap>`, but
+                framer-motion's whileTap intercepts the first pointerdown
+                on touch devices to disambiguate tap vs drag, swallowing
+                the parent's onClick(handlePlay) on the first tap. CSS
+                `:active` fires synchronously and lets the click through. */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
+              <div
                 className={cn(
                   "flex items-center justify-center rounded-full",
                   "bg-white/[0.15] backdrop-blur-md border border-white/20",
                   "group-hover:bg-white/[0.22] group-hover:border-white/30 transition-all duration-300",
+                  "group-hover:scale-[1.06] active:scale-[0.94]",
                   featured ? "h-[72px] w-[72px]" : "h-12 w-12"
                 )}
-                whileHover={{ scale: 1.06 }}
-                whileTap={{ scale: 0.94 }}
               >
                 <Play
                   className={cn(
@@ -163,7 +164,7 @@ function VideoPlayer({
                     featured ? "h-6 w-6" : "h-4 w-4"
                   )}
                 />
-              </motion.div>
+              </div>
             </div>
 
             {/* Label badge — bottom left */}
@@ -222,7 +223,6 @@ export default function ResultsPage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-      <GuideLines />
       <LandingHeader />
 
       <main className="pt-32 sm:pt-36 pb-24">
@@ -257,10 +257,9 @@ export default function ResultsPage() {
 
         {/* ── Featured Video ── */}
         <div className="max-w-5xl mx-auto px-7 sm:px-10 mb-6">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+          <div
+            className="public-fade-up"
+            style={{ ["--card-d" as string]: 150 }}
           >
             <VideoPlayer
               videoId={featured.videoId}
@@ -268,26 +267,27 @@ export default function ResultsPage() {
               task={featured.task}
               featured
             />
-          </motion.div>
+          </div>
         </div>
 
         {/* ── Video Grid ── */}
         <div className="max-w-5xl mx-auto px-7 sm:px-10 mb-28">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {rest.map((v, i) => (
-              <motion.div
+              <div
                 key={v.videoId + v.label}
-                custom={i}
-                initial="hidden"
-                animate="show"
-                variants={fade}
+                className="public-card-enter"
+                style={{
+                  ["--card-i" as string]: i,
+                  ["--card-stagger-ms" as string]: `${CARD_STAGGER_MS}ms`,
+                }}
               >
                 <VideoPlayer
                   videoId={v.videoId}
                   label={v.label}
                   task={v.task}
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -318,12 +318,13 @@ export default function ResultsPage() {
 
           <div className="space-y-0">
             {sessions.map((s, i) => (
-              <motion.div
+              <div
                 key={s.chatId}
-                custom={i}
-                initial="hidden"
-                animate="show"
-                variants={fade}
+                className="public-card-enter"
+                style={{
+                  ["--card-i" as string]: i,
+                  ["--card-stagger-ms" as string]: `${CARD_STAGGER_MS}ms`,
+                }}
               >
                 <Link
                   href={`/share/${s.chatId}`}
@@ -353,36 +354,31 @@ export default function ResultsPage() {
                   {/* Arrow */}
                   <ArrowUpRight className="h-4 w-4 text-muted-foreground/20 group-hover:text-foreground/50 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 shrink-0 mt-1 sm:mt-0" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* ── CTA ── */}
         <div className="max-w-5xl mx-auto px-7 sm:px-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-24 sm:mt-28 text-center"
+          <div
+            className="mt-24 sm:mt-28 text-center public-fade-up"
+            style={{ ["--card-d" as string]: 400 }}
           >
             <p className="text-muted-foreground/60 text-sm mb-6">
               Seen enough?
             </p>
-            <Link href="/auth">
-              <motion.button
-                className="inline-flex items-center gap-2.5 rounded-full font-semibold text-background bg-foreground px-8 py-3.5 text-[15px] cursor-pointer"
-                whileHover={{ scale: 1.02, y: -1 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Try Coasty Free
-                <ArrowRight className="h-4 w-4" />
-              </motion.button>
+            <Link
+              href="/auth"
+              className="inline-flex items-center gap-2.5 rounded-full font-semibold text-background bg-foreground px-8 py-3.5 text-[15px] cursor-pointer transition-transform duration-150 hover:scale-[1.02] hover:-translate-y-px active:scale-[0.98]"
+            >
+              Try Coasty Free
+              <ArrowRight className="h-4 w-4" />
             </Link>
             <p className="text-[11px] text-muted-foreground/30 mt-4">
               No credit card required
             </p>
-          </motion.div>
+          </div>
         </div>
       </main>
 

@@ -80,6 +80,41 @@ function errorHtml(message: string): string {
 
 // ── ElectronAuth class ───────────────────────────────────────────────────
 
+/**
+ * Reasons a session can transition from "valid" to "permanently dead".
+ *
+ * Every value here represents a failure mode where the right
+ * production-grade response is to sign the user out and surface a
+ * fresh sign-in screen. The renderer reads the reason verbatim to
+ * decide whether to log telemetry, show a different toast, etc.
+ *
+ * Why this enum exists
+ * --------------------
+ * The pre-refactor auth layer had FIVE silent failure modes where
+ * the session was cleared in memory but no caller was told:
+ *   - performRefresh() failure → `session = null` + void return
+ *   - scheduled-refresh failure → logged + void return
+ *   - getAccessToken() falling back to null → caller might use it or not
+ *   - OAuth callback timeout → only the awaiting IPC caller knew
+ *   - bridge auth_failed → only the WS bridge knew (via state)
+ *
+ * Each silent path left the renderer thinking "still authenticated"
+ * while every downstream IPC call would 401. The user saw "the app
+ * keeps failing" with no understanding that their session was dead.
+ *
+ * Now every failure path calls ``signalSessionDead(reason)`` which
+ * fans out to all registered listeners — main-process broadcasts to
+ * the renderer, renderer auto-signs-out, done.
+ */
+export type SessionDeadReason =
+  | 'refresh-failed'         // Supabase refreshSession() returned error or no session
+  | 'refresh-network-error'  // refreshSession() threw (offline, DNS, etc.)
+  | 'scheduled-refresh-failed' // background refresh fired and failed
+  | 'oauth-timeout'          // user never completed the sign-in flow
+  | 'bridge-auth-rejected'   // backend WS bridge said the JWT is invalid
+  | 'token-missing'          // a caller asked for a token and nothing was stored
+  | 'manual'                 // user clicked sign-out (still fired for symmetry)
+
 export class ElectronAuth {
   private supabase: SupabaseClient
   private session: Session | null = null
@@ -88,6 +123,15 @@ export class ElectronAuth {
   private pendingCallbackServer: http.Server | null = null
   private pendingSessionPromise: Promise<{ user: User; session: Session }> | null = null
   private tokenRefreshListeners: Array<(token: string) => void> = []
+  /** Subscribers fired exactly once per session-death event. The
+   *  main process registers a listener that broadcasts to the
+   *  renderer via IPC, which auto-signs out the UI. */
+  private sessionDeadListeners: Array<(reason: SessionDeadReason) => void> = []
+  /** Latched so we never fire ``onSessionDead`` twice for the same
+   *  dead session (e.g. both refresh-failed AND scheduled-refresh-failed
+   *  could land on the same already-dead session). Cleared when a new
+   *  session is set. */
+  private sessionDeadFired = false
   // Protocol-based OAuth state (used in packaged builds instead of local HTTP server)
   private protocolAuthResolve: ((result: { user: User; session: Session }) => void) | null = null
   private protocolAuthReject: ((error: Error) => void) | null = null
@@ -183,6 +227,7 @@ export class ElectronAuth {
                 }
 
                 this.session = data.session
+                this.sessionDeadFired = false  // reset latch — fresh session can die again later
                 this.storeSession(data.session)
                 this.scheduleRefresh(data.session)
 
@@ -332,6 +377,7 @@ export class ElectronAuth {
       }
 
       this.session = data.session
+      this.sessionDeadFired = false  // reset latch — fresh session can die again later
       this.storeSession(data.session)
       this.scheduleRefresh(data.session)
 
@@ -395,6 +441,7 @@ export class ElectronAuth {
     }
 
     this.session = data.session
+    this.sessionDeadFired = false  // reset latch — fresh session can die again later
     this.storeSession(data.session)
     this.scheduleRefresh(data.session)
 
@@ -495,6 +542,10 @@ export class ElectronAuth {
       this.refreshTimer = null
     }
     this.clearStoredSession()
+    // Latch sessionDeadFired so any in-flight refresh that fails
+    // AFTER the user clicked sign-out doesn't redundantly fire the
+    // session-died event back to a renderer that already knows.
+    this.sessionDeadFired = true
     try {
       await this.supabase.auth.signOut()
     } catch {
@@ -519,6 +570,62 @@ export class ElectronAuth {
   private notifyTokenRefresh(token: string): void {
     for (const listener of this.tokenRefreshListeners) {
       try { listener(token) } catch { /* ignore listener errors */ }
+    }
+  }
+
+  /**
+   * Register a callback that fires when the session has died and the
+   * user MUST be signed out. The main process uses this to broadcast
+   * an IPC event to the renderer so the UI returns to the AuthScreen.
+   *
+   * Callbacks are called at most once per session-death (the
+   * ``sessionDeadFired`` latch prevents double-firing on cascading
+   * failures — e.g. a refresh failure followed by a scheduled-refresh
+   * failure on the same dead session).
+   */
+  onSessionDead(listener: (reason: SessionDeadReason) => void): void {
+    this.sessionDeadListeners.push(listener)
+  }
+
+  /**
+   * Public entry point for declaring the session dead from OUTSIDE
+   * the auth layer. Used by the WS bridge's fatal-auth callback +
+   * IPC handlers that receive a null token. Always tears down the
+   * in-memory session + on-disk state before notifying listeners
+   * so a fast follow-up ``getAccessToken()`` call from another
+   * subsystem can't accidentally surface stale credentials.
+   *
+   * Idempotent — the ``sessionDeadFired`` latch coalesces multiple
+   * declarations into a single renderer-facing event.
+   */
+  declareDead(reason: SessionDeadReason): void {
+    if (this.sessionDeadFired) return
+    // Tear down state BEFORE notifying so listeners see a consistent
+    // post-death state (session=null, no refresh timer pending).
+    this.session = null
+    if (this.refreshTimer) {
+      clearTimeout(this.refreshTimer)
+      this.refreshTimer = null
+    }
+    this.clearStoredSession()
+    this.signalSessionDead(reason)
+  }
+
+  /**
+   * Internal: declare the session dead. Idempotent per session.
+   * Every callsite that observes an auth failure MUST call this
+   * before returning. Production-grade fault tolerance means failures
+   * never sit silently — they always surface to the UI as a
+   * sign-out.
+   */
+  private signalSessionDead(reason: SessionDeadReason): void {
+    if (this.sessionDeadFired) return
+    this.sessionDeadFired = true
+    console.warn(`[Auth] Session declared dead: reason="${reason}"`)
+    for (const listener of this.sessionDeadListeners) {
+      try { listener(reason) } catch (err) {
+        console.error('[Auth] sessionDead listener threw:', err)
+      }
     }
   }
 
@@ -548,7 +655,17 @@ export class ElectronAuth {
 
       const sessionPath = this.getSessionPath()
 
-      fs.writeFileSync(sessionPath, json, 'utf-8')
+      fs.writeFileSync(sessionPath, json, { encoding: 'utf-8', mode: 0o600 })
+      // Defend against pre-existing files with looser permissions on POSIX —
+      // writeFileSync's `mode` only applies on file creation. chmod is a no-op
+      // semantically on Windows but errors out cleanly there, so guard it.
+      if (process.platform !== 'win32') {
+        try {
+          fs.chmodSync(sessionPath, 0o600)
+        } catch (chmodErr) {
+          console.warn('[Auth] Failed to chmod 0600 on session file:', chmodErr)
+        }
+      }
       console.log('[Auth] Session saved to disk')
     } catch (err) {
       console.error('[Auth] Failed to store session:', err)
@@ -566,10 +683,35 @@ export class ElectronAuth {
       json = raw.toString('utf-8')
 
       const data = JSON.parse(json)
+
+      // Runtime shape guard — guard against tampered / malformed session files.
+      // Without this, a non-conforming JSON value (string, array, or an object
+      // missing required fields) would be cast straight to Session and could
+      // confuse downstream isAuthenticated() / refresh logic.
+      const isValidStoredSession = (d: unknown): d is Session => {
+        return (
+          typeof d === 'object' &&
+          d !== null &&
+          typeof (d as any).access_token === 'string' && (d as any).access_token.length > 0 &&
+          typeof (d as any).refresh_token === 'string' && (d as any).refresh_token.length > 0 &&
+          ((d as any).expires_at === undefined || typeof (d as any).expires_at === 'number') &&
+          (d as any).user !== null && typeof (d as any).user === 'object'
+        )
+      }
+
+      if (!isValidStoredSession(data)) {
+        console.warn('[Auth] Stored session has invalid shape, clearing')
+        this.session = null
+        this.clearStoredSession()
+        return
+      }
+
       this.session = data as Session
 
       if (this.isAuthenticated()) {
         console.log('[Auth] Restored valid session from disk')
+        // Reset the death latch — we have a fresh-looking session.
+        this.sessionDeadFired = false
         // Set the session on the Supabase client so RLS-protected queries work.
         // Without this, the client has no JWT and all DB queries fail with RLS errors.
         this.supabase.auth.setSession({
@@ -584,10 +726,18 @@ export class ElectronAuth {
         // Refresh immediately instead of deferring — getAccessToken() callers
         // need a valid token and the old "lazy refresh on getSession()" approach
         // left the token stale since nothing called getSession().
+        // performRefresh() will signal session-dead on failure.
         this.refreshSessionNow().catch((err) => {
           console.error('[Auth] Eager refresh failed:', err)
         })
       } else {
+        // Stored session has no refresh_token (malformed write or
+        // partial corruption). Can't recover from this on disk; the
+        // renderer's ``checkSession`` IPC will report
+        // ``isAuthenticated: false`` and the UI routes to the
+        // AuthScreen naturally — no need to fire signalSessionDead
+        // here because there's no LIVE session to declare dead
+        // (the user was never signed in this session).
         console.log('[Auth] Stored session fully expired, clearing')
         this.session = null
         this.clearStoredSession()
@@ -630,7 +780,10 @@ export class ElectronAuth {
   /** The actual refresh logic — only called via refreshSessionNow(). */
   private async performRefresh(): Promise<void> {
     if (!this.session?.refresh_token) {
+      // No refresh token to use — session is unrecoverable.
       this.session = null
+      this.clearStoredSession()
+      this.signalSessionDead('token-missing')
       return
     }
 
@@ -641,21 +794,32 @@ export class ElectronAuth {
       })
 
       if (error || !data.session) {
+        // Refresh returned but Supabase says the token can't be
+        // refreshed (revoked, user deleted, etc.). The session is
+        // permanently dead — sign the user out.
         console.error('[Auth] Refresh failed:', error?.message || 'No session returned')
         this.session = null
         this.clearStoredSession()
+        this.signalSessionDead('refresh-failed')
         return
       }
 
+      // Success path — new session, reset everything.
       this.session = data.session
+      this.sessionDeadFired = false  // a fresh session can die again later
       this.storeSession(data.session)
       this.scheduleRefresh(data.session)
       this.notifyTokenRefresh(data.session.access_token)
       console.log('[Auth] Token refreshed successfully')
     } catch (err: any) {
+      // Network error, DNS failure, TLS handshake error, etc. We
+      // can't tell whether the token would refresh on retry, but
+      // the user is currently in a broken state — sign them out so
+      // they can re-authenticate cleanly when the network comes back.
       console.error('[Auth] Refresh error:', err.message)
       this.session = null
       this.clearStoredSession()
+      this.signalSessionDead('refresh-network-error')
     }
   }
 
@@ -676,6 +840,11 @@ export class ElectronAuth {
       // race each other.
       this.refreshSessionNow().catch((err) => {
         console.error('[Auth] Scheduled refresh error:', err)
+        // Even if performRefresh's own catch fired signalSessionDead,
+        // a synchronous throw inside refreshSessionNow's microtask
+        // bookkeeping could escape past that. Fire defensively so a
+        // scheduled refresh failure ALWAYS reaches the renderer.
+        this.signalSessionDead('scheduled-refresh-failed')
       })
     }, refreshIn)
   }

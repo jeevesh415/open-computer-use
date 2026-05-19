@@ -23,6 +23,7 @@ contextBridge.exposeInMainWorld('coasty', {
   connectBridge: () => ipcRenderer.invoke('bridge:connect'),
   disconnectBridge: () => ipcRenderer.invoke('bridge:disconnect'),
   getBridgeState: () => ipcRenderer.invoke('bridge:get-state'),
+  setTaskActive: (active: boolean) => ipcRenderer.invoke('bridge:set-task-active', active),
 
   // Config
   getBackendUrl: () => ipcRenderer.invoke('config:get-backend-url'),
@@ -39,6 +40,18 @@ contextBridge.exposeInMainWorld('coasty', {
 
   // Resume from human handoff
   resumeHuman: (machineId: string) => ipcRenderer.invoke('chat:resume-human', machineId),
+
+  // Machine busy-state for the yellow "Override & Run" UI.
+  // checkMachineBusy: returns { success, busy, ownerChatId } — used by
+  //   the chat input to decide whether to show the normal Send button
+  //   or the yellow Override-and-Run button.
+  // stopMachine: force-stops the running task, used when the user
+  //   clicks the yellow button. Resolves once the lock has released
+  //   (or after a 5 s grace period — see chat.py:/stop-machine).
+  checkMachineBusy: (machineId: string) =>
+    ipcRenderer.invoke('chat:check-machine-busy', machineId),
+  stopMachine: (machineId: string) =>
+    ipcRenderer.invoke('chat:stop-machine', machineId),
 
   // Credits / Billing
   getCredits: () => ipcRenderer.invoke('credits:get-balance'),
@@ -148,6 +161,50 @@ contextBridge.exposeInMainWorld('coasty', {
     ipcRenderer.on('connection-state-changed', handler)
     return () => ipcRenderer.removeListener('connection-state-changed', handler)
   },
+
+  /**
+   * Forced sign-out event from the auth layer.
+   *
+   * The main process emits this when ``ElectronAuth`` declares the
+   * session permanently dead — refresh failed, scheduled refresh
+   * failed, network error during refresh, WS bridge auth_rejected,
+   * etc. The renderer's auth-store subscribes to this in its
+   * ``init()`` and immediately calls ``signOut()`` so the UI returns
+   * to the AuthScreen.
+   *
+   * Why this matters: previously every refresh-failure path silently
+   * cleared the in-memory session but the renderer thought it was
+   * still authenticated, so every downstream IPC call 401'd and the
+   * user saw a chain of cryptic "not authenticated" errors. Now any
+   * auth failure is a single, clean trip to the sign-in screen.
+   *
+   * The ``reason`` is one of the ``SessionDeadReason`` literals so
+   * the renderer can show a contextual toast / log telemetry.
+   */
+  onSessionDied: (callback: (data: { reason: string }) => void) => {
+    const handler = (_event: any, data: { reason: string }) => callback(data)
+    ipcRenderer.on('auth:session-died', handler)
+    return () => ipcRenderer.removeListener('auth:session-died', handler)
+  },
+
+  // Renderer-side error reporting — funnels into the main-process
+  // error-reporter so renderer crashes get the same enrichment + persistence
+  // + backend forwarding as main-process errors.
+  //
+  // Use `ipcRenderer.send` (not `invoke`) so the reporter call is
+  // fire-and-forget and never blocks the UI loop. The main-process handler
+  // re-stamps the category to either 'renderer_unhandled' or
+  // 'renderer_react_boundary' depending on the `from` field.
+  reportRendererError: (payload: {
+    message: string
+    stack?: string
+    url?: string
+    line?: number
+    col?: number
+    component?: string
+    userAgent?: string
+    from?: 'window' | 'unhandledrejection' | 'boundary'
+  }) => ipcRenderer.send('error:report', payload),
 })
 
 // Type declaration for renderer
@@ -167,6 +224,10 @@ export interface CoastyAPI {
   signOut: () => Promise<{ success: boolean; error?: string }>
   getSession: () => Promise<{
     isAuthenticated: boolean
+    // 'oss' = signed in via Coasty API key (no Supabase session, no email/avatar);
+    // 'production' = Supabase OAuth/email session. Renderer code that branches on
+    // session capabilities (e.g. profile photo, billing portal links) keys off this.
+    kind: 'oss' | 'production'
     userId: string | null
     email: string | null
     name: string | null
@@ -178,6 +239,7 @@ export interface CoastyAPI {
   connectBridge: () => Promise<{ success: boolean; machineId?: string; error?: string }>
   disconnectBridge: () => Promise<{ success: boolean }>
   getBridgeState: () => Promise<string>
+  setTaskActive: (active: boolean) => Promise<{ success: boolean }>
 
   getBackendUrl: () => Promise<string>
   getMachineId: () => Promise<string>
@@ -196,11 +258,33 @@ export interface CoastyAPI {
 
   resumeHuman: (machineId: string) => Promise<{ success: boolean; resumed?: boolean; error?: string }>
 
+  checkMachineBusy: (machineId: string) => Promise<{
+    success: boolean
+    busy?: boolean
+    ownerChatId?: string | null
+    error?: string
+  }>
+  stopMachine: (machineId: string) => Promise<{
+    success: boolean
+    stopped?: boolean
+    released?: boolean
+    ownerChatId?: string | null
+    error?: string
+  }>
+
   getCredits: () => Promise<{
     success: boolean
     balance?: number
     can_start_session?: boolean
-    estimated_runtime_minutes?: number
+    /** null for Unlimited subscribers (no per-minute runtime concept) */
+    estimated_runtime_minutes?: number | null
+    /** "unlimited" | "starter" | "professional" | ... | null when no row */
+    subscription_tier?: string | null
+    has_active_subscription?: boolean
+    /** Convenience flag: true iff subscription_tier='unlimited' AND
+     * has_active_subscription=true.  Use this to branch UI (render
+     * "Unlimited" instead of the sentinel balance number). */
+    is_unlimited?: boolean
     error?: string
   }>
 
@@ -284,6 +368,18 @@ export interface CoastyAPI {
   getAppVersion: () => Promise<string>
 
   onConnectionStateChanged: (callback: (state: string) => void) => () => void
+  onSessionDied: (callback: (data: { reason: string }) => void) => () => void
+
+  reportRendererError: (payload: {
+    message: string
+    stack?: string
+    url?: string
+    line?: number
+    col?: number
+    component?: string
+    userAgent?: string
+    from?: 'window' | 'unhandledrejection' | 'boundary'
+  }) => void
 }
 
 declare global {

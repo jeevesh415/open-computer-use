@@ -393,7 +393,7 @@ Use our [Security Policy](SECURITY.md) for responsible disclosure.
 **Have questions about appropriate use?**
 
 - Discord: [community server](https://discord.gg/gppEfsVt)
-- Email: support@coasty.ai
+- Email: founders@coasty.ai
 - Discussions: [GitHub Discussions](https://github.com/coasty-ai/open-computer-use/discussions)
 
 **Need clarification on a specific use case?**

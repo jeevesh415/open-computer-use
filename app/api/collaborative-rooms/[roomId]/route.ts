@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { createServiceClient } from "@/lib/supabase/server-guest"
 import { safeUserMetadataFetch } from "@/lib/fetch"
 import { NextRequest, NextResponse } from "next/server"
+import { isExpectedAuthError } from "@/lib/observability/auth-errors"
 
 // GET: Get room details with participants
 export async function GET(
@@ -23,14 +24,21 @@ export async function GET(
     }
 
     const { data: authData, error: authError } = await supabase.auth.getUser()
-    
+
     if (authError) {
-      console.error("[ROOM API] Auth error:", authError)
+      // Suppress the "logged-out client hit authed route" noise. The
+      // refresh_token_not_found / AuthSessionMissingError shape produced
+      // 18 ERROR lines / 4 days in the 2026-05-13 audit on this endpoint
+      // alone. The route's RESPONSE is unchanged — still a 401 — but the
+      // noisy ERROR log is dropped for expected anonymous-poller traffic.
+      if (!isExpectedAuthError(authError)) {
+        console.error("[ROOM API] Auth error:", authError)
+      }
       return NextResponse.json({ error: "Authentication failed" }, { status: 401 })
     }
-    
+
     if (!authData?.user?.id) {
-      console.error("[ROOM API] No user ID found")
+      // Anonymous client — silent 401. Don't log as ERROR.
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 

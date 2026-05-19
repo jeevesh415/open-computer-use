@@ -14,25 +14,27 @@ CREATE INDEX idx_status_checks_service_time ON status_checks (service_name, chec
 -- Index for cleanup of old records
 CREATE INDEX idx_status_checks_checked_at ON status_checks (checked_at);
 
--- Auto-delete records older than 90 days (run as a periodic cleanup)
+-- Auto-delete records older than 7 days (run as a periodic cleanup)
 -- This can be called via a Supabase pg_cron extension or manually
 CREATE OR REPLACE FUNCTION cleanup_old_status_checks()
 RETURNS void AS $$
 BEGIN
-  DELETE FROM status_checks WHERE checked_at < now() - INTERVAL '90 days';
+  DELETE FROM status_checks WHERE checked_at < now() - INTERVAL '7 days';
 END;
 $$ LANGUAGE plpgsql;
 
--- Disable RLS so the service client can write without issues
+-- Enable RLS
 ALTER TABLE status_checks ENABLE ROW LEVEL SECURITY;
 
--- Allow service role full access
+-- Service role has full CRUD access (requires auth.role() = 'service_role')
 CREATE POLICY "Service role full access" ON status_checks
   FOR ALL
+  TO service_role
   USING (true)
   WITH CHECK (true);
 
--- Allow anonymous read access (status page is public)
+-- Public/anonymous users can only read (status page is public)
 CREATE POLICY "Public read access" ON status_checks
   FOR SELECT
+  TO anon, authenticated
   USING (true);

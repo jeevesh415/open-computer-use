@@ -168,7 +168,12 @@ function compile(): Promise<string | null> {
       '-framework', 'AppKit',
       '-O',                 // optimized build
       '-suppress-warnings', // avoid noisy deprecation warnings in output
-    ], { timeout: 60000 }, (error, _stdout, stderr) => {
+    ], {
+      timeout: 60000,
+      // swiftc verbose output can easily exceed 1 MB on a clean rebuild
+      // — see terminal.ts MAX_OUTPUT_BUFFER_BYTES for the 2026-05-17 fix.
+      maxBuffer: 10 * 1024 * 1024,
+    }, (error, _stdout, stderr) => {
       if (error) {
         console.warn('[NativeScreenshot] Compilation failed:', stderr || error.message)
         // Mark as permanently failed — no point retrying without swiftc
@@ -224,6 +229,10 @@ export async function captureScreenNative(
       String(displayId),
     ], {
       timeout: 10000,
+      // Screenshot binary writes the JPEG to disk; stdout is just the
+      // "OK" status line. 10 MB cap is the project-wide standard set on
+      // 2026-05-17 — see terminal.ts MAX_OUTPUT_BUFFER_BYTES.
+      maxBuffer: 10 * 1024 * 1024,
     }, (error, stdout, stderr) => {
       if (error) {
         // Exit code 2 = macOS < 14, won't ever work — stop retrying

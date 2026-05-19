@@ -14,48 +14,35 @@ async function awardCredits(
   description: string,
   metadata: Record<string, string>
 ) {
-  const { data: existing } = await supabaseAdmin
-    .from("user_credits")
-    .select("balance")
-    .eq("user_id", userId)
-    .single()
+  // Atomic balance increment via migration 014 RPC.  Replaces the legacy
+  // SELECT-then-UPDATE pattern that lost concurrent increments when two
+  // award flows (e.g. simultaneous referral claims) hit different Next.js
+  // replicas.  The RPC also handles the "user_credits row missing" case
+  // via INSERT ... ON CONFLICT, so we don't need a separate branch.
+  const { data: rpcRows, error: rpcError } = await supabaseAdmin.rpc(
+    "add_credits_atomic",
+    {
+      p_user_id: userId,
+      p_amount: amount,
+    }
+  )
 
-  if (existing) {
-    const newBalance = existing.balance + amount
-
-    await supabaseAdmin
-      .from("user_credits")
-      .update({
-        balance: newBalance,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("user_id", userId)
-
-    await supabaseAdmin.from("credit_transactions").insert({
-      user_id: userId,
-      type: "bonus",
-      amount,
-      balance_after: newBalance,
-      usage_description: description,
-      metadata,
-    })
-  } else {
-    await supabaseAdmin.from("user_credits").insert({
-      user_id: userId,
-      balance: amount,
-      total_purchased: 0,
-      total_used: 0,
-    })
-
-    await supabaseAdmin.from("credit_transactions").insert({
-      user_id: userId,
-      type: "bonus",
-      amount,
-      balance_after: amount,
-      usage_description: description,
-      metadata,
-    })
+  if (rpcError) {
+    console.error("add_credits_atomic RPC failed:", rpcError)
+    return
   }
+
+  const newBalance: number =
+    (Array.isArray(rpcRows) ? rpcRows[0]?.new_balance : (rpcRows as any)?.new_balance) ?? amount
+
+  await supabaseAdmin.from("credit_transactions").insert({
+    user_id: userId,
+    type: "bonus",
+    amount,
+    balance_after: newBalance,
+    usage_description: description,
+    metadata,
+  })
 }
 
 export async function POST(req: NextRequest) {

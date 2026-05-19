@@ -4,8 +4,14 @@ import { createClient } from "@/lib/supabase/server"
 import { NextResponse } from "next/server"
 
 export async function POST(request: Request) {
+  let body: { provider?: string; apiKey?: string }
   try {
-    const { provider, apiKey } = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
+  try {
+    const { provider, apiKey } = body
 
     if (!provider || !apiKey) {
       return NextResponse.json(
@@ -118,8 +124,14 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+  let body: { provider?: string }
   try {
-    const { provider } = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
+  try {
+    const { provider } = body
 
     if (!provider) {
       return NextResponse.json(

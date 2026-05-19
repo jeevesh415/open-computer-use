@@ -14,6 +14,7 @@ import {
 import { toast } from "sonner"
 import { useCredits } from "@/lib/hooks/use-credits"
 import { useUser } from "@/lib/user-store/provider"
+import { SVG_SYSTEM_STACK } from "@/lib/fonts"
 import {
   ShoppingCart,
   ArrowUp,
@@ -32,6 +33,9 @@ import {
   ChartLine,
   Funnel,
   Export,
+  Crown,
+  ShieldCheck,
+  CalendarCheck,
 } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 import {
@@ -44,12 +48,23 @@ import {
   Wallet,
   ArrowUpRight,
   ArrowDownRight,
+  Infinity as InfinityIcon,
 } from "lucide-react"
 import { CoastyIcon } from "@/components/icons/coasty"
+import { UnlimitedSmoke } from "@/app/components/effects/unlimited-smoke"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
 
 // ─── Plan & Package Data ────────────────────────────────────────────────────
+//
+// We KEEP every plan definition in this array even when temporarily
+// removed from sale — `activePlan` lookup (line ~1239 below) reads from
+// this list to render the current plan card for existing subscribers
+// on Lite / Plus / Pro.  Toggle `purchasable` on a plan to remove it
+// from the upgrade grid without breaking existing subscribers.
+//
+// The single source of truth for which plans are live is
+// lib/pricing/tiers.ts (PURCHASABLE_DB_TIERS) — keep this flag in sync.
 
 const subscriptionPlans = [
   {
@@ -68,6 +83,7 @@ const subscriptionPlans = [
       "Standard support (real humans)",
     ],
     popular: false,
+    purchasable: false, // HIDDEN — kept for existing subscribers' billing UI
   },
   {
     id: "starter",
@@ -85,6 +101,7 @@ const subscriptionPlans = [
       "Standard support (real humans)",
     ],
     popular: false,
+    purchasable: true, // ✅ LIVE
   },
   {
     id: "professional",
@@ -102,6 +119,7 @@ const subscriptionPlans = [
       "Priority support, 24hr response",
     ],
     popular: true,
+    purchasable: false, // HIDDEN — kept for existing subscribers' billing UI
   },
   {
     id: "enterprise",
@@ -119,8 +137,36 @@ const subscriptionPlans = [
       "Premium support, 12hr response",
     ],
     popular: false,
+    purchasable: false, // HIDDEN — kept for existing subscribers' billing UI
+  },
+  {
+    id: "unlimited",
+    name: "Unlimited",
+    tier: "unlimited",
+    price: 249,
+    // Sentinel for "unlimited" — UI must render the literal string when
+    // detecting tier === "unlimited" rather than this number.
+    monthlyCredits: 999_999_999,
+    machines: 2,
+    // 1 concurrent agent only — see lib/pricing/tiers.ts comment.
+    swarm: 1,
+    description: "No credit limits — ever",
+    features: [
+      "Unlimited credits, no caps",
+      "2 always-on VMs",
+      "1 concurrent agent (no parallel runs)",
+      "Priority support, 24hr response",
+    ],
+    popular: false,
+    featured: true,
+    purchasable: true, // ✅ LIVE — flagship plan
   },
 ]
+
+/** The subset of plans currently for sale.  Powers the "Choose Your Plan"
+ * grid.  Indexed by the local `selectedPlan` state so changing this
+ * array's length will not break the index. */
+const purchasablePlans = subscriptionPlans.filter((p) => p.purchasable)
 
 const additionalCreditPackages = [
   {
@@ -416,7 +462,7 @@ function UsageChart({
       return (
         <g key={tick}>
           <line x1={padding.left} x2={vbW - padding.right} y1={y} y2={y} stroke="currentColor" strokeOpacity={tick === 0 ? 0.15 : 0.06} strokeWidth={0.5} />
-          <text x={padding.left - 10} y={y + 3.5} textAnchor="end" fontSize={9.5} fill="currentColor" fillOpacity={0.4} fontFamily="system-ui, -apple-system, sans-serif" fontWeight={400}>
+          <text x={padding.left - 10} y={y + 3.5} textAnchor="end" fontSize={9.5} fill="currentColor" fillOpacity={0.4} fontFamily={SVG_SYSTEM_STACK} fontWeight={400}>
             {formatAxisValue(tick)}
           </text>
         </g>
@@ -431,7 +477,7 @@ function UsageChart({
         ? padding.left + (i + 0.5) * (chartW / visibleData.length)
         : padding.left + (i / Math.max(visibleData.length - 1, 1)) * chartW
       return (
-        <text key={i} x={x} y={vbH - 8} textAnchor="middle" fontSize={9} fill="currentColor" fillOpacity={0.4} fontFamily="system-ui, -apple-system, sans-serif" fontWeight={400}>
+        <text key={i} x={x} y={vbH - 8} textAnchor="middle" fontSize={9} fill="currentColor" fillOpacity={0.4} fontFamily={SVG_SYSTEM_STACK} fontWeight={400}>
           {formatShortDate(d.date)}
         </text>
       )
@@ -686,35 +732,35 @@ function StatCard({
   accent?: "default" | "green" | "red" | "blue" | "purple"
 }) {
   return (
-    <div className="rounded-xl border border-border/40 bg-card/30 p-4 flex flex-col min-h-[120px]">
-      <div className="flex items-center justify-between mb-auto">
-        <span className="text-[11px] font-medium text-muted-foreground/50 uppercase tracking-wider">
+    <div className="rounded-xl border border-border/40 bg-card/30 p-4 flex flex-col min-h-[120px] overflow-hidden">
+      <div className="flex items-center justify-between mb-auto gap-2 min-w-0">
+        <span className="text-[11px] font-medium text-muted-foreground/50 uppercase tracking-wider truncate">
           {label}
         </span>
-        <div className="h-7 w-7 rounded-lg flex items-center justify-center bg-foreground/[0.04]">
+        <div className="h-7 w-7 rounded-lg flex items-center justify-center bg-foreground/[0.04] shrink-0">
           <Icon className="h-3.5 w-3.5 text-foreground/40" />
         </div>
       </div>
-      <div>
-        <div className="flex items-baseline gap-1.5">
-          <span className="text-[22px] font-bold tracking-tight text-foreground leading-none">
+      <div className="min-w-0">
+        <div className="flex items-baseline gap-1.5 flex-wrap">
+          <span className="text-[20px] font-bold tracking-tight text-foreground leading-none whitespace-nowrap tabular-nums">
             {value}
           </span>
           {subtext && (
-            <span className="text-[11px] text-muted-foreground/50 leading-none">{subtext}</span>
+            <span className="text-[11px] text-muted-foreground/50 leading-none truncate">{subtext}</span>
           )}
         </div>
-        <div className="h-4 mt-1.5">
+        <div className="h-4 mt-2">
           {trend && trendLabel ? (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 min-w-0">
               {trend === "up" ? (
-                <ArrowUpRight className="h-3 w-3 text-foreground/40" />
+                <ArrowUpRight className="h-3 w-3 text-foreground/40 shrink-0" />
               ) : trend === "down" ? (
-                <ArrowDownRight className="h-3 w-3 text-foreground/40" />
+                <ArrowDownRight className="h-3 w-3 text-foreground/40 shrink-0" />
               ) : (
-                <Activity className="h-3 w-3 text-muted-foreground/40" />
+                <Activity className="h-3 w-3 text-muted-foreground/40 shrink-0" />
               )}
-              <span className="text-[10px] leading-none text-muted-foreground/50">
+              <span className="text-[10px] leading-none text-muted-foreground/50 truncate">
                 {trendLabel}
               </span>
             </div>
@@ -722,6 +768,316 @@ function StatCard({
         </div>
       </div>
     </div>
+  )
+}
+
+// ─── Unlimited Plan — Sleek Stat Card Variants ──────────────────────────────
+//
+// Design: minimal hairline borders, no animations, single signature accent
+// per card (a tinted icon).  Matches the existing StatCard footprint so the
+// 4-card grid stays visually balanced — only the icon color + value content
+// changes for unlimited.
+
+function UnlimitedBalanceCard({ label }: { label: string }) {
+  return (
+    <div className="relative rounded-xl border border-border/40 bg-card/30 p-4 flex flex-col min-h-[120px] overflow-hidden isolate">
+      <UnlimitedSmoke variant="stat" />
+      <div className="relative flex items-center justify-between mb-auto gap-2 min-w-0">
+        <span className="text-[11px] font-medium text-muted-foreground/50 uppercase tracking-wider truncate">
+          {label}
+        </span>
+        <div className="h-7 w-7 rounded-lg flex items-center justify-center bg-background/70 backdrop-blur-md ring-1 ring-amber-500/25 shrink-0">
+          <InfinityIcon
+            className="h-3.5 w-3.5 text-amber-500/80"
+            strokeWidth={2.25}
+          />
+        </div>
+      </div>
+      <div className="relative min-w-0">
+        <div className="flex items-baseline gap-1.5 flex-wrap">
+          <span className="text-[20px] font-bold tracking-tight text-foreground leading-none whitespace-nowrap">
+            Unlimited
+          </span>
+          <span className="text-[11px] text-muted-foreground/50 leading-none">
+            credits
+          </span>
+        </div>
+        <div className="h-4 mt-2">
+          <span className="text-[10px] leading-none text-muted-foreground/50 block truncate">
+            No depletion
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function UnlimitedSavingsCard({
+  amountSavedUSD,
+  wouldHavePaidUSD,
+  timeRangeLabel,
+}: {
+  amountSavedUSD: number
+  wouldHavePaidUSD: number
+  timeRangeLabel: string
+}) {
+  // Edge case: no usage yet → show a calmer "still warming up" state
+  // instead of "Saved $0", which reads as a downer when it's actually
+  // just early days.
+  const hasMeaningfulSavings = amountSavedUSD > 0
+  // Short range token for the trend footer ("last 30 days" → "30d") so
+  // the line never gets close to overflow at narrow widths.
+  const shortRange = timeRangeLabel
+    .replace(/^last\s+/i, "")
+    .replace(/\s*days?$/i, "d")
+    .replace(/^all time$/i, "all-time")
+
+  return (
+    <div className="relative rounded-xl border border-border/40 bg-card/30 p-4 flex flex-col min-h-[120px] overflow-hidden isolate">
+      <UnlimitedSmoke variant="stat" />
+      <div className="relative flex items-center justify-between mb-auto gap-2 min-w-0">
+        <span className="text-[11px] font-medium text-muted-foreground/50 uppercase tracking-wider truncate">
+          Saved
+        </span>
+        <div className="h-7 w-7 rounded-lg flex items-center justify-center bg-background/70 backdrop-blur-md ring-1 ring-amber-500/25 shrink-0">
+          <TrendUp size={14} weight="bold" className="text-foreground/40" />
+        </div>
+      </div>
+      <div className="relative min-w-0">
+        {hasMeaningfulSavings ? (
+          <>
+            {/* Headline — bold dollar amount, fixed-width digits */}
+            <p className="text-[22px] font-bold tracking-tight text-foreground leading-none tabular-nums truncate">
+              ${amountSavedUSD.toLocaleString()}
+            </p>
+            {/* Soft secondary — "vs $748 PAYG · 30d" all together, one quiet line */}
+            <p className="text-[11px] leading-none text-muted-foreground/55 truncate mt-2 tabular-nums">
+              vs ${wouldHavePaidUSD.toLocaleString()} PAYG
+              <span className="text-muted-foreground/35"> · </span>
+              <span className="text-muted-foreground/45">{shortRange}</span>
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-[20px] font-bold tracking-tight text-foreground/80 leading-none truncate">
+              Warming up
+            </p>
+            <p className="text-[11px] leading-none text-muted-foreground/55 truncate mt-2">
+              Use Coasty more to see savings
+            </p>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function UnlimitedPlanCard({
+  planName,
+  priceUSD,
+  renewalDateStr,
+  cancelAtPeriodEnd,
+}: {
+  planName: string
+  priceUSD: number
+  renewalDateStr: string | null
+  cancelAtPeriodEnd: boolean
+}) {
+  return (
+    <div className="relative rounded-xl border border-border/40 bg-card/30 p-4 flex flex-col min-h-[120px] overflow-hidden isolate">
+      <UnlimitedSmoke variant="stat" />
+      <div className="relative flex items-center justify-between mb-auto gap-2 min-w-0">
+        <span className="text-[11px] font-medium text-muted-foreground/50 uppercase tracking-wider truncate">
+          Plan
+        </span>
+        <div className="h-7 w-7 rounded-lg flex items-center justify-center bg-background/70 backdrop-blur-md ring-1 ring-amber-500/25 shrink-0">
+          <Crown size={14} weight="fill" className="text-amber-500/80" />
+        </div>
+      </div>
+      <div className="relative min-w-0">
+        {/* Plan name — bold, like a title */}
+        <p className="text-[20px] font-bold tracking-tight text-foreground leading-none truncate">
+          {planName}
+        </p>
+        {/* Price — second line, prominent enough to read at a glance */}
+        <p className="text-[13px] font-semibold text-foreground/75 leading-none tabular-nums mt-2 truncate">
+          ${priceUSD}
+          <span className="font-normal text-muted-foreground/60"> /month</span>
+        </p>
+        {/* Renewal — third line, quiet */}
+        <div className="h-4 mt-2">
+          {renewalDateStr ? (
+            <span className="text-[10px] leading-none text-muted-foreground/50 block truncate">
+              {cancelAtPeriodEnd ? "Ends" : "Renews"} {renewalDateStr}
+            </span>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─── Unlimited Hero Card ────────────────────────────────────────────────────
+//
+// Replaces Auto-Refill + Add Credits + Credit Activity chart for Unlimited
+// subscribers.  Single sleek box — no perks grid, no feature-list noise,
+// no animations.  Just: title, the 3 stats that actually matter (renewal,
+// savings, this-period usage), and a cancel-anytime reassurance.
+// One signature element: a faint amber hairline at the top edge.
+
+function UnlimitedHeroCard({
+  creditsUsedThisPeriod,
+  monthlySavingsUSD,
+  renewalDateStr,
+  daysUntilRenewal,
+  activeSinceStr,
+  usageSessions,
+  onManage,
+  cancelAtPeriodEnd,
+  fadeUpVariant,
+}: {
+  creditsUsedThisPeriod: number
+  monthlySavingsUSD: number
+  renewalDateStr: string | null
+  daysUntilRenewal: number | null
+  activeSinceStr: string | null
+  usageSessions: number
+  onManage: () => void
+  cancelAtPeriodEnd: boolean
+  fadeUpVariant: ReturnType<typeof Object>
+}) {
+  return (
+    <motion.div {...fadeUpVariant}>
+      <div className="relative rounded-xl border border-border/40 bg-card/30 overflow-hidden isolate">
+        {/* Slow amber smoke — sits below all card chrome.  See
+            app/components/effects/unlimited-smoke.tsx + globals.css
+            smoke-optimized-* keyframes. */}
+        <UnlimitedSmoke variant="hero" />
+
+        {/* Single signature accent — a hairline at the top edge, the only
+            "decoration" on the card.  Mirrors the landing pricing card's
+            unlimited treatment. */}
+        <div
+          aria-hidden
+          className="absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/60 to-transparent z-10"
+        />
+
+        {/* ── Header row ──────────────────────────────────────────────── */}
+        <div className="relative flex items-start justify-between gap-4 px-5 pt-5 pb-4 sm:px-6 sm:pt-6">
+          <div className="flex items-start gap-3 min-w-0">
+            <div className="h-9 w-9 rounded-lg bg-foreground/[0.04] flex items-center justify-center shrink-0">
+              <InfinityIcon
+                className="h-4 w-4 text-amber-500/80"
+                strokeWidth={2.25}
+              />
+            </div>
+            <div className="min-w-0">
+              <h3 className="text-sm font-semibold text-foreground tracking-tight truncate">
+                Unlimited Plan Active
+              </h3>
+              <p className="text-[12px] text-muted-foreground/60 mt-0.5 truncate">
+                No caps, no top-ups, no surprises.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onManage}
+            className="hidden sm:inline-flex shrink-0 items-center gap-1.5 h-7 px-3 rounded-md text-[11px] font-medium text-muted-foreground hover:text-foreground border border-border/40 hover:border-border/70 bg-transparent hover:bg-muted/40 transition-colors"
+          >
+            Manage
+            <ArrowUpRight className="h-3 w-3" />
+          </button>
+        </div>
+
+        {/* ── Stats row — renewal + savings + this-period ─────────────── */}
+        {/* Layout: icon left, stacked content right (eyebrow / value /
+            optional small secondary).  Saved deliberately omits the
+            secondary line — the eyebrow "Saved vs PAYG" already gives
+            full context, so the dollar amount stands alone.  Items-start
+            keeps icons aligned with the eyebrow row across cells of
+            uneven height. */}
+        <div className="relative grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border/30 border-y border-border/30 bg-background/75 backdrop-blur-md">
+          {/* Renewal */}
+          <div className="flex items-start gap-2.5 px-5 py-4 sm:px-6 min-w-0">
+            <CalendarCheck size={13} weight="bold" className="text-muted-foreground/40 shrink-0 mt-[3px]" />
+            <div className="flex-1 min-w-0 leading-tight">
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                {cancelAtPeriodEnd ? "Ends" : "Renews"}
+              </p>
+              <p className="text-[14px] font-semibold text-foreground tracking-tight tabular-nums truncate mt-1">
+                {renewalDateStr ?? "—"}
+              </p>
+              {daysUntilRenewal !== null && (
+                <p className="text-[11px] text-muted-foreground/55 tabular-nums truncate mt-0.5">
+                  in {daysUntilRenewal.toLocaleString()} days
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* Savings — single number, no inline comparison */}
+          <div className="flex items-start gap-2.5 px-5 py-4 sm:px-6 min-w-0">
+            <TrendUp size={13} weight="bold" className="text-muted-foreground/40 shrink-0 mt-[3px]" />
+            <div className="flex-1 min-w-0 leading-tight">
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                Saved vs PAYG
+              </p>
+              {monthlySavingsUSD > 0 ? (
+                <p className="text-[14px] font-semibold text-foreground tracking-tight tabular-nums truncate mt-1">
+                  ${monthlySavingsUSD.toLocaleString()}
+                </p>
+              ) : (
+                <p className="text-[13px] text-muted-foreground/55 truncate mt-1">
+                  Build up usage to see
+                </p>
+              )}
+            </div>
+          </div>
+
+          {/* This period — credits as primary, sessions as quiet secondary */}
+          <div className="flex items-start gap-2.5 px-5 py-4 sm:px-6 min-w-0">
+            <ShieldCheck size={13} weight="bold" className="text-muted-foreground/40 shrink-0 mt-[3px]" />
+            <div className="flex-1 min-w-0 leading-tight">
+              <p className="text-[10px] uppercase tracking-wider text-muted-foreground/50 font-medium">
+                This period
+              </p>
+              <p className="text-[14px] font-semibold text-foreground tracking-tight tabular-nums truncate mt-1">
+                {creditsUsedThisPeriod.toLocaleString()} credits
+              </p>
+              <p className="text-[11px] text-muted-foreground/55 tabular-nums truncate mt-0.5">
+                across {usageSessions.toLocaleString()} {usageSessions === 1 ? "session" : "sessions"}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Bottom strip — member-since + cancel reassurance ────────── */}
+        <div className="relative flex items-center justify-between gap-3 px-5 py-3 sm:px-6">
+          <p className="text-[11px] text-muted-foreground/50 leading-none truncate min-w-0">
+            {activeSinceStr ? (
+              <>
+                <span className="text-foreground/55">Member since {activeSinceStr}</span>
+                <span className="mx-1.5 text-muted-foreground/30">·</span>
+              </>
+            ) : null}
+            {cancelAtPeriodEnd ? (
+              <span className="text-amber-600/80 dark:text-amber-400/80">
+                Subscription ends at period close
+              </span>
+            ) : (
+              "Cancel anytime"
+            )}
+          </p>
+          <button
+            onClick={onManage}
+            className="sm:hidden inline-flex shrink-0 items-center gap-1 h-6 px-2 rounded text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Manage
+            <ArrowUpRight className="h-2.5 w-2.5" />
+          </button>
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
@@ -998,7 +1354,13 @@ export function BillingSection() {
   const [subscription, setSubscription] = useState<UserSubscription | null>(null)
   const [loadingSubscription, setLoadingSubscription] = useState(true)
   const [subscribingPlan, setSubscribingPlan] = useState<string | null>(null)
-  const [selectedPlan, setSelectedPlan] = useState(2)
+  // Default to the flagship "unlimited" pill if it's currently live,
+  // otherwise the last available plan.  Indexes into `purchasablePlans`,
+  // not `subscriptionPlans` — clamp to a safe range if the list shrinks.
+  const [selectedPlan, setSelectedPlan] = useState(() => {
+    const idx = purchasablePlans.findIndex((p) => p.id === "unlimited")
+    return idx >= 0 ? idx : Math.max(0, purchasablePlans.length - 1)
+  })
 
   // Chart & filter state
   const [timeRange, setTimeRange] = useState<TimeRange>("30d")
@@ -1186,8 +1548,15 @@ export function BillingSection() {
       }
     }
 
+    // Normalize balance to 0 for unlimited subscribers — see comment at top.
+    // Inlined here (rather than using `isUnlimitedActivePlan` from below)
+    // because chartData runs before that derivation in source order.
+    if (subscription?.tier === "unlimited") {
+      return result.map((d) => ({ ...d, balance: 0 }))
+    }
+
     return result
-  }, [transactions, timeRange])
+  }, [transactions, timeRange, subscription?.tier])
 
   const stats = useMemo(() => {
     const rangeDate = getTimeRangeDate(timeRange)
@@ -1218,12 +1587,51 @@ export function BillingSection() {
     ? subscriptionPlans.find((p) => p.tier === subscription.tier)
     : null
 
-  const creditUsagePercent = activePlan
-    ? Math.min(
+  // Unlimited plan: usage % is meaningless (the sentinel monthlyCredits
+  // would always read ~100% used).  Treat as 0 so the progress bar reads
+  // empty (i.e. "nothing depleted") and the UI elsewhere shows "Unlimited".
+  const isUnlimitedActivePlan = activePlan?.tier === "unlimited"
+  const creditUsagePercent = !activePlan || isUnlimitedActivePlan
+    ? 0
+    : Math.min(
         100,
         ((activePlan.monthlyCredits - (credits?.balance || 0)) / activePlan.monthlyCredits) * 100
       )
-    : 0
+
+  // ─── Unlimited-plan computations ─────────────────────────────────────────
+  //
+  // Used to power the cool "VIP" placeholder UI for Unlimited subscribers
+  // — see <UnlimitedHeroCard /> below.  Rate is the Ultra Boost rate
+  // ($99/1,200 credits = $0.0825/credit) — the cheapest pay-as-you-go
+  // option, so the savings number stays conservative even at heavy usage.
+  const PAYG_CREDIT_RATE_USD = 0.0825
+  const UNLIMITED_MONTHLY_PRICE_USD = 249
+  const wouldHavePaidPAYG = Math.round(stats.totalSpent * PAYG_CREDIT_RATE_USD)
+  const monthlySavingsUSD = Math.max(0, wouldHavePaidPAYG - UNLIMITED_MONTHLY_PRICE_USD)
+
+  const renewalDateStr = subscription?.current_period_end
+    ? new Date(subscription.current_period_end).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      })
+    : null
+  const daysUntilRenewal = subscription?.current_period_end
+    ? Math.max(
+        0,
+        Math.ceil(
+          (new Date(subscription.current_period_end).getTime() - Date.now()) /
+            (1000 * 60 * 60 * 24)
+        )
+      )
+    : null
+  // "Active since" — when did this subscription start?  Falls back to
+  // created_at if current_period_start isn't surfaced on the type.
+  const activeSinceStr = subscription?.created_at
+    ? new Date(subscription.created_at).toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      })
+    : null
 
   // ─── Actions ────────────────────────────────────────────────────────────
 
@@ -1313,7 +1721,10 @@ export function BillingSection() {
     toast.success(t("toasts.transactionsExported"))
   }, [filteredTransactions, timeRange, t])
 
-  const plan = subscriptionPlans[selectedPlan]
+  // Index into the PURCHASABLE list, not the full one — hidden plans must
+  // never be reachable through the pill-tab UI.  If the in-memory selected
+  // index is out of range (because the purchasable count shrank), clamp.
+  const plan = purchasablePlans[selectedPlan] ?? purchasablePlans[0]
 
   // ─── Animation helpers ──────────────────────────────────────────────────
 
@@ -1329,26 +1740,48 @@ export function BillingSection() {
     <div className="space-y-8">
 
       {/* ─── Overview Cards ──────────────────────────────────────────────── */}
+      {/* For Unlimited subscribers the Balance card switches to an ∞ display
+          and the Earned card switches to a "Saved vs PAYG" stat — both via
+          the dedicated UnlimitedBalanceCard / UnlimitedSavingsCard renderers
+          below.  Used + Plan cards are tier-agnostic and rendered the same
+          way regardless. */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          <StatCard
-            key="balance"
-            label={t("stats.balance")}
-            value={creditsLoading ? "..." : (credits?.balance || 0).toLocaleString()}
-            subtext={t("stats.credits")}
-            icon={Wallet}
-            accent="purple"
-            trend={stats.netChange > 0 ? "up" : stats.netChange < 0 ? "down" : "neutral"}
-            trendLabel={stats.daysRemaining !== null ? `~${stats.daysRemaining}d at current rate` : undefined}
-          />,
-          <StatCard
-            key="earned"
-            label={t("stats.earned")}
-            value={`+${stats.totalEarned.toLocaleString()}`}
-            subtext={timeRange === "all" ? t("stats.allTime") : t("stats.lastRange", { range: timeRange.replace("d", " days") })}
-            icon={TrendUp}
-            accent="green"
-          />,
+          isUnlimitedActivePlan ? (
+            <UnlimitedBalanceCard key="balance" label={t("stats.balance")} />
+          ) : (
+            <StatCard
+              key="balance"
+              label={t("stats.balance")}
+              value={creditsLoading ? "..." : (credits?.balance || 0).toLocaleString()}
+              subtext={t("stats.credits")}
+              icon={Wallet}
+              accent="purple"
+              trend={stats.netChange > 0 ? "up" : stats.netChange < 0 ? "down" : "neutral"}
+              trendLabel={stats.daysRemaining !== null ? `~${stats.daysRemaining}d at current rate` : undefined}
+            />
+          ),
+          isUnlimitedActivePlan ? (
+            <UnlimitedSavingsCard
+              key="saved"
+              amountSavedUSD={monthlySavingsUSD}
+              wouldHavePaidUSD={wouldHavePaidPAYG}
+              timeRangeLabel={
+                timeRange === "all"
+                  ? t("stats.allTime")
+                  : t("stats.lastRange", { range: timeRange.replace("d", " days") })
+              }
+            />
+          ) : (
+            <StatCard
+              key="earned"
+              label={t("stats.earned")}
+              value={`+${stats.totalEarned.toLocaleString()}`}
+              subtext={timeRange === "all" ? t("stats.allTime") : t("stats.lastRange", { range: timeRange.replace("d", " days") })}
+              icon={TrendUp}
+              accent="green"
+            />
+          ),
           <StatCard
             key="used"
             label={t("stats.used")}
@@ -1359,16 +1792,26 @@ export function BillingSection() {
             trend={stats.avgDailyUsage > 0 ? "neutral" : undefined}
             trendLabel={stats.avgDailyUsage > 0 ? t("stats.avgDaily", { count: Math.round(stats.avgDailyUsage) }) : undefined}
           />,
-          <StatCard
-            key="plan"
-            label={t("stats.plan")}
-            value={activePlan?.name || t("stats.free")}
-            subtext={activePlan ? `$${activePlan.price}/mo` : t("stats.noPlan")}
-            icon={CoastyIcon}
-            accent="blue"
-            trend={subscription?.cancel_at_period_end ? "down" : undefined}
-            trendLabel={subscription?.cancel_at_period_end ? t("stats.canceling") : undefined}
-          />,
+          isUnlimitedActivePlan && activePlan ? (
+            <UnlimitedPlanCard
+              key="plan"
+              planName={activePlan.name}
+              priceUSD={activePlan.price}
+              renewalDateStr={renewalDateStr}
+              cancelAtPeriodEnd={!!subscription?.cancel_at_period_end}
+            />
+          ) : (
+            <StatCard
+              key="plan"
+              label={t("stats.plan")}
+              value={activePlan?.name || t("stats.free")}
+              subtext={activePlan ? `$${activePlan.price}/mo` : t("stats.noPlan")}
+              icon={CoastyIcon}
+              accent="blue"
+              trend={subscription?.cancel_at_period_end ? "down" : undefined}
+              trendLabel={subscription?.cancel_at_period_end ? t("stats.canceling") : undefined}
+            />
+          ),
         ].map((card, i) => (
           <motion.div key={i} {...fadeUp(i * 0.06)}>
             {card}
@@ -1388,7 +1831,7 @@ export function BillingSection() {
 
           {/* Plan pills */}
           <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
-            {subscriptionPlans.map((p, i) => (
+            {purchasablePlans.map((p, i) => (
               <button
                 key={p.name}
                 onClick={() => setSelectedPlan(i)}
@@ -1506,7 +1949,9 @@ export function BillingSection() {
             <div className="mb-3 flex items-center gap-2 rounded-lg bg-muted/50 border border-border/30 px-3 py-2">
               <Zap className="h-3.5 w-3.5 text-foreground/40 flex-shrink-0" />
               <span className="text-sm font-medium text-foreground">
-                {t("creditsPerMonth", { count: plan.monthlyCredits.toLocaleString() })}
+                {plan.tier === "unlimited"
+                  ? "Unlimited credits — no caps"
+                  : t("creditsPerMonth", { count: plan.monthlyCredits.toLocaleString() })}
               </span>
             </div>
 
@@ -1571,7 +2016,9 @@ export function BillingSection() {
                     ${activePlan?.price || 0}/month
                     {activePlan && (
                       <span className="text-muted-foreground/50">
-                        {" · "}{activePlan.monthlyCredits} credits/mo
+                        {" · "}{activePlan.tier === "unlimited"
+                          ? "Unlimited credits/mo"
+                          : `${activePlan.monthlyCredits.toLocaleString()} credits/mo`}
                       </span>
                     )}
                   </p>
@@ -1634,7 +2081,30 @@ export function BillingSection() {
         </>
       )}
 
+      {/* ─── Unlimited "VIP" Hero (replaces Auto-Refill + Add Credits) ──── */}
+      {/* Unlimited subscribers have no need for Auto-Refill or boost packs,
+          so we swap both sections for one premium hero card that
+          (a) acknowledges their tier visually,
+          (b) surfaces renewal + savings info that IS useful,
+          (c) links to subscription management.
+          When the user is NOT on Unlimited, the standard Auto-Refill +
+          Add Credits sections render below as usual. */}
+      {isUnlimitedActivePlan && (
+        <UnlimitedHeroCard
+          creditsUsedThisPeriod={stats.totalSpent}
+          monthlySavingsUSD={monthlySavingsUSD}
+          renewalDateStr={renewalDateStr}
+          daysUntilRenewal={daysUntilRenewal}
+          activeSinceStr={activeSinceStr}
+          usageSessions={stats.usageSessions}
+          onManage={handleManageSubscription}
+          cancelAtPeriodEnd={!!subscription?.cancel_at_period_end}
+          fadeUpVariant={fadeUp(0.38)}
+        />
+      )}
+
       {/* ─── Auto-Refill ──────────────────────────────────────────────── */}
+      {!isUnlimitedActivePlan && (
       <motion.div {...fadeUp(0.38)}>
         <div className="rounded-xl border border-border/40 overflow-hidden">
           <div className={cn("flex items-center justify-between px-4 py-3", autoRefill.enabled && "border-b border-border/30")}>
@@ -1742,8 +2212,10 @@ export function BillingSection() {
           )}
         </div>
       </motion.div>
+      )}
 
       {/* ─── Additional Credits ──────────────────────────────────────────── */}
+      {!isUnlimitedActivePlan && (
       <motion.div {...fadeUp(0.4)}>
         <div className="flex items-center justify-between mb-3">
           <div>
@@ -1786,8 +2258,16 @@ export function BillingSection() {
           ))}
         </div>
       </motion.div>
+      )}
 
       {/* ─── Usage Chart ─────────────────────────────────────────────────── */}
+      {/* Hidden for Unlimited subscribers — the chart's Balance series
+          would render flat at the sentinel value (~1B), and Earned would
+          spike disproportionately on the renewal grant.  Their per-period
+          usage is already surfaced in the "This period" cell of
+          <UnlimitedHeroCard /> above, and granular per-transaction
+          history is below in the Transactions table. */}
+      {!isUnlimitedActivePlan && (
       <motion.div {...fadeUp(0.45)} className="rounded-xl border border-border/30 bg-card/20 overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 pt-5 pb-1">
           <div className="flex items-center gap-2.5">
@@ -1844,6 +2324,7 @@ export function BillingSection() {
           )}
         </div>
       </motion.div>
+      )}
 
       {/* ─── Transaction History ──────────────────────────────────────────── */}
       <motion.div {...fadeUp(0.55)}>

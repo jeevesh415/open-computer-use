@@ -1,0 +1,217 @@
+{
+  "manifest_version": "0.3",
+  "name": "coasty",
+  "display_name": "Coasty",
+  "version": "1.1.0",
+  "description": "Full computer use for Claude — desktop, browser, terminal, files, schedules. Sandbox VMs free, AWS/Azure infra for production.",
+  "long_description": "Coasty is the only MCP server that gives Claude full computer access — desktop applications, browser automation, terminal execution, file operations, and scheduled jobs (cron + webhooks + email) — running on either a cloud VM (AWS EC2 ARM64 / Azure ACI) or your own machine via the Coasty Electron app. 26 tools (incl. one-shot get_capabilities + get_pricing for agent onboarding), 2 prompts, 4-mode approval system, HMAC-signed webhooks, Idempotency-Key support, and free sandbox keys for instant development.\n\nCompetitors like Browserbase ship browser-only; E2B ships sandbox-only; Anthropic's built-in Computer Use ships cloud-only with no scheduling. Coasty covers all of those surfaces in one package, with a local-execution path so your data never has to leave your machine.\n\nSandbox keys (sk-coasty-test-*) return mock VMs in under 50 ms with zero billing — write your agent against the real wire format, then swap in a live key (sk-coasty-live-*) to ship.",
+  "author": {
+    "name": "Coasty",
+    "email": "founders@coasty.ai",
+    "url": "https://coasty.ai"
+  },
+  "homepage": "https://coasty.ai",
+  "documentation": "https://coasty.ai/api-docs#mcp",
+  "documentation_url": "https://coasty.ai/api-docs#mcp",
+  "discovery_url": "https://coasty.ai/.well-known/mcp/server-card.json",
+  "support": "https://coasty.ai/support",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coasty-ai/coasty-mcp.git"
+  },
+  "icon": "icon.png",
+  "icons": {
+    "light": "icon.svg",
+    "dark": "icon.svg"
+  },
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "claude-desktop",
+    "computer-use",
+    "browser-automation",
+    "desktop-automation",
+    "terminal",
+    "scheduling",
+    "cron",
+    "webhook",
+    "ai-agent",
+    "automation",
+    "anthropic",
+    "coasty"
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18.0.0" }
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/bin/coasty-mcp.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/bin/coasty-mcp.js"],
+      "env": {
+        "COASTY_API_KEY": "${user_config.api_key}",
+        "COASTY_API_BASE_URL": "${user_config.base_url}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Coasty API key",
+      "description": "Get a free sandbox key (sk-coasty-test-*) at https://coasty.ai/developers — it returns mock VMs with zero billing, perfect for development. Use a live key (sk-coasty-live-*) for real AWS/Azure provisioning.",
+      "required": true,
+      "sensitive": true,
+      "pattern": "^(sk-coasty-(live|test)-|cua_sk_).+"
+    },
+    "base_url": {
+      "type": "string",
+      "title": "API base URL (advanced)",
+      "description": "Only change this if you're running self-hosted Coasty.",
+      "required": false,
+      "default": "https://coasty.ai"
+    }
+  },
+  "tools": [
+    {
+      "name": "coasty_predict",
+      "description": "Run a Coasty CUA prediction: given a screenshot and a goal, return a list of actions (click/type/scroll/etc.) with exact coordinates.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_ground",
+      "description": "Find the (x,y) coordinates of an element described in plain language.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_ocr",
+      "description": "Extract text from a screenshot with bounding boxes.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_parse",
+      "description": "Parse pyautogui code into structured Coasty action records (no LLM call).",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_list_machines",
+      "description": "List the user's Coasty VMs.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_get_machine",
+      "description": "Fetch one VM by id.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_take_machine_screenshot",
+      "description": "Capture a screenshot of a running VM's desktop.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_provision_machine",
+      "description": "Provision a fresh VM (Linux or Windows; cloud or sandbox).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_terminate_machine",
+      "description": "Terminate a VM (irreversible — uncommitted state is lost).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_start_machine",
+      "description": "Resume a stopped VM.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_stop_machine",
+      "description": "Stop a running VM (preserves state, cheaper idle billing).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_execute_machine_action",
+      "description": "Dispatch any of 40+ allowlisted actions: click, type, scroll, key combos, browser navigate/click/type, file read/write, terminal exec, etc.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_run_terminal_command",
+      "description": "Execute a shell command on a VM (PowerShell on Windows, bash on Linux).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_list_schedules",
+      "description": "List your Coasty schedules.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_get_schedule",
+      "description": "Fetch one schedule by id.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_list_schedule_runs",
+      "description": "Cursor-paginated execution history for a schedule.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_create_schedule",
+      "description": "Create a cron / one-shot schedule. Appears in the user's /schedules dashboard automatically.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_update_schedule",
+      "description": "Update a schedule (PATCH any field).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_delete_schedule",
+      "description": "Soft-delete a schedule.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_run_schedule_now",
+      "description": "Manually fire a schedule (idempotent with key).",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_pause_schedule",
+      "description": "Disable future fires.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_resume_schedule",
+      "description": "Re-enable future fires.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_add_trigger",
+      "description": "Attach a webhook / email / chain trigger. Webhook secrets returned ONCE.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_remove_trigger",
+      "description": "Remove a trigger.",
+      "annotations": { "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_get_credits",
+      "description": "Read current credit balance, tier, and period usage.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_get_pricing",
+      "description": "Public pricing snapshot — subscription tiers, boost packages, per-call rates. Zero credits, no auth.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "coasty_get_capabilities",
+      "description": "One-shot service description: tools, scopes, limits, discovery links. Zero credits, fully local.",
+      "annotations": { "readOnlyHint": true, "idempotentHint": true, "openWorldHint": false }
+    }
+  ],
+  "privacy_policies": ["https://coasty.ai/privacy"]
+}

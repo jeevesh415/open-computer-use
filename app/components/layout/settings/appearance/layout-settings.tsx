@@ -344,11 +344,11 @@ export function LayoutSettings() {
         )}
       >
         <div className="mb-3 flex items-baseline justify-between">
-          <h3 className="text-sm font-medium">Sidebar style</h3>
+          <h3 className="text-sm font-medium">{t("sidebarStyle")}</h3>
           <span className="text-[11px] text-muted-foreground">
             {sidebarStyleEnabled
-              ? "Choose where the navigation lives"
-              : "Available when Layout is set to Sidebar"}
+              ? t("sidebarStyleHint")
+              : t("sidebarStyleDisabled")}
           </span>
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -366,12 +366,12 @@ export function LayoutSettings() {
             <VerticalLayoutPreview />
             <div className="mt-2.5 flex items-baseline justify-between px-0.5">
               <span className="text-[12.5px] font-semibold text-foreground">
-                Vertical
+                {t("vertical")}
               </span>
-              <span className="text-[10.5px] text-muted-foreground">Default</span>
+              <span className="text-[10.5px] text-muted-foreground">{t("verticalBadge")}</span>
             </div>
             <p className="mt-0.5 px-0.5 text-[10.5px] leading-snug text-muted-foreground">
-              Classic left rail with labels and credits in the footer.
+              {t("verticalDescription")}
             </p>
           </button>
 
@@ -389,12 +389,12 @@ export function LayoutSettings() {
             <HorizontalLayoutPreview />
             <div className="mt-2.5 flex items-baseline justify-between px-0.5">
               <span className="text-[12.5px] font-semibold text-foreground">
-                Horizontal
+                {t("horizontal")}
               </span>
-              <span className="text-[10.5px] text-muted-foreground">Sleek</span>
+              <span className="text-[10.5px] text-muted-foreground">{t("horizontalBadge")}</span>
             </div>
             <p className="mt-0.5 px-0.5 text-[10.5px] leading-snug text-muted-foreground">
-              Single top bar with everything in one row. More canvas height.
+              {t("horizontalDescription")}
             </p>
           </button>
         </div>

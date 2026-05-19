@@ -25,6 +25,7 @@
     "compare": "Compare",
     "demos": "Demos",
     "pricing": "Pricing",
+    "api": "API",
     "download": "Download",
     "signIn": "Sign in",
     "getStarted": "Get Started",
@@ -91,12 +92,12 @@
   },
   "hero": {
     "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonomous computer operators",
+    "headline": "The Best Computer Use Agent",
     "useCases": {
       "computerAgent": {
         "label": "Computer agent",
-        "headline": "automate any browser task",
-        "outcome": "An AI agent that controls a real computer — browses, clicks, types, and delivers finished work. No setup required."
+        "headline": "automate any computer task",
+        "outcome": "Coasty controls a real computer. It browses, clicks, types, and delivers finished work. No setup required."
       },
       "competitorIntel": {
         "label": "Competitor intel",
@@ -163,6 +164,28 @@
       "socialMedia": {
         "label": "Social Media",
         "task": "Post on Hacker News and engage with comments"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "saved monthly",
+        "sublabel": "vs a full-time hire"
+      },
+      "time": {
+        "value": "30 hrs",
+        "label": "reclaimed weekly",
+        "sublabel": "of manual work, eliminated"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "faster output",
+        "sublabel": "tasks done in minutes, not days"
+      },
+      "effort": {
+        "value": "0",
+        "label": "code or hires",
+        "sublabel": "fully managed end-to-end"
       }
     }
   },
@@ -368,9 +391,16 @@
         "name": "Pro",
         "description": "Unlimited heavy automation",
         "cta": "Get Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "No credit limits — ever",
+        "cta": "Go Unlimited",
+        "badge": "Best Value"
       }
     },
     "vmTemporary": "1 temporary VM (2hr)",
+    "unlimitedCredits": "Unlimited credits",
     "vmDeletedAfterInactivity": "1 VM (deleted after inactivity)",
     "vmAlwaysOn": "{count} always-on VM",
     "vmAlwaysOnPlural": "{count} always-on VMs",
@@ -447,7 +477,8 @@
       "contact": "Contact",
       "privacy": "Privacy",
       "terms": "Terms"
-    }
+    },
+    "status": "All systems operational"
   },
   "languageSwitcher": {
     "label": "Language"
@@ -503,6 +534,13 @@
     "google": {
       "connecting": "Connecting...",
       "continueWithGoogle": "Continue with Google"
+    },
+    "inAppBrowser": {
+      "blocked": "Google sign-in doesn't work in embedded browsers. Open this page in your browser, or use a magic link instead.",
+      "blockedNamed": "Google sign-in doesn't work inside {app}. Open this page in your browser, or use a magic link instead.",
+      "copyLink": "Copy link",
+      "copied": "Copied!",
+      "useMagicLink": "Use magic link"
     },
     "or": "or",
     "email": "Email",
@@ -578,18 +616,21 @@
     "getStarted": "Get started",
     "settingUp": "Setting up...",
     "welcome": {
-      "titleReturning": "Welcome back{name}!",
+      "titleReturning": "Welcome back{name}",
       "titleNew": "Welcome to Coasty",
-      "descriptionReturning": "We'd love to learn a bit more about you to improve your experience",
-      "descriptionNew": "Let's set up your account so we can personalize your experience"
+      "eyebrowNew": "Let's get acquainted",
+      "eyebrowReturning": "Almost there",
+      "descriptionReturning": "Just a few more details and Coasty will be fully tuned to the way you work.",
+      "descriptionNew": "Coasty works on real computers — browses, clicks, types, ships. A few quick details so it fits the way you work.",
+      "footerNote": "Takes about a minute. You can change anything later in Settings."
     },
     "nameLabel": "What should we call you?",
-    "namePlaceholder": "Your name",
-    "companyLabel": "Company",
+    "namePlaceholder": "Just your first name",
+    "companyLabel": "Where do you work?",
     "optional": "(optional)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Your company or team",
     "websiteLabel": "Website",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "yourcompany.com",
     "roleStep": {
       "title": "What best describes you?",
       "subtitle": "Select all that apply — this helps us tailor your experience"
@@ -684,8 +725,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "What should your AI worker do?",
-    "placeholderAlt": "Tell your AI what to do on the computer...",
+    "placeholder": "Tell me what to do on this computer...",
+    "placeholderAlt": "Select a computer to get started...",
     "vmError": {
       "title": "Virtual Machine Error",
       "description": "The virtual machine is in an error state or is being deleted.",
@@ -712,13 +753,16 @@
       "offTooltip": "Enable swarm mode to run your prompt across multiple machines simultaneously",
       "decreaseMachines": "Decrease machine count",
       "increaseMachines": "Increase machine count",
-      "machineLimit": "Up to {max} swarm machines on your plan. Need more? Contact founders@coasty.ai"
+      "machineLimit": "Up to {max} swarm machines on your plan. Need more? Contact founders@coasty.ai",
+      "label": "Multi-Run",
+      "upgradeCta": "Swarm mode"
     },
     "desktop": {
       "connectLabel": "Connect to desktop",
       "screenLabel": "{name}'s screen",
       "screenDefault": "Desktop",
-      "watchTooltip": "Watch your agent work on a separate screen. Just don't touch anything or it gets stage fright!"
+      "watchTooltip": "Watch your agent work on a separate screen. Just don't touch anything or it gets stage fright!",
+      "watchLabel": "Desktop"
     },
     "buttons": {
       "stop": "Stop",
@@ -816,6 +860,28 @@
       "ecommerce": "{company} pricing comparison",
       "social_media": "Post about {company}",
       "general_automation": "Automate task on {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Human handoff completed",
+      "yourTurn": "Your turn",
+      "connectToDesktop": "Connect to desktop",
+      "resuming": "Resuming...",
+      "doneContinue": "Done, Continue"
+    },
+    "feedback": {
+      "promptRun": "How was this run?",
+      "promptSwarm": "How was this swarm?",
+      "reactionBad": "Bad",
+      "reactionOkay": "Okay",
+      "reactionGood": "Good",
+      "reactionAmazing": "Amazing",
+      "tellUsMore": "Tell us more",
+      "commentPlaceholder": "What could be better?",
+      "npsPrompt": "Would you recommend Coasty?",
+      "npsNotLikely": "Not likely",
+      "npsVeryLikely": "Very likely",
+      "thanks": "Thanks for the feedback",
+      "creditsLabel": "credits"
     }
   },
   "chatMessages": {
@@ -952,7 +1018,9 @@
     "inMinutes": "in {count}m",
     "inHours": "in {count}h",
     "today": "today",
-    "yesterday": "yesterday"
+    "yesterday": "yesterday",
+    "talkToUsDesc": "Book a 15-min call",
+    "inviteEarnDesc": "Get free credits"
   },
   "appHeader": {
     "login": "Login",
@@ -982,6 +1050,11 @@
       "pro": {
         "name": "Pro",
         "description": "Unlimited heavy automation"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "No credit limits — ever",
+        "badge": "Best Value"
       }
     },
     "features": {
@@ -1149,7 +1222,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Layout"
+    "layout": "Layout",
+    "sidebarStyle": "Sidebar style",
+    "sidebarStyleHint": "Choose where the navigation lives",
+    "sidebarStyleDisabled": "Available when Layout is set to Sidebar",
+    "vertical": "Vertical",
+    "verticalBadge": "Default",
+    "verticalDescription": "Classic left rail with labels and credits in the footer.",
+    "horizontal": "Horizontal",
+    "horizontalBadge": "Sleek",
+    "horizontalDescription": "Single top bar with everything in one row. More canvas height."
   },
   "suggestions": {
     "summary": {
@@ -1394,7 +1476,6 @@
     },
     "loading": "Loading credentials..."
   },
-
   "pricingPage": {
     "hero": {
       "title1": "Simple pricing,",
@@ -1402,19 +1483,73 @@
       "subtitle": "Start free. Upgrade when you need more power."
     },
     "plans": {
-      "free": { "name": "Free", "tagline": "Try the #1 computer-use agent", "cta": "Start Free" },
-      "lite": { "name": "Lite", "tagline": "Light daily automation", "cta": "Get Lite" },
-      "starter": { "name": "Starter", "tagline": "Automate tasks every day", "cta": "Get Starter" },
-      "plus": { "name": "Plus", "tagline": "Scale complex workflows", "cta": "Go Plus", "badge": "Most Popular" },
-      "pro": { "name": "Pro", "tagline": "Unlimited heavy automation", "cta": "Get Pro" }
+      "free": {
+        "name": "Free",
+        "tagline": "Try the #1 computer-use agent",
+        "cta": "Start Free"
+      },
+      "lite": {
+        "name": "Lite",
+        "tagline": "Light daily automation",
+        "cta": "Get Lite"
+      },
+      "starter": {
+        "name": "Starter",
+        "tagline": "Automate tasks every day",
+        "cta": "Get Starter"
+      },
+      "plus": {
+        "name": "Plus",
+        "tagline": "Scale complex workflows",
+        "cta": "Go Plus",
+        "badge": "Most Popular"
+      },
+      "pro": {
+        "name": "Pro",
+        "tagline": "Unlimited heavy automation",
+        "cta": "Get Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "No credit limits — ever",
+        "cta": "Go Unlimited",
+        "badge": "Best Value"
+      }
     },
     "features": {
-      "computerAgent": { "name": "Coasty Computer Agent", "description": "Full browser, desktop & terminal", "badge": "Core" },
-      "swarmMode": { "name": "Swarm Mode", "sequential": "Sequential only", "parallel": "{count} agents in parallel", "badge": "Powerful" },
-      "security": { "name": "Security", "description": "Sandboxed, E2E encrypted", "badge": "Every plan" },
-      "monthlyCredits": { "name": "Monthly Credits", "payAsYouGo": "Pay as you go", "creditsPerMonth": "{count} credits/mo" },
-      "persistentMachines": { "name": "Persistent Machines", "temporary": "1 temporary VM (2hr)", "deletedAfterInactivity": "1 VM (deleted after inactivity)", "alwaysOn": "{count} always-on VM", "alwaysOnPlural": "{count} always-on VMs" },
-      "webSearch": { "name": "Web Search", "advanced": "Advanced search & extraction", "basic": "Basic search" }
+      "computerAgent": {
+        "name": "Coasty Computer Agent",
+        "description": "Full browser, desktop & terminal",
+        "badge": "Core"
+      },
+      "swarmMode": {
+        "name": "Swarm Mode",
+        "sequential": "Sequential only",
+        "parallel": "{count} agents in parallel",
+        "badge": "Powerful"
+      },
+      "security": {
+        "name": "Security",
+        "description": "Sandboxed, E2E encrypted",
+        "badge": "Every plan"
+      },
+      "monthlyCredits": {
+        "name": "Monthly Credits",
+        "payAsYouGo": "Pay as you go",
+        "creditsPerMonth": "{count} credits/mo"
+      },
+      "persistentMachines": {
+        "name": "Persistent Machines",
+        "temporary": "1 temporary VM (2hr)",
+        "deletedAfterInactivity": "1 VM (deleted after inactivity)",
+        "alwaysOn": "{count} always-on VM",
+        "alwaysOnPlural": "{count} always-on VMs"
+      },
+      "webSearch": {
+        "name": "Web Search",
+        "advanced": "Advanced search & extraction",
+        "basic": "Basic search"
+      }
     },
     "animations": {
       "agentDescription": "Your agent controls a real computer — browser, files, and terminal",
@@ -1442,11 +1577,26 @@
     },
     "perMonth": "/mo",
     "faqs": {
-      "credits": { "q": "What counts as a credit?", "a": "One credit equals roughly one agent action — a click, a form fill, a search query, or a file operation. A typical multi-step task uses 5–15 credits." },
-      "persistent": { "q": "What does 'persistent machine' mean?", "a": "On paid plans, your VM stays running between tasks — your desktop, files, browser sessions, and installed software all persist. Like your own always-on cloud computer." },
-      "swarm": { "q": "What is swarm mode?", "a": "Swarm mode splits a task across multiple machines running simultaneously. Instead of one agent doing 10 searches sequentially, multiple agents do them in parallel." },
-      "cancel": { "q": "Can I cancel anytime?", "a": "Yes. No contracts, no cancellation fees. Cancel from your account page and keep access through the end of your billing period." },
-      "security": { "q": "Is my data secure?", "a": "Every task runs in a fully isolated VM destroyed after use. All connections are encrypted end-to-end and we never store your credentials." }
+      "credits": {
+        "q": "What counts as a credit?",
+        "a": "One credit equals roughly one agent action — a click, a form fill, a search query, or a file operation. A typical multi-step task uses 5–15 credits."
+      },
+      "persistent": {
+        "q": "What does 'persistent machine' mean?",
+        "a": "On paid plans, your VM stays running between tasks — your desktop, files, browser sessions, and installed software all persist. Like your own always-on cloud computer."
+      },
+      "swarm": {
+        "q": "What is swarm mode?",
+        "a": "Swarm mode splits a task across multiple machines running simultaneously. Instead of one agent doing 10 searches sequentially, multiple agents do them in parallel."
+      },
+      "cancel": {
+        "q": "Can I cancel anytime?",
+        "a": "Yes. No contracts, no cancellation fees. Cancel from your account page and keep access through the end of your billing period."
+      },
+      "security": {
+        "q": "Is my data secure?",
+        "a": "Every task runs in a fully isolated VM destroyed after use. All connections are encrypted end-to-end and we never store your credentials."
+      }
     },
     "enterprise": {
       "title": "Enterprise",
@@ -1463,7 +1613,6 @@
     },
     "questions": "Questions"
   },
-
   "guide": {
     "pageTitle": "Guide",
     "pageSubtitle": "From first setup to advanced features — learn how to get the most out of Coasty",
@@ -1491,23 +1640,65 @@
       "whatCanDo": "What Coasty can do",
       "taskCount": "40+ tasks across 10 categories",
       "categories": {
-        "sales": { "name": "Sales", "desc": "Find 50 leads, send personalized emails" },
-        "marketing": { "name": "Marketing", "desc": "Publish blog posts, schedule social media" },
-        "jobApps": { "name": "Job Apps", "desc": "Apply to 20 jobs, tailor each resume" },
-        "email": { "name": "Email", "desc": "Draft replies, bulk outreach, unsubscribe" },
-        "dataEntry": { "name": "Data Entry", "desc": "Transfer data between apps, build spreadsheets" },
-        "research": { "name": "Research", "desc": "Deep reports, competitor monitoring" },
-        "qaTesting": { "name": "QA Testing", "desc": "Test signups, fuzz forms, site health checks" },
-        "hr": { "name": "HR", "desc": "Source candidates, personalized outreach" },
-        "support": { "name": "Support", "desc": "Draft responses, update help docs" },
-        "productivity": { "name": "Productivity", "desc": "Book travel, pay bills, manage calendars" }
+        "sales": {
+          "name": "Sales",
+          "desc": "Find 50 leads, send personalized emails"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "desc": "Publish blog posts, schedule social media"
+        },
+        "jobApps": {
+          "name": "Job Apps",
+          "desc": "Apply to 20 jobs, tailor each resume"
+        },
+        "email": {
+          "name": "Email",
+          "desc": "Draft replies, bulk outreach, unsubscribe"
+        },
+        "dataEntry": {
+          "name": "Data Entry",
+          "desc": "Transfer data between apps, build spreadsheets"
+        },
+        "research": {
+          "name": "Research",
+          "desc": "Deep reports, competitor monitoring"
+        },
+        "qaTesting": {
+          "name": "QA Testing",
+          "desc": "Test signups, fuzz forms, site health checks"
+        },
+        "hr": {
+          "name": "HR",
+          "desc": "Source candidates, personalized outreach"
+        },
+        "support": {
+          "name": "Support",
+          "desc": "Draft responses, update help docs"
+        },
+        "productivity": {
+          "name": "Productivity",
+          "desc": "Book travel, pay bills, manage calendars"
+        }
       },
       "whyCoasty": "Why Coasty",
       "notChatbot": "Not a chatbot. Not an RPA script.",
-      "worksLikeHuman": { "title": "Works like a human", "desc": "Sees, clicks, types, navigates — exactly like you" },
-      "noScripts": { "title": "No scripts or setup", "desc": "Plain English in, results out" },
-      "handlesUnexpected": { "title": "Handles the unexpected", "desc": "Adapts to CAPTCHAs, popups, layout changes" },
-      "runsInIsolation": { "title": "Runs in isolation", "desc": "Sandboxed VM per session — nothing leaks" },
+      "worksLikeHuman": {
+        "title": "Works like a human",
+        "desc": "Sees, clicks, types, navigates — exactly like you"
+      },
+      "noScripts": {
+        "title": "No scripts or setup",
+        "desc": "Plain English in, results out"
+      },
+      "handlesUnexpected": {
+        "title": "Handles the unexpected",
+        "desc": "Adapts to CAPTCHAs, popups, layout changes"
+      },
+      "runsInIsolation": {
+        "title": "Runs in isolation",
+        "desc": "Sandboxed VM per session — nothing leaks"
+      },
       "ctaTitle": "Pick any task and try it",
       "ctaSubtitle": "Ready to put Coasty to work?",
       "ctaDescription": "Describe any task from this guide and watch Coasty handle it.",
@@ -1518,10 +1709,22 @@
     },
     "gettingStarted": {
       "steps": {
-        "signUp": { "title": "Sign Up", "desc": "One click to start" },
-        "createMachine": { "title": "Create a Machine", "desc": "Your agent gets its own computer" },
-        "saveCredentials": { "title": "Save Credentials", "desc": "Encrypted logins for any site" },
-        "giveTask": { "title": "Give a Task", "desc": "Describe it. Watch it happen." }
+        "signUp": {
+          "title": "Sign Up",
+          "desc": "One click to start"
+        },
+        "createMachine": {
+          "title": "Create a Machine",
+          "desc": "Your agent gets its own computer"
+        },
+        "saveCredentials": {
+          "title": "Save Credentials",
+          "desc": "Encrypted logins for any site"
+        },
+        "giveTask": {
+          "title": "Give a Task",
+          "desc": "Describe it. Watch it happen."
+        }
       },
       "examplePrompts": [
         "Apply to 10 matching jobs on LinkedIn with my resume",
@@ -1618,12 +1821,30 @@
       "pending": "Pending",
       "result": "RESULT",
       "useCases": {
-        "parallelResearch": { "title": "Parallel research", "desc": "{count} competitors, {count} machines, simultaneously" },
-        "bulkApplications": { "title": "Bulk applications", "desc": "Apply across platforms at the same time" },
-        "multiCitySearch": { "title": "Multi-city search", "desc": "Search listings in {count} cities at once" },
-        "parallelOutreach": { "title": "Parallel outreach", "desc": "Personalized emails to different segments" },
-        "crossPlatform": { "title": "Cross-platform", "desc": "Post to {count} platforms simultaneously" },
-        "distributedTesting": { "title": "Distributed testing", "desc": "Test multiple scenarios in parallel" }
+        "parallelResearch": {
+          "title": "Parallel research",
+          "desc": "{count} competitors, {count} machines, simultaneously"
+        },
+        "bulkApplications": {
+          "title": "Bulk applications",
+          "desc": "Apply across platforms at the same time"
+        },
+        "multiCitySearch": {
+          "title": "Multi-city search",
+          "desc": "Search listings in {count} cities at once"
+        },
+        "parallelOutreach": {
+          "title": "Parallel outreach",
+          "desc": "Personalized emails to different segments"
+        },
+        "crossPlatform": {
+          "title": "Cross-platform",
+          "desc": "Post to {count} platforms simultaneously"
+        },
+        "distributedTesting": {
+          "title": "Distributed testing",
+          "desc": "Test multiple scenarios in parallel"
+        }
       },
       "whatToSwarm": "What to swarm",
       "availability": "Availability",
@@ -1646,12 +1867,30 @@
       "docs": "Docs",
       "concepts": "Core concepts",
       "conceptItems": {
-        "employees": { "title": "Employees", "desc": "AI agents that run tasks on a schedule, 24/7" },
-        "teams": { "title": "Teams", "desc": "Groups of employees with shared instructions" },
-        "sharedMemory": { "title": "Shared Memory", "desc": "Key-value store employees read and write to" },
-        "triggers": { "title": "Triggers", "desc": "Chain employees: one finishes, next starts" },
-        "delegates": { "title": "Delegates", "desc": "Employees assign sub-tasks to specialists" },
-        "orgChart": { "title": "Org Chart", "desc": "Visual map of your company hierarchy" }
+        "employees": {
+          "title": "Employees",
+          "desc": "AI agents that run tasks on a schedule, 24/7"
+        },
+        "teams": {
+          "title": "Teams",
+          "desc": "Groups of employees with shared instructions"
+        },
+        "sharedMemory": {
+          "title": "Shared Memory",
+          "desc": "Key-value store employees read and write to"
+        },
+        "triggers": {
+          "title": "Triggers",
+          "desc": "Chain employees: one finishes, next starts"
+        },
+        "delegates": {
+          "title": "Delegates",
+          "desc": "Employees assign sub-tasks to specialists"
+        },
+        "orgChart": {
+          "title": "Org Chart",
+          "desc": "Visual map of your company hierarchy"
+        }
       },
       "chainTitle": "Chain employees together",
       "chainDesc": "Output flows from one to the next automatically.",
@@ -1666,10 +1905,26 @@
       "waiting": "Waiting",
       "templates": "Start from a template",
       "templateItems": {
-        "contentOps": { "name": "Content Ops", "plan": "Starter", "count": "3" },
-        "customerSupport": { "name": "Customer Support", "plan": "Starter", "count": "3" },
-        "marketing": { "name": "Marketing", "plan": "Plus", "count": "7" },
-        "ecommerce": { "name": "E-Commerce", "plan": "Plus", "count": "7" }
+        "contentOps": {
+          "name": "Content Ops",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "customerSupport": {
+          "name": "Customer Support",
+          "plan": "Starter",
+          "count": "3"
+        },
+        "marketing": {
+          "name": "Marketing",
+          "plan": "Plus",
+          "count": "7"
+        },
+        "ecommerce": {
+          "name": "E-Commerce",
+          "plan": "Plus",
+          "count": "7"
+        }
       },
       "employees": "{count} employees",
       "openWorkforce": "Open Workforce"
@@ -1689,18 +1944,52 @@
       "calculation": "{mins} min x 10 credits/min",
       "plans": "Plans",
       "planData": {
-        "free": { "credits": "100", "machines": "1 temp", "feature": "Basic search" },
-        "lite": { "credits": "100", "machines": "1 always-on", "feature": "2 parallel agents" },
-        "starter": { "credits": "200", "machines": "1 always-on", "feature": "Advanced search" },
-        "plus": { "credits": "600", "machines": "2 always-on", "feature": "Priority support" },
-        "pro": { "credits": "1,500", "machines": "3 always-on", "feature": "SLA guarantee" }
+        "free": {
+          "credits": "100",
+          "machines": "1 temp",
+          "feature": "Basic search"
+        },
+        "lite": {
+          "credits": "100",
+          "machines": "1 always-on",
+          "feature": "2 parallel agents"
+        },
+        "starter": {
+          "credits": "200",
+          "machines": "1 always-on",
+          "feature": "Advanced search"
+        },
+        "plus": {
+          "credits": "600",
+          "machines": "2 always-on",
+          "feature": "Priority support"
+        },
+        "pro": {
+          "credits": "1,500",
+          "machines": "3 always-on",
+          "feature": "SLA guarantee"
+        },
+        "unlimited": {
+          "credits": "Unlimited",
+          "machines": "2 always-on",
+          "feature": "1 concurrent agent"
+        }
       },
       "perMonth": "{price}/mo",
       "faqTitle": "FAQ",
       "faqs": {
-        "howCharged": { "q": "How are credits charged?", "a": "10 credits per minute of agent execution, rounded up. Checked every 30 seconds during a session." },
-        "runOut": { "q": "What happens when I run out?", "a": "You need at least 20 credits to start a task. Hit 0 and the task pauses — buy an add-on to continue." },
-        "rollOver": { "q": "Do unused credits roll over?", "a": "Credits reset each billing cycle. Use them or lose them." }
+        "howCharged": {
+          "q": "How are credits charged?",
+          "a": "10 credits per minute of agent execution, rounded up. Checked every 30 seconds during a session."
+        },
+        "runOut": {
+          "q": "What happens when I run out?",
+          "a": "You need at least 20 credits to start a task. Hit 0 and the task pauses — buy an add-on to continue."
+        },
+        "rollOver": {
+          "q": "Do unused credits roll over?",
+          "a": "Credits reset each billing cycle. Use them or lose them."
+        }
       },
       "goToBilling": "Go to Billing"
     },
@@ -1715,12 +2004,30 @@
       "describePlaceholder": "Describe your task...",
       "whatItControls": "What it controls",
       "controls": {
-        "browser": { "name": "Browser", "desc": "Navigate, click, fill forms" },
-        "files": { "name": "Files", "desc": "Read, write, edit anywhere" },
-        "terminal": { "name": "Terminal", "desc": "Run any shell command" },
-        "desktop": { "name": "Desktop", "desc": "Click, type, scroll" },
-        "screenshots": { "name": "Screenshots", "desc": "See what you see" },
-        "apps": { "name": "Apps", "desc": "Control any installed app" }
+        "browser": {
+          "name": "Browser",
+          "desc": "Navigate, click, fill forms"
+        },
+        "files": {
+          "name": "Files",
+          "desc": "Read, write, edit anywhere"
+        },
+        "terminal": {
+          "name": "Terminal",
+          "desc": "Run any shell command"
+        },
+        "desktop": {
+          "name": "Desktop",
+          "desc": "Click, type, scroll"
+        },
+        "screenshots": {
+          "name": "Screenshots",
+          "desc": "See what you see"
+        },
+        "apps": {
+          "name": "Apps",
+          "desc": "Control any installed app"
+        }
       },
       "twoWays": "Two ways to run",
       "cloudVm": "Cloud VM",
@@ -1738,12 +2045,16 @@
       "downloadCta": "Download Desktop App"
     }
   },
-
   "comparePage": {
     "title": "Comparisons",
     "heroTitle": "Coasty vs. the Competition",
     "heroDescription": "See how the #1 ranked computer-using AI agent (82% OSWorld) compares to alternatives. Feature-by-feature breakdowns with real data.",
-    "categories": { "aiAgent": "AI Agent", "infrastructure": "Infrastructure", "rpa": "RPA", "human": "Human" },
+    "categories": {
+      "aiAgent": "AI Agent",
+      "infrastructure": "Infrastructure",
+      "rpa": "RPA",
+      "human": "Human"
+    },
     "vsLabel": "Coasty vs {name}",
     "ctaTitle": "Ready to try the #1 computer-using AI agent?",
     "ctaButton": "Try Coasty Free",
@@ -1752,10 +2063,9 @@
     "featureComparison": "Feature Comparison",
     "whyChooseCoasty": "Why Choose Coasty",
     "strengthsOf": "{name} Strengths",
-    "ctaDescription": "82% OSWorld benchmark. VM isolation. CAPTCHA solving. Starting at $20/mo.",
+    "ctaDescription": "82% OSWorld benchmark. VM isolation. CAPTCHA solving. Starting at $19/mo.",
     "watchCaseStudies": "Watch Case Studies"
   },
-
   "agentSwarms": {
     "badge": "Agent Swarm Mode",
     "heroTitle1": "One prompt.",
@@ -1769,9 +2079,18 @@
     "running": "running",
     "threeSteps": "Three steps to parallel execution",
     "steps": {
-      "typePrompt": { "title": "Type your prompt", "desc": "Describe the task. Toggle swarm mode and choose how many machines." },
-      "machinesSpinUp": { "title": "Machines spin up", "desc": "Each gets a full isolated environment — browser, terminal, desktop." },
-      "resultsStream": { "title": "Results stream live", "desc": "Watch every machine in real-time via the swarm tree view." }
+      "typePrompt": {
+        "title": "Type your prompt",
+        "desc": "Describe the task. Toggle swarm mode and choose how many machines."
+      },
+      "machinesSpinUp": {
+        "title": "Machines spin up",
+        "desc": "Each gets a full isolated environment — browser, terminal, desktop."
+      },
+      "resultsStream": {
+        "title": "Results stream live",
+        "desc": "Watch every machine in real-time via the swarm tree view."
+      }
     },
     "demoTitle": "Agent Swarms Demo",
     "demoDescription": "Watch {count} machines tackle a CRM research task simultaneously",
@@ -1782,7 +2101,12 @@
     "allCompleted": "All {count} machines completed",
     "speedComparison": "~{swarmTime} min instead of ~{seqTime} min — {multiplier}x faster",
     "seqVsSwarm": "Sequential vs Swarm",
-    "tableHeaders": { "task": "Task", "before": "Before", "swarm": "Swarm", "speed": "Speed" },
+    "tableHeaders": {
+      "task": "Task",
+      "before": "Before",
+      "swarm": "Swarm",
+      "speed": "Speed"
+    },
     "speedExamples": {
       "crmResearch": "5 CRM tools research",
       "qaPages": "QA across 8 pages",
@@ -1791,31 +2115,71 @@
     },
     "builtForParallel": "Built for parallel work",
     "useCases": {
-      "marketResearch": { "title": "Market Research at Scale", "desc": "Research multiple competitors, markets, or products simultaneously across isolated machines." },
-      "leadGeneration": { "title": "Lead Generation", "desc": "Enrich profiles, find emails, and verify social presence — hours of work in minutes." },
-      "qaTesting": { "title": "QA & Regression Testing", "desc": "Run test scenarios across different pages or flows in parallel." },
-      "contentSocial": { "title": "Content & Social", "desc": "Post to multiple platforms simultaneously with per-machine isolation." },
-      "dataExtraction": { "title": "Data Extraction", "desc": "Scrape and structure data from dozens of sources at once." },
-      "scheduledRuns": { "title": "Scheduled Runs", "desc": "Combine swarm mode with scheduling for recurring parallel tasks." }
+      "marketResearch": {
+        "title": "Market Research at Scale",
+        "desc": "Research multiple competitors, markets, or products simultaneously across isolated machines."
+      },
+      "leadGeneration": {
+        "title": "Lead Generation",
+        "desc": "Enrich profiles, find emails, and verify social presence — hours of work in minutes."
+      },
+      "qaTesting": {
+        "title": "QA & Regression Testing",
+        "desc": "Run test scenarios across different pages or flows in parallel."
+      },
+      "contentSocial": {
+        "title": "Content & Social",
+        "desc": "Post to multiple platforms simultaneously with per-machine isolation."
+      },
+      "dataExtraction": {
+        "title": "Data Extraction",
+        "desc": "Scrape and structure data from dozens of sources at once."
+      },
+      "scheduledRuns": {
+        "title": "Scheduled Runs",
+        "desc": "Combine swarm mode with scheduling for recurring parallel tasks."
+      }
     },
     "featureStrip": {
-      "trueIsolation": { "title": "True Isolation", "desc": "Each machine has its own browser, terminal, and desktop." },
-      "tripleMachineLimit": { "title": "3x Machine Limit", "desc": "Swarm mode triples your plan's machine capacity." },
-      "liveTreeView": { "title": "Live Tree View", "desc": "Screenshots and tool calls stream in real-time." },
-      "autoAggregation": { "title": "Auto Aggregation", "desc": "Results combine into a single consolidated report." },
-      "shareableRuns": { "title": "Shareable Runs", "desc": "Replay full execution timelines via a link." },
-      "fullySandboxed": { "title": "Fully Sandboxed", "desc": "All environments destroyed after completion." }
+      "trueIsolation": {
+        "title": "True Isolation",
+        "desc": "Each machine has its own browser, terminal, and desktop."
+      },
+      "tripleMachineLimit": {
+        "title": "3x Machine Limit",
+        "desc": "Swarm mode triples your plan's machine capacity."
+      },
+      "liveTreeView": {
+        "title": "Live Tree View",
+        "desc": "Screenshots and tool calls stream in real-time."
+      },
+      "autoAggregation": {
+        "title": "Auto Aggregation",
+        "desc": "Results combine into a single consolidated report."
+      },
+      "shareableRuns": {
+        "title": "Shareable Runs",
+        "desc": "Replay full execution timelines via a link."
+      },
+      "fullySandboxed": {
+        "title": "Fully Sandboxed",
+        "desc": "All environments destroyed after completion."
+      }
     },
     "readyCta": "Ready to run tasks in parallel?",
     "includedWithPaid": "Swarm mode is included with every paid plan.",
     "getStarted": "Get Started",
     "viewPricing": "View Pricing",
-    "legend": { "messages": "Messages", "broadcast": "Broadcast", "sharedMemory": "Shared Memory", "help": "Help" },
+    "legend": {
+      "messages": "Messages",
+      "broadcast": "Broadcast",
+      "sharedMemory": "Shared Memory",
+      "help": "Help"
+    },
     "liveSwarmExecution": "Live swarm execution with agent communication",
     "popular": "Popular",
     "avgRating": "{rating} avg"
   },
-
   "downloadPage": {
     "title": "Desktop App",
     "heroTitle": "Let Coasty Run Your Computer",
@@ -1863,7 +2227,6 @@
     "download": "Download",
     "unavailable": "Unavailable"
   },
-
   "referralPage": {
     "shareTitle": "Share Coasty.",
     "earnTitle": "Earn together.",
@@ -1876,8 +2239,15 @@
     "recentActivity": "Your recent activity",
     "friendsCould": "Your friends could be doing this too",
     "giveGet": "Give friends 50 credits. Get 50 for yourself. Every time.",
-    "stats": { "invited": "Invited", "earned": "Earned", "perInvite": "Per invite" },
-    "tabs": { "invite": "Invite friends", "feedback": "Send feedback" },
+    "stats": {
+      "invited": "Invited",
+      "earned": "Earned",
+      "perInvite": "Per invite"
+    },
+    "tabs": {
+      "invite": "Invite friends",
+      "feedback": "Send feedback"
+    },
     "referralLink": "Your referral link",
     "howItWorks": "How it works",
     "howSteps": [
@@ -1900,17 +2270,27 @@
     "weReadEvery": "We read every message",
     "send": "Send",
     "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
-    "socialLabels": { "x": "X", "linkedin": "LinkedIn", "whatsapp": "WhatsApp", "telegram": "Telegram", "reddit": "Reddit", "email": "Email" },
+    "socialLabels": {
+      "x": "X",
+      "linkedin": "LinkedIn",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram",
+      "reddit": "Reddit",
+      "email": "Email"
+    },
     "emailSubject": "Check out this AI tool",
     "emailBody": "This AI can actually use a computer for you. Browsing, clicking, typing, all of it."
   },
-
   "statusPage": {
     "title": "System Status",
     "brandTitle": "Coasty Status",
     "subtitle": "Real-time operational status of all Coasty services. This page auto-refreshes every 60 seconds.",
     "refresh": "Refresh",
-    "statuses": { "operational": "Operational", "degraded": "Degraded", "outage": "Outage" },
+    "statuses": {
+      "operational": "Operational",
+      "degraded": "Degraded",
+      "outage": "Outage"
+    },
     "overallStatuses": {
       "allOperational": "All Systems Operational",
       "someDegraded": "Some Systems Degraded",
@@ -1922,10 +2302,10 @@
       "disruption": "We are aware of the issue and actively working on a fix."
     },
     "responseTime": "{ms}ms response time",
-    "uptimeLabel": "90-Day Uptime",
-    "daysAgo": "90 days ago",
+    "uptimeLabel": "7-Day Uptime",
+    "daysAgo": "7 days ago",
     "today": "Today",
-    "overallUptime": "Overall 90-Day Uptime",
+    "overallUptime": "Overall 7-Day Uptime",
     "overallUptimeDesc": "Aggregate availability across all services",
     "services": "Services",
     "clickUptime": "click to view uptime",
@@ -1935,23 +2315,22 @@
     "talkToCofounders": "Talk to Cofounders",
     "emailUs": "Email Us",
     "serviceNames": {
-      "website": "Website",
-      "aiBackend": "AI Backend",
-      "database": "Database",
-      "authentication": "Authentication",
-      "aiModels": "AI Models",
-      "fileStorage": "File Storage"
+      "website": "Web Application",
+      "aiBackend": "Orchestration Engine",
+      "database": "Data Layer",
+      "authentication": "Identity & Auth",
+      "aiModels": "Model Inference",
+      "fileStorage": "Object Storage"
     }
   },
-
   "seo": {
     "home": {
-      "title": "Coasty - #1 Computer-Use AI Agent | AI Employee for Desktop & Browser Automation",
+      "title": "Coasty - #1 Computer-Use AI Agent | $249/mo Unlimited (Cheapest in Market)",
       "titleTemplate": "{title} | Coasty - AI Computer-Use Agent",
-      "description": "Coasty is the #1 ranked computer-using AI agent — 82% on the OSWorld benchmark. It controls a full desktop like a human: opens browsers, clicks, types, fills forms, sends emails, manages spreadsheets. True VM-level isolation per session. Starting at $20/mo.",
-      "ogTitle": "Coasty - #1 Computer-Use AI Agent | 82% OSWorld Benchmark",
-      "ogDescription": "AI employee that controls a desktop like a human. #1 on OSWorld benchmark (82%). Browser automation, desktop control, CAPTCHA solving, VM isolation. Starting at $20/mo.",
-      "twitterDescription": "AI employee that controls a desktop like a human. Opens browsers, clicks, types, fills forms, sends emails. True VM isolation. $20/mo vs $3k/mo human VA."
+      "description": "Coasty is the #1 ranked computer-using AI agent — 82% on the OSWorld benchmark — and the only flat-rate Unlimited computer-use plan at $249/month (cheaper than Devin Team $500+ACU, OpenAI Operator $200 rate-limited, and credit-capped competitors). Controls a full desktop like a human: browsers, forms, emails, spreadsheets. VM-level isolation. From $19/mo Starter or $249/mo Unlimited.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Unlimited (Cheapest Computer-Use Agent)",
+      "ogDescription": "#1 on OSWorld (82%). $249/mo flat Unlimited — cheaper than Devin Team ($500+ACU) at a higher benchmark. Browser, desktop, terminal automation. VM isolation per session. Cross-platform native + REST API + MCP server.",
+      "twitterDescription": "AI agent that runs a real desktop. 82% OSWorld (#1). $249/mo Unlimited — cheapest flat-rate plan in the category. Starter from $19/mo. VM isolation + 26-tool MCP server."
     },
     "compare": {
       "title": "Compare Coasty - AI Agent Alternatives & Competitor Comparison",
@@ -2008,10 +2387,10 @@
       "ogDescription": "The best computer use agent ranked #1 on OSWorld. Automate any desktop, browser, or terminal task with AI."
     },
     "pricing": {
-      "title": "Pricing — Coasty AI Agent Plans & Pricing",
-      "description": "Coasty pricing plans starting at $20/mo. Replace $3,000/mo virtual assistants with an AI employee. Free tier available. Credits-based usage with no hidden fees.",
-      "ogTitle": "Coasty Pricing — AI Agent Plans",
-      "ogDescription": "AI employee starting at $20/mo. Replace expensive VAs with autonomous AI. Free tier available."
+      "title": "Pricing — $19/mo Starter or $249/mo Unlimited (Cheapest in Market)",
+      "description": "Coasty pricing: Starter $19/mo (200 credits) or Unlimited $249/mo (the cheapest flat-rate unlimited computer-use plan in the market — cheaper than Devin Team $500+ACU, Genspark Pro $249 credit-capped, and Manus Extended $200 capped). Replaces $3,000+/mo human virtual assistants. No hidden fees.",
+      "ogTitle": "Coasty Pricing — $19/mo Starter, $249/mo Unlimited",
+      "ogDescription": "$249/mo flat Unlimited — the cheapest unlimited computer-use plan in the market. Or $19/mo Starter for individuals. Saves $36k/year vs human VAs."
     },
     "faq": {
       "q1": "What is Coasty?",
@@ -2019,7 +2398,7 @@
       "q2": "How does Coasty compare to Anthropic Computer Use?",
       "a2": "While Anthropic Computer Use provides a raw API for computer control, Coasty is a production-ready platform with managed VM infrastructure, built-in CAPTCHA solving, a desktop app for Mac and Windows, multi-model support, and the highest OSWorld benchmark score (82%). Coasty provides the complete solution — not just the API.",
       "q3": "How much does Coasty cost?",
-      "a3": "Coasty starts at $20/month for the Starter plan with a free tier available. This compares to $3,000+ per month for a human virtual assistant. Coasty works 24/7 with no breaks, no training, and instant scalability.",
+      "a3": "Coasty has two live plans: Starter at $19/month (200 credits, 1 machine, ideal for individuals) and Unlimited at $249/month with no credit caps. The $249 Unlimited plan is the cheapest flat-rate unlimited computer-use plan available — cheaper than Devin Team ($500/month + ACU overage), OpenAI Operator ChatGPT Pro ($200/month rate-limited), Genspark Pro ($249.99 credit-capped at 125k credits), and Manus Extended ($200 capped at 40k credits). Both replace a $3,000+/month human virtual assistant; Unlimited saves $33,000+/year vs a human VA at 92% cost reduction.",
       "q4": "Is Coasty safe to use?",
       "a4": "Yes. Every Coasty session runs in its own isolated, sandboxed virtual machine. Your data stays safe, your machine stays untouched, and nothing leaks between sessions. This is true VM-level isolation, not just containers in a shared pool.",
       "q5": "What is the OSWorld benchmark?",
@@ -2036,11 +2415,11 @@
       "a10": "Yes. Coasty has a built-in CAPTCHA-solving pipeline, so it doesn't get blocked the way competing AI agents do. This is critical for real-world automation where CAPTCHAs are common on websites."
     },
     "structuredData": {
-      "appDescription": "The #1 ranked computer-using AI agent. Coasty controls a full desktop like a human — opens browsers, clicks, types, fills forms, sends emails, and manages spreadsheets autonomously. 82% on the OSWorld benchmark. True VM-level isolation. Built-in CAPTCHA solving. Starting at $20/month.",
-      "orgDescription": "Coasty builds the #1 computer-using AI agent. Our platform provides autonomous desktop control, browser automation, and multi-agent orchestration with true VM-level isolation.",
-      "productDescription": "AI computer-using agent that controls a desktop like a human. #1 on OSWorld benchmark (82%). Autonomous browser automation, desktop control, email sending, form filling, and spreadsheet management with true VM-level isolation.",
-      "websiteDescription": "#1 computer-using AI agent platform. 82% OSWorld benchmark. Autonomous browser, desktop, and terminal automation with VM isolation. Starting at $20/mo.",
-      "softwareDescription": "AI computer-using agent that controls a full desktop like a human. #1 on OSWorld benchmark with 82% completion rate across 369 real-world tasks. Autonomous browser automation, desktop control, terminal operations, email sending, form filling, and spreadsheet management.",
+      "appDescription": "The #1 ranked computer-using AI agent and the cheapest flat-rate Unlimited computer-use plan in the market at $249/month. Coasty controls a full desktop like a human — opens browsers, clicks, types, fills forms, sends emails, manages spreadsheets autonomously. 82% on the OSWorld benchmark across 369 real-world tasks. True VM-level isolation per session. Built-in CAPTCHA solving. Plans: $19/mo Starter or $249/mo Unlimited.",
+      "orgDescription": "Coasty builds the #1 computer-using AI agent (82% OSWorld) and ships the only flat-rate Unlimited computer-use plan at $249/month — cheaper than Devin Team, OpenAI Operator, and credit-capped competitors at the same price tier. Our platform provides autonomous desktop control, browser automation, and multi-agent orchestration with true VM-level isolation.",
+      "productDescription": "AI computer-using agent that controls a desktop like a human. #1 on OSWorld benchmark (82%). $249/mo Unlimited plan is the cheapest flat-rate unlimited computer-use plan available. Autonomous browser automation, desktop control, email sending, form filling, and spreadsheet management with true VM-level isolation.",
+      "websiteDescription": "#1 computer-using AI agent platform — 82% OSWorld benchmark and the cheapest flat-rate Unlimited plan at $249/month. Autonomous browser, desktop, and terminal automation with VM isolation. From $19/mo Starter or $249/mo Unlimited.",
+      "softwareDescription": "AI computer-using agent that controls a full desktop like a human. #1 on OSWorld benchmark with 82% completion rate across 369 real-world tasks. The $249/month Unlimited plan is the cheapest flat-rate unlimited computer-use plan on the market. Autonomous browser automation, desktop control, terminal operations, email sending, form filling, and spreadsheet management.",
       "breadcrumbs": {
         "home": "Home",
         "caseStudies": "AI Agent Case Studies",
@@ -2050,11 +2429,32 @@
       }
     }
   },
-
   "errorPages": {
     "notFound": {
-      "title": "404 – Page not found",
-      "description": "Sorry, this page doesn't exist."
+      "title": "Page not found",
+      "description": "Our AI agent looked everywhere. Even under the couch. It's just not here.",
+      "metaTitle": "404 · Page not found",
+      "metaDescription": "We sent our best AI agent. It came back with nothing. Head back to Coasty, the #1 ranked computer-use AI agent for desktop and browser automation.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "scan: the entire internet",
+        "step2": "scan: every open tab",
+        "step3": "scan: under the couch",
+        "result": "verdict: page does not exist"
+      },
+      "ok": "OK",
+      "fail": "FAIL",
+      "primaryCta": "Take me home",
+      "secondaryCta": "Hire an AI agent",
+      "navLabel": "Suggested pages",
+      "links": {
+        "home": "Home",
+        "computerUse": "Computer Use",
+        "pricing": "Pricing",
+        "download": "Download",
+        "blog": "Blog",
+        "guide": "Guide"
+      }
     },
     "error": {
       "title": "Something went wrong",
@@ -2062,7 +2462,6 @@
       "tryAgain": "Try again"
     }
   },
-
   "schedulesPage": {
     "title": "Workforce",
     "subtitle": "Your AI workforce — assign tasks and let them handle the rest",
@@ -2102,12 +2501,25 @@
     "emptyWorkforce": {
       "title": "Hire your first employee",
       "description": "AI employees work on your behalf — assign a task, set a schedule, and they'll execute it automatically",
-      "flexibleShifts": { "title": "Flexible shifts", "desc": "Schedule employees hourly, daily, weekly, monthly — or use a custom cron expression" },
-      "fullAutonomy": { "title": "Full autonomy", "desc": "Each employee gets full access to browsing, terminal, and your connected workstations" },
-      "activityLogs": { "title": "Activity logs", "desc": "Every execution is logged so you can review what your employees accomplished" },
+      "flexibleShifts": {
+        "title": "Flexible shifts",
+        "desc": "Schedule employees hourly, daily, weekly, monthly — or use a custom cron expression"
+      },
+      "fullAutonomy": {
+        "title": "Full autonomy",
+        "desc": "Each employee gets full access to browsing, terminal, and your connected workstations"
+      },
+      "activityLogs": {
+        "title": "Activity logs",
+        "desc": "Every execution is logged so you can review what your employees accomplished"
+      },
       "startFromChat": "Start from a chat"
     },
-    "filters": { "all": "All", "onDuty": "On Duty", "standby": "Standby" },
+    "filters": {
+      "all": "All",
+      "onDuty": "On Duty",
+      "standby": "Standby"
+    },
     "noMatch": "No employees match this filter",
     "createTeam": {
       "title": "New Team",
@@ -2365,9 +2777,21 @@
       }
     },
     "tiers": {
-      "starter": { "label": "Starter", "employees": "up to 3", "price": "$19/mo" },
-      "plus": { "label": "Plus", "employees": "up to 10", "price": "$50/mo" },
-      "pro": { "label": "Pro", "employees": "up to 50", "price": "$100/mo" }
+      "starter": {
+        "label": "Starter",
+        "employees": "up to 3",
+        "price": "$19/mo"
+      },
+      "plus": {
+        "label": "Plus",
+        "employees": "up to 10",
+        "price": "$50/mo"
+      },
+      "pro": {
+        "label": "Pro",
+        "employees": "up to 50",
+        "price": "$100/mo"
+      }
     },
     "frequencies": {
       "daily": "daily",
@@ -2532,7 +2956,6 @@
     "noInvites": "No users invited yet",
     "noInvitesHint": "Share your link and you both earn 50 credits"
   },
-
   "dialogPublish": {
     "makePublic": "Make public",
     "title": "Your conversation is now public!",
@@ -2540,7 +2963,6 @@
     "viewPage": "View Page",
     "shareOn": "Share on"
   },
-
   "aiCommandPanel": {
     "title": "AI Control Panel",
     "subtitle": "Describe what you want the AI to do",
@@ -2551,5 +2973,190 @@
     "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
     "executing": "Executing...",
     "executeCommand": "Execute Command"
+  },
+  "memory": {
+    "sidebarLabel": "Memory",
+    "sidebarDescription": "Context applied to every agent run",
+    "dialog": {
+      "title": "Memory",
+      "description": "A short note Coasty applies whenever it works for you.",
+      "openFull": "Open full",
+      "visualMemoryLabel": "Memory",
+      "visualSynced": "Synced",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Schedules",
+      "visualContextSwarm": "Swarm"
+    },
+    "section": {
+      "title": "Memory",
+      "tag": "optional · personal",
+      "description": "A short note about you that travels with every agent run — chat, scheduled tasks, swarm machines, delegated agents."
+    },
+    "presetsLabel": "Try",
+    "presets": {
+      "useFirstName": "Use first name",
+      "useFirstNameSentence": "Address me by my first name.",
+      "beTerse": "Be terse",
+      "beTerseSentence": "Prefer terse, direct responses. No filler.",
+      "imDeveloper": "I'm a developer",
+      "imDeveloperSentence": "I'm a software engineer; comfortable with code.",
+      "noEmojis": "No emojis",
+      "noEmojisSentence": "Avoid emojis in responses.",
+      "metricUnits": "Metric units",
+      "metricUnitsSentence": "Use metric units (meters, kilograms, °C).",
+      "citeSources": "Cite sources",
+      "citeSourcesSentence": "Cite sources when stating factual claims."
+    },
+    "placeholder": "Example:\nAddress me by my first name.\nPrefer terse responses.\nI work in TypeScript and Python.\nNever delete files without confirming.",
+    "loading": "Loading…",
+    "saving": "Saving…",
+    "saved": "Saved",
+    "unsavedChanges": "Unsaved changes",
+    "empty": "Empty",
+    "savedRelative": "Saved · {time}",
+    "errorLoad": "Could not load your memory.",
+    "errorSave": "Could not save your memory.",
+    "willBeShortened": "will be shortened",
+    "clear": "Clear",
+    "footerNote": "Coasty will take these preferences into account whenever it works for you.",
+    "time": {
+      "justNow": "just now",
+      "secondsAgo": "{n}s ago",
+      "minutesAgo": "{n}m ago",
+      "hoursAgo": "{n}h ago",
+      "daysAgo": "{n}d ago"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Settings",
+    "navGroups": {
+      "settings": "Settings",
+      "developer": "Developer",
+      "more": "More",
+      "resources": "Resources"
+    },
+    "sections": {
+      "account": {
+        "label": "General",
+        "description": "Profile and account"
+      },
+      "appearance": {
+        "label": "Appearance",
+        "description": "Theme, language, and background"
+      },
+      "billing": {
+        "label": "Billing",
+        "description": "Plans and credits"
+      },
+      "publicChats": {
+        "label": "Public Chats",
+        "description": "Manage chats shared via public link"
+      },
+      "privacy": {
+        "label": "Privacy",
+        "description": "Security and data privacy"
+      },
+      "notifications": {
+        "label": "Notifications",
+        "description": "Notification preferences"
+      },
+      "apiKeys": {
+        "label": "API Keys",
+        "description": "Manage your API keys"
+      },
+      "data": {
+        "label": "Data",
+        "description": "Export and manage your data"
+      },
+      "feedback": {
+        "label": "Feedback",
+        "description": "Send us your feedback"
+      },
+      "about": {
+        "label": "About",
+        "description": "About Coasty"
+      },
+      "social": {
+        "label": "Connect",
+        "description": "Social links"
+      },
+      "guide": {
+        "label": "Guide",
+        "description": "Learn how to use Coasty"
+      },
+      "referral": {
+        "label": "Referral",
+        "description": "Invite friends and earn credits"
+      }
+    },
+    "appearance": {
+      "theme": "Theme",
+      "language": "Language",
+      "background": "Background",
+      "personalization": "Personalization",
+      "intro": {
+        "title": "Cinematic intro",
+        "description": "Show the animated intro when visiting the homepage"
+      },
+      "interaction": {
+        "title": "Tool invocations",
+        "description": "Show tool execution details in conversations"
+      }
+    },
+    "comingSoon": {
+      "badge": "Soon",
+      "placeholder": "This section is coming in a future update."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Show me what's possible…",
+    "tasks": [
+      "Research my competitors",
+      "Fill out job applications",
+      "Book a flight to Tokyo",
+      "Track my website uptime",
+      "Schedule social posts",
+      "Analyze quarterly trends"
+    ],
+    "dontShowAgain": "Don't show again",
+    "skip": "Skip",
+    "tagline": "Do anything, just as a human can do with a computer"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Your Computers",
+      "description": "Silicon at your service. Spinning up your fleet now."
+    },
+    "swarms": {
+      "title": "Swarm Intelligence",
+      "description": "Many minds, one mission. Rounding up your agents now."
+    },
+    "developers": {
+      "title": "Developer API",
+      "description": "Loading your dashboard."
+    },
+    "secrets": {
+      "title": "Credentials",
+      "description": "Your secrets are safe with us. Unlocking the vault."
+    },
+    "schedules": {
+      "title": "Schedules",
+      "description": "Right on time, every time. Syncing your automations."
+    },
+    "history": {
+      "title": "Your History",
+      "description": "A quiet record of every conversation, task, and idea you've explored."
+    },
+    "referral": {
+      "title": "Referrals",
+      "description": "Share Coasty. Earn together."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Your data, your control",
+    "heroDescription": "We store only what's needed to run your sessions. All traffic is encrypted in transit, and you can extend encryption at rest to the categories below. Your data is never used to train AI models.",
+    "trustTransit": "TLS 1.3 in transit",
+    "trustAtRest": "AES-256-GCM at rest",
+    "trustNoTraining": "No training on your data"
   }
 }

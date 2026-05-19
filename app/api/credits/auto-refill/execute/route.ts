@@ -1,19 +1,13 @@
 import { createClient as createServiceClient } from "@supabase/supabase-js"
 import { NextRequest, NextResponse } from "next/server"
 import Stripe from "stripe"
+import { getBoostPackage, type BoostPackageId } from "@/lib/pricing/tiers"
 
 export const runtime = "nodejs"
 
 const stripe = new Stripe(process.env.STRIPE_API_KEY!, {
   apiVersion: "2025-08-27.basil",
 })
-
-// Must match the server-side source of truth in /api/credits/checkout
-const CREDIT_PACKAGES: Record<string, { credits: number; price: number; name: string }> = {
-  "boost-small": { credits: 150, price: 19, name: "Boost" },
-  "boost-medium": { credits: 500, price: 49, name: "Power Boost" },
-  "boost-large": { credits: 1200, price: 99, name: "Ultra Boost" },
-}
 
 // Called by /api/credits/balance when balance drops below threshold
 // Also callable by backend via internal API key
@@ -101,8 +95,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 5. Get the credit package
-    const pkg = CREDIT_PACKAGES[settings.package_id]
+    // 5. Get the credit package — canonical source: lib/pricing/tiers.ts
+    const pkg = getBoostPackage(settings.package_id as BoostPackageId)
     if (!pkg) {
       return NextResponse.json({ error: "Invalid package configured" }, { status: 400 })
     }
@@ -158,7 +152,7 @@ export async function POST(req: NextRequest) {
 
     const paymentIntent = await stripe.paymentIntents.create(
       {
-        amount: Math.round(pkg.price * 100),
+        amount: Math.round(pkg.priceUSD * 100),
         currency: "usd",
         customer: stripeCustomer.stripe_customer_id,
         payment_method: paymentMethodId,
@@ -227,7 +221,7 @@ export async function POST(req: NextRequest) {
         balance_after: newBalance,
         stripe_payment_intent_id: paymentIntent.id,
         currency: "usd",
-        price_paid: pkg.price,
+        price_paid: pkg.priceUSD,
         usage_description: `Auto-refill: ${pkg.name}`,
         metadata: {
           type: "auto_refill",
@@ -252,7 +246,7 @@ export async function POST(req: NextRequest) {
       success: true,
       credits_added: pkg.credits,
       new_balance: newBalance,
-      charged: pkg.price,
+      charged: pkg.priceUSD,
     })
   } catch (error: any) {
     // Handle Stripe card errors gracefully

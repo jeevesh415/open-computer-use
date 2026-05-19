@@ -20,7 +20,12 @@ import {
   ExternalLink,
   Copy,
   Check,
+  LogOut,
+  WifiOff,
+  MessageSquareX,
+  Laptop2,
 } from "lucide-react";
+import { formatDistanceToNow, parseISO, isValid } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -134,6 +139,12 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
 
       if (action === "snapshot") {
         toast.success("Snapshot created successfully", { duration: 5000 });
+        return;
+      }
+
+      if (action === "delete" && isElectron) {
+        toast.success("Local device unregistered");
+        onDelete(machine.id);
         return;
       }
 
@@ -284,7 +295,7 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="h-7 w-7 p-0 rounded-lg text-muted-foreground/30 hover:text-foreground opacity-0 group-hover:opacity-100 transition-all shrink-0"
+                  className="h-7 w-7 p-0 rounded-lg text-muted-foreground/30 hover:text-foreground sm:opacity-0 sm:group-hover:opacity-100 transition-all shrink-0"
                 >
                   <MoreVertical className="h-3.5 w-3.5" />
                 </Button>
@@ -294,7 +305,19 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
                   <Monitor className="mr-2 h-4 w-4" />
                   View Details
                 </DropdownMenuItem>
-                {!isElectron && (
+                {isElectron ? (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={() => setShowDeleteDialog(true)}
+                      disabled={loading !== null || isTemporary}
+                      className="text-destructive focus:text-destructive"
+                    >
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Unregister device
+                    </DropdownMenuItem>
+                  </>
+                ) : (
                   <>
                     <DropdownMenuSeparator />
                     {isAws && (
@@ -508,27 +531,167 @@ export function MachineCard({ machine, onUpdate, onDelete }: MachineCardProps) {
         </div>
       </div>
 
-      {/* Delete Confirmation Dialog */}
+      {/* Delete / Unregister Confirmation Dialog */}
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete Computer</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to delete &ldquo;{machine.displayName}&rdquo;? This action cannot be
-              undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={() => handleAction("delete")}
-              className="bg-red-600 text-white hover:bg-red-700"
-            >
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
+        {isElectron ? (
+          <UnregisterDialogContent
+            machine={machine}
+            osInfo={osInfo}
+            loading={loading === "delete"}
+            onConfirm={() => handleAction("delete")}
+          />
+        ) : (
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Delete Computer</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to delete &ldquo;{machine.displayName}&rdquo;? This
+                action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => handleAction("delete")}
+                className="bg-red-600 text-white hover:bg-red-700"
+              >
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        )}
       </AlertDialog>
     </>
+  );
+}
+
+
+function UnregisterDialogContent({
+  machine,
+  osInfo,
+  loading,
+  onConfirm,
+}: {
+  machine: UserMachine;
+  osInfo: { label: string; Icon: React.ComponentType<any> } | null;
+  loading: boolean;
+  onConfirm: () => void;
+}) {
+  const hostname = machine.settings?.hostname as string | undefined;
+  const username = machine.settings?.username as string | undefined;
+  const lastActiveAt = machine.lastActiveAt;
+
+  const lastSeen = (() => {
+    if (!lastActiveAt) return null;
+    const d = typeof lastActiveAt === "string" ? parseISO(lastActiveAt) : lastActiveAt;
+    if (!isValid(d)) return null;
+    return formatDistanceToNow(d, { addSuffix: true });
+  })();
+
+  const consequences: Array<{ Icon: React.ComponentType<any>; text: string }> = [
+    { Icon: WifiOff, text: "The Coasty desktop app on this machine disconnects immediately" },
+    { Icon: MessageSquareX, text: "Any active chat using this device will error on its next action" },
+    { Icon: Laptop2, text: "Re-registering requires opening the app on that exact computer" },
+  ];
+
+  const OsIcon = osInfo?.Icon;
+
+  return (
+    <AlertDialogContent
+      className={cn(
+        "p-0 overflow-hidden gap-0 sm:max-w-md",
+        "border-border/60",
+      )}
+    >
+      {/* Signature element: the device's animated thumbnail — makes the
+          device feel tangible before asking the user to cut it off. */}
+      <div className="relative">
+        <MachineCardThumbnail
+          machineId={machine.id}
+          status={machine.status}
+          platform={machine.settings?.platform}
+        />
+        {/* Subtle rose wash overlay to signal destructive intent without shouting */}
+        <div className="absolute inset-0 bg-gradient-to-b from-rose-500/[0.06] via-transparent to-background pointer-events-none" />
+        {OsIcon && (
+          <div className="absolute top-3 right-3 h-7 w-7 rounded-full bg-background/80 backdrop-blur-sm border border-border/40 flex items-center justify-center">
+            <OsIcon className="h-3.5 w-3.5 text-foreground/70" />
+          </div>
+        )}
+      </div>
+
+      {/* Heading + device identity */}
+      <div className="px-6 pt-5 pb-4">
+        <AlertDialogHeader className="gap-1.5 text-left space-y-0">
+          <AlertDialogTitle className="text-[17px] font-semibold tracking-[-0.01em]">
+            Unregister this device?
+          </AlertDialogTitle>
+          <AlertDialogDescription asChild>
+            <div className="text-[13px] text-muted-foreground/70 leading-relaxed">
+              <span className="font-medium text-foreground/85 truncate block">
+                {machine.displayName}
+              </span>
+              <span className="tabular-nums">
+                {hostname && <span className="font-mono text-[11.5px]">{hostname}</span>}
+                {hostname && (username || osInfo || lastSeen) && (
+                  <span className="text-muted-foreground/25 mx-1.5">·</span>
+                )}
+                {osInfo && <span>{osInfo.label}</span>}
+                {osInfo && lastSeen && (
+                  <span className="text-muted-foreground/25 mx-1.5">·</span>
+                )}
+                {lastSeen && <span>active {lastSeen}</span>}
+              </span>
+            </div>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+      </div>
+
+      {/* Hairline-separated consequence list — one row per effect, no cards */}
+      <div className="border-t border-border/30 dark:border-white/[0.05]">
+        {consequences.map(({ Icon, text }, i) => (
+          <div
+            key={i}
+            className={cn(
+              "flex items-center gap-3 px-6 py-3 text-[12.5px]",
+              i > 0 && "border-t border-border/30 dark:border-white/[0.05]",
+            )}
+          >
+            <Icon className="h-3.5 w-3.5 text-rose-500/60 shrink-0" strokeWidth={1.75} />
+            <span className="text-foreground/75 leading-snug">{text}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer — invert the usual button emphasis.  "Keep device" is the
+          solid primary (inviting default path); "Unregister device" is a
+          muted rose outline (requires deliberate intent). */}
+      <div className="border-t border-border/30 dark:border-white/[0.05] px-6 py-4 flex items-center justify-end gap-2">
+        <AlertDialogAction
+          onClick={onConfirm}
+          disabled={loading}
+          className={cn(
+            "order-1 h-9 px-4 rounded-lg text-[13px] font-medium",
+            "bg-transparent border border-rose-500/25 text-rose-500",
+            "hover:bg-rose-500/[0.06] hover:border-rose-500/40 hover:text-rose-500",
+            "disabled:opacity-50",
+          )}
+        >
+          {loading ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            "Unregister device"
+          )}
+        </AlertDialogAction>
+        <AlertDialogCancel
+          className={cn(
+            "order-2 mt-0 h-9 px-4 rounded-lg text-[13px] font-medium border-transparent",
+            "bg-foreground text-background hover:bg-foreground/90",
+          )}
+        >
+          Keep device
+        </AlertDialogCancel>
+      </div>
+    </AlertDialogContent>
   );
 }

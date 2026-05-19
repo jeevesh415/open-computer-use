@@ -449,13 +449,13 @@ export function CreateScheduleDialog({
                 <motion.button
                   type="button"
                   onClick={() => setEmployeeName(randomEmployeeName())}
-                  whileHover={{ scale: 1.05, rotate: 15 }}
                   whileTap={{ scale: 0.9, rotate: -15 }}
                   className={cn(
                     "shrink-0 h-12 w-12 flex items-center justify-center rounded-xl",
                     "bg-muted/30 border border-border/30",
                     "text-muted-foreground hover:text-foreground hover:bg-muted/50",
-                    "transition-colors duration-200",
+                    "hover:scale-105 hover:rotate-[15deg]",
+                    "transition-all duration-200",
                   )}
                   title="Randomize name"
                 >
@@ -526,10 +526,9 @@ export function CreateScheduleDialog({
                       key={pill.value}
                       type="button"
                       onClick={() => handleConfigChange({ frequency: pill.value })}
-                      whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}
                       className={cn(
-                        "relative px-3 py-3 rounded-xl text-xs font-semibold transition-all duration-300",
+                        "relative px-3 py-3 rounded-xl text-xs font-semibold transition-all duration-300 hover:scale-[1.03]",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         isSelected
                           ? "text-foreground bg-muted ring-1 ring-border shadow-sm"
@@ -592,11 +591,10 @@ export function CreateScheduleDialog({
                       key={d.value}
                       type="button"
                       onClick={() => handleConfigChange({ dayOfWeek: d.value })}
-                      whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.92 }}
                       title={d.full}
                       className={cn(
-                        "flex-1 h-12 rounded-xl text-xs font-bold transition-all duration-300",
+                        "flex-1 h-12 rounded-xl text-xs font-bold transition-all duration-300 hover:scale-[1.08]",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         config.dayOfWeek === d.value
                           ? "text-foreground bg-muted ring-1 ring-border shadow-sm"
@@ -722,10 +720,9 @@ export function CreateScheduleDialog({
                         key={m.id}
                         type="button"
                         onClick={() => handleConfigChange({ machineId: m.id })}
-                        whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         className={cn(
-                          "group/machine relative flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-left transition-all duration-300",
+                          "group/machine relative flex items-center gap-3.5 rounded-xl px-4 py-3.5 text-left transition-all duration-300 hover:scale-[1.01]",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                           isSelected
                             ? "bg-muted border-2 border-border shadow-sm"
@@ -912,10 +909,9 @@ export function CreateScheduleDialog({
             {step > 0 ? (
               <motion.button
                 onClick={goBack}
-                whileHover={{ x: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className={cn(
-                  "h-10 px-4 rounded-xl text-sm font-medium transition-all duration-200",
+                  "h-10 px-4 rounded-xl text-sm font-medium transition-all duration-200 hover:-translate-x-0.5",
                   "text-muted-foreground hover:text-foreground",
                   "hover:bg-muted/50",
                   "flex items-center gap-2",
@@ -938,14 +934,13 @@ export function CreateScheduleDialog({
           <motion.button
             onClick={isLastStep ? handleSave : goNext}
             disabled={loading || (isLastStep && !canSubmit)}
-            whileHover={!loading && (isLastStep ? canSubmit : true) ? { scale: 1.03 } : {}}
             whileTap={!loading && (isLastStep ? canSubmit : true) ? { scale: 0.97 } : {}}
             className={cn(
               "relative h-10 px-6 rounded-xl text-sm font-semibold transition-all duration-300",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               "disabled:opacity-40 disabled:cursor-not-allowed",
               (isLastStep ? canSubmit : true) && !loading
-                ? "text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border shadow-sm hover:shadow-md"
+                ? "text-foreground bg-muted hover:bg-muted/80 ring-1 ring-border shadow-sm hover:shadow-md hover:scale-[1.03]"
                 : "text-muted-foreground bg-muted/50"
             )}
           >

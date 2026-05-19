@@ -14,14 +14,15 @@ import {
 import { validateEmailForSignup } from "@/lib/email-validation"
 import { createClient } from "@/lib/supabase/client"
 import Link from "next/link"
-import { useState, useEffect, useRef, memo } from "react"
+import { useState, useEffect, useRef, useMemo, memo } from "react"
 import { captureUtmParams, trackSignIn, trackSignUp } from "@/lib/posthog/analytics"
 import { HeaderGoBack } from "../components/header-go-back"
 import { useRouter, useSearchParams } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { CoastyIcon } from "@/components/icons/coasty"
-import { ArrowUp } from "lucide-react"
+import { ArrowUp, Copy, Check } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { detectInAppBrowser } from "@/lib/detect-in-app-browser"
 
 /* ── Cinematic loop constants ── */
 
@@ -106,25 +107,6 @@ function LeftBrandPanel() {
 
       {/* Cinematic animation */}
       <CinematicLoop key={cycle} onLoop={() => setCycle((c) => c + 1)} />
-
-      {/* Bottom branding — always visible, overlaid */}
-      <div className="absolute bottom-0 left-0 right-0 z-30 px-8 xl:px-10 pb-8 xl:pb-10">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-10"
-        >
-          <div className="flex items-center gap-2.5 mb-3">
-            <CoastyIcon className="size-5 text-white/70" />
-            <span className="text-white/30 text-[10px] font-semibold tracking-[0.3em] uppercase">Coasty</span>
-          </div>
-          <p className="text-white/25 text-[13px] font-normal leading-relaxed max-w-xs">
-            AI agents that control computers like humans do.
-          </p>
-        </motion.div>
-      </div>
     </motion.div>
   )
 }
@@ -433,8 +415,11 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [showInAppBrowserNotice, setShowInAppBrowserNotice] = useState(false)
+  const [copied, setCopied] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
+  const inAppBrowser = useMemo(() => detectInAppBrowser(), [])
 
   useEffect(() => {
     const ref = searchParams.get("ref")
@@ -451,6 +436,13 @@ export default function LoginPage() {
   }
 
   async function handleSignInWithGoogle() {
+    // In-app browsers (LinkedIn, Facebook, etc.) block Google OAuth
+    if (inAppBrowser.isInApp) {
+      setShowInAppBrowserNotice(true)
+      setError(null)
+      return
+    }
+
     const supabase = createClient()
     if (!supabase) {
       throw new Error(te("supabaseNotConfigured"))
@@ -478,6 +470,24 @@ export default function LoginPage() {
     }
   }
 
+  async function handleCopyLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Fallback for older browsers
+      const input = document.createElement("input")
+      input.value = window.location.href
+      document.body.appendChild(input)
+      input.select()
+      document.execCommand("copy")
+      document.body.removeChild(input)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
   async function handleEmailSignIn(e: React.FormEvent) {
     e.preventDefault()
     const supabase = createClient()
@@ -500,17 +510,36 @@ export default function LoginPage() {
 
       if (data?.user) {
         trackSignIn("email")
-        router.push("/")
+        // Hard navigation, not router.push.
+        //
+        // Why: signInWithPassword sets the auth cookie via a Set-Cookie
+        // response, but the React Server Component cache for "/" was
+        // already populated (unauthenticated) when the user landed on
+        // /auth/login. router.push does a client-side nav that reuses
+        // that cached RSC payload, so the home page renders with
+        // isAuthenticated=false and shows the LandingPage cinematic.
+        // Only on a manual refresh does Next.js re-fetch "/" with the
+        // new cookie, see the user, and render the chat.
+        //
+        // We saw the symmetrical bug for sign-OUT — see the comment in
+        // lib/user-store/provider.tsx around `signOut`. Same fix
+        // applies here: full-page navigation guarantees the auth cookie
+        // is on the request, every server component re-runs, every
+        // provider re-initializes with the fresh user, and the URL is
+        // replaced (not pushed) so Back doesn't return to /auth/login.
+        if (typeof window !== "undefined") {
+          window.location.replace("/")
+        }
+        return
       }
     } catch (err: unknown) {
       const message = (err as Error).message
-      if (message?.includes("Email not confirmed")) {
-        setError(te("confirmEmail"))
-      } else if (message?.includes("Invalid login credentials")) {
-        setError(te("invalidCredentials"))
-      } else {
-        setError(message || te("signInFailed"))
-      }
+      // SECURITY (P1-05): Do NOT differentiate "Email not confirmed" vs
+      // "Invalid login credentials" — both leak account existence to a
+      // network-observer. Show a single generic error to the user; log the
+      // underlying reason locally for operator diagnostics only.
+      console.error("[auth] Sign-in failed:", message)
+      setError(te("invalidCredentials"))
     } finally {
       setIsLoading(false)
     }
@@ -590,15 +619,17 @@ export default function LoginPage() {
 
       await signInWithMagicLink(supabase, email)
       trackSignIn("magic_link")
+      // SECURITY (P1-02): Always show the same "check your email" success
+      // toast — the lib/api wrapper swallows the "Signups not allowed for
+      // otp" error so the existing-user and unknown-user paths are
+      // indistinguishable client-side.
       setSuccess(ts("checkEmailMagicLink"))
     } catch (err: unknown) {
+      // Genuine errors only at this point (network, throttling, malformed
+      // email). The account-enumeration error has already been swallowed
+      // upstream in lib/api.signInWithMagicLink.
       const message = (err as Error).message
-      if (message?.includes("Signups not allowed for otp")) {
-        setAuthView("sign-up")
-        setError(te("noAccountFound"))
-      } else {
-        setError(message || te("magicLinkFailed"))
-      }
+      setError(message || te("magicLinkFailed"))
     } finally {
       setIsLoading(false)
     }
@@ -714,6 +745,48 @@ export default function LoginPage() {
               </AnimatePresence>
 
               <div className="space-y-4">
+                {/* In-app browser notice */}
+                <AnimatePresence>
+                  {showInAppBrowserNotice && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-4 space-y-3">
+                        <p className="text-sm text-foreground/80 leading-relaxed">
+                          {inAppBrowser.appName
+                            ? t("inAppBrowser.blockedNamed", { app: inAppBrowser.appName })
+                            : t("inAppBrowser.blocked")}
+                        </p>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            className="flex-1 h-9 text-xs gap-1.5 rounded-lg"
+                            onClick={handleCopyLink}
+                          >
+                            {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+                            {copied ? t("inAppBrowser.copied") : t("inAppBrowser.copyLink")}
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            size="sm"
+                            className="flex-1 h-9 text-xs gap-1.5 rounded-lg"
+                            onClick={() => {
+                              setShowInAppBrowserNotice(false)
+                              switchView("magic-link")
+                            }}
+                          >
+                            {t("inAppBrowser.useMagicLink")}
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
                 {/* Google OAuth */}
                 <Button
                   variant="secondary"

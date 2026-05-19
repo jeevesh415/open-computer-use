@@ -478,7 +478,7 @@ export function ProjectView({ projectId }: ProjectViewProps) {
       ) : showOnboarding && chats.length === 0 ? (
         <div className="mx-auto w-full max-w-3xl px-4 pt-6 pb-20">
           <h2 className="text-muted-foreground mb-3 text-sm font-medium">
-            No chats yet
+            No tasks yet
           </h2>
         </div>
       ) : null}

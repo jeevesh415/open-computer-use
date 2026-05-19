@@ -7,19 +7,27 @@ import { APP_NAME } from "@/lib/config"
 import { createClient } from "@/lib/supabase/client"
 import { isSupabaseEnabled } from "@/lib/supabase/config"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import { useTranslations } from "next-intl"
+import { detectInAppBrowser } from "@/lib/detect-in-app-browser"
 
 export function PopoverContentAuth() {
   const t = useTranslations("chatInput")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const inAppBrowser = useMemo(() => detectInAppBrowser(), [])
 
   if (!isSupabaseEnabled) {
     return null
   }
 
   const handleSignInWithGoogle = async () => {
+    // In-app browsers block Google OAuth — redirect to auth page which handles this
+    if (inAppBrowser.isInApp) {
+      window.location.href = "/auth"
+      return
+    }
+
     const supabase = createClient()
 
     if (!supabase) {

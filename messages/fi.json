@@ -12,13 +12,15 @@
     "recommended": "Suositeltu",
     "month": "kuukausi",
     "creditsPerMonth": "{count} krediittiä/kk",
-    "agentsInParallel": "{count} agenttia rinnakkain"
+    "agentsInParallel": "{count} agenttia rinnakkain",
+    "whatsIncluded": "Mitä sisältyy",
+    "hideDetails": "Piilota tiedot"
   },
   "header": {
     "useCases": "Käyttötapaukset",
     "blog": "Blogi",
     "agentSwarms": "Agenttiparvet",
-    "products": "Products",
+    "products": "Tuotteet",
     "discover": "Discover",
     "compare": "Vertaile",
     "demos": "Demot",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} personoitua sähköpostia per kampanja"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
+      "computerUse": "Tietokoneen käyttö",
+      "agentSwarms": "Agenttiparvet",
       "compare": "Compare"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} OSWorld benchmark -pistemäärä",
+      "agentSwarms": "{stat} agenttia rinnakkain",
+      "compare": "{stat} kilpailijaa analysoitu"
     },
     "blogItems": {
       "allPosts": "Kaikki artikkelit",
@@ -72,7 +74,8 @@
       "webScraping": "Web scraping",
       "jobApplications": "Työhakemukset",
       "demosResults": "Demot ja tulokset",
-      "guide": "Opas"
+      "guide": "Opas",
+      "discover": "Yhteisö"
     },
     "blogStats": {
       "allPosts": "{stat} artikkelia julkaistaan viikoittain",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} sivua per istunto",
       "jobApplications": "{stat} hakemusta per istunto",
       "demosResults": "{stat} todellista tapaustutkimusta",
-      "guide": "{stat} käyttötapauskävelyä"
-    }
+      "guide": "{stat} käyttötapauskävelyä",
+      "discover": "Katso miten ihmiset käyttävät sitä"
+    },
+    "api": "API"
   },
   "hero": {
-    "badge": "#1 Computer-Use Agent · {score} OSWorld",
-    "headline": "Autonomiset tietokoneoperaattorit",
+    "badge": "#1 tietokonetta käyttävä agentti · {score} OSWorld",
+    "headline": "Paras tietokoneen käyttöagentti",
     "useCases": {
       "computerAgent": {
         "label": "Tietokoneagentti",
@@ -141,7 +146,7 @@
         "task": "Markkinoi tuotettasi Reddit-alustalla autonomisesti"
       },
       "goToMarket": {
-        "label": "Go-to-Market",
+        "label": "Markkinoille meno",
         "task": "Löydä prospektit ja lähetä personoituja sähköposteja"
       },
       "qaTesting": {
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Sosiaalinen media",
         "task": "Julkaise Hacker News -alustalla ja osallistu kommentteihin"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "säästöä kuukaudessa",
+        "sublabel": "vs. kokoaikainen VA"
+      },
+      "time": {
+        "value": "30 t",
+        "label": "takaisin viikossa",
+        "sublabel": "manuaalinen työ poistettu"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "nopeampi tuotos",
+        "sublabel": "tehtävät minuuteissa, ei päivissä"
+      },
+      "effort": {
+        "value": "0",
+        "label": "koodia tai palkkauksia",
+        "sublabel": "täysin hallittu päästä päähän"
       }
     }
   },
@@ -239,7 +266,7 @@
       "subtitle": "Sinä tai tiimisi, käsin"
     },
     "coasty": {
-      "title": "Coasty AI Agent",
+      "title": "Coasty AI -agentti",
       "subtitle": "#1 computer-use agentti"
     },
     "rows": {
@@ -284,7 +311,7 @@
       "prospects": {
         "title": "Potentiaalisten asiakkaiden löytäminen",
         "description": "Coasty löytää ja tutkii potentiaalisia asiakkaita, keräten avaintiedot personoidun yhteydenoton laatimiseen.",
-        "tag": "Go-to-Market"
+        "tag": "Markkinoille meno"
       },
       "qa": {
         "title": "QA-testaa itsensä",
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Rajaton raskas automaatio",
         "cta": "Hanki Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Ei luottorajoja — koskaan",
+        "cta": "Valitse Unlimited",
+        "badge": "Paras tarjous"
       }
     },
     "vmTemporary": "1 väliaikainen VM (2 t)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Sama työ maksaa {oldPrice} manuaalisesti tehtynä",
       "description": "Virtuaaliassistentti maksaa $2 000–$4 000/kk. Osa-aikainen työntekijä maksaa enemmän. Coasty tekee saman työn 24/7 alkaen $0 — täydellisellä johdonmukaisuudella, kattavalla tarkastusjäljellä ja nollakoulutusajalla."
-    }
+    },
+    "unlimitedCredits": "Rajattomat luotot"
   },
   "faq": {
     "title": "Usein kysytyt kysymykset",
@@ -429,7 +463,8 @@
       "contact": "Yhteystiedot",
       "privacy": "Tietosuoja",
       "terms": "Ehdot"
-    }
+    },
+    "status": "Kaikki järjestelmät toimivat"
   },
   "languageSwitcher": {
     "label": "Kieli"
@@ -458,16 +493,16 @@
     "demoCaption": "Käytä tekoälyagentteja tietokoneellasi tai ohjaa sitä puhelimellasi mistä tahansa.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Aja paikallisesti tietokoneellasi",
+        "desc": "Lataa työpöytäsovellus ja anna tekoälyn ohjata tietokonettasi suoraan — pilvi-VM:ää ei tarvita."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Ohjaa tietokonettasi puhelimella",
+        "desc": "Käynnistä tehtävä puhelimella ja seuraa tekoälyagentin työskentelyä tietokoneellasi reaaliajassa."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Pilvi tai paikallinen — sinun valintasi",
+        "desc": "Käytä pilvi-VM:iä eristettyihin tehtäviin tai siirry paikalliseen tilaan saadaksesi täyden pääsyn sovelluksiisi ja tiedostoihisi."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Yhdistetään...",
       "continueWithGoogle": "Jatka Google-tilillä"
+    },
+    "inAppBrowser": {
+      "blocked": "Google-kirjautuminen ei toimi upotetuissa selaimissa. Avaa tämä sivu selaimessasi tai käytä taikalinkkiä.",
+      "blockedNamed": "Google-kirjautuminen ei toimi sovelluksessa {app}. Avaa tämä sivu selaimessasi tai käytä taikalinkkiä.",
+      "copyLink": "Kopioi linkki",
+      "copied": "Kopioitu!",
+      "useMagicLink": "Käytä taikalinkkiä"
     },
     "or": "tai",
     "email": "Sähköposti",
@@ -560,18 +602,21 @@
     "getStarted": "Aloita",
     "settingUp": "Valmistellaan...",
     "welcome": {
-      "titleReturning": "Tervetuloa takaisin{name}!",
+      "titleReturning": "Tervetuloa takaisin{name}",
       "titleNew": "Tervetuloa Coastyyn",
-      "descriptionReturning": "Haluaisimme oppia sinusta hieman lisää parantaaksemme kokemustasi",
-      "descriptionNew": "Perustetaan tilisi, jotta voimme personoida kokemustasi"
+      "eyebrowNew": "Tutustutaan",
+      "eyebrowReturning": "Melkein valmis",
+      "descriptionReturning": "Vielä muutama yksityiskohta ja Coasty on täysin viritetty työskentelytavallesi.",
+      "descriptionNew": "Coasty toimii oikeilla tietokoneilla — selaa, klikkaa, kirjoittaa, toimittaa. Muutama nopea yksityiskohta, jotta se sopii tyyliisi.",
+      "footerNote": "Vie noin minuutin. Voit muuttaa mitä tahansa myöhemmin Asetuksissa."
     },
     "nameLabel": "Miten meidän pitäisi kutsua sinua?",
-    "namePlaceholder": "Nimesi",
-    "companyLabel": "Yritys",
+    "namePlaceholder": "Pelkkä etunimi riittää",
+    "companyLabel": "Missä työskentelet?",
     "optional": "(valinnainen)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "Yrityksesi tai tiimisi",
     "websiteLabel": "Verkkosivusto",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "yrityksesi.com",
     "roleStep": {
       "title": "Mikä kuvaa sinua parhaiten?",
       "subtitle": "Valitse kaikki sopivat — tämä auttaa meitä räätälöimään kokemustasi"
@@ -581,7 +626,7 @@
       "developer": "Kehittäjä",
       "marketer": "Markkinoija",
       "designer": "Suunnittelija",
-      "product_manager": "Product Manager",
+      "product_manager": "Tuotepäällikkö",
       "data_analyst": "Data / Analytiikka",
       "operations": "Operaatiot",
       "other": "Muu"
@@ -602,7 +647,7 @@
     "referralSources": {
       "twitter": "Twitter / X",
       "linkedin": "LinkedIn",
-      "google": "Google Search",
+      "google": "Google-haku",
       "youtube": "YouTube",
       "friend": "Ystävä / Kollega",
       "producthunt": "Product Hunt",
@@ -644,7 +689,7 @@
         "description": "Lomakkeet, välilehdet, scraping — täysin automatisoitu"
       },
       "computerVision": {
-        "title": "Computer Vision",
+        "title": "Konenäkö",
         "description": "Näkee ja ymmärtää näyttösi reaaliajassa"
       },
       "workflows": {
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Mitä AI-työntekijäsi pitäisi tehdä?",
-    "placeholderAlt": "Kerro AI:llesi mitä tehdä tietokoneella...",
+    "placeholder": "Kerro mitä tehdä tällä tietokoneella...",
+    "placeholderAlt": "Valitse tietokone aloittaaksesi...",
     "vmError": {
       "title": "Virtuaalikonevirhe",
       "description": "Virtuaalikone on virhetilassa tai sitä poistetaan.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Vähennä koneiden määrää",
       "increaseMachines": "Lisää koneiden määrää",
       "machineLimit": "Enintään {max} parvikonetta paketissasi. Tarvitsetko lisää? Ota yhteyttä founders@coasty.ai",
-      "label": "Multi-Run",
+      "label": "Moniajo",
       "upgradeCta": "Parvitila"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Pudota tiedostot tähän",
       "dropDescription": "Tiedostot ladataan VM:n Työpöytä-kansioon",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Polku: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Kirjaudu kokeillaksesi lisää ominaisuuksia ilmaiseksi",
@@ -801,6 +846,28 @@
       "ecommerce": "{company} hintavertailu",
       "social_media": "Julkaise {company}:sta",
       "general_automation": "Automatisoi tehtävä {company}:ssa"
+    },
+    "awaitingHuman": {
+      "completed": "Ihmisluovutus valmis",
+      "yourTurn": "Sinun vuorosi",
+      "connectToDesktop": "Yhdistä työpöytään",
+      "resuming": "Jatketaan...",
+      "doneContinue": "Valmis, jatka"
+    },
+    "feedback": {
+      "promptRun": "Miten tämä ajo sujui?",
+      "promptSwarm": "Miten tämä parvi sujui?",
+      "reactionBad": "Huono",
+      "reactionOkay": "Ihan ok",
+      "reactionGood": "Hyvä",
+      "reactionAmazing": "Mahtava",
+      "tellUsMore": "Kerro lisää",
+      "commentPlaceholder": "Mitä voisi parantaa?",
+      "npsPrompt": "Suosittelisitko Coastya?",
+      "npsNotLikely": "Epätodennäköistä",
+      "npsVeryLikely": "Hyvin todennäköistä",
+      "thanks": "Kiitos palautteesta",
+      "creditsLabel": "krediittiä"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Rajaton raskas automaatio"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Ei luottorajoja — koskaan",
+        "badge": "Paras tarjous"
       }
     },
     "features": {
@@ -1061,7 +1133,7 @@
     "new": "uusi",
     "description": "Lisää omat API-avaimesi avataksesi pääsyn malleihin.",
     "securityNote": "Avaimesi tallennetaan turvallisesti end-to-end-salauksella.",
-    "apiKeyLabel": "{provider} API Key",
+    "apiKeyLabel": "{provider} API-avain",
     "getApiKey": "Hanki API-avain",
     "delete": "Poista",
     "save": "Tallenna",
@@ -1113,7 +1185,7 @@
         "description": "API-avaimet salattu AES-256-GCM:llä. Tunnistetietojasi ei koskaan tallenneta selkotekstinä."
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "Row Level Security -suojaus",
         "description": "Tietokantatason eristys varmistaa, että datasi on vain sinun käytettävissäsi. Ristikkäinen pääsy ei ole mahdollista."
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Asettelu"
+    "layout": "Asettelu",
+    "sidebarStyle": "Sivupalkin tyyli",
+    "sidebarStyleHint": "Valitse, missä navigointi sijaitsee",
+    "sidebarStyleDisabled": "Käytettävissä, kun asettelu on asetettu sivupalkkiin",
+    "vertical": "Pysty",
+    "verticalBadge": "Oletus",
+    "verticalDescription": "Klassinen vasen palkki etiketeillä ja krediiteillä alatunnisteessa.",
+    "horizontal": "Vaaka",
+    "horizontalBadge": "Tyylikäs",
+    "horizontalDescription": "Yksi yläpalkki, kaikki yhdellä rivillä. Enemmän kankaan korkeutta."
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "Kirjautumiset tallennettu",
       "addLogins": "Lisää kirjautumiset",
       "askAnything": "Kysy mitä tahansa",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac ja Windows",
       "mobileRemote": "Mobiiliohjaus",
       "freeDownload": "Ilmainen lataus",
       "onePrompt": "Yksi käsky",
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Rajoittamaton raskas automaatio",
         "cta": "Hanki Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Ei luottorajoja — koskaan",
+        "cta": "Valitse Unlimited",
+        "badge": "Paras tarjous"
       }
     },
     "features": {
@@ -1757,7 +1844,7 @@
       "subtitle": "AI-yrityksesi autopilotilla",
       "description": "Tyontekijat, tiimit, triggerit — kaynissa 24/7.",
       "myCompany": "Yritykseni",
-      "contentOps": "Content Ops",
+      "contentOps": "Sisällöntuotanto",
       "support": "Tuki",
       "writer": "Kirjoittaja",
       "seo": "SEO",
@@ -1805,7 +1892,7 @@
       "templates": "Aloita mallista",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "Sisällöntuotanto",
           "plan": "Starter",
           "count": "3"
         },
@@ -1820,7 +1907,7 @@
           "count": "7"
         },
         "ecommerce": {
-          "name": "E-Commerce",
+          "name": "Verkkokauppa",
           "plan": "Plus",
           "count": "7"
         }
@@ -1867,6 +1954,11 @@
           "credits": "1 500",
           "machines": "3 aina paalla",
           "feature": "SLA-takuu"
+        },
+        "unlimited": {
+          "credits": "Rajaton",
+          "machines": "2 aina päällä",
+          "feature": "1 samanaikainen agentti"
         }
       },
       "perMonth": "{price}/kk",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "Kaksi tapaa suorittaa",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "Pilvi-VM",
       "cloudFeatures": {
         "isolated": "Taysin eristetty hiekkalaatikko",
         "freshBrowser": "Puhdas selain, ei historiaa",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - #1 Tietokonetta käyttävä tekoälyagentti | Tekoälytyöntekijä työpöytä- ja selainautomaatioon",
+      "title": "Coasty - #1 Tietokonetta käyttävä tekoälyagentti | $249/kk Rajaton (Markkinoiden edullisin)",
       "titleTemplate": "{title} | Coasty - Tekoälyn tietokonekäyttöagentti",
-      "description": "Coasty on #1-sijoitettu tietokonetta käyttävä tekoälyagentti — 82% OSWorld-vertailussa. Se hallitsee täyden työpöydän kuin ihminen: avaa selaimia, klikkaa, kirjoittaa, täyttää lomakkeita, lähettää sähköposteja, hallinnoi taulukoita. Aito VM-tason eristys joka istunnolle. Alkaen $20/kk.",
-      "ogTitle": "Coasty - #1 Tietokonetta käyttävä tekoälyagentti | 82% OSWorld-vertailu",
-      "ogDescription": "Tekoälytyöntekijä, joka hallitsee työpöytää kuin ihminen. #1 OSWorld-vertailussa (82%). Selainautomaatio, työpöytähallinta, CAPTCHA-ratkaisu, VM-eristys. Alkaen $20/kk.",
-      "twitterDescription": "Tekoälytyöntekijä, joka hallitsee työpöytää kuin ihminen. Avaa selaimia, klikkaa, kirjoittaa, täyttää lomakkeita, lähettää sähköposteja. Aito VM-eristys. $20/kk vs $3 000/kk ihmisavustaja."
+      "description": "Coasty on #1-sijoitettu tietokonetta käyttävä tekoälyagentti — 82% OSWorld-vertailussa — ja ainoa kiinteähintainen Rajaton tietokonekäyttösuunnitelma hintaan $249/kk (edullisempi kuin Devin Team $500+ACU, OpenAI Operator $200 nopeusrajoitettuna ja krediittirajoitetut kilpailijat). Hallitsee koko työpöytää kuin ihminen: selaimet, lomakkeet, sähköpostit, taulukot. VM-tason eristys. Alkaen $19/kk Starter tai $249/kk Rajaton.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/kk Rajaton (Edullisin tietokonekäyttöagentti)",
+      "ogDescription": "#1 OSWorld-vertailussa (82%). $249/kk kiinteä Rajaton — edullisempi kuin Devin Team ($500+ACU) korkeammalla vertailutuloksella. Selain-, työpöytä- ja terminaaliautomaatio. VM-eristys joka istunnolle. Alustariippumaton natiivi + REST API + MCP-palvelin.",
+      "twitterDescription": "Tekoälyagentti, joka ajaa oikeaa työpöytää. 82% OSWorld (#1). $249/kk Rajaton — kategorian edullisin kiinteähintainen suunnitelma. Starter alkaen $19/kk. VM-eristys + 26-tool MCP-palvelin."
     },
     "compare": {
       "title": "Vertaa Coasty - Tekoälyagentin vaihtoehdot ja kilpailijavertailu",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Paras tietokonekäyttöagentti, #1 OSWorld-vertailussa. Automatisoi mikä tahansa työpöytä-, selain- tai terminaalitehtävä tekoälyllä."
     },
     "pricing": {
-      "title": "Hinnoittelu — Coasty-tekoälyagentin suunnitelmat ja hinnat",
-      "description": "Coastyn hinnoittelusuunnitelmat alkaen $20/kk. Korvaa $3 000/kk virtuaaliavustajat tekoälytyöntekijällä. Ilmainen taso saatavilla. Krediittipohjainen käyttö ilman piilokustannuksia.",
-      "ogTitle": "Coasty-hinnoittelu — Tekoälyagentin suunnitelmat",
-      "ogDescription": "Tekoälytyöntekijä alkaen $20/kk. Korvaa kalliit virtuaaliavustajat autonomisella tekoälyllä. Ilmainen taso saatavilla."
+      "title": "Hinnoittelu — $19/kk Starter tai $249/kk Rajaton (Markkinoiden edullisin)",
+      "description": "Coastyn hinnoittelu: Starter $19/kk (200 krediittiä) tai Rajaton $249/kk (markkinoiden edullisin kiinteähintainen rajaton tietokonekäyttösuunnitelma — edullisempi kuin Devin Team $500+ACU, Genspark Pro $249 krediittirajoitettuna ja Manus Extended $200 rajoitettuna). Korvaa $3 000+/kk maksavat ihmisvirtuaaliavustajat. Ei piilokustannuksia.",
+      "ogTitle": "Coasty-hinnoittelu — $19/kk Starter, $249/kk Rajaton",
+      "ogDescription": "$249/kk kiinteä Rajaton — markkinoiden edullisin rajaton tietokonekäyttösuunnitelma. Tai $19/kk Starter yksityishenkilöille. Säästää $36 000/vuosi verrattuna ihmisavustajiin."
     },
     "faq": {
       "q1": "Mikä on Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Miten Coasty vertautuu Anthropic Computer Use -palveluun?",
       "a2": "Kun Anthropic Computer Use tarjoaa raaka-API:n tietokoneen hallintaan, Coasty on tuotantovalmis alusta hallitulla VM-infrastruktuurilla, sisäänrakennetulla CAPTCHA-ratkaisulla, työpöytäsovelluksella Mac- ja Windows-käyttöjärjestelmille, monimallituella ja korkeimmalla OSWorld-vertailutuloksella (82%). Coasty tarjoaa kokonaisratkaisun — ei pelkkää API:a.",
       "q3": "Paljonko Coasty maksaa?",
-      "a3": "Coasty alkaa $20/kuukausi Starter-suunnitelmalla ja ilmainen taso on saatavilla. Tämä verrattuna yli $3 000/kuukausi ihmisavustajaan. Coasty työskentelee 24/7 ilman taukoja, koulutusta ja skaalautuu välittömästi.",
+      "a3": "Coastylla on kaksi aktiivista suunnitelmaa: Starter hintaan $19/kk (200 krediittiä, 1 kone, ihanteellinen yksityishenkilöille) ja Rajaton hintaan $249/kk ilman krediittirajoituksia. $249 Rajaton-suunnitelma on edullisin saatavilla oleva kiinteähintainen rajaton tietokonekäyttösuunnitelma — edullisempi kuin Devin Team ($500/kk + ACU-ylitysmaksu), OpenAI Operator ChatGPT Pro ($200/kk nopeusrajoitettuna), Genspark Pro ($249,99 krediittirajoitettuna 125k krediittiin) ja Manus Extended ($200 rajoitettuna 40k krediittiin). Molemmat korvaavat $3 000+/kk maksavan ihmisvirtuaaliavustajan; Rajaton säästää $33 000+/vuosi verrattuna ihmisavustajaan 92% kustannussäästöllä.",
       "q4": "Onko Coasty turvallinen käyttää?",
       "a4": "Kyllä. Jokainen Coasty-istunto pyörii omassa eristetyssä, hiekkalaatikkoidussa virtuaalikoneessa. Tietosi pysyvät turvassa, koneesi koskemattomana, eikä mitään vuoda istuntojen välillä. Tämä on aito VM-tason eristys, ei pelkkiä kontteja jaetussa ympäristössä.",
       "q5": "Mikä on OSWorld-vertailu?",
@@ -2309,11 +2401,11 @@
       "a10": "Kyllä. Coastylla on sisäänrakennettu CAPTCHA-ratkaisuputki, joten se ei jumiudu kuten kilpailevat tekoälyagentit. Tämä on kriittistä todellisessa automaatiossa, jossa CAPTCHA-tehtävät ovat yleisiä verkkosivustoilla."
     },
     "structuredData": {
-      "appDescription": "#1-sijoitettu tietokonetta käyttävä tekoälyagentti. Coasty hallitsee täyden työpöydän kuin ihminen — avaa selaimia, klikkaa, kirjoittaa, täyttää lomakkeita, lähettää sähköposteja ja hallinnoi taulukoita itsenäisesti. 82% OSWorld-vertailussa. Aito VM-tason eristys. Sisäänrakennettu CAPTCHA-ratkaisu. Alkaen $20/kuukausi.",
-      "orgDescription": "Coasty rakentaa #1 tietokonetta käyttävän tekoälyagentin. Alustamme tarjoaa autonomisen työpöytähallinnan, selainautomaation ja moniagenttiorkestraation aidolla VM-tason eristyksellä.",
-      "productDescription": "Tietokonetta käyttävä tekoälyagentti, joka hallitsee työpöytää kuin ihminen. #1 OSWorld-vertailussa (82%). Autonominen selainautomaatio, työpöytähallinta, sähköpostien lähetys, lomakkeiden täyttö ja taulukkojen hallinta aidolla VM-tason eristyksellä.",
-      "websiteDescription": "#1 tietokonetta käyttävä tekoälyagenttialusta. 82% OSWorld-vertailu. Autonominen selain-, työpöytä- ja terminaaliautomaatio VM-eristyksellä. Alkaen $20/kk.",
-      "softwareDescription": "Tietokonetta käyttävä tekoälyagentti, joka hallitsee täyden työpöydän kuin ihminen. #1 OSWorld-vertailussa 82% suoritusasteella 369 todellisessa tehtävässä. Autonominen selainautomaatio, työpöytähallinta, terminaalitoiminnot, sähköpostien lähetys, lomakkeiden täyttö ja taulukkojen hallinta.",
+      "appDescription": "#1-sijoitettu tietokonetta käyttävä tekoälyagentti ja markkinoiden edullisin kiinteähintainen Rajaton tietokonekäyttösuunnitelma hintaan $249/kk. Coasty hallitsee täyden työpöydän kuin ihminen — avaa selaimia, klikkaa, kirjoittaa, täyttää lomakkeita, lähettää sähköposteja ja hallinnoi taulukoita itsenäisesti. 82% OSWorld-vertailussa 369 todellisessa tehtävässä. Aito VM-tason eristys joka istunnolle. Sisäänrakennettu CAPTCHA-ratkaisu. Suunnitelmat: $19/kk Starter tai $249/kk Rajaton.",
+      "orgDescription": "Coasty rakentaa #1 tietokonetta käyttävän tekoälyagentin (82% OSWorld) ja toimittaa ainoan kiinteähintaisen Rajaton tietokonekäyttösuunnitelman hintaan $249/kk — edullisempi kuin Devin Team, OpenAI Operator ja krediittirajoitetut kilpailijat samassa hintaluokassa. Alustamme tarjoaa autonomisen työpöytähallinnan, selainautomaation ja moniagenttiorkestraation aidolla VM-tason eristyksellä.",
+      "productDescription": "Tietokonetta käyttävä tekoälyagentti, joka hallitsee työpöytää kuin ihminen. #1 OSWorld-vertailussa (82%). $249/kk Rajaton-suunnitelma on edullisin saatavilla oleva kiinteähintainen rajaton tietokonekäyttösuunnitelma. Autonominen selainautomaatio, työpöytähallinta, sähköpostien lähetys, lomakkeiden täyttö ja taulukkojen hallinta aidolla VM-tason eristyksellä.",
+      "websiteDescription": "#1 tietokonetta käyttävä tekoälyagenttialusta — 82% OSWorld-vertailu ja edullisin kiinteähintainen Rajaton-suunnitelma hintaan $249/kk. Autonominen selain-, työpöytä- ja terminaaliautomaatio VM-eristyksellä. Alkaen $19/kk Starter tai $249/kk Rajaton.",
+      "softwareDescription": "Tietokonetta käyttävä tekoälyagentti, joka hallitsee täyden työpöydän kuin ihminen. #1 OSWorld-vertailussa 82% suoritusasteella 369 todellisessa tehtävässä. $249/kk Rajaton-suunnitelma on markkinoiden edullisin kiinteähintainen rajaton tietokonekäyttösuunnitelma. Autonominen selainautomaatio, työpöytähallinta, terminaalitoiminnot, sähköpostien lähetys, lomakkeiden täyttö ja taulukkojen hallinta.",
       "breadcrumbs": {
         "home": "Etusivu",
         "caseStudies": "Tekoälyagentin tapaustutkimukset",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Sivua ei löytynyt",
-      "description": "Valitettavasti tätä sivua ei ole olemassa."
+      "description": "Valitettavasti tätä sivua ei ole olemassa.",
+      "metaTitle": "404 · Sivua ei löytynyt",
+      "metaDescription": "Lähetimme parhaan AI-agenttimme. Hän palasi tyhjin käsin. Takaisin Coastyyn, #1-arvostettuun AI-agenttiin työpöydän ja selaimen automaatioon.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "skannaus: koko internet",
+        "step2": "skannaus: jokainen avoin välilehti",
+        "step3": "skannaus: sohvan alta",
+        "result": "tuomio: sivua ei ole olemassa"
+      },
+      "ok": "OK",
+      "fail": "EPÄONNISTUI",
+      "primaryCta": "Takaisin etusivulle",
+      "secondaryCta": "Palkkaa AI-agentti",
+      "navLabel": "Ehdotetut sivut",
+      "links": {
+        "home": "Etusivu",
+        "computerUse": "Tietokoneen käyttö",
+        "pricing": "Hinnat",
+        "download": "Lataa",
+        "blog": "Blogi",
+        "guide": "Opas"
+      }
     },
     "error": {
       "title": "Jokin meni pieleen",
@@ -2457,7 +2571,7 @@
       "teamCreatedPartial": "Tiimi luotu {count} työntekijällä ({failedCount} epäonnistui: {names})",
       "teamCreated": "{name}-tiimi luotu {count} työntekijällä"
     },
-    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "credentialInstructions": "[KÄYTETTÄVISSÄ OLEVAT TUNNISTETIEDOT]\nSeuraavat palvelujen tunnistetiedot on määritetty ja ovat käytettävissä:\n{list}\nKäytä näitä tunnistetietoja, kun sinun tarvitsee kirjautua näihin palveluihin tehtäviesi suorittamiseksi.",
     "templates": {
       "contentOps": {
         "name": "Sisältöoperaatiot",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Huoneen nimi on pakollinen",
+      "taskCreated": "Tehtävä luotu onnistuneesti",
+      "taskFailed": "Tehtävän luonti epäonnistui",
+      "assignTask": "Anna uusi tehtävä",
+      "assignTaskDesc": "Aloita uusi tehtävä AI-avustajasi kanssa.",
+      "taskName": "Tehtävän nimi",
+      "taskNamePlaceholder": "Syötä tehtävän nimi",
+      "cancel": "Peruuta",
+      "creating": "Luodaan...",
+      "createTask": "Luo tehtävä"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Syötä kutsukoodi",
+      "joinSuccess": "Liityit projektiin onnistuneesti!",
+      "joinFailed": "Projektiin liittyminen epäonnistui",
+      "invalidCode": "Virheellinen kutsukoodi tai projektia ei löytynyt",
+      "title": "Liity projektiin",
+      "description": "Syötä kutsukoodi liittyäksesi olemassa olevaan projektiin.",
+      "inviteCode": "Kutsukoodi",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Pyydä tiimisi vetäjältä projektin kutsukoodi",
+      "cancel": "Peruuta",
+      "joining": "Liitytään...",
+      "joinButton": "Liity projektiin"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
+      "title": "Huoneen osallistujat",
+      "copyCode": "Kopioi koodi",
+      "copyLink": "Kopioi linkki",
+      "codeCopied": "Kutsukoodi kopioitu!",
+      "codeFailed": "Kutsukoodin kopiointi epäonnistui",
+      "linkCopied": "Kutsulinkki kopioitu!",
+      "linkFailed": "Kutsulinkin kopiointi epäonnistui",
+      "online": "Verkossa",
       "offline": "Offline",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Huoneen nimi on pakollinen",
+      "created": "Projekti luotu onnistuneesti!",
+      "failed": "Huoneen luonti epäonnistui",
+      "title": "Luo uusi projekti",
+      "description": "Aloita uusi projekti tuotteesi rakentamiseksi tekoälyn avulla.",
+      "projectName": "Projektin nimi",
+      "projectNamePlaceholder": "Syötä projektin nimi",
+      "teamSize": "Tiimin koko",
+      "cancel": "Peruuta",
+      "creating": "Luodaan...",
+      "createButton": "Luo projekti"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Mitä uutta",
+    "title": "Mitä uutta Coastyssa",
+    "updateCount": "{count} päivitystä",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Päivitys",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Pysy kuulolla lisäpäivityksistä",
+    "tagline": "AI-työntekijäsi, joka tekee yhteistyötä kaikkien kanssa"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Mahtavaa"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Kirjaudu sisään lähettääksesi palautteen",
+    "alreadySubmitted": "Olet jo lähettänyt palautteen tästä",
+    "thankYou": "Kiitos palautteestasi!",
+    "creditsEarned": "+{credits} krediittiä ansaittu",
+    "helpImprove": "Palautteesi auttaa meitä parantamaan Coastya.",
+    "howsExperience": "Millainen kokemuksesi on?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Kerro lisää",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Mikä toimii hyvin? Mitä voisi parantaa?",
+    "cancel": "Peruuta",
+    "sending": "Lähetetään...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Valitse työasema",
+    "enterCron": "Syötä cron-lauseke",
+    "hireFailed": "Työntekijän palkkaaminen epäonnistui",
+    "removeFailed": "Työntekijän poisto epäonnistui",
+    "editEmployee": "Muokkaa työntekijää",
+    "configureEmployee": "Määritä työntekijä",
+    "editDescription": "Päivitä aikataulu, työasema tai ohjeet",
+    "configureDescription": "Määritä AI-työntekijä tälle keskustelulle",
+    "loading": "Ladataan asetuksia...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Työntekijän nimi"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Poistetaanko keskustelu?",
+    "description": "Tämä poistaa keskustelun \"{chatTitle}\"",
+    "cancel": "Peruuta",
+    "delete": "Poista"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Maksu onnistui! Krediittisi on lisätty.",
+    "canceled": "Maksu peruutettiin. Veloituksia ei tehty."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Yleiset asetukset",
     "generalDescription": "Määritä tietokoneen perusasetukset",
     "displayName": "Näyttönimi",
     "defaultName": "Oma tietokone",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Tallenna muutokset",
+    "security": "Tietoturva",
+    "securityDescription": "Tietoturva- ja käyttöoikeusasetukset",
+    "sshAuth": "SSH-todennus",
+    "username": "Käyttäjänimi:",
+    "keyPair": "Avainpari:",
+    "sshKeyDownloaded": "SSH-avain ladattu",
+    "sshKeyFailed": "SSH-avaimen lataus epäonnistui",
+    "downloadSshKey": "Lataa SSH-avain",
+    "vncPassword": "VNC-salasana",
     "vncPasswordHint": "Tämä salasana vaaditaan tietokoneeseen yhdistämiseen"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Hei, olen käyttänyt Coastya ja se on aika siisti. Se on tekoäly, joka oikeasti osaa käyttää tietokonetta puolestasi. Selailee, klikkailee, kirjoittaa, kaiken sen. Kokeile linkkini kautta, niin saamme molemmat ilmaisia krediittejä!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Katso tätä AI-työkalua",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "juuri nyt",
+      "minutesAgo": "{minutes} min sitten",
+      "hoursAgo": "{hours} t sitten",
+      "daysAgo": "{days} pv sitten",
+      "monthsAgo": "{months} kk sitten"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Suosittelulinkki kopioitu!",
+    "headline": "Hyvät ystävät jakavat meemejä. Mahtavat ystävät jakavat AI-agentteja.",
+    "subheadline": "Saatte molemmat {credits} ilmaista krediittiä, kun ystäväsi liittyy.",
+    "yourLink": "Suosittelulinkkisi",
+    "shareDirectly": "Jaa suoraan",
+    "yourReferrals": "Suosittelusi",
+    "referralCount": "{count} suosittelua",
+    "creditsEarned": "{credits} krediittiä ansaittu",
+    "invitedYou": "Kutsui sinut",
+    "joinedViaLink": "Liittyi linkkisi kautta",
+    "noInvites": "Ei vielä kutsuttuja käyttäjiä",
+    "noInvitesHint": "Jaa linkkisi, niin saatte molemmat 50 krediittiä"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Tee julkiseksi",
+    "title": "Keskustelusi on nyt julkinen!",
+    "description": "Kuka tahansa linkin omaava voi nyt nähdä tämän keskustelun ja se saattaa näkyä yhteisösyötteissä, esitellyillä sivuilla tai hakutuloksissa tulevaisuudessa.",
+    "viewPage": "Näytä sivu",
+    "shareOn": "Jaa palvelussa"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "AI-ohjauspaneeli",
+    "subtitle": "Kuvaile, mitä haluat tekoälyn tekevän",
+    "quickCommands": "Pikakomennot",
+    "noActions": "Toimintoja ei ole vielä suoritettu",
+    "success": "Onnistui",
+    "failed": "Epäonnistui",
+    "placeholder": "Kerro tekoälylle, mitä tehdä... (Ctrl+Enter lähettää)",
+    "executing": "Suoritetaan...",
+    "executeCommand": "Suorita komento"
   },
   "discover": {
     "badge": "Yhteisö",
@@ -2859,5 +2973,190 @@
     "watchSession": "Katso istunto",
     "steps": "{count} vaihetta",
     "tryCoasty": "Kokeile Coastya"
+  },
+  "memory": {
+    "sidebarLabel": "Muisti",
+    "sidebarDescription": "Konteksti, jota sovelletaan jokaiseen agentin ajoon",
+    "dialog": {
+      "title": "Muisti",
+      "description": "Lyhyt muistiinpano, jota Coasty soveltaa joka kerta kun se työskentelee puolestasi.",
+      "openFull": "Avaa täysi",
+      "visualMemoryLabel": "Muisti",
+      "visualSynced": "Synkronoitu",
+      "visualContextChat": "Keskustelu",
+      "visualContextSchedules": "Aikataulut",
+      "visualContextSwarm": "Parvi"
+    },
+    "section": {
+      "title": "Muisti",
+      "tag": "valinnainen · henkilökohtainen",
+      "description": "Lyhyt muistiinpano sinusta, joka kulkee jokaisessa agentin ajossa — keskustelu, ajastetut tehtävät, parvikoneet, delegoidut agentit."
+    },
+    "presetsLabel": "Kokeile",
+    "presets": {
+      "useFirstName": "Käytä etunimeä",
+      "useFirstNameSentence": "Puhuttele minua etunimellä.",
+      "beTerse": "Ole ytimekäs",
+      "beTerseSentence": "Suosi ytimekkäitä, suoria vastauksia. Ei täytettä.",
+      "imDeveloper": "Olen kehittäjä",
+      "imDeveloperSentence": "Olen ohjelmistoinsinööri; sujuva koodin kanssa.",
+      "noEmojis": "Ei emojeita",
+      "noEmojisSentence": "Vältä emojeita vastauksissa.",
+      "metricUnits": "Metriset yksiköt",
+      "metricUnitsSentence": "Käytä metrisiä yksiköitä (metri, kilogramma, °C).",
+      "citeSources": "Mainitse lähteet",
+      "citeSourcesSentence": "Mainitse lähteet faktaväitteissä."
+    },
+    "placeholder": "Esimerkki:\nPuhuttele minua etunimellä.\nSuosi ytimekkäitä vastauksia.\nTyöskentelen TypeScriptin ja Pythonin parissa.\nÄlä koskaan poista tiedostoja ilman vahvistusta.",
+    "loading": "Ladataan…",
+    "saving": "Tallennetaan…",
+    "saved": "Tallennettu",
+    "unsavedChanges": "Tallentamattomia muutoksia",
+    "empty": "Tyhjä",
+    "savedRelative": "Tallennettu · {time}",
+    "errorLoad": "Muistiasi ei voitu ladata.",
+    "errorSave": "Muistiasi ei voitu tallentaa.",
+    "willBeShortened": "lyhennetään",
+    "clear": "Tyhjennä",
+    "footerNote": "Coasty ottaa nämä asetukset huomioon, kun se työskentelee puolestasi.",
+    "time": {
+      "justNow": "juuri nyt",
+      "secondsAgo": "{n} s sitten",
+      "minutesAgo": "{n} min sitten",
+      "hoursAgo": "{n} t sitten",
+      "daysAgo": "{n} pv sitten"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Asetukset",
+    "navGroups": {
+      "settings": "Asetukset",
+      "developer": "Kehittäjä",
+      "more": "Lisää",
+      "resources": "Resurssit"
+    },
+    "sections": {
+      "account": {
+        "label": "Yleinen",
+        "description": "Profiili ja tili"
+      },
+      "appearance": {
+        "label": "Ulkoasu",
+        "description": "Teema, kieli ja tausta"
+      },
+      "billing": {
+        "label": "Laskutus",
+        "description": "Tilaukset ja luotot"
+      },
+      "publicChats": {
+        "label": "Julkiset keskustelut",
+        "description": "Hallitse julkisen linkin kautta jaettuja keskusteluja"
+      },
+      "privacy": {
+        "label": "Yksityisyys",
+        "description": "Tietoturva ja tietosuoja"
+      },
+      "notifications": {
+        "label": "Ilmoitukset",
+        "description": "Ilmoitusasetukset"
+      },
+      "apiKeys": {
+        "label": "API-avaimet",
+        "description": "Hallitse API-avaimiasi"
+      },
+      "data": {
+        "label": "Tiedot",
+        "description": "Vie ja hallitse tietojasi"
+      },
+      "feedback": {
+        "label": "Palaute",
+        "description": "Lähetä meille palautetta"
+      },
+      "about": {
+        "label": "Tietoja",
+        "description": "Tietoja Coastysta"
+      },
+      "social": {
+        "label": "Yhteys",
+        "description": "Sosiaaliset linkit"
+      },
+      "guide": {
+        "label": "Opas",
+        "description": "Opettele käyttämään Coastya"
+      },
+      "referral": {
+        "label": "Suosittelu",
+        "description": "Kutsu kavereita ja ansaitse krediittejä"
+      }
+    },
+    "appearance": {
+      "theme": "Teema",
+      "language": "Kieli",
+      "background": "Tausta",
+      "personalization": "Mukauttaminen",
+      "intro": {
+        "title": "Elokuvallinen intro",
+        "description": "Näytä animoitu intro, kun käyt etusivulla"
+      },
+      "interaction": {
+        "title": "Työkalukutsut",
+        "description": "Näytä työkalujen suoritustiedot keskusteluissa"
+      }
+    },
+    "comingSoon": {
+      "badge": "Pian",
+      "placeholder": "Tämä osio tulee tulevassa päivityksessä."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Näytä, mikä on mahdollista…",
+    "tasks": [
+      "Tutki kilpailijoitani",
+      "Täytä työhakemuksia",
+      "Varaa lento Tokioon",
+      "Seuraa verkkosivustoni käytettävyyttä",
+      "Aikatauluta sosiaalisen median julkaisut",
+      "Analysoi neljännesvuosittaisia trendejä"
+    ],
+    "dontShowAgain": "Älä näytä uudelleen",
+    "skip": "Ohita",
+    "tagline": "Tee mitä tahansa, aivan kuten ihminen tietokoneella"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Tietokoneesi",
+      "description": "Pii palveluksessasi. Käynnistämme laivuettasi."
+    },
+    "swarms": {
+      "title": "Parvi-äly",
+      "description": "Monta mieltä, yksi tehtävä. Kokoamme agenttejasi."
+    },
+    "developers": {
+      "title": "Kehittäjä-API",
+      "description": "Ladataan koontinäyttöäsi."
+    },
+    "secrets": {
+      "title": "Tunnukset",
+      "description": "Salaisuutesi ovat turvassa kanssamme. Avataan holvi."
+    },
+    "schedules": {
+      "title": "Aikataulut",
+      "description": "Aina ajallaan. Synkronoidaan automaatioitasi."
+    },
+    "history": {
+      "title": "Historiasi",
+      "description": "Hiljainen kirjaus jokaisesta keskustelusta, tehtävästä ja ideasta, jota olet tutkinut."
+    },
+    "referral": {
+      "title": "Suositukset",
+      "description": "Jaa Coasty. Ansaitkaa yhdessä."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Sinun datasi, sinun hallintasi",
+    "heroDescription": "Tallennamme vain sen, mitä istuntojesi suorittaminen edellyttää. Kaikki liikenne salataan siirron aikana, ja voit laajentaa lepotilan salauksen alla oleviin luokkiin. Tietojasi ei käytetä koskaan tekoälymallien kouluttamiseen.",
+    "trustTransit": "TLS 1.3 siirrossa",
+    "trustAtRest": "AES-256-GCM lepotilassa",
+    "trustNoTraining": "Ei koulutusta datallasi"
   }
 }

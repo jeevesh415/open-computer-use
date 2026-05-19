@@ -17,7 +17,21 @@ export default defineConfig({
     },
     build: {
       rollupOptions: {
-        external: ['screenshot-desktop', 'puppeteer-core']
+        // Native .node binaries MUST stay external — Rollup can't bundle
+        // them, and inlining the platform-specific resolver below would
+        // hard-code a single platform into the build. Each entry here MUST
+        // also appear in `electron-builder.yml` under `files:` (and under
+        // `asarUnpack:` if it ships .node binaries) — otherwise the packaged
+        // app crashes with "Cannot find module '<name>'" at first call.
+        // The packaging-deps.test.ts file enforces both halves of that
+        // contract.
+        external: [
+          'puppeteer-core',
+          '@nut-tree-fork/libnut',
+          '@nut-tree-fork/libnut-win32',
+          '@nut-tree-fork/libnut-darwin',
+          '@nut-tree-fork/libnut-linux',
+        ]
       }
     }
   },

@@ -35,6 +35,7 @@ interface MachinesData {
 export function MachinesContent() {
   const router = useRouter();
   const t = useTranslations("machines");
+  const tLoader = useTranslations("pageLoaders.machines");
   const [loading, setLoading] = useState(true);
   const [machines, setMachines] = useState<UserMachine[]>([]);
   const [limits, setLimits] = useState<MachinesData["limits"]>({
@@ -233,10 +234,10 @@ export function MachinesContent() {
   return (
     <PageLoader
       isLoading={loading}
-      title="Your Computers"
-      description="Silicon at your service. Spinning up your fleet now."
+      title={tLoader("title")}
+      description={tLoader("description")}
     >
-    <div className="h-full overflow-y-auto scrollbar-invisible relative">
+    <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div
@@ -246,13 +247,6 @@ export function MachinesContent() {
         <div
           className="absolute -bottom-[20%] -left-[10%] h-[50%] w-[40%] rounded-full opacity-[0.015] dark:opacity-[0.035] blur-[100px]"
           style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-        />
-        <div
-          className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)`,
-            backgroundSize: "80px 80px",
-          }}
         />
       </div>
 

@@ -2,6 +2,7 @@
 
 import { CheckCircle, Info, Warning } from "@phosphor-icons/react/dist/ssr"
 import { toast as sonnerToast } from "sonner"
+import { isSigningOut } from "@/lib/user-store/sign-out-state"
 import { Button } from "./button"
 
 type ToastProps = {
@@ -55,6 +56,16 @@ function Toast({ title, description, button, id, status }: ToastProps) {
 }
 
 function toast(toast: Omit<ToastProps, "id">) {
+  // Suppress error / warning toasts during sign-out tear-down. Between
+  // supabase.auth.signOut() clearing the cookie and window.location.replace
+  // firing, anything in flight (chat stream, query refetch, websocket)
+  // can fail and try to surface here. The user is intentionally leaving;
+  // we don't want a red flash on the way out. Info / success toasts stay
+  // through (they are user-initiated actions like "Copied" that deserve
+  // to render even mid-navigation).
+  if (isSigningOut() && (toast.status === "error" || toast.status === "warning")) {
+    return undefined
+  }
   return sonnerToast.custom(
     (id) => (
       <Toast
@@ -71,4 +82,23 @@ function toast(toast: Omit<ToastProps, "id">) {
   )
 }
 
-export { toast }
+/** Dismiss every visible toast immediately, then sweep again over the next
+ *  ~500ms. Used by the sign-out flow.
+ *
+ *  Why the repeated sweeps: not every toast in this codebase routes through
+ *  the wrapper above — many components import `toast` directly from `sonner`
+ *  (search: `from "sonner"` for ~25 hits). Those direct calls bypass our
+ *  `isSigningOut()` gate and can fire AFTER the initial dismiss. The
+ *  bounded poll (5 sweeps over 500ms — well under the unload latency on
+ *  any reasonable connection) catches them defensively. The intervals are
+ *  short enough that even if a toast does appear, the user perceives a
+ *  brief flicker rather than a sustained banner.
+ */
+function dismissAllToasts() {
+  sonnerToast.dismiss()
+  for (const delay of [16, 50, 120, 250, 500]) {
+    setTimeout(() => sonnerToast.dismiss(), delay)
+  }
+}
+
+export { toast, dismissAllToasts }

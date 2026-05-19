@@ -30,11 +30,45 @@ backend_memory  = 1024
 # Scaling
 # -----------------------------------------------------------------------------
 
-desired_count         = 1
-min_capacity          = 1
+desired_count         = 2    # Initial only — autoscaling owns it after first apply.
+min_capacity          = 2    # Always-warm floor so a single task can't be the SPOF.
 max_capacity          = 4
-cpu_scaling_target    = 70   # Scale out when avg CPU > 70%
-memory_scaling_target = 80   # Scale out when avg memory > 80%
+cpu_scaling_target    = 70                # Scale out when avg CPU > 70%
+memory_scaling_target = 80                # Scale out when avg memory > 80%
+request_count_per_target_target = 200     # Scale out when each task >200 reqs/min
+
+# -----------------------------------------------------------------------------
+# 3-Service ECS Split (coasty-api / coasty-sse / coasty-ws)
+# See infra/aws/ecs_split.tf for the full architecture.
+#
+# When true, provisions three backend-only services with path-based ALB
+# routing:  /api/electron/ws → ws service, /api/chat|/api/swarm → sse service,
+# everything else → api service.  The frontend+backend sidecar stays up so the
+# Next.js container keeps proxying internal calls to localhost:8001 — only
+# external port-8001 traffic shifts to the new services.
+#
+# Prereq: deploy the new backend image first (contains COASTY_SERVICE_MODE
+# handling in main.py), THEN flip this flag and `terraform apply`.  Rollback
+# by setting to false and re-applying (~2 min).
+# -----------------------------------------------------------------------------
+
+three_service_split_enabled = false
+
+# Optional per-service capacity knobs.  Defaults from variables.tf are sensible
+# for small prod (min=1/max=3-4, CPU target 70% for api, 50% for sse, memory
+# target 70% for ws).  Uncomment and tune if you need more headroom.
+# split_api_desired_count = 1
+# split_api_min_capacity  = 1
+# split_api_max_capacity  = 4
+# split_api_cpu_target    = 70
+# split_sse_desired_count = 1
+# split_sse_min_capacity  = 1
+# split_sse_max_capacity  = 4
+# split_sse_cpu_target    = 50   # lower because streams hold threads
+# split_ws_desired_count  = 1
+# split_ws_min_capacity   = 1
+# split_ws_max_capacity   = 3
+# split_ws_memory_target  = 70   # WS holds per-connection buffers in memory
 
 # -----------------------------------------------------------------------------
 # HTTPS — leave empty to run HTTP-only, or provide ACM certificate ARN
@@ -76,3 +110,12 @@ backend_env_vars = {
   GOOGLE_SEARCH_KEY = "your-google-search-key"
   GOOGLE_SEARCH_CX  = "your-google-search-cx"
 }
+
+# -----------------------------------------------------------------------------
+# Admin allowlist — comma-separated emails granted access to admin-only routes
+# (currently POST /api/billing/sessions/cleanup; gated by require_admin in
+# backend/app/services/auth.py).  Empty = no admins (fail-closed default; the
+# periodic background cleanup task still runs unaffected).
+# -----------------------------------------------------------------------------
+
+admin_emails = ""  # comma-separated list, e.g., "ops@coasty.ai,oncall@coasty.ai"

@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { LayoutApp } from "@/app/components/layout/layout-app"
 import { motion, AnimatePresence } from "framer-motion"
@@ -18,7 +17,6 @@ import {
   Lightning,
   Monitor,
   CreditCard,
-  ArrowRight,
   VideoCamera,
   UsersThree,
 } from "@phosphor-icons/react"
@@ -32,10 +30,12 @@ import { SwarmModeTab } from "./tabs/swarm-mode"
 import { WorkforceTab } from "./tabs/workforce"
 import { DesktopAppTab } from "./tabs/desktop-app"
 import { BillingTab } from "./tabs/billing"
+import { APITab } from "./tabs/api"
+import { DEVELOPERS_API_ENABLED } from "@/lib/feature-flags"
 
 /* ─── tab config ─── */
 
-const tabConfig = [
+const ALL_TABS = [
   { id: "overview", labelKey: "tabs.overview", shortLabel: "Overview", icon: BookOpen },
   { id: "getting-started", labelKey: "tabs.gettingStarted", shortLabel: "Start", icon: RocketLaunch },
   { id: "chat-tasks", labelKey: "tabs.chatTasks", shortLabel: "Chat", icon: ChatText },
@@ -45,9 +45,15 @@ const tabConfig = [
   { id: "workforce", labelKey: "tabs.workforce", shortLabel: "Workforce", icon: UsersThree },
   { id: "desktop-app", labelKey: "tabs.desktopApp", shortLabel: "Desktop", icon: Monitor },
   { id: "billing", labelKey: "tabs.billing", shortLabel: "Billing", icon: CreditCard },
+  { id: "api", labelKey: "", shortLabel: "API", icon: Lightning },
 ] as const
 
-type TabId = (typeof tabConfig)[number]["id"]
+type TabId = (typeof ALL_TABS)[number]["id"]
+
+// Filter at module load — DEVELOPERS_API_ENABLED is a compile-time constant.
+const tabConfig = ALL_TABS.filter(
+  (t) => DEVELOPERS_API_ENABLED || t.id !== "api",
+)
 
 const tabIds = new Set<string>(tabConfig.map((t) => t.id))
 function isValidTabId(value: string | null): value is TabId {
@@ -84,6 +90,8 @@ function TabContent({ activeTab, inApp }: { activeTab: TabId; inApp: boolean }) 
       return <DesktopAppTab inApp={inApp} />
     case "billing":
       return <BillingTab inApp={inApp} />
+    case "api":
+      return <APITab inApp={inApp} />
   }
 }
 
@@ -118,7 +126,7 @@ function TabNav({ activeTab, onTabChange }: { activeTab: TabId; onTabChange: (id
                 weight={isActive ? "fill" : "duotone"}
                 className="shrink-0"
               />
-              <span className="hidden sm:inline truncate">{t(tab.labelKey)}</span>
+              <span className="hidden sm:inline truncate">{tab.labelKey ? t(tab.labelKey) : tab.shortLabel}</span>
               <span className="sm:hidden truncate">{tab.shortLabel}</span>
             </button>
           )
@@ -147,7 +155,7 @@ function GuideContent({ inApp }: { inApp: boolean }) {
 
   if (inApp) {
     return (
-      <div className="h-full overflow-y-auto scrollbar-invisible relative">
+      <div className="h-full overflow-y-auto overflow-x-hidden scrollbar-invisible relative">
         {/* Ambient background — matches machines/history/secrets pages */}
         <div className="pointer-events-none fixed inset-0 overflow-hidden">
           <div
@@ -157,13 +165,6 @@ function GuideContent({ inApp }: { inApp: boolean }) {
           <div
             className="absolute -bottom-[20%] -left-[10%] h-[50%] w-[40%] rounded-full opacity-[0.015] dark:opacity-[0.035] blur-[100px]"
             style={{ background: "radial-gradient(circle, currentColor, transparent 70%)" }}
-          />
-          <div
-            className="absolute inset-0 opacity-[0.012] dark:opacity-[0.025]"
-            style={{
-              backgroundImage: "linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)",
-              backgroundSize: "80px 80px",
-            }}
           />
         </div>
 
@@ -213,7 +214,6 @@ function GuideContent({ inApp }: { inApp: boolean }) {
   // Public / landing page version
   return (
     <div className="min-h-screen bg-background relative">
-      <GuideLines />
       <LandingHeader />
 
       <div className="pt-28 sm:pt-32 pb-24">

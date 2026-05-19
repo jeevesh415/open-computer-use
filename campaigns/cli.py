@@ -358,7 +358,7 @@ def main():
     p.add_argument("--segment-filter", dest="segment_filter", help="JSON filter for custom segment")
     p.add_argument("--from-address", dest="from_address", default="hello@coasty.ai")
     p.add_argument("--from-name", dest="from_name", default="Founders from Coasty - #1 Computer Use OS World")
-    p.add_argument("--ab-split", dest="ab_split", type=int, default=50, help="% for variant B")
+    p.add_argument("--ab-split", dest="ab_split", type=int, default=50, help="%% for variant B")
     p.add_argument("--created-by", dest="created_by")
 
     # list

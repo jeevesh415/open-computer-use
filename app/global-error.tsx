@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { SVG_SYSTEM_STACK } from "@/lib/fonts"
 
 export default function GlobalError({
   error,
@@ -23,7 +24,7 @@ export default function GlobalError({
             width: "100vw",
             alignItems: "center",
             justifyContent: "center",
-            fontFamily: "system-ui, -apple-system, sans-serif",
+            fontFamily: SVG_SYSTEM_STACK,
             backgroundColor: "#0a0a0a",
             color: "#fafafa",
           }}

@@ -22,6 +22,7 @@ import {
   IconVideo,
   IconSun,
   IconMoon,
+  IconInfinity,
 } from "@tabler/icons-react"
 import { CoastyIcon } from "@/components/icons/coasty"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -33,6 +34,7 @@ import {
 import { cn } from "@/lib/utils"
 import { useUser } from "@/lib/user-store/provider"
 import { useCredits } from "@/lib/hooks/use-credits"
+import { useSubscription } from "@/lib/hooks/use-subscription"
 import { useAccountDialog } from "@/lib/account-dialog-store"
 import { useSidebarMachines } from "@/app/components/layout/sidebar/hooks/use-sidebar-machines"
 
@@ -306,25 +308,32 @@ function IdentityMenu({
   const openDialog = useAccountDialog((s) => s.open)
   const { signOut } = useUser()
   const { credits } = useCredits()
+  const { isUnlimitedPlan } = useSubscription()
   const { resolvedTheme, setTheme } = useTheme()
   const isDark = resolvedTheme === "dark"
   const displayName = user?.display_name || user?.email?.split("@")[0] || t("user")
 
   // ─── Credit health (matches sidebar footer vocabulary) ──
+  // Unlimited plan: skip the health logic — balance is a sentinel that
+  // would always read "healthy" anyway, but the visual must say "Unlimited".
   const balance = credits?.balance ?? 0
   const totalPurchased = credits?.total_purchased ?? 0
-  const isDepleted = balance <= 0
-  const isLow = !isDepleted && balance < 50
-  const dotClass = isDepleted
-    ? "bg-rose-500 dark:bg-rose-400"
-    : isLow
-      ? "bg-amber-500 dark:bg-amber-400"
-      : "bg-emerald-500/70 dark:bg-emerald-400/70"
-  const numberClass = isDepleted
-    ? "text-rose-500 dark:text-rose-400"
-    : isLow
-      ? "text-amber-600 dark:text-amber-400"
-      : "text-foreground"
+  const isDepleted = !isUnlimitedPlan && balance <= 0
+  const isLow = !isUnlimitedPlan && !isDepleted && balance < 50
+  const dotClass = isUnlimitedPlan
+    ? "bg-amber-500 dark:bg-amber-400"
+    : isDepleted
+      ? "bg-rose-500 dark:bg-rose-400"
+      : isLow
+        ? "bg-amber-500 dark:bg-amber-400"
+        : "bg-emerald-500/70 dark:bg-emerald-400/70"
+  const numberClass = isUnlimitedPlan
+    ? "text-amber-600 dark:text-amber-400"
+    : isDepleted
+      ? "text-rose-500 dark:text-rose-400"
+      : isLow
+        ? "text-amber-600 dark:text-amber-400"
+        : "text-foreground"
 
   type Item =
     | { kind: "button"; icon: TablerIcon; label: string; onClick: () => void }
@@ -384,18 +393,32 @@ function IdentityMenu({
             <span className={cn("h-1 w-1 rounded-full transition-colors", dotClass)} />
           </div>
           <div className="flex items-baseline justify-between gap-2">
-            <span
-              className={cn(
-                "text-[22px] font-semibold tabular-nums leading-none tracking-[-0.025em] transition-colors",
-                numberClass
-              )}
-            >
-              {balance.toLocaleString()}
-            </span>
-            {totalPurchased > 0 && totalPurchased > balance && (
-              <span className="text-[10px] text-foreground/30 tabular-nums leading-none">
-                / {totalPurchased.toLocaleString()}
+            {isUnlimitedPlan ? (
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 text-[22px] font-semibold leading-none tracking-[-0.025em] transition-colors",
+                  numberClass
+                )}
+              >
+                <IconInfinity size={26} stroke={2.4} />
+                <span>Unlimited</span>
               </span>
+            ) : (
+              <>
+                <span
+                  className={cn(
+                    "text-[22px] font-semibold tabular-nums leading-none tracking-[-0.025em] transition-colors",
+                    numberClass
+                  )}
+                >
+                  {balance.toLocaleString()}
+                </span>
+                {totalPurchased > 0 && totalPurchased > balance && (
+                  <span className="text-[10px] text-foreground/30 tabular-nums leading-none">
+                    / {totalPurchased.toLocaleString()}
+                  </span>
+                )}
+              </>
             )}
           </div>
         </button>

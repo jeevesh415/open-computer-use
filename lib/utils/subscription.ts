@@ -1,6 +1,8 @@
 /**
- * Utility functions for checking subscription status and user tiers
+ * Utility functions for checking subscription status and user tiers.
+ * Uses the canonical tier vocabulary from lib/tier.ts.
  */
+import { normalizeTier, isPaidTier, type UserTier } from "@/lib/tier";
 
 export interface UserSubscription {
   status: string;
@@ -9,38 +11,38 @@ export interface UserSubscription {
   } | null;
 }
 
+// Status values that grant tier benefits.  past_due keeps benefits during
+// Stripe's dunning window; trialing grants the trial tier.
+const PAID_STATUSES = new Set(["active", "trialing", "past_due"]);
+
 /**
- * Check if a user is on the free tier (no active paid subscription)
+ * Check if a user is on the free tier (no active paid subscription).
  */
 export function isUserOnFreeTier(subscriptions?: UserSubscription[] | null): boolean {
   if (!subscriptions || subscriptions.length === 0) {
-    return true; // No subscriptions = free user
+    return true;
   }
-
-  const hasActivePaidSubscription = subscriptions.some(sub =>
-    sub.status === 'active' &&
+  return !subscriptions.some(sub =>
+    PAID_STATUSES.has(sub.status) &&
     sub.subscription_plans?.tier &&
-    sub.subscription_plans.tier !== 'free'
+    isPaidTier(sub.subscription_plans.tier)
   );
-
-  return !hasActivePaidSubscription;
 }
 
 /**
- * Get the user's current subscription tier
+ * Get the user's current canonical subscription tier.  Returns one of
+ * free | lite | starter | professional | enterprise.
  */
-export function getUserTier(subscriptions?: UserSubscription[] | null): string {
+export function getUserTier(subscriptions?: UserSubscription[] | null): UserTier {
   if (!subscriptions || subscriptions.length === 0) {
-    return 'free';
+    return "free";
   }
-
-  const activePaidSubscription = subscriptions.find(sub =>
-    sub.status === 'active' &&
+  const active = subscriptions.find(sub =>
+    PAID_STATUSES.has(sub.status) &&
     sub.subscription_plans?.tier &&
-    sub.subscription_plans.tier !== 'free'
+    isPaidTier(sub.subscription_plans.tier)
   );
-
-  return activePaidSubscription?.subscription_plans?.tier || 'free';
+  return normalizeTier(active?.subscription_plans?.tier);
 }
 
 /**

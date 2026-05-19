@@ -2,8 +2,14 @@ import { createClient } from "@/lib/supabase/server"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
+  let body: { provider?: string; userId?: string }
   try {
-    const { provider, userId } = await request.json()
+    body = await request.json()
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 })
+  }
+  try {
+    const { provider, userId } = body
 
     const supabase = await createClient()
     if (!supabase) {

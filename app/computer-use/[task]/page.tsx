@@ -3,7 +3,6 @@
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { LandingHeader } from "@/app/components/landing/landing-header"
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
@@ -38,7 +37,6 @@ export default function ComputerUseTaskPage() {
 
   return (
     <div className="relative min-h-screen bg-background">
-      <GuideLines />
       <LandingHeader />
 
       <main className="pt-32 sm:pt-36 pb-24">
@@ -169,15 +167,12 @@ export default function ComputerUseTaskPage() {
                 <p className="text-sm text-muted-foreground/60 mb-6 max-w-md mx-auto">
                   Start using Coasty to handle {page.title.toLowerCase()} tasks autonomously.
                 </p>
-                <Link href="/auth">
-                  <motion.button
-                    className="inline-flex items-center gap-2.5 rounded-full font-semibold text-background bg-foreground px-7 py-3 text-sm cursor-pointer"
-                    whileHover={{ scale: 1.02, y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Try Coasty Free
-                    <ArrowRight className="h-4 w-4" />
-                  </motion.button>
+                <Link
+                  href="/auth"
+                  className="inline-flex items-center gap-2.5 rounded-full font-semibold text-background bg-foreground px-7 py-3 text-sm cursor-pointer transition-transform duration-150 hover:scale-[1.02] hover:-translate-y-px active:scale-[0.98]"
+                >
+                  Try Coasty Free
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>

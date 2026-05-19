@@ -4,11 +4,10 @@ import { useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, ArrowLeft, Check, MessageSquare, Zap, ChevronDown } from "lucide-react"
+import { ArrowRight, ArrowLeft, Check, MessageSquare, ChevronDown } from "lucide-react"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
-import { GuideLines } from "@/app/components/landing/guide-lines"
-import { USE_CASES, USE_CASE_COLORS, getUseCaseBySlug } from "../data"
+import { USE_CASES, getUseCaseBySlug } from "../data"
 import { cn } from "@/lib/utils"
 
 const fadeIn = {
@@ -18,9 +17,85 @@ const fadeIn = {
 
 const stagger = {
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.08 },
   },
 }
+
+// ── Local atoms (same vocabulary as agent-swarms / 404) ────────────────────
+
+function PrimaryButton({
+  href,
+  children,
+  className,
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-6 text-sm font-medium text-background transition-colors hover:bg-foreground/85",
+        className,
+      )}
+    >
+      {children}
+    </Link>
+  )
+}
+
+function GhostButton({
+  href,
+  children,
+  className,
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "inline-flex h-11 items-center gap-1.5 rounded-full border border-border bg-background/60 px-6 text-sm font-medium text-foreground backdrop-blur-sm transition-colors hover:bg-muted",
+        className,
+      )}
+    >
+      {children}
+    </Link>
+  )
+}
+
+function MonoTag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/60 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground backdrop-blur-sm">
+      {children}
+    </span>
+  )
+}
+
+function SectionHeading({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <h2
+      className={cn(
+        "text-balance font-semibold tracking-tight text-foreground",
+        "text-[26px] leading-[1.1] sm:text-3xl lg:text-4xl",
+        className,
+      )}
+    >
+      {children}
+    </h2>
+  )
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────
 
 export default function UseCasePage() {
   const params = useParams()
@@ -31,19 +106,19 @@ export default function UseCasePage() {
   if (!uc) {
     return (
       <div className="relative min-h-screen bg-background">
-        <GuideLines />
         <LandingHeader />
-        <main className="flex items-center justify-center min-h-screen">
+        <main className="flex min-h-screen items-center justify-center px-6">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Use case not found</h1>
-            <p className="text-muted-foreground mb-8">The use case you are looking for does not exist.</p>
-            <Link
-              href="/use-cases"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
-            >
-              <ArrowLeft className="w-4 h-4" />
+            <h1 className="mb-4 text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+              Use case not found
+            </h1>
+            <p className="mb-8 text-muted-foreground">
+              The use case you are looking for does not exist.
+            </p>
+            <PrimaryButton href="/use-cases">
+              <ArrowLeft className="h-4 w-4" />
               Back to use cases
-            </Link>
+            </PrimaryButton>
           </div>
         </main>
         <LandingFooter />
@@ -51,56 +126,49 @@ export default function UseCasePage() {
     )
   }
 
-  const colors = USE_CASE_COLORS[uc.color]
   const Icon = uc.icon
   const otherUseCases = USE_CASES.filter((u) => u.slug !== uc.slug).slice(0, 3)
 
   return (
     <div className="relative min-h-screen bg-background">
-      <GuideLines />
       <LandingHeader />
 
       <main>
-        {/* Hero Section */}
-        <section className="pt-32 pb-16 px-6">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={stagger}
-            >
-              <motion.div variants={fadeIn} transition={{ duration: 0.5 }}>
+        {/* ── Hero ── */}
+        <section className="relative overflow-hidden px-6 pt-28 pb-16 sm:pt-32 sm:pb-20">
+          {/* Dotted radial backdrop — signature element */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 opacity-60 [background:radial-gradient(circle_at_center,color-mix(in_oklch,var(--foreground)_10%,transparent)_1px,transparent_1.5px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_70%)]"
+          />
+
+          <div className="mx-auto max-w-5xl">
+            <motion.div initial="hidden" animate="visible" variants={stagger}>
+              <div className="public-fade-up">
                 <Link
                   href="/use-cases"
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8"
+                  className="mb-10 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className="h-3.5 w-3.5" />
                   All use cases
                 </Link>
-              </motion.div>
+              </div>
 
               <motion.div
                 variants={fadeIn}
                 transition={{ duration: 0.5, delay: 0.05 }}
                 className="mb-6"
               >
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border",
-                    colors.bg,
-                    colors.text,
-                    colors.border
-                  )}
-                >
-                  <Icon className="w-4 h-4" />
+                <MonoTag>
+                  <Icon className="h-3 w-3" />
                   {uc.label}
-                </span>
+                </MonoTag>
               </motion.div>
 
               <motion.h1
                 variants={fadeIn}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+                className="mb-6 text-balance font-semibold tracking-tight leading-[1.05] text-foreground text-4xl sm:text-5xl lg:text-6xl"
               >
                 {uc.headline}
               </motion.h1>
@@ -108,7 +176,7 @@ export default function UseCasePage() {
               <motion.p
                 variants={fadeIn}
                 transition={{ duration: 0.5, delay: 0.15 }}
-                className="text-lg text-muted-foreground max-w-2xl mb-12"
+                className="mb-12 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg"
               >
                 {uc.description}
               </motion.p>
@@ -116,315 +184,323 @@ export default function UseCasePage() {
               <motion.div
                 variants={fadeIn}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="mb-12"
+                className="mb-12 flex items-baseline gap-4"
               >
-                <span className={cn("text-7xl lg:text-8xl font-bold", colors.text)}>
+                <span className="font-semibold tracking-tight tabular-nums text-foreground text-6xl sm:text-7xl lg:text-8xl">
                   {uc.heroStat}
                 </span>
-                <p className="text-lg text-muted-foreground mt-2">{uc.heroStatLabel}</p>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {uc.heroStatLabel}
+                </span>
               </motion.div>
 
-              <motion.div variants={fadeIn} transition={{ duration: 0.5, delay: 0.25 }}>
-                <Link
-                  href="/auth"
-                  className={cn(
-                    "inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium text-lg transition-opacity hover:opacity-90",
-                    colors.bgSolid
-                  )}
-                >
+              <div
+                className="public-fade-up"
+                style={{ ["--card-d" as string]: 250 }}
+              >
+                <PrimaryButton href="/auth">
                   Try this now
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </motion.div>
+                  <ArrowRight className="h-4 w-4" />
+                </PrimaryButton>
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* How it Works */}
-        <section className="py-24 px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-16"
-            >
-              How it works
-            </motion.h2>
-
+        {/* ── How it Works ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-4xl">
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeIn}
+              transition={{ duration: 0.5 }}
+              className="mb-14"
+            >
+              <SectionHeading>How it works</SectionHeading>
+            </motion.div>
+
+            <motion.ol
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
               variants={stagger}
-              className="space-y-12"
+              className="space-y-10 sm:space-y-12"
             >
               {uc.steps.map((step, i) => (
-                <motion.div
+                <motion.li
                   key={i}
                   variants={fadeIn}
                   transition={{ duration: 0.5 }}
-                  className="flex gap-6"
+                  className="flex gap-5 sm:gap-7"
                 >
-                  <div className="flex-shrink-0">
-                    <span className={cn("text-3xl font-bold", colors.text)}>
+                  <div className="flex-shrink-0 pt-1">
+                    <span className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground/50 tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
+                  <div className="flex-1">
+                    <h3 className="mb-1.5 text-base font-semibold text-foreground sm:text-lg">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      {step.description}
+                    </p>
                   </div>
-                </motion.div>
+                </motion.li>
               ))}
-            </motion.div>
+            </motion.ol>
           </div>
         </section>
 
-        {/* What You Get */}
-        <section className="py-24 px-6 border-t border-border/40">
-          <div className="max-w-4xl mx-auto">
-            <motion.h2
+        {/* ── What You Get ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-4xl">
+            <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={fadeIn}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-12"
+              className="mb-12"
             >
-              What you get
-            </motion.h2>
+              <SectionHeading>What you get</SectionHeading>
+            </motion.div>
 
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               variants={stagger}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-3 md:grid-cols-2"
             >
               {uc.deliverables.map((item, i) => (
                 <motion.div
                   key={i}
                   variants={fadeIn}
                   transition={{ duration: 0.4 }}
-                  className="flex items-start gap-3 p-4 rounded-xl border border-border/40 bg-card/50"
+                  className="flex items-start gap-3 rounded-xl border border-border/50 bg-card/30 p-4 backdrop-blur-sm transition-colors hover:border-border hover:bg-card/50"
                 >
-                  <Check className={cn("w-5 h-5 mt-0.5 flex-shrink-0", colors.text)} />
-                  <span className="text-sm">{item}</span>
+                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
+                  <span className="text-sm leading-relaxed text-foreground/85">{item}</span>
                 </motion.div>
               ))}
             </motion.div>
           </div>
         </section>
 
-        {/* Example Prompt */}
-        <section className="py-24 px-6 border-t border-border/40">
-          <div className="max-w-4xl mx-auto">
-            <motion.h2
+        {/* ── Example Prompt ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-3xl">
+            <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={fadeIn}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-8"
+              className="mb-10"
             >
-              Try it yourself
-            </motion.h2>
+              <SectionHeading>Try it yourself</SectionHeading>
+            </motion.div>
 
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               variants={fadeIn}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className={cn(
-                "rounded-2xl border p-6 sm:p-8 mb-8",
-                colors.border,
-                "bg-muted/30"
-              )}
+              className="mb-8 rounded-2xl border border-border bg-card/30 p-6 backdrop-blur-sm sm:p-8"
             >
-              <div className="flex items-center gap-2 mb-4">
-                <MessageSquare className={cn("w-4 h-4", colors.text)} />
-                <span className="text-sm font-medium text-muted-foreground">Example prompt</span>
-              </div>
-              <p className="text-base sm:text-lg leading-relaxed">{uc.examplePrompt}</p>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <Link
-                href="/auth"
-                className={cn(
-                  "inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium transition-opacity hover:opacity-90",
-                  colors.bgSolid
-                )}
-              >
-                Run this on Coasty
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-24 px-6 border-t border-border/40">
-          <div className="max-w-3xl mx-auto">
-            <motion.h2
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeIn}
-              transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-12"
-            >
-              Common questions
-            </motion.h2>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-              className="space-y-3"
-            >
-              {uc.faqs.map((faq, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeIn}
-                  transition={{ duration: 0.4 }}
-                  className="rounded-xl border border-border/40 overflow-hidden"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 p-5 text-left hover:bg-muted/30 transition-colors"
-                  >
-                    <span className="font-medium">{faq.q}</span>
-                    <ChevronDown
-                      className={cn(
-                        "w-5 h-5 flex-shrink-0 text-muted-foreground transition-transform duration-200",
-                        openFaq === i && "rotate-180"
-                      )}
-                    />
-                  </button>
-                  <div
-                    className={cn(
-                      "grid transition-all duration-200 ease-in-out",
-                      openFaq === i ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-5 pb-5 text-muted-foreground">{faq.a}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Bottom CTA */}
-        <section className="py-24 px-6 border-t border-border/40">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              <motion.h2
-                variants={fadeIn}
-                transition={{ duration: 0.5 }}
-                className="text-3xl sm:text-4xl font-bold mb-6"
-              >
-                Ready to get started?
-              </motion.h2>
-
-              <motion.div
-                variants={fadeIn}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-4"
-              >
-                <span className={cn("text-6xl lg:text-7xl font-bold", colors.text)}>
-                  {uc.heroStat}
+              <div className="mb-4 flex items-center gap-2">
+                <MessageSquare className="h-3.5 w-3.5 text-muted-foreground" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  Example prompt
                 </span>
-                <p className="text-lg text-muted-foreground mt-2">{uc.heroStatLabel}</p>
-              </motion.div>
-
-              <motion.div
-                variants={fadeIn}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="mt-10"
-              >
-                <Link
-                  href="/auth"
-                  className={cn(
-                    "inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium text-lg transition-opacity hover:opacity-90",
-                    colors.bgSolid
-                  )}
-                >
-                  Get started free
-                  <Zap className="w-5 h-5" />
-                </Link>
-              </motion.div>
+              </div>
+              <p className="text-balance text-base leading-relaxed text-foreground/90 sm:text-lg">
+                {uc.examplePrompt}
+              </p>
             </motion.div>
+
+            <div
+              className="public-fade-up"
+              style={{ ["--card-d" as string]: 200 }}
+            >
+              <PrimaryButton href="/auth">
+                Run this on Coasty
+                <ArrowRight className="h-4 w-4" />
+              </PrimaryButton>
+            </div>
           </div>
         </section>
 
-        {/* Other Use Cases */}
-        <section className="py-24 px-6 border-t border-border/40">
-          <div className="max-w-5xl mx-auto">
-            <motion.h2
+        {/* ── FAQ ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-3xl">
+            <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={fadeIn}
               transition={{ duration: 0.5 }}
-              className="text-3xl sm:text-4xl font-bold mb-12"
+              className="mb-12"
             >
-              Explore more use cases
-            </motion.h2>
+              <SectionHeading>Common questions</SectionHeading>
+            </motion.div>
 
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               variants={stagger}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="overflow-hidden rounded-xl border border-border/60 bg-card/20 backdrop-blur-sm"
             >
-              {otherUseCases.map((other) => {
-                const otherColors = USE_CASE_COLORS[other.color]
-                const OtherIcon = other.icon
+              {uc.faqs.map((faq, i) => {
+                const isOpen = openFaq === i
                 return (
                   <motion.div
-                    key={other.slug}
+                    key={i}
                     variants={fadeIn}
                     transition={{ duration: 0.4 }}
+                    className={cn(
+                      i < uc.faqs.length - 1 && "border-b border-border/40",
+                    )}
                   >
-                    <Link
-                      href={`/use-cases/${other.slug}`}
-                      className="block p-6 rounded-2xl border border-border/40 bg-card/50 hover:bg-card/80 transition-colors group"
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : i)}
+                      className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-muted/30 sm:px-6 sm:py-5"
                     >
-                      <div className={cn("inline-flex p-2.5 rounded-xl mb-4", otherColors.bg)}>
-                        <OtherIcon className={cn("w-5 h-5", otherColors.text)} />
+                      <span className="text-sm font-medium text-foreground sm:text-base">
+                        {faq.q}
+                      </span>
+                      <ChevronDown
+                        className={cn(
+                          "h-4 w-4 flex-shrink-0 text-muted-foreground transition-transform duration-200",
+                          isOpen && "rotate-180",
+                        )}
+                      />
+                    </button>
+                    <div
+                      className={cn(
+                        "grid transition-all duration-200 ease-in-out",
+                        isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground sm:px-6 sm:pb-6 sm:text-[15px]">
+                          {faq.a}
+                        </p>
                       </div>
-                      <h3 className="font-semibold mb-2 group-hover:underline">{other.label}</h3>
-                      <p className="text-sm text-muted-foreground line-clamp-2">{other.headline}</p>
-                      <div className="flex items-center gap-1 mt-4 text-sm font-medium">
-                        Learn more
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </Link>
+                    </div>
                   </motion.div>
                 )
               })}
             </motion.div>
+          </div>
+        </section>
+
+        {/* ── Bottom CTA ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-3xl text-center">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={stagger}
+            >
+              <motion.div variants={fadeIn} transition={{ duration: 0.5 }}>
+                <SectionHeading className="mb-6">Ready to get started?</SectionHeading>
+              </motion.div>
+
+              <motion.div
+                variants={fadeIn}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="mb-10 flex items-baseline justify-center gap-3"
+              >
+                <span className="font-semibold tracking-tight tabular-nums text-foreground text-5xl sm:text-6xl lg:text-7xl">
+                  {uc.heroStat}
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                  {uc.heroStatLabel}
+                </span>
+              </motion.div>
+
+              <div
+                className="public-fade-up flex flex-wrap items-center justify-center gap-3"
+                style={{ ["--card-d" as string]: 200 }}
+              >
+                <PrimaryButton href="/auth">
+                  Get started free
+                  <ArrowRight className="h-4 w-4" />
+                </PrimaryButton>
+                <GhostButton href="/use-cases">
+                  Explore more
+                </GhostButton>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── Other Use Cases ── */}
+        <section className="px-6 py-20 sm:py-24">
+          <div className="mx-auto max-w-5xl">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeIn}
+              transition={{ duration: 0.5 }}
+              className="mb-12"
+            >
+              <SectionHeading>Explore more use cases</SectionHeading>
+            </motion.div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+              {otherUseCases.map((other, i) => {
+                const OtherIcon = other.icon
+                return (
+                  <div
+                    key={other.slug}
+                    className="public-card-enter"
+                    style={{
+                      ["--card-i" as string]: i,
+                      ["--card-stagger-ms" as string]: "60ms",
+                    }}
+                  >
+                    <Link
+                      href={`/use-cases/${other.slug}`}
+                      className="group block h-full overflow-hidden rounded-xl border border-border/40 bg-card/30 p-6 backdrop-blur-sm transition-colors duration-300 hover:border-border hover:bg-card/60"
+                    >
+                      <div className="relative">
+                        <OtherIcon
+                          aria-hidden
+                          className="absolute -right-1 -top-1 size-16 text-foreground/[0.04] transition-all duration-500 group-hover:scale-110 group-hover:text-foreground/[0.07] dark:text-foreground/[0.05]"
+                          strokeWidth={1}
+                        />
+                        <div className="relative mb-3 flex items-center gap-2">
+                          <OtherIcon className="size-3.5 text-muted-foreground/60" />
+                          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                            {other.label}
+                          </span>
+                        </div>
+                      </div>
+
+                      <h3 className="mb-2 text-balance text-base font-semibold text-foreground">
+                        {other.headline}
+                      </h3>
+                      <p className="line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
+                        {other.outcome}
+                      </p>
+                      <div className="mt-5 flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                        <span>Learn more</span>
+                        <ArrowRight className="size-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+                      </div>
+                    </Link>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </section>
       </main>

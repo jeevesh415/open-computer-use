@@ -35,10 +35,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { sanitizeBackendError } from "@/lib/services/error-passthrough";
 
 interface FileTransferProps {
   machineId: string;
-  connectionInfo: any;
+  connectionInfo: {
+    publicIpAddress?: string | null;
+    vncPort?: number | null;
+    vncPassword?: string | null;
+    osType?: "linux" | "windows" | string | null;
+    provider?: string | null;
+  } & Record<string, unknown>;
 }
 
 interface RemoteFile {
@@ -50,6 +57,25 @@ interface RemoteFile {
   downloadable: boolean;
 }
 
+/**
+ * Pick the first directory the VM agent should try.  We send `~/Desktop`
+ * (which `os.path.expanduser` resolves on both Linux and Windows agents)
+ * instead of the previous hardcoded `/home/desktop/Desktop`.  That old
+ * default only worked because the Linux Ubuntu agent had a special-case
+ * remap; on Windows VMs and any non-Ubuntu Linux it returned "Not a
+ * directory" and the backend silently swallowed the error as an empty
+ * list, producing the deployed-but-not-local symptom.
+ *
+ * The backend additionally walks a fallback chain on miss
+ * (`backend/app/api/routes/file_operations.py:_LIST_FALLBACK_PATHS`),
+ * so even if `~/Desktop` doesn't exist on a freshly-launched VM we still
+ * surface SOMETHING useful instead of a blank panel.
+ */
+function defaultStartingPath(osType: FileTransferProps["connectionInfo"]["osType"]): string {
+  if (osType === "windows") return "~/Desktop";
+  return "~/Desktop";
+}
+
 export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -57,7 +83,9 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
   const [listing, setListing] = useState(false);
   const [remoteFiles, setRemoteFiles] = useState<RemoteFile[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<Set<string>>(new Set());
-  const [currentPath, setCurrentPath] = useState("/home/desktop/Desktop");
+  const [currentPath, setCurrentPath] = useState(() =>
+    defaultStartingPath(connectionInfo?.osType),
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [uploadProgress, setUploadProgress] = useState(0);
   const [downloadProgress, setDownloadProgress] = useState(0);
@@ -146,18 +174,36 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to list files');
+        // Sanitize: backend can return 502 with an internal error string
+        // ("Failed to list files on m-... unknown error"), 503 connection
+        // failure, or 403 access denied with the machine ID embedded.
+        // The sanitizer maps these to friendly messages and logs the
+        // raw body to console for debugging.
+        throw await sanitizeBackendError(response, {
+          action: "load files",
+          403: "You don't have access to this machine.",
+          502: "Couldn't reach the machine. It may still be starting up — please try again.",
+          503: "Couldn't connect to the machine. Please try again.",
+        });
       }
-      
+
       const data = await response.json();
       if (data.success && data.files) {
         setRemoteFiles(data.files);
-        setCurrentPath(targetPath);
+        // If the backend walked the fallback chain it returns the
+        // resolved path in `data.directory` (which may differ from
+        // `targetPath` for the special `~`/Desktop defaults).  Use
+        // that so the breadcrumb reflects what the user is actually
+        // looking at.
+        setCurrentPath(data.directory || targetPath);
       }
     } catch (error) {
       console.error('List files error:', error);
-      toast.error('Failed to list files');
+      toast.error(
+        error instanceof Error && error.message
+          ? error.message
+          : 'Failed to load files',
+      );
     } finally {
       setListing(false);
     }
@@ -198,10 +244,19 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
         });
 
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || `Failed to upload ${file.name}`);
+          // Sanitize: backend may return 413 (too large), 503 (machine
+          // unreachable), or a generic 500.  The fallback message uses
+          // the file name so the user knows which file failed when
+          // uploading multiple.
+          throw await sanitizeBackendError(response, {
+            action: `upload ${file.name}`,
+            413: `${file.name} is too large to upload.`,
+            403: `You don't have access to upload to this machine.`,
+            503: `Couldn't reach the machine. ${file.name} was not uploaded.`,
+            fallback: `Couldn't upload ${file.name}. Please try again.`,
+          });
         }
-        
+
         const result = await response.json();
         if (result.success) {
           completed++;
@@ -210,7 +265,11 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
         }
       } catch (error) {
         console.error(`Error uploading ${file.name}:`, error);
-        toast.error(`Failed to upload ${file.name}`);
+        toast.error(
+          error instanceof Error && error.message
+            ? error.message
+            : `Failed to upload ${file.name}`,
+        );
       }
     }
     
@@ -275,10 +334,18 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
         });
 
         if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || `Failed to download ${filepath}`);
+          // Sanitize: backend can leak filepath/machine IDs in its
+          // detail string ("Failed to download file: <internal err>").
+          // The sanitizer drops those and surfaces a friendly message.
+          throw await sanitizeBackendError(response, {
+            action: `download ${filepath}`,
+            403: `You don't have access to download from this machine.`,
+            404: `${filepath} could not be found on the machine.`,
+            503: `Couldn't reach the machine. Please try again.`,
+            fallback: `Couldn't download ${filepath}. Please try again.`,
+          });
         }
-        
+
         const result = await response.json();
         if (result.success) {
           // Create download link
@@ -311,10 +378,14 @@ export function FileTransfer({ machineId, connectionInfo }: FileTransferProps) {
         }
       } catch (error) {
         console.error(`Error downloading ${filepath}:`, error);
-        toast.error(`Failed to download ${filepath}`);
+        toast.error(
+          error instanceof Error && error.message
+            ? error.message
+            : `Failed to download ${filepath}`,
+        );
       }
     }
-    
+
     setDownloading(false);
     setDownloadProgress(0);
     setSelectedFiles(new Set());

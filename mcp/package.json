@@ -1,0 +1,96 @@
+{
+  "name": "@coasty/mcp",
+  "version": "1.1.0",
+  "description": "MCP server for Coasty — full computer use (desktop, browser, terminal, files, schedules) from Claude Desktop, Claude Code, Cursor, Windsurf, and VS Code Copilot. Sandbox VMs free, AWS/Azure for production. 26 tools, 4-mode approval, HMAC webhooks.",
+  "license": "MIT",
+  "author": {
+    "name": "Coasty",
+    "email": "founders@coasty.ai",
+    "url": "https://coasty.ai"
+  },
+  "homepage": "https://coasty.ai/api-docs#mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coasty-ai/coasty-mcp.git",
+    "directory": "mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/coasty-ai/coasty-mcp/issues",
+    "email": "founders@coasty.ai"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://coasty.ai/pricing"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "modelcontextprotocol",
+    "claude",
+    "claude-desktop",
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "vscode",
+    "computer-use",
+    "browser-automation",
+    "desktop-automation",
+    "terminal",
+    "scheduling",
+    "cron",
+    "webhook",
+    "ai-agent",
+    "anthropic",
+    "automation",
+    "agentic",
+    "coasty"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "coasty-mcp": "dist/bin/coasty-mcp.js"
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "server.json",
+    "manifest.json",
+    "icon.svg",
+    "llms.txt",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node dist/bin/coasty-mcp.js",
+    "smoke": "node scripts/smoke.mjs",
+    "inspector": "npx @modelcontextprotocol/inspector node dist/bin/coasty-mcp.js",
+    "inspector:cli": "npx @modelcontextprotocol/inspector --cli node dist/bin/coasty-mcp.js",
+    "inspector:tools": "npx @modelcontextprotocol/inspector --cli node dist/bin/coasty-mcp.js --method tools/list",
+    "inspector:prompts": "npx @modelcontextprotocol/inspector --cli node dist/bin/coasty-mcp.js --method prompts/list",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "check": "npm run lint && npm run build && npm test && npm run smoke",
+    "prepublishOnly": "npm run check"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -3,7 +3,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
 import { type ReactNode, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
-import { FloatingThumbnails } from "@/app/components/chat/floating-thumbnails"
 
 const EASE = [0.16, 1, 0.3, 1] as const
 const DEFAULT_DURATION_MS = 2800
@@ -69,17 +68,11 @@ export function PageLoader({
             key="page-loader"
             exit={{ opacity: 0, transition: { duration: 0.25, ease: EASE } }}
             className="pointer-events-none fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
-            style={isMobile ? { perspective: "900px", perspectiveOrigin: "50% 50%" } : undefined}
           >
-            {isMobile ? (
-              /* ── Mobile: lightweight ambient glow — no external images ── */
-              <MobileAmbient />
-            ) : (
-              /* ── Desktop: floating thumbnails (unchanged) ── */
-              <div className="absolute inset-0">
-                <FloatingThumbnails visible />
-              </div>
-            )}
+            {/* Ambient glow background — pure CSS, zero network requests.
+                The chat homepage is the only surface that gets the floating
+                thumbnails; loaders stay quiet. */}
+            <LoaderAmbient />
 
             {/* Center text */}
             <motion.h1
@@ -115,12 +108,12 @@ export function PageLoader({
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
- * Mobile ambient background — pure CSS, zero network requests, GPU-accelerated
+ * Loader ambient background — pure CSS, zero network requests, GPU-accelerated
  * Three soft radial gradients that drift on independent orbits.
  * Uses CSS @keyframes with translateX/Y only (compositor-friendly).
  * ────────────────────────────────────────────────────────────────────────── */
 
-function MobileAmbient() {
+function LoaderAmbient() {
   return (
     <div className="absolute inset-0 overflow-hidden">
       <style

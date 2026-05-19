@@ -8,6 +8,62 @@ import { API_ROUTE_UPDATE_CHAT_MODEL } from "../../routes"
 
 const CHATS_PAGE_SIZE = 20
 
+/**
+ * Strip Coasty-internal markers from a raw assistant-message preview and
+ * produce a short human-readable snippet suitable for the chat list card.
+ *
+ * Returns `null` when the preview collapses to an empty string after cleanup
+ * (e.g. the message was ONLY a task-status marker).  Callers should treat
+ * `null` as "no preview — render the default fallback UI".
+ *
+ * Exported so unit tests can cover the regex cleanup in isolation.
+ */
+export function cleanMessagePreview(raw: string | null | undefined): string | null {
+  if (!raw) return null
+
+  let preview = ""
+
+  // Prefer task-plan main_objective when present.
+  const taskPlanMatch = raw.match(/\[TASK_PLAN_START\]([\s\S]*?)\[TASK_PLAN_END\]/)
+  if (taskPlanMatch) {
+    try {
+      const taskPlan = JSON.parse(taskPlanMatch[1])
+      if (taskPlan.main_objective) {
+        preview = taskPlan.main_objective
+      } else if (taskPlan.subtasks?.length > 0) {
+        preview = taskPlan.subtasks[0].description ?? ""
+      }
+    } catch {
+      preview = raw
+    }
+  } else {
+    preview = raw
+  }
+
+  // Generic cleanup if we didn't get a clean task-plan preview.
+  if (!preview || preview === raw) {
+    preview = preview
+      .replace(/\[TASK_PLAN_START\][\s\S]*?\[TASK_PLAN_END\]/g, "")
+      .replace(/\[REASONING_START\][\s\S]*?\[REASONING_END\]/g, "")
+      .replace(/\[THINKING_START\][\s\S]*?\[THINKING_END\]/g, "")
+      .replace(/<cua-section\s+[^>]*>/g, "")
+      .replace(/<\/cua-section>/g, "")
+      .replace(/\[TASK_STATUS:[^:]+:[^\]]+\]/g, "")
+      .replace(/\[TASK_SUMMARY:[^:]+:[^\]]+\]/g, "")
+      .replace(/```[\s\S]*?```/g, "")
+      .replace(/`[^`]+`/g, "")
+      .replace(/[#*_~\[\]()]/g, "")
+  }
+
+  preview = preview.replace(/\s+/g, " ").trim()
+  if (preview.length > 100) {
+    preview = preview.substring(0, 100).trim() + "..."
+  }
+
+  if (!preview || preview === "...") return null
+  return preview
+}
+
 export async function getChatsForUserInDb(
   userId: string,
   offset: number = 0,
@@ -31,85 +87,21 @@ export async function getChatsForUserInDb(
 
   const hasMore = (ownedChats || []).length === limit
 
-  // For each chat, get the last assistant message
-  const chatsWithPreviews = await Promise.all(
-    (ownedChats || []).map(async (chat: any) => {
-      const { data: lastMessage } = await supabase
-        .from("messages")
-        .select("content")
-        .eq("chat_id", chat.id)
-        .eq("role", "assistant")
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle()
+  // P1 N+1 fix: `chats.last_message_preview` is now denormalised on insert by
+  // the Postgres trigger added in supabase/migrations/009.  No per-chat
+  // secondary query is needed — cleanup is done by the pure helper above.
+  const chatsWithPreviews = (ownedChats || []).map((chat: any) => {
+    const preview = cleanMessagePreview(chat.last_message_preview)
+    if (preview) {
+      return { ...chat, last_message_preview: preview }
+    }
+    // No clean preview after stripping — drop the field so the UI shows its
+    // default fallback instead of an empty bubble.
+    const { last_message_preview: _drop, ...rest } = chat
+    return rest
+  })
 
-      // Add preview to chat object
-      if (lastMessage?.content) {
-        let preview = ''
-        
-        // Try to extract task plan content first
-        const taskPlanMatch = lastMessage.content.match(/\[TASK_PLAN_START\]([\s\S]*?)\[TASK_PLAN_END\]/)
-        if (taskPlanMatch) {
-          try {
-            const taskPlan = JSON.parse(taskPlanMatch[1])
-            // Create a readable preview from the task plan
-            if (taskPlan.main_objective) {
-              preview = taskPlan.main_objective
-            } else if (taskPlan.subtasks && taskPlan.subtasks.length > 0) {
-              // Use first task description as fallback
-              preview = taskPlan.subtasks[0].description
-            }
-          } catch (e) {
-            // If JSON parsing fails, try to get clean text from the content
-            preview = lastMessage.content
-          }
-        } else {
-          // No task plan found, use regular content
-          preview = lastMessage.content
-        }
-        
-        // If we still don't have a preview from task plan, clean the regular content
-        if (!preview || preview === lastMessage.content) {
-          // Remove special markers
-          preview = preview.replace(/\[TASK_PLAN_START\][\s\S]*?\[TASK_PLAN_END\]/g, '')
-          preview = preview.replace(/\[REASONING_START\][\s\S]*?\[REASONING_END\]/g, '')
-          preview = preview.replace(/\[THINKING_START\][\s\S]*?\[THINKING_END\]/g, '')
-
-          // Remove CUA section tags, keeping inner text content
-          preview = preview.replace(/<cua-section\s+[^>]*>/g, '')
-          preview = preview.replace(/<\/cua-section>/g, '')
-          
-          // Remove status updates
-          preview = preview.replace(/\[TASK_STATUS:[^:]+:[^\]]+\]/g, '')
-          preview = preview.replace(/\[TASK_SUMMARY:[^:]+:[^\]]+\]/g, '')
-          
-          // Remove code blocks
-          preview = preview.replace(/```[\s\S]*?```/g, '')
-          preview = preview.replace(/`[^`]+`/g, '')
-          
-          // Remove markdown formatting
-          preview = preview.replace(/[#*_~\[\]()]/g, '')
-        }
-        
-        // Clean up whitespace
-        preview = preview.replace(/\s+/g, ' ').trim()
-        
-        // Truncate to reasonable length
-        if (preview.length > 100) {
-          preview = preview.substring(0, 100).trim() + '...'
-        }
-        
-        // Only return preview if there's actual content
-        if (preview && preview !== '...') {
-          return { ...chat, last_message_preview: preview }
-        }
-      }
-      
-      return chat
-    })
-  )
-
-  return { chats: chatsWithPreviews || [], hasMore }
+  return { chats: chatsWithPreviews, hasMore }
 }
 
 export async function updateChatTitleInDb(id: string, title: string) {

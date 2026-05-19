@@ -38,6 +38,15 @@ resource "aws_vpc_security_group_ingress_rule" "alb_backend_api" {
   cidr_ipv4         = "0.0.0.0/0"
 }
 
+# NOTE: removed `alb_backend_internal_http` (:8002 on the public ALB).  That
+# setup didn't work — the public ALB's DNS resolves to public IPs from within
+# the VPC, so fargate traffic NAT-translated before reaching the listener and
+# the SG rule (from ECS SG) rejected the NAT-sourced packet.  Replaced by a
+# dedicated INTERNAL ALB in alb_internal.tf (has private IPs only).
+#
+# The matching ecs ingress rule "backend port from internal ALB" lives in
+# alb_internal.tf, colocated with the internal ALB itself for clarity.
+
 resource "aws_vpc_security_group_egress_rule" "alb_egress" {
   security_group_id = aws_security_group.alb.id
   description       = "Allow all outbound (to ECS tasks)"

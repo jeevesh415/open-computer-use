@@ -134,7 +134,18 @@ export async function signInWithMagicLink(
     },
   })
 
-  if (error) throw error
+  if (error) {
+    // SECURITY (P1-02): When `shouldCreateUser: false` is set and the email
+    // is not registered, Supabase returns "Signups not allowed for otp".
+    // Surfacing that distinct error to the client is an account-enumeration
+    // leak. Swallow it and return success-shaped data so the UI displays the
+    // same "check your email" affordance regardless of whether the account
+    // exists. All other errors continue to throw.
+    if (error.message?.toLowerCase().includes("signups not allowed")) {
+      return { user: null, session: null }
+    }
+    throw error
+  }
   return data
 }
 

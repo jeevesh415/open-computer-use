@@ -6,6 +6,7 @@ const STATUS_CONFIG = {
   connecting: { color: 'bg-yellow-500 animate-pulse', label: 'Connecting...' },
   disconnected: { color: 'bg-neutral-500', label: 'Disconnected' },
   error: { color: 'bg-red-500', label: 'Connection Error' },
+  auth_error: { color: 'bg-red-500', label: 'Sign-in Required' },
 }
 
 export function ConnectionStatus() {

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { Header } from "@/app/components/layout/header"
 import { AppSidebar } from "@/app/components/layout/sidebar/app-sidebar"
 import { AppTopBar } from "@/app/components/layout/topbar/app-topbar"
@@ -16,6 +17,7 @@ import { ChatStreamingProvider } from "@/lib/chat-streaming-store/provider"
 import dynamic from "next/dynamic"
 import { AccountDialog } from "@/app/components/layout/account-dialog"
 import { ChatBackgroundLayer } from "@/app/components/chat/chat-background"
+import { useIntroStore } from "@/lib/intro-store"
 
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -23,7 +25,14 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
   const { isOpen: isNavigatorOpen, toggleNavigator, width: navigatorWidth } = useProjectNavigator()
   const { chatId } = useChatSession()
   const { getChatById } = useChats()
+  const pathname = usePathname()
   const hasSidebar = preferences.layout === "sidebar"
+
+  // The decorative background belongs to chat surfaces only — the home
+  // composer ("/") and individual chats ("/c/:id"). On resource pages
+  // (schedules, machines, secrets, history, etc.) it competes with
+  // dense content and reads as visual noise.
+  const isChatSurface = pathname === "/" || pathname?.startsWith("/c/") || false
   const [isMobile, setIsMobile] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -48,11 +57,18 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
     }
     checkMobile()
     window.addEventListener('resize', checkMobile)
-    
+
     return () => {
       window.removeEventListener('resize', checkMobile)
     }
   }, [])
+
+  // Hide the top header/topbar on the homepage until the cinematic intro
+  // finishes — otherwise it flashes for a frame before the intro overlay
+  // mounts. On any non-homepage route, the header is always visible.
+  const introPhase = useIntroStore((s) => s.phase)
+  const isHomepage = pathname === "/"
+  const headerHidden = isHomepage && introPhase !== "done"
 
   // During hydration, always render the default layout to avoid mismatch
   // The layout will update after preferences are loaded
@@ -70,12 +86,22 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
           !isHorizontal && "bg-background",
           mounted && hasSidebar && !isHorizontal && "md:rounded-2xl md:overflow-hidden md:shadow-sm"
         )}>
-          {mounted && <ChatBackgroundLayer background={preferences.chatBackground} />}
-          {isHorizontal ? (
-            <AppTopBar />
-          ) : (
-            <Header hasSidebar={hasSidebar} />
-          )}
+          {mounted && isChatSurface && <ChatBackgroundLayer background={preferences.chatBackground} />}
+          <div
+            className={cn(
+              "transition-opacity ease-out",
+              headerHidden
+                ? "opacity-0 pointer-events-none duration-0"
+                : "opacity-100 duration-700"
+            )}
+            aria-hidden={headerHidden}
+          >
+            {isHorizontal ? (
+              <AppTopBar />
+            ) : (
+              <Header hasSidebar={hasSidebar} />
+            )}
+          </div>
           <div
             className={cn(
               "relative h-full overflow-hidden scrollbar-invisible",

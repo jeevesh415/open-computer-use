@@ -1,0 +1,109 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.coasty/mcp",
+  "title": "Coasty",
+  "description": "Full computer use over MCP — desktop, browser, terminal, files, and scheduled jobs from Claude Desktop, Cursor, Windsurf, Claude Code, or VS Code. Sandbox VMs for free dev, real AWS/Azure infra for production, 4-mode approval system.",
+  "version": "1.1.0",
+  "websiteUrl": "https://coasty.ai/api-docs#mcp",
+  "repository": {
+    "url": "https://github.com/coasty-ai/open-computer-use",
+    "source": "github",
+    "subfolder": "mcp"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@coasty/mcp",
+      "version": "1.1.0",
+      "runtimeHint": "npx",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "COASTY_API_KEY",
+          "description": "Coasty API key. Free sandbox keys (sk-coasty-test-*) start at https://coasty.ai/developers — they return mock VMs in <50ms with zero billing. Live keys (sk-coasty-live-*) provision real AWS/Azure VMs.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "COASTY_API_BASE_URL",
+          "description": "Override the API base URL (only needed for self-hosted Coasty deployments).",
+          "isRequired": false,
+          "default": "https://coasty.ai"
+        },
+        {
+          "name": "COASTY_TIMEOUT_MS",
+          "description": "Per-request timeout in milliseconds (1000-300000).",
+          "isRequired": false,
+          "default": "90000"
+        },
+        {
+          "name": "COASTY_MCP_DEBUG",
+          "description": "Set to '1' for verbose stderr logging (API key always redacted).",
+          "isRequired": false,
+          "default": "0"
+        }
+      ]
+    }
+  ],
+  "remotes": [],
+  "_meta": {
+    "ai.coasty/publisher-provided": {
+      "categories": [
+        "computer-use",
+        "automation",
+        "browser-automation",
+        "desktop-automation",
+        "scheduling",
+        "agents"
+      ],
+      "tagline": "The only MCP server that gives Claude full computer access — desktop, browser, terminal, files, schedules — on a cloud VM or your local machine.",
+      "tools_count": 27,
+      "prompts_count": 2,
+      "supported_clients": [
+        "Claude Desktop",
+        "Claude Code",
+        "Cursor",
+        "Windsurf",
+        "VS Code Copilot",
+        "any MCP 2025-06-18 host"
+      ],
+      "operating_systems": ["linux", "windows"],
+      "execution_modes": ["cloud-vm", "local-electron"],
+      "providers": ["aws-ec2", "azure-aci"],
+      "approval_modes": ["full_control", "smart_approve", "approve_all", "off"],
+      "quality_signals": {
+        "tests": 178,
+        "test_files": 11,
+        "type_errors": 0,
+        "languages_with_signing_examples": 8,
+        "tool_annotations_coverage": "100%",
+        "schema_portability": "every tool's JSON schema is self-contained (no external $ref, no top-level oneOf/anyOf), enforced in CI"
+      },
+      "differentiators": [
+        "ONLY MCP server with desktop + browser + terminal + files + schedules in one package",
+        "Local-execution path via Electron — your data never leaves your machine",
+        "Sandbox keys (sk-coasty-test-*) — instant mock VMs, zero billing, real wire format",
+        "4-mode approval: full_control / smart_approve / approve_all / off",
+        "HMAC-SHA256 webhook triggers (Stripe-style) for external schedule fires",
+        "Idempotency-Key on every POST tool (24h replay safety)",
+        "All scopes documented + enforced (machines:write, terminal:exec, browser:execute, etc.)"
+      ],
+      "use_cases": [
+        "Daily 9 a.m. email-summary jobs that summarize Gmail and post to Slack",
+        "Login-required scrapers (handle auth, navigate, extract)",
+        "Form-fill automation across legacy desktop apps that aren't web-accessible",
+        "Browser test runners that need real Chrome on a real desktop",
+        "Cron-fired LLM workflows triggered by Stripe / Linear / custom webhooks",
+        "Lead-qualification pipelines that read CRMs and update spreadsheets"
+      ],
+      "verifiable_facts": {
+        "package_size_kb": 33.8,
+        "unpacked_size_kb": 126.5,
+        "files_in_tarball": 54,
+        "min_node_version": "18",
+        "license": "MIT"
+      }
+    }
+  }
+}

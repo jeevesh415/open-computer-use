@@ -12,13 +12,15 @@
     "recommended": "अनुशंसित",
     "month": "महीना",
     "creditsPerMonth": "{count} क्रेडिट/माह",
-    "agentsInParallel": "{count} एजेंट समानांतर में"
+    "agentsInParallel": "{count} एजेंट समानांतर में",
+    "whatsIncluded": "क्या शामिल है",
+    "hideDetails": "विवरण छिपाएं"
   },
   "header": {
     "useCases": "उपयोग के मामले",
     "blog": "ब्लॉग",
     "agentSwarms": "एजेंट स्वार्म",
-    "products": "Products",
+    "products": "उत्पाद",
     "discover": "Discover",
     "compare": "तुलना",
     "demos": "डेमो",
@@ -57,12 +59,12 @@
     "productItems": {
       "computerUse": "Computer Use",
       "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "compare": "तुलना"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} OSWorld बेंचमार्क स्कोर",
+      "agentSwarms": "{stat} एजेंट समानांतर में",
+      "compare": "{stat} प्रतिस्पर्धियों का विश्लेषण"
     },
     "blogItems": {
       "allPosts": "सभी पोस्ट",
@@ -72,7 +74,8 @@
       "webScraping": "वेब स्क्रैपिंग",
       "jobApplications": "नौकरी आवेदन",
       "demosResults": "डेमो और परिणाम",
-      "guide": "गाइड"
+      "guide": "गाइड",
+      "discover": "समुदाय"
     },
     "blogStats": {
       "allPosts": "{stat} लेख साप्ताहिक प्रकाशित",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} पेज प्रति सत्र",
       "jobApplications": "{stat} आवेदन प्रति सत्र",
       "demosResults": "{stat} वास्तविक केस स्टडी",
-      "guide": "{stat} उपयोग केस वॉकथ्रू"
-    }
+      "guide": "{stat} उपयोग केस वॉकथ्रू",
+      "discover": "देखें लोग इसका उपयोग कैसे करते हैं"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 कंप्यूटर-उपयोग एजेंट · {score} OSWorld",
-    "headline": "स्वायत्त कंप्यूटर ऑपरेटर",
+    "headline": "सर्वश्रेष्ठ कंप्यूटर उपयोग एजेंट",
     "useCases": {
       "computerAgent": {
         "label": "कंप्यूटर एजेंट",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "सोशल मीडिया",
         "task": "Hacker News पर पोस्ट करें और टिप्पणियों पर प्रतिक्रिया दें"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "हर महीने बचत",
+        "sublabel": "पूर्णकालिक VA की तुलना में"
+      },
+      "time": {
+        "value": "30 घंटे",
+        "label": "हर सप्ताह वापस",
+        "sublabel": "मैन्युअल काम समाप्त"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "तेज़ आउटपुट",
+        "sublabel": "मिनटों में काम, दिनों में नहीं"
+      },
+      "effort": {
+        "value": "0",
+        "label": "कोड या नियुक्तियाँ",
+        "sublabel": "पूरी तरह एंड-टू-एंड प्रबंधित"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "असीमित भारी स्वचालन",
         "cta": "Pro लें"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "क्रेडिट की कोई सीमा नहीं — कभी नहीं",
+        "cta": "Unlimited चुनें",
+        "badge": "सर्वोत्तम मूल्य"
       }
     },
     "vmTemporary": "1 अस्थायी VM (2 घंटे)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "वही काम मैन्युअल श्रम से {oldPrice} खर्च होता है",
       "description": "एक वर्चुअल असिस्टेंट की लागत $2,000–$4,000/माह होती है। पार्ट-टाइम हायर और भी महंगा। Coasty वही काम 24/7 $0 से शुरू करता है — सही स्थिरता, पूर्ण ऑडिट ट्रेल, और शून्य प्रशिक्षण समय के साथ।"
-    }
+    },
+    "unlimitedCredits": "असीमित क्रेडिट"
   },
   "faq": {
     "title": "अक्सर पूछे जाने वाले प्रश्न",
@@ -429,7 +463,8 @@
       "contact": "संपर्क",
       "privacy": "गोपनीयता",
       "terms": "शर्तें"
-    }
+    },
+    "status": "सभी सिस्टम चालू हैं"
   },
   "languageSwitcher": {
     "label": "भाषा"
@@ -458,16 +493,16 @@
     "demoCaption": "अपने कंप्यूटर पर AI एजेंट चलाएँ या कहीं से भी अपने फ़ोन से कंट्रोल करें।",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "अपने PC पर स्थानीय रूप से चलाएं",
+        "desc": "डेस्कटॉप ऐप डाउनलोड करें और AI को अपने कंप्यूटर को सीधे नियंत्रित करने दें — कोई क्लाउड VM आवश्यक नहीं।"
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "अपने फ़ोन से अपने PC को नियंत्रित करें",
+        "desc": "अपने फ़ोन से एक कार्य शुरू करें और AI एजेंट को अपने कंप्यूटर पर रीयल-टाइम में काम करते देखें।"
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "क्लाउड या स्थानीय — आपकी पसंद",
+        "desc": "अलग-थलग कार्यों के लिए क्लाउड VM का उपयोग करें, या अपने ऐप्स और फ़ाइलों तक पूर्ण पहुंच के लिए स्थानीय रूप से चलाएं।"
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "कनेक्ट हो रहा है...",
       "continueWithGoogle": "Google से जारी रखें"
+    },
+    "inAppBrowser": {
+      "blocked": "Google साइन-इन एम्बेडेड ब्राउज़र में काम नहीं करता। इस पेज को अपने ब्राउज़र में खोलें, या मैजिक लिंक का उपयोग करें।",
+      "blockedNamed": "Google साइन-इन {app} के अंदर काम नहीं करता। इस पेज को अपने ब्राउज़र में खोलें, या मैजिक लिंक का उपयोग करें।",
+      "copyLink": "लिंक कॉपी करें",
+      "copied": "कॉपी हो गया!",
+      "useMagicLink": "मैजिक लिंक का उपयोग करें"
     },
     "or": "या",
     "email": "ईमेल",
@@ -560,18 +602,21 @@
     "getStarted": "शुरू करें",
     "settingUp": "सेटअप हो रहा है...",
     "welcome": {
-      "titleReturning": "वापस स्वागत है{name}!",
+      "titleReturning": "वापस आने पर स्वागत है{name}",
       "titleNew": "Coasty में आपका स्वागत है",
-      "descriptionReturning": "आपके अनुभव को बेहतर बनाने के लिए हम आपके बारे में थोड़ा और जानना चाहेंगे",
-      "descriptionNew": "आइए आपका खाता सेट करें ताकि हम आपके अनुभव को व्यक्तिगत बना सकें"
+      "eyebrowNew": "आइए परिचित हों",
+      "eyebrowReturning": "बस थोड़ा और",
+      "descriptionReturning": "बस कुछ और जानकारी और Coasty आपके काम करने के तरीके के अनुसार पूरी तरह से तैयार हो जाएगा।",
+      "descriptionNew": "Coasty असली कंप्यूटरों पर काम करता है — ब्राउज़ करता है, क्लिक करता है, टाइप करता है, डिलीवर करता है। आपकी शैली के अनुरूप बनाने के लिए कुछ त्वरित विवरण।",
+      "footerNote": "लगभग एक मिनट लगता है। आप बाद में सेटिंग्स में कुछ भी बदल सकते हैं।"
     },
-    "nameLabel": "हम आपको क्या बुलाएं?",
-    "namePlaceholder": "आपका नाम",
-    "companyLabel": "कंपनी",
+    "nameLabel": "हम आपको क्या पुकारें?",
+    "namePlaceholder": "बस आपका पहला नाम",
+    "companyLabel": "आप कहाँ काम करते हैं?",
     "optional": "(वैकल्पिक)",
-    "companyPlaceholder": "MacroHard",
+    "companyPlaceholder": "आपकी कंपनी या टीम",
     "websiteLabel": "वेबसाइट",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "yourcompany.com",
     "roleStep": {
       "title": "आपको सबसे अच्छा क्या वर्णित करता है?",
       "subtitle": "सभी लागू विकल्प चुनें — इससे हम आपके अनुभव को अनुकूलित कर सकते हैं"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "आपका AI वर्कर क्या करे?",
-    "placeholderAlt": "अपने AI को बताएं कि कंप्यूटर पर क्या करना है...",
+    "placeholder": "मुझे बताएं इस कंप्यूटर पर क्या करना है...",
+    "placeholderAlt": "शुरू करने के लिए एक कंप्यूटर चुनें...",
     "vmError": {
       "title": "वर्चुअल मशीन त्रुटि",
       "description": "वर्चुअल मशीन त्रुटि स्थिति में है या हटाई जा रही है।",
@@ -695,7 +740,7 @@
       "decreaseMachines": "मशीन संख्या घटाएं",
       "increaseMachines": "मशीन संख्या बढ़ाएं",
       "machineLimit": "आपके प्लान पर अधिकतम {max} स्वार्म मशीनें। और चाहिए? founders@coasty.ai पर संपर्क करें",
-      "label": "Multi-Run",
+      "label": "मल्टी-रन",
       "upgradeCta": "स्वार्म मोड"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "फ़ाइलें यहां डालें",
       "dropDescription": "फ़ाइलें VM के डेस्कटॉप फ़ोल्डर में अपलोड होंगी",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "पथ: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "मुफ़्त में और सुविधाएं आज़माने के लिए लॉग इन करें",
@@ -801,6 +846,28 @@
       "ecommerce": "{company} मूल्य तुलना",
       "social_media": "{company} के बारे में पोस्ट करें",
       "general_automation": "{company} पर कार्य स्वचालित करें"
+    },
+    "awaitingHuman": {
+      "completed": "मानव हैंडऑफ़ पूरा हुआ",
+      "yourTurn": "आपकी बारी",
+      "connectToDesktop": "डेस्कटॉप से कनेक्ट करें",
+      "resuming": "फिर से शुरू हो रहा है...",
+      "doneContinue": "हो गया, जारी रखें"
+    },
+    "feedback": {
+      "promptRun": "यह रन कैसा था?",
+      "promptSwarm": "यह स्वार्म कैसा था?",
+      "reactionBad": "खराब",
+      "reactionOkay": "ठीक",
+      "reactionGood": "अच्छा",
+      "reactionAmazing": "कमाल का",
+      "tellUsMore": "और बताएं",
+      "commentPlaceholder": "क्या बेहतर हो सकता है?",
+      "npsPrompt": "क्या आप Coasty की सिफारिश करेंगे?",
+      "npsNotLikely": "संभावना नहीं",
+      "npsVeryLikely": "बहुत संभावना",
+      "thanks": "फीडबैक के लिए धन्यवाद",
+      "creditsLabel": "क्रेडिट"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "असीमित भारी ऑटोमेशन"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "क्रेडिट की कोई सीमा नहीं — कभी नहीं",
+        "badge": "सर्वोत्तम मूल्य"
       }
     },
     "features": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "लेआउट"
+    "layout": "लेआउट",
+    "sidebarStyle": "साइडबार शैली",
+    "sidebarStyleHint": "चुनें कि नेविगेशन कहां रहेगा",
+    "sidebarStyleDisabled": "जब लेआउट साइडबार पर सेट हो तब उपलब्ध",
+    "vertical": "ऊर्ध्वाधर",
+    "verticalBadge": "डिफ़ॉल्ट",
+    "verticalDescription": "फुटर में लेबल और क्रेडिट के साथ क्लासिक बायां रेल।",
+    "horizontal": "क्षैतिज",
+    "horizontalBadge": "चिकना",
+    "horizontalDescription": "एक ही पंक्ति में सब कुछ के साथ एकल शीर्ष पट्टी। अधिक कैनवास ऊंचाई।"
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "लॉगिन सहेजे गए",
       "addLogins": "लॉगिन जोड़ें",
       "askAnything": "कुछ भी पूछें",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac और Windows",
       "mobileRemote": "मोबाइल रिमोट",
       "freeDownload": "मुफ्त डाउनलोड",
       "onePrompt": "एक प्रॉम्प्ट",
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "असीमित भारी ऑटोमेशन",
         "cta": "Pro पाएं"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "क्रेडिट की कोई सीमा नहीं — कभी नहीं",
+        "cta": "Unlimited चुनें",
+        "badge": "सर्वोत्तम मूल्य"
       }
     },
     "features": {
@@ -1422,7 +1509,7 @@
         "badge": "कोर"
       },
       "swarmMode": {
-        "name": "Swarm Mode",
+        "name": "Swarm मोड",
         "sequential": "केवल क्रमिक",
         "parallel": "{count} एजेंट समानांतर में",
         "badge": "शक्तिशाली"
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 हमेशा-चालू",
           "feature": "SLA गारंटी"
+        },
+        "unlimited": {
+          "credits": "असीमित",
+          "machines": "2 हमेशा चालू",
+          "feature": "1 समवर्ती एजेंट"
         }
       },
       "perMonth": "{price}/माह",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty — #1 कंप्यूटर-उपयोग AI एजेंट | डेस्कटॉप और ब्राउज़र ऑटोमेशन के लिए AI कर्मचारी",
-      "titleTemplate": "{title} | Coasty — AI कंप्यूटर-उपयोग एजेंट",
-      "description": "Coasty #1 रैंक वाला कंप्यूटर-उपयोग AI एजेंट है — OSWorld बेंचमार्क पर 82%। यह इंसान की तरह डेस्कटॉप को नियंत्रित करता है: ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है, स्प्रेडशीट प्रबंधित करता है। प्रति सत्र सच्चा VM-स्तर अलगाव। $20/माह से शुरू।",
-      "ogTitle": "Coasty — #1 कंप्यूटर-उपयोग AI एजेंट | OSWorld 82%",
-      "ogDescription": "इंसान की तरह डेस्कटॉप को नियंत्रित करने वाला AI कर्मचारी। OSWorld बेंचमार्क पर #1 (82%)। ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, CAPTCHA हल, VM अलगाव। $20/माह से शुरू।",
-      "twitterDescription": "इंसान की तरह डेस्कटॉप को नियंत्रित करने वाला AI कर्मचारी। ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है। सच्चा VM अलगाव। मानव वर्चुअल सहायक $3,000/माह के मुकाबले $20/माह।"
+      "title": "Coasty - #1 कंप्यूटर-उपयोग AI एजेंट | $249/mo असीमित (बाज़ार में सबसे सस्ता)",
+      "titleTemplate": "{title} | Coasty - AI कंप्यूटर-उपयोग एजेंट",
+      "description": "Coasty #1 रैंक वाला कंप्यूटर-उपयोग AI एजेंट है — OSWorld बेंचमार्क पर 82% — और बाज़ार में $249/mo पर एकमात्र फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान (Devin Team $500+ACU, OpenAI Operator $200 रेट-लिमिटेड, और क्रेडिट-कैप वाले प्रतिस्पर्धियों से सस्ता)। इंसान की तरह पूरे डेस्कटॉप को नियंत्रित करता है: ब्राउज़र, फॉर्म, ईमेल, स्प्रेडशीट। VM-स्तर अलगाव। $19/mo Starter या $249/mo असीमित से।",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo असीमित (सबसे सस्ता कंप्यूटर-उपयोग एजेंट)",
+      "ogDescription": "OSWorld पर #1 (82%)। $249/mo फ्लैट असीमित — उच्च बेंचमार्क पर Devin Team ($500+ACU) से सस्ता। ब्राउज़र, डेस्कटॉप, टर्मिनल ऑटोमेशन। प्रति सत्र VM अलगाव। क्रॉस-प्लेटफ़ॉर्म नेटिव + REST API + MCP सर्वर।",
+      "twitterDescription": "वास्तविक डेस्कटॉप चलाने वाला AI एजेंट। 82% OSWorld (#1)। $249/mo असीमित — श्रेणी में सबसे सस्ता फ्लैट-रेट प्लान। Starter $19/mo से। VM अलगाव + 26-tool MCP सर्वर।"
     },
     "compare": {
       "title": "Coasty तुलना — AI एजेंट विकल्प और प्रतिस्पर्धी तुलना",
@@ -2281,10 +2373,10 @@
       "ogDescription": "OSWorld पर #1 रैंक सबसे अच्छा कंप्यूटर उपयोग एजेंट। AI से किसी भी डेस्कटॉप, ब्राउज़र, या टर्मिनल कार्य को ऑटोमेट करें।"
     },
     "pricing": {
-      "title": "मूल्य — Coasty AI एजेंट प्लान और मूल्य निर्धारण",
-      "description": "Coasty मूल्य निर्धारण योजनाएँ $20/माह से शुरू। $3,000/माह के वर्चुअल सहायकों को AI कर्मचारी से बदलें। मुफ्त टियर उपलब्ध। बिना छिपी फीस के क्रेडिट-आधारित बिलिंग।",
-      "ogTitle": "Coasty मूल्य — AI एजेंट प्लान",
-      "ogDescription": "$20/माह से शुरू AI कर्मचारी। महंगे वर्चुअल सहायकों को स्वायत्त AI से बदलें। मुफ्त टियर उपलब्ध।"
+      "title": "मूल्य — $19/mo Starter या $249/mo असीमित (बाज़ार में सबसे सस्ता)",
+      "description": "Coasty मूल्य निर्धारण: Starter $19/mo (200 क्रेडिट) या असीमित $249/mo (बाज़ार में सबसे सस्ता फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान — Devin Team $500+ACU, Genspark Pro $249 क्रेडिट-कैप, और Manus Extended $200 कैप से सस्ता)। $3,000+/mo के मानव वर्चुअल सहायकों की जगह लेता है। कोई छिपी फीस नहीं।",
+      "ogTitle": "Coasty मूल्य — $19/mo Starter, $249/mo असीमित",
+      "ogDescription": "$249/mo फ्लैट असीमित — बाज़ार में सबसे सस्ता असीमित कंप्यूटर-उपयोग प्लान। या व्यक्तियों के लिए $19/mo Starter। मानव VA की तुलना में $36k/वर्ष बचाता है।"
     },
     "faq": {
       "q1": "Coasty क्या है?",
@@ -2292,7 +2384,7 @@
       "q2": "Coasty Anthropic Computer Use से कैसे अलग है?",
       "a2": "जबकि Anthropic Computer Use कंप्यूटर नियंत्रण के लिए एक कच्चा API प्रदान करता है, Coasty एक उत्पादन-तैयार प्लेटफ़ॉर्म है जिसमें प्रबंधित VM इंफ्रास्ट्रक्चर, बिल्ट-इन CAPTCHA समाधान, Mac और Windows के लिए डेस्कटॉप ऐप, मल्टी-मॉडल सपोर्ट, और सबसे उच्च OSWorld बेंचमार्क स्कोर (82%) है। Coasty पूर्ण समाधान प्रदान करता है — सिर्फ API नहीं।",
       "q3": "Coasty की कीमत कितनी है?",
-      "a3": "Coasty स्टार्टर प्लान $20/माह से शुरू होता है और मुफ्त टियर उपलब्ध है। तुलना में, एक मानव वर्चुअल सहायक $3,000+/माह खर्च करता है। Coasty 24/7 काम करता है बिना ब्रेक, बिना ट्रेनिंग, और तुरंत स्केलेबिलिटी के साथ।",
+      "a3": "Coasty के दो लाइव प्लान हैं: Starter $19/month पर (200 क्रेडिट, 1 मशीन, व्यक्तियों के लिए आदर्श) और असीमित $249/month पर बिना किसी क्रेडिट कैप के। $249 असीमित प्लान बाज़ार में उपलब्ध सबसे सस्ता फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान है — Devin Team ($500/month + ACU ओवरएज), OpenAI Operator ChatGPT Pro ($200/month रेट-लिमिटेड), Genspark Pro ($249.99 क्रेडिट-कैप 125k क्रेडिट पर), और Manus Extended ($200 कैप 40k क्रेडिट पर) से सस्ता। दोनों $3,000+/month के मानव वर्चुअल सहायक की जगह लेते हैं; असीमित मानव VA की तुलना में 92% लागत कटौती के साथ $33,000+/वर्ष बचाता है।",
       "q4": "क्या Coasty उपयोग करना सुरक्षित है?",
       "a4": "हाँ। हर Coasty सत्र अपनी अलग, सैंडबॉक्स्ड वर्चुअल मशीन में चलता है। आपका डेटा सुरक्षित रहता है, आपकी मशीन अछूती रहती है, और सत्रों के बीच कुछ भी लीक नहीं होता। यह सच्चा VM-स्तर अलगाव है, साझा पूल में सिर्फ कंटेनर नहीं।",
       "q5": "OSWorld बेंचमार्क क्या है?",
@@ -2309,11 +2401,11 @@
       "a10": "हाँ। Coasty में बिल्ट-इन CAPTCHA-सॉल्विंग पाइपलाइन है, इसलिए यह प्रतिस्पर्धी AI एजेंटों की तरह ब्लॉक नहीं होता। यह वास्तविक ऑटोमेशन के लिए महत्वपूर्ण है जहाँ वेबसाइटों पर CAPTCHA आम है।"
     },
     "structuredData": {
-      "appDescription": "#1 रैंक कंप्यूटर-उपयोग AI एजेंट। Coasty इंसान की तरह डेस्कटॉप नियंत्रित करता है — ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है, और स्प्रेडशीट स्वायत्त रूप से प्रबंधित करता है। OSWorld बेंचमार्क पर 82%। सच्चा VM-स्तर अलगाव। बिल्ट-इन CAPTCHA समाधान। $20/माह से शुरू।",
-      "orgDescription": "Coasty #1 कंप्यूटर-उपयोग AI एजेंट बनाता है। हमारा प्लेटफ़ॉर्म सच्चे VM-स्तर अलगाव के साथ स्वायत्त डेस्कटॉप नियंत्रण, ब्राउज़र ऑटोमेशन, और मल्टी-एजेंट ऑर्केस्ट्रेशन प्रदान करता है।",
-      "productDescription": "इंसान की तरह डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। OSWorld बेंचमार्क पर #1 (82%)। सच्चे VM-स्तर अलगाव के साथ स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
-      "websiteDescription": "#1 कंप्यूटर-उपयोग AI एजेंट प्लेटफ़ॉर्म। OSWorld बेंचमार्क 82%। VM अलगाव के साथ स्वायत्त ब्राउज़र, डेस्कटॉप, और टर्मिनल ऑटोमेशन। $20/माह से शुरू।",
-      "softwareDescription": "इंसान की तरह पूर्ण डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। 369 वास्तविक कार्यों में 82% पूर्णता दर के साथ OSWorld बेंचमार्क पर #1। स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, टर्मिनल संचालन, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
+      "appDescription": "#1 रैंक कंप्यूटर-उपयोग AI एजेंट और बाज़ार में $249/month पर सबसे सस्ता फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान। Coasty इंसान की तरह पूरे डेस्कटॉप को नियंत्रित करता है — ब्राउज़र खोलता है, क्लिक करता है, टाइप करता है, फॉर्म भरता है, ईमेल भेजता है, स्प्रेडशीट स्वायत्त रूप से प्रबंधित करता है। 369 वास्तविक कार्यों में OSWorld बेंचमार्क पर 82%। प्रति सत्र सच्चा VM-स्तर अलगाव। बिल्ट-इन CAPTCHA समाधान। प्लान: $19/mo Starter या $249/mo असीमित।",
+      "orgDescription": "Coasty #1 कंप्यूटर-उपयोग AI एजेंट (82% OSWorld) बनाता है और $249/month पर एकमात्र फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान भेजता है — समान मूल्य टियर पर Devin Team, OpenAI Operator, और क्रेडिट-कैप वाले प्रतिस्पर्धियों से सस्ता। हमारा प्लेटफ़ॉर्म सच्चे VM-स्तर अलगाव के साथ स्वायत्त डेस्कटॉप नियंत्रण, ब्राउज़र ऑटोमेशन, और मल्टी-एजेंट ऑर्केस्ट्रेशन प्रदान करता है।",
+      "productDescription": "इंसान की तरह डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। OSWorld बेंचमार्क पर #1 (82%)। $249/mo असीमित प्लान उपलब्ध सबसे सस्ता फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान है। सच्चे VM-स्तर अलगाव के साथ स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
+      "websiteDescription": "#1 कंप्यूटर-उपयोग AI एजेंट प्लेटफ़ॉर्म — 82% OSWorld बेंचमार्क और $249/month पर सबसे सस्ता फ्लैट-रेट असीमित प्लान। VM अलगाव के साथ स्वायत्त ब्राउज़र, डेस्कटॉप, और टर्मिनल ऑटोमेशन। $19/mo Starter या $249/mo असीमित से।",
+      "softwareDescription": "इंसान की तरह पूर्ण डेस्कटॉप नियंत्रित करने वाला AI कंप्यूटर-उपयोग एजेंट। 369 वास्तविक कार्यों में 82% पूर्णता दर के साथ OSWorld बेंचमार्क पर #1। $249/month असीमित प्लान बाज़ार में सबसे सस्ता फ्लैट-रेट असीमित कंप्यूटर-उपयोग प्लान है। स्वायत्त ब्राउज़र ऑटोमेशन, डेस्कटॉप नियंत्रण, टर्मिनल संचालन, ईमेल भेजना, फॉर्म भरना, और स्प्रेडशीट प्रबंधन।",
       "breadcrumbs": {
         "home": "होम",
         "caseStudies": "AI एजेंट केस स्टडीज़",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – पेज नहीं मिला",
-      "description": "क्षमा करें, यह पेज मौजूद नहीं है।"
+      "description": "क्षमा करें, यह पेज मौजूद नहीं है।",
+      "metaTitle": "404 · पेज नहीं मिला",
+      "metaDescription": "हमने अपना सबसे अच्छा AI एजेंट भेजा। वह खाली हाथ लौटा। Coasty पर वापस जाएँ, डेस्कटॉप और ब्राउज़र ऑटोमेशन का #1 AI एजेंट।",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "स्कैन: पूरा इंटरनेट",
+        "step2": "स्कैन: हर खुला टैब",
+        "step3": "स्कैन: सोफे के नीचे",
+        "result": "निष्कर्ष: पेज मौजूद नहीं है"
+      },
+      "ok": "ठीक है",
+      "fail": "विफल",
+      "primaryCta": "होम पर जाएँ",
+      "secondaryCta": "AI एजेंट किराए पर लें",
+      "navLabel": "सुझाए गए पेज",
+      "links": {
+        "home": "होम",
+        "computerUse": "कंप्यूटर उपयोग",
+        "pricing": "मूल्य निर्धारण",
+        "download": "डाउनलोड",
+        "blog": "ब्लॉग",
+        "guide": "मार्गदर्शिका"
+      }
     },
     "error": {
       "title": "कुछ गलत हो गया",
@@ -2666,7 +2780,7 @@
     },
     "frequencies": {
       "daily": "daily",
-      "weekly": "weekly",
+      "weekly": "साप्ताहिक",
       "every_30_minutes": "हर 30 मिनट",
       "every_6_hours": "हर 6 घंटे",
       "every_12_hours": "हर 12 घंटे"
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "रूम शीर्षक आवश्यक है",
+      "taskCreated": "कार्य सफलतापूर्वक बनाया गया",
+      "taskFailed": "कार्य बनाने में विफल",
+      "assignTask": "नया कार्य सौंपें",
+      "assignTaskDesc": "अपने AI सहायक के साथ एक नया कार्य शुरू करें।",
+      "taskName": "कार्य का नाम",
+      "taskNamePlaceholder": "कार्य का नाम दर्ज करें",
+      "cancel": "रद्द करें",
+      "creating": "बना रहे हैं...",
+      "createTask": "कार्य बनाएं"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "कृपया एक आमंत्रण कोड दर्ज करें",
+      "joinSuccess": "प्रोजेक्ट में सफलतापूर्वक शामिल हो गए!",
+      "joinFailed": "प्रोजेक्ट में शामिल होने में विफल",
+      "invalidCode": "अमान्य आमंत्रण कोड या प्रोजेक्ट नहीं मिला",
+      "title": "प्रोजेक्ट में शामिल हों",
+      "description": "मौजूदा प्रोजेक्ट में शामिल होने के लिए आमंत्रण कोड दर्ज करें।",
+      "inviteCode": "आमंत्रण कोड",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "अपने टीम लीडर से प्रोजेक्ट आमंत्रण कोड मांगें",
+      "cancel": "रद्द करें",
+      "joining": "शामिल हो रहे हैं...",
+      "joinButton": "प्रोजेक्ट में शामिल हों"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "रूम प्रतिभागी",
+      "copyCode": "कोड कॉपी करें",
+      "copyLink": "लिंक कॉपी करें",
+      "codeCopied": "आमंत्रण कोड कॉपी हो गया!",
+      "codeFailed": "आमंत्रण कोड कॉपी करने में विफल",
+      "linkCopied": "आमंत्रण लिंक कॉपी हो गया!",
+      "linkFailed": "आमंत्रण लिंक कॉपी करने में विफल",
+      "online": "ऑनलाइन",
+      "offline": "ऑफ़लाइन",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "रूम शीर्षक आवश्यक है",
+      "created": "प्रोजेक्ट सफलतापूर्वक बनाया गया!",
+      "failed": "रूम बनाने में विफल",
+      "title": "नया प्रोजेक्ट बनाएं",
+      "description": "AI के साथ अपना उत्पाद बनाने के लिए एक नया प्रोजेक्ट शुरू करें।",
+      "projectName": "प्रोजेक्ट का नाम",
+      "projectNamePlaceholder": "प्रोजेक्ट का नाम दर्ज करें",
+      "teamSize": "टीम का आकार",
+      "cancel": "रद्द करें",
+      "creating": "बना रहे हैं...",
+      "createButton": "प्रोजेक्ट बनाएं"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "नया क्या है",
+    "title": "Coasty में नया क्या है",
+    "updateCount": "{count} अपडेट",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "अपडेट",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "और अपडेट के लिए जुड़े रहें",
+    "tagline": "आपका AI कर्मचारी जो सबके साथ सहयोग करता है"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "शानदार"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "फ़ीडबैक देने के लिए कृपया लॉगिन करें",
+    "alreadySubmitted": "आप पहले ही इसके लिए फ़ीडबैक दे चुके हैं",
+    "thankYou": "आपके फ़ीडबैक के लिए धन्यवाद!",
+    "creditsEarned": "+{credits} क्रेडिट अर्जित",
+    "helpImprove": "आपकी राय हमें Coasty को बेहतर बनाने में मदद करती है।",
+    "howsExperience": "आपका अनुभव कैसा है?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "हमें और बताएं",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "क्या अच्छा काम कर रहा है? क्या बेहतर हो सकता है?",
+    "cancel": "रद्द करें",
+    "sending": "भेज रहे हैं...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "कृपया एक वर्कस्टेशन चुनें",
+    "enterCron": "कृपया एक cron एक्सप्रेशन दर्ज करें",
+    "hireFailed": "कर्मचारी नियुक्त करने में विफल",
+    "removeFailed": "कर्मचारी हटाने में विफल",
+    "editEmployee": "कर्मचारी संपादित करें",
+    "configureEmployee": "कर्मचारी कॉन्फ़िगर करें",
+    "editDescription": "शेड्यूल, वर्कस्टेशन, या निर्देश अपडेट करें",
+    "configureDescription": "इस चैट के लिए एक AI कर्मचारी सेट करें",
+    "loading": "कॉन्फ़िगरेशन लोड हो रहा है...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "कर्मचारी का नाम"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "चैट हटाएं?",
+    "description": "यह \"{chatTitle}\" को हटा देगा",
+    "cancel": "रद्द करें",
+    "delete": "हटाएं"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "भुगतान सफल! आपके क्रेडिट जोड़ दिए गए हैं।",
+    "canceled": "भुगतान रद्द कर दिया गया। कोई शुल्क नहीं लिया गया।"
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "सामान्य सेटिंग्स",
     "generalDescription": "बुनियादी कंप्यूटर सेटिंग्स कॉन्फ़िगर करें",
     "displayName": "प्रदर्शन नाम",
     "defaultName": "मेरा कंप्यूटर",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
+    "saveChanges": "बदलाव सहेजें",
+    "security": "सुरक्षा",
+    "securityDescription": "सुरक्षा और एक्सेस सेटिंग्स",
+    "sshAuth": "SSH प्रमाणीकरण",
+    "username": "उपयोगकर्ता नाम:",
     "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "sshKeyDownloaded": "SSH कुंजी डाउनलोड हो गई",
+    "sshKeyFailed": "SSH कुंजी डाउनलोड करने में विफल",
+    "downloadSshKey": "SSH कुंजी डाउनलोड करें",
+    "vncPassword": "VNC पासवर्ड",
     "vncPasswordHint": "कंप्यूटर से कनेक्ट करने के लिए यह पासवर्ड आवश्यक है"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "हे, मैं Coasty उपयोग कर रहा हूं और यह वाकई बढ़िया है। यह एक AI है जो आपके लिए कंप्यूटर इस्तेमाल कर सकती है — ब्राउज़िंग, क्लिक करना, टाइप करना, सब कुछ। मेरे लिंक से ट्राय करें और हम दोनों को मुफ़्त क्रेडिट मिलेंगे!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "यह AI टूल देखें",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "अभी",
+      "minutesAgo": "{minutes} मि पहले",
+      "hoursAgo": "{hours} घं पहले",
+      "daysAgo": "{days} दि पहले",
+      "monthsAgo": "{months} मा पहले"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "रेफ़रल लिंक कॉपी हो गया!",
+    "headline": "अच्छे दोस्त मीम शेयर करते हैं। बेहतरीन दोस्त AI एजेंट शेयर करते हैं।",
+    "subheadline": "आपके दोस्त के जुड़ने पर आप दोनों को {credits} मुफ़्त क्रेडिट मिलेंगे।",
+    "yourLink": "आपका रेफ़रल लिंक",
+    "shareDirectly": "सीधे शेयर करें",
+    "yourReferrals": "आपके रेफ़रल",
+    "referralCount": "{count} रेफ़रल",
+    "creditsEarned": "{credits} क्रेडिट अर्जित",
+    "invitedYou": "आपको आमंत्रित किया",
+    "joinedViaLink": "आपके लिंक से जुड़े",
+    "noInvites": "अभी तक कोई उपयोगकर्ता आमंत्रित नहीं",
+    "noInvitesHint": "अपना लिंक शेयर करें और आप दोनों को 50 क्रेडिट मिलेंगे"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "सार्वजनिक करें",
+    "title": "आपकी बातचीत अब सार्वजनिक है!",
+    "description": "लिंक वाला कोई भी व्यक्ति अब इस बातचीत को देख सकता है और भविष्य में यह कम्युनिटी फ़ीड, फ़ीचर्ड पेज, या सर्च परिणामों में दिख सकती है।",
+    "viewPage": "पेज देखें",
+    "shareOn": "इस पर शेयर करें"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "AI कंट्रोल पैनल",
+    "subtitle": "बताएं आप AI से क्या करवाना चाहते हैं",
+    "quickCommands": "त्वरित कमांड",
+    "noActions": "अभी तक कोई क्रिया नहीं की गई",
+    "success": "सफल",
+    "failed": "विफल",
+    "placeholder": "AI को बताएं क्या करना है... (भेजने के लिए Ctrl+Enter)",
+    "executing": "निष्पादन हो रहा है...",
+    "executeCommand": "कमांड निष्पादित करें"
   },
   "discover": {
     "badge": "समुदाय",
@@ -2859,5 +2973,190 @@
     "watchSession": "सत्र देखें",
     "steps": "{count} चरण",
     "tryCoasty": "Coasty आज़माएं"
+  },
+  "memory": {
+    "sidebarLabel": "मेमोरी",
+    "sidebarDescription": "हर एजेंट रन पर लागू होने वाला संदर्भ",
+    "dialog": {
+      "title": "मेमोरी",
+      "description": "एक छोटा नोट जिसे Coasty हर बार आपके लिए काम करते समय लागू करता है।",
+      "openFull": "पूर्ण खोलें",
+      "visualMemoryLabel": "मेमोरी",
+      "visualSynced": "सिंक हो गया",
+      "visualContextChat": "चैट",
+      "visualContextSchedules": "शेड्यूल",
+      "visualContextSwarm": "स्वार्म"
+    },
+    "section": {
+      "title": "मेमोरी",
+      "tag": "वैकल्पिक · व्यक्तिगत",
+      "description": "आपके बारे में एक छोटा नोट जो हर एजेंट रन के साथ जाता है — चैट, शेड्यूल किए गए कार्य, स्वार्म मशीनें, सौंपे गए एजेंट।"
+    },
+    "presetsLabel": "आज़माएँ",
+    "presets": {
+      "useFirstName": "मेरा नाम उपयोग करें",
+      "useFirstNameSentence": "मुझे मेरे पहले नाम से संबोधित करें।",
+      "beTerse": "संक्षिप्त रहें",
+      "beTerseSentence": "संक्षिप्त, सीधे जवाब को प्राथमिकता दें। कोई भराई नहीं।",
+      "imDeveloper": "मैं डेवलपर हूँ",
+      "imDeveloperSentence": "मैं सॉफ़्टवेयर इंजीनियर हूँ; कोड के साथ सहज हूँ।",
+      "noEmojis": "इमोजी नहीं",
+      "noEmojisSentence": "जवाबों में इमोजी से बचें।",
+      "metricUnits": "मीट्रिक इकाइयाँ",
+      "metricUnitsSentence": "मीट्रिक इकाइयाँ (मीटर, किलोग्राम, °C) का उपयोग करें।",
+      "citeSources": "स्रोत बताएँ",
+      "citeSourcesSentence": "तथ्यात्मक दावे करते समय स्रोत बताएँ।"
+    },
+    "placeholder": "उदाहरण:\nमुझे मेरे पहले नाम से संबोधित करें।\nसंक्षिप्त जवाब को प्राथमिकता दें।\nमैं TypeScript और Python में काम करता हूँ।\nपुष्टि के बिना कभी फ़ाइलें न हटाएँ।",
+    "loading": "लोड हो रहा है…",
+    "saving": "सहेजा जा रहा है…",
+    "saved": "सहेजा गया",
+    "unsavedChanges": "बिना सहेजे गए बदलाव",
+    "empty": "खाली",
+    "savedRelative": "सहेजा गया · {time}",
+    "errorLoad": "आपकी मेमोरी लोड नहीं हो सकी।",
+    "errorSave": "आपकी मेमोरी सहेजी नहीं जा सकी।",
+    "willBeShortened": "छोटा कर दिया जाएगा",
+    "clear": "साफ़ करें",
+    "footerNote": "Coasty आपके लिए काम करते समय इन प्राथमिकताओं को ध्यान में रखेगा।",
+    "time": {
+      "justNow": "अभी",
+      "secondsAgo": "{n} सेकंड पहले",
+      "minutesAgo": "{n} मिनट पहले",
+      "hoursAgo": "{n} घंटे पहले",
+      "daysAgo": "{n} दिन पहले"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "सेटिंग्स",
+    "navGroups": {
+      "settings": "सेटिंग्स",
+      "developer": "डेवलपर",
+      "more": "अधिक",
+      "resources": "संसाधन"
+    },
+    "sections": {
+      "account": {
+        "label": "सामान्य",
+        "description": "प्रोफ़ाइल और खाता"
+      },
+      "appearance": {
+        "label": "दिखावट",
+        "description": "थीम, भाषा और पृष्ठभूमि"
+      },
+      "billing": {
+        "label": "बिलिंग",
+        "description": "योजनाएँ और क्रेडिट"
+      },
+      "publicChats": {
+        "label": "सार्वजनिक चैट",
+        "description": "सार्वजनिक लिंक के माध्यम से साझा की गई चैट प्रबंधित करें"
+      },
+      "privacy": {
+        "label": "गोपनीयता",
+        "description": "सुरक्षा और डेटा गोपनीयता"
+      },
+      "notifications": {
+        "label": "सूचनाएँ",
+        "description": "सूचना प्राथमिकताएँ"
+      },
+      "apiKeys": {
+        "label": "API कुंजियाँ",
+        "description": "अपनी API कुंजियाँ प्रबंधित करें"
+      },
+      "data": {
+        "label": "डेटा",
+        "description": "अपना डेटा निर्यात और प्रबंधित करें"
+      },
+      "feedback": {
+        "label": "प्रतिक्रिया",
+        "description": "हमें अपनी प्रतिक्रिया भेजें"
+      },
+      "about": {
+        "label": "बारे में",
+        "description": "Coasty के बारे में"
+      },
+      "social": {
+        "label": "जुड़ें",
+        "description": "सोशल लिंक"
+      },
+      "guide": {
+        "label": "गाइड",
+        "description": "Coasty का उपयोग सीखें"
+      },
+      "referral": {
+        "label": "रेफरल",
+        "description": "दोस्तों को आमंत्रित करें और क्रेडिट कमाएं"
+      }
+    },
+    "appearance": {
+      "theme": "थीम",
+      "language": "भाषा",
+      "background": "पृष्ठभूमि",
+      "personalization": "निजीकरण",
+      "intro": {
+        "title": "सिनेमैटिक इंट्रो",
+        "description": "होमपेज पर जाने पर एनिमेटेड इंट्रो दिखाएं"
+      },
+      "interaction": {
+        "title": "टूल इनवोकेशन",
+        "description": "बातचीत में टूल निष्पादन विवरण दिखाएं"
+      }
+    },
+    "comingSoon": {
+      "badge": "जल्द",
+      "placeholder": "यह सेक्शन आगामी अपडेट में आ रहा है।"
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "मुझे दिखाओ क्या संभव है…",
+    "tasks": [
+      "मेरे प्रतिस्पर्धियों पर शोध करें",
+      "नौकरी आवेदन भरें",
+      "टोक्यो की उड़ान बुक करें",
+      "मेरी वेबसाइट के अपटाइम पर नज़र रखें",
+      "सोशल पोस्ट शेड्यूल करें",
+      "तिमाही रुझानों का विश्लेषण करें"
+    ],
+    "dontShowAgain": "फिर से न दिखाएं",
+    "skip": "छोड़ें",
+    "tagline": "कुछ भी करें, ठीक वैसे ही जैसे एक इंसान कंप्यूटर से कर सकता है"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "आपके कंप्यूटर",
+      "description": "सिलिकॉन आपकी सेवा में। आपका बेड़ा शुरू कर रहे हैं।"
+    },
+    "swarms": {
+      "title": "स्वार्म इंटेलिजेंस",
+      "description": "कई दिमाग, एक मिशन। आपके एजेंट इकट्ठा कर रहे हैं।"
+    },
+    "developers": {
+      "title": "डेवलपर एपीआई",
+      "description": "आपका डैशबोर्ड लोड हो रहा है।"
+    },
+    "secrets": {
+      "title": "क्रेडेंशियल",
+      "description": "आपके राज़ हमारे साथ सुरक्षित हैं। तिजोरी खोल रहे हैं।"
+    },
+    "schedules": {
+      "title": "शेड्यूल",
+      "description": "हर बार ठीक समय पर। आपके ऑटोमेशन सिंक हो रहे हैं।"
+    },
+    "history": {
+      "title": "आपका इतिहास",
+      "description": "हर बातचीत, कार्य और विचार का शांत रिकॉर्ड जिसे आपने खोजा है।"
+    },
+    "referral": {
+      "title": "रेफरल",
+      "description": "Coasty साझा करें। साथ कमाएं।"
+    }
+  },
+  "dataSection": {
+    "heroTitle": "आपका डेटा, आपका नियंत्रण",
+    "heroDescription": "हम केवल वही संग्रहीत करते हैं जो आपके सत्रों को चलाने के लिए आवश्यक है। सभी ट्रैफ़िक ट्रांज़िट में एन्क्रिप्टेड है, और आप नीचे की श्रेणियों में स्थिर डेटा एन्क्रिप्शन का विस्तार कर सकते हैं। आपके डेटा का उपयोग कभी भी AI मॉडलों को प्रशिक्षित करने के लिए नहीं किया जाता।",
+    "trustTransit": "ट्रांज़िट में TLS 1.3",
+    "trustAtRest": "स्थिर डेटा पर AES-256-GCM",
+    "trustNoTraining": "आपके डेटा पर कोई प्रशिक्षण नहीं"
   }
 }

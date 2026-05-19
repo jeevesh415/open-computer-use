@@ -65,11 +65,20 @@ function findChromePath(): string | null {
     } catch { /* skip */ }
   }
 
-  // Windows fallback: use 'where' to find chrome/msedge on PATH
+  // Windows fallback: use 'where' to find chrome/msedge on PATH.
+  // ``where.exe`` output is normally a few hundred bytes — well below
+  // any conceivable maxBuffer — but we set the 10 MB cap consistently
+  // across every exec callsite so a corrupted PATH (rare but seen on
+  // CI runners with thousands of entries) can't trip the 1 MB default.
+  // See terminal.ts MAX_OUTPUT_BUFFER_BYTES for the 2026-05-17 fix.
   if (process.platform === 'win32') {
     for (const exe of ['chrome.exe', 'msedge.exe']) {
       try {
-        const result = execFileSync('where', [exe], { timeout: 5000, encoding: 'utf-8' })
+        const result = execFileSync('where', [exe], {
+          timeout: 5000,
+          encoding: 'utf-8',
+          maxBuffer: 10 * 1024 * 1024,
+        })
         const firstLine = result.trim().split('\n')[0]?.trim()
         if (firstLine && fs.existsSync(firstLine)) {
           console.log(`[Browser] Found browser via PATH: ${firstLine}`)
@@ -83,7 +92,11 @@ function findChromePath(): string | null {
   if (process.platform !== 'win32') {
     for (const exe of ['google-chrome', 'google-chrome-stable', 'chromium-browser', 'chromium', 'microsoft-edge']) {
       try {
-        const result = execFileSync('which', [exe], { timeout: 5000, encoding: 'utf-8' })
+        const result = execFileSync('which', [exe], {
+          timeout: 5000,
+          encoding: 'utf-8',
+          maxBuffer: 10 * 1024 * 1024,
+        })
         const firstLine = result.trim().split('\n')[0]?.trim()
         if (firstLine && fs.existsSync(firstLine)) {
           console.log(`[Browser] Found browser via which: ${firstLine}`)

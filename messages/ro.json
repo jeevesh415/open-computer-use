@@ -12,13 +12,15 @@
     "recommended": "Recomandat",
     "month": "luna",
     "creditsPerMonth": "{count} credite/luna",
-    "agentsInParallel": "{count} agenti in paralel"
+    "agentsInParallel": "{count} agenti in paralel",
+    "whatsIncluded": "Ce este inclus",
+    "hideDetails": "Ascunde detaliile"
   },
   "header": {
     "useCases": "Cazuri de utilizare",
     "blog": "Blog",
     "agentSwarms": "Roiuri de agenti",
-    "products": "Products",
+    "products": "Produse",
     "discover": "Discover",
     "compare": "Compara",
     "demos": "Demo-uri",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} e-mailuri personalizate per campanie"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Utilizarea computerului",
+      "agentSwarms": "Roiuri de agenti",
+      "compare": "Compara"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "Scor benchmark OSWorld de {stat}",
+      "agentSwarms": "{stat} agenti in paralel",
+      "compare": "{stat} competitori analizati"
     },
     "blogItems": {
       "allPosts": "Toate articolele",
@@ -72,7 +74,8 @@
       "webScraping": "Web Scraping",
       "jobApplications": "Aplicatii pentru locuri de munca",
       "demosResults": "Demo-uri si rezultate",
-      "guide": "Ghid"
+      "guide": "Ghid",
+      "discover": "Comunitate"
     },
     "blogStats": {
       "allPosts": "{stat} articole publicate saptamanal",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} pagini per sesiune",
       "jobApplications": "{stat} aplicatii per sesiune",
       "demosResults": "{stat} studii de caz reale",
-      "guide": "{stat} ghiduri de utilizare"
-    }
+      "guide": "{stat} ghiduri de utilizare",
+      "discover": "Vezi cum îl folosesc oamenii"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "Agentul Computer-Use #1 · {score} OSWorld",
-    "headline": "Operatori de computer autonomi",
+    "headline": "Cel mai bun agent de utilizare a computerului",
     "useCases": {
       "computerAgent": {
         "label": "Agent de computer",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Social media",
         "task": "Posteaza pe Hacker News si interactioneaza cu comentariile"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "economisiți lunar",
+        "sublabel": "față de un VA full-time"
+      },
+      "time": {
+        "value": "30 h",
+        "label": "recuperate săptămânal",
+        "sublabel": "munca manuală eliminată"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "rezultat mai rapid",
+        "sublabel": "sarcini în minute, nu zile"
+      },
+      "effort": {
+        "value": "0",
+        "label": "cod sau angajări",
+        "sublabel": "gestionat complet end-to-end"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Automatizare intensa nelimitata",
         "cta": "Alege Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Fără limite de credite — niciodată",
+        "cta": "Alege Unlimited",
+        "badge": "Cea mai bună ofertă"
       }
     },
     "vmTemporary": "1 VM temporar (2 ore)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Aceeasi munca costa {oldPrice} cu forta de munca manuala",
       "description": "Un asistent virtual costa $2.000–$4.000/luna. Un angajat part-time costa mai mult. Coasty face aceeasi munca 24/7 incepand de la $0 — cu consistenta perfecta, trasee complete de audit si zero timp de instruire."
-    }
+    },
+    "unlimitedCredits": "Credite nelimitate"
   },
   "faq": {
     "title": "Intrebari frecvente",
@@ -429,7 +463,8 @@
       "contact": "Contact",
       "privacy": "Confidentialitate",
       "terms": "Termeni"
-    }
+    },
+    "status": "Toate sistemele funcționează"
   },
   "languageSwitcher": {
     "label": "Limba"
@@ -458,16 +493,16 @@
     "demoCaption": "Rulează agenți AI pe computerul tău sau controlează-l de pe telefon, de oriunde.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "Ruleaza local pe PC-ul tau",
+        "desc": "Descarca aplicatia desktop si lasa AI sa iti controleze computerul direct — fara VM in cloud."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "Controleaza-ti PC-ul de pe telefon",
+        "desc": "Porneste o sarcina de pe telefon si urmareste agentul AI lucrand pe computerul tau in timp real."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Cloud sau local — alegerea ta",
+        "desc": "Foloseste VM-uri in cloud pentru sarcini izolate, sau ruleaza local pentru acces complet la aplicatiile si fisierele tale."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Se conecteaza...",
       "continueWithGoogle": "Continua cu Google"
+    },
+    "inAppBrowser": {
+      "blocked": "Autentificarea cu Google nu funcționează în browserele încorporate. Deschide această pagină în browserul tău sau folosește un link magic.",
+      "blockedNamed": "Autentificarea cu Google nu funcționează în {app}. Deschide această pagină în browserul tău sau folosește un link magic.",
+      "copyLink": "Copiază linkul",
+      "copied": "Copiat!",
+      "useMagicLink": "Folosește link magic"
     },
     "or": "sau",
     "email": "E-mail",
@@ -560,18 +602,21 @@
     "getStarted": "Incepe",
     "settingUp": "Se configureaza...",
     "welcome": {
-      "titleReturning": "Bine ai revenit{name}!",
+      "titleReturning": "Bine ai revenit{name}",
       "titleNew": "Bine ai venit la Coasty",
-      "descriptionReturning": "Am dori sa aflam putin mai multe despre tine pentru a imbunatati experienta ta",
-      "descriptionNew": "Sa iti configuram contul pentru a personaliza experienta ta"
+      "eyebrowNew": "Să ne cunoaștem",
+      "eyebrowReturning": "Aproape gata",
+      "descriptionReturning": "Încă câteva detalii și Coasty va fi complet adaptat la modul tău de a lucra.",
+      "descriptionNew": "Coasty funcționează pe calculatoare reale — navighează, dă clic, tastează, livrează. Câteva detalii rapide pentru a se adapta stilului tău.",
+      "footerNote": "Durează aproximativ un minut. Poți schimba orice mai târziu în Setări."
     },
-    "nameLabel": "Cum sa iti spunem?",
-    "namePlaceholder": "Numele tau",
-    "companyLabel": "Companie",
-    "optional": "(optional)",
-    "companyPlaceholder": "MacroHard",
-    "websiteLabel": "Website",
-    "websitePlaceholder": "xai.com",
+    "nameLabel": "Cum să-ți spunem?",
+    "namePlaceholder": "Doar prenumele",
+    "companyLabel": "Unde lucrezi?",
+    "optional": "(opțional)",
+    "companyPlaceholder": "Compania sau echipa ta",
+    "websiteLabel": "Site web",
+    "websitePlaceholder": "compania-ta.ro",
     "roleStep": {
       "title": "Ce te descrie cel mai bine?",
       "subtitle": "Selecteaza tot ce se aplica — ne ajuta sa iti personalizam experienta"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "Ce ar trebui sa faca lucratorul tau AI?",
-    "placeholderAlt": "Spune-i AI-ului tau ce sa faca pe computer...",
+    "placeholder": "Spune-mi ce sa fac pe acest computer...",
+    "placeholderAlt": "Selecteaza un computer pentru a incepe...",
     "vmError": {
       "title": "Eroare masina virtuala",
       "description": "Masina virtuala este intr-o stare de eroare sau este stearsa.",
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Trage fisierele aici",
       "dropDescription": "Fisierele vor fi incarcate in folderul Desktop al VM-ului",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Cale: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Autentifica-te pentru a incerca mai multe functii gratuit",
@@ -801,6 +846,28 @@
       "ecommerce": "Comparatie preturi {company}",
       "social_media": "Posteaza despre {company}",
       "general_automation": "Automatizeaza sarcina pe {company}"
+    },
+    "awaitingHuman": {
+      "completed": "Predarea către om finalizată",
+      "yourTurn": "Rândul tău",
+      "connectToDesktop": "Conectare la desktop",
+      "resuming": "Se reia...",
+      "doneContinue": "Gata, continuă"
+    },
+    "feedback": {
+      "promptRun": "Cum a fost această execuție?",
+      "promptSwarm": "Cum a fost acest swarm?",
+      "reactionBad": "Rău",
+      "reactionOkay": "Bine",
+      "reactionGood": "Bun",
+      "reactionAmazing": "Uimitor",
+      "tellUsMore": "Spune-ne mai mult",
+      "commentPlaceholder": "Ce ar putea fi mai bine?",
+      "npsPrompt": "Ai recomanda Coasty?",
+      "npsNotLikely": "Puțin probabil",
+      "npsVeryLikely": "Foarte probabil",
+      "thanks": "Mulțumim pentru feedback",
+      "creditsLabel": "credite"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Automatizare intensiva nelimitata"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Fără limite de credite — niciodată",
+        "badge": "Cea mai bună ofertă"
       }
     },
     "features": {
@@ -1089,7 +1161,7 @@
     "namePlaceholder": "Numele tau",
     "company": "Companie",
     "companyPlaceholder": "Compania ta",
-    "website": "Website",
+    "website": "Site web",
     "websitePlaceholder": "yoursite.com",
     "saving": "Se salveaza...",
     "saveChanges": "Salveaza modificarile",
@@ -1113,7 +1185,7 @@
         "description": "Cheile API criptate cu AES-256-GCM. Credentialele tale nu sunt niciodata stocate in text simplu."
       },
       "rls": {
-        "title": "Row Level Security",
+        "title": "Securitate la nivel de rand",
         "description": "Izolarea la nivel de baza de date asigura ca datele tale sunt accesibile doar de tine. Niciun acces intre tenanturi nu este posibil."
       },
       "privacy": {
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Aspect"
+    "layout": "Aspect",
+    "sidebarStyle": "Stil bară laterală",
+    "sidebarStyleHint": "Alege unde stă navigarea",
+    "sidebarStyleDisabled": "Disponibil când Aspectul este setat la Bară laterală",
+    "vertical": "Vertical",
+    "verticalBadge": "Implicit",
+    "verticalDescription": "Bară clasică din stânga cu etichete și credite în subsol.",
+    "horizontal": "Orizontal",
+    "horizontalBadge": "Elegant",
+    "horizontalDescription": "O singură bară superioară cu totul pe un rând. Mai multă înălțime pentru pânză."
   },
   "suggestions": {
     "summary": {
@@ -1222,7 +1303,7 @@
       "loginsSaved": "Date de autentificare salvate",
       "addLogins": "Adaugă date de autentificare",
       "askAnything": "Întreabă orice",
-      "macWindows": "Mac & Windows",
+      "macWindows": "Mac si Windows",
       "mobileRemote": "Control de pe mobil",
       "freeDownload": "Descărcare gratuită",
       "onePrompt": "Un singur prompt",
@@ -1413,6 +1494,12 @@
         "name": "Pro",
         "tagline": "Automatizare intensivă nelimitată",
         "cta": "Alege Pro"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Fără limite de credite — niciodată",
+        "cta": "Alege Unlimited",
+        "badge": "Cea mai bună ofertă"
       }
     },
     "features": {
@@ -1422,7 +1509,7 @@
         "badge": "Esențial"
       },
       "swarmMode": {
-        "name": "Swarm Mode",
+        "name": "Mod roi",
         "sequential": "Doar secvențial",
         "parallel": "{count} agenți în paralel",
         "badge": "Puternic"
@@ -1525,7 +1612,7 @@
       "chatTasks": "Chat și sarcini",
       "machines": "Mașini",
       "credentials": "Date de autentificare",
-      "swarmMode": "Swarm Mode",
+      "swarmMode": "Mod roi",
       "workforce": "Programări",
       "desktopApp": "Aplicație desktop",
       "billing": "Facturare și credite"
@@ -1712,7 +1799,7 @@
       "goToCredentials": "Mergi la Date de autentificare salvate"
     },
     "swarmTab": {
-      "title": "Swarm Mode",
+      "title": "Mod roi",
       "runParallel": "Rulează {count} mașini în paralel",
       "sameTask": "Aceeași sarcină, {multiplier}x rezultat, același timp.",
       "done": "Gata",
@@ -1867,6 +1954,11 @@
           "credits": "1,500",
           "machines": "3 permanent active",
           "feature": "Garanție SLA"
+        },
+        "unlimited": {
+          "credits": "Nelimitat",
+          "machines": "2 mereu active",
+          "feature": "1 agent simultan"
         }
       },
       "perMonth": "{price}/lună",
@@ -1924,7 +2016,7 @@
         }
       },
       "twoWays": "Două moduri de rulare",
-      "cloudVm": "Cloud VM",
+      "cloudVm": "VM in cloud",
       "cloudFeatures": {
         "isolated": "Sandbox complet izolat",
         "freshBrowser": "Browser curat, fără istoric",
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - Agentul AI #1 care folosește computerul | Angajat AI pentru automatizarea desktopului și browserului",
+      "title": "Coasty - Agentul AI #1 care folosește computerul | $249/mo Nelimitat (Cel mai ieftin de pe piață)",
       "titleTemplate": "{title} | Coasty - Agent AI pentru utilizarea computerului",
-      "description": "Coasty este agentul AI #1 care folosește computerul — 82% în benchmark-ul OSWorld. Controlează un desktop complet ca un om: deschide browsere, dă click, tastează, completează formulare, trimite e-mailuri, gestionează foi de calcul. Izolare reală la nivel de VM per sesiune. De la $20/lună.",
-      "ogTitle": "Coasty - Agentul AI #1 care folosește computerul | 82% benchmark OSWorld",
-      "ogDescription": "Angajat AI care controlează un desktop ca un om. #1 în benchmark-ul OSWorld (82%). Automatizare browser, control desktop, rezolvare CAPTCHA, izolare VM. De la $20/lună.",
-      "twitterDescription": "Angajat AI care controlează un desktop ca un om. Deschide browsere, dă click, tastează, completează formulare, trimite e-mailuri. Izolare reală VM. $20/lună vs $3.000/lună asistent uman."
+      "description": "Coasty este agentul AI #1 care folosește computerul — 82% în benchmark-ul OSWorld — și singurul plan Nelimitat cu tarif fix pentru folosirea computerului la $249/mo (mai ieftin decât Devin Team $500+ACU, OpenAI Operator $200 cu limită de cereri și concurenți cu limită de credite). Controlează un desktop complet ca un om: browsere, formulare, e-mailuri, foi de calcul. Izolare la nivel de VM. De la $19/mo cu Starter sau $249/mo Nelimitat.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Nelimitat (Cel mai ieftin agent de folosire a computerului)",
+      "ogDescription": "#1 în OSWorld (82%). Tarif fix $249/mo Nelimitat — mai ieftin decât Devin Team ($500+ACU) la un scor de benchmark mai mare. Automatizare browser, desktop și terminal. Izolare VM per sesiune. Aplicație nativă multi-platformă + REST API + server MCP.",
+      "twitterDescription": "Agent AI care rulează un desktop real. 82% OSWorld (#1). $249/mo Nelimitat — cel mai ieftin plan cu tarif fix din categorie. Starter de la $19/mo. Izolare VM + server MCP cu 26 de instrumente."
     },
     "compare": {
       "title": "Comparați Coasty - Alternative de agenți AI și comparație cu concurența",
@@ -2281,10 +2373,10 @@
       "ogDescription": "Cel mai bun agent pentru utilizarea computerului, #1 în OSWorld. Automatizați orice sarcină de desktop, browser sau terminal cu AI."
     },
     "pricing": {
-      "title": "Prețuri — Planuri și prețuri Coasty Agent AI",
-      "description": "Planurile de prețuri Coasty de la $20/lună. Înlocuiți asistenții virtuali de $3.000/lună cu un angajat AI. Plan gratuit disponibil. Utilizare bazată pe credite fără costuri ascunse.",
-      "ogTitle": "Prețuri Coasty — Planuri Agent AI",
-      "ogDescription": "Angajat AI de la $20/lună. Înlocuiți asistenții virtuali costisitori cu AI autonom. Plan gratuit disponibil."
+      "title": "Prețuri — $19/mo Starter sau $249/mo Nelimitat (Cel mai ieftin de pe piață)",
+      "description": "Prețurile Coasty: Starter $19/mo (200 credite) sau Nelimitat $249/mo (cel mai ieftin plan cu tarif fix pentru folosirea nelimitată a computerului de pe piață — mai ieftin decât Devin Team $500+ACU, Genspark Pro $249 cu limită de credite și Manus Extended $200 cu limită). Înlocuiește asistenți virtuali umani de peste $3.000/mo. Fără taxe ascunse.",
+      "ogTitle": "Prețuri Coasty — $19/mo Starter, $249/mo Nelimitat",
+      "ogDescription": "Tarif fix $249/mo Nelimitat — cel mai ieftin plan de folosire nelimitată a computerului de pe piață. Sau $19/mo Starter pentru persoane fizice. Economisește $36.000/an față de asistenții umani."
     },
     "faq": {
       "q1": "Ce este Coasty?",
@@ -2292,7 +2384,7 @@
       "q2": "Cum se compară Coasty cu Anthropic Computer Use?",
       "a2": "În timp ce Anthropic Computer Use oferă un API brut pentru controlul computerului, Coasty este o platformă gata de producție cu infrastructură VM gestionată, rezolvare CAPTCHA integrată, aplicație desktop pentru Mac și Windows, suport multi-model și cel mai mare scor în benchmark-ul OSWorld (82%). Coasty oferă soluția completă — nu doar API-ul.",
       "q3": "Cât costă Coasty?",
-      "a3": "Coasty începe de la $20/lună cu planul Starter și un plan gratuit este disponibil. Aceasta se compară cu peste $3.000/lună pentru un asistent virtual uman. Coasty lucrează 24/7 fără pauze, fără instruire și cu scalabilitate instantanee.",
+      "a3": "Coasty are două planuri active: Starter la $19/mo (200 de credite, 1 mașină, ideal pentru persoane fizice) și Nelimitat la $249/mo fără limite de credite. Planul Nelimitat de $249 este cel mai ieftin plan disponibil cu tarif fix pentru folosirea nelimitată a computerului — mai ieftin decât Devin Team ($500/mo + suprataxă ACU), OpenAI Operator ChatGPT Pro ($200/mo cu limită de cereri), Genspark Pro ($249.99 cu limită de 125k credite) și Manus Extended ($200 cu limită de 40k credite). Ambele înlocuiesc un asistent virtual uman de peste $3.000/mo; Nelimitat economisește peste $33.000/an față de un asistent uman, ceea ce înseamnă o reducere de cost de 92%.",
       "q4": "Este Coasty sigur de utilizat?",
       "a4": "Da. Fiecare sesiune Coasty rulează în propria mașină virtuală izolată și sandboxată. Datele dumneavoastră rămân în siguranță, mașina dumneavoastră rămâne neatinsă și nimic nu se scurge între sesiuni. Aceasta este izolare reală la nivel de VM, nu doar containere într-un pool partajat.",
       "q5": "Ce este benchmark-ul OSWorld?",
@@ -2309,11 +2401,11 @@
       "a10": "Da. Coasty are un pipeline integrat de rezolvare a CAPTCHA, așa că nu se blochează cum fac agenții AI concurenți. Acest lucru este esențial pentru automatizarea din lumea reală, unde CAPTCHA sunt frecvente pe site-uri web."
     },
     "structuredData": {
-      "appDescription": "Agentul AI #1 care folosește computerul. Coasty controlează un desktop complet ca un om — deschide browsere, dă click, tastează, completează formulare, trimite e-mailuri și gestionează foi de calcul autonom. 82% în benchmark-ul OSWorld. Izolare reală la nivel de VM. Rezolvare CAPTCHA integrată. De la $20/lună.",
-      "orgDescription": "Coasty construiește agentul AI #1 care folosește computerul. Platforma noastră oferă control autonom al desktopului, automatizare browser și orchestrare multi-agent cu izolare reală la nivel de VM.",
-      "productDescription": "Agent AI care folosește computerul și controlează un desktop ca un om. #1 în benchmark-ul OSWorld (82%). Automatizare autonomă a browserului, control desktop, trimitere e-mailuri, completare formulare și gestionare foi de calcul cu izolare reală la nivel de VM.",
-      "websiteDescription": "Platforma #1 de agent AI care folosește computerul. 82% benchmark OSWorld. Automatizare autonomă browser, desktop și terminal cu izolare VM. De la $20/lună.",
-      "softwareDescription": "Agent AI care folosește computerul și controlează un desktop complet ca un om. #1 în benchmark-ul OSWorld cu o rată de finalizare de 82% în 369 de sarcini reale. Automatizare autonomă a browserului, control desktop, operațiuni terminal, trimitere e-mailuri, completare formulare și gestionare foi de calcul.",
+      "appDescription": "Agentul AI #1 care folosește computerul și cel mai ieftin plan Nelimitat cu tarif fix pentru folosirea computerului de pe piață, la $249/mo. Coasty controlează un desktop complet ca un om — deschide browsere, dă click, tastează, completează formulare, trimite e-mailuri și gestionează foi de calcul autonom. 82% în benchmark-ul OSWorld pe 369 de sarcini reale. Izolare reală la nivel de VM per sesiune. Rezolvare CAPTCHA integrată. Planuri: $19/mo Starter sau $249/mo Nelimitat.",
+      "orgDescription": "Coasty construiește agentul AI #1 care folosește computerul (82% OSWorld) și lansează singurul plan Nelimitat cu tarif fix pentru folosirea computerului la $249/mo — mai ieftin decât Devin Team, OpenAI Operator și concurenții cu limită de credite din aceeași gamă de preț. Platforma noastră oferă control autonom al desktopului, automatizare browser și orchestrare multi-agent cu izolare reală la nivel de VM.",
+      "productDescription": "Agent AI care folosește computerul și controlează un desktop ca un om. #1 în benchmark-ul OSWorld (82%). Planul Nelimitat de $249/mo este cel mai ieftin plan disponibil cu tarif fix pentru folosirea nelimitată a computerului. Automatizare autonomă a browserului, control desktop, trimitere e-mailuri, completare formulare și gestionare foi de calcul cu izolare reală la nivel de VM.",
+      "websiteDescription": "Platforma #1 de agent AI care folosește computerul — 82% benchmark OSWorld și cel mai ieftin plan Nelimitat cu tarif fix la $249/mo. Automatizare autonomă browser, desktop și terminal cu izolare VM. De la $19/mo cu Starter sau $249/mo Nelimitat.",
+      "softwareDescription": "Agent AI care folosește computerul și controlează un desktop complet ca un om. #1 în benchmark-ul OSWorld cu o rată de finalizare de 82% în 369 de sarcini reale. Planul Nelimitat de $249/mo este cel mai ieftin plan cu tarif fix pentru folosirea nelimitată a computerului de pe piață. Automatizare autonomă a browserului, control desktop, operațiuni terminal, trimitere e-mailuri, completare formulare și gestionare foi de calcul.",
       "breadcrumbs": {
         "home": "Acasă",
         "caseStudies": "Studii de caz agent AI",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 — Pagina nu a fost gasita",
-      "description": "Ne pare rau, aceasta pagina nu exista."
+      "description": "Ne pare rau, aceasta pagina nu exista.",
+      "metaTitle": "404 · Pagina nu a fost găsită",
+      "metaDescription": "Am trimis cel mai bun agent AI. S-a întors cu mâna goală. Înapoi la Coasty, agentul AI #1 pentru automatizarea desktopului și a browserului.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "scanare: tot internetul",
+        "step2": "scanare: fiecare tab deschis",
+        "step3": "scanare: sub canapea",
+        "result": "verdict: pagina nu există"
+      },
+      "ok": "OK",
+      "fail": "EȘEC",
+      "primaryCta": "Înapoi la pagina principală",
+      "secondaryCta": "Angajează un agent AI",
+      "navLabel": "Pagini sugerate",
+      "links": {
+        "home": "Acasă",
+        "computerUse": "Utilizare computer",
+        "pricing": "Prețuri",
+        "download": "Descarcă",
+        "blog": "Blog",
+        "guide": "Ghid"
+      }
     },
     "error": {
       "title": "Ceva nu a mers bine",
@@ -2457,7 +2571,7 @@
       "teamCreatedPartial": "Echipă creată cu {count} angajați ({failedCount} eșuați: {names})",
       "teamCreated": "Echipa {name} creată cu {count} angajați"
     },
-    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "credentialInstructions": "[CREDENTIALE DISPONIBILE]\nUrmatoarele credentiale de serviciu au fost configurate si sunt disponibile pentru utilizare:\n{list}\nFoloseste aceste credentiale atunci cand trebuie sa te autentifici la aceste servicii pentru a-ti finaliza sarcinile.",
     "templates": {
       "contentOps": {
         "name": "Operațiuni de conținut",
@@ -2675,130 +2789,130 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Titlul camerei este obligatoriu",
+      "taskCreated": "Sarcina creata cu succes",
+      "taskFailed": "Nu s-a putut crea sarcina",
+      "assignTask": "Atribuie o sarcina noua",
+      "assignTaskDesc": "Porneste o sarcina noua cu asistentul tau AI.",
+      "taskName": "Numele sarcinii",
+      "taskNamePlaceholder": "Introdu numele sarcinii",
+      "cancel": "Anuleaza",
+      "creating": "Se creeaza...",
+      "createTask": "Creeaza sarcina"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Te rugam sa introduci un cod de invitatie",
+      "joinSuccess": "Te-ai alaturat proiectului cu succes!",
+      "joinFailed": "Nu s-a putut adera la proiect",
+      "invalidCode": "Cod de invitatie invalid sau proiect inexistent",
+      "title": "Adera la proiect",
+      "description": "Introdu un cod de invitatie pentru a te alatura unui proiect existent.",
+      "inviteCode": "Cod de invitatie",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Cere liderului de echipa codul de invitatie al proiectului",
+      "cancel": "Anuleaza",
+      "joining": "Se conecteaza...",
+      "joinButton": "Adera la proiect"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
+      "title": "Participantii camerei",
+      "copyCode": "Copiaza codul",
+      "copyLink": "Copiaza linkul",
+      "codeCopied": "Cod de invitatie copiat!",
+      "codeFailed": "Nu s-a putut copia codul de invitatie",
+      "linkCopied": "Link de invitatie copiat!",
+      "linkFailed": "Nu s-a putut copia linkul de invitatie",
       "online": "Online",
       "offline": "Offline",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Titlul camerei este obligatoriu",
+      "created": "Proiect creat cu succes!",
+      "failed": "Nu s-a putut crea camera",
+      "title": "Creeaza un proiect nou",
+      "description": "Porneste un proiect nou pentru a construi produsul tau cu AI.",
+      "projectName": "Numele proiectului",
+      "projectNamePlaceholder": "Introdu numele proiectului",
+      "teamSize": "Marimea echipei",
+      "cancel": "Anuleaza",
+      "creating": "Se creeaza...",
+      "createButton": "Creeaza proiect"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Noutati",
+    "title": "Noutati in Coasty",
+    "updateCount": "{count} actualizari",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Actualizare",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Ramai aproape pentru mai multe noutati",
+    "tagline": "Angajatul tau AI care colaboreaza cu toata lumea"
   },
   "feedbackForm": {
     "ratings": {
       "bad": "Bad",
       "okay": "Okay",
       "good": "Good",
-      "amazing": "Amazing"
+      "amazing": "Excelent"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Te rugam sa te autentifici pentru a trimite feedback",
+    "alreadySubmitted": "Ai trimis deja feedback pentru aceasta",
+    "thankYou": "Multumim pentru feedback-ul tau!",
+    "creditsEarned": "+{credits} credite castigate",
+    "helpImprove": "Parerea ta ne ajuta sa imbunatatim Coasty.",
+    "howsExperience": "Cum este experienta ta?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Spune-ne mai mult",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Ce functioneaza bine? Ce ar putea fi mai bun?",
+    "cancel": "Anuleaza",
+    "sending": "Se trimite...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Te rugam sa selectezi o statie de lucru",
+    "enterCron": "Te rugam sa introduci o expresie cron",
+    "hireFailed": "Nu s-a putut angaja angajatul",
+    "removeFailed": "Nu s-a putut elimina angajatul",
+    "editEmployee": "Editeaza angajatul",
+    "configureEmployee": "Configureaza angajatul",
+    "editDescription": "Actualizeaza programul, statia de lucru sau instructiunile",
+    "configureDescription": "Configureaza un angajat AI pentru aceasta conversatie",
+    "loading": "Se incarca configurarea...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Numele angajatului"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Sterge conversatia?",
+    "description": "Aceasta va sterge \"{chatTitle}\"",
+    "cancel": "Anuleaza",
+    "delete": "Sterge"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Plata efectuata cu succes! Creditele tale au fost adaugate.",
+    "canceled": "Plata a fost anulata. Nu s-au efectuat debite."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Setari generale",
     "generalDescription": "Configurează setările de bază ale computerului",
     "displayName": "Nume afișat",
     "defaultName": "Computerul meu",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Salveaza modificarile",
+    "security": "Securitate",
+    "securityDescription": "Setari de securitate si acces",
+    "sshAuth": "Autentificare SSH",
+    "username": "Nume utilizator:",
+    "keyPair": "Pereche de chei:",
+    "sshKeyDownloaded": "Cheia SSH a fost descarcata",
+    "sshKeyFailed": "Nu s-a putut descarca cheia SSH",
+    "downloadSshKey": "Descarca cheia SSH",
+    "vncPassword": "Parola VNC",
     "vncPasswordHint": "Această parolă este necesară pentru a te conecta la computer"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Salut, am folosit Coasty si e destul de tare. E un AI care chiar poate folosi un computer pentru tine. Cum ar fi navigarea, click-urile, tastarea, tot ce trebuie. Incearca-l cu linkul meu si primim amandoi credite gratuite!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Arunca o privire peste acest instrument AI",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "chiar acum",
+      "minutesAgo": "acum {minutes}m",
+      "hoursAgo": "acum {hours}h",
+      "daysAgo": "acum {days}z",
+      "monthsAgo": "acum {months}l"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Link de recomandare copiat!",
+    "headline": "Prietenii buni isi trimit meme-uri. Prietenii grozavi isi trimit agenti AI.",
+    "subheadline": "Primiti amandoi {credits} credite gratuite cand se inscrie prietenul tau.",
+    "yourLink": "Linkul tau de recomandare",
+    "shareDirectly": "Distribuie direct",
+    "yourReferrals": "Recomandarile tale",
+    "referralCount": "{count} recomandare(e)",
+    "creditsEarned": "{credits} credite castigate",
+    "invitedYou": "Te-a invitat",
+    "joinedViaLink": "S-a inscris prin linkul tau",
+    "noInvites": "Niciun utilizator invitat pana acum",
+    "noInvitesHint": "Distribuie linkul tau si primiti amandoi 50 de credite"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Fa public",
+    "title": "Conversatia ta este acum publica!",
+    "description": "Oricine are linkul poate vedea acum aceasta conversatie si poate aparea in feed-uri ale comunitatii, pagini recomandate sau rezultate de cautare in viitor.",
+    "viewPage": "Vezi pagina",
+    "shareOn": "Distribuie pe"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "Panou de control AI",
+    "subtitle": "Descrie ce vrei sa faca AI-ul",
+    "quickCommands": "Comenzi rapide",
+    "noActions": "Nicio actiune efectuata inca",
+    "success": "Succes",
+    "failed": "Esuat",
+    "placeholder": "Spune-i AI-ului ce sa faca... (Ctrl+Enter pentru trimitere)",
+    "executing": "Se executa...",
+    "executeCommand": "Executa comanda"
   },
   "discover": {
     "badge": "Comunitate",
@@ -2859,5 +2973,190 @@
     "watchSession": "Urmărește sesiunea",
     "steps": "{count} pași",
     "tryCoasty": "Încearcă Coasty"
+  },
+  "memory": {
+    "sidebarLabel": "Memorie",
+    "sidebarDescription": "Context aplicat la fiecare execuție a agentului",
+    "dialog": {
+      "title": "Memorie",
+      "description": "O notă scurtă pe care Coasty o aplică ori de câte ori lucrează pentru tine.",
+      "openFull": "Deschide complet",
+      "visualMemoryLabel": "Memorie",
+      "visualSynced": "Sincronizat",
+      "visualContextChat": "Chat",
+      "visualContextSchedules": "Programări",
+      "visualContextSwarm": "Roi"
+    },
+    "section": {
+      "title": "Memorie",
+      "tag": "opțional · personal",
+      "description": "O notă scurtă despre tine care însoțește fiecare execuție a agentului — chat, sarcini programate, mașini în roi, agenți delegați."
+    },
+    "presetsLabel": "Încearcă",
+    "presets": {
+      "useFirstName": "Folosește prenumele",
+      "useFirstNameSentence": "Adresează-mi-te pe prenume.",
+      "beTerse": "Fii concis",
+      "beTerseSentence": "Preferă răspunsuri concise și directe. Fără umplutură.",
+      "imDeveloper": "Sunt dezvoltator",
+      "imDeveloperSentence": "Sunt inginer software; mă descurc cu codul.",
+      "noEmojis": "Fără emoji",
+      "noEmojisSentence": "Evită emoji-urile în răspunsuri.",
+      "metricUnits": "Unități metrice",
+      "metricUnitsSentence": "Folosește unități metrice (metri, kilograme, °C).",
+      "citeSources": "Citează sursele",
+      "citeSourcesSentence": "Citează sursele când faci afirmații factuale."
+    },
+    "placeholder": "Exemplu:\nAdresează-mi-te pe prenume.\nPreferă răspunsuri concise.\nLucrez cu TypeScript și Python.\nNu șterge fișiere fără confirmare.",
+    "loading": "Se încarcă…",
+    "saving": "Se salvează…",
+    "saved": "Salvat",
+    "unsavedChanges": "Modificări nesalvate",
+    "empty": "Gol",
+    "savedRelative": "Salvat · {time}",
+    "errorLoad": "Nu s-a putut încărca memoria ta.",
+    "errorSave": "Nu s-a putut salva memoria ta.",
+    "willBeShortened": "va fi scurtat",
+    "clear": "Șterge",
+    "footerNote": "Coasty va lua în considerare aceste preferințe când lucrează pentru tine.",
+    "time": {
+      "justNow": "chiar acum",
+      "secondsAgo": "acum {n} s",
+      "minutesAgo": "acum {n} min",
+      "hoursAgo": "acum {n} h",
+      "daysAgo": "acum {n} z"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Setări",
+    "navGroups": {
+      "settings": "Setări",
+      "developer": "Dezvoltator",
+      "more": "Mai multe",
+      "resources": "Resurse"
+    },
+    "sections": {
+      "account": {
+        "label": "General",
+        "description": "Profil și cont"
+      },
+      "appearance": {
+        "label": "Aspect",
+        "description": "Temă, limbă și fundal"
+      },
+      "billing": {
+        "label": "Facturare",
+        "description": "Planuri și credite"
+      },
+      "publicChats": {
+        "label": "Discuții publice",
+        "description": "Gestionează discuțiile partajate prin link public"
+      },
+      "privacy": {
+        "label": "Confidențialitate",
+        "description": "Securitate și confidențialitatea datelor"
+      },
+      "notifications": {
+        "label": "Notificări",
+        "description": "Preferințe pentru notificări"
+      },
+      "apiKeys": {
+        "label": "Chei API",
+        "description": "Gestionează cheile tale API"
+      },
+      "data": {
+        "label": "Date",
+        "description": "Exportă și gestionează datele tale"
+      },
+      "feedback": {
+        "label": "Feedback",
+        "description": "Trimite-ne feedback-ul tău"
+      },
+      "about": {
+        "label": "Despre",
+        "description": "Despre Coasty"
+      },
+      "social": {
+        "label": "Conectează-te",
+        "description": "Linkuri sociale"
+      },
+      "guide": {
+        "label": "Ghid",
+        "description": "Învață cum să folosești Coasty"
+      },
+      "referral": {
+        "label": "Recomandare",
+        "description": "Invită prieteni și câștigă credite"
+      }
+    },
+    "appearance": {
+      "theme": "Temă",
+      "language": "Limbă",
+      "background": "Fundal",
+      "personalization": "Personalizare",
+      "intro": {
+        "title": "Intro cinematic",
+        "description": "Afișează intro-ul animat la vizitarea paginii principale"
+      },
+      "interaction": {
+        "title": "Invocări de instrumente",
+        "description": "Afișează detaliile execuției instrumentelor în conversații"
+      }
+    },
+    "comingSoon": {
+      "badge": "Curând",
+      "placeholder": "Această secțiune va veni într-o actualizare viitoare."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Arată-mi ce este posibil…",
+    "tasks": [
+      "Cercetează concurenții mei",
+      "Completează cereri de angajare",
+      "Rezervă un zbor spre Tokyo",
+      "Urmărește uptime-ul site-ului meu",
+      "Programează postări pe rețele sociale",
+      "Analizează tendințe trimestriale"
+    ],
+    "dontShowAgain": "Nu mai afișa",
+    "skip": "Sări peste",
+    "tagline": "Fă orice, exact ca un om cu un computer"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Computerele tale",
+      "description": "Siliciu la dispoziție. Pornim flota ta."
+    },
+    "swarms": {
+      "title": "Inteligență de roi",
+      "description": "Multe minți, o misiune. Ne adunăm agenții."
+    },
+    "developers": {
+      "title": "API pentru dezvoltatori",
+      "description": "Se încarcă tabloul tău de bord."
+    },
+    "secrets": {
+      "title": "Acreditări",
+      "description": "Secretele tale sunt în siguranță. Deblocăm seiful."
+    },
+    "schedules": {
+      "title": "Programări",
+      "description": "Mereu la timp. Sincronizăm automatizările tale."
+    },
+    "history": {
+      "title": "Istoricul tău",
+      "description": "O înregistrare tăcută a fiecărei conversații, sarcini și idei pe care le-ai explorat."
+    },
+    "referral": {
+      "title": "Recomandări",
+      "description": "Recomandă Coasty. Câștigați împreună."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Datele tale, controlul tău",
+    "heroDescription": "Stocăm doar ce este necesar pentru a rula sesiunile tale. Tot traficul este criptat în tranzit, iar tu poți extinde criptarea în repaus la categoriile de mai jos. Datele tale nu sunt folosite niciodată pentru a antrena modele de IA.",
+    "trustTransit": "TLS 1.3 în tranzit",
+    "trustAtRest": "AES-256-GCM în repaus",
+    "trustNoTraining": "Fără antrenament pe datele tale"
   }
 }

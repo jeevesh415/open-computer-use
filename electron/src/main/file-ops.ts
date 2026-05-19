@@ -2,16 +2,22 @@ import * as fs from 'fs/promises'
 import * as path from 'path'
 import { validateFilePath } from './security'
 
+// reports truncated/size so callers can detect partial reads (10KB cap)
 export async function readFile(params: { path: string; encoding?: string }): Promise<any> {
   try {
     const check = validateFilePath(params.path, 'read')
     if (!check.allowed) return { success: false, error: check.reason }
 
-    const content = await fs.readFile(params.path, { encoding: (params.encoding || 'utf-8') as BufferEncoding })
+    const raw = String(
+      await fs.readFile(params.path, { encoding: (params.encoding || 'utf-8') as BufferEncoding }),
+    )
+    const truncated = raw.length > 10000
     return {
       success: true,
-      content: String(content).slice(0, 10000),
+      content: raw.slice(0, 10000),
       path: params.path,
+      truncated,
+      size: raw.length,
     }
   } catch (error: any) {
     return { success: false, error: error.message }
@@ -32,10 +38,12 @@ export async function writeFile(params: { path: string; content: string }): Prom
   }
 }
 
+// supports global replace via `all`; reports replacements count
 export async function editFile(params: {
   path: string
   old_text: string
   new_text: string
+  all?: boolean
 }): Promise<any> {
   try {
     const check = validateFilePath(params.path, 'write')
@@ -45,19 +53,32 @@ export async function editFile(params: {
     if (!content.includes(params.old_text)) {
       return { success: false, error: 'Old text not found in file' }
     }
-    const newContent = content.replace(params.old_text, params.new_text)
+
+    let newContent: string
+    let replacements: number
+    if (params.all) {
+      // String#replaceAll: literal-string replace, no regex semantics — Electron 40 (Node ≥18) supports this.
+      newContent = content.replaceAll(params.old_text, params.new_text)
+      replacements = content.split(params.old_text).length - 1
+    } else {
+      newContent = content.replace(params.old_text, params.new_text)
+      replacements = 1
+    }
+
     await fs.writeFile(params.path, newContent, 'utf-8')
-    return { success: true, path: params.path, message: 'File edited' }
+    return { success: true, path: params.path, message: 'File edited', replacements }
   } catch (error: any) {
     return { success: false, error: error.message }
   }
 }
 
+// auto-creates parent dirs to mirror writeFile semantics
 export async function appendFile(params: { path: string; content: string }): Promise<any> {
   try {
     const check = validateFilePath(params.path, 'write')
     if (!check.allowed) return { success: false, error: check.reason }
 
+    await fs.mkdir(path.dirname(params.path), { recursive: true })
     await fs.appendFile(params.path, params.content, 'utf-8')
     return { success: true, path: params.path, message: 'Content appended' }
   } catch (error: any) {
@@ -77,8 +98,12 @@ export async function deleteFile(params: { path: string }): Promise<any> {
   }
 }
 
+// validates path against credential allowlist before probing existence
 export async function fileExists(params: { path: string }): Promise<any> {
   try {
+    const check = validateFilePath(params.path, 'read')
+    if (!check.allowed) return { success: false, error: check.reason, exists: false }
+
     await fs.access(params.path)
     const stat = await fs.stat(params.path)
     return {

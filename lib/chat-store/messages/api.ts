@@ -52,19 +52,29 @@ export async function getMessagesFromDb(
     }
   }
 
-  // Standard fetch for non-collaborative rooms or fallback
+  // Standard fetch for non-collaborative rooms. Goes through the Next.js
+  // server route at /api/chats/:chatId/messages instead of directly hitting
+  // Supabase, so that:
+  //   - `frontendScreenshot` values encrypted under users.encryption_prefs.messages
+  //     can be decrypted SERVER-SIDE (the ENCRYPTION_KEY must never ship to
+  //     the browser — that's a critical security boundary).
+  //   - Future read-time transformations (redaction, signed URLs, etc.) have a
+  //     single chokepoint.
+  // RLS still applies because the server route uses the user's session.
   try {
-    const { data: messages, error } = await supabase
-      .from("messages")
-      .select("*")
-      .eq("chat_id", chatId)
-      .order("created_at", { ascending: true })
-
-    if (error) {
-      console.error("Failed to fetch messages from database:", error)
+    const response = await fetch(`/api/chats/${chatId}/messages`, {
+      cache: "no-store",
+      credentials: "include",
+    })
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch messages from /api/chats/${chatId}/messages:`,
+        response.status
+      )
       const cached = await getCachedMessages(chatId)
       return cached
     }
+    const { messages } = (await response.json()) as { messages: any[] }
 
     const formattedMessages = messages.map((message: any) => ({
       id: String(message.id),
@@ -77,7 +87,8 @@ export async function getMessagesFromDb(
       model: message.model,
     }))
 
-    // Update cache with latest messages
+    // Update cache with latest messages (now containing decrypted screenshots,
+    // so the cache reflects what the renderer expects without a re-fetch).
     await cacheMessages(chatId, formattedMessages)
     return formattedMessages
   } catch (error) {

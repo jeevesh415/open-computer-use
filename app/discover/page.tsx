@@ -16,7 +16,6 @@ import {
 import { cn } from "@/lib/utils"
 import { LandingHeader } from "@/app/components/landing/landing-header"
 import { LandingFooter } from "@/app/components/landing/landing-footer"
-import { GuideLines } from "@/app/components/landing/guide-lines"
 import { PostThumbnail } from "@/components/blog/post-thumbnail"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -290,7 +289,6 @@ export default function DiscoverPage() {
 
   return (
     <div className="min-h-screen bg-background relative">
-      <GuideLines />
 
       <LandingHeader />
 
@@ -368,14 +366,17 @@ export default function DiscoverPage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {filtered.map((chat, i) => (
-                <motion.div
+                /* Pure-CSS entrance — see globals.css `.public-card-enter`.
+                   <motion.div> wrapping the inner <button> caused a mobile
+                   double-tap bug (motion's gesture system swallows the
+                   first pointerdown to disambiguate tap vs drag). The
+                   delay is capped at 400ms so late items don't lag in. */
+                <div
                   key={chat.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.45,
-                    delay: Math.min(i * 0.04, 0.4),
-                    ease: [0.22, 1, 0.36, 1],
+                  className="public-card-enter"
+                  style={{
+                    ["--card-i" as string]: Math.min(i, 10),
+                    ["--card-stagger-ms" as string]: "40ms",
                   }}
                 >
                   <button
@@ -419,7 +420,7 @@ export default function DiscoverPage() {
                       </div>
                     </div>
                   </button>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}

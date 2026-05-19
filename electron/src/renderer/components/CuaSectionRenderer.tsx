@@ -48,19 +48,19 @@ function IconCode({ className }: { className?: string }) {
   )
 }
 
-function IconBrain({ className }: { className?: string }) {
+function IconCopy({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9.5 2A5.5 5.5 0 0 0 4 7.5c0 1.5.6 2.9 1.6 3.9L12 18l6.4-6.6A5.5 5.5 0 0 0 14.5 2a5.5 5.5 0 0 0-5 3.2" />
-      <path d="M12 18v4" />
+      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
     </svg>
   )
 }
 
-function IconLightning({ className }: { className?: string }) {
+function IconCheck({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
     </svg>
   )
 }
@@ -319,21 +319,41 @@ function ScreenshotLightbox({
 function ScreenshotDot({ src }: { src: string }) {
   const [lightboxOpen, setLightboxOpen] = useState(false)
 
+  // Micro-interactions:
+  //   • Rest        — tilted -7° to match TerminalDot's character.
+  //   • Hover       — straightens to 0°, scales up 12%, lifts 1px, and
+  //                   the shadow + ring intensify. Reads as "the
+  //                   screenshot is righting itself for inspection."
+  //   • Press       — quick scale-down + slight counter-tilt for a
+  //                   tactile click response.
+  // Easing uses a slight overshoot bezier (1.56 peak) so the spring-y
+  // feel matches the web version's Framer Motion springs.
   return (
     <>
-      <div
-        className="absolute -left-[10px] top-[3px] z-[2] cursor-pointer cua-thumb"
+      <button
+        type="button"
         onClick={() => setLightboxOpen(true)}
+        aria-label="View screenshot"
+        className={cn(
+          // 30×19 landscape — smaller than the web version because the
+          // Electron 400×520 panel needs every pixel of horizontal room
+          // for content. Aspect still ~16:10 so the thumbnail reads as
+          // a tiny screen. Position -left-[12px] keeps the dot's center
+          // on the timeline rail at x=3 (30/2 - 3 = 12).
+          'absolute -left-[12px] top-[3px] z-[2] block w-[30px] h-[19px] cursor-pointer overflow-hidden rounded-[4px]',
+          'ring-1 ring-white/[0.08]',
+          'shadow-[0_1px_2px_rgba(0,0,0,0.18),0_3px_6px_rgba(0,0,0,0.08)]',
+          '-rotate-[7deg]',
+          'transition-[transform,box-shadow,outline-color] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]',
+          'hover:rotate-0 hover:scale-[1.15] hover:-translate-y-[1px]',
+          'hover:ring-white/[0.16]',
+          'hover:shadow-[0_4px_10px_rgba(0,0,0,0.30),0_10px_28px_rgba(0,0,0,0.18)]',
+          'active:scale-[0.95] active:-rotate-[3deg] active:duration-100',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40',
+        )}
       >
-        <div className="w-[26px] h-[26px] rounded-[5px] overflow-hidden ring-1 ring-white/[0.08] shadow-sm">
-          <img src={src} alt="" className="w-full h-full object-cover" draggable={false} />
-        </div>
-        <style>{`
-          .cua-thumb { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
-          .cua-thumb:hover { transform: scale(1.18); }
-          .cua-thumb:active { transform: scale(0.95); }
-        `}</style>
-      </div>
+        <img src={src} alt="" className="w-full h-full object-cover" draggable={false} />
+      </button>
 
       {lightboxOpen && (
         <ScreenshotLightbox src={src} onClose={() => setLightboxOpen(false)} />
@@ -350,6 +370,66 @@ function PlainDot({ status: _status }: { status: 'success' | 'error' | 'pending'
 }
 
 // ── Primitives ──
+
+function stripAgentMarkup(raw: string): string {
+  // The code agent wraps each command/answer in <answer>...</answer>
+  // tags and wraps stdout in ``` fences. Strip both so the user sees
+  // clean text — these are internal markers, not user-facing markup.
+  // Used by every code-agent-* section type (thought, result, summary)
+  // since the agent can leak the tags into any of them.
+  return raw
+    // Strip <answer> / </answer> tags wherever they appear (inline OR
+    // on their own line). The backend produces both forms.
+    .replace(/<\/?answer\b[^>]*>/gi, '')
+    // Strip inline triple-backtick fences with an optional language tag
+    // (e.g. ```bash ...```) wherever they appear.
+    .replace(/```\w*\s*/g, '')
+    .replace(/\s*```/g, '')
+    // Strip lone fence lines that survived (``` on its own line).
+    .split('\n')
+    .filter((line) => !/^\s*```\s*\w*\s*$/.test(line))
+    .join('\n')
+    // Collapse runs of 3+ blank lines down to one for tidiness.
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+function CopyButton({
+  text,
+  className,
+}: {
+  text: string
+  className?: string
+}) {
+  const [copied, setCopied] = useState(false)
+
+  const onClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (typeof navigator === 'undefined' || !navigator.clipboard) return
+    void navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1500)
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={copied ? 'Copied' : 'Copy result'}
+      title={copied ? 'Copied' : 'Copy'}
+      className={cn(
+        '-mr-1 inline-flex items-center justify-center w-6 h-6 rounded-md text-neutral-400/45 transition-all duration-150 hover:bg-white/[0.06] hover:text-neutral-100 active:scale-95',
+        className
+      )}
+    >
+      {copied ? (
+        <IconCheck className="w-3 h-3 text-emerald-400" />
+      ) : (
+        <IconCopy className="w-3 h-3" />
+      )}
+    </button>
+  )
+}
 
 function DetailRow({
   icon: Icon,
@@ -449,7 +529,10 @@ function StepCard({
   const agentAction = step.code ? extractAgentAction(step.code) : null
 
   return (
-    <div className={cn('group/step relative pb-1', hasScreenshot ? 'pl-8' : 'pl-6')}>
+    // Bottom padding intentionally omitted — the parent timeline uses a
+    // uniform `gap-y` to space adjacent items, so individual cards stay
+    // tight internally and breathing room lives at the seam between them.
+    <div className={cn('group/step relative', hasScreenshot ? 'pl-8' : 'pl-6')}>
       {hasScreenshot ? (
         <ScreenshotDot src={screenshot!} />
       ) : (
@@ -458,7 +541,7 @@ function StepCard({
 
       {/* Action — the natural language line (truncated for readability) */}
       {actionText && (
-        <p className="text-[15px] leading-relaxed text-neutral-100/90">
+        <p className="text-[15px] leading-relaxed text-neutral-100/90 break-words overflow-hidden">
           {truncateText(actionText, 200)}
         </p>
       )}
@@ -473,8 +556,8 @@ function StepCard({
             </span>
           </div>
           {agentAction.detail && (
-            <div className="px-3 pb-2.5 -mt-0.5">
-              <p className="text-[12.5px] leading-relaxed text-neutral-300/50">
+            <div className="px-3 pb-2.5 -mt-0.5 overflow-hidden">
+              <p className="text-[12.5px] leading-relaxed text-neutral-300/50 break-words">
                 {truncateText(agentAction.detail, 300)}
               </p>
             </div>
@@ -510,6 +593,32 @@ function StepCard({
           </DetailRow>
         </div>
       )}
+    </div>
+  )
+}
+
+// ── Timeline markers for non-step items ──
+
+function TerminalDot() {
+  // The code-step equivalent of ScreenshotDot. A small solid-black
+  // rectangle — slightly tilted (-7deg) for character — with a mono
+  // `>_` prompt in white. Minimal: no title bar, no traffic lights —
+  // just the silhouette of a terminal screen and a prompt cursor.
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        'absolute -left-[13px] top-[2px]',
+        'flex h-[22px] w-[32px] items-center justify-center',
+        'rounded-[6px] -rotate-[7deg]',
+        'bg-neutral-950',
+        'ring-1 ring-white/[0.08]',
+        'shadow-[0_2px_6px_rgba(0,0,0,0.30),0_5px_14px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.08)]',
+      )}
+    >
+      <span className="font-mono text-[10px] font-bold leading-none tracking-tight text-neutral-100/90">
+        {">_"}
+      </span>
     </div>
   )
 }
@@ -558,23 +667,64 @@ function ItemRenderer({
     }
 
     case 'code-agent-thought': {
-      const label = 'Thinking'
+      // The agent's mid-execution reasoning is virtually always a code
+      // command (with the agent's narrative occasionally mixed in).
+      // Rendering through Markdown was the source of inconsistent
+      // formatting: Python comments (`# x`) became headings, `>` lines
+      // became blockquotes, indentation got collapsed in paragraphs,
+      // and stripped fence markers left some lines as plain prose and
+      // others as monospace. We bypass Markdown entirely and render
+      // the whole block as a single monospace <pre> so every line —
+      // code, narrative, comment — gets the same treatment.
+      const cleaned = truncateText(stripAgentMarkup(item.content), 3000)
+      if (!cleaned) return null
       return (
-        <div className="pl-6">
-          <DetailRow icon={IconBrain} label={label}>
-            <Markdown>{item.content}</Markdown>
-          </DetailRow>
-        </div>
+        <pre
+          className={cn(
+            'm-0 pl-6 py-1',
+            'font-mono text-[12.5px] leading-[1.65] tabular-nums text-neutral-100/85',
+            'whitespace-pre-wrap break-words',
+            'min-w-0 overflow-hidden',
+          )}
+        >
+          {cleaned}
+        </pre>
       )
     }
 
     case 'code-agent-result': {
-      const label = 'Result'
+      // Single-card view: a clean two-row card with a contextual header
+      // label + copy button on top and mono content below. The content
+      // is filtered by stripAgentMarkup which removes <answer>/</answer>
+      // tags and ``` fence markers so the user sees clean text. The
+      // card sits behind a TerminalDot timeline marker — the code-step
+      // equivalent of the ScreenshotDot used for visual actions.
+      const cleaned = stripAgentMarkup(item.content)
+      if (!cleaned) return null
+      const hasError = /\bError:\s/.test(cleaned)
       return (
-        <div className="pl-6">
-          <DetailRow icon={IconLightning} label={label} defaultOpen>
-            <Markdown>{item.content}</Markdown>
-          </DetailRow>
+        <div className="relative pl-8 py-1.5">
+          <TerminalDot />
+          {/* Result card — shadcn-style minimal: hairline border on a
+              subtle muted surface, no title bar, mono body. Copy button
+              floats in the top-right corner, muted at rest and full
+              brightness on hover. Errors are signaled by red body text
+              only — no extra chrome. */}
+          <div className="group/result-card relative overflow-hidden rounded-lg border border-white/[0.07] bg-white/[0.02]">
+            <div className="absolute right-1.5 top-1.5 opacity-40 transition-opacity duration-150 group-hover/result-card:opacity-100">
+              <CopyButton text={cleaned} />
+            </div>
+            <pre
+              className={cn(
+                // pr-10 reserves room for the floating copy button so
+                // long unbreakable lines never slide under it.
+                'm-0 pl-4 pr-10 py-3 font-mono text-[12px] leading-[1.65] tabular-nums whitespace-pre-wrap break-words',
+                hasError ? 'text-red-400/85' : 'text-neutral-100/85'
+              )}
+            >
+              {cleaned}
+            </pre>
+          </div>
         </div>
       )
     }
@@ -589,14 +739,53 @@ function ItemRenderer({
         </div>
       )
 
-    case 'code-agent-summary':
+    case 'code-agent-summary': {
+      // The agent's end-of-execution recap. No card chrome, no sparkle
+      // icon, no decorative gradient — just a small muted label and
+      // clean prose. Copy button hovers in the top-right at low opacity
+      // until the group is hovered. stripAgentMarkup filters any
+      // <answer> tags / fences the agent leaks into the summary too.
+      // Cap at 5000 chars (very generous — most summaries fit easily).
+      const cleaned = truncateText(stripAgentMarkup(item.content), 5000)
+      if (!cleaned) return null
       return (
-        <div className="pl-6">
-          <DetailRow icon={IconTerminal} label="Summary" defaultOpen>
-            <Markdown>{item.content}</Markdown>
-          </DetailRow>
+        <div className="group/summary relative pl-6 py-2">
+          <div className="absolute right-1 top-2 opacity-40 transition-opacity duration-150 group-hover/summary:opacity-100">
+            <CopyButton text={cleaned} />
+          </div>
+          <div className="mb-2">
+            <span className="text-[11.5px] font-medium tracking-tight text-neutral-200/55">
+              Session Summary
+            </span>
+          </div>
+          <div
+            className={cn(
+              'text-[14px] leading-[1.65] text-neutral-100/85',
+              // Containment: long unbreakable strings wrap inside the
+              // bubble instead of pushing it wider.
+              'min-w-0 overflow-hidden break-words',
+              '[&>*:first-child]:mt-0 [&>*:last-child]:mb-0',
+              '[&_p]:my-2',
+              '[&_strong]:font-semibold [&_strong]:text-neutral-100',
+              '[&_em]:italic [&_em]:text-neutral-100/75',
+              '[&_ul]:my-2 [&_ul]:space-y-0.5 [&_ul]:pl-4',
+              '[&_ol]:my-2 [&_ol]:space-y-0.5 [&_ol]:pl-5',
+              '[&_li]:marker:text-neutral-400/40 [&_li]:leading-[1.55]',
+              '[&_h1]:mt-3 [&_h1]:mb-1.5 [&_h1]:text-[15px] [&_h1]:font-semibold [&_h1]:text-neutral-100',
+              '[&_h2]:mt-3 [&_h2]:mb-1.5 [&_h2]:text-[14.5px] [&_h2]:font-semibold [&_h2]:text-neutral-100',
+              '[&_h3]:mt-2.5 [&_h3]:mb-1 [&_h3]:text-[14px] [&_h3]:font-medium [&_h3]:text-neutral-100',
+              '[&_code]:rounded-md [&_code]:bg-white/[0.06] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[12px] [&_code]:text-neutral-100/90 [&_code]:before:content-none [&_code]:after:content-none [&_code]:break-words',
+              '[&_pre]:my-2 [&_pre]:rounded-lg [&_pre]:border [&_pre]:border-white/[0.06] [&_pre]:!bg-white/[0.03] [&_pre]:p-3',
+              '[&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-hidden',
+              '[&_a]:text-neutral-100 [&_a]:underline [&_a]:underline-offset-[3px] [&_a]:decoration-neutral-400/40 hover:[&_a]:decoration-neutral-100/60 [&_a]:break-all',
+              '[&_blockquote]:my-2 [&_blockquote]:border-l-2 [&_blockquote]:border-white/15 [&_blockquote]:pl-3 [&_blockquote]:text-neutral-100/70 [&_blockquote]:italic'
+            )}
+          >
+            <Markdown>{cleaned}</Markdown>
+          </div>
         </div>
       )
+    }
 
     case 'search-results': {
       const label = item.query ? `Search: ${item.query}` : 'Web search'
@@ -649,7 +838,15 @@ function ItemRenderer({
       const cleaned = stripAgentCode(item.content)
       if (!cleaned) return null
       return (
-        <div className="pl-6 py-0.5 text-[15px] leading-relaxed text-neutral-200/80">
+        <div
+          className={cn(
+            'pl-6 py-0.5 text-[15px] leading-relaxed text-neutral-200/80',
+            'min-w-0 overflow-hidden break-words',
+            '[&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-hidden',
+            '[&_code]:break-words',
+            '[&_a]:break-all',
+          )}
+        >
           <Markdown>{truncateText(cleaned, 500)}</Markdown>
         </div>
       )
@@ -658,6 +855,50 @@ function ItemRenderer({
     default:
       return null
   }
+}
+
+// ── Live "still working" pulse ──
+//
+// Shown at the foot of the timeline while `isStreaming` is true, to signal
+// that the agent is still active between sections. The pulse hides itself
+// in any state where another live signal already exists (the
+// AwaitingHumanBanner has its own timer + resume button) or where work has
+// visibly concluded (status=completed, code-agent-done, summary). That
+// keeps the indicator from contradicting what the user just read.
+
+function shouldShowThinking(items: TopLevelItem[]): boolean {
+  if (items.length === 0) return true
+  const last = items[items.length - 1]
+  switch (last.kind) {
+    case 'awaiting-human':
+    case 'awaiting-human-timeout':
+    case 'status':
+    case 'code-agent-done':
+    case 'code-agent-summary':
+      return false
+    default:
+      return true
+  }
+}
+
+function ThinkingPulse() {
+  // Muted "Thinking" label with the .shimmer-text glow sweep — the same
+  // self-contained text effect used elsewhere as a loader placeholder.
+  // The timeline rail to the left already serves as the visual border,
+  // so no extra chrome is added here: just the shimmering word at the
+  // same pl-6 indent as every other item in the timeline.
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      aria-label="Agent is working"
+      className="pl-6 thinking-pulse-enter"
+    >
+      <span className="shimmer-text text-[13.5px] font-medium tracking-tight">
+        Thinking
+      </span>
+    </div>
+  )
 }
 
 // ── Exported ──
@@ -698,29 +939,75 @@ export const CuaSectionRenderer = memo(function CuaSectionRenderer({
     return map
   }, [items, screenshots])
 
+  // Show the live "thinking" pulse only while streaming AND when no other
+  // signal is already covering the same ground — see shouldShowThinking
+  // for the corner cases (awaiting-human / status / done / summary).
+  const showThinking = isStreaming === true && shouldShowThinking(items)
+
   return (
     <div className={cn('flex flex-col', className)}>
       <div className="relative">
-        {/* Timeline — dotted line, fades at ends */}
+        {/* ── Timeline rail ──────────────────────────────────────
+            A single 1px column at left-[2.5px] hosts two coupled
+            layers that read as one object:
+              1. Static soft gradient line (replaces the old dotted
+                 pattern — reads as ink, not as a graph axis).
+                 Draws itself top→down on first mount via the
+                 .cua-line-draw class (scaleY 0→1 over 800ms).
+              2. A travelling light caret — a 60px soft glow that
+                 drifts top→bottom on a 4s loop, fading in/out at
+                 the edges so it materializes rather than blinks.
+                 Only rendered while isStreaming. */}
+        {/* overflow-hidden clips the travelling caret to the rail's
+            vertical bounds — without it the caret would bleed above
+            and below the message bubble during its drift cycle. */}
         <div
-          className="absolute left-[2.5px] top-0 bottom-0 w-px opacity-[0.30]"
-          style={{
-            maskImage: 'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
-            backgroundImage: 'repeating-linear-gradient(to bottom, currentColor 0px, currentColor 2px, transparent 2px, transparent 7px)',
-          }}
+          className="absolute left-[2.5px] top-0 bottom-0 w-px overflow-hidden"
           aria-hidden="true"
-        />
-        <div className="relative flex flex-col">
-          {items.map((item, i) => (
-            <ItemRenderer
-              key={i}
-              item={item}
-              screenshot={stepScreenshotMap.get(i)}
-              isStreaming={isStreaming}
-              onResumeHuman={onResumeHuman}
+        >
+          {/* Static gradient line — vertical fade at both ends bakes
+              the old mask treatment into the gradient itself. */}
+          <div
+            className="cua-line-draw absolute inset-0 opacity-[0.28]"
+            style={{
+              backgroundImage:
+                'linear-gradient(to bottom, transparent 0%, currentColor 10%, currentColor 90%, transparent 100%)',
+            }}
+          />
+          {/* Travelling light caret — only mounted while streaming.
+              The drift @keyframes ramps opacity at the entry and exit
+              of each cycle, so the caret naturally materializes at the
+              top of the line and dissolves past the bottom. */}
+          {isStreaming === true && (
+            <div
+              className="cua-caret-drift absolute left-0 w-px h-[60px] opacity-[0.65]"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to bottom, transparent 0%, currentColor 50%, transparent 100%)',
+              }}
             />
+          )}
+        </div>
+        {/* Generous vertical rhythm — 20px between every item. Each
+            point gets clear breathing room so the timeline reads as
+            distinct beats rather than a paragraph of activity. Per-item
+            internal padding stays tight; all the breath lives at the
+            seam between items. */}
+        <div className="relative flex flex-col gap-y-5">
+          {/* Each item gets the cua-item-in fade + lift on mount. CSS
+              animations don't replay on re-render, so existing items
+              stay still and only newly streamed items animate. */}
+          {items.map((item, i) => (
+            <div key={i} className="cua-item-in">
+              <ItemRenderer
+                item={item}
+                screenshot={stepScreenshotMap.get(i)}
+                isStreaming={isStreaming}
+                onResumeHuman={onResumeHuman}
+              />
+            </div>
           ))}
+          {showThinking && <ThinkingPulse />}
         </div>
       </div>
     </div>

@@ -12,13 +12,15 @@
     "recommended": "Onerilen",
     "month": "ay",
     "creditsPerMonth": "{count} kredi/ay",
-    "agentsInParallel": "{count} paralel ajan"
+    "agentsInParallel": "{count} paralel ajan",
+    "whatsIncluded": "Neler dahil",
+    "hideDetails": "Ayrıntıları gizle"
   },
   "header": {
     "useCases": "Kullanim Alanlari",
     "blog": "Blog",
     "agentSwarms": "Ajan Suruleri",
-    "products": "Products",
+    "products": "Ürünler",
     "discover": "Discover",
     "compare": "Karsilastir",
     "demos": "Demolar",
@@ -55,14 +57,14 @@
       "emailCampaigns": "{stat} kisisellestirilmis e-posta kampanya basina"
     },
     "productItems": {
-      "computerUse": "Computer Use",
-      "agentSwarms": "Agent Swarms",
-      "compare": "Compare"
+      "computerUse": "Bilgisayar Kullanımı",
+      "agentSwarms": "Ajan Sürüleri",
+      "compare": "Karşılaştır"
     },
     "productStats": {
-      "computerUse": "{stat} OSWorld benchmark score",
-      "agentSwarms": "{stat} agents in parallel",
-      "compare": "{stat} competitors analyzed"
+      "computerUse": "{stat} OSWorld benchmark skoru",
+      "agentSwarms": "{stat} ajan paralel çalışıyor",
+      "compare": "{stat} rakip analiz edildi"
     },
     "blogItems": {
       "allPosts": "Tum Yazilar",
@@ -72,7 +74,8 @@
       "webScraping": "Web Scraping",
       "jobApplications": "Is Basvurulari",
       "demosResults": "Demolar ve Sonuclar",
-      "guide": "Rehber"
+      "guide": "Rehber",
+      "discover": "Topluluk"
     },
     "blogStats": {
       "allPosts": "{stat} makale haftalik yayinlandi",
@@ -82,12 +85,14 @@
       "webScraping": "{stat} sayfa oturum basina",
       "jobApplications": "{stat} basvuru oturum basina",
       "demosResults": "{stat} gercek vaka calismasi",
-      "guide": "{stat} kullanim alani kilavuzu"
-    }
+      "guide": "{stat} kullanim alani kilavuzu",
+      "discover": "İnsanların nasıl kullandığını görün"
+    },
+    "api": "API"
   },
   "hero": {
     "badge": "#1 Computer-Use Ajani · {score} OSWorld",
-    "headline": "Otonom bilgisayar operatorleri",
+    "headline": "En iyi bilgisayar kullanım ajanı",
     "useCases": {
       "computerAgent": {
         "label": "Bilgisayar ajani",
@@ -159,6 +164,28 @@
       "socialMedia": {
         "label": "Sosyal Medya",
         "task": "Hacker News'de yayinla ve yorumlarla etkilesime gir"
+      }
+    },
+    "resourceStats": {
+      "money": {
+        "value": "$3,200",
+        "label": "aylık tasarruf",
+        "sublabel": "tam zamanlı VA'ya karşı"
+      },
+      "time": {
+        "value": "30 sa.",
+        "label": "haftalık geri kazanım",
+        "sublabel": "manuel iş ortadan kalktı"
+      },
+      "speed": {
+        "value": "10×",
+        "label": "daha hızlı çıktı",
+        "sublabel": "dakikalarda iş, günlerde değil"
+      },
+      "effort": {
+        "value": "0",
+        "label": "kod veya işe alım",
+        "sublabel": "uçtan uca tam yönetim"
       }
     }
   },
@@ -364,6 +391,12 @@
         "name": "Pro",
         "description": "Sinirsiz agir otomasyon",
         "cta": "Pro'yu Al"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Kredi sınırı yok — asla",
+        "cta": "Unlimited'a geç",
+        "badge": "En iyi değer"
       }
     },
     "vmTemporary": "1 gecici VM (2 saat)",
@@ -373,7 +406,8 @@
     "bargain": {
       "title": "Ayni is manuel iscilikle {oldPrice} tutar",
       "description": "Sanal asistan aylik $2.000–$4.000'dir. Yari zamanli calisan daha pahaliya mal olur. Coasty ayni isi 7/24 $0'dan baslayarak yapar — mukemmel tutarlilik, tam denetim izleri ve sifir egitim suresiyle."
-    }
+    },
+    "unlimitedCredits": "Sınırsız kredi"
   },
   "faq": {
     "title": "Sikca sorulan sorular",
@@ -429,7 +463,8 @@
       "contact": "Iletisim",
       "privacy": "Gizlilik",
       "terms": "Sartlar"
-    }
+    },
+    "status": "Tüm sistemler çalışıyor"
   },
   "languageSwitcher": {
     "label": "Dil"
@@ -458,16 +493,16 @@
     "demoCaption": "Bilgisayarınızda yapay zeka ajanları çalıştırın ya da telefonunuzdan her yerden kontrol edin.",
     "features": {
       "localControl": {
-        "title": "Run locally on your PC",
-        "desc": "Download the desktop app and let AI control your computer directly — no cloud VM needed."
+        "title": "PC'nizde yerel olarak çalıştırın",
+        "desc": "Masaüstü uygulamasını indirin ve AI'nın bilgisayarınızı doğrudan kontrol etmesine izin verin — bulut VM gerekmez."
       },
       "phoneControl": {
-        "title": "Control your PC from your phone",
-        "desc": "Start a task from your phone and watch the AI agent work on your computer in real time."
+        "title": "PC'nizi telefonunuzdan kontrol edin",
+        "desc": "Telefonunuzdan bir görev başlatın ve AI ajanının bilgisayarınızda gerçek zamanlı çalışmasını izleyin."
       },
       "cloudOrLocal": {
-        "title": "Cloud or local — your choice",
-        "desc": "Use cloud VMs for isolated tasks, or go local for full access to your apps and files."
+        "title": "Bulut veya yerel — seçim sizin",
+        "desc": "İzole görevler için bulut VM'leri kullanın veya uygulamalarınıza ve dosyalarınıza tam erişim için yerel çalıştırın."
       }
     },
     "viewTitles": {
@@ -485,6 +520,13 @@
     "google": {
       "connecting": "Baglaniyor...",
       "continueWithGoogle": "Google ile devam et"
+    },
+    "inAppBrowser": {
+      "blocked": "Google ile giriş, gömülü tarayıcılarda çalışmaz. Bu sayfayı tarayıcınızda açın veya sihirli bağlantı kullanın.",
+      "blockedNamed": "Google ile giriş {app} içinde çalışmaz. Bu sayfayı tarayıcınızda açın veya sihirli bağlantı kullanın.",
+      "copyLink": "Bağlantıyı kopyala",
+      "copied": "Kopyalandı!",
+      "useMagicLink": "Sihirli bağlantı kullan"
     },
     "or": "veya",
     "email": "E-posta",
@@ -560,18 +602,21 @@
     "getStarted": "Basla",
     "settingUp": "Hazirlaniyor...",
     "welcome": {
-      "titleReturning": "Tekrar hos geldiniz{name}!",
-      "titleNew": "Coasty'ye hos geldiniz",
-      "descriptionReturning": "Deneyiminizi iyilestirmek icin sizin hakkinda biraz daha bilgi edinmek isteriz",
-      "descriptionNew": "Deneyiminizi kisisellestirebilmemiz icin hesabinizi ayarlayalim"
+      "titleReturning": "Tekrar hoş geldin{name}",
+      "titleNew": "Coasty'ye hoş geldin",
+      "eyebrowNew": "Tanışalım",
+      "eyebrowReturning": "Neredeyse bitti",
+      "descriptionReturning": "Birkaç ayrıntı daha ve Coasty çalışma şekline tamamen uyarlanmış olacak.",
+      "descriptionNew": "Coasty gerçek bilgisayarlarda çalışır — gezinir, tıklar, yazar, teslim eder. Tarzına uyarlamak için birkaç hızlı ayrıntı.",
+      "footerNote": "Yaklaşık bir dakika sürer. Her şeyi daha sonra Ayarlar'dan değiştirebilirsin."
     },
-    "nameLabel": "Size ne diyelim?",
-    "namePlaceholder": "Adiniz",
-    "companyLabel": "Sirket",
-    "optional": "(istege bagli)",
-    "companyPlaceholder": "MacroHard",
+    "nameLabel": "Sana nasıl hitap edelim?",
+    "namePlaceholder": "Sadece adın",
+    "companyLabel": "Nerede çalışıyorsun?",
+    "optional": "(isteğe bağlı)",
+    "companyPlaceholder": "Şirketin veya ekibin",
     "websiteLabel": "Web sitesi",
-    "websitePlaceholder": "xai.com",
+    "websitePlaceholder": "sirketin.com",
     "roleStep": {
       "title": "Sizi en iyi ne tanimlar?",
       "subtitle": "Gecerli olan tumu secin — bu deneyiminizi ozellestirmemize yardimci olur"
@@ -666,8 +711,8 @@
     }
   },
   "chatInput": {
-    "placeholder": "AI calisaniniz ne yapmali?",
-    "placeholderAlt": "AI'niza bilgisayarda ne yapacagini soyleyin...",
+    "placeholder": "Bu bilgisayarda ne yapmam gerektigini soyleyin...",
+    "placeholderAlt": "Baslamak icin bir bilgisayar secin...",
     "vmError": {
       "title": "Sanal Makine Hatasi",
       "description": "Sanal makine hata durumunda veya siliniyor.",
@@ -695,7 +740,7 @@
       "decreaseMachines": "Makine sayisini azalt",
       "increaseMachines": "Makine sayisini artir",
       "machineLimit": "Planinizda en fazla {max} suru makinesi. Daha fazla mi lazim? founders@coasty.ai ile iletisime gecin",
-      "label": "Multi-Run",
+      "label": "Çoklu Çalıştırma",
       "upgradeCta": "Suru Modu"
     },
     "desktop": {
@@ -728,7 +773,7 @@
       "vmInfo": "VM: {name}",
       "dropHeading": "Dosyalari buraya birakin",
       "dropDescription": "Dosyalar VM'nin Masaustu klasorune yuklenecek",
-      "dropPath": "Path: /home/desktop/Desktop/"
+      "dropPath": "Yol: /home/desktop/Desktop/"
     },
     "authPrompt": {
       "heading": "Daha fazla ozellik icin ucretsiz giris yapin",
@@ -801,6 +846,28 @@
       "ecommerce": "{company} fiyat karsilastirmasi",
       "social_media": "{company} hakkinda paylas",
       "general_automation": "{company} uzerinde gorev otomatiklestir"
+    },
+    "awaitingHuman": {
+      "completed": "İnsan devri tamamlandı",
+      "yourTurn": "Sıra sizde",
+      "connectToDesktop": "Masaüstüne bağlan",
+      "resuming": "Devam ediliyor...",
+      "doneContinue": "Tamam, devam"
+    },
+    "feedback": {
+      "promptRun": "Bu çalışma nasıldı?",
+      "promptSwarm": "Bu sürü nasıldı?",
+      "reactionBad": "Kötü",
+      "reactionOkay": "Fena değil",
+      "reactionGood": "İyi",
+      "reactionAmazing": "Harika",
+      "tellUsMore": "Daha fazla anlat",
+      "commentPlaceholder": "Daha iyi ne olabilirdi?",
+      "npsPrompt": "Coasty'yi tavsiye eder misiniz?",
+      "npsNotLikely": "Olası değil",
+      "npsVeryLikely": "Çok olası",
+      "thanks": "Geri bildirim için teşekkürler",
+      "creditsLabel": "kredi"
     }
   },
   "chatMessages": {
@@ -969,6 +1036,11 @@
       "pro": {
         "name": "Pro",
         "description": "Sinirsiz agir otomasyon"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "description": "Kredi sınırı yok — asla",
+        "badge": "En iyi değer"
       }
     },
     "features": {
@@ -1061,7 +1133,7 @@
     "new": "yeni",
     "description": "Modellere erismek icin kendi API anahtarlarinizi ekleyin.",
     "securityNote": "Anahtarlariniz uctan uca sifreleme ile guvenli sekilde saklanir.",
-    "apiKeyLabel": "{provider} API Key",
+    "apiKeyLabel": "{provider} API Anahtarı",
     "getApiKey": "API key al",
     "delete": "Sil",
     "save": "Kaydet",
@@ -1136,7 +1208,16 @@
     }
   },
   "layoutSettings": {
-    "layout": "Duzlem"
+    "layout": "Duzlem",
+    "sidebarStyle": "Kenar çubuğu stili",
+    "sidebarStyleHint": "Gezinmenin yerini seçin",
+    "sidebarStyleDisabled": "Düzen Kenar Çubuğu olarak ayarlandığında kullanılabilir",
+    "vertical": "Dikey",
+    "verticalBadge": "Varsayılan",
+    "verticalDescription": "Altbilgide etiketler ve krediler bulunan klasik sol şerit.",
+    "horizontal": "Yatay",
+    "horizontalBadge": "Şık",
+    "horizontalDescription": "Tek bir üst çubukta her şey tek bir satırda. Daha fazla tuval yüksekliği."
   },
   "suggestions": {
     "summary": {
@@ -1413,11 +1494,17 @@
         "name": "Pro",
         "tagline": "Sinirsiz yogun otomasyon",
         "cta": "Pro al"
+      },
+      "unlimited": {
+        "name": "Unlimited",
+        "tagline": "Kredi sınırı yok — asla",
+        "cta": "Unlimited'a geç",
+        "badge": "En iyi değer"
       }
     },
     "features": {
       "computerAgent": {
-        "name": "Coasty Computer Agent",
+        "name": "Coasty Bilgisayar Ajanı",
         "description": "Tam tarayici, masaustu ve terminal",
         "badge": "Cekirdek"
       },
@@ -1757,7 +1844,7 @@
       "subtitle": "AI sirketiniz, otopilotta",
       "description": "Calisanlar, ekipler, tetikleyiciler — 7/24 calisiyor.",
       "myCompany": "Sirketim",
-      "contentOps": "Content Ops",
+      "contentOps": "İçerik Operasyonları",
       "support": "Destek",
       "writer": "Yazar",
       "seo": "SEO",
@@ -1805,7 +1892,7 @@
       "templates": "Bir sablondan baslayin",
       "templateItems": {
         "contentOps": {
-          "name": "Content Ops",
+          "name": "İçerik Operasyonları",
           "plan": "Starter",
           "count": "3"
         },
@@ -1867,6 +1954,11 @@
           "credits": "1.500",
           "machines": "3 her zaman acik",
           "feature": "SLA garantisi"
+        },
+        "unlimited": {
+          "credits": "Sınırsız",
+          "machines": "2 her zaman açık",
+          "feature": "1 eşzamanlı ajan"
         }
       },
       "perMonth": "{price}/ay",
@@ -1936,7 +2028,7 @@
         "yourApps": "Yuklu uygulamalariniz",
         "yourSessions": "Giris yapmis oturumlariniz"
       },
-      "downloadCta": "Download Desktop App"
+      "downloadCta": "Masaüstü Uygulamasını İndir"
     }
   },
   "comparePage": {
@@ -2219,12 +2311,12 @@
   },
   "seo": {
     "home": {
-      "title": "Coasty - 1 Numaralı Bilgisayar Kullanan AI Ajanı | Masaüstü ve Tarayıcı Otomasyonu için AI Çalışan",
+      "title": "Coasty - 1 Numaralı Bilgisayar Kullanan AI Ajanı | $249/mo Sınırsız (Piyasanın En Ucuzu)",
       "titleTemplate": "{title} | Coasty - AI Bilgisayar Kullanım Ajanı",
-      "description": "Coasty, 1 numaralı bilgisayar kullanan AI ajanıdır — OSWorld benchmark'ta 82%. Tam bir masaüstünü insan gibi kontrol eder: tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir, elektronik tablolar yönetir. Oturum başına gerçek VM izolasyonu. $20/mo'dan başlayan fiyatlar.",
-      "ogTitle": "Coasty - 1 Numaralı Bilgisayar Kullanan AI Ajanı | 82% OSWorld Benchmark",
-      "ogDescription": "Masaüstünü insan gibi kontrol eden AI çalışan. OSWorld benchmark'ta 1 numara (82%). Tarayıcı otomasyonu, masaüstü kontrolü, CAPTCHA çözme, VM izolasyonu. $20/mo'dan başlayan fiyatlar.",
-      "twitterDescription": "Masaüstünü insan gibi kontrol eden AI çalışan. Tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir. Gerçek VM izolasyonu. İnsan sanal asistana kıyasla $20/mo vs $3,000/mo."
+      "description": "Coasty, 1 numaralı bilgisayar kullanan AI ajanıdır — OSWorld benchmark'ta 82% — ve $249/mo sabit fiyatla sunulan tek Sınırsız bilgisayar kullanım planıdır (Devin Team $500+ACU, OpenAI Operator $200 hız limitli ve kredi sınırlı rakiplerden daha ucuz). Tam bir masaüstünü insan gibi kontrol eder: tarayıcılar, formlar, e-postalar, elektronik tablolar. VM düzeyinde izolasyon. $19/mo Starter veya $249/mo Sınırsız.",
+      "ogTitle": "Coasty — 82% OSWorld + $249/mo Sınırsız (En Ucuz Bilgisayar Kullanım Ajanı)",
+      "ogDescription": "OSWorld'de 1 numara (82%). $249/mo sabit Sınırsız — Devin Team'den ($500+ACU) daha ucuz, üstelik daha yüksek benchmark puanıyla. Tarayıcı, masaüstü, terminal otomasyonu. Oturum başına VM izolasyonu. Çoklu platform yerel uygulama + REST API + MCP sunucusu.",
+      "twitterDescription": "Gerçek bir masaüstünü çalıştıran AI ajanı. 82% OSWorld (1 numara). $249/mo Sınırsız — kategorideki en ucuz sabit fiyatlı plan. Starter $19/mo'dan başlar. VM izolasyonu + 26 araçlı MCP sunucusu."
     },
     "compare": {
       "title": "Coasty Karşılaştırma - AI Ajanı Alternatifleri ve Rakip Karşılaştırması",
@@ -2281,10 +2373,10 @@
       "ogDescription": "OSWorld'de 1 numara olan en iyi bilgisayar kullanım ajanı. AI ile herhangi bir masaüstü, tarayıcı veya terminal görevini otomatikleştirin."
     },
     "pricing": {
-      "title": "Fiyatlandırma — Coasty AI Ajanı Planları ve Fiyatları",
-      "description": "Coasty fiyatlandırma planları $20/mo'dan başlar. $3,000/mo sanal asistanları AI çalışanla değiştirin. Ücretsiz plan mevcuttur. Gizli ücret olmadan kredi tabanlı kullanım.",
-      "ogTitle": "Coasty Fiyatlandırma — AI Ajanı Planları",
-      "ogDescription": "$20/mo'dan başlayan AI çalışan. Pahalı sanal asistanları otonom AI ile değiştirin. Ücretsiz plan mevcuttur."
+      "title": "Fiyatlandırma — $19/mo Starter veya $249/mo Sınırsız (Piyasanın En Ucuzu)",
+      "description": "Coasty fiyatlandırma: Starter $19/mo (200 kredi) veya Sınırsız $249/mo (piyasadaki en ucuz sabit fiyatlı sınırsız bilgisayar kullanım planı — Devin Team $500+ACU, Genspark Pro $249 kredi sınırlı ve Manus Extended $200 sınırlı planlardan daha ucuz). $3,000+/mo insan sanal asistanın yerini alır. Gizli ücret yok.",
+      "ogTitle": "Coasty Fiyatlandırma — $19/mo Starter, $249/mo Sınırsız",
+      "ogDescription": "$249/mo sabit Sınırsız — piyasadaki en ucuz sınırsız bilgisayar kullanım planı. Veya bireyler için $19/mo Starter. İnsan asistana kıyasla yılda $36k tasarruf."
     },
     "faq": {
       "q1": "Coasty nedir?",
@@ -2292,7 +2384,7 @@
       "q2": "Coasty, Anthropic Computer Use ile nasıl karşılaştırılır?",
       "a2": "Anthropic Computer Use bilgisayar kontrolü için ham bir API sağlarken, Coasty yönetilen VM altyapısı, yerleşik CAPTCHA çözümü, Mac ve Windows için masaüstü uygulaması, çoklu model desteği ve en yüksek OSWorld benchmark puanı (82%) ile üretime hazır bir platformdur. Coasty eksiksiz çözümü sunar — sadece API değil.",
       "q3": "Coasty'nin maliyeti nedir?",
-      "a3": "Coasty, ücretsiz plan mevcut olmak üzere Starter planı için $20/month'dan başlar. Bu, bir insan sanal asistan için aylık $3,000+ ile karşılaştırılır. Coasty molasız, eğitimsiz ve anında ölçeklenebilir olarak 7/24 çalışır.",
+      "a3": "Coasty'nin iki aktif planı var: Starter $19/ay (200 kredi, 1 makine, bireyler için ideal) ve Sınırsız $249/ay (kredi sınırı yok). $249 Sınırsız plan, piyasadaki en ucuz sabit fiyatlı sınırsız bilgisayar kullanım planıdır — Devin Team ($500/ay + ACU aşım ücreti), OpenAI Operator ChatGPT Pro ($200/ay hız limitli), Genspark Pro ($249.99 125k kredi sınırlı) ve Manus Extended ($200 40k kredi sınırlı) planlarından daha ucuzdur. Her ikisi de $3,000+/ay maliyetli bir insan sanal asistanın yerini alır; Sınırsız plan, insan asistana kıyasla yılda $33,000+ tasarruf sağlar — yani %92 maliyet düşüşü.",
       "q4": "Coasty kullanmak güvenli mi?",
       "a4": "Evet. Her Coasty oturumu kendi izole, sandbox sanal makinesinde çalışır. Verileriniz güvende, makinenize dokunulmaz ve oturumlar arasında hiçbir şey sızmaz. Bu gerçek VM düzeyinde izolasyondur, paylaşılan havuzda konteynerler değil.",
       "q5": "OSWorld benchmark nedir?",
@@ -2309,11 +2401,11 @@
       "a10": "Evet. Coasty'nin yerleşik CAPTCHA çözme sistemi vardır, bu nedenle rakip AI ajanların engellenmesi gibi engellenmez. Bu, web sitelerinde CAPTCHA'nın yaygın olduğu gerçek dünya otomasyonu için kritik öneme sahiptir."
     },
     "structuredData": {
-      "appDescription": "1 numaralı bilgisayar kullanan AI ajanı. Coasty tam bir masaüstünü insan gibi kontrol eder — tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir ve elektronik tabloları otonom olarak yönetir. OSWorld benchmark'ta 82%. Gerçek VM düzeyinde izolasyon. Yerleşik CAPTCHA çözümü. $20/month'dan başlayan fiyatlar.",
-      "orgDescription": "Coasty, 1 numaralı bilgisayar kullanan AI ajanını geliştirir. Platformumuz gerçek VM düzeyinde izolasyonla otonom masaüstü kontrolü, tarayıcı otomasyonu ve çoklu ajan orkestrasyonu sağlar.",
-      "productDescription": "Masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. OSWorld benchmark'ta 1 numara (82%). Gerçek VM izolasyonuyla otonom tarayıcı otomasyonu, masaüstü kontrolü, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
-      "websiteDescription": "1 numaralı bilgisayar kullanan AI ajanı platformu. 82% OSWorld benchmark. VM izolasyonuyla otonom tarayıcı, masaüstü ve terminal otomasyonu. $20/mo'dan başlayan fiyatlar.",
-      "softwareDescription": "Tam bir masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. 369 gerçek dünya görevinde 82% tamamlama oranıyla OSWorld benchmark'ta 1 numara. Otonom tarayıcı otomasyonu, masaüstü kontrolü, terminal işlemleri, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
+      "appDescription": "1 numaralı bilgisayar kullanan AI ajanı ve piyasadaki en ucuz sabit fiyatlı Sınırsız bilgisayar kullanım planı — $249/mo. Coasty tam bir masaüstünü insan gibi kontrol eder — tarayıcı açar, tıklar, yazar, form doldurur, e-posta gönderir ve elektronik tabloları otonom olarak yönetir. 369 gerçek dünya görevinde OSWorld benchmark'ta 82%. Oturum başına gerçek VM düzeyinde izolasyon. Yerleşik CAPTCHA çözümü. Planlar: $19/mo Starter veya $249/mo Sınırsız.",
+      "orgDescription": "Coasty, 1 numaralı bilgisayar kullanan AI ajanını geliştirir (82% OSWorld) ve $249/mo sabit fiyatla sunulan tek Sınırsız bilgisayar kullanım planını sunar — aynı fiyat segmentindeki Devin Team, OpenAI Operator ve kredi sınırlı rakiplerden daha ucuz. Platformumuz gerçek VM düzeyinde izolasyonla otonom masaüstü kontrolü, tarayıcı otomasyonu ve çoklu ajan orkestrasyonu sağlar.",
+      "productDescription": "Masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. OSWorld benchmark'ta 1 numara (82%). $249/mo Sınırsız plan, mevcut en ucuz sabit fiyatlı sınırsız bilgisayar kullanım planıdır. Gerçek VM izolasyonuyla otonom tarayıcı otomasyonu, masaüstü kontrolü, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
+      "websiteDescription": "1 numaralı bilgisayar kullanan AI ajanı platformu — 82% OSWorld benchmark ve $249/mo'da en ucuz sabit fiyatlı Sınırsız plan. VM izolasyonuyla otonom tarayıcı, masaüstü ve terminal otomasyonu. $19/mo Starter veya $249/mo Sınırsız.",
+      "softwareDescription": "Tam bir masaüstünü insan gibi kontrol eden AI bilgisayar kullanım ajanı. 369 gerçek dünya görevinde 82% tamamlama oranıyla OSWorld benchmark'ta 1 numara. $249/mo Sınırsız plan, piyasadaki en ucuz sabit fiyatlı sınırsız bilgisayar kullanım planıdır. Otonom tarayıcı otomasyonu, masaüstü kontrolü, terminal işlemleri, e-posta gönderimi, form doldurma ve elektronik tablo yönetimi.",
       "breadcrumbs": {
         "home": "Ana Sayfa",
         "caseStudies": "AI Ajanı Vaka Çalışmaları",
@@ -2326,7 +2418,29 @@
   "errorPages": {
     "notFound": {
       "title": "404 – Sayfa bulunamadi",
-      "description": "Uzgunuz, bu sayfa mevcut degil."
+      "description": "Uzgunuz, bu sayfa mevcut degil.",
+      "metaTitle": "404 · Sayfa bulunamadı",
+      "metaDescription": "En iyi AI ajanımızı gönderdik. Elleri boş döndü. Coasty'ye geri dönün — masaüstü ve tarayıcı otomasyonunda 1 numaralı AI ajanı.",
+      "log": {
+        "command": "coasty open requested-page",
+        "step1": "tara: tüm internet",
+        "step2": "tara: tüm açık sekmeler",
+        "step3": "tara: koltuğun altı",
+        "result": "sonuç: sayfa mevcut değil"
+      },
+      "ok": "TAMAM",
+      "fail": "HATA",
+      "primaryCta": "Ana sayfaya dön",
+      "secondaryCta": "AI ajanı kirala",
+      "navLabel": "Önerilen sayfalar",
+      "links": {
+        "home": "Ana sayfa",
+        "computerUse": "Bilgisayar kullanımı",
+        "pricing": "Fiyatlandırma",
+        "download": "İndir",
+        "blog": "Blog",
+        "guide": "Kılavuz"
+      }
     },
     "error": {
       "title": "Bir seyler yanlis gitti",
@@ -2457,7 +2571,7 @@
       "teamCreatedPartial": "Takım {count} çalışanla oluşturuldu ({failedCount} başarısız: {names})",
       "teamCreated": "{name} takımı {count} çalışanla oluşturuldu"
     },
-    "credentialInstructions": "[AVAILABLE CREDENTIALS]\nThe following service credentials have been configured and are available for use:\n{list}\nUse these credentials when you need to log in to these services to complete your tasks.",
+    "credentialInstructions": "[KULLANILABİLİR KİMLİK BİLGİLERİ]\nAşağıdaki servis kimlik bilgileri yapılandırılmıştır ve kullanıma hazırdır:\n{list}\nGörevlerinizi tamamlamak için bu servislere giriş yapmanız gerektiğinde bu kimlik bilgilerini kullanın.",
     "templates": {
       "contentOps": {
         "name": "İçerik Operasyonları",
@@ -2675,66 +2789,66 @@
   },
   "collaborative": {
     "createRoom": {
-      "titleRequired": "Room title is required",
-      "taskCreated": "Task created successfully",
-      "taskFailed": "Failed to create task",
-      "assignTask": "Assign New Task",
-      "assignTaskDesc": "Start a new task with your AI assistant.",
-      "taskName": "Task Name",
-      "taskNamePlaceholder": "Enter task name",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createTask": "Create Task"
+      "titleRequired": "Oda başlığı gereklidir",
+      "taskCreated": "Görev başarıyla oluşturuldu",
+      "taskFailed": "Görev oluşturulamadı",
+      "assignTask": "Yeni Görev Ata",
+      "assignTaskDesc": "AI asistanınızla yeni bir görev başlatın.",
+      "taskName": "Görev Adı",
+      "taskNamePlaceholder": "Görev adını girin",
+      "cancel": "İptal",
+      "creating": "Oluşturuluyor...",
+      "createTask": "Görev Oluştur"
     },
     "joinRoom": {
-      "enterCode": "Please enter an invite code",
-      "joinSuccess": "Successfully joined the project!",
-      "joinFailed": "Failed to join project",
-      "invalidCode": "Invalid invite code or project not found",
-      "title": "Join Project",
-      "description": "Enter an invite code to join an existing project.",
-      "inviteCode": "Invite Code",
+      "enterCode": "Lütfen bir davet kodu girin",
+      "joinSuccess": "Projeye başarıyla katıldınız!",
+      "joinFailed": "Projeye katılınamadı",
+      "invalidCode": "Geçersiz davet kodu veya proje bulunamadı",
+      "title": "Projeye Katıl",
+      "description": "Mevcut bir projeye katılmak için davet kodunu girin.",
+      "inviteCode": "Davet Kodu",
       "placeholder": "e.g. ABC123",
-      "hint": "Ask your team leader for the project invite code",
-      "cancel": "Cancel",
-      "joining": "Joining...",
-      "joinButton": "Join Project"
+      "hint": "Proje davet kodu için takım liderinize sorun",
+      "cancel": "İptal",
+      "joining": "Katılıyor...",
+      "joinButton": "Projeye Katıl"
     },
     "participants": {
-      "title": "Room Participants",
-      "copyCode": "Copy Code",
-      "copyLink": "Copy Link",
-      "codeCopied": "Invite code copied!",
-      "codeFailed": "Failed to copy invite code",
-      "linkCopied": "Invite link copied!",
-      "linkFailed": "Failed to copy invite link",
-      "online": "Online",
-      "offline": "Offline",
+      "title": "Oda Katılımcıları",
+      "copyCode": "Kodu Kopyala",
+      "copyLink": "Bağlantıyı Kopyala",
+      "codeCopied": "Davet kodu kopyalandı!",
+      "codeFailed": "Davet kodu kopyalanamadı",
+      "linkCopied": "Davet bağlantısı kopyalandı!",
+      "linkFailed": "Davet bağlantısı kopyalanamadı",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı",
       "you": "(you)"
     },
     "createProject": {
-      "titleRequired": "Room title is required",
-      "created": "Project created successfully!",
-      "failed": "Failed to create room",
-      "title": "Create New Project",
-      "description": "Start a new project to build your product with AI.",
-      "projectName": "Project Name",
-      "projectNamePlaceholder": "Enter project name",
-      "teamSize": "Team Size",
-      "cancel": "Cancel",
-      "creating": "Creating...",
-      "createButton": "Create Project"
+      "titleRequired": "Oda başlığı gereklidir",
+      "created": "Proje başarıyla oluşturuldu!",
+      "failed": "Oda oluşturulamadı",
+      "title": "Yeni Proje Oluştur",
+      "description": "Ürününüzü AI ile birlikte geliştirmek için yeni bir proje başlatın.",
+      "projectName": "Proje Adı",
+      "projectNamePlaceholder": "Proje adını girin",
+      "teamSize": "Takım Büyüklüğü",
+      "cancel": "İptal",
+      "creating": "Oluşturuluyor...",
+      "createButton": "Proje Oluştur"
     }
   },
   "whatsNew": {
-    "trigger": "What's New",
-    "title": "What's New in Coasty",
-    "updateCount": "{count} updates",
+    "trigger": "Yenilikler",
+    "title": "Coasty'deki Yenilikler",
+    "updateCount": "{count} güncelleme",
     "tagNew": "New",
-    "tagUpdate": "Update",
+    "tagUpdate": "Güncelleme",
     "tagFix": "Fix",
-    "stayTuned": "Stay tuned for more updates",
-    "tagline": "Your AI employee that collaborates with everyone"
+    "stayTuned": "Daha fazla güncelleme için takipte kalın",
+    "tagline": "Herkesle işbirliği yapan AI çalışanınız"
   },
   "feedbackForm": {
     "ratings": {
@@ -2743,62 +2857,62 @@
       "good": "Good",
       "amazing": "Amazing"
     },
-    "loginRequired": "Please login to submit feedback",
-    "alreadySubmitted": "You already submitted feedback for this",
-    "thankYou": "Thank you for your feedback!",
-    "creditsEarned": "+{credits} credits earned",
-    "helpImprove": "Your input helps us improve Coasty.",
-    "howsExperience": "How's your experience?",
+    "loginRequired": "Geri bildirim göndermek için lütfen giriş yapın",
+    "alreadySubmitted": "Bunun için zaten geri bildirim gönderdiniz",
+    "thankYou": "Geri bildiriminiz için teşekkürler!",
+    "creditsEarned": "+{credits} kredi kazandınız",
+    "helpImprove": "Görüşleriniz Coasty'yi geliştirmemize yardımcı olur.",
+    "howsExperience": "Deneyiminiz nasıl?",
     "plusOne": "+1",
-    "tellMore": "Tell us more",
+    "tellMore": "Daha fazlasını anlatın",
     "plusFive": "+5",
-    "placeholder": "What's working well? What could improve?",
-    "cancel": "Cancel",
-    "sending": "Sending...",
+    "placeholder": "Neler iyi gidiyor? Neler geliştirilebilir?",
+    "cancel": "İptal",
+    "sending": "Gönderiliyor...",
     "send": "Send"
   },
   "scheduleDialog": {
-    "selectWorkstation": "Please select a workstation",
-    "enterCron": "Please enter a cron expression",
-    "hireFailed": "Failed to hire employee",
-    "removeFailed": "Failed to remove employee",
-    "editEmployee": "Edit Employee",
-    "configureEmployee": "Configure Employee",
-    "editDescription": "Update schedule, workstation, or instructions",
-    "configureDescription": "Set up an AI employee for this chat",
-    "loading": "Loading configuration...",
+    "selectWorkstation": "Lütfen bir iş istasyonu seçin",
+    "enterCron": "Lütfen bir cron expression girin",
+    "hireFailed": "Çalışan işe alınamadı",
+    "removeFailed": "Çalışan kaldırılamadı",
+    "editEmployee": "Çalışanı Düzenle",
+    "configureEmployee": "Çalışanı Yapılandır",
+    "editDescription": "Programı, iş istasyonunu veya talimatları güncelleyin",
+    "configureDescription": "Bu sohbet için bir AI çalışan ayarlayın",
+    "loading": "Yapılandırma yükleniyor...",
     "name": "Name",
-    "employeeName": "Employee name"
+    "employeeName": "Çalışan adı"
   },
   "deleteChat": {
-    "title": "Delete chat?",
-    "description": "This will delete \"{chatTitle}\"",
-    "cancel": "Cancel",
-    "delete": "Delete"
+    "title": "Sohbeti sil?",
+    "description": "Bu işlem \"{chatTitle}\" sohbetini silecek",
+    "cancel": "İptal",
+    "delete": "Sil"
   },
   "paymentHandler": {
-    "success": "Payment successful! Your credits have been added.",
-    "canceled": "Payment was canceled. No charges were made."
+    "success": "Ödeme başarılı! Kredileriniz hesabınıza eklendi.",
+    "canceled": "Ödeme iptal edildi. Herhangi bir ücret alınmadı."
   },
   "machineSettings": {
-    "generalSettings": "General Settings",
+    "generalSettings": "Genel Ayarlar",
     "generalDescription": "Temel bilgisayar ayarlarını yapılandırın",
     "displayName": "Görünen Ad",
     "defaultName": "Bilgisayarım",
-    "saveChanges": "Save Changes",
-    "security": "Security",
-    "securityDescription": "Security and access settings",
-    "sshAuth": "SSH Authentication",
-    "username": "Username:",
-    "keyPair": "Key Pair:",
-    "sshKeyDownloaded": "SSH key downloaded",
-    "sshKeyFailed": "Failed to download SSH key",
-    "downloadSshKey": "Download SSH Key",
-    "vncPassword": "VNC Password",
+    "saveChanges": "Değişiklikleri Kaydet",
+    "security": "Güvenlik",
+    "securityDescription": "Güvenlik ve erişim ayarları",
+    "sshAuth": "SSH Kimlik Doğrulama",
+    "username": "Kullanıcı adı:",
+    "keyPair": "Anahtar Çifti:",
+    "sshKeyDownloaded": "SSH anahtarı indirildi",
+    "sshKeyFailed": "SSH anahtarı indirilemedi",
+    "downloadSshKey": "SSH Anahtarını İndir",
+    "vncPassword": "VNC Parolası",
     "vncPasswordHint": "Bu şifre bilgisayara bağlanmak için gereklidir"
   },
   "referralPopup": {
-    "shareMessage": "Hey, I've been using Coasty and it's pretty cool. It's an AI that can actually use a computer for you. Like browsing, clicking, typing, all of it. Try it with my link and we both get free credits!",
+    "shareMessage": "Selam, bir süredir Coasty kullanıyorum ve gerçekten harika. Senin yerine bilgisayar kullanabilen bir yapay zeka. Tarayıcıda gezinmek, tıklamak, yazmak, hepsi. Linkimle dene, ikimiz de bedava kredi kazanalım!",
     "socialLabels": {
       "x": "X",
       "linkedin": "LinkedIn",
@@ -2807,44 +2921,44 @@
       "reddit": "Reddit",
       "email": "Email"
     },
-    "emailSubject": "Check out this AI tool",
+    "emailSubject": "Bu AI aracına bir bak",
     "timeAgo": {
-      "justNow": "just now",
-      "minutesAgo": "{minutes}m ago",
-      "hoursAgo": "{hours}h ago",
-      "daysAgo": "{days}d ago",
-      "monthsAgo": "{months}mo ago"
+      "justNow": "az önce",
+      "minutesAgo": "{minutes}d önce",
+      "hoursAgo": "{hours}sa önce",
+      "daysAgo": "{days}g önce",
+      "monthsAgo": "{months}ay önce"
     },
-    "linkCopied": "Referral link copied!",
-    "headline": "Good friends share memes. Great friends share AI agents.",
-    "subheadline": "You both get {credits} free credits when your friend joins.",
-    "yourLink": "Your referral link",
-    "shareDirectly": "Share directly",
-    "yourReferrals": "Your referrals",
-    "referralCount": "{count} referral(s)",
-    "creditsEarned": "{credits} credits earned",
-    "invitedYou": "Invited you",
-    "joinedViaLink": "Joined via your link",
-    "noInvites": "No users invited yet",
-    "noInvitesHint": "Share your link and you both earn 50 credits"
+    "linkCopied": "Referans bağlantısı kopyalandı!",
+    "headline": "İyi arkadaşlar meme paylaşır. Harika arkadaşlar AI ajanı paylaşır.",
+    "subheadline": "Arkadaşınız katıldığında ikiniz de {credits} ücretsiz kredi kazanırsınız.",
+    "yourLink": "Referans bağlantınız",
+    "shareDirectly": "Doğrudan paylaş",
+    "yourReferrals": "Referanslarınız",
+    "referralCount": "{count} referans",
+    "creditsEarned": "{credits} kredi kazanıldı",
+    "invitedYou": "Sizi davet etti",
+    "joinedViaLink": "Bağlantınızla katıldı",
+    "noInvites": "Henüz davet edilen kullanıcı yok",
+    "noInvitesHint": "Bağlantınızı paylaşın, ikiniz de 50 kredi kazanın"
   },
   "dialogPublish": {
-    "makePublic": "Make public",
-    "title": "Your conversation is now public!",
-    "description": "Anyone with the link can now view this conversation and may appear in community feeds, featured pages, or search results in the future.",
-    "viewPage": "View Page",
-    "shareOn": "Share on"
+    "makePublic": "Herkese açık yap",
+    "title": "Konuşmanız artık herkese açık!",
+    "description": "Bağlantısı olan herkes bu konuşmayı görüntüleyebilir ve gelecekte topluluk akışlarında, öne çıkan sayfalarda veya arama sonuçlarında görünebilir.",
+    "viewPage": "Sayfayı Görüntüle",
+    "shareOn": "Paylaş"
   },
   "aiCommandPanel": {
-    "title": "AI Control Panel",
-    "subtitle": "Describe what you want the AI to do",
-    "quickCommands": "Quick Commands",
-    "noActions": "No actions performed yet",
-    "success": "Success",
-    "failed": "Failed",
-    "placeholder": "Tell the AI what to do... (Ctrl+Enter to send)",
-    "executing": "Executing...",
-    "executeCommand": "Execute Command"
+    "title": "AI Kontrol Paneli",
+    "subtitle": "AI'nın ne yapmasını istediğinizi tarif edin",
+    "quickCommands": "Hızlı Komutlar",
+    "noActions": "Henüz hiçbir işlem yapılmadı",
+    "success": "Başarılı",
+    "failed": "Başarısız",
+    "placeholder": "AI'ya ne yapacağını söyleyin... (göndermek için Ctrl+Enter)",
+    "executing": "Çalıştırılıyor...",
+    "executeCommand": "Komutu Çalıştır"
   },
   "discover": {
     "badge": "Topluluk",
@@ -2859,5 +2973,190 @@
     "watchSession": "Oturumu izle",
     "steps": "{count} adım",
     "tryCoasty": "Coasty'yi dene"
+  },
+  "memory": {
+    "sidebarLabel": "Hafıza",
+    "sidebarDescription": "Her ajan çalıştırmasında uygulanan bağlam",
+    "dialog": {
+      "title": "Hafıza",
+      "description": "Coasty'nin sizin için çalıştığı her seferinde uyguladığı kısa bir not.",
+      "openFull": "Tam aç",
+      "visualMemoryLabel": "Hafıza",
+      "visualSynced": "Senkronize",
+      "visualContextChat": "Sohbet",
+      "visualContextSchedules": "Zamanlamalar",
+      "visualContextSwarm": "Sürü"
+    },
+    "section": {
+      "title": "Hafıza",
+      "tag": "isteğe bağlı · kişisel",
+      "description": "Her ajan çalıştırmasında yanınızda olan, sizin hakkınızda kısa bir not — sohbet, planlı görevler, sürü makineleri, devredilmiş ajanlar."
+    },
+    "presetsLabel": "Dene",
+    "presets": {
+      "useFirstName": "Adımı kullan",
+      "useFirstNameSentence": "Bana adımla hitap et.",
+      "beTerse": "Kısa ol",
+      "beTerseSentence": "Kısa ve doğrudan yanıtları tercih et. Dolgu yok.",
+      "imDeveloper": "Geliştiriciyim",
+      "imDeveloperSentence": "Yazılım mühendisiyim; kodla rahatım.",
+      "noEmojis": "Emoji yok",
+      "noEmojisSentence": "Yanıtlarda emoji kullanma.",
+      "metricUnits": "Metrik birimler",
+      "metricUnitsSentence": "Metrik birimler kullan (metre, kilogram, °C).",
+      "citeSources": "Kaynakları belirt",
+      "citeSourcesSentence": "Olgusal iddialarda bulunurken kaynakları belirt."
+    },
+    "placeholder": "Örnek:\nBana adımla hitap et.\nKısa yanıtları tercih et.\nTypeScript ve Python kullanıyorum.\nDosyaları onaylamadan asla silme.",
+    "loading": "Yükleniyor…",
+    "saving": "Kaydediliyor…",
+    "saved": "Kaydedildi",
+    "unsavedChanges": "Kaydedilmemiş değişiklikler",
+    "empty": "Boş",
+    "savedRelative": "Kaydedildi · {time}",
+    "errorLoad": "Hafızanız yüklenemedi.",
+    "errorSave": "Hafızanız kaydedilemedi.",
+    "willBeShortened": "kısaltılacak",
+    "clear": "Temizle",
+    "footerNote": "Coasty sizin için çalıştığında bu tercihleri dikkate alacaktır.",
+    "time": {
+      "justNow": "az önce",
+      "secondsAgo": "{n} sn önce",
+      "minutesAgo": "{n} dk önce",
+      "hoursAgo": "{n} sa önce",
+      "daysAgo": "{n} g önce"
+    }
+  },
+  "accountDialog": {
+    "settingsHeading": "Ayarlar",
+    "navGroups": {
+      "settings": "Ayarlar",
+      "developer": "Geliştirici",
+      "more": "Daha fazla",
+      "resources": "Kaynaklar"
+    },
+    "sections": {
+      "account": {
+        "label": "Genel",
+        "description": "Profil ve hesap"
+      },
+      "appearance": {
+        "label": "Görünüm",
+        "description": "Tema, dil ve arka plan"
+      },
+      "billing": {
+        "label": "Faturalama",
+        "description": "Planlar ve krediler"
+      },
+      "publicChats": {
+        "label": "Genel sohbetler",
+        "description": "Genel bağlantıyla paylaşılan sohbetleri yönet"
+      },
+      "privacy": {
+        "label": "Gizlilik",
+        "description": "Güvenlik ve veri gizliliği"
+      },
+      "notifications": {
+        "label": "Bildirimler",
+        "description": "Bildirim tercihleri"
+      },
+      "apiKeys": {
+        "label": "API anahtarları",
+        "description": "API anahtarlarını yönet"
+      },
+      "data": {
+        "label": "Veriler",
+        "description": "Verilerini dışa aktar ve yönet"
+      },
+      "feedback": {
+        "label": "Geri bildirim",
+        "description": "Bize geri bildirimini gönder"
+      },
+      "about": {
+        "label": "Hakkında",
+        "description": "Coasty hakkında"
+      },
+      "social": {
+        "label": "Bağlan",
+        "description": "Sosyal bağlantılar"
+      },
+      "guide": {
+        "label": "Rehber",
+        "description": "Coasty'yi nasıl kullanacağını öğren"
+      },
+      "referral": {
+        "label": "Tavsiye",
+        "description": "Arkadaşlarını davet et ve kredi kazan"
+      }
+    },
+    "appearance": {
+      "theme": "Tema",
+      "language": "Dil",
+      "background": "Arka plan",
+      "personalization": "Kişiselleştirme",
+      "intro": {
+        "title": "Sinematik giriş",
+        "description": "Ana sayfayı ziyaret ederken animasyonlu girişi göster"
+      },
+      "interaction": {
+        "title": "Araç çağrıları",
+        "description": "Sohbetlerde araç yürütme ayrıntılarını göster"
+      }
+    },
+    "comingSoon": {
+      "badge": "Yakında",
+      "placeholder": "Bu bölüm gelecekteki bir güncellemede gelecek."
+    }
+  },
+  "cinematicIntro": {
+    "initialText": "Neyin mümkün olduğunu göster…",
+    "tasks": [
+      "Rakiplerimi araştır",
+      "İş başvurularını doldur",
+      "Tokyo'ya uçak bileti al",
+      "Sitemin çalışma süresini izle",
+      "Sosyal medya gönderilerini planla",
+      "Üç aylık trendleri analiz et"
+    ],
+    "dontShowAgain": "Bir daha gösterme",
+    "skip": "Atla",
+    "tagline": "İnsanın bilgisayarla yapabileceği her şeyi yap"
+  },
+  "pageLoaders": {
+    "machines": {
+      "title": "Bilgisayarlarınız",
+      "description": "Silikon hizmetinizde. Filonuzu çalıştırıyoruz."
+    },
+    "swarms": {
+      "title": "Sürü zekası",
+      "description": "Çok zihin, tek misyon. Ajanlarınızı topluyoruz."
+    },
+    "developers": {
+      "title": "Geliştirici API",
+      "description": "Panonuz yükleniyor."
+    },
+    "secrets": {
+      "title": "Kimlik bilgileri",
+      "description": "Sırlarınız bizimle güvende. Kasayı açıyoruz."
+    },
+    "schedules": {
+      "title": "Zamanlamalar",
+      "description": "Her zaman tam zamanında. Otomasyonlarınız senkronize ediliyor."
+    },
+    "history": {
+      "title": "Geçmişiniz",
+      "description": "Keşfettiğin her sohbet, görev ve fikrin sessiz kaydı."
+    },
+    "referral": {
+      "title": "Tavsiyeler",
+      "description": "Coasty'yi paylaş. Birlikte kazanın."
+    }
+  },
+  "dataSection": {
+    "heroTitle": "Veriniz, kontrolünüz",
+    "heroDescription": "Yalnızca oturumlarınızı çalıştırmak için gereken verileri saklarız. Tüm trafik aktarım sırasında şifrelenir ve aşağıdaki kategoriler için dinlenme halinde şifrelemeyi etkinleştirebilirsiniz. Verileriniz, yapay zeka modellerini eğitmek için asla kullanılmaz.",
+    "trustTransit": "Aktarımda TLS 1.3",
+    "trustAtRest": "Dinlenme halinde AES-256-GCM",
+    "trustNoTraining": "Verileriniz model eğitiminde kullanılmaz"
   }
 }
